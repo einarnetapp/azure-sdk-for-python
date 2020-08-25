@@ -97,9 +97,9 @@ stages:
 
                       - script: |
                           set -e
-                          twine upload --repository ${{parameters.DevFeedName}} --config-file $(PYPIRC_PATH) $(Pipeline.Workspace)/${{artifact.safeName}}/*.whl
+                          twine upload --repository ${{parameters.DevFeedName}} --config-file $(PYPIRC_PATH) $(Pipeline.Workspace)/${{artifact.safeName}}/*.whl --skip-existing
                           echo "Uploaded whl to devops feed"
-                          twine upload --repository ${{parameters.DevFeedName}} --config-file $(PYPIRC_PATH) $(Pipeline.Workspace)/${{artifact.safeName}}/*.zip
+                          twine upload --repository ${{parameters.DevFeedName}} --config-file $(PYPIRC_PATH) $(Pipeline.Workspace)/${{artifact.safeName}}/*.zip --skip-existing
                           echo "Uploaded sdist to devops feed"
                         displayName: 'Publish package to feed: ${{parameters.DevFeedName}}'
 
@@ -130,7 +130,7 @@ stages:
                         displayName: Output Visible Artifacts
                       - template: /eng/common/pipelines/templates/steps/link-replacement.yml
                         parameters:
-                          Directory: '$(Pipeline.Workspace)/${{artifact.safeName}}'
+                          Directory: '$(Pipeline.Workspace)/${{artifact.safeName}}/documentation'
                           ReleaseSha: $(Build.SourceVersion)
                       - template: /eng/common/pipelines/templates/steps/publish-blobs.yml
                         parameters:
