@@ -34,12 +34,8 @@ if ($pkgList) {
   }
 
   # CREATE TAGS and RELEASES
-  try {
-    CreateReleases -pkgList $pkgList -releaseApiUrl $apiUrl/releases -releaseSha $releaseSha
-  }
-  catch {
-    Write-Host "The tag exists. Keep going!"
-  }
+
+  CreateReleases -pkgList $pkgList -releaseApiUrl $apiUrl/releases -releaseSha $releaseSha
 }
 else {
   Write-Host "After processing, no packages required release."
