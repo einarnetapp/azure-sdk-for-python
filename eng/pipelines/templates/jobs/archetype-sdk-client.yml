@@ -145,21 +145,21 @@ jobs:
               ServiceDirectory: ${{ parameters.ServiceDirectory }}
               BuildTargetingString: ${{ parameters.BuildTargetingString }}
 
-  - job: 'RunRegression'
-    condition: and(succeededOrFailed(), or(eq(variables['Run.Regression'], 'true'), and(eq(variables['Build.Reason'], 'Schedule'), eq(variables['System.TeamProject'],'internal'))))
-    displayName: 'Run Regression'
-    timeoutInMinutes: 90
-    variables:
-    - template: ../variables/globals.yml
+  # - job: 'RunRegression'
+  #   condition: and(succeededOrFailed(), or(eq(variables['Run.Regression'], 'true'), and(eq(variables['Build.Reason'], 'Schedule'), eq(variables['System.TeamProject'],'internal'))))
+  #   displayName: 'Run Regression'
+  #   timeoutInMinutes: 90
+  #   variables:
+  #   - template: ../variables/globals.yml
 
-    dependsOn:
-      - 'Build'
+  #   dependsOn:
+  #     - 'Build'
 
-    pool:
-      vmImage: 'ubuntu-18.04'
+  #   pool:
+  #     vmImage: 'ubuntu-18.04'
 
-    steps:
-    - template: ../steps/test_regression.yml
-      parameters: 
-        ServiceDirectory: ${{ parameters.ServiceDirectory }}
-        BuildTargetingString: ${{ parameters.BuildTargetingString }}
+  #   steps:
+  #   - template: ../steps/test_regression.yml
+  #     parameters: 
+  #       ServiceDirectory: ${{ parameters.ServiceDirectory }}
+  #       BuildTargetingString: ${{ parameters.BuildTargetingString }}
