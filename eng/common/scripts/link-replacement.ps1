@@ -15,6 +15,10 @@ Write-Host "ReleaseSha $releaseTag"
 
 if ($sourceDir) {
   Write-Host "1. $sourceDir"
+  $files = Get-ChildItem -Path $sourceDir
+  foreach ($file in $files) {
+    Write-Host "This is the item name. $file"
+  }
   $urls = Get-ChildItem -Path $sourceDir -Recurse -Include *.md
   if ($urls.Count -eq 0) {
     Write-Host "Usage $($MyInvocation.MyCommand.Name) <urls>";
@@ -23,6 +27,7 @@ if ($sourceDir) {
 }
 
 foreach ($url in $urls) {
+
   Write-Host "2. Let's start $url"
   $regex = new-object System.Text.RegularExpressions.Regex ($branchReplaceRegex,
       [System.Text.RegularExpressions.RegexOptions]"Singleline, IgnoreCase")
