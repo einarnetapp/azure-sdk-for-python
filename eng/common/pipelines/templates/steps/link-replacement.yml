@@ -1,0 +1,16 @@
+parameters:
+  Directory: 'not-specified'
+  IgnoreLinksFile: "$(Build.SourcesDirectory)/eng/ignore-links.txt"
+  ReleaseSha: 'not-specified'
+
+steps:
+- task: PowerShell@2
+  displayName: Replace github like master with release tag
+  inputs:
+    pwsh: true
+    filePath: eng/common/scripts/link-replacement.ps1 
+    arguments: >
+      -sourceDir ${{ parameters.Directory }}
+      -ignoreLinksFile ${{ parameters.IgnoreLinksFile }}
+      -branchReplaceRegex "^(https://github.com/.*/(?:blob|tree)/)master(/.*)$"
+      -releaseTag ${{ parameters.ReleaseSha }}
