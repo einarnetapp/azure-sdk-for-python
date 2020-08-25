@@ -3,7 +3,7 @@ parameters:
   ArtifactName: 'not-specified'
   DependsOn: Build
   DocArtifact: 'documentation'
-  DevFeedName: public/azure-sdk-for-python
+  DevFeedName: playground/azure-python
   TargetDocRepoOwner: ''
   TargetDocRepoName: ''
 
@@ -216,4 +216,3 @@ stages:
                           PRBranchName: increment-package-version-${{ parameters.ServiceDirectory }}-$(Build.BuildId)
                           CommitMsg: "Increment package version after release of ${{ artifact.name }}"
                           PRTitle: "Increment version for ${{ parameters.ServiceDirectory }} releases"
-                          
