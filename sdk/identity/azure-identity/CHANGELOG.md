@@ -1,5 +1,8 @@
 # Release History
 
+## 1.4.2 (Unreleased)
+
+
 ## 1.4.1 (2020-10-07)
 ### Fixed
 - `AzureCliCredential.get_token` correctly sets token expiration time,
