@@ -3534,27 +3534,27 @@ class ManagedClusterLoadBalancerProfileManagedOutboundIPs(msrest.serialization.M
      load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value
      is 1.
     :vartype count: int
-    :ivar count_ipv6: The desired number of IPv6 outbound IPs created/managed by Azure for the
+    :ivar count_i_pv6: The desired number of IPv6 outbound IPs created/managed by Azure for the
      cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default
      value is 0 for single-stack and 1 for dual-stack.
-    :vartype count_ipv6: int
+    :vartype count_i_pv6: int
     """
 
     _validation = {
         'count': {'maximum': 100, 'minimum': 1},
-        'count_ipv6': {'maximum': 100, 'minimum': 0},
+        'count_i_pv6': {'maximum': 100, 'minimum': 0},
     }
 
     _attribute_map = {
         'count': {'key': 'count', 'type': 'int'},
-        'count_ipv6': {'key': 'countIPv6', 'type': 'int'},
+        'count_i_pv6': {'key': 'countIPv6', 'type': 'int'},
     }
 
     def __init__(
         self,
         *,
         count: Optional[int] = 1,
-        count_ipv6: Optional[int] = 0,
+        count_i_pv6: Optional[int] = 0,
         **kwargs
     ):
         """
@@ -3562,14 +3562,14 @@ class ManagedClusterLoadBalancerProfileManagedOutboundIPs(msrest.serialization.M
          cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default
          value is 1.
         :paramtype count: int
-        :keyword count_ipv6: The desired number of IPv6 outbound IPs created/managed by Azure for the
+        :keyword count_i_pv6: The desired number of IPv6 outbound IPs created/managed by Azure for the
          cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default
          value is 0 for single-stack and 1 for dual-stack.
-        :paramtype count_ipv6: int
+        :paramtype count_i_pv6: int
         """
         super(ManagedClusterLoadBalancerProfileManagedOutboundIPs, self).__init__(**kwargs)
         self.count = count
-        self.count_ipv6 = count_ipv6
+        self.count_i_pv6 = count_i_pv6
 
 
 class ManagedClusterLoadBalancerProfileOutboundIPPrefixes(msrest.serialization.Model):
