@@ -15,7 +15,7 @@ from msrest import Deserializer, Serializer
 
 from . import models
 from ._configuration import MonitorManagementClientConfiguration
-from .operations import ActionGroupsOperations, BaselineOperations, MetricBaselineOperations
+from .operations import ActionGroupsOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -26,11 +26,6 @@ class MonitorManagementClient:
 
     :ivar action_groups: ActionGroupsOperations operations
     :vartype action_groups: $(python-base-namespace).v2018_09_01.operations.ActionGroupsOperations
-    :ivar metric_baseline: MetricBaselineOperations operations
-    :vartype metric_baseline:
-     $(python-base-namespace).v2018_09_01.operations.MetricBaselineOperations
-    :ivar baseline: BaselineOperations operations
-    :vartype baseline: $(python-base-namespace).v2018_09_01.operations.BaselineOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription.
@@ -54,8 +49,6 @@ class MonitorManagementClient:
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
         self.action_groups = ActionGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.metric_baseline = MetricBaselineOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.baseline = BaselineOperations(self._client, self._config, self._serialize, self._deserialize)
 
 
     def _send_request(
