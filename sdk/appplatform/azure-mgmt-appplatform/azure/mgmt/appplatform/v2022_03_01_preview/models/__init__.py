@@ -170,6 +170,7 @@ from ._models_py3 import TestKeys
 from ._models_py3 import TrackedResource
 from ._models_py3 import TriggeredBuildResult
 from ._models_py3 import UploadedUserSourceInfo
+from ._models_py3 import UserAssignedManagedIdentity
 from ._models_py3 import UserSourceInfo
 from ._models_py3 import ValidationMessages
 
@@ -373,6 +374,7 @@ __all__ = [
     'TrackedResource',
     'TriggeredBuildResult',
     'UploadedUserSourceInfo',
+    'UserAssignedManagedIdentity',
     'UserSourceInfo',
     'ValidationMessages',
     'ActionType',
