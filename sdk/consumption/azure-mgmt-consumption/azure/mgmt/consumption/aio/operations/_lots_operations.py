@@ -20,7 +20,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._lots_operations import build_list_by_billing_account_request, build_list_by_billing_profile_request
+from ...operations._lots_operations import build_list_by_billing_account_request, build_list_by_billing_profile_request, build_list_by_customer_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -53,9 +53,8 @@ class LotsOperations:
         billing_profile_id: str,
         **kwargs: Any
     ) -> AsyncIterable["_models.Lots"]:
-        """Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a
-        billing profile. Microsoft Azure consumption commitments are only supported for the billing
-        account scope.
+        """Lists all Azure credits for a billing account or a billing profile. The API is only supported
+        for Microsoft Customer Agreements (MCA) billing accounts.
 
         :param billing_account_id: BillingAccount ID.
         :type billing_account_id: str
@@ -127,9 +126,9 @@ class LotsOperations:
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.Lots"]:
-        """Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a
-        billing profile. Microsoft Azure consumption commitments are only supported for the billing
-        account scope.
+        """Lists all Microsoft Azure consumption commitments for a billing account. The API is only
+        supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing
+        accounts.
 
         :param billing_account_id: BillingAccount ID.
         :type billing_account_id: str
@@ -195,3 +194,83 @@ class LotsOperations:
             get_next, extract_data
         )
     list_by_billing_account.metadata = {'url': '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/lots'}  # type: ignore
+
+    @distributed_trace
+    def list_by_customer(
+        self,
+        billing_account_id: str,
+        customer_id: str,
+        filter: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.Lots"]:
+        """Lists all Azure credits for a customer. The API is only supported for Microsoft Partner
+        Agreements (MPA) billing accounts.
+
+        :param billing_account_id: BillingAccount ID.
+        :type billing_account_id: str
+        :param customer_id: Customer ID.
+        :type customer_id: str
+        :param filter: May be used to filter the lots by Status, Source etc. The filter supports 'eq',
+         'lt', 'gt', 'le', 'ge', and 'and'. Tag filter is a key value pair string where key and value is
+         separated by a colon (:).
+        :type filter: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either Lots or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.consumption.models.Lots]
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Lots"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+        def prepare_request(next_link=None):
+            if not next_link:
+                
+                request = build_list_by_customer_request(
+                    billing_account_id=billing_account_id,
+                    customer_id=customer_id,
+                    filter=filter,
+                    template_url=self.list_by_customer.metadata['url'],
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                
+                request = build_list_by_customer_request(
+                    billing_account_id=billing_account_id,
+                    customer_id=customer_id,
+                    filter=filter,
+                    template_url=next_link,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("Lots", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+
+        return AsyncItemPaged(
+            get_next, extract_data
+        )
+    list_by_customer.metadata = {'url': '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}/providers/Microsoft.Consumption/lots'}  # type: ignore
