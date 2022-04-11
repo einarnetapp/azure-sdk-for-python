@@ -27,18 +27,20 @@ _SERIALIZER.client_side_validation = False
 
 def build_get_request(
     subscription_id: str,
+    resource_group_name: str,
+    vault_name: str,
     operation_id: str,
-    location: str,
     **kwargs: Any
 ) -> HttpRequest:
     api_version = "2022-03-31-preview"
     accept = "application/json"
     # Construct URL
-    url = kwargs.pop("template_url", '/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationResults/{operationId}')
+    url = kwargs.pop("template_url", '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/operationStatus/{operationId}')
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+        "vaultName": _SERIALIZER.url("vault_name", vault_name, 'str'),
         "operationId": _SERIALIZER.url("operation_id", operation_id, 'str'),
-        "location": _SERIALIZER.url("location", location, 'str'),
     }
 
     url = _format_url_section(url, **path_format_arguments)
@@ -59,8 +61,8 @@ def build_get_request(
         **kwargs
     )
 
-class OperationResultOperations(object):
-    """OperationResultOperations operations.
+class OperationStatusBackupVaultContextOperations(object):
+    """OperationStatusBackupVaultContextOperations operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -84,24 +86,27 @@ class OperationResultOperations(object):
     @distributed_trace
     def get(
         self,
+        resource_group_name: str,
+        vault_name: str,
         operation_id: str,
-        location: str,
         **kwargs: Any
-    ) -> Optional["_models.OperationJobExtendedInfo"]:
-        """Gets the operation status for a resource.
+    ) -> "_models.OperationResource":
+        """Gets the operation status for an operation over a BackupVault's context.
 
-        Gets the operation result for a resource.
+        Gets the operation status for an operation over a BackupVault's context.
 
+        :param resource_group_name: The name of the resource group where the backup vault is present.
+        :type resource_group_name: str
+        :param vault_name: The name of the backup vault.
+        :type vault_name: str
         :param operation_id:
         :type operation_id: str
-        :param location:
-        :type location: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: OperationJobExtendedInfo, or the result of cls(response)
-        :rtype: ~azure.mgmt.dataprotection.models.OperationJobExtendedInfo or None
+        :return: OperationResource, or the result of cls(response)
+        :rtype: ~azure.mgmt.dataprotection.models.OperationResource
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[Optional["_models.OperationJobExtendedInfo"]]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.OperationResource"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -110,8 +115,9 @@ class OperationResultOperations(object):
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            vault_name=vault_name,
             operation_id=operation_id,
-            location=location,
             template_url=self.get.metadata['url'],
         )
         request = _convert_request(request)
@@ -120,25 +126,16 @@ class OperationResultOperations(object):
         pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 202]:
+        if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = None
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = self._deserialize('OperationJobExtendedInfo', pipeline_response)
-
-        if response.status_code == 202:
-            response_headers['Location']=self._deserialize('str', response.headers.get('Location'))
-            response_headers['Azure-AsyncOperation']=self._deserialize('str', response.headers.get('Azure-AsyncOperation'))
-            response_headers['Retry-After']=self._deserialize('int', response.headers.get('Retry-After'))
-            
+        deserialized = self._deserialize('OperationResource', pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': '/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationResults/{operationId}'}  # type: ignore
+    get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/operationStatus/{operationId}'}  # type: ignore
 
