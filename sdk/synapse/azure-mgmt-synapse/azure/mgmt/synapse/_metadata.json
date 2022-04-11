@@ -142,6 +142,7 @@
         "workspace_managed_sql_server_encryption_protector": "WorkspaceManagedSqlServerEncryptionProtectorOperations",
         "workspace_managed_sql_server_usages": "WorkspaceManagedSqlServerUsagesOperations",
         "workspace_managed_sql_server_recoverable_sql_pools": "WorkspaceManagedSqlServerRecoverableSqlPoolsOperations",
+        "workspace_managed_sql_server_dedicated_sql_minimal_tls_settings": "WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations",
         "workspaces": "WorkspacesOperations",
         "workspace_aad_admins": "WorkspaceAadAdminsOperations",
         "workspace_sql_aad_admins": "WorkspaceSqlAadAdminsOperations",
