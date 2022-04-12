@@ -301,7 +301,7 @@ class ClustersOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~stream_analytics_management_client.models
+    :type models: ~azure.mgmt.streamanalytics.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -387,7 +387,7 @@ class ClustersOperations(object):
         :type cluster_name: str
         :param cluster: The definition of the cluster that will be used to create a new cluster or
          replace the existing one.
-        :type cluster: ~stream_analytics_management_client.models.Cluster
+        :type cluster: ~azure.mgmt.streamanalytics.models.Cluster
         :param if_match: The ETag of the resource. Omit this value to always overwrite the current
          record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
@@ -404,7 +404,7 @@ class ClustersOperations(object):
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
         :return: An instance of LROPoller that returns either Cluster or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~stream_analytics_management_client.models.Cluster]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.streamanalytics.models.Cluster]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -518,7 +518,7 @@ class ClustersOperations(object):
         :type cluster_name: str
         :param cluster: The properties specified here will overwrite the corresponding properties in
          the existing cluster (ie. Those properties will be updated).
-        :type cluster: ~stream_analytics_management_client.models.Cluster
+        :type cluster: ~azure.mgmt.streamanalytics.models.Cluster
         :param if_match: The ETag of the resource. Omit this value to always overwrite the current
          record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
@@ -532,7 +532,7 @@ class ClustersOperations(object):
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
         :return: An instance of LROPoller that returns either Cluster or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~stream_analytics_management_client.models.Cluster]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.streamanalytics.models.Cluster]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -593,7 +593,7 @@ class ClustersOperations(object):
         :type cluster_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Cluster, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Cluster
+        :rtype: ~azure.mgmt.streamanalytics.models.Cluster
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Cluster"]
@@ -735,8 +735,7 @@ class ClustersOperations(object):
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ClusterListResult or the result of cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~stream_analytics_management_client.models.ClusterListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.streamanalytics.models.ClusterListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ClusterListResult"]
@@ -803,8 +802,7 @@ class ClustersOperations(object):
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ClusterListResult or the result of cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~stream_analytics_management_client.models.ClusterListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.streamanalytics.models.ClusterListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ClusterListResult"]
@@ -877,8 +875,7 @@ class ClustersOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ClusterJobListResult or the result of
          cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~stream_analytics_management_client.models.ClusterJobListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.streamanalytics.models.ClusterJobListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ClusterJobListResult"]

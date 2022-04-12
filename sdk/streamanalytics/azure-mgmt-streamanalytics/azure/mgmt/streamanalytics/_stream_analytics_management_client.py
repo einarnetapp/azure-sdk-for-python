@@ -25,25 +25,23 @@ class StreamAnalyticsManagementClient:
     """Stream Analytics Client.
 
     :ivar operations: Operations operations
-    :vartype operations: stream_analytics_management_client.operations.Operations
+    :vartype operations: azure.mgmt.streamanalytics.operations.Operations
     :ivar streaming_jobs: StreamingJobsOperations operations
-    :vartype streaming_jobs: stream_analytics_management_client.operations.StreamingJobsOperations
+    :vartype streaming_jobs: azure.mgmt.streamanalytics.operations.StreamingJobsOperations
     :ivar inputs: InputsOperations operations
-    :vartype inputs: stream_analytics_management_client.operations.InputsOperations
+    :vartype inputs: azure.mgmt.streamanalytics.operations.InputsOperations
     :ivar outputs: OutputsOperations operations
-    :vartype outputs: stream_analytics_management_client.operations.OutputsOperations
+    :vartype outputs: azure.mgmt.streamanalytics.operations.OutputsOperations
     :ivar transformations: TransformationsOperations operations
-    :vartype transformations:
-     stream_analytics_management_client.operations.TransformationsOperations
+    :vartype transformations: azure.mgmt.streamanalytics.operations.TransformationsOperations
     :ivar functions: FunctionsOperations operations
-    :vartype functions: stream_analytics_management_client.operations.FunctionsOperations
+    :vartype functions: azure.mgmt.streamanalytics.operations.FunctionsOperations
     :ivar subscriptions: SubscriptionsOperations operations
-    :vartype subscriptions: stream_analytics_management_client.operations.SubscriptionsOperations
+    :vartype subscriptions: azure.mgmt.streamanalytics.operations.SubscriptionsOperations
     :ivar clusters: ClustersOperations operations
-    :vartype clusters: stream_analytics_management_client.operations.ClustersOperations
+    :vartype clusters: azure.mgmt.streamanalytics.operations.ClustersOperations
     :ivar private_endpoints: PrivateEndpointsOperations operations
-    :vartype private_endpoints:
-     stream_analytics_management_client.operations.PrivateEndpointsOperations
+    :vartype private_endpoints: azure.mgmt.streamanalytics.operations.PrivateEndpointsOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription.

@@ -33,7 +33,7 @@ class OutputsOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~stream_analytics_management_client.models
+    :type models: ~azure.mgmt.streamanalytics.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -69,7 +69,7 @@ class OutputsOperations:
         :type output_name: str
         :param output: The definition of the output that will be used to create a new output or replace
          the existing one under the streaming job.
-        :type output: ~stream_analytics_management_client.models.Output
+        :type output: ~azure.mgmt.streamanalytics.models.Output
         :param if_match: The ETag of the output. Omit this value to always overwrite the current
          output. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
@@ -79,7 +79,7 @@ class OutputsOperations:
         :type if_none_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Output, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Output
+        :rtype: ~azure.mgmt.streamanalytics.models.Output
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Output"]
@@ -157,14 +157,14 @@ class OutputsOperations:
          properties in the existing output (ie. Those properties will be updated). Any properties that
          are set to null here will mean that the corresponding property in the existing output will
          remain the same and not change as a result of this PATCH operation.
-        :type output: ~stream_analytics_management_client.models.Output
+        :type output: ~azure.mgmt.streamanalytics.models.Output
         :param if_match: The ETag of the output. Omit this value to always overwrite the current
          output. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Output, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Output
+        :rtype: ~azure.mgmt.streamanalytics.models.Output
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Output"]
@@ -281,7 +281,7 @@ class OutputsOperations:
         :type output_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Output, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Output
+        :rtype: ~azure.mgmt.streamanalytics.models.Output
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Output"]
@@ -343,7 +343,7 @@ class OutputsOperations:
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either OutputListResult or the result of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~stream_analytics_management_client.models.OutputListResult]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.streamanalytics.models.OutputListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.OutputListResult"]
@@ -479,7 +479,7 @@ class OutputsOperations:
          parameter can be left null to test the existing output as is or if specified, the properties
          specified will overwrite the corresponding properties in the existing output (exactly like a
          PATCH operation) and the resulting output will be tested.
-        :type output: ~stream_analytics_management_client.models.Output
+        :type output: ~azure.mgmt.streamanalytics.models.Output
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -491,7 +491,7 @@ class OutputsOperations:
         :return: An instance of AsyncLROPoller that returns either ResourceTestStatus or the result of
          cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~stream_analytics_management_client.models.ResourceTestStatus]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.streamanalytics.models.ResourceTestStatus]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]

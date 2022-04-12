@@ -341,7 +341,7 @@ class FunctionsOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~stream_analytics_management_client.models
+    :type models: ~azure.mgmt.streamanalytics.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -377,7 +377,7 @@ class FunctionsOperations(object):
         :type function_name: str
         :param function: The definition of the function that will be used to create a new function or
          replace the existing one under the streaming job.
-        :type function: ~stream_analytics_management_client.models.Function
+        :type function: ~azure.mgmt.streamanalytics.models.Function
         :param if_match: The ETag of the function. Omit this value to always overwrite the current
          function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
@@ -387,7 +387,7 @@ class FunctionsOperations(object):
         :type if_none_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Function, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Function
+        :rtype: ~azure.mgmt.streamanalytics.models.Function
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Function"]
@@ -465,14 +465,14 @@ class FunctionsOperations(object):
          corresponding properties in the existing function (ie. Those properties will be updated). Any
          properties that are set to null here will mean that the corresponding property in the existing
          function will remain the same and not change as a result of this PATCH operation.
-        :type function: ~stream_analytics_management_client.models.Function
+        :type function: ~azure.mgmt.streamanalytics.models.Function
         :param if_match: The ETag of the function. Omit this value to always overwrite the current
          function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Function, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Function
+        :rtype: ~azure.mgmt.streamanalytics.models.Function
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Function"]
@@ -589,7 +589,7 @@ class FunctionsOperations(object):
         :type function_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Function, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Function
+        :rtype: ~azure.mgmt.streamanalytics.models.Function
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Function"]
@@ -650,8 +650,7 @@ class FunctionsOperations(object):
         :type select: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either FunctionListResult or the result of cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~stream_analytics_management_client.models.FunctionListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.streamanalytics.models.FunctionListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.FunctionListResult"]
@@ -788,7 +787,7 @@ class FunctionsOperations(object):
          this parameter can be left null to test the existing function as is or if specified, the
          properties specified will overwrite the corresponding properties in the existing function
          (exactly like a PATCH operation) and the resulting function will be tested.
-        :type function: ~stream_analytics_management_client.models.Function
+        :type function: ~azure.mgmt.streamanalytics.models.Function
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -799,8 +798,7 @@ class FunctionsOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either ResourceTestStatus or the result of
          cls(response)
-        :rtype:
-         ~azure.core.polling.LROPoller[~stream_analytics_management_client.models.ResourceTestStatus]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.streamanalytics.models.ResourceTestStatus]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -866,10 +864,10 @@ class FunctionsOperations(object):
         :param function_retrieve_default_definition_parameters: Parameters used to specify the type of
          function to retrieve the default definition for.
         :type function_retrieve_default_definition_parameters:
-         ~stream_analytics_management_client.models.FunctionRetrieveDefaultDefinitionParameters
+         ~azure.mgmt.streamanalytics.models.FunctionRetrieveDefaultDefinitionParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Function, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Function
+        :rtype: ~azure.mgmt.streamanalytics.models.Function
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Function"]

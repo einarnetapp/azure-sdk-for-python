@@ -196,7 +196,7 @@ class PrivateEndpointsOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~stream_analytics_management_client.models
+    :type models: ~azure.mgmt.streamanalytics.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -232,7 +232,7 @@ class PrivateEndpointsOperations(object):
         :type private_endpoint_name: str
         :param private_endpoint: The definition of the private endpoint that will be used to create a
          new cluster or replace the existing one.
-        :type private_endpoint: ~stream_analytics_management_client.models.PrivateEndpoint
+        :type private_endpoint: ~azure.mgmt.streamanalytics.models.PrivateEndpoint
         :param if_match: The ETag of the resource. Omit this value to always overwrite the current
          record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
@@ -242,7 +242,7 @@ class PrivateEndpointsOperations(object):
         :type if_none_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpoint, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.PrivateEndpoint
+        :rtype: ~azure.mgmt.streamanalytics.models.PrivateEndpoint
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateEndpoint"]
@@ -309,7 +309,7 @@ class PrivateEndpointsOperations(object):
         :type private_endpoint_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpoint, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.PrivateEndpoint
+        :rtype: ~azure.mgmt.streamanalytics.models.PrivateEndpoint
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateEndpoint"]
@@ -466,7 +466,7 @@ class PrivateEndpointsOperations(object):
         :return: An iterator like instance of either PrivateEndpointListResult or the result of
          cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~stream_analytics_management_client.models.PrivateEndpointListResult]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.streamanalytics.models.PrivateEndpointListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateEndpointListResult"]

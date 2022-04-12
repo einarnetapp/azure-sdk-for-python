@@ -170,7 +170,7 @@ class TransformationsOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~stream_analytics_management_client.models
+    :type models: ~azure.mgmt.streamanalytics.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -207,7 +207,7 @@ class TransformationsOperations(object):
         :type transformation_name: str
         :param transformation: The definition of the transformation that will be used to create a new
          transformation or replace the existing one under the streaming job.
-        :type transformation: ~stream_analytics_management_client.models.Transformation
+        :type transformation: ~azure.mgmt.streamanalytics.models.Transformation
         :param if_match: The ETag of the transformation. Omit this value to always overwrite the
          current transformation. Specify the last-seen ETag value to prevent accidentally overwriting
          concurrent changes.
@@ -218,7 +218,7 @@ class TransformationsOperations(object):
         :type if_none_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Transformation, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Transformation
+        :rtype: ~azure.mgmt.streamanalytics.models.Transformation
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Transformation"]
@@ -297,14 +297,14 @@ class TransformationsOperations(object):
          updated). Any properties that are set to null here will mean that the corresponding property in
          the existing transformation will remain the same and not change as a result of this PATCH
          operation.
-        :type transformation: ~stream_analytics_management_client.models.Transformation
+        :type transformation: ~azure.mgmt.streamanalytics.models.Transformation
         :param if_match: The ETag of the transformation. Omit this value to always overwrite the
          current transformation. Specify the last-seen ETag value to prevent accidentally overwriting
          concurrent changes.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Transformation, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Transformation
+        :rtype: ~azure.mgmt.streamanalytics.models.Transformation
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Transformation"]
@@ -369,7 +369,7 @@ class TransformationsOperations(object):
         :type transformation_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Transformation, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.Transformation
+        :rtype: ~azure.mgmt.streamanalytics.models.Transformation
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Transformation"]

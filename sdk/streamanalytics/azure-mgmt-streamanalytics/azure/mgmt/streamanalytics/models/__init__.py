@@ -6,9 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import AggregateFunctionProperties
 from ._models_py3 import AvroSerialization
 from ._models_py3 import AzureDataLakeStoreOutputDataSource
 from ._models_py3 import AzureDataLakeStoreOutputDataSourceProperties
+from ._models_py3 import AzureFunctionOutputDataSource
 from ._models_py3 import AzureMachineLearningWebServiceFunctionBinding
 from ._models_py3 import AzureMachineLearningWebServiceFunctionRetrieveDefaultDefinitionParameters
 from ._models_py3 import AzureMachineLearningWebServiceInputColumn
@@ -128,9 +130,11 @@ from ._stream_analytics_management_client_enums import (
 )
 
 __all__ = [
+    'AggregateFunctionProperties',
     'AvroSerialization',
     'AzureDataLakeStoreOutputDataSource',
     'AzureDataLakeStoreOutputDataSourceProperties',
+    'AzureFunctionOutputDataSource',
     'AzureMachineLearningWebServiceFunctionBinding',
     'AzureMachineLearningWebServiceFunctionRetrieveDefaultDefinitionParameters',
     'AzureMachineLearningWebServiceInputColumn',

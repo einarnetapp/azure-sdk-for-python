@@ -401,7 +401,7 @@ class StreamingJobsOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~stream_analytics_management_client.models
+    :type models: ~azure.mgmt.streamanalytics.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -492,7 +492,7 @@ class StreamingJobsOperations(object):
         :type job_name: str
         :param streaming_job: The definition of the streaming job that will be used to create a new
          streaming job or replace the existing one.
-        :type streaming_job: ~stream_analytics_management_client.models.StreamingJob
+        :type streaming_job: ~azure.mgmt.streamanalytics.models.StreamingJob
         :param if_match: The ETag of the streaming job. Omit this value to always overwrite the current
          record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
@@ -511,7 +511,7 @@ class StreamingJobsOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either StreamingJob or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~stream_analytics_management_client.models.StreamingJob]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.streamanalytics.models.StreamingJob]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -581,14 +581,14 @@ class StreamingJobsOperations(object):
          corresponding properties in the existing streaming job (ie. Those properties will be updated).
          Any properties that are set to null here will mean that the corresponding property in the
          existing input will remain the same and not change as a result of this PATCH operation.
-        :type streaming_job: ~stream_analytics_management_client.models.StreamingJob
+        :type streaming_job: ~azure.mgmt.streamanalytics.models.StreamingJob
         :param if_match: The ETag of the streaming job. Omit this value to always overwrite the current
          record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent
          changes.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingJob, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.StreamingJob
+        :rtype: ~azure.mgmt.streamanalytics.models.StreamingJob
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.StreamingJob"]
@@ -751,7 +751,7 @@ class StreamingJobsOperations(object):
         :type expand: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingJob, or the result of cls(response)
-        :rtype: ~stream_analytics_management_client.models.StreamingJob
+        :rtype: ~azure.mgmt.streamanalytics.models.StreamingJob
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.StreamingJob"]
@@ -811,8 +811,7 @@ class StreamingJobsOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either StreamingJobListResult or the result of
          cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~stream_analytics_management_client.models.StreamingJobListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.streamanalytics.models.StreamingJobListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.StreamingJobListResult"]
@@ -887,8 +886,7 @@ class StreamingJobsOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either StreamingJobListResult or the result of
          cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~stream_analytics_management_client.models.StreamingJobListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.streamanalytics.models.StreamingJobListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.StreamingJobListResult"]
@@ -1005,8 +1003,7 @@ class StreamingJobsOperations(object):
         :param job_name: The name of the streaming job.
         :type job_name: str
         :param start_job_parameters: Parameters applicable to a start streaming job operation.
-        :type start_job_parameters:
-         ~stream_analytics_management_client.models.StartStreamingJobParameters
+        :type start_job_parameters: ~azure.mgmt.streamanalytics.models.StartStreamingJobParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -1214,8 +1211,7 @@ class StreamingJobsOperations(object):
         :param job_name: The name of the streaming job.
         :type job_name: str
         :param scale_job_parameters: Parameters applicable to a scale streaming job operation.
-        :type scale_job_parameters:
-         ~stream_analytics_management_client.models.ScaleStreamingJobParameters
+        :type scale_job_parameters: ~azure.mgmt.streamanalytics.models.ScaleStreamingJobParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
