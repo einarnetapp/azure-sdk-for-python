@@ -29,7 +29,7 @@ class ContainerAppsRevisionReplicasOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~container_apps_api_client.models
+    :type models: ~azure.mgmt.app.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -50,7 +50,7 @@ class ContainerAppsRevisionReplicasOperations:
         resource_group_name: str,
         container_app_name: str,
         revision_name: str,
-        name: str,
+        replica_name: str,
         **kwargs: Any
     ) -> "_models.Replica":
         """Get a replica for a Container App Revision.
@@ -63,11 +63,11 @@ class ContainerAppsRevisionReplicasOperations:
         :type container_app_name: str
         :param revision_name: Name of the Container App Revision.
         :type revision_name: str
-        :param name: Name of the Container App Revision Replica.
-        :type name: str
+        :param replica_name: Name of the Container App Revision Replica.
+        :type replica_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Replica, or the result of cls(response)
-        :rtype: ~container_apps_api_client.models.Replica
+        :rtype: ~azure.mgmt.app.models.Replica
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.Replica"]
@@ -82,7 +82,7 @@ class ContainerAppsRevisionReplicasOperations:
             resource_group_name=resource_group_name,
             container_app_name=container_app_name,
             revision_name=revision_name,
-            name=name,
+            replica_name=replica_name,
             template_url=self.get_replica.metadata['url'],
         )
         request = _convert_request(request)
@@ -103,7 +103,7 @@ class ContainerAppsRevisionReplicasOperations:
 
         return deserialized
 
-    get_replica.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas/{name}'}  # type: ignore
+    get_replica.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas/{replicaName}'}  # type: ignore
 
 
     @distributed_trace_async
@@ -126,7 +126,7 @@ class ContainerAppsRevisionReplicasOperations:
         :type revision_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ReplicaCollection, or the result of cls(response)
-        :rtype: ~container_apps_api_client.models.ReplicaCollection
+        :rtype: ~azure.mgmt.app.models.ReplicaCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReplicaCollection"]
