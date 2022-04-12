@@ -43,6 +43,8 @@ class Resource(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -80,6 +82,8 @@ class ProxyResource(Resource):
         self,
         **kwargs
     ):
+        """
+        """
         super(ProxyResource, self).__init__(**kwargs)
 
 
@@ -96,9 +100,9 @@ class Configuration(ProxyResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :param enforce_private_markdown_storage: When flag is set to true Markdown tile will require
+    :ivar enforce_private_markdown_storage: When flag is set to true Markdown tile will require
      external storage configuration (URI). The inline content configuration will be prohibited.
-    :type enforce_private_markdown_storage: bool
+    :vartype enforce_private_markdown_storage: bool
     """
 
     _validation = {
@@ -120,6 +124,11 @@ class Configuration(ProxyResource):
         enforce_private_markdown_storage: Optional[bool] = None,
         **kwargs
     ):
+        """
+        :keyword enforce_private_markdown_storage: When flag is set to true Markdown tile will require
+         external storage configuration (URI). The inline content configuration will be prohibited.
+        :paramtype enforce_private_markdown_storage: bool
+        """
         super(Configuration, self).__init__(**kwargs)
         self.enforce_private_markdown_storage = enforce_private_markdown_storage
 
@@ -127,10 +136,10 @@ class Configuration(ProxyResource):
 class ConfigurationList(msrest.serialization.Model):
     """List of tenant configurations.
 
-    :param value: The array of tenant configurations.
-    :type value: list[~azure.mgmt.portal.models.Configuration]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: The array of tenant configurations.
+    :vartype value: list[~azure.mgmt.portal.models.Configuration]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -145,6 +154,12 @@ class ConfigurationList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: The array of tenant configurations.
+        :paramtype value: list[~azure.mgmt.portal.models.Configuration]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(ConfigurationList, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -163,14 +178,14 @@ class Dashboard(msrest.serialization.Model):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param location: Required. Resource location.
-    :type location: str
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
-    :param lenses: The dashboard lenses.
-    :type lenses: list[~azure.mgmt.portal.models.DashboardLens]
-    :param metadata: The dashboard metadata.
-    :type metadata: dict[str, any]
+    :ivar location: Required. Resource location.
+    :vartype location: str
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar lenses: The dashboard lenses.
+    :vartype lenses: list[~azure.mgmt.portal.models.DashboardLens]
+    :ivar metadata: The dashboard metadata.
+    :vartype metadata: dict[str, any]
     """
 
     _validation = {
@@ -199,6 +214,16 @@ class Dashboard(msrest.serialization.Model):
         metadata: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
+        """
+        :keyword location: Required. Resource location.
+        :paramtype location: str
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword lenses: The dashboard lenses.
+        :paramtype lenses: list[~azure.mgmt.portal.models.DashboardLens]
+        :keyword metadata: The dashboard metadata.
+        :paramtype metadata: dict[str, any]
+        """
         super(Dashboard, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -214,12 +239,12 @@ class DashboardLens(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param order: Required. The lens order.
-    :type order: int
-    :param parts: Required. The dashboard parts.
-    :type parts: list[~azure.mgmt.portal.models.DashboardParts]
-    :param metadata: The dashboard len's metadata.
-    :type metadata: dict[str, any]
+    :ivar order: Required. The lens order.
+    :vartype order: int
+    :ivar parts: Required. The dashboard parts.
+    :vartype parts: list[~azure.mgmt.portal.models.DashboardParts]
+    :ivar metadata: The dashboard len's metadata.
+    :vartype metadata: dict[str, any]
     """
 
     _validation = {
@@ -241,6 +266,14 @@ class DashboardLens(msrest.serialization.Model):
         metadata: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
+        """
+        :keyword order: Required. The lens order.
+        :paramtype order: int
+        :keyword parts: Required. The dashboard parts.
+        :paramtype parts: list[~azure.mgmt.portal.models.DashboardParts]
+        :keyword metadata: The dashboard len's metadata.
+        :paramtype metadata: dict[str, any]
+        """
         super(DashboardLens, self).__init__(**kwargs)
         self.order = order
         self.parts = parts
@@ -250,10 +283,10 @@ class DashboardLens(msrest.serialization.Model):
 class DashboardListResult(msrest.serialization.Model):
     """List of dashboards.
 
-    :param value: The array of custom resource provider manifests.
-    :type value: list[~azure.mgmt.portal.models.Dashboard]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: The array of custom resource provider manifests.
+    :vartype value: list[~azure.mgmt.portal.models.Dashboard]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -268,6 +301,12 @@ class DashboardListResult(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: The array of custom resource provider manifests.
+        :paramtype value: list[~azure.mgmt.portal.models.Dashboard]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(DashboardListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -281,11 +320,11 @@ class DashboardPartMetadata(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param additional_properties: Unmatched properties from the message are deserialized to this
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
      collection.
-    :type additional_properties: dict[str, any]
-    :param type: Required. The type of dashboard part.Constant filled by server.
-    :type type: str
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Required. The type of dashboard part.Constant filled by server.
+    :vartype type: str
     """
 
     _validation = {
@@ -307,6 +346,11 @@ class DashboardPartMetadata(msrest.serialization.Model):
         additional_properties: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        """
         super(DashboardPartMetadata, self).__init__(**kwargs)
         self.additional_properties = additional_properties
         self.type = 'DashboardPartMetadata'  # type: str
@@ -317,10 +361,10 @@ class DashboardParts(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param position: Required. The dashboard's part position.
-    :type position: ~azure.mgmt.portal.models.DashboardPartsPosition
-    :param metadata: The dashboard part's metadata.
-    :type metadata: ~azure.mgmt.portal.models.DashboardPartMetadata
+    :ivar position: Required. The dashboard's part position.
+    :vartype position: ~azure.mgmt.portal.models.DashboardPartsPosition
+    :ivar metadata: The dashboard part's metadata.
+    :vartype metadata: ~azure.mgmt.portal.models.DashboardPartMetadata
     """
 
     _validation = {
@@ -339,6 +383,12 @@ class DashboardParts(msrest.serialization.Model):
         metadata: Optional["DashboardPartMetadata"] = None,
         **kwargs
     ):
+        """
+        :keyword position: Required. The dashboard's part position.
+        :paramtype position: ~azure.mgmt.portal.models.DashboardPartsPosition
+        :keyword metadata: The dashboard part's metadata.
+        :paramtype metadata: ~azure.mgmt.portal.models.DashboardPartMetadata
+        """
         super(DashboardParts, self).__init__(**kwargs)
         self.position = position
         self.metadata = metadata
@@ -349,16 +399,16 @@ class DashboardPartsPosition(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param x: Required. The dashboard's part x coordinate.
-    :type x: int
-    :param y: Required. The dashboard's part y coordinate.
-    :type y: int
-    :param row_span: Required. The dashboard's part row span.
-    :type row_span: int
-    :param col_span: Required. The dashboard's part column span.
-    :type col_span: int
-    :param metadata: The dashboard part's metadata.
-    :type metadata: dict[str, any]
+    :ivar x: Required. The dashboard's part x coordinate.
+    :vartype x: int
+    :ivar y: Required. The dashboard's part y coordinate.
+    :vartype y: int
+    :ivar row_span: Required. The dashboard's part row span.
+    :vartype row_span: int
+    :ivar col_span: Required. The dashboard's part column span.
+    :vartype col_span: int
+    :ivar metadata: The dashboard part's metadata.
+    :vartype metadata: dict[str, any]
     """
 
     _validation = {
@@ -386,6 +436,18 @@ class DashboardPartsPosition(msrest.serialization.Model):
         metadata: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
+        """
+        :keyword x: Required. The dashboard's part x coordinate.
+        :paramtype x: int
+        :keyword y: Required. The dashboard's part y coordinate.
+        :paramtype y: int
+        :keyword row_span: Required. The dashboard's part row span.
+        :paramtype row_span: int
+        :keyword col_span: Required. The dashboard's part column span.
+        :paramtype col_span: int
+        :keyword metadata: The dashboard part's metadata.
+        :paramtype metadata: dict[str, any]
+        """
         super(DashboardPartsPosition, self).__init__(**kwargs)
         self.x = x
         self.y = y
@@ -423,6 +485,8 @@ class ErrorDefinition(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ErrorDefinition, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -432,8 +496,8 @@ class ErrorDefinition(msrest.serialization.Model):
 class ErrorResponse(msrest.serialization.Model):
     """Error response.
 
-    :param error: The error details.
-    :type error: ~azure.mgmt.portal.models.ErrorDefinition
+    :ivar error: The error details.
+    :vartype error: ~azure.mgmt.portal.models.ErrorDefinition
     """
 
     _attribute_map = {
@@ -446,6 +510,10 @@ class ErrorResponse(msrest.serialization.Model):
         error: Optional["ErrorDefinition"] = None,
         **kwargs
     ):
+        """
+        :keyword error: The error details.
+        :paramtype error: ~azure.mgmt.portal.models.ErrorDefinition
+        """
         super(ErrorResponse, self).__init__(**kwargs)
         self.error = error
 
@@ -455,15 +523,15 @@ class MarkdownPartMetadata(DashboardPartMetadata):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param additional_properties: Unmatched properties from the message are deserialized to this
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
      collection.
-    :type additional_properties: dict[str, any]
-    :param type: Required. The type of dashboard part.Constant filled by server.
-    :type type: str
-    :param inputs: Input to dashboard part.
-    :type inputs: list[any]
-    :param settings: Markdown part settings.
-    :type settings: ~azure.mgmt.portal.models.MarkdownPartMetadataSettings
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Required. The type of dashboard part.Constant filled by server.
+    :vartype type: str
+    :ivar inputs: Input to dashboard part.
+    :vartype inputs: list[any]
+    :ivar settings: Markdown part settings.
+    :vartype settings: ~azure.mgmt.portal.models.MarkdownPartMetadataSettings
     """
 
     _validation = {
@@ -485,6 +553,15 @@ class MarkdownPartMetadata(DashboardPartMetadata):
         settings: Optional["MarkdownPartMetadataSettings"] = None,
         **kwargs
     ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword inputs: Input to dashboard part.
+        :paramtype inputs: list[any]
+        :keyword settings: Markdown part settings.
+        :paramtype settings: ~azure.mgmt.portal.models.MarkdownPartMetadataSettings
+        """
         super(MarkdownPartMetadata, self).__init__(additional_properties=additional_properties, **kwargs)
         self.type = 'Extension/HubsExtension/PartType/MarkdownPart'  # type: str
         self.inputs = inputs
@@ -494,8 +571,8 @@ class MarkdownPartMetadata(DashboardPartMetadata):
 class MarkdownPartMetadataSettings(msrest.serialization.Model):
     """Markdown part settings.
 
-    :param content: The content of markdown part.
-    :type content: ~azure.mgmt.portal.models.MarkdownPartMetadataSettingsContent
+    :ivar content: The content of markdown part.
+    :vartype content: ~azure.mgmt.portal.models.MarkdownPartMetadataSettingsContent
     """
 
     _attribute_map = {
@@ -508,6 +585,10 @@ class MarkdownPartMetadataSettings(msrest.serialization.Model):
         content: Optional["MarkdownPartMetadataSettingsContent"] = None,
         **kwargs
     ):
+        """
+        :keyword content: The content of markdown part.
+        :paramtype content: ~azure.mgmt.portal.models.MarkdownPartMetadataSettingsContent
+        """
         super(MarkdownPartMetadataSettings, self).__init__(**kwargs)
         self.content = content
 
@@ -515,8 +596,8 @@ class MarkdownPartMetadataSettings(msrest.serialization.Model):
 class MarkdownPartMetadataSettingsContent(msrest.serialization.Model):
     """The content of markdown part.
 
-    :param settings: The setting of the content of markdown part.
-    :type settings: ~azure.mgmt.portal.models.MarkdownPartMetadataSettingsContentSettings
+    :ivar settings: The setting of the content of markdown part.
+    :vartype settings: ~azure.mgmt.portal.models.MarkdownPartMetadataSettingsContentSettings
     """
 
     _attribute_map = {
@@ -529,6 +610,10 @@ class MarkdownPartMetadataSettingsContent(msrest.serialization.Model):
         settings: Optional["MarkdownPartMetadataSettingsContentSettings"] = None,
         **kwargs
     ):
+        """
+        :keyword settings: The setting of the content of markdown part.
+        :paramtype settings: ~azure.mgmt.portal.models.MarkdownPartMetadataSettingsContentSettings
+        """
         super(MarkdownPartMetadataSettingsContent, self).__init__(**kwargs)
         self.settings = settings
 
@@ -536,16 +621,16 @@ class MarkdownPartMetadataSettingsContent(msrest.serialization.Model):
 class MarkdownPartMetadataSettingsContentSettings(msrest.serialization.Model):
     """The setting of the content of markdown part.
 
-    :param content: The content of the markdown part.
-    :type content: str
-    :param title: The title of the markdown part.
-    :type title: str
-    :param subtitle: The subtitle of the markdown part.
-    :type subtitle: str
-    :param markdown_source: The source of the content of the markdown part.
-    :type markdown_source: int
-    :param markdown_uri: The uri of markdown content.
-    :type markdown_uri: str
+    :ivar content: The content of the markdown part.
+    :vartype content: str
+    :ivar title: The title of the markdown part.
+    :vartype title: str
+    :ivar subtitle: The subtitle of the markdown part.
+    :vartype subtitle: str
+    :ivar markdown_source: The source of the content of the markdown part.
+    :vartype markdown_source: int
+    :ivar markdown_uri: The uri of markdown content.
+    :vartype markdown_uri: str
     """
 
     _attribute_map = {
@@ -566,6 +651,18 @@ class MarkdownPartMetadataSettingsContentSettings(msrest.serialization.Model):
         markdown_uri: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword content: The content of the markdown part.
+        :paramtype content: str
+        :keyword title: The title of the markdown part.
+        :paramtype title: str
+        :keyword subtitle: The subtitle of the markdown part.
+        :paramtype subtitle: str
+        :keyword markdown_source: The source of the content of the markdown part.
+        :paramtype markdown_source: int
+        :keyword markdown_uri: The uri of markdown content.
+        :paramtype markdown_uri: str
+        """
         super(MarkdownPartMetadataSettingsContentSettings, self).__init__(**kwargs)
         self.content = content
         self.title = title
@@ -577,12 +674,12 @@ class MarkdownPartMetadataSettingsContentSettings(msrest.serialization.Model):
 class PatchableDashboard(msrest.serialization.Model):
     """The shared dashboard resource definition.
 
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
-    :param lenses: The dashboard lenses.
-    :type lenses: list[~azure.mgmt.portal.models.DashboardLens]
-    :param metadata: The dashboard metadata.
-    :type metadata: dict[str, any]
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar lenses: The dashboard lenses.
+    :vartype lenses: list[~azure.mgmt.portal.models.DashboardLens]
+    :ivar metadata: The dashboard metadata.
+    :vartype metadata: dict[str, any]
     """
 
     _attribute_map = {
@@ -599,6 +696,14 @@ class PatchableDashboard(msrest.serialization.Model):
         metadata: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
+        """
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword lenses: The dashboard lenses.
+        :paramtype lenses: list[~azure.mgmt.portal.models.DashboardLens]
+        :keyword metadata: The dashboard metadata.
+        :paramtype metadata: dict[str, any]
+        """
         super(PatchableDashboard, self).__init__(**kwargs)
         self.tags = tags
         self.lenses = lenses
@@ -608,12 +713,12 @@ class PatchableDashboard(msrest.serialization.Model):
 class ResourceProviderOperation(msrest.serialization.Model):
     """Supported operations of this resource provider.
 
-    :param name: Operation name, in format of {provider}/{resource}/{operation}.
-    :type name: str
-    :param is_data_action: Indicates whether the operation applies to data-plane.
-    :type is_data_action: str
-    :param display: Display metadata associated with the operation.
-    :type display: ~azure.mgmt.portal.models.ResourceProviderOperationDisplay
+    :ivar name: Operation name, in format of {provider}/{resource}/{operation}.
+    :vartype name: str
+    :ivar is_data_action: Indicates whether the operation applies to data-plane.
+    :vartype is_data_action: str
+    :ivar display: Display metadata associated with the operation.
+    :vartype display: ~azure.mgmt.portal.models.ResourceProviderOperationDisplay
     """
 
     _attribute_map = {
@@ -630,6 +735,14 @@ class ResourceProviderOperation(msrest.serialization.Model):
         display: Optional["ResourceProviderOperationDisplay"] = None,
         **kwargs
     ):
+        """
+        :keyword name: Operation name, in format of {provider}/{resource}/{operation}.
+        :paramtype name: str
+        :keyword is_data_action: Indicates whether the operation applies to data-plane.
+        :paramtype is_data_action: str
+        :keyword display: Display metadata associated with the operation.
+        :paramtype display: ~azure.mgmt.portal.models.ResourceProviderOperationDisplay
+        """
         super(ResourceProviderOperation, self).__init__(**kwargs)
         self.name = name
         self.is_data_action = is_data_action
@@ -639,14 +752,14 @@ class ResourceProviderOperation(msrest.serialization.Model):
 class ResourceProviderOperationDisplay(msrest.serialization.Model):
     """Display metadata associated with the operation.
 
-    :param provider: Resource provider: Microsoft Custom Providers.
-    :type provider: str
-    :param resource: Resource on which the operation is performed.
-    :type resource: str
-    :param operation: Type of operation: get, read, delete, etc.
-    :type operation: str
-    :param description: Description of this operation.
-    :type description: str
+    :ivar provider: Resource provider: Microsoft Custom Providers.
+    :vartype provider: str
+    :ivar resource: Resource on which the operation is performed.
+    :vartype resource: str
+    :ivar operation: Type of operation: get, read, delete, etc.
+    :vartype operation: str
+    :ivar description: Description of this operation.
+    :vartype description: str
     """
 
     _attribute_map = {
@@ -665,6 +778,16 @@ class ResourceProviderOperationDisplay(msrest.serialization.Model):
         description: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword provider: Resource provider: Microsoft Custom Providers.
+        :paramtype provider: str
+        :keyword resource: Resource on which the operation is performed.
+        :paramtype resource: str
+        :keyword operation: Type of operation: get, read, delete, etc.
+        :paramtype operation: str
+        :keyword description: Description of this operation.
+        :paramtype description: str
+        """
         super(ResourceProviderOperationDisplay, self).__init__(**kwargs)
         self.provider = provider
         self.resource = resource
@@ -675,10 +798,10 @@ class ResourceProviderOperationDisplay(msrest.serialization.Model):
 class ResourceProviderOperationList(msrest.serialization.Model):
     """Results of the request to list operations.
 
-    :param value: List of operations supported by this resource provider.
-    :type value: list[~azure.mgmt.portal.models.ResourceProviderOperation]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: List of operations supported by this resource provider.
+    :vartype value: list[~azure.mgmt.portal.models.ResourceProviderOperation]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -693,6 +816,12 @@ class ResourceProviderOperationList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: List of operations supported by this resource provider.
+        :paramtype value: list[~azure.mgmt.portal.models.ResourceProviderOperation]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(ResourceProviderOperationList, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -727,6 +856,8 @@ class Violation(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Violation, self).__init__(**kwargs)
         self.id = None
         self.user_id = None
@@ -736,10 +867,10 @@ class Violation(msrest.serialization.Model):
 class ViolationsList(msrest.serialization.Model):
     """List of list of items that violate tenant's configuration.
 
-    :param value: The array of violations.
-    :type value: list[~azure.mgmt.portal.models.Violation]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: The array of violations.
+    :vartype value: list[~azure.mgmt.portal.models.Violation]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -754,6 +885,12 @@ class ViolationsList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: The array of violations.
+        :paramtype value: list[~azure.mgmt.portal.models.Violation]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(ViolationsList, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
