@@ -209,7 +209,7 @@ class TenantConfigurationOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -290,9 +290,9 @@ class TenantConfigurationOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param configuration_name: The identifier of the Git Configuration Operation.
-        :type configuration_name: str or ~api_management_client.models.ConfigurationIdName
+        :type configuration_name: str or ~azure.mgmt.apimanagement.models.ConfigurationIdName
         :param parameters: Deploy Configuration parameters.
-        :type parameters: ~api_management_client.models.DeployConfigurationParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.DeployConfigurationParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -303,7 +303,7 @@ class TenantConfigurationOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either OperationResultContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~api_management_client.models.OperationResultContract]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.OperationResultContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -415,9 +415,9 @@ class TenantConfigurationOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param configuration_name: The identifier of the Git Configuration Operation.
-        :type configuration_name: str or ~api_management_client.models.ConfigurationIdName
+        :type configuration_name: str or ~azure.mgmt.apimanagement.models.ConfigurationIdName
         :param parameters: Save Configuration parameters.
-        :type parameters: ~api_management_client.models.SaveConfigurationParameter
+        :type parameters: ~azure.mgmt.apimanagement.models.SaveConfigurationParameter
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -428,7 +428,7 @@ class TenantConfigurationOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either OperationResultContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~api_management_client.models.OperationResultContract]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.OperationResultContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -540,9 +540,9 @@ class TenantConfigurationOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param configuration_name: The identifier of the Git Configuration Operation.
-        :type configuration_name: str or ~api_management_client.models.ConfigurationIdName
+        :type configuration_name: str or ~azure.mgmt.apimanagement.models.ConfigurationIdName
         :param parameters: Validate Configuration parameters.
-        :type parameters: ~api_management_client.models.DeployConfigurationParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.DeployConfigurationParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -553,7 +553,7 @@ class TenantConfigurationOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either OperationResultContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~api_management_client.models.OperationResultContract]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.OperationResultContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -615,10 +615,10 @@ class TenantConfigurationOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param configuration_name: The identifier of the Git Configuration Operation.
-        :type configuration_name: str or ~api_management_client.models.ConfigurationIdName
+        :type configuration_name: str or ~azure.mgmt.apimanagement.models.ConfigurationIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: TenantConfigurationSyncStateContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.TenantConfigurationSyncStateContract
+        :rtype: ~azure.mgmt.apimanagement.models.TenantConfigurationSyncStateContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.TenantConfigurationSyncStateContract"]

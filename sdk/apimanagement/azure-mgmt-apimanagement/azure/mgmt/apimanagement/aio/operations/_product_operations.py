@@ -31,7 +31,7 @@ class ProductOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -84,7 +84,7 @@ class ProductOperations:
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ProductCollection or the result of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ProductCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ProductCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ProductCollection"]
@@ -230,7 +230,7 @@ class ProductOperations:
         :type product_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ProductContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ProductContract
+        :rtype: ~azure.mgmt.apimanagement.models.ProductContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ProductContract"]
@@ -291,13 +291,13 @@ class ProductOperations:
          instance.
         :type product_id: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.ProductContract
+        :type parameters: ~azure.mgmt.apimanagement.models.ProductContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ProductContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ProductContract
+        :rtype: ~azure.mgmt.apimanagement.models.ProductContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ProductContract"]
@@ -373,10 +373,10 @@ class ProductOperations:
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.ProductUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.ProductUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ProductContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ProductContract
+        :rtype: ~azure.mgmt.apimanagement.models.ProductContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ProductContract"]
@@ -520,7 +520,7 @@ class ProductOperations:
         :return: An iterator like instance of either TagResourceCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.TagResourceCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.TagResourceCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.TagResourceCollection"]

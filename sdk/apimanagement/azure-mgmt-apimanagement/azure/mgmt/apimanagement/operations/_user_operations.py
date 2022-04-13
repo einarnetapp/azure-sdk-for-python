@@ -387,7 +387,7 @@ class UserOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -437,7 +437,7 @@ class UserOperations(object):
         :type expand_groups: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either UserCollection or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.UserCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.UserCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.UserCollection"]
@@ -579,7 +579,7 @@ class UserOperations(object):
         :type user_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: UserContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.UserContract
+        :rtype: ~azure.mgmt.apimanagement.models.UserContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.UserContract"]
@@ -640,7 +640,7 @@ class UserOperations(object):
         :param user_id: User identifier. Must be unique in the current API Management service instance.
         :type user_id: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.UserCreateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.UserCreateParameters
         :param notify: Send an Email notification to the User.
         :type notify: bool
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
@@ -648,7 +648,7 @@ class UserOperations(object):
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: UserContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.UserContract
+        :rtype: ~azure.mgmt.apimanagement.models.UserContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.UserContract"]
@@ -724,10 +724,10 @@ class UserOperations(object):
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.UserUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.UserUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: UserContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.UserContract
+        :rtype: ~azure.mgmt.apimanagement.models.UserContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.UserContract"]
@@ -803,7 +803,7 @@ class UserOperations(object):
         :type notify: bool
         :param app_type: Determines the type of application which send the create user request. Default
          is legacy publisher portal.
-        :type app_type: str or ~api_management_client.models.AppType
+        :type app_type: str or ~azure.mgmt.apimanagement.models.AppType
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -863,7 +863,7 @@ class UserOperations(object):
         :type user_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GenerateSsoUrlResult, or the result of cls(response)
-        :rtype: ~api_management_client.models.GenerateSsoUrlResult
+        :rtype: ~azure.mgmt.apimanagement.models.GenerateSsoUrlResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GenerateSsoUrlResult"]
@@ -919,10 +919,10 @@ class UserOperations(object):
         :param user_id: User identifier. Must be unique in the current API Management service instance.
         :type user_id: str
         :param parameters: Create Authorization Token parameters.
-        :type parameters: ~api_management_client.models.UserTokenParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.UserTokenParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: UserTokenResult, or the result of cls(response)
-        :rtype: ~api_management_client.models.UserTokenResult
+        :rtype: ~azure.mgmt.apimanagement.models.UserTokenResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.UserTokenResult"]

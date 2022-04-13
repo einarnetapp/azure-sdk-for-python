@@ -29,7 +29,7 @@ class NotificationRecipientUserOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -59,10 +59,10 @@ class NotificationRecipientUserOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param notification_name: Notification Name Identifier.
-        :type notification_name: str or ~api_management_client.models.NotificationName
+        :type notification_name: str or ~azure.mgmt.apimanagement.models.NotificationName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RecipientUserCollection, or the result of cls(response)
-        :rtype: ~api_management_client.models.RecipientUserCollection
+        :rtype: ~azure.mgmt.apimanagement.models.RecipientUserCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.RecipientUserCollection"]
@@ -116,7 +116,7 @@ class NotificationRecipientUserOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param notification_name: Notification Name Identifier.
-        :type notification_name: str or ~api_management_client.models.NotificationName
+        :type notification_name: str or ~azure.mgmt.apimanagement.models.NotificationName
         :param user_id: User identifier. Must be unique in the current API Management service instance.
         :type user_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -173,12 +173,12 @@ class NotificationRecipientUserOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param notification_name: Notification Name Identifier.
-        :type notification_name: str or ~api_management_client.models.NotificationName
+        :type notification_name: str or ~azure.mgmt.apimanagement.models.NotificationName
         :param user_id: User identifier. Must be unique in the current API Management service instance.
         :type user_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RecipientUserContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.RecipientUserContract
+        :rtype: ~azure.mgmt.apimanagement.models.RecipientUserContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.RecipientUserContract"]
@@ -237,7 +237,7 @@ class NotificationRecipientUserOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param notification_name: Notification Name Identifier.
-        :type notification_name: str or ~api_management_client.models.NotificationName
+        :type notification_name: str or ~azure.mgmt.apimanagement.models.NotificationName
         :param user_id: User identifier. Must be unique in the current API Management service instance.
         :type user_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response

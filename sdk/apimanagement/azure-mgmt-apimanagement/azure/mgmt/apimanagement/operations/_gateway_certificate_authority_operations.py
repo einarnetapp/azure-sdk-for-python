@@ -251,7 +251,7 @@ class GatewayCertificateAuthorityOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -298,7 +298,7 @@ class GatewayCertificateAuthorityOperations(object):
         :return: An iterator like instance of either GatewayCertificateAuthorityCollection or the
          result of cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~api_management_client.models.GatewayCertificateAuthorityCollection]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.GatewayCertificateAuthorityCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayCertificateAuthorityCollection"]
@@ -451,7 +451,7 @@ class GatewayCertificateAuthorityOperations(object):
         :type certificate_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayCertificateAuthorityContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayCertificateAuthorityContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayCertificateAuthorityContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayCertificateAuthorityContract"]
@@ -517,13 +517,13 @@ class GatewayCertificateAuthorityOperations(object):
          Management service instance.
         :type certificate_id: str
         :param parameters:
-        :type parameters: ~api_management_client.models.GatewayCertificateAuthorityContract
+        :type parameters: ~azure.mgmt.apimanagement.models.GatewayCertificateAuthorityContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayCertificateAuthorityContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayCertificateAuthorityContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayCertificateAuthorityContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayCertificateAuthorityContract"]

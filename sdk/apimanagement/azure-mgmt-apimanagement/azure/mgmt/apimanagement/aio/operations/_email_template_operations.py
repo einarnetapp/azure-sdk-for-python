@@ -31,7 +31,7 @@ class EmailTemplateOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -74,7 +74,7 @@ class EmailTemplateOperations:
         :return: An iterator like instance of either EmailTemplateCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.EmailTemplateCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.EmailTemplateCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.EmailTemplateCollection"]
@@ -154,7 +154,7 @@ class EmailTemplateOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param template_name: Email Template Name Identifier.
-        :type template_name: str or ~api_management_client.models.TemplateName
+        :type template_name: str or ~azure.mgmt.apimanagement.models.TemplateName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: bool, or the result of cls(response)
         :rtype: bool
@@ -211,10 +211,10 @@ class EmailTemplateOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param template_name: Email Template Name Identifier.
-        :type template_name: str or ~api_management_client.models.TemplateName
+        :type template_name: str or ~azure.mgmt.apimanagement.models.TemplateName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: EmailTemplateContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.EmailTemplateContract
+        :rtype: ~azure.mgmt.apimanagement.models.EmailTemplateContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.EmailTemplateContract"]
@@ -272,15 +272,15 @@ class EmailTemplateOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param template_name: Email Template Name Identifier.
-        :type template_name: str or ~api_management_client.models.TemplateName
+        :type template_name: str or ~azure.mgmt.apimanagement.models.TemplateName
         :param parameters: Email Template update parameters.
-        :type parameters: ~api_management_client.models.EmailTemplateUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.EmailTemplateUpdateParameters
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: EmailTemplateContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.EmailTemplateContract
+        :rtype: ~azure.mgmt.apimanagement.models.EmailTemplateContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.EmailTemplateContract"]
@@ -345,15 +345,15 @@ class EmailTemplateOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param template_name: Email Template Name Identifier.
-        :type template_name: str or ~api_management_client.models.TemplateName
+        :type template_name: str or ~azure.mgmt.apimanagement.models.TemplateName
         :param if_match: ETag of the Entity. ETag should match the current entity state from the header
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.EmailTemplateUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.EmailTemplateUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: EmailTemplateContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.EmailTemplateContract
+        :rtype: ~azure.mgmt.apimanagement.models.EmailTemplateContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.EmailTemplateContract"]
@@ -416,7 +416,7 @@ class EmailTemplateOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param template_name: Email Template Name Identifier.
-        :type template_name: str or ~api_management_client.models.TemplateName
+        :type template_name: str or ~azure.mgmt.apimanagement.models.TemplateName
         :param if_match: ETag of the Entity. ETag should match the current entity state from the header
          response of the GET request or it should be * for unconditional update.
         :type if_match: str

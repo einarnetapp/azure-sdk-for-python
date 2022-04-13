@@ -72,7 +72,7 @@ class UserConfirmationPasswordOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -106,7 +106,7 @@ class UserConfirmationPasswordOperations(object):
         :type user_id: str
         :param app_type: Determines the type of application which send the create user request. Default
          is legacy publisher portal.
-        :type app_type: str or ~api_management_client.models.AppType
+        :type app_type: str or ~azure.mgmt.apimanagement.models.AppType
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None

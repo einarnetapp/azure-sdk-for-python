@@ -31,7 +31,7 @@ class ApiIssueCommentOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -82,7 +82,7 @@ class ApiIssueCommentOperations:
         :return: An iterator like instance of either IssueCommentCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.IssueCommentCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.IssueCommentCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.IssueCommentCollection"]
@@ -243,7 +243,7 @@ class ApiIssueCommentOperations:
         :type comment_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IssueCommentContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.IssueCommentContract
+        :rtype: ~azure.mgmt.apimanagement.models.IssueCommentContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.IssueCommentContract"]
@@ -312,13 +312,13 @@ class ApiIssueCommentOperations:
         :param comment_id: Comment identifier within an Issue. Must be unique in the current Issue.
         :type comment_id: str
         :param parameters: Create parameters.
-        :type parameters: ~api_management_client.models.IssueCommentContract
+        :type parameters: ~azure.mgmt.apimanagement.models.IssueCommentContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IssueCommentContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.IssueCommentContract
+        :rtype: ~azure.mgmt.apimanagement.models.IssueCommentContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.IssueCommentContract"]

@@ -335,7 +335,7 @@ class BackendOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -378,7 +378,7 @@ class BackendOperations(object):
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BackendCollection or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.BackendCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.BackendCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.BackendCollection"]
@@ -520,7 +520,7 @@ class BackendOperations(object):
         :type backend_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: BackendContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.BackendContract
+        :rtype: ~azure.mgmt.apimanagement.models.BackendContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.BackendContract"]
@@ -581,13 +581,13 @@ class BackendOperations(object):
          Management service instance.
         :type backend_id: str
         :param parameters: Create parameters.
-        :type parameters: ~api_management_client.models.BackendContract
+        :type parameters: ~azure.mgmt.apimanagement.models.BackendContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: BackendContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.BackendContract
+        :rtype: ~azure.mgmt.apimanagement.models.BackendContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.BackendContract"]
@@ -663,10 +663,10 @@ class BackendOperations(object):
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.BackendUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.BackendUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: BackendContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.BackendContract
+        :rtype: ~azure.mgmt.apimanagement.models.BackendContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.BackendContract"]
@@ -791,7 +791,7 @@ class BackendOperations(object):
          Management service instance.
         :type backend_id: str
         :param parameters: Reconnect request parameters.
-        :type parameters: ~api_management_client.models.BackendReconnectContract
+        :type parameters: ~azure.mgmt.apimanagement.models.BackendReconnectContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None

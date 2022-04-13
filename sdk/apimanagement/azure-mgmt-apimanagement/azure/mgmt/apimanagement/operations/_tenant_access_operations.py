@@ -353,7 +353,7 @@ class TenantAccessOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -387,7 +387,8 @@ class TenantAccessOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AccessInformationCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.AccessInformationCollection]
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.AccessInformationCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AccessInformationCollection"]
@@ -463,7 +464,7 @@ class TenantAccessOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: bool, or the result of cls(response)
         :rtype: bool
@@ -520,10 +521,10 @@ class TenantAccessOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AccessInformationContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AccessInformationContract
+        :rtype: ~azure.mgmt.apimanagement.models.AccessInformationContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AccessInformationContract"]
@@ -581,15 +582,15 @@ class TenantAccessOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :param if_match: ETag of the Entity. ETag should match the current entity state from the header
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Parameters supplied to retrieve the Tenant Access Information.
-        :type parameters: ~api_management_client.models.AccessInformationCreateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.AccessInformationCreateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AccessInformationContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AccessInformationContract
+        :rtype: ~azure.mgmt.apimanagement.models.AccessInformationContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AccessInformationContract"]
@@ -653,15 +654,15 @@ class TenantAccessOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :param if_match: ETag of the Entity. ETag should match the current entity state from the header
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Parameters supplied to retrieve the Tenant Access Information.
-        :type parameters: ~api_management_client.models.AccessInformationUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.AccessInformationUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AccessInformationContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AccessInformationContract
+        :rtype: ~azure.mgmt.apimanagement.models.AccessInformationContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AccessInformationContract"]
@@ -723,7 +724,7 @@ class TenantAccessOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -775,7 +776,7 @@ class TenantAccessOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -827,10 +828,10 @@ class TenantAccessOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AccessInformationSecretsContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AccessInformationSecretsContract
+        :rtype: ~azure.mgmt.apimanagement.models.AccessInformationSecretsContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AccessInformationSecretsContract"]

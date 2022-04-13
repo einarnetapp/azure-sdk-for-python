@@ -31,7 +31,7 @@ class SubscriptionOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -82,7 +82,7 @@ class SubscriptionOperations:
         :return: An iterator like instance of either SubscriptionCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.SubscriptionCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.SubscriptionCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SubscriptionCollection"]
@@ -225,7 +225,7 @@ class SubscriptionOperations:
         :type sid: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SubscriptionContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.SubscriptionContract
+        :rtype: ~azure.mgmt.apimanagement.models.SubscriptionContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SubscriptionContract"]
@@ -288,7 +288,7 @@ class SubscriptionOperations:
          user and a product in API Management.
         :type sid: str
         :param parameters: Create parameters.
-        :type parameters: ~api_management_client.models.SubscriptionCreateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.SubscriptionCreateParameters
         :param notify: Notify change in Subscription State.
 
 
@@ -300,10 +300,10 @@ class SubscriptionOperations:
         :type if_match: str
         :param app_type: Determines the type of application which send the create user request. Default
          is legacy publisher portal.
-        :type app_type: str or ~api_management_client.models.AppType
+        :type app_type: str or ~azure.mgmt.apimanagement.models.AppType
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SubscriptionContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.SubscriptionContract
+        :rtype: ~azure.mgmt.apimanagement.models.SubscriptionContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SubscriptionContract"]
@@ -383,7 +383,7 @@ class SubscriptionOperations:
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.SubscriptionUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.SubscriptionUpdateParameters
         :param notify: Notify change in Subscription State.
 
 
@@ -392,10 +392,10 @@ class SubscriptionOperations:
         :type notify: bool
         :param app_type: Determines the type of application which send the create user request. Default
          is legacy publisher portal.
-        :type app_type: str or ~api_management_client.models.AppType
+        :type app_type: str or ~azure.mgmt.apimanagement.models.AppType
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SubscriptionContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.SubscriptionContract
+        :rtype: ~azure.mgmt.apimanagement.models.SubscriptionContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SubscriptionContract"]
@@ -627,7 +627,7 @@ class SubscriptionOperations:
         :type sid: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SubscriptionKeysContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.SubscriptionKeysContract
+        :rtype: ~azure.mgmt.apimanagement.models.SubscriptionKeysContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SubscriptionKeysContract"]

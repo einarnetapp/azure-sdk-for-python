@@ -418,7 +418,7 @@ class GatewayOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -462,7 +462,7 @@ class GatewayOperations(object):
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either GatewayCollection or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.GatewayCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.GatewayCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayCollection"]
@@ -604,7 +604,7 @@ class GatewayOperations(object):
         :type gateway_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayContract"]
@@ -665,13 +665,13 @@ class GatewayOperations(object):
          service instance. Must not have value 'managed'.
         :type gateway_id: str
         :param parameters:
-        :type parameters: ~api_management_client.models.GatewayContract
+        :type parameters: ~azure.mgmt.apimanagement.models.GatewayContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayContract"]
@@ -747,10 +747,10 @@ class GatewayOperations(object):
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters:
-        :type parameters: ~api_management_client.models.GatewayContract
+        :type parameters: ~azure.mgmt.apimanagement.models.GatewayContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayContract"]
@@ -874,7 +874,7 @@ class GatewayOperations(object):
         :type gateway_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayKeysContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayKeysContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayKeysContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayKeysContract"]
@@ -934,7 +934,7 @@ class GatewayOperations(object):
          service instance. Must not have value 'managed'.
         :type gateway_id: str
         :param parameters:
-        :type parameters: ~api_management_client.models.GatewayKeyRegenerationRequestContract
+        :type parameters: ~azure.mgmt.apimanagement.models.GatewayKeyRegenerationRequestContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -995,10 +995,10 @@ class GatewayOperations(object):
          service instance. Must not have value 'managed'.
         :type gateway_id: str
         :param parameters:
-        :type parameters: ~api_management_client.models.GatewayTokenRequestContract
+        :type parameters: ~azure.mgmt.apimanagement.models.GatewayTokenRequestContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayTokenContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayTokenContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayTokenContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayTokenContract"]

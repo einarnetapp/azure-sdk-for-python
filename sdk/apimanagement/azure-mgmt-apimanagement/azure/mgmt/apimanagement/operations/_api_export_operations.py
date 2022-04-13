@@ -73,7 +73,7 @@ class ApiExportOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -110,12 +110,12 @@ class ApiExportOperations(object):
         :type api_id: str
         :param format: Format in which to export the Api Details to the Storage Blob with Sas Key valid
          for 5 minutes.
-        :type format: str or ~api_management_client.models.ExportFormat
+        :type format: str or ~azure.mgmt.apimanagement.models.ExportFormat
         :param export: Query parameter required to export the API details.
-        :type export: str or ~api_management_client.models.ExportApi
+        :type export: str or ~azure.mgmt.apimanagement.models.ExportApi
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiExportResult, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiExportResult
+        :rtype: ~azure.mgmt.apimanagement.models.ApiExportResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiExportResult"]

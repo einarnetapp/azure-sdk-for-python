@@ -495,7 +495,7 @@ class ApiManagementServiceOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -575,7 +575,7 @@ class ApiManagementServiceOperations(object):
         :type service_name: str
         :param parameters: Parameters supplied to the Restore API Management service from backup
          operation.
-        :type parameters: ~api_management_client.models.ApiManagementServiceBackupRestoreParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiManagementServiceBackupRestoreParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -587,7 +587,7 @@ class ApiManagementServiceOperations(object):
         :return: An instance of LROPoller that returns either ApiManagementServiceResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~api_management_client.models.ApiManagementServiceResource]
+         ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.ApiManagementServiceResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -695,7 +695,7 @@ class ApiManagementServiceOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param parameters: Parameters supplied to the ApiManagementService_Backup operation.
-        :type parameters: ~api_management_client.models.ApiManagementServiceBackupRestoreParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiManagementServiceBackupRestoreParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -707,7 +707,7 @@ class ApiManagementServiceOperations(object):
         :return: An instance of LROPoller that returns either ApiManagementServiceResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~api_management_client.models.ApiManagementServiceResource]
+         ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.ApiManagementServiceResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -818,7 +818,7 @@ class ApiManagementServiceOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param parameters: Parameters supplied to the CreateOrUpdate API Management service operation.
-        :type parameters: ~api_management_client.models.ApiManagementServiceResource
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiManagementServiceResource
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -830,7 +830,7 @@ class ApiManagementServiceOperations(object):
         :return: An instance of LROPoller that returns either ApiManagementServiceResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~api_management_client.models.ApiManagementServiceResource]
+         ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.ApiManagementServiceResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -937,7 +937,7 @@ class ApiManagementServiceOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param parameters: Parameters supplied to the CreateOrUpdate API Management service operation.
-        :type parameters: ~api_management_client.models.ApiManagementServiceUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiManagementServiceUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -949,7 +949,7 @@ class ApiManagementServiceOperations(object):
         :return: An instance of LROPoller that returns either ApiManagementServiceResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~api_management_client.models.ApiManagementServiceResource]
+         ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.ApiManagementServiceResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -1009,7 +1009,7 @@ class ApiManagementServiceOperations(object):
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiManagementServiceResource, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiManagementServiceResource
+        :rtype: ~azure.mgmt.apimanagement.models.ApiManagementServiceResource
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiManagementServiceResource"]
@@ -1111,7 +1111,7 @@ class ApiManagementServiceOperations(object):
         :return: An instance of LROPoller that returns either ApiManagementServiceResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~api_management_client.models.ApiManagementServiceResource]
+         ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.ApiManagementServiceResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         polling = kwargs.pop('polling', True)  # type: Union[bool, azure.core.polling.PollingMethod]
@@ -1167,7 +1167,7 @@ class ApiManagementServiceOperations(object):
         :return: An iterator like instance of either ApiManagementServiceListResult or the result of
          cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~api_management_client.models.ApiManagementServiceListResult]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.ApiManagementServiceListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiManagementServiceListResult"]
@@ -1235,7 +1235,7 @@ class ApiManagementServiceOperations(object):
         :return: An iterator like instance of either ApiManagementServiceListResult or the result of
          cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~api_management_client.models.ApiManagementServiceListResult]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.ApiManagementServiceListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiManagementServiceListResult"]
@@ -1305,7 +1305,7 @@ class ApiManagementServiceOperations(object):
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiManagementServiceGetSsoTokenResult, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiManagementServiceGetSsoTokenResult
+        :rtype: ~azure.mgmt.apimanagement.models.ApiManagementServiceGetSsoTokenResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiManagementServiceGetSsoTokenResult"]
@@ -1352,10 +1352,10 @@ class ApiManagementServiceOperations(object):
 
         :param parameters: Parameters supplied to the CheckNameAvailability operation.
         :type parameters:
-         ~api_management_client.models.ApiManagementServiceCheckNameAvailabilityParameters
+         ~azure.mgmt.apimanagement.models.ApiManagementServiceCheckNameAvailabilityParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiManagementServiceNameAvailabilityResult, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiManagementServiceNameAvailabilityResult
+        :rtype: ~azure.mgmt.apimanagement.models.ApiManagementServiceNameAvailabilityResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiManagementServiceNameAvailabilityResult"]
@@ -1404,7 +1404,7 @@ class ApiManagementServiceOperations(object):
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiManagementServiceGetDomainOwnershipIdentifierResult, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiManagementServiceGetDomainOwnershipIdentifierResult
+        :rtype: ~azure.mgmt.apimanagement.models.ApiManagementServiceGetDomainOwnershipIdentifierResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiManagementServiceGetDomainOwnershipIdentifierResult"]
@@ -1508,7 +1508,7 @@ class ApiManagementServiceOperations(object):
          parameters are empty, all the regions in which the Api Management service is deployed will be
          updated sequentially without incurring downtime in the region.
         :type parameters:
-         ~api_management_client.models.ApiManagementServiceApplyNetworkConfigurationParameters
+         ~azure.mgmt.apimanagement.models.ApiManagementServiceApplyNetworkConfigurationParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -1520,7 +1520,7 @@ class ApiManagementServiceOperations(object):
         :return: An instance of LROPoller that returns either ApiManagementServiceResource or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.LROPoller[~api_management_client.models.ApiManagementServiceResource]
+         ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.ApiManagementServiceResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]

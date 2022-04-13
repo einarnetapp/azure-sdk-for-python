@@ -289,7 +289,7 @@ class ApiVersionSetOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -330,7 +330,7 @@ class ApiVersionSetOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApiVersionSetCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.ApiVersionSetCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.ApiVersionSetCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiVersionSetCollection"]
@@ -472,7 +472,7 @@ class ApiVersionSetOperations(object):
         :type version_set_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiVersionSetContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiVersionSetContract
+        :rtype: ~azure.mgmt.apimanagement.models.ApiVersionSetContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiVersionSetContract"]
@@ -533,13 +533,13 @@ class ApiVersionSetOperations(object):
          service instance.
         :type version_set_id: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.ApiVersionSetContract
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiVersionSetContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiVersionSetContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiVersionSetContract
+        :rtype: ~azure.mgmt.apimanagement.models.ApiVersionSetContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiVersionSetContract"]
@@ -615,10 +615,10 @@ class ApiVersionSetOperations(object):
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.ApiVersionSetUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiVersionSetUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiVersionSetContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiVersionSetContract
+        :rtype: ~azure.mgmt.apimanagement.models.ApiVersionSetContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiVersionSetContract"]

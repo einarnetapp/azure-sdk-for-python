@@ -89,7 +89,8 @@ class ApiManagementClientOperationsMixin:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param connectivity_check_request_params: Connectivity Check request parameters.
-        :type connectivity_check_request_params: ~api_management_client.models.ConnectivityCheckRequest
+        :type connectivity_check_request_params:
+         ~azure.mgmt.apimanagement.models.ConnectivityCheckRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -101,7 +102,7 @@ class ApiManagementClientOperationsMixin:
         :return: An instance of AsyncLROPoller that returns either ConnectivityCheckResponse or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~api_management_client.models.ConnectivityCheckResponse]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]

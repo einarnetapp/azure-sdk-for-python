@@ -232,7 +232,7 @@ class ContentItemOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -266,7 +266,7 @@ class ContentItemOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ContentItemCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.ContentItemCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.ContentItemCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ContentItemCollection"]
@@ -410,7 +410,7 @@ class ContentItemOperations(object):
         :type content_item_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ContentItemContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ContentItemContract
+        :rtype: ~azure.mgmt.apimanagement.models.ContentItemContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ContentItemContract"]
@@ -477,7 +477,7 @@ class ContentItemOperations(object):
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ContentItemContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ContentItemContract
+        :rtype: ~azure.mgmt.apimanagement.models.ContentItemContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ContentItemContract"]

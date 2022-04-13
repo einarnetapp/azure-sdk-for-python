@@ -33,7 +33,7 @@ class PortalRevisionOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -85,7 +85,7 @@ class PortalRevisionOperations:
         :return: An iterator like instance of either PortalRevisionCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.PortalRevisionCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.PortalRevisionCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PortalRevisionCollection"]
@@ -227,7 +227,7 @@ class PortalRevisionOperations:
         :type portal_revision_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PortalRevisionContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.PortalRevisionContract
+        :rtype: ~azure.mgmt.apimanagement.models.PortalRevisionContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PortalRevisionContract"]
@@ -340,7 +340,7 @@ class PortalRevisionOperations:
          Management service instance.
         :type portal_revision_id: str
         :param parameters:
-        :type parameters: ~api_management_client.models.PortalRevisionContract
+        :type parameters: ~azure.mgmt.apimanagement.models.PortalRevisionContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -352,7 +352,7 @@ class PortalRevisionOperations:
         :return: An instance of AsyncLROPoller that returns either PortalRevisionContract or the result
          of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~api_management_client.models.PortalRevisionContract]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.PortalRevisionContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -478,7 +478,7 @@ class PortalRevisionOperations:
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters:
-        :type parameters: ~api_management_client.models.PortalRevisionContract
+        :type parameters: ~azure.mgmt.apimanagement.models.PortalRevisionContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -490,7 +490,7 @@ class PortalRevisionOperations:
         :return: An instance of AsyncLROPoller that returns either PortalRevisionContract or the result
          of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~api_management_client.models.PortalRevisionContract]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.PortalRevisionContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]

@@ -108,7 +108,7 @@ class TenantSettingsOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -142,7 +142,7 @@ class TenantSettingsOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either TenantSettingsCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.TenantSettingsCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.TenantSettingsCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.TenantSettingsCollection"]
@@ -218,10 +218,10 @@ class TenantSettingsOperations(object):
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param settings_type: The identifier of the settings.
-        :type settings_type: str or ~api_management_client.models.SettingsTypeName
+        :type settings_type: str or ~azure.mgmt.apimanagement.models.SettingsTypeName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: TenantSettingsContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.TenantSettingsContract
+        :rtype: ~azure.mgmt.apimanagement.models.TenantSettingsContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.TenantSettingsContract"]

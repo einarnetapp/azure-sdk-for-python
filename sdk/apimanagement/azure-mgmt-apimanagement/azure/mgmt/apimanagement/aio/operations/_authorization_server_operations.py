@@ -31,7 +31,7 @@ class AuthorizationServerOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -76,7 +76,7 @@ class AuthorizationServerOperations:
         :return: An iterator like instance of either AuthorizationServerCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.AuthorizationServerCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.AuthorizationServerCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthorizationServerCollection"]
@@ -216,7 +216,7 @@ class AuthorizationServerOperations:
         :type authsid: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AuthorizationServerContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AuthorizationServerContract
+        :rtype: ~azure.mgmt.apimanagement.models.AuthorizationServerContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthorizationServerContract"]
@@ -276,13 +276,13 @@ class AuthorizationServerOperations:
         :param authsid: Identifier of the authorization server.
         :type authsid: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.AuthorizationServerContract
+        :type parameters: ~azure.mgmt.apimanagement.models.AuthorizationServerContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AuthorizationServerContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AuthorizationServerContract
+        :rtype: ~azure.mgmt.apimanagement.models.AuthorizationServerContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthorizationServerContract"]
@@ -357,10 +357,10 @@ class AuthorizationServerOperations:
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: OAuth2 Server settings Update parameters.
-        :type parameters: ~api_management_client.models.AuthorizationServerUpdateContract
+        :type parameters: ~azure.mgmt.apimanagement.models.AuthorizationServerUpdateContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AuthorizationServerContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AuthorizationServerContract
+        :rtype: ~azure.mgmt.apimanagement.models.AuthorizationServerContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthorizationServerContract"]
@@ -482,7 +482,7 @@ class AuthorizationServerOperations:
         :type authsid: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AuthorizationServerSecretsContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.AuthorizationServerSecretsContract
+        :rtype: ~azure.mgmt.apimanagement.models.AuthorizationServerSecretsContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthorizationServerSecretsContract"]

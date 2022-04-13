@@ -29,7 +29,7 @@ class OutboundNetworkDependenciesEndpointsOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -59,7 +59,7 @@ class OutboundNetworkDependenciesEndpointsOperations:
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: OutboundEnvironmentEndpointList, or the result of cls(response)
-        :rtype: ~api_management_client.models.OutboundEnvironmentEndpointList
+        :rtype: ~azure.mgmt.apimanagement.models.OutboundEnvironmentEndpointList
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.OutboundEnvironmentEndpointList"]

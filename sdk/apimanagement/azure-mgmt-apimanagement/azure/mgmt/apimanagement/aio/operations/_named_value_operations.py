@@ -33,7 +33,7 @@ class NamedValueOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -82,7 +82,7 @@ class NamedValueOperations:
         :return: An iterator like instance of either NamedValueCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.NamedValueCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.NamedValueCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.NamedValueCollection"]
@@ -224,7 +224,7 @@ class NamedValueOperations:
         :type named_value_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NamedValueContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.NamedValueContract
+        :rtype: ~azure.mgmt.apimanagement.models.NamedValueContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.NamedValueContract"]
@@ -343,7 +343,7 @@ class NamedValueOperations:
         :param named_value_id: Identifier of the NamedValue.
         :type named_value_id: str
         :param parameters: Create parameters.
-        :type parameters: ~api_management_client.models.NamedValueCreateContract
+        :type parameters: ~azure.mgmt.apimanagement.models.NamedValueCreateContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
@@ -357,7 +357,7 @@ class NamedValueOperations:
          Retry-After header is present.
         :return: An instance of AsyncLROPoller that returns either NamedValueContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~api_management_client.models.NamedValueContract]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.NamedValueContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -483,7 +483,7 @@ class NamedValueOperations:
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.NamedValueUpdateParameters
+        :type parameters: ~azure.mgmt.apimanagement.models.NamedValueUpdateParameters
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -494,7 +494,7 @@ class NamedValueOperations:
          Retry-After header is present.
         :return: An instance of AsyncLROPoller that returns either NamedValueContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~api_management_client.models.NamedValueContract]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.NamedValueContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -619,7 +619,7 @@ class NamedValueOperations:
         :type named_value_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NamedValueSecretContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.NamedValueSecretContract
+        :rtype: ~azure.mgmt.apimanagement.models.NamedValueSecretContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.NamedValueSecretContract"]
@@ -732,7 +732,7 @@ class NamedValueOperations:
          Retry-After header is present.
         :return: An instance of AsyncLROPoller that returns either NamedValueContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~api_management_client.models.NamedValueContract]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.NamedValueContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         polling = kwargs.pop('polling', True)  # type: Union[bool, azure.core.polling.AsyncPollingMethod]

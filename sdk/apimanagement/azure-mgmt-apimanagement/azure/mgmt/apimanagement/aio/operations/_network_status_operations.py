@@ -29,7 +29,7 @@ class NetworkStatusOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -61,7 +61,7 @@ class NetworkStatusOperations:
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of NetworkStatusContractByLocation, or the result of cls(response)
-        :rtype: list[~api_management_client.models.NetworkStatusContractByLocation]
+        :rtype: list[~azure.mgmt.apimanagement.models.NetworkStatusContractByLocation]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType[List["_models.NetworkStatusContractByLocation"]]
@@ -119,7 +119,7 @@ class NetworkStatusOperations:
         :type location_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkStatusContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.NetworkStatusContract
+        :rtype: ~azure.mgmt.apimanagement.models.NetworkStatusContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.NetworkStatusContract"]

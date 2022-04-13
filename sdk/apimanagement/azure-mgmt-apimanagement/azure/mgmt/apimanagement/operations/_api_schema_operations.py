@@ -256,7 +256,7 @@ class ApiSchemaOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -301,7 +301,7 @@ class ApiSchemaOperations(object):
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either SchemaCollection or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.SchemaCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.SchemaCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SchemaCollection"]
@@ -454,7 +454,7 @@ class ApiSchemaOperations(object):
         :type schema_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SchemaContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.SchemaContract
+        :rtype: ~azure.mgmt.apimanagement.models.SchemaContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SchemaContract"]
@@ -581,7 +581,7 @@ class ApiSchemaOperations(object):
          instance.
         :type schema_id: str
         :param parameters: The schema contents to apply.
-        :type parameters: ~api_management_client.models.SchemaContract
+        :type parameters: ~azure.mgmt.apimanagement.models.SchemaContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
@@ -595,7 +595,7 @@ class ApiSchemaOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either SchemaContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~api_management_client.models.SchemaContract]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.SchemaContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]

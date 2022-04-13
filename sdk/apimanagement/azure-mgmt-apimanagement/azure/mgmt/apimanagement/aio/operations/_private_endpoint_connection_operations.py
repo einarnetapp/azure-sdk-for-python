@@ -33,7 +33,7 @@ class PrivateEndpointConnectionOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -65,7 +65,7 @@ class PrivateEndpointConnectionOperations:
         :return: An iterator like instance of either PrivateEndpointConnectionListResult or the result
          of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.PrivateEndpointConnectionListResult]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.PrivateEndpointConnectionListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateEndpointConnectionListResult"]
@@ -142,7 +142,7 @@ class PrivateEndpointConnectionOperations:
         :type private_endpoint_connection_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpointConnection, or the result of cls(response)
-        :rtype: ~api_management_client.models.PrivateEndpointConnection
+        :rtype: ~azure.mgmt.apimanagement.models.PrivateEndpointConnection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateEndpointConnection"]
@@ -213,7 +213,7 @@ class PrivateEndpointConnectionOperations:
         pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 201]:
+        if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
@@ -248,7 +248,7 @@ class PrivateEndpointConnectionOperations:
         :type private_endpoint_connection_name: str
         :param private_endpoint_connection_request:
         :type private_endpoint_connection_request:
-         ~api_management_client.models.PrivateEndpointConnectionRequest
+         ~azure.mgmt.apimanagement.models.PrivateEndpointConnectionRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -260,7 +260,7 @@ class PrivateEndpointConnectionOperations:
         :return: An instance of AsyncLROPoller that returns either PrivateEndpointConnection or the
          result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~api_management_client.models.PrivateEndpointConnection]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.PrivateEndpointConnection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -423,7 +423,7 @@ class PrivateEndpointConnectionOperations:
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateLinkResourceListResult, or the result of cls(response)
-        :rtype: ~api_management_client.models.PrivateLinkResourceListResult
+        :rtype: ~azure.mgmt.apimanagement.models.PrivateLinkResourceListResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
@@ -478,7 +478,7 @@ class PrivateEndpointConnectionOperations:
         :type private_link_sub_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateLinkResource, or the result of cls(response)
-        :rtype: ~api_management_client.models.PrivateLinkResource
+        :rtype: ~azure.mgmt.apimanagement.models.PrivateLinkResource
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResource"]

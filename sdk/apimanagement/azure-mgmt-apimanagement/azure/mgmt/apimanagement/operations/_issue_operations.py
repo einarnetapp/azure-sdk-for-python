@@ -114,7 +114,7 @@ class IssueOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -160,7 +160,7 @@ class IssueOperations(object):
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either IssueCollection or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.IssueCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.IssueCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.IssueCollection"]
@@ -244,7 +244,7 @@ class IssueOperations(object):
         :type issue_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IssueContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.IssueContract
+        :rtype: ~azure.mgmt.apimanagement.models.IssueContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.IssueContract"]

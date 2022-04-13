@@ -115,7 +115,7 @@ class QuotaByCounterKeysOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -152,7 +152,7 @@ class QuotaByCounterKeysOperations(object):
         :type quota_counter_key: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: QuotaCounterCollection, or the result of cls(response)
-        :rtype: ~api_management_client.models.QuotaCounterCollection
+        :rtype: ~azure.mgmt.apimanagement.models.QuotaCounterCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.QuotaCounterCollection"]
@@ -212,10 +212,10 @@ class QuotaByCounterKeysOperations(object):
          as counter-key="@("b"+"a")" then it will be accessible by "ba" key.
         :type quota_counter_key: str
         :param parameters: The value of the quota counter to be applied to all quota counter periods.
-        :type parameters: ~api_management_client.models.QuotaCounterValueUpdateContract
+        :type parameters: ~azure.mgmt.apimanagement.models.QuotaCounterValueUpdateContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: QuotaCounterCollection, or the result of cls(response)
-        :rtype: ~api_management_client.models.QuotaCounterCollection
+        :rtype: ~azure.mgmt.apimanagement.models.QuotaCounterCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.QuotaCounterCollection"]

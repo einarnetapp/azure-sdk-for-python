@@ -29,7 +29,7 @@ class TenantAccessGitOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -59,7 +59,7 @@ class TenantAccessGitOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -111,7 +111,7 @@ class TenantAccessGitOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param access_name: The identifier of the Access configuration.
-        :type access_name: str or ~api_management_client.models.AccessIdName
+        :type access_name: str or ~azure.mgmt.apimanagement.models.AccessIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None

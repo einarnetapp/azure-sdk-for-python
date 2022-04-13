@@ -31,7 +31,7 @@ class GroupUserOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -81,7 +81,8 @@ class GroupUserOperations:
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either UserCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.UserCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.UserCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.UserCollection"]
@@ -228,7 +229,7 @@ class GroupUserOperations:
         :type user_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: UserContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.UserContract
+        :rtype: ~azure.mgmt.apimanagement.models.UserContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.UserContract"]

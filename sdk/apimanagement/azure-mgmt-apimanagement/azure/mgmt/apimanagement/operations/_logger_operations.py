@@ -289,7 +289,7 @@ class LoggerOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -333,7 +333,7 @@ class LoggerOperations(object):
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoggerCollection or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.LoggerCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.LoggerCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.LoggerCollection"]
@@ -473,7 +473,7 @@ class LoggerOperations(object):
         :type logger_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LoggerContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.LoggerContract
+        :rtype: ~azure.mgmt.apimanagement.models.LoggerContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.LoggerContract"]
@@ -533,13 +533,13 @@ class LoggerOperations(object):
         :param logger_id: Logger identifier. Must be unique in the API Management service instance.
         :type logger_id: str
         :param parameters: Create parameters.
-        :type parameters: ~api_management_client.models.LoggerContract
+        :type parameters: ~azure.mgmt.apimanagement.models.LoggerContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LoggerContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.LoggerContract
+        :rtype: ~azure.mgmt.apimanagement.models.LoggerContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.LoggerContract"]
@@ -614,10 +614,10 @@ class LoggerOperations(object):
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update parameters.
-        :type parameters: ~api_management_client.models.LoggerUpdateContract
+        :type parameters: ~azure.mgmt.apimanagement.models.LoggerUpdateContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LoggerContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.LoggerContract
+        :rtype: ~azure.mgmt.apimanagement.models.LoggerContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.LoggerContract"]

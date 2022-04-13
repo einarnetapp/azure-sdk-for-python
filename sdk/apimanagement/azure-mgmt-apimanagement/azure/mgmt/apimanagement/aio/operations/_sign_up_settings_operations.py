@@ -29,7 +29,7 @@ class SignUpSettingsOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -112,7 +112,7 @@ class SignUpSettingsOperations:
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PortalSignupSettings, or the result of cls(response)
-        :rtype: ~api_management_client.models.PortalSignupSettings
+        :rtype: ~azure.mgmt.apimanagement.models.PortalSignupSettings
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PortalSignupSettings"]
@@ -171,7 +171,7 @@ class SignUpSettingsOperations:
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update Sign-Up settings.
-        :type parameters: ~api_management_client.models.PortalSignupSettings
+        :type parameters: ~azure.mgmt.apimanagement.models.PortalSignupSettings
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -229,13 +229,13 @@ class SignUpSettingsOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.PortalSignupSettings
+        :type parameters: ~azure.mgmt.apimanagement.models.PortalSignupSettings
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PortalSignupSettings, or the result of cls(response)
-        :rtype: ~api_management_client.models.PortalSignupSettings
+        :rtype: ~azure.mgmt.apimanagement.models.PortalSignupSettings
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PortalSignupSettings"]

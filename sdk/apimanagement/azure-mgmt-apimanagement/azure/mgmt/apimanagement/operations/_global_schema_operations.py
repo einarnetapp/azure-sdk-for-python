@@ -243,7 +243,7 @@ class GlobalSchemaOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -285,7 +285,7 @@ class GlobalSchemaOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either GlobalSchemaCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.GlobalSchemaCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.GlobalSchemaCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GlobalSchemaCollection"]
@@ -427,7 +427,7 @@ class GlobalSchemaOperations(object):
         :type schema_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GlobalSchemaContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GlobalSchemaContract
+        :rtype: ~azure.mgmt.apimanagement.models.GlobalSchemaContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GlobalSchemaContract"]
@@ -547,7 +547,7 @@ class GlobalSchemaOperations(object):
          instance.
         :type schema_id: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.GlobalSchemaContract
+        :type parameters: ~azure.mgmt.apimanagement.models.GlobalSchemaContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
@@ -561,7 +561,7 @@ class GlobalSchemaOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either GlobalSchemaContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~api_management_client.models.GlobalSchemaContract]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.GlobalSchemaContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]

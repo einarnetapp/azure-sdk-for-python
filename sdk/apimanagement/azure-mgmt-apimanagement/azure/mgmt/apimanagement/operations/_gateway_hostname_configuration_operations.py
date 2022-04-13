@@ -251,7 +251,7 @@ class GatewayHostnameConfigurationOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -299,7 +299,7 @@ class GatewayHostnameConfigurationOperations(object):
         :return: An iterator like instance of either GatewayHostnameConfigurationCollection or the
          result of cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~api_management_client.models.GatewayHostnameConfigurationCollection]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.GatewayHostnameConfigurationCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayHostnameConfigurationCollection"]
@@ -453,7 +453,7 @@ class GatewayHostnameConfigurationOperations(object):
         :type hc_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayHostnameConfigurationContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayHostnameConfigurationContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayHostnameConfigurationContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayHostnameConfigurationContract"]
@@ -519,13 +519,13 @@ class GatewayHostnameConfigurationOperations(object):
          Gateway entity.
         :type hc_id: str
         :param parameters:
-        :type parameters: ~api_management_client.models.GatewayHostnameConfigurationContract
+        :type parameters: ~azure.mgmt.apimanagement.models.GatewayHostnameConfigurationContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GatewayHostnameConfigurationContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.GatewayHostnameConfigurationContract
+        :rtype: ~azure.mgmt.apimanagement.models.GatewayHostnameConfigurationContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.GatewayHostnameConfigurationContract"]

@@ -32,7 +32,7 @@ class ReportsOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -74,7 +74,8 @@ class ReportsOperations:
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
@@ -180,7 +181,8 @@ class ReportsOperations:
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
@@ -286,7 +288,8 @@ class ReportsOperations:
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
@@ -391,7 +394,8 @@ class ReportsOperations:
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
@@ -494,7 +498,8 @@ class ReportsOperations:
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
@@ -597,7 +602,8 @@ class ReportsOperations:
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
@@ -708,7 +714,8 @@ class ReportsOperations:
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
@@ -807,7 +814,7 @@ class ReportsOperations:
         :return: An iterator like instance of either RequestReportCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.RequestReportCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.RequestReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.RequestReportCollection"]

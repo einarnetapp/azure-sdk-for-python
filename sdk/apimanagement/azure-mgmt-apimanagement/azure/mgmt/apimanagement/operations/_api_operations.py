@@ -348,7 +348,7 @@ class ApiOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -400,7 +400,7 @@ class ApiOperations(object):
         :type expand_api_version_set: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApiCollection or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.ApiCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.ApiCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiCollection"]
@@ -546,7 +546,7 @@ class ApiOperations(object):
         :type api_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiContract
+        :rtype: ~azure.mgmt.apimanagement.models.ApiContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiContract"]
@@ -666,7 +666,7 @@ class ApiOperations(object):
          instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
         :type api_id: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.ApiCreateOrUpdateParameter
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiCreateOrUpdateParameter
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
@@ -680,7 +680,7 @@ class ApiOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either ApiContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~api_management_client.models.ApiContract]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.ApiContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -753,10 +753,10 @@ class ApiOperations(object):
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: API Update Contract parameters.
-        :type parameters: ~api_management_client.models.ApiUpdateContract
+        :type parameters: ~azure.mgmt.apimanagement.models.ApiUpdateContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApiContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.ApiContract
+        :rtype: ~azure.mgmt.apimanagement.models.ApiContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApiContract"]
@@ -901,7 +901,7 @@ class ApiOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either TagResourceCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.TagResourceCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.TagResourceCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.TagResourceCollection"]

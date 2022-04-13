@@ -119,7 +119,7 @@ class QuotaByPeriodKeysOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -159,7 +159,7 @@ class QuotaByPeriodKeysOperations(object):
         :type quota_period_key: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: QuotaCounterContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.QuotaCounterContract
+        :rtype: ~azure.mgmt.apimanagement.models.QuotaCounterContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.QuotaCounterContract"]
@@ -222,10 +222,10 @@ class QuotaByPeriodKeysOperations(object):
         :param quota_period_key: Quota period key identifier.
         :type quota_period_key: str
         :param parameters: The value of the Quota counter to be applied on the specified period.
-        :type parameters: ~api_management_client.models.QuotaCounterValueUpdateContract
+        :type parameters: ~azure.mgmt.apimanagement.models.QuotaCounterValueUpdateContract
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: QuotaCounterContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.QuotaCounterContract
+        :rtype: ~azure.mgmt.apimanagement.models.QuotaCounterContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.QuotaCounterContract"]

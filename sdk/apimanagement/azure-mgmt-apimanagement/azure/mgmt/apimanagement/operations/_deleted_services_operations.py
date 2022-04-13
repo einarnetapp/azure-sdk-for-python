@@ -135,7 +135,7 @@ class DeletedServicesOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -160,7 +160,8 @@ class DeletedServicesOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either DeletedServicesCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~api_management_client.models.DeletedServicesCollection]
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.apimanagement.models.DeletedServicesCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.DeletedServicesCollection"]
@@ -230,7 +231,7 @@ class DeletedServicesOperations(object):
         :type location: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DeletedServiceContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.DeletedServiceContract
+        :rtype: ~azure.mgmt.apimanagement.models.DeletedServiceContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.DeletedServiceContract"]
@@ -331,7 +332,7 @@ class DeletedServicesOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either DeletedServiceContract or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~api_management_client.models.DeletedServiceContract]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.apimanagement.models.DeletedServiceContract]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         polling = kwargs.pop('polling', True)  # type: Union[bool, azure.core.polling.PollingMethod]

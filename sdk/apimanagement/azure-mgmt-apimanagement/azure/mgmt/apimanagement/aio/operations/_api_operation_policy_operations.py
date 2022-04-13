@@ -29,7 +29,7 @@ class ApiOperationPolicyOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -67,7 +67,7 @@ class ApiOperationPolicyOperations:
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PolicyCollection, or the result of cls(response)
-        :rtype: ~api_management_client.models.PolicyCollection
+        :rtype: ~azure.mgmt.apimanagement.models.PolicyCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyCollection"]
@@ -129,7 +129,7 @@ class ApiOperationPolicyOperations:
          Management service instance.
         :type operation_id: str
         :param policy_id: The identifier of the Policy.
-        :type policy_id: str or ~api_management_client.models.PolicyIdName
+        :type policy_id: str or ~azure.mgmt.apimanagement.models.PolicyIdName
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: bool, or the result of cls(response)
         :rtype: bool
@@ -197,12 +197,12 @@ class ApiOperationPolicyOperations:
          Management service instance.
         :type operation_id: str
         :param policy_id: The identifier of the Policy.
-        :type policy_id: str or ~api_management_client.models.PolicyIdName
+        :type policy_id: str or ~azure.mgmt.apimanagement.models.PolicyIdName
         :param format: Policy Export Format.
-        :type format: str or ~api_management_client.models.PolicyExportFormat
+        :type format: str or ~azure.mgmt.apimanagement.models.PolicyExportFormat
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PolicyContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.PolicyContract
+        :rtype: ~azure.mgmt.apimanagement.models.PolicyContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyContract"]
@@ -271,15 +271,15 @@ class ApiOperationPolicyOperations:
          Management service instance.
         :type operation_id: str
         :param policy_id: The identifier of the Policy.
-        :type policy_id: str or ~api_management_client.models.PolicyIdName
+        :type policy_id: str or ~azure.mgmt.apimanagement.models.PolicyIdName
         :param parameters: The policy contents to apply.
-        :type parameters: ~api_management_client.models.PolicyContract
+        :type parameters: ~azure.mgmt.apimanagement.models.PolicyContract
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PolicyContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.PolicyContract
+        :rtype: ~azure.mgmt.apimanagement.models.PolicyContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyContract"]
@@ -358,7 +358,7 @@ class ApiOperationPolicyOperations:
          Management service instance.
         :type operation_id: str
         :param policy_id: The identifier of the Policy.
-        :type policy_id: str or ~api_management_client.models.PolicyIdName
+        :type policy_id: str or ~azure.mgmt.apimanagement.models.PolicyIdName
         :param if_match: ETag of the Entity. ETag should match the current entity state from the header
          response of the GET request or it should be * for unconditional update.
         :type if_match: str

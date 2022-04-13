@@ -29,7 +29,7 @@ class DelegationSettingsOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
+    :type models: ~azure.mgmt.apimanagement.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -112,7 +112,7 @@ class DelegationSettingsOperations:
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PortalDelegationSettings, or the result of cls(response)
-        :rtype: ~api_management_client.models.PortalDelegationSettings
+        :rtype: ~azure.mgmt.apimanagement.models.PortalDelegationSettings
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PortalDelegationSettings"]
@@ -171,7 +171,7 @@ class DelegationSettingsOperations:
          response of the GET request or it should be * for unconditional update.
         :type if_match: str
         :param parameters: Update Delegation settings.
-        :type parameters: ~api_management_client.models.PortalDelegationSettings
+        :type parameters: ~azure.mgmt.apimanagement.models.PortalDelegationSettings
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -229,13 +229,13 @@ class DelegationSettingsOperations:
         :param service_name: The name of the API Management service.
         :type service_name: str
         :param parameters: Create or update parameters.
-        :type parameters: ~api_management_client.models.PortalDelegationSettings
+        :type parameters: ~azure.mgmt.apimanagement.models.PortalDelegationSettings
         :param if_match: ETag of the Entity. Not required when creating an entity, but required when
          updating an entity.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PortalDelegationSettings, or the result of cls(response)
-        :rtype: ~api_management_client.models.PortalDelegationSettings
+        :rtype: ~azure.mgmt.apimanagement.models.PortalDelegationSettings
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PortalDelegationSettings"]
@@ -293,7 +293,7 @@ class DelegationSettingsOperations:
         :type service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PortalSettingValidationKeyContract, or the result of cls(response)
-        :rtype: ~api_management_client.models.PortalSettingValidationKeyContract
+        :rtype: ~azure.mgmt.apimanagement.models.PortalSettingValidationKeyContract
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PortalSettingValidationKeyContract"]
