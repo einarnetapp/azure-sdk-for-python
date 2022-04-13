@@ -25,22 +25,19 @@ class DnsResolverManagementClient:
     """The DNS Resolver Management Client.
 
     :ivar dns_resolvers: DnsResolversOperations operations
-    :vartype dns_resolvers: dns_resolver_management_client.aio.operations.DnsResolversOperations
+    :vartype dns_resolvers: azure.mgmt.dnsresolver.aio.operations.DnsResolversOperations
     :ivar inbound_endpoints: InboundEndpointsOperations operations
-    :vartype inbound_endpoints:
-     dns_resolver_management_client.aio.operations.InboundEndpointsOperations
+    :vartype inbound_endpoints: azure.mgmt.dnsresolver.aio.operations.InboundEndpointsOperations
     :ivar outbound_endpoints: OutboundEndpointsOperations operations
-    :vartype outbound_endpoints:
-     dns_resolver_management_client.aio.operations.OutboundEndpointsOperations
+    :vartype outbound_endpoints: azure.mgmt.dnsresolver.aio.operations.OutboundEndpointsOperations
     :ivar dns_forwarding_rulesets: DnsForwardingRulesetsOperations operations
     :vartype dns_forwarding_rulesets:
-     dns_resolver_management_client.aio.operations.DnsForwardingRulesetsOperations
+     azure.mgmt.dnsresolver.aio.operations.DnsForwardingRulesetsOperations
     :ivar forwarding_rules: ForwardingRulesOperations operations
-    :vartype forwarding_rules:
-     dns_resolver_management_client.aio.operations.ForwardingRulesOperations
+    :vartype forwarding_rules: azure.mgmt.dnsresolver.aio.operations.ForwardingRulesOperations
     :ivar virtual_network_links: VirtualNetworkLinksOperations operations
     :vartype virtual_network_links:
-     dns_resolver_management_client.aio.operations.VirtualNetworkLinksOperations
+     azure.mgmt.dnsresolver.aio.operations.VirtualNetworkLinksOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription.

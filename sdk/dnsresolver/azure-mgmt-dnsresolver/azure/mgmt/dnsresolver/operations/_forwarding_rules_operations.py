@@ -251,7 +251,7 @@ class ForwardingRulesOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~dns_resolver_management_client.models
+    :type models: ~azure.mgmt.dnsresolver.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -286,7 +286,7 @@ class ForwardingRulesOperations(object):
         :param forwarding_rule_name: The name of the forwarding rule.
         :type forwarding_rule_name: str
         :param parameters: Parameters supplied to the CreateOrUpdate operation.
-        :type parameters: ~dns_resolver_management_client.models.ForwardingRule
+        :type parameters: ~azure.mgmt.dnsresolver.models.ForwardingRule
         :param if_match: ETag of the resource. Omit this value to always overwrite the current
          resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent
          changes.
@@ -296,7 +296,7 @@ class ForwardingRulesOperations(object):
         :type if_none_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ForwardingRule, or the result of cls(response)
-        :rtype: ~dns_resolver_management_client.models.ForwardingRule
+        :rtype: ~azure.mgmt.dnsresolver.models.ForwardingRule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ForwardingRule"]
@@ -363,14 +363,14 @@ class ForwardingRulesOperations(object):
         :param forwarding_rule_name: The name of the forwarding rule.
         :type forwarding_rule_name: str
         :param parameters: Parameters supplied to the Update operation.
-        :type parameters: ~dns_resolver_management_client.models.ForwardingRulePatch
+        :type parameters: ~azure.mgmt.dnsresolver.models.ForwardingRulePatch
         :param if_match: ETag of the resource. Omit this value to always overwrite the current
          resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent
          changes.
         :type if_match: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ForwardingRule, or the result of cls(response)
-        :rtype: ~dns_resolver_management_client.models.ForwardingRule
+        :rtype: ~azure.mgmt.dnsresolver.models.ForwardingRule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ForwardingRule"]
@@ -489,7 +489,7 @@ class ForwardingRulesOperations(object):
         :type forwarding_rule_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ForwardingRule, or the result of cls(response)
-        :rtype: ~dns_resolver_management_client.models.ForwardingRule
+        :rtype: ~azure.mgmt.dnsresolver.models.ForwardingRule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ForwardingRule"]
@@ -546,8 +546,7 @@ class ForwardingRulesOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ForwardingRuleListResult or the result of
          cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~dns_resolver_management_client.models.ForwardingRuleListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.dnsresolver.models.ForwardingRuleListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.ForwardingRuleListResult"]

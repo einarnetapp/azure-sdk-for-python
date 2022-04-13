@@ -33,7 +33,7 @@ class DnsForwardingRulesetsOperations:
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~dns_resolver_management_client.models
+    :type models: ~azure.mgmt.dnsresolver.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -119,7 +119,7 @@ class DnsForwardingRulesetsOperations:
         :param dns_forwarding_ruleset_name: The name of the DNS forwarding ruleset.
         :type dns_forwarding_ruleset_name: str
         :param parameters: Parameters supplied to the CreateOrUpdate operation.
-        :type parameters: ~dns_resolver_management_client.models.DnsForwardingRuleset
+        :type parameters: ~azure.mgmt.dnsresolver.models.DnsForwardingRuleset
         :param if_match: ETag of the resource. Omit this value to always overwrite the current
          resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent
          changes.
@@ -137,8 +137,7 @@ class DnsForwardingRulesetsOperations:
          Retry-After header is present.
         :return: An instance of AsyncLROPoller that returns either DnsForwardingRuleset or the result
          of cls(response)
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~dns_resolver_management_client.models.DnsForwardingRuleset]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.dnsresolver.models.DnsForwardingRuleset]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -250,7 +249,7 @@ class DnsForwardingRulesetsOperations:
         :param dns_forwarding_ruleset_name: The name of the DNS forwarding ruleset.
         :type dns_forwarding_ruleset_name: str
         :param parameters: Parameters supplied to the Update operation.
-        :type parameters: ~dns_resolver_management_client.models.DnsForwardingRulesetPatch
+        :type parameters: ~azure.mgmt.dnsresolver.models.DnsForwardingRulesetPatch
         :param if_match: ETag of the resource. Omit this value to always overwrite the current
          resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent
          changes.
@@ -265,8 +264,7 @@ class DnsForwardingRulesetsOperations:
          Retry-After header is present.
         :return: An instance of AsyncLROPoller that returns either DnsForwardingRuleset or the result
          of cls(response)
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~dns_resolver_management_client.models.DnsForwardingRuleset]
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.dnsresolver.models.DnsForwardingRuleset]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -432,7 +430,7 @@ class DnsForwardingRulesetsOperations:
         :type dns_forwarding_ruleset_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DnsForwardingRuleset, or the result of cls(response)
-        :rtype: ~dns_resolver_management_client.models.DnsForwardingRuleset
+        :rtype: ~azure.mgmt.dnsresolver.models.DnsForwardingRuleset
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.DnsForwardingRuleset"]
@@ -486,7 +484,7 @@ class DnsForwardingRulesetsOperations:
         :return: An iterator like instance of either DnsForwardingRulesetListResult or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~dns_resolver_management_client.models.DnsForwardingRulesetListResult]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.dnsresolver.models.DnsForwardingRulesetListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.DnsForwardingRulesetListResult"]
@@ -559,7 +557,7 @@ class DnsForwardingRulesetsOperations:
         :return: An iterator like instance of either DnsForwardingRulesetListResult or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~dns_resolver_management_client.models.DnsForwardingRulesetListResult]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.dnsresolver.models.DnsForwardingRulesetListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.DnsForwardingRulesetListResult"]
@@ -636,7 +634,7 @@ class DnsForwardingRulesetsOperations:
         :return: An iterator like instance of either VirtualNetworkDnsForwardingRulesetListResult or
          the result of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~dns_resolver_management_client.models.VirtualNetworkDnsForwardingRulesetListResult]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.dnsresolver.models.VirtualNetworkDnsForwardingRulesetListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.VirtualNetworkDnsForwardingRulesetListResult"]

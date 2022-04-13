@@ -253,7 +253,7 @@ class OutboundEndpointsOperations(object):
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~dns_resolver_management_client.models
+    :type models: ~azure.mgmt.dnsresolver.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -344,7 +344,7 @@ class OutboundEndpointsOperations(object):
         :param outbound_endpoint_name: The name of the outbound endpoint for the DNS resolver.
         :type outbound_endpoint_name: str
         :param parameters: Parameters supplied to the CreateOrUpdate operation.
-        :type parameters: ~dns_resolver_management_client.models.OutboundEndpoint
+        :type parameters: ~azure.mgmt.dnsresolver.models.OutboundEndpoint
         :param if_match: ETag of the resource. Omit this value to always overwrite the current
          resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent
          changes.
@@ -362,7 +362,7 @@ class OutboundEndpointsOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either OutboundEndpoint or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~dns_resolver_management_client.models.OutboundEndpoint]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.dnsresolver.models.OutboundEndpoint]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -480,7 +480,7 @@ class OutboundEndpointsOperations(object):
         :param outbound_endpoint_name: The name of the outbound endpoint for the DNS resolver.
         :type outbound_endpoint_name: str
         :param parameters: Parameters supplied to the Update operation.
-        :type parameters: ~dns_resolver_management_client.models.OutboundEndpointPatch
+        :type parameters: ~azure.mgmt.dnsresolver.models.OutboundEndpointPatch
         :param if_match: ETag of the resource. Omit this value to always overwrite the current
          resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent
          changes.
@@ -495,7 +495,7 @@ class OutboundEndpointsOperations(object):
          Retry-After header is present.
         :return: An instance of LROPoller that returns either OutboundEndpoint or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~dns_resolver_management_client.models.OutboundEndpoint]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.dnsresolver.models.OutboundEndpoint]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
@@ -670,7 +670,7 @@ class OutboundEndpointsOperations(object):
         :type outbound_endpoint_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: OutboundEndpoint, or the result of cls(response)
-        :rtype: ~dns_resolver_management_client.models.OutboundEndpoint
+        :rtype: ~azure.mgmt.dnsresolver.models.OutboundEndpoint
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.OutboundEndpoint"]
@@ -727,8 +727,7 @@ class OutboundEndpointsOperations(object):
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either OutboundEndpointListResult or the result of
          cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~dns_resolver_management_client.models.OutboundEndpointListResult]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.dnsresolver.models.OutboundEndpointListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.OutboundEndpointListResult"]
