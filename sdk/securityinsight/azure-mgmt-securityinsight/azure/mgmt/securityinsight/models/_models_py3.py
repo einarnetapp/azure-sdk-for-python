@@ -2580,6 +2580,233 @@ class Anomalies(Settings):
         self.is_enabled = None
 
 
+class SecurityMLAnalyticsSetting(ResourceWithEtag):
+    """Security ML Analytics Setting.
+
+    You probably want to use the sub-classes and not this class directly. Known
+    sub-classes are: AnomalySecurityMLAnalyticsSettings.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
+    :ivar etag: Etag of the azure resource.
+    :vartype etag: str
+    :ivar kind: Required. The kind of security ML Analytics Settings.Constant filled by server.
+     Possible values include: "Anomaly".
+    :vartype kind: str or ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsKind
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'kind': {'required': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'etag': {'key': 'etag', 'type': 'str'},
+        'kind': {'key': 'kind', 'type': 'str'},
+    }
+
+    _subtype_map = {
+        'kind': {'Anomaly': 'AnomalySecurityMLAnalyticsSettings'}
+    }
+
+    def __init__(
+        self,
+        *,
+        etag: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword etag: Etag of the azure resource.
+        :paramtype etag: str
+        """
+        super(SecurityMLAnalyticsSetting, self).__init__(etag=etag, **kwargs)
+        self.kind = 'SecurityMLAnalyticsSetting'  # type: str
+
+
+class AnomalySecurityMLAnalyticsSettings(SecurityMLAnalyticsSetting):
+    """Represents Anomaly Security ML Analytics Settings.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
+    :ivar etag: Etag of the azure resource.
+    :vartype etag: str
+    :ivar kind: Required. The kind of security ML Analytics Settings.Constant filled by server.
+     Possible values include: "Anomaly".
+    :vartype kind: str or ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsKind
+    :ivar description: The description of the SecurityMLAnalyticsSettings.
+    :vartype description: str
+    :ivar display_name: The display name for settings created by this SecurityMLAnalyticsSettings.
+    :vartype display_name: str
+    :ivar enabled: Determines whether this settings is enabled or disabled.
+    :vartype enabled: bool
+    :ivar last_modified_utc: The last time that this SecurityMLAnalyticsSettings has been modified.
+    :vartype last_modified_utc: ~datetime.datetime
+    :ivar required_data_connectors: The required data sources for this SecurityMLAnalyticsSettings.
+    :vartype required_data_connectors:
+     list[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsDataSource]
+    :ivar tactics: The tactics of the SecurityMLAnalyticsSettings.
+    :vartype tactics: list[str or ~azure.mgmt.securityinsight.models.AttackTactic]
+    :ivar techniques: The techniques of the SecurityMLAnalyticsSettings.
+    :vartype techniques: list[str]
+    :ivar anomaly_version: The anomaly version of the AnomalySecurityMLAnalyticsSettings.
+    :vartype anomaly_version: str
+    :ivar customizable_observations: The customizable observations of the
+     AnomalySecurityMLAnalyticsSettings.
+    :vartype customizable_observations: any
+    :ivar frequency: The frequency that this SecurityMLAnalyticsSettings will be run.
+    :vartype frequency: ~datetime.timedelta
+    :ivar settings_status: The anomaly SecurityMLAnalyticsSettings status. Possible values include:
+     "Production", "Flighting".
+    :vartype settings_status: str or ~azure.mgmt.securityinsight.models.SettingsStatus
+    :ivar is_default_settings: Determines whether this anomaly security ml analytics settings is a
+     default settings.
+    :vartype is_default_settings: bool
+    :ivar anomaly_settings_version: The anomaly settings version of the Anomaly security ml
+     analytics settings that dictates whether job version gets updated or not.
+    :vartype anomaly_settings_version: int
+    :ivar settings_definition_id: The anomaly settings definition Id.
+    :vartype settings_definition_id: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'kind': {'required': True},
+        'last_modified_utc': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'etag': {'key': 'etag', 'type': 'str'},
+        'kind': {'key': 'kind', 'type': 'str'},
+        'description': {'key': 'properties.description', 'type': 'str'},
+        'display_name': {'key': 'properties.displayName', 'type': 'str'},
+        'enabled': {'key': 'properties.enabled', 'type': 'bool'},
+        'last_modified_utc': {'key': 'properties.lastModifiedUtc', 'type': 'iso-8601'},
+        'required_data_connectors': {'key': 'properties.requiredDataConnectors', 'type': '[SecurityMLAnalyticsSettingsDataSource]'},
+        'tactics': {'key': 'properties.tactics', 'type': '[str]'},
+        'techniques': {'key': 'properties.techniques', 'type': '[str]'},
+        'anomaly_version': {'key': 'properties.anomalyVersion', 'type': 'str'},
+        'customizable_observations': {'key': 'properties.customizableObservations', 'type': 'object'},
+        'frequency': {'key': 'properties.frequency', 'type': 'duration'},
+        'settings_status': {'key': 'properties.settingsStatus', 'type': 'str'},
+        'is_default_settings': {'key': 'properties.isDefaultSettings', 'type': 'bool'},
+        'anomaly_settings_version': {'key': 'properties.anomalySettingsVersion', 'type': 'int'},
+        'settings_definition_id': {'key': 'properties.settingsDefinitionId', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        etag: Optional[str] = None,
+        description: Optional[str] = None,
+        display_name: Optional[str] = None,
+        enabled: Optional[bool] = None,
+        required_data_connectors: Optional[List["SecurityMLAnalyticsSettingsDataSource"]] = None,
+        tactics: Optional[List[Union[str, "AttackTactic"]]] = None,
+        techniques: Optional[List[str]] = None,
+        anomaly_version: Optional[str] = None,
+        customizable_observations: Optional[Any] = None,
+        frequency: Optional[datetime.timedelta] = None,
+        settings_status: Optional[Union[str, "SettingsStatus"]] = None,
+        is_default_settings: Optional[bool] = None,
+        anomaly_settings_version: Optional[int] = None,
+        settings_definition_id: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword etag: Etag of the azure resource.
+        :paramtype etag: str
+        :keyword description: The description of the SecurityMLAnalyticsSettings.
+        :paramtype description: str
+        :keyword display_name: The display name for settings created by this
+         SecurityMLAnalyticsSettings.
+        :paramtype display_name: str
+        :keyword enabled: Determines whether this settings is enabled or disabled.
+        :paramtype enabled: bool
+        :keyword required_data_connectors: The required data sources for this
+         SecurityMLAnalyticsSettings.
+        :paramtype required_data_connectors:
+         list[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsDataSource]
+        :keyword tactics: The tactics of the SecurityMLAnalyticsSettings.
+        :paramtype tactics: list[str or ~azure.mgmt.securityinsight.models.AttackTactic]
+        :keyword techniques: The techniques of the SecurityMLAnalyticsSettings.
+        :paramtype techniques: list[str]
+        :keyword anomaly_version: The anomaly version of the AnomalySecurityMLAnalyticsSettings.
+        :paramtype anomaly_version: str
+        :keyword customizable_observations: The customizable observations of the
+         AnomalySecurityMLAnalyticsSettings.
+        :paramtype customizable_observations: any
+        :keyword frequency: The frequency that this SecurityMLAnalyticsSettings will be run.
+        :paramtype frequency: ~datetime.timedelta
+        :keyword settings_status: The anomaly SecurityMLAnalyticsSettings status. Possible values
+         include: "Production", "Flighting".
+        :paramtype settings_status: str or ~azure.mgmt.securityinsight.models.SettingsStatus
+        :keyword is_default_settings: Determines whether this anomaly security ml analytics settings is
+         a default settings.
+        :paramtype is_default_settings: bool
+        :keyword anomaly_settings_version: The anomaly settings version of the Anomaly security ml
+         analytics settings that dictates whether job version gets updated or not.
+        :paramtype anomaly_settings_version: int
+        :keyword settings_definition_id: The anomaly settings definition Id.
+        :paramtype settings_definition_id: str
+        """
+        super(AnomalySecurityMLAnalyticsSettings, self).__init__(etag=etag, **kwargs)
+        self.kind = 'Anomaly'  # type: str
+        self.description = description
+        self.display_name = display_name
+        self.enabled = enabled
+        self.last_modified_utc = None
+        self.required_data_connectors = required_data_connectors
+        self.tactics = tactics
+        self.techniques = techniques
+        self.anomaly_version = anomaly_version
+        self.customizable_observations = customizable_observations
+        self.frequency = frequency
+        self.settings_status = settings_status
+        self.is_default_settings = is_default_settings
+        self.anomaly_settings_version = anomaly_settings_version
+        self.settings_definition_id = settings_definition_id
+
+
 class ASCCheckRequirements(DataConnectorsCheckRequirements):
     """Represents ASC (Azure Security Center) requirements check request.
 
@@ -6740,8 +6967,8 @@ class EntityAnalytics(Settings):
     :ivar kind: Required. The kind of the setting.Constant filled by server. Possible values
      include: "Anomalies", "EyesOn", "EntityAnalytics", "Ueba".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.SettingKind
-    :ivar is_enabled: Determines whether the setting is enable or disabled.
-    :vartype is_enabled: bool
+    :ivar entity_providers: The relevant entity providers that are synced.
+    :vartype entity_providers: list[str or ~azure.mgmt.securityinsight.models.EntityProviders]
     """
 
     _validation = {
@@ -6750,7 +6977,6 @@ class EntityAnalytics(Settings):
         'type': {'readonly': True},
         'system_data': {'readonly': True},
         'kind': {'required': True},
-        'is_enabled': {'readonly': True},
     }
 
     _attribute_map = {
@@ -6760,22 +6986,25 @@ class EntityAnalytics(Settings):
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'etag': {'key': 'etag', 'type': 'str'},
         'kind': {'key': 'kind', 'type': 'str'},
-        'is_enabled': {'key': 'properties.isEnabled', 'type': 'bool'},
+        'entity_providers': {'key': 'properties.entityProviders', 'type': '[str]'},
     }
 
     def __init__(
         self,
         *,
         etag: Optional[str] = None,
+        entity_providers: Optional[List[Union[str, "EntityProviders"]]] = None,
         **kwargs
     ):
         """
         :keyword etag: Etag of the azure resource.
         :paramtype etag: str
+        :keyword entity_providers: The relevant entity providers that are synced.
+        :paramtype entity_providers: list[str or ~azure.mgmt.securityinsight.models.EntityProviders]
         """
         super(EntityAnalytics, self).__init__(etag=etag, **kwargs)
         self.kind = 'EntityAnalytics'  # type: str
-        self.is_enabled = None
+        self.entity_providers = entity_providers
 
 
 class EntityEdges(msrest.serialization.Model):
@@ -8067,6 +8296,225 @@ class FileHashEntityProperties(EntityCommonProperties):
         super(FileHashEntityProperties, self).__init__(**kwargs)
         self.algorithm = None
         self.hash_value = None
+
+
+class FileImport(Resource):
+    """Represents a file import in Azure Security Insights.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
+    :ivar ingestion_mode: Describes how to ingest the records in the file. Possible values include:
+     "IngestOnlyIfAllAreValid", "IngestAnyValidRecords", "Unspecified".
+    :vartype ingestion_mode: str or ~azure.mgmt.securityinsight.models.IngestionMode
+    :ivar content_type: The content type of this file. Possible values include: "BasicIndicator",
+     "StixIndicator", "Unspecified".
+    :vartype content_type: str or ~azure.mgmt.securityinsight.models.FileImportContentType
+    :ivar created_time_utc: The time the file was imported.
+    :vartype created_time_utc: ~datetime.datetime
+    :ivar error_file: Represents the error file (if the import was ingested with errors or failed
+     the validation).
+    :vartype error_file: ~azure.mgmt.securityinsight.models.FileMetadata
+    :ivar errors_preview: An ordered list of some of the errors that were encountered during
+     validation.
+    :vartype errors_preview: list[~azure.mgmt.securityinsight.models.ValidationError]
+    :ivar import_file: Represents the imported file.
+    :vartype import_file: ~azure.mgmt.securityinsight.models.FileMetadata
+    :ivar ingested_record_count: The number of records that have been successfully ingested.
+    :vartype ingested_record_count: int
+    :ivar source: The source for the data in the file.
+    :vartype source: str
+    :ivar state: The state of the file import. Possible values include: "FatalError", "Ingested",
+     "IngestedWithErrors", "InProgress", "Invalid", "WaitingForUpload", "Unspecified".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.FileImportState
+    :ivar total_record_count: The number of records in the file.
+    :vartype total_record_count: int
+    :ivar valid_record_count: The number of records that have passed validation.
+    :vartype valid_record_count: int
+    :ivar files_valid_until_time_utc: The time the files associated with this import are deleted
+     from the storage account.
+    :vartype files_valid_until_time_utc: ~datetime.datetime
+    :ivar import_valid_until_time_utc: The time the file import record is soft deleted from the
+     database and history.
+    :vartype import_valid_until_time_utc: ~datetime.datetime
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'created_time_utc': {'readonly': True},
+        'error_file': {'readonly': True},
+        'errors_preview': {'readonly': True},
+        'ingested_record_count': {'readonly': True},
+        'state': {'readonly': True},
+        'total_record_count': {'readonly': True},
+        'valid_record_count': {'readonly': True},
+        'files_valid_until_time_utc': {'readonly': True},
+        'import_valid_until_time_utc': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'ingestion_mode': {'key': 'properties.ingestionMode', 'type': 'str'},
+        'content_type': {'key': 'properties.contentType', 'type': 'str'},
+        'created_time_utc': {'key': 'properties.createdTimeUTC', 'type': 'iso-8601'},
+        'error_file': {'key': 'properties.errorFile', 'type': 'FileMetadata'},
+        'errors_preview': {'key': 'properties.errorsPreview', 'type': '[ValidationError]'},
+        'import_file': {'key': 'properties.importFile', 'type': 'FileMetadata'},
+        'ingested_record_count': {'key': 'properties.ingestedRecordCount', 'type': 'int'},
+        'source': {'key': 'properties.source', 'type': 'str'},
+        'state': {'key': 'properties.state', 'type': 'str'},
+        'total_record_count': {'key': 'properties.totalRecordCount', 'type': 'int'},
+        'valid_record_count': {'key': 'properties.validRecordCount', 'type': 'int'},
+        'files_valid_until_time_utc': {'key': 'properties.filesValidUntilTimeUTC', 'type': 'iso-8601'},
+        'import_valid_until_time_utc': {'key': 'properties.importValidUntilTimeUTC', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        ingestion_mode: Optional[Union[str, "IngestionMode"]] = None,
+        content_type: Optional[Union[str, "FileImportContentType"]] = None,
+        import_file: Optional["FileMetadata"] = None,
+        source: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword ingestion_mode: Describes how to ingest the records in the file. Possible values
+         include: "IngestOnlyIfAllAreValid", "IngestAnyValidRecords", "Unspecified".
+        :paramtype ingestion_mode: str or ~azure.mgmt.securityinsight.models.IngestionMode
+        :keyword content_type: The content type of this file. Possible values include:
+         "BasicIndicator", "StixIndicator", "Unspecified".
+        :paramtype content_type: str or ~azure.mgmt.securityinsight.models.FileImportContentType
+        :keyword import_file: Represents the imported file.
+        :paramtype import_file: ~azure.mgmt.securityinsight.models.FileMetadata
+        :keyword source: The source for the data in the file.
+        :paramtype source: str
+        """
+        super(FileImport, self).__init__(**kwargs)
+        self.ingestion_mode = ingestion_mode
+        self.content_type = content_type
+        self.created_time_utc = None
+        self.error_file = None
+        self.errors_preview = None
+        self.import_file = import_file
+        self.ingested_record_count = None
+        self.source = source
+        self.state = None
+        self.total_record_count = None
+        self.valid_record_count = None
+        self.files_valid_until_time_utc = None
+        self.import_valid_until_time_utc = None
+
+
+class FileImportList(msrest.serialization.Model):
+    """List all the file imports.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar next_link: URL to fetch the next set of file imports.
+    :vartype next_link: str
+    :ivar value: Required. Array of file imports.
+    :vartype value: list[~azure.mgmt.securityinsight.models.FileImport]
+    """
+
+    _validation = {
+        'next_link': {'readonly': True},
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+        'value': {'key': 'value', 'type': '[FileImport]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: List["FileImport"],
+        **kwargs
+    ):
+        """
+        :keyword value: Required. Array of file imports.
+        :paramtype value: list[~azure.mgmt.securityinsight.models.FileImport]
+        """
+        super(FileImportList, self).__init__(**kwargs)
+        self.next_link = None
+        self.value = value
+
+
+class FileMetadata(msrest.serialization.Model):
+    """Represents a file.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar file_format: The format of the file. Possible values include: "CSV", "JSON",
+     "Unspecified".
+    :vartype file_format: str or ~azure.mgmt.securityinsight.models.FileFormat
+    :ivar file_name: The name of the file.
+    :vartype file_name: str
+    :ivar file_size: The size of the file.
+    :vartype file_size: int
+    :ivar file_content_uri: A URI with a valid SAS token to allow uploading / downloading the file.
+    :vartype file_content_uri: str
+    :ivar delete_status: Indicates whether the file was deleted from the storage account. Possible
+     values include: "Deleted", "NotDeleted", "Unspecified".
+    :vartype delete_status: str or ~azure.mgmt.securityinsight.models.DeleteStatus
+    """
+
+    _validation = {
+        'file_content_uri': {'readonly': True},
+        'delete_status': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'file_format': {'key': 'fileFormat', 'type': 'str'},
+        'file_name': {'key': 'fileName', 'type': 'str'},
+        'file_size': {'key': 'fileSize', 'type': 'int'},
+        'file_content_uri': {'key': 'fileContentUri', 'type': 'str'},
+        'delete_status': {'key': 'deleteStatus', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        file_format: Optional[Union[str, "FileFormat"]] = None,
+        file_name: Optional[str] = None,
+        file_size: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword file_format: The format of the file. Possible values include: "CSV", "JSON",
+         "Unspecified".
+        :paramtype file_format: str or ~azure.mgmt.securityinsight.models.FileFormat
+        :keyword file_name: The name of the file.
+        :paramtype file_name: str
+        :keyword file_size: The size of the file.
+        :paramtype file_size: int
+        """
+        super(FileMetadata, self).__init__(**kwargs)
+        self.file_format = file_format
+        self.file_name = file_name
+        self.file_size = file_size
+        self.file_content_uri = None
+        self.delete_status = None
 
 
 class FusionAlertRule(AlertRule):
@@ -10099,8 +10547,6 @@ class IncidentList(msrest.serialization.Model):
 class IncidentOwnerInfo(msrest.serialization.Model):
     """Information on the user an incident is assigned to.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar email: The email of the user the incident is assigned to.
     :vartype email: str
     :ivar assigned_to: The name of the user the incident is assigned to.
@@ -10113,10 +10559,6 @@ class IncidentOwnerInfo(msrest.serialization.Model):
      "Unknown", "User", "Group".
     :vartype owner_type: str or ~azure.mgmt.securityinsight.models.OwnerType
     """
-
-    _validation = {
-        'owner_type': {'readonly': True},
-    }
 
     _attribute_map = {
         'email': {'key': 'email', 'type': 'str'},
@@ -10133,6 +10575,7 @@ class IncidentOwnerInfo(msrest.serialization.Model):
         assigned_to: Optional[str] = None,
         object_id: Optional[str] = None,
         user_principal_name: Optional[str] = None,
+        owner_type: Optional[Union[str, "OwnerType"]] = None,
         **kwargs
     ):
         """
@@ -10144,13 +10587,16 @@ class IncidentOwnerInfo(msrest.serialization.Model):
         :paramtype object_id: str
         :keyword user_principal_name: The user principal name of the user the incident is assigned to.
         :paramtype user_principal_name: str
+        :keyword owner_type: The type of the owner the incident is assigned to. Possible values
+         include: "Unknown", "User", "Group".
+        :paramtype owner_type: str or ~azure.mgmt.securityinsight.models.OwnerType
         """
         super(IncidentOwnerInfo, self).__init__(**kwargs)
         self.email = email
         self.assigned_to = assigned_to
         self.object_id = object_id
         self.user_principal_name = user_principal_name
-        self.owner_type = None
+        self.owner_type = owner_type
 
 
 class IncidentPropertiesAction(msrest.serialization.Model):
@@ -19022,6 +19468,76 @@ class SecurityGroupEntityProperties(EntityCommonProperties):
         self.sid = None
 
 
+class SecurityMLAnalyticsSettingsDataSource(msrest.serialization.Model):
+    """security ml analytics settings data sources.
+
+    :ivar connector_id: The connector id that provides the following data types.
+    :vartype connector_id: str
+    :ivar data_types: The data types used by the security ml analytics settings.
+    :vartype data_types: list[str]
+    """
+
+    _attribute_map = {
+        'connector_id': {'key': 'connectorId', 'type': 'str'},
+        'data_types': {'key': 'dataTypes', 'type': '[str]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        connector_id: Optional[str] = None,
+        data_types: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword connector_id: The connector id that provides the following data types.
+        :paramtype connector_id: str
+        :keyword data_types: The data types used by the security ml analytics settings.
+        :paramtype data_types: list[str]
+        """
+        super(SecurityMLAnalyticsSettingsDataSource, self).__init__(**kwargs)
+        self.connector_id = connector_id
+        self.data_types = data_types
+
+
+class SecurityMLAnalyticsSettingsList(msrest.serialization.Model):
+    """List all the SecurityMLAnalyticsSettings.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar next_link: URL to fetch the next set of SecurityMLAnalyticsSettings.
+    :vartype next_link: str
+    :ivar value: Required. Array of SecurityMLAnalyticsSettings.
+    :vartype value: list[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting]
+    """
+
+    _validation = {
+        'next_link': {'readonly': True},
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+        'value': {'key': 'value', 'type': '[SecurityMLAnalyticsSetting]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: List["SecurityMLAnalyticsSetting"],
+        **kwargs
+    ):
+        """
+        :keyword value: Required. Array of SecurityMLAnalyticsSettings.
+        :paramtype value: list[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting]
+        """
+        super(SecurityMLAnalyticsSettingsList, self).__init__(**kwargs)
+        self.next_link = None
+        self.value = value
+
+
 class SentinelOnboardingState(ResourceWithEtag):
     """Sentinel onboarding state.
 
@@ -22141,6 +22657,41 @@ class UserInfo(msrest.serialization.Model):
         self.object_id = object_id
 
 
+class ValidationError(msrest.serialization.Model):
+    """Describes an error encountered in the file during validation.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar record_index: The number of the record that has the error.
+    :vartype record_index: int
+    :ivar error_messages: A list of descriptions of the error.
+    :vartype error_messages: list[str]
+    """
+
+    _validation = {
+        'error_messages': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'record_index': {'key': 'recordIndex', 'type': 'int'},
+        'error_messages': {'key': 'errorMessages', 'type': '[str]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        record_index: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword record_index: The number of the record that has the error.
+        :paramtype record_index: int
+        """
+        super(ValidationError, self).__init__(**kwargs)
+        self.record_index = record_index
+        self.error_messages = None
+
+
 class Watchlist(ResourceWithEtag):
     """Represents a Watchlist in Azure Security Insights.
 
@@ -22385,9 +22936,9 @@ class WatchlistItem(ResourceWithEtag):
     :ivar updated_by: Describes a user that updated the watchlist item.
     :vartype updated_by: ~azure.mgmt.securityinsight.models.UserInfo
     :ivar items_key_value: key-value pairs for a watchlist item.
-    :vartype items_key_value: any
+    :vartype items_key_value: dict[str, any]
     :ivar entity_mapping: key-value pairs for a watchlist item entity mapping.
-    :vartype entity_mapping: any
+    :vartype entity_mapping: dict[str, any]
     """
 
     _validation = {
@@ -22411,8 +22962,8 @@ class WatchlistItem(ResourceWithEtag):
         'updated': {'key': 'properties.updated', 'type': 'iso-8601'},
         'created_by': {'key': 'properties.createdBy', 'type': 'UserInfo'},
         'updated_by': {'key': 'properties.updatedBy', 'type': 'UserInfo'},
-        'items_key_value': {'key': 'properties.itemsKeyValue', 'type': 'object'},
-        'entity_mapping': {'key': 'properties.entityMapping', 'type': 'object'},
+        'items_key_value': {'key': 'properties.itemsKeyValue', 'type': '{object}'},
+        'entity_mapping': {'key': 'properties.entityMapping', 'type': '{object}'},
     }
 
     def __init__(
@@ -22427,8 +22978,8 @@ class WatchlistItem(ResourceWithEtag):
         updated: Optional[datetime.datetime] = None,
         created_by: Optional["UserInfo"] = None,
         updated_by: Optional["UserInfo"] = None,
-        items_key_value: Optional[Any] = None,
-        entity_mapping: Optional[Any] = None,
+        items_key_value: Optional[Dict[str, Any]] = None,
+        entity_mapping: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
         """
@@ -22451,9 +23002,9 @@ class WatchlistItem(ResourceWithEtag):
         :keyword updated_by: Describes a user that updated the watchlist item.
         :paramtype updated_by: ~azure.mgmt.securityinsight.models.UserInfo
         :keyword items_key_value: key-value pairs for a watchlist item.
-        :paramtype items_key_value: any
+        :paramtype items_key_value: dict[str, any]
         :keyword entity_mapping: key-value pairs for a watchlist item entity mapping.
-        :paramtype entity_mapping: any
+        :paramtype entity_mapping: dict[str, any]
         """
         super(WatchlistItem, self).__init__(etag=etag, **kwargs)
         self.watchlist_item_type = watchlist_item_type

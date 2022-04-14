@@ -349,6 +349,17 @@ class DataTypeState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
+class DeleteStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Indicates whether the file was deleted from the storage account.
+    """
+
+    #: The file was deleted.
+    DELETED = "Deleted"
+    #: The file was not deleted.
+    NOT_DELETED = "NotDeleted"
+    #: Unspecified.
+    UNSPECIFIED = "Unspecified"
+
 class DeliveryAction(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The delivery action of this mail message like Delivered, Blocked, Replaced etc
     """
@@ -516,6 +527,13 @@ class EntityMappingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Submission mail entity type.
     SUBMISSION_MAIL = "SubmissionMail"
 
+class EntityProviders(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The entity provider that is synced.
+    """
+
+    ACTIVE_DIRECTORY = "ActiveDirectory"
+    AZURE_ACTIVE_DIRECTORY = "AzureActiveDirectory"
+
 class EntityQueryKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the entity query
     """
@@ -600,6 +618,17 @@ class EventGroupingAggregationKind(with_metaclass(CaseInsensitiveEnumMeta, str, 
     SINGLE_ALERT = "SingleAlert"
     ALERT_PER_RESULT = "AlertPerResult"
 
+class FileFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The format of the file
+    """
+
+    #: A CSV file.
+    CSV = "CSV"
+    #: A JSON file.
+    JSON = "JSON"
+    #: A file of other format.
+    UNSPECIFIED = "Unspecified"
+
 class FileHashAlgorithm(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The hash algorithm type.
     """
@@ -614,6 +643,37 @@ class FileHashAlgorithm(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SHA256 = "SHA256"
     #: SHA256 Authenticode hash type.
     SHA256_AC = "SHA256AC"
+
+class FileImportContentType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The content type of this file.
+    """
+
+    #: File containing records with the core fields of an indicator, plus the observables to construct
+    #: the STIX pattern.
+    BASIC_INDICATOR = "BasicIndicator"
+    #: File containing STIX indicators.
+    STIX_INDICATOR = "StixIndicator"
+    #: File containing other records.
+    UNSPECIFIED = "Unspecified"
+
+class FileImportState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The state of the file import.
+    """
+
+    #: A fatal error has occurred while ingesting the file.
+    FATAL_ERROR = "FatalError"
+    #: The file has been ingested.
+    INGESTED = "Ingested"
+    #: The file has been ingested with errors.
+    INGESTED_WITH_ERRORS = "IngestedWithErrors"
+    #: The file ingestion is in progress.
+    IN_PROGRESS = "InProgress"
+    #: The file is invalid.
+    INVALID = "Invalid"
+    #: Waiting for the file to be uploaded.
+    WAITING_FOR_UPLOAD = "WaitingForUpload"
+    #: Unspecified state.
+    UNSPECIFIED = "Unspecified"
 
 class IncidentClassification(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The reason the incident was closed
@@ -673,6 +733,17 @@ class IncidentStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ACTIVE = "Active"
     #: A non-active incident.
     CLOSED = "Closed"
+
+class IngestionMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Describes how to ingest the records in the file.
+    """
+
+    #: No records should be ingested when invalid records are detected.
+    INGEST_ONLY_IF_ALL_ARE_VALID = "IngestOnlyIfAllAreValid"
+    #: Valid records should still be ingested when invalid records are detected.
+    INGEST_ANY_VALID_RECORDS = "IngestAnyValidRecords"
+    #: Unspecified.
+    UNSPECIFIED = "Unspecified"
 
 class KillChainIntent(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Holds the alert intent stage(s) mapping for this alert.
@@ -920,6 +991,12 @@ class RepoType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     GITHUB = "Github"
     DEV_OPS = "DevOps"
 
+class SecurityMLAnalyticsSettingsKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The kind of security ML analytics settings
+    """
+
+    ANOMALY = "Anomaly"
+
 class SettingKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the setting
     """
@@ -928,6 +1005,15 @@ class SettingKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     EYES_ON = "EyesOn"
     ENTITY_ANALYTICS = "EntityAnalytics"
     UEBA = "Ueba"
+
+class SettingsStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The anomaly SecurityMLAnalyticsSettings status
+    """
+
+    #: Anomaly settings status in Production mode.
+    PRODUCTION = "Production"
+    #: Anomaly settings status in Flighting mode.
+    FLIGHTING = "Flighting"
 
 class SettingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the setting

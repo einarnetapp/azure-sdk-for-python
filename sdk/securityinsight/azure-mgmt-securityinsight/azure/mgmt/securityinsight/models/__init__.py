@@ -41,6 +41,7 @@ from ._models_py3 import AlertRuleTemplatesList
 from ._models_py3 import AlertRulesList
 from ._models_py3 import AlertsDataTypeOfDataConnector
 from ._models_py3 import Anomalies
+from ._models_py3 import AnomalySecurityMLAnalyticsSettings
 from ._models_py3 import AutomationRule
 from ._models_py3 import AutomationRuleAction
 from ._models_py3 import AutomationRuleCondition
@@ -151,6 +152,9 @@ from ._models_py3 import FileEntity
 from ._models_py3 import FileEntityProperties
 from ._models_py3 import FileHashEntity
 from ._models_py3 import FileHashEntityProperties
+from ._models_py3 import FileImport
+from ._models_py3 import FileImportList
+from ._models_py3 import FileMetadata
 from ._models_py3 import FusionAlertRule
 from ._models_py3 import FusionAlertRuleTemplate
 from ._models_py3 import FusionScenarioExclusionPattern
@@ -321,6 +325,9 @@ from ._models_py3 import SecurityAlertPropertiesConfidenceReasonsItem
 from ._models_py3 import SecurityAlertTimelineItem
 from ._models_py3 import SecurityGroupEntity
 from ._models_py3 import SecurityGroupEntityProperties
+from ._models_py3 import SecurityMLAnalyticsSetting
+from ._models_py3 import SecurityMLAnalyticsSettingsDataSource
+from ._models_py3 import SecurityMLAnalyticsSettingsList
 from ._models_py3 import SentinelOnboardingState
 from ._models_py3 import SentinelOnboardingStatesList
 from ._models_py3 import SettingList
@@ -372,6 +379,7 @@ from ._models_py3 import Ueba
 from ._models_py3 import UrlEntity
 from ._models_py3 import UrlEntityProperties
 from ._models_py3 import UserInfo
+from ._models_py3 import ValidationError
 from ._models_py3 import Watchlist
 from ._models_py3 import WatchlistItem
 from ._models_py3 import WatchlistItemList
@@ -401,6 +409,7 @@ from ._security_insights_enums import (
     DataConnectorKind,
     DataConnectorLicenseState,
     DataTypeState,
+    DeleteStatus,
     DeliveryAction,
     DeliveryLocation,
     DeploymentFetchStatus,
@@ -410,18 +419,23 @@ from ._security_insights_enums import (
     EntityItemQueryKind,
     EntityKind,
     EntityMappingType,
+    EntityProviders,
     EntityQueryKind,
     EntityQueryTemplateKind,
     EntityTimelineKind,
     EntityType,
     Enum12,
     EventGroupingAggregationKind,
+    FileFormat,
     FileHashAlgorithm,
+    FileImportContentType,
+    FileImportState,
     IncidentClassification,
     IncidentClassificationReason,
     IncidentLabelType,
     IncidentSeverity,
     IncidentStatus,
+    IngestionMode,
     KillChainIntent,
     Kind,
     MatchingMethod,
@@ -436,8 +450,10 @@ from ._security_insights_enums import (
     RegistryHive,
     RegistryValueKind,
     RepoType,
+    SecurityMLAnalyticsSettingsKind,
     SettingKind,
     SettingType,
+    SettingsStatus,
     SkuKind,
     SourceKind,
     SourceType,
@@ -488,6 +504,7 @@ __all__ = [
     'AlertRulesList',
     'AlertsDataTypeOfDataConnector',
     'Anomalies',
+    'AnomalySecurityMLAnalyticsSettings',
     'AutomationRule',
     'AutomationRuleAction',
     'AutomationRuleCondition',
@@ -598,6 +615,9 @@ __all__ = [
     'FileEntityProperties',
     'FileHashEntity',
     'FileHashEntityProperties',
+    'FileImport',
+    'FileImportList',
+    'FileMetadata',
     'FusionAlertRule',
     'FusionAlertRuleTemplate',
     'FusionScenarioExclusionPattern',
@@ -768,6 +788,9 @@ __all__ = [
     'SecurityAlertTimelineItem',
     'SecurityGroupEntity',
     'SecurityGroupEntityProperties',
+    'SecurityMLAnalyticsSetting',
+    'SecurityMLAnalyticsSettingsDataSource',
+    'SecurityMLAnalyticsSettingsList',
     'SentinelOnboardingState',
     'SentinelOnboardingStatesList',
     'SettingList',
@@ -819,6 +842,7 @@ __all__ = [
     'UrlEntity',
     'UrlEntityProperties',
     'UserInfo',
+    'ValidationError',
     'Watchlist',
     'WatchlistItem',
     'WatchlistItemList',
@@ -845,6 +869,7 @@ __all__ = [
     'DataConnectorKind',
     'DataConnectorLicenseState',
     'DataTypeState',
+    'DeleteStatus',
     'DeliveryAction',
     'DeliveryLocation',
     'DeploymentFetchStatus',
@@ -854,18 +879,23 @@ __all__ = [
     'EntityItemQueryKind',
     'EntityKind',
     'EntityMappingType',
+    'EntityProviders',
     'EntityQueryKind',
     'EntityQueryTemplateKind',
     'EntityTimelineKind',
     'EntityType',
     'Enum12',
     'EventGroupingAggregationKind',
+    'FileFormat',
     'FileHashAlgorithm',
+    'FileImportContentType',
+    'FileImportState',
     'IncidentClassification',
     'IncidentClassificationReason',
     'IncidentLabelType',
     'IncidentSeverity',
     'IncidentStatus',
+    'IngestionMode',
     'KillChainIntent',
     'Kind',
     'MatchingMethod',
@@ -880,8 +910,10 @@ __all__ = [
     'RegistryHive',
     'RegistryValueKind',
     'RepoType',
+    'SecurityMLAnalyticsSettingsKind',
     'SettingKind',
     'SettingType',
+    'SettingsStatus',
     'SkuKind',
     'SourceKind',
     'SourceType',
