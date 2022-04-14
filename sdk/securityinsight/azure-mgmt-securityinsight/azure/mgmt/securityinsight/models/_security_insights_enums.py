@@ -516,6 +516,13 @@ class EntityMappingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Submission mail entity type.
     SUBMISSION_MAIL = "SubmissionMail"
 
+class EntityProviders(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The entity provider that is synced.
+    """
+
+    ACTIVE_DIRECTORY = "ActiveDirectory"
+    AZURE_ACTIVE_DIRECTORY = "AzureActiveDirectory"
+
 class EntityQueryKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the entity query
     """
@@ -866,6 +873,15 @@ class ProviderName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MICROSOFT_OPERATIONAL_INSIGHTS_WORKSPACES_SHARED_KEYS = "Microsoft.OperationalInsights/workspaces/sharedKeys"
     MICROSOFT_AUTHORIZATION_POLICY_ASSIGNMENTS = "Microsoft.Authorization/policyAssignments"
 
+class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The current provisioning state.
+    """
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
+    IN_PROGRESS = "InProgress"
+
 class RegistryHive(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """the hive that holds the registry key.
     """
@@ -957,8 +973,8 @@ class SourceType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The sourceType of the watchlist
     """
 
-    LOCAL_FILE = "Local file"
-    REMOTE_STORAGE = "Remote storage"
+    LOCAL = "Local"
+    AZURE_STORAGE = "AzureStorage"
 
 class SupportTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Type of support for content item

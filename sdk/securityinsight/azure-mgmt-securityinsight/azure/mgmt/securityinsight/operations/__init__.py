@@ -35,6 +35,8 @@ from ._threat_intelligence_indicators_operations import ThreatIntelligenceIndica
 from ._threat_intelligence_indicator_metrics_operations import ThreatIntelligenceIndicatorMetricsOperations
 from ._watchlists_operations import WatchlistsOperations
 from ._watchlist_items_operations import WatchlistItemsOperations
+from ._confidential_watchlists_operations import ConfidentialWatchlistsOperations
+from ._confidential_watchlist_items_operations import ConfidentialWatchlistItemsOperations
 from ._data_connectors_operations import DataConnectorsOperations
 from ._data_connectors_check_requirements_operations import DataConnectorsCheckRequirementsOperations
 from ._operations import Operations
@@ -69,6 +71,8 @@ __all__ = [
     'ThreatIntelligenceIndicatorMetricsOperations',
     'WatchlistsOperations',
     'WatchlistItemsOperations',
+    'ConfidentialWatchlistsOperations',
+    'ConfidentialWatchlistItemsOperations',
     'DataConnectorsOperations',
     'DataConnectorsCheckRequirementsOperations',
     'Operations',

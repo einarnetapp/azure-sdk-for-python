@@ -7,21 +7,22 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, Optional, TYPE_CHECKING
+from typing import Any, Awaitable, TYPE_CHECKING
+
+from msrest import Deserializer, Serializer
 
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
-from msrest import Deserializer, Serializer
 
 from .. import models
 from ._configuration import SecurityInsightsConfiguration
-from .operations import ActionsOperations, AlertRuleTemplatesOperations, AlertRulesOperations, AutomationRulesOperations, BookmarkOperations, BookmarkRelationsOperations, BookmarksOperations, DataConnectorsCheckRequirementsOperations, DataConnectorsOperations, DomainWhoisOperations, EntitiesGetTimelineOperations, EntitiesOperations, EntitiesRelationsOperations, EntityQueriesOperations, EntityQueryTemplatesOperations, EntityRelationsOperations, IPGeodataOperations, IncidentCommentsOperations, IncidentRelationsOperations, IncidentsOperations, MetadataOperations, OfficeConsentsOperations, Operations, ProductSettingsOperations, SentinelOnboardingStatesOperations, SourceControlOperations, SourceControlsOperations, ThreatIntelligenceIndicatorMetricsOperations, ThreatIntelligenceIndicatorOperations, ThreatIntelligenceIndicatorsOperations, WatchlistItemsOperations, WatchlistsOperations
+from .operations import ActionsOperations, AlertRuleTemplatesOperations, AlertRulesOperations, AutomationRulesOperations, BookmarkOperations, BookmarkRelationsOperations, BookmarksOperations, ConfidentialWatchlistItemsOperations, ConfidentialWatchlistsOperations, DataConnectorsCheckRequirementsOperations, DataConnectorsOperations, DomainWhoisOperations, EntitiesGetTimelineOperations, EntitiesOperations, EntitiesRelationsOperations, EntityQueriesOperations, EntityQueryTemplatesOperations, EntityRelationsOperations, IPGeodataOperations, IncidentCommentsOperations, IncidentRelationsOperations, IncidentsOperations, MetadataOperations, OfficeConsentsOperations, Operations, ProductSettingsOperations, SentinelOnboardingStatesOperations, SourceControlOperations, SourceControlsOperations, ThreatIntelligenceIndicatorMetricsOperations, ThreatIntelligenceIndicatorOperations, ThreatIntelligenceIndicatorsOperations, WatchlistItemsOperations, WatchlistsOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials_async import AsyncTokenCredential
 
-class SecurityInsights:
+class SecurityInsights:    # pylint: disable=too-many-instance-attributes
     """API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider.
 
     :ivar alert_rules: AlertRulesOperations operations
@@ -94,6 +95,12 @@ class SecurityInsights:
     :vartype watchlists: azure.mgmt.securityinsight.aio.operations.WatchlistsOperations
     :ivar watchlist_items: WatchlistItemsOperations operations
     :vartype watchlist_items: azure.mgmt.securityinsight.aio.operations.WatchlistItemsOperations
+    :ivar confidential_watchlists: ConfidentialWatchlistsOperations operations
+    :vartype confidential_watchlists:
+     azure.mgmt.securityinsight.aio.operations.ConfidentialWatchlistsOperations
+    :ivar confidential_watchlist_items: ConfidentialWatchlistItemsOperations operations
+    :vartype confidential_watchlist_items:
+     azure.mgmt.securityinsight.aio.operations.ConfidentialWatchlistItemsOperations
     :ivar data_connectors: DataConnectorsOperations operations
     :vartype data_connectors: azure.mgmt.securityinsight.aio.operations.DataConnectorsOperations
     :ivar data_connectors_check_requirements: DataConnectorsCheckRequirementsOperations operations
@@ -105,8 +112,11 @@ class SecurityInsights:
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is 'https://management.azure.com'.
+    :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2022-06-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
+    :paramtype api_version: str
     """
 
     def __init__(
@@ -152,6 +162,8 @@ class SecurityInsights:
         self.threat_intelligence_indicator_metrics = ThreatIntelligenceIndicatorMetricsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlists = WatchlistsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlist_items = WatchlistItemsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.confidential_watchlists = ConfidentialWatchlistsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.confidential_watchlist_items = ConfidentialWatchlistItemsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connectors = DataConnectorsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connectors_check_requirements = DataConnectorsCheckRequirementsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)

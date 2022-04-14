@@ -6740,8 +6740,8 @@ class EntityAnalytics(Settings):
     :ivar kind: Required. The kind of the setting.Constant filled by server. Possible values
      include: "Anomalies", "EyesOn", "EntityAnalytics", "Ueba".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.SettingKind
-    :ivar is_enabled: Determines whether the setting is enable or disabled.
-    :vartype is_enabled: bool
+    :ivar entity_providers: The relevant entity providers that are synced.
+    :vartype entity_providers: list[str or ~azure.mgmt.securityinsight.models.EntityProviders]
     """
 
     _validation = {
@@ -6750,7 +6750,6 @@ class EntityAnalytics(Settings):
         'type': {'readonly': True},
         'system_data': {'readonly': True},
         'kind': {'required': True},
-        'is_enabled': {'readonly': True},
     }
 
     _attribute_map = {
@@ -6760,22 +6759,25 @@ class EntityAnalytics(Settings):
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'etag': {'key': 'etag', 'type': 'str'},
         'kind': {'key': 'kind', 'type': 'str'},
-        'is_enabled': {'key': 'properties.isEnabled', 'type': 'bool'},
+        'entity_providers': {'key': 'properties.entityProviders', 'type': '[str]'},
     }
 
     def __init__(
         self,
         *,
         etag: Optional[str] = None,
+        entity_providers: Optional[List[Union[str, "EntityProviders"]]] = None,
         **kwargs
     ):
         """
         :keyword etag: Etag of the azure resource.
         :paramtype etag: str
+        :keyword entity_providers: The relevant entity providers that are synced.
+        :paramtype entity_providers: list[str or ~azure.mgmt.securityinsight.models.EntityProviders]
         """
         super(EntityAnalytics, self).__init__(etag=etag, **kwargs)
         self.kind = 'EntityAnalytics'  # type: str
-        self.is_enabled = None
+        self.entity_providers = entity_providers
 
 
 class EntityEdges(msrest.serialization.Model):
@@ -10099,8 +10101,6 @@ class IncidentList(msrest.serialization.Model):
 class IncidentOwnerInfo(msrest.serialization.Model):
     """Information on the user an incident is assigned to.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar email: The email of the user the incident is assigned to.
     :vartype email: str
     :ivar assigned_to: The name of the user the incident is assigned to.
@@ -10113,10 +10113,6 @@ class IncidentOwnerInfo(msrest.serialization.Model):
      "Unknown", "User", "Group".
     :vartype owner_type: str or ~azure.mgmt.securityinsight.models.OwnerType
     """
-
-    _validation = {
-        'owner_type': {'readonly': True},
-    }
 
     _attribute_map = {
         'email': {'key': 'email', 'type': 'str'},
@@ -10133,6 +10129,7 @@ class IncidentOwnerInfo(msrest.serialization.Model):
         assigned_to: Optional[str] = None,
         object_id: Optional[str] = None,
         user_principal_name: Optional[str] = None,
+        owner_type: Optional[Union[str, "OwnerType"]] = None,
         **kwargs
     ):
         """
@@ -10144,13 +10141,16 @@ class IncidentOwnerInfo(msrest.serialization.Model):
         :paramtype object_id: str
         :keyword user_principal_name: The user principal name of the user the incident is assigned to.
         :paramtype user_principal_name: str
+        :keyword owner_type: The type of the owner the incident is assigned to. Possible values
+         include: "Unknown", "User", "Group".
+        :paramtype owner_type: str or ~azure.mgmt.securityinsight.models.OwnerType
         """
         super(IncidentOwnerInfo, self).__init__(**kwargs)
         self.email = email
         self.assigned_to = assigned_to
         self.object_id = object_id
         self.user_principal_name = user_principal_name
-        self.owner_type = None
+        self.owner_type = owner_type
 
 
 class IncidentPropertiesAction(msrest.serialization.Model):
@@ -22142,7 +22142,7 @@ class UserInfo(msrest.serialization.Model):
 
 
 class Watchlist(ResourceWithEtag):
-    """Represents a Watchlist in Azure Security Insights.
+    """Represents a (Confidential) Watchlist in Azure Security Insights.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -22167,8 +22167,8 @@ class Watchlist(ResourceWithEtag):
     :vartype provider: str
     :ivar source: The filename of the watchlist, called 'source'.
     :vartype source: str
-    :ivar source_type: The sourceType of the watchlist. Possible values include: "Local file",
-     "Remote storage".
+    :ivar source_type: The sourceType of the watchlist. Possible values include: "Local",
+     "AzureStorage".
     :vartype source_type: str or ~azure.mgmt.securityinsight.models.SourceType
     :ivar created: The time the watchlist was created.
     :vartype created: ~datetime.datetime
@@ -22198,6 +22198,9 @@ class Watchlist(ResourceWithEtag):
     :ivar raw_content: The raw content that represents to watchlist items to create. In case of
      csv/tsv content type, it's the content of the file that will parsed by the endpoint.
     :vartype raw_content: str
+    :ivar sas_uri: The Shared Access Signature (SAS) URI under which the large csv watchlist file
+     is located and from which the watchlist and its items will be created.
+    :vartype sas_uri: str
     :ivar items_search_key: The search key is used to optimize query performance when using
      watchlists for joins with other data. For example, enable a column with IP addresses to be the
      designated SearchKey field, then use this field as the key field when joining to other event
@@ -22208,6 +22211,12 @@ class Watchlist(ResourceWithEtag):
     :ivar upload_status: The status of the Watchlist upload : New, InProgress or Complete. Pls note
      : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted.
     :vartype upload_status: str
+    :ivar provisioning_state: The provisioning state of the watchlist resource. Possible values
+     include: "Succeeded", "Failed", "Canceled", "InProgress".
+    :vartype provisioning_state: str or ~azure.mgmt.securityinsight.models.ProvisioningState
+    :ivar watchlist_category: The watchlist category (normal or confidential). It's read only
+     property, calculated by the API during PUT operation.
+    :vartype watchlist_category: str
     """
 
     _validation = {
@@ -22215,6 +22224,8 @@ class Watchlist(ResourceWithEtag):
         'name': {'readonly': True},
         'type': {'readonly': True},
         'system_data': {'readonly': True},
+        'provisioning_state': {'readonly': True},
+        'watchlist_category': {'readonly': True},
     }
 
     _attribute_map = {
@@ -22241,9 +22252,12 @@ class Watchlist(ResourceWithEtag):
         'tenant_id': {'key': 'properties.tenantId', 'type': 'str'},
         'number_of_lines_to_skip': {'key': 'properties.numberOfLinesToSkip', 'type': 'int'},
         'raw_content': {'key': 'properties.rawContent', 'type': 'str'},
+        'sas_uri': {'key': 'properties.sasUri', 'type': 'str'},
         'items_search_key': {'key': 'properties.itemsSearchKey', 'type': 'str'},
         'content_type': {'key': 'properties.contentType', 'type': 'str'},
         'upload_status': {'key': 'properties.uploadStatus', 'type': 'str'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'watchlist_category': {'key': 'properties.watchlistCategory', 'type': 'str'},
     }
 
     def __init__(
@@ -22268,6 +22282,7 @@ class Watchlist(ResourceWithEtag):
         tenant_id: Optional[str] = None,
         number_of_lines_to_skip: Optional[int] = None,
         raw_content: Optional[str] = None,
+        sas_uri: Optional[str] = None,
         items_search_key: Optional[str] = None,
         content_type: Optional[str] = None,
         upload_status: Optional[str] = None,
@@ -22284,8 +22299,8 @@ class Watchlist(ResourceWithEtag):
         :paramtype provider: str
         :keyword source: The filename of the watchlist, called 'source'.
         :paramtype source: str
-        :keyword source_type: The sourceType of the watchlist. Possible values include: "Local file",
-         "Remote storage".
+        :keyword source_type: The sourceType of the watchlist. Possible values include: "Local",
+         "AzureStorage".
         :paramtype source_type: str or ~azure.mgmt.securityinsight.models.SourceType
         :keyword created: The time the watchlist was created.
         :paramtype created: ~datetime.datetime
@@ -22315,6 +22330,9 @@ class Watchlist(ResourceWithEtag):
         :keyword raw_content: The raw content that represents to watchlist items to create. In case of
          csv/tsv content type, it's the content of the file that will parsed by the endpoint.
         :paramtype raw_content: str
+        :keyword sas_uri: The Shared Access Signature (SAS) URI under which the large csv watchlist
+         file is located and from which the watchlist and its items will be created.
+        :paramtype sas_uri: str
         :keyword items_search_key: The search key is used to optimize query performance when using
          watchlists for joins with other data. For example, enable a column with IP addresses to be the
          designated SearchKey field, then use this field as the key field when joining to other event
@@ -22345,9 +22363,12 @@ class Watchlist(ResourceWithEtag):
         self.tenant_id = tenant_id
         self.number_of_lines_to_skip = number_of_lines_to_skip
         self.raw_content = raw_content
+        self.sas_uri = sas_uri
         self.items_search_key = items_search_key
         self.content_type = content_type
         self.upload_status = upload_status
+        self.provisioning_state = None
+        self.watchlist_category = None
 
 
 class WatchlistItem(ResourceWithEtag):
@@ -22385,9 +22406,9 @@ class WatchlistItem(ResourceWithEtag):
     :ivar updated_by: Describes a user that updated the watchlist item.
     :vartype updated_by: ~azure.mgmt.securityinsight.models.UserInfo
     :ivar items_key_value: key-value pairs for a watchlist item.
-    :vartype items_key_value: any
+    :vartype items_key_value: dict[str, any]
     :ivar entity_mapping: key-value pairs for a watchlist item entity mapping.
-    :vartype entity_mapping: any
+    :vartype entity_mapping: dict[str, any]
     """
 
     _validation = {
@@ -22411,8 +22432,8 @@ class WatchlistItem(ResourceWithEtag):
         'updated': {'key': 'properties.updated', 'type': 'iso-8601'},
         'created_by': {'key': 'properties.createdBy', 'type': 'UserInfo'},
         'updated_by': {'key': 'properties.updatedBy', 'type': 'UserInfo'},
-        'items_key_value': {'key': 'properties.itemsKeyValue', 'type': 'object'},
-        'entity_mapping': {'key': 'properties.entityMapping', 'type': 'object'},
+        'items_key_value': {'key': 'properties.itemsKeyValue', 'type': '{object}'},
+        'entity_mapping': {'key': 'properties.entityMapping', 'type': '{object}'},
     }
 
     def __init__(
@@ -22427,8 +22448,8 @@ class WatchlistItem(ResourceWithEtag):
         updated: Optional[datetime.datetime] = None,
         created_by: Optional["UserInfo"] = None,
         updated_by: Optional["UserInfo"] = None,
-        items_key_value: Optional[Any] = None,
-        entity_mapping: Optional[Any] = None,
+        items_key_value: Optional[Dict[str, Any]] = None,
+        entity_mapping: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
         """
@@ -22451,9 +22472,9 @@ class WatchlistItem(ResourceWithEtag):
         :keyword updated_by: Describes a user that updated the watchlist item.
         :paramtype updated_by: ~azure.mgmt.securityinsight.models.UserInfo
         :keyword items_key_value: key-value pairs for a watchlist item.
-        :paramtype items_key_value: any
+        :paramtype items_key_value: dict[str, any]
         :keyword entity_mapping: key-value pairs for a watchlist item entity mapping.
-        :paramtype entity_mapping: any
+        :paramtype entity_mapping: dict[str, any]
         """
         super(WatchlistItem, self).__init__(etag=etag, **kwargs)
         self.watchlist_item_type = watchlist_item_type
