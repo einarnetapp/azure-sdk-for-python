@@ -14,20 +14,20 @@ from azure.mgmt.core import AsyncARMPipelineClient
 from msrest import Deserializer, Serializer
 
 from .. import models
-from ._configuration import MicrosoftServiceLinkerConfiguration
+from ._configuration import ServiceLinkerManagementClientConfiguration
 from .operations import LinkerOperations, Operations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials_async import AsyncTokenCredential
 
-class MicrosoftServiceLinker:
+class ServiceLinkerManagementClient:
     """Microsoft.ServiceLinker provider.
 
     :ivar linker: LinkerOperations operations
-    :vartype linker: microsoft_service_linker.aio.operations.LinkerOperations
+    :vartype linker: azure.mgmt.servicelinker.aio.operations.LinkerOperations
     :ivar operations: Operations operations
-    :vartype operations: microsoft_service_linker.aio.operations.Operations
+    :vartype operations: azure.mgmt.servicelinker.aio.operations.Operations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param base_url: Service URL. Default value is 'https://management.azure.com'.
@@ -42,7 +42,7 @@ class MicrosoftServiceLinker:
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = MicrosoftServiceLinkerConfiguration(credential=credential, **kwargs)
+        self._config = ServiceLinkerManagementClientConfiguration(credential=credential, **kwargs)
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
@@ -82,7 +82,7 @@ class MicrosoftServiceLinker:
     async def close(self) -> None:
         await self._client.close()
 
-    async def __aenter__(self) -> "MicrosoftServiceLinker":
+    async def __aenter__(self) -> "ServiceLinkerManagementClient":
         await self._client.__aenter__()
         return self
 

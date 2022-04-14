@@ -14,20 +14,20 @@ from azure.mgmt.core import ARMPipelineClient
 from msrest import Deserializer, Serializer
 
 from . import models
-from ._configuration import MicrosoftServiceLinkerConfiguration
+from ._configuration import ServiceLinkerManagementClientConfiguration
 from .operations import LinkerOperations, Operations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class MicrosoftServiceLinker:
+class ServiceLinkerManagementClient:
     """Microsoft.ServiceLinker provider.
 
     :ivar linker: LinkerOperations operations
-    :vartype linker: microsoft_service_linker.operations.LinkerOperations
+    :vartype linker: azure.mgmt.servicelinker.operations.LinkerOperations
     :ivar operations: Operations operations
-    :vartype operations: microsoft_service_linker.operations.Operations
+    :vartype operations: azure.mgmt.servicelinker.operations.Operations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials.TokenCredential
     :param base_url: Service URL. Default value is 'https://management.azure.com'.
@@ -42,7 +42,7 @@ class MicrosoftServiceLinker:
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = MicrosoftServiceLinkerConfiguration(credential=credential, **kwargs)
+        self._config = ServiceLinkerManagementClientConfiguration(credential=credential, **kwargs)
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
@@ -84,7 +84,7 @@ class MicrosoftServiceLinker:
         self._client.close()
 
     def __enter__(self):
-        # type: () -> MicrosoftServiceLinker
+        # type: () -> ServiceLinkerManagementClient
         self._client.__enter__()
         return self
 
