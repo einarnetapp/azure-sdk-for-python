@@ -95,19 +95,6 @@ class ChangesClient(MultiApiClientMixin, _SDKClient):
         raise ValueError("API version {} is not available".format(api_version))
 
     @property
-    def change_resource(self):
-        """Instance depends on the API version:
-
-           * 2022-03-01-preview: :class:`ChangeResourceOperations<azure.mgmt.resource.changes.v2022_03_01_preview.aio.operations.ChangeResourceOperations>`
-        """
-        api_version = self._get_api_version('change_resource')
-        if api_version == '2022-03-01-preview':
-            from ..v2022_03_01_preview.aio.operations import ChangeResourceOperations as OperationClass
-        else:
-            raise ValueError("API version {} does not have operation group 'change_resource'".format(api_version))
-        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
-
-    @property
     def change_resources(self):
         """Instance depends on the API version:
 

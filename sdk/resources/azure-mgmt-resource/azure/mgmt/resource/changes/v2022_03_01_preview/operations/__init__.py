@@ -7,9 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._operations import ChangeResourcesOperations
-from ._operations import ChangeResourceOperations
 
 __all__ = [
     'ChangeResourcesOperations',
-    'ChangeResourceOperations',
 ]
