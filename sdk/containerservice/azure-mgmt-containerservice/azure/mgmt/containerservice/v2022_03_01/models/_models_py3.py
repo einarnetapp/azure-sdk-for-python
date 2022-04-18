@@ -3284,6 +3284,12 @@ class ManagedClusterAPIServerAccessProfile(msrest.serialization.Model):
     :vartype enable_private_cluster_public_fqdn: bool
     :ivar disable_run_command: Whether to disable run command for the cluster or not.
     :vartype disable_run_command: bool
+    :ivar enable_vnet_integration: Whether to enable apiserver vnet integration for the cluster or
+     not.
+    :vartype enable_vnet_integration: bool
+    :ivar subnet_id: The subnet to be used for apiserver when apiserver vnet integration is
+     enabled.
+    :vartype subnet_id: str
     """
 
     _attribute_map = {
@@ -3292,6 +3298,8 @@ class ManagedClusterAPIServerAccessProfile(msrest.serialization.Model):
         'private_dns_zone': {'key': 'privateDNSZone', 'type': 'str'},
         'enable_private_cluster_public_fqdn': {'key': 'enablePrivateClusterPublicFQDN', 'type': 'bool'},
         'disable_run_command': {'key': 'disableRunCommand', 'type': 'bool'},
+        'enable_vnet_integration': {'key': 'enableVnetIntegration', 'type': 'bool'},
+        'subnet_id': {'key': 'subnetId', 'type': 'str'},
     }
 
     def __init__(
@@ -3302,6 +3310,8 @@ class ManagedClusterAPIServerAccessProfile(msrest.serialization.Model):
         private_dns_zone: Optional[str] = None,
         enable_private_cluster_public_fqdn: Optional[bool] = None,
         disable_run_command: Optional[bool] = None,
+        enable_vnet_integration: Optional[bool] = None,
+        subnet_id: Optional[str] = None,
         **kwargs
     ):
         """
@@ -3322,6 +3332,12 @@ class ManagedClusterAPIServerAccessProfile(msrest.serialization.Model):
         :paramtype enable_private_cluster_public_fqdn: bool
         :keyword disable_run_command: Whether to disable run command for the cluster or not.
         :paramtype disable_run_command: bool
+        :keyword enable_vnet_integration: Whether to enable apiserver vnet integration for the cluster
+         or not.
+        :paramtype enable_vnet_integration: bool
+        :keyword subnet_id: The subnet to be used for apiserver when apiserver vnet integration is
+         enabled.
+        :paramtype subnet_id: str
         """
         super(ManagedClusterAPIServerAccessProfile, self).__init__(**kwargs)
         self.authorized_ip_ranges = authorized_ip_ranges
@@ -3329,6 +3345,8 @@ class ManagedClusterAPIServerAccessProfile(msrest.serialization.Model):
         self.private_dns_zone = private_dns_zone
         self.enable_private_cluster_public_fqdn = enable_private_cluster_public_fqdn
         self.disable_run_command = disable_run_command
+        self.enable_vnet_integration = enable_vnet_integration
+        self.subnet_id = subnet_id
 
 
 class ManagedClusterAutoUpgradeProfile(msrest.serialization.Model):
