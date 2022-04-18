@@ -4880,8 +4880,10 @@ class DataTransferJobGetResults(ARMProxyResource):
     :vartype destination: ~azure.mgmt.cosmosdb.models.DataTransferDataSourceSink
     :ivar status: Job Status.
     :vartype status: str
-    :ivar percentage_complete: Percentage of completion.
-    :vartype percentage_complete: float
+    :ivar processed_count: Processed Count.
+    :vartype processed_count: float
+    :ivar total_count: Total Count.
+    :vartype total_count: float
     :ivar last_updated_utc_time: Last Updated Time (ISO-8601 format).
     :vartype last_updated_utc_time: ~datetime.datetime
     :ivar worker_count: Worker count.
@@ -4896,7 +4898,8 @@ class DataTransferJobGetResults(ARMProxyResource):
         'type': {'readonly': True},
         'job_name': {'readonly': True},
         'status': {'readonly': True},
-        'percentage_complete': {'readonly': True},
+        'processed_count': {'readonly': True},
+        'total_count': {'readonly': True},
         'last_updated_utc_time': {'readonly': True},
         'worker_count': {'minimum': 0},
         'error': {'readonly': True},
@@ -4910,7 +4913,8 @@ class DataTransferJobGetResults(ARMProxyResource):
         'source': {'key': 'properties.source', 'type': 'DataTransferDataSourceSink'},
         'destination': {'key': 'properties.destination', 'type': 'DataTransferDataSourceSink'},
         'status': {'key': 'properties.status', 'type': 'str'},
-        'percentage_complete': {'key': 'properties.percentageComplete', 'type': 'float'},
+        'processed_count': {'key': 'properties.processedCount', 'type': 'float'},
+        'total_count': {'key': 'properties.totalCount', 'type': 'float'},
         'last_updated_utc_time': {'key': 'properties.lastUpdatedUtcTime', 'type': 'iso-8601'},
         'worker_count': {'key': 'properties.workerCount', 'type': 'int'},
         'error': {'key': 'properties.error', 'type': 'ErrorResponse'},
@@ -4937,7 +4941,8 @@ class DataTransferJobGetResults(ARMProxyResource):
         self.source = source
         self.destination = destination
         self.status = None
-        self.percentage_complete = None
+        self.processed_count = None
+        self.total_count = None
         self.last_updated_utc_time = None
         self.worker_count = worker_count
         self.error = None
@@ -4958,8 +4963,10 @@ class DataTransferJobProperties(msrest.serialization.Model):
     :vartype destination: ~azure.mgmt.cosmosdb.models.DataTransferDataSourceSink
     :ivar status: Job Status.
     :vartype status: str
-    :ivar percentage_complete: Percentage of completion.
-    :vartype percentage_complete: float
+    :ivar processed_count: Processed Count.
+    :vartype processed_count: float
+    :ivar total_count: Total Count.
+    :vartype total_count: float
     :ivar last_updated_utc_time: Last Updated Time (ISO-8601 format).
     :vartype last_updated_utc_time: ~datetime.datetime
     :ivar worker_count: Worker count.
@@ -4973,7 +4980,8 @@ class DataTransferJobProperties(msrest.serialization.Model):
         'source': {'required': True},
         'destination': {'required': True},
         'status': {'readonly': True},
-        'percentage_complete': {'readonly': True},
+        'processed_count': {'readonly': True},
+        'total_count': {'readonly': True},
         'last_updated_utc_time': {'readonly': True},
         'worker_count': {'minimum': 0},
         'error': {'readonly': True},
@@ -4984,7 +4992,8 @@ class DataTransferJobProperties(msrest.serialization.Model):
         'source': {'key': 'source', 'type': 'DataTransferDataSourceSink'},
         'destination': {'key': 'destination', 'type': 'DataTransferDataSourceSink'},
         'status': {'key': 'status', 'type': 'str'},
-        'percentage_complete': {'key': 'percentageComplete', 'type': 'float'},
+        'processed_count': {'key': 'processedCount', 'type': 'float'},
+        'total_count': {'key': 'totalCount', 'type': 'float'},
         'last_updated_utc_time': {'key': 'lastUpdatedUtcTime', 'type': 'iso-8601'},
         'worker_count': {'key': 'workerCount', 'type': 'int'},
         'error': {'key': 'error', 'type': 'ErrorResponse'},
@@ -5011,7 +5020,8 @@ class DataTransferJobProperties(msrest.serialization.Model):
         self.source = source
         self.destination = destination
         self.status = None
-        self.percentage_complete = None
+        self.processed_count = None
+        self.total_count = None
         self.last_updated_utc_time = None
         self.worker_count = worker_count
         self.error = None
@@ -10892,7 +10902,6 @@ class RestorableSqlContainerPropertiesResourceContainer(ExtendedResourceProperti
         self.rid = None
         self.ts = None
         self.etag = None
-        self.self_property = None
 
 
 class RestorableSqlContainersListResult(msrest.serialization.Model):
@@ -11120,9 +11129,6 @@ class RestorableSqlDatabasePropertiesResourceDatabase(SqlDatabaseResource, Exten
         self.users = None
         self.self_property = None
         self.id = id
-        self.colls = None
-        self.users = None
-        self.self_property = None
 
 
 class RestorableSqlDatabasesListResult(msrest.serialization.Model):
@@ -12103,8 +12109,6 @@ class SqlDatabaseGetPropertiesResource(SqlDatabaseResource, ExtendedResourceProp
         self.colls = colls
         self.users = users
         self.id = id
-        self.colls = colls
-        self.users = users
 
 
 class SqlDatabaseGetResults(ARMResourceProperties):
