@@ -975,6 +975,11 @@ class GalleryApplicationVersionPublishingProfile(GalleryArtifactPublishingProfil
     :vartype manage_actions: ~azure.mgmt.compute.v2021_10_01.models.UserArtifactManage
     :ivar enable_health_check: Optional. Whether or not this application reports health.
     :vartype enable_health_check: bool
+    :ivar settings:
+    :vartype settings: ~azure.mgmt.compute.v2021_10_01.models.UserArtifactSettings
+    :ivar advanced_settings: Optional. Additional settings to pass to the VMApp extension. For
+     advanced used only.
+    :vartype advanced_settings: dict[str, str]
     """
 
     _validation = {
@@ -994,6 +999,8 @@ class GalleryApplicationVersionPublishingProfile(GalleryArtifactPublishingProfil
         'source': {'key': 'source', 'type': 'UserArtifactSource'},
         'manage_actions': {'key': 'manageActions', 'type': 'UserArtifactManage'},
         'enable_health_check': {'key': 'enableHealthCheck', 'type': 'bool'},
+        'settings': {'key': 'settings', 'type': 'UserArtifactSettings'},
+        'advanced_settings': {'key': 'advancedSettings', 'type': '{str}'},
     }
 
     def __init__(
@@ -1009,6 +1016,8 @@ class GalleryApplicationVersionPublishingProfile(GalleryArtifactPublishingProfil
         target_extended_locations: Optional[List["GalleryTargetExtendedLocation"]] = None,
         manage_actions: Optional["UserArtifactManage"] = None,
         enable_health_check: Optional[bool] = None,
+        settings: Optional["UserArtifactSettings"] = None,
+        advanced_settings: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -1044,11 +1053,18 @@ class GalleryApplicationVersionPublishingProfile(GalleryArtifactPublishingProfil
         :paramtype manage_actions: ~azure.mgmt.compute.v2021_10_01.models.UserArtifactManage
         :keyword enable_health_check: Optional. Whether or not this application reports health.
         :paramtype enable_health_check: bool
+        :keyword settings:
+        :paramtype settings: ~azure.mgmt.compute.v2021_10_01.models.UserArtifactSettings
+        :keyword advanced_settings: Optional. Additional settings to pass to the VMApp extension. For
+         advanced used only.
+        :paramtype advanced_settings: dict[str, str]
         """
         super(GalleryApplicationVersionPublishingProfile, self).__init__(target_regions=target_regions, replica_count=replica_count, exclude_from_latest=exclude_from_latest, end_of_life_date=end_of_life_date, storage_account_type=storage_account_type, replication_mode=replication_mode, target_extended_locations=target_extended_locations, **kwargs)
         self.source = source
         self.manage_actions = manage_actions
         self.enable_health_check = enable_health_check
+        self.settings = settings
+        self.advanced_settings = advanced_settings
 
 
 class GalleryApplicationVersionUpdate(UpdateResourceDefinition):
@@ -3018,6 +3034,46 @@ class UserArtifactManage(msrest.serialization.Model):
         self.install = install
         self.remove = remove
         self.update = update
+
+
+class UserArtifactSettings(msrest.serialization.Model):
+    """UserArtifactSettings.
+
+    :ivar package_file_name: Optional. The file to rename the downloaded package to on the VM. If
+     not present, then the file will be called :code:`<appname>`. This is limited to 4096
+     characters.
+    :vartype package_file_name: str
+    :ivar config_file_name: Optional. The file to rename the downloaded config to on the VM. If not
+     present, then the file will be called :code:`<appname>`_config. This is limited to 4096
+     characters.
+    :vartype config_file_name: str
+    """
+
+    _attribute_map = {
+        'package_file_name': {'key': 'packageFileName', 'type': 'str'},
+        'config_file_name': {'key': 'configFileName', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        package_file_name: Optional[str] = None,
+        config_file_name: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword package_file_name: Optional. The file to rename the downloaded package to on the VM.
+         If not present, then the file will be called :code:`<appname>`. This is limited to 4096
+         characters.
+        :paramtype package_file_name: str
+        :keyword config_file_name: Optional. The file to rename the downloaded config to on the VM. If
+         not present, then the file will be called :code:`<appname>`_config. This is limited to 4096
+         characters.
+        :paramtype config_file_name: str
+        """
+        super(UserArtifactSettings, self).__init__(**kwargs)
+        self.package_file_name = package_file_name
+        self.config_file_name = config_file_name
 
 
 class UserArtifactSource(msrest.serialization.Model):

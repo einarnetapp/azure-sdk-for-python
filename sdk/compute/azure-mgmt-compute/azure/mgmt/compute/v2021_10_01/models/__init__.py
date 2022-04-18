@@ -61,6 +61,7 @@ from ._models_py3 import SoftDeletePolicy
 from ._models_py3 import TargetRegion
 from ._models_py3 import UpdateResourceDefinition
 from ._models_py3 import UserArtifactManage
+from ._models_py3 import UserArtifactSettings
 from ._models_py3 import UserArtifactSource
 
 
@@ -145,6 +146,7 @@ __all__ = [
     'TargetRegion',
     'UpdateResourceDefinition',
     'UserArtifactManage',
+    'UserArtifactSettings',
     'UserArtifactSource',
     'AggregatedReplicationState',
     'Architecture',
