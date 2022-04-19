@@ -2876,11 +2876,12 @@ class AutomationRuleCondition(msrest.serialization.Model):
     """Describes an automation rule condition.
 
     You probably want to use the sub-classes and not this class directly. Known
-    sub-classes are: PropertyConditionProperties.
+    sub-classes are: PropertyConditionProperties, PropertyArrayChangedConditionProperties, PropertyChangedConditionProperties.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar condition_type: Required. Constant filled by server. Possible values include: "Property".
+    :ivar condition_type: Required. Constant filled by server. Possible values include: "Property",
+     "PropertyChanged", "PropertyArrayChanged".
     :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
     """
 
@@ -2893,7 +2894,7 @@ class AutomationRuleCondition(msrest.serialization.Model):
     }
 
     _subtype_map = {
-        'condition_type': {'Property': 'PropertyConditionProperties'}
+        'condition_type': {'Property': 'PropertyConditionProperties', 'PropertyArrayChanged': 'PropertyArrayChangedConditionProperties', 'PropertyChanged': 'PropertyChangedConditionProperties'}
     }
 
     def __init__(
@@ -2947,6 +2948,98 @@ class AutomationRuleModifyPropertiesAction(AutomationRuleAction):
         super(AutomationRuleModifyPropertiesAction, self).__init__(order=order, **kwargs)
         self.action_type = 'ModifyProperties'  # type: str
         self.action_configuration = action_configuration
+
+
+class AutomationRulePropertyArrayChangedValuesCondition(msrest.serialization.Model):
+    """AutomationRulePropertyArrayChangedValuesCondition.
+
+    :ivar array_type: Possible values include: "Alerts", "Labels", "Tactics", "Comments".
+    :vartype array_type: str or
+     ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayChangedConditionSupportedArrayType
+    :ivar change_type: Possible values include: "Added".
+    :vartype change_type: str or
+     ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayChangedConditionSupportedChangeType
+    """
+
+    _attribute_map = {
+        'array_type': {'key': 'arrayType', 'type': 'str'},
+        'change_type': {'key': 'changeType', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        array_type: Optional[Union[str, "AutomationRulePropertyArrayChangedConditionSupportedArrayType"]] = None,
+        change_type: Optional[Union[str, "AutomationRulePropertyArrayChangedConditionSupportedChangeType"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword array_type: Possible values include: "Alerts", "Labels", "Tactics", "Comments".
+        :paramtype array_type: str or
+         ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayChangedConditionSupportedArrayType
+        :keyword change_type: Possible values include: "Added".
+        :paramtype change_type: str or
+         ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayChangedConditionSupportedChangeType
+        """
+        super(AutomationRulePropertyArrayChangedValuesCondition, self).__init__(**kwargs)
+        self.array_type = array_type
+        self.change_type = change_type
+
+
+class AutomationRulePropertyValuesChangedCondition(msrest.serialization.Model):
+    """AutomationRulePropertyValuesChangedCondition.
+
+    :ivar property_name: Possible values include: "IncidentSeverity", "IncidentStatus",
+     "IncidentOwner".
+    :vartype property_name: str or
+     ~azure.mgmt.securityinsight.models.AutomationRulePropertyChangedConditionSupportedPropertyType
+    :ivar change_type: Possible values include: "ChangedFrom", "ChangedTo".
+    :vartype change_type: str or
+     ~azure.mgmt.securityinsight.models.AutomationRulePropertyChangedConditionSupportedChangedType
+    :ivar operator: Possible values include: "Equals", "NotEquals", "Contains", "NotContains",
+     "StartsWith", "NotStartsWith", "EndsWith", "NotEndsWith".
+    :vartype operator: str or
+     ~azure.mgmt.securityinsight.models.AutomationRulePropertyConditionSupportedOperator
+    :ivar property_values:
+    :vartype property_values: list[str]
+    """
+
+    _attribute_map = {
+        'property_name': {'key': 'propertyName', 'type': 'str'},
+        'change_type': {'key': 'changeType', 'type': 'str'},
+        'operator': {'key': 'operator', 'type': 'str'},
+        'property_values': {'key': 'propertyValues', 'type': '[str]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        property_name: Optional[Union[str, "AutomationRulePropertyChangedConditionSupportedPropertyType"]] = None,
+        change_type: Optional[Union[str, "AutomationRulePropertyChangedConditionSupportedChangedType"]] = None,
+        operator: Optional[Union[str, "AutomationRulePropertyConditionSupportedOperator"]] = None,
+        property_values: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword property_name: Possible values include: "IncidentSeverity", "IncidentStatus",
+         "IncidentOwner".
+        :paramtype property_name: str or
+         ~azure.mgmt.securityinsight.models.AutomationRulePropertyChangedConditionSupportedPropertyType
+        :keyword change_type: Possible values include: "ChangedFrom", "ChangedTo".
+        :paramtype change_type: str or
+         ~azure.mgmt.securityinsight.models.AutomationRulePropertyChangedConditionSupportedChangedType
+        :keyword operator: Possible values include: "Equals", "NotEquals", "Contains", "NotContains",
+         "StartsWith", "NotStartsWith", "EndsWith", "NotEndsWith".
+        :paramtype operator: str or
+         ~azure.mgmt.securityinsight.models.AutomationRulePropertyConditionSupportedOperator
+        :keyword property_values:
+        :paramtype property_values: list[str]
+        """
+        super(AutomationRulePropertyValuesChangedCondition, self).__init__(**kwargs)
+        self.property_name = property_name
+        self.change_type = change_type
+        self.operator = operator
+        self.property_values = property_values
 
 
 class AutomationRulePropertyValuesCondition(msrest.serialization.Model):
@@ -3107,7 +3200,7 @@ class AutomationRuleTriggeringLogic(msrest.serialization.Model):
     :vartype expiration_time_utc: ~datetime.datetime
     :ivar triggers_on: Required. Possible values include: "Incidents".
     :vartype triggers_on: str or ~azure.mgmt.securityinsight.models.TriggersOn
-    :ivar triggers_when: Required. Possible values include: "Created".
+    :ivar triggers_when: Required. Possible values include: "Created", "Updated".
     :vartype triggers_when: str or ~azure.mgmt.securityinsight.models.TriggersWhen
     :ivar conditions: The conditions to evaluate to determine if the automation rule should be
      triggered on a given object.
@@ -3147,7 +3240,7 @@ class AutomationRuleTriggeringLogic(msrest.serialization.Model):
         :paramtype expiration_time_utc: ~datetime.datetime
         :keyword triggers_on: Required. Possible values include: "Incidents".
         :paramtype triggers_on: str or ~azure.mgmt.securityinsight.models.TriggersOn
-        :keyword triggers_when: Required. Possible values include: "Created".
+        :keyword triggers_when: Required. Possible values include: "Created", "Updated".
         :paramtype triggers_when: str or ~azure.mgmt.securityinsight.models.TriggersWhen
         :keyword conditions: The conditions to evaluate to determine if the automation rule should be
          triggered on a given object.
@@ -6740,8 +6833,8 @@ class EntityAnalytics(Settings):
     :ivar kind: Required. The kind of the setting.Constant filled by server. Possible values
      include: "Anomalies", "EyesOn", "EntityAnalytics", "Ueba".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.SettingKind
-    :ivar is_enabled: Determines whether the setting is enable or disabled.
-    :vartype is_enabled: bool
+    :ivar entity_providers: The relevant entity providers that are synced.
+    :vartype entity_providers: list[str or ~azure.mgmt.securityinsight.models.EntityProviders]
     """
 
     _validation = {
@@ -6750,7 +6843,6 @@ class EntityAnalytics(Settings):
         'type': {'readonly': True},
         'system_data': {'readonly': True},
         'kind': {'required': True},
-        'is_enabled': {'readonly': True},
     }
 
     _attribute_map = {
@@ -6760,22 +6852,25 @@ class EntityAnalytics(Settings):
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'etag': {'key': 'etag', 'type': 'str'},
         'kind': {'key': 'kind', 'type': 'str'},
-        'is_enabled': {'key': 'properties.isEnabled', 'type': 'bool'},
+        'entity_providers': {'key': 'properties.entityProviders', 'type': '[str]'},
     }
 
     def __init__(
         self,
         *,
         etag: Optional[str] = None,
+        entity_providers: Optional[List[Union[str, "EntityProviders"]]] = None,
         **kwargs
     ):
         """
         :keyword etag: Etag of the azure resource.
         :paramtype etag: str
+        :keyword entity_providers: The relevant entity providers that are synced.
+        :paramtype entity_providers: list[str or ~azure.mgmt.securityinsight.models.EntityProviders]
         """
         super(EntityAnalytics, self).__init__(etag=etag, **kwargs)
         self.kind = 'EntityAnalytics'  # type: str
-        self.is_enabled = None
+        self.entity_providers = entity_providers
 
 
 class EntityEdges(msrest.serialization.Model):
@@ -10099,8 +10194,6 @@ class IncidentList(msrest.serialization.Model):
 class IncidentOwnerInfo(msrest.serialization.Model):
     """Information on the user an incident is assigned to.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar email: The email of the user the incident is assigned to.
     :vartype email: str
     :ivar assigned_to: The name of the user the incident is assigned to.
@@ -10113,10 +10206,6 @@ class IncidentOwnerInfo(msrest.serialization.Model):
      "Unknown", "User", "Group".
     :vartype owner_type: str or ~azure.mgmt.securityinsight.models.OwnerType
     """
-
-    _validation = {
-        'owner_type': {'readonly': True},
-    }
 
     _attribute_map = {
         'email': {'key': 'email', 'type': 'str'},
@@ -10133,6 +10222,7 @@ class IncidentOwnerInfo(msrest.serialization.Model):
         assigned_to: Optional[str] = None,
         object_id: Optional[str] = None,
         user_principal_name: Optional[str] = None,
+        owner_type: Optional[Union[str, "OwnerType"]] = None,
         **kwargs
     ):
         """
@@ -10144,13 +10234,16 @@ class IncidentOwnerInfo(msrest.serialization.Model):
         :paramtype object_id: str
         :keyword user_principal_name: The user principal name of the user the incident is assigned to.
         :paramtype user_principal_name: str
+        :keyword owner_type: The type of the owner the incident is assigned to. Possible values
+         include: "Unknown", "User", "Group".
+        :paramtype owner_type: str or ~azure.mgmt.securityinsight.models.OwnerType
         """
         super(IncidentOwnerInfo, self).__init__(**kwargs)
         self.email = email
         self.assigned_to = assigned_to
         self.object_id = object_id
         self.user_principal_name = user_principal_name
-        self.owner_type = None
+        self.owner_type = owner_type
 
 
 class IncidentPropertiesAction(msrest.serialization.Model):
@@ -17057,12 +17150,89 @@ class ProcessEntityProperties(EntityCommonProperties):
         self.process_id = None
 
 
+class PropertyArrayChangedConditionProperties(AutomationRuleCondition):
+    """Describes an automation rule condition that evaluates an array property's value change.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar condition_type: Required. Constant filled by server. Possible values include: "Property",
+     "PropertyChanged", "PropertyArrayChanged".
+    :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
+    :ivar condition_properties:
+    :vartype condition_properties:
+     ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayChangedValuesCondition
+    """
+
+    _validation = {
+        'condition_type': {'required': True},
+    }
+
+    _attribute_map = {
+        'condition_type': {'key': 'conditionType', 'type': 'str'},
+        'condition_properties': {'key': 'conditionProperties', 'type': 'AutomationRulePropertyArrayChangedValuesCondition'},
+    }
+
+    def __init__(
+        self,
+        *,
+        condition_properties: Optional["AutomationRulePropertyArrayChangedValuesCondition"] = None,
+        **kwargs
+    ):
+        """
+        :keyword condition_properties:
+        :paramtype condition_properties:
+         ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayChangedValuesCondition
+        """
+        super(PropertyArrayChangedConditionProperties, self).__init__(**kwargs)
+        self.condition_type = 'PropertyArrayChanged'  # type: str
+        self.condition_properties = condition_properties
+
+
+class PropertyChangedConditionProperties(AutomationRuleCondition):
+    """Describes an automation rule condition that evaluates a property's value change.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar condition_type: Required. Constant filled by server. Possible values include: "Property",
+     "PropertyChanged", "PropertyArrayChanged".
+    :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
+    :ivar condition_properties:
+    :vartype condition_properties:
+     ~azure.mgmt.securityinsight.models.AutomationRulePropertyValuesChangedCondition
+    """
+
+    _validation = {
+        'condition_type': {'required': True},
+    }
+
+    _attribute_map = {
+        'condition_type': {'key': 'conditionType', 'type': 'str'},
+        'condition_properties': {'key': 'conditionProperties', 'type': 'AutomationRulePropertyValuesChangedCondition'},
+    }
+
+    def __init__(
+        self,
+        *,
+        condition_properties: Optional["AutomationRulePropertyValuesChangedCondition"] = None,
+        **kwargs
+    ):
+        """
+        :keyword condition_properties:
+        :paramtype condition_properties:
+         ~azure.mgmt.securityinsight.models.AutomationRulePropertyValuesChangedCondition
+        """
+        super(PropertyChangedConditionProperties, self).__init__(**kwargs)
+        self.condition_type = 'PropertyChanged'  # type: str
+        self.condition_properties = condition_properties
+
+
 class PropertyConditionProperties(AutomationRuleCondition):
     """Describes an automation rule condition that evaluates a property's value.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar condition_type: Required. Constant filled by server. Possible values include: "Property".
+    :ivar condition_type: Required. Constant filled by server. Possible values include: "Property",
+     "PropertyChanged", "PropertyArrayChanged".
     :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
     :ivar condition_properties:
     :vartype condition_properties:
@@ -22385,9 +22555,9 @@ class WatchlistItem(ResourceWithEtag):
     :ivar updated_by: Describes a user that updated the watchlist item.
     :vartype updated_by: ~azure.mgmt.securityinsight.models.UserInfo
     :ivar items_key_value: key-value pairs for a watchlist item.
-    :vartype items_key_value: any
+    :vartype items_key_value: dict[str, any]
     :ivar entity_mapping: key-value pairs for a watchlist item entity mapping.
-    :vartype entity_mapping: any
+    :vartype entity_mapping: dict[str, any]
     """
 
     _validation = {
@@ -22411,8 +22581,8 @@ class WatchlistItem(ResourceWithEtag):
         'updated': {'key': 'properties.updated', 'type': 'iso-8601'},
         'created_by': {'key': 'properties.createdBy', 'type': 'UserInfo'},
         'updated_by': {'key': 'properties.updatedBy', 'type': 'UserInfo'},
-        'items_key_value': {'key': 'properties.itemsKeyValue', 'type': 'object'},
-        'entity_mapping': {'key': 'properties.entityMapping', 'type': 'object'},
+        'items_key_value': {'key': 'properties.itemsKeyValue', 'type': '{object}'},
+        'entity_mapping': {'key': 'properties.entityMapping', 'type': '{object}'},
     }
 
     def __init__(
@@ -22427,8 +22597,8 @@ class WatchlistItem(ResourceWithEtag):
         updated: Optional[datetime.datetime] = None,
         created_by: Optional["UserInfo"] = None,
         updated_by: Optional["UserInfo"] = None,
-        items_key_value: Optional[Any] = None,
-        entity_mapping: Optional[Any] = None,
+        items_key_value: Optional[Dict[str, Any]] = None,
+        entity_mapping: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
         """
@@ -22451,9 +22621,9 @@ class WatchlistItem(ResourceWithEtag):
         :keyword updated_by: Describes a user that updated the watchlist item.
         :paramtype updated_by: ~azure.mgmt.securityinsight.models.UserInfo
         :keyword items_key_value: key-value pairs for a watchlist item.
-        :paramtype items_key_value: any
+        :paramtype items_key_value: dict[str, any]
         :keyword entity_mapping: key-value pairs for a watchlist item entity mapping.
-        :paramtype entity_mapping: any
+        :paramtype entity_mapping: dict[str, any]
         """
         super(WatchlistItem, self).__init__(etag=etag, **kwargs)
         self.watchlist_item_type = watchlist_item_type

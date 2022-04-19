@@ -45,6 +45,8 @@ from ._models_py3 import AutomationRule
 from ._models_py3 import AutomationRuleAction
 from ._models_py3 import AutomationRuleCondition
 from ._models_py3 import AutomationRuleModifyPropertiesAction
+from ._models_py3 import AutomationRulePropertyArrayChangedValuesCondition
+from ._models_py3 import AutomationRulePropertyValuesChangedCondition
 from ._models_py3 import AutomationRulePropertyValuesCondition
 from ._models_py3 import AutomationRuleRunPlaybookAction
 from ._models_py3 import AutomationRuleTriggeringLogic
@@ -294,6 +296,8 @@ from ._models_py3 import PermissionsResourceProviderItem
 from ._models_py3 import PlaybookActionProperties
 from ._models_py3 import ProcessEntity
 from ._models_py3 import ProcessEntityProperties
+from ._models_py3 import PropertyArrayChangedConditionProperties
+from ._models_py3 import PropertyChangedConditionProperties
 from ._models_py3 import PropertyConditionProperties
 from ._models_py3 import QueryBasedAlertRuleTemplateProperties
 from ._models_py3 import RegistryKeyEntity
@@ -387,6 +391,10 @@ from ._security_insights_enums import (
     AlertStatus,
     AntispamMailDirection,
     AttackTactic,
+    AutomationRulePropertyArrayChangedConditionSupportedArrayType,
+    AutomationRulePropertyArrayChangedConditionSupportedChangeType,
+    AutomationRulePropertyChangedConditionSupportedChangedType,
+    AutomationRulePropertyChangedConditionSupportedPropertyType,
     AutomationRulePropertyConditionSupportedOperator,
     AutomationRulePropertyConditionSupportedProperty,
     ConditionType,
@@ -410,6 +418,7 @@ from ._security_insights_enums import (
     EntityItemQueryKind,
     EntityKind,
     EntityMappingType,
+    EntityProviders,
     EntityQueryKind,
     EntityQueryTemplateKind,
     EntityTimelineKind,
@@ -492,6 +501,8 @@ __all__ = [
     'AutomationRuleAction',
     'AutomationRuleCondition',
     'AutomationRuleModifyPropertiesAction',
+    'AutomationRulePropertyArrayChangedValuesCondition',
+    'AutomationRulePropertyValuesChangedCondition',
     'AutomationRulePropertyValuesCondition',
     'AutomationRuleRunPlaybookAction',
     'AutomationRuleTriggeringLogic',
@@ -741,6 +752,8 @@ __all__ = [
     'PlaybookActionProperties',
     'ProcessEntity',
     'ProcessEntityProperties',
+    'PropertyArrayChangedConditionProperties',
+    'PropertyChangedConditionProperties',
     'PropertyConditionProperties',
     'QueryBasedAlertRuleTemplateProperties',
     'RegistryKeyEntity',
@@ -831,6 +844,10 @@ __all__ = [
     'AlertStatus',
     'AntispamMailDirection',
     'AttackTactic',
+    'AutomationRulePropertyArrayChangedConditionSupportedArrayType',
+    'AutomationRulePropertyArrayChangedConditionSupportedChangeType',
+    'AutomationRulePropertyChangedConditionSupportedChangedType',
+    'AutomationRulePropertyChangedConditionSupportedPropertyType',
     'AutomationRulePropertyConditionSupportedOperator',
     'AutomationRulePropertyConditionSupportedProperty',
     'ConditionType',
@@ -854,6 +871,7 @@ __all__ = [
     'EntityItemQueryKind',
     'EntityKind',
     'EntityMappingType',
+    'EntityProviders',
     'EntityQueryKind',
     'EntityQueryTemplateKind',
     'EntityTimelineKind',

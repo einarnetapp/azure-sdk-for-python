@@ -12,7 +12,7 @@ from azure.core import CaseInsensitiveEnumMeta
 
 
 class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of the automation rule action
+    """The type of the automation rule action.
     """
 
     #: Modify an object's properties.
@@ -103,6 +103,38 @@ class AttackTactic(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     IMPAIR_PROCESS_CONTROL = "ImpairProcessControl"
     INHIBIT_RESPONSE_FUNCTION = "InhibitResponseFunction"
 
+class AutomationRulePropertyArrayChangedConditionSupportedArrayType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on the alerts.
+    ALERTS = "Alerts"
+    #: Evaluate the condition on the labels.
+    LABELS = "Labels"
+    #: Evaluate the condition on the tactics.
+    TACTICS = "Tactics"
+    #: Evaluate the condition on the comments.
+    COMMENTS = "Comments"
+
+class AutomationRulePropertyArrayChangedConditionSupportedChangeType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on items added to the array.
+    ADDED = "Added"
+
+class AutomationRulePropertyChangedConditionSupportedChangedType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on the previous value of the property.
+    CHANGED_FROM = "ChangedFrom"
+    #: Evaluate the condition on the updated value of the property.
+    CHANGED_TO = "ChangedTo"
+
+class AutomationRulePropertyChangedConditionSupportedPropertyType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on the incident severity.
+    INCIDENT_SEVERITY = "IncidentSeverity"
+    #: Evaluate the condition on the incident status.
+    INCIDENT_STATUS = "IncidentStatus"
+    #: Evaluate the condition on the incident owner.
+    INCIDENT_OWNER = "IncidentOwner"
+
 class AutomationRulePropertyConditionSupportedOperator(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     #: Evaluates if the property equals at least one of the condition values.
@@ -123,7 +155,7 @@ class AutomationRulePropertyConditionSupportedOperator(with_metaclass(CaseInsens
     NOT_ENDS_WITH = "NotEndsWith"
 
 class AutomationRulePropertyConditionSupportedProperty(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The property to evaluate in an automation rule property condition
+    """The property to evaluate in an automation rule property condition.
     """
 
     #: The title of the incident.
@@ -239,6 +271,10 @@ class ConditionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     #: Evaluate an object property value.
     PROPERTY = "Property"
+    #: Evaluate an object property changed value.
+    PROPERTY_CHANGED = "PropertyChanged"
+    #: Evaluate an object array property changed value.
+    PROPERTY_ARRAY_CHANGED = "PropertyArrayChanged"
 
 class ConfidenceLevel(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The confidence level of this alert.
@@ -515,6 +551,13 @@ class EntityMappingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MAIL_MESSAGE = "MailMessage"
     #: Submission mail entity type.
     SUBMISSION_MAIL = "SubmissionMail"
+
+class EntityProviders(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The entity provider that is synced.
+    """
+
+    ACTIVE_DIRECTORY = "ActiveDirectory"
+    AZURE_ACTIVE_DIRECTORY = "AzureActiveDirectory"
 
 class EntityQueryKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the entity query
@@ -1012,6 +1055,8 @@ class TriggersWhen(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     #: Trigger on created objects.
     CREATED = "Created"
+    #: Trigger on updated objects.
+    UPDATED = "Updated"
 
 class UebaDataSources(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The data source that enriched by ueba.
