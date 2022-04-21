@@ -48,6 +48,8 @@ class ProxyDto(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ProxyDto, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -68,10 +70,10 @@ class DefaultDto(ProxyDto):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param location: Location of the azure resource.
-    :type location: str
-    :param tags: A set of tags. Tags on the azure resource.
-    :type tags: dict[str, str]
+    :ivar location: Location of the azure resource.
+    :vartype location: str
+    :ivar tags: A set of tags. Tags on the azure resource.
+    :vartype tags: dict[str, str]
     """
 
     _validation = {
@@ -97,6 +99,12 @@ class DefaultDto(ProxyDto):
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword location: Location of the azure resource.
+        :paramtype location: str
+        :keyword tags: A set of tags. Tags on the azure resource.
+        :paramtype tags: dict[str, str]
+        """
         super(DefaultDto, self).__init__(**kwargs)
         self.location = location
         self.tags = tags
@@ -117,12 +125,12 @@ class Account(DefaultDto):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param location: Location of the azure resource.
-    :type location: str
-    :param tags: A set of tags. Tags on the azure resource.
-    :type tags: dict[str, str]
-    :param identity: Required. Identity Info on the Account.
-    :type identity: ~azure.mgmt.datashare.models.Identity
+    :ivar location: Location of the azure resource.
+    :vartype location: str
+    :ivar tags: A set of tags. Tags on the azure resource.
+    :vartype tags: dict[str, str]
+    :ivar identity: Required. Identity Info on the Account.
+    :vartype identity: ~azure.mgmt.datashare.models.Identity
     :ivar created_at: Time at which the account was created.
     :vartype created_at: ~datetime.datetime
     :ivar provisioning_state: Provisioning state of the Account. Possible values include:
@@ -168,6 +176,14 @@ class Account(DefaultDto):
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword location: Location of the azure resource.
+        :paramtype location: str
+        :keyword tags: A set of tags. Tags on the azure resource.
+        :paramtype tags: dict[str, str]
+        :keyword identity: Required. Identity Info on the Account.
+        :paramtype identity: ~azure.mgmt.datashare.models.Identity
+        """
         super(Account, self).__init__(location=location, tags=tags, **kwargs)
         self.identity = identity
         self.created_at = None
@@ -181,10 +197,10 @@ class AccountList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.Account]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.Account]
     """
 
     _validation = {
@@ -203,6 +219,12 @@ class AccountList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.Account]
+        """
         super(AccountList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -211,8 +233,8 @@ class AccountList(msrest.serialization.Model):
 class AccountUpdateParameters(msrest.serialization.Model):
     """Update parameters for accounts.
 
-    :param tags: A set of tags. Tags on the azure resource.
-    :type tags: dict[str, str]
+    :ivar tags: A set of tags. Tags on the azure resource.
+    :vartype tags: dict[str, str]
     """
 
     _attribute_map = {
@@ -225,6 +247,10 @@ class AccountUpdateParameters(msrest.serialization.Model):
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword tags: A set of tags. Tags on the azure resource.
+        :paramtype tags: dict[str, str]
+        """
         super(AccountUpdateParameters, self).__init__(**kwargs)
         self.tags = tags
 
@@ -247,11 +273,11 @@ class DataSet(ProxyDto):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     """
 
     _validation = {
@@ -278,6 +304,8 @@ class DataSet(ProxyDto):
         self,
         **kwargs
     ):
+        """
+        """
         super(DataSet, self).__init__(**kwargs)
         self.kind = 'DataSet'  # type: str
 
@@ -297,23 +325,23 @@ class ADLSGen1FileDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
-    :param account_name: Required. The ADLS account name.
-    :type account_name: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :ivar account_name: Required. The ADLS account name.
+    :vartype account_name: str
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param file_name: Required. The file name in the ADLS account.
-    :type file_name: str
-    :param folder_path: Required. The folder path within the ADLS account.
-    :type folder_path: str
-    :param resource_group: Required. Resource group of ADLS account.
-    :type resource_group: str
-    :param subscription_id: Required. Subscription id of ADLS account.
-    :type subscription_id: str
+    :ivar file_name: Required. The file name in the ADLS account.
+    :vartype file_name: str
+    :ivar folder_path: Required. The folder path within the ADLS account.
+    :vartype folder_path: str
+    :ivar resource_group: Required. Resource group of ADLS account.
+    :vartype resource_group: str
+    :ivar subscription_id: Required. Subscription id of ADLS account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -354,6 +382,18 @@ class ADLSGen1FileDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword account_name: Required. The ADLS account name.
+        :paramtype account_name: str
+        :keyword file_name: Required. The file name in the ADLS account.
+        :paramtype file_name: str
+        :keyword folder_path: Required. The folder path within the ADLS account.
+        :paramtype folder_path: str
+        :keyword resource_group: Required. Resource group of ADLS account.
+        :paramtype resource_group: str
+        :keyword subscription_id: Required. Subscription id of ADLS account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen1FileDataSet, self).__init__(**kwargs)
         self.kind = 'AdlsGen1File'  # type: str
         self.account_name = account_name
@@ -379,21 +419,21 @@ class ADLSGen1FolderDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
-    :param account_name: Required. The ADLS account name.
-    :type account_name: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :ivar account_name: Required. The ADLS account name.
+    :vartype account_name: str
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param folder_path: Required. The folder path within the ADLS account.
-    :type folder_path: str
-    :param resource_group: Required. Resource group of ADLS account.
-    :type resource_group: str
-    :param subscription_id: Required. Subscription id of ADLS account.
-    :type subscription_id: str
+    :ivar folder_path: Required. The folder path within the ADLS account.
+    :vartype folder_path: str
+    :ivar resource_group: Required. Resource group of ADLS account.
+    :vartype resource_group: str
+    :ivar subscription_id: Required. Subscription id of ADLS account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -431,6 +471,16 @@ class ADLSGen1FolderDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword account_name: Required. The ADLS account name.
+        :paramtype account_name: str
+        :keyword folder_path: Required. The folder path within the ADLS account.
+        :paramtype folder_path: str
+        :keyword resource_group: Required. Resource group of ADLS account.
+        :paramtype resource_group: str
+        :keyword subscription_id: Required. Subscription id of ADLS account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen1FolderDataSet, self).__init__(**kwargs)
         self.kind = 'AdlsGen1Folder'  # type: str
         self.account_name = account_name
@@ -455,23 +505,23 @@ class ADLSGen2FileDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param file_path: Required. File path within the file system.
-    :type file_path: str
-    :param file_system: Required. File system to which the file belongs.
-    :type file_system: str
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar file_path: Required. File path within the file system.
+    :vartype file_path: str
+    :ivar file_system: Required. File system to which the file belongs.
+    :vartype file_system: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -512,6 +562,18 @@ class ADLSGen2FileDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword file_path: Required. File path within the file system.
+        :paramtype file_path: str
+        :keyword file_system: Required. File system to which the file belongs.
+        :paramtype file_system: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen2FileDataSet, self).__init__(**kwargs)
         self.kind = 'AdlsGen2File'  # type: str
         self.data_set_id = None
@@ -540,11 +602,11 @@ class DataSetMapping(ProxyDto):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
     """
 
     _validation = {
@@ -571,6 +633,8 @@ class DataSetMapping(ProxyDto):
         self,
         **kwargs
     ):
+        """
+        """
         super(DataSetMapping, self).__init__(**kwargs)
         self.kind = 'DataSetMapping'  # type: str
 
@@ -590,31 +654,31 @@ class ADLSGen2FileDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param file_path: Required. File path within the file system.
-    :type file_path: str
-    :param file_system: Required. File system to which the file belongs.
-    :type file_system: str
-    :param output_type: Type of output file. Possible values include: "Csv", "Parquet".
-    :type output_type: str or ~azure.mgmt.datashare.models.OutputType
+    :ivar file_path: Required. File path within the file system.
+    :vartype file_path: str
+    :ivar file_system: Required. File system to which the file belongs.
+    :vartype file_system: str
+    :ivar output_type: Type of output file. Possible values include: "Csv", "Parquet".
+    :vartype output_type: str or ~azure.mgmt.datashare.models.OutputType
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -662,6 +726,22 @@ class ADLSGen2FileDataSetMapping(DataSetMapping):
         output_type: Optional[Union[str, "OutputType"]] = None,
         **kwargs
     ):
+        """
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword file_path: Required. File path within the file system.
+        :paramtype file_path: str
+        :keyword file_system: Required. File system to which the file belongs.
+        :paramtype file_system: str
+        :keyword output_type: Type of output file. Possible values include: "Csv", "Parquet".
+        :paramtype output_type: str or ~azure.mgmt.datashare.models.OutputType
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen2FileDataSetMapping, self).__init__(**kwargs)
         self.kind = 'AdlsGen2File'  # type: str
         self.data_set_id = data_set_id
@@ -690,21 +770,21 @@ class ADLSGen2FileSystemDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param file_system: Required. The file system name.
-    :type file_system: str
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar file_system: Required. The file system name.
+    :vartype file_system: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -742,6 +822,16 @@ class ADLSGen2FileSystemDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword file_system: Required. The file system name.
+        :paramtype file_system: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen2FileSystemDataSet, self).__init__(**kwargs)
         self.kind = 'AdlsGen2FileSystem'  # type: str
         self.data_set_id = None
@@ -766,27 +856,27 @@ class ADLSGen2FileSystemDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param file_system: Required. The file system name.
-    :type file_system: str
+    :ivar file_system: Required. The file system name.
+    :vartype file_system: str
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -829,6 +919,18 @@ class ADLSGen2FileSystemDataSetMapping(DataSetMapping):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword file_system: Required. The file system name.
+        :paramtype file_system: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen2FileSystemDataSetMapping, self).__init__(**kwargs)
         self.kind = 'AdlsGen2FileSystem'  # type: str
         self.data_set_id = data_set_id
@@ -855,23 +957,23 @@ class ADLSGen2FolderDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param file_system: Required. File system to which the folder belongs.
-    :type file_system: str
-    :param folder_path: Required. Folder path within the file system.
-    :type folder_path: str
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar file_system: Required. File system to which the folder belongs.
+    :vartype file_system: str
+    :ivar folder_path: Required. Folder path within the file system.
+    :vartype folder_path: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -912,6 +1014,18 @@ class ADLSGen2FolderDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword file_system: Required. File system to which the folder belongs.
+        :paramtype file_system: str
+        :keyword folder_path: Required. Folder path within the file system.
+        :paramtype folder_path: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen2FolderDataSet, self).__init__(**kwargs)
         self.kind = 'AdlsGen2Folder'  # type: str
         self.data_set_id = None
@@ -937,29 +1051,29 @@ class ADLSGen2FolderDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param file_system: Required. File system to which the folder belongs.
-    :type file_system: str
-    :param folder_path: Required. Folder path within the file system.
-    :type folder_path: str
+    :ivar file_system: Required. File system to which the folder belongs.
+    :vartype file_system: str
+    :ivar folder_path: Required. Folder path within the file system.
+    :vartype folder_path: str
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -1005,6 +1119,20 @@ class ADLSGen2FolderDataSetMapping(DataSetMapping):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword file_system: Required. File system to which the folder belongs.
+        :paramtype file_system: str
+        :keyword folder_path: Required. Folder path within the file system.
+        :paramtype folder_path: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(ADLSGen2FolderDataSetMapping, self).__init__(**kwargs)
         self.kind = 'AdlsGen2Folder'  # type: str
         self.data_set_id = data_set_id
@@ -1032,21 +1160,21 @@ class BlobContainerDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
-    :param container_name: Required. BLOB Container name.
-    :type container_name: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :ivar container_name: Required. BLOB Container name.
+    :vartype container_name: str
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -1084,6 +1212,16 @@ class BlobContainerDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword container_name: Required. BLOB Container name.
+        :paramtype container_name: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(BlobContainerDataSet, self).__init__(**kwargs)
         self.kind = 'Container'  # type: str
         self.container_name = container_name
@@ -1108,27 +1246,27 @@ class BlobContainerDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param container_name: Required. BLOB Container name.
-    :type container_name: str
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar container_name: Required. BLOB Container name.
+    :vartype container_name: str
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -1171,6 +1309,18 @@ class BlobContainerDataSetMapping(DataSetMapping):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword container_name: Required. BLOB Container name.
+        :paramtype container_name: str
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(BlobContainerDataSetMapping, self).__init__(**kwargs)
         self.kind = 'Container'  # type: str
         self.container_name = container_name
@@ -1197,23 +1347,23 @@ class BlobDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
-    :param container_name: Required. Container that has the file path.
-    :type container_name: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :ivar container_name: Required. Container that has the file path.
+    :vartype container_name: str
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param file_path: Required. File path within the source data set.
-    :type file_path: str
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar file_path: Required. File path within the source data set.
+    :vartype file_path: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -1254,6 +1404,18 @@ class BlobDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword container_name: Required. Container that has the file path.
+        :paramtype container_name: str
+        :keyword file_path: Required. File path within the source data set.
+        :paramtype file_path: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(BlobDataSet, self).__init__(**kwargs)
         self.kind = 'Blob'  # type: str
         self.container_name = container_name
@@ -1279,31 +1441,31 @@ class BlobDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param container_name: Required. Container that has the file path.
-    :type container_name: str
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar container_name: Required. Container that has the file path.
+    :vartype container_name: str
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param file_path: Required. File path within the source data set.
-    :type file_path: str
-    :param output_type: File output type. Possible values include: "Csv", "Parquet".
-    :type output_type: str or ~azure.mgmt.datashare.models.OutputType
+    :ivar file_path: Required. File path within the source data set.
+    :vartype file_path: str
+    :ivar output_type: File output type. Possible values include: "Csv", "Parquet".
+    :vartype output_type: str or ~azure.mgmt.datashare.models.OutputType
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -1351,6 +1513,22 @@ class BlobDataSetMapping(DataSetMapping):
         output_type: Optional[Union[str, "OutputType"]] = None,
         **kwargs
     ):
+        """
+        :keyword container_name: Required. Container that has the file path.
+        :paramtype container_name: str
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword file_path: Required. File path within the source data set.
+        :paramtype file_path: str
+        :keyword output_type: File output type. Possible values include: "Csv", "Parquet".
+        :paramtype output_type: str or ~azure.mgmt.datashare.models.OutputType
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(BlobDataSetMapping, self).__init__(**kwargs)
         self.kind = 'Blob'  # type: str
         self.container_name = container_name
@@ -1379,23 +1557,23 @@ class BlobFolderDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
-    :param container_name: Required. Container that has the file path.
-    :type container_name: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :ivar container_name: Required. Container that has the file path.
+    :vartype container_name: str
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param prefix: Required. Prefix for blob folder.
-    :type prefix: str
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar prefix: Required. Prefix for blob folder.
+    :vartype prefix: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -1436,6 +1614,18 @@ class BlobFolderDataSet(DataSet):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword container_name: Required. Container that has the file path.
+        :paramtype container_name: str
+        :keyword prefix: Required. Prefix for blob folder.
+        :paramtype prefix: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(BlobFolderDataSet, self).__init__(**kwargs)
         self.kind = 'BlobFolder'  # type: str
         self.container_name = container_name
@@ -1461,29 +1651,29 @@ class BlobFolderDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param container_name: Required. Container that has the file path.
-    :type container_name: str
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar container_name: Required. Container that has the file path.
+    :vartype container_name: str
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param prefix: Required. Prefix for blob folder.
-    :type prefix: str
+    :ivar prefix: Required. Prefix for blob folder.
+    :vartype prefix: str
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param resource_group: Required. Resource group of storage account.
-    :type resource_group: str
-    :param storage_account_name: Required. Storage account name of the source data set.
-    :type storage_account_name: str
-    :param subscription_id: Required. Subscription id of storage account.
-    :type subscription_id: str
+    :ivar resource_group: Required. Resource group of storage account.
+    :vartype resource_group: str
+    :ivar storage_account_name: Required. Storage account name of the source data set.
+    :vartype storage_account_name: str
+    :ivar subscription_id: Required. Subscription id of storage account.
+    :vartype subscription_id: str
     """
 
     _validation = {
@@ -1529,6 +1719,20 @@ class BlobFolderDataSetMapping(DataSetMapping):
         subscription_id: str,
         **kwargs
     ):
+        """
+        :keyword container_name: Required. Container that has the file path.
+        :paramtype container_name: str
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword prefix: Required. Prefix for blob folder.
+        :paramtype prefix: str
+        :keyword resource_group: Required. Resource group of storage account.
+        :paramtype resource_group: str
+        :keyword storage_account_name: Required. Storage account name of the source data set.
+        :paramtype storage_account_name: str
+        :keyword subscription_id: Required. Subscription id of storage account.
+        :paramtype subscription_id: str
+        """
         super(BlobFolderDataSetMapping, self).__init__(**kwargs)
         self.kind = 'BlobFolder'  # type: str
         self.container_name = container_name
@@ -1563,8 +1767,8 @@ class ConsumerInvitation(ProxyDto):
     :ivar expiration_date: The expiration date for the share subscription created by accepting the
      invitation.
     :vartype expiration_date: ~datetime.datetime
-    :param invitation_id: Required. Unique id of the invitation.
-    :type invitation_id: str
+    :ivar invitation_id: Required. Unique id of the invitation.
+    :vartype invitation_id: str
     :ivar invitation_status: The status of the invitation. Possible values include: "Pending",
      "Accepted", "Rejected", "Withdrawn".
     :vartype invitation_status: str or ~azure.mgmt.datashare.models.InvitationStatus
@@ -1640,6 +1844,10 @@ class ConsumerInvitation(ProxyDto):
         invitation_id: str,
         **kwargs
     ):
+        """
+        :keyword invitation_id: Required. Unique id of the invitation.
+        :paramtype invitation_id: str
+        """
         super(ConsumerInvitation, self).__init__(**kwargs)
         self.data_set_count = None
         self.description = None
@@ -1663,10 +1871,10 @@ class ConsumerInvitationList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.ConsumerInvitation]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.ConsumerInvitation]
     """
 
     _validation = {
@@ -1685,6 +1893,12 @@ class ConsumerInvitationList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.ConsumerInvitation]
+        """
         super(ConsumerInvitationList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -1746,6 +1960,8 @@ class ConsumerSourceDataSet(ProxyDto):
         self,
         **kwargs
     ):
+        """
+        """
         super(ConsumerSourceDataSet, self).__init__(**kwargs)
         self.data_set_id = None
         self.data_set_location = None
@@ -1759,10 +1975,10 @@ class ConsumerSourceDataSetList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.ConsumerSourceDataSet]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.ConsumerSourceDataSet]
     """
 
     _validation = {
@@ -1781,6 +1997,12 @@ class ConsumerSourceDataSetList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.ConsumerSourceDataSet]
+        """
         super(ConsumerSourceDataSetList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -1791,10 +2013,10 @@ class DataSetList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.DataSet]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.DataSet]
     """
 
     _validation = {
@@ -1813,6 +2035,12 @@ class DataSetList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.DataSet]
+        """
         super(DataSetList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -1823,10 +2051,10 @@ class DataSetMappingList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.DataSetMapping]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.DataSetMapping]
     """
 
     _validation = {
@@ -1845,6 +2073,12 @@ class DataSetMappingList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.DataSetMapping]
+        """
         super(DataSetMappingList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -1855,8 +2089,8 @@ class DataShareError(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param error: Required. The data share error body.
-    :type error: ~azure.mgmt.datashare.models.DataShareErrorInfo
+    :ivar error: Required. The data share error body.
+    :vartype error: ~azure.mgmt.datashare.models.DataShareErrorInfo
     """
 
     _validation = {
@@ -1873,6 +2107,10 @@ class DataShareError(msrest.serialization.Model):
         error: "DataShareErrorInfo",
         **kwargs
     ):
+        """
+        :keyword error: Required. The data share error body.
+        :paramtype error: ~azure.mgmt.datashare.models.DataShareErrorInfo
+        """
         super(DataShareError, self).__init__(**kwargs)
         self.error = error
 
@@ -1882,14 +2120,14 @@ class DataShareErrorInfo(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param code: Required. Code of the error.
-    :type code: str
-    :param details: Nested details of the error model.
-    :type details: list[~azure.mgmt.datashare.models.DataShareErrorInfo]
-    :param message: Required. Message of the error.
-    :type message: str
-    :param target: Target of the error.
-    :type target: str
+    :ivar code: Required. Code of the error.
+    :vartype code: str
+    :ivar details: Nested details of the error model.
+    :vartype details: list[~azure.mgmt.datashare.models.DataShareErrorInfo]
+    :ivar message: Required. Message of the error.
+    :vartype message: str
+    :ivar target: Target of the error.
+    :vartype target: str
     """
 
     _validation = {
@@ -1913,6 +2151,16 @@ class DataShareErrorInfo(msrest.serialization.Model):
         target: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword code: Required. Code of the error.
+        :paramtype code: str
+        :keyword details: Nested details of the error model.
+        :paramtype details: list[~azure.mgmt.datashare.models.DataShareErrorInfo]
+        :keyword message: Required. Message of the error.
+        :paramtype message: str
+        :keyword target: Target of the error.
+        :paramtype target: str
+        """
         super(DataShareErrorInfo, self).__init__(**kwargs)
         self.code = code
         self.details = details
@@ -1923,10 +2171,10 @@ class DataShareErrorInfo(msrest.serialization.Model):
 class DimensionProperties(msrest.serialization.Model):
     """properties for dimension.
 
-    :param display_name: localized display name of the dimension to customer.
-    :type display_name: str
-    :param name: dimension name.
-    :type name: str
+    :ivar display_name: localized display name of the dimension to customer.
+    :vartype display_name: str
+    :ivar name: dimension name.
+    :vartype name: str
     """
 
     _attribute_map = {
@@ -1941,9 +2189,66 @@ class DimensionProperties(msrest.serialization.Model):
         name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: localized display name of the dimension to customer.
+        :paramtype display_name: str
+        :keyword name: dimension name.
+        :paramtype name: str
+        """
         super(DimensionProperties, self).__init__(**kwargs)
         self.display_name = display_name
         self.name = name
+
+
+class EmailRegistration(msrest.serialization.Model):
+    """Dto for tenant domain registration.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar activation_code: Activation code for the registration.
+    :vartype activation_code: str
+    :ivar activation_expiration_date: Date of the activation expiration.
+    :vartype activation_expiration_date: ~datetime.datetime
+    :ivar email: The email to register.
+    :vartype email: str
+    :ivar registration_status: Registration status. Possible values include: "ActivationPending",
+     "Activated", "ActivationAttemptsExhausted".
+    :vartype registration_status: str or ~azure.mgmt.datashare.models.RegistrationStatus
+    :ivar tenant_id: The tenant to register.
+    :vartype tenant_id: str
+    """
+
+    _validation = {
+        'activation_expiration_date': {'readonly': True},
+        'email': {'readonly': True},
+        'registration_status': {'readonly': True},
+        'tenant_id': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'activation_code': {'key': 'activationCode', 'type': 'str'},
+        'activation_expiration_date': {'key': 'activationExpirationDate', 'type': 'iso-8601'},
+        'email': {'key': 'email', 'type': 'str'},
+        'registration_status': {'key': 'registrationStatus', 'type': 'str'},
+        'tenant_id': {'key': 'tenantId', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        activation_code: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword activation_code: Activation code for the registration.
+        :paramtype activation_code: str
+        """
+        super(EmailRegistration, self).__init__(**kwargs)
+        self.activation_code = activation_code
+        self.activation_expiration_date = None
+        self.email = None
+        self.registration_status = None
+        self.tenant_id = None
 
 
 class Identity(msrest.serialization.Model):
@@ -1955,8 +2260,8 @@ class Identity(msrest.serialization.Model):
     :vartype principal_id: str
     :ivar tenant_id: Tenant Id.
     :vartype tenant_id: str
-    :param type: Identity Type. Possible values include: "SystemAssigned".
-    :type type: str or ~azure.mgmt.datashare.models.Type
+    :ivar type: Identity Type. Possible values include: "SystemAssigned".
+    :vartype type: str or ~azure.mgmt.datashare.models.Type
     """
 
     _validation = {
@@ -1976,6 +2281,10 @@ class Identity(msrest.serialization.Model):
         type: Optional[Union[str, "Type"]] = None,
         **kwargs
     ):
+        """
+        :keyword type: Identity Type. Possible values include: "SystemAssigned".
+        :paramtype type: str or ~azure.mgmt.datashare.models.Type
+        """
         super(Identity, self).__init__(**kwargs)
         self.principal_id = None
         self.tenant_id = None
@@ -1995,8 +2304,8 @@ class Invitation(ProxyDto):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param expiration_date: The expiration date for the invitation and share subscription.
-    :type expiration_date: ~datetime.datetime
+    :ivar expiration_date: The expiration date for the invitation and share subscription.
+    :vartype expiration_date: ~datetime.datetime
     :ivar invitation_id: unique invitation id.
     :vartype invitation_id: str
     :ivar invitation_status: The status of the invitation. Possible values include: "Pending",
@@ -2006,14 +2315,14 @@ class Invitation(ProxyDto):
     :vartype responded_at: ~datetime.datetime
     :ivar sent_at: Gets the time at which the invitation was sent.
     :vartype sent_at: ~datetime.datetime
-    :param target_active_directory_id: The target Azure AD Id. Can't be combined with email.
-    :type target_active_directory_id: str
-    :param target_email: The email the invitation is directed to.
-    :type target_email: str
-    :param target_object_id: The target user or application Id that invitation is being sent to.
+    :ivar target_active_directory_id: The target Azure AD Id. Can't be combined with email.
+    :vartype target_active_directory_id: str
+    :ivar target_email: The email the invitation is directed to.
+    :vartype target_email: str
+    :ivar target_object_id: The target user or application Id that invitation is being sent to.
      Must be specified along TargetActiveDirectoryId. This enables sending
      invitations to specific users or applications in an AD tenant.
-    :type target_object_id: str
+    :vartype target_object_id: str
     :ivar user_email: Email of the user who created the resource.
     :vartype user_email: str
     :ivar user_name: Name of the user who created the resource.
@@ -2059,6 +2368,18 @@ class Invitation(ProxyDto):
         target_object_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword expiration_date: The expiration date for the invitation and share subscription.
+        :paramtype expiration_date: ~datetime.datetime
+        :keyword target_active_directory_id: The target Azure AD Id. Can't be combined with email.
+        :paramtype target_active_directory_id: str
+        :keyword target_email: The email the invitation is directed to.
+        :paramtype target_email: str
+        :keyword target_object_id: The target user or application Id that invitation is being sent to.
+         Must be specified along TargetActiveDirectoryId. This enables sending
+         invitations to specific users or applications in an AD tenant.
+        :paramtype target_object_id: str
+        """
         super(Invitation, self).__init__(**kwargs)
         self.expiration_date = expiration_date
         self.invitation_id = None
@@ -2077,10 +2398,10 @@ class InvitationList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.Invitation]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.Invitation]
     """
 
     _validation = {
@@ -2099,6 +2420,12 @@ class InvitationList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.Invitation]
+        """
         super(InvitationList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -2119,15 +2446,15 @@ class KustoClusterDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param kusto_cluster_resource_id: Required. Resource id of the kusto cluster.
-    :type kusto_cluster_resource_id: str
+    :ivar kusto_cluster_resource_id: Required. Resource id of the kusto cluster.
+    :vartype kusto_cluster_resource_id: str
     :ivar location: Location of the kusto cluster.
     :vartype location: str
     :ivar provisioning_state: Provisioning state of the kusto cluster data set. Possible values
@@ -2165,6 +2492,10 @@ class KustoClusterDataSet(DataSet):
         kusto_cluster_resource_id: str,
         **kwargs
     ):
+        """
+        :keyword kusto_cluster_resource_id: Required. Resource id of the kusto cluster.
+        :paramtype kusto_cluster_resource_id: str
+        """
         super(KustoClusterDataSet, self).__init__(**kwargs)
         self.kind = 'KustoCluster'  # type: str
         self.data_set_id = None
@@ -2188,18 +2519,18 @@ class KustoClusterDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param kusto_cluster_resource_id: Required. Resource id of the sink kusto cluster.
-    :type kusto_cluster_resource_id: str
+    :ivar kusto_cluster_resource_id: Required. Resource id of the sink kusto cluster.
+    :vartype kusto_cluster_resource_id: str
     :ivar location: Location of the sink kusto cluster.
     :vartype location: str
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
@@ -2240,6 +2571,12 @@ class KustoClusterDataSetMapping(DataSetMapping):
         kusto_cluster_resource_id: str,
         **kwargs
     ):
+        """
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword kusto_cluster_resource_id: Required. Resource id of the sink kusto cluster.
+        :paramtype kusto_cluster_resource_id: str
+        """
         super(KustoClusterDataSetMapping, self).__init__(**kwargs)
         self.kind = 'KustoCluster'  # type: str
         self.data_set_id = data_set_id
@@ -2264,15 +2601,15 @@ class KustoDatabaseDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param kusto_database_resource_id: Required. Resource id of the kusto database.
-    :type kusto_database_resource_id: str
+    :ivar kusto_database_resource_id: Required. Resource id of the kusto database.
+    :vartype kusto_database_resource_id: str
     :ivar location: Location of the kusto cluster.
     :vartype location: str
     :ivar provisioning_state: Provisioning state of the kusto database data set. Possible values
@@ -2310,6 +2647,10 @@ class KustoDatabaseDataSet(DataSet):
         kusto_database_resource_id: str,
         **kwargs
     ):
+        """
+        :keyword kusto_database_resource_id: Required. Resource id of the kusto database.
+        :paramtype kusto_database_resource_id: str
+        """
         super(KustoDatabaseDataSet, self).__init__(**kwargs)
         self.kind = 'KustoDatabase'  # type: str
         self.data_set_id = None
@@ -2333,18 +2674,18 @@ class KustoDatabaseDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param kusto_cluster_resource_id: Required. Resource id of the sink kusto cluster.
-    :type kusto_cluster_resource_id: str
+    :ivar kusto_cluster_resource_id: Required. Resource id of the sink kusto cluster.
+    :vartype kusto_cluster_resource_id: str
     :ivar location: Location of the sink kusto cluster.
     :vartype location: str
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
@@ -2385,6 +2726,12 @@ class KustoDatabaseDataSetMapping(DataSetMapping):
         kusto_cluster_resource_id: str,
         **kwargs
     ):
+        """
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword kusto_cluster_resource_id: Required. Resource id of the sink kusto cluster.
+        :paramtype kusto_cluster_resource_id: str
+        """
         super(KustoDatabaseDataSetMapping, self).__init__(**kwargs)
         self.kind = 'KustoDatabase'  # type: str
         self.data_set_id = data_set_id
@@ -2399,10 +2746,10 @@ class OperationList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.OperationModel]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.OperationModel]
     """
 
     _validation = {
@@ -2421,6 +2768,12 @@ class OperationList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.OperationModel]
+        """
         super(OperationList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -2429,12 +2782,12 @@ class OperationList(msrest.serialization.Model):
 class OperationMetaLogSpecification(msrest.serialization.Model):
     """log specifications for operation api.
 
-    :param blob_duration: blob duration of the log.
-    :type blob_duration: str
-    :param display_name: localized name of the log category.
-    :type display_name: str
-    :param name: name of the log category.
-    :type name: str
+    :ivar blob_duration: blob duration of the log.
+    :vartype blob_duration: str
+    :ivar display_name: localized name of the log category.
+    :vartype display_name: str
+    :ivar name: name of the log category.
+    :vartype name: str
     """
 
     _attribute_map = {
@@ -2451,6 +2804,14 @@ class OperationMetaLogSpecification(msrest.serialization.Model):
         name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword blob_duration: blob duration of the log.
+        :paramtype blob_duration: str
+        :keyword display_name: localized name of the log category.
+        :paramtype display_name: str
+        :keyword name: name of the log category.
+        :paramtype name: str
+        """
         super(OperationMetaLogSpecification, self).__init__(**kwargs)
         self.blob_duration = blob_duration
         self.display_name = display_name
@@ -2460,31 +2821,31 @@ class OperationMetaLogSpecification(msrest.serialization.Model):
 class OperationMetaMetricSpecification(msrest.serialization.Model):
     """metric specifications for the operation.
 
-    :param aggregation_type: aggregation type of metric.
-    :type aggregation_type: str
-    :param dimensions: properties for dimension.
-    :type dimensions: list[~azure.mgmt.datashare.models.DimensionProperties]
-    :param display_description: description of the metric.
-    :type display_description: str
-    :param display_name: localized name of the metric.
-    :type display_name: str
-    :param enable_regional_mdm_account: enable regional mdm account.
-    :type enable_regional_mdm_account: str
-    :param fill_gap_with_zero: fill gap with zero.
-    :type fill_gap_with_zero: bool
-    :param internal_metric_name: internal metric name.
-    :type internal_metric_name: str
-    :param name: name of the metric.
-    :type name: str
-    :param resource_id_dimension_name_override: dimension name use to replace resource id if
+    :ivar aggregation_type: aggregation type of metric.
+    :vartype aggregation_type: str
+    :ivar dimensions: properties for dimension.
+    :vartype dimensions: list[~azure.mgmt.datashare.models.DimensionProperties]
+    :ivar display_description: description of the metric.
+    :vartype display_description: str
+    :ivar display_name: localized name of the metric.
+    :vartype display_name: str
+    :ivar enable_regional_mdm_account: enable regional mdm account.
+    :vartype enable_regional_mdm_account: str
+    :ivar fill_gap_with_zero: fill gap with zero.
+    :vartype fill_gap_with_zero: bool
+    :ivar internal_metric_name: internal metric name.
+    :vartype internal_metric_name: str
+    :ivar name: name of the metric.
+    :vartype name: str
+    :ivar resource_id_dimension_name_override: dimension name use to replace resource id if
      specified.
-    :type resource_id_dimension_name_override: str
-    :param supported_aggregation_types: supported aggregation types.
-    :type supported_aggregation_types: list[str]
-    :param supported_time_grain_types: supported time grain types.
-    :type supported_time_grain_types: list[str]
-    :param unit: units for the metric.
-    :type unit: str
+    :vartype resource_id_dimension_name_override: str
+    :ivar supported_aggregation_types: supported aggregation types.
+    :vartype supported_aggregation_types: list[str]
+    :ivar supported_time_grain_types: supported time grain types.
+    :vartype supported_time_grain_types: list[str]
+    :ivar unit: units for the metric.
+    :vartype unit: str
     """
 
     _attribute_map = {
@@ -2519,6 +2880,33 @@ class OperationMetaMetricSpecification(msrest.serialization.Model):
         unit: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword aggregation_type: aggregation type of metric.
+        :paramtype aggregation_type: str
+        :keyword dimensions: properties for dimension.
+        :paramtype dimensions: list[~azure.mgmt.datashare.models.DimensionProperties]
+        :keyword display_description: description of the metric.
+        :paramtype display_description: str
+        :keyword display_name: localized name of the metric.
+        :paramtype display_name: str
+        :keyword enable_regional_mdm_account: enable regional mdm account.
+        :paramtype enable_regional_mdm_account: str
+        :keyword fill_gap_with_zero: fill gap with zero.
+        :paramtype fill_gap_with_zero: bool
+        :keyword internal_metric_name: internal metric name.
+        :paramtype internal_metric_name: str
+        :keyword name: name of the metric.
+        :paramtype name: str
+        :keyword resource_id_dimension_name_override: dimension name use to replace resource id if
+         specified.
+        :paramtype resource_id_dimension_name_override: str
+        :keyword supported_aggregation_types: supported aggregation types.
+        :paramtype supported_aggregation_types: list[str]
+        :keyword supported_time_grain_types: supported time grain types.
+        :paramtype supported_time_grain_types: list[str]
+        :keyword unit: units for the metric.
+        :paramtype unit: str
+        """
         super(OperationMetaMetricSpecification, self).__init__(**kwargs)
         self.aggregation_type = aggregation_type
         self.dimensions = dimensions
@@ -2537,10 +2925,10 @@ class OperationMetaMetricSpecification(msrest.serialization.Model):
 class OperationMetaServiceSpecification(msrest.serialization.Model):
     """The operation meta service specification.
 
-    :param log_specifications: log specifications for the operation.
-    :type log_specifications: list[~azure.mgmt.datashare.models.OperationMetaLogSpecification]
-    :param metric_specifications: metric specifications for the operation.
-    :type metric_specifications:
+    :ivar log_specifications: log specifications for the operation.
+    :vartype log_specifications: list[~azure.mgmt.datashare.models.OperationMetaLogSpecification]
+    :ivar metric_specifications: metric specifications for the operation.
+    :vartype metric_specifications:
      list[~azure.mgmt.datashare.models.OperationMetaMetricSpecification]
     """
 
@@ -2556,6 +2944,13 @@ class OperationMetaServiceSpecification(msrest.serialization.Model):
         metric_specifications: Optional[List["OperationMetaMetricSpecification"]] = None,
         **kwargs
     ):
+        """
+        :keyword log_specifications: log specifications for the operation.
+        :paramtype log_specifications: list[~azure.mgmt.datashare.models.OperationMetaLogSpecification]
+        :keyword metric_specifications: metric specifications for the operation.
+        :paramtype metric_specifications:
+         list[~azure.mgmt.datashare.models.OperationMetaMetricSpecification]
+        """
         super(OperationMetaServiceSpecification, self).__init__(**kwargs)
         self.log_specifications = log_specifications
         self.metric_specifications = metric_specifications
@@ -2564,14 +2959,14 @@ class OperationMetaServiceSpecification(msrest.serialization.Model):
 class OperationModel(msrest.serialization.Model):
     """The response model for get operations.
 
-    :param display: Properties on the operation.
-    :type display: ~azure.mgmt.datashare.models.OperationModelProperties
-    :param name: Operation name for display purposes.
-    :type name: str
-    :param origin: origin of the operation.
-    :type origin: str
-    :param service_specification: meta service specification.
-    :type service_specification: ~azure.mgmt.datashare.models.OperationMetaServiceSpecification
+    :ivar display: Properties on the operation.
+    :vartype display: ~azure.mgmt.datashare.models.OperationModelProperties
+    :ivar name: Operation name for display purposes.
+    :vartype name: str
+    :ivar origin: origin of the operation.
+    :vartype origin: str
+    :ivar service_specification: meta service specification.
+    :vartype service_specification: ~azure.mgmt.datashare.models.OperationMetaServiceSpecification
     """
 
     _attribute_map = {
@@ -2590,6 +2985,17 @@ class OperationModel(msrest.serialization.Model):
         service_specification: Optional["OperationMetaServiceSpecification"] = None,
         **kwargs
     ):
+        """
+        :keyword display: Properties on the operation.
+        :paramtype display: ~azure.mgmt.datashare.models.OperationModelProperties
+        :keyword name: Operation name for display purposes.
+        :paramtype name: str
+        :keyword origin: origin of the operation.
+        :paramtype origin: str
+        :keyword service_specification: meta service specification.
+        :paramtype service_specification:
+         ~azure.mgmt.datashare.models.OperationMetaServiceSpecification
+        """
         super(OperationModel, self).__init__(**kwargs)
         self.display = display
         self.name = name
@@ -2600,14 +3006,14 @@ class OperationModel(msrest.serialization.Model):
 class OperationModelProperties(msrest.serialization.Model):
     """Properties on operations.
 
-    :param description: Description of the operation for display purposes.
-    :type description: str
-    :param operation: Name of the operation for display purposes.
-    :type operation: str
-    :param provider: Name of the provider for display purposes.
-    :type provider: str
-    :param resource: Name of the resource type for display purposes.
-    :type resource: str
+    :ivar description: Description of the operation for display purposes.
+    :vartype description: str
+    :ivar operation: Name of the operation for display purposes.
+    :vartype operation: str
+    :ivar provider: Name of the provider for display purposes.
+    :vartype provider: str
+    :ivar resource: Name of the resource type for display purposes.
+    :vartype resource: str
     """
 
     _attribute_map = {
@@ -2626,6 +3032,16 @@ class OperationModelProperties(msrest.serialization.Model):
         resource: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword description: Description of the operation for display purposes.
+        :paramtype description: str
+        :keyword operation: Name of the operation for display purposes.
+        :paramtype operation: str
+        :keyword provider: Name of the provider for display purposes.
+        :paramtype provider: str
+        :keyword resource: Name of the resource type for display purposes.
+        :paramtype resource: str
+        """
         super(OperationModelProperties, self).__init__(**kwargs)
         self.description = description
         self.operation = operation
@@ -2638,15 +3054,15 @@ class OperationResponse(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param end_time: start time.
-    :type end_time: ~datetime.datetime
-    :param error: The error property when status is failed.
-    :type error: ~azure.mgmt.datashare.models.DataShareErrorInfo
-    :param start_time: start time.
-    :type start_time: ~datetime.datetime
-    :param status: Required. Operation state of the long running operation. Possible values
-     include: "Accepted", "InProgress", "TransientFailure", "Succeeded", "Failed", "Canceled".
-    :type status: str or ~azure.mgmt.datashare.models.Status
+    :ivar end_time: start time.
+    :vartype end_time: ~datetime.datetime
+    :ivar error: The error property when status is failed.
+    :vartype error: ~azure.mgmt.datashare.models.DataShareErrorInfo
+    :ivar start_time: start time.
+    :vartype start_time: ~datetime.datetime
+    :ivar status: Required. Operation state of the long running operation. Possible values include:
+     "Accepted", "InProgress", "TransientFailure", "Succeeded", "Failed", "Canceled".
+    :vartype status: str or ~azure.mgmt.datashare.models.Status
     """
 
     _validation = {
@@ -2669,6 +3085,17 @@ class OperationResponse(msrest.serialization.Model):
         start_time: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword end_time: start time.
+        :paramtype end_time: ~datetime.datetime
+        :keyword error: The error property when status is failed.
+        :paramtype error: ~azure.mgmt.datashare.models.DataShareErrorInfo
+        :keyword start_time: start time.
+        :paramtype start_time: ~datetime.datetime
+        :keyword status: Required. Operation state of the long running operation. Possible values
+         include: "Accepted", "InProgress", "TransientFailure", "Succeeded", "Failed", "Canceled".
+        :paramtype status: str or ~azure.mgmt.datashare.models.Status
+        """
         super(OperationResponse, self).__init__(**kwargs)
         self.end_time = end_time
         self.error = error
@@ -2697,8 +3124,8 @@ class ProviderShareSubscription(ProxyDto):
     :vartype consumer_tenant_name: str
     :ivar created_at: created at.
     :vartype created_at: ~datetime.datetime
-    :param expiration_date: Expiration date of the share subscription in UTC format.
-    :type expiration_date: ~datetime.datetime
+    :ivar expiration_date: Expiration date of the share subscription in UTC format.
+    :vartype expiration_date: ~datetime.datetime
     :ivar provider_email: Email of the provider who created the share.
     :vartype provider_email: str
     :ivar provider_name: Name of the provider who created the share.
@@ -2751,6 +3178,10 @@ class ProviderShareSubscription(ProxyDto):
         expiration_date: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword expiration_date: Expiration date of the share subscription in UTC format.
+        :paramtype expiration_date: ~datetime.datetime
+        """
         super(ProviderShareSubscription, self).__init__(**kwargs)
         self.consumer_email = None
         self.consumer_name = None
@@ -2769,10 +3200,10 @@ class ProviderShareSubscriptionList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.ProviderShareSubscription]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.ProviderShareSubscription]
     """
 
     _validation = {
@@ -2791,6 +3222,12 @@ class ProviderShareSubscriptionList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.ProviderShareSubscription]
+        """
         super(ProviderShareSubscriptionList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -2804,9 +3241,9 @@ class SourceShareSynchronizationSetting(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param kind: Required. Kind of synchronization setting on share.Constant filled by server.
+    :ivar kind: Required. Kind of synchronization setting on share.Constant filled by server.
      Possible values include: "ScheduleBased".
-    :type kind: str or ~azure.mgmt.datashare.models.SourceShareSynchronizationSettingKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.SourceShareSynchronizationSettingKind
     """
 
     _validation = {
@@ -2825,6 +3262,8 @@ class SourceShareSynchronizationSetting(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(SourceShareSynchronizationSetting, self).__init__(**kwargs)
         self.kind = None  # type: Optional[str]
 
@@ -2834,13 +3273,13 @@ class ScheduledSourceSynchronizationSetting(SourceShareSynchronizationSetting):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param kind: Required. Kind of synchronization setting on share.Constant filled by server.
+    :ivar kind: Required. Kind of synchronization setting on share.Constant filled by server.
      Possible values include: "ScheduleBased".
-    :type kind: str or ~azure.mgmt.datashare.models.SourceShareSynchronizationSettingKind
-    :param recurrence_interval: Recurrence Interval. Possible values include: "Hour", "Day".
-    :type recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
-    :param synchronization_time: Synchronization time.
-    :type synchronization_time: ~datetime.datetime
+    :vartype kind: str or ~azure.mgmt.datashare.models.SourceShareSynchronizationSettingKind
+    :ivar recurrence_interval: Recurrence Interval. Possible values include: "Hour", "Day".
+    :vartype recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
+    :ivar synchronization_time: Synchronization time.
+    :vartype synchronization_time: ~datetime.datetime
     """
 
     _validation = {
@@ -2860,6 +3299,12 @@ class ScheduledSourceSynchronizationSetting(SourceShareSynchronizationSetting):
         synchronization_time: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword recurrence_interval: Recurrence Interval. Possible values include: "Hour", "Day".
+        :paramtype recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
+        :keyword synchronization_time: Synchronization time.
+        :paramtype synchronization_time: ~datetime.datetime
+        """
         super(ScheduledSourceSynchronizationSetting, self).__init__(**kwargs)
         self.kind = 'ScheduleBased'  # type: str
         self.recurrence_interval = recurrence_interval
@@ -2884,9 +3329,9 @@ class SynchronizationSetting(ProxyDto):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of synchronization setting.Constant filled by server.  Possible
+    :ivar kind: Required. Kind of synchronization setting.Constant filled by server. Possible
      values include: "ScheduleBased".
-    :type kind: str or ~azure.mgmt.datashare.models.SynchronizationSettingKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.SynchronizationSettingKind
     """
 
     _validation = {
@@ -2913,6 +3358,8 @@ class SynchronizationSetting(ProxyDto):
         self,
         **kwargs
     ):
+        """
+        """
         super(SynchronizationSetting, self).__init__(**kwargs)
         self.kind = 'SynchronizationSetting'  # type: str
 
@@ -2932,19 +3379,19 @@ class ScheduledSynchronizationSetting(SynchronizationSetting):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of synchronization setting.Constant filled by server.  Possible
+    :ivar kind: Required. Kind of synchronization setting.Constant filled by server. Possible
      values include: "ScheduleBased".
-    :type kind: str or ~azure.mgmt.datashare.models.SynchronizationSettingKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.SynchronizationSettingKind
     :ivar created_at: Time at which the synchronization setting was created.
     :vartype created_at: ~datetime.datetime
     :ivar provisioning_state: Gets or sets the provisioning state. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param recurrence_interval: Required. Recurrence Interval. Possible values include: "Hour",
+    :ivar recurrence_interval: Required. Recurrence Interval. Possible values include: "Hour",
      "Day".
-    :type recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
-    :param synchronization_time: Required. Synchronization time.
-    :type synchronization_time: ~datetime.datetime
+    :vartype recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
+    :ivar synchronization_time: Required. Synchronization time.
+    :vartype synchronization_time: ~datetime.datetime
     :ivar user_name: Name of the user who created the synchronization setting.
     :vartype user_name: str
     """
@@ -2982,6 +3429,13 @@ class ScheduledSynchronizationSetting(SynchronizationSetting):
         synchronization_time: datetime.datetime,
         **kwargs
     ):
+        """
+        :keyword recurrence_interval: Required. Recurrence Interval. Possible values include: "Hour",
+         "Day".
+        :paramtype recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
+        :keyword synchronization_time: Required. Synchronization time.
+        :paramtype synchronization_time: ~datetime.datetime
+        """
         super(ScheduledSynchronizationSetting, self).__init__(**kwargs)
         self.kind = 'ScheduleBased'  # type: str
         self.created_at = None
@@ -3009,9 +3463,9 @@ class Trigger(ProxyDto):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of synchronization on trigger.Constant filled by server.  Possible
+    :ivar kind: Required. Kind of synchronization on trigger.Constant filled by server. Possible
      values include: "ScheduleBased".
-    :type kind: str or ~azure.mgmt.datashare.models.TriggerKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.TriggerKind
     """
 
     _validation = {
@@ -3038,6 +3492,8 @@ class Trigger(ProxyDto):
         self,
         **kwargs
     ):
+        """
+        """
         super(Trigger, self).__init__(**kwargs)
         self.kind = 'Trigger'  # type: str
 
@@ -3057,22 +3513,22 @@ class ScheduledTrigger(Trigger):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of synchronization on trigger.Constant filled by server.  Possible
+    :ivar kind: Required. Kind of synchronization on trigger.Constant filled by server. Possible
      values include: "ScheduleBased".
-    :type kind: str or ~azure.mgmt.datashare.models.TriggerKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.TriggerKind
     :ivar created_at: Time at which the trigger was created.
     :vartype created_at: ~datetime.datetime
     :ivar provisioning_state: Gets the provisioning state. Possible values include: "Succeeded",
      "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param recurrence_interval: Required. Recurrence Interval. Possible values include: "Hour",
+    :ivar recurrence_interval: Required. Recurrence Interval. Possible values include: "Hour",
      "Day".
-    :type recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
-    :param synchronization_mode: Synchronization mode. Possible values include: "Incremental",
+    :vartype recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
+    :ivar synchronization_mode: Synchronization mode. Possible values include: "Incremental",
      "FullSync".
-    :type synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
-    :param synchronization_time: Required. Synchronization time.
-    :type synchronization_time: ~datetime.datetime
+    :vartype synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
+    :ivar synchronization_time: Required. Synchronization time.
+    :vartype synchronization_time: ~datetime.datetime
     :ivar trigger_status: Gets the trigger state. Possible values include: "Active", "Inactive",
      "SourceSynchronizationSettingDeleted".
     :vartype trigger_status: str or ~azure.mgmt.datashare.models.TriggerStatus
@@ -3117,6 +3573,16 @@ class ScheduledTrigger(Trigger):
         synchronization_mode: Optional[Union[str, "SynchronizationMode"]] = None,
         **kwargs
     ):
+        """
+        :keyword recurrence_interval: Required. Recurrence Interval. Possible values include: "Hour",
+         "Day".
+        :paramtype recurrence_interval: str or ~azure.mgmt.datashare.models.RecurrenceInterval
+        :keyword synchronization_mode: Synchronization mode. Possible values include: "Incremental",
+         "FullSync".
+        :paramtype synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
+        :keyword synchronization_time: Required. Synchronization time.
+        :paramtype synchronization_time: ~datetime.datetime
+        """
         super(ScheduledTrigger, self).__init__(**kwargs)
         self.kind = 'ScheduleBased'  # type: str
         self.created_at = None
@@ -3143,15 +3609,15 @@ class Share(ProxyDto):
     :vartype type: str
     :ivar created_at: Time at which the share was created.
     :vartype created_at: ~datetime.datetime
-    :param description: Share description.
-    :type description: str
+    :ivar description: Share description.
+    :vartype description: str
     :ivar provisioning_state: Gets or sets the provisioning state. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param share_kind: Share kind. Possible values include: "CopyBased", "InPlace".
-    :type share_kind: str or ~azure.mgmt.datashare.models.ShareKind
-    :param terms: Share terms.
-    :type terms: str
+    :ivar share_kind: Share kind. Possible values include: "CopyBased", "InPlace".
+    :vartype share_kind: str or ~azure.mgmt.datashare.models.ShareKind
+    :ivar terms: Share terms.
+    :vartype terms: str
     :ivar user_email: Email of the user who created the resource.
     :vartype user_email: str
     :ivar user_name: Name of the user who created the resource.
@@ -3191,6 +3657,14 @@ class Share(ProxyDto):
         terms: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword description: Share description.
+        :paramtype description: str
+        :keyword share_kind: Share kind. Possible values include: "CopyBased", "InPlace".
+        :paramtype share_kind: str or ~azure.mgmt.datashare.models.ShareKind
+        :keyword terms: Share terms.
+        :paramtype terms: str
+        """
         super(Share, self).__init__(**kwargs)
         self.created_at = None
         self.description = description
@@ -3206,10 +3680,10 @@ class ShareList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.Share]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.Share]
     """
 
     _validation = {
@@ -3228,6 +3702,12 @@ class ShareList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.Share]
+        """
         super(ShareList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -3250,10 +3730,10 @@ class ShareSubscription(ProxyDto):
     :vartype type: str
     :ivar created_at: Time at which the share subscription was created.
     :vartype created_at: ~datetime.datetime
-    :param expiration_date: The expiration date of the share subscription.
-    :type expiration_date: ~datetime.datetime
-    :param invitation_id: Required. The invitation id.
-    :type invitation_id: str
+    :ivar expiration_date: The expiration date of the share subscription.
+    :vartype expiration_date: ~datetime.datetime
+    :ivar invitation_id: Required. The invitation id.
+    :vartype invitation_id: str
     :ivar provider_email: Email of the provider who created the resource.
     :vartype provider_email: str
     :ivar provider_name: Name of the provider who created the resource.
@@ -3274,8 +3754,8 @@ class ShareSubscription(ProxyDto):
     :vartype share_subscription_status: str or ~azure.mgmt.datashare.models.ShareSubscriptionStatus
     :ivar share_terms: Terms of a share.
     :vartype share_terms: str
-    :param source_share_location: Required. Source share location.
-    :type source_share_location: str
+    :ivar source_share_location: Required. Source share location.
+    :vartype source_share_location: str
     :ivar user_email: Email of the user who created the resource.
     :vartype user_email: str
     :ivar user_name: Name of the user who created the resource.
@@ -3333,6 +3813,14 @@ class ShareSubscription(ProxyDto):
         expiration_date: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword expiration_date: The expiration date of the share subscription.
+        :paramtype expiration_date: ~datetime.datetime
+        :keyword invitation_id: Required. The invitation id.
+        :paramtype invitation_id: str
+        :keyword source_share_location: Required. Source share location.
+        :paramtype source_share_location: str
+        """
         super(ShareSubscription, self).__init__(**kwargs)
         self.created_at = None
         self.expiration_date = expiration_date
@@ -3356,10 +3844,10 @@ class ShareSubscriptionList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.ShareSubscription]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.ShareSubscription]
     """
 
     _validation = {
@@ -3378,6 +3866,12 @@ class ShareSubscriptionList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.ShareSubscription]
+        """
         super(ShareSubscriptionList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -3400,8 +3894,8 @@ class ShareSubscriptionSynchronization(msrest.serialization.Model):
     :vartype start_time: ~datetime.datetime
     :ivar status: Raw Status.
     :vartype status: str
-    :param synchronization_id: Required. Synchronization id.
-    :type synchronization_id: str
+    :ivar synchronization_id: Required. Synchronization id.
+    :vartype synchronization_id: str
     :ivar synchronization_mode: Synchronization Mode. Possible values include: "Incremental",
      "FullSync".
     :vartype synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
@@ -3433,6 +3927,10 @@ class ShareSubscriptionSynchronization(msrest.serialization.Model):
         synchronization_id: str,
         **kwargs
     ):
+        """
+        :keyword synchronization_id: Required. Synchronization id.
+        :paramtype synchronization_id: str
+        """
         super(ShareSubscriptionSynchronization, self).__init__(**kwargs)
         self.duration_ms = None
         self.end_time = None
@@ -3448,10 +3946,10 @@ class ShareSubscriptionSynchronizationList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.ShareSubscriptionSynchronization]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.ShareSubscriptionSynchronization]
     """
 
     _validation = {
@@ -3470,6 +3968,12 @@ class ShareSubscriptionSynchronizationList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.ShareSubscriptionSynchronization]
+        """
         super(ShareSubscriptionSynchronizationList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -3480,24 +3984,24 @@ class ShareSynchronization(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param consumer_email: Email of the user who created the synchronization.
-    :type consumer_email: str
-    :param consumer_name: Name of the user who created the synchronization.
-    :type consumer_name: str
-    :param consumer_tenant_name: Tenant name of the consumer who created the synchronization.
-    :type consumer_tenant_name: str
-    :param duration_ms: synchronization duration.
-    :type duration_ms: int
-    :param end_time: End time of synchronization.
-    :type end_time: ~datetime.datetime
-    :param message: message of synchronization.
-    :type message: str
-    :param start_time: start time of synchronization.
-    :type start_time: ~datetime.datetime
-    :param status: Raw Status.
-    :type status: str
-    :param synchronization_id: Synchronization id.
-    :type synchronization_id: str
+    :ivar consumer_email: Email of the user who created the synchronization.
+    :vartype consumer_email: str
+    :ivar consumer_name: Name of the user who created the synchronization.
+    :vartype consumer_name: str
+    :ivar consumer_tenant_name: Tenant name of the consumer who created the synchronization.
+    :vartype consumer_tenant_name: str
+    :ivar duration_ms: synchronization duration.
+    :vartype duration_ms: int
+    :ivar end_time: End time of synchronization.
+    :vartype end_time: ~datetime.datetime
+    :ivar message: message of synchronization.
+    :vartype message: str
+    :ivar start_time: start time of synchronization.
+    :vartype start_time: ~datetime.datetime
+    :ivar status: Raw Status.
+    :vartype status: str
+    :ivar synchronization_id: Synchronization id.
+    :vartype synchronization_id: str
     :ivar synchronization_mode: Synchronization mode. Possible values include: "Incremental",
      "FullSync".
     :vartype synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
@@ -3534,6 +4038,26 @@ class ShareSynchronization(msrest.serialization.Model):
         synchronization_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword consumer_email: Email of the user who created the synchronization.
+        :paramtype consumer_email: str
+        :keyword consumer_name: Name of the user who created the synchronization.
+        :paramtype consumer_name: str
+        :keyword consumer_tenant_name: Tenant name of the consumer who created the synchronization.
+        :paramtype consumer_tenant_name: str
+        :keyword duration_ms: synchronization duration.
+        :paramtype duration_ms: int
+        :keyword end_time: End time of synchronization.
+        :paramtype end_time: ~datetime.datetime
+        :keyword message: message of synchronization.
+        :paramtype message: str
+        :keyword start_time: start time of synchronization.
+        :paramtype start_time: ~datetime.datetime
+        :keyword status: Raw Status.
+        :paramtype status: str
+        :keyword synchronization_id: Synchronization id.
+        :paramtype synchronization_id: str
+        """
         super(ShareSynchronization, self).__init__(**kwargs)
         self.consumer_email = consumer_email
         self.consumer_name = consumer_name
@@ -3552,10 +4076,10 @@ class ShareSynchronizationList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.ShareSynchronization]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.ShareSynchronization]
     """
 
     _validation = {
@@ -3574,6 +4098,12 @@ class ShareSynchronizationList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.ShareSynchronization]
+        """
         super(ShareSynchronizationList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -3584,10 +4114,10 @@ class SourceShareSynchronizationSettingList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.SourceShareSynchronizationSetting]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.SourceShareSynchronizationSetting]
     """
 
     _validation = {
@@ -3606,6 +4136,12 @@ class SourceShareSynchronizationSettingList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.SourceShareSynchronizationSetting]
+        """
         super(SourceShareSynchronizationSettingList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -3626,21 +4162,21 @@ class SqlDBTableDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
-    :param database_name: Database name of the source data set.
-    :type database_name: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :ivar database_name: Database name of the source data set.
+    :vartype database_name: str
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param schema_name: Schema of the table. Default value is dbo.
-    :type schema_name: str
-    :param sql_server_resource_id: Resource id of SQL server.
-    :type sql_server_resource_id: str
-    :param table_name: SQL DB table name.
-    :type table_name: str
+    :ivar schema_name: Schema of the table. Default value is dbo.
+    :vartype schema_name: str
+    :ivar sql_server_resource_id: Resource id of SQL server.
+    :vartype sql_server_resource_id: str
+    :ivar table_name: SQL DB table name.
+    :vartype table_name: str
     """
 
     _validation = {
@@ -3674,6 +4210,16 @@ class SqlDBTableDataSet(DataSet):
         table_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword database_name: Database name of the source data set.
+        :paramtype database_name: str
+        :keyword schema_name: Schema of the table. Default value is dbo.
+        :paramtype schema_name: str
+        :keyword sql_server_resource_id: Resource id of SQL server.
+        :paramtype sql_server_resource_id: str
+        :keyword table_name: SQL DB table name.
+        :paramtype table_name: str
+        """
         super(SqlDBTableDataSet, self).__init__(**kwargs)
         self.kind = 'SqlDBTable'  # type: str
         self.database_name = database_name
@@ -3698,27 +4244,27 @@ class SqlDBTableDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param database_name: Required. DatabaseName name of the sink data set.
-    :type database_name: str
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar database_name: Required. DatabaseName name of the sink data set.
+    :vartype database_name: str
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param schema_name: Required. Schema of the table. Default value is dbo.
-    :type schema_name: str
-    :param sql_server_resource_id: Required. Resource id of SQL server.
-    :type sql_server_resource_id: str
-    :param table_name: Required. SQL DB table name.
-    :type table_name: str
+    :ivar schema_name: Required. Schema of the table. Default value is dbo.
+    :vartype schema_name: str
+    :ivar sql_server_resource_id: Required. Resource id of SQL server.
+    :vartype sql_server_resource_id: str
+    :ivar table_name: Required. SQL DB table name.
+    :vartype table_name: str
     """
 
     _validation = {
@@ -3761,6 +4307,18 @@ class SqlDBTableDataSetMapping(DataSetMapping):
         table_name: str,
         **kwargs
     ):
+        """
+        :keyword database_name: Required. DatabaseName name of the sink data set.
+        :paramtype database_name: str
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword schema_name: Required. Schema of the table. Default value is dbo.
+        :paramtype schema_name: str
+        :keyword sql_server_resource_id: Required. Resource id of SQL server.
+        :paramtype sql_server_resource_id: str
+        :keyword table_name: Required. SQL DB table name.
+        :paramtype table_name: str
+        """
         super(SqlDBTableDataSetMapping, self).__init__(**kwargs)
         self.kind = 'SqlDBTable'  # type: str
         self.database_name = database_name
@@ -3787,21 +4345,21 @@ class SqlDWTableDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param data_warehouse_name: DataWarehouse name of the source data set.
-    :type data_warehouse_name: str
-    :param schema_name: Schema of the table. Default value is dbo.
-    :type schema_name: str
-    :param sql_server_resource_id: Resource id of SQL server.
-    :type sql_server_resource_id: str
-    :param table_name: SQL DW table name.
-    :type table_name: str
+    :ivar data_warehouse_name: DataWarehouse name of the source data set.
+    :vartype data_warehouse_name: str
+    :ivar schema_name: Schema of the table. Default value is dbo.
+    :vartype schema_name: str
+    :ivar sql_server_resource_id: Resource id of SQL server.
+    :vartype sql_server_resource_id: str
+    :ivar table_name: SQL DW table name.
+    :vartype table_name: str
     """
 
     _validation = {
@@ -3835,6 +4393,16 @@ class SqlDWTableDataSet(DataSet):
         table_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword data_warehouse_name: DataWarehouse name of the source data set.
+        :paramtype data_warehouse_name: str
+        :keyword schema_name: Schema of the table. Default value is dbo.
+        :paramtype schema_name: str
+        :keyword sql_server_resource_id: Resource id of SQL server.
+        :paramtype sql_server_resource_id: str
+        :keyword table_name: SQL DW table name.
+        :paramtype table_name: str
+        """
         super(SqlDWTableDataSet, self).__init__(**kwargs)
         self.kind = 'SqlDWTable'  # type: str
         self.data_set_id = None
@@ -3859,27 +4427,27 @@ class SqlDWTableDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
-    :param data_warehouse_name: Required. DataWarehouse name of the source data set.
-    :type data_warehouse_name: str
+    :ivar data_warehouse_name: Required. DataWarehouse name of the source data set.
+    :vartype data_warehouse_name: str
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param schema_name: Required. Schema of the table. Default value is dbo.
-    :type schema_name: str
-    :param sql_server_resource_id: Required. Resource id of SQL server.
-    :type sql_server_resource_id: str
-    :param table_name: Required. SQL DW table name.
-    :type table_name: str
+    :ivar schema_name: Required. Schema of the table. Default value is dbo.
+    :vartype schema_name: str
+    :ivar sql_server_resource_id: Required. Resource id of SQL server.
+    :vartype sql_server_resource_id: str
+    :ivar table_name: Required. SQL DW table name.
+    :vartype table_name: str
     """
 
     _validation = {
@@ -3922,6 +4490,18 @@ class SqlDWTableDataSetMapping(DataSetMapping):
         table_name: str,
         **kwargs
     ):
+        """
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword data_warehouse_name: Required. DataWarehouse name of the source data set.
+        :paramtype data_warehouse_name: str
+        :keyword schema_name: Required. Schema of the table. Default value is dbo.
+        :paramtype schema_name: str
+        :keyword sql_server_resource_id: Required. Resource id of SQL server.
+        :paramtype sql_server_resource_id: str
+        :keyword table_name: Required. SQL DW table name.
+        :paramtype table_name: str
+        """
         super(SqlDWTableDataSetMapping, self).__init__(**kwargs)
         self.kind = 'SqlDWTable'  # type: str
         self.data_set_id = data_set_id
@@ -3948,16 +4528,16 @@ class SynapseWorkspaceSqlPoolTableDataSet(DataSet):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set.Constant filled by server.  Possible values include:
+    :ivar kind: Required. Kind of data set.Constant filled by server. Possible values include:
      "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder", "AdlsGen2File",
      "AdlsGen1Folder", "AdlsGen1File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetKind
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetKind
     :ivar data_set_id: Unique id for identifying a data set resource.
     :vartype data_set_id: str
-    :param synapse_workspace_sql_pool_table_resource_id: Required. Resource id of the Synapse
+    :ivar synapse_workspace_sql_pool_table_resource_id: Required. Resource id of the Synapse
      Workspace SQL Pool Table.
-    :type synapse_workspace_sql_pool_table_resource_id: str
+    :vartype synapse_workspace_sql_pool_table_resource_id: str
     """
 
     _validation = {
@@ -3986,6 +4566,11 @@ class SynapseWorkspaceSqlPoolTableDataSet(DataSet):
         synapse_workspace_sql_pool_table_resource_id: str,
         **kwargs
     ):
+        """
+        :keyword synapse_workspace_sql_pool_table_resource_id: Required. Resource id of the Synapse
+         Workspace SQL Pool Table.
+        :paramtype synapse_workspace_sql_pool_table_resource_id: str
+        """
         super(SynapseWorkspaceSqlPoolTableDataSet, self).__init__(**kwargs)
         self.kind = 'SynapseWorkspaceSqlPoolTable'  # type: str
         self.data_set_id = None
@@ -4007,22 +4592,22 @@ class SynapseWorkspaceSqlPoolTableDataSetMapping(DataSetMapping):
     :vartype system_data: ~azure.mgmt.datashare.models.SystemData
     :ivar type: Type of the azure resource.
     :vartype type: str
-    :param kind: Required. Kind of data set mapping.Constant filled by server.  Possible values
+    :ivar kind: Required. Kind of data set mapping.Constant filled by server. Possible values
      include: "Blob", "Container", "BlobFolder", "AdlsGen2FileSystem", "AdlsGen2Folder",
      "AdlsGen2File", "KustoCluster", "KustoDatabase", "SqlDBTable", "SqlDWTable",
      "SynapseWorkspaceSqlPoolTable".
-    :type kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
-    :param data_set_id: Required. The id of the source data set.
-    :type data_set_id: str
+    :vartype kind: str or ~azure.mgmt.datashare.models.DataSetMappingKind
+    :ivar data_set_id: Required. The id of the source data set.
+    :vartype data_set_id: str
     :ivar data_set_mapping_status: Gets the status of the data set mapping. Possible values
      include: "Ok", "Broken".
     :vartype data_set_mapping_status: str or ~azure.mgmt.datashare.models.DataSetMappingStatus
     :ivar provisioning_state: Provisioning state of the data set mapping. Possible values include:
      "Succeeded", "Creating", "Deleting", "Moving", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.datashare.models.ProvisioningState
-    :param synapse_workspace_sql_pool_table_resource_id: Required. Resource id of the Synapse
+    :ivar synapse_workspace_sql_pool_table_resource_id: Required. Resource id of the Synapse
      Workspace SQL Pool Table.
-    :type synapse_workspace_sql_pool_table_resource_id: str
+    :vartype synapse_workspace_sql_pool_table_resource_id: str
     """
 
     _validation = {
@@ -4056,6 +4641,13 @@ class SynapseWorkspaceSqlPoolTableDataSetMapping(DataSetMapping):
         synapse_workspace_sql_pool_table_resource_id: str,
         **kwargs
     ):
+        """
+        :keyword data_set_id: Required. The id of the source data set.
+        :paramtype data_set_id: str
+        :keyword synapse_workspace_sql_pool_table_resource_id: Required. Resource id of the Synapse
+         Workspace SQL Pool Table.
+        :paramtype synapse_workspace_sql_pool_table_resource_id: str
+        """
         super(SynapseWorkspaceSqlPoolTableDataSetMapping, self).__init__(**kwargs)
         self.kind = 'SynapseWorkspaceSqlPoolTable'  # type: str
         self.data_set_id = data_set_id
@@ -4144,6 +4736,8 @@ class SynchronizationDetails(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(SynchronizationDetails, self).__init__(**kwargs)
         self.data_set_id = None
         self.data_set_type = None
@@ -4167,10 +4761,10 @@ class SynchronizationDetailsList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.SynchronizationDetails]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.SynchronizationDetails]
     """
 
     _validation = {
@@ -4189,6 +4783,12 @@ class SynchronizationDetailsList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.SynchronizationDetails]
+        """
         super(SynchronizationDetailsList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -4199,10 +4799,10 @@ class SynchronizationSettingList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.SynchronizationSetting]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.SynchronizationSetting]
     """
 
     _validation = {
@@ -4221,6 +4821,12 @@ class SynchronizationSettingList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.SynchronizationSetting]
+        """
         super(SynchronizationSettingList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value
@@ -4229,9 +4835,9 @@ class SynchronizationSettingList(msrest.serialization.Model):
 class Synchronize(msrest.serialization.Model):
     """Payload for the synchronizing the data.
 
-    :param synchronization_mode: Mode of synchronization used in triggers and snapshot sync.
+    :ivar synchronization_mode: Mode of synchronization used in triggers and snapshot sync.
      Incremental by default. Possible values include: "Incremental", "FullSync".
-    :type synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
+    :vartype synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
     """
 
     _attribute_map = {
@@ -4244,6 +4850,11 @@ class Synchronize(msrest.serialization.Model):
         synchronization_mode: Optional[Union[str, "SynchronizationMode"]] = None,
         **kwargs
     ):
+        """
+        :keyword synchronization_mode: Mode of synchronization used in triggers and snapshot sync.
+         Incremental by default. Possible values include: "Incremental", "FullSync".
+        :paramtype synchronization_mode: str or ~azure.mgmt.datashare.models.SynchronizationMode
+        """
         super(Synchronize, self).__init__(**kwargs)
         self.synchronization_mode = synchronization_mode
 
@@ -4251,20 +4862,20 @@ class Synchronize(msrest.serialization.Model):
 class SystemData(msrest.serialization.Model):
     """Metadata pertaining to creation and last modification of the resource.
 
-    :param created_at: The timestamp of resource creation (UTC).
-    :type created_at: ~datetime.datetime
-    :param created_by: The identity that created the resource.
-    :type created_by: str
-    :param created_by_type: The type of identity that created the resource. Possible values
-     include: "User", "Application", "ManagedIdentity", "Key".
-    :type created_by_type: str or ~azure.mgmt.datashare.models.CreatedByType
-    :param last_modified_at: The type of identity that last modified the resource.
-    :type last_modified_at: ~datetime.datetime
-    :param last_modified_by: The identity that last modified the resource.
-    :type last_modified_by: str
-    :param last_modified_by_type: The type of identity that last modified the resource. Possible
+    :ivar created_at: The timestamp of resource creation (UTC).
+    :vartype created_at: ~datetime.datetime
+    :ivar created_by: The identity that created the resource.
+    :vartype created_by: str
+    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+     "User", "Application", "ManagedIdentity", "Key".
+    :vartype created_by_type: str or ~azure.mgmt.datashare.models.CreatedByType
+    :ivar last_modified_at: The type of identity that last modified the resource.
+    :vartype last_modified_at: ~datetime.datetime
+    :ivar last_modified_by: The identity that last modified the resource.
+    :vartype last_modified_by: str
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
      values include: "User", "Application", "ManagedIdentity", "Key".
-    :type last_modified_by_type: str or ~azure.mgmt.datashare.models.LastModifiedByType
+    :vartype last_modified_by_type: str or ~azure.mgmt.datashare.models.LastModifiedByType
     """
 
     _attribute_map = {
@@ -4287,6 +4898,22 @@ class SystemData(msrest.serialization.Model):
         last_modified_by_type: Optional[Union[str, "LastModifiedByType"]] = None,
         **kwargs
     ):
+        """
+        :keyword created_at: The timestamp of resource creation (UTC).
+        :paramtype created_at: ~datetime.datetime
+        :keyword created_by: The identity that created the resource.
+        :paramtype created_by: str
+        :keyword created_by_type: The type of identity that created the resource. Possible values
+         include: "User", "Application", "ManagedIdentity", "Key".
+        :paramtype created_by_type: str or ~azure.mgmt.datashare.models.CreatedByType
+        :keyword last_modified_at: The type of identity that last modified the resource.
+        :paramtype last_modified_at: ~datetime.datetime
+        :keyword last_modified_by: The identity that last modified the resource.
+        :paramtype last_modified_by: str
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
+         values include: "User", "Application", "ManagedIdentity", "Key".
+        :paramtype last_modified_by_type: str or ~azure.mgmt.datashare.models.LastModifiedByType
+        """
         super(SystemData, self).__init__(**kwargs)
         self.created_at = created_at
         self.created_by = created_by
@@ -4301,10 +4928,10 @@ class TriggerList(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param next_link: The Url of next result page.
-    :type next_link: str
-    :param value: Required. Collection of items of type DataTransferObjects.
-    :type value: list[~azure.mgmt.datashare.models.Trigger]
+    :ivar next_link: The Url of next result page.
+    :vartype next_link: str
+    :ivar value: Required. Collection of items of type DataTransferObjects.
+    :vartype value: list[~azure.mgmt.datashare.models.Trigger]
     """
 
     _validation = {
@@ -4323,6 +4950,12 @@ class TriggerList(msrest.serialization.Model):
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword next_link: The Url of next result page.
+        :paramtype next_link: str
+        :keyword value: Required. Collection of items of type DataTransferObjects.
+        :paramtype value: list[~azure.mgmt.datashare.models.Trigger]
+        """
         super(TriggerList, self).__init__(**kwargs)
         self.next_link = next_link
         self.value = value

@@ -10,6 +10,7 @@ from ._accounts_operations import AccountsOperations
 from ._consumer_invitations_operations import ConsumerInvitationsOperations
 from ._data_sets_operations import DataSetsOperations
 from ._data_set_mappings_operations import DataSetMappingsOperations
+from ._email_registrations_operations import EmailRegistrationsOperations
 from ._invitations_operations import InvitationsOperations
 from ._operations import Operations
 from ._shares_operations import SharesOperations
@@ -24,6 +25,7 @@ __all__ = [
     'ConsumerInvitationsOperations',
     'DataSetsOperations',
     'DataSetMappingsOperations',
+    'EmailRegistrationsOperations',
     'InvitationsOperations',
     'Operations',
     'SharesOperations',
