@@ -22,22 +22,6 @@ class AacAudioProfile(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Specifies that the output audio is to be encoded into HE-AAC v2 profile.
     HE_AAC_V2 = "HeAacV2"
 
-class AccountEncryptionKeyType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of key used to encrypt the Account Key.
-    """
-
-    #: The Account Key is encrypted with a System Key.
-    SYSTEM_KEY = "SystemKey"
-    #: The Account Key is encrypted with a Customer Key.
-    CUSTOMER_KEY = "CustomerKey"
-
-class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Indicates the action type.
-    """
-
-    #: An internal action.
-    INTERNAL = "Internal"
-
 class AnalysisResolution(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Specifies the maximum resolution at which your video is analyzed. The default behavior is
     "SourceResolution," which will keep the input video at its original resolution when analyzed.
@@ -228,15 +212,6 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
-
-class DefaultAction(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The behavior for IP access control in Key Delivery.
-    """
-
-    #: All public IP addresses are allowed.
-    ALLOW = "Allow"
-    #: Public IP addresses are blocked.
-    DENY = "Deny"
 
 class DeinterlaceMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The deinterlacing mode. Defaults to AutoPixelAdaptive.
@@ -650,28 +625,6 @@ class LiveOutputResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)
     #: Any streaming URLs created on the live output asset continue to work.
     DELETING = "Deleting"
 
-class MetricAggregationType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The metric aggregation type
-    """
-
-    #: The average.
-    AVERAGE = "Average"
-    #: The count of a number of items, usually requests.
-    COUNT = "Count"
-    #: The sum.
-    TOTAL = "Total"
-
-class MetricUnit(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The metric unit
-    """
-
-    #: The number of bytes.
-    BYTES = "Bytes"
-    #: The count.
-    COUNT = "Count"
-    #: The number of milliseconds.
-    MILLISECONDS = "Milliseconds"
-
 class OnErrorType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """A Transform can define more than one outputs. This property defines what the service should do
     when one output fails - either continue to produce other outputs, or, stop the other outputs.
@@ -699,23 +652,6 @@ class Priority(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Used for TransformOutputs that should take precedence over others.
     HIGH = "High"
 
-class PrivateEndpointConnectionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The current provisioning state.
-    """
-
-    SUCCEEDED = "Succeeded"
-    CREATING = "Creating"
-    DELETING = "Deleting"
-    FAILED = "Failed"
-
-class PrivateEndpointServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The private endpoint connection status.
-    """
-
-    PENDING = "Pending"
-    APPROVED = "Approved"
-    REJECTED = "Rejected"
-
 class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Provisioning state of the asset track.
     """
@@ -726,15 +662,6 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     IN_PROGRESS = "InProgress"
     #: Provisioning state succeeded.
     SUCCEEDED = "Succeeded"
-
-class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Whether or not public network access is allowed for resources under the Media Services account.
-    """
-
-    #: Public network access is enabled.
-    ENABLED = "Enabled"
-    #: Public network access is disabled.
-    DISABLED = "Disabled"
 
 class Rotation(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The rotation, if any, to be applied to the input video, before it is encoded. Default is Auto
@@ -753,22 +680,6 @@ class Rotation(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ROTATE180 = "Rotate180"
     #: Rotate 270 degrees clockwise.
     ROTATE270 = "Rotate270"
-
-class StorageAccountType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of the storage account.
-    """
-
-    #: The primary storage account for the Media Services account.
-    PRIMARY = "Primary"
-    #: A secondary storage account for the Media Services account.
-    SECONDARY = "Secondary"
-
-class StorageAuthentication(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-
-    #: System authentication.
-    SYSTEM = "System"
-    #: Managed Identity authentication.
-    MANAGED_IDENTITY = "ManagedIdentity"
 
 class StreamingEndpointResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The resource state of the streaming endpoint.

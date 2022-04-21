@@ -8,8 +8,6 @@
 
 from ._models_py3 import AacAudio
 from ._models_py3 import AbsoluteClipTime
-from ._models_py3 import AccessControl
-from ._models_py3 import AccountEncryption
 from ._models_py3 import AccountFilter
 from ._models_py3 import AccountFilterCollection
 from ._models_py3 import AkamaiAccessControl
@@ -36,7 +34,6 @@ from ._models_py3 import AudioTrackDescriptor
 from ._models_py3 import BuiltInStandardEncoderPreset
 from ._models_py3 import CbcsDrmConfiguration
 from ._models_py3 import CencDrmConfiguration
-from ._models_py3 import CheckNameAvailabilityInput
 from ._models_py3 import ClipTime
 from ._models_py3 import Codec
 from ._models_py3 import CommonEncryptionCbcs
@@ -72,11 +69,7 @@ from ._models_py3 import CopyVideo
 from ._models_py3 import CrossSiteAccessPolicies
 from ._models_py3 import DefaultKey
 from ._models_py3 import Deinterlace
-from ._models_py3 import EdgePolicies
-from ._models_py3 import EdgeUsageDataCollectionPolicy
-from ._models_py3 import EdgeUsageDataEventHub
 from ._models_py3 import EnabledProtocols
-from ._models_py3 import EntityNameAvailabilityCheckOutput
 from ._models_py3 import EnvelopeEncryption
 from ._models_py3 import ErrorAdditionalInfo
 from ._models_py3 import ErrorDetail
@@ -117,12 +110,9 @@ from ._models_py3 import JobOutputAsset
 from ._models_py3 import JpgFormat
 from ._models_py3 import JpgImage
 from ._models_py3 import JpgLayer
-from ._models_py3 import KeyDelivery
-from ._models_py3 import KeyVaultProperties
 from ._models_py3 import Layer
 from ._models_py3 import ListContainerSasInput
 from ._models_py3 import ListContentKeysResponse
-from ._models_py3 import ListEdgePoliciesInput
 from ._models_py3 import ListPathsResponse
 from ._models_py3 import ListStreamingLocatorsResponse
 from ._models_py3 import LiveEvent
@@ -139,19 +129,9 @@ from ._models_py3 import LiveEventPreviewAccessControl
 from ._models_py3 import LiveEventTranscription
 from ._models_py3 import LiveOutput
 from ._models_py3 import LiveOutputListResult
-from ._models_py3 import LogSpecification
-from ._models_py3 import MediaService
-from ._models_py3 import MediaServiceCollection
-from ._models_py3 import MediaServiceIdentity
-from ._models_py3 import MediaServiceUpdate
-from ._models_py3 import MetricDimension
-from ._models_py3 import MetricSpecification
 from ._models_py3 import Mp4Format
 from ._models_py3 import MultiBitrateFormat
 from ._models_py3 import NoEncryption
-from ._models_py3 import Operation
-from ._models_py3 import OperationCollection
-from ._models_py3 import OperationDisplay
 from ._models_py3 import OutputFile
 from ._models_py3 import Overlay
 from ._models_py3 import PngFormat
@@ -160,24 +140,14 @@ from ._models_py3 import PngLayer
 from ._models_py3 import PresentationTimeRange
 from ._models_py3 import Preset
 from ._models_py3 import PresetConfigurations
-from ._models_py3 import PrivateEndpoint
-from ._models_py3 import PrivateEndpointConnection
-from ._models_py3 import PrivateEndpointConnectionListResult
-from ._models_py3 import PrivateLinkResource
-from ._models_py3 import PrivateLinkResourceListResult
-from ._models_py3 import PrivateLinkServiceConnectionState
-from ._models_py3 import Properties
 from ._models_py3 import ProxyResource
 from ._models_py3 import Rectangle
 from ._models_py3 import Resource
-from ._models_py3 import ResourceIdentity
 from ._models_py3 import SelectAudioTrackByAttribute
 from ._models_py3 import SelectAudioTrackById
 from ._models_py3 import SelectVideoTrackByAttribute
 from ._models_py3 import SelectVideoTrackById
-from ._models_py3 import ServiceSpecification
 from ._models_py3 import StandardEncoderPreset
-from ._models_py3 import StorageAccount
 from ._models_py3 import StorageEncryptedAssetDecryptionData
 from ._models_py3 import StreamingEndpoint
 from ._models_py3 import StreamingEndpointAccessControl
@@ -195,7 +165,6 @@ from ._models_py3 import StreamingPolicyContentKeys
 from ._models_py3 import StreamingPolicyFairPlayConfiguration
 from ._models_py3 import StreamingPolicyPlayReadyConfiguration
 from ._models_py3 import StreamingPolicyWidevineConfiguration
-from ._models_py3 import SyncStorageKeysInput
 from ._models_py3 import SystemData
 from ._models_py3 import TextTrack
 from ._models_py3 import TrackBase
@@ -207,7 +176,6 @@ from ._models_py3 import Transform
 from ._models_py3 import TransformCollection
 from ._models_py3 import TransformOutput
 from ._models_py3 import TransportStreamFormat
-from ._models_py3 import UserAssignedManagedIdentity
 from ._models_py3 import UtcClipTime
 from ._models_py3 import Video
 from ._models_py3 import VideoAnalyzerPreset
@@ -219,8 +187,6 @@ from ._models_py3 import VideoTrackDescriptor
 
 from ._azure_media_services_enums import (
     AacAudioProfile,
-    AccountEncryptionKeyType,
-    ActionType,
     AnalysisResolution,
     AssetContainerPermission,
     AssetStorageEncryptionFormat,
@@ -235,7 +201,6 @@ from ._azure_media_services_enums import (
     ContentKeyPolicyPlayReadyUnknownOutputPassingOption,
     ContentKeyPolicyRestrictionTokenType,
     CreatedByType,
-    DefaultAction,
     DeinterlaceMode,
     DeinterlaceParity,
     EncoderNamedPreset,
@@ -259,17 +224,10 @@ from ._azure_media_services_enums import (
     LiveEventInputProtocol,
     LiveEventResourceState,
     LiveOutputResourceState,
-    MetricAggregationType,
-    MetricUnit,
     OnErrorType,
     Priority,
-    PrivateEndpointConnectionProvisioningState,
-    PrivateEndpointServiceConnectionStatus,
     ProvisioningState,
-    PublicNetworkAccess,
     Rotation,
-    StorageAccountType,
-    StorageAuthentication,
     StreamOptionsFlag,
     StreamingEndpointResourceState,
     StreamingLocatorContentKeyType,
@@ -285,8 +243,6 @@ from ._azure_media_services_enums import (
 __all__ = [
     'AacAudio',
     'AbsoluteClipTime',
-    'AccessControl',
-    'AccountEncryption',
     'AccountFilter',
     'AccountFilterCollection',
     'AkamaiAccessControl',
@@ -313,7 +269,6 @@ __all__ = [
     'BuiltInStandardEncoderPreset',
     'CbcsDrmConfiguration',
     'CencDrmConfiguration',
-    'CheckNameAvailabilityInput',
     'ClipTime',
     'Codec',
     'CommonEncryptionCbcs',
@@ -349,11 +304,7 @@ __all__ = [
     'CrossSiteAccessPolicies',
     'DefaultKey',
     'Deinterlace',
-    'EdgePolicies',
-    'EdgeUsageDataCollectionPolicy',
-    'EdgeUsageDataEventHub',
     'EnabledProtocols',
-    'EntityNameAvailabilityCheckOutput',
     'EnvelopeEncryption',
     'ErrorAdditionalInfo',
     'ErrorDetail',
@@ -394,12 +345,9 @@ __all__ = [
     'JpgFormat',
     'JpgImage',
     'JpgLayer',
-    'KeyDelivery',
-    'KeyVaultProperties',
     'Layer',
     'ListContainerSasInput',
     'ListContentKeysResponse',
-    'ListEdgePoliciesInput',
     'ListPathsResponse',
     'ListStreamingLocatorsResponse',
     'LiveEvent',
@@ -416,19 +364,9 @@ __all__ = [
     'LiveEventTranscription',
     'LiveOutput',
     'LiveOutputListResult',
-    'LogSpecification',
-    'MediaService',
-    'MediaServiceCollection',
-    'MediaServiceIdentity',
-    'MediaServiceUpdate',
-    'MetricDimension',
-    'MetricSpecification',
     'Mp4Format',
     'MultiBitrateFormat',
     'NoEncryption',
-    'Operation',
-    'OperationCollection',
-    'OperationDisplay',
     'OutputFile',
     'Overlay',
     'PngFormat',
@@ -437,24 +375,14 @@ __all__ = [
     'PresentationTimeRange',
     'Preset',
     'PresetConfigurations',
-    'PrivateEndpoint',
-    'PrivateEndpointConnection',
-    'PrivateEndpointConnectionListResult',
-    'PrivateLinkResource',
-    'PrivateLinkResourceListResult',
-    'PrivateLinkServiceConnectionState',
-    'Properties',
     'ProxyResource',
     'Rectangle',
     'Resource',
-    'ResourceIdentity',
     'SelectAudioTrackByAttribute',
     'SelectAudioTrackById',
     'SelectVideoTrackByAttribute',
     'SelectVideoTrackById',
-    'ServiceSpecification',
     'StandardEncoderPreset',
-    'StorageAccount',
     'StorageEncryptedAssetDecryptionData',
     'StreamingEndpoint',
     'StreamingEndpointAccessControl',
@@ -472,7 +400,6 @@ __all__ = [
     'StreamingPolicyFairPlayConfiguration',
     'StreamingPolicyPlayReadyConfiguration',
     'StreamingPolicyWidevineConfiguration',
-    'SyncStorageKeysInput',
     'SystemData',
     'TextTrack',
     'TrackBase',
@@ -484,7 +411,6 @@ __all__ = [
     'TransformCollection',
     'TransformOutput',
     'TransportStreamFormat',
-    'UserAssignedManagedIdentity',
     'UtcClipTime',
     'Video',
     'VideoAnalyzerPreset',
@@ -493,8 +419,6 @@ __all__ = [
     'VideoTrack',
     'VideoTrackDescriptor',
     'AacAudioProfile',
-    'AccountEncryptionKeyType',
-    'ActionType',
     'AnalysisResolution',
     'AssetContainerPermission',
     'AssetStorageEncryptionFormat',
@@ -509,7 +433,6 @@ __all__ = [
     'ContentKeyPolicyPlayReadyUnknownOutputPassingOption',
     'ContentKeyPolicyRestrictionTokenType',
     'CreatedByType',
-    'DefaultAction',
     'DeinterlaceMode',
     'DeinterlaceParity',
     'EncoderNamedPreset',
@@ -533,17 +456,10 @@ __all__ = [
     'LiveEventInputProtocol',
     'LiveEventResourceState',
     'LiveOutputResourceState',
-    'MetricAggregationType',
-    'MetricUnit',
     'OnErrorType',
     'Priority',
-    'PrivateEndpointConnectionProvisioningState',
-    'PrivateEndpointServiceConnectionStatus',
     'ProvisioningState',
-    'PublicNetworkAccess',
     'Rotation',
-    'StorageAccountType',
-    'StorageAuthentication',
     'StreamOptionsFlag',
     'StreamingEndpointResourceState',
     'StreamingLocatorContentKeyType',
