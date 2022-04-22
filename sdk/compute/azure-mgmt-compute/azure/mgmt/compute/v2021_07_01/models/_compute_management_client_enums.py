@@ -211,10 +211,12 @@ class GalleryPropertiesProvisioningState(with_metaclass(CaseInsensitiveEnumMeta,
 class GallerySharingPermissionTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """This property allows you to specify the permission of sharing gallery. :code:`<br>`:code:`<br>`
     Possible values are: :code:`<br>`:code:`<br>` **Private** :code:`<br>`:code:`<br>` **Groups**
+    :code:`<br>`:code:`<br>` **Community**
     """
 
     PRIVATE = "Private"
     GROUPS = "Groups"
+    COMMUNITY = "Community"
 
 class HostCaching(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
@@ -510,6 +512,14 @@ class RollingUpgradeStatusCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum
     COMPLETED = "Completed"
     FAULTED = "Faulted"
 
+class SecurityProfileType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """all types of security profile
+    """
+
+    ENCRYPTED_VM_GUEST_STATE_ONLY_WITH_PMK = "EncryptedVMGuestStateOnlyWithPmk"
+    ENCRYPTED_WITH_PMK = "EncryptedWithPmk"
+    ENCRYPTED_WITH_CMK = "EncryptedWithCmk"
+
 class SecurityTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Specifies the SecurityType of the virtual machine. It is set as TrustedLaunch to enable
     UefiSettings. :code:`<br>`:code:`<br>` Default: UefiSettings will not be enabled unless this
@@ -543,6 +553,15 @@ class SharingProfileGroupTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum
     SUBSCRIPTIONS = "Subscriptions"
     AAD_TENANTS = "AADTenants"
 
+class SharingState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The sharing state of the gallery, which only appears in the response.
+    """
+
+    SUCCEEDED = "Succeeded"
+    IN_PROGRESS = "InProgress"
+    FAILED = "Failed"
+    UNKNOWN = "Unknown"
+
 class SharingUpdateOperationTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """This property allows you to specify the operation type of gallery sharing update.
     :code:`<br>`:code:`<br>` Possible values are: :code:`<br>`:code:`<br>` **Add**
@@ -552,6 +571,7 @@ class SharingUpdateOperationTypes(with_metaclass(CaseInsensitiveEnumMeta, str, E
     ADD = "Add"
     REMOVE = "Remove"
     RESET = "Reset"
+    ENABLE_COMMUNITY = "EnableCommunity"
 
 class StatusLevelTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The level code.

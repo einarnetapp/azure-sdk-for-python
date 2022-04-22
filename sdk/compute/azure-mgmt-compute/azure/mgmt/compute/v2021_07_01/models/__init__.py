@@ -34,8 +34,15 @@ from ._models_py3 import CapacityReservationProfile
 from ._models_py3 import CapacityReservationUpdate
 from ._models_py3 import CapacityReservationUtilization
 from ._models_py3 import CommunityGallery
+from ._models_py3 import CommunityGalleryDataDiskImage
+from ._models_py3 import CommunityGalleryDiskImage
 from ._models_py3 import CommunityGalleryImage
+from ._models_py3 import CommunityGalleryImageList
 from ._models_py3 import CommunityGalleryImageVersion
+from ._models_py3 import CommunityGalleryImageVersionList
+from ._models_py3 import CommunityGalleryImageVersionStorageProfile
+from ._models_py3 import CommunityGalleryInfo
+from ._models_py3 import CommunityGalleryOSDiskImage
 from ._models_py3 import ComputeOperationListResult
 from ._models_py3 import ComputeOperationValue
 from ._models_py3 import DataDisk
@@ -119,6 +126,7 @@ from ._models_py3 import NetworkProfile
 from ._models_py3 import OSDisk
 from ._models_py3 import OSDiskImage
 from ._models_py3 import OSDiskImageEncryption
+from ._models_py3 import OSDiskImageSecurityProfile
 from ._models_py3 import OSProfile
 from ._models_py3 import OrchestrationServiceStateInput
 from ._models_py3 import OrchestrationServiceSummary
@@ -137,6 +145,7 @@ from ._models_py3 import PurchasePlan
 from ._models_py3 import RecommendedMachineConfiguration
 from ._models_py3 import RecoveryWalkResponse
 from ._models_py3 import RegionalReplicationStatus
+from ._models_py3 import RegionalSharingStatus
 from ._models_py3 import ReplicationStatus
 from ._models_py3 import RequestRateByIntervalInput
 from ._models_py3 import Resource
@@ -183,6 +192,7 @@ from ._models_py3 import SharedGalleryImageVersionList
 from ._models_py3 import SharedGalleryList
 from ._models_py3 import SharingProfile
 from ._models_py3 import SharingProfileGroup
+from ._models_py3 import SharingStatus
 from ._models_py3 import SharingUpdate
 from ._models_py3 import Sku
 from ._models_py3 import SoftDeletePolicy
@@ -373,11 +383,13 @@ from ._compute_management_client_enums import (
     RestorePointCollectionExpandOptions,
     RollingUpgradeActionType,
     RollingUpgradeStatusCode,
+    SecurityProfileType,
     SecurityTypes,
     SelectPermissions,
     SettingNames,
     SharedToValues,
     SharingProfileGroupTypes,
+    SharingState,
     SharingUpdateOperationTypes,
     StatusLevelTypes,
     StorageAccountType,
@@ -429,8 +441,15 @@ __all__ = [
     'CapacityReservationUpdate',
     'CapacityReservationUtilization',
     'CommunityGallery',
+    'CommunityGalleryDataDiskImage',
+    'CommunityGalleryDiskImage',
     'CommunityGalleryImage',
+    'CommunityGalleryImageList',
     'CommunityGalleryImageVersion',
+    'CommunityGalleryImageVersionList',
+    'CommunityGalleryImageVersionStorageProfile',
+    'CommunityGalleryInfo',
+    'CommunityGalleryOSDiskImage',
     'ComputeOperationListResult',
     'ComputeOperationValue',
     'DataDisk',
@@ -514,6 +533,7 @@ __all__ = [
     'OSDisk',
     'OSDiskImage',
     'OSDiskImageEncryption',
+    'OSDiskImageSecurityProfile',
     'OSProfile',
     'OrchestrationServiceStateInput',
     'OrchestrationServiceSummary',
@@ -532,6 +552,7 @@ __all__ = [
     'RecommendedMachineConfiguration',
     'RecoveryWalkResponse',
     'RegionalReplicationStatus',
+    'RegionalSharingStatus',
     'ReplicationStatus',
     'RequestRateByIntervalInput',
     'Resource',
@@ -578,6 +599,7 @@ __all__ = [
     'SharedGalleryList',
     'SharingProfile',
     'SharingProfileGroup',
+    'SharingStatus',
     'SharingUpdate',
     'Sku',
     'SoftDeletePolicy',
@@ -765,11 +787,13 @@ __all__ = [
     'RestorePointCollectionExpandOptions',
     'RollingUpgradeActionType',
     'RollingUpgradeStatusCode',
+    'SecurityProfileType',
     'SecurityTypes',
     'SelectPermissions',
     'SettingNames',
     'SharedToValues',
     'SharingProfileGroupTypes',
+    'SharingState',
     'SharingUpdateOperationTypes',
     'StatusLevelTypes',
     'StorageAccountType',
