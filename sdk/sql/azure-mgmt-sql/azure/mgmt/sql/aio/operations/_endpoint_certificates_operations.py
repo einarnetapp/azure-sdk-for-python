@@ -19,12 +19,12 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._private_link_resources_operations import build_get_request, build_list_by_server_request
+from ...operations._endpoint_certificates_operations import build_get_request, build_list_by_instance_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class PrivateLinkResourcesOperations:
-    """PrivateLinkResourcesOperations async operations.
+class EndpointCertificatesOperations:
+    """EndpointCertificatesOperations async operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -46,32 +46,32 @@ class PrivateLinkResourcesOperations:
         self._config = config
 
     @distributed_trace
-    def list_by_server(
+    def list_by_instance(
         self,
         resource_group_name: str,
-        server_name: str,
+        managed_instance_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.PrivateLinkResourceListResult"]:
-        """Gets the private link resources for SQL server.
+    ) -> AsyncIterable["_models.EndpointCertificateListResult"]:
+        """List certificates used on endpoints on the target instance.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal.
         :type resource_group_name: str
-        :param server_name: The name of the server.
-        :type server_name: str
-        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+        :param managed_instance_name: The name of the managed instance.
+        :type managed_instance_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PrivateLinkResourceListResult or the result of
+        :return: An iterator like instance of either EndpointCertificateListResult or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.PrivateLinkResourceListResult]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.EndpointCertificateListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.EndpointCertificateListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -79,21 +79,21 @@ class PrivateLinkResourcesOperations:
         def prepare_request(next_link=None):
             if not next_link:
                 
-                request = build_list_by_server_request(
+                request = build_list_by_instance_request(
                     resource_group_name=resource_group_name,
-                    server_name=server_name,
+                    managed_instance_name=managed_instance_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.list_by_server.metadata['url'],
+                    template_url=self.list_by_instance.metadata['url'],
                 )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
 
             else:
                 
-                request = build_list_by_server_request(
+                request = build_list_by_instance_request(
                     resource_group_name=resource_group_name,
-                    server_name=server_name,
+                    managed_instance_name=managed_instance_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=next_link,
@@ -104,7 +104,7 @@ class PrivateLinkResourcesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("PrivateLinkResourceListResult", pipeline_response)
+            deserialized = self._deserialize("EndpointCertificateListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -130,46 +130,46 @@ class PrivateLinkResourcesOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_server.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/privateLinkResources"}  # type: ignore
+    list_by_instance.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/endpointCertificates"}  # type: ignore
 
     @distributed_trace_async
     async def get(
         self,
         resource_group_name: str,
-        server_name: str,
-        group_name: str,
+        managed_instance_name: str,
+        endpoint_type: str,
         **kwargs: Any
-    ) -> "_models.PrivateLinkResource":
-        """Gets a private link resource for SQL server.
+    ) -> "_models.EndpointCertificate":
+        """Gets a certificate used on the endpoint with the given id.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal.
         :type resource_group_name: str
-        :param server_name: The name of the server.
-        :type server_name: str
-        :param group_name: The name of the private link resource.
-        :type group_name: str
-        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+        :param managed_instance_name: The name of the managed instance.
+        :type managed_instance_name: str
+        :param endpoint_type: Type of the endpoint whose certificate the customer is looking for.
+        :type endpoint_type: str
+        :keyword api_version: Api Version. Default value is "2021-11-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PrivateLinkResource, or the result of cls(response)
-        :rtype: ~azure.mgmt.sql.models.PrivateLinkResource
+        :return: EndpointCertificate, or the result of cls(response)
+        :rtype: ~azure.mgmt.sql.models.EndpointCertificate
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResource"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.EndpointCertificate"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
 
         
         request = build_get_request(
             resource_group_name=resource_group_name,
-            server_name=server_name,
-            group_name=group_name,
+            managed_instance_name=managed_instance_name,
+            endpoint_type=endpoint_type,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata['url'],
@@ -188,12 +188,12 @@ class PrivateLinkResourcesOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('PrivateLinkResource', pipeline_response)
+        deserialized = self._deserialize('EndpointCertificate', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/privateLinkResources/{groupName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/endpointCertificates/{endpointType}"}  # type: ignore
 

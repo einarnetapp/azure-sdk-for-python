@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -6,9 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import datetime
-import functools
-from typing import Any, AsyncIterable, Callable, Dict, Generic, Optional, TypeVar
-import warnings
+from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
@@ -78,29 +77,35 @@ class JobTargetExecutionsOperations:
         :param job_execution_id: The id of the job execution.
         :type job_execution_id: str
         :param create_time_min: If specified, only job executions created at or after the specified
-         time are included.
+         time are included. Default value is None.
         :type create_time_min: ~datetime.datetime
         :param create_time_max: If specified, only job executions created before the specified time are
-         included.
+         included. Default value is None.
         :type create_time_max: ~datetime.datetime
         :param end_time_min: If specified, only job executions completed at or after the specified time
-         are included.
+         are included. Default value is None.
         :type end_time_min: ~datetime.datetime
         :param end_time_max: If specified, only job executions completed before the specified time are
-         included.
+         included. Default value is None.
         :type end_time_max: ~datetime.datetime
         :param is_active: If specified, only active or only completed job executions are included.
+         Default value is None.
         :type is_active: bool
-        :param skip: The number of elements in the collection to skip.
+        :param skip: The number of elements in the collection to skip. Default value is None.
         :type skip: int
-        :param top: The number of elements to return from the collection.
+        :param top: The number of elements to return from the collection. Default value is None.
         :type top: int
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either JobExecutionListResult or the result of
          cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.JobExecutionListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.JobExecutionListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -116,6 +121,7 @@ class JobTargetExecutionsOperations:
                     job_name=job_name,
                     job_execution_id=job_execution_id,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -137,6 +143,7 @@ class JobTargetExecutionsOperations:
                     job_name=job_name,
                     job_execution_id=job_execution_id,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -161,7 +168,11 @@ class JobTargetExecutionsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -174,7 +185,7 @@ class JobTargetExecutionsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_job_execution.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/targets'}  # type: ignore
+    list_by_job_execution.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/targets"}  # type: ignore
 
     @distributed_trace
     def list_by_step(
@@ -210,29 +221,35 @@ class JobTargetExecutionsOperations:
         :param step_name: The name of the step.
         :type step_name: str
         :param create_time_min: If specified, only job executions created at or after the specified
-         time are included.
+         time are included. Default value is None.
         :type create_time_min: ~datetime.datetime
         :param create_time_max: If specified, only job executions created before the specified time are
-         included.
+         included. Default value is None.
         :type create_time_max: ~datetime.datetime
         :param end_time_min: If specified, only job executions completed at or after the specified time
-         are included.
+         are included. Default value is None.
         :type end_time_min: ~datetime.datetime
         :param end_time_max: If specified, only job executions completed before the specified time are
-         included.
+         included. Default value is None.
         :type end_time_max: ~datetime.datetime
         :param is_active: If specified, only active or only completed job executions are included.
+         Default value is None.
         :type is_active: bool
-        :param skip: The number of elements in the collection to skip.
+        :param skip: The number of elements in the collection to skip. Default value is None.
         :type skip: int
-        :param top: The number of elements to return from the collection.
+        :param top: The number of elements to return from the collection. Default value is None.
         :type top: int
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either JobExecutionListResult or the result of
          cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.JobExecutionListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.JobExecutionListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -249,6 +266,7 @@ class JobTargetExecutionsOperations:
                     job_execution_id=job_execution_id,
                     step_name=step_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -271,6 +289,7 @@ class JobTargetExecutionsOperations:
                     job_execution_id=job_execution_id,
                     step_name=step_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -295,7 +314,11 @@ class JobTargetExecutionsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -308,7 +331,7 @@ class JobTargetExecutionsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_step.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets'}  # type: ignore
+    list_by_step.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets"}  # type: ignore
 
     @distributed_trace_async
     async def get(
@@ -339,6 +362,9 @@ class JobTargetExecutionsOperations:
         :type step_name: str
         :param target_id: The target id.
         :type target_id: str
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: JobExecution, or the result of cls(response)
         :rtype: ~azure.mgmt.sql.models.JobExecution
@@ -350,6 +376,8 @@ class JobTargetExecutionsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}))
 
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -360,12 +388,17 @@ class JobTargetExecutionsOperations:
             step_name=step_name,
             target_id=target_id,
             subscription_id=self._config.subscription_id,
+            api_version=api_version,
             template_url=self.get.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -379,5 +412,5 @@ class JobTargetExecutionsOperations:
 
         return deserialized
 
-    get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}'}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/steps/{stepName}/targets/{targetId}"}  # type: ignore
 
