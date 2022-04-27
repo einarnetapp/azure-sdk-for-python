@@ -45,11 +45,12 @@ from ._models_py3 import ValueSecretInfo
 from ._service_linker_management_client_enums import (
     ActionType,
     AuthType,
+    AzureResourceType,
     ClientType,
     CreatedByType,
     Origin,
     SecretType,
-    Type,
+    TargetServiceType,
     VNetSolutionType,
     ValidationResultStatus,
 )
@@ -91,11 +92,12 @@ __all__ = [
     'ValueSecretInfo',
     'ActionType',
     'AuthType',
+    'AzureResourceType',
     'ClientType',
     'CreatedByType',
     'Origin',
     'SecretType',
-    'Type',
+    'TargetServiceType',
     'VNetSolutionType',
     'ValidationResultStatus',
 ]

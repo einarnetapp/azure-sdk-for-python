@@ -60,8 +60,8 @@ class AzureResourcePropertiesBase(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The azure resource type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "KeyVault".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.AzureResourceType
     """
 
     _validation = {
@@ -92,8 +92,8 @@ class AzureKeyVaultProperties(AzureResourcePropertiesBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The azure resource type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "KeyVault".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.AzureResourceType
     :ivar connect_as_kubernetes_csi_driver: True if connect via Kubernetes CSI Driver.
     :vartype connect_as_kubernetes_csi_driver: bool
     """
@@ -131,8 +131,8 @@ class TargetServiceBase(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     """
 
     _validation = {
@@ -163,8 +163,8 @@ class AzureResource(TargetServiceBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     :ivar id: The Id of azure resource.
     :vartype id: str
     :ivar resource_properties: The azure resource connection related properties.
@@ -206,8 +206,8 @@ class ConfluentBootstrapServer(TargetServiceBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     :ivar endpoint: The endpoint of service.
     :vartype endpoint: str
     """
@@ -242,8 +242,8 @@ class ConfluentSchemaRegistry(TargetServiceBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     :ivar endpoint: The endpoint of service.
     :vartype endpoint: str
     """
