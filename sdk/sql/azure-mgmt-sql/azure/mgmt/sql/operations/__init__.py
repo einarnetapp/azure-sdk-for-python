@@ -61,8 +61,6 @@ from ._managed_databases_operations import ManagedDatabasesOperations
 from ._managed_database_schemas_operations import ManagedDatabaseSchemasOperations
 from ._managed_database_security_alert_policies_operations import ManagedDatabaseSecurityAlertPoliciesOperations
 from ._managed_database_security_events_operations import ManagedDatabaseSecurityEventsOperations
-from ._managed_database_sensitivity_labels_operations import ManagedDatabaseSensitivityLabelsOperations
-from ._managed_database_recommended_sensitivity_labels_operations import ManagedDatabaseRecommendedSensitivityLabelsOperations
 from ._managed_database_tables_operations import ManagedDatabaseTablesOperations
 from ._managed_database_transparent_data_encryption_operations import ManagedDatabaseTransparentDataEncryptionOperations
 from ._managed_database_vulnerability_assessment_rule_baselines_operations import ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations
@@ -85,8 +83,6 @@ from ._private_endpoint_connections_operations import PrivateEndpointConnections
 from ._private_link_resources_operations import PrivateLinkResourcesOperations
 from ._recoverable_managed_databases_operations import RecoverableManagedDatabasesOperations
 from ._restore_points_operations import RestorePointsOperations
-from ._sensitivity_labels_operations import SensitivityLabelsOperations
-from ._recommended_sensitivity_labels_operations import RecommendedSensitivityLabelsOperations
 from ._server_advisors_operations import ServerAdvisorsOperations
 from ._server_automatic_tuning_operations import ServerAutomaticTuningOperations
 from ._server_azure_ad_administrators_operations import ServerAzureADAdministratorsOperations
@@ -127,6 +123,11 @@ from ._server_connection_policies_operations import ServerConnectionPoliciesOper
 from ._distributed_availability_groups_operations import DistributedAvailabilityGroupsOperations
 from ._server_trust_certificates_operations import ServerTrustCertificatesOperations
 from ._ipv6_firewall_rules_operations import IPv6FirewallRulesOperations
+from ._endpoint_certificates_operations import EndpointCertificatesOperations
+from ._managed_database_sensitivity_labels_operations import ManagedDatabaseSensitivityLabelsOperations
+from ._managed_database_recommended_sensitivity_labels_operations import ManagedDatabaseRecommendedSensitivityLabelsOperations
+from ._sensitivity_labels_operations import SensitivityLabelsOperations
+from ._recommended_sensitivity_labels_operations import RecommendedSensitivityLabelsOperations
 
 __all__ = [
     'RecoverableDatabasesOperations',
@@ -184,8 +185,6 @@ __all__ = [
     'ManagedDatabaseSchemasOperations',
     'ManagedDatabaseSecurityAlertPoliciesOperations',
     'ManagedDatabaseSecurityEventsOperations',
-    'ManagedDatabaseSensitivityLabelsOperations',
-    'ManagedDatabaseRecommendedSensitivityLabelsOperations',
     'ManagedDatabaseTablesOperations',
     'ManagedDatabaseTransparentDataEncryptionOperations',
     'ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations',
@@ -208,8 +207,6 @@ __all__ = [
     'PrivateLinkResourcesOperations',
     'RecoverableManagedDatabasesOperations',
     'RestorePointsOperations',
-    'SensitivityLabelsOperations',
-    'RecommendedSensitivityLabelsOperations',
     'ServerAdvisorsOperations',
     'ServerAutomaticTuningOperations',
     'ServerAzureADAdministratorsOperations',
@@ -250,4 +247,9 @@ __all__ = [
     'DistributedAvailabilityGroupsOperations',
     'ServerTrustCertificatesOperations',
     'IPv6FirewallRulesOperations',
+    'EndpointCertificatesOperations',
+    'ManagedDatabaseSensitivityLabelsOperations',
+    'ManagedDatabaseRecommendedSensitivityLabelsOperations',
+    'SensitivityLabelsOperations',
+    'RecommendedSensitivityLabelsOperations',
 ]
