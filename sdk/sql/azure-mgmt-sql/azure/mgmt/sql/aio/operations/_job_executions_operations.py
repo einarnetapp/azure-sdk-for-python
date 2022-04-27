@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -6,9 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import datetime
-import functools
-from typing import Any, AsyncIterable, Callable, Dict, Generic, Optional, TypeVar, Union
-import warnings
+from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar, Union
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
@@ -74,29 +73,35 @@ class JobExecutionsOperations:
         :param job_agent_name: The name of the job agent.
         :type job_agent_name: str
         :param create_time_min: If specified, only job executions created at or after the specified
-         time are included.
+         time are included. Default value is None.
         :type create_time_min: ~datetime.datetime
         :param create_time_max: If specified, only job executions created before the specified time are
-         included.
+         included. Default value is None.
         :type create_time_max: ~datetime.datetime
         :param end_time_min: If specified, only job executions completed at or after the specified time
-         are included.
+         are included. Default value is None.
         :type end_time_min: ~datetime.datetime
         :param end_time_max: If specified, only job executions completed before the specified time are
-         included.
+         included. Default value is None.
         :type end_time_max: ~datetime.datetime
         :param is_active: If specified, only active or only completed job executions are included.
+         Default value is None.
         :type is_active: bool
-        :param skip: The number of elements in the collection to skip.
+        :param skip: The number of elements in the collection to skip. Default value is None.
         :type skip: int
-        :param top: The number of elements to return from the collection.
+        :param top: The number of elements to return from the collection. Default value is None.
         :type top: int
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either JobExecutionListResult or the result of
          cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.JobExecutionListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.JobExecutionListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -110,6 +115,7 @@ class JobExecutionsOperations:
                     server_name=server_name,
                     job_agent_name=job_agent_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -129,6 +135,7 @@ class JobExecutionsOperations:
                     server_name=server_name,
                     job_agent_name=job_agent_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -153,7 +160,11 @@ class JobExecutionsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -166,10 +177,10 @@ class JobExecutionsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_agent.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/executions'}  # type: ignore
+    list_by_agent.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/executions"}  # type: ignore
 
     @distributed_trace_async
-    async def cancel(
+    async def cancel(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
         server_name: str,
@@ -191,6 +202,9 @@ class JobExecutionsOperations:
         :type job_name: str
         :param job_execution_id: The id of the job execution to cancel.
         :type job_execution_id: str
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -202,6 +216,8 @@ class JobExecutionsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}))
 
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         
         request = build_cancel_request(
             resource_group_name=resource_group_name,
@@ -210,12 +226,17 @@ class JobExecutionsOperations:
             job_name=job_name,
             job_execution_id=job_execution_id,
             subscription_id=self._config.subscription_id,
+            api_version=api_version,
             template_url=self.cancel.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -225,7 +246,7 @@ class JobExecutionsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    cancel.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel'}  # type: ignore
+    cancel.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}/cancel"}  # type: ignore
 
 
     async def _create_initial(
@@ -242,6 +263,8 @@ class JobExecutionsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}))
 
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         
         request = build_create_request_initial(
             resource_group_name=resource_group_name,
@@ -249,12 +272,17 @@ class JobExecutionsOperations:
             job_agent_name=job_agent_name,
             job_name=job_name,
             subscription_id=self._config.subscription_id,
+            api_version=api_version,
             template_url=self._create_initial.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 202]:
@@ -270,7 +298,7 @@ class JobExecutionsOperations:
 
         return deserialized
 
-    _create_initial.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start'}  # type: ignore
+    _create_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start"}  # type: ignore
 
 
     @distributed_trace_async
@@ -293,6 +321,9 @@ class JobExecutionsOperations:
         :type job_agent_name: str
         :param job_name: The name of the job to get.
         :type job_name: str
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -306,7 +337,8 @@ class JobExecutionsOperations:
         :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.sql.models.JobExecution]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        polling = kwargs.pop('polling', True)  # type: Union[bool, azure.core.polling.AsyncPollingMethod]
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+        polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.JobExecution"]
         lro_delay = kwargs.pop(
             'polling_interval',
@@ -319,6 +351,7 @@ class JobExecutionsOperations:
                 server_name=server_name,
                 job_agent_name=job_agent_name,
                 job_name=job_name,
+                api_version=api_version,
                 cls=lambda x,y,z: x,
                 **kwargs
             )
@@ -342,10 +375,9 @@ class JobExecutionsOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output
             )
-        else:
-            return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start'}  # type: ignore
+    begin_create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/start"}  # type: ignore
 
     @distributed_trace
     def list_by_job(
@@ -375,29 +407,35 @@ class JobExecutionsOperations:
         :param job_name: The name of the job to get.
         :type job_name: str
         :param create_time_min: If specified, only job executions created at or after the specified
-         time are included.
+         time are included. Default value is None.
         :type create_time_min: ~datetime.datetime
         :param create_time_max: If specified, only job executions created before the specified time are
-         included.
+         included. Default value is None.
         :type create_time_max: ~datetime.datetime
         :param end_time_min: If specified, only job executions completed at or after the specified time
-         are included.
+         are included. Default value is None.
         :type end_time_min: ~datetime.datetime
         :param end_time_max: If specified, only job executions completed before the specified time are
-         included.
+         included. Default value is None.
         :type end_time_max: ~datetime.datetime
         :param is_active: If specified, only active or only completed job executions are included.
+         Default value is None.
         :type is_active: bool
-        :param skip: The number of elements in the collection to skip.
+        :param skip: The number of elements in the collection to skip. Default value is None.
         :type skip: int
-        :param top: The number of elements to return from the collection.
+        :param top: The number of elements to return from the collection. Default value is None.
         :type top: int
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either JobExecutionListResult or the result of
          cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sql.models.JobExecutionListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.JobExecutionListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -412,6 +450,7 @@ class JobExecutionsOperations:
                     job_agent_name=job_agent_name,
                     job_name=job_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -432,6 +471,7 @@ class JobExecutionsOperations:
                     job_agent_name=job_agent_name,
                     job_name=job_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     create_time_min=create_time_min,
                     create_time_max=create_time_max,
                     end_time_min=end_time_min,
@@ -456,7 +496,11 @@ class JobExecutionsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -469,7 +513,7 @@ class JobExecutionsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_job.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions'}  # type: ignore
+    list_by_job.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions"}  # type: ignore
 
     @distributed_trace_async
     async def get(
@@ -494,6 +538,9 @@ class JobExecutionsOperations:
         :type job_name: str
         :param job_execution_id: The id of the job execution.
         :type job_execution_id: str
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: JobExecution, or the result of cls(response)
         :rtype: ~azure.mgmt.sql.models.JobExecution
@@ -505,6 +552,8 @@ class JobExecutionsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}))
 
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -513,12 +562,17 @@ class JobExecutionsOperations:
             job_name=job_name,
             job_execution_id=job_execution_id,
             subscription_id=self._config.subscription_id,
+            api_version=api_version,
             template_url=self.get.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -532,7 +586,7 @@ class JobExecutionsOperations:
 
         return deserialized
 
-    get.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}'}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}"}  # type: ignore
 
 
     async def _create_or_update_initial(
@@ -550,6 +604,8 @@ class JobExecutionsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}))
 
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+
         
         request = build_create_or_update_request_initial(
             resource_group_name=resource_group_name,
@@ -558,12 +614,17 @@ class JobExecutionsOperations:
             job_name=job_name,
             job_execution_id=job_execution_id,
             subscription_id=self._config.subscription_id,
+            api_version=api_version,
             template_url=self._create_or_update_initial.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 201, 202]:
@@ -582,7 +643,7 @@ class JobExecutionsOperations:
 
         return deserialized
 
-    _create_or_update_initial.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}'}  # type: ignore
+    _create_or_update_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}"}  # type: ignore
 
 
     @distributed_trace_async
@@ -608,6 +669,9 @@ class JobExecutionsOperations:
         :type job_name: str
         :param job_execution_id: The job execution id to create the job execution under.
         :type job_execution_id: str
+        :keyword api_version: Api Version. Default value is "2020-11-01-preview". Note that overriding
+         this default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -621,7 +685,8 @@ class JobExecutionsOperations:
         :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.sql.models.JobExecution]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        polling = kwargs.pop('polling', True)  # type: Union[bool, azure.core.polling.AsyncPollingMethod]
+        api_version = kwargs.pop('api_version', "2020-11-01-preview")  # type: str
+        polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.JobExecution"]
         lro_delay = kwargs.pop(
             'polling_interval',
@@ -635,6 +700,7 @@ class JobExecutionsOperations:
                 job_agent_name=job_agent_name,
                 job_name=job_name,
                 job_execution_id=job_execution_id,
+                api_version=api_version,
                 cls=lambda x,y,z: x,
                 **kwargs
             )
@@ -658,7 +724,6 @@ class JobExecutionsOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output
             )
-        else:
-            return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create_or_update.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}'}  # type: ignore
+    begin_create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/executions/{jobExecutionId}"}  # type: ignore
