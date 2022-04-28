@@ -516,6 +516,13 @@ class EntityMappingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Submission mail entity type.
     SUBMISSION_MAIL = "SubmissionMail"
 
+class EntityProviders(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The entity provider that is synced.
+    """
+
+    ACTIVE_DIRECTORY = "ActiveDirectory"
+    AZURE_ACTIVE_DIRECTORY = "AzureActiveDirectory"
+
 class EntityQueryKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the entity query
     """
@@ -540,6 +547,8 @@ class EntityTimelineKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     BOOKMARK = "Bookmark"
     #: security alerts.
     SECURITY_ALERT = "SecurityAlert"
+    #: anomaly.
+    ANOMALY = "Anomaly"
 
 class EntityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of the entity
@@ -588,7 +597,7 @@ class EntityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Entity represents submission mail in the system.
     SUBMISSION_MAIL = "SubmissionMail"
 
-class Enum12(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Enum13(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     EXPANSION = "Expansion"
     ACTIVITY = "Activity"
@@ -614,6 +623,12 @@ class FileHashAlgorithm(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SHA256 = "SHA256"
     #: SHA256 Authenticode hash type.
     SHA256_AC = "SHA256AC"
+
+class GetInsightsError(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """the query kind
+    """
+
+    INSIGHT = "Insight"
 
 class IncidentClassification(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The reason the incident was closed
@@ -920,6 +935,12 @@ class RepoType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     GITHUB = "Github"
     DEV_OPS = "DevOps"
 
+class SecurityMLAnalyticsSettingsKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The kind of security ML analytics settings
+    """
+
+    ANOMALY = "Anomaly"
+
 class SettingKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the setting
     """
@@ -928,6 +949,15 @@ class SettingKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     EYES_ON = "EyesOn"
     ENTITY_ANALYTICS = "EntityAnalytics"
     UEBA = "Ueba"
+
+class SettingsStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The anomaly SecurityMLAnalyticsSettings status
+    """
+
+    #: Anomaly settings status in Production mode.
+    PRODUCTION = "Production"
+    #: Anomaly settings status in Flighting mode.
+    FLIGHTING = "Flighting"
 
 class SettingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the setting

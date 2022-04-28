@@ -41,6 +41,8 @@ from ._models_py3 import AlertRuleTemplatesList
 from ._models_py3 import AlertRulesList
 from ._models_py3 import AlertsDataTypeOfDataConnector
 from ._models_py3 import Anomalies
+from ._models_py3 import AnomalySecurityMLAnalyticsSettings
+from ._models_py3 import AnomalyTimelineItem
 from ._models_py3 import AutomationRule
 from ._models_py3 import AutomationRuleAction
 from ._models_py3 import AutomationRuleCondition
@@ -162,7 +164,7 @@ from ._models_py3 import FusionTemplateSourceSetting
 from ._models_py3 import FusionTemplateSourceSubType
 from ._models_py3 import FusionTemplateSubTypeSeverityFilter
 from ._models_py3 import GeoLocation
-from ._models_py3 import GetInsightsError
+from ._models_py3 import GetInsightsErrorKind
 from ._models_py3 import GetInsightsResultsMetadata
 from ._models_py3 import GetQueriesResponse
 from ._models_py3 import GitHubResourceInfo
@@ -321,6 +323,9 @@ from ._models_py3 import SecurityAlertPropertiesConfidenceReasonsItem
 from ._models_py3 import SecurityAlertTimelineItem
 from ._models_py3 import SecurityGroupEntity
 from ._models_py3 import SecurityGroupEntityProperties
+from ._models_py3 import SecurityMLAnalyticsSetting
+from ._models_py3 import SecurityMLAnalyticsSettingsDataSource
+from ._models_py3 import SecurityMLAnalyticsSettingsList
 from ._models_py3 import SentinelOnboardingState
 from ._models_py3 import SentinelOnboardingStatesList
 from ._models_py3 import SettingList
@@ -410,13 +415,15 @@ from ._security_insights_enums import (
     EntityItemQueryKind,
     EntityKind,
     EntityMappingType,
+    EntityProviders,
     EntityQueryKind,
     EntityQueryTemplateKind,
     EntityTimelineKind,
     EntityType,
-    Enum12,
+    Enum13,
     EventGroupingAggregationKind,
     FileHashAlgorithm,
+    GetInsightsError,
     IncidentClassification,
     IncidentClassificationReason,
     IncidentLabelType,
@@ -436,8 +443,10 @@ from ._security_insights_enums import (
     RegistryHive,
     RegistryValueKind,
     RepoType,
+    SecurityMLAnalyticsSettingsKind,
     SettingKind,
     SettingType,
+    SettingsStatus,
     SkuKind,
     SourceKind,
     SourceType,
@@ -488,6 +497,8 @@ __all__ = [
     'AlertRulesList',
     'AlertsDataTypeOfDataConnector',
     'Anomalies',
+    'AnomalySecurityMLAnalyticsSettings',
+    'AnomalyTimelineItem',
     'AutomationRule',
     'AutomationRuleAction',
     'AutomationRuleCondition',
@@ -609,7 +620,7 @@ __all__ = [
     'FusionTemplateSourceSubType',
     'FusionTemplateSubTypeSeverityFilter',
     'GeoLocation',
-    'GetInsightsError',
+    'GetInsightsErrorKind',
     'GetInsightsResultsMetadata',
     'GetQueriesResponse',
     'GitHubResourceInfo',
@@ -768,6 +779,9 @@ __all__ = [
     'SecurityAlertTimelineItem',
     'SecurityGroupEntity',
     'SecurityGroupEntityProperties',
+    'SecurityMLAnalyticsSetting',
+    'SecurityMLAnalyticsSettingsDataSource',
+    'SecurityMLAnalyticsSettingsList',
     'SentinelOnboardingState',
     'SentinelOnboardingStatesList',
     'SettingList',
@@ -854,13 +868,15 @@ __all__ = [
     'EntityItemQueryKind',
     'EntityKind',
     'EntityMappingType',
+    'EntityProviders',
     'EntityQueryKind',
     'EntityQueryTemplateKind',
     'EntityTimelineKind',
     'EntityType',
-    'Enum12',
+    'Enum13',
     'EventGroupingAggregationKind',
     'FileHashAlgorithm',
+    'GetInsightsError',
     'IncidentClassification',
     'IncidentClassificationReason',
     'IncidentLabelType',
@@ -880,8 +896,10 @@ __all__ = [
     'RegistryHive',
     'RegistryValueKind',
     'RepoType',
+    'SecurityMLAnalyticsSettingsKind',
     'SettingKind',
     'SettingType',
+    'SettingsStatus',
     'SkuKind',
     'SourceKind',
     'SourceType',

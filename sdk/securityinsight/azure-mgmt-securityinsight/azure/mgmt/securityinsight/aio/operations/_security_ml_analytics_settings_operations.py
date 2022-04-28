@@ -19,12 +19,12 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._incident_comments_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
+from ...operations._security_ml_analytics_settings_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class IncidentCommentsOperations:
-    """IncidentCommentsOperations async operations.
+class SecurityMLAnalyticsSettingsOperations:
+    """SecurityMLAnalyticsSettingsOperations async operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -50,42 +50,24 @@ class IncidentCommentsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        incident_id: str,
-        filter: Optional[str] = None,
-        orderby: Optional[str] = None,
-        top: Optional[int] = None,
-        skip_token: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.IncidentCommentList"]:
-        """Gets all incident comments.
+    ) -> AsyncIterable["_models.SecurityMLAnalyticsSettingsList"]:
+        """Gets all Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param incident_id: Incident ID.
-        :type incident_id: str
-        :param filter: Filters the results, based on a Boolean condition. Optional. Default value is
-         None.
-        :type filter: str
-        :param orderby: Sorts the results. Optional. Default value is None.
-        :type orderby: str
-        :param top: Returns only the first n results. Optional. Default value is None.
-        :type top: int
-        :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
-         a previous response contains a nextLink element, the value of the nextLink element will include
-         a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
-         Default value is None.
-        :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either IncidentCommentList or the result of cls(response)
+        :return: An iterator like instance of either SecurityMLAnalyticsSettingsList or the result of
+         cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.IncidentCommentList]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsList]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.IncidentCommentList"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SecurityMLAnalyticsSettingsList"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -97,12 +79,7 @@ class IncidentCommentsOperations:
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
-                    incident_id=incident_id,
                     api_version=api_version,
-                    filter=filter,
-                    orderby=orderby,
-                    top=top,
-                    skip_token=skip_token,
                     template_url=self.list.metadata['url'],
                 )
                 request = _convert_request(request)
@@ -114,12 +91,7 @@ class IncidentCommentsOperations:
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
-                    incident_id=incident_id,
                     api_version=api_version,
-                    filter=filter,
-                    orderby=orderby,
-                    top=top,
-                    skip_token=skip_token,
                     template_url=next_link,
                 )
                 request = _convert_request(request)
@@ -128,7 +100,7 @@ class IncidentCommentsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("IncidentCommentList", pipeline_response)
+            deserialized = self._deserialize("SecurityMLAnalyticsSettingsList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -154,33 +126,30 @@ class IncidentCommentsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings"}  # type: ignore
 
     @distributed_trace_async
     async def get(
         self,
         resource_group_name: str,
         workspace_name: str,
-        incident_id: str,
-        incident_comment_id: str,
+        settings_resource_name: str,
         **kwargs: Any
-    ) -> "_models.IncidentComment":
-        """Gets an incident comment.
+    ) -> "_models.SecurityMLAnalyticsSetting":
+        """Gets the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param incident_id: Incident ID.
-        :type incident_id: str
-        :param incident_comment_id: Incident comment ID.
-        :type incident_comment_id: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: IncidentComment, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.IncidentComment
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.IncidentComment"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SecurityMLAnalyticsSetting"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -193,8 +162,7 @@ class IncidentCommentsOperations:
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            incident_id=incident_id,
-            incident_comment_id=incident_comment_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
         )
@@ -212,14 +180,14 @@ class IncidentCommentsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('IncidentComment', pipeline_response)
+        deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
 
     @distributed_trace_async
@@ -227,29 +195,27 @@ class IncidentCommentsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        incident_id: str,
-        incident_comment_id: str,
-        incident_comment: "_models.IncidentComment",
+        settings_resource_name: str,
+        security_ml_analytics_setting: "_models.SecurityMLAnalyticsSetting",
         **kwargs: Any
-    ) -> "_models.IncidentComment":
-        """Creates or updates the incident comment.
+    ) -> "_models.SecurityMLAnalyticsSetting":
+        """Creates or updates the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param incident_id: Incident ID.
-        :type incident_id: str
-        :param incident_comment_id: Incident comment ID.
-        :type incident_comment_id: str
-        :param incident_comment: The incident comment.
-        :type incident_comment: ~azure.mgmt.securityinsight.models.IncidentComment
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
+        :param security_ml_analytics_setting: The security ML Analytics setting.
+        :type security_ml_analytics_setting:
+         ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: IncidentComment, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.IncidentComment
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.IncidentComment"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SecurityMLAnalyticsSetting"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -258,14 +224,13 @@ class IncidentCommentsOperations:
         api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
-        _json = self._serialize.body(incident_comment, 'IncidentComment')
+        _json = self._serialize.body(security_ml_analytics_setting, 'SecurityMLAnalyticsSetting')
 
         request = build_create_or_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            incident_id=incident_id,
-            incident_comment_id=incident_comment_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -286,17 +251,17 @@ class IncidentCommentsOperations:
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('IncidentComment', pipeline_response)
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('IncidentComment', pipeline_response)
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}"}  # type: ignore
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
 
     @distributed_trace_async
@@ -304,20 +269,17 @@ class IncidentCommentsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        incident_id: str,
-        incident_comment_id: str,
+        settings_resource_name: str,
         **kwargs: Any
     ) -> None:
-        """Delete the incident comment.
+        """Delete the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param incident_id: Incident ID.
-        :type incident_id: str
-        :param incident_comment_id: Incident comment ID.
-        :type incident_comment_id: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -336,8 +298,7 @@ class IncidentCommentsOperations:
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            incident_id=incident_id,
-            incident_comment_id=incident_comment_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
         )
@@ -358,5 +319,5 @@ class IncidentCommentsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
