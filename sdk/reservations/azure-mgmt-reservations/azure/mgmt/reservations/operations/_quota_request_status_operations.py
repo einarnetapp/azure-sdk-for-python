@@ -228,10 +228,8 @@ class QuotaRequestStatusOperations(object):
 
             * - Field
               - Supported operators
-            * -
-
-
-         |requestSubmitTime | ge, le, eq, gt, lt. Default value is None.
+            * - requestSubmitTime
+              - ge, le, eq, gt, lt. Default value is None.
         :type filter: str
         :param top: Number of records to return. Default value is None.
         :type top: int
