@@ -6036,8 +6036,6 @@ class BackendAddressPool(SubResource):
     :vartype etag: str
     :ivar type: Type of the resource.
     :vartype type: str
-    :ivar location: The location of the backend address pool.
-    :vartype location: str
     :ivar load_balancer_backend_addresses: An array of backend addresses.
     :vartype load_balancer_backend_addresses:
      list[~azure.mgmt.network.v2020_11_01.models.LoadBalancerBackendAddress]
@@ -6073,7 +6071,6 @@ class BackendAddressPool(SubResource):
         'name': {'key': 'name', 'type': 'str'},
         'etag': {'key': 'etag', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'properties.location', 'type': 'str'},
         'load_balancer_backend_addresses': {'key': 'properties.loadBalancerBackendAddresses', 'type': '[LoadBalancerBackendAddress]'},
         'backend_ip_configurations': {'key': 'properties.backendIPConfigurations', 'type': '[NetworkInterfaceIPConfiguration]'},
         'load_balancing_rules': {'key': 'properties.loadBalancingRules', 'type': '[SubResource]'},
@@ -6087,7 +6084,6 @@ class BackendAddressPool(SubResource):
         *,
         id: Optional[str] = None,
         name: Optional[str] = None,
-        location: Optional[str] = None,
         load_balancer_backend_addresses: Optional[List["LoadBalancerBackendAddress"]] = None,
         **kwargs
     ):
@@ -6097,8 +6093,6 @@ class BackendAddressPool(SubResource):
         :keyword name: The name of the resource that is unique within the set of backend address pools
          used by the load balancer. This name can be used to access the resource.
         :paramtype name: str
-        :keyword location: The location of the backend address pool.
-        :paramtype location: str
         :keyword load_balancer_backend_addresses: An array of backend addresses.
         :paramtype load_balancer_backend_addresses:
          list[~azure.mgmt.network.v2020_11_01.models.LoadBalancerBackendAddress]
@@ -6107,7 +6101,6 @@ class BackendAddressPool(SubResource):
         self.name = name
         self.etag = None
         self.type = None
-        self.location = location
         self.load_balancer_backend_addresses = load_balancer_backend_addresses
         self.backend_ip_configurations = None
         self.load_balancing_rules = None
