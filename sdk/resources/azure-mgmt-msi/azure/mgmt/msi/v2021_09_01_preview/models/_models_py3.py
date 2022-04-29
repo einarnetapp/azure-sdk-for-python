@@ -20,7 +20,7 @@ class AssociatedResourcesListResult(msrest.serialization.Model):
     :vartype total_count: float
     :ivar value: The collection of Azure resources returned by the resource action to get a list of
      assigned resources.
-    :vartype value: list[~azure.mgmt.msi.v2019_09_01_preview.models.AzureResource]
+    :vartype value: list[~azure.mgmt.msi.v2021_09_01_preview.models.AzureResource]
     :ivar next_link: The url to get the next page of results, if any.
     :vartype next_link: str
     """
@@ -113,7 +113,7 @@ class CloudErrorBody(msrest.serialization.Model):
      error.
     :vartype target: str
     :ivar details: A list of additional details about the error.
-    :vartype details: list[~azure.mgmt.msi.v2019_09_01_preview.models.CloudErrorBody]
+    :vartype details: list[~azure.mgmt.msi.v2021_09_01_preview.models.CloudErrorBody]
     """
 
     _attribute_map = {
@@ -142,7 +142,7 @@ class CloudErrorBody(msrest.serialization.Model):
          error.
         :paramtype target: str
         :keyword details: A list of additional details about the error.
-        :paramtype details: list[~azure.mgmt.msi.v2019_09_01_preview.models.CloudErrorBody]
+        :paramtype details: list[~azure.mgmt.msi.v2021_09_01_preview.models.CloudErrorBody]
         """
         super(CloudErrorBody, self).__init__(**kwargs)
         self.code = code
@@ -388,7 +388,7 @@ class Operation(msrest.serialization.Model):
      {provider}/{resource}/{operation}.
     :vartype name: str
     :ivar display: The object that describes the operation.
-    :vartype display: ~azure.mgmt.msi.v2019_09_01_preview.models.OperationDisplay
+    :vartype display: ~azure.mgmt.msi.v2021_09_01_preview.models.OperationDisplay
     """
 
     _attribute_map = {
@@ -408,7 +408,7 @@ class Operation(msrest.serialization.Model):
          {provider}/{resource}/{operation}.
         :paramtype name: str
         :keyword display: The object that describes the operation.
-        :paramtype display: ~azure.mgmt.msi.v2019_09_01_preview.models.OperationDisplay
+        :paramtype display: ~azure.mgmt.msi.v2021_09_01_preview.models.OperationDisplay
         """
         super(Operation, self).__init__(**kwargs)
         self.name = name
@@ -465,7 +465,7 @@ class OperationListResult(msrest.serialization.Model):
     """A list of operations supported by Microsoft.ManagedIdentity Resource Provider.
 
     :ivar value: A list of operations supported by Microsoft.ManagedIdentity Resource Provider.
-    :vartype value: list[~azure.mgmt.msi.v2019_09_01_preview.models.Operation]
+    :vartype value: list[~azure.mgmt.msi.v2021_09_01_preview.models.Operation]
     :ivar next_link: The url to get the next page of results, if any.
     :vartype next_link: str
     """
@@ -484,7 +484,7 @@ class OperationListResult(msrest.serialization.Model):
     ):
         """
         :keyword value: A list of operations supported by Microsoft.ManagedIdentity Resource Provider.
-        :paramtype value: list[~azure.mgmt.msi.v2019_09_01_preview.models.Operation]
+        :paramtype value: list[~azure.mgmt.msi.v2021_09_01_preview.models.Operation]
         :keyword next_link: The url to get the next page of results, if any.
         :paramtype next_link: str
         """
@@ -610,7 +610,7 @@ class UserAssignedIdentitiesListResult(msrest.serialization.Model):
     """Values returned by the List operation.
 
     :ivar value: The collection of userAssignedIdentities returned by the listing operation.
-    :vartype value: list[~azure.mgmt.msi.v2019_09_01_preview.models.Identity]
+    :vartype value: list[~azure.mgmt.msi.v2021_09_01_preview.models.Identity]
     :ivar next_link: The url to get the next page of results, if any.
     :vartype next_link: str
     """
@@ -629,7 +629,7 @@ class UserAssignedIdentitiesListResult(msrest.serialization.Model):
     ):
         """
         :keyword value: The collection of userAssignedIdentities returned by the listing operation.
-        :paramtype value: list[~azure.mgmt.msi.v2019_09_01_preview.models.Identity]
+        :paramtype value: list[~azure.mgmt.msi.v2021_09_01_preview.models.Identity]
         :keyword next_link: The url to get the next page of results, if any.
         :paramtype next_link: str
         """

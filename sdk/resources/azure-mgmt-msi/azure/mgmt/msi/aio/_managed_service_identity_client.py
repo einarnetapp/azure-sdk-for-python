@@ -11,10 +11,11 @@
 
 from typing import Any, Optional, TYPE_CHECKING
 
+from msrest import Deserializer, Serializer
+
 from azure.mgmt.core import AsyncARMPipelineClient
 from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
-from msrest import Deserializer, Serializer
 
 from ._configuration import ManagedServiceIdentityClientConfiguration
 
@@ -88,12 +89,16 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-11-30: :mod:`v2018_11_30.models<azure.mgmt.msi.v2018_11_30.models>`
            * 2021-09-30-preview: :mod:`v2019_09_01_preview.models<azure.mgmt.msi.v2019_09_01_preview.models>`
+           * 2021-09-30-preview: :mod:`v2021_09_01_preview.models<azure.mgmt.msi.v2021_09_01_preview.models>`
         """
         if api_version == '2018-11-30':
             from ..v2018_11_30 import models
             return models
         elif api_version == '2021-09-30-preview':
             from ..v2019_09_01_preview import models
+            return models
+        elif api_version == '2021-09-30-preview':
+            from ..v2021_09_01_preview import models
             return models
         raise ValueError("API version {} is not available".format(api_version))
 
@@ -103,12 +108,15 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-11-30: :class:`Operations<azure.mgmt.msi.v2018_11_30.aio.operations.Operations>`
            * 2021-09-30-preview: :class:`Operations<azure.mgmt.msi.v2019_09_01_preview.aio.operations.Operations>`
+           * 2021-09-30-preview: :class:`Operations<azure.mgmt.msi.v2021_09_01_preview.aio.operations.Operations>`
         """
         api_version = self._get_api_version('operations')
         if api_version == '2018-11-30':
             from ..v2018_11_30.aio.operations import Operations as OperationClass
         elif api_version == '2021-09-30-preview':
             from ..v2019_09_01_preview.aio.operations import Operations as OperationClass
+        elif api_version == '2021-09-30-preview':
+            from ..v2021_09_01_preview.aio.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -119,12 +127,15 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-11-30: :class:`SystemAssignedIdentitiesOperations<azure.mgmt.msi.v2018_11_30.aio.operations.SystemAssignedIdentitiesOperations>`
            * 2021-09-30-preview: :class:`SystemAssignedIdentitiesOperations<azure.mgmt.msi.v2019_09_01_preview.aio.operations.SystemAssignedIdentitiesOperations>`
+           * 2021-09-30-preview: :class:`SystemAssignedIdentitiesOperations<azure.mgmt.msi.v2021_09_01_preview.aio.operations.SystemAssignedIdentitiesOperations>`
         """
         api_version = self._get_api_version('system_assigned_identities')
         if api_version == '2018-11-30':
             from ..v2018_11_30.aio.operations import SystemAssignedIdentitiesOperations as OperationClass
         elif api_version == '2021-09-30-preview':
             from ..v2019_09_01_preview.aio.operations import SystemAssignedIdentitiesOperations as OperationClass
+        elif api_version == '2021-09-30-preview':
+            from ..v2021_09_01_preview.aio.operations import SystemAssignedIdentitiesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'system_assigned_identities'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -135,12 +146,15 @@ class ManagedServiceIdentityClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-11-30: :class:`UserAssignedIdentitiesOperations<azure.mgmt.msi.v2018_11_30.aio.operations.UserAssignedIdentitiesOperations>`
            * 2021-09-30-preview: :class:`UserAssignedIdentitiesOperations<azure.mgmt.msi.v2019_09_01_preview.aio.operations.UserAssignedIdentitiesOperations>`
+           * 2021-09-30-preview: :class:`UserAssignedIdentitiesOperations<azure.mgmt.msi.v2021_09_01_preview.aio.operations.UserAssignedIdentitiesOperations>`
         """
         api_version = self._get_api_version('user_assigned_identities')
         if api_version == '2018-11-30':
             from ..v2018_11_30.aio.operations import UserAssignedIdentitiesOperations as OperationClass
         elif api_version == '2021-09-30-preview':
             from ..v2019_09_01_preview.aio.operations import UserAssignedIdentitiesOperations as OperationClass
+        elif api_version == '2021-09-30-preview':
+            from ..v2021_09_01_preview.aio.operations import UserAssignedIdentitiesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'user_assigned_identities'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
