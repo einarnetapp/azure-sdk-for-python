@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import CheckNameAvailabilityParameters
+from ._models_py3 import CorsConfiguration
 from ._models_py3 import DicomService
 from ._models_py3 import DicomServiceAuthenticationConfiguration
 from ._models_py3 import DicomServiceCollection
@@ -99,6 +100,7 @@ from ._healthcare_apis_management_client_enums import (
 
 __all__ = [
     'CheckNameAvailabilityParameters',
+    'CorsConfiguration',
     'DicomService',
     'DicomServiceAuthenticationConfiguration',
     'DicomServiceCollection',

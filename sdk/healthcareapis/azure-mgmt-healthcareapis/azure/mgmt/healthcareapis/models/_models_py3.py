@@ -54,6 +54,63 @@ class CheckNameAvailabilityParameters(msrest.serialization.Model):
         self.type = type
 
 
+class CorsConfiguration(msrest.serialization.Model):
+    """The settings for the CORS configuration of the service instance.
+
+    :ivar origins: The origins to be allowed via CORS.
+    :vartype origins: list[str]
+    :ivar headers: The headers to be allowed via CORS.
+    :vartype headers: list[str]
+    :ivar methods: The methods to be allowed via CORS.
+    :vartype methods: list[str]
+    :ivar max_age: The max age to be allowed via CORS.
+    :vartype max_age: int
+    :ivar allow_credentials: If credentials are allowed via CORS.
+    :vartype allow_credentials: bool
+    """
+
+    _validation = {
+        'max_age': {'maximum': 99999, 'minimum': 0},
+    }
+
+    _attribute_map = {
+        'origins': {'key': 'origins', 'type': '[str]'},
+        'headers': {'key': 'headers', 'type': '[str]'},
+        'methods': {'key': 'methods', 'type': '[str]'},
+        'max_age': {'key': 'maxAge', 'type': 'int'},
+        'allow_credentials': {'key': 'allowCredentials', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        origins: Optional[List[str]] = None,
+        headers: Optional[List[str]] = None,
+        methods: Optional[List[str]] = None,
+        max_age: Optional[int] = None,
+        allow_credentials: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword origins: The origins to be allowed via CORS.
+        :paramtype origins: list[str]
+        :keyword headers: The headers to be allowed via CORS.
+        :paramtype headers: list[str]
+        :keyword methods: The methods to be allowed via CORS.
+        :paramtype methods: list[str]
+        :keyword max_age: The max age to be allowed via CORS.
+        :paramtype max_age: int
+        :keyword allow_credentials: If credentials are allowed via CORS.
+        :paramtype allow_credentials: bool
+        """
+        super(CorsConfiguration, self).__init__(**kwargs)
+        self.origins = origins
+        self.headers = headers
+        self.methods = methods
+        self.max_age = max_age
+        self.allow_credentials = allow_credentials
+
+
 class ServiceManagedIdentity(msrest.serialization.Model):
     """Managed service identity (system assigned and/or user assigned identities).
 
@@ -294,6 +351,8 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
     :ivar authentication_configuration: Dicom Service authentication configuration.
     :vartype authentication_configuration:
      ~azure.mgmt.healthcareapis.models.DicomServiceAuthenticationConfiguration
+    :ivar cors_configuration: Dicom Service Cors configuration.
+    :vartype cors_configuration: ~azure.mgmt.healthcareapis.models.CorsConfiguration
     :ivar service_url: The url of the Dicom Services.
     :vartype service_url: str
     :ivar private_endpoint_connections: The list of private endpoint connections that are set up
@@ -326,6 +385,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'authentication_configuration': {'key': 'properties.authenticationConfiguration', 'type': 'DicomServiceAuthenticationConfiguration'},
+        'cors_configuration': {'key': 'properties.corsConfiguration', 'type': 'CorsConfiguration'},
         'service_url': {'key': 'properties.serviceUrl', 'type': 'str'},
         'private_endpoint_connections': {'key': 'properties.privateEndpointConnections', 'type': '[PrivateEndpointConnection]'},
         'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
@@ -339,6 +399,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
         authentication_configuration: Optional["DicomServiceAuthenticationConfiguration"] = None,
+        cors_configuration: Optional["CorsConfiguration"] = None,
         public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
         **kwargs
     ):
@@ -356,6 +417,8 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         :keyword authentication_configuration: Dicom Service authentication configuration.
         :paramtype authentication_configuration:
          ~azure.mgmt.healthcareapis.models.DicomServiceAuthenticationConfiguration
+        :keyword cors_configuration: Dicom Service Cors configuration.
+        :paramtype cors_configuration: ~azure.mgmt.healthcareapis.models.CorsConfiguration
         :keyword public_network_access: Control permission for data plane traffic coming from public
          networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
@@ -365,6 +428,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         self.system_data = None
         self.provisioning_state = None
         self.authentication_configuration = authentication_configuration
+        self.cors_configuration = cors_configuration
         self.service_url = None
         self.private_endpoint_connections = None
         self.public_network_access = public_network_access
@@ -374,12 +438,6 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         self.etag = etag
         self.location = location
         self.tags = tags
-        self.system_data = None
-        self.provisioning_state = None
-        self.authentication_configuration = authentication_configuration
-        self.service_url = None
-        self.private_endpoint_connections = None
-        self.public_network_access = public_network_access
 
 
 class DicomServiceAuthenticationConfiguration(msrest.serialization.Model):
@@ -724,18 +782,6 @@ class FhirService(TaggedResource, ServiceManagedIdentity):
         self.etag = etag
         self.location = location
         self.tags = tags
-        self.kind = kind
-        self.system_data = None
-        self.provisioning_state = None
-        self.access_policies = access_policies
-        self.acr_configuration = acr_configuration
-        self.authentication_configuration = authentication_configuration
-        self.cors_configuration = cors_configuration
-        self.export_configuration = export_configuration
-        self.private_endpoint_connections = None
-        self.public_network_access = public_network_access
-        self.event_state = None
-        self.resource_version_policy_configuration = resource_version_policy_configuration
 
 
 class FhirServiceAccessPolicyEntry(msrest.serialization.Model):
@@ -1086,10 +1132,6 @@ class IotConnector(TaggedResource, ServiceManagedIdentity):
         self.etag = etag
         self.location = location
         self.tags = tags
-        self.system_data = None
-        self.provisioning_state = None
-        self.ingestion_endpoint_configuration = ingestion_endpoint_configuration
-        self.device_mapping = device_mapping
 
 
 class IotConnectorCollection(msrest.serialization.Model):
