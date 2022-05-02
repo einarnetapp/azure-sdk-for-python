@@ -6,27 +6,12 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
+from enum import Enum
 from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class AddonProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AddonProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the addon provisioning
     """
 
@@ -37,7 +22,7 @@ class AddonProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class AddonType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AddonType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of private cloud addon
     """
 
@@ -45,21 +30,21 @@ class AddonType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     VR = "VR"
     HCX = "HCX"
 
-class AffinityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AffinityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Placement policy affinity type
     """
 
     AFFINITY = "Affinity"
     ANTI_AFFINITY = "AntiAffinity"
 
-class AvailabilityStrategy(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AvailabilityStrategy(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The availability strategy for the private cloud
     """
 
     SINGLE_ZONE = "SingleZone"
     DUAL_ZONE = "DualZone"
 
-class CloudLinkStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CloudLinkStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the cloud link.
     """
 
@@ -69,7 +54,7 @@ class CloudLinkStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     FAILED = "Failed"
     DISCONNECTED = "Disconnected"
 
-class ClusterProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ClusterProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the cluster provisioning
     """
 
@@ -79,7 +64,7 @@ class ClusterProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enu
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class DatastoreProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DatastoreProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the datastore provisioning
     """
 
@@ -91,7 +76,7 @@ class DatastoreProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, E
     UPDATING = "Updating"
     DELETING = "Deleting"
 
-class DatastoreStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DatastoreStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The operational status of the datastore
     """
 
@@ -103,14 +88,14 @@ class DatastoreStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     LOST_COMMUNICATION = "LostCommunication"
     DEAD_OR_ERROR = "DeadOrError"
 
-class DhcpTypeEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DhcpTypeEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Type of DHCP: SERVER or RELAY.
     """
 
     SERVER = "SERVER"
     RELAY = "RELAY"
 
-class DnsServiceLogLevelEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DnsServiceLogLevelEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """DNS Service log level.
     """
 
@@ -120,35 +105,35 @@ class DnsServiceLogLevelEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)
     ERROR = "ERROR"
     FATAL = "FATAL"
 
-class DnsServiceStatusEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DnsServiceStatusEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """DNS Service status.
     """
 
     SUCCESS = "SUCCESS"
     FAILURE = "FAILURE"
 
-class EncryptionKeyStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EncryptionKeyStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of key provided
     """
 
     CONNECTED = "Connected"
     ACCESS_DENIED = "AccessDenied"
 
-class EncryptionState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EncryptionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Status of customer managed encryption key
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class EncryptionVersionType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EncryptionVersionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Property of the key if user provided or auto detected
     """
 
     FIXED = "Fixed"
     AUTO_DETECTED = "AutoDetected"
 
-class ExpressRouteAuthorizationProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ExpressRouteAuthorizationProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the  ExpressRoute Circuit Authorization provisioning
     """
 
@@ -156,7 +141,7 @@ class ExpressRouteAuthorizationProvisioningState(with_metaclass(_CaseInsensitive
     FAILED = "Failed"
     UPDATING = "Updating"
 
-class GlobalReachConnectionProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class GlobalReachConnectionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the  ExpressRoute Circuit Authorization provisioning
     """
 
@@ -164,7 +149,7 @@ class GlobalReachConnectionProvisioningState(with_metaclass(_CaseInsensitiveEnum
     FAILED = "Failed"
     UPDATING = "Updating"
 
-class GlobalReachConnectionStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class GlobalReachConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The connection status of the global reach connection
     """
 
@@ -172,7 +157,7 @@ class GlobalReachConnectionStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, 
     CONNECTING = "Connecting"
     DISCONNECTED = "Disconnected"
 
-class HcxEnterpriseSiteStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class HcxEnterpriseSiteStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The status of the HCX Enterprise Site
     """
 
@@ -181,28 +166,28 @@ class HcxEnterpriseSiteStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum
     DEACTIVATED = "Deactivated"
     DELETED = "Deleted"
 
-class InternetEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class InternetEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Connectivity to internet is enabled or disabled
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class MountOptionEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MountOptionEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Mode that describes whether the LUN has to be mounted as a datastore or attached as a LUN
     """
 
     MOUNT = "MOUNT"
     ATTACH = "ATTACH"
 
-class OptionalParamEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class OptionalParamEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Is this parameter required or optional
     """
 
     OPTIONAL = "Optional"
     REQUIRED = "Required"
 
-class PlacementPolicyProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PlacementPolicyProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -212,21 +197,21 @@ class PlacementPolicyProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, 
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class PlacementPolicyState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PlacementPolicyState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Whether the placement policy is enabled or disabled
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class PlacementPolicyType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PlacementPolicyType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """placement policy type
     """
 
     VM_VM = "VmVm"
     VM_HOST = "VmHost"
 
-class PortMirroringDirectionEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PortMirroringDirectionEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Direction of port mirroring profile.
     """
 
@@ -234,14 +219,14 @@ class PortMirroringDirectionEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, E
     EGRESS = "EGRESS"
     BIDIRECTIONAL = "BIDIRECTIONAL"
 
-class PortMirroringStatusEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PortMirroringStatusEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Port Mirroring Status.
     """
 
     SUCCESS = "SUCCESS"
     FAILURE = "FAILURE"
 
-class PrivateCloudProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateCloudProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -253,14 +238,14 @@ class PrivateCloudProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class QuotaEnabled(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class QuotaEnabled(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Host quota is active for current subscription
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class ResourceIdentityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of identity used for the private cloud. The type 'SystemAssigned' refers to an
     implicitly created identity. The type 'None' will remove any identities from the Private Cloud.
     """
@@ -268,7 +253,7 @@ class ResourceIdentityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     SYSTEM_ASSIGNED = "SystemAssigned"
     NONE = "None"
 
-class ScriptExecutionParameterType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ScriptExecutionParameterType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of execution parameter
     """
 
@@ -276,7 +261,7 @@ class ScriptExecutionParameterType(with_metaclass(_CaseInsensitiveEnumMeta, str,
     SECURE_VALUE = "SecureValue"
     CREDENTIAL = "Credential"
 
-class ScriptExecutionProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ScriptExecutionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the script execution resource
     """
 
@@ -288,14 +273,14 @@ class ScriptExecutionProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, 
     CANCELLED = "Cancelled"
     DELETING = "Deleting"
 
-class ScriptOutputStreamType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ScriptOutputStreamType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     INFORMATION = "Information"
     WARNING = "Warning"
     OUTPUT = "Output"
     ERROR = "Error"
 
-class ScriptParameterTypes(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ScriptParameterTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of parameter the script is expecting. psCredential is a PSCredentialObject
     """
 
@@ -306,21 +291,21 @@ class ScriptParameterTypes(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     BOOL = "Bool"
     FLOAT = "Float"
 
-class SegmentStatusEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SegmentStatusEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Segment status.
     """
 
     SUCCESS = "SUCCESS"
     FAILURE = "FAILURE"
 
-class SslEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SslEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Protect LDAP communication using SSL certificate (LDAPS)
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class TrialStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class TrialStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Trial status
     """
 
@@ -328,28 +313,28 @@ class TrialStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     TRIAL_USED = "TrialUsed"
     TRIAL_DISABLED = "TrialDisabled"
 
-class VirtualMachineRestrictMovementState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class VirtualMachineRestrictMovementState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Whether VM DRS-driven movement is restricted (enabled) or not (disabled)
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class VisibilityParameterEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class VisibilityParameterEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Should this parameter be visible to arm and passed in the parameters argument when executing
     """
 
     VISIBLE = "Visible"
     HIDDEN = "Hidden"
 
-class VMGroupStatusEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class VMGroupStatusEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """VM Group status.
     """
 
     SUCCESS = "SUCCESS"
     FAILURE = "FAILURE"
 
-class VMTypeEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class VMTypeEnum(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Virtual machine type.
     """
 
@@ -357,7 +342,7 @@ class VMTypeEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     EDGE = "EDGE"
     SERVICE = "SERVICE"
 
-class WorkloadNetworkDhcpProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class WorkloadNetworkDhcpProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -367,7 +352,7 @@ class WorkloadNetworkDhcpProvisioningState(with_metaclass(_CaseInsensitiveEnumMe
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class WorkloadNetworkDnsServiceProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class WorkloadNetworkDnsServiceProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -377,7 +362,7 @@ class WorkloadNetworkDnsServiceProvisioningState(with_metaclass(_CaseInsensitive
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class WorkloadNetworkDnsZoneProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class WorkloadNetworkDnsZoneProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -387,7 +372,7 @@ class WorkloadNetworkDnsZoneProvisioningState(with_metaclass(_CaseInsensitiveEnu
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class WorkloadNetworkPortMirroringProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class WorkloadNetworkPortMirroringProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -397,7 +382,7 @@ class WorkloadNetworkPortMirroringProvisioningState(with_metaclass(_CaseInsensit
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class WorkloadNetworkPublicIPProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class WorkloadNetworkPublicIPProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -407,7 +392,7 @@ class WorkloadNetworkPublicIPProvisioningState(with_metaclass(_CaseInsensitiveEn
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class WorkloadNetworkSegmentProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class WorkloadNetworkSegmentProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 
@@ -417,7 +402,7 @@ class WorkloadNetworkSegmentProvisioningState(with_metaclass(_CaseInsensitiveEnu
     DELETING = "Deleting"
     UPDATING = "Updating"
 
-class WorkloadNetworkVMGroupProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class WorkloadNetworkVMGroupProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state
     """
 

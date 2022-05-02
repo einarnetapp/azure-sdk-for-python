@@ -42,6 +42,8 @@ class Resource(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -59,8 +61,8 @@ class Addon(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param properties: The properties of an addon resource.
-    :type properties: ~azure.mgmt.avs.models.AddonProperties
+    :ivar properties: The properties of an addon resource.
+    :vartype properties: ~azure.mgmt.avs.models.AddonProperties
     """
 
     _validation = {
@@ -82,6 +84,10 @@ class Addon(Resource):
         properties: Optional["AddonProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword properties: The properties of an addon resource.
+        :paramtype properties: ~azure.mgmt.avs.models.AddonProperties
+        """
         super(Addon, self).__init__(**kwargs)
         self.properties = properties
 
@@ -96,9 +102,9 @@ class AddonProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param addon_type: Required. The type of private cloud addon.Constant filled by server.
-     Possible values include: "SRM", "VR", "HCX".
-    :type addon_type: str or ~azure.mgmt.avs.models.AddonType
+    :ivar addon_type: Required. The type of private cloud addon.Constant filled by server. Possible
+     values include: "SRM", "VR", "HCX".
+    :vartype addon_type: str or ~azure.mgmt.avs.models.AddonType
     :ivar provisioning_state: The state of the addon provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.AddonProvisioningState
@@ -122,6 +128,8 @@ class AddonProperties(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(AddonProperties, self).__init__(**kwargs)
         self.addon_type = None  # type: Optional[str]
         self.provisioning_state = None
@@ -134,14 +142,14 @@ class AddonHcxProperties(AddonProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param addon_type: Required. The type of private cloud addon.Constant filled by server.
-     Possible values include: "SRM", "VR", "HCX".
-    :type addon_type: str or ~azure.mgmt.avs.models.AddonType
+    :ivar addon_type: Required. The type of private cloud addon.Constant filled by server. Possible
+     values include: "SRM", "VR", "HCX".
+    :vartype addon_type: str or ~azure.mgmt.avs.models.AddonType
     :ivar provisioning_state: The state of the addon provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.AddonProvisioningState
-    :param offer: Required. The HCX offer, example VMware MaaS Cloud Provider (Enterprise).
-    :type offer: str
+    :ivar offer: Required. The HCX offer, example VMware MaaS Cloud Provider (Enterprise).
+    :vartype offer: str
     """
 
     _validation = {
@@ -162,6 +170,10 @@ class AddonHcxProperties(AddonProperties):
         offer: str,
         **kwargs
     ):
+        """
+        :keyword offer: Required. The HCX offer, example VMware MaaS Cloud Provider (Enterprise).
+        :paramtype offer: str
+        """
         super(AddonHcxProperties, self).__init__(**kwargs)
         self.addon_type = 'HCX'  # type: str
         self.offer = offer
@@ -192,6 +204,8 @@ class AddonList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(AddonList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -204,14 +218,14 @@ class AddonSrmProperties(AddonProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param addon_type: Required. The type of private cloud addon.Constant filled by server.
-     Possible values include: "SRM", "VR", "HCX".
-    :type addon_type: str or ~azure.mgmt.avs.models.AddonType
+    :ivar addon_type: Required. The type of private cloud addon.Constant filled by server. Possible
+     values include: "SRM", "VR", "HCX".
+    :vartype addon_type: str or ~azure.mgmt.avs.models.AddonType
     :ivar provisioning_state: The state of the addon provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.AddonProvisioningState
-    :param license_key: The Site Recovery Manager (SRM) license.
-    :type license_key: str
+    :ivar license_key: The Site Recovery Manager (SRM) license.
+    :vartype license_key: str
     """
 
     _validation = {
@@ -231,6 +245,10 @@ class AddonSrmProperties(AddonProperties):
         license_key: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword license_key: The Site Recovery Manager (SRM) license.
+        :paramtype license_key: str
+        """
         super(AddonSrmProperties, self).__init__(**kwargs)
         self.addon_type = 'SRM'  # type: str
         self.license_key = license_key
@@ -243,14 +261,14 @@ class AddonVrProperties(AddonProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param addon_type: Required. The type of private cloud addon.Constant filled by server.
-     Possible values include: "SRM", "VR", "HCX".
-    :type addon_type: str or ~azure.mgmt.avs.models.AddonType
+    :ivar addon_type: Required. The type of private cloud addon.Constant filled by server. Possible
+     values include: "SRM", "VR", "HCX".
+    :vartype addon_type: str or ~azure.mgmt.avs.models.AddonType
     :ivar provisioning_state: The state of the addon provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.AddonProvisioningState
-    :param vrs_count: Required. The vSphere Replication Server (VRS) count.
-    :type vrs_count: int
+    :ivar vrs_count: Required. The vSphere Replication Server (VRS) count.
+    :vartype vrs_count: int
     """
 
     _validation = {
@@ -271,6 +289,10 @@ class AddonVrProperties(AddonProperties):
         vrs_count: int,
         **kwargs
     ):
+        """
+        :keyword vrs_count: Required. The vSphere Replication Server (VRS) count.
+        :paramtype vrs_count: int
+        """
         super(AddonVrProperties, self).__init__(**kwargs)
         self.addon_type = 'VR'  # type: str
         self.vrs_count = vrs_count
@@ -309,6 +331,8 @@ class AdminCredentials(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(AdminCredentials, self).__init__(**kwargs)
         self.nsxt_username = None
         self.nsxt_password = None
@@ -319,13 +343,13 @@ class AdminCredentials(msrest.serialization.Model):
 class AvailabilityProperties(msrest.serialization.Model):
     """The properties describing private cloud availability zone distribution.
 
-    :param strategy: The availability strategy for the private cloud. Possible values include:
+    :ivar strategy: The availability strategy for the private cloud. Possible values include:
      "SingleZone", "DualZone".
-    :type strategy: str or ~azure.mgmt.avs.models.AvailabilityStrategy
-    :param zone: The primary availability zone for the private cloud.
-    :type zone: int
-    :param secondary_zone: The secondary availability zone for the private cloud.
-    :type secondary_zone: int
+    :vartype strategy: str or ~azure.mgmt.avs.models.AvailabilityStrategy
+    :ivar zone: The primary availability zone for the private cloud.
+    :vartype zone: int
+    :ivar secondary_zone: The secondary availability zone for the private cloud.
+    :vartype secondary_zone: int
     """
 
     _attribute_map = {
@@ -342,6 +366,15 @@ class AvailabilityProperties(msrest.serialization.Model):
         secondary_zone: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword strategy: The availability strategy for the private cloud. Possible values include:
+         "SingleZone", "DualZone".
+        :paramtype strategy: str or ~azure.mgmt.avs.models.AvailabilityStrategy
+        :keyword zone: The primary availability zone for the private cloud.
+        :paramtype zone: int
+        :keyword secondary_zone: The secondary availability zone for the private cloud.
+        :paramtype secondary_zone: int
+        """
         super(AvailabilityProperties, self).__init__(**kwargs)
         self.strategy = strategy
         self.zone = zone
@@ -381,6 +414,8 @@ class Circuit(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Circuit, self).__init__(**kwargs)
         self.primary_subnet = None
         self.secondary_subnet = None
@@ -402,8 +437,8 @@ class CloudLink(Resource):
     :ivar status: The state of the cloud link. Possible values include: "Active", "Building",
      "Deleting", "Failed", "Disconnected".
     :vartype status: str or ~azure.mgmt.avs.models.CloudLinkStatus
-    :param linked_cloud: Identifier of the other private cloud participating in the link.
-    :type linked_cloud: str
+    :ivar linked_cloud: Identifier of the other private cloud participating in the link.
+    :vartype linked_cloud: str
     """
 
     _validation = {
@@ -427,6 +462,10 @@ class CloudLink(Resource):
         linked_cloud: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword linked_cloud: Identifier of the other private cloud participating in the link.
+        :paramtype linked_cloud: str
+        """
         super(CloudLink, self).__init__(**kwargs)
         self.status = None
         self.linked_cloud = linked_cloud
@@ -457,6 +496,8 @@ class CloudLinkList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(CloudLinkList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -475,17 +516,17 @@ class Cluster(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param sku: Required. The cluster SKU.
-    :type sku: ~azure.mgmt.avs.models.Sku
-    :param cluster_size: The cluster size.
-    :type cluster_size: int
+    :ivar sku: Required. The cluster SKU.
+    :vartype sku: ~azure.mgmt.avs.models.Sku
+    :ivar cluster_size: The cluster size.
+    :vartype cluster_size: int
     :ivar provisioning_state: The state of the cluster provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.ClusterProvisioningState
     :ivar cluster_id: The identity.
     :vartype cluster_id: int
-    :param hosts: The hosts.
-    :type hosts: list[str]
+    :ivar hosts: The hosts.
+    :vartype hosts: list[str]
     """
 
     _validation = {
@@ -516,6 +557,14 @@ class Cluster(Resource):
         hosts: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword sku: Required. The cluster SKU.
+        :paramtype sku: ~azure.mgmt.avs.models.Sku
+        :keyword cluster_size: The cluster size.
+        :paramtype cluster_size: int
+        :keyword hosts: The hosts.
+        :paramtype hosts: list[str]
+        """
         super(Cluster, self).__init__(**kwargs)
         self.sku = sku
         self.cluster_size = cluster_size
@@ -549,6 +598,8 @@ class ClusterList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ClusterList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -559,15 +610,15 @@ class CommonClusterProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param cluster_size: The cluster size.
-    :type cluster_size: int
+    :ivar cluster_size: The cluster size.
+    :vartype cluster_size: int
     :ivar provisioning_state: The state of the cluster provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.ClusterProvisioningState
     :ivar cluster_id: The identity.
     :vartype cluster_id: int
-    :param hosts: The hosts.
-    :type hosts: list[str]
+    :ivar hosts: The hosts.
+    :vartype hosts: list[str]
     """
 
     _validation = {
@@ -589,6 +640,12 @@ class CommonClusterProperties(msrest.serialization.Model):
         hosts: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword cluster_size: The cluster size.
+        :paramtype cluster_size: int
+        :keyword hosts: The hosts.
+        :paramtype hosts: list[str]
+        """
         super(CommonClusterProperties, self).__init__(**kwargs)
         self.cluster_size = cluster_size
         self.provisioning_state = None
@@ -601,15 +658,15 @@ class ClusterProperties(CommonClusterProperties):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param cluster_size: The cluster size.
-    :type cluster_size: int
+    :ivar cluster_size: The cluster size.
+    :vartype cluster_size: int
     :ivar provisioning_state: The state of the cluster provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.ClusterProvisioningState
     :ivar cluster_id: The identity.
     :vartype cluster_id: int
-    :param hosts: The hosts.
-    :type hosts: list[str]
+    :ivar hosts: The hosts.
+    :vartype hosts: list[str]
     """
 
     _validation = {
@@ -631,16 +688,22 @@ class ClusterProperties(CommonClusterProperties):
         hosts: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword cluster_size: The cluster size.
+        :paramtype cluster_size: int
+        :keyword hosts: The hosts.
+        :paramtype hosts: list[str]
+        """
         super(ClusterProperties, self).__init__(cluster_size=cluster_size, hosts=hosts, **kwargs)
 
 
 class ClusterUpdate(msrest.serialization.Model):
     """An update of a cluster resource.
 
-    :param cluster_size: The cluster size.
-    :type cluster_size: int
-    :param hosts: The hosts.
-    :type hosts: list[str]
+    :ivar cluster_size: The cluster size.
+    :vartype cluster_size: int
+    :ivar hosts: The hosts.
+    :vartype hosts: list[str]
     """
 
     _attribute_map = {
@@ -655,6 +718,12 @@ class ClusterUpdate(msrest.serialization.Model):
         hosts: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword cluster_size: The cluster size.
+        :paramtype cluster_size: int
+        :keyword hosts: The hosts.
+        :paramtype hosts: list[str]
+        """
         super(ClusterUpdate, self).__init__(**kwargs)
         self.cluster_size = cluster_size
         self.hosts = hosts
@@ -674,10 +743,10 @@ class Datastore(Resource):
     :ivar provisioning_state: The state of the datastore provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Pending", "Creating", "Updating", "Deleting".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.DatastoreProvisioningState
-    :param net_app_volume: An Azure NetApp Files volume.
-    :type net_app_volume: ~azure.mgmt.avs.models.NetAppVolume
-    :param disk_pool_volume: An iSCSI volume.
-    :type disk_pool_volume: ~azure.mgmt.avs.models.DiskPoolVolume
+    :ivar net_app_volume: An Azure NetApp Files volume.
+    :vartype net_app_volume: ~azure.mgmt.avs.models.NetAppVolume
+    :ivar disk_pool_volume: An iSCSI volume.
+    :vartype disk_pool_volume: ~azure.mgmt.avs.models.DiskPoolVolume
     :ivar status: The operational status of the datastore. Possible values include: "Unknown",
      "Accessible", "Inaccessible", "Attached", "Detached", "LostCommunication", "DeadOrError".
     :vartype status: str or ~azure.mgmt.avs.models.DatastoreStatus
@@ -708,6 +777,12 @@ class Datastore(Resource):
         disk_pool_volume: Optional["DiskPoolVolume"] = None,
         **kwargs
     ):
+        """
+        :keyword net_app_volume: An Azure NetApp Files volume.
+        :paramtype net_app_volume: ~azure.mgmt.avs.models.NetAppVolume
+        :keyword disk_pool_volume: An iSCSI volume.
+        :paramtype disk_pool_volume: ~azure.mgmt.avs.models.DiskPoolVolume
+        """
         super(Datastore, self).__init__(**kwargs)
         self.provisioning_state = None
         self.net_app_volume = net_app_volume
@@ -740,6 +815,8 @@ class DatastoreList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(DatastoreList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -752,13 +829,13 @@ class DiskPoolVolume(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param target_id: Required. Azure resource ID of the iSCSI target.
-    :type target_id: str
-    :param lun_name: Required. Name of the LUN to be used for datastore.
-    :type lun_name: str
-    :param mount_option: Mode that describes whether the LUN has to be mounted as a datastore or
+    :ivar target_id: Required. Azure resource ID of the iSCSI target.
+    :vartype target_id: str
+    :ivar lun_name: Required. Name of the LUN to be used for datastore.
+    :vartype lun_name: str
+    :ivar mount_option: Mode that describes whether the LUN has to be mounted as a datastore or
      attached as a LUN. Possible values include: "MOUNT", "ATTACH". Default value: "MOUNT".
-    :type mount_option: str or ~azure.mgmt.avs.models.MountOptionEnum
+    :vartype mount_option: str or ~azure.mgmt.avs.models.MountOptionEnum
     :ivar path: Device path.
     :vartype path: str
     """
@@ -784,6 +861,15 @@ class DiskPoolVolume(msrest.serialization.Model):
         mount_option: Optional[Union[str, "MountOptionEnum"]] = "MOUNT",
         **kwargs
     ):
+        """
+        :keyword target_id: Required. Azure resource ID of the iSCSI target.
+        :paramtype target_id: str
+        :keyword lun_name: Required. Name of the LUN to be used for datastore.
+        :paramtype lun_name: str
+        :keyword mount_option: Mode that describes whether the LUN has to be mounted as a datastore or
+         attached as a LUN. Possible values include: "MOUNT", "ATTACH". Default value: "MOUNT".
+        :paramtype mount_option: str or ~azure.mgmt.avs.models.MountOptionEnum
+        """
         super(DiskPoolVolume, self).__init__(**kwargs)
         self.target_id = target_id
         self.lun_name = lun_name
@@ -794,11 +880,11 @@ class DiskPoolVolume(msrest.serialization.Model):
 class Encryption(msrest.serialization.Model):
     """The properties of customer managed encryption key.
 
-    :param status: Status of customer managed encryption key. Possible values include: "Enabled",
+    :ivar status: Status of customer managed encryption key. Possible values include: "Enabled",
      "Disabled".
-    :type status: str or ~azure.mgmt.avs.models.EncryptionState
-    :param key_vault_properties: The key vault where the encryption key is stored.
-    :type key_vault_properties: ~azure.mgmt.avs.models.EncryptionKeyVaultProperties
+    :vartype status: str or ~azure.mgmt.avs.models.EncryptionState
+    :ivar key_vault_properties: The key vault where the encryption key is stored.
+    :vartype key_vault_properties: ~azure.mgmt.avs.models.EncryptionKeyVaultProperties
     """
 
     _attribute_map = {
@@ -813,6 +899,13 @@ class Encryption(msrest.serialization.Model):
         key_vault_properties: Optional["EncryptionKeyVaultProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword status: Status of customer managed encryption key. Possible values include: "Enabled",
+         "Disabled".
+        :paramtype status: str or ~azure.mgmt.avs.models.EncryptionState
+        :keyword key_vault_properties: The key vault where the encryption key is stored.
+        :paramtype key_vault_properties: ~azure.mgmt.avs.models.EncryptionKeyVaultProperties
+        """
         super(Encryption, self).__init__(**kwargs)
         self.status = status
         self.key_vault_properties = key_vault_properties
@@ -823,12 +916,12 @@ class EncryptionKeyVaultProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param key_name: The name of the key.
-    :type key_name: str
-    :param key_version: The version of the key.
-    :type key_version: str
-    :param key_vault_url: The URL of the vault.
-    :type key_vault_url: str
+    :ivar key_name: The name of the key.
+    :vartype key_name: str
+    :ivar key_version: The version of the key.
+    :vartype key_version: str
+    :ivar key_vault_url: The URL of the vault.
+    :vartype key_vault_url: str
     :ivar key_state: The state of key provided. Possible values include: "Connected",
      "AccessDenied".
     :vartype key_state: str or ~azure.mgmt.avs.models.EncryptionKeyStatus
@@ -858,6 +951,14 @@ class EncryptionKeyVaultProperties(msrest.serialization.Model):
         key_vault_url: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword key_name: The name of the key.
+        :paramtype key_name: str
+        :keyword key_version: The version of the key.
+        :paramtype key_version: str
+        :keyword key_vault_url: The URL of the vault.
+        :paramtype key_vault_url: str
+        """
         super(EncryptionKeyVaultProperties, self).__init__(**kwargs)
         self.key_name = key_name
         self.key_version = key_version
@@ -895,6 +996,8 @@ class Endpoints(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Endpoints, self).__init__(**kwargs)
         self.nsxt_manager = None
         self.vcsa = None
@@ -926,6 +1029,8 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -968,6 +1073,8 @@ class ErrorResponse(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ErrorResponse, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -995,8 +1102,8 @@ class ExpressRouteAuthorization(Resource):
     :vartype express_route_authorization_id: str
     :ivar express_route_authorization_key: The key of the ExpressRoute Circuit Authorization.
     :vartype express_route_authorization_key: str
-    :param express_route_id: The ID of the ExpressRoute Circuit.
-    :type express_route_id: str
+    :ivar express_route_id: The ID of the ExpressRoute Circuit.
+    :vartype express_route_id: str
     """
 
     _validation = {
@@ -1024,6 +1131,10 @@ class ExpressRouteAuthorization(Resource):
         express_route_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword express_route_id: The ID of the ExpressRoute Circuit.
+        :paramtype express_route_id: str
+        """
         super(ExpressRouteAuthorization, self).__init__(**kwargs)
         self.provisioning_state = None
         self.express_route_authorization_id = None
@@ -1056,6 +1167,8 @@ class ExpressRouteAuthorizationList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ExpressRouteAuthorizationList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1079,18 +1192,18 @@ class GlobalReachConnection(Resource):
     :ivar address_prefix: The network used for global reach carved out from the original network
      block provided for the private cloud.
     :vartype address_prefix: str
-    :param authorization_key: Authorization key from the peer express route used for the global
+    :ivar authorization_key: Authorization key from the peer express route used for the global
      reach connection.
-    :type authorization_key: str
+    :vartype authorization_key: str
     :ivar circuit_connection_status: The connection status of the global reach connection. Possible
      values include: "Connected", "Connecting", "Disconnected".
     :vartype circuit_connection_status: str or ~azure.mgmt.avs.models.GlobalReachConnectionStatus
-    :param peer_express_route_circuit: Identifier of the ExpressRoute Circuit to peer with in the
+    :ivar peer_express_route_circuit: Identifier of the ExpressRoute Circuit to peer with in the
      global reach connection.
-    :type peer_express_route_circuit: str
-    :param express_route_id: The ID of the Private Cloud's ExpressRoute Circuit that is
+    :vartype peer_express_route_circuit: str
+    :ivar express_route_id: The ID of the Private Cloud's ExpressRoute Circuit that is
      participating in the global reach connection.
-    :type express_route_id: str
+    :vartype express_route_id: str
     """
 
     _validation = {
@@ -1122,6 +1235,17 @@ class GlobalReachConnection(Resource):
         express_route_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword authorization_key: Authorization key from the peer express route used for the global
+         reach connection.
+        :paramtype authorization_key: str
+        :keyword peer_express_route_circuit: Identifier of the ExpressRoute Circuit to peer with in the
+         global reach connection.
+        :paramtype peer_express_route_circuit: str
+        :keyword express_route_id: The ID of the Private Cloud's ExpressRoute Circuit that is
+         participating in the global reach connection.
+        :paramtype express_route_id: str
+        """
         super(GlobalReachConnection, self).__init__(**kwargs)
         self.provisioning_state = None
         self.address_prefix = None
@@ -1156,6 +1280,8 @@ class GlobalReachConnectionList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(GlobalReachConnectionList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1199,6 +1325,8 @@ class HcxEnterpriseSite(Resource):
         self,
         **kwargs
     ):
+        """
+        """
         super(HcxEnterpriseSite, self).__init__(**kwargs)
         self.activation_key = None
         self.status = None
@@ -1229,6 +1357,8 @@ class HcxEnterpriseSiteList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(HcxEnterpriseSiteList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1237,29 +1367,29 @@ class HcxEnterpriseSiteList(msrest.serialization.Model):
 class IdentitySource(msrest.serialization.Model):
     """vCenter Single Sign On Identity Source.
 
-    :param name: The name of the identity source.
-    :type name: str
-    :param alias: The domain's NetBIOS name.
-    :type alias: str
-    :param domain: The domain's dns name.
-    :type domain: str
-    :param base_user_dn: The base distinguished name for users.
-    :type base_user_dn: str
-    :param base_group_dn: The base distinguished name for groups.
-    :type base_group_dn: str
-    :param primary_server: Primary server URL.
-    :type primary_server: str
-    :param secondary_server: Secondary server URL.
-    :type secondary_server: str
-    :param ssl: Protect LDAP communication using SSL certificate (LDAPS). Possible values include:
+    :ivar name: The name of the identity source.
+    :vartype name: str
+    :ivar alias: The domain's NetBIOS name.
+    :vartype alias: str
+    :ivar domain: The domain's dns name.
+    :vartype domain: str
+    :ivar base_user_dn: The base distinguished name for users.
+    :vartype base_user_dn: str
+    :ivar base_group_dn: The base distinguished name for groups.
+    :vartype base_group_dn: str
+    :ivar primary_server: Primary server URL.
+    :vartype primary_server: str
+    :ivar secondary_server: Secondary server URL.
+    :vartype secondary_server: str
+    :ivar ssl: Protect LDAP communication using SSL certificate (LDAPS). Possible values include:
      "Enabled", "Disabled".
-    :type ssl: str or ~azure.mgmt.avs.models.SslEnum
-    :param username: The ID of an Active Directory user with a minimum of read-only access to Base
+    :vartype ssl: str or ~azure.mgmt.avs.models.SslEnum
+    :ivar username: The ID of an Active Directory user with a minimum of read-only access to Base
      DN for users and group.
-    :type username: str
-    :param password: The password of the Active Directory user with a minimum of read-only access
-     to Base DN for users and groups.
-    :type password: str
+    :vartype username: str
+    :ivar password: The password of the Active Directory user with a minimum of read-only access to
+     Base DN for users and groups.
+    :vartype password: str
     """
 
     _attribute_map = {
@@ -1290,6 +1420,31 @@ class IdentitySource(msrest.serialization.Model):
         password: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: The name of the identity source.
+        :paramtype name: str
+        :keyword alias: The domain's NetBIOS name.
+        :paramtype alias: str
+        :keyword domain: The domain's dns name.
+        :paramtype domain: str
+        :keyword base_user_dn: The base distinguished name for users.
+        :paramtype base_user_dn: str
+        :keyword base_group_dn: The base distinguished name for groups.
+        :paramtype base_group_dn: str
+        :keyword primary_server: Primary server URL.
+        :paramtype primary_server: str
+        :keyword secondary_server: Secondary server URL.
+        :paramtype secondary_server: str
+        :keyword ssl: Protect LDAP communication using SSL certificate (LDAPS). Possible values
+         include: "Enabled", "Disabled".
+        :paramtype ssl: str or ~azure.mgmt.avs.models.SslEnum
+        :keyword username: The ID of an Active Directory user with a minimum of read-only access to
+         Base DN for users and group.
+        :paramtype username: str
+        :keyword password: The password of the Active Directory user with a minimum of read-only access
+         to Base DN for users and groups.
+        :paramtype password: str
+        """
         super(IdentitySource, self).__init__(**kwargs)
         self.name = name
         self.alias = alias
@@ -1306,12 +1461,12 @@ class IdentitySource(msrest.serialization.Model):
 class LogSpecification(msrest.serialization.Model):
     """Specifications of the Log for Azure Monitoring.
 
-    :param name: Name of the log.
-    :type name: str
-    :param display_name: Localized friendly display name of the log.
-    :type display_name: str
-    :param blob_duration: Blob duration of the log.
-    :type blob_duration: str
+    :ivar name: Name of the log.
+    :vartype name: str
+    :ivar display_name: Localized friendly display name of the log.
+    :vartype display_name: str
+    :ivar blob_duration: Blob duration of the log.
+    :vartype blob_duration: str
     """
 
     _attribute_map = {
@@ -1328,6 +1483,14 @@ class LogSpecification(msrest.serialization.Model):
         blob_duration: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the log.
+        :paramtype name: str
+        :keyword display_name: Localized friendly display name of the log.
+        :paramtype display_name: str
+        :keyword blob_duration: Blob duration of the log.
+        :paramtype blob_duration: str
+        """
         super(LogSpecification, self).__init__(**kwargs)
         self.name = name
         self.display_name = display_name
@@ -1339,15 +1502,15 @@ class ManagementCluster(CommonClusterProperties):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param cluster_size: The cluster size.
-    :type cluster_size: int
+    :ivar cluster_size: The cluster size.
+    :vartype cluster_size: int
     :ivar provisioning_state: The state of the cluster provisioning. Possible values include:
      "Succeeded", "Failed", "Cancelled", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.ClusterProvisioningState
     :ivar cluster_id: The identity.
     :vartype cluster_id: int
-    :param hosts: The hosts.
-    :type hosts: list[str]
+    :ivar hosts: The hosts.
+    :vartype hosts: list[str]
     """
 
     _validation = {
@@ -1369,21 +1532,27 @@ class ManagementCluster(CommonClusterProperties):
         hosts: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword cluster_size: The cluster size.
+        :paramtype cluster_size: int
+        :keyword hosts: The hosts.
+        :paramtype hosts: list[str]
+        """
         super(ManagementCluster, self).__init__(cluster_size=cluster_size, hosts=hosts, **kwargs)
 
 
 class MetricDimension(msrest.serialization.Model):
     """Specifications of the Dimension of metrics.
 
-    :param name: Name of the dimension.
-    :type name: str
-    :param display_name: Localized friendly display name of the dimension.
-    :type display_name: str
-    :param internal_name: Name of the dimension as it appears in MDM.
-    :type internal_name: str
-    :param to_be_exported_for_shoebox: A boolean flag indicating whether this dimension should be
+    :ivar name: Name of the dimension.
+    :vartype name: str
+    :ivar display_name: Localized friendly display name of the dimension.
+    :vartype display_name: str
+    :ivar internal_name: Name of the dimension as it appears in MDM.
+    :vartype internal_name: str
+    :ivar to_be_exported_for_shoebox: A boolean flag indicating whether this dimension should be
      included for the shoebox export scenario.
-    :type to_be_exported_for_shoebox: bool
+    :vartype to_be_exported_for_shoebox: bool
     """
 
     _attribute_map = {
@@ -1402,6 +1571,17 @@ class MetricDimension(msrest.serialization.Model):
         to_be_exported_for_shoebox: Optional[bool] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the dimension.
+        :paramtype name: str
+        :keyword display_name: Localized friendly display name of the dimension.
+        :paramtype display_name: str
+        :keyword internal_name: Name of the dimension as it appears in MDM.
+        :paramtype internal_name: str
+        :keyword to_be_exported_for_shoebox: A boolean flag indicating whether this dimension should be
+         included for the shoebox export scenario.
+        :paramtype to_be_exported_for_shoebox: bool
+        """
         super(MetricDimension, self).__init__(**kwargs)
         self.name = name
         self.display_name = display_name
@@ -1412,35 +1592,35 @@ class MetricDimension(msrest.serialization.Model):
 class MetricSpecification(msrest.serialization.Model):
     """Specifications of the Metrics for Azure Monitoring.
 
-    :param name: Name of the metric.
-    :type name: str
-    :param display_name: Localized friendly display name of the metric.
-    :type display_name: str
-    :param display_description: Localized friendly description of the metric.
-    :type display_description: str
-    :param unit: Unit that makes sense for the metric.
-    :type unit: str
-    :param category: Name of the metric category that the metric belongs to. A metric can only
+    :ivar name: Name of the metric.
+    :vartype name: str
+    :ivar display_name: Localized friendly display name of the metric.
+    :vartype display_name: str
+    :ivar display_description: Localized friendly description of the metric.
+    :vartype display_description: str
+    :ivar unit: Unit that makes sense for the metric.
+    :vartype unit: str
+    :ivar category: Name of the metric category that the metric belongs to. A metric can only
      belong to a single category.
-    :type category: str
-    :param aggregation_type: Only provide one value for this field. Valid values: Average, Minimum,
+    :vartype category: str
+    :ivar aggregation_type: Only provide one value for this field. Valid values: Average, Minimum,
      Maximum, Total, Count.
-    :type aggregation_type: str
-    :param supported_aggregation_types: Supported aggregation types.
-    :type supported_aggregation_types: list[str]
-    :param supported_time_grain_types: Supported time grain types.
-    :type supported_time_grain_types: list[str]
-    :param fill_gap_with_zero: Optional. If set to true, then zero will be returned for time
+    :vartype aggregation_type: str
+    :ivar supported_aggregation_types: Supported aggregation types.
+    :vartype supported_aggregation_types: list[str]
+    :ivar supported_time_grain_types: Supported time grain types.
+    :vartype supported_time_grain_types: list[str]
+    :ivar fill_gap_with_zero: Optional. If set to true, then zero will be returned for time
      duration where no metric is emitted/published.
-    :type fill_gap_with_zero: bool
-    :param dimensions: Dimensions of the metric.
-    :type dimensions: list[~azure.mgmt.avs.models.MetricDimension]
-    :param enable_regional_mdm_account: Whether or not the service is using regional MDM accounts.
-    :type enable_regional_mdm_account: str
-    :param source_mdm_account: The name of the MDM account.
-    :type source_mdm_account: str
-    :param source_mdm_namespace: The name of the MDM namespace.
-    :type source_mdm_namespace: str
+    :vartype fill_gap_with_zero: bool
+    :ivar dimensions: Dimensions of the metric.
+    :vartype dimensions: list[~azure.mgmt.avs.models.MetricDimension]
+    :ivar enable_regional_mdm_account: Whether or not the service is using regional MDM accounts.
+    :vartype enable_regional_mdm_account: str
+    :ivar source_mdm_account: The name of the MDM account.
+    :vartype source_mdm_account: str
+    :ivar source_mdm_namespace: The name of the MDM namespace.
+    :vartype source_mdm_namespace: str
     """
 
     _attribute_map = {
@@ -1477,6 +1657,38 @@ class MetricSpecification(msrest.serialization.Model):
         source_mdm_namespace: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the metric.
+        :paramtype name: str
+        :keyword display_name: Localized friendly display name of the metric.
+        :paramtype display_name: str
+        :keyword display_description: Localized friendly description of the metric.
+        :paramtype display_description: str
+        :keyword unit: Unit that makes sense for the metric.
+        :paramtype unit: str
+        :keyword category: Name of the metric category that the metric belongs to. A metric can only
+         belong to a single category.
+        :paramtype category: str
+        :keyword aggregation_type: Only provide one value for this field. Valid values: Average,
+         Minimum, Maximum, Total, Count.
+        :paramtype aggregation_type: str
+        :keyword supported_aggregation_types: Supported aggregation types.
+        :paramtype supported_aggregation_types: list[str]
+        :keyword supported_time_grain_types: Supported time grain types.
+        :paramtype supported_time_grain_types: list[str]
+        :keyword fill_gap_with_zero: Optional. If set to true, then zero will be returned for time
+         duration where no metric is emitted/published.
+        :paramtype fill_gap_with_zero: bool
+        :keyword dimensions: Dimensions of the metric.
+        :paramtype dimensions: list[~azure.mgmt.avs.models.MetricDimension]
+        :keyword enable_regional_mdm_account: Whether or not the service is using regional MDM
+         accounts.
+        :paramtype enable_regional_mdm_account: str
+        :keyword source_mdm_account: The name of the MDM account.
+        :paramtype source_mdm_account: str
+        :keyword source_mdm_namespace: The name of the MDM namespace.
+        :paramtype source_mdm_namespace: str
+        """
         super(MetricSpecification, self).__init__(**kwargs)
         self.name = name
         self.display_name = display_name
@@ -1498,8 +1710,8 @@ class NetAppVolume(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param id: Required. Azure resource ID of the NetApp volume.
-    :type id: str
+    :ivar id: Required. Azure resource ID of the NetApp volume.
+    :vartype id: str
     """
 
     _validation = {
@@ -1516,6 +1728,10 @@ class NetAppVolume(msrest.serialization.Model):
         id: str,
         **kwargs
     ):
+        """
+        :keyword id: Required. Azure resource ID of the NetApp volume.
+        :paramtype id: str
+        """
         super(NetAppVolume, self).__init__(**kwargs)
         self.id = id
 
@@ -1529,13 +1745,13 @@ class Operation(msrest.serialization.Model):
     :vartype name: str
     :ivar display: Contains the localized display information for this operation.
     :vartype display: ~azure.mgmt.avs.models.OperationDisplay
-    :param is_data_action: Gets or sets a value indicating whether the operation is a data action
-     or not.
-    :type is_data_action: bool
-    :param origin: Origin of the operation.
-    :type origin: str
-    :param properties: Properties of the operation.
-    :type properties: ~azure.mgmt.avs.models.OperationProperties
+    :ivar is_data_action: Gets or sets a value indicating whether the operation is a data action or
+     not.
+    :vartype is_data_action: bool
+    :ivar origin: Origin of the operation.
+    :vartype origin: str
+    :ivar properties: Properties of the operation.
+    :vartype properties: ~azure.mgmt.avs.models.OperationProperties
     """
 
     _validation = {
@@ -1559,6 +1775,15 @@ class Operation(msrest.serialization.Model):
         properties: Optional["OperationProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword is_data_action: Gets or sets a value indicating whether the operation is a data action
+         or not.
+        :paramtype is_data_action: bool
+        :keyword origin: Origin of the operation.
+        :paramtype origin: str
+        :keyword properties: Properties of the operation.
+        :paramtype properties: ~azure.mgmt.avs.models.OperationProperties
+        """
         super(Operation, self).__init__(**kwargs)
         self.name = None
         self.display = None
@@ -1600,6 +1825,8 @@ class OperationDisplay(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = None
         self.resource = None
@@ -1632,6 +1859,8 @@ class OperationList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(OperationList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1640,8 +1869,8 @@ class OperationList(msrest.serialization.Model):
 class OperationProperties(msrest.serialization.Model):
     """Extra Operation properties.
 
-    :param service_specification: Service specifications of the operation.
-    :type service_specification: ~azure.mgmt.avs.models.ServiceSpecification
+    :ivar service_specification: Service specifications of the operation.
+    :vartype service_specification: ~azure.mgmt.avs.models.ServiceSpecification
     """
 
     _attribute_map = {
@@ -1654,6 +1883,10 @@ class OperationProperties(msrest.serialization.Model):
         service_specification: Optional["ServiceSpecification"] = None,
         **kwargs
     ):
+        """
+        :keyword service_specification: Service specifications of the operation.
+        :paramtype service_specification: ~azure.mgmt.avs.models.ServiceSpecification
+        """
         super(OperationProperties, self).__init__(**kwargs)
         self.service_specification = service_specification
 
@@ -1683,6 +1916,8 @@ class PlacementPoliciesList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(PlacementPoliciesList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1699,8 +1934,8 @@ class PlacementPolicy(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param properties: placement policy properties.
-    :type properties: ~azure.mgmt.avs.models.PlacementPolicyProperties
+    :ivar properties: placement policy properties.
+    :vartype properties: ~azure.mgmt.avs.models.PlacementPolicyProperties
     """
 
     _validation = {
@@ -1722,6 +1957,10 @@ class PlacementPolicy(Resource):
         properties: Optional["PlacementPolicyProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword properties: placement policy properties.
+        :paramtype properties: ~azure.mgmt.avs.models.PlacementPolicyProperties
+        """
         super(PlacementPolicy, self).__init__(**kwargs)
         self.properties = properties
 
@@ -1736,14 +1975,14 @@ class PlacementPolicyProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param type: Required. placement policy type.Constant filled by server.  Possible values
-     include: "VmVm", "VmHost".
-    :type type: str or ~azure.mgmt.avs.models.PlacementPolicyType
-    :param state: Whether the placement policy is enabled or disabled. Possible values include:
+    :ivar type: Required. placement policy type.Constant filled by server. Possible values include:
+     "VmVm", "VmHost".
+    :vartype type: str or ~azure.mgmt.avs.models.PlacementPolicyType
+    :ivar state: Whether the placement policy is enabled or disabled. Possible values include:
      "Enabled", "Disabled".
-    :type state: str or ~azure.mgmt.avs.models.PlacementPolicyState
-    :param display_name: Display name of the placement policy.
-    :type display_name: str
+    :vartype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+    :ivar display_name: Display name of the placement policy.
+    :vartype display_name: str
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.PlacementPolicyProvisioningState
@@ -1772,6 +2011,13 @@ class PlacementPolicyProperties(msrest.serialization.Model):
         display_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword state: Whether the placement policy is enabled or disabled. Possible values include:
+         "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+        :keyword display_name: Display name of the placement policy.
+        :paramtype display_name: str
+        """
         super(PlacementPolicyProperties, self).__init__(**kwargs)
         self.type = None  # type: Optional[str]
         self.state = state
@@ -1782,13 +2028,13 @@ class PlacementPolicyProperties(msrest.serialization.Model):
 class PlacementPolicyUpdate(msrest.serialization.Model):
     """An update of a DRS placement policy resource.
 
-    :param state: Whether the placement policy is enabled or disabled. Possible values include:
+    :ivar state: Whether the placement policy is enabled or disabled. Possible values include:
      "Enabled", "Disabled".
-    :type state: str or ~azure.mgmt.avs.models.PlacementPolicyState
-    :param vm_members: Virtual machine members list.
-    :type vm_members: list[str]
-    :param host_members: Host members list.
-    :type host_members: list[str]
+    :vartype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+    :ivar vm_members: Virtual machine members list.
+    :vartype vm_members: list[str]
+    :ivar host_members: Host members list.
+    :vartype host_members: list[str]
     """
 
     _attribute_map = {
@@ -1805,6 +2051,15 @@ class PlacementPolicyUpdate(msrest.serialization.Model):
         host_members: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword state: Whether the placement policy is enabled or disabled. Possible values include:
+         "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+        :keyword vm_members: Virtual machine members list.
+        :paramtype vm_members: list[str]
+        :keyword host_members: Host members list.
+        :paramtype host_members: list[str]
+        """
         super(PlacementPolicyUpdate, self).__init__(**kwargs)
         self.state = state
         self.vm_members = vm_members
@@ -1822,10 +2077,10 @@ class TrackedResource(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param location: Resource location.
-    :type location: str
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
+    :ivar location: Resource location.
+    :vartype location: str
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
     """
 
     _validation = {
@@ -1849,6 +2104,12 @@ class TrackedResource(Resource):
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword location: Resource location.
+        :paramtype location: str
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        """
         super(TrackedResource, self).__init__(**kwargs)
         self.location = location
         self.tags = tags
@@ -1867,37 +2128,37 @@ class PrivateCloud(TrackedResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param location: Resource location.
-    :type location: str
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
-    :param sku: Required. The private cloud SKU.
-    :type sku: ~azure.mgmt.avs.models.Sku
-    :param identity: The identity of the private cloud, if configured.
-    :type identity: ~azure.mgmt.avs.models.PrivateCloudIdentity
-    :param management_cluster: The default cluster used for management.
-    :type management_cluster: ~azure.mgmt.avs.models.ManagementCluster
-    :param internet: Connectivity to internet is enabled or disabled. Possible values include:
+    :ivar location: Resource location.
+    :vartype location: str
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar sku: Required. The private cloud SKU.
+    :vartype sku: ~azure.mgmt.avs.models.Sku
+    :ivar identity: The identity of the private cloud, if configured.
+    :vartype identity: ~azure.mgmt.avs.models.PrivateCloudIdentity
+    :ivar management_cluster: The default cluster used for management.
+    :vartype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+    :ivar internet: Connectivity to internet is enabled or disabled. Possible values include:
      "Enabled", "Disabled". Default value: "Disabled".
-    :type internet: str or ~azure.mgmt.avs.models.InternetEnum
-    :param identity_sources: vCenter Single Sign On Identity Sources.
-    :type identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
-    :param availability: Properties describing how the cloud is distributed across availability
+    :vartype internet: str or ~azure.mgmt.avs.models.InternetEnum
+    :ivar identity_sources: vCenter Single Sign On Identity Sources.
+    :vartype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+    :ivar availability: Properties describing how the cloud is distributed across availability
      zones.
-    :type availability: ~azure.mgmt.avs.models.AvailabilityProperties
-    :param encryption: Customer managed key encryption, can be enabled or disabled.
-    :type encryption: ~azure.mgmt.avs.models.Encryption
+    :vartype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+    :ivar encryption: Customer managed key encryption, can be enabled or disabled.
+    :vartype encryption: ~azure.mgmt.avs.models.Encryption
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Cancelled", "Pending", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.PrivateCloudProvisioningState
-    :param circuit: An ExpressRoute Circuit.
-    :type circuit: ~azure.mgmt.avs.models.Circuit
+    :ivar circuit: An ExpressRoute Circuit.
+    :vartype circuit: ~azure.mgmt.avs.models.Circuit
     :ivar endpoints: The endpoints.
     :vartype endpoints: ~azure.mgmt.avs.models.Endpoints
-    :param network_block: The block of addresses should be unique across VNet in your subscription
+    :ivar network_block: The block of addresses should be unique across VNet in your subscription
      as well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where A,B,C,D are
      between 0 and 255, and X is between 0 and 22.
-    :type network_block: str
+    :vartype network_block: str
     :ivar management_network: Network used to access vCenter Server and NSX-T Manager.
     :vartype management_network: str
     :ivar provisioning_network: Used for virtual machine cold migration, cloning, and snapshot
@@ -1905,21 +2166,21 @@ class PrivateCloud(TrackedResource):
     :vartype provisioning_network: str
     :ivar vmotion_network: Used for live migration of virtual machines.
     :vartype vmotion_network: str
-    :param vcenter_password: Optionally, set the vCenter admin password when the private cloud is
+    :ivar vcenter_password: Optionally, set the vCenter admin password when the private cloud is
      created.
-    :type vcenter_password: str
-    :param nsxt_password: Optionally, set the NSX-T Manager password when the private cloud is
+    :vartype vcenter_password: str
+    :ivar nsxt_password: Optionally, set the NSX-T Manager password when the private cloud is
      created.
-    :type nsxt_password: str
+    :vartype nsxt_password: str
     :ivar vcenter_certificate_thumbprint: Thumbprint of the vCenter Server SSL certificate.
     :vartype vcenter_certificate_thumbprint: str
     :ivar nsxt_certificate_thumbprint: Thumbprint of the NSX-T Manager SSL certificate.
     :vartype nsxt_certificate_thumbprint: str
     :ivar external_cloud_links: Array of cloud link IDs from other clouds that connect to this one.
     :vartype external_cloud_links: list[str]
-    :param secondary_circuit: A secondary expressRoute circuit from a separate AZ. Only present in
-     a stretched private cloud.
-    :type secondary_circuit: ~azure.mgmt.avs.models.Circuit
+    :ivar secondary_circuit: A secondary expressRoute circuit from a separate AZ. Only present in a
+     stretched private cloud.
+    :vartype secondary_circuit: ~azure.mgmt.avs.models.Circuit
     """
 
     _validation = {
@@ -1984,6 +2245,43 @@ class PrivateCloud(TrackedResource):
         secondary_circuit: Optional["Circuit"] = None,
         **kwargs
     ):
+        """
+        :keyword location: Resource location.
+        :paramtype location: str
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword sku: Required. The private cloud SKU.
+        :paramtype sku: ~azure.mgmt.avs.models.Sku
+        :keyword identity: The identity of the private cloud, if configured.
+        :paramtype identity: ~azure.mgmt.avs.models.PrivateCloudIdentity
+        :keyword management_cluster: The default cluster used for management.
+        :paramtype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+        :keyword internet: Connectivity to internet is enabled or disabled. Possible values include:
+         "Enabled", "Disabled". Default value: "Disabled".
+        :paramtype internet: str or ~azure.mgmt.avs.models.InternetEnum
+        :keyword identity_sources: vCenter Single Sign On Identity Sources.
+        :paramtype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+        :keyword availability: Properties describing how the cloud is distributed across availability
+         zones.
+        :paramtype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+        :keyword encryption: Customer managed key encryption, can be enabled or disabled.
+        :paramtype encryption: ~azure.mgmt.avs.models.Encryption
+        :keyword circuit: An ExpressRoute Circuit.
+        :paramtype circuit: ~azure.mgmt.avs.models.Circuit
+        :keyword network_block: The block of addresses should be unique across VNet in your
+         subscription as well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
+         A,B,C,D are between 0 and 255, and X is between 0 and 22.
+        :paramtype network_block: str
+        :keyword vcenter_password: Optionally, set the vCenter admin password when the private cloud is
+         created.
+        :paramtype vcenter_password: str
+        :keyword nsxt_password: Optionally, set the NSX-T Manager password when the private cloud is
+         created.
+        :paramtype nsxt_password: str
+        :keyword secondary_circuit: A secondary expressRoute circuit from a separate AZ. Only present
+         in a stretched private cloud.
+        :paramtype secondary_circuit: ~azure.mgmt.avs.models.Circuit
+        """
         super(PrivateCloud, self).__init__(location=location, tags=tags, **kwargs)
         self.sku = sku
         self.identity = identity
@@ -2018,10 +2316,10 @@ class PrivateCloudIdentity(msrest.serialization.Model):
     :ivar tenant_id: The tenant ID associated with the private cloud. This property will only be
      provided for a system assigned identity.
     :vartype tenant_id: str
-    :param type: The type of identity used for the private cloud. The type 'SystemAssigned' refers
+    :ivar type: The type of identity used for the private cloud. The type 'SystemAssigned' refers
      to an implicitly created identity. The type 'None' will remove any identities from the Private
      Cloud. Possible values include: "SystemAssigned", "None".
-    :type type: str or ~azure.mgmt.avs.models.ResourceIdentityType
+    :vartype type: str or ~azure.mgmt.avs.models.ResourceIdentityType
     """
 
     _validation = {
@@ -2041,6 +2339,12 @@ class PrivateCloudIdentity(msrest.serialization.Model):
         type: Optional[Union[str, "ResourceIdentityType"]] = None,
         **kwargs
     ):
+        """
+        :keyword type: The type of identity used for the private cloud. The type 'SystemAssigned'
+         refers to an implicitly created identity. The type 'None' will remove any identities from the
+         Private Cloud. Possible values include: "SystemAssigned", "None".
+        :paramtype type: str or ~azure.mgmt.avs.models.ResourceIdentityType
+        """
         super(PrivateCloudIdentity, self).__init__(**kwargs)
         self.principal_id = None
         self.tenant_id = None
@@ -2072,6 +2376,8 @@ class PrivateCloudList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(PrivateCloudList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -2080,18 +2386,18 @@ class PrivateCloudList(msrest.serialization.Model):
 class PrivateCloudUpdateProperties(msrest.serialization.Model):
     """The properties of a private cloud resource that may be updated.
 
-    :param management_cluster: The default cluster used for management.
-    :type management_cluster: ~azure.mgmt.avs.models.ManagementCluster
-    :param internet: Connectivity to internet is enabled or disabled. Possible values include:
+    :ivar management_cluster: The default cluster used for management.
+    :vartype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+    :ivar internet: Connectivity to internet is enabled or disabled. Possible values include:
      "Enabled", "Disabled". Default value: "Disabled".
-    :type internet: str or ~azure.mgmt.avs.models.InternetEnum
-    :param identity_sources: vCenter Single Sign On Identity Sources.
-    :type identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
-    :param availability: Properties describing how the cloud is distributed across availability
+    :vartype internet: str or ~azure.mgmt.avs.models.InternetEnum
+    :ivar identity_sources: vCenter Single Sign On Identity Sources.
+    :vartype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+    :ivar availability: Properties describing how the cloud is distributed across availability
      zones.
-    :type availability: ~azure.mgmt.avs.models.AvailabilityProperties
-    :param encryption: Customer managed key encryption, can be enabled or disabled.
-    :type encryption: ~azure.mgmt.avs.models.Encryption
+    :vartype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+    :ivar encryption: Customer managed key encryption, can be enabled or disabled.
+    :vartype encryption: ~azure.mgmt.avs.models.Encryption
     """
 
     _attribute_map = {
@@ -2112,6 +2418,20 @@ class PrivateCloudUpdateProperties(msrest.serialization.Model):
         encryption: Optional["Encryption"] = None,
         **kwargs
     ):
+        """
+        :keyword management_cluster: The default cluster used for management.
+        :paramtype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+        :keyword internet: Connectivity to internet is enabled or disabled. Possible values include:
+         "Enabled", "Disabled". Default value: "Disabled".
+        :paramtype internet: str or ~azure.mgmt.avs.models.InternetEnum
+        :keyword identity_sources: vCenter Single Sign On Identity Sources.
+        :paramtype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+        :keyword availability: Properties describing how the cloud is distributed across availability
+         zones.
+        :paramtype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+        :keyword encryption: Customer managed key encryption, can be enabled or disabled.
+        :paramtype encryption: ~azure.mgmt.avs.models.Encryption
+        """
         super(PrivateCloudUpdateProperties, self).__init__(**kwargs)
         self.management_cluster = management_cluster
         self.internet = internet
@@ -2127,29 +2447,29 @@ class PrivateCloudProperties(PrivateCloudUpdateProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param management_cluster: The default cluster used for management.
-    :type management_cluster: ~azure.mgmt.avs.models.ManagementCluster
-    :param internet: Connectivity to internet is enabled or disabled. Possible values include:
+    :ivar management_cluster: The default cluster used for management.
+    :vartype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+    :ivar internet: Connectivity to internet is enabled or disabled. Possible values include:
      "Enabled", "Disabled". Default value: "Disabled".
-    :type internet: str or ~azure.mgmt.avs.models.InternetEnum
-    :param identity_sources: vCenter Single Sign On Identity Sources.
-    :type identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
-    :param availability: Properties describing how the cloud is distributed across availability
+    :vartype internet: str or ~azure.mgmt.avs.models.InternetEnum
+    :ivar identity_sources: vCenter Single Sign On Identity Sources.
+    :vartype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+    :ivar availability: Properties describing how the cloud is distributed across availability
      zones.
-    :type availability: ~azure.mgmt.avs.models.AvailabilityProperties
-    :param encryption: Customer managed key encryption, can be enabled or disabled.
-    :type encryption: ~azure.mgmt.avs.models.Encryption
+    :vartype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+    :ivar encryption: Customer managed key encryption, can be enabled or disabled.
+    :vartype encryption: ~azure.mgmt.avs.models.Encryption
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Cancelled", "Pending", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.PrivateCloudProvisioningState
-    :param circuit: An ExpressRoute Circuit.
-    :type circuit: ~azure.mgmt.avs.models.Circuit
+    :ivar circuit: An ExpressRoute Circuit.
+    :vartype circuit: ~azure.mgmt.avs.models.Circuit
     :ivar endpoints: The endpoints.
     :vartype endpoints: ~azure.mgmt.avs.models.Endpoints
-    :param network_block: Required. The block of addresses should be unique across VNet in your
+    :ivar network_block: Required. The block of addresses should be unique across VNet in your
      subscription as well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
      A,B,C,D are between 0 and 255, and X is between 0 and 22.
-    :type network_block: str
+    :vartype network_block: str
     :ivar management_network: Network used to access vCenter Server and NSX-T Manager.
     :vartype management_network: str
     :ivar provisioning_network: Used for virtual machine cold migration, cloning, and snapshot
@@ -2157,21 +2477,21 @@ class PrivateCloudProperties(PrivateCloudUpdateProperties):
     :vartype provisioning_network: str
     :ivar vmotion_network: Used for live migration of virtual machines.
     :vartype vmotion_network: str
-    :param vcenter_password: Optionally, set the vCenter admin password when the private cloud is
+    :ivar vcenter_password: Optionally, set the vCenter admin password when the private cloud is
      created.
-    :type vcenter_password: str
-    :param nsxt_password: Optionally, set the NSX-T Manager password when the private cloud is
+    :vartype vcenter_password: str
+    :ivar nsxt_password: Optionally, set the NSX-T Manager password when the private cloud is
      created.
-    :type nsxt_password: str
+    :vartype nsxt_password: str
     :ivar vcenter_certificate_thumbprint: Thumbprint of the vCenter Server SSL certificate.
     :vartype vcenter_certificate_thumbprint: str
     :ivar nsxt_certificate_thumbprint: Thumbprint of the NSX-T Manager SSL certificate.
     :vartype nsxt_certificate_thumbprint: str
     :ivar external_cloud_links: Array of cloud link IDs from other clouds that connect to this one.
     :vartype external_cloud_links: list[str]
-    :param secondary_circuit: A secondary expressRoute circuit from a separate AZ. Only present in
-     a stretched private cloud.
-    :type secondary_circuit: ~azure.mgmt.avs.models.Circuit
+    :ivar secondary_circuit: A secondary expressRoute circuit from a separate AZ. Only present in a
+     stretched private cloud.
+    :vartype secondary_circuit: ~azure.mgmt.avs.models.Circuit
     """
 
     _validation = {
@@ -2222,6 +2542,35 @@ class PrivateCloudProperties(PrivateCloudUpdateProperties):
         secondary_circuit: Optional["Circuit"] = None,
         **kwargs
     ):
+        """
+        :keyword management_cluster: The default cluster used for management.
+        :paramtype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+        :keyword internet: Connectivity to internet is enabled or disabled. Possible values include:
+         "Enabled", "Disabled". Default value: "Disabled".
+        :paramtype internet: str or ~azure.mgmt.avs.models.InternetEnum
+        :keyword identity_sources: vCenter Single Sign On Identity Sources.
+        :paramtype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+        :keyword availability: Properties describing how the cloud is distributed across availability
+         zones.
+        :paramtype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+        :keyword encryption: Customer managed key encryption, can be enabled or disabled.
+        :paramtype encryption: ~azure.mgmt.avs.models.Encryption
+        :keyword circuit: An ExpressRoute Circuit.
+        :paramtype circuit: ~azure.mgmt.avs.models.Circuit
+        :keyword network_block: Required. The block of addresses should be unique across VNet in your
+         subscription as well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
+         A,B,C,D are between 0 and 255, and X is between 0 and 22.
+        :paramtype network_block: str
+        :keyword vcenter_password: Optionally, set the vCenter admin password when the private cloud is
+         created.
+        :paramtype vcenter_password: str
+        :keyword nsxt_password: Optionally, set the NSX-T Manager password when the private cloud is
+         created.
+        :paramtype nsxt_password: str
+        :keyword secondary_circuit: A secondary expressRoute circuit from a separate AZ. Only present
+         in a stretched private cloud.
+        :paramtype secondary_circuit: ~azure.mgmt.avs.models.Circuit
+        """
         super(PrivateCloudProperties, self).__init__(management_cluster=management_cluster, internet=internet, identity_sources=identity_sources, availability=availability, encryption=encryption, **kwargs)
         self.provisioning_state = None
         self.circuit = circuit
@@ -2241,22 +2590,22 @@ class PrivateCloudProperties(PrivateCloudUpdateProperties):
 class PrivateCloudUpdate(msrest.serialization.Model):
     """An update to a private cloud resource.
 
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
-    :param identity: The identity of the private cloud, if configured.
-    :type identity: ~azure.mgmt.avs.models.PrivateCloudIdentity
-    :param management_cluster: The default cluster used for management.
-    :type management_cluster: ~azure.mgmt.avs.models.ManagementCluster
-    :param internet: Connectivity to internet is enabled or disabled. Possible values include:
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar identity: The identity of the private cloud, if configured.
+    :vartype identity: ~azure.mgmt.avs.models.PrivateCloudIdentity
+    :ivar management_cluster: The default cluster used for management.
+    :vartype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+    :ivar internet: Connectivity to internet is enabled or disabled. Possible values include:
      "Enabled", "Disabled". Default value: "Disabled".
-    :type internet: str or ~azure.mgmt.avs.models.InternetEnum
-    :param identity_sources: vCenter Single Sign On Identity Sources.
-    :type identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
-    :param availability: Properties describing how the cloud is distributed across availability
+    :vartype internet: str or ~azure.mgmt.avs.models.InternetEnum
+    :ivar identity_sources: vCenter Single Sign On Identity Sources.
+    :vartype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+    :ivar availability: Properties describing how the cloud is distributed across availability
      zones.
-    :type availability: ~azure.mgmt.avs.models.AvailabilityProperties
-    :param encryption: Customer managed key encryption, can be enabled or disabled.
-    :type encryption: ~azure.mgmt.avs.models.Encryption
+    :vartype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+    :ivar encryption: Customer managed key encryption, can be enabled or disabled.
+    :vartype encryption: ~azure.mgmt.avs.models.Encryption
     """
 
     _attribute_map = {
@@ -2281,6 +2630,24 @@ class PrivateCloudUpdate(msrest.serialization.Model):
         encryption: Optional["Encryption"] = None,
         **kwargs
     ):
+        """
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword identity: The identity of the private cloud, if configured.
+        :paramtype identity: ~azure.mgmt.avs.models.PrivateCloudIdentity
+        :keyword management_cluster: The default cluster used for management.
+        :paramtype management_cluster: ~azure.mgmt.avs.models.ManagementCluster
+        :keyword internet: Connectivity to internet is enabled or disabled. Possible values include:
+         "Enabled", "Disabled". Default value: "Disabled".
+        :paramtype internet: str or ~azure.mgmt.avs.models.InternetEnum
+        :keyword identity_sources: vCenter Single Sign On Identity Sources.
+        :paramtype identity_sources: list[~azure.mgmt.avs.models.IdentitySource]
+        :keyword availability: Properties describing how the cloud is distributed across availability
+         zones.
+        :paramtype availability: ~azure.mgmt.avs.models.AvailabilityProperties
+        :keyword encryption: Customer managed key encryption, can be enabled or disabled.
+        :paramtype encryption: ~azure.mgmt.avs.models.Encryption
+        """
         super(PrivateCloudUpdate, self).__init__(**kwargs)
         self.tags = tags
         self.identity = identity
@@ -2320,6 +2687,8 @@ class ProxyResource(Resource):
         self,
         **kwargs
     ):
+        """
+        """
         super(ProxyResource, self).__init__(**kwargs)
 
 
@@ -2331,11 +2700,11 @@ class ScriptExecutionParameter(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param name: Required. The parameter name.
-    :type name: str
-    :param type: Required. The type of execution parameter.Constant filled by server.  Possible
+    :ivar name: Required. The parameter name.
+    :vartype name: str
+    :ivar type: Required. The type of execution parameter.Constant filled by server. Possible
      values include: "Value", "SecureValue", "Credential".
-    :type type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
+    :vartype type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
     """
 
     _validation = {
@@ -2358,6 +2727,10 @@ class ScriptExecutionParameter(msrest.serialization.Model):
         name: str,
         **kwargs
     ):
+        """
+        :keyword name: Required. The parameter name.
+        :paramtype name: str
+        """
         super(ScriptExecutionParameter, self).__init__(**kwargs)
         self.name = name
         self.type = None  # type: Optional[str]
@@ -2368,15 +2741,15 @@ class PSCredentialExecutionParameter(ScriptExecutionParameter):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param name: Required. The parameter name.
-    :type name: str
-    :param type: Required. The type of execution parameter.Constant filled by server.  Possible
+    :ivar name: Required. The parameter name.
+    :vartype name: str
+    :ivar type: Required. The type of execution parameter.Constant filled by server. Possible
      values include: "Value", "SecureValue", "Credential".
-    :type type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
-    :param username: username for login.
-    :type username: str
-    :param password: password for login.
-    :type password: str
+    :vartype type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
+    :ivar username: username for login.
+    :vartype username: str
+    :ivar password: password for login.
+    :vartype password: str
     """
 
     _validation = {
@@ -2399,6 +2772,14 @@ class PSCredentialExecutionParameter(ScriptExecutionParameter):
         password: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Required. The parameter name.
+        :paramtype name: str
+        :keyword username: username for login.
+        :paramtype username: str
+        :keyword password: password for login.
+        :paramtype password: str
+        """
         super(PSCredentialExecutionParameter, self).__init__(name=name, **kwargs)
         self.type = 'Credential'  # type: str
         self.username = username
@@ -2431,6 +2812,8 @@ class Quota(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Quota, self).__init__(**kwargs)
         self.hosts_remaining = None
         self.quota_enabled = None
@@ -2477,6 +2860,8 @@ class ScriptCmdlet(ProxyResource):
         self,
         **kwargs
     ):
+        """
+        """
         super(ScriptCmdlet, self).__init__(**kwargs)
         self.description = None
         self.timeout = None
@@ -2508,6 +2893,8 @@ class ScriptCmdletsList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ScriptCmdletsList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -2524,22 +2911,21 @@ class ScriptExecution(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param script_cmdlet_id: A reference to the script cmdlet resource if user is running a AVS
+    :ivar script_cmdlet_id: A reference to the script cmdlet resource if user is running a AVS
      script.
-    :type script_cmdlet_id: str
-    :param parameters: Parameters the script will accept.
-    :type parameters: list[~azure.mgmt.avs.models.ScriptExecutionParameter]
-    :param hidden_parameters: Parameters that will be hidden/not visible to ARM, such as passwords
+    :vartype script_cmdlet_id: str
+    :ivar parameters: Parameters the script will accept.
+    :vartype parameters: list[~azure.mgmt.avs.models.ScriptExecutionParameter]
+    :ivar hidden_parameters: Parameters that will be hidden/not visible to ARM, such as passwords
      and credentials.
-    :type hidden_parameters: list[~azure.mgmt.avs.models.ScriptExecutionParameter]
-    :param failure_reason: Error message if the script was able to run, but if the script itself
-     had errors or powershell threw an exception.
-    :type failure_reason: str
-    :param timeout: Time limit for execution.
-    :type timeout: str
-    :param retention: Time to live for the resource. If not provided, will be available for 60
-     days.
-    :type retention: str
+    :vartype hidden_parameters: list[~azure.mgmt.avs.models.ScriptExecutionParameter]
+    :ivar failure_reason: Error message if the script was able to run, but if the script itself had
+     errors or powershell threw an exception.
+    :vartype failure_reason: str
+    :ivar timeout: Time limit for execution.
+    :vartype timeout: str
+    :ivar retention: Time to live for the resource. If not provided, will be available for 60 days.
+    :vartype retention: str
     :ivar submitted_at: Time the script execution was submitted.
     :vartype submitted_at: ~datetime.datetime
     :ivar started_at: Time the script execution was started.
@@ -2549,10 +2935,10 @@ class ScriptExecution(ProxyResource):
     :ivar provisioning_state: The state of the script execution resource. Possible values include:
      "Pending", "Running", "Succeeded", "Failed", "Cancelling", "Cancelled", "Deleting".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.ScriptExecutionProvisioningState
-    :param output: Standard output stream from the powershell execution.
-    :type output: list[str]
-    :param named_outputs: User-defined dictionary.
-    :type named_outputs: dict[str, any]
+    :ivar output: Standard output stream from the powershell execution.
+    :vartype output: list[str]
+    :ivar named_outputs: User-defined dictionary.
+    :vartype named_outputs: dict[str, any]
     :ivar information: Standard information out stream from the powershell execution.
     :vartype information: list[str]
     :ivar warnings: Standard warning out stream from the powershell execution.
@@ -2608,6 +2994,28 @@ class ScriptExecution(ProxyResource):
         named_outputs: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
+        """
+        :keyword script_cmdlet_id: A reference to the script cmdlet resource if user is running a AVS
+         script.
+        :paramtype script_cmdlet_id: str
+        :keyword parameters: Parameters the script will accept.
+        :paramtype parameters: list[~azure.mgmt.avs.models.ScriptExecutionParameter]
+        :keyword hidden_parameters: Parameters that will be hidden/not visible to ARM, such as
+         passwords and credentials.
+        :paramtype hidden_parameters: list[~azure.mgmt.avs.models.ScriptExecutionParameter]
+        :keyword failure_reason: Error message if the script was able to run, but if the script itself
+         had errors or powershell threw an exception.
+        :paramtype failure_reason: str
+        :keyword timeout: Time limit for execution.
+        :paramtype timeout: str
+        :keyword retention: Time to live for the resource. If not provided, will be available for 60
+         days.
+        :paramtype retention: str
+        :keyword output: Standard output stream from the powershell execution.
+        :paramtype output: list[str]
+        :keyword named_outputs: User-defined dictionary.
+        :paramtype named_outputs: dict[str, any]
+        """
         super(ScriptExecution, self).__init__(**kwargs)
         self.script_cmdlet_id = script_cmdlet_id
         self.parameters = parameters
@@ -2651,6 +3059,8 @@ class ScriptExecutionsList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ScriptExecutionsList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -2693,6 +3103,8 @@ class ScriptPackage(ProxyResource):
         self,
         **kwargs
     ):
+        """
+        """
         super(ScriptPackage, self).__init__(**kwargs)
         self.description = None
         self.version = None
@@ -2723,6 +3135,8 @@ class ScriptPackagesList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ScriptPackagesList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -2737,8 +3151,8 @@ class ScriptParameter(msrest.serialization.Model):
      PSCredentialObject. Possible values include: "String", "SecureString", "Credential", "Int",
      "Bool", "Float".
     :vartype type: str or ~azure.mgmt.avs.models.ScriptParameterTypes
-    :param name: The parameter name that the script will expect a parameter value for.
-    :type name: str
+    :ivar name: The parameter name that the script will expect a parameter value for.
+    :vartype name: str
     :ivar description: User friendly description of the parameter.
     :vartype description: str
     :ivar visibility: Should this parameter be visible to arm and passed in the parameters argument
@@ -2770,6 +3184,10 @@ class ScriptParameter(msrest.serialization.Model):
         name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: The parameter name that the script will expect a parameter value for.
+        :paramtype name: str
+        """
         super(ScriptParameter, self).__init__(**kwargs)
         self.type = None
         self.name = name
@@ -2783,13 +3201,13 @@ class ScriptSecureStringExecutionParameter(ScriptExecutionParameter):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param name: Required. The parameter name.
-    :type name: str
-    :param type: Required. The type of execution parameter.Constant filled by server.  Possible
+    :ivar name: Required. The parameter name.
+    :vartype name: str
+    :ivar type: Required. The type of execution parameter.Constant filled by server. Possible
      values include: "Value", "SecureValue", "Credential".
-    :type type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
-    :param secure_value: A secure value for the passed parameter, not to be stored in logs.
-    :type secure_value: str
+    :vartype type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
+    :ivar secure_value: A secure value for the passed parameter, not to be stored in logs.
+    :vartype secure_value: str
     """
 
     _validation = {
@@ -2810,6 +3228,12 @@ class ScriptSecureStringExecutionParameter(ScriptExecutionParameter):
         secure_value: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Required. The parameter name.
+        :paramtype name: str
+        :keyword secure_value: A secure value for the passed parameter, not to be stored in logs.
+        :paramtype secure_value: str
+        """
         super(ScriptSecureStringExecutionParameter, self).__init__(name=name, **kwargs)
         self.type = 'SecureValue'  # type: str
         self.secure_value = secure_value
@@ -2820,13 +3244,13 @@ class ScriptStringExecutionParameter(ScriptExecutionParameter):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param name: Required. The parameter name.
-    :type name: str
-    :param type: Required. The type of execution parameter.Constant filled by server.  Possible
+    :ivar name: Required. The parameter name.
+    :vartype name: str
+    :ivar type: Required. The type of execution parameter.Constant filled by server. Possible
      values include: "Value", "SecureValue", "Credential".
-    :type type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
-    :param value: The value for the passed parameter.
-    :type value: str
+    :vartype type: str or ~azure.mgmt.avs.models.ScriptExecutionParameterType
+    :ivar value: The value for the passed parameter.
+    :vartype value: str
     """
 
     _validation = {
@@ -2847,6 +3271,12 @@ class ScriptStringExecutionParameter(ScriptExecutionParameter):
         value: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Required. The parameter name.
+        :paramtype name: str
+        :keyword value: The value for the passed parameter.
+        :paramtype value: str
+        """
         super(ScriptStringExecutionParameter, self).__init__(name=name, **kwargs)
         self.type = 'Value'  # type: str
         self.value = value
@@ -2855,10 +3285,10 @@ class ScriptStringExecutionParameter(ScriptExecutionParameter):
 class ServiceSpecification(msrest.serialization.Model):
     """Service specification payload.
 
-    :param log_specifications: Specifications of the Log for Azure Monitoring.
-    :type log_specifications: list[~azure.mgmt.avs.models.LogSpecification]
-    :param metric_specifications: Specifications of the Metrics for Azure Monitoring.
-    :type metric_specifications: list[~azure.mgmt.avs.models.MetricSpecification]
+    :ivar log_specifications: Specifications of the Log for Azure Monitoring.
+    :vartype log_specifications: list[~azure.mgmt.avs.models.LogSpecification]
+    :ivar metric_specifications: Specifications of the Metrics for Azure Monitoring.
+    :vartype metric_specifications: list[~azure.mgmt.avs.models.MetricSpecification]
     """
 
     _attribute_map = {
@@ -2873,6 +3303,12 @@ class ServiceSpecification(msrest.serialization.Model):
         metric_specifications: Optional[List["MetricSpecification"]] = None,
         **kwargs
     ):
+        """
+        :keyword log_specifications: Specifications of the Log for Azure Monitoring.
+        :paramtype log_specifications: list[~azure.mgmt.avs.models.LogSpecification]
+        :keyword metric_specifications: Specifications of the Metrics for Azure Monitoring.
+        :paramtype metric_specifications: list[~azure.mgmt.avs.models.MetricSpecification]
+        """
         super(ServiceSpecification, self).__init__(**kwargs)
         self.log_specifications = log_specifications
         self.metric_specifications = metric_specifications
@@ -2883,8 +3319,8 @@ class Sku(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param name: Required. The name of the SKU.
-    :type name: str
+    :ivar name: Required. The name of the SKU.
+    :vartype name: str
     """
 
     _validation = {
@@ -2901,6 +3337,10 @@ class Sku(msrest.serialization.Model):
         name: str,
         **kwargs
     ):
+        """
+        :keyword name: Required. The name of the SKU.
+        :paramtype name: str
+        """
         super(Sku, self).__init__(**kwargs)
         self.name = name
 
@@ -2931,6 +3371,8 @@ class Trial(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Trial, self).__init__(**kwargs)
         self.status = None
         self.available_hosts = None
@@ -2983,6 +3425,8 @@ class VirtualMachine(ProxyResource):
         self,
         **kwargs
     ):
+        """
+        """
         super(VirtualMachine, self).__init__(**kwargs)
         self.display_name = None
         self.mo_ref_id = None
@@ -2993,9 +3437,9 @@ class VirtualMachine(ProxyResource):
 class VirtualMachineRestrictMovement(msrest.serialization.Model):
     """Set VM DRS-driven movement to restricted (enabled) or not (disabled).
 
-    :param restrict_movement: Whether VM DRS-driven movement is restricted (enabled) or not
+    :ivar restrict_movement: Whether VM DRS-driven movement is restricted (enabled) or not
      (disabled). Possible values include: "Enabled", "Disabled".
-    :type restrict_movement: str or ~azure.mgmt.avs.models.VirtualMachineRestrictMovementState
+    :vartype restrict_movement: str or ~azure.mgmt.avs.models.VirtualMachineRestrictMovementState
     """
 
     _attribute_map = {
@@ -3008,6 +3452,11 @@ class VirtualMachineRestrictMovement(msrest.serialization.Model):
         restrict_movement: Optional[Union[str, "VirtualMachineRestrictMovementState"]] = None,
         **kwargs
     ):
+        """
+        :keyword restrict_movement: Whether VM DRS-driven movement is restricted (enabled) or not
+         (disabled). Possible values include: "Enabled", "Disabled".
+        :paramtype restrict_movement: str or ~azure.mgmt.avs.models.VirtualMachineRestrictMovementState
+        """
         super(VirtualMachineRestrictMovement, self).__init__(**kwargs)
         self.restrict_movement = restrict_movement
 
@@ -3037,6 +3486,8 @@ class VirtualMachinesList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(VirtualMachinesList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3049,24 +3500,24 @@ class VmHostPlacementPolicyProperties(PlacementPolicyProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param type: Required. placement policy type.Constant filled by server.  Possible values
-     include: "VmVm", "VmHost".
-    :type type: str or ~azure.mgmt.avs.models.PlacementPolicyType
-    :param state: Whether the placement policy is enabled or disabled. Possible values include:
+    :ivar type: Required. placement policy type.Constant filled by server. Possible values include:
+     "VmVm", "VmHost".
+    :vartype type: str or ~azure.mgmt.avs.models.PlacementPolicyType
+    :ivar state: Whether the placement policy is enabled or disabled. Possible values include:
      "Enabled", "Disabled".
-    :type state: str or ~azure.mgmt.avs.models.PlacementPolicyState
-    :param display_name: Display name of the placement policy.
-    :type display_name: str
+    :vartype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+    :ivar display_name: Display name of the placement policy.
+    :vartype display_name: str
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.PlacementPolicyProvisioningState
-    :param vm_members: Required. Virtual machine members list.
-    :type vm_members: list[str]
-    :param host_members: Required. Host members list.
-    :type host_members: list[str]
-    :param affinity_type: Required. placement policy affinity type. Possible values include:
+    :ivar vm_members: Required. Virtual machine members list.
+    :vartype vm_members: list[str]
+    :ivar host_members: Required. Host members list.
+    :vartype host_members: list[str]
+    :ivar affinity_type: Required. placement policy affinity type. Possible values include:
      "Affinity", "AntiAffinity".
-    :type affinity_type: str or ~azure.mgmt.avs.models.AffinityType
+    :vartype affinity_type: str or ~azure.mgmt.avs.models.AffinityType
     """
 
     _validation = {
@@ -3097,6 +3548,20 @@ class VmHostPlacementPolicyProperties(PlacementPolicyProperties):
         display_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword state: Whether the placement policy is enabled or disabled. Possible values include:
+         "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+        :keyword display_name: Display name of the placement policy.
+        :paramtype display_name: str
+        :keyword vm_members: Required. Virtual machine members list.
+        :paramtype vm_members: list[str]
+        :keyword host_members: Required. Host members list.
+        :paramtype host_members: list[str]
+        :keyword affinity_type: Required. placement policy affinity type. Possible values include:
+         "Affinity", "AntiAffinity".
+        :paramtype affinity_type: str or ~azure.mgmt.avs.models.AffinityType
+        """
         super(VmHostPlacementPolicyProperties, self).__init__(state=state, display_name=display_name, **kwargs)
         self.type = 'VmHost'  # type: str
         self.vm_members = vm_members
@@ -3111,22 +3576,22 @@ class VmPlacementPolicyProperties(PlacementPolicyProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param type: Required. placement policy type.Constant filled by server.  Possible values
-     include: "VmVm", "VmHost".
-    :type type: str or ~azure.mgmt.avs.models.PlacementPolicyType
-    :param state: Whether the placement policy is enabled or disabled. Possible values include:
+    :ivar type: Required. placement policy type.Constant filled by server. Possible values include:
+     "VmVm", "VmHost".
+    :vartype type: str or ~azure.mgmt.avs.models.PlacementPolicyType
+    :ivar state: Whether the placement policy is enabled or disabled. Possible values include:
      "Enabled", "Disabled".
-    :type state: str or ~azure.mgmt.avs.models.PlacementPolicyState
-    :param display_name: Display name of the placement policy.
-    :type display_name: str
+    :vartype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+    :ivar display_name: Display name of the placement policy.
+    :vartype display_name: str
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.PlacementPolicyProvisioningState
-    :param vm_members: Required. Virtual machine members list.
-    :type vm_members: list[str]
-    :param affinity_type: Required. placement policy affinity type. Possible values include:
+    :ivar vm_members: Required. Virtual machine members list.
+    :vartype vm_members: list[str]
+    :ivar affinity_type: Required. placement policy affinity type. Possible values include:
      "Affinity", "AntiAffinity".
-    :type affinity_type: str or ~azure.mgmt.avs.models.AffinityType
+    :vartype affinity_type: str or ~azure.mgmt.avs.models.AffinityType
     """
 
     _validation = {
@@ -3154,6 +3619,18 @@ class VmPlacementPolicyProperties(PlacementPolicyProperties):
         display_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword state: Whether the placement policy is enabled or disabled. Possible values include:
+         "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.avs.models.PlacementPolicyState
+        :keyword display_name: Display name of the placement policy.
+        :paramtype display_name: str
+        :keyword vm_members: Required. Virtual machine members list.
+        :paramtype vm_members: list[str]
+        :keyword affinity_type: Required. placement policy affinity type. Possible values include:
+         "Affinity", "AntiAffinity".
+        :paramtype affinity_type: str or ~azure.mgmt.avs.models.AffinityType
+        """
         super(VmPlacementPolicyProperties, self).__init__(state=state, display_name=display_name, **kwargs)
         self.type = 'VmVm'  # type: str
         self.vm_members = vm_members
@@ -3171,8 +3648,8 @@ class WorkloadNetworkDhcp(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param properties: DHCP properties.
-    :type properties: ~azure.mgmt.avs.models.WorkloadNetworkDhcpEntity
+    :ivar properties: DHCP properties.
+    :vartype properties: ~azure.mgmt.avs.models.WorkloadNetworkDhcpEntity
     """
 
     _validation = {
@@ -3194,6 +3671,10 @@ class WorkloadNetworkDhcp(ProxyResource):
         properties: Optional["WorkloadNetworkDhcpEntity"] = None,
         **kwargs
     ):
+        """
+        :keyword properties: DHCP properties.
+        :paramtype properties: ~azure.mgmt.avs.models.WorkloadNetworkDhcpEntity
+        """
         super(WorkloadNetworkDhcp, self).__init__(**kwargs)
         self.properties = properties
 
@@ -3208,18 +3689,18 @@ class WorkloadNetworkDhcpEntity(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param dhcp_type: Required. Type of DHCP: SERVER or RELAY.Constant filled by server.  Possible
+    :ivar dhcp_type: Required. Type of DHCP: SERVER or RELAY.Constant filled by server. Possible
      values include: "SERVER", "RELAY".
-    :type dhcp_type: str or ~azure.mgmt.avs.models.DhcpTypeEnum
-    :param display_name: Display name of the DHCP entity.
-    :type display_name: str
+    :vartype dhcp_type: str or ~azure.mgmt.avs.models.DhcpTypeEnum
+    :ivar display_name: Display name of the DHCP entity.
+    :vartype display_name: str
     :ivar segments: NSX Segments consuming DHCP.
     :vartype segments: list[str]
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.WorkloadNetworkDhcpProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
+    :ivar revision: NSX revision number.
+    :vartype revision: long
     """
 
     _validation = {
@@ -3247,6 +3728,12 @@ class WorkloadNetworkDhcpEntity(msrest.serialization.Model):
         revision: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the DHCP entity.
+        :paramtype display_name: str
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        """
         super(WorkloadNetworkDhcpEntity, self).__init__(**kwargs)
         self.dhcp_type = None  # type: Optional[str]
         self.display_name = display_name
@@ -3280,6 +3767,8 @@ class WorkloadNetworkDhcpList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkDhcpList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3292,20 +3781,20 @@ class WorkloadNetworkDhcpRelay(WorkloadNetworkDhcpEntity):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param dhcp_type: Required. Type of DHCP: SERVER or RELAY.Constant filled by server.  Possible
+    :ivar dhcp_type: Required. Type of DHCP: SERVER or RELAY.Constant filled by server. Possible
      values include: "SERVER", "RELAY".
-    :type dhcp_type: str or ~azure.mgmt.avs.models.DhcpTypeEnum
-    :param display_name: Display name of the DHCP entity.
-    :type display_name: str
+    :vartype dhcp_type: str or ~azure.mgmt.avs.models.DhcpTypeEnum
+    :ivar display_name: Display name of the DHCP entity.
+    :vartype display_name: str
     :ivar segments: NSX Segments consuming DHCP.
     :vartype segments: list[str]
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.WorkloadNetworkDhcpProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
-    :param server_addresses: DHCP Relay Addresses. Max 3.
-    :type server_addresses: list[str]
+    :ivar revision: NSX revision number.
+    :vartype revision: long
+    :ivar server_addresses: DHCP Relay Addresses. Max 3.
+    :vartype server_addresses: list[str]
     """
 
     _validation = {
@@ -3332,6 +3821,14 @@ class WorkloadNetworkDhcpRelay(WorkloadNetworkDhcpEntity):
         server_addresses: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the DHCP entity.
+        :paramtype display_name: str
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        :keyword server_addresses: DHCP Relay Addresses. Max 3.
+        :paramtype server_addresses: list[str]
+        """
         super(WorkloadNetworkDhcpRelay, self).__init__(display_name=display_name, revision=revision, **kwargs)
         self.dhcp_type = 'RELAY'  # type: str
         self.server_addresses = server_addresses
@@ -3344,22 +3841,22 @@ class WorkloadNetworkDhcpServer(WorkloadNetworkDhcpEntity):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param dhcp_type: Required. Type of DHCP: SERVER or RELAY.Constant filled by server.  Possible
+    :ivar dhcp_type: Required. Type of DHCP: SERVER or RELAY.Constant filled by server. Possible
      values include: "SERVER", "RELAY".
-    :type dhcp_type: str or ~azure.mgmt.avs.models.DhcpTypeEnum
-    :param display_name: Display name of the DHCP entity.
-    :type display_name: str
+    :vartype dhcp_type: str or ~azure.mgmt.avs.models.DhcpTypeEnum
+    :ivar display_name: Display name of the DHCP entity.
+    :vartype display_name: str
     :ivar segments: NSX Segments consuming DHCP.
     :vartype segments: list[str]
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.avs.models.WorkloadNetworkDhcpProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
-    :param server_address: DHCP Server Address.
-    :type server_address: str
-    :param lease_time: DHCP Server Lease Time.
-    :type lease_time: long
+    :ivar revision: NSX revision number.
+    :vartype revision: long
+    :ivar server_address: DHCP Server Address.
+    :vartype server_address: str
+    :ivar lease_time: DHCP Server Lease Time.
+    :vartype lease_time: long
     """
 
     _validation = {
@@ -3387,6 +3884,16 @@ class WorkloadNetworkDhcpServer(WorkloadNetworkDhcpEntity):
         lease_time: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the DHCP entity.
+        :paramtype display_name: str
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        :keyword server_address: DHCP Server Address.
+        :paramtype server_address: str
+        :keyword lease_time: DHCP Server Lease Time.
+        :paramtype lease_time: long
+        """
         super(WorkloadNetworkDhcpServer, self).__init__(display_name=display_name, revision=revision, **kwargs)
         self.dhcp_type = 'SERVER'  # type: str
         self.server_address = server_address
@@ -3404,25 +3911,25 @@ class WorkloadNetworkDnsService(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the DNS Service.
-    :type display_name: str
-    :param dns_service_ip: DNS service IP of the DNS Service.
-    :type dns_service_ip: str
-    :param default_dns_zone: Default DNS zone of the DNS Service.
-    :type default_dns_zone: str
-    :param fqdn_zones: FQDN zones of the DNS Service.
-    :type fqdn_zones: list[str]
-    :param log_level: DNS Service log level. Possible values include: "DEBUG", "INFO", "WARNING",
+    :ivar display_name: Display name of the DNS Service.
+    :vartype display_name: str
+    :ivar dns_service_ip: DNS service IP of the DNS Service.
+    :vartype dns_service_ip: str
+    :ivar default_dns_zone: Default DNS zone of the DNS Service.
+    :vartype default_dns_zone: str
+    :ivar fqdn_zones: FQDN zones of the DNS Service.
+    :vartype fqdn_zones: list[str]
+    :ivar log_level: DNS Service log level. Possible values include: "DEBUG", "INFO", "WARNING",
      "ERROR", "FATAL".
-    :type log_level: str or ~azure.mgmt.avs.models.DnsServiceLogLevelEnum
+    :vartype log_level: str or ~azure.mgmt.avs.models.DnsServiceLogLevelEnum
     :ivar status: DNS Service status. Possible values include: "SUCCESS", "FAILURE".
     :vartype status: str or ~azure.mgmt.avs.models.DnsServiceStatusEnum
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.avs.models.WorkloadNetworkDnsServiceProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
+    :ivar revision: NSX revision number.
+    :vartype revision: long
     """
 
     _validation = {
@@ -3458,6 +3965,21 @@ class WorkloadNetworkDnsService(ProxyResource):
         revision: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the DNS Service.
+        :paramtype display_name: str
+        :keyword dns_service_ip: DNS service IP of the DNS Service.
+        :paramtype dns_service_ip: str
+        :keyword default_dns_zone: Default DNS zone of the DNS Service.
+        :paramtype default_dns_zone: str
+        :keyword fqdn_zones: FQDN zones of the DNS Service.
+        :paramtype fqdn_zones: list[str]
+        :keyword log_level: DNS Service log level. Possible values include: "DEBUG", "INFO", "WARNING",
+         "ERROR", "FATAL".
+        :paramtype log_level: str or ~azure.mgmt.avs.models.DnsServiceLogLevelEnum
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        """
         super(WorkloadNetworkDnsService, self).__init__(**kwargs)
         self.display_name = display_name
         self.dns_service_ip = dns_service_ip
@@ -3494,6 +4016,8 @@ class WorkloadNetworkDnsServicesList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkDnsServicesList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3510,22 +4034,22 @@ class WorkloadNetworkDnsZone(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the DNS Zone.
-    :type display_name: str
-    :param domain: Domain names of the DNS Zone.
-    :type domain: list[str]
-    :param dns_server_ips: DNS Server IP array of the DNS Zone.
-    :type dns_server_ips: list[str]
-    :param source_ip: Source IP of the DNS Zone.
-    :type source_ip: str
-    :param dns_services: Number of DNS Services using the DNS zone.
-    :type dns_services: long
+    :ivar display_name: Display name of the DNS Zone.
+    :vartype display_name: str
+    :ivar domain: Domain names of the DNS Zone.
+    :vartype domain: list[str]
+    :ivar dns_server_ips: DNS Server IP array of the DNS Zone.
+    :vartype dns_server_ips: list[str]
+    :ivar source_ip: Source IP of the DNS Zone.
+    :vartype source_ip: str
+    :ivar dns_services: Number of DNS Services using the DNS zone.
+    :vartype dns_services: long
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.avs.models.WorkloadNetworkDnsZoneProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
+    :ivar revision: NSX revision number.
+    :vartype revision: long
     """
 
     _validation = {
@@ -3559,6 +4083,20 @@ class WorkloadNetworkDnsZone(ProxyResource):
         revision: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the DNS Zone.
+        :paramtype display_name: str
+        :keyword domain: Domain names of the DNS Zone.
+        :paramtype domain: list[str]
+        :keyword dns_server_ips: DNS Server IP array of the DNS Zone.
+        :paramtype dns_server_ips: list[str]
+        :keyword source_ip: Source IP of the DNS Zone.
+        :paramtype source_ip: str
+        :keyword dns_services: Number of DNS Services using the DNS zone.
+        :paramtype dns_services: long
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        """
         super(WorkloadNetworkDnsZone, self).__init__(**kwargs)
         self.display_name = display_name
         self.domain = domain
@@ -3594,6 +4132,8 @@ class WorkloadNetworkDnsZonesList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkDnsZonesList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3610,8 +4150,8 @@ class WorkloadNetworkGateway(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the DHCP entity.
-    :type display_name: str
+    :ivar display_name: Display name of the DHCP entity.
+    :vartype display_name: str
     :ivar path: NSX Gateway Path.
     :vartype path: str
     """
@@ -3637,6 +4177,10 @@ class WorkloadNetworkGateway(ProxyResource):
         display_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the DHCP entity.
+        :paramtype display_name: str
+        """
         super(WorkloadNetworkGateway, self).__init__(**kwargs)
         self.display_name = display_name
         self.path = None
@@ -3667,6 +4211,8 @@ class WorkloadNetworkGatewayList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkGatewayList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3683,23 +4229,23 @@ class WorkloadNetworkPortMirroring(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the port mirroring profile.
-    :type display_name: str
-    :param direction: Direction of port mirroring profile. Possible values include: "INGRESS",
+    :ivar display_name: Display name of the port mirroring profile.
+    :vartype display_name: str
+    :ivar direction: Direction of port mirroring profile. Possible values include: "INGRESS",
      "EGRESS", "BIDIRECTIONAL".
-    :type direction: str or ~azure.mgmt.avs.models.PortMirroringDirectionEnum
-    :param source: Source VM Group.
-    :type source: str
-    :param destination: Destination VM Group.
-    :type destination: str
+    :vartype direction: str or ~azure.mgmt.avs.models.PortMirroringDirectionEnum
+    :ivar source: Source VM Group.
+    :vartype source: str
+    :ivar destination: Destination VM Group.
+    :vartype destination: str
     :ivar status: Port Mirroring Status. Possible values include: "SUCCESS", "FAILURE".
     :vartype status: str or ~azure.mgmt.avs.models.PortMirroringStatusEnum
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.avs.models.WorkloadNetworkPortMirroringProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
+    :ivar revision: NSX revision number.
+    :vartype revision: long
     """
 
     _validation = {
@@ -3733,6 +4279,19 @@ class WorkloadNetworkPortMirroring(ProxyResource):
         revision: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the port mirroring profile.
+        :paramtype display_name: str
+        :keyword direction: Direction of port mirroring profile. Possible values include: "INGRESS",
+         "EGRESS", "BIDIRECTIONAL".
+        :paramtype direction: str or ~azure.mgmt.avs.models.PortMirroringDirectionEnum
+        :keyword source: Source VM Group.
+        :paramtype source: str
+        :keyword destination: Destination VM Group.
+        :paramtype destination: str
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        """
         super(WorkloadNetworkPortMirroring, self).__init__(**kwargs)
         self.display_name = display_name
         self.direction = direction
@@ -3768,6 +4327,8 @@ class WorkloadNetworkPortMirroringList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkPortMirroringList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3784,10 +4345,10 @@ class WorkloadNetworkPublicIP(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the Public IP Block.
-    :type display_name: str
-    :param number_of_public_i_ps: Number of Public IPs requested.
-    :type number_of_public_i_ps: long
+    :ivar display_name: Display name of the Public IP Block.
+    :vartype display_name: str
+    :ivar number_of_public_i_ps: Number of Public IPs requested.
+    :vartype number_of_public_i_ps: long
     :ivar public_ip_block: CIDR Block of the Public IP Block.
     :vartype public_ip_block: str
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
@@ -3821,6 +4382,12 @@ class WorkloadNetworkPublicIP(ProxyResource):
         number_of_public_i_ps: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the Public IP Block.
+        :paramtype display_name: str
+        :keyword number_of_public_i_ps: Number of Public IPs requested.
+        :paramtype number_of_public_i_ps: long
+        """
         super(WorkloadNetworkPublicIP, self).__init__(**kwargs)
         self.display_name = display_name
         self.number_of_public_i_ps = number_of_public_i_ps
@@ -3853,6 +4420,8 @@ class WorkloadNetworkPublicIPsList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkPublicIPsList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3869,12 +4438,12 @@ class WorkloadNetworkSegment(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the segment.
-    :type display_name: str
-    :param connected_gateway: Gateway which to connect segment to.
-    :type connected_gateway: str
-    :param subnet: Subnet which to connect segment to.
-    :type subnet: ~azure.mgmt.avs.models.WorkloadNetworkSegmentSubnet
+    :ivar display_name: Display name of the segment.
+    :vartype display_name: str
+    :ivar connected_gateway: Gateway which to connect segment to.
+    :vartype connected_gateway: str
+    :ivar subnet: Subnet which to connect segment to.
+    :vartype subnet: ~azure.mgmt.avs.models.WorkloadNetworkSegmentSubnet
     :ivar port_vif: Port Vif which segment is associated with.
     :vartype port_vif: list[~azure.mgmt.avs.models.WorkloadNetworkSegmentPortVif]
     :ivar status: Segment status. Possible values include: "SUCCESS", "FAILURE".
@@ -3883,8 +4452,8 @@ class WorkloadNetworkSegment(ProxyResource):
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.avs.models.WorkloadNetworkSegmentProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
+    :ivar revision: NSX revision number.
+    :vartype revision: long
     """
 
     _validation = {
@@ -3918,6 +4487,16 @@ class WorkloadNetworkSegment(ProxyResource):
         revision: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the segment.
+        :paramtype display_name: str
+        :keyword connected_gateway: Gateway which to connect segment to.
+        :paramtype connected_gateway: str
+        :keyword subnet: Subnet which to connect segment to.
+        :paramtype subnet: ~azure.mgmt.avs.models.WorkloadNetworkSegmentSubnet
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        """
         super(WorkloadNetworkSegment, self).__init__(**kwargs)
         self.display_name = display_name
         self.connected_gateway = connected_gateway
@@ -3931,8 +4510,8 @@ class WorkloadNetworkSegment(ProxyResource):
 class WorkloadNetworkSegmentPortVif(msrest.serialization.Model):
     """Ports and any VIF attached to segment.
 
-    :param port_name: Name of port or VIF attached to segment.
-    :type port_name: str
+    :ivar port_name: Name of port or VIF attached to segment.
+    :vartype port_name: str
     """
 
     _attribute_map = {
@@ -3945,6 +4524,10 @@ class WorkloadNetworkSegmentPortVif(msrest.serialization.Model):
         port_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword port_name: Name of port or VIF attached to segment.
+        :paramtype port_name: str
+        """
         super(WorkloadNetworkSegmentPortVif, self).__init__(**kwargs)
         self.port_name = port_name
 
@@ -3974,6 +4557,8 @@ class WorkloadNetworkSegmentsList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkSegmentsList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3982,10 +4567,10 @@ class WorkloadNetworkSegmentsList(msrest.serialization.Model):
 class WorkloadNetworkSegmentSubnet(msrest.serialization.Model):
     """Subnet configuration for segment.
 
-    :param dhcp_ranges: DHCP Range assigned for subnet.
-    :type dhcp_ranges: list[str]
-    :param gateway_address: Gateway address.
-    :type gateway_address: str
+    :ivar dhcp_ranges: DHCP Range assigned for subnet.
+    :vartype dhcp_ranges: list[str]
+    :ivar gateway_address: Gateway address.
+    :vartype gateway_address: str
     """
 
     _attribute_map = {
@@ -4000,6 +4585,12 @@ class WorkloadNetworkSegmentSubnet(msrest.serialization.Model):
         gateway_address: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword dhcp_ranges: DHCP Range assigned for subnet.
+        :paramtype dhcp_ranges: list[str]
+        :keyword gateway_address: Gateway address.
+        :paramtype gateway_address: str
+        """
         super(WorkloadNetworkSegmentSubnet, self).__init__(**kwargs)
         self.dhcp_ranges = dhcp_ranges
         self.gateway_address = gateway_address
@@ -4016,8 +4607,8 @@ class WorkloadNetworkVirtualMachine(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the VM.
-    :type display_name: str
+    :ivar display_name: Display name of the VM.
+    :vartype display_name: str
     :ivar vm_type: Virtual machine type. Possible values include: "REGULAR", "EDGE", "SERVICE".
     :vartype vm_type: str or ~azure.mgmt.avs.models.VMTypeEnum
     """
@@ -4043,6 +4634,10 @@ class WorkloadNetworkVirtualMachine(ProxyResource):
         display_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the VM.
+        :paramtype display_name: str
+        """
         super(WorkloadNetworkVirtualMachine, self).__init__(**kwargs)
         self.display_name = display_name
         self.vm_type = None
@@ -4073,6 +4668,8 @@ class WorkloadNetworkVirtualMachinesList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkVirtualMachinesList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -4089,18 +4686,18 @@ class WorkloadNetworkVMGroup(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: Display name of the VM group.
-    :type display_name: str
-    :param members: Virtual machine members of this group.
-    :type members: list[str]
+    :ivar display_name: Display name of the VM group.
+    :vartype display_name: str
+    :ivar members: Virtual machine members of this group.
+    :vartype members: list[str]
     :ivar status: VM Group status. Possible values include: "SUCCESS", "FAILURE".
     :vartype status: str or ~azure.mgmt.avs.models.VMGroupStatusEnum
     :ivar provisioning_state: The provisioning state. Possible values include: "Succeeded",
      "Failed", "Building", "Deleting", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.avs.models.WorkloadNetworkVMGroupProvisioningState
-    :param revision: NSX revision number.
-    :type revision: long
+    :ivar revision: NSX revision number.
+    :vartype revision: long
     """
 
     _validation = {
@@ -4130,6 +4727,14 @@ class WorkloadNetworkVMGroup(ProxyResource):
         revision: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: Display name of the VM group.
+        :paramtype display_name: str
+        :keyword members: Virtual machine members of this group.
+        :paramtype members: list[str]
+        :keyword revision: NSX revision number.
+        :paramtype revision: long
+        """
         super(WorkloadNetworkVMGroup, self).__init__(**kwargs)
         self.display_name = display_name
         self.members = members
@@ -4163,6 +4768,8 @@ class WorkloadNetworkVMGroupsList(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(WorkloadNetworkVMGroupsList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
