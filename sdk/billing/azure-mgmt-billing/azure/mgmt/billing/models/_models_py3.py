@@ -20,34 +20,34 @@ class AddressDetails(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param first_name: First name.
-    :type first_name: str
-    :param middle_name: Middle name.
-    :type middle_name: str
-    :param last_name: Last name.
-    :type last_name: str
-    :param company_name: Company name.
-    :type company_name: str
-    :param address_line1: Required. Address line 1.
-    :type address_line1: str
-    :param address_line2: Address line 2.
-    :type address_line2: str
-    :param address_line3: Address line 3.
-    :type address_line3: str
-    :param city: Address city.
-    :type city: str
-    :param district: Address district.
-    :type district: str
-    :param region: Address region.
-    :type region: str
-    :param country: Required. Country code uses ISO2, 2-digit format.
-    :type country: str
-    :param postal_code: Postal code.
-    :type postal_code: str
-    :param email: Email address.
-    :type email: str
-    :param phone_number: Phone number.
-    :type phone_number: str
+    :ivar first_name: First name.
+    :vartype first_name: str
+    :ivar middle_name: Middle name.
+    :vartype middle_name: str
+    :ivar last_name: Last name.
+    :vartype last_name: str
+    :ivar company_name: Company name.
+    :vartype company_name: str
+    :ivar address_line1: Required. Address line 1.
+    :vartype address_line1: str
+    :ivar address_line2: Address line 2.
+    :vartype address_line2: str
+    :ivar address_line3: Address line 3.
+    :vartype address_line3: str
+    :ivar city: Address city.
+    :vartype city: str
+    :ivar district: Address district.
+    :vartype district: str
+    :ivar region: Address region.
+    :vartype region: str
+    :ivar country: Required. Country code uses ISO2, 2-digit format.
+    :vartype country: str
+    :ivar postal_code: Postal code.
+    :vartype postal_code: str
+    :ivar email: Email address.
+    :vartype email: str
+    :ivar phone_number: Phone number.
+    :vartype phone_number: str
     """
 
     _validation = {
@@ -91,6 +91,36 @@ class AddressDetails(msrest.serialization.Model):
         phone_number: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword first_name: First name.
+        :paramtype first_name: str
+        :keyword middle_name: Middle name.
+        :paramtype middle_name: str
+        :keyword last_name: Last name.
+        :paramtype last_name: str
+        :keyword company_name: Company name.
+        :paramtype company_name: str
+        :keyword address_line1: Required. Address line 1.
+        :paramtype address_line1: str
+        :keyword address_line2: Address line 2.
+        :paramtype address_line2: str
+        :keyword address_line3: Address line 3.
+        :paramtype address_line3: str
+        :keyword city: Address city.
+        :paramtype city: str
+        :keyword district: Address district.
+        :paramtype district: str
+        :keyword region: Address region.
+        :paramtype region: str
+        :keyword country: Required. Country code uses ISO2, 2-digit format.
+        :paramtype country: str
+        :keyword postal_code: Postal code.
+        :paramtype postal_code: str
+        :keyword email: Email address.
+        :paramtype email: str
+        :keyword phone_number: Phone number.
+        :paramtype phone_number: str
+        """
         super(AddressDetails, self).__init__(**kwargs)
         self.first_name = first_name
         self.middle_name = middle_name
@@ -137,6 +167,8 @@ class Resource(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -162,12 +194,15 @@ class Agreement(Resource):
     :ivar acceptance_mode: The mode of acceptance for an agreement. Possible values include:
      "ClickToAccept", "ESignEmbedded", "ESignOffline".
     :vartype acceptance_mode: str or ~azure.mgmt.billing.models.AcceptanceMode
+    :ivar billing_profile_info: The list of billing profiles associated with agreement and present
+     only for specific agreements.
+    :vartype billing_profile_info: ~azure.mgmt.billing.models.BillingProfileInfo
     :ivar effective_date: The date from which the agreement is effective.
     :vartype effective_date: ~datetime.datetime
     :ivar expiration_date: The date when the agreement expires.
     :vartype expiration_date: ~datetime.datetime
-    :param participants: The list of participants that participates in acceptance of an agreement.
-    :type participants: list[~azure.mgmt.billing.models.Participants]
+    :ivar participants: The list of participants that participates in acceptance of an agreement.
+    :vartype participants: list[~azure.mgmt.billing.models.Participants]
     :ivar status: The current status of the agreement.
     :vartype status: str
     """
@@ -179,6 +214,7 @@ class Agreement(Resource):
         'agreement_link': {'readonly': True},
         'category': {'readonly': True},
         'acceptance_mode': {'readonly': True},
+        'billing_profile_info': {'readonly': True},
         'effective_date': {'readonly': True},
         'expiration_date': {'readonly': True},
         'status': {'readonly': True},
@@ -191,6 +227,7 @@ class Agreement(Resource):
         'agreement_link': {'key': 'properties.agreementLink', 'type': 'str'},
         'category': {'key': 'properties.category', 'type': 'str'},
         'acceptance_mode': {'key': 'properties.acceptanceMode', 'type': 'str'},
+        'billing_profile_info': {'key': 'properties.billingProfileInfo', 'type': 'BillingProfileInfo'},
         'effective_date': {'key': 'properties.effectiveDate', 'type': 'iso-8601'},
         'expiration_date': {'key': 'properties.expirationDate', 'type': 'iso-8601'},
         'participants': {'key': 'properties.participants', 'type': '[Participants]'},
@@ -203,10 +240,16 @@ class Agreement(Resource):
         participants: Optional[List["Participants"]] = None,
         **kwargs
     ):
+        """
+        :keyword participants: The list of participants that participates in acceptance of an
+         agreement.
+        :paramtype participants: list[~azure.mgmt.billing.models.Participants]
+        """
         super(Agreement, self).__init__(**kwargs)
         self.agreement_link = None
         self.category = None
         self.acceptance_mode = None
+        self.billing_profile_info = None
         self.effective_date = None
         self.expiration_date = None
         self.participants = participants
@@ -238,6 +281,8 @@ class AgreementListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(AgreementListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -250,8 +295,8 @@ class Amount(msrest.serialization.Model):
 
     :ivar currency: The currency for the amount value.
     :vartype currency: str
-    :param value: Amount value.
-    :type value: float
+    :ivar value: Amount value.
+    :vartype value: float
     """
 
     _validation = {
@@ -269,6 +314,10 @@ class Amount(msrest.serialization.Model):
         value: Optional[float] = None,
         **kwargs
     ):
+        """
+        :keyword value: Amount value.
+        :paramtype value: float
+        """
         super(Amount, self).__init__(**kwargs)
         self.currency = None
         self.value = value
@@ -307,6 +356,8 @@ class AvailableBalance(Resource):
         self,
         **kwargs
     ):
+        """
+        """
         super(AvailableBalance, self).__init__(**kwargs)
         self.amount = None
 
@@ -316,8 +367,8 @@ class AzurePlan(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param sku_id: The sku id.
-    :type sku_id: str
+    :ivar sku_id: The sku id.
+    :vartype sku_id: str
     :ivar sku_description: The sku description.
     :vartype sku_description: str
     """
@@ -337,6 +388,10 @@ class AzurePlan(msrest.serialization.Model):
         sku_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword sku_id: The sku id.
+        :paramtype sku_id: str
+        """
         super(AzurePlan, self).__init__(**kwargs)
         self.sku_id = sku_id
         self.sku_description = None
@@ -353,11 +408,11 @@ class BillingAccount(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: The billing account name.
-    :type display_name: str
-    :param sold_to: The address of the individual or organization that is responsible for the
+    :ivar display_name: The billing account name.
+    :vartype display_name: str
+    :ivar sold_to: The address of the individual or organization that is responsible for the
      billing account.
-    :type sold_to: ~azure.mgmt.billing.models.AddressDetails
+    :vartype sold_to: ~azure.mgmt.billing.models.AddressDetails
     :ivar agreement_type: The type of agreement. Possible values include:
      "MicrosoftCustomerAgreement", "EnterpriseAgreement", "MicrosoftOnlineServicesProgram",
      "MicrosoftPartnerAgreement".
@@ -368,20 +423,20 @@ class BillingAccount(Resource):
     :ivar account_status: The current status of the billing account. Possible values include:
      "Active", "Deleted", "Disabled", "Expired", "Transferred", "Extended", "Terminated".
     :vartype account_status: str or ~azure.mgmt.billing.models.AccountStatus
-    :param billing_profiles: The billing profiles associated with the billing account. By default
+    :ivar billing_profiles: The billing profiles associated with the billing account. By default
      this is not populated, unless it's specified in $expand.
-    :type billing_profiles: ~azure.mgmt.billing.models.BillingProfilesOnExpand
+    :vartype billing_profiles: ~azure.mgmt.billing.models.BillingProfilesOnExpand
     :ivar enrollment_details: The details about the associated legacy enrollment. By default this
      is not populated, unless it's specified in $expand.
     :vartype enrollment_details: ~azure.mgmt.billing.models.Enrollment
-    :param departments: The departments associated to the enrollment.
-    :type departments: list[~azure.mgmt.billing.models.Department]
-    :param enrollment_accounts: The accounts associated to the enrollment.
-    :type enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
+    :ivar departments: The departments associated to the enrollment.
+    :vartype departments: list[~azure.mgmt.billing.models.Department]
+    :ivar enrollment_accounts: The accounts associated to the enrollment.
+    :vartype enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
     :ivar has_read_access: Indicates whether user has read access to the billing account.
     :vartype has_read_access: bool
-    :param notification_email_address: Notification email address, only for legacy accounts.
-    :type notification_email_address: str
+    :ivar notification_email_address: Notification email address, only for legacy accounts.
+    :vartype notification_email_address: str
     """
 
     _validation = {
@@ -423,6 +478,22 @@ class BillingAccount(Resource):
         notification_email_address: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The billing account name.
+        :paramtype display_name: str
+        :keyword sold_to: The address of the individual or organization that is responsible for the
+         billing account.
+        :paramtype sold_to: ~azure.mgmt.billing.models.AddressDetails
+        :keyword billing_profiles: The billing profiles associated with the billing account. By default
+         this is not populated, unless it's specified in $expand.
+        :paramtype billing_profiles: ~azure.mgmt.billing.models.BillingProfilesOnExpand
+        :keyword departments: The departments associated to the enrollment.
+        :paramtype departments: list[~azure.mgmt.billing.models.Department]
+        :keyword enrollment_accounts: The accounts associated to the enrollment.
+        :paramtype enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
+        :keyword notification_email_address: Notification email address, only for legacy accounts.
+        :paramtype notification_email_address: str
+        """
         super(BillingAccount, self).__init__(**kwargs)
         self.display_name = display_name
         self.sold_to = sold_to
@@ -462,6 +533,8 @@ class BillingAccountListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingAccountListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -472,11 +545,11 @@ class BillingAccountUpdateRequest(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param display_name: The billing account name.
-    :type display_name: str
-    :param sold_to: The address of the individual or organization that is responsible for the
+    :ivar display_name: The billing account name.
+    :vartype display_name: str
+    :ivar sold_to: The address of the individual or organization that is responsible for the
      billing account.
-    :type sold_to: ~azure.mgmt.billing.models.AddressDetails
+    :vartype sold_to: ~azure.mgmt.billing.models.AddressDetails
     :ivar agreement_type: The type of agreement. Possible values include:
      "MicrosoftCustomerAgreement", "EnterpriseAgreement", "MicrosoftOnlineServicesProgram",
      "MicrosoftPartnerAgreement".
@@ -487,20 +560,20 @@ class BillingAccountUpdateRequest(msrest.serialization.Model):
     :ivar account_status: The current status of the billing account. Possible values include:
      "Active", "Deleted", "Disabled", "Expired", "Transferred", "Extended", "Terminated".
     :vartype account_status: str or ~azure.mgmt.billing.models.AccountStatus
-    :param billing_profiles: The billing profiles associated with the billing account. By default
+    :ivar billing_profiles: The billing profiles associated with the billing account. By default
      this is not populated, unless it's specified in $expand.
-    :type billing_profiles: ~azure.mgmt.billing.models.BillingProfilesOnExpand
+    :vartype billing_profiles: ~azure.mgmt.billing.models.BillingProfilesOnExpand
     :ivar enrollment_details: The details about the associated legacy enrollment. By default this
      is not populated, unless it's specified in $expand.
     :vartype enrollment_details: ~azure.mgmt.billing.models.Enrollment
-    :param departments: The departments associated to the enrollment.
-    :type departments: list[~azure.mgmt.billing.models.Department]
-    :param enrollment_accounts: The accounts associated to the enrollment.
-    :type enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
+    :ivar departments: The departments associated to the enrollment.
+    :vartype departments: list[~azure.mgmt.billing.models.Department]
+    :ivar enrollment_accounts: The accounts associated to the enrollment.
+    :vartype enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
     :ivar has_read_access: Indicates whether user has read access to the billing account.
     :vartype has_read_access: bool
-    :param notification_email_address: Notification email address, only for legacy accounts.
-    :type notification_email_address: str
+    :ivar notification_email_address: Notification email address, only for legacy accounts.
+    :vartype notification_email_address: str
     """
 
     _validation = {
@@ -536,6 +609,22 @@ class BillingAccountUpdateRequest(msrest.serialization.Model):
         notification_email_address: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The billing account name.
+        :paramtype display_name: str
+        :keyword sold_to: The address of the individual or organization that is responsible for the
+         billing account.
+        :paramtype sold_to: ~azure.mgmt.billing.models.AddressDetails
+        :keyword billing_profiles: The billing profiles associated with the billing account. By default
+         this is not populated, unless it's specified in $expand.
+        :paramtype billing_profiles: ~azure.mgmt.billing.models.BillingProfilesOnExpand
+        :keyword departments: The departments associated to the enrollment.
+        :paramtype departments: list[~azure.mgmt.billing.models.Department]
+        :keyword enrollment_accounts: The accounts associated to the enrollment.
+        :paramtype enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
+        :keyword notification_email_address: Notification email address, only for legacy accounts.
+        :paramtype notification_email_address: str
+        """
         super(BillingAccountUpdateRequest, self).__init__(**kwargs)
         self.display_name = display_name
         self.sold_to = sold_to
@@ -591,6 +680,8 @@ class BillingPeriod(Resource):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingPeriod, self).__init__(**kwargs)
         self.billing_period_start_date = None
         self.billing_period_end_date = None
@@ -622,6 +713,8 @@ class BillingPeriodsListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingPeriodsListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -652,6 +745,8 @@ class BillingPermissionsListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingPermissionsListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -682,6 +777,8 @@ class BillingPermissionsProperties(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingPermissionsProperties, self).__init__(**kwargs)
         self.actions = None
         self.not_actions = None
@@ -698,32 +795,32 @@ class BillingProfile(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: The name of the billing profile.
-    :type display_name: str
-    :param po_number: The purchase order name that will appear on the invoices generated for the
+    :ivar display_name: The name of the billing profile.
+    :vartype display_name: str
+    :ivar po_number: The purchase order name that will appear on the invoices generated for the
      billing profile.
-    :type po_number: str
+    :vartype po_number: str
     :ivar billing_relationship_type: Identifies which services and purchases are paid by a billing
      profile. Possible values include: "Direct", "IndirectCustomer", "IndirectPartner",
      "CSPPartner".
     :vartype billing_relationship_type: str or ~azure.mgmt.billing.models.BillingRelationshipType
-    :param bill_to: Billing address.
-    :type bill_to: ~azure.mgmt.billing.models.AddressDetails
+    :ivar bill_to: Billing address.
+    :vartype bill_to: ~azure.mgmt.billing.models.AddressDetails
     :ivar indirect_relationship_info: Identifies the billing profile that is linked to another
      billing profile in indirect purchase motion.
     :vartype indirect_relationship_info: ~azure.mgmt.billing.models.IndirectRelationshipInfo
-    :param invoice_email_opt_in: Flag controlling whether the invoices for the billing profile are
+    :ivar invoice_email_opt_in: Flag controlling whether the invoices for the billing profile are
      sent through email.
-    :type invoice_email_opt_in: bool
+    :vartype invoice_email_opt_in: bool
     :ivar invoice_day: The day of the month when the invoice for the billing profile is generated.
     :vartype invoice_day: int
     :ivar currency: The currency in which the charges for the billing profile are billed.
     :vartype currency: str
-    :param enabled_azure_plans: Information about the enabled azure plans.
-    :type enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
-    :param invoice_sections: The invoice sections associated to the billing profile. By default
-     this is not populated, unless it's specified in $expand.
-    :type invoice_sections: ~azure.mgmt.billing.models.InvoiceSectionsOnExpand
+    :ivar enabled_azure_plans: Information about the enabled azure plans.
+    :vartype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+    :ivar invoice_sections: The invoice sections associated to the billing profile. By default this
+     is not populated, unless it's specified in $expand.
+    :vartype invoice_sections: ~azure.mgmt.billing.models.InvoiceSectionsOnExpand
     :ivar has_read_access: Indicates whether user has read access to the billing profile.
     :vartype has_read_access: bool
     :ivar system_id: The system generated unique identifier for a billing profile.
@@ -740,8 +837,8 @@ class BillingProfile(Resource):
      profile. This is a system managed optional field and gets updated as the billing profile gets
      associated with accounts in various clouds.
     :vartype target_clouds: list[str or ~azure.mgmt.billing.models.TargetCloud]
-    :param tags: A set of tags. Tags of billing profiles.
-    :type tags: dict[str, str]
+    :ivar tags: A set of tags. Tags of billing profiles.
+    :vartype tags: dict[str, str]
     """
 
     _validation = {
@@ -795,6 +892,25 @@ class BillingProfile(Resource):
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The name of the billing profile.
+        :paramtype display_name: str
+        :keyword po_number: The purchase order name that will appear on the invoices generated for the
+         billing profile.
+        :paramtype po_number: str
+        :keyword bill_to: Billing address.
+        :paramtype bill_to: ~azure.mgmt.billing.models.AddressDetails
+        :keyword invoice_email_opt_in: Flag controlling whether the invoices for the billing profile
+         are sent through email.
+        :paramtype invoice_email_opt_in: bool
+        :keyword enabled_azure_plans: Information about the enabled azure plans.
+        :paramtype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+        :keyword invoice_sections: The invoice sections associated to the billing profile. By default
+         this is not populated, unless it's specified in $expand.
+        :paramtype invoice_sections: ~azure.mgmt.billing.models.InvoiceSectionsOnExpand
+        :keyword tags: A set of tags. Tags of billing profiles.
+        :paramtype tags: dict[str, str]
+        """
         super(BillingProfile, self).__init__(**kwargs)
         self.display_name = display_name
         self.po_number = po_number
@@ -818,19 +934,19 @@ class BillingProfile(Resource):
 class BillingProfileCreationRequest(msrest.serialization.Model):
     """The request parameters for creating a new billing profile.
 
-    :param display_name: The name of the billing profile.
-    :type display_name: str
-    :param po_number: The purchase order name that will appear on the invoices generated for the
+    :ivar display_name: The name of the billing profile.
+    :vartype display_name: str
+    :ivar po_number: The purchase order name that will appear on the invoices generated for the
      billing profile.
-    :type po_number: str
-    :param bill_to: The address of the individual or organization that is responsible for the
+    :vartype po_number: str
+    :ivar bill_to: The address of the individual or organization that is responsible for the
      billing profile.
-    :type bill_to: ~azure.mgmt.billing.models.AddressDetails
-    :param invoice_email_opt_in: Flag controlling whether the invoices for the billing profile are
+    :vartype bill_to: ~azure.mgmt.billing.models.AddressDetails
+    :ivar invoice_email_opt_in: Flag controlling whether the invoices for the billing profile are
      sent through email.
-    :type invoice_email_opt_in: bool
-    :param enabled_azure_plans: Enabled azure plans for the billing profile.
-    :type enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+    :vartype invoice_email_opt_in: bool
+    :ivar enabled_azure_plans: Enabled azure plans for the billing profile.
+    :vartype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
     """
 
     _attribute_map = {
@@ -851,12 +967,68 @@ class BillingProfileCreationRequest(msrest.serialization.Model):
         enabled_azure_plans: Optional[List["AzurePlan"]] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The name of the billing profile.
+        :paramtype display_name: str
+        :keyword po_number: The purchase order name that will appear on the invoices generated for the
+         billing profile.
+        :paramtype po_number: str
+        :keyword bill_to: The address of the individual or organization that is responsible for the
+         billing profile.
+        :paramtype bill_to: ~azure.mgmt.billing.models.AddressDetails
+        :keyword invoice_email_opt_in: Flag controlling whether the invoices for the billing profile
+         are sent through email.
+        :paramtype invoice_email_opt_in: bool
+        :keyword enabled_azure_plans: Enabled azure plans for the billing profile.
+        :paramtype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+        """
         super(BillingProfileCreationRequest, self).__init__(**kwargs)
         self.display_name = display_name
         self.po_number = po_number
         self.bill_to = bill_to
         self.invoice_email_opt_in = invoice_email_opt_in
         self.enabled_azure_plans = enabled_azure_plans
+
+
+class BillingProfileInfo(msrest.serialization.Model):
+    """Details about billing profile associated with agreement and available only for specific agreements.
+
+    :ivar billing_profile_id: The unique identifier for the billing profile.
+    :vartype billing_profile_id: str
+    :ivar billing_profile_display_name: The name of the billing profile.
+    :vartype billing_profile_display_name: str
+    :ivar indirect_relationship_organization_name: Billing account name. This property is available
+     for a specific type of agreement.
+    :vartype indirect_relationship_organization_name: str
+    """
+
+    _attribute_map = {
+        'billing_profile_id': {'key': 'billingProfileId', 'type': 'str'},
+        'billing_profile_display_name': {'key': 'billingProfileDisplayName', 'type': 'str'},
+        'indirect_relationship_organization_name': {'key': 'indirectRelationshipOrganizationName', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        billing_profile_id: Optional[str] = None,
+        billing_profile_display_name: Optional[str] = None,
+        indirect_relationship_organization_name: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword billing_profile_id: The unique identifier for the billing profile.
+        :paramtype billing_profile_id: str
+        :keyword billing_profile_display_name: The name of the billing profile.
+        :paramtype billing_profile_display_name: str
+        :keyword indirect_relationship_organization_name: Billing account name. This property is
+         available for a specific type of agreement.
+        :paramtype indirect_relationship_organization_name: str
+        """
+        super(BillingProfileInfo, self).__init__(**kwargs)
+        self.billing_profile_id = billing_profile_id
+        self.billing_profile_display_name = billing_profile_display_name
+        self.indirect_relationship_organization_name = indirect_relationship_organization_name
 
 
 class BillingProfileListResult(msrest.serialization.Model):
@@ -866,17 +1038,21 @@ class BillingProfileListResult(msrest.serialization.Model):
 
     :ivar value: The list of billing profiles.
     :vartype value: list[~azure.mgmt.billing.models.BillingProfile]
+    :ivar total_count: Total number of records.
+    :vartype total_count: int
     :ivar next_link: The link (url) to the next page of results.
     :vartype next_link: str
     """
 
     _validation = {
         'value': {'readonly': True},
+        'total_count': {'readonly': True},
         'next_link': {'readonly': True},
     }
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[BillingProfile]'},
+        'total_count': {'key': 'totalCount', 'type': 'int'},
         'next_link': {'key': 'nextLink', 'type': 'str'},
     }
 
@@ -884,8 +1060,11 @@ class BillingProfileListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingProfileListResult, self).__init__(**kwargs)
         self.value = None
+        self.total_count = None
         self.next_link = None
 
 
@@ -898,8 +1077,8 @@ class BillingProfilesOnExpand(msrest.serialization.Model):
      in this collection. The collection lists a maximum of 50 billing profiles. To get all billing
      profiles, use the list billing profiles API.
     :vartype has_more_results: bool
-    :param value: The billing profiles associated with the billing account.
-    :type value: list[~azure.mgmt.billing.models.BillingProfile]
+    :ivar value: The billing profiles associated with the billing account.
+    :vartype value: list[~azure.mgmt.billing.models.BillingProfile]
     """
 
     _validation = {
@@ -917,6 +1096,10 @@ class BillingProfilesOnExpand(msrest.serialization.Model):
         value: Optional[List["BillingProfile"]] = None,
         **kwargs
     ):
+        """
+        :keyword value: The billing profiles associated with the billing account.
+        :paramtype value: list[~azure.mgmt.billing.models.BillingProfile]
+        """
         super(BillingProfilesOnExpand, self).__init__(**kwargs)
         self.has_more_results = None
         self.value = value
@@ -959,8 +1142,8 @@ class BillingProperty(Resource):
      include: "Off", "On".
     :vartype billing_profile_spending_limit: str or
      ~azure.mgmt.billing.models.BillingProfileSpendingLimit
-    :param cost_center: The cost center applied to the subscription.
-    :type cost_center: str
+    :ivar cost_center: The cost center applied to the subscription.
+    :vartype cost_center: str
     :ivar invoice_section_id: The ID of the invoice section to which the subscription is billed.
     :vartype invoice_section_id: str
     :ivar invoice_section_display_name: The name of the invoice section to which the subscription
@@ -1029,6 +1212,10 @@ class BillingProperty(Resource):
         cost_center: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword cost_center: The cost center applied to the subscription.
+        :paramtype cost_center: str
+        """
         super(BillingProperty, self).__init__(**kwargs)
         self.account_admin_notification_email_address = None
         self.billing_tenant_id = None
@@ -1070,18 +1257,18 @@ class BillingRoleAssignment(Resource):
     :ivar created_by_user_email_address: The email address of the user who created the role
      assignment.
     :vartype created_by_user_email_address: str
-    :param principal_id: The principal id of the user to whom the role was assigned.
-    :type principal_id: str
-    :param principal_tenant_id: The principal tenant id of the user to whom the role was assigned.
-    :type principal_tenant_id: str
-    :param role_definition_id: The ID of the role definition.
-    :type role_definition_id: str
+    :ivar principal_id: The principal id of the user to whom the role was assigned.
+    :vartype principal_id: str
+    :ivar principal_tenant_id: The principal tenant id of the user to whom the role was assigned.
+    :vartype principal_tenant_id: str
+    :ivar role_definition_id: The ID of the role definition.
+    :vartype role_definition_id: str
     :ivar scope: The scope at which the role was assigned.
     :vartype scope: str
-    :param user_authentication_type: The authentication type.
-    :type user_authentication_type: str
-    :param user_email_address: The email address of the user.
-    :type user_email_address: str
+    :ivar user_authentication_type: The authentication type.
+    :vartype user_authentication_type: str
+    :ivar user_email_address: The email address of the user.
+    :vartype user_email_address: str
     """
 
     _validation = {
@@ -1121,6 +1308,19 @@ class BillingRoleAssignment(Resource):
         user_email_address: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword principal_id: The principal id of the user to whom the role was assigned.
+        :paramtype principal_id: str
+        :keyword principal_tenant_id: The principal tenant id of the user to whom the role was
+         assigned.
+        :paramtype principal_tenant_id: str
+        :keyword role_definition_id: The ID of the role definition.
+        :paramtype role_definition_id: str
+        :keyword user_authentication_type: The authentication type.
+        :paramtype user_authentication_type: str
+        :keyword user_email_address: The email address of the user.
+        :paramtype user_email_address: str
+        """
         super(BillingRoleAssignment, self).__init__(**kwargs)
         self.created_on = None
         self.created_by_principal_tenant_id = None
@@ -1159,6 +1359,8 @@ class BillingRoleAssignmentListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingRoleAssignmentListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1177,8 +1379,8 @@ class BillingRoleDefinition(Resource):
     :vartype type: str
     :ivar description: The role description.
     :vartype description: str
-    :param permissions: The billingPermissions the role has.
-    :type permissions: list[~azure.mgmt.billing.models.BillingPermissionsProperties]
+    :ivar permissions: The billingPermissions the role has.
+    :vartype permissions: list[~azure.mgmt.billing.models.BillingPermissionsProperties]
     :ivar role_name: The name of the role.
     :vartype role_name: str
     """
@@ -1206,6 +1408,10 @@ class BillingRoleDefinition(Resource):
         permissions: Optional[List["BillingPermissionsProperties"]] = None,
         **kwargs
     ):
+        """
+        :keyword permissions: The billingPermissions the role has.
+        :paramtype permissions: list[~azure.mgmt.billing.models.BillingPermissionsProperties]
+        """
         super(BillingRoleDefinition, self).__init__(**kwargs)
         self.description = None
         self.permissions = permissions
@@ -1237,6 +1443,8 @@ class BillingRoleDefinitionListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingRoleDefinitionListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1257,9 +1465,9 @@ class BillingSubscription(Resource):
     :vartype display_name: str
     :ivar subscription_id: The ID of the subscription.
     :vartype subscription_id: str
-    :param subscription_billing_status: The current billing status of the subscription. Possible
+    :ivar subscription_billing_status: The current billing status of the subscription. Possible
      values include: "Active", "Inactive", "Abandoned", "Deleted", "Warning".
-    :type subscription_billing_status: str or
+    :vartype subscription_billing_status: str or
      ~azure.mgmt.billing.models.BillingSubscriptionStatusType
     :ivar last_month_charges: The last month charges.
     :vartype last_month_charges: ~azure.mgmt.billing.models.Amount
@@ -1270,8 +1478,8 @@ class BillingSubscription(Resource):
     :ivar billing_profile_display_name: The name of the billing profile to which the subscription
      is billed.
     :vartype billing_profile_display_name: str
-    :param cost_center: The cost center applied to the subscription.
-    :type cost_center: str
+    :ivar cost_center: The cost center applied to the subscription.
+    :vartype cost_center: str
     :ivar customer_id: The ID of the customer for whom the subscription was created. The field is
      applicable only for Microsoft Partner Agreement billing account.
     :vartype customer_id: str
@@ -1285,10 +1493,13 @@ class BillingSubscription(Resource):
     :vartype invoice_section_display_name: str
     :ivar reseller: Reseller for this subscription.
     :vartype reseller: ~azure.mgmt.billing.models.Reseller
-    :param sku_id: The sku ID of the Azure plan for the subscription.
-    :type sku_id: str
+    :ivar sku_id: The sku ID of the Azure plan for the subscription.
+    :vartype sku_id: str
     :ivar sku_description: The sku description of the Azure plan for the subscription.
     :vartype sku_description: str
+    :ivar suspension_reasons: The suspension reason for a subscription. Applies only to
+     subscriptions in Microsoft Online Services Program billing accounts.
+    :vartype suspension_reasons: list[str]
     """
 
     _validation = {
@@ -1307,6 +1518,7 @@ class BillingSubscription(Resource):
         'invoice_section_display_name': {'readonly': True},
         'reseller': {'readonly': True},
         'sku_description': {'readonly': True},
+        'suspension_reasons': {'readonly': True},
     }
 
     _attribute_map = {
@@ -1328,6 +1540,7 @@ class BillingSubscription(Resource):
         'reseller': {'key': 'properties.reseller', 'type': 'Reseller'},
         'sku_id': {'key': 'properties.skuId', 'type': 'str'},
         'sku_description': {'key': 'properties.skuDescription', 'type': 'str'},
+        'suspension_reasons': {'key': 'properties.suspensionReasons', 'type': '[str]'},
     }
 
     def __init__(
@@ -1338,6 +1551,16 @@ class BillingSubscription(Resource):
         sku_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword subscription_billing_status: The current billing status of the subscription. Possible
+         values include: "Active", "Inactive", "Abandoned", "Deleted", "Warning".
+        :paramtype subscription_billing_status: str or
+         ~azure.mgmt.billing.models.BillingSubscriptionStatusType
+        :keyword cost_center: The cost center applied to the subscription.
+        :paramtype cost_center: str
+        :keyword sku_id: The sku ID of the Azure plan for the subscription.
+        :paramtype sku_id: str
+        """
         super(BillingSubscription, self).__init__(**kwargs)
         self.display_name = None
         self.subscription_id = None
@@ -1354,6 +1577,7 @@ class BillingSubscription(Resource):
         self.reseller = None
         self.sku_id = sku_id
         self.sku_description = None
+        self.suspension_reasons = None
 
 
 class BillingSubscriptionsListResult(msrest.serialization.Model):
@@ -1385,6 +1609,8 @@ class BillingSubscriptionsListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(BillingSubscriptionsListResult, self).__init__(**kwargs)
         self.value = None
         self.total_count = None
@@ -1406,12 +1632,12 @@ class Customer(Resource):
     :vartype billing_profile_id: str
     :ivar billing_profile_display_name: The name of the billing profile for the invoice section.
     :vartype billing_profile_display_name: str
-    :param display_name: The name of the customer.
-    :type display_name: str
-    :param enabled_azure_plans: Azure plans enabled for the customer.
-    :type enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
-    :param resellers: The list of resellers for which an Azure plan is enabled for the customer.
-    :type resellers: list[~azure.mgmt.billing.models.Reseller]
+    :ivar display_name: The name of the customer.
+    :vartype display_name: str
+    :ivar enabled_azure_plans: Azure plans enabled for the customer.
+    :vartype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+    :ivar resellers: The list of resellers for which an Azure plan is enabled for the customer.
+    :vartype resellers: list[~azure.mgmt.billing.models.Reseller]
     """
 
     _validation = {
@@ -1441,6 +1667,14 @@ class Customer(Resource):
         resellers: Optional[List["Reseller"]] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The name of the customer.
+        :paramtype display_name: str
+        :keyword enabled_azure_plans: Azure plans enabled for the customer.
+        :paramtype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+        :keyword resellers: The list of resellers for which an Azure plan is enabled for the customer.
+        :paramtype resellers: list[~azure.mgmt.billing.models.Reseller]
+        """
         super(Customer, self).__init__(**kwargs)
         self.billing_profile_id = None
         self.billing_profile_display_name = None
@@ -1478,6 +1712,8 @@ class CustomerListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(CustomerListResult, self).__init__(**kwargs)
         self.value = None
         self.total_count = None
@@ -1495,9 +1731,9 @@ class CustomerPolicy(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param view_charges: The policy that controls whether the users in customer's organization can
+    :ivar view_charges: The policy that controls whether the users in customer's organization can
      view charges at pay-as-you-go prices. Possible values include: "Allowed", "NotAllowed".
-    :type view_charges: str or ~azure.mgmt.billing.models.ViewCharges
+    :vartype view_charges: str or ~azure.mgmt.billing.models.ViewCharges
     """
 
     _validation = {
@@ -1519,6 +1755,11 @@ class CustomerPolicy(Resource):
         view_charges: Optional[Union[str, "ViewCharges"]] = None,
         **kwargs
     ):
+        """
+        :keyword view_charges: The policy that controls whether the users in customer's organization
+         can view charges at pay-as-you-go prices. Possible values include: "Allowed", "NotAllowed".
+        :paramtype view_charges: str or ~azure.mgmt.billing.models.ViewCharges
+        """
         super(CustomerPolicy, self).__init__(**kwargs)
         self.view_charges = view_charges
 
@@ -1534,15 +1775,15 @@ class Department(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param department_name: The name of the department.
-    :type department_name: str
-    :param cost_center: The cost center associated with the department.
-    :type cost_center: str
-    :param status: The status of the department.
-    :type status: str
-    :param enrollment_accounts: Associated enrollment accounts. By default this is not populated,
+    :ivar department_name: The name of the department.
+    :vartype department_name: str
+    :ivar cost_center: The cost center associated with the department.
+    :vartype cost_center: str
+    :ivar status: The status of the department.
+    :vartype status: str
+    :ivar enrollment_accounts: Associated enrollment accounts. By default this is not populated,
      unless it's specified in $expand.
-    :type enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
+    :vartype enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
     """
 
     _validation = {
@@ -1570,6 +1811,17 @@ class Department(Resource):
         enrollment_accounts: Optional[List["EnrollmentAccount"]] = None,
         **kwargs
     ):
+        """
+        :keyword department_name: The name of the department.
+        :paramtype department_name: str
+        :keyword cost_center: The cost center associated with the department.
+        :paramtype cost_center: str
+        :keyword status: The status of the department.
+        :paramtype status: str
+        :keyword enrollment_accounts: Associated enrollment accounts. By default this is not populated,
+         unless it's specified in $expand.
+        :paramtype enrollment_accounts: list[~azure.mgmt.billing.models.EnrollmentAccount]
+        """
         super(Department, self).__init__(**kwargs)
         self.department_name = department_name
         self.cost_center = cost_center
@@ -1608,6 +1860,8 @@ class Document(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Document, self).__init__(**kwargs)
         self.kind = None
         self.url = None
@@ -1639,6 +1893,8 @@ class DownloadUrl(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(DownloadUrl, self).__init__(**kwargs)
         self.expiry_time = None
         self.url = None
@@ -1649,10 +1905,10 @@ class Enrollment(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param start_date: The start date of the enrollment.
-    :type start_date: ~datetime.datetime
-    :param end_date: The end date of the enrollment.
-    :type end_date: ~datetime.datetime
+    :ivar start_date: The start date of the enrollment.
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The end date of the enrollment.
+    :vartype end_date: ~datetime.datetime
     :ivar currency: The billing currency for the enrollment.
     :vartype currency: str
     :ivar channel: The channel type of the enrollment.
@@ -1698,6 +1954,12 @@ class Enrollment(msrest.serialization.Model):
         end_date: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword start_date: The start date of the enrollment.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The end date of the enrollment.
+        :paramtype end_date: ~datetime.datetime
+        """
         super(Enrollment, self).__init__(**kwargs)
         self.start_date = start_date
         self.end_date = end_date
@@ -1721,23 +1983,23 @@ class EnrollmentAccount(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param account_name: The name of the enrollment account.
-    :type account_name: str
-    :param cost_center: The cost center associated with the enrollment account.
-    :type cost_center: str
-    :param account_owner: The owner of the enrollment account.
-    :type account_owner: str
-    :param account_owner_email: The enrollment account owner email address.
-    :type account_owner_email: str
-    :param status: The status of the enrollment account.
-    :type status: str
-    :param start_date: The start date of the enrollment account.
-    :type start_date: ~datetime.datetime
-    :param end_date: The end date of the enrollment account.
-    :type end_date: ~datetime.datetime
-    :param department: Associated department. By default this is not populated, unless it's
+    :ivar account_name: The name of the enrollment account.
+    :vartype account_name: str
+    :ivar cost_center: The cost center associated with the enrollment account.
+    :vartype cost_center: str
+    :ivar account_owner: The owner of the enrollment account.
+    :vartype account_owner: str
+    :ivar account_owner_email: The enrollment account owner email address.
+    :vartype account_owner_email: str
+    :ivar status: The status of the enrollment account.
+    :vartype status: str
+    :ivar start_date: The start date of the enrollment account.
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The end date of the enrollment account.
+    :vartype end_date: ~datetime.datetime
+    :ivar department: Associated department. By default this is not populated, unless it's
      specified in $expand.
-    :type department: ~azure.mgmt.billing.models.Department
+    :vartype department: ~azure.mgmt.billing.models.Department
     """
 
     _validation = {
@@ -1773,6 +2035,25 @@ class EnrollmentAccount(Resource):
         department: Optional["Department"] = None,
         **kwargs
     ):
+        """
+        :keyword account_name: The name of the enrollment account.
+        :paramtype account_name: str
+        :keyword cost_center: The cost center associated with the enrollment account.
+        :paramtype cost_center: str
+        :keyword account_owner: The owner of the enrollment account.
+        :paramtype account_owner: str
+        :keyword account_owner_email: The enrollment account owner email address.
+        :paramtype account_owner_email: str
+        :keyword status: The status of the enrollment account.
+        :paramtype status: str
+        :keyword start_date: The start date of the enrollment account.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The end date of the enrollment account.
+        :paramtype end_date: ~datetime.datetime
+        :keyword department: Associated department. By default this is not populated, unless it's
+         specified in $expand.
+        :paramtype department: ~azure.mgmt.billing.models.Department
+        """
         super(EnrollmentAccount, self).__init__(**kwargs)
         self.account_name = account_name
         self.cost_center = cost_center
@@ -1787,14 +2068,14 @@ class EnrollmentAccount(Resource):
 class EnrollmentAccountContext(msrest.serialization.Model):
     """The enrollment account context.
 
-    :param cost_center: The cost center associated with the enrollment account.
-    :type cost_center: str
-    :param start_date: The start date of the enrollment account.
-    :type start_date: ~datetime.datetime
-    :param end_date: The end date of the enrollment account.
-    :type end_date: ~datetime.datetime
-    :param enrollment_account_name: The ID of the enrollment account.
-    :type enrollment_account_name: str
+    :ivar cost_center: The cost center associated with the enrollment account.
+    :vartype cost_center: str
+    :ivar start_date: The start date of the enrollment account.
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The end date of the enrollment account.
+    :vartype end_date: ~datetime.datetime
+    :ivar enrollment_account_name: The ID of the enrollment account.
+    :vartype enrollment_account_name: str
     """
 
     _attribute_map = {
@@ -1813,6 +2094,16 @@ class EnrollmentAccountContext(msrest.serialization.Model):
         enrollment_account_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword cost_center: The cost center associated with the enrollment account.
+        :paramtype cost_center: str
+        :keyword start_date: The start date of the enrollment account.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The end date of the enrollment account.
+        :paramtype end_date: ~datetime.datetime
+        :keyword enrollment_account_name: The ID of the enrollment account.
+        :paramtype enrollment_account_name: str
+        """
         super(EnrollmentAccountContext, self).__init__(**kwargs)
         self.cost_center = cost_center
         self.start_date = start_date
@@ -1845,6 +2136,8 @@ class EnrollmentAccountListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(EnrollmentAccountListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1883,6 +2176,8 @@ class EnrollmentAccountSummary(Resource):
         self,
         **kwargs
     ):
+        """
+        """
         super(EnrollmentAccountSummary, self).__init__(**kwargs)
         self.principal_name = None
 
@@ -1924,6 +2219,8 @@ class EnrollmentPolicies(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(EnrollmentPolicies, self).__init__(**kwargs)
         self.account_owner_view_charges = None
         self.department_admin_view_charges = None
@@ -1964,6 +2261,8 @@ class ErrorDetails(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ErrorDetails, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -1974,8 +2273,8 @@ class ErrorDetails(msrest.serialization.Model):
 class ErrorResponse(msrest.serialization.Model):
     """Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
 
-    :param error: The details of the error.
-    :type error: ~azure.mgmt.billing.models.ErrorDetails
+    :ivar error: The details of the error.
+    :vartype error: ~azure.mgmt.billing.models.ErrorDetails
     """
 
     _attribute_map = {
@@ -1988,6 +2287,10 @@ class ErrorResponse(msrest.serialization.Model):
         error: Optional["ErrorDetails"] = None,
         **kwargs
     ):
+        """
+        :keyword error: The details of the error.
+        :paramtype error: ~azure.mgmt.billing.models.ErrorDetails
+        """
         super(ErrorResponse, self).__init__(**kwargs)
         self.error = error
 
@@ -2021,6 +2324,8 @@ class ErrorSubDetailsItem(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ErrorSubDetailsItem, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -2030,14 +2335,14 @@ class ErrorSubDetailsItem(msrest.serialization.Model):
 class IndirectRelationshipInfo(msrest.serialization.Model):
     """The billing profile details of the partner of the customer for an indirect motion.
 
-    :param billing_account_name: The billing account name of the partner or the customer for an
+    :ivar billing_account_name: The billing account name of the partner or the customer for an
      indirect motion.
-    :type billing_account_name: str
-    :param billing_profile_name: The billing profile name of the partner or the customer for an
+    :vartype billing_account_name: str
+    :ivar billing_profile_name: The billing profile name of the partner or the customer for an
      indirect motion.
-    :type billing_profile_name: str
-    :param display_name: The display name of the partner or customer for an indirect motion.
-    :type display_name: str
+    :vartype billing_profile_name: str
+    :ivar display_name: The display name of the partner or customer for an indirect motion.
+    :vartype display_name: str
     """
 
     _attribute_map = {
@@ -2054,6 +2359,16 @@ class IndirectRelationshipInfo(msrest.serialization.Model):
         display_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword billing_account_name: The billing account name of the partner or the customer for an
+         indirect motion.
+        :paramtype billing_account_name: str
+        :keyword billing_profile_name: The billing profile name of the partner or the customer for an
+         indirect motion.
+        :paramtype billing_profile_name: str
+        :keyword display_name: The display name of the partner or customer for an indirect motion.
+        :paramtype display_name: str
+        """
         super(IndirectRelationshipInfo, self).__init__(**kwargs)
         self.billing_account_name = billing_account_name
         self.billing_profile_name = billing_profile_name
@@ -2071,14 +2386,14 @@ class Instruction(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param amount: The amount budgeted for this billing instruction.
-    :type amount: float
-    :param start_date: The date this billing instruction goes into effect.
-    :type start_date: ~datetime.datetime
-    :param end_date: The date this billing instruction is no longer in effect.
-    :type end_date: ~datetime.datetime
-    :param creation_date: The date this billing instruction was created.
-    :type creation_date: ~datetime.datetime
+    :ivar amount: The amount budgeted for this billing instruction.
+    :vartype amount: float
+    :ivar start_date: The date this billing instruction goes into effect.
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The date this billing instruction is no longer in effect.
+    :vartype end_date: ~datetime.datetime
+    :ivar creation_date: The date this billing instruction was created.
+    :vartype creation_date: ~datetime.datetime
     """
 
     _validation = {
@@ -2106,6 +2421,16 @@ class Instruction(Resource):
         creation_date: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword amount: The amount budgeted for this billing instruction.
+        :paramtype amount: float
+        :keyword start_date: The date this billing instruction goes into effect.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The date this billing instruction is no longer in effect.
+        :paramtype end_date: ~datetime.datetime
+        :keyword creation_date: The date this billing instruction was created.
+        :paramtype creation_date: ~datetime.datetime
+        """
         super(Instruction, self).__init__(**kwargs)
         self.amount = amount
         self.start_date = start_date
@@ -2138,6 +2463,8 @@ class InstructionListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(InstructionListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -2289,6 +2616,8 @@ class Invoice(Resource):
         self,
         **kwargs
     ):
+        """
+        """
         super(Invoice, self).__init__(**kwargs)
         self.due_date = None
         self.invoice_date = None
@@ -2326,25 +2655,32 @@ class InvoiceListResult(msrest.serialization.Model):
     :vartype value: list[~azure.mgmt.billing.models.Invoice]
     :ivar next_link: The link (url) to the next page of results.
     :vartype next_link: str
+    :ivar total_count: Total number of records.
+    :vartype total_count: int
     """
 
     _validation = {
         'value': {'readonly': True},
         'next_link': {'readonly': True},
+        'total_count': {'readonly': True},
     }
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[Invoice]'},
         'next_link': {'key': 'nextLink', 'type': 'str'},
+        'total_count': {'key': 'totalCount', 'type': 'int'},
     }
 
     def __init__(
         self,
         **kwargs
     ):
+        """
+        """
         super(InvoiceListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
+        self.total_count = None
 
 
 class InvoiceSection(Resource):
@@ -2358,15 +2694,19 @@ class InvoiceSection(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param display_name: The name of the invoice section.
-    :type display_name: str
-    :param labels: Dictionary of metadata associated with the invoice section.
-    :type labels: dict[str, str]
+    :ivar display_name: The name of the invoice section.
+    :vartype display_name: str
+    :ivar labels: Dictionary of metadata associated with the invoice section.
+    :vartype labels: dict[str, str]
     :ivar state: Identifies the state of an invoice section. Possible values include: "Active",
      "Restricted".
     :vartype state: str or ~azure.mgmt.billing.models.InvoiceSectionState
     :ivar system_id: The system generated unique identifier for an invoice section.
     :vartype system_id: str
+    :ivar tags: A set of tags. Dictionary of metadata associated with the invoice section. Maximum
+     key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys
+     can not contain < > % & ? /.
+    :vartype tags: dict[str, str]
     :ivar target_cloud: Identifies the cloud environments that are associated with an invoice
      section. This is a system managed optional field and gets updated as the invoice section gets
      associated with accounts in various clouds. Possible values include: "USGov", "USNat", "USSec".
@@ -2390,6 +2730,7 @@ class InvoiceSection(Resource):
         'labels': {'key': 'properties.labels', 'type': '{str}'},
         'state': {'key': 'properties.state', 'type': 'str'},
         'system_id': {'key': 'properties.systemId', 'type': 'str'},
+        'tags': {'key': 'properties.tags', 'type': '{str}'},
         'target_cloud': {'key': 'properties.targetCloud', 'type': 'str'},
     }
 
@@ -2398,21 +2739,33 @@ class InvoiceSection(Resource):
         *,
         display_name: Optional[str] = None,
         labels: Optional[Dict[str, str]] = None,
+        tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The name of the invoice section.
+        :paramtype display_name: str
+        :keyword labels: Dictionary of metadata associated with the invoice section.
+        :paramtype labels: dict[str, str]
+        :keyword tags: A set of tags. Dictionary of metadata associated with the invoice section.
+         Maximum key/value length supported of 256 characters. Keys/value should not empty value nor
+         null. Keys can not contain < > % & ? /.
+        :paramtype tags: dict[str, str]
+        """
         super(InvoiceSection, self).__init__(**kwargs)
         self.display_name = display_name
         self.labels = labels
         self.state = None
         self.system_id = None
+        self.tags = tags
         self.target_cloud = None
 
 
 class InvoiceSectionCreationRequest(msrest.serialization.Model):
     """The properties of the invoice section.
 
-    :param display_name: The name of the invoice section.
-    :type display_name: str
+    :ivar display_name: The name of the invoice section.
+    :vartype display_name: str
     """
 
     _attribute_map = {
@@ -2425,6 +2778,10 @@ class InvoiceSectionCreationRequest(msrest.serialization.Model):
         display_name: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The name of the invoice section.
+        :paramtype display_name: str
+        """
         super(InvoiceSectionCreationRequest, self).__init__(**kwargs)
         self.display_name = display_name
 
@@ -2458,6 +2815,8 @@ class InvoiceSectionListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(InvoiceSectionListResult, self).__init__(**kwargs)
         self.value = None
         self.total_count = None
@@ -2469,8 +2828,8 @@ class InvoiceSectionListWithCreateSubPermissionResult(msrest.serialization.Model
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param value: The list of invoice section properties with create subscription permission.
-    :type value: list[~azure.mgmt.billing.models.InvoiceSectionWithCreateSubPermission]
+    :ivar value: The list of invoice section properties with create subscription permission.
+    :vartype value: list[~azure.mgmt.billing.models.InvoiceSectionWithCreateSubPermission]
     :ivar next_link: The link (url) to the next page of results.
     :vartype next_link: str
     """
@@ -2490,6 +2849,10 @@ class InvoiceSectionListWithCreateSubPermissionResult(msrest.serialization.Model
         value: Optional[List["InvoiceSectionWithCreateSubPermission"]] = None,
         **kwargs
     ):
+        """
+        :keyword value: The list of invoice section properties with create subscription permission.
+        :paramtype value: list[~azure.mgmt.billing.models.InvoiceSectionWithCreateSubPermission]
+        """
         super(InvoiceSectionListWithCreateSubPermissionResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = None
@@ -2504,8 +2867,8 @@ class InvoiceSectionsOnExpand(msrest.serialization.Model):
      in this collection. The collection lists a maximum of 50 invoice sections. To get all invoice
      sections, use the list invoice sections API.
     :vartype has_more_results: bool
-    :param value: The invoice sections associated to the billing profile.
-    :type value: list[~azure.mgmt.billing.models.InvoiceSection]
+    :ivar value: The invoice sections associated to the billing profile.
+    :vartype value: list[~azure.mgmt.billing.models.InvoiceSection]
     """
 
     _validation = {
@@ -2523,6 +2886,10 @@ class InvoiceSectionsOnExpand(msrest.serialization.Model):
         value: Optional[List["InvoiceSection"]] = None,
         **kwargs
     ):
+        """
+        :keyword value: The invoice sections associated to the billing profile.
+        :paramtype value: list[~azure.mgmt.billing.models.InvoiceSection]
+        """
         super(InvoiceSectionsOnExpand, self).__init__(**kwargs)
         self.has_more_results = None
         self.value = value
@@ -2556,8 +2923,8 @@ class InvoiceSectionWithCreateSubPermission(msrest.serialization.Model):
      ~azure.mgmt.billing.models.SpendingLimitForBillingProfile
     :ivar billing_profile_system_id: The system generated unique identifier for a billing profile.
     :vartype billing_profile_system_id: str
-    :param enabled_azure_plans: Enabled azure plans for the associated billing profile.
-    :type enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+    :ivar enabled_azure_plans: Enabled azure plans for the associated billing profile.
+    :vartype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
     """
 
     _validation = {
@@ -2591,6 +2958,10 @@ class InvoiceSectionWithCreateSubPermission(msrest.serialization.Model):
         enabled_azure_plans: Optional[List["AzurePlan"]] = None,
         **kwargs
     ):
+        """
+        :keyword enabled_azure_plans: Enabled azure plans for the associated billing profile.
+        :paramtype enabled_azure_plans: list[~azure.mgmt.billing.models.AzurePlan]
+        """
         super(InvoiceSectionWithCreateSubPermission, self).__init__(**kwargs)
         self.invoice_section_id = None
         self.invoice_section_display_name = None
@@ -2613,8 +2984,8 @@ class Operation(msrest.serialization.Model):
     :vartype name: str
     :ivar is_data_action: Identifies if the operation is a data operation.
     :vartype is_data_action: bool
-    :param display: The object that represents the operation.
-    :type display: ~azure.mgmt.billing.models.OperationDisplay
+    :ivar display: The object that represents the operation.
+    :vartype display: ~azure.mgmt.billing.models.OperationDisplay
     """
 
     _validation = {
@@ -2634,6 +3005,10 @@ class Operation(msrest.serialization.Model):
         display: Optional["OperationDisplay"] = None,
         **kwargs
     ):
+        """
+        :keyword display: The object that represents the operation.
+        :paramtype display: ~azure.mgmt.billing.models.OperationDisplay
+        """
         super(Operation, self).__init__(**kwargs)
         self.name = None
         self.is_data_action = None
@@ -2674,6 +3049,8 @@ class OperationDisplay(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = None
         self.resource = None
@@ -2707,9 +3084,73 @@ class OperationListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(OperationListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
+
+
+class OperationsErrorDetails(msrest.serialization.Model):
+    """The details of the error.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar code: Error code.
+    :vartype code: str
+    :ivar message: Error message indicating why the operation failed.
+    :vartype message: str
+    :ivar target: The target of the particular error.
+    :vartype target: str
+    """
+
+    _validation = {
+        'code': {'readonly': True},
+        'message': {'readonly': True},
+        'target': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'code': {'key': 'code', 'type': 'str'},
+        'message': {'key': 'message', 'type': 'str'},
+        'target': {'key': 'target', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(OperationsErrorDetails, self).__init__(**kwargs)
+        self.code = None
+        self.message = None
+        self.target = None
+
+
+class OperationsErrorResponse(msrest.serialization.Model):
+    """Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+
+    :ivar error: The details of the error.
+    :vartype error: ~azure.mgmt.billing.models.OperationsErrorDetails
+    """
+
+    _attribute_map = {
+        'error': {'key': 'error', 'type': 'OperationsErrorDetails'},
+    }
+
+    def __init__(
+        self,
+        *,
+        error: Optional["OperationsErrorDetails"] = None,
+        **kwargs
+    ):
+        """
+        :keyword error: The details of the error.
+        :paramtype error: ~azure.mgmt.billing.models.OperationsErrorDetails
+        """
+        super(OperationsErrorResponse, self).__init__(**kwargs)
+        self.error = error
 
 
 class Participants(msrest.serialization.Model):
@@ -2741,6 +3182,8 @@ class Participants(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Participants, self).__init__(**kwargs)
         self.status = None
         self.status_date = None
@@ -2758,9 +3201,9 @@ class PaymentProperties(msrest.serialization.Model):
     :vartype amount: ~azure.mgmt.billing.models.Amount
     :ivar date: The date when the payment was made.
     :vartype date: ~datetime.datetime
-    :param payment_method_family: The family of payment method. Possible values include: "Credits",
+    :ivar payment_method_family: The family of payment method. Possible values include: "Credits",
      "CheckWire", "CreditCard", "None".
-    :type payment_method_family: str or ~azure.mgmt.billing.models.PaymentMethodFamily
+    :vartype payment_method_family: str or ~azure.mgmt.billing.models.PaymentMethodFamily
     :ivar payment_method_type: The type of payment method.
     :vartype payment_method_type: str
     """
@@ -2786,6 +3229,11 @@ class PaymentProperties(msrest.serialization.Model):
         payment_method_family: Optional[Union[str, "PaymentMethodFamily"]] = None,
         **kwargs
     ):
+        """
+        :keyword payment_method_family: The family of payment method. Possible values include:
+         "Credits", "CheckWire", "CreditCard", "None".
+        :paramtype payment_method_family: str or ~azure.mgmt.billing.models.PaymentMethodFamily
+        """
         super(PaymentProperties, self).__init__(**kwargs)
         self.payment_type = None
         self.amount = None
@@ -2805,16 +3253,16 @@ class Policy(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param marketplace_purchases: The policy that controls whether Azure marketplace purchases are
+    :ivar marketplace_purchases: The policy that controls whether Azure marketplace purchases are
      allowed for a billing profile. Possible values include: "AllAllowed", "OnlyFreeAllowed",
      "NotAllowed".
-    :type marketplace_purchases: str or ~azure.mgmt.billing.models.MarketplacePurchasesPolicy
-    :param reservation_purchases: The policy that controls whether Azure reservation purchases are
+    :vartype marketplace_purchases: str or ~azure.mgmt.billing.models.MarketplacePurchasesPolicy
+    :ivar reservation_purchases: The policy that controls whether Azure reservation purchases are
      allowed for a billing profile. Possible values include: "Allowed", "NotAllowed".
-    :type reservation_purchases: str or ~azure.mgmt.billing.models.ReservationPurchasesPolicy
-    :param view_charges: The policy that controls whether users with Azure RBAC access to a
+    :vartype reservation_purchases: str or ~azure.mgmt.billing.models.ReservationPurchasesPolicy
+    :ivar view_charges: The policy that controls whether users with Azure RBAC access to a
      subscription can view its charges. Possible values include: "Allowed", "NotAllowed".
-    :type view_charges: str or ~azure.mgmt.billing.models.ViewChargesPolicy
+    :vartype view_charges: str or ~azure.mgmt.billing.models.ViewChargesPolicy
     """
 
     _validation = {
@@ -2840,6 +3288,18 @@ class Policy(Resource):
         view_charges: Optional[Union[str, "ViewChargesPolicy"]] = None,
         **kwargs
     ):
+        """
+        :keyword marketplace_purchases: The policy that controls whether Azure marketplace purchases
+         are allowed for a billing profile. Possible values include: "AllAllowed", "OnlyFreeAllowed",
+         "NotAllowed".
+        :paramtype marketplace_purchases: str or ~azure.mgmt.billing.models.MarketplacePurchasesPolicy
+        :keyword reservation_purchases: The policy that controls whether Azure reservation purchases
+         are allowed for a billing profile. Possible values include: "Allowed", "NotAllowed".
+        :paramtype reservation_purchases: str or ~azure.mgmt.billing.models.ReservationPurchasesPolicy
+        :keyword view_charges: The policy that controls whether users with Azure RBAC access to a
+         subscription can view its charges. Possible values include: "Allowed", "NotAllowed".
+        :paramtype view_charges: str or ~azure.mgmt.billing.models.ViewChargesPolicy
+        """
         super(Policy, self).__init__(**kwargs)
         self.marketplace_purchases = marketplace_purchases
         self.reservation_purchases = reservation_purchases
@@ -2857,9 +3317,9 @@ class Product(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param auto_renew: Indicates whether auto renewal is turned on or off for a product. Possible
+    :ivar auto_renew: Indicates whether auto renewal is turned on or off for a product. Possible
      values include: "Off", "On".
-    :type auto_renew: str or ~azure.mgmt.billing.models.AutoRenew
+    :vartype auto_renew: str or ~azure.mgmt.billing.models.AutoRenew
     :ivar display_name: The display name of the product.
     :vartype display_name: str
     :ivar purchase_date: The date when the product was purchased.
@@ -2868,14 +3328,14 @@ class Product(Resource):
     :vartype product_type_id: str
     :ivar product_type: The description of the type of product.
     :vartype product_type: str
-    :param status: The current status of the product. Possible values include: "Active",
-     "Inactive", "PastDue", "Expiring", "Expired", "Disabled", "Cancelled", "AutoRenew".
-    :type status: str or ~azure.mgmt.billing.models.ProductStatusType
+    :ivar status: The current status of the product. Possible values include: "Active", "Inactive",
+     "PastDue", "Expiring", "Expired", "Disabled", "Cancelled", "AutoRenew".
+    :vartype status: str or ~azure.mgmt.billing.models.ProductStatusType
     :ivar end_date: The date when the product will be renewed or canceled.
     :vartype end_date: ~datetime.datetime
-    :param billing_frequency: The frequency at which the product will be billed. Possible values
+    :ivar billing_frequency: The frequency at which the product will be billed. Possible values
      include: "OneTime", "Monthly", "UsageBased".
-    :type billing_frequency: str or ~azure.mgmt.billing.models.BillingFrequency
+    :vartype billing_frequency: str or ~azure.mgmt.billing.models.BillingFrequency
     :ivar last_charge: The last month charges.
     :vartype last_charge: ~azure.mgmt.billing.models.Amount
     :ivar last_charge_date: The date of the last charge.
@@ -2971,6 +3431,17 @@ class Product(Resource):
         billing_frequency: Optional[Union[str, "BillingFrequency"]] = None,
         **kwargs
     ):
+        """
+        :keyword auto_renew: Indicates whether auto renewal is turned on or off for a product. Possible
+         values include: "Off", "On".
+        :paramtype auto_renew: str or ~azure.mgmt.billing.models.AutoRenew
+        :keyword status: The current status of the product. Possible values include: "Active",
+         "Inactive", "PastDue", "Expiring", "Expired", "Disabled", "Cancelled", "AutoRenew".
+        :paramtype status: str or ~azure.mgmt.billing.models.ProductStatusType
+        :keyword billing_frequency: The frequency at which the product will be billed. Possible values
+         include: "OneTime", "Monthly", "UsageBased".
+        :paramtype billing_frequency: str or ~azure.mgmt.billing.models.BillingFrequency
+        """
         super(Product, self).__init__(**kwargs)
         self.auto_renew = auto_renew
         self.display_name = None
@@ -3003,17 +3474,21 @@ class ProductsListResult(msrest.serialization.Model):
 
     :ivar value: The list of products.
     :vartype value: list[~azure.mgmt.billing.models.Product]
+    :ivar total_count: Total number of records.
+    :vartype total_count: int
     :ivar next_link: The link (url) to the next page of results.
     :vartype next_link: str
     """
 
     _validation = {
         'value': {'readonly': True},
+        'total_count': {'readonly': True},
         'next_link': {'readonly': True},
     }
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[Product]'},
+        'total_count': {'key': 'totalCount', 'type': 'int'},
         'next_link': {'key': 'nextLink', 'type': 'str'},
     }
 
@@ -3021,8 +3496,11 @@ class ProductsListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ProductsListResult, self).__init__(**kwargs)
         self.value = None
+        self.total_count = None
         self.next_link = None
 
 
@@ -3055,6 +3533,8 @@ class RebillDetails(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(RebillDetails, self).__init__(**kwargs)
         self.credit_note_document_id = None
         self.invoice_document_id = None
@@ -3086,6 +3566,8 @@ class Reseller(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Reseller, self).__init__(**kwargs)
         self.reseller_id = None
         self.description = None
@@ -3104,11 +3586,11 @@ class Reservation(msrest.serialization.Model):
     :vartype type: str
     :ivar location: The location of the reservation.
     :vartype location: str
-    :param sku: The sku information associated to this reservation.
-    :type sku: ~azure.mgmt.billing.models.ReservationSkuProperty
-    :param applied_scopes: The array of applied scopes of a reservation. Will be null if the
+    :ivar sku: The sku information associated to this reservation.
+    :vartype sku: ~azure.mgmt.billing.models.ReservationSkuProperty
+    :ivar applied_scopes: The array of applied scopes of a reservation. Will be null if the
      reservation is in Shared scope.
-    :type applied_scopes: list[str]
+    :vartype applied_scopes: list[str]
     :ivar applied_scope_type: The applied scope type of the reservation.
     :vartype applied_scope_type: str
     :ivar reserved_resource_type: The reserved source type of the reservation, e.g. virtual
@@ -3201,6 +3683,13 @@ class Reservation(msrest.serialization.Model):
         applied_scopes: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword sku: The sku information associated to this reservation.
+        :paramtype sku: ~azure.mgmt.billing.models.ReservationSkuProperty
+        :keyword applied_scopes: The array of applied scopes of a reservation. Will be null if the
+         reservation is in Shared scope.
+        :paramtype applied_scopes: list[str]
+        """
         super(Reservation, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -3233,8 +3722,8 @@ class ReservationPropertyUtilization(msrest.serialization.Model):
 
     :ivar trend: The number of days trend for a reservation.
     :vartype trend: str
-    :param aggregates: The array of aggregates of a reservation's utilization.
-    :type aggregates: list[~azure.mgmt.billing.models.ReservationUtilizationAggregates]
+    :ivar aggregates: The array of aggregates of a reservation's utilization.
+    :vartype aggregates: list[~azure.mgmt.billing.models.ReservationUtilizationAggregates]
     """
 
     _validation = {
@@ -3252,6 +3741,10 @@ class ReservationPropertyUtilization(msrest.serialization.Model):
         aggregates: Optional[List["ReservationUtilizationAggregates"]] = None,
         **kwargs
     ):
+        """
+        :keyword aggregates: The array of aggregates of a reservation's utilization.
+        :paramtype aggregates: list[~azure.mgmt.billing.models.ReservationUtilizationAggregates]
+        """
         super(ReservationPropertyUtilization, self).__init__(**kwargs)
         self.trend = None
         self.aggregates = aggregates
@@ -3278,6 +3771,8 @@ class ReservationSkuProperty(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ReservationSkuProperty, self).__init__(**kwargs)
         self.name = None
 
@@ -3291,8 +3786,8 @@ class ReservationsListResult(msrest.serialization.Model):
     :vartype value: list[~azure.mgmt.billing.models.Reservation]
     :ivar next_link: The link (url) to the next page of results.
     :vartype next_link: str
-    :param summary: The roll out count summary of the reservations.
-    :type summary: ~azure.mgmt.billing.models.ReservationSummary
+    :ivar summary: The roll out count summary of the reservations.
+    :vartype summary: ~azure.mgmt.billing.models.ReservationSummary
     """
 
     _validation = {
@@ -3312,6 +3807,10 @@ class ReservationsListResult(msrest.serialization.Model):
         summary: Optional["ReservationSummary"] = None,
         **kwargs
     ):
+        """
+        :keyword summary: The roll out count summary of the reservations.
+        :paramtype summary: ~azure.mgmt.billing.models.ReservationSummary
+        """
         super(ReservationsListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -3359,6 +3858,8 @@ class ReservationSummary(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ReservationSummary, self).__init__(**kwargs)
         self.succeeded_count = None
         self.failed_count = None
@@ -3401,6 +3902,8 @@ class ReservationUtilizationAggregates(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ReservationUtilizationAggregates, self).__init__(**kwargs)
         self.grain = None
         self.grain_unit = None
@@ -3419,9 +3922,9 @@ class Transaction(Resource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :param kind: The kind of transaction. Options are all or reservation. Possible values include:
+    :ivar kind: The kind of transaction. Options are all or reservation. Possible values include:
      "all", "reservation".
-    :type kind: str or ~azure.mgmt.billing.models.TransactionTypeKind
+    :vartype kind: str or ~azure.mgmt.billing.models.TransactionTypeKind
     :ivar date: The date of transaction.
     :vartype date: ~datetime.datetime
     :ivar invoice: Invoice on which the transaction was billed or 'pending' if the transaction is
@@ -3444,9 +3947,9 @@ class Transaction(Resource):
     :vartype product_type: str
     :ivar product_description: The description of the product for which the transaction took place.
     :vartype product_description: str
-    :param transaction_type: The type of transaction. Possible values include: "Purchase", "Usage
+    :ivar transaction_type: The type of transaction. Possible values include: "Purchase", "Usage
      Charge".
-    :type transaction_type: str or ~azure.mgmt.billing.models.ReservationType
+    :vartype transaction_type: str or ~azure.mgmt.billing.models.ReservationType
     :ivar transaction_amount: The charge associated with the transaction.
     :vartype transaction_amount: ~azure.mgmt.billing.models.Amount
     :ivar quantity: The quantity purchased in the transaction.
@@ -3601,6 +4104,14 @@ class Transaction(Resource):
         transaction_type: Optional[Union[str, "ReservationType"]] = None,
         **kwargs
     ):
+        """
+        :keyword kind: The kind of transaction. Options are all or reservation. Possible values
+         include: "all", "reservation".
+        :paramtype kind: str or ~azure.mgmt.billing.models.TransactionTypeKind
+        :keyword transaction_type: The type of transaction. Possible values include: "Purchase", "Usage
+         Charge".
+        :paramtype transaction_type: str or ~azure.mgmt.billing.models.ReservationType
+        """
         super(Transaction, self).__init__(**kwargs)
         self.kind = kind
         self.date = None
@@ -3647,17 +4158,21 @@ class TransactionListResult(msrest.serialization.Model):
 
     :ivar value: The list of transactions.
     :vartype value: list[~azure.mgmt.billing.models.Transaction]
+    :ivar total_count: Total number of records.
+    :vartype total_count: int
     :ivar next_link: The link (url) to the next page of results.
     :vartype next_link: str
     """
 
     _validation = {
         'value': {'readonly': True},
+        'total_count': {'readonly': True},
         'next_link': {'readonly': True},
     }
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[Transaction]'},
+        'total_count': {'key': 'totalCount', 'type': 'int'},
         'next_link': {'key': 'nextLink', 'type': 'str'},
     }
 
@@ -3665,8 +4180,11 @@ class TransactionListResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(TransactionListResult, self).__init__(**kwargs)
         self.value = None
+        self.total_count = None
         self.next_link = None
 
 
@@ -3675,8 +4193,8 @@ class TransferBillingSubscriptionRequestProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param destination_invoice_section_id: Required. The destination invoice section id.
-    :type destination_invoice_section_id: str
+    :ivar destination_invoice_section_id: Required. The destination invoice section id.
+    :vartype destination_invoice_section_id: str
     """
 
     _validation = {
@@ -3693,6 +4211,10 @@ class TransferBillingSubscriptionRequestProperties(msrest.serialization.Model):
         destination_invoice_section_id: str,
         **kwargs
     ):
+        """
+        :keyword destination_invoice_section_id: Required. The destination invoice section id.
+        :paramtype destination_invoice_section_id: str
+        """
         super(TransferBillingSubscriptionRequestProperties, self).__init__(**kwargs)
         self.destination_invoice_section_id = destination_invoice_section_id
 
@@ -3700,8 +4222,8 @@ class TransferBillingSubscriptionRequestProperties(msrest.serialization.Model):
 class TransferProductRequestProperties(msrest.serialization.Model):
     """The properties of the product to initiate a transfer.
 
-    :param destination_invoice_section_id: The destination invoice section id.
-    :type destination_invoice_section_id: str
+    :ivar destination_invoice_section_id: The destination invoice section id.
+    :vartype destination_invoice_section_id: str
     """
 
     _attribute_map = {
@@ -3714,6 +4236,10 @@ class TransferProductRequestProperties(msrest.serialization.Model):
         destination_invoice_section_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword destination_invoice_section_id: The destination invoice section id.
+        :paramtype destination_invoice_section_id: str
+        """
         super(TransferProductRequestProperties, self).__init__(**kwargs)
         self.destination_invoice_section_id = destination_invoice_section_id
 
@@ -3721,17 +4247,17 @@ class TransferProductRequestProperties(msrest.serialization.Model):
 class ValidateAddressResponse(msrest.serialization.Model):
     """Result of the address validation.
 
-    :param status: status of the address validation. Possible values include: "Valid", "Invalid".
-    :type status: str or ~azure.mgmt.billing.models.AddressValidationStatus
-    :param suggested_addresses: The list of suggested addresses.
-    :type suggested_addresses: list[~azure.mgmt.billing.models.AddressDetails]
-    :param validation_message: Validation error message.
-    :type validation_message: str
+    :ivar status: status of the address validation. Possible values include: "Valid", "Invalid".
+    :vartype status: str or ~azure.mgmt.billing.models.AddressValidationStatus
+    :ivar suggested_address_list: The list of suggested addresses.
+    :vartype suggested_address_list: list[~azure.mgmt.billing.models.AddressDetails]
+    :ivar validation_message: Validation error message.
+    :vartype validation_message: str
     """
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'str'},
-        'suggested_addresses': {'key': 'suggestedAddresses', 'type': '[AddressDetails]'},
+        'suggested_address_list': {'key': 'suggestedAddressList', 'type': '[AddressDetails]'},
         'validation_message': {'key': 'validationMessage', 'type': 'str'},
     }
 
@@ -3739,29 +4265,37 @@ class ValidateAddressResponse(msrest.serialization.Model):
         self,
         *,
         status: Optional[Union[str, "AddressValidationStatus"]] = None,
-        suggested_addresses: Optional[List["AddressDetails"]] = None,
+        suggested_address_list: Optional[List["AddressDetails"]] = None,
         validation_message: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword status: status of the address validation. Possible values include: "Valid", "Invalid".
+        :paramtype status: str or ~azure.mgmt.billing.models.AddressValidationStatus
+        :keyword suggested_address_list: The list of suggested addresses.
+        :paramtype suggested_address_list: list[~azure.mgmt.billing.models.AddressDetails]
+        :keyword validation_message: Validation error message.
+        :paramtype validation_message: str
+        """
         super(ValidateAddressResponse, self).__init__(**kwargs)
         self.status = status
-        self.suggested_addresses = suggested_addresses
+        self.suggested_address_list = suggested_address_list
         self.validation_message = validation_message
 
 
 class ValidateProductTransferEligibilityError(msrest.serialization.Model):
     """Error details of the product transfer eligibility validation.
 
-    :param code: Error code for the product transfer validation. Possible values include:
+    :ivar code: Error code for the product transfer validation. Possible values include:
      "InvalidSource", "ProductNotActive", "InsufficientPermissionOnSource",
      "InsufficientPermissionOnDestination", "DestinationBillingProfilePastDue",
      "ProductTypeNotSupported", "CrossBillingAccountNotAllowed", "NotAvailableForDestinationMarket",
      "OneTimePurchaseProductTransferNotAllowed".
-    :type code: str or ~azure.mgmt.billing.models.ProductTransferValidationErrorCode
-    :param message: The error message.
-    :type message: str
-    :param details: Detailed error message explaining the error.
-    :type details: str
+    :vartype code: str or ~azure.mgmt.billing.models.ProductTransferValidationErrorCode
+    :ivar message: The error message.
+    :vartype message: str
+    :ivar details: Detailed error message explaining the error.
+    :vartype details: str
     """
 
     _attribute_map = {
@@ -3778,6 +4312,18 @@ class ValidateProductTransferEligibilityError(msrest.serialization.Model):
         details: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword code: Error code for the product transfer validation. Possible values include:
+         "InvalidSource", "ProductNotActive", "InsufficientPermissionOnSource",
+         "InsufficientPermissionOnDestination", "DestinationBillingProfilePastDue",
+         "ProductTypeNotSupported", "CrossBillingAccountNotAllowed", "NotAvailableForDestinationMarket",
+         "OneTimePurchaseProductTransferNotAllowed".
+        :paramtype code: str or ~azure.mgmt.billing.models.ProductTransferValidationErrorCode
+        :keyword message: The error message.
+        :paramtype message: str
+        :keyword details: Detailed error message explaining the error.
+        :paramtype details: str
+        """
         super(ValidateProductTransferEligibilityError, self).__init__(**kwargs)
         self.code = code
         self.message = message
@@ -3791,8 +4337,8 @@ class ValidateProductTransferEligibilityResult(msrest.serialization.Model):
 
     :ivar is_move_eligible: Specifies whether the transfer is eligible or not.
     :vartype is_move_eligible: bool
-    :param error_details: Validation error details.
-    :type error_details: ~azure.mgmt.billing.models.ValidateProductTransferEligibilityError
+    :ivar error_details: Validation error details.
+    :vartype error_details: ~azure.mgmt.billing.models.ValidateProductTransferEligibilityError
     """
 
     _validation = {
@@ -3810,6 +4356,10 @@ class ValidateProductTransferEligibilityResult(msrest.serialization.Model):
         error_details: Optional["ValidateProductTransferEligibilityError"] = None,
         **kwargs
     ):
+        """
+        :keyword error_details: Validation error details.
+        :paramtype error_details: ~azure.mgmt.billing.models.ValidateProductTransferEligibilityError
+        """
         super(ValidateProductTransferEligibilityResult, self).__init__(**kwargs)
         self.is_move_eligible = None
         self.error_details = error_details
@@ -3818,7 +4368,7 @@ class ValidateProductTransferEligibilityResult(msrest.serialization.Model):
 class ValidateSubscriptionTransferEligibilityError(msrest.serialization.Model):
     """Error details of the transfer eligibility validation.
 
-    :param code: Error code for the product transfer validation. Possible values include:
+    :ivar code: Error code for the product transfer validation. Possible values include:
      "BillingAccountInactive", "CrossBillingAccountNotAllowed", "DestinationBillingProfileInactive",
      "DestinationBillingProfileNotFound", "DestinationBillingProfilePastDue",
      "DestinationInvoiceSectionInactive", "DestinationInvoiceSectionNotFound",
@@ -3826,11 +4376,11 @@ class ValidateSubscriptionTransferEligibilityError(msrest.serialization.Model):
      "InvalidSource", "MarketplaceNotEnabledOnDestination", "NotAvailableForDestinationMarket",
      "ProductInactive", "ProductNotFound", "ProductTypeNotSupported", "SourceBillingProfilePastDue",
      "SourceInvoiceSectionInactive", "SubscriptionNotActive", "SubscriptionTypeNotSupported".
-    :type code: str or ~azure.mgmt.billing.models.SubscriptionTransferValidationErrorCode
-    :param message: The error message.
-    :type message: str
-    :param details: Detailed error message explaining the error.
-    :type details: str
+    :vartype code: str or ~azure.mgmt.billing.models.SubscriptionTransferValidationErrorCode
+    :ivar message: The error message.
+    :vartype message: str
+    :ivar details: Detailed error message explaining the error.
+    :vartype details: str
     """
 
     _attribute_map = {
@@ -3847,6 +4397,21 @@ class ValidateSubscriptionTransferEligibilityError(msrest.serialization.Model):
         details: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword code: Error code for the product transfer validation. Possible values include:
+         "BillingAccountInactive", "CrossBillingAccountNotAllowed", "DestinationBillingProfileInactive",
+         "DestinationBillingProfileNotFound", "DestinationBillingProfilePastDue",
+         "DestinationInvoiceSectionInactive", "DestinationInvoiceSectionNotFound",
+         "InsufficientPermissionOnDestination", "InsufficientPermissionOnSource", "InvalidDestination",
+         "InvalidSource", "MarketplaceNotEnabledOnDestination", "NotAvailableForDestinationMarket",
+         "ProductInactive", "ProductNotFound", "ProductTypeNotSupported", "SourceBillingProfilePastDue",
+         "SourceInvoiceSectionInactive", "SubscriptionNotActive", "SubscriptionTypeNotSupported".
+        :paramtype code: str or ~azure.mgmt.billing.models.SubscriptionTransferValidationErrorCode
+        :keyword message: The error message.
+        :paramtype message: str
+        :keyword details: Detailed error message explaining the error.
+        :paramtype details: str
+        """
         super(ValidateSubscriptionTransferEligibilityError, self).__init__(**kwargs)
         self.code = code
         self.message = message
@@ -3860,8 +4425,8 @@ class ValidateSubscriptionTransferEligibilityResult(msrest.serialization.Model):
 
     :ivar is_move_eligible: Specifies whether the subscription is eligible to be transferred.
     :vartype is_move_eligible: bool
-    :param error_details: Validation error details.
-    :type error_details: ~azure.mgmt.billing.models.ValidateSubscriptionTransferEligibilityError
+    :ivar error_details: Validation error details.
+    :vartype error_details: ~azure.mgmt.billing.models.ValidateSubscriptionTransferEligibilityError
     """
 
     _validation = {
@@ -3879,6 +4444,11 @@ class ValidateSubscriptionTransferEligibilityResult(msrest.serialization.Model):
         error_details: Optional["ValidateSubscriptionTransferEligibilityError"] = None,
         **kwargs
     ):
+        """
+        :keyword error_details: Validation error details.
+        :paramtype error_details:
+         ~azure.mgmt.billing.models.ValidateSubscriptionTransferEligibilityError
+        """
         super(ValidateSubscriptionTransferEligibilityResult, self).__init__(**kwargs)
         self.is_move_eligible = None
         self.error_details = error_details
