@@ -7,21 +7,22 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, Optional, TYPE_CHECKING
+from typing import Any, Awaitable, TYPE_CHECKING
+
+from msrest import Deserializer, Serializer
 
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
-from msrest import Deserializer, Serializer
 
 from .. import models
 from ._configuration import SecurityInsightsConfiguration
-from .operations import ActionsOperations, AlertRuleTemplatesOperations, AlertRulesOperations, AutomationRulesOperations, BookmarkOperations, BookmarkRelationsOperations, BookmarksOperations, DataConnectorsCheckRequirementsOperations, DataConnectorsOperations, DomainWhoisOperations, EntitiesGetTimelineOperations, EntitiesOperations, EntitiesRelationsOperations, EntityQueriesOperations, EntityQueryTemplatesOperations, EntityRelationsOperations, IPGeodataOperations, IncidentCommentsOperations, IncidentRelationsOperations, IncidentsOperations, MetadataOperations, OfficeConsentsOperations, Operations, ProductSettingsOperations, SentinelOnboardingStatesOperations, SourceControlOperations, SourceControlsOperations, ThreatIntelligenceIndicatorMetricsOperations, ThreatIntelligenceIndicatorOperations, ThreatIntelligenceIndicatorsOperations, WatchlistItemsOperations, WatchlistsOperations
+from .operations import ActionsOperations, AlertRuleTemplatesOperations, AlertRulesOperations, AutomationRulesOperations, BookmarkOperations, BookmarkRelationsOperations, BookmarksOperations, DataConnectorsCheckRequirementsOperations, DataConnectorsOperations, DomainWhoisOperations, EntitiesGetTimelineOperations, EntitiesOperations, EntitiesRelationsOperations, EntityQueriesOperations, EntityQueryTemplatesOperations, EntityRelationsOperations, IPGeodataOperations, IncidentCommentsOperations, IncidentRelationsOperations, IncidentsOperations, MetadataOperations, OfficeConsentsOperations, Operations, ProductSettingsOperations, SecurityMLAnalyticsSettingsOperations, SentinelOnboardingStatesOperations, SourceControlOperations, SourceControlsOperations, ThreatIntelligenceIndicatorMetricsOperations, ThreatIntelligenceIndicatorOperations, ThreatIntelligenceIndicatorsOperations, WatchlistItemsOperations, WatchlistsOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials_async import AsyncTokenCredential
 
-class SecurityInsights:
+class SecurityInsights:    # pylint: disable=too-many-instance-attributes
     """API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider.
 
     :ivar alert_rules: AlertRulesOperations operations
@@ -74,6 +75,9 @@ class SecurityInsights:
     :ivar sentinel_onboarding_states: SentinelOnboardingStatesOperations operations
     :vartype sentinel_onboarding_states:
      azure.mgmt.securityinsight.aio.operations.SentinelOnboardingStatesOperations
+    :ivar security_ml_analytics_settings: SecurityMLAnalyticsSettingsOperations operations
+    :vartype security_ml_analytics_settings:
+     azure.mgmt.securityinsight.aio.operations.SecurityMLAnalyticsSettingsOperations
     :ivar product_settings: ProductSettingsOperations operations
     :vartype product_settings: azure.mgmt.securityinsight.aio.operations.ProductSettingsOperations
     :ivar source_control: SourceControlOperations operations
@@ -105,8 +109,11 @@ class SecurityInsights:
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is 'https://management.azure.com'.
+    :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2022-05-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
+    :paramtype api_version: str
     """
 
     def __init__(
@@ -144,6 +151,7 @@ class SecurityInsights:
         self.metadata = MetadataOperations(self._client, self._config, self._serialize, self._deserialize)
         self.office_consents = OfficeConsentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.sentinel_onboarding_states = SentinelOnboardingStatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.security_ml_analytics_settings = SecurityMLAnalyticsSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.product_settings = ProductSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.source_control = SourceControlOperations(self._client, self._config, self._serialize, self._deserialize)
         self.source_controls = SourceControlsOperations(self._client, self._config, self._serialize, self._deserialize)
