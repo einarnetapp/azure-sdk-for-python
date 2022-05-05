@@ -37,7 +37,7 @@ def build_list_request(
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
@@ -67,19 +67,19 @@ def build_get_request(
     subscription_id: str,
     resource_group_name: str,
     workspace_name: str,
-    data_connector_id: str,
+    settings_resource_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "dataConnectorId": _SERIALIZER.url("data_connector_id", data_connector_id, 'str'),
+        "settingsResourceName": _SERIALIZER.url("settings_resource_name", settings_resource_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -105,7 +105,7 @@ def build_create_or_update_request(
     subscription_id: str,
     resource_group_name: str,
     workspace_name: str,
-    data_connector_id: str,
+    settings_resource_name: str,
     *,
     json: JSONType = None,
     content: Any = None,
@@ -116,12 +116,12 @@ def build_create_or_update_request(
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "dataConnectorId": _SERIALIZER.url("data_connector_id", data_connector_id, 'str'),
+        "settingsResourceName": _SERIALIZER.url("settings_resource_name", settings_resource_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -151,19 +151,19 @@ def build_delete_request(
     subscription_id: str,
     resource_group_name: str,
     workspace_name: str,
-    data_connector_id: str,
+    settings_resource_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "dataConnectorId": _SERIALIZER.url("data_connector_id", data_connector_id, 'str'),
+        "settingsResourceName": _SERIALIZER.url("settings_resource_name", settings_resource_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -184,92 +184,8 @@ def build_delete_request(
         **kwargs
     )
 
-
-def build_connect_request(
-    subscription_id: str,
-    resource_group_name: str,
-    workspace_name: str,
-    data_connector_id: str,
-    *,
-    json: JSONType = None,
-    content: Any = None,
-    **kwargs: Any
-) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
-    content_type = kwargs.pop('content_type', None)  # type: Optional[str]
-
-    accept = "application/json"
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/connect")  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "dataConnectorId": _SERIALIZER.url("data_connector_id", data_connector_id, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    if content_type is not None:
-        _header_parameters['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
-
-    return HttpRequest(
-        method="POST",
-        url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
-        json=json,
-        content=content,
-        **kwargs
-    )
-
-
-def build_disconnect_request(
-    subscription_id: str,
-    resource_group_name: str,
-    workspace_name: str,
-    data_connector_id: str,
-    **kwargs: Any
-) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
-
-    accept = "application/json"
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/disconnect")  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "dataConnectorId": _SERIALIZER.url("data_connector_id", data_connector_id, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
-
-    return HttpRequest(
-        method="POST",
-        url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
-        **kwargs
-    )
-
-class DataConnectorsOperations(object):
-    """DataConnectorsOperations operations.
+class SecurityMLAnalyticsSettingsOperations(object):
+    """SecurityMLAnalyticsSettingsOperations operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -296,21 +212,23 @@ class DataConnectorsOperations(object):
         resource_group_name: str,
         workspace_name: str,
         **kwargs: Any
-    ) -> Iterable["_models.DataConnectorList"]:
-        """Gets all data connectors.
+    ) -> Iterable["_models.SecurityMLAnalyticsSettingsList"]:
+        """Gets all Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either DataConnectorList or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.DataConnectorList]
+        :return: An iterator like instance of either SecurityMLAnalyticsSettingsList or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsList]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.DataConnectorList"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SecurityMLAnalyticsSettingsList"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -343,7 +261,7 @@ class DataConnectorsOperations(object):
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("DataConnectorList", pipeline_response)
+            deserialized = self._deserialize("SecurityMLAnalyticsSettingsList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -369,30 +287,30 @@ class DataConnectorsOperations(object):
         return ItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings"}  # type: ignore
 
     @distributed_trace
     def get(
         self,
         resource_group_name: str,
         workspace_name: str,
-        data_connector_id: str,
+        settings_resource_name: str,
         **kwargs: Any
-    ) -> "_models.DataConnector":
-        """Gets a data connector.
+    ) -> "_models.SecurityMLAnalyticsSetting":
+        """Gets the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param data_connector_id: Connector ID.
-        :type data_connector_id: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DataConnector, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.DataConnector
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.DataConnector"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SecurityMLAnalyticsSetting"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -405,7 +323,7 @@ class DataConnectorsOperations(object):
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            data_connector_id=data_connector_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
         )
@@ -423,14 +341,14 @@ class DataConnectorsOperations(object):
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('DataConnector', pipeline_response)
+        deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
 
     @distributed_trace
@@ -438,26 +356,27 @@ class DataConnectorsOperations(object):
         self,
         resource_group_name: str,
         workspace_name: str,
-        data_connector_id: str,
-        data_connector: "_models.DataConnector",
+        settings_resource_name: str,
+        security_ml_analytics_setting: "_models.SecurityMLAnalyticsSetting",
         **kwargs: Any
-    ) -> "_models.DataConnector":
-        """Creates or updates the data connector.
+    ) -> "_models.SecurityMLAnalyticsSetting":
+        """Creates or updates the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param data_connector_id: Connector ID.
-        :type data_connector_id: str
-        :param data_connector: The data connector.
-        :type data_connector: ~azure.mgmt.securityinsight.models.DataConnector
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
+        :param security_ml_analytics_setting: The security ML Analytics setting.
+        :type security_ml_analytics_setting:
+         ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DataConnector, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.DataConnector
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.DataConnector"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SecurityMLAnalyticsSetting"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -466,13 +385,13 @@ class DataConnectorsOperations(object):
         api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
-        _json = self._serialize.body(data_connector, 'DataConnector')
+        _json = self._serialize.body(security_ml_analytics_setting, 'SecurityMLAnalyticsSetting')
 
         request = build_create_or_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            data_connector_id=data_connector_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -493,17 +412,17 @@ class DataConnectorsOperations(object):
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('DataConnector', pipeline_response)
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('DataConnector', pipeline_response)
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}"}  # type: ignore
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
 
     @distributed_trace
@@ -511,17 +430,17 @@ class DataConnectorsOperations(object):
         self,
         resource_group_name: str,
         workspace_name: str,
-        data_connector_id: str,
+        settings_resource_name: str,
         **kwargs: Any
     ) -> None:
-        """Delete the data connector.
+        """Delete the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param data_connector_id: Connector ID.
-        :type data_connector_id: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -540,7 +459,7 @@ class DataConnectorsOperations(object):
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            data_connector_id=data_connector_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
         )
@@ -561,128 +480,5 @@ class DataConnectorsOperations(object):
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}"}  # type: ignore
-
-
-    @distributed_trace
-    def connect(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        data_connector_id: str,
-        connect_body: "_models.DataConnectorConnectBody",
-        **kwargs: Any
-    ) -> None:
-        """Connects a data connector.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace.
-        :type workspace_name: str
-        :param data_connector_id: Connector ID.
-        :type data_connector_id: str
-        :param connect_body: The data connector.
-        :type connect_body: ~azure.mgmt.securityinsight.models.DataConnectorConnectBody
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None, or the result of cls(response)
-        :rtype: None
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
-
-        _json = self._serialize.body(connect_body, 'DataConnectorConnectBody')
-
-        request = build_connect_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            data_connector_id=data_connector_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.connect.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    connect.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/connect"}  # type: ignore
-
-
-    @distributed_trace
-    def disconnect(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        data_connector_id: str,
-        **kwargs: Any
-    ) -> None:
-        """Disconnect a data connector.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace.
-        :type workspace_name: str
-        :param data_connector_id: Connector ID.
-        :type data_connector_id: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None, or the result of cls(response)
-        :rtype: None
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2022-05-01-preview")  # type: str
-
-        
-        request = build_disconnect_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            data_connector_id=data_connector_id,
-            api_version=api_version,
-            template_url=self.disconnect.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    disconnect.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/disconnect"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
