@@ -50,7 +50,6 @@ from ._models_py3 import DatabaseVulnerabilityAssessmentListResult
 from ._models_py3 import DatabaseVulnerabilityAssessmentRuleBaseline
 from ._models_py3 import DatabaseVulnerabilityAssessmentRuleBaselineItem
 from ._models_py3 import DatabaseVulnerabilityAssessmentScansExport
-from ._models_py3 import Delegation
 from ._models_py3 import DeletedServer
 from ._models_py3 import DeletedServerListResult
 from ._models_py3 import DistributedAvailabilityGroup
@@ -72,6 +71,8 @@ from ._models_py3 import ElasticPoolPerformanceLevelCapability
 from ._models_py3 import ElasticPoolUpdate
 from ._models_py3 import EncryptionProtector
 from ._models_py3 import EncryptionProtectorListResult
+from ._models_py3 import EndpointCertificate
+from ._models_py3 import EndpointCertificateListResult
 from ._models_py3 import ExportDatabaseDefinition
 from ._models_py3 import ExtendedDatabaseBlobAuditingPolicy
 from ._models_py3 import ExtendedDatabaseBlobAuditingPolicyListResult
@@ -88,7 +89,6 @@ from ._models_py3 import FirewallRuleListResult
 from ._models_py3 import GeoBackupPolicy
 from ._models_py3 import GeoBackupPolicyListResult
 from ._models_py3 import IPv6FirewallRule
-from ._models_py3 import IPv6FirewallRuleList
 from ._models_py3 import IPv6FirewallRuleListResult
 from ._models_py3 import ImportExistingDatabaseDefinition
 from ._models_py3 import ImportExportExtensionsOperationListResult
@@ -334,7 +334,6 @@ from ._models_py3 import TimeZoneListResult
 from ._models_py3 import TopQueries
 from ._models_py3 import TopQueriesListResult
 from ._models_py3 import TrackedResource
-from ._models_py3 import UnlinkParameters
 from ._models_py3 import UpdateLongTermRetentionBackupParameters
 from ._models_py3 import UpdateManagedInstanceDnsServersOperation
 from ._models_py3 import UpsertManagedServerOperationParameters
@@ -538,7 +537,6 @@ __all__ = [
     'DatabaseVulnerabilityAssessmentRuleBaseline',
     'DatabaseVulnerabilityAssessmentRuleBaselineItem',
     'DatabaseVulnerabilityAssessmentScansExport',
-    'Delegation',
     'DeletedServer',
     'DeletedServerListResult',
     'DistributedAvailabilityGroup',
@@ -560,6 +558,8 @@ __all__ = [
     'ElasticPoolUpdate',
     'EncryptionProtector',
     'EncryptionProtectorListResult',
+    'EndpointCertificate',
+    'EndpointCertificateListResult',
     'ExportDatabaseDefinition',
     'ExtendedDatabaseBlobAuditingPolicy',
     'ExtendedDatabaseBlobAuditingPolicyListResult',
@@ -576,7 +576,6 @@ __all__ = [
     'GeoBackupPolicy',
     'GeoBackupPolicyListResult',
     'IPv6FirewallRule',
-    'IPv6FirewallRuleList',
     'IPv6FirewallRuleListResult',
     'ImportExistingDatabaseDefinition',
     'ImportExportExtensionsOperationListResult',
@@ -822,7 +821,6 @@ __all__ = [
     'TopQueries',
     'TopQueriesListResult',
     'TrackedResource',
-    'UnlinkParameters',
     'UpdateLongTermRetentionBackupParameters',
     'UpdateManagedInstanceDnsServersOperation',
     'UpsertManagedServerOperationParameters',
