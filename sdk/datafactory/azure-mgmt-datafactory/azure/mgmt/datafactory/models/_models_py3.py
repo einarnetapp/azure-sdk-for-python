@@ -17986,6 +17986,8 @@ class DataFlowSink(Transformation):
     :vartype flowlet: ~azure.mgmt.datafactory.models.DataFlowReference
     :ivar schema_linked_service: Schema linked service reference.
     :vartype schema_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
+    :ivar rejected_data_linked_service: Rejected data linked service reference.
+    :vartype rejected_data_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
     """
 
     _validation = {
@@ -17999,6 +18001,7 @@ class DataFlowSink(Transformation):
         'linked_service': {'key': 'linkedService', 'type': 'LinkedServiceReference'},
         'flowlet': {'key': 'flowlet', 'type': 'DataFlowReference'},
         'schema_linked_service': {'key': 'schemaLinkedService', 'type': 'LinkedServiceReference'},
+        'rejected_data_linked_service': {'key': 'rejectedDataLinkedService', 'type': 'LinkedServiceReference'},
     }
 
     def __init__(
@@ -18010,6 +18013,7 @@ class DataFlowSink(Transformation):
         linked_service: Optional["LinkedServiceReference"] = None,
         flowlet: Optional["DataFlowReference"] = None,
         schema_linked_service: Optional["LinkedServiceReference"] = None,
+        rejected_data_linked_service: Optional["LinkedServiceReference"] = None,
         **kwargs
     ):
         """
@@ -18025,9 +18029,12 @@ class DataFlowSink(Transformation):
         :paramtype flowlet: ~azure.mgmt.datafactory.models.DataFlowReference
         :keyword schema_linked_service: Schema linked service reference.
         :paramtype schema_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
+        :keyword rejected_data_linked_service: Rejected data linked service reference.
+        :paramtype rejected_data_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
         """
         super(DataFlowSink, self).__init__(name=name, description=description, dataset=dataset, linked_service=linked_service, flowlet=flowlet, **kwargs)
         self.schema_linked_service = schema_linked_service
+        self.rejected_data_linked_service = rejected_data_linked_service
 
 
 class DataFlowSource(Transformation):
@@ -23450,6 +23457,8 @@ class Factory(Resource):
     :vartype create_time: ~datetime.datetime
     :ivar version: Version of the factory.
     :vartype version: str
+    :ivar purview_configuration: Purview information of the factory.
+    :vartype purview_configuration: ~azure.mgmt.datafactory.models.PurviewConfiguration
     :ivar repo_configuration: Git repo information of the factory.
     :vartype repo_configuration: ~azure.mgmt.datafactory.models.FactoryRepoConfiguration
     :ivar global_parameters: List of parameters for factory.
@@ -23484,6 +23493,7 @@ class Factory(Resource):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'create_time': {'key': 'properties.createTime', 'type': 'iso-8601'},
         'version': {'key': 'properties.version', 'type': 'str'},
+        'purview_configuration': {'key': 'properties.purviewConfiguration', 'type': 'PurviewConfiguration'},
         'repo_configuration': {'key': 'properties.repoConfiguration', 'type': 'FactoryRepoConfiguration'},
         'global_parameters': {'key': 'properties.globalParameters', 'type': '{GlobalParameterSpecification}'},
         'encryption': {'key': 'properties.encryption', 'type': 'EncryptionConfiguration'},
@@ -23497,6 +23507,7 @@ class Factory(Resource):
         tags: Optional[Dict[str, str]] = None,
         additional_properties: Optional[Dict[str, Any]] = None,
         identity: Optional["FactoryIdentity"] = None,
+        purview_configuration: Optional["PurviewConfiguration"] = None,
         repo_configuration: Optional["FactoryRepoConfiguration"] = None,
         global_parameters: Optional[Dict[str, "GlobalParameterSpecification"]] = None,
         encryption: Optional["EncryptionConfiguration"] = None,
@@ -23513,6 +23524,8 @@ class Factory(Resource):
         :paramtype additional_properties: dict[str, any]
         :keyword identity: Managed service identity of the factory.
         :paramtype identity: ~azure.mgmt.datafactory.models.FactoryIdentity
+        :keyword purview_configuration: Purview information of the factory.
+        :paramtype purview_configuration: ~azure.mgmt.datafactory.models.PurviewConfiguration
         :keyword repo_configuration: Git repo information of the factory.
         :paramtype repo_configuration: ~azure.mgmt.datafactory.models.FactoryRepoConfiguration
         :keyword global_parameters: List of parameters for factory.
@@ -23530,6 +23543,7 @@ class Factory(Resource):
         self.provisioning_state = None
         self.create_time = None
         self.version = None
+        self.purview_configuration = purview_configuration
         self.repo_configuration = repo_configuration
         self.global_parameters = global_parameters
         self.encryption = encryption
@@ -42452,6 +42466,8 @@ class PowerQuerySink(DataFlowSink):
     :vartype flowlet: ~azure.mgmt.datafactory.models.DataFlowReference
     :ivar schema_linked_service: Schema linked service reference.
     :vartype schema_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
+    :ivar rejected_data_linked_service: Rejected data linked service reference.
+    :vartype rejected_data_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
     :ivar script: sink script.
     :vartype script: str
     """
@@ -42467,6 +42483,7 @@ class PowerQuerySink(DataFlowSink):
         'linked_service': {'key': 'linkedService', 'type': 'LinkedServiceReference'},
         'flowlet': {'key': 'flowlet', 'type': 'DataFlowReference'},
         'schema_linked_service': {'key': 'schemaLinkedService', 'type': 'LinkedServiceReference'},
+        'rejected_data_linked_service': {'key': 'rejectedDataLinkedService', 'type': 'LinkedServiceReference'},
         'script': {'key': 'script', 'type': 'str'},
     }
 
@@ -42479,6 +42496,7 @@ class PowerQuerySink(DataFlowSink):
         linked_service: Optional["LinkedServiceReference"] = None,
         flowlet: Optional["DataFlowReference"] = None,
         schema_linked_service: Optional["LinkedServiceReference"] = None,
+        rejected_data_linked_service: Optional["LinkedServiceReference"] = None,
         script: Optional[str] = None,
         **kwargs
     ):
@@ -42495,10 +42513,12 @@ class PowerQuerySink(DataFlowSink):
         :paramtype flowlet: ~azure.mgmt.datafactory.models.DataFlowReference
         :keyword schema_linked_service: Schema linked service reference.
         :paramtype schema_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
+        :keyword rejected_data_linked_service: Rejected data linked service reference.
+        :paramtype rejected_data_linked_service: ~azure.mgmt.datafactory.models.LinkedServiceReference
         :keyword script: sink script.
         :paramtype script: str
         """
-        super(PowerQuerySink, self).__init__(name=name, description=description, dataset=dataset, linked_service=linked_service, flowlet=flowlet, schema_linked_service=schema_linked_service, **kwargs)
+        super(PowerQuerySink, self).__init__(name=name, description=description, dataset=dataset, linked_service=linked_service, flowlet=flowlet, schema_linked_service=schema_linked_service, rejected_data_linked_service=rejected_data_linked_service, **kwargs)
         self.script = script
 
 
@@ -42990,6 +43010,31 @@ class PrestoSource(TabularSource):
         self.query = query
 
 
+class PrivateEndpoint(msrest.serialization.Model):
+    """Private endpoint which a connection belongs to.
+
+    :ivar id: The resource Id for private endpoint.
+    :vartype id: str
+    """
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        id: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword id: The resource Id for private endpoint.
+        :paramtype id: str
+        """
+        super(PrivateEndpoint, self).__init__(**kwargs)
+        self.id = id
+
+
 class PrivateEndpointConnectionListResponse(msrest.serialization.Model):
     """A list of linked service resources.
 
@@ -43080,25 +43125,32 @@ class PrivateLinkConnectionApprovalRequest(msrest.serialization.Model):
     :ivar private_link_service_connection_state: The state of a private link connection.
     :vartype private_link_service_connection_state:
      ~azure.mgmt.datafactory.models.PrivateLinkConnectionState
+    :ivar private_endpoint: The resource of private endpoint.
+    :vartype private_endpoint: ~azure.mgmt.datafactory.models.PrivateEndpoint
     """
 
     _attribute_map = {
         'private_link_service_connection_state': {'key': 'privateLinkServiceConnectionState', 'type': 'PrivateLinkConnectionState'},
+        'private_endpoint': {'key': 'privateEndpoint', 'type': 'PrivateEndpoint'},
     }
 
     def __init__(
         self,
         *,
         private_link_service_connection_state: Optional["PrivateLinkConnectionState"] = None,
+        private_endpoint: Optional["PrivateEndpoint"] = None,
         **kwargs
     ):
         """
         :keyword private_link_service_connection_state: The state of a private link connection.
         :paramtype private_link_service_connection_state:
          ~azure.mgmt.datafactory.models.PrivateLinkConnectionState
+        :keyword private_endpoint: The resource of private endpoint.
+        :paramtype private_endpoint: ~azure.mgmt.datafactory.models.PrivateEndpoint
         """
         super(PrivateLinkConnectionApprovalRequest, self).__init__(**kwargs)
         self.private_link_service_connection_state = private_link_service_connection_state
+        self.private_endpoint = private_endpoint
 
 
 class PrivateLinkConnectionApprovalRequestResource(SubResource):
@@ -43298,6 +43350,31 @@ class PrivateLinkResourcesWrapper(msrest.serialization.Model):
         """
         super(PrivateLinkResourcesWrapper, self).__init__(**kwargs)
         self.value = value
+
+
+class PurviewConfiguration(msrest.serialization.Model):
+    """Purview configuration.
+
+    :ivar purview_resource_id: Purview resource id.
+    :vartype purview_resource_id: str
+    """
+
+    _attribute_map = {
+        'purview_resource_id': {'key': 'purviewResourceId', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        purview_resource_id: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword purview_resource_id: Purview resource id.
+        :paramtype purview_resource_id: str
+        """
+        super(PurviewConfiguration, self).__init__(**kwargs)
+        self.purview_resource_id = purview_resource_id
 
 
 class QueryDataFlowDebugSessionsResponse(msrest.serialization.Model):

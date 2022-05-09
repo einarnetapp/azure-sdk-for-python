@@ -500,6 +500,7 @@ from ._models_py3 import PowerQuerySource
 from ._models_py3 import PrestoLinkedService
 from ._models_py3 import PrestoObjectDataset
 from ._models_py3 import PrestoSource
+from ._models_py3 import PrivateEndpoint
 from ._models_py3 import PrivateEndpointConnectionListResponse
 from ._models_py3 import PrivateEndpointConnectionResource
 from ._models_py3 import PrivateLinkConnectionApprovalRequest
@@ -508,6 +509,7 @@ from ._models_py3 import PrivateLinkConnectionState
 from ._models_py3 import PrivateLinkResource
 from ._models_py3 import PrivateLinkResourceProperties
 from ._models_py3 import PrivateLinkResourcesWrapper
+from ._models_py3 import PurviewConfiguration
 from ._models_py3 import QueryDataFlowDebugSessionsResponse
 from ._models_py3 import QuickBooksLinkedService
 from ._models_py3 import QuickBooksObjectDataset
@@ -1314,6 +1316,7 @@ __all__ = [
     'PrestoLinkedService',
     'PrestoObjectDataset',
     'PrestoSource',
+    'PrivateEndpoint',
     'PrivateEndpointConnectionListResponse',
     'PrivateEndpointConnectionResource',
     'PrivateLinkConnectionApprovalRequest',
@@ -1322,6 +1325,7 @@ __all__ = [
     'PrivateLinkResource',
     'PrivateLinkResourceProperties',
     'PrivateLinkResourcesWrapper',
+    'PurviewConfiguration',
     'QueryDataFlowDebugSessionsResponse',
     'QuickBooksLinkedService',
     'QuickBooksObjectDataset',
