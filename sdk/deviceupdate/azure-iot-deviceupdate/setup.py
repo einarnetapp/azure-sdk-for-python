@@ -13,7 +13,7 @@ from setuptools import find_packages, setup
 
 # Change the PACKAGE_NAME only to change folder and different name
 PACKAGE_NAME = "azure-iot-deviceupdate"
-PACKAGE_PPRINT_NAME = "Azure Device Update"
+PACKAGE_PPRINT_NAME = "MyService Management"
 
 # a-b-c => a/b/c
 package_folder_path = PACKAGE_NAME.replace('-', '/')
@@ -21,7 +21,9 @@ package_folder_path = PACKAGE_NAME.replace('-', '/')
 namespace_name = PACKAGE_NAME.replace('-', '.')
 
 # Version extraction inspired from 'requests'
-with open(os.path.join(package_folder_path, '_version.py'), 'r') as fd:
+with open(os.path.join(package_folder_path, 'version.py')
+          if os.path.exists(os.path.join(package_folder_path, 'version.py'))
+          else os.path.join(package_folder_path, '_version.py'), 'r') as fd:
     version = re.search(r'^VERSION\s*=\s*[\'"]([^\'"]*)[\'"]',
                         fd.read(), re.MULTILINE).group(1)
 
@@ -36,24 +38,25 @@ with open('CHANGELOG.md', encoding='utf-8') as f:
 setup(
     name=PACKAGE_NAME,
     version=version,
-    description='Microsoft {} Client Library for Python'.format(PACKAGE_PPRINT_NAME),
-    long_description=readme + "\n\n" + changelog,
+    description='Microsoft Azure {} Client Library for Python'.format(PACKAGE_PPRINT_NAME),
+    long_description=readme + '\n\n' + changelog,
     long_description_content_type='text/markdown',
     license='MIT License',
     author='Microsoft Corporation',
-    author_email='adupmdevteam@microsoft.com',
-    url='https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/deviceupdate/azure-iot-deviceupdate',
+    author_email='azpysdkhelp@microsoft.com',
+    url='https://github.com/Azure/azure-sdk-for-python',
+    keywords="azure, azure sdk",  # update with search keywords relevant to the azure service / product
     classifiers=[
-        "Development Status :: 4 - Beta",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "License :: OSI Approved :: MIT License",
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'License :: OSI Approved :: MIT License',
     ],
     zip_safe=False,
     packages=find_packages(exclude=[
@@ -63,9 +66,9 @@ setup(
         'azure.iot',
     ]),
     install_requires=[
-        "azure-core<2.0.0,>=1.20.1",
-        "msrest>=0.6.21",
-        'six>=1.11.0',
+        'msrest>=0.6.21',
+        'azure-common~=1.1',
+        'azure-mgmt-core>=1.3.0,<2.0.0',
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.6"
 )

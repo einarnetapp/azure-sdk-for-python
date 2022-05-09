@@ -1,6 +1,6 @@
-recursive-include tests *.py
-recursive-include samples *.py *.md
-include LICENSE
+include _meta.json
+recursive-include tests *.py *.yaml
 include *.md
 include azure/__init__.py
 include azure/iot/__init__.py
+include LICENSE
