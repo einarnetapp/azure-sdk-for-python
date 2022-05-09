@@ -60,8 +60,8 @@ class AzureResourcePropertiesBase(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The azure resource type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "KeyVault".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.AzureResourceType
     """
 
     _validation = {
@@ -92,8 +92,8 @@ class AzureKeyVaultProperties(AzureResourcePropertiesBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The azure resource type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "KeyVault".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.AzureResourceType
     :ivar connect_as_kubernetes_csi_driver: True if connect via Kubernetes CSI Driver.
     :vartype connect_as_kubernetes_csi_driver: bool
     """
@@ -131,8 +131,8 @@ class TargetServiceBase(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     """
 
     _validation = {
@@ -163,8 +163,8 @@ class AzureResource(TargetServiceBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     :ivar id: The Id of azure resource.
     :vartype id: str
     :ivar resource_properties: The azure resource connection related properties.
@@ -206,8 +206,8 @@ class ConfluentBootstrapServer(TargetServiceBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     :ivar endpoint: The endpoint of service.
     :vartype endpoint: str
     """
@@ -242,8 +242,8 @@ class ConfluentSchemaRegistry(TargetServiceBase):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The target service type.Constant filled by server. Possible values
-     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry", "KeyVault".
-    :vartype type: str or ~azure.mgmt.servicelinker.models.Type
+     include: "AzureResource", "ConfluentBootstrapServer", "ConfluentSchemaRegistry".
+    :vartype type: str or ~azure.mgmt.servicelinker.models.TargetServiceType
     :ivar endpoint: The endpoint of service.
     :vartype endpoint: str
     """
@@ -1264,9 +1264,13 @@ class UserAssignedIdentityAuthInfo(AuthInfoBase):
         self.subscription_id = subscription_id
 
 
-class ValidateResult(msrest.serialization.Model):
-    """The validation result for a linker.
+class ValidateOperationResult(msrest.serialization.Model):
+    """The validation operation result for a linker.
 
+    :ivar resource_id: Validated linker id.
+    :vartype resource_id: str
+    :ivar status: Validation operation status.
+    :vartype status: str
     :ivar linker_name: The linker name.
     :vartype linker_name: str
     :ivar is_connection_available: A boolean value indicating whether the connection is available
@@ -1288,19 +1292,23 @@ class ValidateResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'linker_name': {'key': 'linkerName', 'type': 'str'},
-        'is_connection_available': {'key': 'isConnectionAvailable', 'type': 'bool'},
-        'report_start_time_utc': {'key': 'reportStartTimeUtc', 'type': 'iso-8601'},
-        'report_end_time_utc': {'key': 'reportEndTimeUtc', 'type': 'iso-8601'},
-        'source_id': {'key': 'sourceId', 'type': 'str'},
-        'target_id': {'key': 'targetId', 'type': 'str'},
-        'auth_type': {'key': 'authType', 'type': 'str'},
-        'validation_detail': {'key': 'validationDetail', 'type': '[ValidationResultItem]'},
+        'resource_id': {'key': 'resourceId', 'type': 'str'},
+        'status': {'key': 'status', 'type': 'str'},
+        'linker_name': {'key': 'properties.linkerName', 'type': 'str'},
+        'is_connection_available': {'key': 'properties.isConnectionAvailable', 'type': 'bool'},
+        'report_start_time_utc': {'key': 'properties.reportStartTimeUtc', 'type': 'iso-8601'},
+        'report_end_time_utc': {'key': 'properties.reportEndTimeUtc', 'type': 'iso-8601'},
+        'source_id': {'key': 'properties.sourceId', 'type': 'str'},
+        'target_id': {'key': 'properties.targetId', 'type': 'str'},
+        'auth_type': {'key': 'properties.authType', 'type': 'str'},
+        'validation_detail': {'key': 'properties.validationDetail', 'type': '[ValidationResultItem]'},
     }
 
     def __init__(
         self,
         *,
+        resource_id: Optional[str] = None,
+        status: Optional[str] = None,
         linker_name: Optional[str] = None,
         is_connection_available: Optional[bool] = None,
         report_start_time_utc: Optional[datetime.datetime] = None,
@@ -1312,6 +1320,10 @@ class ValidateResult(msrest.serialization.Model):
         **kwargs
     ):
         """
+        :keyword resource_id: Validated linker id.
+        :paramtype resource_id: str
+        :keyword status: Validation operation status.
+        :paramtype status: str
         :keyword linker_name: The linker name.
         :paramtype linker_name: str
         :keyword is_connection_available: A boolean value indicating whether the connection is
@@ -1331,7 +1343,9 @@ class ValidateResult(msrest.serialization.Model):
         :keyword validation_detail: The detail of validation result.
         :paramtype validation_detail: list[~azure.mgmt.servicelinker.models.ValidationResultItem]
         """
-        super(ValidateResult, self).__init__(**kwargs)
+        super(ValidateOperationResult, self).__init__(**kwargs)
+        self.resource_id = resource_id
+        self.status = status
         self.linker_name = linker_name
         self.is_connection_available = is_connection_available
         self.report_start_time_utc = report_start_time_utc
