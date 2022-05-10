@@ -31,85 +31,19 @@ _SERIALIZER.client_side_validation = False
 
 def build_list_request(
     subscription_id: str,
-    **kwargs: Any
-) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-
-    accept = "application/json"
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerInstances")
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
-
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
-        **kwargs
-    )
-
-
-def build_list_by_resource_group_request(
-    subscription_id: str,
     resource_group_name: str,
+    data_controller_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
-
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
-        **kwargs
-    )
-
-
-def build_get_request(
-    subscription_id: str,
-    resource_group_name: str,
-    sql_server_instance_name: str,
-    **kwargs: Any
-) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-
-    accept = "application/json"
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}")  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, 'str'),
+        "dataControllerName": _SERIALIZER.url("data_controller_name", data_controller_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -134,7 +68,8 @@ def build_get_request(
 def build_create_request_initial(
     subscription_id: str,
     resource_group_name: str,
-    sql_server_instance_name: str,
+    data_controller_name: str,
+    active_directory_connector_name: str,
     *,
     json: JSONType = None,
     content: Any = None,
@@ -145,11 +80,12 @@ def build_create_request_initial(
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, 'str'),
+        "dataControllerName": _SERIALIZER.url("data_controller_name", data_controller_name, 'str'),
+        "activeDirectoryConnectorName": _SERIALIZER.url("active_directory_connector_name", active_directory_connector_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -178,18 +114,20 @@ def build_create_request_initial(
 def build_delete_request_initial(
     subscription_id: str,
     resource_group_name: str,
-    sql_server_instance_name: str,
+    data_controller_name: str,
+    active_directory_connector_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, 'str'),
+        "dataControllerName": _SERIALIZER.url("data_controller_name", data_controller_name, 'str'),
+        "activeDirectoryConnectorName": _SERIALIZER.url("active_directory_connector_name", active_directory_connector_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -211,25 +149,23 @@ def build_delete_request_initial(
     )
 
 
-def build_update_request(
+def build_get_request(
     subscription_id: str,
     resource_group_name: str,
-    sql_server_instance_name: str,
-    *,
-    json: JSONType = None,
-    content: Any = None,
+    data_controller_name: str,
+    active_directory_connector_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-    content_type = kwargs.pop('content_type', None)  # type: Optional[str]
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, 'str'),
+        "dataControllerName": _SERIALIZER.url("data_controller_name", data_controller_name, 'str'),
+        "activeDirectoryConnectorName": _SERIALIZER.url("active_directory_connector_name", active_directory_connector_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -240,22 +176,18 @@ def build_update_request(
 
     # Construct headers
     _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    if content_type is not None:
-        _header_parameters['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
     _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
-        method="PATCH",
+        method="GET",
         url=_url,
         params=_query_parameters,
         headers=_header_parameters,
-        json=json,
-        content=content,
         **kwargs
     )
 
-class SqlServerInstancesOperations(object):
-    """SqlServerInstancesOperations operations.
+class ActiveDirectoryConnectorsOperations(object):
+    """ActiveDirectoryConnectorsOperations operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -279,22 +211,28 @@ class SqlServerInstancesOperations(object):
     @distributed_trace
     def list(
         self,
+        resource_group_name: str,
+        data_controller_name: str,
         **kwargs: Any
-    ) -> Iterable["_models.SqlServerInstanceListResult"]:
-        """List sqlServerInstance resources in the subscription.
+    ) -> Iterable["_models.ActiveDirectoryConnectorListResult"]:
+        """List the active directory connectors associated with the given data controller.
 
-        List sqlServerInstance resources in the subscription.
+        List the active directory connectors associated with the given data controller.
 
+        :param resource_group_name: The name of the Azure resource group.
+        :type resource_group_name: str
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SqlServerInstanceListResult or the result of
-         cls(response)
+        :return: An iterator like instance of either ActiveDirectoryConnectorListResult or the result
+         of cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.azurearcdata.models.SqlServerInstanceListResult]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlServerInstanceListResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -304,6 +242,8 @@ class SqlServerInstancesOperations(object):
                 
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    data_controller_name=data_controller_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
                 )
@@ -314,6 +254,8 @@ class SqlServerInstancesOperations(object):
                 
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    data_controller_name=data_controller_name,
                     api_version=api_version,
                     template_url=next_link,
                 )
@@ -323,7 +265,7 @@ class SqlServerInstancesOperations(object):
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("SqlServerInstanceListResult", pipeline_response)
+            deserialized = self._deserialize("ActiveDirectoryConnectorListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -350,156 +292,17 @@ class SqlServerInstancesOperations(object):
         return ItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerInstances"}  # type: ignore
-
-    @distributed_trace
-    def list_by_resource_group(
-        self,
-        resource_group_name: str,
-        **kwargs: Any
-    ) -> Iterable["_models.SqlServerInstanceListResult"]:
-        """List sqlServerInstance resources in the resource group.
-
-        Gets all sqlServerInstances in a resource group.
-
-        :param resource_group_name: The name of the Azure resource group.
-        :type resource_group_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SqlServerInstanceListResult or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.azurearcdata.models.SqlServerInstanceListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlServerInstanceListResult"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-        def prepare_request(next_link=None):
-            if not next_link:
-                
-                request = build_list_by_resource_group_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=resource_group_name,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group.metadata['url'],
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                
-                request = build_list_by_resource_group_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=resource_group_name,
-                    api_version=api_version,
-                    template_url=next_link,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        def extract_data(pipeline_response):
-            deserialized = self._deserialize("SqlServerInstanceListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances"}  # type: ignore
-
-    @distributed_trace
-    def get(
-        self,
-        resource_group_name: str,
-        sql_server_instance_name: str,
-        **kwargs: Any
-    ) -> "_models.SqlServerInstance":
-        """Retrieves a SQL Server Instance resource.
-
-        :param resource_group_name: The name of the Azure resource group.
-        :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance.
-        :type sql_server_instance_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlServerInstance, or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlServerInstance
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlServerInstance"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-
-        
-        request = build_get_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
-            api_version=api_version,
-            template_url=self.get.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('SqlServerInstance', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
-
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors"}  # type: ignore
 
     def _create_initial(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        sql_server_instance: "_models.SqlServerInstance",
+        data_controller_name: str,
+        active_directory_connector_name: str,
+        active_directory_connector_resource: "_models.ActiveDirectoryConnectorResource",
         **kwargs: Any
-    ) -> "_models.SqlServerInstance":
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlServerInstance"]
+    ) -> "_models.ActiveDirectoryConnectorResource":
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorResource"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -508,12 +311,13 @@ class SqlServerInstancesOperations(object):
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
-        _json = self._serialize.body(sql_server_instance, 'SqlServerInstance')
+        _json = self._serialize.body(active_directory_connector_resource, 'ActiveDirectoryConnectorResource')
 
         request = build_create_request_initial(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
+            data_controller_name=data_controller_name,
+            active_directory_connector_name=active_directory_connector_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -534,35 +338,39 @@ class SqlServerInstancesOperations(object):
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('SqlServerInstance', pipeline_response)
+            deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('SqlServerInstance', pipeline_response)
+            deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    _create_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
 
     @distributed_trace
     def begin_create(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        sql_server_instance: "_models.SqlServerInstance",
+        data_controller_name: str,
+        active_directory_connector_name: str,
+        active_directory_connector_resource: "_models.ActiveDirectoryConnectorResource",
         **kwargs: Any
-    ) -> LROPoller["_models.SqlServerInstance"]:
-        """Creates or replaces a SQL Server Instance resource.
+    ) -> LROPoller["_models.ActiveDirectoryConnectorResource"]:
+        """Creates or replaces an Active Directory connector resource.
 
         :param resource_group_name: The name of the Azure resource group.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance.
-        :type sql_server_instance_name: str
-        :param sql_server_instance: The SQL Server Instance to be created or updated.
-        :type sql_server_instance: ~azure.mgmt.azurearcdata.models.SqlServerInstance
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
+        :param active_directory_connector_name: The name of the Active Directory connector instance.
+        :type active_directory_connector_name: str
+        :param active_directory_connector_resource: desc.
+        :type active_directory_connector_resource:
+         ~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorResource
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -571,15 +379,16 @@ class SqlServerInstancesOperations(object):
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either SqlServerInstance or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.SqlServerInstance]
+        :return: An instance of LROPoller that returns either ActiveDirectoryConnectorResource or the
+         result of cls(response)
+        :rtype:
+         ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlServerInstance"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorResource"]
         lro_delay = kwargs.pop(
             'polling_interval',
             self._config.polling_interval
@@ -588,8 +397,9 @@ class SqlServerInstancesOperations(object):
         if cont_token is None:
             raw_result = self._create_initial(
                 resource_group_name=resource_group_name,
-                sql_server_instance_name=sql_server_instance_name,
-                sql_server_instance=sql_server_instance,
+                data_controller_name=data_controller_name,
+                active_directory_connector_name=active_directory_connector_name,
+                active_directory_connector_resource=active_directory_connector_resource,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x,y,z: x,
@@ -599,7 +409,7 @@ class SqlServerInstancesOperations(object):
 
         def get_long_running_output(pipeline_response):
             response = pipeline_response.http_response
-            deserialized = self._deserialize('SqlServerInstance', pipeline_response)
+            deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -617,12 +427,13 @@ class SqlServerInstancesOperations(object):
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    begin_create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
     def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
+        data_controller_name: str,
+        active_directory_connector_name: str,
         **kwargs: Any
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
@@ -637,7 +448,8 @@ class SqlServerInstancesOperations(object):
         request = build_delete_request_initial(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
+            data_controller_name=data_controller_name,
+            active_directory_connector_name=active_directory_connector_name,
             api_version=api_version,
             template_url=self._delete_initial.metadata['url'],
         )
@@ -658,22 +470,25 @@ class SqlServerInstancesOperations(object):
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    _delete_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
 
     @distributed_trace
     def begin_delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
+        data_controller_name: str,
+        active_directory_connector_name: str,
         **kwargs: Any
     ) -> LROPoller[None]:
-        """Deletes a SQL Server Instance resource.
+        """Deletes an Active Directory connector resource.
 
         :param resource_group_name: The name of the Azure resource group.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance.
-        :type sql_server_instance_name: str
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
+        :param active_directory_connector_name: The name of the Active Directory connector instance.
+        :type active_directory_connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -697,7 +512,8 @@ class SqlServerInstancesOperations(object):
         if cont_token is None:
             raw_result = self._delete_initial(
                 resource_group_name=resource_group_name,
-                sql_server_instance_name=sql_server_instance_name,
+                data_controller_name=data_controller_name,
+                active_directory_connector_name=active_directory_connector_name,
                 api_version=api_version,
                 cls=lambda x,y,z: x,
                 **kwargs
@@ -721,48 +537,45 @@ class SqlServerInstancesOperations(object):
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    begin_delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
     @distributed_trace
-    def update(
+    def get(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        parameters: "_models.SqlServerInstanceUpdate",
+        data_controller_name: str,
+        active_directory_connector_name: str,
         **kwargs: Any
-    ) -> "_models.SqlServerInstance":
-        """Updates a SQL Server Instance resource.
+    ) -> "_models.ActiveDirectoryConnectorResource":
+        """Retrieves an Active Directory connector resource.
 
         :param resource_group_name: The name of the Azure resource group.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance.
-        :type sql_server_instance_name: str
-        :param parameters: The SQL Server Instance.
-        :type parameters: ~azure.mgmt.azurearcdata.models.SqlServerInstanceUpdate
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
+        :param active_directory_connector_name: The name of the Active Directory connector instance.
+        :type active_directory_connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlServerInstance, or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlServerInstance
+        :return: ActiveDirectoryConnectorResource, or the result of cls(response)
+        :rtype: ~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorResource
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlServerInstance"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorResource"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
         error_map.update(kwargs.pop('error_map', {}))
 
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
-        _json = self._serialize.body(parameters, 'SqlServerInstanceUpdate')
-
-        request = build_update_request(
+        
+        request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
+            data_controller_name=data_controller_name,
+            active_directory_connector_name=active_directory_connector_name,
             api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.update.metadata['url'],
+            template_url=self.get.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
@@ -779,12 +592,12 @@ class SqlServerInstancesOperations(object):
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SqlServerInstance', pipeline_response)
+        deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 

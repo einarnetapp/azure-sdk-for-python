@@ -21,12 +21,12 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._sql_managed_instances_operations import build_create_request_initial, build_delete_request_initial, build_get_request, build_list_by_resource_group_request, build_list_request, build_update_request
+from ...operations._active_directory_connectors_operations import build_create_request_initial, build_delete_request_initial, build_get_request, build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class SqlManagedInstancesOperations:
-    """SqlManagedInstancesOperations async operations.
+class ActiveDirectoryConnectorsOperations:
+    """ActiveDirectoryConnectorsOperations async operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -50,22 +50,28 @@ class SqlManagedInstancesOperations:
     @distributed_trace
     def list(
         self,
+        resource_group_name: str,
+        data_controller_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.SqlManagedInstanceListResult"]:
-        """List sqlManagedInstance resources in the subscription.
+    ) -> AsyncIterable["_models.ActiveDirectoryConnectorListResult"]:
+        """List the active directory connectors associated with the given data controller.
 
-        List sqlManagedInstance resources in the subscription.
+        List the active directory connectors associated with the given data controller.
 
+        :param resource_group_name: The name of the Azure resource group.
+        :type resource_group_name: str
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SqlManagedInstanceListResult or the result of
-         cls(response)
+        :return: An iterator like instance of either ActiveDirectoryConnectorListResult or the result
+         of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.azurearcdata.models.SqlManagedInstanceListResult]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlManagedInstanceListResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -75,6 +81,8 @@ class SqlManagedInstancesOperations:
                 
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    data_controller_name=data_controller_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
                 )
@@ -85,6 +93,8 @@ class SqlManagedInstancesOperations:
                 
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    data_controller_name=data_controller_name,
                     api_version=api_version,
                     template_url=next_link,
                 )
@@ -94,7 +104,7 @@ class SqlManagedInstancesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("SqlManagedInstanceListResult", pipeline_response)
+            deserialized = self._deserialize("ActiveDirectoryConnectorListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -121,156 +131,17 @@ class SqlManagedInstancesOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlManagedInstances"}  # type: ignore
-
-    @distributed_trace
-    def list_by_resource_group(
-        self,
-        resource_group_name: str,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SqlManagedInstanceListResult"]:
-        """List sqlManagedInstance resources in the resource group.
-
-        Gets all sqlManagedInstances in a resource group.
-
-        :param resource_group_name: The name of the Azure resource group.
-        :type resource_group_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SqlManagedInstanceListResult or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.azurearcdata.models.SqlManagedInstanceListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlManagedInstanceListResult"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-        def prepare_request(next_link=None):
-            if not next_link:
-                
-                request = build_list_by_resource_group_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=resource_group_name,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group.metadata['url'],
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-
-            else:
-                
-                request = build_list_by_resource_group_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=resource_group_name,
-                    api_version=api_version,
-                    template_url=next_link,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("SqlManagedInstanceListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances"}  # type: ignore
-
-    @distributed_trace_async
-    async def get(
-        self,
-        resource_group_name: str,
-        sql_managed_instance_name: str,
-        **kwargs: Any
-    ) -> "_models.SqlManagedInstance":
-        """Retrieves a SQL Managed Instance resource.
-
-        :param resource_group_name: The name of the Azure resource group.
-        :type resource_group_name: str
-        :param sql_managed_instance_name: Name of SQL Managed Instance.
-        :type sql_managed_instance_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlManagedInstance, or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlManagedInstance
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlManagedInstance"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-
-        
-        request = build_get_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            sql_managed_instance_name=sql_managed_instance_name,
-            api_version=api_version,
-            template_url=self.get.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('SqlManagedInstance', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}"}  # type: ignore
-
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors"}  # type: ignore
 
     async def _create_initial(
         self,
         resource_group_name: str,
-        sql_managed_instance_name: str,
-        sql_managed_instance: "_models.SqlManagedInstance",
+        data_controller_name: str,
+        active_directory_connector_name: str,
+        active_directory_connector_resource: "_models.ActiveDirectoryConnectorResource",
         **kwargs: Any
-    ) -> "_models.SqlManagedInstance":
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlManagedInstance"]
+    ) -> "_models.ActiveDirectoryConnectorResource":
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorResource"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -279,12 +150,13 @@ class SqlManagedInstancesOperations:
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
-        _json = self._serialize.body(sql_managed_instance, 'SqlManagedInstance')
+        _json = self._serialize.body(active_directory_connector_resource, 'ActiveDirectoryConnectorResource')
 
         request = build_create_request_initial(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            sql_managed_instance_name=sql_managed_instance_name,
+            data_controller_name=data_controller_name,
+            active_directory_connector_name=active_directory_connector_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -305,35 +177,39 @@ class SqlManagedInstancesOperations:
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('SqlManagedInstance', pipeline_response)
+            deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('SqlManagedInstance', pipeline_response)
+            deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}"}  # type: ignore
+    _create_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def begin_create(
         self,
         resource_group_name: str,
-        sql_managed_instance_name: str,
-        sql_managed_instance: "_models.SqlManagedInstance",
+        data_controller_name: str,
+        active_directory_connector_name: str,
+        active_directory_connector_resource: "_models.ActiveDirectoryConnectorResource",
         **kwargs: Any
-    ) -> AsyncLROPoller["_models.SqlManagedInstance"]:
-        """Creates or replaces a SQL Managed Instance resource.
+    ) -> AsyncLROPoller["_models.ActiveDirectoryConnectorResource"]:
+        """Creates or replaces an Active Directory connector resource.
 
         :param resource_group_name: The name of the Azure resource group.
         :type resource_group_name: str
-        :param sql_managed_instance_name: Name of SQL Managed Instance.
-        :type sql_managed_instance_name: str
-        :param sql_managed_instance: The SQL Managed Instance to be created or updated.
-        :type sql_managed_instance: ~azure.mgmt.azurearcdata.models.SqlManagedInstance
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
+        :param active_directory_connector_name: The name of the Active Directory connector instance.
+        :type active_directory_connector_name: str
+        :param active_directory_connector_resource: desc.
+        :type active_directory_connector_resource:
+         ~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorResource
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -342,15 +218,16 @@ class SqlManagedInstancesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either SqlManagedInstance or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.azurearcdata.models.SqlManagedInstance]
+        :return: An instance of AsyncLROPoller that returns either ActiveDirectoryConnectorResource or
+         the result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorResource]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlManagedInstance"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorResource"]
         lro_delay = kwargs.pop(
             'polling_interval',
             self._config.polling_interval
@@ -359,8 +236,9 @@ class SqlManagedInstancesOperations:
         if cont_token is None:
             raw_result = await self._create_initial(
                 resource_group_name=resource_group_name,
-                sql_managed_instance_name=sql_managed_instance_name,
-                sql_managed_instance=sql_managed_instance,
+                data_controller_name=data_controller_name,
+                active_directory_connector_name=active_directory_connector_name,
+                active_directory_connector_resource=active_directory_connector_resource,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x,y,z: x,
@@ -370,7 +248,7 @@ class SqlManagedInstancesOperations:
 
         def get_long_running_output(pipeline_response):
             response = pipeline_response.http_response
-            deserialized = self._deserialize('SqlManagedInstance', pipeline_response)
+            deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -388,12 +266,13 @@ class SqlManagedInstancesOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}"}  # type: ignore
+    begin_create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        sql_managed_instance_name: str,
+        data_controller_name: str,
+        active_directory_connector_name: str,
         **kwargs: Any
     ) -> None:
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
@@ -408,7 +287,8 @@ class SqlManagedInstancesOperations:
         request = build_delete_request_initial(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            sql_managed_instance_name=sql_managed_instance_name,
+            data_controller_name=data_controller_name,
+            active_directory_connector_name=active_directory_connector_name,
             api_version=api_version,
             template_url=self._delete_initial.metadata['url'],
         )
@@ -429,22 +309,25 @@ class SqlManagedInstancesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}"}  # type: ignore
+    _delete_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def begin_delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        sql_managed_instance_name: str,
+        data_controller_name: str,
+        active_directory_connector_name: str,
         **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Deletes a SQL Managed Instance resource.
+        """Deletes an Active Directory connector resource.
 
         :param resource_group_name: The name of the Azure resource group.
         :type resource_group_name: str
-        :param sql_managed_instance_name: Name of SQL Managed Instance.
-        :type sql_managed_instance_name: str
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
+        :param active_directory_connector_name: The name of the Active Directory connector instance.
+        :type active_directory_connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -468,7 +351,8 @@ class SqlManagedInstancesOperations:
         if cont_token is None:
             raw_result = await self._delete_initial(
                 resource_group_name=resource_group_name,
-                sql_managed_instance_name=sql_managed_instance_name,
+                data_controller_name=data_controller_name,
+                active_directory_connector_name=active_directory_connector_name,
                 api_version=api_version,
                 cls=lambda x,y,z: x,
                 **kwargs
@@ -492,48 +376,45 @@ class SqlManagedInstancesOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}"}  # type: ignore
+    begin_delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
     @distributed_trace_async
-    async def update(
+    async def get(
         self,
         resource_group_name: str,
-        sql_managed_instance_name: str,
-        parameters: "_models.SqlManagedInstanceUpdate",
+        data_controller_name: str,
+        active_directory_connector_name: str,
         **kwargs: Any
-    ) -> "_models.SqlManagedInstance":
-        """Updates a SQL Managed Instance resource.
+    ) -> "_models.ActiveDirectoryConnectorResource":
+        """Retrieves an Active Directory connector resource.
 
         :param resource_group_name: The name of the Azure resource group.
         :type resource_group_name: str
-        :param sql_managed_instance_name: Name of SQL Managed Instance.
-        :type sql_managed_instance_name: str
-        :param parameters: The SQL Managed Instance.
-        :type parameters: ~azure.mgmt.azurearcdata.models.SqlManagedInstanceUpdate
+        :param data_controller_name: The name of the data controller.
+        :type data_controller_name: str
+        :param active_directory_connector_name: The name of the Active Directory connector instance.
+        :type active_directory_connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlManagedInstance, or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlManagedInstance
+        :return: ActiveDirectoryConnectorResource, or the result of cls(response)
+        :rtype: ~azure.mgmt.azurearcdata.models.ActiveDirectoryConnectorResource
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlManagedInstance"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ActiveDirectoryConnectorResource"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
         error_map.update(kwargs.pop('error_map', {}))
 
         api_version = kwargs.pop('api_version', "2022-03-01-preview")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
-        _json = self._serialize.body(parameters, 'SqlManagedInstanceUpdate')
-
-        request = build_update_request(
+        
+        request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            sql_managed_instance_name=sql_managed_instance_name,
+            data_controller_name=data_controller_name,
+            active_directory_connector_name=active_directory_connector_name,
             api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.update.metadata['url'],
+            template_url=self.get.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
@@ -550,12 +431,12 @@ class SqlManagedInstancesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SqlManagedInstance', pipeline_response)
+        deserialized = self._deserialize('ActiveDirectoryConnectorResource', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}"}  # type: ignore
 
