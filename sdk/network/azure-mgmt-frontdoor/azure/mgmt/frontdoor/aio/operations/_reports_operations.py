@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -6,9 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import datetime
-import functools
-from typing import Any, Callable, Dict, Generic, Optional, TypeVar, Union
-import warnings
+from typing import Any, Callable, Dict, Optional, TypeVar, Union
 
 from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
 from azure.core.pipeline import PipelineResponse
@@ -69,11 +68,15 @@ class ReportsOperations:
         :param aggregation_interval: The aggregation interval of the Latency Scorecard.
         :type aggregation_interval: str or
          ~azure.mgmt.frontdoor.models.LatencyScorecardAggregationInterval
-        :param end_date_time_utc: The end DateTime of the Latency Scorecard in UTC.
+        :param end_date_time_utc: The end DateTime of the Latency Scorecard in UTC. Default value is
+         None.
         :type end_date_time_utc: str
         :param country: The country associated with the Latency Scorecard. Values are country ISO codes
-         as specified here- https://www.iso.org/iso-3166-country-codes.html.
+         as specified here- https://www.iso.org/iso-3166-country-codes.html. Default value is None.
         :type country: str
+        :keyword api_version: Api Version. Default value is "2019-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LatencyScorecard, or the result of cls(response)
         :rtype: ~azure.mgmt.frontdoor.models.LatencyScorecard
@@ -85,12 +88,15 @@ class ReportsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}))
 
+        api_version = kwargs.pop('api_version', "2019-11-01")  # type: str
+
         
         request = build_get_latency_scorecards_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             profile_name=profile_name,
             experiment_name=experiment_name,
+            api_version=api_version,
             aggregation_interval=aggregation_interval,
             end_date_time_utc=end_date_time_utc,
             country=country,
@@ -99,7 +105,11 @@ class ReportsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -114,7 +124,7 @@ class ReportsOperations:
 
         return deserialized
 
-    get_latency_scorecards.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}/LatencyScorecard'}  # type: ignore
+    get_latency_scorecards.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}/LatencyScorecard"}  # type: ignore
 
 
     @distributed_trace_async
@@ -149,11 +159,14 @@ class ReportsOperations:
         :type aggregation_interval: str or ~azure.mgmt.frontdoor.models.TimeseriesAggregationInterval
         :param timeseries_type: The type of Timeseries.
         :type timeseries_type: str or ~azure.mgmt.frontdoor.models.TimeseriesType
-        :param endpoint: The specific endpoint.
+        :param endpoint: The specific endpoint. Default value is None.
         :type endpoint: str
         :param country: The country associated with the Timeseries. Values are country ISO codes as
-         specified here- https://www.iso.org/iso-3166-country-codes.html.
+         specified here- https://www.iso.org/iso-3166-country-codes.html. Default value is None.
         :type country: str
+        :keyword api_version: Api Version. Default value is "2019-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Timeseries, or the result of cls(response)
         :rtype: ~azure.mgmt.frontdoor.models.Timeseries
@@ -165,12 +178,15 @@ class ReportsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}))
 
+        api_version = kwargs.pop('api_version', "2019-11-01")  # type: str
+
         
         request = build_get_timeseries_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             profile_name=profile_name,
             experiment_name=experiment_name,
+            api_version=api_version,
             start_date_time_utc=start_date_time_utc,
             end_date_time_utc=end_date_time_utc,
             aggregation_interval=aggregation_interval,
@@ -182,7 +198,11 @@ class ReportsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -197,5 +217,5 @@ class ReportsOperations:
 
         return deserialized
 
-    get_timeseries.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}/Timeseries'}  # type: ignore
+    get_timeseries.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/NetworkExperimentProfiles/{profileName}/Experiments/{experimentName}/Timeseries"}  # type: ignore
 
