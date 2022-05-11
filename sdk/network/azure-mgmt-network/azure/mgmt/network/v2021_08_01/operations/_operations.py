@@ -2510,7 +2510,7 @@ def build_network_interfaces_list_virtual_machine_scale_set_vm_network_interface
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -2547,7 +2547,7 @@ def build_network_interfaces_list_virtual_machine_scale_set_network_interfaces_r
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -2587,7 +2587,7 @@ def build_network_interfaces_get_virtual_machine_scale_set_network_interface_req
     expand: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -2631,7 +2631,7 @@ def build_network_interfaces_list_virtual_machine_scale_set_ip_configurations_re
     expand: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -2676,7 +2676,7 @@ def build_network_interfaces_get_virtual_machine_scale_set_ip_configuration_requ
     expand: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -3073,7 +3073,7 @@ def build_public_ip_addresses_list_virtual_machine_scale_set_public_ip_addresses
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -3112,7 +3112,7 @@ def build_public_ip_addresses_list_virtual_machine_scale_set_vm_public_ip_addres
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -3157,7 +3157,7 @@ def build_public_ip_addresses_get_virtual_machine_scale_set_public_ip_address_re
     expand: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -21388,9 +21388,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :type resource_group_name: str
         :param application_gateway_name: The name of the application gateway.
         :type application_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -21453,9 +21450,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :type resource_group_name: str
         :param application_gateway_name: The name of the application gateway.
         :type application_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationGateway
@@ -21572,9 +21566,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :type application_gateway_name: str
         :param parameters: Parameters supplied to the create or update application gateway operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ApplicationGateway
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -21648,9 +21639,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :type application_gateway_name: str
         :param parameters: Parameters supplied to update application gateway tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationGateway
@@ -21710,9 +21698,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationGatewayListResult or the result of
          cls(response)
@@ -21788,9 +21773,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
     ) -> Iterable["_models.ApplicationGatewayListResult"]:
         """Gets all the application gateways in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationGatewayListResult or the result of
          cls(response)
@@ -21912,9 +21894,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :type resource_group_name: str
         :param application_gateway_name: The name of the application gateway.
         :type application_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -22019,9 +21998,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :type resource_group_name: str
         :param application_gateway_name: The name of the application gateway.
         :type application_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -22138,9 +22114,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :param expand: Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
          Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -22272,9 +22245,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
         :param expand: Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
          Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -22340,9 +22310,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
     ) -> List[str]:
         """Lists all available server variables.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of str, or the result of cls(response)
         :rtype: list[str]
@@ -22394,9 +22361,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
     ) -> List[str]:
         """Lists all available request headers.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of str, or the result of cls(response)
         :rtype: list[str]
@@ -22448,9 +22412,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
     ) -> List[str]:
         """Lists all available response headers.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of str, or the result of cls(response)
         :rtype: list[str]
@@ -22502,9 +22463,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
     ) -> "_models.ApplicationGatewayAvailableWafRuleSetsResult":
         """Lists all available web application firewall rule sets.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationGatewayAvailableWafRuleSetsResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayAvailableWafRuleSetsResult
@@ -22555,9 +22513,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
     ) -> "_models.ApplicationGatewayAvailableSslOptions":
         """Lists available Ssl options for configuring Ssl policy.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationGatewayAvailableSslOptions, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayAvailableSslOptions
@@ -22608,9 +22563,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
     ) -> Iterable["_models.ApplicationGatewayAvailableSslPredefinedPolicies"]:
         """Lists all SSL predefined policies for configuring Ssl policy.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationGatewayAvailableSslPredefinedPolicies
          or the result of cls(response)
@@ -22687,9 +22639,6 @@ class ApplicationGatewaysOperations(object):  # pylint: disable=too-many-public-
 
         :param predefined_policy_name: Name of Ssl predefined policy.
         :type predefined_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationGatewaySslPredefinedPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewaySslPredefinedPolicy
@@ -22768,9 +22717,6 @@ class ApplicationGatewayPrivateLinkResourcesOperations(object):
         :type resource_group_name: str
         :param application_gateway_name: The name of the application gateway.
         :type application_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationGatewayPrivateLinkResourceListResult or
          the result of cls(response)
@@ -22922,9 +22868,6 @@ class ApplicationGatewayPrivateEndpointConnectionsOperations(object):
         :type application_gateway_name: str
         :param connection_name: The name of the application gateway private endpoint connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -23051,9 +22994,6 @@ class ApplicationGatewayPrivateEndpointConnectionsOperations(object):
          connection operation.
         :type parameters:
          ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayPrivateEndpointConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -23128,9 +23068,6 @@ class ApplicationGatewayPrivateEndpointConnectionsOperations(object):
         :type application_gateway_name: str
         :param connection_name: The name of the application gateway private endpoint connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationGatewayPrivateEndpointConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayPrivateEndpointConnection
@@ -23190,9 +23127,6 @@ class ApplicationGatewayPrivateEndpointConnectionsOperations(object):
         :type resource_group_name: str
         :param application_gateway_name: The name of the application gateway.
         :type application_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either
          ApplicationGatewayPrivateEndpointConnectionListResult or the result of cls(response)
@@ -23339,9 +23273,6 @@ class ApplicationSecurityGroupsOperations(object):
         :type resource_group_name: str
         :param application_security_group_name: The name of the application security group.
         :type application_security_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -23404,9 +23335,6 @@ class ApplicationSecurityGroupsOperations(object):
         :type resource_group_name: str
         :param application_security_group_name: The name of the application security group.
         :type application_security_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationSecurityGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationSecurityGroup
@@ -23524,9 +23452,6 @@ class ApplicationSecurityGroupsOperations(object):
         :param parameters: Parameters supplied to the create or update ApplicationSecurityGroup
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ApplicationSecurityGroup
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -23600,9 +23525,6 @@ class ApplicationSecurityGroupsOperations(object):
         :type application_security_group_name: str
         :param parameters: Parameters supplied to update application security group tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ApplicationSecurityGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ApplicationSecurityGroup
@@ -23659,9 +23581,6 @@ class ApplicationSecurityGroupsOperations(object):
     ) -> Iterable["_models.ApplicationSecurityGroupListResult"]:
         """Gets all application security groups in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationSecurityGroupListResult or the result
          of cls(response)
@@ -23738,9 +23657,6 @@ class ApplicationSecurityGroupsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationSecurityGroupListResult or the result
          of cls(response)
@@ -23840,9 +23756,6 @@ class AvailableDelegationsOperations(object):
 
         :param location: The location of the subnet.
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AvailableDelegationsResult or the result of
          cls(response)
@@ -23945,9 +23858,6 @@ class AvailableResourceGroupDelegationsOperations(object):
         :type location: str
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AvailableDelegationsResult or the result of
          cls(response)
@@ -24049,9 +23959,6 @@ class AvailableServiceAliasesOperations(object):
 
         :param location: The location.
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AvailableServiceAliasesResult or the result of
          cls(response)
@@ -24133,9 +24040,6 @@ class AvailableServiceAliasesOperations(object):
         :type resource_group_name: str
         :param location: The location.
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AvailableServiceAliasesResult or the result of
          cls(response)
@@ -24282,9 +24186,6 @@ class AzureFirewallsOperations(object):
         :type resource_group_name: str
         :param azure_firewall_name: The name of the Azure Firewall.
         :type azure_firewall_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -24347,9 +24248,6 @@ class AzureFirewallsOperations(object):
         :type resource_group_name: str
         :param azure_firewall_name: The name of the Azure Firewall.
         :type azure_firewall_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AzureFirewall, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.AzureFirewall
@@ -24466,9 +24364,6 @@ class AzureFirewallsOperations(object):
         :type azure_firewall_name: str
         :param parameters: Parameters supplied to the create or update Azure Firewall operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.AzureFirewall
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -24594,9 +24489,6 @@ class AzureFirewallsOperations(object):
         :type azure_firewall_name: str
         :param parameters: Parameters supplied to update azure firewall tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -24663,9 +24555,6 @@ class AzureFirewallsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AzureFirewallListResult or the result of
          cls(response)
@@ -24741,9 +24630,6 @@ class AzureFirewallsOperations(object):
     ) -> Iterable["_models.AzureFirewallListResult"]:
         """Gets all the Azure Firewalls in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AzureFirewallListResult or the result of
          cls(response)
@@ -24838,9 +24724,6 @@ class AzureFirewallFqdnTagsOperations(object):
     ) -> Iterable["_models.AzureFirewallFqdnTagListResult"]:
         """Gets all the Azure Firewall FQDN Tags in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AzureFirewallFqdnTagListResult or the result of
          cls(response)
@@ -24942,9 +24825,6 @@ class WebCategoriesOperations(object):
         :param expand: Expands resourceIds back referenced by the azureWebCategory resource. Default
          value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AzureWebCategory, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.AzureWebCategory
@@ -24997,9 +24877,6 @@ class WebCategoriesOperations(object):
     ) -> Iterable["_models.AzureWebCategoryListResult"]:
         """Gets all the Azure Web Categories in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AzureWebCategoryListResult or the result of
          cls(response)
@@ -25142,9 +25019,6 @@ class BastionHostsOperations(object):
         :type resource_group_name: str
         :param bastion_host_name: The name of the Bastion Host.
         :type bastion_host_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -25207,9 +25081,6 @@ class BastionHostsOperations(object):
         :type resource_group_name: str
         :param bastion_host_name: The name of the Bastion Host.
         :type bastion_host_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: BastionHost, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.BastionHost
@@ -25326,9 +25197,6 @@ class BastionHostsOperations(object):
         :type bastion_host_name: str
         :param parameters: Parameters supplied to the create or update Bastion Host operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.BastionHost
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -25454,9 +25322,6 @@ class BastionHostsOperations(object):
         :type bastion_host_name: str
         :param parameters: Parameters supplied to update BastionHost tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -25520,9 +25385,6 @@ class BastionHostsOperations(object):
     ) -> Iterable["_models.BastionHostListResult"]:
         """Lists all Bastion Hosts in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BastionHostListResult or the result of
          cls(response)
@@ -25599,9 +25461,6 @@ class BastionHostsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BastionHostListResult or the result of
          cls(response)
@@ -25740,9 +25599,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param bsl_request: Post request for all the Bastion Shareable Link endpoints.
         :type bsl_request: ~azure.mgmt.network.v2021_08_01.models.BastionShareableLinkListRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -25930,9 +25786,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param bsl_request: Post request for all the Bastion Shareable Link endpoints.
         :type bsl_request: ~azure.mgmt.network.v2021_08_01.models.BastionShareableLinkListRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -26001,9 +25854,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param bsl_request: Post request for all the Bastion Shareable Link endpoints.
         :type bsl_request: ~azure.mgmt.network.v2021_08_01.models.BastionShareableLinkListRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BastionShareableLinkListResult or the result of
          cls(response)
@@ -26142,9 +25992,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type resource_group_name: str
         :param bastion_host_name: The name of the Bastion Host.
         :type bastion_host_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -26276,9 +26123,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param session_ids: The list of sessionids to disconnect.
         :type session_ids: ~azure.mgmt.network.v2021_08_01.models.SessionIds
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BastionSessionDeleteResult or the result of
          cls(response)
@@ -26370,9 +26214,6 @@ class NetworkManagementClientOperationsMixin(object):
         :param domain_name_label: The domain name to be verified. It must conform to the following
          regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
         :type domain_name_label: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DnsNameAvailabilityResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.DnsNameAvailabilityResult
@@ -26432,9 +26273,6 @@ class NetworkManagementClientOperationsMixin(object):
         :param virtual_wan_name: The name of the VirtualWAN for which supported security providers are
          needed.
         :type virtual_wan_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualWanSecurityProviders, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualWanSecurityProviders
@@ -26552,9 +26390,6 @@ class NetworkManagementClientOperationsMixin(object):
         :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
          operation.
         :type vpn_client_params: ~azure.mgmt.network.v2021_08_01.models.VirtualWanVpnProfileParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -26649,9 +26484,6 @@ class NetworkInterfacesOperations(object):
         :type cloud_service_name: str
         :param role_instance_name: The name of role instance.
         :type role_instance_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceListResult or the result of
          cls(response)
@@ -26737,9 +26569,6 @@ class NetworkInterfacesOperations(object):
         :type resource_group_name: str
         :param cloud_service_name: The name of the cloud service.
         :type cloud_service_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceListResult or the result of
          cls(response)
@@ -26832,9 +26661,6 @@ class NetworkInterfacesOperations(object):
         :type network_interface_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkInterface, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkInterface
@@ -26938,9 +26764,6 @@ class NetworkInterfacesOperations(object):
         :type resource_group_name: str
         :param network_interface_name: The name of the network interface.
         :type network_interface_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -27006,9 +26829,6 @@ class NetworkInterfacesOperations(object):
         :type network_interface_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkInterface, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkInterface
@@ -27126,9 +26946,6 @@ class NetworkInterfacesOperations(object):
         :type network_interface_name: str
         :param parameters: Parameters supplied to the create or update network interface operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.NetworkInterface
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -27201,9 +27018,6 @@ class NetworkInterfacesOperations(object):
         :type network_interface_name: str
         :param parameters: Parameters supplied to update network interface tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkInterface, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkInterface
@@ -27260,9 +27074,6 @@ class NetworkInterfacesOperations(object):
     ) -> Iterable["_models.NetworkInterfaceListResult"]:
         """Gets all network interfaces in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceListResult or the result of
          cls(response)
@@ -27339,9 +27150,6 @@ class NetworkInterfacesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceListResult or the result of
          cls(response)
@@ -27471,9 +27279,6 @@ class NetworkInterfacesOperations(object):
         :type resource_group_name: str
         :param network_interface_name: The name of the network interface.
         :type network_interface_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -27589,9 +27394,6 @@ class NetworkInterfacesOperations(object):
         :type resource_group_name: str
         :param network_interface_name: The name of the network interface.
         :type network_interface_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -27663,9 +27465,6 @@ class NetworkInterfacesOperations(object):
         :type virtual_machine_scale_set_name: str
         :param virtualmachine_index: The virtual machine index.
         :type virtualmachine_index: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceListResult or the result of
          cls(response)
@@ -27673,7 +27472,7 @@ class NetworkInterfacesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.NetworkInterfaceListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.NetworkInterfaceListResult"]
         error_map = {
@@ -27751,9 +27550,6 @@ class NetworkInterfacesOperations(object):
         :type resource_group_name: str
         :param virtual_machine_scale_set_name: The name of the virtual machine scale set.
         :type virtual_machine_scale_set_name: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceListResult or the result of
          cls(response)
@@ -27761,7 +27557,7 @@ class NetworkInterfacesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.NetworkInterfaceListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.NetworkInterfaceListResult"]
         error_map = {
@@ -27846,9 +27642,6 @@ class NetworkInterfacesOperations(object):
         :type network_interface_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkInterface, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkInterface
@@ -27860,7 +27653,7 @@ class NetworkInterfacesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         
         request = build_network_interfaces_get_virtual_machine_scale_set_network_interface_request(
@@ -27919,9 +27712,6 @@ class NetworkInterfacesOperations(object):
         :type network_interface_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceIPConfigurationListResult or the
          result of cls(response)
@@ -27929,7 +27719,7 @@ class NetworkInterfacesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.NetworkInterfaceIPConfigurationListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.NetworkInterfaceIPConfigurationListResult"]
         error_map = {
@@ -28023,9 +27813,6 @@ class NetworkInterfacesOperations(object):
         :type ip_configuration_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkInterfaceIPConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkInterfaceIPConfiguration
@@ -28037,7 +27824,7 @@ class NetworkInterfacesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         
         request = build_network_interfaces_get_virtual_machine_scale_set_ip_configuration_request(
@@ -28109,9 +27896,6 @@ class PublicIPAddressesOperations(object):
         :type resource_group_name: str
         :param cloud_service_name: The name of the cloud service.
         :type cloud_service_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPAddressListResult or the result of
          cls(response)
@@ -28205,9 +27989,6 @@ class PublicIPAddressesOperations(object):
         :type network_interface_name: str
         :param ip_configuration_name: The IP configuration name.
         :type ip_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPAddressListResult or the result of
          cls(response)
@@ -28312,9 +28093,6 @@ class PublicIPAddressesOperations(object):
         :type public_ip_address_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PublicIPAddress, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PublicIPAddress
@@ -28420,9 +28198,6 @@ class PublicIPAddressesOperations(object):
         :type resource_group_name: str
         :param public_ip_address_name: The name of the public IP address.
         :type public_ip_address_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -28488,9 +28263,6 @@ class PublicIPAddressesOperations(object):
         :type public_ip_address_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PublicIPAddress, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PublicIPAddress
@@ -28608,9 +28380,6 @@ class PublicIPAddressesOperations(object):
         :type public_ip_address_name: str
         :param parameters: Parameters supplied to the create or update public IP address operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.PublicIPAddress
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -28683,9 +28452,6 @@ class PublicIPAddressesOperations(object):
         :type public_ip_address_name: str
         :param parameters: Parameters supplied to update public IP address tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PublicIPAddress, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PublicIPAddress
@@ -28742,9 +28508,6 @@ class PublicIPAddressesOperations(object):
     ) -> Iterable["_models.PublicIPAddressListResult"]:
         """Gets all the public IP addresses in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPAddressListResult or the result of
          cls(response)
@@ -28821,9 +28584,6 @@ class PublicIPAddressesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPAddressListResult or the result of
          cls(response)
@@ -28905,9 +28665,6 @@ class PublicIPAddressesOperations(object):
         :type resource_group_name: str
         :param virtual_machine_scale_set_name: The name of the virtual machine scale set.
         :type virtual_machine_scale_set_name: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPAddressListResult or the result of
          cls(response)
@@ -28915,7 +28672,7 @@ class PublicIPAddressesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.PublicIPAddressListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PublicIPAddressListResult"]
         error_map = {
@@ -29001,9 +28758,6 @@ class PublicIPAddressesOperations(object):
         :type network_interface_name: str
         :param ip_configuration_name: The IP configuration name.
         :type ip_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPAddressListResult or the result of
          cls(response)
@@ -29011,7 +28765,7 @@ class PublicIPAddressesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.PublicIPAddressListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.PublicIPAddressListResult"]
         error_map = {
@@ -29108,9 +28862,6 @@ class PublicIPAddressesOperations(object):
         :type public_ip_address_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2018-10-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PublicIPAddress, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PublicIPAddress
@@ -29122,7 +28873,7 @@ class PublicIPAddressesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2018-10-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-08-01")  # type: str
 
         
         request = build_public_ip_addresses_get_virtual_machine_scale_set_public_ip_address_request(
@@ -29237,9 +28988,6 @@ class CustomIPPrefixesOperations(object):
         :type resource_group_name: str
         :param custom_ip_prefix_name: The name of the CustomIpPrefix.
         :type custom_ip_prefix_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -29305,9 +29053,6 @@ class CustomIPPrefixesOperations(object):
         :type custom_ip_prefix_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CustomIpPrefix, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.CustomIpPrefix
@@ -29425,9 +29170,6 @@ class CustomIPPrefixesOperations(object):
         :type custom_ip_prefix_name: str
         :param parameters: Parameters supplied to the create or update custom IP prefix operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.CustomIpPrefix
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -29500,9 +29242,6 @@ class CustomIPPrefixesOperations(object):
         :type custom_ip_prefix_name: str
         :param parameters: Parameters supplied to update custom IP prefix tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CustomIpPrefix, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.CustomIpPrefix
@@ -29559,9 +29298,6 @@ class CustomIPPrefixesOperations(object):
     ) -> Iterable["_models.CustomIpPrefixListResult"]:
         """Gets all the custom IP prefixes in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either CustomIpPrefixListResult or the result of
          cls(response)
@@ -29638,9 +29374,6 @@ class CustomIPPrefixesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either CustomIpPrefixListResult or the result of
          cls(response)
@@ -29785,9 +29518,6 @@ class DdosCustomPoliciesOperations(object):
         :type resource_group_name: str
         :param ddos_custom_policy_name: The name of the DDoS custom policy.
         :type ddos_custom_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -29850,9 +29580,6 @@ class DdosCustomPoliciesOperations(object):
         :type resource_group_name: str
         :param ddos_custom_policy_name: The name of the DDoS custom policy.
         :type ddos_custom_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DdosCustomPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.DdosCustomPolicy
@@ -29969,9 +29696,6 @@ class DdosCustomPoliciesOperations(object):
         :type ddos_custom_policy_name: str
         :param parameters: Parameters supplied to the create or update operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.DdosCustomPolicy
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -30044,9 +29768,6 @@ class DdosCustomPoliciesOperations(object):
         :type ddos_custom_policy_name: str
         :param parameters: Parameters supplied to update DDoS custom policy resource tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DdosCustomPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.DdosCustomPolicy
@@ -30172,9 +29893,6 @@ class DdosProtectionPlansOperations(object):
         :type resource_group_name: str
         :param ddos_protection_plan_name: The name of the DDoS protection plan.
         :type ddos_protection_plan_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -30237,9 +29955,6 @@ class DdosProtectionPlansOperations(object):
         :type resource_group_name: str
         :param ddos_protection_plan_name: The name of the DDoS protection plan.
         :type ddos_protection_plan_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DdosProtectionPlan, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.DdosProtectionPlan
@@ -30356,9 +30071,6 @@ class DdosProtectionPlansOperations(object):
         :type ddos_protection_plan_name: str
         :param parameters: Parameters supplied to the create or update operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.DdosProtectionPlan
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -30432,9 +30144,6 @@ class DdosProtectionPlansOperations(object):
         :type ddos_protection_plan_name: str
         :param parameters: Parameters supplied to the update DDoS protection plan resource tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DdosProtectionPlan, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.DdosProtectionPlan
@@ -30491,9 +30200,6 @@ class DdosProtectionPlansOperations(object):
     ) -> Iterable["_models.DdosProtectionPlanListResult"]:
         """Gets all DDoS protection plans in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either DdosProtectionPlanListResult or the result of
          cls(response)
@@ -30570,9 +30276,6 @@ class DdosProtectionPlansOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either DdosProtectionPlanListResult or the result of
          cls(response)
@@ -30733,9 +30436,6 @@ class DscpConfigurationOperations(object):
         :type dscp_configuration_name: str
         :param parameters: Parameters supplied to the create or update dscp configuration operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.DscpConfiguration
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -30847,9 +30547,6 @@ class DscpConfigurationOperations(object):
         :type resource_group_name: str
         :param dscp_configuration_name: The name of the resource.
         :type dscp_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -30912,9 +30609,6 @@ class DscpConfigurationOperations(object):
         :type resource_group_name: str
         :param dscp_configuration_name: The name of the resource.
         :type dscp_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DscpConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.DscpConfiguration
@@ -30970,9 +30664,6 @@ class DscpConfigurationOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either DscpConfigurationListResult or the result of
          cls(response)
@@ -31048,9 +30739,6 @@ class DscpConfigurationOperations(object):
     ) -> Iterable["_models.DscpConfigurationListResult"]:
         """Gets all dscp configurations in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either DscpConfigurationListResult or the result of
          cls(response)
@@ -31148,9 +30836,6 @@ class AvailableEndpointServicesOperations(object):
 
         :param location: The location to check available endpoint services.
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either EndpointServicesListResult or the result of
          cls(response)
@@ -31300,9 +30985,6 @@ class ExpressRouteCircuitAuthorizationsOperations(object):
         :type circuit_name: str
         :param authorization_name: The name of the authorization.
         :type authorization_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -31369,9 +31051,6 @@ class ExpressRouteCircuitAuthorizationsOperations(object):
         :type circuit_name: str
         :param authorization_name: The name of the authorization.
         :type authorization_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCircuitAuthorization, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitAuthorization
@@ -31496,9 +31175,6 @@ class ExpressRouteCircuitAuthorizationsOperations(object):
          circuit authorization operation.
         :type authorization_parameters:
          ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitAuthorization
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -31570,9 +31246,6 @@ class ExpressRouteCircuitAuthorizationsOperations(object):
         :type resource_group_name: str
         :param circuit_name: The name of the circuit.
         :type circuit_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AuthorizationListResult or the result of
          cls(response)
@@ -31724,9 +31397,6 @@ class ExpressRouteCircuitPeeringsOperations(object):
         :type circuit_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -31793,9 +31463,6 @@ class ExpressRouteCircuitPeeringsOperations(object):
         :type circuit_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCircuitPeering, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitPeering
@@ -31919,9 +31586,6 @@ class ExpressRouteCircuitPeeringsOperations(object):
         :param peering_parameters: Parameters supplied to the create or update express route circuit
          peering operation.
         :type peering_parameters: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitPeering
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -31993,9 +31657,6 @@ class ExpressRouteCircuitPeeringsOperations(object):
         :type resource_group_name: str
         :param circuit_name: The name of the express route circuit.
         :type circuit_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteCircuitPeeringListResult or the result
          of cls(response)
@@ -32153,9 +31814,6 @@ class ExpressRouteCircuitConnectionsOperations(object):
         :type peering_name: str
         :param connection_name: The name of the express route circuit connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -32226,9 +31884,6 @@ class ExpressRouteCircuitConnectionsOperations(object):
         :type peering_name: str
         :param connection_name: The name of the express route circuit connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCircuitConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitConnection
@@ -32359,9 +32014,6 @@ class ExpressRouteCircuitConnectionsOperations(object):
          express route circuit connection operation.
         :type express_route_circuit_connection_parameters:
          ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -32438,9 +32090,6 @@ class ExpressRouteCircuitConnectionsOperations(object):
         :type circuit_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteCircuitConnectionListResult or the
          result of cls(response)
@@ -32554,9 +32203,6 @@ class PeerExpressRouteCircuitConnectionsOperations(object):
         :type peering_name: str
         :param connection_name: The name of the peer express route circuit connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PeerExpressRouteCircuitConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PeerExpressRouteCircuitConnection
@@ -32621,9 +32267,6 @@ class PeerExpressRouteCircuitConnectionsOperations(object):
         :type circuit_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PeerExpressRouteCircuitConnectionListResult or the
          result of cls(response)
@@ -32772,9 +32415,6 @@ class ExpressRouteCircuitsOperations(object):
         :type resource_group_name: str
         :param circuit_name: The name of the express route circuit.
         :type circuit_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -32837,9 +32477,6 @@ class ExpressRouteCircuitsOperations(object):
         :type resource_group_name: str
         :param circuit_name: The name of express route circuit.
         :type circuit_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCircuit, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuit
@@ -32956,9 +32593,6 @@ class ExpressRouteCircuitsOperations(object):
         :type circuit_name: str
         :param parameters: Parameters supplied to the create or update express route circuit operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuit
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -33032,9 +32666,6 @@ class ExpressRouteCircuitsOperations(object):
         :type circuit_name: str
         :param parameters: Parameters supplied to update express route circuit tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCircuit, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuit
@@ -33156,9 +32787,6 @@ class ExpressRouteCircuitsOperations(object):
         :type peering_name: str
         :param device_path: The path of the device.
         :type device_path: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -33287,9 +32915,6 @@ class ExpressRouteCircuitsOperations(object):
         :type peering_name: str
         :param device_path: The path of the device.
         :type device_path: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -33418,9 +33043,6 @@ class ExpressRouteCircuitsOperations(object):
         :type peering_name: str
         :param device_path: The path of the device.
         :type device_path: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -33490,9 +33112,6 @@ class ExpressRouteCircuitsOperations(object):
         :type resource_group_name: str
         :param circuit_name: The name of the express route circuit.
         :type circuit_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCircuitStats, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitStats
@@ -33554,9 +33173,6 @@ class ExpressRouteCircuitsOperations(object):
         :type circuit_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCircuitStats, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCircuitStats
@@ -33613,9 +33229,6 @@ class ExpressRouteCircuitsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteCircuitListResult or the result of
          cls(response)
@@ -33691,9 +33304,6 @@ class ExpressRouteCircuitsOperations(object):
     ) -> Iterable["_models.ExpressRouteCircuitListResult"]:
         """Gets all the express route circuits in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteCircuitListResult or the result of
          cls(response)
@@ -33788,9 +33398,6 @@ class ExpressRouteServiceProvidersOperations(object):
     ) -> Iterable["_models.ExpressRouteServiceProviderListResult"]:
         """Gets all the available express route service providers.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteServiceProviderListResult or the
          result of cls(response)
@@ -33885,9 +33492,6 @@ class ExpressRouteCrossConnectionsOperations(object):
     ) -> Iterable["_models.ExpressRouteCrossConnectionListResult"]:
         """Retrieves all the ExpressRouteCrossConnections in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteCrossConnectionListResult or the
          result of cls(response)
@@ -33964,9 +33568,6 @@ class ExpressRouteCrossConnectionsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteCrossConnectionListResult or the
          result of cls(response)
@@ -34049,9 +33650,6 @@ class ExpressRouteCrossConnectionsOperations(object):
         :param cross_connection_name: The name of the ExpressRouteCrossConnection (service key of the
          circuit).
         :type cross_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCrossConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCrossConnection
@@ -34164,9 +33762,6 @@ class ExpressRouteCrossConnectionsOperations(object):
         :type cross_connection_name: str
         :param parameters: Parameters supplied to the update express route crossConnection operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCrossConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -34241,9 +33836,6 @@ class ExpressRouteCrossConnectionsOperations(object):
         :param cross_connection_parameters: Parameters supplied to update express route cross
          connection tags.
         :type cross_connection_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCrossConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCrossConnection
@@ -34365,9 +33957,6 @@ class ExpressRouteCrossConnectionsOperations(object):
         :type peering_name: str
         :param device_path: The path of the device.
         :type device_path: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -34496,9 +34085,6 @@ class ExpressRouteCrossConnectionsOperations(object):
         :type peering_name: str
         :param device_path: The path of the device.
         :type device_path: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -34627,9 +34213,6 @@ class ExpressRouteCrossConnectionsOperations(object):
         :type peering_name: str
         :param device_path: The path of the device.
         :type device_path: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -34720,9 +34303,6 @@ class ExpressRouteCrossConnectionPeeringsOperations(object):
         :type resource_group_name: str
         :param cross_connection_name: The name of the ExpressRouteCrossConnection.
         :type cross_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteCrossConnectionPeeringList or the
          result of cls(response)
@@ -34853,9 +34433,6 @@ class ExpressRouteCrossConnectionPeeringsOperations(object):
         :type cross_connection_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -34922,9 +34499,6 @@ class ExpressRouteCrossConnectionPeeringsOperations(object):
         :type cross_connection_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteCrossConnectionPeering, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCrossConnectionPeering
@@ -35049,9 +34623,6 @@ class ExpressRouteCrossConnectionPeeringsOperations(object):
          ExpressRouteCrossConnection peering operation.
         :type peering_parameters:
          ~azure.mgmt.network.v2021_08_01.models.ExpressRouteCrossConnectionPeering
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -35140,9 +34711,6 @@ class ExpressRoutePortsLocationsOperations(object):
         location. Available bandwidths can only be obtained when retrieving a specific peering
         location.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRoutePortsLocationListResult or the result
          of cls(response)
@@ -35220,9 +34788,6 @@ class ExpressRoutePortsLocationsOperations(object):
 
         :param location_name: Name of the requested ExpressRoutePort peering location.
         :type location_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRoutePortsLocation, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRoutePortsLocation
@@ -35343,9 +34908,6 @@ class ExpressRoutePortsOperations(object):
         :type resource_group_name: str
         :param express_route_port_name: The name of the ExpressRoutePort resource.
         :type express_route_port_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -35408,9 +34970,6 @@ class ExpressRoutePortsOperations(object):
         :type resource_group_name: str
         :param express_route_port_name: The name of ExpressRoutePort.
         :type express_route_port_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRoutePort, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRoutePort
@@ -35527,9 +35086,6 @@ class ExpressRoutePortsOperations(object):
         :type express_route_port_name: str
         :param parameters: Parameters supplied to the create ExpressRoutePort operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ExpressRoutePort
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -35602,9 +35158,6 @@ class ExpressRoutePortsOperations(object):
         :type express_route_port_name: str
         :param parameters: Parameters supplied to update ExpressRoutePort resource tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRoutePort, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRoutePort
@@ -35664,9 +35217,6 @@ class ExpressRoutePortsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRoutePortListResult or the result of
          cls(response)
@@ -35742,9 +35292,6 @@ class ExpressRoutePortsOperations(object):
     ) -> Iterable["_models.ExpressRoutePortListResult"]:
         """List all the ExpressRoutePort resources in the specified subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRoutePortListResult or the result of
          cls(response)
@@ -35827,9 +35374,6 @@ class ExpressRoutePortsOperations(object):
         :type express_route_port_name: str
         :param request: Request parameters supplied to generate a letter of authorization.
         :type request: ~azure.mgmt.network.v2021_08_01.models.GenerateExpressRoutePortsLOARequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: GenerateExpressRoutePortsLOAResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.GenerateExpressRoutePortsLOAResult
@@ -35916,9 +35460,6 @@ class ExpressRouteLinksOperations(object):
         :type express_route_port_name: str
         :param link_name: The name of the ExpressRouteLink resource.
         :type link_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteLink, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteLink
@@ -35978,9 +35519,6 @@ class ExpressRouteLinksOperations(object):
         :type resource_group_name: str
         :param express_route_port_name: The name of the ExpressRoutePort resource.
         :type express_route_port_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRouteLinkListResult or the result of
          cls(response)
@@ -36132,9 +35670,6 @@ class ExpressRoutePortAuthorizationsOperations(object):
         :type express_route_port_name: str
         :param authorization_name: The name of the authorization.
         :type authorization_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -36201,9 +35736,6 @@ class ExpressRoutePortAuthorizationsOperations(object):
         :type express_route_port_name: str
         :param authorization_name: The name of the authorization.
         :type authorization_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRoutePortAuthorization, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRoutePortAuthorization
@@ -36328,9 +35860,6 @@ class ExpressRoutePortAuthorizationsOperations(object):
          authorization operation.
         :type authorization_parameters:
          ~azure.mgmt.network.v2021_08_01.models.ExpressRoutePortAuthorization
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -36402,9 +35931,6 @@ class ExpressRoutePortAuthorizationsOperations(object):
         :type resource_group_name: str
         :param express_route_port_name: The name of the express route port.
         :type express_route_port_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ExpressRoutePortAuthorizationListResult or the
          result of cls(response)
@@ -36551,9 +36077,6 @@ class FirewallPoliciesOperations(object):
         :type resource_group_name: str
         :param firewall_policy_name: The name of the Firewall Policy.
         :type firewall_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -36619,9 +36142,6 @@ class FirewallPoliciesOperations(object):
         :type firewall_policy_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: FirewallPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.FirewallPolicy
@@ -36739,9 +36259,6 @@ class FirewallPoliciesOperations(object):
         :type firewall_policy_name: str
         :param parameters: Parameters supplied to the create or update Firewall Policy operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.FirewallPolicy
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -36814,9 +36331,6 @@ class FirewallPoliciesOperations(object):
         :type firewall_policy_name: str
         :param parameters: Parameters supplied to update Azure Firewall Policy tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: FirewallPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.FirewallPolicy
@@ -36876,9 +36390,6 @@ class FirewallPoliciesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either FirewallPolicyListResult or the result of
          cls(response)
@@ -36954,9 +36465,6 @@ class FirewallPoliciesOperations(object):
     ) -> Iterable["_models.FirewallPolicyListResult"]:
         """Gets all the Firewall Policies in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either FirewallPolicyListResult or the result of
          cls(response)
@@ -37104,9 +36612,6 @@ class FirewallPolicyRuleCollectionGroupsOperations(object):
         :type firewall_policy_name: str
         :param rule_collection_group_name: The name of the FirewallPolicyRuleCollectionGroup.
         :type rule_collection_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -37173,9 +36678,6 @@ class FirewallPolicyRuleCollectionGroupsOperations(object):
         :type firewall_policy_name: str
         :param rule_collection_group_name: The name of the FirewallPolicyRuleCollectionGroup.
         :type rule_collection_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: FirewallPolicyRuleCollectionGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.FirewallPolicyRuleCollectionGroup
@@ -37299,9 +36801,6 @@ class FirewallPolicyRuleCollectionGroupsOperations(object):
         :param parameters: Parameters supplied to the create or update
          FirewallPolicyRuleCollectionGroup operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.FirewallPolicyRuleCollectionGroup
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -37373,9 +36872,6 @@ class FirewallPolicyRuleCollectionGroupsOperations(object):
         :type resource_group_name: str
         :param firewall_policy_name: The name of the Firewall Policy.
         :type firewall_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either FirewallPolicyRuleCollectionGroupListResult or the
          result of cls(response)
@@ -37483,9 +36979,6 @@ class FirewallPolicyIdpsSignaturesOperations(object):
         :type firewall_policy_name: str
         :param parameters:
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.IDPSQueryObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: QueryResults, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.QueryResults
@@ -37572,9 +37065,6 @@ class FirewallPolicyIdpsSignaturesOverridesOperations(object):
         :type firewall_policy_name: str
         :param parameters: Will contain all properties of the object to put.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.SignaturesOverrides
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SignaturesOverrides, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SignaturesOverrides
@@ -37640,9 +37130,6 @@ class FirewallPolicyIdpsSignaturesOverridesOperations(object):
         :type firewall_policy_name: str
         :param parameters: Will contain all properties of the object to put.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.SignaturesOverrides
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SignaturesOverrides, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SignaturesOverrides
@@ -37705,9 +37192,6 @@ class FirewallPolicyIdpsSignaturesOverridesOperations(object):
         :type resource_group_name: str
         :param firewall_policy_name: The name of the Firewall Policy.
         :type firewall_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SignaturesOverrides, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SignaturesOverrides
@@ -37767,9 +37251,6 @@ class FirewallPolicyIdpsSignaturesOverridesOperations(object):
         :type resource_group_name: str
         :param firewall_policy_name: The name of the Firewall Policy.
         :type firewall_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SignaturesOverridesList, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SignaturesOverridesList
@@ -37852,9 +37333,6 @@ class FirewallPolicyIdpsSignaturesFilterValuesOperations(object):
         :type firewall_policy_name: str
         :param parameters:
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.SignatureOverridesFilterValuesQuery
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SignatureOverridesFilterValuesResponse, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SignatureOverridesFilterValuesResponse
@@ -37980,9 +37458,6 @@ class IpAllocationsOperations(object):
         :type resource_group_name: str
         :param ip_allocation_name: The name of the IpAllocation.
         :type ip_allocation_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -38048,9 +37523,6 @@ class IpAllocationsOperations(object):
         :type ip_allocation_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IpAllocation, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.IpAllocation
@@ -38168,9 +37640,6 @@ class IpAllocationsOperations(object):
         :type ip_allocation_name: str
         :param parameters: Parameters supplied to the create or update virtual network operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.IpAllocation
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -38243,9 +37712,6 @@ class IpAllocationsOperations(object):
         :type ip_allocation_name: str
         :param parameters: Parameters supplied to update IpAllocation tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IpAllocation, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.IpAllocation
@@ -38302,9 +37768,6 @@ class IpAllocationsOperations(object):
     ) -> Iterable["_models.IpAllocationListResult"]:
         """Gets all IpAllocations in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either IpAllocationListResult or the result of
          cls(response)
@@ -38381,9 +37844,6 @@ class IpAllocationsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either IpAllocationListResult or the result of
          cls(response)
@@ -38490,9 +37950,6 @@ class IpGroupsOperations(object):
         :param expand: Expands resourceIds (of Firewalls/Network Security Groups etc.) back referenced
          by the IpGroups resource. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IpGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.IpGroup
@@ -38611,9 +38068,6 @@ class IpGroupsOperations(object):
         :type ip_groups_name: str
         :param parameters: Parameters supplied to the create or update IpGroups operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.IpGroup
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -38685,9 +38139,6 @@ class IpGroupsOperations(object):
         :type ip_groups_name: str
         :param parameters: Parameters supplied to the update ipGroups operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IpGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.IpGroup
@@ -38793,9 +38244,6 @@ class IpGroupsOperations(object):
         :type resource_group_name: str
         :param ip_groups_name: The name of the ipGroups.
         :type ip_groups_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -38855,9 +38303,6 @@ class IpGroupsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either IpGroupListResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.IpGroupListResult]
@@ -38932,9 +38377,6 @@ class IpGroupsOperations(object):
     ) -> Iterable["_models.IpGroupListResult"]:
         """Gets all IpGroups in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either IpGroupListResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.IpGroupListResult]
@@ -39076,9 +38518,6 @@ class LoadBalancersOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -39144,9 +38583,6 @@ class LoadBalancersOperations(object):
         :type load_balancer_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LoadBalancer, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.LoadBalancer
@@ -39264,9 +38700,6 @@ class LoadBalancersOperations(object):
         :type load_balancer_name: str
         :param parameters: Parameters supplied to the create or update load balancer operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.LoadBalancer
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -39339,9 +38772,6 @@ class LoadBalancersOperations(object):
         :type load_balancer_name: str
         :param parameters: Parameters supplied to update load balancer tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LoadBalancer, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.LoadBalancer
@@ -39398,9 +38828,6 @@ class LoadBalancersOperations(object):
     ) -> Iterable["_models.LoadBalancerListResult"]:
         """Gets all the load balancers in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoadBalancerListResult or the result of
          cls(response)
@@ -39477,9 +38904,6 @@ class LoadBalancersOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoadBalancerListResult or the result of
          cls(response)
@@ -39606,9 +39030,6 @@ class LoadBalancersOperations(object):
         :type location: str
         :param parameters: Parameters that define which VIPs should be swapped.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.LoadBalancerVipSwapRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -39736,9 +39157,6 @@ class LoadBalancersOperations(object):
         :type backend_pool_name: str
         :param parameters: Query inbound NAT rule port mapping request.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.QueryInboundNatRulePortMappingRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -39831,9 +39249,6 @@ class LoadBalancerBackendAddressPoolsOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoadBalancerBackendAddressPoolListResult or the
          result of cls(response)
@@ -39920,9 +39335,6 @@ class LoadBalancerBackendAddressPoolsOperations(object):
         :type load_balancer_name: str
         :param backend_address_pool_name: The name of the backend address pool.
         :type backend_address_pool_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: BackendAddressPool, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.BackendAddressPool
@@ -40046,9 +39458,6 @@ class LoadBalancerBackendAddressPoolsOperations(object):
         :param parameters: Parameters supplied to the create or update load balancer backend address
          pool operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.BackendAddressPool
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -40167,9 +39576,6 @@ class LoadBalancerBackendAddressPoolsOperations(object):
         :type load_balancer_name: str
         :param backend_address_pool_name: The name of the backend address pool.
         :type backend_address_pool_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -40254,9 +39660,6 @@ class LoadBalancerFrontendIPConfigurationsOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoadBalancerFrontendIPConfigurationListResult or
          the result of cls(response)
@@ -40343,9 +39746,6 @@ class LoadBalancerFrontendIPConfigurationsOperations(object):
         :type load_balancer_name: str
         :param frontend_ip_configuration_name: The name of the frontend IP configuration.
         :type frontend_ip_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: FrontendIPConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.FrontendIPConfiguration
@@ -40426,9 +39826,6 @@ class InboundNatRulesOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either InboundNatRuleListResult or the result of
          cls(response)
@@ -40559,9 +39956,6 @@ class InboundNatRulesOperations(object):
         :type load_balancer_name: str
         :param inbound_nat_rule_name: The name of the inbound NAT rule.
         :type inbound_nat_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -40631,9 +40025,6 @@ class InboundNatRulesOperations(object):
         :type inbound_nat_rule_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: InboundNatRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.InboundNatRule
@@ -40758,9 +40149,6 @@ class InboundNatRulesOperations(object):
         :param inbound_nat_rule_parameters: Parameters supplied to the create or update inbound NAT
          rule operation.
         :type inbound_nat_rule_parameters: ~azure.mgmt.network.v2021_08_01.models.InboundNatRule
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -40852,9 +40240,6 @@ class LoadBalancerLoadBalancingRulesOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoadBalancerLoadBalancingRuleListResult or the
          result of cls(response)
@@ -40941,9 +40326,6 @@ class LoadBalancerLoadBalancingRulesOperations(object):
         :type load_balancer_name: str
         :param load_balancing_rule_name: The name of the load balancing rule.
         :type load_balancing_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LoadBalancingRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.LoadBalancingRule
@@ -41024,9 +40406,6 @@ class LoadBalancerOutboundRulesOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoadBalancerOutboundRuleListResult or the result
          of cls(response)
@@ -41113,9 +40492,6 @@ class LoadBalancerOutboundRulesOperations(object):
         :type load_balancer_name: str
         :param outbound_rule_name: The name of the outbound rule.
         :type outbound_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: OutboundRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.OutboundRule
@@ -41196,9 +40572,6 @@ class LoadBalancerNetworkInterfacesOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceListResult or the result of
          cls(response)
@@ -41303,9 +40676,6 @@ class LoadBalancerProbesOperations(object):
         :type resource_group_name: str
         :param load_balancer_name: The name of the load balancer.
         :type load_balancer_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LoadBalancerProbeListResult or the result of
          cls(response)
@@ -41392,9 +40762,6 @@ class LoadBalancerProbesOperations(object):
         :type load_balancer_name: str
         :param probe_name: The name of the probe.
         :type probe_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Probe, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.Probe
@@ -41517,9 +40884,6 @@ class NatGatewaysOperations(object):
         :type resource_group_name: str
         :param nat_gateway_name: The name of the nat gateway.
         :type nat_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -41585,9 +40949,6 @@ class NatGatewaysOperations(object):
         :type nat_gateway_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NatGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NatGateway
@@ -41706,9 +41067,6 @@ class NatGatewaysOperations(object):
         :type nat_gateway_name: str
         :param parameters: Parameters supplied to the create or update nat gateway operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.NatGateway
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -41780,9 +41138,6 @@ class NatGatewaysOperations(object):
         :type nat_gateway_name: str
         :param parameters: Parameters supplied to update nat gateway tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NatGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NatGateway
@@ -41839,9 +41194,6 @@ class NatGatewaysOperations(object):
     ) -> Iterable["_models.NatGatewayListResult"]:
         """Gets all the Nat Gateways in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NatGatewayListResult or the result of
          cls(response)
@@ -41918,9 +41270,6 @@ class NatGatewaysOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NatGatewayListResult or the result of
          cls(response)
@@ -42023,9 +41372,6 @@ class NetworkInterfaceIPConfigurationsOperations(object):
         :type resource_group_name: str
         :param network_interface_name: The name of the network interface.
         :type network_interface_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceIPConfigurationListResult or the
          result of cls(response)
@@ -42112,9 +41458,6 @@ class NetworkInterfaceIPConfigurationsOperations(object):
         :type network_interface_name: str
         :param ip_configuration_name: The name of the ip configuration name.
         :type ip_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkInterfaceIPConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkInterfaceIPConfiguration
@@ -42195,9 +41538,6 @@ class NetworkInterfaceLoadBalancersOperations(object):
         :type resource_group_name: str
         :param network_interface_name: The name of the network interface.
         :type network_interface_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceLoadBalancerListResult or the
          result of cls(response)
@@ -42349,9 +41689,6 @@ class NetworkInterfaceTapConfigurationsOperations(object):
         :type network_interface_name: str
         :param tap_configuration_name: The name of the tap configuration.
         :type tap_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -42418,9 +41755,6 @@ class NetworkInterfaceTapConfigurationsOperations(object):
         :type network_interface_name: str
         :param tap_configuration_name: The name of the tap configuration.
         :type tap_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkInterfaceTapConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkInterfaceTapConfiguration
@@ -42545,9 +41879,6 @@ class NetworkInterfaceTapConfigurationsOperations(object):
          configuration operation.
         :type tap_configuration_parameters:
          ~azure.mgmt.network.v2021_08_01.models.NetworkInterfaceTapConfiguration
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -42619,9 +41950,6 @@ class NetworkInterfaceTapConfigurationsOperations(object):
         :type resource_group_name: str
         :param network_interface_name: The name of the network interface.
         :type network_interface_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkInterfaceTapConfigurationListResult or the
          result of cls(response)
@@ -42768,9 +42096,6 @@ class NetworkProfilesOperations(object):
         :type resource_group_name: str
         :param network_profile_name: The name of the NetworkProfile.
         :type network_profile_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -42836,9 +42161,6 @@ class NetworkProfilesOperations(object):
         :type network_profile_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkProfile, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkProfile
@@ -42901,9 +42223,6 @@ class NetworkProfilesOperations(object):
         :type network_profile_name: str
         :param parameters: Parameters supplied to the create or update network profile operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.NetworkProfile
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkProfile, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkProfile
@@ -42973,9 +42292,6 @@ class NetworkProfilesOperations(object):
         :type network_profile_name: str
         :param parameters: Parameters supplied to update network profile tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkProfile, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkProfile
@@ -43032,9 +42348,6 @@ class NetworkProfilesOperations(object):
     ) -> Iterable["_models.NetworkProfileListResult"]:
         """Gets all the network profiles in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkProfileListResult or the result of
          cls(response)
@@ -43111,9 +42424,6 @@ class NetworkProfilesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkProfileListResult or the result of
          cls(response)
@@ -43258,9 +42568,6 @@ class NetworkSecurityGroupsOperations(object):
         :type resource_group_name: str
         :param network_security_group_name: The name of the network security group.
         :type network_security_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -43326,9 +42633,6 @@ class NetworkSecurityGroupsOperations(object):
         :type network_security_group_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkSecurityGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkSecurityGroup
@@ -43447,9 +42751,6 @@ class NetworkSecurityGroupsOperations(object):
         :param parameters: Parameters supplied to the create or update network security group
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.NetworkSecurityGroup
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -43523,9 +42824,6 @@ class NetworkSecurityGroupsOperations(object):
         :type network_security_group_name: str
         :param parameters: Parameters supplied to update network security group tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkSecurityGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkSecurityGroup
@@ -43582,9 +42880,6 @@ class NetworkSecurityGroupsOperations(object):
     ) -> Iterable["_models.NetworkSecurityGroupListResult"]:
         """Gets all network security groups in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkSecurityGroupListResult or the result of
          cls(response)
@@ -43661,9 +42956,6 @@ class NetworkSecurityGroupsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkSecurityGroupListResult or the result of
          cls(response)
@@ -43813,9 +43105,6 @@ class SecurityRulesOperations(object):
         :type network_security_group_name: str
         :param security_rule_name: The name of the security rule.
         :type security_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -43882,9 +43171,6 @@ class SecurityRulesOperations(object):
         :type network_security_group_name: str
         :param security_rule_name: The name of the security rule.
         :type security_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SecurityRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SecurityRule
@@ -44008,9 +43294,6 @@ class SecurityRulesOperations(object):
         :param security_rule_parameters: Parameters supplied to the create or update network security
          rule operation.
         :type security_rule_parameters: ~azure.mgmt.network.v2021_08_01.models.SecurityRule
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -44081,9 +43364,6 @@ class SecurityRulesOperations(object):
         :type resource_group_name: str
         :param network_security_group_name: The name of the network security group.
         :type network_security_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either SecurityRuleListResult or the result of
          cls(response)
@@ -44188,9 +43468,6 @@ class DefaultSecurityRulesOperations(object):
         :type resource_group_name: str
         :param network_security_group_name: The name of the network security group.
         :type network_security_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either SecurityRuleListResult or the result of
          cls(response)
@@ -44277,9 +43554,6 @@ class DefaultSecurityRulesOperations(object):
         :type network_security_group_name: str
         :param default_security_rule_name: The name of the default security rule.
         :type default_security_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SecurityRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SecurityRule
@@ -44402,9 +43676,6 @@ class NetworkVirtualAppliancesOperations(object):
         :type resource_group_name: str
         :param network_virtual_appliance_name: The name of Network Virtual Appliance.
         :type network_virtual_appliance_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -44470,9 +43741,6 @@ class NetworkVirtualAppliancesOperations(object):
         :type network_virtual_appliance_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkVirtualAppliance, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkVirtualAppliance
@@ -44535,9 +43803,6 @@ class NetworkVirtualAppliancesOperations(object):
         :type network_virtual_appliance_name: str
         :param parameters: Parameters supplied to Update Network Virtual Appliance Tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkVirtualAppliance, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkVirtualAppliance
@@ -44658,9 +43923,6 @@ class NetworkVirtualAppliancesOperations(object):
         :type network_virtual_appliance_name: str
         :param parameters: Parameters supplied to the create or update Network Virtual Appliance.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.NetworkVirtualAppliance
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -44728,9 +43990,6 @@ class NetworkVirtualAppliancesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkVirtualApplianceListResult or the result of
          cls(response)
@@ -44806,9 +44065,6 @@ class NetworkVirtualAppliancesOperations(object):
     ) -> Iterable["_models.NetworkVirtualApplianceListResult"]:
         """Gets all Network Virtual Appliances in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkVirtualApplianceListResult or the result of
          cls(response)
@@ -44956,9 +44212,6 @@ class VirtualApplianceSitesOperations(object):
         :type network_virtual_appliance_name: str
         :param site_name: The name of the site.
         :type site_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -45025,9 +44278,6 @@ class VirtualApplianceSitesOperations(object):
         :type network_virtual_appliance_name: str
         :param site_name: The name of the site.
         :type site_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualApplianceSite, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualApplianceSite
@@ -45151,9 +44401,6 @@ class VirtualApplianceSitesOperations(object):
         :param parameters: Parameters supplied to the create or update Network Virtual Appliance Site
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualApplianceSite
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -45225,9 +44472,6 @@ class VirtualApplianceSitesOperations(object):
         :type resource_group_name: str
         :param network_virtual_appliance_name: The name of the Network Virtual Appliance.
         :type network_virtual_appliance_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkVirtualApplianceSiteListResult or the
          result of cls(response)
@@ -45326,9 +44570,6 @@ class VirtualApplianceSkusOperations(object):
     ) -> Iterable["_models.NetworkVirtualApplianceSkuListResult"]:
         """List all SKUs available for a virtual appliance.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkVirtualApplianceSkuListResult or the result
          of cls(response)
@@ -45405,9 +44646,6 @@ class VirtualApplianceSkusOperations(object):
 
         :param sku_name: Name of the Sku.
         :type sku_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkVirtualApplianceSku, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkVirtualApplianceSku
@@ -45550,9 +44788,6 @@ class InboundSecurityRuleOperations(object):
         :param parameters: Parameters supplied to the create or update Network Virtual Appliance
          Inbound Security Rules operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.InboundSecurityRule
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -45648,9 +44883,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the network watcher resource.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.NetworkWatcher
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkWatcher, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkWatcher
@@ -45718,9 +44950,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type resource_group_name: str
         :param network_watcher_name: The name of the network watcher.
         :type network_watcher_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkWatcher, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkWatcher
@@ -45822,9 +45051,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type resource_group_name: str
         :param network_watcher_name: The name of the network watcher.
         :type network_watcher_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -45890,9 +45116,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters supplied to update network watcher tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: NetworkWatcher, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.NetworkWatcher
@@ -45953,9 +45176,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkWatcherListResult or the result of
          cls(response)
@@ -46032,9 +45252,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
     ) -> Iterable["_models.NetworkWatcherListResult"]:
         """Gets all network watchers by subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either NetworkWatcherListResult or the result of
          cls(response)
@@ -46118,9 +45335,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the representation of topology.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TopologyParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Topology, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.Topology
@@ -46242,9 +45456,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the IP flow to be verified.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VerificationIPFlowParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -46373,9 +45584,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the source and destination endpoint.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.NextHopParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -46503,9 +45711,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the VM to check security groups for.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.SecurityGroupViewParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -46634,9 +45839,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the resource to troubleshoot.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TroubleshootingParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -46765,9 +45967,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the resource to query the troubleshooting result.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.QueryTroubleshootingParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -46896,9 +46095,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that define the configuration of flow log.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.FlowLogInformation
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -47028,9 +46224,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :param parameters: Parameters that define a resource to query flow log and traffic analytics
          (optional) status.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.FlowLogStatusParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -47160,9 +46353,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that determine how the connectivity check will be performed.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ConnectivityParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -47293,9 +46483,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that determine Azure reachability report configuration.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.AzureReachabilityReportParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -47425,9 +46612,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :type network_watcher_name: str
         :param parameters: Parameters that scope the list of available providers.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.AvailableProvidersListParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -47561,9 +46745,6 @@ class NetworkWatchersOperations(object):  # pylint: disable=too-many-public-meth
         :param parameters: Parameters to get network configuration diagnostic.
         :type parameters:
          ~azure.mgmt.network.v2021_08_01.models.NetworkConfigurationDiagnosticParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -47714,9 +46895,6 @@ class PacketCapturesOperations(object):
         :type packet_capture_name: str
         :param parameters: Parameters that define the create packet capture operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.PacketCapture
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -47791,9 +46969,6 @@ class PacketCapturesOperations(object):
         :type network_watcher_name: str
         :param packet_capture_name: The name of the packet capture session.
         :type packet_capture_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PacketCaptureResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureResult
@@ -47901,9 +47076,6 @@ class PacketCapturesOperations(object):
         :type network_watcher_name: str
         :param packet_capture_name: The name of the packet capture session.
         :type packet_capture_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -48014,9 +47186,6 @@ class PacketCapturesOperations(object):
         :type network_watcher_name: str
         :param packet_capture_name: The name of the packet capture session.
         :type packet_capture_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -48135,9 +47304,6 @@ class PacketCapturesOperations(object):
         :type network_watcher_name: str
         :param packet_capture_name: The name given to the packet capture session.
         :type packet_capture_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -48206,9 +47372,6 @@ class PacketCapturesOperations(object):
         :type resource_group_name: str
         :param network_watcher_name: The name of the Network Watcher resource.
         :type network_watcher_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PacketCaptureListResult or the result of
          cls(response)
@@ -48383,9 +47546,6 @@ class ConnectionMonitorsOperations(object):
         :param migrate: Value indicating whether connection monitor V1 should be migrated to V2 format.
          Default value is None.
         :type migrate: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -48461,9 +47621,6 @@ class ConnectionMonitorsOperations(object):
         :type network_watcher_name: str
         :param connection_monitor_name: The name of the connection monitor.
         :type connection_monitor_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ConnectionMonitorResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ConnectionMonitorResult
@@ -48571,9 +47728,6 @@ class ConnectionMonitorsOperations(object):
         :type network_watcher_name: str
         :param connection_monitor_name: The name of the connection monitor.
         :type connection_monitor_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -48643,9 +47797,6 @@ class ConnectionMonitorsOperations(object):
         :type connection_monitor_name: str
         :param parameters: Parameters supplied to update connection monitor tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ConnectionMonitorResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ConnectionMonitorResult
@@ -48757,9 +47908,6 @@ class ConnectionMonitorsOperations(object):
         :type network_watcher_name: str
         :param connection_monitor_name: The name of the connection monitor.
         :type connection_monitor_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -48870,9 +48018,6 @@ class ConnectionMonitorsOperations(object):
         :type network_watcher_name: str
         :param connection_monitor_name: The name of the connection monitor.
         :type connection_monitor_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -48991,9 +48136,6 @@ class ConnectionMonitorsOperations(object):
         :type network_watcher_name: str
         :param connection_monitor_name: The name given to the connection monitor.
         :type connection_monitor_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -49062,9 +48204,6 @@ class ConnectionMonitorsOperations(object):
         :type resource_group_name: str
         :param network_watcher_name: The name of the Network Watcher resource.
         :type network_watcher_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ConnectionMonitorListResult or the result of
          cls(response)
@@ -49233,9 +48372,6 @@ class FlowLogsOperations(object):
         :type flow_log_name: str
         :param parameters: Parameters that define the create or update flow log resource.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.FlowLog
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -49311,9 +48447,6 @@ class FlowLogsOperations(object):
         :type flow_log_name: str
         :param parameters: Parameters supplied to update flow log tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: FlowLog, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.FlowLog
@@ -49381,9 +48514,6 @@ class FlowLogsOperations(object):
         :type network_watcher_name: str
         :param flow_log_name: The name of the flow log resource.
         :type flow_log_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: FlowLog, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.FlowLog
@@ -49491,9 +48621,6 @@ class FlowLogsOperations(object):
         :type network_watcher_name: str
         :param flow_log_name: The name of the flow log resource.
         :type flow_log_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -49557,9 +48684,6 @@ class FlowLogsOperations(object):
         :type resource_group_name: str
         :param network_watcher_name: The name of the Network Watcher resource.
         :type network_watcher_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either FlowLogListResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.FlowLogListResult]
@@ -49657,9 +48781,6 @@ class Operations(object):
     ) -> Iterable["_models.OperationListResult"]:
         """Lists all of the available Network Rest API operations.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either OperationListResult or the result of cls(response)
         :rtype:
@@ -49799,9 +48920,6 @@ class PrivateEndpointsOperations(object):
         :type resource_group_name: str
         :param private_endpoint_name: The name of the private endpoint.
         :type private_endpoint_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -49867,9 +48985,6 @@ class PrivateEndpointsOperations(object):
         :type private_endpoint_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpoint, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PrivateEndpoint
@@ -49988,9 +49103,6 @@ class PrivateEndpointsOperations(object):
         :type private_endpoint_name: str
         :param parameters: Parameters supplied to the create or update private endpoint operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.PrivateEndpoint
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -50057,9 +49169,6 @@ class PrivateEndpointsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PrivateEndpointListResult or the result of
          cls(response)
@@ -50136,9 +49245,6 @@ class PrivateEndpointsOperations(object):
     ) -> Iterable["_models.PrivateEndpointListResult"]:
         """Gets all private endpoints in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PrivateEndpointListResult or the result of
          cls(response)
@@ -50238,9 +49344,6 @@ class AvailablePrivateEndpointTypesOperations(object):
 
         :param location: The location of the domain name.
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AvailablePrivateEndpointTypesResult or the result
          of cls(response)
@@ -50323,9 +49426,6 @@ class AvailablePrivateEndpointTypesOperations(object):
         :type location: str
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AvailablePrivateEndpointTypesResult or the result
          of cls(response)
@@ -50477,9 +49577,6 @@ class PrivateDnsZoneGroupsOperations(object):
         :type private_endpoint_name: str
         :param private_dns_zone_group_name: The name of the private dns zone group.
         :type private_dns_zone_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -50546,9 +49643,6 @@ class PrivateDnsZoneGroupsOperations(object):
         :type private_endpoint_name: str
         :param private_dns_zone_group_name: The name of the private dns zone group.
         :type private_dns_zone_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateDnsZoneGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PrivateDnsZoneGroup
@@ -50672,9 +49766,6 @@ class PrivateDnsZoneGroupsOperations(object):
         :param parameters: Parameters supplied to the create or update private dns zone group
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.PrivateDnsZoneGroup
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -50746,9 +49837,6 @@ class PrivateDnsZoneGroupsOperations(object):
         :type private_endpoint_name: str
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PrivateDnsZoneGroupListResult or the result of
          cls(response)
@@ -50896,9 +49984,6 @@ class PrivateLinkServicesOperations(object):
         :type resource_group_name: str
         :param service_name: The name of the private link service.
         :type service_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -50964,9 +50049,6 @@ class PrivateLinkServicesOperations(object):
         :type service_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateLinkService, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PrivateLinkService
@@ -51085,9 +50167,6 @@ class PrivateLinkServicesOperations(object):
         :type service_name: str
         :param parameters: Parameters supplied to the create or update private link service operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.PrivateLinkService
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -51155,9 +50234,6 @@ class PrivateLinkServicesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PrivateLinkServiceListResult or the result of
          cls(response)
@@ -51234,9 +50310,6 @@ class PrivateLinkServicesOperations(object):
     ) -> Iterable["_models.PrivateLinkServiceListResult"]:
         """Gets all private link service in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PrivateLinkServiceListResult or the result of
          cls(response)
@@ -51324,9 +50397,6 @@ class PrivateLinkServicesOperations(object):
         :type pe_connection_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpointConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PrivateEndpointConnection
@@ -51394,9 +50464,6 @@ class PrivateLinkServicesOperations(object):
         :type pe_connection_name: str
         :param parameters: Parameters supplied to approve or reject the private end point connection.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.PrivateEndpointConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateEndpointConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PrivateEndpointConnection
@@ -51508,9 +50575,6 @@ class PrivateLinkServicesOperations(object):
         :type service_name: str
         :param pe_connection_name: The name of the private end point connection.
         :type pe_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -51574,9 +50638,6 @@ class PrivateLinkServicesOperations(object):
         :type resource_group_name: str
         :param service_name: The name of the private link service.
         :type service_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PrivateEndpointConnectionListResult or the result
          of cls(response)
@@ -51713,9 +50774,6 @@ class PrivateLinkServicesOperations(object):
         :param parameters: The request body of CheckPrivateLinkService API call.
         :type parameters:
          ~azure.mgmt.network.v2021_08_01.models.CheckPrivateLinkServiceVisibilityRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -51843,9 +50901,6 @@ class PrivateLinkServicesOperations(object):
         :param parameters: The request body of CheckPrivateLinkService API call.
         :type parameters:
          ~azure.mgmt.network.v2021_08_01.models.CheckPrivateLinkServiceVisibilityRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -51914,9 +50969,6 @@ class PrivateLinkServicesOperations(object):
 
         :param location: The location of the domain name.
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AutoApprovedPrivateLinkServicesResult or the
          result of cls(response)
@@ -51999,9 +51051,6 @@ class PrivateLinkServicesOperations(object):
         :type location: str
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AutoApprovedPrivateLinkServicesResult or the
          result of cls(response)
@@ -52148,9 +51197,6 @@ class PublicIPPrefixesOperations(object):
         :type resource_group_name: str
         :param public_ip_prefix_name: The name of the PublicIpPrefix.
         :type public_ip_prefix_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -52216,9 +51262,6 @@ class PublicIPPrefixesOperations(object):
         :type public_ip_prefix_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PublicIPPrefix, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PublicIPPrefix
@@ -52336,9 +51379,6 @@ class PublicIPPrefixesOperations(object):
         :type public_ip_prefix_name: str
         :param parameters: Parameters supplied to the create or update public IP prefix operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.PublicIPPrefix
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -52411,9 +51451,6 @@ class PublicIPPrefixesOperations(object):
         :type public_ip_prefix_name: str
         :param parameters: Parameters supplied to update public IP prefix tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PublicIPPrefix, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.PublicIPPrefix
@@ -52470,9 +51507,6 @@ class PublicIPPrefixesOperations(object):
     ) -> Iterable["_models.PublicIPPrefixListResult"]:
         """Gets all the public IP prefixes in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPPrefixListResult or the result of
          cls(response)
@@ -52549,9 +51583,6 @@ class PublicIPPrefixesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PublicIPPrefixListResult or the result of
          cls(response)
@@ -52696,9 +51727,6 @@ class RouteFiltersOperations(object):
         :type resource_group_name: str
         :param route_filter_name: The name of the route filter.
         :type route_filter_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -52764,9 +51792,6 @@ class RouteFiltersOperations(object):
         :type route_filter_name: str
         :param expand: Expands referenced express route bgp peering resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RouteFilter, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.RouteFilter
@@ -52885,9 +51910,6 @@ class RouteFiltersOperations(object):
         :param route_filter_parameters: Parameters supplied to the create or update route filter
          operation.
         :type route_filter_parameters: ~azure.mgmt.network.v2021_08_01.models.RouteFilter
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -52960,9 +51982,6 @@ class RouteFiltersOperations(object):
         :type route_filter_name: str
         :param parameters: Parameters supplied to update route filter tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RouteFilter, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.RouteFilter
@@ -53022,9 +52041,6 @@ class RouteFiltersOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either RouteFilterListResult or the result of
          cls(response)
@@ -53100,9 +52116,6 @@ class RouteFiltersOperations(object):
     ) -> Iterable["_models.RouteFilterListResult"]:
         """Gets all route filters in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either RouteFilterListResult or the result of
          cls(response)
@@ -53250,9 +52263,6 @@ class RouteFilterRulesOperations(object):
         :type route_filter_name: str
         :param rule_name: The name of the rule.
         :type rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -53319,9 +52329,6 @@ class RouteFilterRulesOperations(object):
         :type route_filter_name: str
         :param rule_name: The name of the rule.
         :type rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RouteFilterRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.RouteFilterRule
@@ -53445,9 +52452,6 @@ class RouteFilterRulesOperations(object):
         :param route_filter_rule_parameters: Parameters supplied to the create or update route filter
          rule operation.
         :type route_filter_rule_parameters: ~azure.mgmt.network.v2021_08_01.models.RouteFilterRule
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -53518,9 +52522,6 @@ class RouteFilterRulesOperations(object):
         :type resource_group_name: str
         :param route_filter_name: The name of the route filter.
         :type route_filter_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either RouteFilterRuleListResult or the result of
          cls(response)
@@ -53667,9 +52668,6 @@ class RouteTablesOperations(object):
         :type resource_group_name: str
         :param route_table_name: The name of the route table.
         :type route_table_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -53735,9 +52733,6 @@ class RouteTablesOperations(object):
         :type route_table_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RouteTable, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.RouteTable
@@ -53855,9 +52850,6 @@ class RouteTablesOperations(object):
         :type route_table_name: str
         :param parameters: Parameters supplied to the create or update route table operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.RouteTable
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -53929,9 +52921,6 @@ class RouteTablesOperations(object):
         :type route_table_name: str
         :param parameters: Parameters supplied to update route table tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RouteTable, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.RouteTable
@@ -53991,9 +52980,6 @@ class RouteTablesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either RouteTableListResult or the result of
          cls(response)
@@ -54069,9 +53055,6 @@ class RouteTablesOperations(object):
     ) -> Iterable["_models.RouteTableListResult"]:
         """Gets all route tables in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either RouteTableListResult or the result of
          cls(response)
@@ -54219,9 +53202,6 @@ class RoutesOperations(object):
         :type route_table_name: str
         :param route_name: The name of the route.
         :type route_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -54288,9 +53268,6 @@ class RoutesOperations(object):
         :type route_table_name: str
         :param route_name: The name of the route.
         :type route_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Route, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.Route
@@ -54413,9 +53390,6 @@ class RoutesOperations(object):
         :type route_name: str
         :param route_parameters: Parameters supplied to the create or update route operation.
         :type route_parameters: ~azure.mgmt.network.v2021_08_01.models.Route
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -54485,9 +53459,6 @@ class RoutesOperations(object):
         :type resource_group_name: str
         :param route_table_name: The name of the route table.
         :type route_table_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either RouteListResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.RouteListResult]
@@ -54632,9 +53603,6 @@ class SecurityPartnerProvidersOperations(object):
         :type resource_group_name: str
         :param security_partner_provider_name: The name of the Security Partner Provider.
         :type security_partner_provider_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -54697,9 +53665,6 @@ class SecurityPartnerProvidersOperations(object):
         :type resource_group_name: str
         :param security_partner_provider_name: The name of the Security Partner Provider.
         :type security_partner_provider_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SecurityPartnerProvider, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SecurityPartnerProvider
@@ -54817,9 +53782,6 @@ class SecurityPartnerProvidersOperations(object):
         :param parameters: Parameters supplied to the create or update Security Partner Provider
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.SecurityPartnerProvider
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -54893,9 +53855,6 @@ class SecurityPartnerProvidersOperations(object):
         :type security_partner_provider_name: str
         :param parameters: Parameters supplied to update Security Partner Provider tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SecurityPartnerProvider, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.SecurityPartnerProvider
@@ -54955,9 +53914,6 @@ class SecurityPartnerProvidersOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either SecurityPartnerProviderListResult or the result of
          cls(response)
@@ -55033,9 +53989,6 @@ class SecurityPartnerProvidersOperations(object):
     ) -> Iterable["_models.SecurityPartnerProviderListResult"]:
         """Gets all the Security Partner Providers in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either SecurityPartnerProviderListResult or the result of
          cls(response)
@@ -55130,9 +54083,6 @@ class BgpServiceCommunitiesOperations(object):
     ) -> Iterable["_models.BgpServiceCommunityListResult"]:
         """Gets all the available bgp service communities.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BgpServiceCommunityListResult or the result of
          cls(response)
@@ -55275,9 +54225,6 @@ class ServiceEndpointPoliciesOperations(object):
         :type resource_group_name: str
         :param service_endpoint_policy_name: The name of the service endpoint policy.
         :type service_endpoint_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -55343,9 +54290,6 @@ class ServiceEndpointPoliciesOperations(object):
         :type service_endpoint_policy_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ServiceEndpointPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ServiceEndpointPolicy
@@ -55464,9 +54408,6 @@ class ServiceEndpointPoliciesOperations(object):
         :param parameters: Parameters supplied to the create or update service endpoint policy
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ServiceEndpointPolicy
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -55540,9 +54481,6 @@ class ServiceEndpointPoliciesOperations(object):
         :type service_endpoint_policy_name: str
         :param parameters: Parameters supplied to update service endpoint policy tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ServiceEndpointPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ServiceEndpointPolicy
@@ -55599,9 +54537,6 @@ class ServiceEndpointPoliciesOperations(object):
     ) -> Iterable["_models.ServiceEndpointPolicyListResult"]:
         """Gets all the service endpoint policies in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ServiceEndpointPolicyListResult or the result of
          cls(response)
@@ -55678,9 +54613,6 @@ class ServiceEndpointPoliciesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ServiceEndpointPolicyListResult or the result of
          cls(response)
@@ -55831,9 +54763,6 @@ class ServiceEndpointPolicyDefinitionsOperations(object):
         :param service_endpoint_policy_definition_name: The name of the service endpoint policy
          definition.
         :type service_endpoint_policy_definition_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -55901,9 +54830,6 @@ class ServiceEndpointPolicyDefinitionsOperations(object):
         :param service_endpoint_policy_definition_name: The name of the service endpoint policy
          definition name.
         :type service_endpoint_policy_definition_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ServiceEndpointPolicyDefinition, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ServiceEndpointPolicyDefinition
@@ -56030,9 +54956,6 @@ class ServiceEndpointPolicyDefinitionsOperations(object):
          endpoint policy operation.
         :type service_endpoint_policy_definitions:
          ~azure.mgmt.network.v2021_08_01.models.ServiceEndpointPolicyDefinition
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -56104,9 +55027,6 @@ class ServiceEndpointPolicyDefinitionsOperations(object):
         :type resource_group_name: str
         :param service_endpoint_policy_name: The name of the service endpoint policy name.
         :type service_endpoint_policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ServiceEndpointPolicyDefinitionListResult or the
          result of cls(response)
@@ -56210,9 +55130,6 @@ class ServiceTagsOperations(object):
          based on location, you will get the list of service tags with prefix details across all regions
          but limited to the cloud that your subscription belongs to).
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ServiceTagsListResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ServiceTagsListResult
@@ -56297,9 +55214,6 @@ class ServiceTagInformationOperations(object):
         :type no_address_prefixes: bool
         :param tag_name: Return tag information for a particular tag. Default value is None.
         :type tag_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ServiceTagInformationListResult or the result of
          cls(response)
@@ -56403,9 +55317,6 @@ class UsagesOperations(object):
 
         :param location: The location where resource usage is queried.
         :type location: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either UsagesListResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.UsagesListResult]
@@ -56548,9 +55459,6 @@ class VirtualNetworksOperations(object):
         :type resource_group_name: str
         :param virtual_network_name: The name of the virtual network.
         :type virtual_network_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -56616,9 +55524,6 @@ class VirtualNetworksOperations(object):
         :type virtual_network_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetwork, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetwork
@@ -56736,9 +55641,6 @@ class VirtualNetworksOperations(object):
         :type virtual_network_name: str
         :param parameters: Parameters supplied to the create or update virtual network operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualNetwork
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -56811,9 +55713,6 @@ class VirtualNetworksOperations(object):
         :type virtual_network_name: str
         :param parameters: Parameters supplied to update virtual network tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetwork, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetwork
@@ -56870,9 +55769,6 @@ class VirtualNetworksOperations(object):
     ) -> Iterable["_models.VirtualNetworkListResult"]:
         """Gets all virtual networks in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkListResult or the result of
          cls(response)
@@ -56949,9 +55845,6 @@ class VirtualNetworksOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkListResult or the result of
          cls(response)
@@ -57036,9 +55929,6 @@ class VirtualNetworksOperations(object):
         :type virtual_network_name: str
         :param ip_address: The private IP address to be verified.
         :type ip_address: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: IPAddressAvailabilityResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.IPAddressAvailabilityResult
@@ -57098,9 +55988,6 @@ class VirtualNetworksOperations(object):
         :type resource_group_name: str
         :param virtual_network_name: The name of the virtual network.
         :type virtual_network_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkListUsageResult or the result of
          cls(response)
@@ -57252,9 +56139,6 @@ class SubnetsOperations(object):
         :type virtual_network_name: str
         :param subnet_name: The name of the subnet.
         :type subnet_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -57324,9 +56208,6 @@ class SubnetsOperations(object):
         :type subnet_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Subnet, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.Subnet
@@ -57450,9 +56331,6 @@ class SubnetsOperations(object):
         :type subnet_name: str
         :param subnet_parameters: Parameters supplied to the create or update subnet operation.
         :type subnet_parameters: ~azure.mgmt.network.v2021_08_01.models.Subnet
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -57579,9 +56457,6 @@ class SubnetsOperations(object):
          applying network intent policies.
         :type prepare_network_policies_request_parameters:
          ~azure.mgmt.network.v2021_08_01.models.PrepareNetworkPoliciesRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -57705,9 +56580,6 @@ class SubnetsOperations(object):
          to remove network intent policies.
         :type unprepare_network_policies_request_parameters:
          ~azure.mgmt.network.v2021_08_01.models.UnprepareNetworkPoliciesRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -57774,9 +56646,6 @@ class SubnetsOperations(object):
         :type resource_group_name: str
         :param virtual_network_name: The name of the virtual network.
         :type virtual_network_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either SubnetListResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.SubnetListResult]
@@ -57882,9 +56751,6 @@ class ResourceNavigationLinksOperations(object):
         :type virtual_network_name: str
         :param subnet_name: The name of the subnet.
         :type subnet_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ResourceNavigationLinksListResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ResourceNavigationLinksListResult
@@ -57968,9 +56834,6 @@ class ServiceAssociationLinksOperations(object):
         :type virtual_network_name: str
         :param subnet_name: The name of the subnet.
         :type subnet_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ServiceAssociationLinksListResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ServiceAssociationLinksListResult
@@ -58098,9 +56961,6 @@ class VirtualNetworkPeeringsOperations(object):
         :type virtual_network_name: str
         :param virtual_network_peering_name: The name of the virtual network peering.
         :type virtual_network_peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -58167,9 +57027,6 @@ class VirtualNetworkPeeringsOperations(object):
         :type virtual_network_name: str
         :param virtual_network_peering_name: The name of the virtual network peering.
         :type virtual_network_peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetworkPeering, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkPeering
@@ -58301,9 +57158,6 @@ class VirtualNetworkPeeringsOperations(object):
          the current address space on the remote vNet after it's updated. Default value is None.
         :type sync_remote_address_space: str or
          ~azure.mgmt.network.v2021_08_01.models.SyncRemoteAddressSpace
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -58376,9 +57230,6 @@ class VirtualNetworkPeeringsOperations(object):
         :type resource_group_name: str
         :param virtual_network_name: The name of the virtual network.
         :type virtual_network_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkPeeringListResult or the result of
          cls(response)
@@ -58541,9 +57392,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type virtual_network_gateway_name: str
         :param parameters: Parameters supplied to create or update virtual network gateway operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkGateway
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -58614,9 +57462,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetworkGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkGateway
@@ -58717,9 +57562,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -58838,9 +57680,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type virtual_network_gateway_name: str
         :param parameters: Parameters supplied to update virtual network gateway tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -58908,9 +57747,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkGatewayListResult or the result of
          cls(response)
@@ -58992,9 +57828,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkGatewayListConnectionsResult or the
          result of cls(response)
@@ -59132,9 +57965,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :param gateway_vip: Virtual network gateway vip address supplied to the begin reset of the
          active-active feature enabled gateway. Default value is None.
         :type gateway_vip: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -59246,9 +58076,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -59369,9 +58196,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :param parameters: Parameters supplied to the generate virtual network gateway VPN client
          package operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnClientParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -59498,9 +58322,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :param parameters: Parameters supplied to the generate virtual network gateway VPN client
          package operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnClientParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -59618,9 +58439,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -59739,9 +58557,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type virtual_network_gateway_name: str
         :param peer: The IP address of the peer to retrieve the status of. Default value is None.
         :type peer: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -59810,9 +58625,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: str, or the result of cls(response)
         :rtype: str
@@ -59920,9 +58732,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -60044,9 +58853,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type virtual_network_gateway_name: str
         :param peer: The IP address of the peer.
         :type peer: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -60173,9 +58979,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :param vpnclient_ipsec_params: Parameters supplied to the Begin Set vpnclient ipsec parameters
          of Virtual Network Gateway P2S client operation through Network resource provider.
         :type vpnclient_ipsec_params: ~azure.mgmt.network.v2021_08_01.models.VpnClientIPsecParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -60294,9 +59097,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The virtual network gateway name.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -60368,9 +59168,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type virtual_network_gateway_connection_name: str
         :param parameters: Parameters supplied to the generate vpn device script operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnDeviceScriptParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: str, or the result of cls(response)
         :rtype: str
@@ -60493,9 +59290,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :param parameters: Virtual network gateway packet capture parameters supplied to start packet
          capture on gateway. Default value is None.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnPacketCaptureStartParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -60621,9 +59415,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :param parameters: Virtual network gateway packet capture parameters supplied to stop packet
          capture on gateway.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnPacketCaptureStopParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -60741,9 +59532,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the virtual network gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -60861,9 +59649,6 @@ class VirtualNetworkGatewaysOperations(object):  # pylint: disable=too-many-publ
         :type virtual_network_gateway_name: str
         :param request: The parameters are supplied to disconnect vpn connections.
         :type request: ~azure.mgmt.network.v2021_08_01.models.P2SVpnConnectionRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -61010,9 +59795,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param parameters: Parameters supplied to the create or update virtual network gateway
          connection operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkGatewayConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -61084,9 +59866,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param virtual_network_gateway_connection_name: The name of the virtual network gateway
          connection.
         :type virtual_network_gateway_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetworkGatewayConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkGatewayConnection
@@ -61188,9 +59967,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param virtual_network_gateway_connection_name: The name of the virtual network gateway
          connection.
         :type virtual_network_gateway_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -61310,9 +60086,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :type virtual_network_gateway_connection_name: str
         :param parameters: Parameters supplied to update virtual network gateway connection tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -61444,9 +60217,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param parameters: Parameters supplied to the Begin Set Virtual Network Gateway connection
          Shared key operation throughNetwork resource provider.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ConnectionSharedKey
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -61519,9 +60289,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param virtual_network_gateway_connection_name: The virtual network gateway connection shared
          key name.
         :type virtual_network_gateway_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ConnectionSharedKey, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ConnectionSharedKey
@@ -61578,9 +60345,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkGatewayConnectionListResult or the
          result of cls(response)
@@ -61722,9 +60486,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param parameters: Parameters supplied to the begin reset virtual network gateway connection
          shared key operation through network resource provider.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.ConnectionResetSharedKey
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -61856,9 +60617,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param parameters: Virtual network gateway packet capture parameters supplied to start packet
          capture on gateway connection. Default value is None.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnPacketCaptureStartParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -61985,9 +60743,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param parameters: Virtual network gateway packet capture parameters supplied to stop packet
          capture on gateway connection.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnPacketCaptureStopParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -62106,9 +60861,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param virtual_network_gateway_connection_name: The name of the virtual network gateway
          Connection.
         :type virtual_network_gateway_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -62217,9 +60969,6 @@ class VirtualNetworkGatewayConnectionsOperations(object):  # pylint: disable=too
         :param virtual_network_gateway_connection_name: The name of the virtual network gateway
          Connection.
         :type virtual_network_gateway_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -62361,9 +61110,6 @@ class LocalNetworkGatewaysOperations(object):
         :type local_network_gateway_name: str
         :param parameters: Parameters supplied to the create or update local network gateway operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.LocalNetworkGateway
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -62434,9 +61180,6 @@ class LocalNetworkGatewaysOperations(object):
         :type resource_group_name: str
         :param local_network_gateway_name: The name of the local network gateway.
         :type local_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LocalNetworkGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.LocalNetworkGateway
@@ -62537,9 +61280,6 @@ class LocalNetworkGatewaysOperations(object):
         :type resource_group_name: str
         :param local_network_gateway_name: The name of the local network gateway.
         :type local_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -62605,9 +61345,6 @@ class LocalNetworkGatewaysOperations(object):
         :type local_network_gateway_name: str
         :param parameters: Parameters supplied to update local network gateway tags.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LocalNetworkGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.LocalNetworkGateway
@@ -62667,9 +61404,6 @@ class LocalNetworkGatewaysOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LocalNetworkGatewayListResult or the result of
          cls(response)
@@ -62775,9 +61509,6 @@ class VirtualNetworkGatewayNatRulesOperations(object):
         :type virtual_network_gateway_name: str
         :param nat_rule_name: The name of the nat rule.
         :type nat_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetworkGatewayNatRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkGatewayNatRule
@@ -62901,9 +61632,6 @@ class VirtualNetworkGatewayNatRulesOperations(object):
         :type nat_rule_name: str
         :param nat_rule_parameters: Parameters supplied to create or Update a Nat Rule.
         :type nat_rule_parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkGatewayNatRule
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -63022,9 +61750,6 @@ class VirtualNetworkGatewayNatRulesOperations(object):
         :type virtual_network_gateway_name: str
         :param nat_rule_name: The name of the nat rule.
         :type nat_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -63088,9 +61813,6 @@ class VirtualNetworkGatewayNatRulesOperations(object):
         :type resource_group_name: str
         :param virtual_network_gateway_name: The name of the gateway.
         :type virtual_network_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualNetworkGatewayNatRulesResult or the
          result of cls(response)
@@ -63237,9 +61959,6 @@ class VirtualNetworkTapsOperations(object):
         :type resource_group_name: str
         :param tap_name: The name of the virtual network tap.
         :type tap_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -63302,9 +62021,6 @@ class VirtualNetworkTapsOperations(object):
         :type resource_group_name: str
         :param tap_name: The name of virtual network tap.
         :type tap_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetworkTap, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkTap
@@ -63421,9 +62137,6 @@ class VirtualNetworkTapsOperations(object):
         :type tap_name: str
         :param parameters: Parameters supplied to the create or update virtual network tap operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkTap
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -63496,9 +62209,6 @@ class VirtualNetworkTapsOperations(object):
         :type tap_name: str
         :param tap_parameters: Parameters supplied to update VirtualNetworkTap tags.
         :type tap_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualNetworkTap, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualNetworkTap
@@ -63555,9 +62265,6 @@ class VirtualNetworkTapsOperations(object):
     ) -> Iterable["_models.VirtualNetworkTapListResult"]:
         """Gets all the VirtualNetworkTaps in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkTapListResult or the result of
          cls(response)
@@ -63634,9 +62341,6 @@ class VirtualNetworkTapsOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualNetworkTapListResult or the result of
          cls(response)
@@ -63781,9 +62485,6 @@ class VirtualRoutersOperations(object):
         :type resource_group_name: str
         :param virtual_router_name: The name of the Virtual Router.
         :type virtual_router_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -63849,9 +62550,6 @@ class VirtualRoutersOperations(object):
         :type virtual_router_name: str
         :param expand: Expands referenced resources. Default value is None.
         :type expand: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualRouter, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualRouter
@@ -63970,9 +62668,6 @@ class VirtualRoutersOperations(object):
         :type virtual_router_name: str
         :param parameters: Parameters supplied to the create or update Virtual Router.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualRouter
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -64039,9 +62734,6 @@ class VirtualRoutersOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualRouterListResult or the result of
          cls(response)
@@ -64118,9 +62810,6 @@ class VirtualRoutersOperations(object):
     ) -> Iterable["_models.VirtualRouterListResult"]:
         """Gets all the Virtual Routers in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualRouterListResult or the result of
          cls(response)
@@ -64269,9 +62958,6 @@ class VirtualRouterPeeringsOperations(object):
         :type virtual_router_name: str
         :param peering_name: The name of the peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -64338,9 +63024,6 @@ class VirtualRouterPeeringsOperations(object):
         :type virtual_router_name: str
         :param peering_name: The name of the Virtual Router Peering.
         :type peering_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualRouterPeering, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualRouterPeering
@@ -64465,9 +63148,6 @@ class VirtualRouterPeeringsOperations(object):
         :param parameters: Parameters supplied to the create or update Virtual Router Peering
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualRouterPeering
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -64539,9 +63219,6 @@ class VirtualRouterPeeringsOperations(object):
         :type resource_group_name: str
         :param virtual_router_name: The name of the Virtual Router.
         :type virtual_router_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either VirtualRouterPeeringListResult or the result of
          cls(response)
@@ -64647,9 +63324,6 @@ class VirtualWansOperations(object):
         :type resource_group_name: str
         :param virtual_wan_name: The name of the VirtualWAN being retrieved.
         :type virtual_wan_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualWAN, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualWAN
@@ -64766,9 +63440,6 @@ class VirtualWansOperations(object):
         :type virtual_wan_name: str
         :param wan_parameters: Parameters supplied to create or update VirtualWAN.
         :type wan_parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualWAN
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -64840,9 +63511,6 @@ class VirtualWansOperations(object):
         :type virtual_wan_name: str
         :param wan_parameters: Parameters supplied to Update VirtualWAN tags.
         :type wan_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualWAN, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualWAN
@@ -64947,9 +63615,6 @@ class VirtualWansOperations(object):
         :type resource_group_name: str
         :param virtual_wan_name: The name of the VirtualWAN being deleted.
         :type virtual_wan_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -65009,9 +63674,6 @@ class VirtualWansOperations(object):
 
         :param resource_group_name: The resource group name of the VirtualWan.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualWANsResult or the result of
          cls(response)
@@ -65087,9 +63749,6 @@ class VirtualWansOperations(object):
     ) -> Iterable["_models.ListVirtualWANsResult"]:
         """Lists all the VirtualWANs in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualWANsResult or the result of
          cls(response)
@@ -65190,9 +63849,6 @@ class VpnSitesOperations(object):
         :type resource_group_name: str
         :param vpn_site_name: The name of the VpnSite being retrieved.
         :type vpn_site_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnSite, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnSite
@@ -65309,9 +63965,6 @@ class VpnSitesOperations(object):
         :type vpn_site_name: str
         :param vpn_site_parameters: Parameters supplied to create or update VpnSite.
         :type vpn_site_parameters: ~azure.mgmt.network.v2021_08_01.models.VpnSite
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -65383,9 +64036,6 @@ class VpnSitesOperations(object):
         :type vpn_site_name: str
         :param vpn_site_parameters: Parameters supplied to update VpnSite tags.
         :type vpn_site_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnSite, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnSite
@@ -65490,9 +64140,6 @@ class VpnSitesOperations(object):
         :type resource_group_name: str
         :param vpn_site_name: The name of the VpnSite being deleted.
         :type vpn_site_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -65552,9 +64199,6 @@ class VpnSitesOperations(object):
 
         :param resource_group_name: The resource group name of the VpnSite.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnSitesResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.ListVpnSitesResult]
@@ -65628,9 +64272,6 @@ class VpnSitesOperations(object):
     ) -> Iterable["_models.ListVpnSitesResult"]:
         """Lists all the VpnSites in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnSitesResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.v2021_08_01.models.ListVpnSitesResult]
@@ -65732,9 +64373,6 @@ class VpnSiteLinksOperations(object):
         :type vpn_site_name: str
         :param vpn_site_link_name: The name of the VpnSiteLink being retrieved.
         :type vpn_site_link_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnSiteLink, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnSiteLink
@@ -65794,9 +64432,6 @@ class VpnSiteLinksOperations(object):
         :type resource_group_name: str
         :param vpn_site_name: The name of the VpnSite.
         :type vpn_site_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnSiteLinksResult or the result of
          cls(response)
@@ -65952,9 +64587,6 @@ class VpnSitesConfigurationOperations(object):
         :type virtual_wan_name: str
         :param request: Parameters supplied to download vpn-sites configuration.
         :type request: ~azure.mgmt.network.v2021_08_01.models.GetVpnSitesConfigurationRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -66041,9 +64673,6 @@ class VpnServerConfigurationsOperations(object):
         :type resource_group_name: str
         :param vpn_server_configuration_name: The name of the VpnServerConfiguration being retrieved.
         :type vpn_server_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnServerConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnServerConfiguration
@@ -66164,9 +64793,6 @@ class VpnServerConfigurationsOperations(object):
          VpnServerConfiguration.
         :type vpn_server_configuration_parameters:
          ~azure.mgmt.network.v2021_08_01.models.VpnServerConfiguration
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -66241,9 +64867,6 @@ class VpnServerConfigurationsOperations(object):
         :param vpn_server_configuration_parameters: Parameters supplied to update
          VpnServerConfiguration tags.
         :type vpn_server_configuration_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnServerConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnServerConfiguration
@@ -66348,9 +64971,6 @@ class VpnServerConfigurationsOperations(object):
         :type resource_group_name: str
         :param vpn_server_configuration_name: The name of the VpnServerConfiguration being deleted.
         :type vpn_server_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -66410,9 +65030,6 @@ class VpnServerConfigurationsOperations(object):
 
         :param resource_group_name: The resource group name of the VpnServerConfiguration.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnServerConfigurationsResult or the result of
          cls(response)
@@ -66488,9 +65105,6 @@ class VpnServerConfigurationsOperations(object):
     ) -> Iterable["_models.ListVpnServerConfigurationsResult"]:
         """Lists all the VpnServerConfigurations in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnServerConfigurationsResult or the result of
          cls(response)
@@ -66656,9 +65270,6 @@ class ConfigurationPolicyGroupsOperations(object):
          update a VpnServerConfiguration PolicyGroup.
         :type vpn_server_configuration_policy_group_parameters:
          ~azure.mgmt.network.v2021_08_01.models.VpnServerConfigurationPolicyGroup
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -66777,9 +65388,6 @@ class ConfigurationPolicyGroupsOperations(object):
         :type vpn_server_configuration_name: str
         :param configuration_policy_group_name: The name of the ConfigurationPolicyGroup.
         :type configuration_policy_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -66847,9 +65455,6 @@ class ConfigurationPolicyGroupsOperations(object):
         :param configuration_policy_group_name: The name of the ConfigurationPolicyGroup being
          retrieved.
         :type configuration_policy_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnServerConfigurationPolicyGroup, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnServerConfigurationPolicyGroup
@@ -66909,9 +65514,6 @@ class ConfigurationPolicyGroupsOperations(object):
         :type resource_group_name: str
         :param vpn_server_configuration_name: The name of the VpnServerConfiguration.
         :type vpn_server_configuration_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnServerConfigurationPolicyGroupsResult or
          the result of cls(response)
@@ -67016,9 +65618,6 @@ class VirtualHubsOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualHub, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualHub
@@ -67135,9 +65734,6 @@ class VirtualHubsOperations(object):
         :type virtual_hub_name: str
         :param virtual_hub_parameters: Parameters supplied to create or update VirtualHub.
         :type virtual_hub_parameters: ~azure.mgmt.network.v2021_08_01.models.VirtualHub
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -67209,9 +65805,6 @@ class VirtualHubsOperations(object):
         :type virtual_hub_name: str
         :param virtual_hub_parameters: Parameters supplied to update VirtualHub tags.
         :type virtual_hub_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualHub, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualHub
@@ -67316,9 +65909,6 @@ class VirtualHubsOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -67378,9 +65968,6 @@ class VirtualHubsOperations(object):
 
         :param resource_group_name: The resource group name of the VirtualHub.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualHubsResult or the result of
          cls(response)
@@ -67456,9 +66043,6 @@ class VirtualHubsOperations(object):
     ) -> Iterable["_models.ListVirtualHubsResult"]:
         """Lists all the VirtualHubs in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualHubsResult or the result of
          cls(response)
@@ -67593,9 +66177,6 @@ class VirtualHubsOperations(object):
          specific resource. Default value is None.
         :type effective_routes_parameters:
          ~azure.mgmt.network.v2021_08_01.models.EffectiveRoutesParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -67747,9 +66328,6 @@ class HubVirtualNetworkConnectionsOperations(object):
          virtual network connection.
         :type hub_virtual_network_connection_parameters:
          ~azure.mgmt.network.v2021_08_01.models.HubVirtualNetworkConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -67868,9 +66446,6 @@ class HubVirtualNetworkConnectionsOperations(object):
         :type virtual_hub_name: str
         :param connection_name: The name of the HubVirtualNetworkConnection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -67937,9 +66512,6 @@ class HubVirtualNetworkConnectionsOperations(object):
         :type virtual_hub_name: str
         :param connection_name: The name of the vpn connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: HubVirtualNetworkConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.HubVirtualNetworkConnection
@@ -67999,9 +66571,6 @@ class HubVirtualNetworkConnectionsOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListHubVirtualNetworkConnectionsResult or the
          result of cls(response)
@@ -68106,9 +66675,6 @@ class VpnGatewaysOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnGateway
@@ -68226,9 +66792,6 @@ class VpnGatewaysOperations(object):
         :param vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan vpn
          gateway.
         :type vpn_gateway_parameters: ~azure.mgmt.network.v2021_08_01.models.VpnGateway
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -68353,9 +66916,6 @@ class VpnGatewaysOperations(object):
         :type gateway_name: str
         :param vpn_gateway_parameters: Parameters supplied to update a virtual wan vpn gateway tags.
         :type vpn_gateway_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -68466,9 +67026,6 @@ class VpnGatewaysOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -68579,9 +67136,6 @@ class VpnGatewaysOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -68707,9 +67261,6 @@ class VpnGatewaysOperations(object):
         :param parameters: Vpn gateway packet capture parameters supplied to start packet capture on
          vpn gateway. Default value is None.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnGatewayPacketCaptureStartParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -68838,9 +67389,6 @@ class VpnGatewaysOperations(object):
         :param parameters: Vpn gateway packet capture parameters supplied to stop packet capture on vpn
          gateway. Default value is None.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.VpnGatewayPacketCaptureStopParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -68906,9 +67454,6 @@ class VpnGatewaysOperations(object):
 
         :param resource_group_name: The resource group name of the VpnGateway.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnGatewaysResult or the result of
          cls(response)
@@ -68984,9 +67529,6 @@ class VpnGatewaysOperations(object):
     ) -> Iterable["_models.ListVpnGatewaysResult"]:
         """Lists all the VpnGateways in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnGatewaysResult or the result of
          cls(response)
@@ -69139,9 +67681,6 @@ class VpnLinkConnectionsOperations(object):
         :type connection_name: str
         :param link_connection_name: The name of the vpn link connection.
         :type link_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -69264,9 +67803,6 @@ class VpnLinkConnectionsOperations(object):
         :type connection_name: str
         :param link_connection_name: The name of the vpn link connection.
         :type link_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -69338,9 +67874,6 @@ class VpnLinkConnectionsOperations(object):
         :type gateway_name: str
         :param connection_name: The name of the vpn connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnSiteLinkConnectionsResult or the result of
          cls(response)
@@ -69450,9 +67983,6 @@ class VpnConnectionsOperations(object):
         :type gateway_name: str
         :param connection_name: The name of the vpn connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnConnection
@@ -69576,9 +68106,6 @@ class VpnConnectionsOperations(object):
         :type connection_name: str
         :param vpn_connection_parameters: Parameters supplied to create or Update a VPN Connection.
         :type vpn_connection_parameters: ~azure.mgmt.network.v2021_08_01.models.VpnConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -69696,9 +68223,6 @@ class VpnConnectionsOperations(object):
         :type gateway_name: str
         :param connection_name: The name of the connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -69828,9 +68352,6 @@ class VpnConnectionsOperations(object):
          gateway connection. Default value is None.
         :type parameters:
          ~azure.mgmt.network.v2021_08_01.models.VpnConnectionPacketCaptureStartParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -69966,9 +68487,6 @@ class VpnConnectionsOperations(object):
          gateway connection. Default value is None.
         :type parameters:
          ~azure.mgmt.network.v2021_08_01.models.VpnConnectionPacketCaptureStopParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -70038,9 +68556,6 @@ class VpnConnectionsOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnConnectionsResult or the result of
          cls(response)
@@ -70151,9 +68666,6 @@ class VpnSiteLinkConnectionsOperations(object):
         :type connection_name: str
         :param link_connection_name: The name of the vpn connection.
         :type link_connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnSiteLinkConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnSiteLinkConnection
@@ -70238,9 +68750,6 @@ class NatRulesOperations(object):
         :type gateway_name: str
         :param nat_rule_name: The name of the nat rule.
         :type nat_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VpnGatewayNatRule, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VpnGatewayNatRule
@@ -70364,9 +68873,6 @@ class NatRulesOperations(object):
         :type nat_rule_name: str
         :param nat_rule_parameters: Parameters supplied to create or Update a Nat Rule.
         :type nat_rule_parameters: ~azure.mgmt.network.v2021_08_01.models.VpnGatewayNatRule
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -70484,9 +68990,6 @@ class NatRulesOperations(object):
         :type gateway_name: str
         :param nat_rule_name: The name of the nat rule.
         :type nat_rule_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -70550,9 +69053,6 @@ class NatRulesOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVpnGatewayNatRulesResult or the result of
          cls(response)
@@ -70657,9 +69157,6 @@ class P2SVpnGatewaysOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: P2SVpnGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.P2SVpnGateway
@@ -70777,9 +69274,6 @@ class P2SVpnGatewaysOperations(object):
         :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
          vpn gateway.
         :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.v2021_08_01.models.P2SVpnGateway
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -70906,9 +69400,6 @@ class P2SVpnGatewaysOperations(object):
         :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
          tags.
         :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -71020,9 +69511,6 @@ class P2SVpnGatewaysOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -71082,9 +69570,6 @@ class P2SVpnGatewaysOperations(object):
 
         :param resource_group_name: The resource group name of the P2SVpnGateway.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListP2SVpnGatewaysResult or the result of
          cls(response)
@@ -71160,9 +69645,6 @@ class P2SVpnGatewaysOperations(object):
     ) -> Iterable["_models.ListP2SVpnGatewaysResult"]:
         """Lists all the P2SVpnGateways in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListP2SVpnGatewaysResult or the result of
          cls(response)
@@ -71290,9 +69772,6 @@ class P2SVpnGatewaysOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the gateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -71416,9 +69895,6 @@ class P2SVpnGatewaysOperations(object):
         :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
          operation.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.P2SVpnProfileParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -71538,9 +70014,6 @@ class P2SVpnGatewaysOperations(object):
         :type resource_group_name: str
         :param gateway_name: The name of the P2SVpnGateway.
         :type gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -71664,9 +70137,6 @@ class P2SVpnGatewaysOperations(object):
         :type gateway_name: str
         :param request: Request parameters supplied to get p2s vpn connections detailed health.
         :type request: ~azure.mgmt.network.v2021_08_01.models.P2SVpnConnectionHealthRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -71788,9 +70258,6 @@ class P2SVpnGatewaysOperations(object):
         :type p2_s_vpn_gateway_name: str
         :param request: The parameters are supplied to disconnect p2s vpn connections.
         :type request: ~azure.mgmt.network.v2021_08_01.models.P2SVpnConnectionRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -71926,9 +70393,6 @@ class VpnServerConfigurationsAssociatedWithVirtualWanOperations(object):
         :param virtual_wan_name: The name of the VirtualWAN whose associated VpnServerConfigurations is
          needed.
         :type virtual_wan_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -72020,9 +70484,6 @@ class VirtualHubRouteTableV2SOperations(object):
         :type virtual_hub_name: str
         :param route_table_name: The name of the VirtualHubRouteTableV2.
         :type route_table_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualHubRouteTableV2, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualHubRouteTableV2
@@ -72149,9 +70610,6 @@ class VirtualHubRouteTableV2SOperations(object):
          VirtualHubRouteTableV2.
         :type virtual_hub_route_table_v2_parameters:
          ~azure.mgmt.network.v2021_08_01.models.VirtualHubRouteTableV2
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -72270,9 +70728,6 @@ class VirtualHubRouteTableV2SOperations(object):
         :type virtual_hub_name: str
         :param route_table_name: The name of the VirtualHubRouteTableV2.
         :type route_table_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -72336,9 +70791,6 @@ class VirtualHubRouteTableV2SOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualHubRouteTableV2SResult or the result of
          cls(response)
@@ -72437,9 +70889,6 @@ class ExpressRouteGatewaysOperations(object):
     ) -> "_models.ExpressRouteGatewayList":
         """Lists ExpressRoute gateways under a given subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteGatewayList, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteGatewayList
@@ -72493,9 +70942,6 @@ class ExpressRouteGatewaysOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteGatewayList, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteGatewayList
@@ -72613,9 +71059,6 @@ class ExpressRouteGatewaysOperations(object):
          operation.
         :type put_express_route_gateway_parameters:
          ~azure.mgmt.network.v2021_08_01.models.ExpressRouteGateway
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -72743,9 +71186,6 @@ class ExpressRouteGatewaysOperations(object):
         :param express_route_gateway_parameters: Parameters supplied to update a virtual wan express
          route gateway tags.
         :type express_route_gateway_parameters: ~azure.mgmt.network.v2021_08_01.models.TagsObject
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -72816,9 +71256,6 @@ class ExpressRouteGatewaysOperations(object):
         :type resource_group_name: str
         :param express_route_gateway_name: The name of the ExpressRoute gateway.
         :type express_route_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteGateway, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteGateway
@@ -72920,9 +71357,6 @@ class ExpressRouteGatewaysOperations(object):
         :type resource_group_name: str
         :param express_route_gateway_name: The name of the ExpressRoute gateway.
         :type express_route_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -73071,9 +71505,6 @@ class ExpressRouteConnectionsOperations(object):
          ExpressRouteConnection PUT operation.
         :type put_express_route_connection_parameters:
          ~azure.mgmt.network.v2021_08_01.models.ExpressRouteConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -73148,9 +71579,6 @@ class ExpressRouteConnectionsOperations(object):
         :type express_route_gateway_name: str
         :param connection_name: The name of the ExpressRoute connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteConnection
@@ -73257,9 +71685,6 @@ class ExpressRouteConnectionsOperations(object):
         :type express_route_gateway_name: str
         :param connection_name: The name of the connection subresource.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -73323,9 +71748,6 @@ class ExpressRouteConnectionsOperations(object):
         :type resource_group_name: str
         :param express_route_gateway_name: The name of the ExpressRoute gateway.
         :type express_route_gateway_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ExpressRouteConnectionList, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteConnectionList
@@ -73408,9 +71830,6 @@ class VirtualHubBgpConnectionOperations(object):
         :type virtual_hub_name: str
         :param connection_name: The name of the connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: BgpConnection, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.BgpConnection
@@ -73534,9 +71953,6 @@ class VirtualHubBgpConnectionOperations(object):
         :type connection_name: str
         :param parameters: Parameters of Bgp connection.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.BgpConnection
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -73654,9 +72070,6 @@ class VirtualHubBgpConnectionOperations(object):
         :type virtual_hub_name: str
         :param connection_name: The name of the connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -73741,9 +72154,6 @@ class VirtualHubBgpConnectionsOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualHubBgpConnectionResults or the result
          of cls(response)
@@ -73880,9 +72290,6 @@ class VirtualHubBgpConnectionsOperations(object):
         :type hub_name: str
         :param connection_name: The name of the virtual hub bgp connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -74003,9 +72410,6 @@ class VirtualHubBgpConnectionsOperations(object):
         :type hub_name: str
         :param connection_name: The name of the virtual hub bgp connection.
         :type connection_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -74097,9 +72501,6 @@ class VirtualHubIpConfigurationOperations(object):
         :type virtual_hub_name: str
         :param ip_config_name: The name of the ipconfig.
         :type ip_config_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: HubIpConfiguration, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.HubIpConfiguration
@@ -74223,9 +72624,6 @@ class VirtualHubIpConfigurationOperations(object):
         :type ip_config_name: str
         :param parameters: Hub Ip Configuration parameters.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.HubIpConfiguration
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -74344,9 +72742,6 @@ class VirtualHubIpConfigurationOperations(object):
         :type virtual_hub_name: str
         :param ip_config_name: The name of the ipconfig.
         :type ip_config_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -74410,9 +72805,6 @@ class VirtualHubIpConfigurationOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListVirtualHubIpConfigurationResults or the result
          of cls(response)
@@ -74580,9 +72972,6 @@ class HubRouteTablesOperations(object):
         :type route_table_name: str
         :param route_table_parameters: Parameters supplied to create or update RouteTable.
         :type route_table_parameters: ~azure.mgmt.network.v2021_08_01.models.HubRouteTable
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -74656,9 +73045,6 @@ class HubRouteTablesOperations(object):
         :type virtual_hub_name: str
         :param route_table_name: The name of the RouteTable.
         :type route_table_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: HubRouteTable, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.HubRouteTable
@@ -74765,9 +73151,6 @@ class HubRouteTablesOperations(object):
         :type virtual_hub_name: str
         :param route_table_name: The name of the RouteTable.
         :type route_table_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -74831,9 +73214,6 @@ class HubRouteTablesOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListHubRouteTablesResult or the result of
          cls(response)
@@ -75001,9 +73381,6 @@ class RoutingIntentOperations(object):
         :type routing_intent_name: str
         :param routing_intent_parameters: Parameters supplied to create or update RoutingIntent.
         :type routing_intent_parameters: ~azure.mgmt.network.v2021_08_01.models.RoutingIntent
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -75077,9 +73454,6 @@ class RoutingIntentOperations(object):
         :type virtual_hub_name: str
         :param routing_intent_name: The name of the RoutingIntent.
         :type routing_intent_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: RoutingIntent, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.RoutingIntent
@@ -75186,9 +73560,6 @@ class RoutingIntentOperations(object):
         :type virtual_hub_name: str
         :param routing_intent_name: The name of the RoutingIntent.
         :type routing_intent_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -75252,9 +73623,6 @@ class RoutingIntentOperations(object):
         :type resource_group_name: str
         :param virtual_hub_name: The name of the VirtualHub.
         :type virtual_hub_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ListRoutingIntentResult or the result of
          cls(response)
@@ -75356,9 +73724,6 @@ class WebApplicationFirewallPoliciesOperations(object):
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WebApplicationFirewallPolicyListResult or the
          result of cls(response)
@@ -75434,9 +73799,6 @@ class WebApplicationFirewallPoliciesOperations(object):
     ) -> Iterable["_models.WebApplicationFirewallPolicyListResult"]:
         """Gets all the WAF policies in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WebApplicationFirewallPolicyListResult or the
          result of cls(response)
@@ -75516,9 +73878,6 @@ class WebApplicationFirewallPoliciesOperations(object):
         :type resource_group_name: str
         :param policy_name: The name of the policy.
         :type policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: WebApplicationFirewallPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.WebApplicationFirewallPolicy
@@ -75580,9 +73939,6 @@ class WebApplicationFirewallPoliciesOperations(object):
         :type policy_name: str
         :param parameters: Policy to be created.
         :type parameters: ~azure.mgmt.network.v2021_08_01.models.WebApplicationFirewallPolicy
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: WebApplicationFirewallPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.WebApplicationFirewallPolicy
@@ -75691,9 +74047,6 @@ class WebApplicationFirewallPoliciesOperations(object):
         :type resource_group_name: str
         :param policy_name: The name of the policy.
         :type policy_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
