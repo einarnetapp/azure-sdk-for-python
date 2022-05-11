@@ -1350,7 +1350,9 @@ class ExtendedStatusInfo(msrest.serialization.Model):
     """ExtendedStatusInfo.
 
     :ivar status_code: Possible values include: "None", "Pending", "Processing", "Active",
-     "PurchaseError", "PaymentInstrumentError", "Split", "Merged", "Expired", "Succeeded".
+     "PurchaseError", "PaymentInstrumentError", "Split", "Merged", "Expired", "Succeeded",
+     "Warning", "NoBenefit", "NoBenefitDueToSubscriptionTransfer",
+     "NoBenefitDueToSubscriptionDeletion".
     :vartype status_code: str or ~azure.mgmt.reservations.models.ReservationStatusCode
     :ivar message: The message giving detailed information about the status code.
     :vartype message: str
@@ -1370,7 +1372,9 @@ class ExtendedStatusInfo(msrest.serialization.Model):
     ):
         """
         :keyword status_code: Possible values include: "None", "Pending", "Processing", "Active",
-         "PurchaseError", "PaymentInstrumentError", "Split", "Merged", "Expired", "Succeeded".
+         "PurchaseError", "PaymentInstrumentError", "Split", "Merged", "Expired", "Succeeded",
+         "Warning", "NoBenefit", "NoBenefitDueToSubscriptionTransfer",
+         "NoBenefitDueToSubscriptionDeletion".
         :paramtype status_code: str or ~azure.mgmt.reservations.models.ReservationStatusCode
         :keyword message: The message giving detailed information about the status code.
         :paramtype message: str
@@ -3269,6 +3273,10 @@ class ReservationSummary(msrest.serialization.Model):
     :vartype cancelled_count: float
     :ivar processing_count: The number of reservation in Processing state.
     :vartype processing_count: float
+    :ivar warning_count: The number of reservation in Warning state.
+    :vartype warning_count: float
+    :ivar no_benefit_count: The number of reservation in NoBenefit state.
+    :vartype no_benefit_count: float
     """
 
     _validation = {
@@ -3279,6 +3287,8 @@ class ReservationSummary(msrest.serialization.Model):
         'pending_count': {'readonly': True},
         'cancelled_count': {'readonly': True},
         'processing_count': {'readonly': True},
+        'warning_count': {'readonly': True},
+        'no_benefit_count': {'readonly': True},
     }
 
     _attribute_map = {
@@ -3289,6 +3299,8 @@ class ReservationSummary(msrest.serialization.Model):
         'pending_count': {'key': 'pendingCount', 'type': 'float'},
         'cancelled_count': {'key': 'cancelledCount', 'type': 'float'},
         'processing_count': {'key': 'processingCount', 'type': 'float'},
+        'warning_count': {'key': 'warningCount', 'type': 'float'},
+        'no_benefit_count': {'key': 'noBenefitCount', 'type': 'float'},
     }
 
     def __init__(
@@ -3305,6 +3317,8 @@ class ReservationSummary(msrest.serialization.Model):
         self.pending_count = None
         self.cancelled_count = None
         self.processing_count = None
+        self.warning_count = None
+        self.no_benefit_count = None
 
 
 class ReservationToExchange(msrest.serialization.Model):

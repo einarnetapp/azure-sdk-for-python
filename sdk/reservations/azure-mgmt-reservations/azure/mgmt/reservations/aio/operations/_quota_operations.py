@@ -193,14 +193,9 @@ class QuotaOperations:
          Steps:
 
 
-        #.
-           Make the Get request to get the quota information for specific resource.
-
-        #.
-           To increase the quota, update the limit field in the response from Get request to new value.
-
-        #.
-           Submit the JSON to the quota request API to update the quota.
+        #. Make the Get request to get the quota information for specific resource.
+        #. To increase the quota, update the limit field in the response from Get request to new value.
+        #. Submit the JSON to the quota request API to update the quota.
            The Create quota request may be constructed as follows. The PUT operation can be used to
         update the quota.
 
@@ -347,11 +342,8 @@ class QuotaOperations:
         **kwargs: Any
     ) -> AsyncLROPoller[Union["_models.CurrentQuotaLimitBase", "_models.QuotaRequestSubmitResponse201"]]:
         """Update the quota (service limits) of this resource to the requested value.
-
           • To get the quota information for specific resource, send a GET request.
-
           • To increase the quota, update the limit field from the GET response to a new value.
-
           • To update the quota value, submit the JSON response to the quota request API to update the
         quota.
           • To update the quota. use the PATCH operation.

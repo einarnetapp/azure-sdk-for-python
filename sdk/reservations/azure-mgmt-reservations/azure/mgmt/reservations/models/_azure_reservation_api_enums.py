@@ -47,6 +47,8 @@ class DisplayProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum
     PROCESSING = "Processing"
     CANCELLED = "Cancelled"
     FAILED = "Failed"
+    WARNING = "Warning"
+    NO_BENEFIT = "NoBenefit"
 
 class ErrorResponseCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
@@ -220,6 +222,10 @@ class ReservationStatusCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MERGED = "Merged"
     EXPIRED = "Expired"
     SUCCEEDED = "Succeeded"
+    WARNING = "Warning"
+    NO_BENEFIT = "NoBenefit"
+    NO_BENEFIT_DUE_TO_SUBSCRIPTION_TRANSFER = "NoBenefitDueToSubscriptionTransfer"
+    NO_BENEFIT_DUE_TO_SUBSCRIPTION_DELETION = "NoBenefitDueToSubscriptionDeletion"
 
 class ReservationTerm(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Represent the term of Reservation.
