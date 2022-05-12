@@ -82,6 +82,7 @@ class EventType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     PENDING_EXPIRED_CREDIT = "PendingExpiredCredit"
     UN_KNOWN = "UnKnown"
     NEW_CREDIT = "NewCredit"
+    CREDIT_EXPIRED = "CreditExpired"
 
 class LookBackPeriod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 

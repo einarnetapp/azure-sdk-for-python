@@ -533,8 +533,6 @@ class BudgetFilter(msrest.serialization.Model):
 
     :ivar and_property: The logical "AND" expression. Must have at least 2 items.
     :vartype and_property: list[~azure.mgmt.consumption.models.BudgetFilterProperties]
-    :ivar not_property: The logical "NOT" expression.
-    :vartype not_property: ~azure.mgmt.consumption.models.BudgetFilterProperties
     :ivar dimensions: Has comparison expression for a dimension.
     :vartype dimensions: ~azure.mgmt.consumption.models.BudgetComparisonExpression
     :ivar tags: A set of tags. Has comparison expression for a tag.
@@ -543,7 +541,6 @@ class BudgetFilter(msrest.serialization.Model):
 
     _attribute_map = {
         'and_property': {'key': 'and', 'type': '[BudgetFilterProperties]'},
-        'not_property': {'key': 'not', 'type': 'BudgetFilterProperties'},
         'dimensions': {'key': 'dimensions', 'type': 'BudgetComparisonExpression'},
         'tags': {'key': 'tags', 'type': 'BudgetComparisonExpression'},
     }
@@ -552,7 +549,6 @@ class BudgetFilter(msrest.serialization.Model):
         self,
         *,
         and_property: Optional[List["BudgetFilterProperties"]] = None,
-        not_property: Optional["BudgetFilterProperties"] = None,
         dimensions: Optional["BudgetComparisonExpression"] = None,
         tags: Optional["BudgetComparisonExpression"] = None,
         **kwargs
@@ -560,8 +556,6 @@ class BudgetFilter(msrest.serialization.Model):
         """
         :keyword and_property: The logical "AND" expression. Must have at least 2 items.
         :paramtype and_property: list[~azure.mgmt.consumption.models.BudgetFilterProperties]
-        :keyword not_property: The logical "NOT" expression.
-        :paramtype not_property: ~azure.mgmt.consumption.models.BudgetFilterProperties
         :keyword dimensions: Has comparison expression for a dimension.
         :paramtype dimensions: ~azure.mgmt.consumption.models.BudgetComparisonExpression
         :keyword tags: A set of tags. Has comparison expression for a tag.
@@ -569,7 +563,6 @@ class BudgetFilter(msrest.serialization.Model):
         """
         super(BudgetFilter, self).__init__(**kwargs)
         self.and_property = and_property
-        self.not_property = not_property
         self.dimensions = dimensions
         self.tags = tags
 
@@ -1078,7 +1071,7 @@ class EventSummary(ProxyResource):
     :vartype closed_balance: ~azure.mgmt.consumption.models.Amount
     :ivar event_type: Identifies the type of the event. Possible values include: "SettledCharges",
      "PendingCharges", "PendingAdjustments", "PendingNewCredit", "PendingExpiredCredit", "UnKnown",
-     "NewCredit".
+     "NewCredit", "CreditExpired".
     :vartype event_type: str or ~azure.mgmt.consumption.models.EventType
     :ivar invoice_number: The number which uniquely identifies the invoice on which the event was
      billed. This will be empty for unbilled events.
@@ -1193,7 +1186,7 @@ class EventSummary(ProxyResource):
         :paramtype e_tag: str
         :keyword event_type: Identifies the type of the event. Possible values include:
          "SettledCharges", "PendingCharges", "PendingAdjustments", "PendingNewCredit",
-         "PendingExpiredCredit", "UnKnown", "NewCredit".
+         "PendingExpiredCredit", "UnKnown", "NewCredit", "CreditExpired".
         :paramtype event_type: str or ~azure.mgmt.consumption.models.EventType
         """
         super(EventSummary, self).__init__(e_tag=e_tag, **kwargs)
@@ -1509,7 +1502,6 @@ class ReservationRecommendation(Resource, ResourceAttributes):
         self.type = None
         self.etag = None
         self.tags = None
-        self.kind = 'ReservationRecommendation'  # type: str
 
 
 class LegacyReservationRecommendation(ReservationRecommendation):
