@@ -17,12 +17,12 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._container_apps_revision_replicas_operations import build_get_replica_request, build_list_replicas_request
+from ...operations._managed_environment_diagnostics_operations import build_get_detector_request, build_list_detectors_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class ContainerAppsRevisionReplicasOperations:
-    """ContainerAppsRevisionReplicasOperations async operations.
+class ManagedEnvironmentDiagnosticsOperations:
+    """ManagedEnvironmentDiagnosticsOperations async operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -44,32 +44,26 @@ class ContainerAppsRevisionReplicasOperations:
         self._config = config
 
     @distributed_trace_async
-    async def get_replica(
+    async def list_detectors(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        revision_name: str,
         name: str,
         **kwargs: Any
-    ) -> "_models.Replica":
-        """Get a replica for a Container App Revision.
+    ) -> "_models.DiagnosticsCollection":
+        """Get the list of diagnostics for a given Managed Environment.
 
-        Get a replica for a Container App Revision.
+        Get the list of diagnostics for a Managed Environment used to host container apps.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App.
-        :type container_app_name: str
-        :param revision_name: Name of the Container App Revision.
-        :type revision_name: str
-        :param name: Name of the Container App Revision Replica.
+        :param name: Name of the Environment.
         :type name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Replica, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Replica
+        :return: DiagnosticsCollection, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.DiagnosticsCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Replica"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.DiagnosticsCollection"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -78,14 +72,12 @@ class ContainerAppsRevisionReplicasOperations:
         api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
 
         
-        request = build_get_replica_request(
+        request = build_list_detectors_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            revision_name=revision_name,
             name=name,
             api_version=api_version,
-            template_url=self.get_replica.metadata['url'],
+            template_url=self.list_detectors.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
@@ -102,40 +94,40 @@ class ContainerAppsRevisionReplicasOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('Replica', pipeline_response)
+        deserialized = self._deserialize('DiagnosticsCollection', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_replica.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas/{name}"}  # type: ignore
+    list_detectors.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{name}/detectors"}  # type: ignore
 
 
     @distributed_trace_async
-    async def list_replicas(
+    async def get_detector(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        revision_name: str,
+        name: str,
+        detector_name: str,
         **kwargs: Any
-    ) -> "_models.ReplicaCollection":
-        """List replicas for a Container App Revision.
+    ) -> "_models.Diagnostics":
+        """Get the diagnostics data for a given Managed Environment.
 
-        List replicas for a Container App Revision.
+        Get the diagnostics data for a Managed Environment used to host container apps.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App.
-        :type container_app_name: str
-        :param revision_name: Name of the Container App Revision.
-        :type revision_name: str
+        :param name: Name of the Environment.
+        :type name: str
+        :param detector_name: Name of the Managed Environment detector.
+        :type detector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ReplicaCollection, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ReplicaCollection
+        :return: Diagnostics, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.Diagnostics
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReplicaCollection"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Diagnostics"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -144,13 +136,13 @@ class ContainerAppsRevisionReplicasOperations:
         api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
 
         
-        request = build_list_replicas_request(
+        request = build_get_detector_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            revision_name=revision_name,
+            name=name,
+            detector_name=detector_name,
             api_version=api_version,
-            template_url=self.list_replicas.metadata['url'],
+            template_url=self.get_detector.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
@@ -167,12 +159,12 @@ class ContainerAppsRevisionReplicasOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('ReplicaCollection', pipeline_response)
+        deserialized = self._deserialize('Diagnostics', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list_replicas.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/replicas"}  # type: ignore
+    get_detector.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{name}/detectors/{detectorName}"}  # type: ignore
 
