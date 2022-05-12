@@ -121,6 +121,7 @@ from ._operations import VirtualHubIpConfigurationOperations
 from ._operations import HubRouteTablesOperations
 from ._operations import RoutingIntentOperations
 from ._operations import WebApplicationFirewallPoliciesOperations
+from ._operations import ExpressRouteProviderPortsLocationOperations
 
 __all__ = [
     'ApplicationGatewaysOperations',
@@ -238,4 +239,5 @@ __all__ = [
     'HubRouteTablesOperations',
     'RoutingIntentOperations',
     'WebApplicationFirewallPoliciesOperations',
+    'ExpressRouteProviderPortsLocationOperations',
 ]

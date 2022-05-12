@@ -32,9 +32,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param bsl_request: Post request for all the Bastion Shareable Link endpoints.
         :type bsl_request: ~azure.mgmt.network.v2021_08_01.models.BastionShareableLinkListRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -100,9 +97,6 @@ class NetworkManagementClientOperationsMixin(object):
         :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
          operation.
         :type vpn_client_params: ~azure.mgmt.network.v2021_08_01.models.VirtualWanVpnProfileParameters
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -166,9 +160,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type resource_group_name: str
         :param bastion_host_name: The name of the Bastion Host.
         :type bastion_host_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -233,9 +224,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param bsl_request: Post request for all the Bastion Shareable Link endpoints.
         :type bsl_request: ~azure.mgmt.network.v2021_08_01.models.BastionShareableLinkListRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -298,9 +286,6 @@ class NetworkManagementClientOperationsMixin(object):
         :param domain_name_label: The domain name to be verified. It must conform to the following
          regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
         :type domain_name_label: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DnsNameAvailabilityResult, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.DnsNameAvailabilityResult
@@ -396,9 +381,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param session_ids: The list of sessionids to disconnect.
         :type session_ids: ~azure.mgmt.network.v2021_08_01.models.SessionIds
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BastionSessionDeleteResult or the result of
          cls(response)
@@ -441,6 +423,33 @@ class NetworkManagementClientOperationsMixin(object):
         mixin_instance._deserialize = Deserializer(self._models_dict(api_version))
         return mixin_instance.disconnect_active_sessions(resource_group_name, bastion_host_name, session_ids, **kwargs)
 
+    async def express_route_provider_port(
+        self,
+        providerport: str,
+        **kwargs: Any
+    ) -> "_models.ExpressRouteProviderPort":
+        """Retrieves detail of a provider port.
+
+        :param providerport: The name of the provider port.
+        :type providerport: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ExpressRouteProviderPort, or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_08_01.models.ExpressRouteProviderPort
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        api_version = self._get_api_version('express_route_provider_port')
+        if api_version == '2021-08-01':
+            from ..v2021_08_01.aio.operations import NetworkManagementClientOperationsMixin as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation 'express_route_provider_port'".format(api_version))
+        mixin_instance = OperationClass()
+        mixin_instance._client = self._client
+        mixin_instance._config = self._config
+        mixin_instance._serialize = Serializer(self._models_dict(api_version))
+        mixin_instance._serialize.client_side_validation = False
+        mixin_instance._deserialize = Deserializer(self._models_dict(api_version))
+        return await mixin_instance.express_route_provider_port(providerport, **kwargs)
+
     def get_bastion_shareable_link(
         self,
         resource_group_name: str,
@@ -456,9 +465,6 @@ class NetworkManagementClientOperationsMixin(object):
         :type bastion_host_name: str
         :param bsl_request: Post request for all the Bastion Shareable Link endpoints.
         :type bsl_request: ~azure.mgmt.network.v2021_08_01.models.BastionShareableLinkListRequest
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BastionShareableLinkListResult or the result of
          cls(response)
@@ -514,9 +520,6 @@ class NetworkManagementClientOperationsMixin(object):
         :param virtual_wan_name: The name of the VirtualWAN for which supported security providers are
          needed.
         :type virtual_wan_name: str
-        :keyword api_version: Api Version. Default value is "2021-08-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: VirtualWanSecurityProviders, or the result of cls(response)
         :rtype: ~azure.mgmt.network.v2021_08_01.models.VirtualWanSecurityProviders

@@ -13810,6 +13810,145 @@ class ExpressRoutePortsLocationListResult(msrest.serialization.Model):
         self.next_link = next_link
 
 
+class ExpressRouteProviderPort(Resource):
+    """ExpressRouteProviderPort resource.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar location: Resource location.
+    :vartype location: str
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar etag: A unique read-only string that changes whenever the resource is updated.
+    :vartype etag: str
+    :ivar port_pair_descriptor: The name of the port pair.
+    :vartype port_pair_descriptor: str
+    :ivar primary_azure_port: The name of the primary port.
+    :vartype primary_azure_port: str
+    :ivar secondary_azure_port: The name of the secondary port.
+    :vartype secondary_azure_port: str
+    :ivar peering_location: The peering location of the port pair.
+    :vartype peering_location: str
+    :ivar overprovision_factor: Overprovisioning factor for the port pair.
+    :vartype overprovision_factor: int
+    :ivar port_bandwidth_in_mbps: Bandwidth of the port in Mbps.
+    :vartype port_bandwidth_in_mbps: int
+    :ivar used_bandwidth_in_mbps: Used Bandwidth of the port in Mbps.
+    :vartype used_bandwidth_in_mbps: int
+    :ivar remaining_bandwidth_in_mbps: Remaining Bandwidth of the port in Mbps.
+    :vartype remaining_bandwidth_in_mbps: int
+    """
+
+    _validation = {
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'etag': {'readonly': True},
+        'port_pair_descriptor': {'readonly': True},
+        'primary_azure_port': {'readonly': True},
+        'secondary_azure_port': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+        'etag': {'key': 'etag', 'type': 'str'},
+        'port_pair_descriptor': {'key': 'properties.portPairDescriptor', 'type': 'str'},
+        'primary_azure_port': {'key': 'properties.primaryAzurePort', 'type': 'str'},
+        'secondary_azure_port': {'key': 'properties.secondaryAzurePort', 'type': 'str'},
+        'peering_location': {'key': 'properties.peeringLocation', 'type': 'str'},
+        'overprovision_factor': {'key': 'properties.overprovisionFactor', 'type': 'int'},
+        'port_bandwidth_in_mbps': {'key': 'properties.portBandwidthInMbps', 'type': 'int'},
+        'used_bandwidth_in_mbps': {'key': 'properties.usedBandwidthInMbps', 'type': 'int'},
+        'remaining_bandwidth_in_mbps': {'key': 'properties.remainingBandwidthInMbps', 'type': 'int'},
+    }
+
+    def __init__(
+        self,
+        *,
+        id: Optional[str] = None,
+        location: Optional[str] = None,
+        tags: Optional[Dict[str, str]] = None,
+        peering_location: Optional[str] = None,
+        overprovision_factor: Optional[int] = None,
+        port_bandwidth_in_mbps: Optional[int] = None,
+        used_bandwidth_in_mbps: Optional[int] = None,
+        remaining_bandwidth_in_mbps: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword id: Resource ID.
+        :paramtype id: str
+        :keyword location: Resource location.
+        :paramtype location: str
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword peering_location: The peering location of the port pair.
+        :paramtype peering_location: str
+        :keyword overprovision_factor: Overprovisioning factor for the port pair.
+        :paramtype overprovision_factor: int
+        :keyword port_bandwidth_in_mbps: Bandwidth of the port in Mbps.
+        :paramtype port_bandwidth_in_mbps: int
+        :keyword used_bandwidth_in_mbps: Used Bandwidth of the port in Mbps.
+        :paramtype used_bandwidth_in_mbps: int
+        :keyword remaining_bandwidth_in_mbps: Remaining Bandwidth of the port in Mbps.
+        :paramtype remaining_bandwidth_in_mbps: int
+        """
+        super(ExpressRouteProviderPort, self).__init__(id=id, location=location, tags=tags, **kwargs)
+        self.etag = None
+        self.port_pair_descriptor = None
+        self.primary_azure_port = None
+        self.secondary_azure_port = None
+        self.peering_location = peering_location
+        self.overprovision_factor = overprovision_factor
+        self.port_bandwidth_in_mbps = port_bandwidth_in_mbps
+        self.used_bandwidth_in_mbps = used_bandwidth_in_mbps
+        self.remaining_bandwidth_in_mbps = remaining_bandwidth_in_mbps
+
+
+class ExpressRouteProviderPortListResult(msrest.serialization.Model):
+    """Response for ListExpressRouteProviderPort API service call.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: A list of ExpressRouteProviderPort resources.
+    :vartype value: list[~azure.mgmt.network.v2021_08_01.models.ExpressRouteProviderPort]
+    :ivar next_link: The URL to get the next set of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ExpressRouteProviderPort]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["ExpressRouteProviderPort"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: A list of ExpressRouteProviderPort resources.
+        :paramtype value: list[~azure.mgmt.network.v2021_08_01.models.ExpressRouteProviderPort]
+        """
+        super(ExpressRouteProviderPortListResult, self).__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
 class ExpressRouteServiceProvider(Resource):
     """A ExpressRouteResourceProvider object.
 

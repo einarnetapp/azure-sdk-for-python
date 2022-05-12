@@ -242,6 +242,8 @@ from ._models_py3 import ExpressRoutePortListResult
 from ._models_py3 import ExpressRoutePortsLocation
 from ._models_py3 import ExpressRoutePortsLocationBandwidths
 from ._models_py3 import ExpressRoutePortsLocationListResult
+from ._models_py3 import ExpressRouteProviderPort
+from ._models_py3 import ExpressRouteProviderPortListResult
 from ._models_py3 import ExpressRouteServiceProvider
 from ._models_py3 import ExpressRouteServiceProviderBandwidthsOffered
 from ._models_py3 import ExpressRouteServiceProviderListResult
@@ -1024,6 +1026,8 @@ __all__ = [
     'ExpressRoutePortsLocation',
     'ExpressRoutePortsLocationBandwidths',
     'ExpressRoutePortsLocationListResult',
+    'ExpressRouteProviderPort',
+    'ExpressRouteProviderPortListResult',
     'ExpressRouteServiceProvider',
     'ExpressRouteServiceProviderBandwidthsOffered',
     'ExpressRouteServiceProviderListResult',

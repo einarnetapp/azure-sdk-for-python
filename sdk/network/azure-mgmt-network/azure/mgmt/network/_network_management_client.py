@@ -2631,6 +2631,19 @@ class NetworkManagementClient(NetworkManagementClientOperationsMixin, MultiApiCl
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
+    def express_route_provider_ports_location(self):
+        """Instance depends on the API version:
+
+           * 2021-08-01: :class:`ExpressRouteProviderPortsLocationOperations<azure.mgmt.network.v2021_08_01.operations.ExpressRouteProviderPortsLocationOperations>`
+        """
+        api_version = self._get_api_version('express_route_provider_ports_location')
+        if api_version == '2021-08-01':
+            from .v2021_08_01.operations import ExpressRouteProviderPortsLocationOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'express_route_provider_ports_location'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
     def express_route_service_providers(self):
         """Instance depends on the API version:
 
