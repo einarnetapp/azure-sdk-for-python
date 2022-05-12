@@ -62,7 +62,7 @@ class Audio(Codec):
     """Defines the common properties for all audio codecs.
 
     You probably want to use the sub-classes and not this class directly. Known
-    sub-classes are: AacAudio.
+    sub-classes are: AacAudio, DDAudio.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -91,7 +91,7 @@ class Audio(Codec):
     }
 
     _subtype_map = {
-        'odata_type': {'#Microsoft.Media.AacAudio': 'AacAudio'}
+        'odata_type': {'#Microsoft.Media.AacAudio': 'AacAudio', '#Microsoft.Media.DDAudio': 'DDAudio'}
     }
 
     def __init__(
@@ -1695,6 +1695,442 @@ class AudioTrackDescriptor(TrackDescriptor):
         self.channel_mapping = channel_mapping
 
 
+class Layer(msrest.serialization.Model):
+    """The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution.
+
+    :ivar width: The width of the output video for this layer. The value can be absolute (in
+     pixels) or relative (in percentage). For example 50% means the output video has half as many
+     pixels in width as the input.
+    :vartype width: str
+    :ivar height: The height of the output video for this layer. The value can be absolute (in
+     pixels) or relative (in percentage). For example 50% means the output video has half as many
+     pixels in height as the input.
+    :vartype height: str
+    :ivar label: The alphanumeric label for this layer, which can be used in multiplexing different
+     video and audio layers, or in naming the output file.
+    :vartype label: str
+    """
+
+    _attribute_map = {
+        'width': {'key': 'width', 'type': 'str'},
+        'height': {'key': 'height', 'type': 'str'},
+        'label': {'key': 'label', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        label: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword width: The width of the output video for this layer. The value can be absolute (in
+         pixels) or relative (in percentage). For example 50% means the output video has half as many
+         pixels in width as the input.
+        :paramtype width: str
+        :keyword height: The height of the output video for this layer. The value can be absolute (in
+         pixels) or relative (in percentage). For example 50% means the output video has half as many
+         pixels in height as the input.
+        :paramtype height: str
+        :keyword label: The alphanumeric label for this layer, which can be used in multiplexing
+         different video and audio layers, or in naming the output file.
+        :paramtype label: str
+        """
+        super(Layer, self).__init__(**kwargs)
+        self.width = width
+        self.height = height
+        self.label = label
+
+
+class AV1VideoLayer(Layer):
+    """Describes the settings to be used when encoding the input video into a desired output bitrate layer.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar width: The width of the output video for this layer. The value can be absolute (in
+     pixels) or relative (in percentage). For example 50% means the output video has half as many
+     pixels in width as the input.
+    :vartype width: str
+    :ivar height: The height of the output video for this layer. The value can be absolute (in
+     pixels) or relative (in percentage). For example 50% means the output video has half as many
+     pixels in height as the input.
+    :vartype height: str
+    :ivar label: The alphanumeric label for this layer, which can be used in multiplexing different
+     video and audio layers, or in naming the output file.
+    :vartype label: str
+    :ivar bitrate: Required. The average bitrate in bits per second at which to encode the input
+     video when generating this layer. For example: a target bitrate of 3000Kbps or 3Mbps means this
+     value should be 3000000 This is a required field.
+    :vartype bitrate: int
+    :ivar frame_rate: The frame rate (in frames per second) at which to encode this layer. The
+     value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the
+     form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame
+     rates based on the profile and level. If it is not specified, the encoder will use the same
+     frame rate as the input video.
+    :vartype frame_rate: str
+    :ivar max_bitrate: The maximum bitrate (in bits per second), at which the VBV buffer should be
+     assumed to refill. If not specified, defaults to the same value as bitrate.
+    :vartype max_bitrate: int
+    """
+
+    _validation = {
+        'bitrate': {'required': True},
+    }
+
+    _attribute_map = {
+        'width': {'key': 'width', 'type': 'str'},
+        'height': {'key': 'height', 'type': 'str'},
+        'label': {'key': 'label', 'type': 'str'},
+        'bitrate': {'key': 'bitrate', 'type': 'int'},
+        'frame_rate': {'key': 'frameRate', 'type': 'str'},
+        'max_bitrate': {'key': 'maxBitrate', 'type': 'int'},
+    }
+
+    def __init__(
+        self,
+        *,
+        bitrate: int,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        label: Optional[str] = None,
+        frame_rate: Optional[str] = None,
+        max_bitrate: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword width: The width of the output video for this layer. The value can be absolute (in
+         pixels) or relative (in percentage). For example 50% means the output video has half as many
+         pixels in width as the input.
+        :paramtype width: str
+        :keyword height: The height of the output video for this layer. The value can be absolute (in
+         pixels) or relative (in percentage). For example 50% means the output video has half as many
+         pixels in height as the input.
+        :paramtype height: str
+        :keyword label: The alphanumeric label for this layer, which can be used in multiplexing
+         different video and audio layers, or in naming the output file.
+        :paramtype label: str
+        :keyword bitrate: Required. The average bitrate in bits per second at which to encode the input
+         video when generating this layer. For example: a target bitrate of 3000Kbps or 3Mbps means this
+         value should be 3000000 This is a required field.
+        :paramtype bitrate: int
+        :keyword frame_rate: The frame rate (in frames per second) at which to encode this layer. The
+         value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the
+         form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame
+         rates based on the profile and level. If it is not specified, the encoder will use the same
+         frame rate as the input video.
+        :paramtype frame_rate: str
+        :keyword max_bitrate: The maximum bitrate (in bits per second), at which the VBV buffer should
+         be assumed to refill. If not specified, defaults to the same value as bitrate.
+        :paramtype max_bitrate: int
+        """
+        super(AV1VideoLayer, self).__init__(width=width, height=height, label=label, **kwargs)
+        self.bitrate = bitrate
+        self.frame_rate = frame_rate
+        self.max_bitrate = max_bitrate
+
+
+class AV1Layer(AV1VideoLayer):
+    """Describes the settings to be used when encoding the input video into a desired output bitrate layer with the AV1 video codec.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar width: The width of the output video for this layer. The value can be absolute (in
+     pixels) or relative (in percentage). For example 50% means the output video has half as many
+     pixels in width as the input.
+    :vartype width: str
+    :ivar height: The height of the output video for this layer. The value can be absolute (in
+     pixels) or relative (in percentage). For example 50% means the output video has half as many
+     pixels in height as the input.
+    :vartype height: str
+    :ivar label: The alphanumeric label for this layer, which can be used in multiplexing different
+     video and audio layers, or in naming the output file.
+    :vartype label: str
+    :ivar bitrate: Required. The average bitrate in bits per second at which to encode the input
+     video when generating this layer. For example: a target bitrate of 3000Kbps or 3Mbps means this
+     value should be 3000000 This is a required field.
+    :vartype bitrate: int
+    :ivar frame_rate: The frame rate (in frames per second) at which to encode this layer. The
+     value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the
+     form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame
+     rates based on the profile and level. If it is not specified, the encoder will use the same
+     frame rate as the input video.
+    :vartype frame_rate: str
+    :ivar max_bitrate: The maximum bitrate (in bits per second), at which the VBV buffer should be
+     assumed to refill. If not specified, defaults to the same value as bitrate.
+    :vartype max_bitrate: int
+    :ivar buffer_window: The VBV buffer window length. The value should be in ISO 8601 format. The
+     value should be in the range [0.1-100] seconds. The default is 5 seconds (for example, PT5S).
+    :vartype buffer_window: ~datetime.timedelta
+    :ivar crf: The value of CRF to be used when encoding this layer. This setting takes effect when
+     RateControlMode of video codec is set at CRF mode. The range of CRF value is between 0 and 63,
+     where lower values would result in better quality, at the expense of higher file sizes. Higher
+     values mean more compression, but at some point quality degradation will be noticed. Default
+     value is 32.
+    :vartype crf: float
+    :ivar level: We currently support Level up to 6.3. The value can be Auto, or a number that
+     matches the AV1 profile. If not specified, the default is Auto, which lets the encoder choose
+     the Level that is appropriate for this layer.
+    :vartype level: str
+    :ivar profile: We currently support Main. Default is Auto. Possible values include: "Auto",
+     "Main".
+    :vartype profile: str or ~azure.mgmt.media.models.AV1VideoProfile
+    """
+
+    _validation = {
+        'bitrate': {'required': True},
+    }
+
+    _attribute_map = {
+        'width': {'key': 'width', 'type': 'str'},
+        'height': {'key': 'height', 'type': 'str'},
+        'label': {'key': 'label', 'type': 'str'},
+        'bitrate': {'key': 'bitrate', 'type': 'int'},
+        'frame_rate': {'key': 'frameRate', 'type': 'str'},
+        'max_bitrate': {'key': 'maxBitrate', 'type': 'int'},
+        'buffer_window': {'key': 'bufferWindow', 'type': 'duration'},
+        'crf': {'key': 'crf', 'type': 'float'},
+        'level': {'key': 'level', 'type': 'str'},
+        'profile': {'key': 'profile', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        bitrate: int,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        label: Optional[str] = None,
+        frame_rate: Optional[str] = None,
+        max_bitrate: Optional[int] = None,
+        buffer_window: Optional[datetime.timedelta] = None,
+        crf: Optional[float] = None,
+        level: Optional[str] = None,
+        profile: Optional[Union[str, "AV1VideoProfile"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword width: The width of the output video for this layer. The value can be absolute (in
+         pixels) or relative (in percentage). For example 50% means the output video has half as many
+         pixels in width as the input.
+        :paramtype width: str
+        :keyword height: The height of the output video for this layer. The value can be absolute (in
+         pixels) or relative (in percentage). For example 50% means the output video has half as many
+         pixels in height as the input.
+        :paramtype height: str
+        :keyword label: The alphanumeric label for this layer, which can be used in multiplexing
+         different video and audio layers, or in naming the output file.
+        :paramtype label: str
+        :keyword bitrate: Required. The average bitrate in bits per second at which to encode the input
+         video when generating this layer. For example: a target bitrate of 3000Kbps or 3Mbps means this
+         value should be 3000000 This is a required field.
+        :paramtype bitrate: int
+        :keyword frame_rate: The frame rate (in frames per second) at which to encode this layer. The
+         value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the
+         form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame
+         rates based on the profile and level. If it is not specified, the encoder will use the same
+         frame rate as the input video.
+        :paramtype frame_rate: str
+        :keyword max_bitrate: The maximum bitrate (in bits per second), at which the VBV buffer should
+         be assumed to refill. If not specified, defaults to the same value as bitrate.
+        :paramtype max_bitrate: int
+        :keyword buffer_window: The VBV buffer window length. The value should be in ISO 8601 format.
+         The value should be in the range [0.1-100] seconds. The default is 5 seconds (for example,
+         PT5S).
+        :paramtype buffer_window: ~datetime.timedelta
+        :keyword crf: The value of CRF to be used when encoding this layer. This setting takes effect
+         when RateControlMode of video codec is set at CRF mode. The range of CRF value is between 0 and
+         63, where lower values would result in better quality, at the expense of higher file sizes.
+         Higher values mean more compression, but at some point quality degradation will be noticed.
+         Default value is 32.
+        :paramtype crf: float
+        :keyword level: We currently support Level up to 6.3. The value can be Auto, or a number that
+         matches the AV1 profile. If not specified, the default is Auto, which lets the encoder choose
+         the Level that is appropriate for this layer.
+        :paramtype level: str
+        :keyword profile: We currently support Main. Default is Auto. Possible values include: "Auto",
+         "Main".
+        :paramtype profile: str or ~azure.mgmt.media.models.AV1VideoProfile
+        """
+        super(AV1Layer, self).__init__(width=width, height=height, label=label, bitrate=bitrate, frame_rate=frame_rate, max_bitrate=max_bitrate, **kwargs)
+        self.buffer_window = buffer_window
+        self.crf = crf
+        self.level = level
+        self.profile = profile
+
+
+class Video(Codec):
+    """Describes the basic properties for encoding the input video.
+
+    You probably want to use the sub-classes and not this class directly. Known
+    sub-classes are: AV1Video, H264Video, H265Video, Image.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
+    :vartype odata_type: str
+    :ivar label: An optional label for the codec. The label can be used to control muxing behavior.
+    :vartype label: str
+    :ivar key_frame_interval: The distance between two key frames. The value should be non-zero in
+     the range [0.5, 20] seconds, specified in ISO 8601 format. The default is 2 seconds(PT2S). Note
+     that this setting is ignored if VideoSyncMode.Passthrough is set, where the KeyFrameInterval
+     value will follow the input source setting.
+    :vartype key_frame_interval: ~datetime.timedelta
+    :ivar stretch_mode: The resizing mode - how the input video will be resized to fit the desired
+     output resolution(s). Default is AutoSize. Possible values include: "None", "AutoSize",
+     "AutoFit".
+    :vartype stretch_mode: str or ~azure.mgmt.media.models.StretchMode
+    :ivar sync_mode: The Video Sync Mode. Possible values include: "Auto", "Passthrough", "Cfr",
+     "Vfr".
+    :vartype sync_mode: str or ~azure.mgmt.media.models.VideoSyncMode
+    """
+
+    _validation = {
+        'odata_type': {'required': True},
+    }
+
+    _attribute_map = {
+        'odata_type': {'key': '@odata\\.type', 'type': 'str'},
+        'label': {'key': 'label', 'type': 'str'},
+        'key_frame_interval': {'key': 'keyFrameInterval', 'type': 'duration'},
+        'stretch_mode': {'key': 'stretchMode', 'type': 'str'},
+        'sync_mode': {'key': 'syncMode', 'type': 'str'},
+    }
+
+    _subtype_map = {
+        'odata_type': {'#Microsoft.Media.AV1Video': 'AV1Video', '#Microsoft.Media.H264Video': 'H264Video', '#Microsoft.Media.H265Video': 'H265Video', '#Microsoft.Media.Image': 'Image'}
+    }
+
+    def __init__(
+        self,
+        *,
+        label: Optional[str] = None,
+        key_frame_interval: Optional[datetime.timedelta] = None,
+        stretch_mode: Optional[Union[str, "StretchMode"]] = None,
+        sync_mode: Optional[Union[str, "VideoSyncMode"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword label: An optional label for the codec. The label can be used to control muxing
+         behavior.
+        :paramtype label: str
+        :keyword key_frame_interval: The distance between two key frames. The value should be non-zero
+         in the range [0.5, 20] seconds, specified in ISO 8601 format. The default is 2 seconds(PT2S).
+         Note that this setting is ignored if VideoSyncMode.Passthrough is set, where the
+         KeyFrameInterval value will follow the input source setting.
+        :paramtype key_frame_interval: ~datetime.timedelta
+        :keyword stretch_mode: The resizing mode - how the input video will be resized to fit the
+         desired output resolution(s). Default is AutoSize. Possible values include: "None", "AutoSize",
+         "AutoFit".
+        :paramtype stretch_mode: str or ~azure.mgmt.media.models.StretchMode
+        :keyword sync_mode: The Video Sync Mode. Possible values include: "Auto", "Passthrough", "Cfr",
+         "Vfr".
+        :paramtype sync_mode: str or ~azure.mgmt.media.models.VideoSyncMode
+        """
+        super(Video, self).__init__(label=label, **kwargs)
+        self.odata_type = '#Microsoft.Media.Video'  # type: str
+        self.key_frame_interval = key_frame_interval
+        self.stretch_mode = stretch_mode
+        self.sync_mode = sync_mode
+
+
+class AV1Video(Video):
+    """Describes all the properties for encoding a video with the AV1 codec.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
+    :vartype odata_type: str
+    :ivar label: An optional label for the codec. The label can be used to control muxing behavior.
+    :vartype label: str
+    :ivar key_frame_interval: The distance between two key frames. The value should be non-zero in
+     the range [0.5, 20] seconds, specified in ISO 8601 format. The default is 2 seconds(PT2S). Note
+     that this setting is ignored if VideoSyncMode.Passthrough is set, where the KeyFrameInterval
+     value will follow the input source setting.
+    :vartype key_frame_interval: ~datetime.timedelta
+    :ivar stretch_mode: The resizing mode - how the input video will be resized to fit the desired
+     output resolution(s). Default is AutoSize. Possible values include: "None", "AutoSize",
+     "AutoFit".
+    :vartype stretch_mode: str or ~azure.mgmt.media.models.StretchMode
+    :ivar sync_mode: The Video Sync Mode. Possible values include: "Auto", "Passthrough", "Cfr",
+     "Vfr".
+    :vartype sync_mode: str or ~azure.mgmt.media.models.VideoSyncMode
+    :ivar complexity: Tells the encoder how to choose its encoding settings.  Quality will provide
+     for a higher compression ratio but at a higher cost and longer compute time.  Speed will
+     produce a relatively larger file but is faster and more economical. The default value is
+     Balanced. Possible values include: "Speed", "Balanced", "Quality".
+    :vartype complexity: str or ~azure.mgmt.media.models.AV1Complexity
+    :ivar layers: The collection of output AV1 layers to be produced by the encoder.
+    :vartype layers: list[~azure.mgmt.media.models.AV1Layer]
+    :ivar scene_change_detection: Specifies whether or not the encoder should insert key frames at
+     scene changes. If not specified, the default is false. This flag should be set to true only
+     when the encoder is being configured to produce a single output video.
+    :vartype scene_change_detection: bool
+    """
+
+    _validation = {
+        'odata_type': {'required': True},
+    }
+
+    _attribute_map = {
+        'odata_type': {'key': '@odata\\.type', 'type': 'str'},
+        'label': {'key': 'label', 'type': 'str'},
+        'key_frame_interval': {'key': 'keyFrameInterval', 'type': 'duration'},
+        'stretch_mode': {'key': 'stretchMode', 'type': 'str'},
+        'sync_mode': {'key': 'syncMode', 'type': 'str'},
+        'complexity': {'key': 'complexity', 'type': 'str'},
+        'layers': {'key': 'layers', 'type': '[AV1Layer]'},
+        'scene_change_detection': {'key': 'sceneChangeDetection', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        label: Optional[str] = None,
+        key_frame_interval: Optional[datetime.timedelta] = None,
+        stretch_mode: Optional[Union[str, "StretchMode"]] = None,
+        sync_mode: Optional[Union[str, "VideoSyncMode"]] = None,
+        complexity: Optional[Union[str, "AV1Complexity"]] = None,
+        layers: Optional[List["AV1Layer"]] = None,
+        scene_change_detection: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword label: An optional label for the codec. The label can be used to control muxing
+         behavior.
+        :paramtype label: str
+        :keyword key_frame_interval: The distance between two key frames. The value should be non-zero
+         in the range [0.5, 20] seconds, specified in ISO 8601 format. The default is 2 seconds(PT2S).
+         Note that this setting is ignored if VideoSyncMode.Passthrough is set, where the
+         KeyFrameInterval value will follow the input source setting.
+        :paramtype key_frame_interval: ~datetime.timedelta
+        :keyword stretch_mode: The resizing mode - how the input video will be resized to fit the
+         desired output resolution(s). Default is AutoSize. Possible values include: "None", "AutoSize",
+         "AutoFit".
+        :paramtype stretch_mode: str or ~azure.mgmt.media.models.StretchMode
+        :keyword sync_mode: The Video Sync Mode. Possible values include: "Auto", "Passthrough", "Cfr",
+         "Vfr".
+        :paramtype sync_mode: str or ~azure.mgmt.media.models.VideoSyncMode
+        :keyword complexity: Tells the encoder how to choose its encoding settings.  Quality will
+         provide for a higher compression ratio but at a higher cost and longer compute time.  Speed
+         will produce a relatively larger file but is faster and more economical. The default value is
+         Balanced. Possible values include: "Speed", "Balanced", "Quality".
+        :paramtype complexity: str or ~azure.mgmt.media.models.AV1Complexity
+        :keyword layers: The collection of output AV1 layers to be produced by the encoder.
+        :paramtype layers: list[~azure.mgmt.media.models.AV1Layer]
+        :keyword scene_change_detection: Specifies whether or not the encoder should insert key frames
+         at scene changes. If not specified, the default is false. This flag should be set to true only
+         when the encoder is being configured to produce a single output video.
+        :paramtype scene_change_detection: bool
+        """
+        super(AV1Video, self).__init__(label=label, key_frame_interval=key_frame_interval, stretch_mode=stretch_mode, sync_mode=sync_mode, **kwargs)
+        self.odata_type = '#Microsoft.Media.AV1Video'  # type: str
+        self.complexity = complexity
+        self.layers = layers
+        self.scene_change_detection = scene_change_detection
+
+
 class BuiltInStandardEncoderPreset(Preset):
     """Describes a built-in preset for encoding the input video with the Standard Encoder.
 
@@ -1707,11 +2143,12 @@ class BuiltInStandardEncoderPreset(Preset):
     :vartype configurations: ~azure.mgmt.media.models.PresetConfigurations
     :ivar preset_name: Required. The built-in preset to be used for encoding videos. Possible
      values include: "H264SingleBitrateSD", "H264SingleBitrate720p", "H264SingleBitrate1080p",
-     "AdaptiveStreaming", "AACGoodQualityAudio", "ContentAwareEncodingExperimental",
-     "ContentAwareEncoding", "CopyAllBitrateNonInterleaved", "H264MultipleBitrate1080p",
-     "H264MultipleBitrate720p", "H264MultipleBitrateSD", "H265ContentAwareEncoding",
-     "H265AdaptiveStreaming", "H265SingleBitrate720p", "H265SingleBitrate1080p",
-     "H265SingleBitrate4K".
+     "AdaptiveStreaming", "AACGoodQualityAudio", "DDGoodQualityAudio",
+     "ContentAwareEncodingExperimental", "ContentAwareEncoding", "CopyAllBitrateNonInterleaved",
+     "H264MultipleBitrate1080p", "H264MultipleBitrate720p", "H264MultipleBitrateSD",
+     "H265ContentAwareEncoding", "H265AdaptiveStreaming", "H265SingleBitrate720p",
+     "H265SingleBitrate1080p", "H265SingleBitrate4K", "AV1ContentAwareEncoding",
+     "AV1AdaptiveStreaming", "AV1SingleBitrate720p", "AV1SingleBitrate1080p", "AV1SingleBitrate4K".
     :vartype preset_name: str or ~azure.mgmt.media.models.EncoderNamedPreset
     """
 
@@ -1739,11 +2176,12 @@ class BuiltInStandardEncoderPreset(Preset):
         :paramtype configurations: ~azure.mgmt.media.models.PresetConfigurations
         :keyword preset_name: Required. The built-in preset to be used for encoding videos. Possible
          values include: "H264SingleBitrateSD", "H264SingleBitrate720p", "H264SingleBitrate1080p",
-         "AdaptiveStreaming", "AACGoodQualityAudio", "ContentAwareEncodingExperimental",
-         "ContentAwareEncoding", "CopyAllBitrateNonInterleaved", "H264MultipleBitrate1080p",
-         "H264MultipleBitrate720p", "H264MultipleBitrateSD", "H265ContentAwareEncoding",
-         "H265AdaptiveStreaming", "H265SingleBitrate720p", "H265SingleBitrate1080p",
-         "H265SingleBitrate4K".
+         "AdaptiveStreaming", "AACGoodQualityAudio", "DDGoodQualityAudio",
+         "ContentAwareEncodingExperimental", "ContentAwareEncoding", "CopyAllBitrateNonInterleaved",
+         "H264MultipleBitrate1080p", "H264MultipleBitrate720p", "H264MultipleBitrateSD",
+         "H265ContentAwareEncoding", "H265AdaptiveStreaming", "H265SingleBitrate720p",
+         "H265SingleBitrate1080p", "H265SingleBitrate4K", "AV1ContentAwareEncoding",
+         "AV1AdaptiveStreaming", "AV1SingleBitrate720p", "AV1SingleBitrate1080p", "AV1SingleBitrate4K".
         :paramtype preset_name: str or ~azure.mgmt.media.models.EncoderNamedPreset
         """
         super(BuiltInStandardEncoderPreset, self).__init__(**kwargs)
@@ -3312,6 +3750,59 @@ class CrossSiteAccessPolicies(msrest.serialization.Model):
         self.cross_domain_policy = cross_domain_policy
 
 
+class DDAudio(Audio):
+    """Describes Dolby Digital Audio Codec (AC3) audio encoding settings. The current implementation for Dolby Digital Audio support are: Audio channel numbers at 1((mono), 2(stereo), 6(5.1side); Audio sampling frequency rates at: 32K/44.1K/48K Hz; Audio bitrate values as AC3 specification supports: 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 320000, 384000, 448000, 512000, 576000, 640000 bps.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
+    :vartype odata_type: str
+    :ivar label: An optional label for the codec. The label can be used to control muxing behavior.
+    :vartype label: str
+    :ivar channels: The number of channels in the audio.
+    :vartype channels: int
+    :ivar sampling_rate: The sampling rate to use for encoding in hertz.
+    :vartype sampling_rate: int
+    :ivar bitrate: The bitrate, in bits per second, of the output encoded audio.
+    :vartype bitrate: int
+    """
+
+    _validation = {
+        'odata_type': {'required': True},
+    }
+
+    _attribute_map = {
+        'odata_type': {'key': '@odata\\.type', 'type': 'str'},
+        'label': {'key': 'label', 'type': 'str'},
+        'channels': {'key': 'channels', 'type': 'int'},
+        'sampling_rate': {'key': 'samplingRate', 'type': 'int'},
+        'bitrate': {'key': 'bitrate', 'type': 'int'},
+    }
+
+    def __init__(
+        self,
+        *,
+        label: Optional[str] = None,
+        channels: Optional[int] = None,
+        sampling_rate: Optional[int] = None,
+        bitrate: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword label: An optional label for the codec. The label can be used to control muxing
+         behavior.
+        :paramtype label: str
+        :keyword channels: The number of channels in the audio.
+        :paramtype channels: int
+        :keyword sampling_rate: The sampling rate to use for encoding in hertz.
+        :paramtype sampling_rate: int
+        :keyword bitrate: The bitrate, in bits per second, of the output encoded audio.
+        :paramtype bitrate: int
+        """
+        super(DDAudio, self).__init__(label=label, channels=channels, sampling_rate=sampling_rate, bitrate=bitrate, **kwargs)
+        self.odata_type = '#Microsoft.Media.DDAudio'  # type: str
+
+
 class DefaultKey(msrest.serialization.Model):
     """Class to specify properties of default content key for each encryption scheme.
 
@@ -4023,14 +4514,15 @@ class Format(msrest.serialization.Model):
 
     :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
     :vartype odata_type: str
-    :ivar filename_pattern: Required. The pattern of the file names for the generated output files.
-     The following macros are supported in the file name: {Basename} - An expansion macro that will
-     use the name of the input video file. If the base name(the file suffix is not included) of the
-     input video file is less than 32 characters long, the base name of input video files will be
-     used. If the length of base name of the input video file exceeds 32 characters, the base name
-     is truncated to the first 32 characters in total length. {Extension} - The appropriate
-     extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique
-     index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not
+    :ivar filename_pattern: Required. The file naming pattern used for the creation of output
+     files. The following macros are supported in the file name: {Basename} - An expansion macro
+     that will use the name of the input video file. If the base name(the file suffix is not
+     included) of the input video file is less than 32 characters long, the base name of input video
+     files will be used. If the length of base name of the input video file exceeds 32 characters,
+     the base name is truncated to the first 32 characters in total length. {Extension} - The
+     appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
+     - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+     plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
      applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
      resolution. Any unsubstituted macros will be collapsed and removed from the filename.
     :vartype filename_pattern: str
@@ -4057,17 +4549,17 @@ class Format(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword filename_pattern: Required. The pattern of the file names for the generated output
+        :keyword filename_pattern: Required. The file naming pattern used for the creation of output
          files. The following macros are supported in the file name: {Basename} - An expansion macro
          that will use the name of the input video file. If the base name(the file suffix is not
          included) of the input video file is less than 32 characters long, the base name of input video
          files will be used. If the length of base name of the input video file exceeds 32 characters,
          the base name is truncated to the first 32 characters in total length. {Extension} - The
          appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
-         - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video
-         bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec.
-         {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed
-         from the filename.
+         - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+         plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
+         applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
+         resolution. Any unsubstituted macros will be collapsed and removed from the filename.
         :paramtype filename_pattern: str
         """
         super(Format, self).__init__(**kwargs)
@@ -4189,55 +4681,6 @@ class FromEachInputFile(InputDefinition):
         """
         super(FromEachInputFile, self).__init__(included_tracks=included_tracks, **kwargs)
         self.odata_type = '#Microsoft.Media.FromEachInputFile'  # type: str
-
-
-class Layer(msrest.serialization.Model):
-    """The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution.
-
-    :ivar width: The width of the output video for this layer. The value can be absolute (in
-     pixels) or relative (in percentage). For example 50% means the output video has half as many
-     pixels in width as the input.
-    :vartype width: str
-    :ivar height: The height of the output video for this layer. The value can be absolute (in
-     pixels) or relative (in percentage). For example 50% means the output video has half as many
-     pixels in height as the input.
-    :vartype height: str
-    :ivar label: The alphanumeric label for this layer, which can be used in multiplexing different
-     video and audio layers, or in naming the output file.
-    :vartype label: str
-    """
-
-    _attribute_map = {
-        'width': {'key': 'width', 'type': 'str'},
-        'height': {'key': 'height', 'type': 'str'},
-        'label': {'key': 'label', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        *,
-        width: Optional[str] = None,
-        height: Optional[str] = None,
-        label: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword width: The width of the output video for this layer. The value can be absolute (in
-         pixels) or relative (in percentage). For example 50% means the output video has half as many
-         pixels in width as the input.
-        :paramtype width: str
-        :keyword height: The height of the output video for this layer. The value can be absolute (in
-         pixels) or relative (in percentage). For example 50% means the output video has half as many
-         pixels in height as the input.
-        :paramtype height: str
-        :keyword label: The alphanumeric label for this layer, which can be used in multiplexing
-         different video and audio layers, or in naming the output file.
-        :paramtype label: str
-        """
-        super(Layer, self).__init__(**kwargs)
-        self.width = width
-        self.height = height
-        self.label = label
 
 
 class VideoLayer(Layer):
@@ -4527,81 +4970,6 @@ class H264Layer(VideoLayer):
         self.crf = crf
         self.reference_frames = reference_frames
         self.entropy_mode = entropy_mode
-
-
-class Video(Codec):
-    """Describes the basic properties for encoding the input video.
-
-    You probably want to use the sub-classes and not this class directly. Known
-    sub-classes are: H264Video, H265Video, Image.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
-    :vartype odata_type: str
-    :ivar label: An optional label for the codec. The label can be used to control muxing behavior.
-    :vartype label: str
-    :ivar key_frame_interval: The distance between two key frames. The value should be non-zero in
-     the range [0.5, 20] seconds, specified in ISO 8601 format. The default is 2 seconds(PT2S). Note
-     that this setting is ignored if VideoSyncMode.Passthrough is set, where the KeyFrameInterval
-     value will follow the input source setting.
-    :vartype key_frame_interval: ~datetime.timedelta
-    :ivar stretch_mode: The resizing mode - how the input video will be resized to fit the desired
-     output resolution(s). Default is AutoSize. Possible values include: "None", "AutoSize",
-     "AutoFit".
-    :vartype stretch_mode: str or ~azure.mgmt.media.models.StretchMode
-    :ivar sync_mode: The Video Sync Mode. Possible values include: "Auto", "Passthrough", "Cfr",
-     "Vfr".
-    :vartype sync_mode: str or ~azure.mgmt.media.models.VideoSyncMode
-    """
-
-    _validation = {
-        'odata_type': {'required': True},
-    }
-
-    _attribute_map = {
-        'odata_type': {'key': '@odata\\.type', 'type': 'str'},
-        'label': {'key': 'label', 'type': 'str'},
-        'key_frame_interval': {'key': 'keyFrameInterval', 'type': 'duration'},
-        'stretch_mode': {'key': 'stretchMode', 'type': 'str'},
-        'sync_mode': {'key': 'syncMode', 'type': 'str'},
-    }
-
-    _subtype_map = {
-        'odata_type': {'#Microsoft.Media.H264Video': 'H264Video', '#Microsoft.Media.H265Video': 'H265Video', '#Microsoft.Media.Image': 'Image'}
-    }
-
-    def __init__(
-        self,
-        *,
-        label: Optional[str] = None,
-        key_frame_interval: Optional[datetime.timedelta] = None,
-        stretch_mode: Optional[Union[str, "StretchMode"]] = None,
-        sync_mode: Optional[Union[str, "VideoSyncMode"]] = None,
-        **kwargs
-    ):
-        """
-        :keyword label: An optional label for the codec. The label can be used to control muxing
-         behavior.
-        :paramtype label: str
-        :keyword key_frame_interval: The distance between two key frames. The value should be non-zero
-         in the range [0.5, 20] seconds, specified in ISO 8601 format. The default is 2 seconds(PT2S).
-         Note that this setting is ignored if VideoSyncMode.Passthrough is set, where the
-         KeyFrameInterval value will follow the input source setting.
-        :paramtype key_frame_interval: ~datetime.timedelta
-        :keyword stretch_mode: The resizing mode - how the input video will be resized to fit the
-         desired output resolution(s). Default is AutoSize. Possible values include: "None", "AutoSize",
-         "AutoFit".
-        :paramtype stretch_mode: str or ~azure.mgmt.media.models.StretchMode
-        :keyword sync_mode: The Video Sync Mode. Possible values include: "Auto", "Passthrough", "Cfr",
-         "Vfr".
-        :paramtype sync_mode: str or ~azure.mgmt.media.models.VideoSyncMode
-        """
-        super(Video, self).__init__(label=label, **kwargs)
-        self.odata_type = '#Microsoft.Media.Video'  # type: str
-        self.key_frame_interval = key_frame_interval
-        self.stretch_mode = stretch_mode
-        self.sync_mode = sync_mode
 
 
 class H264Video(Video):
@@ -5297,14 +5665,15 @@ class ImageFormat(Format):
 
     :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
     :vartype odata_type: str
-    :ivar filename_pattern: Required. The pattern of the file names for the generated output files.
-     The following macros are supported in the file name: {Basename} - An expansion macro that will
-     use the name of the input video file. If the base name(the file suffix is not included) of the
-     input video file is less than 32 characters long, the base name of input video files will be
-     used. If the length of base name of the input video file exceeds 32 characters, the base name
-     is truncated to the first 32 characters in total length. {Extension} - The appropriate
-     extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique
-     index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not
+    :ivar filename_pattern: Required. The file naming pattern used for the creation of output
+     files. The following macros are supported in the file name: {Basename} - An expansion macro
+     that will use the name of the input video file. If the base name(the file suffix is not
+     included) of the input video file is less than 32 characters long, the base name of input video
+     files will be used. If the length of base name of the input video file exceeds 32 characters,
+     the base name is truncated to the first 32 characters in total length. {Extension} - The
+     appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
+     - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+     plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
      applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
      resolution. Any unsubstituted macros will be collapsed and removed from the filename.
     :vartype filename_pattern: str
@@ -5331,17 +5700,17 @@ class ImageFormat(Format):
         **kwargs
     ):
         """
-        :keyword filename_pattern: Required. The pattern of the file names for the generated output
+        :keyword filename_pattern: Required. The file naming pattern used for the creation of output
          files. The following macros are supported in the file name: {Basename} - An expansion macro
          that will use the name of the input video file. If the base name(the file suffix is not
          included) of the input video file is less than 32 characters long, the base name of input video
          files will be used. If the length of base name of the input video file exceeds 32 characters,
          the base name is truncated to the first 32 characters in total length. {Extension} - The
          appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
-         - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video
-         bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec.
-         {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed
-         from the filename.
+         - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+         plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
+         applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
+         resolution. Any unsubstituted macros will be collapsed and removed from the filename.
         :paramtype filename_pattern: str
         """
         super(ImageFormat, self).__init__(filename_pattern=filename_pattern, **kwargs)
@@ -5608,12 +5977,12 @@ class JobError(msrest.serialization.Model):
     :ivar code: Error code describing the error. Possible values include: "ServiceError",
      "ServiceTransientError", "DownloadNotAccessible", "DownloadTransientError",
      "UploadNotAccessible", "UploadTransientError", "ConfigurationUnsupported", "ContentMalformed",
-     "ContentUnsupported".
+     "ContentUnsupported", "IdentityUnsupported".
     :vartype code: str or ~azure.mgmt.media.models.JobErrorCode
     :ivar message: A human-readable language-dependent representation of the error.
     :vartype message: str
     :ivar category: Helps with categorization of errors. Possible values include: "Service",
-     "Download", "Upload", "Configuration", "Content".
+     "Download", "Upload", "Configuration", "Content", "Account".
     :vartype category: str or ~azure.mgmt.media.models.JobErrorCategory
     :ivar retry: Indicates that it may be possible to retry the Job. If retry is unsuccessful,
      please contact Azure support via Azure Portal. Possible values include: "DoNotRetry",
@@ -6243,14 +6612,15 @@ class JpgFormat(ImageFormat):
 
     :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
     :vartype odata_type: str
-    :ivar filename_pattern: Required. The pattern of the file names for the generated output files.
-     The following macros are supported in the file name: {Basename} - An expansion macro that will
-     use the name of the input video file. If the base name(the file suffix is not included) of the
-     input video file is less than 32 characters long, the base name of input video files will be
-     used. If the length of base name of the input video file exceeds 32 characters, the base name
-     is truncated to the first 32 characters in total length. {Extension} - The appropriate
-     extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique
-     index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not
+    :ivar filename_pattern: Required. The file naming pattern used for the creation of output
+     files. The following macros are supported in the file name: {Basename} - An expansion macro
+     that will use the name of the input video file. If the base name(the file suffix is not
+     included) of the input video file is less than 32 characters long, the base name of input video
+     files will be used. If the length of base name of the input video file exceeds 32 characters,
+     the base name is truncated to the first 32 characters in total length. {Extension} - The
+     appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
+     - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+     plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
      applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
      resolution. Any unsubstituted macros will be collapsed and removed from the filename.
     :vartype filename_pattern: str
@@ -6273,17 +6643,17 @@ class JpgFormat(ImageFormat):
         **kwargs
     ):
         """
-        :keyword filename_pattern: Required. The pattern of the file names for the generated output
+        :keyword filename_pattern: Required. The file naming pattern used for the creation of output
          files. The following macros are supported in the file name: {Basename} - An expansion macro
          that will use the name of the input video file. If the base name(the file suffix is not
          included) of the input video file is less than 32 characters long, the base name of input video
          files will be used. If the length of base name of the input video file exceeds 32 characters,
          the base name is truncated to the first 32 characters in total length. {Extension} - The
          appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
-         - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video
-         bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec.
-         {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed
-         from the filename.
+         - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+         plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
+         applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
+         resolution. Any unsubstituted macros will be collapsed and removed from the filename.
         :paramtype filename_pattern: str
         """
         super(JpgFormat, self).__init__(filename_pattern=filename_pattern, **kwargs)
@@ -8020,14 +8390,15 @@ class MultiBitrateFormat(Format):
 
     :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
     :vartype odata_type: str
-    :ivar filename_pattern: Required. The pattern of the file names for the generated output files.
-     The following macros are supported in the file name: {Basename} - An expansion macro that will
-     use the name of the input video file. If the base name(the file suffix is not included) of the
-     input video file is less than 32 characters long, the base name of input video files will be
-     used. If the length of base name of the input video file exceeds 32 characters, the base name
-     is truncated to the first 32 characters in total length. {Extension} - The appropriate
-     extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique
-     index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not
+    :ivar filename_pattern: Required. The file naming pattern used for the creation of output
+     files. The following macros are supported in the file name: {Basename} - An expansion macro
+     that will use the name of the input video file. If the base name(the file suffix is not
+     included) of the input video file is less than 32 characters long, the base name of input video
+     files will be used. If the length of base name of the input video file exceeds 32 characters,
+     the base name is truncated to the first 32 characters in total length. {Extension} - The
+     appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
+     - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+     plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
      applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
      resolution. Any unsubstituted macros will be collapsed and removed from the filename.
     :vartype filename_pattern: str
@@ -8059,17 +8430,17 @@ class MultiBitrateFormat(Format):
         **kwargs
     ):
         """
-        :keyword filename_pattern: Required. The pattern of the file names for the generated output
+        :keyword filename_pattern: Required. The file naming pattern used for the creation of output
          files. The following macros are supported in the file name: {Basename} - An expansion macro
          that will use the name of the input video file. If the base name(the file suffix is not
          included) of the input video file is less than 32 characters long, the base name of input video
          files will be used. If the length of base name of the input video file exceeds 32 characters,
          the base name is truncated to the first 32 characters in total length. {Extension} - The
          appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
-         - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video
-         bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec.
-         {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed
-         from the filename.
+         - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+         plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
+         applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
+         resolution. Any unsubstituted macros will be collapsed and removed from the filename.
         :paramtype filename_pattern: str
         :keyword output_files: The list of output files to produce.  Each entry in the list is a set of
          audio and video layer labels to be muxed together .
@@ -8087,14 +8458,15 @@ class Mp4Format(MultiBitrateFormat):
 
     :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
     :vartype odata_type: str
-    :ivar filename_pattern: Required. The pattern of the file names for the generated output files.
-     The following macros are supported in the file name: {Basename} - An expansion macro that will
-     use the name of the input video file. If the base name(the file suffix is not included) of the
-     input video file is less than 32 characters long, the base name of input video files will be
-     used. If the length of base name of the input video file exceeds 32 characters, the base name
-     is truncated to the first 32 characters in total length. {Extension} - The appropriate
-     extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique
-     index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not
+    :ivar filename_pattern: Required. The file naming pattern used for the creation of output
+     files. The following macros are supported in the file name: {Basename} - An expansion macro
+     that will use the name of the input video file. If the base name(the file suffix is not
+     included) of the input video file is less than 32 characters long, the base name of input video
+     files will be used. If the length of base name of the input video file exceeds 32 characters,
+     the base name is truncated to the first 32 characters in total length. {Extension} - The
+     appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
+     - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+     plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
      applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
      resolution. Any unsubstituted macros will be collapsed and removed from the filename.
     :vartype filename_pattern: str
@@ -8122,17 +8494,17 @@ class Mp4Format(MultiBitrateFormat):
         **kwargs
     ):
         """
-        :keyword filename_pattern: Required. The pattern of the file names for the generated output
+        :keyword filename_pattern: Required. The file naming pattern used for the creation of output
          files. The following macros are supported in the file name: {Basename} - An expansion macro
          that will use the name of the input video file. If the base name(the file suffix is not
          included) of the input video file is less than 32 characters long, the base name of input video
          files will be used. If the length of base name of the input video file exceeds 32 characters,
          the base name is truncated to the first 32 characters in total length. {Extension} - The
          appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
-         - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video
-         bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec.
-         {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed
-         from the filename.
+         - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+         plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
+         applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
+         resolution. Any unsubstituted macros will be collapsed and removed from the filename.
         :paramtype filename_pattern: str
         :keyword output_files: The list of output files to produce.  Each entry in the list is a set of
          audio and video layer labels to be muxed together .
@@ -8350,14 +8722,15 @@ class PngFormat(ImageFormat):
 
     :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
     :vartype odata_type: str
-    :ivar filename_pattern: Required. The pattern of the file names for the generated output files.
-     The following macros are supported in the file name: {Basename} - An expansion macro that will
-     use the name of the input video file. If the base name(the file suffix is not included) of the
-     input video file is less than 32 characters long, the base name of input video files will be
-     used. If the length of base name of the input video file exceeds 32 characters, the base name
-     is truncated to the first 32 characters in total length. {Extension} - The appropriate
-     extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique
-     index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not
+    :ivar filename_pattern: Required. The file naming pattern used for the creation of output
+     files. The following macros are supported in the file name: {Basename} - An expansion macro
+     that will use the name of the input video file. If the base name(the file suffix is not
+     included) of the input video file is less than 32 characters long, the base name of input video
+     files will be used. If the length of base name of the input video file exceeds 32 characters,
+     the base name is truncated to the first 32 characters in total length. {Extension} - The
+     appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
+     - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+     plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
      applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
      resolution. Any unsubstituted macros will be collapsed and removed from the filename.
     :vartype filename_pattern: str
@@ -8380,17 +8753,17 @@ class PngFormat(ImageFormat):
         **kwargs
     ):
         """
-        :keyword filename_pattern: Required. The pattern of the file names for the generated output
+        :keyword filename_pattern: Required. The file naming pattern used for the creation of output
          files. The following macros are supported in the file name: {Basename} - An expansion macro
          that will use the name of the input video file. If the base name(the file suffix is not
          included) of the input video file is less than 32 characters long, the base name of input video
          files will be used. If the length of base name of the input video file exceeds 32 characters,
          the base name is truncated to the first 32 characters in total length. {Extension} - The
          appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
-         - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video
-         bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec.
-         {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed
-         from the filename.
+         - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+         plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
+         applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
+         resolution. Any unsubstituted macros will be collapsed and removed from the filename.
         :paramtype filename_pattern: str
         """
         super(PngFormat, self).__init__(filename_pattern=filename_pattern, **kwargs)
@@ -10803,14 +11176,15 @@ class TransportStreamFormat(MultiBitrateFormat):
 
     :ivar odata_type: Required. The discriminator for derived types.Constant filled by server.
     :vartype odata_type: str
-    :ivar filename_pattern: Required. The pattern of the file names for the generated output files.
-     The following macros are supported in the file name: {Basename} - An expansion macro that will
-     use the name of the input video file. If the base name(the file suffix is not included) of the
-     input video file is less than 32 characters long, the base name of input video files will be
-     used. If the length of base name of the input video file exceeds 32 characters, the base name
-     is truncated to the first 32 characters in total length. {Extension} - The appropriate
-     extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique
-     index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not
+    :ivar filename_pattern: Required. The file naming pattern used for the creation of output
+     files. The following macros are supported in the file name: {Basename} - An expansion macro
+     that will use the name of the input video file. If the base name(the file suffix is not
+     included) of the input video file is less than 32 characters long, the base name of input video
+     files will be used. If the length of base name of the input video file exceeds 32 characters,
+     the base name is truncated to the first 32 characters in total length. {Extension} - The
+     appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
+     - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+     plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
      applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
      resolution. Any unsubstituted macros will be collapsed and removed from the filename.
     :vartype filename_pattern: str
@@ -10838,17 +11212,17 @@ class TransportStreamFormat(MultiBitrateFormat):
         **kwargs
     ):
         """
-        :keyword filename_pattern: Required. The pattern of the file names for the generated output
+        :keyword filename_pattern: Required. The file naming pattern used for the creation of output
          files. The following macros are supported in the file name: {Basename} - An expansion macro
          that will use the name of the input video file. If the base name(the file suffix is not
          included) of the input video file is less than 32 characters long, the base name of input video
          files will be used. If the length of base name of the input video file exceeds 32 characters,
          the base name is truncated to the first 32 characters in total length. {Extension} - The
          appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index}
-         - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video
-         bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec.
-         {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed
-         from the filename.
+         - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio"
+         plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not
+         applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video
+         resolution. Any unsubstituted macros will be collapsed and removed from the filename.
         :paramtype filename_pattern: str
         :keyword output_files: The list of output files to produce.  Each entry in the list is a set of
          audio and video layer labels to be muxed together .

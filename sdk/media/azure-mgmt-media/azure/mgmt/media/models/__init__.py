@@ -6,6 +6,9 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import AV1Layer
+from ._models_py3 import AV1Video
+from ._models_py3 import AV1VideoLayer
 from ._models_py3 import AacAudio
 from ._models_py3 import AbsoluteClipTime
 from ._models_py3 import AccessControl
@@ -70,6 +73,7 @@ from ._models_py3 import ContentKeyPolicyX509CertificateTokenKey
 from ._models_py3 import CopyAudio
 from ._models_py3 import CopyVideo
 from ._models_py3 import CrossSiteAccessPolicies
+from ._models_py3 import DDAudio
 from ._models_py3 import DefaultKey
 from ._models_py3 import Deinterlace
 from ._models_py3 import EdgePolicies
@@ -218,6 +222,8 @@ from ._models_py3 import VideoTrackDescriptor
 
 
 from ._azure_media_services_enums import (
+    AV1Complexity,
+    AV1VideoProfile,
     AacAudioProfile,
     AccountEncryptionKeyType,
     ActionType,
@@ -283,6 +289,9 @@ from ._azure_media_services_enums import (
 )
 
 __all__ = [
+    'AV1Layer',
+    'AV1Video',
+    'AV1VideoLayer',
     'AacAudio',
     'AbsoluteClipTime',
     'AccessControl',
@@ -347,6 +356,7 @@ __all__ = [
     'CopyAudio',
     'CopyVideo',
     'CrossSiteAccessPolicies',
+    'DDAudio',
     'DefaultKey',
     'Deinterlace',
     'EdgePolicies',
@@ -492,6 +502,8 @@ __all__ = [
     'VideoOverlay',
     'VideoTrack',
     'VideoTrackDescriptor',
+    'AV1Complexity',
+    'AV1VideoProfile',
     'AacAudioProfile',
     'AccountEncryptionKeyType',
     'ActionType',
