@@ -24,13 +24,13 @@ class ActiveRevisionsMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     
     .. raw:: html
     
-       <list><item>Multiple: multiple revisions can be active. If no value if provided, this is the
-    default</item><item>Single: Only one revision can be active at a time. Revision weights can not
-    be used in this mode</item></list>
+       <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one
+    revision can be active at a time. Revision weights can not be used in this mode. If no value if
+    provided, this is the default.</item></list>
     """
 
-    MULTIPLE = "multiple"
-    SINGLE = "single"
+    MULTIPLE = "Multiple"
+    SINGLE = "Single"
 
 class AppProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Tells Dapr which protocol your application is using. Valid options are http and grpc. Default
@@ -56,6 +56,13 @@ class CertificateProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, 
     CANCELED = "Canceled"
     DELETE_FAILED = "DeleteFailed"
     PENDING = "Pending"
+
+class CheckNameAvailabilityReason(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The reason why the given name is not available.
+    """
+
+    INVALID = "Invalid"
+    ALREADY_EXISTS = "AlreadyExists"
 
 class ContainerAppProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Provisioning state of the Container App.
@@ -149,6 +156,13 @@ class RevisionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enu
     DEPROVISIONING = "Deprovisioning"
     DEPROVISIONED = "Deprovisioned"
 
+class Scheme(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Scheme to use for connecting to the host. Defaults to HTTP.
+    """
+
+    HTTP = "HTTP"
+    HTTPS = "HTTPS"
+
 class SourceControlOperationState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Current provisioning State of the operation
     """
@@ -169,9 +183,9 @@ class Type(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of probe.
     """
 
-    LIVENESS = "liveness"
-    READINESS = "readiness"
-    STARTUP = "startup"
+    LIVENESS = "Liveness"
+    READINESS = "Readiness"
+    STARTUP = "Startup"
 
 class UnauthenticatedClientActionV2(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The action to take when an unauthenticated client attempts to access the app.
