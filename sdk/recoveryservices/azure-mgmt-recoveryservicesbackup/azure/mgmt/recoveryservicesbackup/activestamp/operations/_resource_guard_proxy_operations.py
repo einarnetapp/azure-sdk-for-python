@@ -33,7 +33,7 @@ def build_get_request(
     resource_guard_proxy_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -71,7 +71,7 @@ def build_put_request(
     resource_guard_proxy_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -109,7 +109,7 @@ def build_delete_request(
     resource_guard_proxy_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -150,7 +150,7 @@ def build_unlock_delete_request(
     content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
     content_type = kwargs.pop('content_type', None)  # type: Optional[str]
 
     accept = "application/json"
@@ -235,7 +235,7 @@ class ResourceGuardProxyOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
 
         
         request = build_get_request(
@@ -299,7 +299,7 @@ class ResourceGuardProxyOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
 
         
         request = build_put_request(
@@ -362,7 +362,7 @@ class ResourceGuardProxyOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
 
         
         request = build_delete_request(
@@ -424,7 +424,7 @@ class ResourceGuardProxyOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-12-01")  # type: str
+        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
         _json = self._serialize.body(parameters, 'UnlockDeleteRequest')
