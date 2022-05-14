@@ -17,12 +17,12 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._operation_status_operations import build_get_request
+from ...operations._operation_status_backup_vault_context_operations import build_get_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class OperationStatusOperations:
-    """OperationStatusOperations async operations.
+class OperationStatusBackupVaultContextOperations:
+    """OperationStatusBackupVaultContextOperations async operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -46,16 +46,19 @@ class OperationStatusOperations:
     @distributed_trace_async
     async def get(
         self,
-        location: str,
+        resource_group_name: str,
+        vault_name: str,
         operation_id: str,
         **kwargs: Any
     ) -> "_models.OperationResource":
-        """Gets the operation status for a resource.
+        """Gets the operation status for an operation over a BackupVault's context.
 
-        Gets the operation status for a resource.
+        Gets the operation status for an operation over a BackupVault's context.
 
-        :param location:
-        :type location: str
+        :param resource_group_name: The name of the resource group where the backup vault is present.
+        :type resource_group_name: str
+        :param vault_name: The name of the backup vault.
+        :type vault_name: str
         :param operation_id:
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -74,7 +77,8 @@ class OperationStatusOperations:
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
-            location=location,
+            resource_group_name=resource_group_name,
+            vault_name=vault_name,
             operation_id=operation_id,
             api_version=api_version,
             template_url=self.get.metadata['url'],
@@ -100,5 +104,5 @@ class OperationStatusOperations:
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationStatus/{operationId}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/operationStatus/{operationId}"}  # type: ignore
 
