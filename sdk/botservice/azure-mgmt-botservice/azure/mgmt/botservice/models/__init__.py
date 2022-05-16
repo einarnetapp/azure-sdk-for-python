@@ -14,7 +14,6 @@ from ._models_py3 import BotProperties
 from ._models_py3 import BotResponseList
 from ._models_py3 import Channel
 from ._models_py3 import ChannelResponseList
-from ._models_py3 import ChannelSettings
 from ._models_py3 import CheckNameAvailabilityRequestBody
 from ._models_py3 import CheckNameAvailabilityResponseBody
 from ._models_py3 import ConnectionItemName
@@ -40,7 +39,6 @@ from ._models_py3 import KikChannelProperties
 from ._models_py3 import LineChannel
 from ._models_py3 import LineChannelProperties
 from ._models_py3 import LineRegistration
-from ._models_py3 import ListChannelWithKeysResponse
 from ._models_py3 import MsTeamsChannel
 from ._models_py3 import MsTeamsChannelProperties
 from ._models_py3 import OperationDisplayInfo
@@ -61,7 +59,6 @@ from ._models_py3 import ServiceProviderParameterMetadata
 from ._models_py3 import ServiceProviderParameterMetadataConstraints
 from ._models_py3 import ServiceProviderProperties
 from ._models_py3 import ServiceProviderResponseList
-from ._models_py3 import Site
 from ._models_py3 import SiteInfo
 from ._models_py3 import Sku
 from ._models_py3 import SkypeChannel
@@ -100,7 +97,6 @@ __all__ = [
     'BotResponseList',
     'Channel',
     'ChannelResponseList',
-    'ChannelSettings',
     'CheckNameAvailabilityRequestBody',
     'CheckNameAvailabilityResponseBody',
     'ConnectionItemName',
@@ -126,7 +122,6 @@ __all__ = [
     'LineChannel',
     'LineChannelProperties',
     'LineRegistration',
-    'ListChannelWithKeysResponse',
     'MsTeamsChannel',
     'MsTeamsChannelProperties',
     'OperationDisplayInfo',
@@ -147,7 +142,6 @@ __all__ = [
     'ServiceProviderParameterMetadataConstraints',
     'ServiceProviderProperties',
     'ServiceProviderResponseList',
-    'Site',
     'SiteInfo',
     'Sku',
     'SkypeChannel',
