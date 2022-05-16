@@ -55,13 +55,16 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no Retry-After header is present.
     """
 
-    DEFAULT_API_VERSION = '2022-04-01'
+    DEFAULT_API_VERSION = '2022-05-01'
     _PROFILE_TAG = "azure.mgmt.containerservice.ContainerServiceClient"
     LATEST_PROFILE = ProfileDefinition({
         _PROFILE_TAG: {
             None: DEFAULT_API_VERSION,
             'container_services': '2017-07-01',
+            'managed_cluster_snapshots': '2022-04-02-preview',
             'open_shift_managed_clusters': '2019-04-30',
+            'trusted_access_role_bindings': '2022-04-02-preview',
+            'trusted_access_roles': '2022-04-02-preview',
         }},
         _PROFILE_TAG + " latest"
     )
@@ -128,6 +131,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :mod:`v2022_03_02_preview.models<azure.mgmt.containerservice.v2022_03_02_preview.models>`
            * 2022-04-01: :mod:`v2022_04_01.models<azure.mgmt.containerservice.v2022_04_01.models>`
            * 2022-04-02-preview: :mod:`v2022_04_02_preview.models<azure.mgmt.containerservice.v2022_04_02_preview.models>`
+           * 2022-05-01: :mod:`v2022_05_01.models<azure.mgmt.containerservice.v2022_05_01.models>`
         """
         if api_version == '2017-07-01':
             from ..v2017_07_01 import models
@@ -243,6 +247,9 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview import models
             return models
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01 import models
+            return models
         raise ValueError("API version {} is not available".format(api_version))
 
     @property
@@ -280,6 +287,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`AgentPoolsOperations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.AgentPoolsOperations>`
            * 2022-04-01: :class:`AgentPoolsOperations<azure.mgmt.containerservice.v2022_04_01.aio.operations.AgentPoolsOperations>`
            * 2022-04-02-preview: :class:`AgentPoolsOperations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.AgentPoolsOperations>`
+           * 2022-05-01: :class:`AgentPoolsOperations<azure.mgmt.containerservice.v2022_05_01.aio.operations.AgentPoolsOperations>`
         """
         api_version = self._get_api_version('agent_pools')
         if api_version == '2019-02-01':
@@ -344,6 +352,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import AgentPoolsOperations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import AgentPoolsOperations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import AgentPoolsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'agent_pools'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -382,6 +392,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`MaintenanceConfigurationsOperations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.MaintenanceConfigurationsOperations>`
            * 2022-04-01: :class:`MaintenanceConfigurationsOperations<azure.mgmt.containerservice.v2022_04_01.aio.operations.MaintenanceConfigurationsOperations>`
            * 2022-04-02-preview: :class:`MaintenanceConfigurationsOperations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.MaintenanceConfigurationsOperations>`
+           * 2022-05-01: :class:`MaintenanceConfigurationsOperations<azure.mgmt.containerservice.v2022_05_01.aio.operations.MaintenanceConfigurationsOperations>`
         """
         api_version = self._get_api_version('maintenance_configurations')
         if api_version == '2020-12-01':
@@ -418,6 +429,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import MaintenanceConfigurationsOperations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import MaintenanceConfigurationsOperations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import MaintenanceConfigurationsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'maintenance_configurations'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -478,6 +491,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`ManagedClustersOperations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.ManagedClustersOperations>`
            * 2022-04-01: :class:`ManagedClustersOperations<azure.mgmt.containerservice.v2022_04_01.aio.operations.ManagedClustersOperations>`
            * 2022-04-02-preview: :class:`ManagedClustersOperations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.ManagedClustersOperations>`
+           * 2022-05-01: :class:`ManagedClustersOperations<azure.mgmt.containerservice.v2022_05_01.aio.operations.ManagedClustersOperations>`
         """
         api_version = self._get_api_version('managed_clusters')
         if api_version == '2018-03-31':
@@ -546,6 +560,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import ManagedClustersOperations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import ManagedClustersOperations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import ManagedClustersOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'managed_clusters'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -609,6 +625,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`Operations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.Operations>`
            * 2022-04-01: :class:`Operations<azure.mgmt.containerservice.v2022_04_01.aio.operations.Operations>`
            * 2022-04-02-preview: :class:`Operations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.Operations>`
+           * 2022-05-01: :class:`Operations<azure.mgmt.containerservice.v2022_05_01.aio.operations.Operations>`
         """
         api_version = self._get_api_version('operations')
         if api_version == '2018-03-31':
@@ -677,6 +694,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import Operations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import Operations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -706,6 +725,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`PrivateEndpointConnectionsOperations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.PrivateEndpointConnectionsOperations>`
            * 2022-04-01: :class:`PrivateEndpointConnectionsOperations<azure.mgmt.containerservice.v2022_04_01.aio.operations.PrivateEndpointConnectionsOperations>`
            * 2022-04-02-preview: :class:`PrivateEndpointConnectionsOperations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.PrivateEndpointConnectionsOperations>`
+           * 2022-05-01: :class:`PrivateEndpointConnectionsOperations<azure.mgmt.containerservice.v2022_05_01.aio.operations.PrivateEndpointConnectionsOperations>`
         """
         api_version = self._get_api_version('private_endpoint_connections')
         if api_version == '2020-06-01':
@@ -750,6 +770,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import PrivateEndpointConnectionsOperations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import PrivateEndpointConnectionsOperations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import PrivateEndpointConnectionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_endpoint_connections'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -777,6 +799,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`PrivateLinkResourcesOperations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.PrivateLinkResourcesOperations>`
            * 2022-04-01: :class:`PrivateLinkResourcesOperations<azure.mgmt.containerservice.v2022_04_01.aio.operations.PrivateLinkResourcesOperations>`
            * 2022-04-02-preview: :class:`PrivateLinkResourcesOperations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.PrivateLinkResourcesOperations>`
+           * 2022-05-01: :class:`PrivateLinkResourcesOperations<azure.mgmt.containerservice.v2022_05_01.aio.operations.PrivateLinkResourcesOperations>`
         """
         api_version = self._get_api_version('private_link_resources')
         if api_version == '2020-09-01':
@@ -817,6 +840,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import PrivateLinkResourcesOperations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import PrivateLinkResourcesOperations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import PrivateLinkResourcesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_link_resources'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -844,6 +869,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`ResolvePrivateLinkServiceIdOperations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.ResolvePrivateLinkServiceIdOperations>`
            * 2022-04-01: :class:`ResolvePrivateLinkServiceIdOperations<azure.mgmt.containerservice.v2022_04_01.aio.operations.ResolvePrivateLinkServiceIdOperations>`
            * 2022-04-02-preview: :class:`ResolvePrivateLinkServiceIdOperations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.ResolvePrivateLinkServiceIdOperations>`
+           * 2022-05-01: :class:`ResolvePrivateLinkServiceIdOperations<azure.mgmt.containerservice.v2022_05_01.aio.operations.ResolvePrivateLinkServiceIdOperations>`
         """
         api_version = self._get_api_version('resolve_private_link_service_id')
         if api_version == '2020-09-01':
@@ -884,6 +910,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import ResolvePrivateLinkServiceIdOperations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import ResolvePrivateLinkServiceIdOperations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import ResolvePrivateLinkServiceIdOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'resolve_private_link_service_id'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -904,6 +932,7 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
            * 2022-03-02-preview: :class:`SnapshotsOperations<azure.mgmt.containerservice.v2022_03_02_preview.aio.operations.SnapshotsOperations>`
            * 2022-04-01: :class:`SnapshotsOperations<azure.mgmt.containerservice.v2022_04_01.aio.operations.SnapshotsOperations>`
            * 2022-04-02-preview: :class:`SnapshotsOperations<azure.mgmt.containerservice.v2022_04_02_preview.aio.operations.SnapshotsOperations>`
+           * 2022-05-01: :class:`SnapshotsOperations<azure.mgmt.containerservice.v2022_05_01.aio.operations.SnapshotsOperations>`
         """
         api_version = self._get_api_version('snapshots')
         if api_version == '2021-08-01':
@@ -930,6 +959,8 @@ class ContainerServiceClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_04_01.aio.operations import SnapshotsOperations as OperationClass
         elif api_version == '2022-04-02-preview':
             from ..v2022_04_02_preview.aio.operations import SnapshotsOperations as OperationClass
+        elif api_version == '2022-05-01':
+            from ..v2022_05_01.aio.operations import SnapshotsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'snapshots'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
