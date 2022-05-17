@@ -23647,6 +23647,8 @@ class PrivateEndpoint(Resource):
     :ivar network_interfaces: An array of references to the network interfaces created for this
      private endpoint.
     :vartype network_interfaces: list[~azure.mgmt.network.v2021_08_01.models.NetworkInterface]
+    :ivar resource_guid: The resource GUID property of the private endpoint.
+    :vartype resource_guid: str
     :ivar provisioning_state: The provisioning state of the private endpoint resource. Possible
      values include: "Succeeded", "Updating", "Deleting", "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.network.v2021_08_01.models.ProvisioningState
@@ -23680,6 +23682,7 @@ class PrivateEndpoint(Resource):
         'type': {'readonly': True},
         'etag': {'readonly': True},
         'network_interfaces': {'readonly': True},
+        'resource_guid': {'readonly': True},
         'provisioning_state': {'readonly': True},
     }
 
@@ -23693,6 +23696,7 @@ class PrivateEndpoint(Resource):
         'etag': {'key': 'etag', 'type': 'str'},
         'subnet': {'key': 'properties.subnet', 'type': 'Subnet'},
         'network_interfaces': {'key': 'properties.networkInterfaces', 'type': '[NetworkInterface]'},
+        'resource_guid': {'key': 'properties.resourceGuid', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'private_link_service_connections': {'key': 'properties.privateLinkServiceConnections', 'type': '[PrivateLinkServiceConnection]'},
         'manual_private_link_service_connections': {'key': 'properties.manualPrivateLinkServiceConnections', 'type': '[PrivateLinkServiceConnection]'},
@@ -23758,6 +23762,7 @@ class PrivateEndpoint(Resource):
         self.etag = None
         self.subnet = subnet
         self.network_interfaces = None
+        self.resource_guid = None
         self.provisioning_state = None
         self.private_link_service_connections = private_link_service_connections
         self.manual_private_link_service_connections = manual_private_link_service_connections
