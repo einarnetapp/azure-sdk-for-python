@@ -14948,24 +14948,33 @@ class FirewallPolicySNAT(msrest.serialization.Model):
 
     :ivar private_ranges: List of private IP addresses/IP address ranges to not be SNAT.
     :vartype private_ranges: list[str]
+    :ivar auto_learn_private_ranges: The operation mode for automatically learning private ranges
+     to not be SNAT.
+    :vartype auto_learn_private_ranges: bool
     """
 
     _attribute_map = {
         'private_ranges': {'key': 'privateRanges', 'type': '[str]'},
+        'auto_learn_private_ranges': {'key': 'autoLearnPrivateRanges', 'type': 'bool'},
     }
 
     def __init__(
         self,
         *,
         private_ranges: Optional[List[str]] = None,
+        auto_learn_private_ranges: Optional[bool] = None,
         **kwargs
     ):
         """
         :keyword private_ranges: List of private IP addresses/IP address ranges to not be SNAT.
         :paramtype private_ranges: list[str]
+        :keyword auto_learn_private_ranges: The operation mode for automatically learning private
+         ranges to not be SNAT.
+        :paramtype auto_learn_private_ranges: bool
         """
         super(FirewallPolicySNAT, self).__init__(**kwargs)
         self.private_ranges = private_ranges
+        self.auto_learn_private_ranges = auto_learn_private_ranges
 
 
 class FirewallPolicySQL(msrest.serialization.Model):
@@ -17292,6 +17301,31 @@ class IpGroupListResult(msrest.serialization.Model):
         super(IpGroupListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
+
+
+class IPPrefixesList(msrest.serialization.Model):
+    """List of SNAT IP Prefixes learnt by firewall to not SNAT.
+
+    :ivar ip_prefixes: IP Prefix value.
+    :vartype ip_prefixes: str
+    """
+
+    _attribute_map = {
+        'ip_prefixes': {'key': 'ipPrefixes', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        ip_prefixes: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword ip_prefixes: IP Prefix value.
+        :paramtype ip_prefixes: str
+        """
+        super(IPPrefixesList, self).__init__(**kwargs)
+        self.ip_prefixes = ip_prefixes
 
 
 class IpsecPolicy(msrest.serialization.Model):

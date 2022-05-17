@@ -298,6 +298,7 @@ from ._models_py3 import IPAddressAvailabilityResult
 from ._models_py3 import IPConfiguration
 from ._models_py3 import IPConfigurationBgpPeeringAddress
 from ._models_py3 import IPConfigurationProfile
+from ._models_py3 import IPPrefixesList
 from ._models_py3 import InboundNatPool
 from ._models_py3 import InboundNatRule
 from ._models_py3 import InboundNatRuleListResult
@@ -1080,6 +1081,7 @@ __all__ = [
     'IPConfiguration',
     'IPConfigurationBgpPeeringAddress',
     'IPConfigurationProfile',
+    'IPPrefixesList',
     'InboundNatPool',
     'InboundNatRule',
     'InboundNatRuleListResult',
