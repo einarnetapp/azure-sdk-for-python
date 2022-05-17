@@ -230,6 +230,7 @@ class AgentPool(SubResource):
         'name': {'readonly': True},
         'type': {'readonly': True},
         'os_disk_size_gb': {'maximum': 2048, 'minimum': 0},
+        'current_orchestrator_version': {'readonly': True},
         'node_image_version': {'readonly': True},
         'provisioning_state': {'readonly': True},
     }
@@ -305,7 +306,6 @@ class AgentPool(SubResource):
         type_properties_type: Optional[Union[str, "AgentPoolType"]] = None,
         mode: Optional[Union[str, "AgentPoolMode"]] = None,
         orchestrator_version: Optional[str] = None,
-        current_orchestrator_version: Optional[str] = None,
         upgrade_settings: Optional["AgentPoolUpgradeSettings"] = None,
         power_state: Optional["PowerState"] = None,
         availability_zones: Optional[List[str]] = None,
@@ -408,10 +408,6 @@ class AgentPool(SubResource):
          greater than the control plane version. For more information see `upgrading a node pool
          <https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool>`_.
         :paramtype orchestrator_version: str
-        :keyword current_orchestrator_version: If orchestratorVersion was a fully specified version
-         <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was
-         <major.minor>, this field will contain the full <major.minor.patch> version being used.
-        :paramtype current_orchestrator_version: str
         :keyword upgrade_settings: Settings for upgrading the agentpool.
         :paramtype upgrade_settings:
          ~azure.mgmt.containerservice.v2022_03_02_preview.models.AgentPoolUpgradeSettings
@@ -509,7 +505,7 @@ class AgentPool(SubResource):
         self.type_properties_type = type_properties_type
         self.mode = mode
         self.orchestrator_version = orchestrator_version
-        self.current_orchestrator_version = current_orchestrator_version
+        self.current_orchestrator_version = None
         self.node_image_version = None
         self.upgrade_settings = upgrade_settings
         self.provisioning_state = None
@@ -2804,6 +2800,7 @@ class ManagedClusterAgentPoolProfileProperties(msrest.serialization.Model):
 
     _validation = {
         'os_disk_size_gb': {'maximum': 2048, 'minimum': 0},
+        'current_orchestrator_version': {'readonly': True},
         'node_image_version': {'readonly': True},
         'provisioning_state': {'readonly': True},
     }
@@ -2876,7 +2873,6 @@ class ManagedClusterAgentPoolProfileProperties(msrest.serialization.Model):
         type: Optional[Union[str, "AgentPoolType"]] = None,
         mode: Optional[Union[str, "AgentPoolMode"]] = None,
         orchestrator_version: Optional[str] = None,
-        current_orchestrator_version: Optional[str] = None,
         upgrade_settings: Optional["AgentPoolUpgradeSettings"] = None,
         power_state: Optional["PowerState"] = None,
         availability_zones: Optional[List[str]] = None,
@@ -2978,10 +2974,6 @@ class ManagedClusterAgentPoolProfileProperties(msrest.serialization.Model):
          greater than the control plane version. For more information see `upgrading a node pool
          <https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool>`_.
         :paramtype orchestrator_version: str
-        :keyword current_orchestrator_version: If orchestratorVersion was a fully specified version
-         <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was
-         <major.minor>, this field will contain the full <major.minor.patch> version being used.
-        :paramtype current_orchestrator_version: str
         :keyword upgrade_settings: Settings for upgrading the agentpool.
         :paramtype upgrade_settings:
          ~azure.mgmt.containerservice.v2022_03_02_preview.models.AgentPoolUpgradeSettings
@@ -3079,7 +3071,7 @@ class ManagedClusterAgentPoolProfileProperties(msrest.serialization.Model):
         self.type = type
         self.mode = mode
         self.orchestrator_version = orchestrator_version
-        self.current_orchestrator_version = current_orchestrator_version
+        self.current_orchestrator_version = None
         self.node_image_version = None
         self.upgrade_settings = upgrade_settings
         self.provisioning_state = None
@@ -3276,6 +3268,7 @@ class ManagedClusterAgentPoolProfile(ManagedClusterAgentPoolProfileProperties):
 
     _validation = {
         'os_disk_size_gb': {'maximum': 2048, 'minimum': 0},
+        'current_orchestrator_version': {'readonly': True},
         'node_image_version': {'readonly': True},
         'provisioning_state': {'readonly': True},
         'name': {'required': True, 'pattern': r'^[a-z][a-z0-9]{0,11}$'},
@@ -3351,7 +3344,6 @@ class ManagedClusterAgentPoolProfile(ManagedClusterAgentPoolProfileProperties):
         type: Optional[Union[str, "AgentPoolType"]] = None,
         mode: Optional[Union[str, "AgentPoolMode"]] = None,
         orchestrator_version: Optional[str] = None,
-        current_orchestrator_version: Optional[str] = None,
         upgrade_settings: Optional["AgentPoolUpgradeSettings"] = None,
         power_state: Optional["PowerState"] = None,
         availability_zones: Optional[List[str]] = None,
@@ -3453,10 +3445,6 @@ class ManagedClusterAgentPoolProfile(ManagedClusterAgentPoolProfileProperties):
          greater than the control plane version. For more information see `upgrading a node pool
          <https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool>`_.
         :paramtype orchestrator_version: str
-        :keyword current_orchestrator_version: If orchestratorVersion was a fully specified version
-         <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was
-         <major.minor>, this field will contain the full <major.minor.patch> version being used.
-        :paramtype current_orchestrator_version: str
         :keyword upgrade_settings: Settings for upgrading the agentpool.
         :paramtype upgrade_settings:
          ~azure.mgmt.containerservice.v2022_03_02_preview.models.AgentPoolUpgradeSettings
@@ -3536,7 +3524,7 @@ class ManagedClusterAgentPoolProfile(ManagedClusterAgentPoolProfileProperties):
         :keyword name: Required. Windows agent pool names must be 6 characters or less.
         :paramtype name: str
         """
-        super(ManagedClusterAgentPoolProfile, self).__init__(count=count, vm_size=vm_size, os_disk_size_gb=os_disk_size_gb, os_disk_type=os_disk_type, kubelet_disk_type=kubelet_disk_type, workload_runtime=workload_runtime, message_of_the_day=message_of_the_day, vnet_subnet_id=vnet_subnet_id, pod_subnet_id=pod_subnet_id, max_pods=max_pods, os_type=os_type, os_sku=os_sku, max_count=max_count, min_count=min_count, enable_auto_scaling=enable_auto_scaling, scale_down_mode=scale_down_mode, type=type, mode=mode, orchestrator_version=orchestrator_version, current_orchestrator_version=current_orchestrator_version, upgrade_settings=upgrade_settings, power_state=power_state, availability_zones=availability_zones, enable_node_public_ip=enable_node_public_ip, node_public_ip_prefix_id=node_public_ip_prefix_id, scale_set_priority=scale_set_priority, scale_set_eviction_policy=scale_set_eviction_policy, spot_max_price=spot_max_price, tags=tags, node_labels=node_labels, node_taints=node_taints, proximity_placement_group_id=proximity_placement_group_id, kubelet_config=kubelet_config, linux_os_config=linux_os_config, enable_encryption_at_host=enable_encryption_at_host, enable_ultra_ssd=enable_ultra_ssd, enable_fips=enable_fips, gpu_instance_profile=gpu_instance_profile, creation_data=creation_data, capacity_reservation_group_id=capacity_reservation_group_id, host_group_id=host_group_id, **kwargs)
+        super(ManagedClusterAgentPoolProfile, self).__init__(count=count, vm_size=vm_size, os_disk_size_gb=os_disk_size_gb, os_disk_type=os_disk_type, kubelet_disk_type=kubelet_disk_type, workload_runtime=workload_runtime, message_of_the_day=message_of_the_day, vnet_subnet_id=vnet_subnet_id, pod_subnet_id=pod_subnet_id, max_pods=max_pods, os_type=os_type, os_sku=os_sku, max_count=max_count, min_count=min_count, enable_auto_scaling=enable_auto_scaling, scale_down_mode=scale_down_mode, type=type, mode=mode, orchestrator_version=orchestrator_version, upgrade_settings=upgrade_settings, power_state=power_state, availability_zones=availability_zones, enable_node_public_ip=enable_node_public_ip, node_public_ip_prefix_id=node_public_ip_prefix_id, scale_set_priority=scale_set_priority, scale_set_eviction_policy=scale_set_eviction_policy, spot_max_price=spot_max_price, tags=tags, node_labels=node_labels, node_taints=node_taints, proximity_placement_group_id=proximity_placement_group_id, kubelet_config=kubelet_config, linux_os_config=linux_os_config, enable_encryption_at_host=enable_encryption_at_host, enable_ultra_ssd=enable_ultra_ssd, enable_fips=enable_fips, gpu_instance_profile=gpu_instance_profile, creation_data=creation_data, capacity_reservation_group_id=capacity_reservation_group_id, host_group_id=host_group_id, **kwargs)
         self.name = name
 
 
