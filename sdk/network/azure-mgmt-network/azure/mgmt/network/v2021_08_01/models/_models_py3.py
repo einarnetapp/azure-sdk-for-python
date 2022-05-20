@@ -3589,6 +3589,8 @@ class ApplicationGatewayRoutingRule(SubResource):
     :ivar rule_type: Rule type. Possible values include: "Basic", "PathBasedRouting".
     :vartype rule_type: str or
      ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayRequestRoutingRuleType
+    :ivar priority: Priority of the routing rule.
+    :vartype priority: int
     :ivar backend_address_pool: Backend address pool resource of the application gateway.
     :vartype backend_address_pool: ~azure.mgmt.network.v2021_08_01.models.SubResource
     :ivar backend_settings: Backend settings resource of the application gateway.
@@ -3603,6 +3605,7 @@ class ApplicationGatewayRoutingRule(SubResource):
     _validation = {
         'etag': {'readonly': True},
         'type': {'readonly': True},
+        'priority': {'maximum': 20000, 'minimum': 1},
         'provisioning_state': {'readonly': True},
     }
 
@@ -3612,6 +3615,7 @@ class ApplicationGatewayRoutingRule(SubResource):
         'etag': {'key': 'etag', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'rule_type': {'key': 'properties.ruleType', 'type': 'str'},
+        'priority': {'key': 'properties.priority', 'type': 'int'},
         'backend_address_pool': {'key': 'properties.backendAddressPool', 'type': 'SubResource'},
         'backend_settings': {'key': 'properties.backendSettings', 'type': 'SubResource'},
         'listener': {'key': 'properties.listener', 'type': 'SubResource'},
@@ -3624,6 +3628,7 @@ class ApplicationGatewayRoutingRule(SubResource):
         id: Optional[str] = None,
         name: Optional[str] = None,
         rule_type: Optional[Union[str, "ApplicationGatewayRequestRoutingRuleType"]] = None,
+        priority: Optional[int] = None,
         backend_address_pool: Optional["SubResource"] = None,
         backend_settings: Optional["SubResource"] = None,
         listener: Optional["SubResource"] = None,
@@ -3637,6 +3642,8 @@ class ApplicationGatewayRoutingRule(SubResource):
         :keyword rule_type: Rule type. Possible values include: "Basic", "PathBasedRouting".
         :paramtype rule_type: str or
          ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayRequestRoutingRuleType
+        :keyword priority: Priority of the routing rule.
+        :paramtype priority: int
         :keyword backend_address_pool: Backend address pool resource of the application gateway.
         :paramtype backend_address_pool: ~azure.mgmt.network.v2021_08_01.models.SubResource
         :keyword backend_settings: Backend settings resource of the application gateway.
@@ -3649,6 +3656,7 @@ class ApplicationGatewayRoutingRule(SubResource):
         self.etag = None
         self.type = None
         self.rule_type = rule_type
+        self.priority = priority
         self.backend_address_pool = backend_address_pool
         self.backend_settings = backend_settings
         self.listener = listener
