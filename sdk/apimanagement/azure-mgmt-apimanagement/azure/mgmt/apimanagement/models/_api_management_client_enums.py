@@ -111,6 +111,13 @@ class AuthorizationMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     PATCH = "PATCH"
     DELETE = "DELETE"
 
+class AuthorizationType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Authorization type options
+    """
+
+    #: OAuth2 authorization type.
+    O_AUTH2 = "OAuth2"
+
 class BackendProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Backend communication protocol.
     """
@@ -412,6 +419,15 @@ class NotificationName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: usage gets close to usage quota.
     QUOTA_LIMIT_APPROACHING_PUBLISHER_NOTIFICATION_MESSAGE = "QuotaLimitApproachingPublisherNotificationMessage"
 
+class OAuth2GrantType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """OAuth2 grant type options
+    """
+
+    #: Authorization Code grant.
+    AUTHORIZATION_CODE = "AuthorizationCode"
+    #: Client Credential grant.
+    CLIENT_CREDENTIALS = "ClientCredentials"
+
 class OperationNameFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The format of the Operation Name for Application Insights telemetries. Default is Name.
     """
@@ -464,6 +480,13 @@ class PolicyExportFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The contents are inline and Content type is a non XML encoded policy document.
     RAWXML = "rawxml"
 
+class PolicyFragmentContentFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: The contents are inline and Content type is an XML document.
+    XML = "xml"
+    #: The contents are inline and Content type is a non XML encoded policy document.
+    RAWXML = "rawxml"
+
 class PolicyIdName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     POLICY = "policy"
@@ -488,6 +511,17 @@ class PortalRevisionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     COMPLETED = "completed"
     #: Portal's revision publishing failed.
     FAILED = "failed"
+
+class PortalSettingsCspMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The mode of the developer portal Content Security Policy (CSP).
+    """
+
+    #: The browser will block requests not matching allowed origins.
+    ENABLED = "enabled"
+    #: The browser will not apply the origin restrictions.
+    DISABLED = "disabled"
+    #: The browser will report requests not matching allowed origins without blocking them.
+    REPORT_ONLY = "reportOnly"
 
 class PreferredIPVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The IP version to be used. Only IPv4 is supported for now.

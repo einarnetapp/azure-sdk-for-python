@@ -66,6 +66,17 @@ from ._models_py3 import ApimResource
 from ._models_py3 import ArmIdWrapper
 from ._models_py3 import AssociationContract
 from ._models_py3 import AuthenticationSettingsContract
+from ._models_py3 import AuthorizationAccessPolicyCollection
+from ._models_py3 import AuthorizationAccessPolicyContract
+from ._models_py3 import AuthorizationCollection
+from ._models_py3 import AuthorizationContract
+from ._models_py3 import AuthorizationError
+from ._models_py3 import AuthorizationLoginRequestContract
+from ._models_py3 import AuthorizationLoginResponseContract
+from ._models_py3 import AuthorizationProviderCollection
+from ._models_py3 import AuthorizationProviderContract
+from ._models_py3 import AuthorizationProviderOAuth2GrantTypes
+from ._models_py3 import AuthorizationProviderOAuth2Settings
 from ._models_py3 import AuthorizationServerCollection
 from ._models_py3 import AuthorizationServerContract
 from ._models_py3 import AuthorizationServerContractBaseProperties
@@ -209,6 +220,16 @@ from ._models_py3 import PolicyCollection
 from ._models_py3 import PolicyContract
 from ._models_py3 import PolicyDescriptionCollection
 from ._models_py3 import PolicyDescriptionContract
+from ._models_py3 import PolicyFragmentCollection
+from ._models_py3 import PolicyFragmentContract
+from ._models_py3 import PortalConfigCollection
+from ._models_py3 import PortalConfigContract
+from ._models_py3 import PortalConfigCorsProperties
+from ._models_py3 import PortalConfigCspProperties
+from ._models_py3 import PortalConfigDelegationProperties
+from ._models_py3 import PortalConfigPropertiesSignin
+from ._models_py3 import PortalConfigPropertiesSignup
+from ._models_py3 import PortalConfigTermsOfServiceProperties
 from ._models_py3 import PortalDelegationSettings
 from ._models_py3 import PortalRevisionCollection
 from ._models_py3 import PortalRevisionContract
@@ -253,6 +274,8 @@ from ._models_py3 import RequestContract
 from ._models_py3 import RequestReportCollection
 from ._models_py3 import RequestReportRecordContract
 from ._models_py3 import Resource
+from ._models_py3 import ResourceCollection
+from ._models_py3 import ResourceCollectionValueItem
 from ._models_py3 import ResourceLocationDataContract
 from ._models_py3 import ResourceSku
 from ._models_py3 import ResourceSkuCapacity
@@ -317,6 +340,7 @@ from ._api_management_client_enums import (
     AppType,
     AsyncOperationStatus,
     AuthorizationMethod,
+    AuthorizationType,
     BackendProtocol,
     BearerTokenSendingMethod,
     BearerTokenSendingMethods,
@@ -346,14 +370,17 @@ from ._api_management_client_enums import (
     Method,
     NameAvailabilityReason,
     NotificationName,
+    OAuth2GrantType,
     OperationNameFormat,
     Origin,
     PlatformVersion,
     PolicyContentFormat,
     PolicyExportFormat,
+    PolicyFragmentContentFormat,
     PolicyIdName,
     PolicyScopeContract,
     PortalRevisionStatus,
+    PortalSettingsCspMode,
     PreferredIPVersion,
     PrivateEndpointConnectionProvisioningState,
     PrivateEndpointServiceConnectionStatus,
@@ -437,6 +464,17 @@ __all__ = [
     'ArmIdWrapper',
     'AssociationContract',
     'AuthenticationSettingsContract',
+    'AuthorizationAccessPolicyCollection',
+    'AuthorizationAccessPolicyContract',
+    'AuthorizationCollection',
+    'AuthorizationContract',
+    'AuthorizationError',
+    'AuthorizationLoginRequestContract',
+    'AuthorizationLoginResponseContract',
+    'AuthorizationProviderCollection',
+    'AuthorizationProviderContract',
+    'AuthorizationProviderOAuth2GrantTypes',
+    'AuthorizationProviderOAuth2Settings',
     'AuthorizationServerCollection',
     'AuthorizationServerContract',
     'AuthorizationServerContractBaseProperties',
@@ -580,6 +618,16 @@ __all__ = [
     'PolicyContract',
     'PolicyDescriptionCollection',
     'PolicyDescriptionContract',
+    'PolicyFragmentCollection',
+    'PolicyFragmentContract',
+    'PortalConfigCollection',
+    'PortalConfigContract',
+    'PortalConfigCorsProperties',
+    'PortalConfigCspProperties',
+    'PortalConfigDelegationProperties',
+    'PortalConfigPropertiesSignin',
+    'PortalConfigPropertiesSignup',
+    'PortalConfigTermsOfServiceProperties',
     'PortalDelegationSettings',
     'PortalRevisionCollection',
     'PortalRevisionContract',
@@ -624,6 +672,8 @@ __all__ = [
     'RequestReportCollection',
     'RequestReportRecordContract',
     'Resource',
+    'ResourceCollection',
+    'ResourceCollectionValueItem',
     'ResourceLocationDataContract',
     'ResourceSku',
     'ResourceSkuCapacity',
@@ -685,6 +735,7 @@ __all__ = [
     'AppType',
     'AsyncOperationStatus',
     'AuthorizationMethod',
+    'AuthorizationType',
     'BackendProtocol',
     'BearerTokenSendingMethod',
     'BearerTokenSendingMethods',
@@ -714,14 +765,17 @@ __all__ = [
     'Method',
     'NameAvailabilityReason',
     'NotificationName',
+    'OAuth2GrantType',
     'OperationNameFormat',
     'Origin',
     'PlatformVersion',
     'PolicyContentFormat',
     'PolicyExportFormat',
+    'PolicyFragmentContentFormat',
     'PolicyIdName',
     'PolicyScopeContract',
     'PortalRevisionStatus',
+    'PortalSettingsCspMode',
     'PreferredIPVersion',
     'PrivateEndpointConnectionProvisioningState',
     'PrivateEndpointServiceConnectionStatus',
