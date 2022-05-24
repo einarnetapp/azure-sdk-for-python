@@ -633,7 +633,7 @@ class ContainerAppsOperations(object):
     ) -> LROPoller["_models.ContainerApp"]:
         """Create or update a Container App.
 
-        Description for Create or update a Container App.
+        Create or update a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -748,7 +748,7 @@ class ContainerAppsOperations(object):
     ) -> LROPoller[None]:
         """Delete a Container App.
 
-        Description for Delete a Container App.
+        Delete a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str

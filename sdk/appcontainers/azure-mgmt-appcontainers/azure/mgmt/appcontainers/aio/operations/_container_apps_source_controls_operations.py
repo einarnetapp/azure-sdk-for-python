@@ -266,7 +266,7 @@ class ContainerAppsSourceControlsOperations:
     ) -> AsyncLROPoller["_models.SourceControl"]:
         """Create or update the SourceControl for a Container App.
 
-        Description for Create or update the SourceControl for a Container App.
+        Create or update the SourceControl for a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -387,7 +387,7 @@ class ContainerAppsSourceControlsOperations:
     ) -> AsyncLROPoller[None]:
         """Delete a Container App SourceControl.
 
-        Description for Delete a Container App SourceControl.
+        Delete a Container App SourceControl.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
