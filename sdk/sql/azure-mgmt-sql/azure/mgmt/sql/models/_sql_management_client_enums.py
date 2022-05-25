@@ -21,6 +21,19 @@ class AdministratorType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     ACTIVE_DIRECTORY = "ActiveDirectory"
 
+class AdvancedThreatProtectionName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    DEFAULT = "Default"
+
+class AdvancedThreatProtectionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Specifies the state of the Advanced Threat Protection, whether it is enabled or disabled or a
+    state has not been applied yet on the specific database or server.
+    """
+
+    NEW = "New"
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
 class AdvisorStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Gets the status of availability of this advisor to customers. Possible values are 'GA',
     'PublicPreview', 'LimitedPublicPreview' and 'PrivatePreview'.
@@ -279,7 +292,7 @@ class DatabaseLicenseType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 class DatabaseReadScale(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of read-only routing. If enabled, connections that have application intent set to
     readonly in their connection string may be routed to a readonly secondary replica in the same
-    region.
+    region. Not applicable to a Hyperscale database within an elastic pool.
     """
 
     ENABLED = "Enabled"

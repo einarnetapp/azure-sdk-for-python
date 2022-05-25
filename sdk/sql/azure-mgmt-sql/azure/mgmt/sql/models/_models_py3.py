@@ -880,10 +880,12 @@ class Database(TrackedResource):
     :vartype earliest_restore_date: ~datetime.datetime
     :ivar read_scale: The state of read-only routing. If enabled, connections that have application
      intent set to readonly in their connection string may be routed to a readonly secondary replica
-     in the same region. Possible values include: "Enabled", "Disabled".
+     in the same region. Not applicable to a Hyperscale database within an elastic pool. Possible
+     values include: "Enabled", "Disabled".
     :vartype read_scale: str or ~azure.mgmt.sql.models.DatabaseReadScale
     :ivar high_availability_replica_count: The number of secondary replicas associated with the
-     database that are used to provide high availability.
+     database that are used to provide high availability. Not applicable to a Hyperscale database
+     within an elastic pool.
     :vartype high_availability_replica_count: int
     :ivar secondary_type: The secondary type of the database if it is a secondary.  Valid values
      are Geo and Named. Possible values include: "Geo", "Named".
@@ -920,9 +922,30 @@ class Database(TrackedResource):
     :vartype is_infra_encryption_enabled: bool
     :ivar federated_client_id: The Client id used for cross tenant per database CMK scenario.
     :vartype federated_client_id: str
-    :ivar primary_delegated_identity_client_id: The Primary Delegated Identity Client id used for
-     per database CMK - for internal use only.
-    :vartype primary_delegated_identity_client_id: str
+    :ivar source_resource_id: The resource identifier of the source associated with the create
+     operation of this database.
+    
+     When sourceResourceId is specified, sourceDatabaseId, recoverableDatabaseId,
+     restorableDroppedDatabaseId and sourceDatabaseDeletionDate must not be specified and CreateMode
+     must be PointInTimeRestore, Restore or Recover.
+    
+     When createMode is PointInTimeRestore, sourceResourceId must be the resource ID of an existing
+     database or existing sql pool, and restorePointInTime must be specified.
+    
+     When createMode is Restore, sourceResourceId must be the resource ID of restorable dropped
+     database or restorable dropped sql pool.
+    
+     When createMode is Recover, sourceResourceId must be the resource ID of recoverable database
+     or recoverable sql pool.
+    
+     This property allows to restore across subscriptions which is only supported for DataWarehouse
+     edition.
+    
+     When source subscription belongs to a different tenant than target subscription,
+     “x-ms-authorization-auxiliary” header must contain authentication token for the source tenant.
+     For more details about “x-ms-authorization-auxiliary” header see
+     https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/authenticate-multi-tenant.
+    :vartype source_resource_id: str
     """
 
     _validation = {
@@ -996,7 +1019,7 @@ class Database(TrackedResource):
         'is_ledger_on': {'key': 'properties.isLedgerOn', 'type': 'bool'},
         'is_infra_encryption_enabled': {'key': 'properties.isInfraEncryptionEnabled', 'type': 'bool'},
         'federated_client_id': {'key': 'properties.federatedClientId', 'type': 'str'},
-        'primary_delegated_identity_client_id': {'key': 'properties.primaryDelegatedIdentityClientId', 'type': 'str'},
+        'source_resource_id': {'key': 'properties.sourceResourceId', 'type': 'str'},
     }
 
     def __init__(
@@ -1030,7 +1053,7 @@ class Database(TrackedResource):
         maintenance_configuration_id: Optional[str] = None,
         is_ledger_on: Optional[bool] = None,
         federated_client_id: Optional[str] = None,
-        primary_delegated_identity_client_id: Optional[str] = None,
+        source_resource_id: Optional[str] = None,
         **kwargs
     ):
         """
@@ -1130,10 +1153,12 @@ class Database(TrackedResource):
         :paramtype license_type: str or ~azure.mgmt.sql.models.DatabaseLicenseType
         :keyword read_scale: The state of read-only routing. If enabled, connections that have
          application intent set to readonly in their connection string may be routed to a readonly
-         secondary replica in the same region. Possible values include: "Enabled", "Disabled".
+         secondary replica in the same region. Not applicable to a Hyperscale database within an elastic
+         pool. Possible values include: "Enabled", "Disabled".
         :paramtype read_scale: str or ~azure.mgmt.sql.models.DatabaseReadScale
         :keyword high_availability_replica_count: The number of secondary replicas associated with the
-         database that are used to provide high availability.
+         database that are used to provide high availability. Not applicable to a Hyperscale database
+         within an elastic pool.
         :paramtype high_availability_replica_count: int
         :keyword secondary_type: The secondary type of the database if it is a secondary.  Valid values
          are Geo and Named. Possible values include: "Geo", "Named".
@@ -1157,9 +1182,30 @@ class Database(TrackedResource):
         :paramtype is_ledger_on: bool
         :keyword federated_client_id: The Client id used for cross tenant per database CMK scenario.
         :paramtype federated_client_id: str
-        :keyword primary_delegated_identity_client_id: The Primary Delegated Identity Client id used
-         for per database CMK - for internal use only.
-        :paramtype primary_delegated_identity_client_id: str
+        :keyword source_resource_id: The resource identifier of the source associated with the create
+         operation of this database.
+        
+         When sourceResourceId is specified, sourceDatabaseId, recoverableDatabaseId,
+         restorableDroppedDatabaseId and sourceDatabaseDeletionDate must not be specified and CreateMode
+         must be PointInTimeRestore, Restore or Recover.
+        
+         When createMode is PointInTimeRestore, sourceResourceId must be the resource ID of an existing
+         database or existing sql pool, and restorePointInTime must be specified.
+        
+         When createMode is Restore, sourceResourceId must be the resource ID of restorable dropped
+         database or restorable dropped sql pool.
+        
+         When createMode is Recover, sourceResourceId must be the resource ID of recoverable database
+         or recoverable sql pool.
+        
+         This property allows to restore across subscriptions which is only supported for DataWarehouse
+         edition.
+        
+         When source subscription belongs to a different tenant than target subscription,
+         “x-ms-authorization-auxiliary” header must contain authentication token for the source tenant.
+         For more details about “x-ms-authorization-auxiliary” header see
+         https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/authenticate-multi-tenant.
+        :paramtype source_resource_id: str
         """
         super(Database, self).__init__(location=location, tags=tags, **kwargs)
         self.sku = sku
@@ -1204,7 +1250,95 @@ class Database(TrackedResource):
         self.is_ledger_on = is_ledger_on
         self.is_infra_encryption_enabled = None
         self.federated_client_id = federated_client_id
-        self.primary_delegated_identity_client_id = primary_delegated_identity_client_id
+        self.source_resource_id = source_resource_id
+
+
+class DatabaseAdvancedThreatProtection(ProxyResource):
+    """A database Advanced Threat Protection.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar system_data: SystemData of AdvancedThreatProtectionResource.
+    :vartype system_data: ~azure.mgmt.sql.models.SystemData
+    :ivar state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+     disabled or a state has not been applied yet on the specific database or server. Possible
+     values include: "New", "Enabled", "Disabled".
+    :vartype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+    :ivar creation_time: Specifies the UTC creation time of the policy.
+    :vartype creation_time: ~datetime.datetime
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'creation_time': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'state': {'key': 'properties.state', 'type': 'str'},
+        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        state: Optional[Union[str, "AdvancedThreatProtectionState"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+         disabled or a state has not been applied yet on the specific database or server. Possible
+         values include: "New", "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+        """
+        super(DatabaseAdvancedThreatProtection, self).__init__(**kwargs)
+        self.system_data = None
+        self.state = state
+        self.creation_time = None
+
+
+class DatabaseAdvancedThreatProtectionListResult(msrest.serialization.Model):
+    """A list of the database's Advanced Threat Protection configurations.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.DatabaseAdvancedThreatProtection]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[DatabaseAdvancedThreatProtection]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(DatabaseAdvancedThreatProtectionListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
 
 
 class DatabaseAutomaticTuning(ProxyResource):
@@ -1316,6 +1450,10 @@ class DatabaseBlobAuditingPolicy(ProxyResource):
      USER_CHANGE_PASSWORD_GROUP
      BATCH_STARTED_GROUP
      BATCH_COMPLETED_GROUP
+     DBCC_GROUP
+     DATABASE_OWNERSHIP_CHANGE_GROUP
+     DATABASE_CHANGE_GROUP
+     LEDGER_OPERATION_GROUP
     
      These are groups that cover all sql statements and stored procedures executed against the
      database, and should not be used in combination with other groups as this will result in
@@ -1373,6 +1511,9 @@ class DatabaseBlobAuditingPolicy(ProxyResource):
      actions are forced to be processed.
      The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
     :vartype queue_delay_ms: int
+    :ivar is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+     storage.
+    :vartype is_managed_identity_in_use: bool
     :ivar state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
      isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
     :vartype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -1414,6 +1555,7 @@ class DatabaseBlobAuditingPolicy(ProxyResource):
         'is_storage_secondary_key_in_use': {'key': 'properties.isStorageSecondaryKeyInUse', 'type': 'bool'},
         'is_azure_monitor_target_enabled': {'key': 'properties.isAzureMonitorTargetEnabled', 'type': 'bool'},
         'queue_delay_ms': {'key': 'properties.queueDelayMs', 'type': 'int'},
+        'is_managed_identity_in_use': {'key': 'properties.isManagedIdentityInUse', 'type': 'bool'},
         'state': {'key': 'properties.state', 'type': 'str'},
         'storage_endpoint': {'key': 'properties.storageEndpoint', 'type': 'str'},
         'storage_account_access_key': {'key': 'properties.storageAccountAccessKey', 'type': 'str'},
@@ -1428,6 +1570,7 @@ class DatabaseBlobAuditingPolicy(ProxyResource):
         is_storage_secondary_key_in_use: Optional[bool] = None,
         is_azure_monitor_target_enabled: Optional[bool] = None,
         queue_delay_ms: Optional[int] = None,
+        is_managed_identity_in_use: Optional[bool] = None,
         state: Optional[Union[str, "BlobAuditingPolicyState"]] = None,
         storage_endpoint: Optional[str] = None,
         storage_account_access_key: Optional[str] = None,
@@ -1474,6 +1617,10 @@ class DatabaseBlobAuditingPolicy(ProxyResource):
          USER_CHANGE_PASSWORD_GROUP
          BATCH_STARTED_GROUP
          BATCH_COMPLETED_GROUP
+         DBCC_GROUP
+         DATABASE_OWNERSHIP_CHANGE_GROUP
+         DATABASE_CHANGE_GROUP
+         LEDGER_OPERATION_GROUP
         
          These are groups that cover all sql statements and stored procedures executed against the
          database, and should not be used in combination with other groups as this will result in
@@ -1531,6 +1678,9 @@ class DatabaseBlobAuditingPolicy(ProxyResource):
          audit actions are forced to be processed.
          The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
         :paramtype queue_delay_ms: int
+        :keyword is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+         storage.
+        :paramtype is_managed_identity_in_use: bool
         :keyword state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
          isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
         :paramtype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -1562,6 +1712,7 @@ class DatabaseBlobAuditingPolicy(ProxyResource):
         self.is_storage_secondary_key_in_use = is_storage_secondary_key_in_use
         self.is_azure_monitor_target_enabled = is_azure_monitor_target_enabled
         self.queue_delay_ms = queue_delay_ms
+        self.is_managed_identity_in_use = is_managed_identity_in_use
         self.state = state
         self.storage_endpoint = storage_endpoint
         self.storage_account_access_key = storage_account_access_key
@@ -1781,8 +1932,6 @@ class DatabaseIdentity(msrest.serialization.Model):
     :vartype tenant_id: str
     :ivar user_assigned_identities: The resource ids of the user assigned identities to use.
     :vartype user_assigned_identities: dict[str, ~azure.mgmt.sql.models.DatabaseUserIdentity]
-    :ivar delegated_resources: Resources delegated to the database - Internal Use Only.
-    :vartype delegated_resources: dict[str, ~azure.mgmt.sql.models.Delegation]
     """
 
     _validation = {
@@ -1793,7 +1942,6 @@ class DatabaseIdentity(msrest.serialization.Model):
         'type': {'key': 'type', 'type': 'str'},
         'tenant_id': {'key': 'tenantId', 'type': 'str'},
         'user_assigned_identities': {'key': 'userAssignedIdentities', 'type': '{DatabaseUserIdentity}'},
-        'delegated_resources': {'key': 'delegatedResources', 'type': '{Delegation}'},
     }
 
     def __init__(
@@ -1801,7 +1949,6 @@ class DatabaseIdentity(msrest.serialization.Model):
         *,
         type: Optional[Union[str, "DatabaseIdentityType"]] = None,
         user_assigned_identities: Optional[Dict[str, "DatabaseUserIdentity"]] = None,
-        delegated_resources: Optional[Dict[str, "Delegation"]] = None,
         **kwargs
     ):
         """
@@ -1809,14 +1956,11 @@ class DatabaseIdentity(msrest.serialization.Model):
         :paramtype type: str or ~azure.mgmt.sql.models.DatabaseIdentityType
         :keyword user_assigned_identities: The resource ids of the user assigned identities to use.
         :paramtype user_assigned_identities: dict[str, ~azure.mgmt.sql.models.DatabaseUserIdentity]
-        :keyword delegated_resources: Resources delegated to the database - Internal Use Only.
-        :paramtype delegated_resources: dict[str, ~azure.mgmt.sql.models.Delegation]
         """
         super(DatabaseIdentity, self).__init__(**kwargs)
         self.type = type
         self.tenant_id = None
         self.user_assigned_identities = user_assigned_identities
-        self.delegated_resources = delegated_resources
 
 
 class DatabaseListResult(msrest.serialization.Model):
@@ -2279,7 +2423,7 @@ class DatabaseTableListResult(msrest.serialization.Model):
 
 
 class DatabaseUpdate(msrest.serialization.Model):
-    """A database resource.
+    """A database update resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -2386,10 +2530,12 @@ class DatabaseUpdate(msrest.serialization.Model):
     :vartype earliest_restore_date: ~datetime.datetime
     :ivar read_scale: The state of read-only routing. If enabled, connections that have application
      intent set to readonly in their connection string may be routed to a readonly secondary replica
-     in the same region. Possible values include: "Enabled", "Disabled".
+     in the same region. Not applicable to a Hyperscale database within an elastic pool. Possible
+     values include: "Enabled", "Disabled".
     :vartype read_scale: str or ~azure.mgmt.sql.models.DatabaseReadScale
     :ivar high_availability_replica_count: The number of secondary replicas associated with the
-     database that are used to provide high availability.
+     database that are used to provide high availability. Not applicable to a Hyperscale database
+     within an elastic pool.
     :vartype high_availability_replica_count: int
     :ivar secondary_type: The secondary type of the database if it is a secondary.  Valid values
      are Geo and Named. Possible values include: "Geo", "Named".
@@ -2426,9 +2572,6 @@ class DatabaseUpdate(msrest.serialization.Model):
     :vartype is_infra_encryption_enabled: bool
     :ivar federated_client_id: The Client id used for cross tenant per database CMK scenario.
     :vartype federated_client_id: str
-    :ivar primary_delegated_identity_client_id: The Primary Delegated Identity Client id used for
-     per database CMK - for internal use only.
-    :vartype primary_delegated_identity_client_id: str
     """
 
     _validation = {
@@ -2490,7 +2633,6 @@ class DatabaseUpdate(msrest.serialization.Model):
         'is_ledger_on': {'key': 'properties.isLedgerOn', 'type': 'bool'},
         'is_infra_encryption_enabled': {'key': 'properties.isInfraEncryptionEnabled', 'type': 'bool'},
         'federated_client_id': {'key': 'properties.federatedClientId', 'type': 'str'},
-        'primary_delegated_identity_client_id': {'key': 'properties.primaryDelegatedIdentityClientId', 'type': 'str'},
     }
 
     def __init__(
@@ -2523,7 +2665,6 @@ class DatabaseUpdate(msrest.serialization.Model):
         maintenance_configuration_id: Optional[str] = None,
         is_ledger_on: Optional[bool] = None,
         federated_client_id: Optional[str] = None,
-        primary_delegated_identity_client_id: Optional[str] = None,
         **kwargs
     ):
         """
@@ -2606,10 +2747,12 @@ class DatabaseUpdate(msrest.serialization.Model):
         :paramtype license_type: str or ~azure.mgmt.sql.models.DatabaseLicenseType
         :keyword read_scale: The state of read-only routing. If enabled, connections that have
          application intent set to readonly in their connection string may be routed to a readonly
-         secondary replica in the same region. Possible values include: "Enabled", "Disabled".
+         secondary replica in the same region. Not applicable to a Hyperscale database within an elastic
+         pool. Possible values include: "Enabled", "Disabled".
         :paramtype read_scale: str or ~azure.mgmt.sql.models.DatabaseReadScale
         :keyword high_availability_replica_count: The number of secondary replicas associated with the
-         database that are used to provide high availability.
+         database that are used to provide high availability. Not applicable to a Hyperscale database
+         within an elastic pool.
         :paramtype high_availability_replica_count: int
         :keyword secondary_type: The secondary type of the database if it is a secondary.  Valid values
          are Geo and Named. Possible values include: "Geo", "Named".
@@ -2633,9 +2776,6 @@ class DatabaseUpdate(msrest.serialization.Model):
         :paramtype is_ledger_on: bool
         :keyword federated_client_id: The Client id used for cross tenant per database CMK scenario.
         :paramtype federated_client_id: str
-        :keyword primary_delegated_identity_client_id: The Primary Delegated Identity Client id used
-         for per database CMK - for internal use only.
-        :paramtype primary_delegated_identity_client_id: str
         """
         super(DatabaseUpdate, self).__init__(**kwargs)
         self.sku = sku
@@ -2679,7 +2819,6 @@ class DatabaseUpdate(msrest.serialization.Model):
         self.is_ledger_on = is_ledger_on
         self.is_infra_encryption_enabled = None
         self.federated_client_id = federated_client_id
-        self.primary_delegated_identity_client_id = primary_delegated_identity_client_id
 
 
 class DatabaseUsage(ProxyResource):
@@ -3341,41 +3480,6 @@ class DataWarehouseUserActivitiesListResult(msrest.serialization.Model):
         super(DataWarehouseUserActivitiesListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
-
-
-class Delegation(msrest.serialization.Model):
-    """Delegated Resource Properties - Internal Use Only.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar resource_id: The resource id of the source resource - Internal Use Only.
-    :vartype resource_id: str
-    :ivar tenant_id: AAD tenant guid of the source resource identity - Internal Use Only.
-    :vartype tenant_id: str
-    """
-
-    _validation = {
-        'tenant_id': {'readonly': True},
-    }
-
-    _attribute_map = {
-        'resource_id': {'key': 'resourceId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        *,
-        resource_id: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword resource_id: The resource id of the source resource - Internal Use Only.
-        :paramtype resource_id: str
-        """
-        super(Delegation, self).__init__(**kwargs)
-        self.resource_id = resource_id
-        self.tenant_id = None
 
 
 class DeletedServer(ProxyResource):
@@ -4765,6 +4869,80 @@ class EncryptionProtectorListResult(msrest.serialization.Model):
         self.next_link = None
 
 
+class EndpointCertificate(ProxyResource):
+    """Certificate used on an endpoint on the Managed Instance.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar public_blob: The certificate public blob.
+    :vartype public_blob: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'public_blob': {'key': 'properties.publicBlob', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        public_blob: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword public_blob: The certificate public blob.
+        :paramtype public_blob: str
+        """
+        super(EndpointCertificate, self).__init__(**kwargs)
+        self.public_blob = public_blob
+
+
+class EndpointCertificateListResult(msrest.serialization.Model):
+    """A list of endpoint certificates on the target instance.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.EndpointCertificate]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[EndpointCertificate]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(EndpointCertificateListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
 class ExportDatabaseDefinition(msrest.serialization.Model):
     """Contains the information necessary to perform export database operation.
 
@@ -4897,6 +5075,10 @@ class ExtendedDatabaseBlobAuditingPolicy(ProxyResource):
      USER_CHANGE_PASSWORD_GROUP
      BATCH_STARTED_GROUP
      BATCH_COMPLETED_GROUP
+     DBCC_GROUP
+     DATABASE_OWNERSHIP_CHANGE_GROUP
+     DATABASE_CHANGE_GROUP
+     LEDGER_OPERATION_GROUP
     
      These are groups that cover all sql statements and stored procedures executed against the
      database, and should not be used in combination with other groups as this will result in
@@ -4954,6 +5136,9 @@ class ExtendedDatabaseBlobAuditingPolicy(ProxyResource):
      actions are forced to be processed.
      The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
     :vartype queue_delay_ms: int
+    :ivar is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+     storage.
+    :vartype is_managed_identity_in_use: bool
     :ivar state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
      isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
     :vartype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -4994,6 +5179,7 @@ class ExtendedDatabaseBlobAuditingPolicy(ProxyResource):
         'is_storage_secondary_key_in_use': {'key': 'properties.isStorageSecondaryKeyInUse', 'type': 'bool'},
         'is_azure_monitor_target_enabled': {'key': 'properties.isAzureMonitorTargetEnabled', 'type': 'bool'},
         'queue_delay_ms': {'key': 'properties.queueDelayMs', 'type': 'int'},
+        'is_managed_identity_in_use': {'key': 'properties.isManagedIdentityInUse', 'type': 'bool'},
         'state': {'key': 'properties.state', 'type': 'str'},
         'storage_endpoint': {'key': 'properties.storageEndpoint', 'type': 'str'},
         'storage_account_access_key': {'key': 'properties.storageAccountAccessKey', 'type': 'str'},
@@ -5009,6 +5195,7 @@ class ExtendedDatabaseBlobAuditingPolicy(ProxyResource):
         is_storage_secondary_key_in_use: Optional[bool] = None,
         is_azure_monitor_target_enabled: Optional[bool] = None,
         queue_delay_ms: Optional[int] = None,
+        is_managed_identity_in_use: Optional[bool] = None,
         state: Optional[Union[str, "BlobAuditingPolicyState"]] = None,
         storage_endpoint: Optional[str] = None,
         storage_account_access_key: Optional[str] = None,
@@ -5057,6 +5244,10 @@ class ExtendedDatabaseBlobAuditingPolicy(ProxyResource):
          USER_CHANGE_PASSWORD_GROUP
          BATCH_STARTED_GROUP
          BATCH_COMPLETED_GROUP
+         DBCC_GROUP
+         DATABASE_OWNERSHIP_CHANGE_GROUP
+         DATABASE_CHANGE_GROUP
+         LEDGER_OPERATION_GROUP
         
          These are groups that cover all sql statements and stored procedures executed against the
          database, and should not be used in combination with other groups as this will result in
@@ -5114,6 +5305,9 @@ class ExtendedDatabaseBlobAuditingPolicy(ProxyResource):
          audit actions are forced to be processed.
          The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
         :paramtype queue_delay_ms: int
+        :keyword is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+         storage.
+        :paramtype is_managed_identity_in_use: bool
         :keyword state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
          isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
         :paramtype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -5145,6 +5339,7 @@ class ExtendedDatabaseBlobAuditingPolicy(ProxyResource):
         self.is_storage_secondary_key_in_use = is_storage_secondary_key_in_use
         self.is_azure_monitor_target_enabled = is_azure_monitor_target_enabled
         self.queue_delay_ms = queue_delay_ms
+        self.is_managed_identity_in_use = is_managed_identity_in_use
         self.state = state
         self.storage_endpoint = storage_endpoint
         self.storage_account_access_key = storage_account_access_key
@@ -5251,6 +5446,10 @@ class ExtendedServerBlobAuditingPolicy(ProxyResource):
      USER_CHANGE_PASSWORD_GROUP
      BATCH_STARTED_GROUP
      BATCH_COMPLETED_GROUP
+     DBCC_GROUP
+     DATABASE_OWNERSHIP_CHANGE_GROUP
+     DATABASE_CHANGE_GROUP
+     LEDGER_OPERATION_GROUP
     
      These are groups that cover all sql statements and stored procedures executed against the
      database, and should not be used in combination with other groups as this will result in
@@ -5308,6 +5507,9 @@ class ExtendedServerBlobAuditingPolicy(ProxyResource):
      actions are forced to be processed.
      The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
     :vartype queue_delay_ms: int
+    :ivar is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+     storage.
+    :vartype is_managed_identity_in_use: bool
     :ivar state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
      isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
     :vartype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -5349,6 +5551,7 @@ class ExtendedServerBlobAuditingPolicy(ProxyResource):
         'is_storage_secondary_key_in_use': {'key': 'properties.isStorageSecondaryKeyInUse', 'type': 'bool'},
         'is_azure_monitor_target_enabled': {'key': 'properties.isAzureMonitorTargetEnabled', 'type': 'bool'},
         'queue_delay_ms': {'key': 'properties.queueDelayMs', 'type': 'int'},
+        'is_managed_identity_in_use': {'key': 'properties.isManagedIdentityInUse', 'type': 'bool'},
         'state': {'key': 'properties.state', 'type': 'str'},
         'storage_endpoint': {'key': 'properties.storageEndpoint', 'type': 'str'},
         'storage_account_access_key': {'key': 'properties.storageAccountAccessKey', 'type': 'str'},
@@ -5365,6 +5568,7 @@ class ExtendedServerBlobAuditingPolicy(ProxyResource):
         is_storage_secondary_key_in_use: Optional[bool] = None,
         is_azure_monitor_target_enabled: Optional[bool] = None,
         queue_delay_ms: Optional[int] = None,
+        is_managed_identity_in_use: Optional[bool] = None,
         state: Optional[Union[str, "BlobAuditingPolicyState"]] = None,
         storage_endpoint: Optional[str] = None,
         storage_account_access_key: Optional[str] = None,
@@ -5429,6 +5633,10 @@ class ExtendedServerBlobAuditingPolicy(ProxyResource):
          USER_CHANGE_PASSWORD_GROUP
          BATCH_STARTED_GROUP
          BATCH_COMPLETED_GROUP
+         DBCC_GROUP
+         DATABASE_OWNERSHIP_CHANGE_GROUP
+         DATABASE_CHANGE_GROUP
+         LEDGER_OPERATION_GROUP
         
          These are groups that cover all sql statements and stored procedures executed against the
          database, and should not be used in combination with other groups as this will result in
@@ -5486,6 +5694,9 @@ class ExtendedServerBlobAuditingPolicy(ProxyResource):
          audit actions are forced to be processed.
          The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
         :paramtype queue_delay_ms: int
+        :keyword is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+         storage.
+        :paramtype is_managed_identity_in_use: bool
         :keyword state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
          isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
         :paramtype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -5518,6 +5729,7 @@ class ExtendedServerBlobAuditingPolicy(ProxyResource):
         self.is_storage_secondary_key_in_use = is_storage_secondary_key_in_use
         self.is_azure_monitor_target_enabled = is_azure_monitor_target_enabled
         self.queue_delay_ms = queue_delay_ms
+        self.is_managed_identity_in_use = is_managed_identity_in_use
         self.state = state
         self.storage_endpoint = storage_endpoint
         self.storage_account_access_key = storage_account_access_key
@@ -6965,31 +7177,6 @@ class IPv6FirewallRule(ProxyResourceWithWritableName):
         self.end_i_pv6_address = end_i_pv6_address
 
 
-class IPv6FirewallRuleList(msrest.serialization.Model):
-    """A list of IPv6 server firewall rules.
-
-    :ivar values:
-    :vartype values: list[~azure.mgmt.sql.models.IPv6FirewallRule]
-    """
-
-    _attribute_map = {
-        'values': {'key': 'values', 'type': '[IPv6FirewallRule]'},
-    }
-
-    def __init__(
-        self,
-        *,
-        values: Optional[List["IPv6FirewallRule"]] = None,
-        **kwargs
-    ):
-        """
-        :keyword values:
-        :paramtype values: list[~azure.mgmt.sql.models.IPv6FirewallRule]
-        """
-        super(IPv6FirewallRuleList, self).__init__(**kwargs)
-        self.values = values
-
-
 class IPv6FirewallRuleListResult(msrest.serialization.Model):
     """The response to a list IPv6 firewall rules request.
 
@@ -8325,6 +8512,38 @@ class LogicalDatabaseTransparentDataEncryptionListResult(msrest.serialization.Mo
         """
         """
         super(LogicalDatabaseTransparentDataEncryptionListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
+class LogicalServerAdvancedThreatProtectionListResult(msrest.serialization.Model):
+    """A list of the server's Advanced Threat Protection configurations.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ServerAdvancedThreatProtection]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ServerAdvancedThreatProtection]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(LogicalServerAdvancedThreatProtectionListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
 
@@ -11942,6 +12161,140 @@ class ManagedInstanceVulnerabilityAssessmentListResult(msrest.serialization.Mode
         self.next_link = None
 
 
+class ManagedServerDnsAlias(ProxyResource):
+    """A managed server DNS alias.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar azure_dns_record: The fully qualified DNS record for managed server alias.
+    :vartype azure_dns_record: str
+    :ivar public_azure_dns_record: The fully qualified public DNS record for managed server alias.
+    :vartype public_azure_dns_record: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'azure_dns_record': {'readonly': True},
+        'public_azure_dns_record': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'azure_dns_record': {'key': 'properties.azureDnsRecord', 'type': 'str'},
+        'public_azure_dns_record': {'key': 'properties.publicAzureDnsRecord', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(ManagedServerDnsAlias, self).__init__(**kwargs)
+        self.azure_dns_record = None
+        self.public_azure_dns_record = None
+
+
+class ManagedServerDnsAliasAcquisition(msrest.serialization.Model):
+    """A managed server DNS alias acquisition request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar old_managed_server_dns_alias_resource_id: Required. The resource ID of the managed server
+     DNS alias that will be acquired to point to this managed server instead.
+    :vartype old_managed_server_dns_alias_resource_id: str
+    """
+
+    _validation = {
+        'old_managed_server_dns_alias_resource_id': {'required': True},
+    }
+
+    _attribute_map = {
+        'old_managed_server_dns_alias_resource_id': {'key': 'oldManagedServerDnsAliasResourceId', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        old_managed_server_dns_alias_resource_id: str,
+        **kwargs
+    ):
+        """
+        :keyword old_managed_server_dns_alias_resource_id: Required. The resource ID of the managed
+         server DNS alias that will be acquired to point to this managed server instead.
+        :paramtype old_managed_server_dns_alias_resource_id: str
+        """
+        super(ManagedServerDnsAliasAcquisition, self).__init__(**kwargs)
+        self.old_managed_server_dns_alias_resource_id = old_managed_server_dns_alias_resource_id
+
+
+class ManagedServerDnsAliasCreation(msrest.serialization.Model):
+    """A managed server dns alias creation request.
+
+    :ivar create_dns_record: Whether or not DNS record should be created for this alias.
+    :vartype create_dns_record: bool
+    """
+
+    _attribute_map = {
+        'create_dns_record': {'key': 'createDnsRecord', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        create_dns_record: Optional[bool] = True,
+        **kwargs
+    ):
+        """
+        :keyword create_dns_record: Whether or not DNS record should be created for this alias.
+        :paramtype create_dns_record: bool
+        """
+        super(ManagedServerDnsAliasCreation, self).__init__(**kwargs)
+        self.create_dns_record = create_dns_record
+
+
+class ManagedServerDnsAliasListResult(msrest.serialization.Model):
+    """A list of managed server DNS aliases.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ManagedServerDnsAlias]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ManagedServerDnsAlias]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(ManagedServerDnsAliasListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
 class ManagedServerSecurityAlertPolicy(ProxyResource):
     """A managed server security alert policy.
 
@@ -15389,6 +15742,62 @@ class Server(TrackedResource):
         self.restrict_outbound_network_access = restrict_outbound_network_access
 
 
+class ServerAdvancedThreatProtection(ProxyResource):
+    """A server Advanced Threat Protection.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar system_data: SystemData of AdvancedThreatProtectionResource.
+    :vartype system_data: ~azure.mgmt.sql.models.SystemData
+    :ivar state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+     disabled or a state has not been applied yet on the specific database or server. Possible
+     values include: "New", "Enabled", "Disabled".
+    :vartype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+    :ivar creation_time: Specifies the UTC creation time of the policy.
+    :vartype creation_time: ~datetime.datetime
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'creation_time': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'state': {'key': 'properties.state', 'type': 'str'},
+        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        state: Optional[Union[str, "AdvancedThreatProtectionState"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+         disabled or a state has not been applied yet on the specific database or server. Possible
+         values include: "New", "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+        """
+        super(ServerAdvancedThreatProtection, self).__init__(**kwargs)
+        self.system_data = None
+        self.state = state
+        self.creation_time = None
+
+
 class ServerAutomaticTuning(ProxyResource):
     """Server-level Automatic Tuning.
 
@@ -15624,6 +16033,10 @@ class ServerBlobAuditingPolicy(ProxyResource):
      USER_CHANGE_PASSWORD_GROUP
      BATCH_STARTED_GROUP
      BATCH_COMPLETED_GROUP
+     DBCC_GROUP
+     DATABASE_OWNERSHIP_CHANGE_GROUP
+     DATABASE_CHANGE_GROUP
+     LEDGER_OPERATION_GROUP
     
      These are groups that cover all sql statements and stored procedures executed against the
      database, and should not be used in combination with other groups as this will result in
@@ -15681,6 +16094,9 @@ class ServerBlobAuditingPolicy(ProxyResource):
      actions are forced to be processed.
      The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
     :vartype queue_delay_ms: int
+    :ivar is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+     storage.
+    :vartype is_managed_identity_in_use: bool
     :ivar state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
      isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
     :vartype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -15721,6 +16137,7 @@ class ServerBlobAuditingPolicy(ProxyResource):
         'is_storage_secondary_key_in_use': {'key': 'properties.isStorageSecondaryKeyInUse', 'type': 'bool'},
         'is_azure_monitor_target_enabled': {'key': 'properties.isAzureMonitorTargetEnabled', 'type': 'bool'},
         'queue_delay_ms': {'key': 'properties.queueDelayMs', 'type': 'int'},
+        'is_managed_identity_in_use': {'key': 'properties.isManagedIdentityInUse', 'type': 'bool'},
         'state': {'key': 'properties.state', 'type': 'str'},
         'storage_endpoint': {'key': 'properties.storageEndpoint', 'type': 'str'},
         'storage_account_access_key': {'key': 'properties.storageAccountAccessKey', 'type': 'str'},
@@ -15736,6 +16153,7 @@ class ServerBlobAuditingPolicy(ProxyResource):
         is_storage_secondary_key_in_use: Optional[bool] = None,
         is_azure_monitor_target_enabled: Optional[bool] = None,
         queue_delay_ms: Optional[int] = None,
+        is_managed_identity_in_use: Optional[bool] = None,
         state: Optional[Union[str, "BlobAuditingPolicyState"]] = None,
         storage_endpoint: Optional[str] = None,
         storage_account_access_key: Optional[str] = None,
@@ -15798,6 +16216,10 @@ class ServerBlobAuditingPolicy(ProxyResource):
          USER_CHANGE_PASSWORD_GROUP
          BATCH_STARTED_GROUP
          BATCH_COMPLETED_GROUP
+         DBCC_GROUP
+         DATABASE_OWNERSHIP_CHANGE_GROUP
+         DATABASE_CHANGE_GROUP
+         LEDGER_OPERATION_GROUP
         
          These are groups that cover all sql statements and stored procedures executed against the
          database, and should not be used in combination with other groups as this will result in
@@ -15855,6 +16277,9 @@ class ServerBlobAuditingPolicy(ProxyResource):
          audit actions are forced to be processed.
          The default minimum value is 1000 (1 second). The maximum is 2,147,483,647.
         :paramtype queue_delay_ms: int
+        :keyword is_managed_identity_in_use: Specifies whether Managed Identity is used to access blob
+         storage.
+        :paramtype is_managed_identity_in_use: bool
         :keyword state: Specifies the state of the audit. If state is Enabled, storageEndpoint or
          isAzureMonitorTargetEnabled are required. Possible values include: "Enabled", "Disabled".
         :paramtype state: str or ~azure.mgmt.sql.models.BlobAuditingPolicyState
@@ -15886,6 +16311,7 @@ class ServerBlobAuditingPolicy(ProxyResource):
         self.is_storage_secondary_key_in_use = is_storage_secondary_key_in_use
         self.is_azure_monitor_target_enabled = is_azure_monitor_target_enabled
         self.queue_delay_ms = queue_delay_ms
+        self.is_managed_identity_in_use = is_managed_identity_in_use
         self.state = state
         self.storage_endpoint = storage_endpoint
         self.storage_account_access_key = storage_account_access_key
@@ -16929,7 +17355,7 @@ class ServerTrustCertificate(ProxyResource):
 
 
 class ServerTrustCertificatesListResult(msrest.serialization.Model):
-    """A list of the server trust certificates which are used for secure communication between SQL On-Prem instance and the given Sql Managed Instance.
+    """A list of server trust certificates in instance.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -19185,33 +19611,6 @@ class TopQueriesListResult(msrest.serialization.Model):
         super(TopQueriesListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
-
-
-class UnlinkParameters(msrest.serialization.Model):
-    """Represents the parameters for Unlink Replication Link request.
-
-    :ivar forced_termination: Determines whether link will be terminated in a forced or a friendly
-     way.
-    :vartype forced_termination: bool
-    """
-
-    _attribute_map = {
-        'forced_termination': {'key': 'forcedTermination', 'type': 'bool'},
-    }
-
-    def __init__(
-        self,
-        *,
-        forced_termination: Optional[bool] = None,
-        **kwargs
-    ):
-        """
-        :keyword forced_termination: Determines whether link will be terminated in a forced or a
-         friendly way.
-        :paramtype forced_termination: bool
-        """
-        super(UnlinkParameters, self).__init__(**kwargs)
-        self.forced_termination = forced_termination
 
 
 class UpdateLongTermRetentionBackupParameters(msrest.serialization.Model):
