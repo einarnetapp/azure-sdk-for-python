@@ -25,7 +25,7 @@ ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dic
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_list_by_bot_resource_request(
+def build_create_sign_in_url_request(
     resource_group_name: str,
     resource_name: str,
     subscription_id: str,
@@ -35,7 +35,7 @@ def build_list_by_bot_resource_request(
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateLinkResources")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/createEmailSignInUrl")  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=64, min_length=2, pattern=r'^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'),
         "resourceName": _SERIALIZER.url("resource_name", resource_name, 'str', max_length=64, min_length=2, pattern=r'^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'),
@@ -53,15 +53,15 @@ def build_list_by_bot_resource_request(
     _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
-        method="GET",
+        method="POST",
         url=_url,
         params=_query_parameters,
         headers=_header_parameters,
         **kwargs
     )
 
-class PrivateLinkResourcesOperations(object):
-    """PrivateLinkResourcesOperations operations.
+class EmailOperations(object):
+    """EmailOperations operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -83,24 +83,24 @@ class PrivateLinkResourcesOperations(object):
         self._config = config
 
     @distributed_trace
-    def list_by_bot_resource(
+    def create_sign_in_url(
         self,
         resource_group_name: str,
         resource_name: str,
         **kwargs: Any
-    ) -> "_models.PrivateLinkResourceListResult":
-        """Gets the private link resources that need to be created for a Bot.
+    ) -> "_models.CreateEmailSignInUrlResponse":
+        """Creates an email channel sign in url for a Bot Service.
 
         :param resource_group_name: The name of the Bot resource group in the user subscription.
         :type resource_group_name: str
         :param resource_name: The name of the Bot resource.
         :type resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PrivateLinkResourceListResult, or the result of cls(response)
-        :rtype: ~azure.mgmt.botservice.models.PrivateLinkResourceListResult
+        :return: CreateEmailSignInUrlResponse, or the result of cls(response)
+        :rtype: ~azure.mgmt.botservice.models.CreateEmailSignInUrlResponse
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.CreateEmailSignInUrlResponse"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -109,12 +109,12 @@ class PrivateLinkResourcesOperations(object):
         api_version = kwargs.pop('api_version', "2021-05-01-preview")  # type: str
 
         
-        request = build_list_by_bot_resource_request(
+        request = build_create_sign_in_url_request(
             resource_group_name=resource_group_name,
             resource_name=resource_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.list_by_bot_resource.metadata['url'],
+            template_url=self.create_sign_in_url.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
@@ -131,12 +131,12 @@ class PrivateLinkResourcesOperations(object):
             error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('PrivateLinkResourceListResult', pipeline_response)
+        deserialized = self._deserialize('CreateEmailSignInUrlResponse', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list_by_bot_resource.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateLinkResources"}  # type: ignore
+    create_sign_in_url.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/createEmailSignInUrl"}  # type: ignore
 

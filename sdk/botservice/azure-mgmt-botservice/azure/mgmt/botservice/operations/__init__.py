@@ -9,6 +9,7 @@
 from ._bots_operations import BotsOperations
 from ._channels_operations import ChannelsOperations
 from ._direct_line_operations import DirectLineOperations
+from ._email_operations import EmailOperations
 from ._operations import Operations
 from ._bot_connection_operations import BotConnectionOperations
 from ._host_settings_operations import HostSettingsOperations
@@ -20,6 +21,7 @@ __all__ = [
     'BotsOperations',
     'ChannelsOperations',
     'DirectLineOperations',
+    'EmailOperations',
     'Operations',
     'BotConnectionOperations',
     'HostSettingsOperations',
