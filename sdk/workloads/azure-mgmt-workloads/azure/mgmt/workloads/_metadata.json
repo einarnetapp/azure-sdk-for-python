@@ -1,0 +1,165 @@
+{
+    "chosen_version": "2021-12-01-preview",
+    "total_api_version_list": ["2021-12-01-preview"],
+    "client": {
+        "name": "WorkloadsClient",
+        "filename": "_workloads_client",
+        "description": "Workloads client provides access to various workload operations.",
+        "host_value": "\"https://management.azure.com\"",
+        "parameterized_host_template": null,
+        "azure_arm": true,
+        "has_lro_operations": true,
+        "client_side_validation": false,
+        "sync_imports": "{\"typing\": {\"azurecore\": {\"azure.core.credentials\": [\"TokenCredential\"]}}, \"regular\": {\"azurecore\": {\"azure.profiles\": [\"KnownProfiles\", \"ProfileDefinition\"], \"azure.profiles.multiapiclient\": [\"MultiApiClientMixin\"], \"azure.mgmt.core\": [\"ARMPipelineClient\"]}, \"local\": {\"._configuration\": [\"WorkloadsClientConfiguration\"], \"._operations_mixin\": [\"WorkloadsClientOperationsMixin\"]}, \"thirdparty\": {\"msrest\": [\"Deserializer\", \"Serializer\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}",
+        "async_imports": "{\"typing\": {\"azurecore\": {\"azure.core.credentials_async\": [\"AsyncTokenCredential\"], \"azure.core.credentials\": [\"TokenCredential\"]}}, \"regular\": {\"azurecore\": {\"azure.profiles\": [\"KnownProfiles\", \"ProfileDefinition\"], \"azure.profiles.multiapiclient\": [\"MultiApiClientMixin\"], \"azure.mgmt.core\": [\"AsyncARMPipelineClient\"]}, \"local\": {\"._configuration\": [\"WorkloadsClientConfiguration\"], \"._operations_mixin\": [\"WorkloadsClientOperationsMixin\"]}, \"thirdparty\": {\"msrest\": [\"Deserializer\", \"Serializer\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}"
+    },
+    "global_parameters": {
+        "sync": {
+            "credential": {
+                "signature": "credential,  # type: \"TokenCredential\"",
+                "description": "Credential needed for the client to connect to Azure.",
+                "docstring_type": "~azure.core.credentials.TokenCredential",
+                "required": true
+            },
+            "subscription_id": {
+                "signature": "subscription_id,  # type: str",
+                "description": "The ID of the target subscription.",
+                "docstring_type": "str",
+                "required": true
+            }
+        },
+        "async": {
+            "credential": {
+                "signature": "credential: \"AsyncTokenCredential\",",
+                "description": "Credential needed for the client to connect to Azure.",
+                "docstring_type": "~azure.core.credentials_async.AsyncTokenCredential",
+                "required": true
+            },
+            "subscription_id": {
+                "signature": "subscription_id: str,",
+                "description": "The ID of the target subscription.",
+                "docstring_type": "str",
+                "required": true
+            }
+        },
+        "constant": {
+        },
+        "call": "credential, subscription_id",
+        "service_client_specific": {
+            "sync": {
+                "api_version": {
+                    "signature": "api_version=None, # type: Optional[str]",
+                    "description": "API version to use if no profile is provided, or if missing in profile.",
+                    "docstring_type": "str",
+                    "required": false
+                },
+                "base_url": {
+                    "signature": "base_url=\"https://management.azure.com\",  # type: str",
+                    "description": "Service URL",
+                    "docstring_type": "str",
+                    "required": false
+                },
+                "profile": {
+                    "signature": "profile=KnownProfiles.default, # type: KnownProfiles",
+                    "description": "A profile definition, from KnownProfiles to dict.",
+                    "docstring_type": "azure.profiles.KnownProfiles",
+                    "required": false
+                }
+            },
+            "async": {
+                "api_version": {
+                    "signature": "api_version: Optional[str] = None,",
+                    "description": "API version to use if no profile is provided, or if missing in profile.",
+                    "docstring_type": "str",
+                    "required": false
+                },
+                "base_url": {
+                    "signature": "base_url: str = \"https://management.azure.com\",",
+                    "description": "Service URL",
+                    "docstring_type": "str",
+                    "required": false
+                },
+                "profile": {
+                    "signature": "profile: KnownProfiles = KnownProfiles.default,",
+                    "description": "A profile definition, from KnownProfiles to dict.",
+                    "docstring_type": "azure.profiles.KnownProfiles",
+                    "required": false
+                }
+            }
+        }
+    },
+    "config": {
+        "credential": true,
+        "credential_scopes": ["https://management.azure.com/.default"],
+        "credential_call_sync": "ARMChallengeAuthenticationPolicy(self.credential, *self.credential_scopes, **kwargs)",
+        "credential_call_async": "AsyncARMChallengeAuthenticationPolicy(self.credential, *self.credential_scopes, **kwargs)",
+        "sync_imports": "{\"regular\": {\"azurecore\": {\"azure.core.configuration\": [\"Configuration\"], \"azure.core.pipeline\": [\"policies\"], \"azure.mgmt.core.policies\": [\"ARMChallengeAuthenticationPolicy\", \"ARMHttpLoggingPolicy\"]}, \"local\": {\"._version\": [\"VERSION\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\"]}}, \"typing\": {\"azurecore\": {\"azure.core.credentials\": [\"TokenCredential\"]}}}",
+        "async_imports": "{\"regular\": {\"azurecore\": {\"azure.core.configuration\": [\"Configuration\"], \"azure.core.pipeline\": [\"policies\"], \"azure.mgmt.core.policies\": [\"ARMHttpLoggingPolicy\", \"AsyncARMChallengeAuthenticationPolicy\"]}, \"local\": {\".._version\": [\"VERSION\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\"]}}, \"typing\": {\"azurecore\": {\"azure.core.credentials_async\": [\"AsyncTokenCredential\"]}}}"
+    },
+    "operation_groups": {
+        "php_workloads": "PhpWorkloadsOperations",
+        "wordpress_instances": "WordpressInstancesOperations",
+        "sap_virtual_instances": "SAPVirtualInstancesOperations",
+        "sap_central_instances": "SAPCentralInstancesOperations",
+        "sap_database_instances": "SAPDatabaseInstancesOperations",
+        "sap_application_server_instances": "SAPApplicationServerInstancesOperations",
+        "operations": "Operations",
+        "monitors": "MonitorsOperations",
+        "provider_instances": "ProviderInstancesOperations",
+        "skus": "SkusOperations"
+    },
+    "operation_mixins": {
+        "sync_imports": "{\"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}",
+        "async_imports": "{\"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}",
+        "operations": {
+            "sap_sizing_recommendations" : {
+                "sync": {
+                    "signature": "def sap_sizing_recommendations(\n    self,\n    location,  # type: str\n    sap_sizing_recommendation=None,  # type: Optional[\"_models.SAPSizingRecommendationRequest\"]\n    **kwargs  # type: Any\n):\n    # type: (...) -\u003e \"_models.SAPSizingRecommendationResult\"\n",
+                    "doc": "\"\"\"Get SAP sizing recommendations.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_sizing_recommendation: SAP Sizing Recommendation Request body. Default value is\n None.\n:type sap_sizing_recommendation: ~azure.mgmt.workloads.models.SAPSizingRecommendationRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPSizingRecommendationResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPSizingRecommendationResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "async": {
+                    "coroutine": true,
+                    "signature": "async def sap_sizing_recommendations(\n    self,\n    location: str,\n    sap_sizing_recommendation: Optional[\"_models.SAPSizingRecommendationRequest\"] = None,\n    **kwargs: Any\n) -\u003e \"_models.SAPSizingRecommendationResult\":\n",
+                    "doc": "\"\"\"Get SAP sizing recommendations.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_sizing_recommendation: SAP Sizing Recommendation Request body. Default value is\n None.\n:type sap_sizing_recommendation: ~azure.mgmt.workloads.models.SAPSizingRecommendationRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPSizingRecommendationResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPSizingRecommendationResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "call": "location, sap_sizing_recommendation"
+            },
+            "sap_supported_sku" : {
+                "sync": {
+                    "signature": "def sap_supported_sku(\n    self,\n    location,  # type: str\n    sap_supported_sku=None,  # type: Optional[\"_models.SAPSupportedSkusRequest\"]\n    **kwargs  # type: Any\n):\n    # type: (...) -\u003e \"_models.SAPSupportedResourceSkusResult\"\n",
+                    "doc": "\"\"\"Get SAP supported SKUs.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_supported_sku: SAP Supported SKU Request body. Default value is None.\n:type sap_supported_sku: ~azure.mgmt.workloads.models.SAPSupportedSkusRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPSupportedResourceSkusResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPSupportedResourceSkusResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "async": {
+                    "coroutine": true,
+                    "signature": "async def sap_supported_sku(\n    self,\n    location: str,\n    sap_supported_sku: Optional[\"_models.SAPSupportedSkusRequest\"] = None,\n    **kwargs: Any\n) -\u003e \"_models.SAPSupportedResourceSkusResult\":\n",
+                    "doc": "\"\"\"Get SAP supported SKUs.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_supported_sku: SAP Supported SKU Request body. Default value is None.\n:type sap_supported_sku: ~azure.mgmt.workloads.models.SAPSupportedSkusRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPSupportedResourceSkusResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPSupportedResourceSkusResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "call": "location, sap_supported_sku"
+            },
+            "sap_disk_configurations" : {
+                "sync": {
+                    "signature": "def sap_disk_configurations(\n    self,\n    location,  # type: str\n    sap_disk_configurations=None,  # type: Optional[\"_models.SAPDiskConfigurationsRequest\"]\n    **kwargs  # type: Any\n):\n    # type: (...) -\u003e \"_models.SAPDiskConfigurationsResult\"\n",
+                    "doc": "\"\"\"Get SAP Disk Configurations.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_disk_configurations: SAP Disk Configurations Request body. Default value is None.\n:type sap_disk_configurations: ~azure.mgmt.workloads.models.SAPDiskConfigurationsRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPDiskConfigurationsResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPDiskConfigurationsResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "async": {
+                    "coroutine": true,
+                    "signature": "async def sap_disk_configurations(\n    self,\n    location: str,\n    sap_disk_configurations: Optional[\"_models.SAPDiskConfigurationsRequest\"] = None,\n    **kwargs: Any\n) -\u003e \"_models.SAPDiskConfigurationsResult\":\n",
+                    "doc": "\"\"\"Get SAP Disk Configurations.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_disk_configurations: SAP Disk Configurations Request body. Default value is None.\n:type sap_disk_configurations: ~azure.mgmt.workloads.models.SAPDiskConfigurationsRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPDiskConfigurationsResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPDiskConfigurationsResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "call": "location, sap_disk_configurations"
+            },
+            "sap_availability_zone_details" : {
+                "sync": {
+                    "signature": "def sap_availability_zone_details(\n    self,\n    location,  # type: str\n    sap_availability_zone_details=None,  # type: Optional[\"_models.SAPAvailabilityZoneDetailsRequest\"]\n    **kwargs  # type: Any\n):\n    # type: (...) -\u003e \"_models.SAPAvailabilityZoneDetailsResult\"\n",
+                    "doc": "\"\"\"Get SAP Availability Zone Details.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_availability_zone_details: SAP Availability Zone Details Request body. Default value\n is None.\n:type sap_availability_zone_details:\n ~azure.mgmt.workloads.models.SAPAvailabilityZoneDetailsRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPAvailabilityZoneDetailsResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPAvailabilityZoneDetailsResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "async": {
+                    "coroutine": true,
+                    "signature": "async def sap_availability_zone_details(\n    self,\n    location: str,\n    sap_availability_zone_details: Optional[\"_models.SAPAvailabilityZoneDetailsRequest\"] = None,\n    **kwargs: Any\n) -\u003e \"_models.SAPAvailabilityZoneDetailsResult\":\n",
+                    "doc": "\"\"\"Get SAP Availability Zone Details.\n\n:param location: The name of Azure region.\n:type location: str\n:param sap_availability_zone_details: SAP Availability Zone Details Request body. Default value\n is None.\n:type sap_availability_zone_details:\n ~azure.mgmt.workloads.models.SAPAvailabilityZoneDetailsRequest\n:keyword callable cls: A custom type or function that will be passed the direct response\n:return: SAPAvailabilityZoneDetailsResult, or the result of cls(response)\n:rtype: ~azure.mgmt.workloads.models.SAPAvailabilityZoneDetailsResult\n:raises: ~azure.core.exceptions.HttpResponseError\n\"\"\""
+                },
+                "call": "location, sap_availability_zone_details"
+            }
+        }
+    }
+}
