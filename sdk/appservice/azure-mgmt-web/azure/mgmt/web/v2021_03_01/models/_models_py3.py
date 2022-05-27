@@ -2307,6 +2307,8 @@ class AppServicePlan(Resource):
     :ivar maximum_number_of_workers: Maximum number of instances that can be assigned to this App
      Service plan.
     :vartype maximum_number_of_workers: int
+    :ivar number_of_workers: The number of instances that are assigned to this App Service plan.
+    :vartype number_of_workers: int
     :ivar geo_region: Geographical location for the App Service plan.
     :vartype geo_region: str
     :ivar per_site_scaling: If :code:`<code>true</code>`, apps assigned to this App Service plan
@@ -2365,6 +2367,7 @@ class AppServicePlan(Resource):
         'status': {'readonly': True},
         'subscription': {'readonly': True},
         'maximum_number_of_workers': {'readonly': True},
+        'number_of_workers': {'readonly': True},
         'geo_region': {'readonly': True},
         'number_of_sites': {'readonly': True},
         'resource_group': {'readonly': True},
@@ -2385,6 +2388,7 @@ class AppServicePlan(Resource):
         'subscription': {'key': 'properties.subscription', 'type': 'str'},
         'hosting_environment_profile': {'key': 'properties.hostingEnvironmentProfile', 'type': 'HostingEnvironmentProfile'},
         'maximum_number_of_workers': {'key': 'properties.maximumNumberOfWorkers', 'type': 'int'},
+        'number_of_workers': {'key': 'properties.numberOfWorkers', 'type': 'int'},
         'geo_region': {'key': 'properties.geoRegion', 'type': 'str'},
         'per_site_scaling': {'key': 'properties.perSiteScaling', 'type': 'bool'},
         'elastic_scale_enabled': {'key': 'properties.elasticScaleEnabled', 'type': 'bool'},
@@ -2494,6 +2498,7 @@ class AppServicePlan(Resource):
         self.subscription = None
         self.hosting_environment_profile = hosting_environment_profile
         self.maximum_number_of_workers = None
+        self.number_of_workers = None
         self.geo_region = None
         self.per_site_scaling = per_site_scaling
         self.elastic_scale_enabled = elastic_scale_enabled
@@ -2577,6 +2582,8 @@ class AppServicePlanPatchResource(ProxyOnlyResource):
     :ivar maximum_number_of_workers: Maximum number of instances that can be assigned to this App
      Service plan.
     :vartype maximum_number_of_workers: int
+    :ivar number_of_workers: The number of instances that are assigned to this App Service plan.
+    :vartype number_of_workers: int
     :ivar geo_region: Geographical location for the App Service plan.
     :vartype geo_region: str
     :ivar per_site_scaling: If :code:`<code>true</code>`, apps assigned to this App Service plan
@@ -2634,6 +2641,7 @@ class AppServicePlanPatchResource(ProxyOnlyResource):
         'status': {'readonly': True},
         'subscription': {'readonly': True},
         'maximum_number_of_workers': {'readonly': True},
+        'number_of_workers': {'readonly': True},
         'geo_region': {'readonly': True},
         'number_of_sites': {'readonly': True},
         'resource_group': {'readonly': True},
@@ -2650,6 +2658,7 @@ class AppServicePlanPatchResource(ProxyOnlyResource):
         'subscription': {'key': 'properties.subscription', 'type': 'str'},
         'hosting_environment_profile': {'key': 'properties.hostingEnvironmentProfile', 'type': 'HostingEnvironmentProfile'},
         'maximum_number_of_workers': {'key': 'properties.maximumNumberOfWorkers', 'type': 'int'},
+        'number_of_workers': {'key': 'properties.numberOfWorkers', 'type': 'int'},
         'geo_region': {'key': 'properties.geoRegion', 'type': 'str'},
         'per_site_scaling': {'key': 'properties.perSiteScaling', 'type': 'bool'},
         'elastic_scale_enabled': {'key': 'properties.elasticScaleEnabled', 'type': 'bool'},
@@ -2745,6 +2754,7 @@ class AppServicePlanPatchResource(ProxyOnlyResource):
         self.subscription = None
         self.hosting_environment_profile = hosting_environment_profile
         self.maximum_number_of_workers = None
+        self.number_of_workers = None
         self.geo_region = None
         self.per_site_scaling = per_site_scaling
         self.elastic_scale_enabled = elastic_scale_enabled
