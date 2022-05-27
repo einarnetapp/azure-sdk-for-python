@@ -1231,6 +1231,86 @@ class AssetTrackOperationStatus(msrest.serialization.Model):
         self.error = error
 
 
+class AsyncOperationErrorDetail(msrest.serialization.Model):
+    """The error detail of an async operation result.
+
+    :ivar code: The error code.
+    :vartype code: str
+    :ivar message: The error message.
+    :vartype message: str
+    :ivar target: Id of the entity on which the operation is performed.
+    :vartype target: str
+    """
+
+    _attribute_map = {
+        'code': {'key': 'code', 'type': 'str'},
+        'message': {'key': 'message', 'type': 'str'},
+        'target': {'key': 'target', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        code: Optional[str] = None,
+        message: Optional[str] = None,
+        target: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword code: The error code.
+        :paramtype code: str
+        :keyword message: The error message.
+        :paramtype message: str
+        :keyword target: Id of the entity on which the operation is performed.
+        :paramtype target: str
+        """
+        super(AsyncOperationErrorDetail, self).__init__(**kwargs)
+        self.code = code
+        self.message = message
+        self.target = target
+
+
+class AsyncOperationResult(msrest.serialization.Model):
+    """The status of an async operation.
+
+    :ivar error: The error object.
+    :vartype error: ~azure.mgmt.media.models.AsyncOperationErrorDetail
+    :ivar name: Operation Id of the async operation.
+    :vartype name: str
+    :ivar status: Operation status of the async operation. Possible values include: "Succeeded",
+     "Failed", "InProgress".
+    :vartype status: str or ~azure.mgmt.media.models.AsyncOperationStatus
+    """
+
+    _attribute_map = {
+        'error': {'key': 'error', 'type': 'AsyncOperationErrorDetail'},
+        'name': {'key': 'name', 'type': 'str'},
+        'status': {'key': 'status', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        error: Optional["AsyncOperationErrorDetail"] = None,
+        name: Optional[str] = None,
+        status: Optional[Union[str, "AsyncOperationStatus"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword error: The error object.
+        :paramtype error: ~azure.mgmt.media.models.AsyncOperationErrorDetail
+        :keyword name: Operation Id of the async operation.
+        :paramtype name: str
+        :keyword status: Operation status of the async operation. Possible values include: "Succeeded",
+         "Failed", "InProgress".
+        :paramtype status: str or ~azure.mgmt.media.models.AsyncOperationStatus
+        """
+        super(AsyncOperationResult, self).__init__(**kwargs)
+        self.error = error
+        self.name = name
+        self.status = status
+
+
 class Preset(msrest.serialization.Model):
     """Base type for all Presets, which define the recipe or instructions on how the input media files should be processed.
 

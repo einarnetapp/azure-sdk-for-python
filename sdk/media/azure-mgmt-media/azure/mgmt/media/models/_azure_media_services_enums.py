@@ -74,6 +74,14 @@ class AssetStorageEncryptionFormat(with_metaclass(CaseInsensitiveEnumMeta, str, 
     #: The Asset is encrypted with Media Services client-side encryption.
     MEDIA_STORAGE_CLIENT_ENCRYPTION = "MediaStorageClientEncryption"
 
+class AsyncOperationStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Operation status of the async operation.
+    """
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    IN_PROGRESS = "InProgress"
+
 class AttributeFilter(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of AttributeFilter to apply to the TrackAttribute in order to select the tracks.
     """
