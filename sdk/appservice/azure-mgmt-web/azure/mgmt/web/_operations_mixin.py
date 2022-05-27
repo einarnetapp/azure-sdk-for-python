@@ -36,7 +36,7 @@ class WebSiteManagementClientOperationsMixin(object):
         :type name: str
         :param type: Resource type used for verification.
         :type type: str or ~azure.mgmt.web.v2021_03_01.models.CheckNameResourceTypes
-        :param is_fqdn: Is fully qualified domain name.
+        :param is_fqdn: Is fully qualified domain name. Default value is None.
         :type is_fqdn: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ResourceNameAvailability, or the result of cls(response)
@@ -215,9 +215,9 @@ class WebSiteManagementClientOperationsMixin(object):
 
         Description for Gets a list of meters for a given location.
 
-        :param billing_location: Azure Location of billable resource.
+        :param billing_location: Azure Location of billable resource. Default value is None.
         :type billing_location: str
-        :param os_type: App Service OS type meters used for.
+        :param os_type: App Service OS type meters used for. Default value is None.
         :type os_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BillingMeterCollection or the result of
@@ -294,16 +294,16 @@ class WebSiteManagementClientOperationsMixin(object):
 
         Description for Get a list of available geographical regions.
 
-        :param sku: Name of SKU used to filter the regions.
+        :param sku: Name of SKU used to filter the regions. Default value is None.
         :type sku: str or ~azure.mgmt.web.v2021_03_01.models.SkuName
         :param linux_workers_enabled: Specify :code:`<code>true</code>` if you want to filter to only
-         regions that support Linux workers.
+         regions that support Linux workers. Default value is None.
         :type linux_workers_enabled: bool
         :param xenon_workers_enabled: Specify :code:`<code>true</code>` if you want to filter to only
-         regions that support Xenon workers.
+         regions that support Xenon workers. Default value is None.
         :type xenon_workers_enabled: bool
         :param linux_dynamic_workers_enabled: Specify :code:`<code>true</code>` if you want to filter
-         to only regions that support Linux Consumption Workers.
+         to only regions that support Linux Consumption Workers. Default value is None.
         :type linux_dynamic_workers_enabled: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either GeoRegionCollection or the result of cls(response)
@@ -519,7 +519,7 @@ class WebSiteManagementClientOperationsMixin(object):
         mixin_instance._deserialize = Deserializer(self._models_dict(api_version))
         return mixin_instance.list_source_controls(**kwargs)
 
-    def move(
+    def move(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name,  # type: str
         move_resource_envelope,  # type: "_models.CsmMoveResourceEnvelope"
@@ -746,7 +746,7 @@ class WebSiteManagementClientOperationsMixin(object):
         mixin_instance._deserialize = Deserializer(self._models_dict(api_version))
         return mixin_instance.validate_container_settings(resource_group_name, validate_container_settings_request, **kwargs)
 
-    def validate_move(
+    def validate_move(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name,  # type: str
         move_resource_envelope,  # type: "_models.CsmMoveResourceEnvelope"
