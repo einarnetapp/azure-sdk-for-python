@@ -27,16 +27,20 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 def build_list_request(
+    resource_name: str,
     resource_group_name: str,
     subscription_id: str,
+    *,
+    filter: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances")  # pylint: disable=line-too-long
     path_format_arguments = {
+        "resourceName": _SERIALIZER.url("resource_name", resource_name, 'str'),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
     }
@@ -46,6 +50,8 @@ def build_list_request(
     # Construct parameters
     _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
     _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if filter is not None:
+        _query_parameters['$filter'] = _SERIALIZER.query("filter", filter, 'str')
 
     # Construct headers
     _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
@@ -59,8 +65,8 @@ def build_list_request(
         **kwargs
     )
 
-class Operations(object):
-    """Operations operations.
+class ReplicationAppliancesOperations(object):
+    """ReplicationAppliancesOperations operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -84,22 +90,24 @@ class Operations(object):
     @distributed_trace
     def list(
         self,
+        filter: Optional[str] = None,
         **kwargs: Any
-    ) -> Iterable["_models.OperationsDiscoveryCollection"]:
-        """Returns the list of available operations.
+    ) -> Iterable["_models.ApplianceCollection"]:
+        """Gets the list of appliances.
 
-        Operation to return the list of available operations.
+        Gets the list of Azure Site Recovery appliances for the vault.
 
+        :param filter: OData filter options. Default value is None.
+        :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either OperationsDiscoveryCollection or the result of
-         cls(response)
+        :return: An iterator like instance of either ApplianceCollection or the result of cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.OperationsDiscoveryCollection]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.ApplianceCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.OperationsDiscoveryCollection"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApplianceCollection"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -108,9 +116,11 @@ class Operations(object):
             if not next_link:
                 
                 request = build_list_request(
+                    resource_name=self._config.resource_name,
                     resource_group_name=self._config.resource_group_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
+                    filter=filter,
                     template_url=self.list.metadata['url'],
                 )
                 request = _convert_request(request)
@@ -119,9 +129,11 @@ class Operations(object):
             else:
                 
                 request = build_list_request(
+                    resource_name=self._config.resource_name,
                     resource_group_name=self._config.resource_group_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
+                    filter=filter,
                     template_url=next_link,
                 )
                 request = _convert_request(request)
@@ -130,7 +142,7 @@ class Operations(object):
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("OperationsDiscoveryCollection", pipeline_response)
+            deserialized = self._deserialize("ApplianceCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -156,4 +168,4 @@ class Operations(object):
         return ItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances"}  # type: ignore

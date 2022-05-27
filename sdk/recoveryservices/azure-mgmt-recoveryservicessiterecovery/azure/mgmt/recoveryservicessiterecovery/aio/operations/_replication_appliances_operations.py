@@ -14,17 +14,16 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
-from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._replication_logical_networks_operations import build_get_request, build_list_by_replication_fabrics_request
+from ...operations._replication_appliances_operations import build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class ReplicationLogicalNetworksOperations:
-    """ReplicationLogicalNetworksOperations async operations.
+class ReplicationAppliancesOperations:
+    """ReplicationAppliancesOperations async operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -46,27 +45,26 @@ class ReplicationLogicalNetworksOperations:
         self._config = config
 
     @distributed_trace
-    def list_by_replication_fabrics(
+    def list(
         self,
-        fabric_name: str,
+        filter: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.LogicalNetworkCollection"]:
-        """Gets the list of logical networks under a fabric.
+    ) -> AsyncIterable["_models.ApplianceCollection"]:
+        """Gets the list of appliances.
 
-        Lists all the logical networks of the Azure Site Recovery fabric.
+        Gets the list of Azure Site Recovery appliances for the vault.
 
-        :param fabric_name: Server Id.
-        :type fabric_name: str
+        :param filter: OData filter options. Default value is None.
+        :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either LogicalNetworkCollection or the result of
-         cls(response)
+        :return: An iterator like instance of either ApplianceCollection or the result of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.LogicalNetworkCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.ApplianceCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.LogicalNetworkCollection"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApplianceCollection"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -74,25 +72,25 @@ class ReplicationLogicalNetworksOperations:
         def prepare_request(next_link=None):
             if not next_link:
                 
-                request = build_list_by_replication_fabrics_request(
+                request = build_list_request(
                     resource_name=self._config.resource_name,
                     resource_group_name=self._config.resource_group_name,
                     subscription_id=self._config.subscription_id,
-                    fabric_name=fabric_name,
                     api_version=api_version,
-                    template_url=self.list_by_replication_fabrics.metadata['url'],
+                    filter=filter,
+                    template_url=self.list.metadata['url'],
                 )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
 
             else:
                 
-                request = build_list_by_replication_fabrics_request(
+                request = build_list_request(
                     resource_name=self._config.resource_name,
                     resource_group_name=self._config.resource_group_name,
                     subscription_id=self._config.subscription_id,
-                    fabric_name=fabric_name,
                     api_version=api_version,
+                    filter=filter,
                     template_url=next_link,
                 )
                 request = _convert_request(request)
@@ -101,7 +99,7 @@ class ReplicationLogicalNetworksOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("LogicalNetworkCollection", pipeline_response)
+            deserialized = self._deserialize("ApplianceCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -127,66 +125,4 @@ class ReplicationLogicalNetworksOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_replication_fabrics.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationLogicalNetworks"}  # type: ignore
-
-    @distributed_trace_async
-    async def get(
-        self,
-        fabric_name: str,
-        logical_network_name: str,
-        **kwargs: Any
-    ) -> "_models.LogicalNetwork":
-        """Gets a logical network with specified server id and logical network name.
-
-        Gets the details of a logical network.
-
-        :param fabric_name: Server Id.
-        :type fabric_name: str
-        :param logical_network_name: Logical network name.
-        :type logical_network_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: LogicalNetwork, or the result of cls(response)
-        :rtype: ~azure.mgmt.recoveryservicessiterecovery.models.LogicalNetwork
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.LogicalNetwork"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
-
-        
-        request = build_get_request(
-            resource_name=self._config.resource_name,
-            resource_group_name=self._config.resource_group_name,
-            subscription_id=self._config.subscription_id,
-            fabric_name=fabric_name,
-            logical_network_name=logical_network_name,
-            api_version=api_version,
-            template_url=self.get.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('LogicalNetwork', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationLogicalNetworks/{logicalNetworkName}"}  # type: ignore
-
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances"}  # type: ignore
