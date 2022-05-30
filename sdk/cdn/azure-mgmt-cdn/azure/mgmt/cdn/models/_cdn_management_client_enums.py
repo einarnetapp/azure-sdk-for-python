@@ -145,7 +145,7 @@ class CustomDomainResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enu
     DELETING = "Deleting"
 
 class CustomHttpsProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Provisioning status of Custom Https of the custom domain.
+    """Provisioning status of the custom domain.
     """
 
     ENABLING = "Enabling"
@@ -234,6 +234,16 @@ class EnabledState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
+
+class EndpointProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Provisioning status of the endpoint.
+    """
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    UPDATING = "Updating"
+    DELETING = "Deleting"
+    CREATING = "Creating"
 
 class EndpointResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Resource status of the endpoint.
@@ -462,6 +472,16 @@ class OptimizationType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     LARGE_FILE_DOWNLOAD = "LargeFileDownload"
     DYNAMIC_SITE_ACCELERATION = "DynamicSiteAcceleration"
 
+class OriginGroupProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Provisioning status of the origin group.
+    """
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    UPDATING = "Updating"
+    DELETING = "Deleting"
+    CREATING = "Creating"
+
 class OriginGroupResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Resource status of the origin group.
     """
@@ -469,6 +489,16 @@ class OriginGroupResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum
     CREATING = "Creating"
     ACTIVE = "Active"
     DELETING = "Deleting"
+
+class OriginProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Provisioning status of the origin.
+    """
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    UPDATING = "Updating"
+    DELETING = "Deleting"
+    CREATING = "Creating"
 
 class OriginResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Resource status of the origin.
@@ -554,6 +584,16 @@ class ProbeProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     NOT_SET = "NotSet"
     HTTP = "Http"
     HTTPS = "Https"
+
+class ProfileProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Provisioning status of the profile.
+    """
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    UPDATING = "Updating"
+    DELETING = "Deleting"
+    CREATING = "Creating"
 
 class ProfileResourceState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Resource status of the profile.
@@ -703,6 +743,12 @@ class ResourceType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     MICROSOFT_CDN_PROFILES_ENDPOINTS = "Microsoft.Cdn/Profiles/Endpoints"
     MICROSOFT_CDN_PROFILES_AFD_ENDPOINTS = "Microsoft.Cdn/Profiles/AfdEndpoints"
+
+class ResourceUsageUnit(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Unit of the usage. e.g. count.
+    """
+
+    COUNT = "count"
 
 class ResponseBasedDetectedErrorTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Type of response errors for real user requests for which origin will be deemed unhealthy

@@ -494,9 +494,6 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         self.tls_settings = tls_settings
         self.azure_dns_zone = azure_dns_zone
         self.pre_validated_custom_domain_resource_id = pre_validated_custom_domain_resource_id
-        self.domain_validation_state = None
-        self.host_name = host_name
-        self.validation_properties = None
 
 
 class AFDDomainUpdateParameters(msrest.serialization.Model):
@@ -847,8 +844,6 @@ class AFDEndpointProperties(AFDStateProperties, AFDEndpointPropertiesUpdateParam
         self.auto_generated_domain_name_label_scope = auto_generated_domain_name_label_scope
         self.provisioning_state = None
         self.deployment_status = None
-        self.host_name = None
-        self.auto_generated_domain_name_label_scope = auto_generated_domain_name_label_scope
 
 
 class AFDEndpointUpdateParameters(msrest.serialization.Model):
@@ -3229,8 +3224,8 @@ class CustomDomain(ProxyResource):
     :ivar resource_state: Resource status of the custom domain. Possible values include:
      "Creating", "Active", "Deleting".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.CustomDomainResourceState
-    :ivar custom_https_provisioning_state: Provisioning status of Custom Https of the custom
-     domain. Possible values include: "Enabling", "Enabled", "Disabling", "Disabled", "Failed".
+    :ivar custom_https_provisioning_state: Provisioning status of the custom domain. Possible
+     values include: "Enabling", "Enabled", "Disabling", "Disabled", "Failed".
     :vartype custom_https_provisioning_state: str or
      ~azure.mgmt.cdn.models.CustomHttpsProvisioningState
     :ivar custom_https_provisioning_substate: Provisioning substate shows the progress of custom
@@ -3247,8 +3242,9 @@ class CustomDomain(ProxyResource):
      regions due to local compliance reasons. E.g. ICP license number of a custom domain is required
      to deliver content in China.
     :vartype validation_data: str
-    :ivar provisioning_state: Provisioning status of the custom domain.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of Custom Https of the custom domain. Possible
+     values include: "Enabling", "Enabled", "Disabling", "Disabled", "Failed".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.CustomHttpsProvisioningState
     """
 
     _validation = {
@@ -5167,8 +5163,9 @@ class Endpoint(TrackedResource):
     :ivar resource_state: Resource status of the endpoint. Possible values include: "Creating",
      "Deleting", "Running", "Starting", "Stopped", "Stopping".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.EndpointResourceState
-    :ivar provisioning_state: Provisioning status of the endpoint.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of the endpoint. Possible values include:
+     "Succeeded", "Failed", "Updating", "Deleting", "Creating".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.EndpointProvisioningState
     """
 
     _validation = {
@@ -5598,8 +5595,9 @@ class EndpointProperties(EndpointPropertiesUpdateParameters):
     :ivar resource_state: Resource status of the endpoint. Possible values include: "Creating",
      "Deleting", "Running", "Starting", "Stopped", "Stopping".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.EndpointResourceState
-    :ivar provisioning_state: Provisioning status of the endpoint.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of the endpoint. Possible values include:
+     "Succeeded", "Failed", "Updating", "Deleting", "Creating".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.EndpointProvisioningState
     """
 
     _validation = {
@@ -6944,8 +6942,8 @@ class ManagedRuleGroupOverride(msrest.serialization.Model):
     :ivar rule_group_name: Required. Describes the managed rule group within the rule set to
      override.
     :vartype rule_group_name: str
-    :ivar rules: List of rules that will be disabled. If none specified, all rules in the group
-     will be disabled.
+    :ivar rules: List of rules that will be enabled. If none specified, all rules in the group will
+     be disabled.
     :vartype rules: list[~azure.mgmt.cdn.models.ManagedRuleOverride]
     """
 
@@ -6969,7 +6967,7 @@ class ManagedRuleGroupOverride(msrest.serialization.Model):
         :keyword rule_group_name: Required. Describes the managed rule group within the rule set to
          override.
         :paramtype rule_group_name: str
-        :keyword rules: List of rules that will be disabled. If none specified, all rules in the group
+        :keyword rules: List of rules that will be enabled. If none specified, all rules in the group
          will be disabled.
         :paramtype rules: list[~azure.mgmt.cdn.models.ManagedRuleOverride]
         """
@@ -7721,8 +7719,9 @@ class Origin(ProxyResource):
     :ivar resource_state: Resource status of the origin. Possible values include: "Creating",
      "Active", "Deleting".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.OriginResourceState
-    :ivar provisioning_state: Provisioning status of the origin.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of the origin. Possible values include:
+     "Succeeded", "Failed", "Updating", "Deleting", "Creating".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.OriginProvisioningState
     :ivar private_endpoint_status: The approval status for the connection to the Private Link.
      Possible values include: "Pending", "Approved", "Rejected", "Disconnected", "Timeout".
     :vartype private_endpoint_status: str or ~azure.mgmt.cdn.models.PrivateEndpointStatus
@@ -7861,8 +7860,9 @@ class OriginGroup(ProxyResource):
     :ivar resource_state: Resource status of the origin group. Possible values include: "Creating",
      "Active", "Deleting".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.OriginGroupResourceState
-    :ivar provisioning_state: Provisioning status of the origin group.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of the origin group. Possible values include:
+     "Succeeded", "Failed", "Updating", "Deleting", "Creating".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.OriginGroupProvisioningState
     """
 
     _validation = {
@@ -8157,8 +8157,9 @@ class OriginGroupProperties(OriginGroupUpdatePropertiesParameters):
     :ivar resource_state: Resource status of the origin group. Possible values include: "Creating",
      "Active", "Deleting".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.OriginGroupResourceState
-    :ivar provisioning_state: Provisioning status of the origin group.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of the origin group. Possible values include:
+     "Succeeded", "Failed", "Updating", "Deleting", "Creating".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.OriginGroupProvisioningState
     """
 
     _validation = {
@@ -8468,8 +8469,9 @@ class OriginProperties(OriginUpdatePropertiesParameters):
     :ivar resource_state: Resource status of the origin. Possible values include: "Creating",
      "Active", "Deleting".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.OriginResourceState
-    :ivar provisioning_state: Provisioning status of the origin.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of the origin. Possible values include:
+     "Succeeded", "Failed", "Updating", "Deleting", "Creating".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.OriginProvisioningState
     :ivar private_endpoint_status: The approval status for the connection to the Private Link.
      Possible values include: "Pending", "Approved", "Rejected", "Disconnected", "Timeout".
     :vartype private_endpoint_status: str or ~azure.mgmt.cdn.models.PrivateEndpointStatus
@@ -8853,8 +8855,9 @@ class Profile(TrackedResource):
     :ivar resource_state: Resource status of the profile. Possible values include: "Creating",
      "Active", "Deleting", "Disabled".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.ProfileResourceState
-    :ivar provisioning_state: Provisioning status of the profile.
-    :vartype provisioning_state: str
+    :ivar provisioning_state: Provisioning status of the profile. Possible values include:
+     "Succeeded", "Failed", "Updating", "Deleting", "Creating".
+    :vartype provisioning_state: str or ~azure.mgmt.cdn.models.ProfileProvisioningState
     :ivar front_door_id: The Id of the frontdoor.
     :vartype front_door_id: str
     :ivar origin_response_timeout_seconds: Send and receive timeout on forwarding request to the
@@ -9931,8 +9934,8 @@ class ResourceUsage(msrest.serialization.Model):
 
     :ivar resource_type: Resource type for which the usage is provided.
     :vartype resource_type: str
-    :ivar unit: Unit of the usage. e.g. Count.
-    :vartype unit: str
+    :ivar unit: Unit of the usage. e.g. count. Possible values include: "count".
+    :vartype unit: str or ~azure.mgmt.cdn.models.ResourceUsageUnit
     :ivar current_value: Actual value of usage on the specified resource type.
     :vartype current_value: int
     :ivar limit: Quota of the specified resource type.
