@@ -28,6 +28,15 @@ class ChannelName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DIRECT_LINE_SPEECH_CHANNEL = "DirectLineSpeechChannel"
     OUTLOOK_CHANNEL = "OutlookChannel"
 
+class EmailChannelAuthMethod(with_metaclass(CaseInsensitiveEnumMeta, float, Enum)):
+    """Email channel auth method. 0 Password (Default); 1 Graph.
+    """
+
+    #: Basic authentication.
+    PASSWORD = 0
+    #: Modern authentication.
+    GRAPH = 1
+
 class Key(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Determines which key is to be regenerated
     """

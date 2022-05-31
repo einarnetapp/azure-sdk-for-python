@@ -18,7 +18,7 @@ class Channel(msrest.serialization.Model):
     """Channel definition.
 
     You probably want to use the sub-classes and not this class directly. Known
-    sub-classes are: AlexaChannel, DirectLineChannel, DirectLineSpeechChannel, EmailChannel, FacebookChannel, KikChannel, LineChannel, MsTeamsChannel, SkypeChannel, SlackChannel, SmsChannel, TelegramChannel, WebChatChannel.
+    sub-classes are: AlexaChannel, DirectLineChannel, DirectLineSpeechChannel, EmailChannel, FacebookChannel, KikChannel, LineChannel, MsTeamsChannel, OutlookChannel, SkypeChannel, SlackChannel, SmsChannel, TelegramChannel, WebChatChannel.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -47,7 +47,7 @@ class Channel(msrest.serialization.Model):
     }
 
     _subtype_map = {
-        'channel_name': {'AlexaChannel': 'AlexaChannel', 'DirectLineChannel': 'DirectLineChannel', 'DirectLineSpeechChannel': 'DirectLineSpeechChannel', 'EmailChannel': 'EmailChannel', 'FacebookChannel': 'FacebookChannel', 'KikChannel': 'KikChannel', 'LineChannel': 'LineChannel', 'MsTeamsChannel': 'MsTeamsChannel', 'SkypeChannel': 'SkypeChannel', 'SlackChannel': 'SlackChannel', 'SmsChannel': 'SmsChannel', 'TelegramChannel': 'TelegramChannel', 'WebChatChannel': 'WebChatChannel'}
+        'channel_name': {'AlexaChannel': 'AlexaChannel', 'DirectLineChannel': 'DirectLineChannel', 'DirectLineSpeechChannel': 'DirectLineSpeechChannel', 'EmailChannel': 'EmailChannel', 'FacebookChannel': 'FacebookChannel', 'KikChannel': 'KikChannel', 'LineChannel': 'LineChannel', 'MsTeamsChannel': 'MsTeamsChannel', 'OutlookChannel': 'OutlookChannel', 'SkypeChannel': 'SkypeChannel', 'SlackChannel': 'SlackChannel', 'SmsChannel': 'SmsChannel', 'TelegramChannel': 'TelegramChannel', 'WebChatChannel': 'WebChatChannel'}
     }
 
     def __init__(
@@ -1158,6 +1158,73 @@ class ConnectionSettingResponseList(msrest.serialization.Model):
         self.value = None
 
 
+class CreateEmailSignInUrlResponse(msrest.serialization.Model):
+    """The ARM create email sign in url operation response.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Specifies the resource ID.
+    :vartype id: str
+    :ivar location: Specifies the location of the resource.
+    :vartype location: str
+    :ivar properties: The set of properties specific to sign in url.
+    :vartype properties: ~azure.mgmt.botservice.models.CreateEmailSignInUrlResponseProperties
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'properties': {'key': 'properties', 'type': 'CreateEmailSignInUrlResponseProperties'},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: Optional[str] = None,
+        properties: Optional["CreateEmailSignInUrlResponseProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword location: Specifies the location of the resource.
+        :paramtype location: str
+        :keyword properties: The set of properties specific to sign in url.
+        :paramtype properties: ~azure.mgmt.botservice.models.CreateEmailSignInUrlResponseProperties
+        """
+        super(CreateEmailSignInUrlResponse, self).__init__(**kwargs)
+        self.id = None
+        self.location = location
+        self.properties = properties
+
+
+class CreateEmailSignInUrlResponseProperties(msrest.serialization.Model):
+    """The set of properties specific to sign in url.
+
+    :ivar url: Sign in url.
+    :vartype url: str
+    """
+
+    _attribute_map = {
+        'url': {'key': 'url', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        url: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword url: Sign in url.
+        :paramtype url: str
+        """
+        super(CreateEmailSignInUrlResponseProperties, self).__init__(**kwargs)
+        self.url = url
+
+
 class DirectLineChannel(Channel):
     """Direct Line channel definition.
 
@@ -1528,9 +1595,14 @@ class EmailChannelProperties(msrest.serialization.Model):
 
     :ivar email_address: Required. The email address.
     :vartype email_address: str
+    :ivar auth_method: Email channel auth method. 0 Password (Default); 1 Graph. Possible values
+     include: 0, 1.
+    :vartype auth_method: float or ~azure.mgmt.botservice.models.EmailChannelAuthMethod
     :ivar password: The password for the email address. Value only returned through POST to the
      action Channel List API, otherwise empty.
     :vartype password: str
+    :ivar magic_code: The magic code for setting up the modern authentication.
+    :vartype magic_code: str
     :ivar is_enabled: Required. Whether this channel is enabled for the bot.
     :vartype is_enabled: bool
     """
@@ -1542,7 +1614,9 @@ class EmailChannelProperties(msrest.serialization.Model):
 
     _attribute_map = {
         'email_address': {'key': 'emailAddress', 'type': 'str'},
+        'auth_method': {'key': 'authMethod', 'type': 'float'},
         'password': {'key': 'password', 'type': 'str'},
+        'magic_code': {'key': 'magicCode', 'type': 'str'},
         'is_enabled': {'key': 'isEnabled', 'type': 'bool'},
     }
 
@@ -1551,21 +1625,30 @@ class EmailChannelProperties(msrest.serialization.Model):
         *,
         email_address: str,
         is_enabled: bool,
+        auth_method: Optional[Union[float, "EmailChannelAuthMethod"]] = None,
         password: Optional[str] = None,
+        magic_code: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword email_address: Required. The email address.
         :paramtype email_address: str
+        :keyword auth_method: Email channel auth method. 0 Password (Default); 1 Graph. Possible values
+         include: 0, 1.
+        :paramtype auth_method: float or ~azure.mgmt.botservice.models.EmailChannelAuthMethod
         :keyword password: The password for the email address. Value only returned through POST to the
          action Channel List API, otherwise empty.
         :paramtype password: str
+        :keyword magic_code: The magic code for setting up the modern authentication.
+        :paramtype magic_code: str
         :keyword is_enabled: Required. Whether this channel is enabled for the bot.
         :paramtype is_enabled: bool
         """
         super(EmailChannelProperties, self).__init__(**kwargs)
         self.email_address = email_address
+        self.auth_method = auth_method
         self.password = password
+        self.magic_code = magic_code
         self.is_enabled = is_enabled
 
 
@@ -2516,6 +2599,52 @@ class OperationResultsDescription(msrest.serialization.Model):
         self.start_time = None
 
 
+class OutlookChannel(Channel):
+    """Outlook channel definition.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar channel_name: Required. The channel name.Constant filled by server.
+    :vartype channel_name: str
+    :ivar etag: Entity Tag of the resource.
+    :vartype etag: str
+    :ivar provisioning_state: Provisioning state of the resource.
+    :vartype provisioning_state: str
+    :ivar location: Specifies the location of the resource.
+    :vartype location: str
+    """
+
+    _validation = {
+        'channel_name': {'required': True},
+        'provisioning_state': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'channel_name': {'key': 'channelName', 'type': 'str'},
+        'etag': {'key': 'etag', 'type': 'str'},
+        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        etag: Optional[str] = None,
+        location: Optional[str] = "global",
+        **kwargs
+    ):
+        """
+        :keyword etag: Entity Tag of the resource.
+        :paramtype etag: str
+        :keyword location: Specifies the location of the resource.
+        :paramtype location: str
+        """
+        super(OutlookChannel, self).__init__(etag=etag, location=location, **kwargs)
+        self.channel_name = 'OutlookChannel'  # type: str
+
+
 class PrivateEndpoint(msrest.serialization.Model):
     """The Private Endpoint resource.
 
@@ -3203,8 +3332,6 @@ class Site(WebChatSite, DirectLineSite):
         self.key2 = None
         self.is_enabled = is_enabled
         self.is_webchat_preview_enabled = is_webchat_preview_enabled
-        self.is_token_enabled = is_token_enabled
-        self.e_tag = e_tag
 
 
 class SiteInfo(msrest.serialization.Model):
@@ -3524,7 +3651,6 @@ class SlackChannelProperties(msrest.serialization.Model):
     _validation = {
         'redirect_action': {'readonly': True},
         'last_submission_id': {'readonly': True},
-        'register_before_o_auth_flow': {'readonly': True},
         'is_validated': {'readonly': True},
         'is_enabled': {'required': True},
     }
@@ -3552,6 +3678,7 @@ class SlackChannelProperties(msrest.serialization.Model):
         verification_token: Optional[str] = None,
         scopes: Optional[str] = None,
         landing_page_url: Optional[str] = None,
+        register_before_o_auth_flow: Optional[bool] = None,
         signing_secret: Optional[str] = None,
         **kwargs
     ):
@@ -3568,6 +3695,9 @@ class SlackChannelProperties(msrest.serialization.Model):
         :paramtype scopes: str
         :keyword landing_page_url: The Slack landing page Url.
         :paramtype landing_page_url: str
+        :keyword register_before_o_auth_flow: Whether to register the settings before OAuth validation
+         is performed. Recommended to True.
+        :paramtype register_before_o_auth_flow: bool
         :keyword signing_secret: The Slack signing secret.
         :paramtype signing_secret: str
         :keyword is_enabled: Required. Whether this channel is enabled for the bot.
@@ -3581,7 +3711,7 @@ class SlackChannelProperties(msrest.serialization.Model):
         self.landing_page_url = landing_page_url
         self.redirect_action = None
         self.last_submission_id = None
-        self.register_before_o_auth_flow = None
+        self.register_before_o_auth_flow = register_before_o_auth_flow
         self.is_validated = None
         self.signing_secret = signing_secret
         self.is_enabled = is_enabled
