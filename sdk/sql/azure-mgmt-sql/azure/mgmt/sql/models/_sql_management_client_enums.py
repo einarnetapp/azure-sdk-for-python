@@ -279,7 +279,7 @@ class DatabaseLicenseType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 class DatabaseReadScale(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of read-only routing. If enabled, connections that have application intent set to
     readonly in their connection string may be routed to a readonly secondary replica in the same
-    region.
+    region. Not applicable to a Hyperscale database within an elastic pool.
     """
 
     ENABLED = "Enabled"
@@ -331,6 +331,10 @@ class DataMaskingFunction(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SSN = "SSN"
     TEXT = "Text"
 
+class DataMaskingPolicyName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    DEFAULT = "Default"
+
 class DataMaskingRuleState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName,
     tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule
@@ -338,15 +342,15 @@ class DataMaskingRuleState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     the provided value of ruleState.
     """
 
-    DISABLED = "Disabled"
     ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 class DataMaskingState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the data masking policy.
     """
 
-    DISABLED = "Disabled"
     ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 class DataWarehouseUserActivityName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
@@ -379,6 +383,10 @@ class DnsRefreshConfigurationPropertiesStatus(with_metaclass(CaseInsensitiveEnum
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
+
+class DtcName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    CURRENT = "current"
 
 class ElasticPoolLicenseType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The license type to apply for this elastic pool.
@@ -414,8 +422,8 @@ class GeoBackupPolicyState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The state of the geo backup policy.
     """
 
-    DISABLED = "Disabled"
     ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 class IdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an
