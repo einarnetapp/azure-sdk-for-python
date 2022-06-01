@@ -4952,8 +4952,8 @@ class VnetConfiguration(msrest.serialization.Model):
     """Configuration properties for apps environment to join a Virtual Network.
 
     :ivar internal: Boolean indicating the environment only has an internal load balancer. These
-     environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId
-     and AppSubnetResourceId if enabling this property.
+     environments do not have a public static IP resource. They must provide runtimeSubnetId and
+     infrastructureSubnetId if enabling this property.
     :vartype internal: bool
     :ivar infrastructure_subnet_id: Resource ID of a subnet for infrastructure components. This
      subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with
@@ -4996,8 +4996,8 @@ class VnetConfiguration(msrest.serialization.Model):
     ):
         """
         :keyword internal: Boolean indicating the environment only has an internal load balancer. These
-         environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId
-         and AppSubnetResourceId if enabling this property.
+         environments do not have a public static IP resource. They must provide runtimeSubnetId and
+         infrastructureSubnetId if enabling this property.
         :paramtype internal: bool
         :keyword infrastructure_subnet_id: Resource ID of a subnet for infrastructure components. This
          subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with

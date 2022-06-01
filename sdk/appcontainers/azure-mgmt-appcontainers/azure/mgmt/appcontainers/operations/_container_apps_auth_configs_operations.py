@@ -367,7 +367,7 @@ class ContainerAppsAuthConfigsOperations(object):
     ) -> "_models.AuthConfig":
         """Create or update the AuthConfig for a Container App.
 
-        Description for Create or update the AuthConfig for a Container App.
+        Create or update the AuthConfig for a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -438,7 +438,7 @@ class ContainerAppsAuthConfigsOperations(object):
     ) -> None:
         """Delete a Container App AuthConfig.
 
-        Description for Delete a Container App AuthConfig.
+        Delete a Container App AuthConfig.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
