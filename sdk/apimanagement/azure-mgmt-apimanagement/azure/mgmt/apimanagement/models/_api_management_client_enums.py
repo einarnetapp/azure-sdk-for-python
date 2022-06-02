@@ -464,6 +464,13 @@ class PolicyExportFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The contents are inline and Content type is a non XML encoded policy document.
     RAWXML = "rawxml"
 
+class PolicyFragmentContentFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: The contents are inline and Content type is an XML document.
+    XML = "xml"
+    #: The contents are inline and Content type is a non XML encoded policy document.
+    RAWXML = "rawxml"
+
 class PolicyIdName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     POLICY = "policy"
@@ -488,6 +495,17 @@ class PortalRevisionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     COMPLETED = "completed"
     #: Portal's revision publishing failed.
     FAILED = "failed"
+
+class PortalSettingsCspMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The mode of the developer portal Content Security Policy (CSP).
+    """
+
+    #: The browser will block requests not matching allowed origins.
+    ENABLED = "enabled"
+    #: The browser will not apply the origin restrictions.
+    DISABLED = "disabled"
+    #: The browser will report requests not matching allowed origins without blocking them.
+    REPORT_ONLY = "reportOnly"
 
 class PreferredIPVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The IP version to be used. Only IPv4 is supported for now.

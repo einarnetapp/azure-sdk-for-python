@@ -209,6 +209,16 @@ from ._models_py3 import PolicyCollection
 from ._models_py3 import PolicyContract
 from ._models_py3 import PolicyDescriptionCollection
 from ._models_py3 import PolicyDescriptionContract
+from ._models_py3 import PolicyFragmentCollection
+from ._models_py3 import PolicyFragmentContract
+from ._models_py3 import PortalConfigCollection
+from ._models_py3 import PortalConfigContract
+from ._models_py3 import PortalConfigCorsProperties
+from ._models_py3 import PortalConfigCspProperties
+from ._models_py3 import PortalConfigDelegationProperties
+from ._models_py3 import PortalConfigPropertiesSignin
+from ._models_py3 import PortalConfigPropertiesSignup
+from ._models_py3 import PortalConfigTermsOfServiceProperties
 from ._models_py3 import PortalDelegationSettings
 from ._models_py3 import PortalRevisionCollection
 from ._models_py3 import PortalRevisionContract
@@ -253,6 +263,8 @@ from ._models_py3 import RequestContract
 from ._models_py3 import RequestReportCollection
 from ._models_py3 import RequestReportRecordContract
 from ._models_py3 import Resource
+from ._models_py3 import ResourceCollection
+from ._models_py3 import ResourceCollectionValueItem
 from ._models_py3 import ResourceLocationDataContract
 from ._models_py3 import ResourceSku
 from ._models_py3 import ResourceSkuCapacity
@@ -351,9 +363,11 @@ from ._api_management_client_enums import (
     PlatformVersion,
     PolicyContentFormat,
     PolicyExportFormat,
+    PolicyFragmentContentFormat,
     PolicyIdName,
     PolicyScopeContract,
     PortalRevisionStatus,
+    PortalSettingsCspMode,
     PreferredIPVersion,
     PrivateEndpointConnectionProvisioningState,
     PrivateEndpointServiceConnectionStatus,
@@ -580,6 +594,16 @@ __all__ = [
     'PolicyContract',
     'PolicyDescriptionCollection',
     'PolicyDescriptionContract',
+    'PolicyFragmentCollection',
+    'PolicyFragmentContract',
+    'PortalConfigCollection',
+    'PortalConfigContract',
+    'PortalConfigCorsProperties',
+    'PortalConfigCspProperties',
+    'PortalConfigDelegationProperties',
+    'PortalConfigPropertiesSignin',
+    'PortalConfigPropertiesSignup',
+    'PortalConfigTermsOfServiceProperties',
     'PortalDelegationSettings',
     'PortalRevisionCollection',
     'PortalRevisionContract',
@@ -624,6 +648,8 @@ __all__ = [
     'RequestReportCollection',
     'RequestReportRecordContract',
     'Resource',
+    'ResourceCollection',
+    'ResourceCollectionValueItem',
     'ResourceLocationDataContract',
     'ResourceSku',
     'ResourceSkuCapacity',
@@ -719,9 +745,11 @@ __all__ = [
     'PlatformVersion',
     'PolicyContentFormat',
     'PolicyExportFormat',
+    'PolicyFragmentContentFormat',
     'PolicyIdName',
     'PolicyScopeContract',
     'PortalRevisionStatus',
+    'PortalSettingsCspMode',
     'PreferredIPVersion',
     'PrivateEndpointConnectionProvisioningState',
     'PrivateEndpointServiceConnectionStatus',

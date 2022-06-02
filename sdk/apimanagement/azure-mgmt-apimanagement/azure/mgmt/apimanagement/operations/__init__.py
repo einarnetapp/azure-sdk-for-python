@@ -54,6 +54,8 @@ from ._open_id_connect_provider_operations import OpenIdConnectProviderOperation
 from ._outbound_network_dependencies_endpoints_operations import OutboundNetworkDependenciesEndpointsOperations
 from ._policy_operations import PolicyOperations
 from ._policy_description_operations import PolicyDescriptionOperations
+from ._policy_fragment_operations import PolicyFragmentOperations
+from ._portal_config_operations import PortalConfigOperations
 from ._portal_revision_operations import PortalRevisionOperations
 from ._portal_settings_operations import PortalSettingsOperations
 from ._sign_in_settings_operations import SignInSettingsOperations
@@ -132,6 +134,8 @@ __all__ = [
     'OutboundNetworkDependenciesEndpointsOperations',
     'PolicyOperations',
     'PolicyDescriptionOperations',
+    'PolicyFragmentOperations',
+    'PortalConfigOperations',
     'PortalRevisionOperations',
     'PortalSettingsOperations',
     'SignInSettingsOperations',
