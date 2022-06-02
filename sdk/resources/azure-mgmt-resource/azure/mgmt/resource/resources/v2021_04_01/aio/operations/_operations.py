@@ -5051,8 +5051,8 @@ class ResourcesOperations:  # pylint: disable=too-many-public-methods
          Valid values include ``createdTime``\ , ``changedTime`` and ``provisioningState``. For example,
          ``$expand=createdTime,changedTime``. Default value is None.
         :type expand: str
-        :param top: The number of results to return. If null is passed, returns all resources. Default
-         value is None.
+        :param top: The number of recommendations per page if a paged version of this API is being
+         used. Default value is None.
         :type top: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ResourceListResult or the result of cls(response)
