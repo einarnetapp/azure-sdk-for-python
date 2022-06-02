@@ -6,8 +6,8 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._metric_baseline_operations import MetricBaselineOperations
+from ._action_groups_operations import ActionGroupsOperations
 
 __all__ = [
-    'MetricBaselineOperations',
+    'ActionGroupsOperations',
 ]
