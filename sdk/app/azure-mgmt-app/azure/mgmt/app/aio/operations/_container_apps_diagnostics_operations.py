@@ -19,12 +19,12 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._certificates_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request, build_update_request
+from ...operations._container_apps_diagnostics_operations import build_get_detector_request, build_get_revision_request, build_get_root_request, build_list_detectors_request, build_list_revisions_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class CertificatesOperations:
-    """CertificatesOperations async operations.
+class ContainerAppsDiagnosticsOperations:
+    """ContainerAppsDiagnosticsOperations async operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
@@ -46,29 +46,29 @@ class CertificatesOperations:
         self._config = config
 
     @distributed_trace
-    def list(
+    def list_detectors(
         self,
         resource_group_name: str,
-        environment_name: str,
+        container_app_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.CertificateCollection"]:
-        """Get the Certificates in a given managed environment.
+    ) -> AsyncIterable["_models.DiagnosticsCollection"]:
+        """Get the list of diagnostics for a given Container App.
 
-        Get the Certificates in a given managed environment.
+        Get the list of diagnostics for a given Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param container_app_name: Name of the Container App for which detector info is needed.
+        :type container_app_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either CertificateCollection or the result of
+        :return: An iterator like instance of either DiagnosticsCollection or the result of
          cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.CertificateCollection]
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.DiagnosticsCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.CertificateCollection"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.DiagnosticsCollection"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -76,22 +76,22 @@ class CertificatesOperations:
         def prepare_request(next_link=None):
             if not next_link:
                 
-                request = build_list_request(
+                request = build_list_detectors_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    container_app_name=container_app_name,
                     api_version=api_version,
-                    template_url=self.list.metadata['url'],
+                    template_url=self.list_detectors.metadata['url'],
                 )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)
 
             else:
                 
-                request = build_list_request(
+                request = build_list_detectors_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    container_app_name=container_app_name,
                     api_version=api_version,
                     template_url=next_link,
                 )
@@ -101,7 +101,7 @@ class CertificatesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("CertificateCollection", pipeline_response)
+            deserialized = self._deserialize("DiagnosticsCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -128,32 +128,32 @@ class CertificatesOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates"}  # type: ignore
+    list_detectors.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors"}  # type: ignore
 
     @distributed_trace_async
-    async def get(
+    async def get_detector(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
+        container_app_name: str,
+        detector_name: str,
         **kwargs: Any
-    ) -> "_models.Certificate":
-        """Get the specified Certificate.
+    ) -> "_models.Diagnostics":
+        """Get a diagnostics result of a Container App.
 
-        Get the specified Certificate.
+        Get a diagnostics result of a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
+        :param container_app_name: Name of the Container App.
+        :type container_app_name: str
+        :param detector_name: Name of the Container App Detector.
+        :type detector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: Diagnostics, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.Diagnostics
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Certificate"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Diagnostics"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -162,13 +162,13 @@ class CertificatesOperations:
         api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
 
         
-        request = build_get_request(
+        request = build_get_detector_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            container_app_name=container_app_name,
+            detector_name=detector_name,
             api_version=api_version,
-            template_url=self.get.metadata['url'],
+            template_url=self.get_detector.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
@@ -185,115 +185,129 @@ class CertificatesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('Certificate', pipeline_response)
+        deserialized = self._deserialize('Diagnostics', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    get_detector.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors/{detectorName}"}  # type: ignore
 
 
-    @distributed_trace_async
-    async def create_or_update(
+    @distributed_trace
+    def list_revisions(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: Optional["_models.Certificate"] = None,
+        container_app_name: str,
+        filter: Optional[str] = None,
         **kwargs: Any
-    ) -> "_models.Certificate":
-        """Create or Update a Certificate.
+    ) -> AsyncIterable["_models.RevisionCollection"]:
+        """Get the Revisions for a given Container App.
 
-        Create or Update a Certificate.
+        Get the Revisions for a given Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
-        :param certificate_envelope: Certificate to be created or updated. Default value is None.
-        :type certificate_envelope: ~azure.mgmt.app.models.Certificate
+        :param container_app_name: Name of the Container App for which Revisions are needed.
+        :type container_app_name: str
+        :param filter: The filter to apply on the operation. Default value is None.
+        :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: An iterator like instance of either RevisionCollection or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.RevisionCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Certificate"]
+        api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
+
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.RevisionCollection"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
         error_map.update(kwargs.pop('error_map', {}))
+        def prepare_request(next_link=None):
+            if not next_link:
+                
+                request = build_list_revisions_request(
+                    subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    container_app_name=container_app_name,
+                    api_version=api_version,
+                    filter=filter,
+                    template_url=self.list_revisions.metadata['url'],
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
 
-        api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+            else:
+                
+                request = build_list_revisions_request(
+                    subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    container_app_name=container_app_name,
+                    api_version=api_version,
+                    filter=filter,
+                    template_url=next_link,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
 
-        if certificate_envelope is not None:
-            _json = self._serialize.body(certificate_envelope, 'Certificate')
-        else:
-            _json = None
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("RevisionCollection", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, AsyncList(list_of_elem)
 
-        request = build_create_or_update_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.create_or_update.metadata['url'],
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+
+        return AsyncItemPaged(
+            get_next, extract_data
         )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('Certificate', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
-
+    list_revisions.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/"}  # type: ignore
 
     @distributed_trace_async
-    async def delete(  # pylint: disable=inconsistent-return-statements
+    async def get_revision(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
+        container_app_name: str,
+        revision_name: str,
         **kwargs: Any
-    ) -> None:
-        """Deletes the specified Certificate.
+    ) -> "_models.Revision":
+        """Get a revision of a Container App.
 
-        Deletes the specified Certificate.
+        Get a revision of a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
+        :param container_app_name: Name of the Container App.
+        :type container_app_name: str
+        :param revision_name: Name of the Container App Revision.
+        :type revision_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None, or the result of cls(response)
-        :rtype: None
+        :return: Revision, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.Revision
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Revision"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -302,81 +316,13 @@ class CertificatesOperations:
         api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
 
         
-        request = build_delete_request(
+        request = build_get_revision_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            container_app_name=container_app_name,
+            revision_name=revision_name,
             api_version=api_version,
-            template_url=self.delete.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
-
-
-    @distributed_trace_async
-    async def update(
-        self,
-        resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: "_models.CertificatePatch",
-        **kwargs: Any
-    ) -> "_models.Certificate":
-        """Update properties of a certificate.
-
-        Patches a certificate. Currently only patching of tags is supported.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
-        :param certificate_envelope: Properties of a certificate that need to be updated.
-        :type certificate_envelope: ~azure.mgmt.app.models.CertificatePatch
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Certificate"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
-
-        _json = self._serialize.body(certificate_envelope, 'CertificatePatch')
-
-        request = build_update_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.update.metadata['url'],
+            template_url=self.get_revision.metadata['url'],
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)
@@ -393,12 +339,73 @@ class CertificatesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('Certificate', pipeline_response)
+        deserialized = self._deserialize('Revision', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    get_revision.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/{revisionName}"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def get_root(
+        self,
+        resource_group_name: str,
+        container_app_name: str,
+        **kwargs: Any
+    ) -> "_models.ContainerApp":
+        """Get the properties of a Container App.
+
+        Get the properties of a Container App.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param container_app_name: Name of the Container App.
+        :type container_app_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ContainerApp, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ContainerApp
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ContainerApp"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        api_version = kwargs.pop('api_version', "2022-05-01")  # type: str
+
+        
+        request = build_get_root_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            container_app_name=container_app_name,
+            api_version=api_version,
+            template_url=self.get_root.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('ContainerApp', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get_root.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/rootApi/"}  # type: ignore
 

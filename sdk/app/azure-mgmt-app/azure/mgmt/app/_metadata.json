@@ -1,6 +1,6 @@
 {
-    "chosen_version": "2022-01-01-preview",
-    "total_api_version_list": ["2022-01-01-preview"],
+    "chosen_version": "2022-05-01",
+    "total_api_version_list": ["2022-05-01"],
     "client": {
         "name": "ContainerAppsAPIClient",
         "filename": "_container_apps_api_client",
@@ -10,8 +10,8 @@
         "azure_arm": true,
         "has_lro_operations": true,
         "client_side_validation": false,
-        "sync_imports": "{\"typing\": {\"azurecore\": {\"azure.core.credentials\": [\"TokenCredential\"]}}, \"regular\": {\"azurecore\": {\"azure.profiles\": [\"KnownProfiles\", \"ProfileDefinition\"], \"azure.profiles.multiapiclient\": [\"MultiApiClientMixin\"], \"msrest\": [\"Deserializer\", \"Serializer\"], \"azure.mgmt.core\": [\"ARMPipelineClient\"]}, \"local\": {\"._configuration\": [\"ContainerAppsAPIClientConfiguration\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}",
-        "async_imports": "{\"typing\": {\"azurecore\": {\"azure.core.credentials_async\": [\"AsyncTokenCredential\"], \"azure.core.credentials\": [\"TokenCredential\"]}}, \"regular\": {\"azurecore\": {\"azure.profiles\": [\"KnownProfiles\", \"ProfileDefinition\"], \"azure.profiles.multiapiclient\": [\"MultiApiClientMixin\"], \"msrest\": [\"Deserializer\", \"Serializer\"], \"azure.mgmt.core\": [\"AsyncARMPipelineClient\"]}, \"local\": {\"._configuration\": [\"ContainerAppsAPIClientConfiguration\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}"
+        "sync_imports": "{\"typing\": {\"azurecore\": {\"azure.core.credentials\": [\"TokenCredential\"]}}, \"regular\": {\"azurecore\": {\"azure.profiles\": [\"KnownProfiles\", \"ProfileDefinition\"], \"azure.profiles.multiapiclient\": [\"MultiApiClientMixin\"], \"azure.mgmt.core\": [\"ARMPipelineClient\"]}, \"local\": {\"._configuration\": [\"ContainerAppsAPIClientConfiguration\"]}, \"thirdparty\": {\"msrest\": [\"Deserializer\", \"Serializer\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}",
+        "async_imports": "{\"typing\": {\"azurecore\": {\"azure.core.credentials_async\": [\"AsyncTokenCredential\"], \"azure.core.credentials\": [\"TokenCredential\"]}}, \"regular\": {\"azurecore\": {\"azure.profiles\": [\"KnownProfiles\", \"ProfileDefinition\"], \"azure.profiles.multiapiclient\": [\"MultiApiClientMixin\"], \"azure.mgmt.core\": [\"AsyncARMPipelineClient\"]}, \"local\": {\"._configuration\": [\"ContainerAppsAPIClientConfiguration\"]}, \"thirdparty\": {\"msrest\": [\"Deserializer\", \"Serializer\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\", \"Optional\"]}}}"
     },
     "global_parameters": {
         "sync": {
@@ -97,15 +97,19 @@
         "async_imports": "{\"regular\": {\"azurecore\": {\"azure.core.configuration\": [\"Configuration\"], \"azure.core.pipeline\": [\"policies\"], \"azure.mgmt.core.policies\": [\"ARMHttpLoggingPolicy\", \"AsyncARMChallengeAuthenticationPolicy\"]}, \"local\": {\".._version\": [\"VERSION\"]}}, \"conditional\": {\"stdlib\": {\"typing\": [\"Any\"]}}, \"typing\": {\"azurecore\": {\"azure.core.credentials_async\": [\"AsyncTokenCredential\"]}}}"
     },
     "operation_groups": {
+        "container_apps_auth_configs": "ContainerAppsAuthConfigsOperations",
         "container_apps": "ContainerAppsOperations",
         "container_apps_revisions": "ContainerAppsRevisionsOperations",
         "container_apps_revision_replicas": "ContainerAppsRevisionReplicasOperations",
+        "dapr_components": "DaprComponentsOperations",
+        "container_apps_diagnostics": "ContainerAppsDiagnosticsOperations",
+        "managed_environment_diagnostics": "ManagedEnvironmentDiagnosticsOperations",
+        "managed_environments_diagnostics": "ManagedEnvironmentsDiagnosticsOperations",
+        "operations": "Operations",
         "managed_environments": "ManagedEnvironmentsOperations",
         "certificates": "CertificatesOperations",
-        "operations": "Operations",
-        "container_apps_source_controls": "ContainerAppsSourceControlsOperations",
-        "dapr_components": "DaprComponentsOperations",
-        "container_apps_auth_configs": "ContainerAppsAuthConfigsOperations",
-        "managed_environments_storages": "ManagedEnvironmentsStoragesOperations"
+        "namespaces": "NamespacesOperations",
+        "managed_environments_storages": "ManagedEnvironmentsStoragesOperations",
+        "container_apps_source_controls": "ContainerAppsSourceControlsOperations"
     }
 }
