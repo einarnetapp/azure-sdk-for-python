@@ -5140,7 +5140,7 @@ class OrchestrationServiceStateInput(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar service_name: Required. The name of the service. Possible values include:
-     "AutomaticRepairs".
+     "AutomaticRepairs", "DummyOrchestrationServiceName".
     :vartype service_name: str or ~azure.mgmt.compute.v2020_12_01.models.OrchestrationServiceNames
     :ivar action: Required. The action to be performed. Possible values include: "Resume",
      "Suspend".
@@ -5166,7 +5166,7 @@ class OrchestrationServiceStateInput(msrest.serialization.Model):
     ):
         """
         :keyword service_name: Required. The name of the service. Possible values include:
-         "AutomaticRepairs".
+         "AutomaticRepairs", "DummyOrchestrationServiceName".
         :paramtype service_name: str or
          ~azure.mgmt.compute.v2020_12_01.models.OrchestrationServiceNames
         :keyword action: Required. The action to be performed. Possible values include: "Resume",
@@ -5184,7 +5184,8 @@ class OrchestrationServiceSummary(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar service_name: The name of the service. Possible values include: "AutomaticRepairs".
+    :ivar service_name: The name of the service. Possible values include: "AutomaticRepairs",
+     "DummyOrchestrationServiceName".
     :vartype service_name: str or ~azure.mgmt.compute.v2020_12_01.models.OrchestrationServiceNames
     :ivar service_state: The current state of the service. Possible values include: "NotRunning",
      "Running", "Suspended".
