@@ -115,6 +115,13 @@ class IsGlobal(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FALSE = "False"
     TRUE = "True"
 
+class IsMember(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """yes/no, if it is member or not.
+    """
+
+    YES = "yes"
+    NO = "no"
+
 class MembershipType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Membership Type.
     """

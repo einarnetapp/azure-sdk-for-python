@@ -16,7 +16,7 @@ from azure.mgmt.core import ARMPipelineClient
 
 from . import models
 from ._configuration import NetworkManagementClientConfiguration
-from .operations import ActiveConnectivityConfigurationsOperations, ActiveSecurityAdminRulesOperations, ActiveSecurityUserRulesOperations, AdminRuleCollectionsOperations, AdminRulesOperations, ConnectivityConfigurationsOperations, EffectiveConnectivityConfigurationsOperations, EffectiveVirtualNetworksOperations, NetworkGroupsOperations, NetworkManagerCommitsOperations, NetworkManagerDeploymentStatusOperations, NetworkManagerEffectiveSecurityAdminRulesOperations, NetworkManagersOperations, NetworkSecurityPerimetersOperations, NspAccessRulesOperations, NspAssociationsOperations, NspProfilesOperations, PerimeterAssociableResourceTypesOperations, SecurityAdminConfigurationsOperations, SecurityUserConfigurationsOperations, UserRuleCollectionsOperations, UserRulesOperations
+from .operations import ActiveConnectivityConfigurationsOperations, ActiveSecurityAdminRulesOperations, ActiveSecurityUserRulesOperations, AdminRuleCollectionsOperations, AdminRulesOperations, ConnectivityConfigurationsOperations, EffectiveConnectivityConfigurationsOperations, EffectiveVirtualNetworksOperations, NetworkGroupsOperations, NetworkManagerCommitsOperations, NetworkManagerDeploymentStatusOperations, NetworkManagerEffectiveSecurityAdminRulesOperations, NetworkManagersOperations, NetworkSecurityPerimetersOperations, NspAccessRulesOperations, NspAccessRulesReconcileOperations, NspAssociationsOperations, NspAssociationsProxyOperations, NspProfilesOperations, PerimeterAssociableResourceTypesOperations, SecurityAdminConfigurationsOperations, SecurityUserConfigurationsOperations, UserRuleCollectionsOperations, UserRulesOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -87,10 +87,16 @@ class NetworkManagementClient:    # pylint: disable=too-many-instance-attributes
     :ivar nsp_associations: NspAssociationsOperations operations
     :vartype nsp_associations:
      azure.mgmt.network.v2021_02_01_preview.operations.NspAssociationsOperations
+    :ivar nsp_associations_proxy: NspAssociationsProxyOperations operations
+    :vartype nsp_associations_proxy:
+     azure.mgmt.network.v2021_02_01_preview.operations.NspAssociationsProxyOperations
     :ivar perimeter_associable_resource_types: PerimeterAssociableResourceTypesOperations
      operations
     :vartype perimeter_associable_resource_types:
      azure.mgmt.network.v2021_02_01_preview.operations.PerimeterAssociableResourceTypesOperations
+    :ivar nsp_access_rules_reconcile: NspAccessRulesReconcileOperations operations
+    :vartype nsp_access_rules_reconcile:
+     azure.mgmt.network.v2021_02_01_preview.operations.NspAccessRulesReconcileOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The subscription credentials which uniquely identify the Microsoft
@@ -140,7 +146,9 @@ class NetworkManagementClient:    # pylint: disable=too-many-instance-attributes
         self.nsp_profiles = NspProfilesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.nsp_access_rules = NspAccessRulesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.nsp_associations = NspAssociationsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.nsp_associations_proxy = NspAssociationsProxyOperations(self._client, self._config, self._serialize, self._deserialize)
         self.perimeter_associable_resource_types = PerimeterAssociableResourceTypesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.nsp_access_rules_reconcile = NspAccessRulesReconcileOperations(self._client, self._config, self._serialize, self._deserialize)
 
 
     def _send_request(
