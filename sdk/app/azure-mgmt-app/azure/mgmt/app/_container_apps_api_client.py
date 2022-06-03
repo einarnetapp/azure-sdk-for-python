@@ -7,55 +7,68 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Optional, TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
+
+from msrest import Deserializer, Serializer
 
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
-from msrest import Deserializer, Serializer
 
 from . import models
 from ._configuration import ContainerAppsAPIClientConfiguration
-from .operations import CertificatesOperations, ContainerAppsAuthConfigsOperations, ContainerAppsOperations, ContainerAppsRevisionReplicasOperations, ContainerAppsRevisionsOperations, ContainerAppsSourceControlsOperations, DaprComponentsOperations, ManagedEnvironmentsOperations, ManagedEnvironmentsStoragesOperations, Operations
+from .operations import CertificatesOperations, ContainerAppsAuthConfigsOperations, ContainerAppsDiagnosticsOperations, ContainerAppsOperations, ContainerAppsRevisionReplicasOperations, ContainerAppsRevisionsOperations, ContainerAppsSourceControlsOperations, DaprComponentsOperations, ManagedEnvironmentDiagnosticsOperations, ManagedEnvironmentsDiagnosticsOperations, ManagedEnvironmentsOperations, ManagedEnvironmentsStoragesOperations, NamespacesOperations, Operations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class ContainerAppsAPIClient:
+class ContainerAppsAPIClient:    # pylint: disable=too-many-instance-attributes
     """ContainerAppsAPIClient.
 
-    :ivar container_apps: ContainerAppsOperations operations
-    :vartype container_apps: container_apps_api_client.operations.ContainerAppsOperations
-    :ivar container_apps_revisions: ContainerAppsRevisionsOperations operations
-    :vartype container_apps_revisions:
-     container_apps_api_client.operations.ContainerAppsRevisionsOperations
-    :ivar container_apps_revision_replicas: ContainerAppsRevisionReplicasOperations operations
-    :vartype container_apps_revision_replicas:
-     container_apps_api_client.operations.ContainerAppsRevisionReplicasOperations
-    :ivar managed_environments: ManagedEnvironmentsOperations operations
-    :vartype managed_environments:
-     container_apps_api_client.operations.ManagedEnvironmentsOperations
-    :ivar certificates: CertificatesOperations operations
-    :vartype certificates: container_apps_api_client.operations.CertificatesOperations
-    :ivar operations: Operations operations
-    :vartype operations: container_apps_api_client.operations.Operations
-    :ivar container_apps_source_controls: ContainerAppsSourceControlsOperations operations
-    :vartype container_apps_source_controls:
-     container_apps_api_client.operations.ContainerAppsSourceControlsOperations
-    :ivar dapr_components: DaprComponentsOperations operations
-    :vartype dapr_components: container_apps_api_client.operations.DaprComponentsOperations
     :ivar container_apps_auth_configs: ContainerAppsAuthConfigsOperations operations
     :vartype container_apps_auth_configs:
-     container_apps_api_client.operations.ContainerAppsAuthConfigsOperations
+     azure.mgmt.app.operations.ContainerAppsAuthConfigsOperations
+    :ivar container_apps: ContainerAppsOperations operations
+    :vartype container_apps: azure.mgmt.app.operations.ContainerAppsOperations
+    :ivar container_apps_revisions: ContainerAppsRevisionsOperations operations
+    :vartype container_apps_revisions: azure.mgmt.app.operations.ContainerAppsRevisionsOperations
+    :ivar container_apps_revision_replicas: ContainerAppsRevisionReplicasOperations operations
+    :vartype container_apps_revision_replicas:
+     azure.mgmt.app.operations.ContainerAppsRevisionReplicasOperations
+    :ivar dapr_components: DaprComponentsOperations operations
+    :vartype dapr_components: azure.mgmt.app.operations.DaprComponentsOperations
+    :ivar container_apps_diagnostics: ContainerAppsDiagnosticsOperations operations
+    :vartype container_apps_diagnostics:
+     azure.mgmt.app.operations.ContainerAppsDiagnosticsOperations
+    :ivar managed_environment_diagnostics: ManagedEnvironmentDiagnosticsOperations operations
+    :vartype managed_environment_diagnostics:
+     azure.mgmt.app.operations.ManagedEnvironmentDiagnosticsOperations
+    :ivar managed_environments_diagnostics: ManagedEnvironmentsDiagnosticsOperations operations
+    :vartype managed_environments_diagnostics:
+     azure.mgmt.app.operations.ManagedEnvironmentsDiagnosticsOperations
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.app.operations.Operations
+    :ivar managed_environments: ManagedEnvironmentsOperations operations
+    :vartype managed_environments: azure.mgmt.app.operations.ManagedEnvironmentsOperations
+    :ivar certificates: CertificatesOperations operations
+    :vartype certificates: azure.mgmt.app.operations.CertificatesOperations
+    :ivar namespaces: NamespacesOperations operations
+    :vartype namespaces: azure.mgmt.app.operations.NamespacesOperations
     :ivar managed_environments_storages: ManagedEnvironmentsStoragesOperations operations
     :vartype managed_environments_storages:
-     container_apps_api_client.operations.ManagedEnvironmentsStoragesOperations
+     azure.mgmt.app.operations.ManagedEnvironmentsStoragesOperations
+    :ivar container_apps_source_controls: ContainerAppsSourceControlsOperations operations
+    :vartype container_apps_source_controls:
+     azure.mgmt.app.operations.ContainerAppsSourceControlsOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is 'https://management.azure.com'.
+    :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2022-05-01". Note that overriding this
+     default value may result in unsupported behavior.
+    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -74,21 +87,25 @@ class ContainerAppsAPIClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.container_apps_auth_configs = ContainerAppsAuthConfigsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.container_apps = ContainerAppsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.container_apps_revisions = ContainerAppsRevisionsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.container_apps_revision_replicas = ContainerAppsRevisionReplicasOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dapr_components = DaprComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.container_apps_diagnostics = ContainerAppsDiagnosticsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.managed_environment_diagnostics = ManagedEnvironmentDiagnosticsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.managed_environments_diagnostics = ManagedEnvironmentsDiagnosticsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.managed_environments = ManagedEnvironmentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.certificates = CertificatesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.container_apps_source_controls = ContainerAppsSourceControlsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.dapr_components = DaprComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.container_apps_auth_configs = ContainerAppsAuthConfigsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.namespaces = NamespacesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.managed_environments_storages = ManagedEnvironmentsStoragesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.container_apps_source_controls = ContainerAppsSourceControlsOperations(self._client, self._config, self._serialize, self._deserialize)
 
 
     def _send_request(
         self,
-        request,  # type: HttpRequest
+        request: HttpRequest,
         **kwargs: Any
     ) -> HttpResponse:
         """Runs the network request through the client's chained policies.
