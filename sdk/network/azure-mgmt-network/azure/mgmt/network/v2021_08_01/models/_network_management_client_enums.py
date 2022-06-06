@@ -445,6 +445,8 @@ class EndpointType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     EXTERNAL_ADDRESS = "ExternalAddress"
     MMA_WORKSPACE_MACHINE = "MMAWorkspaceMachine"
     MMA_WORKSPACE_NETWORK = "MMAWorkspaceNetwork"
+    AZURE_ARC_VM = "AzureArcVM"
+    AZURE_VMSS = "AzureVMSS"
 
 class EvaluationState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Connectivity analysis evaluation state.
@@ -956,6 +958,13 @@ class OwaspCrsExclusionEntrySelectorMatchOperator(with_metaclass(CaseInsensitive
     STARTS_WITH = "StartsWith"
     ENDS_WITH = "EndsWith"
     EQUALS_ANY = "EqualsAny"
+
+class PacketCaptureTargetType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Target type of the resource provided.
+    """
+
+    AZURE_VM = "AzureVM"
+    AZURE_VMSS = "AzureVMSS"
 
 class PcError(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 

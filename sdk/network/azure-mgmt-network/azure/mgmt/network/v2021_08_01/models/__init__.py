@@ -411,6 +411,7 @@ from ._models_py3 import P2SVpnProfileParameters
 from ._models_py3 import PacketCapture
 from ._models_py3 import PacketCaptureFilter
 from ._models_py3 import PacketCaptureListResult
+from ._models_py3 import PacketCaptureMachineScope
 from ._models_py3 import PacketCaptureParameters
 from ._models_py3 import PacketCaptureQueryStatusResult
 from ._models_py3 import PacketCaptureResult
@@ -722,6 +723,7 @@ from ._network_management_client_enums import (
     OutputType,
     OwaspCrsExclusionEntryMatchVariable,
     OwaspCrsExclusionEntrySelectorMatchOperator,
+    PacketCaptureTargetType,
     PcError,
     PcProtocol,
     PcStatus,
@@ -1193,6 +1195,7 @@ __all__ = [
     'PacketCapture',
     'PacketCaptureFilter',
     'PacketCaptureListResult',
+    'PacketCaptureMachineScope',
     'PacketCaptureParameters',
     'PacketCaptureQueryStatusResult',
     'PacketCaptureResult',
@@ -1501,6 +1504,7 @@ __all__ = [
     'OutputType',
     'OwaspCrsExclusionEntryMatchVariable',
     'OwaspCrsExclusionEntrySelectorMatchOperator',
+    'PacketCaptureTargetType',
     'PcError',
     'PcProtocol',
     'PcStatus',

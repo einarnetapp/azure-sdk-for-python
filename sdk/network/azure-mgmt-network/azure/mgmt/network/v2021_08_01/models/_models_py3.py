@@ -3589,6 +3589,8 @@ class ApplicationGatewayRoutingRule(SubResource):
     :ivar rule_type: Rule type. Possible values include: "Basic", "PathBasedRouting".
     :vartype rule_type: str or
      ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayRequestRoutingRuleType
+    :ivar priority: Priority of the routing rule.
+    :vartype priority: int
     :ivar backend_address_pool: Backend address pool resource of the application gateway.
     :vartype backend_address_pool: ~azure.mgmt.network.v2021_08_01.models.SubResource
     :ivar backend_settings: Backend settings resource of the application gateway.
@@ -3603,6 +3605,7 @@ class ApplicationGatewayRoutingRule(SubResource):
     _validation = {
         'etag': {'readonly': True},
         'type': {'readonly': True},
+        'priority': {'maximum': 20000, 'minimum': 1},
         'provisioning_state': {'readonly': True},
     }
 
@@ -3612,6 +3615,7 @@ class ApplicationGatewayRoutingRule(SubResource):
         'etag': {'key': 'etag', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'rule_type': {'key': 'properties.ruleType', 'type': 'str'},
+        'priority': {'key': 'properties.priority', 'type': 'int'},
         'backend_address_pool': {'key': 'properties.backendAddressPool', 'type': 'SubResource'},
         'backend_settings': {'key': 'properties.backendSettings', 'type': 'SubResource'},
         'listener': {'key': 'properties.listener', 'type': 'SubResource'},
@@ -3624,6 +3628,7 @@ class ApplicationGatewayRoutingRule(SubResource):
         id: Optional[str] = None,
         name: Optional[str] = None,
         rule_type: Optional[Union[str, "ApplicationGatewayRequestRoutingRuleType"]] = None,
+        priority: Optional[int] = None,
         backend_address_pool: Optional["SubResource"] = None,
         backend_settings: Optional["SubResource"] = None,
         listener: Optional["SubResource"] = None,
@@ -3637,6 +3642,8 @@ class ApplicationGatewayRoutingRule(SubResource):
         :keyword rule_type: Rule type. Possible values include: "Basic", "PathBasedRouting".
         :paramtype rule_type: str or
          ~azure.mgmt.network.v2021_08_01.models.ApplicationGatewayRequestRoutingRuleType
+        :keyword priority: Priority of the routing rule.
+        :paramtype priority: int
         :keyword backend_address_pool: Backend address pool resource of the application gateway.
         :paramtype backend_address_pool: ~azure.mgmt.network.v2021_08_01.models.SubResource
         :keyword backend_settings: Backend settings resource of the application gateway.
@@ -3649,6 +3656,7 @@ class ApplicationGatewayRoutingRule(SubResource):
         self.etag = None
         self.type = None
         self.rule_type = rule_type
+        self.priority = priority
         self.backend_address_pool = backend_address_pool
         self.backend_settings = backend_settings
         self.listener = listener
@@ -7927,7 +7935,7 @@ class ConnectionMonitorEndpoint(msrest.serialization.Model):
     :ivar name: Required. The name of the connection monitor endpoint.
     :vartype name: str
     :ivar type: The endpoint type. Possible values include: "AzureVM", "AzureVNet", "AzureSubnet",
-     "ExternalAddress", "MMAWorkspaceMachine", "MMAWorkspaceNetwork".
+     "ExternalAddress", "MMAWorkspaceMachine", "MMAWorkspaceNetwork", "AzureArcVM", "AzureVMSS".
     :vartype type: str or ~azure.mgmt.network.v2021_08_01.models.EndpointType
     :ivar resource_id: Resource ID of the connection monitor endpoint.
     :vartype resource_id: str
@@ -7972,7 +7980,8 @@ class ConnectionMonitorEndpoint(msrest.serialization.Model):
         :keyword name: Required. The name of the connection monitor endpoint.
         :paramtype name: str
         :keyword type: The endpoint type. Possible values include: "AzureVM", "AzureVNet",
-         "AzureSubnet", "ExternalAddress", "MMAWorkspaceMachine", "MMAWorkspaceNetwork".
+         "AzureSubnet", "ExternalAddress", "MMAWorkspaceMachine", "MMAWorkspaceNetwork", "AzureArcVM",
+         "AzureVMSS".
         :paramtype type: str or ~azure.mgmt.network.v2021_08_01.models.EndpointType
         :keyword resource_id: Resource ID of the connection monitor endpoint.
         :paramtype resource_id: str
@@ -22505,8 +22514,16 @@ class PacketCapture(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar target: Required. The ID of the targeted resource, only VM is currently supported.
+    :ivar target: Required. The ID of the targeted resource, only AzureVM and AzureVMSS as target
+     type are currently supported.
     :vartype target: str
+    :ivar scope: A list of AzureVMSS instances which can be included or excluded to run packet
+     capture. If both included and excluded are empty, then the packet capture will run on all
+     instances of AzureVMSS.
+    :vartype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+    :ivar target_type: Target type of the resource provided. Possible values include: "AzureVM",
+     "AzureVMSS".
+    :vartype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
     :ivar bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes are
      truncated.
     :vartype bytes_to_capture_per_packet: long
@@ -22530,6 +22547,8 @@ class PacketCapture(msrest.serialization.Model):
 
     _attribute_map = {
         'target': {'key': 'properties.target', 'type': 'str'},
+        'scope': {'key': 'properties.scope', 'type': 'PacketCaptureMachineScope'},
+        'target_type': {'key': 'properties.targetType', 'type': 'str'},
         'bytes_to_capture_per_packet': {'key': 'properties.bytesToCapturePerPacket', 'type': 'long'},
         'total_bytes_per_session': {'key': 'properties.totalBytesPerSession', 'type': 'long'},
         'time_limit_in_seconds': {'key': 'properties.timeLimitInSeconds', 'type': 'int'},
@@ -22542,6 +22561,8 @@ class PacketCapture(msrest.serialization.Model):
         *,
         target: str,
         storage_location: "PacketCaptureStorageLocation",
+        scope: Optional["PacketCaptureMachineScope"] = None,
+        target_type: Optional[Union[str, "PacketCaptureTargetType"]] = None,
         bytes_to_capture_per_packet: Optional[int] = 0,
         total_bytes_per_session: Optional[int] = 1073741824,
         time_limit_in_seconds: Optional[int] = 18000,
@@ -22549,8 +22570,16 @@ class PacketCapture(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword target: Required. The ID of the targeted resource, only VM is currently supported.
+        :keyword target: Required. The ID of the targeted resource, only AzureVM and AzureVMSS as
+         target type are currently supported.
         :paramtype target: str
+        :keyword scope: A list of AzureVMSS instances which can be included or excluded to run packet
+         capture. If both included and excluded are empty, then the packet capture will run on all
+         instances of AzureVMSS.
+        :paramtype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+        :keyword target_type: Target type of the resource provided. Possible values include: "AzureVM",
+         "AzureVMSS".
+        :paramtype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
         :keyword bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes
          are truncated.
         :paramtype bytes_to_capture_per_packet: long
@@ -22566,6 +22595,8 @@ class PacketCapture(msrest.serialization.Model):
         """
         super(PacketCapture, self).__init__(**kwargs)
         self.target = target
+        self.scope = scope
+        self.target_type = target_type
         self.bytes_to_capture_per_packet = bytes_to_capture_per_packet
         self.total_bytes_per_session = total_bytes_per_session
         self.time_limit_in_seconds = time_limit_in_seconds
@@ -22673,13 +22704,55 @@ class PacketCaptureListResult(msrest.serialization.Model):
         self.value = value
 
 
+class PacketCaptureMachineScope(msrest.serialization.Model):
+    """A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS.
+
+    :ivar include: List of AzureVMSS instances to run packet capture on.
+    :vartype include: list[str]
+    :ivar exclude: List of AzureVMSS instances which has to be excluded from the AzureVMSS from
+     running packet capture.
+    :vartype exclude: list[str]
+    """
+
+    _attribute_map = {
+        'include': {'key': 'include', 'type': '[str]'},
+        'exclude': {'key': 'exclude', 'type': '[str]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        include: Optional[List[str]] = None,
+        exclude: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword include: List of AzureVMSS instances to run packet capture on.
+        :paramtype include: list[str]
+        :keyword exclude: List of AzureVMSS instances which has to be excluded from the AzureVMSS from
+         running packet capture.
+        :paramtype exclude: list[str]
+        """
+        super(PacketCaptureMachineScope, self).__init__(**kwargs)
+        self.include = include
+        self.exclude = exclude
+
+
 class PacketCaptureParameters(msrest.serialization.Model):
     """Parameters that define the create packet capture operation.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar target: Required. The ID of the targeted resource, only VM is currently supported.
+    :ivar target: Required. The ID of the targeted resource, only AzureVM and AzureVMSS as target
+     type are currently supported.
     :vartype target: str
+    :ivar scope: A list of AzureVMSS instances which can be included or excluded to run packet
+     capture. If both included and excluded are empty, then the packet capture will run on all
+     instances of AzureVMSS.
+    :vartype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+    :ivar target_type: Target type of the resource provided. Possible values include: "AzureVM",
+     "AzureVMSS".
+    :vartype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
     :ivar bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes are
      truncated.
     :vartype bytes_to_capture_per_packet: long
@@ -22703,6 +22776,8 @@ class PacketCaptureParameters(msrest.serialization.Model):
 
     _attribute_map = {
         'target': {'key': 'target', 'type': 'str'},
+        'scope': {'key': 'scope', 'type': 'PacketCaptureMachineScope'},
+        'target_type': {'key': 'targetType', 'type': 'str'},
         'bytes_to_capture_per_packet': {'key': 'bytesToCapturePerPacket', 'type': 'long'},
         'total_bytes_per_session': {'key': 'totalBytesPerSession', 'type': 'long'},
         'time_limit_in_seconds': {'key': 'timeLimitInSeconds', 'type': 'int'},
@@ -22715,6 +22790,8 @@ class PacketCaptureParameters(msrest.serialization.Model):
         *,
         target: str,
         storage_location: "PacketCaptureStorageLocation",
+        scope: Optional["PacketCaptureMachineScope"] = None,
+        target_type: Optional[Union[str, "PacketCaptureTargetType"]] = None,
         bytes_to_capture_per_packet: Optional[int] = 0,
         total_bytes_per_session: Optional[int] = 1073741824,
         time_limit_in_seconds: Optional[int] = 18000,
@@ -22722,8 +22799,16 @@ class PacketCaptureParameters(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword target: Required. The ID of the targeted resource, only VM is currently supported.
+        :keyword target: Required. The ID of the targeted resource, only AzureVM and AzureVMSS as
+         target type are currently supported.
         :paramtype target: str
+        :keyword scope: A list of AzureVMSS instances which can be included or excluded to run packet
+         capture. If both included and excluded are empty, then the packet capture will run on all
+         instances of AzureVMSS.
+        :paramtype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+        :keyword target_type: Target type of the resource provided. Possible values include: "AzureVM",
+         "AzureVMSS".
+        :paramtype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
         :keyword bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes
          are truncated.
         :paramtype bytes_to_capture_per_packet: long
@@ -22739,6 +22824,8 @@ class PacketCaptureParameters(msrest.serialization.Model):
         """
         super(PacketCaptureParameters, self).__init__(**kwargs)
         self.target = target
+        self.scope = scope
+        self.target_type = target_type
         self.bytes_to_capture_per_packet = bytes_to_capture_per_packet
         self.total_bytes_per_session = total_bytes_per_session
         self.time_limit_in_seconds = time_limit_in_seconds
@@ -22819,8 +22906,16 @@ class PacketCaptureResult(msrest.serialization.Model):
     :vartype id: str
     :ivar etag: A unique read-only string that changes whenever the resource is updated.
     :vartype etag: str
-    :ivar target: The ID of the targeted resource, only VM is currently supported.
+    :ivar target: The ID of the targeted resource, only AzureVM and AzureVMSS as target type are
+     currently supported.
     :vartype target: str
+    :ivar scope: A list of AzureVMSS instances which can be included or excluded to run packet
+     capture. If both included and excluded are empty, then the packet capture will run on all
+     instances of AzureVMSS.
+    :vartype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+    :ivar target_type: Target type of the resource provided. Possible values include: "AzureVM",
+     "AzureVMSS".
+    :vartype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
     :ivar bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes are
      truncated.
     :vartype bytes_to_capture_per_packet: long
@@ -22852,6 +22947,8 @@ class PacketCaptureResult(msrest.serialization.Model):
         'id': {'key': 'id', 'type': 'str'},
         'etag': {'key': 'etag', 'type': 'str'},
         'target': {'key': 'properties.target', 'type': 'str'},
+        'scope': {'key': 'properties.scope', 'type': 'PacketCaptureMachineScope'},
+        'target_type': {'key': 'properties.targetType', 'type': 'str'},
         'bytes_to_capture_per_packet': {'key': 'properties.bytesToCapturePerPacket', 'type': 'long'},
         'total_bytes_per_session': {'key': 'properties.totalBytesPerSession', 'type': 'long'},
         'time_limit_in_seconds': {'key': 'properties.timeLimitInSeconds', 'type': 'int'},
@@ -22864,6 +22961,8 @@ class PacketCaptureResult(msrest.serialization.Model):
         self,
         *,
         target: Optional[str] = None,
+        scope: Optional["PacketCaptureMachineScope"] = None,
+        target_type: Optional[Union[str, "PacketCaptureTargetType"]] = None,
         bytes_to_capture_per_packet: Optional[int] = 0,
         total_bytes_per_session: Optional[int] = 1073741824,
         time_limit_in_seconds: Optional[int] = 18000,
@@ -22872,8 +22971,16 @@ class PacketCaptureResult(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword target: The ID of the targeted resource, only VM is currently supported.
+        :keyword target: The ID of the targeted resource, only AzureVM and AzureVMSS as target type are
+         currently supported.
         :paramtype target: str
+        :keyword scope: A list of AzureVMSS instances which can be included or excluded to run packet
+         capture. If both included and excluded are empty, then the packet capture will run on all
+         instances of AzureVMSS.
+        :paramtype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+        :keyword target_type: Target type of the resource provided. Possible values include: "AzureVM",
+         "AzureVMSS".
+        :paramtype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
         :keyword bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes
          are truncated.
         :paramtype bytes_to_capture_per_packet: long
@@ -22892,6 +22999,8 @@ class PacketCaptureResult(msrest.serialization.Model):
         self.id = None
         self.etag = None
         self.target = target
+        self.scope = scope
+        self.target_type = target_type
         self.bytes_to_capture_per_packet = bytes_to_capture_per_packet
         self.total_bytes_per_session = total_bytes_per_session
         self.time_limit_in_seconds = time_limit_in_seconds
@@ -22907,8 +23016,16 @@ class PacketCaptureResultProperties(PacketCaptureParameters):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar target: Required. The ID of the targeted resource, only VM is currently supported.
+    :ivar target: Required. The ID of the targeted resource, only AzureVM and AzureVMSS as target
+     type are currently supported.
     :vartype target: str
+    :ivar scope: A list of AzureVMSS instances which can be included or excluded to run packet
+     capture. If both included and excluded are empty, then the packet capture will run on all
+     instances of AzureVMSS.
+    :vartype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+    :ivar target_type: Target type of the resource provided. Possible values include: "AzureVM",
+     "AzureVMSS".
+    :vartype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
     :ivar bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes are
      truncated.
     :vartype bytes_to_capture_per_packet: long
@@ -22936,6 +23053,8 @@ class PacketCaptureResultProperties(PacketCaptureParameters):
 
     _attribute_map = {
         'target': {'key': 'target', 'type': 'str'},
+        'scope': {'key': 'scope', 'type': 'PacketCaptureMachineScope'},
+        'target_type': {'key': 'targetType', 'type': 'str'},
         'bytes_to_capture_per_packet': {'key': 'bytesToCapturePerPacket', 'type': 'long'},
         'total_bytes_per_session': {'key': 'totalBytesPerSession', 'type': 'long'},
         'time_limit_in_seconds': {'key': 'timeLimitInSeconds', 'type': 'int'},
@@ -22949,6 +23068,8 @@ class PacketCaptureResultProperties(PacketCaptureParameters):
         *,
         target: str,
         storage_location: "PacketCaptureStorageLocation",
+        scope: Optional["PacketCaptureMachineScope"] = None,
+        target_type: Optional[Union[str, "PacketCaptureTargetType"]] = None,
         bytes_to_capture_per_packet: Optional[int] = 0,
         total_bytes_per_session: Optional[int] = 1073741824,
         time_limit_in_seconds: Optional[int] = 18000,
@@ -22956,8 +23077,16 @@ class PacketCaptureResultProperties(PacketCaptureParameters):
         **kwargs
     ):
         """
-        :keyword target: Required. The ID of the targeted resource, only VM is currently supported.
+        :keyword target: Required. The ID of the targeted resource, only AzureVM and AzureVMSS as
+         target type are currently supported.
         :paramtype target: str
+        :keyword scope: A list of AzureVMSS instances which can be included or excluded to run packet
+         capture. If both included and excluded are empty, then the packet capture will run on all
+         instances of AzureVMSS.
+        :paramtype scope: ~azure.mgmt.network.v2021_08_01.models.PacketCaptureMachineScope
+        :keyword target_type: Target type of the resource provided. Possible values include: "AzureVM",
+         "AzureVMSS".
+        :paramtype target_type: str or ~azure.mgmt.network.v2021_08_01.models.PacketCaptureTargetType
         :keyword bytes_to_capture_per_packet: Number of bytes captured per packet, the remaining bytes
          are truncated.
         :paramtype bytes_to_capture_per_packet: long
@@ -22971,7 +23100,7 @@ class PacketCaptureResultProperties(PacketCaptureParameters):
         :keyword filters: A list of packet capture filters.
         :paramtype filters: list[~azure.mgmt.network.v2021_08_01.models.PacketCaptureFilter]
         """
-        super(PacketCaptureResultProperties, self).__init__(target=target, bytes_to_capture_per_packet=bytes_to_capture_per_packet, total_bytes_per_session=total_bytes_per_session, time_limit_in_seconds=time_limit_in_seconds, storage_location=storage_location, filters=filters, **kwargs)
+        super(PacketCaptureResultProperties, self).__init__(target=target, scope=scope, target_type=target_type, bytes_to_capture_per_packet=bytes_to_capture_per_packet, total_bytes_per_session=total_bytes_per_session, time_limit_in_seconds=time_limit_in_seconds, storage_location=storage_location, filters=filters, **kwargs)
         self.provisioning_state = None
 
 

@@ -1585,6 +1585,33 @@ class BaseUserRule(ProxyResource):
         self.system_data = None
 
 
+class CheckMembers(msrest.serialization.Model):
+    """Request object for check members API.
+
+    :ivar member_destinations:
+    :vartype member_destinations:
+     list[~azure.mgmt.network.v2021_02_01_preview.models.MemberDestination]
+    """
+
+    _attribute_map = {
+        'member_destinations': {'key': 'memberDestinations', 'type': '[MemberDestination]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        member_destinations: Optional[List["MemberDestination"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword member_destinations:
+        :paramtype member_destinations:
+         list[~azure.mgmt.network.v2021_02_01_preview.models.MemberDestination]
+        """
+        super(CheckMembers, self).__init__(**kwargs)
+        self.member_destinations = member_destinations
+
+
 class CloudErrorBody(msrest.serialization.Model):
     """An error response from the service.
 
@@ -2704,29 +2731,44 @@ class Hub(msrest.serialization.Model):
         self.resource_type = resource_type
 
 
-class LoggingCategory(msrest.serialization.Model):
-    """Logging Category.
+class MemberDestination(msrest.serialization.Model):
+    """MemberDestination.
 
-    :ivar name: The name of the logging category.
-    :vartype name: str
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar private_link_resource_id: Private link resource Id.
+    :vartype private_link_resource_id: str
+    :ivar is_member: yes/no, if it is member or not. Possible values include: "yes", "no".
+    :vartype is_member: str or ~azure.mgmt.network.v2021_02_01_preview.models.IsMember
+    :ivar profile: Network security perimeter profile.
+    :vartype profile: str
     """
 
+    _validation = {
+        'is_member': {'readonly': True},
+        'profile': {'readonly': True},
+    }
+
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
+        'private_link_resource_id': {'key': 'privateLinkResourceId', 'type': 'str'},
+        'is_member': {'key': 'isMember', 'type': 'str'},
+        'profile': {'key': 'profile', 'type': 'str'},
     }
 
     def __init__(
         self,
         *,
-        name: Optional[str] = None,
+        private_link_resource_id: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword name: The name of the logging category.
-        :paramtype name: str
+        :keyword private_link_resource_id: Private link resource Id.
+        :paramtype private_link_resource_id: str
         """
-        super(LoggingCategory, self).__init__(**kwargs)
-        self.name = name
+        super(MemberDestination, self).__init__(**kwargs)
+        self.private_link_resource_id = private_link_resource_id
+        self.is_member = None
+        self.profile = None
 
 
 class NetworkGroup(ProxyResource):
@@ -3373,22 +3415,17 @@ class NetworkSecurityPerimeter(Resource):
     :vartype location: str
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
-    :ivar etag: A unique read-only string that changes whenever the resource is updated.
-    :vartype etag: str
-    :ivar display_name: A friendly name for the network security perimeter.
-    :vartype display_name: str
-    :ivar description: A description of the network security perimeter.
-    :vartype description: str
     :ivar provisioning_state: The provisioning state of the scope assignment resource. Possible
      values include: "Succeeded", "Creating", "Updating", "Deleting", "Accepted", "Failed".
     :vartype provisioning_state: str or
      ~azure.mgmt.network.v2021_02_01_preview.models.NspProvisioningState
+    :ivar perimeter_guid: perimeter guid of the network security perimeter.
+    :vartype perimeter_guid: str
     """
 
     _validation = {
         'name': {'readonly': True},
         'type': {'readonly': True},
-        'etag': {'readonly': True},
         'provisioning_state': {'readonly': True},
     }
 
@@ -3398,10 +3435,8 @@ class NetworkSecurityPerimeter(Resource):
         'type': {'key': 'type', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'perimeter_guid': {'key': 'properties.perimeterGuid', 'type': 'str'},
     }
 
     def __init__(
@@ -3410,8 +3445,7 @@ class NetworkSecurityPerimeter(Resource):
         id: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        display_name: Optional[str] = None,
-        description: Optional[str] = None,
+        perimeter_guid: Optional[str] = None,
         **kwargs
     ):
         """
@@ -3421,16 +3455,12 @@ class NetworkSecurityPerimeter(Resource):
         :paramtype location: str
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword display_name: A friendly name for the network security perimeter.
-        :paramtype display_name: str
-        :keyword description: A description of the network security perimeter.
-        :paramtype description: str
+        :keyword perimeter_guid: perimeter guid of the network security perimeter.
+        :paramtype perimeter_guid: str
         """
         super(NetworkSecurityPerimeter, self).__init__(id=id, location=location, tags=tags, **kwargs)
-        self.etag = None
-        self.display_name = display_name
-        self.description = description
         self.provisioning_state = None
+        self.perimeter_guid = perimeter_guid
 
 
 class NetworkSecurityPerimeterListResult(msrest.serialization.Model):
@@ -3728,9 +3758,6 @@ class NspProfile(Resource):
     :ivar access_rules_version: Version number that increases with every update to access rules
      within the profile.
     :vartype access_rules_version: str
-    :ivar enabled_log_categories: Gets the enabled log categories.
-    :vartype enabled_log_categories:
-     list[~azure.mgmt.network.v2021_02_01_preview.models.LoggingCategory]
     """
 
     _validation = {
@@ -3746,7 +3773,6 @@ class NspProfile(Resource):
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'access_rules_version': {'key': 'properties.accessRulesVersion', 'type': 'str'},
-        'enabled_log_categories': {'key': 'properties.enabledLogCategories', 'type': '[LoggingCategory]'},
     }
 
     def __init__(
@@ -3755,7 +3781,6 @@ class NspProfile(Resource):
         id: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        enabled_log_categories: Optional[List["LoggingCategory"]] = None,
         **kwargs
     ):
         """
@@ -3765,13 +3790,9 @@ class NspProfile(Resource):
         :paramtype location: str
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword enabled_log_categories: Gets the enabled log categories.
-        :paramtype enabled_log_categories:
-         list[~azure.mgmt.network.v2021_02_01_preview.models.LoggingCategory]
         """
         super(NspProfile, self).__init__(id=id, location=location, tags=tags, **kwargs)
         self.access_rules_version = None
-        self.enabled_log_categories = enabled_log_categories
 
 
 class NspProfileListResult(msrest.serialization.Model):
@@ -3942,6 +3963,68 @@ class PerimeterBasedAccessRule(msrest.serialization.Model):
         self.id = id
         self.perimeter_guid = None
         self.location = None
+
+
+class QueryNSPObj(msrest.serialization.Model):
+    """QueryNSPObj.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar perimeter_guid: Perimeter guid of NSP.
+    :vartype perimeter_guid: str
+    :ivar id: Id of NSP.
+    :vartype id: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'perimeter_guid': {'key': 'perimeterGuid', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        perimeter_guid: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword perimeter_guid: Perimeter guid of NSP.
+        :paramtype perimeter_guid: str
+        """
+        super(QueryNSPObj, self).__init__(**kwargs)
+        self.perimeter_guid = perimeter_guid
+        self.id = None
+
+
+class QueryNSPReqRes(msrest.serialization.Model):
+    """Request object for query NSP.
+
+    :ivar network_security_perimeters:
+    :vartype network_security_perimeters:
+     list[~azure.mgmt.network.v2021_02_01_preview.models.QueryNSPObj]
+    """
+
+    _attribute_map = {
+        'network_security_perimeters': {'key': 'networkSecurityPerimeters', 'type': '[QueryNSPObj]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        network_security_perimeters: Optional[List["QueryNSPObj"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword network_security_perimeters:
+        :paramtype network_security_perimeters:
+         list[~azure.mgmt.network.v2021_02_01_preview.models.QueryNSPObj]
+        """
+        super(QueryNSPReqRes, self).__init__(**kwargs)
+        self.network_security_perimeters = network_security_perimeters
 
 
 class QueryRequestOptions(msrest.serialization.Model):

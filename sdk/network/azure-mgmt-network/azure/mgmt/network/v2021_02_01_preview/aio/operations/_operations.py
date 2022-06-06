@@ -21,7 +21,7 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._operations import build_active_connectivity_configurations_list_request, build_active_security_admin_rules_list_request, build_active_security_user_rules_list_request, build_admin_rule_collections_create_or_update_request, build_admin_rule_collections_delete_request, build_admin_rule_collections_get_request, build_admin_rule_collections_list_request, build_admin_rules_create_or_update_request, build_admin_rules_delete_request, build_admin_rules_get_request, build_admin_rules_list_request, build_connectivity_configurations_create_or_update_request, build_connectivity_configurations_delete_request, build_connectivity_configurations_get_request, build_connectivity_configurations_list_request, build_effective_connectivity_configurations_list_request, build_effective_virtual_networks_list_by_network_group_request, build_effective_virtual_networks_list_by_network_manager_request, build_network_groups_create_or_update_request, build_network_groups_delete_request, build_network_groups_get_request, build_network_groups_list_request, build_network_manager_commits_post_request, build_network_manager_deployment_status_list_request, build_network_manager_effective_security_admin_rules_list_request, build_network_managers_create_or_update_request, build_network_managers_delete_request, build_network_managers_get_request, build_network_managers_list_by_subscription_request, build_network_managers_list_request, build_network_managers_patch_tags_request, build_network_security_perimeters_create_or_update_request, build_network_security_perimeters_delete_request, build_network_security_perimeters_get_request, build_network_security_perimeters_list_by_subscription_request, build_network_security_perimeters_list_request, build_nsp_access_rules_create_or_update_request, build_nsp_access_rules_delete_request, build_nsp_access_rules_get_request, build_nsp_access_rules_list_request, build_nsp_associations_create_or_update_request, build_nsp_associations_delete_request_initial, build_nsp_associations_get_request, build_nsp_associations_list_request, build_nsp_profiles_create_or_update_request, build_nsp_profiles_delete_request, build_nsp_profiles_get_request, build_nsp_profiles_list_request, build_perimeter_associable_resource_types_list_request, build_security_admin_configurations_create_or_update_request, build_security_admin_configurations_delete_request, build_security_admin_configurations_get_request, build_security_admin_configurations_list_request, build_security_user_configurations_create_or_update_request, build_security_user_configurations_delete_request, build_security_user_configurations_get_request, build_security_user_configurations_list_request, build_user_rule_collections_create_or_update_request, build_user_rule_collections_delete_request, build_user_rule_collections_get_request, build_user_rule_collections_list_request, build_user_rules_create_or_update_request, build_user_rules_delete_request, build_user_rules_get_request, build_user_rules_list_request
+from ...operations._operations import build_active_connectivity_configurations_list_request, build_active_security_admin_rules_list_request, build_active_security_user_rules_list_request, build_admin_rule_collections_create_or_update_request, build_admin_rule_collections_delete_request, build_admin_rule_collections_get_request, build_admin_rule_collections_list_request, build_admin_rules_create_or_update_request, build_admin_rules_delete_request, build_admin_rules_get_request, build_admin_rules_list_request, build_connectivity_configurations_create_or_update_request, build_connectivity_configurations_delete_request, build_connectivity_configurations_get_request, build_connectivity_configurations_list_request, build_effective_connectivity_configurations_list_request, build_effective_virtual_networks_list_by_network_group_request, build_effective_virtual_networks_list_by_network_manager_request, build_network_groups_create_or_update_request, build_network_groups_delete_request, build_network_groups_get_request, build_network_groups_list_request, build_network_manager_commits_post_request, build_network_manager_deployment_status_list_request, build_network_manager_effective_security_admin_rules_list_request, build_network_managers_create_or_update_request, build_network_managers_delete_request, build_network_managers_get_request, build_network_managers_list_by_subscription_request, build_network_managers_list_request, build_network_managers_patch_tags_request, build_network_security_perimeters_check_members_request, build_network_security_perimeters_create_or_update_request, build_network_security_perimeters_delete_request, build_network_security_perimeters_get_request, build_network_security_perimeters_list_by_subscription_request, build_network_security_perimeters_list_request, build_network_security_perimeters_query_request, build_nsp_access_rules_create_or_update_request, build_nsp_access_rules_delete_request, build_nsp_access_rules_get_request, build_nsp_access_rules_list_request, build_nsp_access_rules_reconcile_post_request, build_nsp_associations_create_or_update_request, build_nsp_associations_delete_request_initial, build_nsp_associations_get_request, build_nsp_associations_list_request, build_nsp_associations_proxy_create_or_update_request, build_nsp_associations_proxy_delete_request, build_nsp_associations_proxy_get_request, build_nsp_associations_proxy_list_request, build_nsp_profiles_create_or_update_request, build_nsp_profiles_delete_request, build_nsp_profiles_get_request, build_nsp_profiles_list_request, build_perimeter_associable_resource_types_list_request, build_security_admin_configurations_create_or_update_request, build_security_admin_configurations_delete_request, build_security_admin_configurations_get_request, build_security_admin_configurations_list_request, build_security_user_configurations_create_or_update_request, build_security_user_configurations_delete_request, build_security_user_configurations_get_request, build_security_user_configurations_list_request, build_user_rule_collections_create_or_update_request, build_user_rule_collections_delete_request, build_user_rule_collections_get_request, build_user_rule_collections_list_request, build_user_rules_create_or_update_request, build_user_rules_delete_request, build_user_rules_get_request, build_user_rules_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -4248,6 +4248,133 @@ class NetworkSecurityPerimetersOperations:
             get_next, extract_data
         )
     list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters"}  # type: ignore
+
+    @distributed_trace_async
+    async def check_members(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        network_security_perimeter_profile: str,
+        parameters: "_models.CheckMembers",
+        **kwargs: Any
+    ) -> "_models.CheckMembers":
+        """Action to check members associated to an NSP Profile.
+
+        :param resource_group_name: The name of the resource group.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter.
+        :type network_security_perimeter_name: str
+        :param network_security_perimeter_profile: The name of the network security perimeter profile.
+        :type network_security_perimeter_profile: str
+        :param parameters: Parameter supplied to create the network security perimeter check members.
+        :type parameters: ~azure.mgmt.network.v2021_02_01_preview.models.CheckMembers
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: CheckMembers, or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_02_01_preview.models.CheckMembers
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.CheckMembers"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        api_version = kwargs.pop('api_version', "2021-02-01-preview")  # type: str
+        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+
+        _json = self._serialize.body(parameters, 'CheckMembers')
+
+        request = build_network_security_perimeters_check_members_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            network_security_perimeter_name=network_security_perimeter_name,
+            network_security_perimeter_profile=network_security_perimeter_profile,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.check_members.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('CheckMembers', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    check_members.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{networkSecurityPerimeterProfile}/checkMembers"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def query(
+        self,
+        location: str,
+        parameters: "_models.QueryNSPReqRes",
+        **kwargs: Any
+    ) -> "_models.QueryNSPReqRes":
+        """Action to query network security parameter.
+
+        :param location: The location of network security perimeter.
+        :type location: str
+        :param parameters: Parameter supplied to query network security parameter.
+        :type parameters: ~azure.mgmt.network.v2021_02_01_preview.models.QueryNSPReqRes
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: QueryNSPReqRes, or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_02_01_preview.models.QueryNSPReqRes
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.QueryNSPReqRes"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+
+        _json = self._serialize.body(parameters, 'QueryNSPReqRes')
+
+        request = build_network_security_perimeters_query_request(
+            location=location,
+            content_type=content_type,
+            json=_json,
+            template_url=self.query.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('QueryNSPReqRes', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    query.metadata = {'url': "/providers/Microsoft.Network/locations/{location}/queryNetworkSecurityPerimeter"}  # type: ignore
+
 class NspProfilesOperations:
     """NspProfilesOperations async operations.
 
@@ -5158,7 +5285,7 @@ class NspAssociationsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.NspAssociationsListResult"]:
-        """Lists the NSP resource associations in the specified perimeter.
+        """Lists the NSP resource associations.
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
@@ -5245,6 +5372,309 @@ class NspAssociationsOperations:
             get_next, extract_data
         )
     list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations"}  # type: ignore
+class NspAssociationsProxyOperations:
+    """NspAssociationsProxyOperations async operations.
+
+    You should not instantiate this class directly. Instead, you should create a Client instance that
+    instantiates it for you and attaches it as an attribute.
+
+    :ivar models: Alias to model classes used in this operation group.
+    :type models: ~azure.mgmt.network.v2021_02_01_preview.models
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An object model deserializer.
+    """
+
+    models = _models
+
+    def __init__(self, client, config, serializer, deserializer) -> None:
+        self._client = client
+        self._serialize = serializer
+        self._deserialize = deserializer
+        self._config = config
+
+    @distributed_trace_async
+    async def get(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        association_name: str,
+        **kwargs: Any
+    ) -> "_models.NspAssociation":
+        """Gets the specified NSP association by name.
+
+        :param resource_group_name: The name of the resource group.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter.
+        :type network_security_perimeter_name: str
+        :param association_name: The name of the NSP association.
+        :type association_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: NspAssociation, or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_02_01_preview.models.NspAssociation
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.NspAssociation"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        
+        request = build_nsp_associations_proxy_get_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            network_security_perimeter_name=network_security_perimeter_name,
+            association_name=association_name,
+            template_url=self.get.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('NspAssociation', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies/{associationName}"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        association_name: str,
+        parameters: "_models.NspAssociation",
+        **kwargs: Any
+    ) -> "_models.NspAssociation":
+        """Creates or updates a NSP resource association.
+
+        :param resource_group_name: The name of the resource group.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter.
+        :type network_security_perimeter_name: str
+        :param association_name: The name of the NSP association.
+        :type association_name: str
+        :param parameters: Parameters that hold the NspAssociation resource to be created/updated.
+        :type parameters: ~azure.mgmt.network.v2021_02_01_preview.models.NspAssociation
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: NspAssociation, or the result of cls(response)
+        :rtype: ~azure.mgmt.network.v2021_02_01_preview.models.NspAssociation
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.NspAssociation"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+
+        _json = self._serialize.body(parameters, 'NspAssociation')
+
+        request = build_nsp_associations_proxy_create_or_update_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            network_security_perimeter_name=network_security_perimeter_name,
+            association_name=association_name,
+            content_type=content_type,
+            json=_json,
+            template_url=self.create_or_update.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('NspAssociation', pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('NspAssociation', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies/{associationName}"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def delete(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        association_name: str,
+        **kwargs: Any
+    ) -> None:
+        """Deletes an NSP association resource.
+
+        :param resource_group_name: The name of the resource group.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter.
+        :type network_security_perimeter_name: str
+        :param association_name: The name of the NSP association.
+        :type association_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        
+        request = build_nsp_associations_proxy_delete_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            network_security_perimeter_name=network_security_perimeter_name,
+            association_name=association_name,
+            template_url=self.delete.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies/{associationName}"}  # type: ignore
+
+
+    @distributed_trace
+    def list(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        top: Optional[int] = None,
+        skip_token: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.NspAssociationsListResult"]:
+        """Lists the NSP resource associations.
+
+        :param resource_group_name: The name of the resource group.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter.
+        :type network_security_perimeter_name: str
+        :param top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :type top: int
+        :param skip_token: SkipToken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skipToken parameter that specifies a starting point to use for subsequent calls. Default
+         value is None.
+        :type skip_token: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either NspAssociationsListResult or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.network.v2021_02_01_preview.models.NspAssociationsListResult]
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        api_version = kwargs.pop('api_version', "2021-02-01-preview")  # type: str
+
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.NspAssociationsListResult"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+        def prepare_request(next_link=None):
+            if not next_link:
+                
+                request = build_nsp_associations_proxy_list_request(
+                    subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    network_security_perimeter_name=network_security_perimeter_name,
+                    api_version=api_version,
+                    top=top,
+                    skip_token=skip_token,
+                    template_url=self.list.metadata['url'],
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+
+            else:
+                
+                request = build_nsp_associations_proxy_list_request(
+                    subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    network_security_perimeter_name=network_security_perimeter_name,
+                    api_version=api_version,
+                    top=top,
+                    skip_token=skip_token,
+                    template_url=next_link,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)
+                request.method = "GET"
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("NspAssociationsListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+
+        return AsyncItemPaged(
+            get_next, extract_data
+        )
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociationProxies"}  # type: ignore
 class PerimeterAssociableResourceTypesOperations:
     """PerimeterAssociableResourceTypesOperations async operations.
 
@@ -5276,7 +5706,7 @@ class PerimeterAssociableResourceTypesOperations:
         """Gets the list of resources that are onboarded with NSP. These resources can be associated with
         a network security perimeter.
 
-        :param location: The location of the where the association is present.
+        :param location: The location of network security perimeter.
         :type location: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PerimeterAssociableResourcesListResult or the
@@ -5345,3 +5775,97 @@ class PerimeterAssociableResourceTypesOperations:
             get_next, extract_data
         )
     list.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes"}  # type: ignore
+class NspAccessRulesReconcileOperations:
+    """NspAccessRulesReconcileOperations async operations.
+
+    You should not instantiate this class directly. Instead, you should create a Client instance that
+    instantiates it for you and attaches it as an attribute.
+
+    :ivar models: Alias to model classes used in this operation group.
+    :type models: ~azure.mgmt.network.v2021_02_01_preview.models
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An object model deserializer.
+    """
+
+    models = _models
+
+    def __init__(self, client, config, serializer, deserializer) -> None:
+        self._client = client
+        self._serialize = serializer
+        self._deserialize = deserializer
+        self._config = config
+
+    @distributed_trace_async
+    async def post(
+        self,
+        resource_group_name: str,
+        network_security_perimeter_name: str,
+        profile_name: str,
+        access_rule_name: str,
+        parameters: Any,
+        **kwargs: Any
+    ) -> Any:
+        """Reconcile NSP access rules.
+
+        :param resource_group_name: The name of the resource group.
+        :type resource_group_name: str
+        :param network_security_perimeter_name: The name of the network security perimeter.
+        :type network_security_perimeter_name: str
+        :param profile_name: The name of the NSP profile.
+        :type profile_name: str
+        :param access_rule_name: The name of the NSP access rule.
+        :type access_rule_name: str
+        :param parameters: Parameters for NSP access rule reconcile.
+        :type parameters: any
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: any, or the result of cls(response)
+        :rtype: any
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType[Any]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        api_version = kwargs.pop('api_version', "2021-02-01-preview")  # type: str
+        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+
+        _json = self._serialize.body(parameters, 'object')
+
+        request = build_nsp_access_rules_reconcile_post_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            network_security_perimeter_name=network_security_perimeter_name,
+            profile_name=profile_name,
+            access_rule_name=access_rule_name,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.post.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('object', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    post.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile"}  # type: ignore
+
