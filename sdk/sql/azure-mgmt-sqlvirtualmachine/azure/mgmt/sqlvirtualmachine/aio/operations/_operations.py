@@ -57,7 +57,7 @@ class Operations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.sqlvirtualmachine.models.OperationListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.OperationListResult"]
         error_map = {

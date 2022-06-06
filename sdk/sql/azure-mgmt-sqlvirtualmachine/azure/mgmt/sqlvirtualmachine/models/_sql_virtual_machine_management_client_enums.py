@@ -53,6 +53,13 @@ class ClusterManagerType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     WSFC = "WSFC"
 
+class ClusterSubnetType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Cluster subnet type.
+    """
+
+    SINGLE_SUBNET = "SingleSubnet"
+    MULTI_SUBNET = "MultiSubnet"
+
 class Commit(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Replica commit mode in availability group.
     """
@@ -67,15 +74,6 @@ class ConnectivityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     LOCAL = "LOCAL"
     PRIVATE = "PRIVATE"
     PUBLIC = "PUBLIC"
-
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of identity that created the resource.
-    """
-
-    USER = "User"
-    APPLICATION = "Application"
-    MANAGED_IDENTITY = "ManagedIdentity"
-    KEY = "Key"
 
 class DayOfWeek(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Day of week to apply the patch on.
@@ -113,7 +111,7 @@ class FullBackupFrequencyType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)
     DAILY = "Daily"
     WEEKLY = "Weekly"
 
-class IdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IdentityTypeWithNone(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an
     Azure Active Directory principal for the resource.
     """

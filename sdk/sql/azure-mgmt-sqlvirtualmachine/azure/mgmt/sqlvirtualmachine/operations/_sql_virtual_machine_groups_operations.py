@@ -35,7 +35,7 @@ def build_get_request(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -74,7 +74,7 @@ def build_create_or_update_request_initial(
     content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
     content_type = kwargs.pop('content_type', None)  # type: Optional[str]
 
     accept = "application/json"
@@ -115,7 +115,7 @@ def build_delete_request_initial(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/{sqlVirtualMachineGroupName}")  # pylint: disable=line-too-long
@@ -148,7 +148,7 @@ def build_update_request_initial(
     content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
     content_type = kwargs.pop('content_type', None)  # type: Optional[str]
 
     accept = "application/json"
@@ -188,7 +188,7 @@ def build_list_by_resource_group_request(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -221,7 +221,7 @@ def build_list_request(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -295,7 +295,7 @@ class SqlVirtualMachineGroupsOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         
         request = build_get_request(
@@ -342,7 +342,7 @@ class SqlVirtualMachineGroupsOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
         _json = self._serialize.body(parameters, 'SqlVirtualMachineGroup')
@@ -415,7 +415,7 @@ class SqlVirtualMachineGroupsOperations(object):
          ~azure.core.polling.LROPoller[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineGroup]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachineGroup"]
@@ -470,7 +470,7 @@ class SqlVirtualMachineGroupsOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         
         request = build_delete_request_initial(
@@ -526,7 +526,7 @@ class SqlVirtualMachineGroupsOperations(object):
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         lro_delay = kwargs.pop(
@@ -576,7 +576,7 @@ class SqlVirtualMachineGroupsOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
         _json = self._serialize.body(parameters, 'SqlVirtualMachineGroupUpdate')
@@ -645,7 +645,7 @@ class SqlVirtualMachineGroupsOperations(object):
          ~azure.core.polling.LROPoller[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineGroup]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachineGroup"]
@@ -706,7 +706,7 @@ class SqlVirtualMachineGroupsOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineGroupListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachineGroupListResult"]
         error_map = {
@@ -781,7 +781,7 @@ class SqlVirtualMachineGroupsOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineGroupListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachineGroupListResult"]
         error_map = {

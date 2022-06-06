@@ -16,6 +16,7 @@ from ._models_py3 import AvailabilityGroupListener
 from ._models_py3 import AvailabilityGroupListenerListResult
 from ._models_py3 import KeyVaultCredentialSettings
 from ._models_py3 import LoadBalancerConfiguration
+from ._models_py3 import MultiSubnetIpConfiguration
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
@@ -38,7 +39,6 @@ from ._models_py3 import SqlVirtualMachineListResult
 from ._models_py3 import SqlVirtualMachineUpdate
 from ._models_py3 import SqlWorkloadTypeUpdateSettings
 from ._models_py3 import StorageConfigurationSettings
-from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
 from ._models_py3 import WsfcDomainCredentials
 from ._models_py3 import WsfcDomainProfile
@@ -50,14 +50,14 @@ from ._sql_virtual_machine_management_client_enums import (
     BackupScheduleType,
     ClusterConfiguration,
     ClusterManagerType,
+    ClusterSubnetType,
     Commit,
     ConnectivityType,
-    CreatedByType,
     DayOfWeek,
     DiskConfigurationType,
     Failover,
     FullBackupFrequencyType,
-    IdentityType,
+    IdentityTypeWithNone,
     OperationOrigin,
     ReadableSecondary,
     Role,
@@ -81,6 +81,7 @@ __all__ = [
     'AvailabilityGroupListenerListResult',
     'KeyVaultCredentialSettings',
     'LoadBalancerConfiguration',
+    'MultiSubnetIpConfiguration',
     'Operation',
     'OperationDisplay',
     'OperationListResult',
@@ -103,7 +104,6 @@ __all__ = [
     'SqlVirtualMachineUpdate',
     'SqlWorkloadTypeUpdateSettings',
     'StorageConfigurationSettings',
-    'SystemData',
     'TrackedResource',
     'WsfcDomainCredentials',
     'WsfcDomainProfile',
@@ -112,14 +112,14 @@ __all__ = [
     'BackupScheduleType',
     'ClusterConfiguration',
     'ClusterManagerType',
+    'ClusterSubnetType',
     'Commit',
     'ConnectivityType',
-    'CreatedByType',
     'DayOfWeek',
     'DiskConfigurationType',
     'Failover',
     'FullBackupFrequencyType',
-    'IdentityType',
+    'IdentityTypeWithNone',
     'OperationOrigin',
     'ReadableSecondary',
     'Role',
