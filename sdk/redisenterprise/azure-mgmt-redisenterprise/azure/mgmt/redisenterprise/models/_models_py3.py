@@ -46,6 +46,38 @@ class AccessKeys(msrest.serialization.Model):
         self.secondary_key = None
 
 
+class Capability(msrest.serialization.Model):
+    """Information about what features the location supports.
+
+    :ivar name: Feature name.
+    :vartype name: str
+    :ivar value: Indicates whether feature is supported or not.
+    :vartype value: bool
+    """
+
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[str] = None,
+        value: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: Feature name.
+        :paramtype name: str
+        :keyword value: Indicates whether feature is supported or not.
+        :paramtype value: bool
+        """
+        super(Capability, self).__init__(**kwargs)
+        self.name = name
+        self.value = value
+
+
 class Resource(msrest.serialization.Model):
     """Common fields that are returned in the response for all Azure Resource Manager resources.
 
@@ -908,6 +940,38 @@ class LinkedDatabase(msrest.serialization.Model):
         self.state = None
 
 
+class LocationInfo(msrest.serialization.Model):
+    """Information about location (for example: features that it supports).
+
+    :ivar location: Location name.
+    :vartype location: str
+    :ivar capabilities: List of capabilities.
+    :vartype capabilities: list[~azure.mgmt.redisenterprise.models.Capability]
+    """
+
+    _attribute_map = {
+        'location': {'key': 'location', 'type': 'str'},
+        'capabilities': {'key': 'capabilities', 'type': '[Capability]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: Optional[str] = None,
+        capabilities: Optional[List["Capability"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword location: Location name.
+        :paramtype location: str
+        :keyword capabilities: List of capabilities.
+        :paramtype capabilities: list[~azure.mgmt.redisenterprise.models.Capability]
+        """
+        super(LocationInfo, self).__init__(**kwargs)
+        self.location = location
+        self.capabilities = capabilities
+
+
 class Module(msrest.serialization.Model):
     """Specifies configuration of a redis module.
 
@@ -1469,6 +1533,71 @@ class RegenerateKeyParameters(msrest.serialization.Model):
         self.key_type = key_type
 
 
+class RegionSkuDetail(msrest.serialization.Model):
+    """Details about the location requested and the available skus in the location.
+
+    :ivar resource_type: Resource type which has the SKU, such as Microsoft.Cache/redisEnterprise.
+    :vartype resource_type: str
+    :ivar location_info: Details about location and its capabilities.
+    :vartype location_info: ~azure.mgmt.redisenterprise.models.LocationInfo
+    :ivar sku_details: Details about available skus.
+    :vartype sku_details: ~azure.mgmt.redisenterprise.models.SkuDetail
+    """
+
+    _attribute_map = {
+        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        'location_info': {'key': 'locationInfo', 'type': 'LocationInfo'},
+        'sku_details': {'key': 'skuDetails', 'type': 'SkuDetail'},
+    }
+
+    def __init__(
+        self,
+        *,
+        resource_type: Optional[str] = None,
+        location_info: Optional["LocationInfo"] = None,
+        sku_details: Optional["SkuDetail"] = None,
+        **kwargs
+    ):
+        """
+        :keyword resource_type: Resource type which has the SKU, such as
+         Microsoft.Cache/redisEnterprise.
+        :paramtype resource_type: str
+        :keyword location_info: Details about location and its capabilities.
+        :paramtype location_info: ~azure.mgmt.redisenterprise.models.LocationInfo
+        :keyword sku_details: Details about available skus.
+        :paramtype sku_details: ~azure.mgmt.redisenterprise.models.SkuDetail
+        """
+        super(RegionSkuDetail, self).__init__(**kwargs)
+        self.resource_type = resource_type
+        self.location_info = location_info
+        self.sku_details = sku_details
+
+
+class RegionSkuDetails(msrest.serialization.Model):
+    """List of Region SKU Detail.
+
+    :ivar value: List of SkuDetails.
+    :vartype value: list[~azure.mgmt.redisenterprise.models.RegionSkuDetail]
+    """
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[RegionSkuDetail]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["RegionSkuDetail"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: List of SkuDetails.
+        :paramtype value: list[~azure.mgmt.redisenterprise.models.RegionSkuDetail]
+        """
+        super(RegionSkuDetails, self).__init__(**kwargs)
+        self.value = value
+
+
 class Sku(msrest.serialization.Model):
     """SKU parameters supplied to the create RedisEnterprise operation.
 
@@ -1513,3 +1642,48 @@ class Sku(msrest.serialization.Model):
         super(Sku, self).__init__(**kwargs)
         self.name = name
         self.capacity = capacity
+
+
+class SkuDetail(msrest.serialization.Model):
+    """Information about Sku.
+
+    :ivar name: The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10,
+     EnterpriseFlash_F300 etc.). Possible values include: "Enterprise_E10", "Enterprise_E20",
+     "Enterprise_E50", "Enterprise_E100", "EnterpriseFlash_F300", "EnterpriseFlash_F700",
+     "EnterpriseFlash_F1500".
+    :vartype name: str or ~azure.mgmt.redisenterprise.models.Name
+    :ivar default_max_memory: The memory limit.
+    :vartype default_max_memory: float
+    :ivar default_max_flash: The memory limit in flash tier caches.
+    :vartype default_max_flash: float
+    """
+
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'str'},
+        'default_max_memory': {'key': 'defaultMaxMemory', 'type': 'float'},
+        'default_max_flash': {'key': 'defaultMaxFlash', 'type': 'float'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[Union[str, "Name"]] = None,
+        default_max_memory: Optional[float] = None,
+        default_max_flash: Optional[float] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10,
+         EnterpriseFlash_F300 etc.). Possible values include: "Enterprise_E10", "Enterprise_E20",
+         "Enterprise_E50", "Enterprise_E100", "EnterpriseFlash_F300", "EnterpriseFlash_F700",
+         "EnterpriseFlash_F1500".
+        :paramtype name: str or ~azure.mgmt.redisenterprise.models.Name
+        :keyword default_max_memory: The memory limit.
+        :paramtype default_max_memory: float
+        :keyword default_max_flash: The memory limit in flash tier caches.
+        :paramtype default_max_flash: float
+        """
+        super(SkuDetail, self).__init__(**kwargs)
+        self.name = name
+        self.default_max_memory = default_max_memory
+        self.default_max_flash = default_max_flash

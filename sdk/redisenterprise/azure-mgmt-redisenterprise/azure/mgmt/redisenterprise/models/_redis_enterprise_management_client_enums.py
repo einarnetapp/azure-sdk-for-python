@@ -61,6 +61,19 @@ class LinkState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     LINK_FAILED = "LinkFailed"
     UNLINK_FAILED = "UnlinkFailed"
 
+class Name(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10,
+    EnterpriseFlash_F300 etc.)
+    """
+
+    ENTERPRISE_E10 = "Enterprise_E10"
+    ENTERPRISE_E20 = "Enterprise_E20"
+    ENTERPRISE_E50 = "Enterprise_E50"
+    ENTERPRISE_E100 = "Enterprise_E100"
+    ENTERPRISE_FLASH_F300 = "EnterpriseFlash_F300"
+    ENTERPRISE_FLASH_F700 = "EnterpriseFlash_F700"
+    ENTERPRISE_FLASH_F1500 = "EnterpriseFlash_F1500"
+
 class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit
     logs UX. Default value is "user,system"

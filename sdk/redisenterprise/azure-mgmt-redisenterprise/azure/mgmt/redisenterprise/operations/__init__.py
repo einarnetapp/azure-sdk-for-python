@@ -12,6 +12,7 @@ from ._redis_enterprise_operations import RedisEnterpriseOperations
 from ._databases_operations import DatabasesOperations
 from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations
 from ._private_link_resources_operations import PrivateLinkResourcesOperations
+from ._skus_operations import SkusOperations
 
 __all__ = [
     'Operations',
@@ -20,4 +21,5 @@ __all__ = [
     'DatabasesOperations',
     'PrivateEndpointConnectionsOperations',
     'PrivateLinkResourcesOperations',
+    'SkusOperations',
 ]
