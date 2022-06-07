@@ -538,6 +538,7 @@ class RestServiceAuthenticationType(with_metaclass(CaseInsensitiveEnumMeta, str,
     BASIC = "Basic"
     AAD_SERVICE_PRINCIPAL = "AadServicePrincipal"
     MANAGED_SERVICE_IDENTITY = "ManagedServiceIdentity"
+    O_AUTH2_CLIENT_CREDENTIAL = "OAuth2ClientCredential"
 
 class RunQueryFilterOperand(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Parameter name to be used for filter. The allowed operands to query pipeline runs are
