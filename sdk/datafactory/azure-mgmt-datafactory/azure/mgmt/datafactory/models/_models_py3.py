@@ -23676,7 +23676,7 @@ class FactoryGitHubConfiguration(FactoryRepoConfiguration):
     :vartype root_folder: str
     :ivar last_commit_id: Last commit id.
     :vartype last_commit_id: str
-    :ivar host_name: GitHub Enterprise host name. For example: https://github.mydomain.com.
+    :ivar host_name: GitHub Enterprise host name. For example: ``https://github.mydomain.com``.
     :vartype host_name: str
     :ivar client_id: GitHub bring your own app client id.
     :vartype client_id: str
@@ -23728,7 +23728,7 @@ class FactoryGitHubConfiguration(FactoryRepoConfiguration):
         :paramtype root_folder: str
         :keyword last_commit_id: Last commit id.
         :paramtype last_commit_id: str
-        :keyword host_name: GitHub Enterprise host name. For example: https://github.mydomain.com.
+        :keyword host_name: GitHub Enterprise host name. For example: ``https://github.mydomain.com``.
         :paramtype host_name: str
         :keyword client_id: GitHub bring your own app client id.
         :paramtype client_id: str
@@ -44927,7 +44927,7 @@ class RestServiceLinkedService(LinkedService):
     :vartype enable_server_certificate_validation: any
     :ivar authentication_type: Required. Type of authentication used to connect to the REST
      service. Possible values include: "Anonymous", "Basic", "AadServicePrincipal",
-     "ManagedServiceIdentity".
+     "ManagedServiceIdentity", "OAuth2ClientCredential".
     :vartype authentication_type: str or
      ~azure.mgmt.datafactory.models.RestServiceAuthenticationType
     :ivar user_name: The user name used in Basic authentication type.
@@ -44958,6 +44958,20 @@ class RestServiceLinkedService(LinkedService):
     :vartype encrypted_credential: any
     :ivar credential: The credential reference containing authentication information.
     :vartype credential: ~azure.mgmt.datafactory.models.CredentialReference
+    :ivar client_id: The client ID associated with your application. Type: string (or Expression
+     with resultType string).
+    :vartype client_id: any
+    :ivar client_secret: The client secret associated with your application.
+    :vartype client_secret: ~azure.mgmt.datafactory.models.SecretBase
+    :ivar token_endpoint: The token endpoint of the authorization server to acquire access token.
+     Type: string (or Expression with resultType string).
+    :vartype token_endpoint: any
+    :ivar resource: The target service or resource to which the access will be requested. Type:
+     string (or Expression with resultType string).
+    :vartype resource: any
+    :ivar scope: The scope of the access required. It describes what kind of access will be
+     requested. Type: string (or Expression with resultType string).
+    :vartype scope: any
     """
 
     _validation = {
@@ -44986,6 +45000,11 @@ class RestServiceLinkedService(LinkedService):
         'aad_resource_id': {'key': 'typeProperties.aadResourceId', 'type': 'object'},
         'encrypted_credential': {'key': 'typeProperties.encryptedCredential', 'type': 'object'},
         'credential': {'key': 'typeProperties.credential', 'type': 'CredentialReference'},
+        'client_id': {'key': 'typeProperties.clientId', 'type': 'object'},
+        'client_secret': {'key': 'typeProperties.clientSecret', 'type': 'SecretBase'},
+        'token_endpoint': {'key': 'typeProperties.tokenEndpoint', 'type': 'object'},
+        'resource': {'key': 'typeProperties.resource', 'type': 'object'},
+        'scope': {'key': 'typeProperties.scope', 'type': 'object'},
     }
 
     def __init__(
@@ -45009,6 +45028,11 @@ class RestServiceLinkedService(LinkedService):
         aad_resource_id: Optional[Any] = None,
         encrypted_credential: Optional[Any] = None,
         credential: Optional["CredentialReference"] = None,
+        client_id: Optional[Any] = None,
+        client_secret: Optional["SecretBase"] = None,
+        token_endpoint: Optional[Any] = None,
+        resource: Optional[Any] = None,
+        scope: Optional[Any] = None,
         **kwargs
     ):
         """
@@ -45031,7 +45055,7 @@ class RestServiceLinkedService(LinkedService):
         :paramtype enable_server_certificate_validation: any
         :keyword authentication_type: Required. Type of authentication used to connect to the REST
          service. Possible values include: "Anonymous", "Basic", "AadServicePrincipal",
-         "ManagedServiceIdentity".
+         "ManagedServiceIdentity", "OAuth2ClientCredential".
         :paramtype authentication_type: str or
          ~azure.mgmt.datafactory.models.RestServiceAuthenticationType
         :keyword user_name: The user name used in Basic authentication type.
@@ -45062,6 +45086,20 @@ class RestServiceLinkedService(LinkedService):
         :paramtype encrypted_credential: any
         :keyword credential: The credential reference containing authentication information.
         :paramtype credential: ~azure.mgmt.datafactory.models.CredentialReference
+        :keyword client_id: The client ID associated with your application. Type: string (or Expression
+         with resultType string).
+        :paramtype client_id: any
+        :keyword client_secret: The client secret associated with your application.
+        :paramtype client_secret: ~azure.mgmt.datafactory.models.SecretBase
+        :keyword token_endpoint: The token endpoint of the authorization server to acquire access
+         token. Type: string (or Expression with resultType string).
+        :paramtype token_endpoint: any
+        :keyword resource: The target service or resource to which the access will be requested. Type:
+         string (or Expression with resultType string).
+        :paramtype resource: any
+        :keyword scope: The scope of the access required. It describes what kind of access will be
+         requested. Type: string (or Expression with resultType string).
+        :paramtype scope: any
         """
         super(RestServiceLinkedService, self).__init__(additional_properties=additional_properties, connect_via=connect_via, description=description, parameters=parameters, annotations=annotations, **kwargs)
         self.type = 'RestService'  # type: str
@@ -45078,6 +45116,11 @@ class RestServiceLinkedService(LinkedService):
         self.aad_resource_id = aad_resource_id
         self.encrypted_credential = encrypted_credential
         self.credential = credential
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.token_endpoint = token_endpoint
+        self.resource = resource
+        self.scope = scope
 
 
 class RestSink(CopySink):
