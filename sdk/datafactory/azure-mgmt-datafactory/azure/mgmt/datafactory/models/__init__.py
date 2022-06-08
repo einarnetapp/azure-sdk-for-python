@@ -569,6 +569,9 @@ from ._models_py3 import SapHanaLinkedService
 from ._models_py3 import SapHanaPartitionSettings
 from ._models_py3 import SapHanaSource
 from ._models_py3 import SapHanaTableDataset
+from ._models_py3 import SapODPLinkedService
+from ._models_py3 import SapODPResourceDataset
+from ._models_py3 import SapODPSource
 from ._models_py3 import SapOpenHubLinkedService
 from ._models_py3 import SapOpenHubSource
 from ._models_py3 import SapOpenHubTableDataset
@@ -1387,6 +1390,9 @@ __all__ = [
     'SapHanaPartitionSettings',
     'SapHanaSource',
     'SapHanaTableDataset',
+    'SapODPLinkedService',
+    'SapODPResourceDataset',
+    'SapODPSource',
     'SapOpenHubLinkedService',
     'SapOpenHubSource',
     'SapOpenHubTableDataset',
