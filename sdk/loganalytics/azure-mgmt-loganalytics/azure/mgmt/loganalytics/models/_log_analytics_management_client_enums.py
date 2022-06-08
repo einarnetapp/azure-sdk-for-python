@@ -160,6 +160,7 @@ class DataSourceType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     CUSTOM_LOGS = "CustomLogs"
     AZURE_WATSON = "AzureWatson"
     QUERY = "Query"
+    INGESTION = "Ingestion"
     ALERTS = "Alerts"
 
 class IdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
