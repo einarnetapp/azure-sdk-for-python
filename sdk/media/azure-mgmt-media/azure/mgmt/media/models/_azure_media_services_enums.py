@@ -103,6 +103,30 @@ class AudioAnalysisMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: not included in this mode.
     BASIC = "Basic"
 
+class AV1Complexity(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """Tells the encoder how to choose its encoding settings.  Quality will provide for a higher
+    compression ratio but at a higher cost and longer compute time.  Speed will produce a
+    relatively larger file but is faster and more economical. The default value is Balanced.
+    """
+
+    #: Tells the encoder to use settings that are optimized for faster encoding. Quality is sacrificed
+    #: to decrease encoding time.
+    SPEED = "Speed"
+    #: Tells the encoder to use settings that achieve a balance between speed and quality.
+    BALANCED = "Balanced"
+    #: Tells the encoder to use settings that are optimized to produce higher quality output at the
+    #: expense of slower overall encode time.
+    QUALITY = "Quality"
+
+class AV1VideoProfile(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """We currently support Main. Default is Auto.
+    """
+
+    #: Tells the encoder to automatically determine the appropriate AV1 profile.
+    AUTO = "Auto"
+    #: Main profile.
+    MAIN = "Main"
+
 class BlurType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Blur type
     """
@@ -276,8 +300,10 @@ class EncoderNamedPreset(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: will never exceed the input resolution. For example, if the input is 720p, output will remain
     #: 720p at best.
     ADAPTIVE_STREAMING = "AdaptiveStreaming"
-    #: Produces a single MP4 file containing only stereo audio encoded at 192 kbps.
+    #: Produces a single MP4 file containing only AAC stereo audio encoded at 192 kbps.
     AAC_GOOD_QUALITY_AUDIO = "AACGoodQualityAudio"
+    #: Produces a single MP4 file containing only DD(Digital Dolby) stereo audio encoded at 192 kbps.
+    DD_GOOD_QUALITY_AUDIO = "DDGoodQualityAudio"
     #: Exposes an experimental preset for content-aware encoding. Given any input content, the service
     #: attempts to automatically determine the optimal number of layers, appropriate bitrate and
     #: resolution settings for delivery by adaptive streaming. The underlying algorithms will continue
@@ -326,6 +352,28 @@ class EncoderNamedPreset(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Produces an MP4 file where the video is encoded with H.265 codec at 9500 kbps and a picture
     #: height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.
     H265_SINGLE_BITRATE4_K = "H265SingleBitrate4K"
+    #: Produces a set of GOP-aligned MP4s by using content-aware encoding. Given any input content,
+    #: the service performs an initial lightweight analysis of the input content, and uses the results
+    #: to determine the optimal number of layers, appropriate bitrate and resolution settings for
+    #: delivery by adaptive streaming. This preset is particularly effective for low and medium
+    #: complexity videos, where the output files will be at lower bitrates but at a quality that still
+    #: delivers a good experience to viewers. The output will contain MP4 files with video and audio
+    #: interleaved.
+    AV1_CONTENT_AWARE_ENCODING = "AV1ContentAwareEncoding"
+    #: Produces a set of GOP aligned MP4 files with AV1 video and stereo AAC audio. Auto-generates a
+    #: bitrate ladder based on the input resolution, bitrate and frame rate. The auto-generated preset
+    #: will never exceed the input resolution. For example, if the input is 720p, output will remain
+    #: 720p at best.
+    AV1_ADAPTIVE_STREAMING = "AV1AdaptiveStreaming"
+    #: Produces an MP4 file where the video is encoded with AV1 codec at 1800 kbps and a picture
+    #: height of 720 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.
+    AV1_SINGLE_BITRATE720_P = "AV1SingleBitrate720p"
+    #: Produces an MP4 file where the video is encoded with AV1 codec at 3500 kbps and a picture
+    #: height of 1080 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.
+    AV1_SINGLE_BITRATE1080_P = "AV1SingleBitrate1080p"
+    #: Produces an MP4 file where the video is encoded with AV1 codec at 9500 kbps and a picture
+    #: height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps.
+    AV1_SINGLE_BITRATE4_K = "AV1SingleBitrate4K"
 
 class EncryptionScheme(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Encryption scheme
@@ -505,6 +553,8 @@ class JobErrorCategory(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     CONFIGURATION = "Configuration"
     #: The error is related to data in the input files.
     CONTENT = "Content"
+    #: The error is related to account information.
+    ACCOUNT = "Account"
 
 class JobErrorCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Error code describing the error.
@@ -536,6 +586,9 @@ class JobErrorCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: There was a problem with the format of the input (not valid media file, or an unsupported
     #: file/codec), check the validity of the input files.
     CONTENT_UNSUPPORTED = "ContentUnsupported"
+    #: There was an error verifying to the account identity. Check and fix the identity configurations
+    #: and retry. If unsuccessful, please contact support.
+    IDENTITY_UNSUPPORTED = "IdentityUnsupported"
 
 class JobRetry(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact
@@ -825,12 +878,12 @@ class StreamOptionsFlag(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     LOW_LATENCY_V2 = "LowLatencyV2"
 
 class StretchMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The resizing mode - how the input video will be resized to fit the desired output
-    resolution(s). Default is AutoSize
+    """Specifies how the input video will be resized to fit the desired output resolution(s). Default
+    is None
     """
 
-    #: Strictly respect the output resolution without considering the pixel aspect ratio or display
-    #: aspect ratio of the input video.
+    #: Strictly respects the output resolution specified in the encoding preset without considering
+    #: the pixel aspect ratio or display aspect ratio of the input video.
     NONE = "None"
     #: Override the output resolution, and change it to match the display aspect ratio of the input,
     #: without padding. For example, if the input is 1920x1080 and the encoding preset asks for
