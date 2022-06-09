@@ -12,7 +12,7 @@ from azure.core import CaseInsensitiveEnumMeta
 
 
 class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of the automation rule action
+    """The type of the automation rule action.
     """
 
     #: Modify an object's properties.
@@ -103,6 +103,38 @@ class AttackTactic(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     IMPAIR_PROCESS_CONTROL = "ImpairProcessControl"
     INHIBIT_RESPONSE_FUNCTION = "InhibitResponseFunction"
 
+class AutomationRulePropertyArrayChangedConditionSupportedArrayType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on the alerts.
+    ALERTS = "Alerts"
+    #: Evaluate the condition on the labels.
+    LABELS = "Labels"
+    #: Evaluate the condition on the tactics.
+    TACTICS = "Tactics"
+    #: Evaluate the condition on the comments.
+    COMMENTS = "Comments"
+
+class AutomationRulePropertyArrayChangedConditionSupportedChangeType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on items added to the array.
+    ADDED = "Added"
+
+class AutomationRulePropertyChangedConditionSupportedChangedType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on the previous value of the property.
+    CHANGED_FROM = "ChangedFrom"
+    #: Evaluate the condition on the updated value of the property.
+    CHANGED_TO = "ChangedTo"
+
+class AutomationRulePropertyChangedConditionSupportedPropertyType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+    #: Evaluate the condition on the incident severity.
+    INCIDENT_SEVERITY = "IncidentSeverity"
+    #: Evaluate the condition on the incident status.
+    INCIDENT_STATUS = "IncidentStatus"
+    #: Evaluate the condition on the incident owner.
+    INCIDENT_OWNER = "IncidentOwner"
+
 class AutomationRulePropertyConditionSupportedOperator(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     #: Evaluates if the property equals at least one of the condition values.
@@ -123,7 +155,7 @@ class AutomationRulePropertyConditionSupportedOperator(with_metaclass(CaseInsens
     NOT_ENDS_WITH = "NotEndsWith"
 
 class AutomationRulePropertyConditionSupportedProperty(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The property to evaluate in an automation rule property condition
+    """The property to evaluate in an automation rule property condition.
     """
 
     #: The title of the incident.
@@ -160,6 +192,8 @@ class AutomationRulePropertyConditionSupportedProperty(with_metaclass(CaseInsens
     ACCOUNT_UPN_SUFFIX = "AccountUPNSuffix"
     #: The name of the product of the alert.
     ALERT_PRODUCT_NAMES = "AlertProductNames"
+    #: The analytic rule ids of the alert.
+    ALERT_ANALYTIC_RULE_IDS = "AlertAnalyticRuleIds"
     #: The Azure resource id.
     AZURE_RESOURCE_RESOURCE_ID = "AzureResourceResourceId"
     #: The Azure resource subscription id.
@@ -239,6 +273,10 @@ class ConditionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     #: Evaluate an object property value.
     PROPERTY = "Property"
+    #: Evaluate an object property changed value.
+    PROPERTY_CHANGED = "PropertyChanged"
+    #: Evaluate an object array property changed value.
+    PROPERTY_ARRAY_CHANGED = "PropertyArrayChanged"
 
 class ConfidenceLevel(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The confidence level of this alert.
@@ -516,6 +554,13 @@ class EntityMappingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Submission mail entity type.
     SUBMISSION_MAIL = "SubmissionMail"
 
+class EntityProviders(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The entity provider that is synced.
+    """
+
+    ACTIVE_DIRECTORY = "ActiveDirectory"
+    AZURE_ACTIVE_DIRECTORY = "AzureActiveDirectory"
+
 class EntityQueryKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the entity query
     """
@@ -540,6 +585,8 @@ class EntityTimelineKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     BOOKMARK = "Bookmark"
     #: security alerts.
     SECURITY_ALERT = "SecurityAlert"
+    #: anomaly.
+    ANOMALY = "Anomaly"
 
 class EntityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of the entity
@@ -588,7 +635,7 @@ class EntityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Entity represents submission mail in the system.
     SUBMISSION_MAIL = "SubmissionMail"
 
-class Enum12(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Enum13(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     EXPANSION = "Expansion"
     ACTIVITY = "Activity"
@@ -614,6 +661,12 @@ class FileHashAlgorithm(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SHA256 = "SHA256"
     #: SHA256 Authenticode hash type.
     SHA256_AC = "SHA256AC"
+
+class GetInsightsError(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """the query kind
+    """
+
+    INSIGHT = "Insight"
 
 class IncidentClassification(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The reason the incident was closed
@@ -920,6 +973,12 @@ class RepoType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     GITHUB = "Github"
     DEV_OPS = "DevOps"
 
+class SecurityMLAnalyticsSettingsKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The kind of security ML analytics settings
+    """
+
+    ANOMALY = "Anomaly"
+
 class SettingKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the setting
     """
@@ -929,6 +988,15 @@ class SettingKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ENTITY_ANALYTICS = "EntityAnalytics"
     UEBA = "Ueba"
 
+class SettingsStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The anomaly SecurityMLAnalyticsSettings status
+    """
+
+    #: Anomaly settings status in Production mode.
+    PRODUCTION = "Production"
+    #: Anomaly settings status in Flighting mode.
+    FLIGHTING = "Flighting"
+
 class SettingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The kind of the setting
     """
@@ -936,13 +1004,6 @@ class SettingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     COPYABLE_LABEL = "CopyableLabel"
     INSTRUCTION_STEPS_GROUP = "InstructionStepsGroup"
     INFO_MESSAGE = "InfoMessage"
-
-class SkuKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The kind of the tier
-    """
-
-    PER_GB = "PerGB"
-    CAPACITY_RESERVATION = "CapacityReservation"
 
 class SourceKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Source type of the content
@@ -1007,11 +1068,15 @@ class TriggersOn(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     #: Trigger on Incidents.
     INCIDENTS = "Incidents"
+    #: Trigger on Alerts.
+    ALERTS = "Alerts"
 
 class TriggersWhen(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     #: Trigger on created objects.
     CREATED = "Created"
+    #: Trigger on updated objects.
+    UPDATED = "Updated"
 
 class UebaDataSources(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The data source that enriched by ueba.
