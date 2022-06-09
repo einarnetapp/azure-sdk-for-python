@@ -24,6 +24,8 @@ from ._models_py3 import FirewallRuleListResult
 from ._models_py3 import GetPrivateDnsZoneSuffixResponse
 from ._models_py3 import HighAvailability
 from ._models_py3 import Identity
+from ._models_py3 import LogFile
+from ._models_py3 import LogFileListResult
 from ._models_py3 import MaintenanceWindow
 from ._models_py3 import NameAvailability
 from ._models_py3 import NameAvailabilityRequest
@@ -88,6 +90,8 @@ __all__ = [
     'GetPrivateDnsZoneSuffixResponse',
     'HighAvailability',
     'Identity',
+    'LogFile',
+    'LogFileListResult',
     'MaintenanceWindow',
     'NameAvailability',
     'NameAvailabilityRequest',

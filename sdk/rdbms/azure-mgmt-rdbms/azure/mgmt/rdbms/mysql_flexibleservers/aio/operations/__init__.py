@@ -6,12 +6,13 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._backups_operations import BackupsOperations
+from ._configurations_operations import ConfigurationsOperations
+from ._databases_operations import DatabasesOperations
+from ._firewall_rules_operations import FirewallRulesOperations
 from ._servers_operations import ServersOperations
 from ._replicas_operations import ReplicasOperations
-from ._backups_operations import BackupsOperations
-from ._firewall_rules_operations import FirewallRulesOperations
-from ._databases_operations import DatabasesOperations
-from ._configurations_operations import ConfigurationsOperations
+from ._log_files_operations import LogFilesOperations
 from ._location_based_capabilities_operations import LocationBasedCapabilitiesOperations
 from ._check_virtual_network_subnet_usage_operations import CheckVirtualNetworkSubnetUsageOperations
 from ._check_name_availability_operations import CheckNameAvailabilityOperations
@@ -19,12 +20,13 @@ from ._get_private_dns_zone_suffix_operations import GetPrivateDnsZoneSuffixOper
 from ._operations import Operations
 
 __all__ = [
+    'BackupsOperations',
+    'ConfigurationsOperations',
+    'DatabasesOperations',
+    'FirewallRulesOperations',
     'ServersOperations',
     'ReplicasOperations',
-    'BackupsOperations',
-    'FirewallRulesOperations',
-    'DatabasesOperations',
-    'ConfigurationsOperations',
+    'LogFilesOperations',
     'LocationBasedCapabilitiesOperations',
     'CheckVirtualNetworkSubnetUsageOperations',
     'CheckNameAvailabilityOperations',

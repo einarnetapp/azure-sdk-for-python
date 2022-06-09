@@ -353,25 +353,32 @@ class ConfigurationListForBatchUpdate(msrest.serialization.Model):
     :ivar value: The list of server configurations.
     :vartype value:
      list[~azure.mgmt.rdbms.mysql_flexibleservers.models.ConfigurationForBatchUpdate]
+    :ivar reset_all_to_default: Whether to reset all server parameters to default.
+    :vartype reset_all_to_default: bool
     """
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[ConfigurationForBatchUpdate]'},
+        'reset_all_to_default': {'key': 'resetAllToDefault', 'type': 'bool'},
     }
 
     def __init__(
         self,
         *,
         value: Optional[List["ConfigurationForBatchUpdate"]] = None,
+        reset_all_to_default: Optional[bool] = None,
         **kwargs
     ):
         """
         :keyword value: The list of server configurations.
         :paramtype value:
          list[~azure.mgmt.rdbms.mysql_flexibleservers.models.ConfigurationForBatchUpdate]
+        :keyword reset_all_to_default: Whether to reset all server parameters to default.
+        :paramtype reset_all_to_default: bool
         """
         super(ConfigurationListForBatchUpdate, self).__init__(**kwargs)
         self.value = value
+        self.reset_all_to_default = reset_all_to_default
 
 
 class ConfigurationListResult(msrest.serialization.Model):
@@ -878,6 +885,115 @@ class Identity(msrest.serialization.Model):
         self.tenant_id = None
         self.type = type
         self.user_assigned_identities = user_assigned_identities
+
+
+class LogFile(ProxyResource):
+    """Represents a logFile.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: The system metadata relating to this resource.
+    :vartype system_data: ~azure.mgmt.rdbms.mysql_flexibleservers.models.SystemData
+    :ivar size_in_kb: The size in kb of the logFile.
+    :vartype size_in_kb: long
+    :ivar created_time: Creation timestamp of the log file.
+    :vartype created_time: ~datetime.datetime
+    :ivar type_properties_type: Type of the log file.
+    :vartype type_properties_type: str
+    :ivar last_modified_time: Last modified timestamp of the log file.
+    :vartype last_modified_time: ~datetime.datetime
+    :ivar url: The url to download the log file from.
+    :vartype url: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'size_in_kb': {'key': 'properties.sizeInKB', 'type': 'long'},
+        'created_time': {'key': 'properties.createdTime', 'type': 'iso-8601'},
+        'type_properties_type': {'key': 'properties.type', 'type': 'str'},
+        'last_modified_time': {'key': 'properties.lastModifiedTime', 'type': 'iso-8601'},
+        'url': {'key': 'properties.url', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        size_in_kb: Optional[int] = None,
+        created_time: Optional[datetime.datetime] = None,
+        type_properties_type: Optional[str] = None,
+        last_modified_time: Optional[datetime.datetime] = None,
+        url: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword size_in_kb: The size in kb of the logFile.
+        :paramtype size_in_kb: long
+        :keyword created_time: Creation timestamp of the log file.
+        :paramtype created_time: ~datetime.datetime
+        :keyword type_properties_type: Type of the log file.
+        :paramtype type_properties_type: str
+        :keyword last_modified_time: Last modified timestamp of the log file.
+        :paramtype last_modified_time: ~datetime.datetime
+        :keyword url: The url to download the log file from.
+        :paramtype url: str
+        """
+        super(LogFile, self).__init__(**kwargs)
+        self.system_data = None
+        self.size_in_kb = size_in_kb
+        self.created_time = created_time
+        self.type_properties_type = type_properties_type
+        self.last_modified_time = last_modified_time
+        self.url = url
+
+
+class LogFileListResult(msrest.serialization.Model):
+    """A List of logFiles.
+
+    :ivar value: The list of logFiles in a server.
+    :vartype value: list[~azure.mgmt.rdbms.mysql_flexibleservers.models.LogFile]
+    :ivar next_link: The link used to get the next page of operations.
+    :vartype next_link: str
+    """
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[LogFile]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["LogFile"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: The list of logFiles in a server.
+        :paramtype value: list[~azure.mgmt.rdbms.mysql_flexibleservers.models.LogFile]
+        :keyword next_link: The link used to get the next page of operations.
+        :paramtype next_link: str
+        """
+        super(LogFileListResult, self).__init__(**kwargs)
+        self.value = value
+        self.next_link = next_link
 
 
 class MaintenanceWindow(msrest.serialization.Model):
@@ -1570,6 +1686,8 @@ class ServerForUpdate(msrest.serialization.Model):
     :vartype tags: dict[str, str]
     :ivar administrator_login_password: The password of the administrator login.
     :vartype administrator_login_password: str
+    :ivar version: Server version. Possible values include: "5.7", "8.0.21".
+    :vartype version: str or ~azure.mgmt.rdbms.mysql_flexibleservers.models.ServerVersion
     :ivar storage: Storage related properties of a server.
     :vartype storage: ~azure.mgmt.rdbms.mysql_flexibleservers.models.Storage
     :ivar backup: Backup related properties of a server.
@@ -1591,6 +1709,7 @@ class ServerForUpdate(msrest.serialization.Model):
         'sku': {'key': 'sku', 'type': 'Sku'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'administrator_login_password': {'key': 'properties.administratorLoginPassword', 'type': 'str'},
+        'version': {'key': 'properties.version', 'type': 'str'},
         'storage': {'key': 'properties.storage', 'type': 'Storage'},
         'backup': {'key': 'properties.backup', 'type': 'Backup'},
         'high_availability': {'key': 'properties.highAvailability', 'type': 'HighAvailability'},
@@ -1606,6 +1725,7 @@ class ServerForUpdate(msrest.serialization.Model):
         sku: Optional["Sku"] = None,
         tags: Optional[Dict[str, str]] = None,
         administrator_login_password: Optional[str] = None,
+        version: Optional[Union[str, "ServerVersion"]] = None,
         storage: Optional["Storage"] = None,
         backup: Optional["Backup"] = None,
         high_availability: Optional["HighAvailability"] = None,
@@ -1623,6 +1743,8 @@ class ServerForUpdate(msrest.serialization.Model):
         :paramtype tags: dict[str, str]
         :keyword administrator_login_password: The password of the administrator login.
         :paramtype administrator_login_password: str
+        :keyword version: Server version. Possible values include: "5.7", "8.0.21".
+        :paramtype version: str or ~azure.mgmt.rdbms.mysql_flexibleservers.models.ServerVersion
         :keyword storage: Storage related properties of a server.
         :paramtype storage: ~azure.mgmt.rdbms.mysql_flexibleservers.models.Storage
         :keyword backup: Backup related properties of a server.
@@ -1643,6 +1765,7 @@ class ServerForUpdate(msrest.serialization.Model):
         self.sku = sku
         self.tags = tags
         self.administrator_login_password = administrator_login_password
+        self.version = version
         self.storage = storage
         self.backup = backup
         self.high_availability = high_availability

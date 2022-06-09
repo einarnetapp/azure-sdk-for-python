@@ -26,55 +26,17 @@ ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dic
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_get_request(
-    subscription_id: str,
-    resource_group_name: str,
-    server_name: str,
-    advisor_name: str,
-    **kwargs: Any
-) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-06-01")  # type: str
-
-    accept = "application/json"
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/advisors/{advisorName}")  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "serverName": _SERIALIZER.url("server_name", server_name, 'str'),
-        "advisorName": _SERIALIZER.url("advisor_name", advisor_name, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
-
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
-        **kwargs
-    )
-
-
 def build_list_by_server_request(
     subscription_id: str,
     resource_group_name: str,
     server_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2018-06-01")  # type: str
+    api_version = kwargs.pop('api_version', "2021-12-01-preview")  # type: str
 
     accept = "application/json"
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/advisors")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/logFiles")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
@@ -99,14 +61,14 @@ def build_list_by_server_request(
         **kwargs
     )
 
-class AdvisorsOperations(object):
-    """AdvisorsOperations operations.
+class LogFilesOperations(object):
+    """LogFilesOperations operations.
 
     You should not instantiate this class directly. Instead, you should create a Client instance that
     instantiates it for you and attaches it as an attribute.
 
     :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.rdbms.mysql.models
+    :type models: ~azure.mgmt.rdbms.mysql_flexibleservers.models
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
@@ -122,94 +84,27 @@ class AdvisorsOperations(object):
         self._config = config
 
     @distributed_trace
-    def get(
-        self,
-        resource_group_name: str,
-        server_name: str,
-        advisor_name: str,
-        **kwargs: Any
-    ) -> "_models.Advisor":
-        """Get a recommendation action advisor.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param server_name: The name of the server.
-        :type server_name: str
-        :param advisor_name: The advisor name for recommendation action.
-        :type advisor_name: str
-        :keyword api_version: Api Version. Default value is "2018-06-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Advisor, or the result of cls(response)
-        :rtype: ~azure.mgmt.rdbms.mysql.models.Advisor
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Advisor"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2018-06-01")  # type: str
-
-        
-        request = build_get_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            server_name=server_name,
-            advisor_name=advisor_name,
-            api_version=api_version,
-            template_url=self.get.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('Advisor', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/advisors/{advisorName}"}  # type: ignore
-
-
-    @distributed_trace
     def list_by_server(
         self,
         resource_group_name: str,
         server_name: str,
         **kwargs: Any
-    ) -> Iterable["_models.AdvisorsResultList"]:
-        """List recommendation action advisors.
+    ) -> Iterable["_models.LogFileListResult"]:
+        """List all the server log files in a given server.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param server_name: The name of the server.
         :type server_name: str
-        :keyword api_version: Api Version. Default value is "2018-06-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either AdvisorsResultList or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.rdbms.mysql.models.AdvisorsResultList]
+        :return: An iterator like instance of either LogFileListResult or the result of cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.rdbms.mysql_flexibleservers.models.LogFileListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2018-06-01")  # type: str
+        api_version = kwargs.pop('api_version', "2021-12-01-preview")  # type: str
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.AdvisorsResultList"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.LogFileListResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -242,7 +137,7 @@ class AdvisorsOperations(object):
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("AdvisorsResultList", pipeline_response)
+            deserialized = self._deserialize("LogFileListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -268,4 +163,4 @@ class AdvisorsOperations(object):
         return ItemPaged(
             get_next, extract_data
         )
-    list_by_server.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/advisors"}  # type: ignore
+    list_by_server.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/logFiles"}  # type: ignore
