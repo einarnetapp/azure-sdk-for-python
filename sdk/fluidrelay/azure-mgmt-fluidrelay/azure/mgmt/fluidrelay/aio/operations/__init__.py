@@ -8,8 +8,10 @@
 
 from ._fluid_relay_operations_operations import FluidRelayOperationsOperations
 from ._fluid_relay_servers_operations import FluidRelayServersOperations
+from ._fluid_relay_containers_operations import FluidRelayContainersOperations
 
 __all__ = [
     'FluidRelayOperationsOperations',
     'FluidRelayServersOperations',
+    'FluidRelayContainersOperations',
 ]
