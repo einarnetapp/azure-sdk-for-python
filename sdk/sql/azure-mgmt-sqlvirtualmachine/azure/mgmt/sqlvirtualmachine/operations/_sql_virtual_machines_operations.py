@@ -35,7 +35,7 @@ def build_list_by_sql_vm_group_request(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -69,7 +69,7 @@ def build_list_request(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -97,36 +97,6 @@ def build_list_request(
     )
 
 
-def build_redeploy_request_initial(
-    resource_group_name: str,
-    sql_virtual_machine_name: str,
-    subscription_id: str,
-    **kwargs: Any
-) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
-
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/redeploy")  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
-        "sqlVirtualMachineName": _SERIALIZER.url("sql_virtual_machine_name", sql_virtual_machine_name, 'str'),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    return HttpRequest(
-        method="POST",
-        url=_url,
-        params=_query_parameters,
-        **kwargs
-    )
-
-
 def build_get_request(
     resource_group_name: str,
     sql_virtual_machine_name: str,
@@ -135,7 +105,7 @@ def build_get_request(
     expand: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -176,7 +146,7 @@ def build_create_or_update_request_initial(
     content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
     content_type = kwargs.pop('content_type', None)  # type: Optional[str]
 
     accept = "application/json"
@@ -217,7 +187,7 @@ def build_delete_request_initial(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}")  # pylint: disable=line-too-long
@@ -250,7 +220,7 @@ def build_update_request_initial(
     content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
     content_type = kwargs.pop('content_type', None)  # type: Optional[str]
 
     accept = "application/json"
@@ -290,7 +260,7 @@ def build_list_by_resource_group_request(
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     accept = "application/json"
     # Construct URL
@@ -319,13 +289,43 @@ def build_list_by_resource_group_request(
     )
 
 
+def build_redeploy_request_initial(
+    resource_group_name: str,
+    sql_virtual_machine_name: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/redeploy")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+        "sqlVirtualMachineName": _SERIALIZER.url("sql_virtual_machine_name", sql_virtual_machine_name, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
+    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_query_parameters,
+        **kwargs
+    )
+
+
 def build_start_assessment_request_initial(
     resource_group_name: str,
     sql_virtual_machine_name: str,
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+    api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/startAssessment")  # pylint: disable=line-too-long
@@ -391,7 +391,7 @@ class SqlVirtualMachinesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachineListResult"]
         error_map = {
@@ -468,7 +468,7 @@ class SqlVirtualMachinesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachineListResult"]
         error_map = {
@@ -527,111 +527,6 @@ class SqlVirtualMachinesOperations(object):
         )
     list.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines"}  # type: ignore
 
-    def _redeploy_initial(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_group_name: str,
-        sql_virtual_machine_name: str,
-        **kwargs: Any
-    ) -> None:
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
-
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
-
-        
-        request = build_redeploy_request_initial(
-            resource_group_name=resource_group_name,
-            sql_virtual_machine_name=sql_virtual_machine_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self._redeploy_initial.metadata['url'],
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    _redeploy_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/redeploy"}  # type: ignore
-
-
-    @distributed_trace
-    def begin_redeploy(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_group_name: str,
-        sql_virtual_machine_name: str,
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Uninstalls and reinstalls the SQL Iaas Extension.
-
-        :param resource_group_name: Name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal.
-        :type resource_group_name: str
-        :param sql_virtual_machine_name: Name of the SQL virtual machine.
-        :type sql_virtual_machine_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
-        polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        lro_delay = kwargs.pop(
-            'polling_interval',
-            self._config.polling_interval
-        )
-        cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
-        if cont_token is None:
-            raw_result = self._redeploy_initial(
-                resource_group_name=resource_group_name,
-                sql_virtual_machine_name=sql_virtual_machine_name,
-                api_version=api_version,
-                cls=lambda x,y,z: x,
-                **kwargs
-            )
-        kwargs.pop('error_map', None)
-
-        def get_long_running_output(pipeline_response):
-            if cls:
-                return cls(pipeline_response, None, {})
-
-
-        if polling is True: polling_method = ARMPolling(lro_delay, **kwargs)
-        elif polling is False: polling_method = NoPolling()
-        else: polling_method = polling
-        if cont_token:
-            return LROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output
-            )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
-
-    begin_redeploy.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/redeploy"}  # type: ignore
-
     @distributed_trace
     def get(
         self,
@@ -660,7 +555,7 @@ class SqlVirtualMachinesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         
         request = build_get_request(
@@ -708,7 +603,7 @@ class SqlVirtualMachinesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
         _json = self._serialize.body(parameters, 'SqlVirtualMachine')
@@ -780,7 +675,7 @@ class SqlVirtualMachinesOperations(object):
         :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachine]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachine"]
@@ -835,7 +730,7 @@ class SqlVirtualMachinesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         
         request = build_delete_request_initial(
@@ -891,7 +786,7 @@ class SqlVirtualMachinesOperations(object):
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         lro_delay = kwargs.pop(
@@ -941,7 +836,7 @@ class SqlVirtualMachinesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
 
         _json = self._serialize.body(parameters, 'SqlVirtualMachineUpdate')
@@ -1009,7 +904,7 @@ class SqlVirtualMachinesOperations(object):
         :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachine]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachine"]
@@ -1070,7 +965,7 @@ class SqlVirtualMachinesOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.sqlvirtualmachine.models.SqlVirtualMachineListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlVirtualMachineListResult"]
         error_map = {
@@ -1131,6 +1026,111 @@ class SqlVirtualMachinesOperations(object):
         )
     list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines"}  # type: ignore
 
+    def _redeploy_initial(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        sql_virtual_machine_name: str,
+        **kwargs: Any
+    ) -> None:
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
+
+        
+        request = build_redeploy_request_initial(
+            resource_group_name=resource_group_name,
+            sql_virtual_machine_name=sql_virtual_machine_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self._redeploy_initial.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    _redeploy_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/redeploy"}  # type: ignore
+
+
+    @distributed_trace
+    def begin_redeploy(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        sql_virtual_machine_name: str,
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Uninstalls and reinstalls the SQL Iaas Extension.
+
+        :param resource_group_name: Name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal.
+        :type resource_group_name: str
+        :param sql_virtual_machine_name: Name of the SQL virtual machine.
+        :type sql_virtual_machine_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
+         operation to not poll, or pass in your own initialized polling object for a personal polling
+         strategy.
+        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of LROPoller that returns either None or the result of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
+        polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        lro_delay = kwargs.pop(
+            'polling_interval',
+            self._config.polling_interval
+        )
+        cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
+        if cont_token is None:
+            raw_result = self._redeploy_initial(
+                resource_group_name=resource_group_name,
+                sql_virtual_machine_name=sql_virtual_machine_name,
+                api_version=api_version,
+                cls=lambda x,y,z: x,
+                **kwargs
+            )
+        kwargs.pop('error_map', None)
+
+        def get_long_running_output(pipeline_response):
+            if cls:
+                return cls(pipeline_response, None, {})
+
+
+        if polling is True: polling_method = ARMPolling(lro_delay, **kwargs)
+        elif polling is False: polling_method = NoPolling()
+        else: polling_method = polling
+        if cont_token:
+            return LROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output
+            )
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+
+    begin_redeploy.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/redeploy"}  # type: ignore
+
     def _start_assessment_initial(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
@@ -1143,7 +1143,7 @@ class SqlVirtualMachinesOperations(object):
         }
         error_map.update(kwargs.pop('error_map', {}))
 
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
 
         
         request = build_start_assessment_request_initial(
@@ -1199,7 +1199,7 @@ class SqlVirtualMachinesOperations(object):
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-11-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-02-01")  # type: str
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         lro_delay = kwargs.pop(
