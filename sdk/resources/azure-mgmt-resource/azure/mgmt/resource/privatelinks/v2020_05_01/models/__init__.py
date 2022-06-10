@@ -13,6 +13,8 @@ from ._models_py3 import PrivateLinkAssociationGetResult
 from ._models_py3 import PrivateLinkAssociationObject
 from ._models_py3 import PrivateLinkAssociationProperties
 from ._models_py3 import PrivateLinkAssociationPropertiesExpanded
+from ._models_py3 import PrivateLinkResource
+from ._models_py3 import PrivateLinkResourceListResult
 from ._models_py3 import ResourceManagementPrivateLink
 from ._models_py3 import ResourceManagementPrivateLinkEndpointConnections
 from ._models_py3 import ResourceManagementPrivateLinkListResult
@@ -31,6 +33,8 @@ __all__ = [
     'PrivateLinkAssociationObject',
     'PrivateLinkAssociationProperties',
     'PrivateLinkAssociationPropertiesExpanded',
+    'PrivateLinkResource',
+    'PrivateLinkResourceListResult',
     'ResourceManagementPrivateLink',
     'ResourceManagementPrivateLinkEndpointConnections',
     'ResourceManagementPrivateLinkListResult',

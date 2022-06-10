@@ -16,7 +16,7 @@ from azure.mgmt.core import ARMPipelineClient
 
 from . import models
 from ._configuration import ResourcePrivateLinkClientConfiguration
-from .operations import PrivateLinkAssociationOperations, ResourceManagementPrivateLinkOperations
+from .operations import PrivateLinkAssociationOperations, PrivateLinkResourcesOperations, ResourceManagementPrivateLinkOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -28,6 +28,9 @@ class ResourcePrivateLinkClient:
     :ivar private_link_association: PrivateLinkAssociationOperations operations
     :vartype private_link_association:
      azure.mgmt.resource.privatelinks.v2020_05_01.operations.PrivateLinkAssociationOperations
+    :ivar private_link_resources: PrivateLinkResourcesOperations operations
+    :vartype private_link_resources:
+     azure.mgmt.resource.privatelinks.v2020_05_01.operations.PrivateLinkResourcesOperations
     :ivar resource_management_private_link: ResourceManagementPrivateLinkOperations operations
     :vartype resource_management_private_link:
      azure.mgmt.resource.privatelinks.v2020_05_01.operations.ResourceManagementPrivateLinkOperations
@@ -57,6 +60,7 @@ class ResourcePrivateLinkClient:
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
         self.private_link_association = PrivateLinkAssociationOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.private_link_resources = PrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.resource_management_private_link = ResourceManagementPrivateLinkOperations(self._client, self._config, self._serialize, self._deserialize)
 
 

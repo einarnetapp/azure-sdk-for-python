@@ -276,6 +276,72 @@ class PrivateLinkAssociationPropertiesExpanded(msrest.serialization.Model):
         self.scope = scope
 
 
+class PrivateLinkResource(msrest.serialization.Model):
+    """A private link resource.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar group_id: Group identifier of private link resource.
+    :vartype group_id: str
+    :ivar required_members: Required member names of private link resource.
+    :vartype required_members: list[str]
+    :ivar required_zone_names: Required DNS zone names of the the private link resource.
+    :vartype required_zone_names: list[str]
+    """
+
+    _validation = {
+        'group_id': {'readonly': True},
+        'required_members': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'group_id': {'key': 'properties.groupId', 'type': 'str'},
+        'required_members': {'key': 'properties.requiredMembers', 'type': '[str]'},
+        'required_zone_names': {'key': 'properties.requiredZoneNames', 'type': '[str]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        required_zone_names: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword required_zone_names: Required DNS zone names of the the private link resource.
+        :paramtype required_zone_names: list[str]
+        """
+        super(PrivateLinkResource, self).__init__(**kwargs)
+        self.group_id = None
+        self.required_members = None
+        self.required_zone_names = required_zone_names
+
+
+class PrivateLinkResourceListResult(msrest.serialization.Model):
+    """A list of private link resources.
+
+    :ivar value: Array of private link resources.
+    :vartype value: list[~azure.mgmt.resource.privatelinks.v2020_05_01.models.PrivateLinkResource]
+    """
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[PrivateLinkResource]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["PrivateLinkResource"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Array of private link resources.
+        :paramtype value:
+         list[~azure.mgmt.resource.privatelinks.v2020_05_01.models.PrivateLinkResource]
+        """
+        super(PrivateLinkResourceListResult, self).__init__(**kwargs)
+        self.value = value
+
+
 class ResourceManagementPrivateLink(msrest.serialization.Model):
     """ResourceManagementPrivateLink.
 

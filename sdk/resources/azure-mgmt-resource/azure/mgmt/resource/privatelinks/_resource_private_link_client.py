@@ -109,6 +109,19 @@ class ResourcePrivateLinkClient(MultiApiClientMixin, _SDKClient):
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
+    def private_link_resources(self):
+        """Instance depends on the API version:
+
+           * 2020-05-01: :class:`PrivateLinkResourcesOperations<azure.mgmt.resource.privatelinks.v2020_05_01.operations.PrivateLinkResourcesOperations>`
+        """
+        api_version = self._get_api_version('private_link_resources')
+        if api_version == '2020-05-01':
+            from .v2020_05_01.operations import PrivateLinkResourcesOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'private_link_resources'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
     def resource_management_private_link(self):
         """Instance depends on the API version:
 

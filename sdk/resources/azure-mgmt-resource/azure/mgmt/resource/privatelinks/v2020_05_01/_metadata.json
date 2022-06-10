@@ -98,6 +98,7 @@
     },
     "operation_groups": {
         "private_link_association": "PrivateLinkAssociationOperations",
+        "private_link_resources": "PrivateLinkResourcesOperations",
         "resource_management_private_link": "ResourceManagementPrivateLinkOperations"
     }
 }

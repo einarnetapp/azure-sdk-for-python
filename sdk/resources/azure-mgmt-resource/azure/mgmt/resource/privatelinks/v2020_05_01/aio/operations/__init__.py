@@ -7,9 +7,11 @@
 # --------------------------------------------------------------------------
 
 from ._operations import PrivateLinkAssociationOperations
+from ._operations import PrivateLinkResourcesOperations
 from ._operations import ResourceManagementPrivateLinkOperations
 
 __all__ = [
     'PrivateLinkAssociationOperations',
+    'PrivateLinkResourcesOperations',
     'ResourceManagementPrivateLinkOperations',
 ]

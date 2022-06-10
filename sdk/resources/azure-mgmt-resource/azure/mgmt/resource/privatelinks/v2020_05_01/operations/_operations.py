@@ -168,6 +168,42 @@ def build_private_link_association_list_request(
     )
 
 
+def build_private_link_resources_list_request(
+    subscription_id: str,
+    resource_group_name: str,
+    rmpl_name: str,
+    **kwargs: Any
+) -> HttpRequest:
+    api_version = kwargs.pop('api_version', "2020-05-01")  # type: str
+
+    accept = "application/json"
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks/{rmplName}/privateLinkResources")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
+        "rmplName": _SERIALIZER.url("rmpl_name", rmpl_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
+    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
+    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="GET",
+        url=_url,
+        params=_query_parameters,
+        headers=_header_parameters,
+        **kwargs
+    )
+
+
 def build_resource_management_private_link_put_request(
     subscription_id: str,
     resource_group_name: str,
@@ -601,6 +637,85 @@ class PrivateLinkAssociationOperations(object):
         return deserialized
 
     list.metadata = {'url': "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Authorization/privateLinkAssociations"}  # type: ignore
+
+class PrivateLinkResourcesOperations(object):
+    """PrivateLinkResourcesOperations operations.
+
+    You should not instantiate this class directly. Instead, you should create a Client instance that
+    instantiates it for you and attaches it as an attribute.
+
+    :ivar models: Alias to model classes used in this operation group.
+    :type models: ~azure.mgmt.resource.privatelinks.v2020_05_01.models
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An object model deserializer.
+    """
+
+    models = _models
+
+    def __init__(self, client, config, serializer, deserializer):
+        self._client = client
+        self._serialize = serializer
+        self._deserialize = deserializer
+        self._config = config
+
+    @distributed_trace
+    def list(
+        self,
+        resource_group_name: str,
+        rmpl_name: str,
+        **kwargs: Any
+    ) -> "_models.PrivateLinkResourceListResult":
+        """Gets the private link resources.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param rmpl_name: The name of the resource management private link.
+        :type rmpl_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: PrivateLinkResourceListResult, or the result of cls(response)
+        :rtype: ~azure.mgmt.resource.privatelinks.v2020_05_01.models.PrivateLinkResourceListResult
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}))
+
+        api_version = kwargs.pop('api_version', "2020-05-01")  # type: str
+
+        
+        request = build_private_link_resources_list_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            rmpl_name=rmpl_name,
+            api_version=api_version,
+            template_url=self.list.metadata['url'],
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('PrivateLinkResourceListResult', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/resourceManagementPrivateLinks/{rmplName}/privateLinkResources"}  # type: ignore
 
 class ResourceManagementPrivateLinkOperations(object):
     """ResourceManagementPrivateLinkOperations operations.
