@@ -6,34 +6,19 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
+from enum import Enum
 from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class Category(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Category(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Identity system of the device.
     """
 
     AZURE_AD = "AzureAD"
     ADFS = "ADFS"
 
-class CompatibilityIssue(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CompatibilityIssue(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Compatibility issue
     """
 
@@ -48,7 +33,7 @@ class CompatibilityIssue(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     CONNECTION_TO_AZURE_REQUIRED = "ConnectionToAzureRequired"
     DISCONNECTED_ENVIRONMENT_REQUIRED = "DisconnectedEnvironmentRequired"
 
-class ComputeRole(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ComputeRole(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Compute role type (IaaS or PaaS).
     """
 
@@ -56,7 +41,7 @@ class ComputeRole(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     IAA_S = "IaaS"
     PAA_S = "PaaS"
 
-class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The type of identity that created the resource.
     """
 
@@ -65,13 +50,13 @@ class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class Location(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Location(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Location of the resource.
     """
 
     GLOBAL_ENUM = "global"
 
-class OperatingSystem(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class OperatingSystem(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Operating system type (Windows or Linux).
     """
 
@@ -79,7 +64,7 @@ class OperatingSystem(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     WINDOWS = "Windows"
     LINUX = "Linux"
 
-class ProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """The provisioning state of the resource.
     """
 
