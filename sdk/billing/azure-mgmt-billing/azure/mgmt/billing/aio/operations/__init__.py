@@ -20,13 +20,13 @@ from ._invoices_operations import InvoicesOperations
 from ._transactions_operations import TransactionsOperations
 from ._policies_operations import PoliciesOperations
 from ._billing_property_operations import BillingPropertyOperations
-from ._operations import Operations
 from ._billing_role_definitions_operations import BillingRoleDefinitionsOperations
 from ._billing_role_assignments_operations import BillingRoleAssignmentsOperations
 from ._agreements_operations import AgreementsOperations
 from ._reservations_operations import ReservationsOperations
 from ._enrollment_accounts_operations import EnrollmentAccountsOperations
 from ._billing_periods_operations import BillingPeriodsOperations
+from ._operations import Operations
 
 __all__ = [
     'BillingAccountsOperations',
@@ -43,11 +43,11 @@ __all__ = [
     'TransactionsOperations',
     'PoliciesOperations',
     'BillingPropertyOperations',
-    'Operations',
     'BillingRoleDefinitionsOperations',
     'BillingRoleAssignmentsOperations',
     'AgreementsOperations',
     'ReservationsOperations',
     'EnrollmentAccountsOperations',
     'BillingPeriodsOperations',
+    'Operations',
 ]
