@@ -21,6 +21,7 @@ from ._analysis_results_operations import AnalysisResultsOperations
 from ._email_events_operations import EmailEventsOperations
 from ._customer_events_operations import CustomerEventsOperations
 from ._operations import Operations
+from ._billing_hub_service_operations import BillingHubServiceOperations
 
 __all__ = [
     'SkusOperations',
@@ -38,4 +39,5 @@ __all__ = [
     'EmailEventsOperations',
     'CustomerEventsOperations',
     'Operations',
+    'BillingHubServiceOperations',
 ]
