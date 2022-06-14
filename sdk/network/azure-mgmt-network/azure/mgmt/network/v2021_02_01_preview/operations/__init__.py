@@ -27,7 +27,9 @@ from ._operations import NetworkSecurityPerimetersOperations
 from ._operations import NspProfilesOperations
 from ._operations import NspAccessRulesOperations
 from ._operations import NspAssociationsOperations
+from ._operations import NspAssociationsProxyOperations
 from ._operations import PerimeterAssociableResourceTypesOperations
+from ._operations import NspAccessRulesReconcileOperations
 
 __all__ = [
     'NetworkManagersOperations',
@@ -51,5 +53,7 @@ __all__ = [
     'NspProfilesOperations',
     'NspAccessRulesOperations',
     'NspAssociationsOperations',
+    'NspAssociationsProxyOperations',
     'PerimeterAssociableResourceTypesOperations',
+    'NspAccessRulesReconcileOperations',
 ]
