@@ -3902,7 +3902,7 @@ class InstanceViewStatus(msrest.serialization.Model):
 
     :ivar code: The status code.
     :vartype code: str
-    :ivar level: The level code. Possible values include: "Info", "Warning", "Error".
+    :ivar level: The level code. Possible values include: "Info", "Warning", "Error", "Debug".
     :vartype level: str or ~azure.mgmt.compute.v2021_03_01.models.StatusLevelTypes
     :ivar display_status: The short localizable label for the status.
     :vartype display_status: str
@@ -3933,7 +3933,7 @@ class InstanceViewStatus(msrest.serialization.Model):
         """
         :keyword code: The status code.
         :paramtype code: str
-        :keyword level: The level code. Possible values include: "Info", "Warning", "Error".
+        :keyword level: The level code. Possible values include: "Info", "Warning", "Error", "Debug".
         :paramtype level: str or ~azure.mgmt.compute.v2021_03_01.models.StatusLevelTypes
         :keyword display_status: The short localizable label for the status.
         :paramtype display_status: str
@@ -6211,7 +6211,7 @@ class ResourceInstanceViewStatus(msrest.serialization.Model):
     :vartype message: str
     :ivar time: The time of the status.
     :vartype time: ~datetime.datetime
-    :ivar level: The level code. Possible values include: "Info", "Warning", "Error".
+    :ivar level: The level code. Possible values include: "Info", "Warning", "Error", "Debug".
     :vartype level: str or ~azure.mgmt.compute.v2021_03_01.models.StatusLevelTypes
     """
 
@@ -6237,7 +6237,7 @@ class ResourceInstanceViewStatus(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword level: The level code. Possible values include: "Info", "Warning", "Error".
+        :keyword level: The level code. Possible values include: "Info", "Warning", "Error", "Debug".
         :paramtype level: str or ~azure.mgmt.compute.v2021_03_01.models.StatusLevelTypes
         """
         super(ResourceInstanceViewStatus, self).__init__(**kwargs)

@@ -976,7 +976,7 @@ class DiskSku(msrest.serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar name: The sku name. Possible values include: "Standard_LRS", "Premium_LRS".
-    :vartype name: str or ~azure.mgmt.compute.v2017_03_30.models.StorageAccountTypes
+    :vartype name: str or ~azure.mgmt.compute.v2017_03_30.models.DiskSkuName
     :ivar tier: The sku tier.
     :vartype tier: str
     """
@@ -993,12 +993,12 @@ class DiskSku(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        name: Optional[Union[str, "StorageAccountTypes"]] = None,
+        name: Optional[Union[str, "DiskSkuName"]] = None,
         **kwargs
     ):
         """
         :keyword name: The sku name. Possible values include: "Standard_LRS", "Premium_LRS".
-        :paramtype name: str or ~azure.mgmt.compute.v2017_03_30.models.StorageAccountTypes
+        :paramtype name: str or ~azure.mgmt.compute.v2017_03_30.models.DiskSkuName
         """
         super(DiskSku, self).__init__(**kwargs)
         self.name = name

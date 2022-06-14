@@ -50,6 +50,13 @@ class DiskCreateOptionTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     EMPTY = "Empty"
     ATTACH = "Attach"
 
+class DiskSkuName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+    """The sku name.
+    """
+
+    STANDARD_LRS = "Standard_LRS"
+    PREMIUM_LRS = "Premium_LRS"
+
 class IPVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Available from Api-Version 2017-03-30 onwards, it represents whether the specific
     ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and

@@ -409,6 +409,7 @@ class StatusLevelTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     INFO = "Info"
     WARNING = "Warning"
     ERROR = "Error"
+    DEBUG = "Debug"
 
 class StorageAccountTypes(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     """Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used
