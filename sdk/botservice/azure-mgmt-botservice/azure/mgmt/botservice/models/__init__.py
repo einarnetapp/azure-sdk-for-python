@@ -22,6 +22,8 @@ from ._models_py3 import ConnectionSetting
 from ._models_py3 import ConnectionSettingParameter
 from ._models_py3 import ConnectionSettingProperties
 from ._models_py3 import ConnectionSettingResponseList
+from ._models_py3 import CreateEmailSignInUrlResponse
+from ._models_py3 import CreateEmailSignInUrlResponseProperties
 from ._models_py3 import DirectLineChannel
 from ._models_py3 import DirectLineChannelProperties
 from ._models_py3 import DirectLineSite
@@ -47,6 +49,7 @@ from ._models_py3 import OperationDisplayInfo
 from ._models_py3 import OperationEntity
 from ._models_py3 import OperationEntityListResult
 from ._models_py3 import OperationResultsDescription
+from ._models_py3 import OutlookChannel
 from ._models_py3 import PrivateEndpoint
 from ._models_py3 import PrivateEndpointConnection
 from ._models_py3 import PrivateEndpointConnectionListResult
@@ -79,6 +82,7 @@ from ._models_py3 import WebChatSite
 
 from ._azure_bot_service_enums import (
     ChannelName,
+    EmailChannelAuthMethod,
     Key,
     Kind,
     MsaAppType,
@@ -90,7 +94,9 @@ from ._azure_bot_service_enums import (
     SkuName,
     SkuTier,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AlexaChannel',
     'AlexaChannelProperties',
@@ -108,6 +114,8 @@ __all__ = [
     'ConnectionSettingParameter',
     'ConnectionSettingProperties',
     'ConnectionSettingResponseList',
+    'CreateEmailSignInUrlResponse',
+    'CreateEmailSignInUrlResponseProperties',
     'DirectLineChannel',
     'DirectLineChannelProperties',
     'DirectLineSite',
@@ -133,6 +141,7 @@ __all__ = [
     'OperationEntity',
     'OperationEntityListResult',
     'OperationResultsDescription',
+    'OutlookChannel',
     'PrivateEndpoint',
     'PrivateEndpointConnection',
     'PrivateEndpointConnectionListResult',
@@ -162,6 +171,7 @@ __all__ = [
     'WebChatChannelProperties',
     'WebChatSite',
     'ChannelName',
+    'EmailChannelAuthMethod',
     'Key',
     'Kind',
     'MsaAppType',
@@ -173,3 +183,5 @@ __all__ = [
     'SkuName',
     'SkuTier',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
