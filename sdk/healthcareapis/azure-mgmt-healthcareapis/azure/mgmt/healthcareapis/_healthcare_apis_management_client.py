@@ -7,11 +7,12 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Optional, TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
+
+from msrest import Deserializer, Serializer
 
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
-from msrest import Deserializer, Serializer
 
 from . import models
 from ._configuration import HealthcareApisManagementClientConfiguration
@@ -21,7 +22,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class HealthcareApisManagementClient:
+class HealthcareApisManagementClient:    # pylint: disable=too-many-instance-attributes
     """Azure Healthcare APIs Client.
 
     :ivar services: ServicesOperations operations
@@ -60,8 +61,11 @@ class HealthcareApisManagementClient:
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The subscription identifier.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is 'https://management.azure.com'.
+    :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+     default value may result in unsupported behavior.
+    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -80,24 +84,50 @@ class HealthcareApisManagementClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_link_resources = PrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspaces = WorkspacesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.dicom_services = DicomServicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.iot_connectors = IotConnectorsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.fhir_destinations = FhirDestinationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.iot_connector_fhir_destination = IotConnectorFhirDestinationOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.fhir_services = FhirServicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_private_endpoint_connections = WorkspacePrivateEndpointConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_private_link_resources = WorkspacePrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.operation_results = OperationResultsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.services = ServicesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_link_resources = PrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspaces = WorkspacesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dicom_services = DicomServicesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.iot_connectors = IotConnectorsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.fhir_destinations = FhirDestinationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.iot_connector_fhir_destination = IotConnectorFhirDestinationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.fhir_services = FhirServicesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_private_endpoint_connections = WorkspacePrivateEndpointConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_private_link_resources = WorkspacePrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operation_results = OperationResultsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
         self,
-        request,  # type: HttpRequest
+        request: HttpRequest,
         **kwargs: Any
     ) -> HttpResponse:
         """Runs the network request through the client's chained policies.

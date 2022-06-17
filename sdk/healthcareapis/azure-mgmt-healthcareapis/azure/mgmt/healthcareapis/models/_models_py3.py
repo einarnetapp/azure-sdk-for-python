@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._healthcare_apis_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class CheckNameAvailabilityParameters(msrest.serialization.Model):
@@ -54,6 +56,63 @@ class CheckNameAvailabilityParameters(msrest.serialization.Model):
         self.type = type
 
 
+class CorsConfiguration(msrest.serialization.Model):
+    """The settings for the CORS configuration of the service instance.
+
+    :ivar origins: The origins to be allowed via CORS.
+    :vartype origins: list[str]
+    :ivar headers: The headers to be allowed via CORS.
+    :vartype headers: list[str]
+    :ivar methods: The methods to be allowed via CORS.
+    :vartype methods: list[str]
+    :ivar max_age: The max age to be allowed via CORS.
+    :vartype max_age: int
+    :ivar allow_credentials: If credentials are allowed via CORS.
+    :vartype allow_credentials: bool
+    """
+
+    _validation = {
+        'max_age': {'maximum': 99999, 'minimum': 0},
+    }
+
+    _attribute_map = {
+        'origins': {'key': 'origins', 'type': '[str]'},
+        'headers': {'key': 'headers', 'type': '[str]'},
+        'methods': {'key': 'methods', 'type': '[str]'},
+        'max_age': {'key': 'maxAge', 'type': 'int'},
+        'allow_credentials': {'key': 'allowCredentials', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        origins: Optional[List[str]] = None,
+        headers: Optional[List[str]] = None,
+        methods: Optional[List[str]] = None,
+        max_age: Optional[int] = None,
+        allow_credentials: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword origins: The origins to be allowed via CORS.
+        :paramtype origins: list[str]
+        :keyword headers: The headers to be allowed via CORS.
+        :paramtype headers: list[str]
+        :keyword methods: The methods to be allowed via CORS.
+        :paramtype methods: list[str]
+        :keyword max_age: The max age to be allowed via CORS.
+        :paramtype max_age: int
+        :keyword allow_credentials: If credentials are allowed via CORS.
+        :paramtype allow_credentials: bool
+        """
+        super(CorsConfiguration, self).__init__(**kwargs)
+        self.origins = origins
+        self.headers = headers
+        self.methods = methods
+        self.max_age = max_age
+        self.allow_credentials = allow_credentials
+
+
 class ServiceManagedIdentity(msrest.serialization.Model):
     """Managed service identity (system assigned and/or user assigned identities).
 
@@ -69,7 +128,7 @@ class ServiceManagedIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        identity: Optional["ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         **kwargs
     ):
         """
@@ -287,13 +346,15 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
     :vartype tags: dict[str, str]
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
     :vartype system_data: ~azure.mgmt.healthcareapis.models.SystemData
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     :ivar authentication_configuration: Dicom Service authentication configuration.
     :vartype authentication_configuration:
      ~azure.mgmt.healthcareapis.models.DicomServiceAuthenticationConfiguration
+    :ivar cors_configuration: Dicom Service Cors configuration.
+    :vartype cors_configuration: ~azure.mgmt.healthcareapis.models.CorsConfiguration
     :ivar service_url: The url of the Dicom Services.
     :vartype service_url: str
     :ivar private_endpoint_connections: The list of private endpoint connections that are set up
@@ -301,7 +362,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
     :vartype private_endpoint_connections:
      list[~azure.mgmt.healthcareapis.models.PrivateEndpointConnection]
     :ivar public_network_access: Control permission for data plane traffic coming from public
-     networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+     networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
     """
 
@@ -326,6 +387,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'authentication_configuration': {'key': 'properties.authenticationConfiguration', 'type': 'DicomServiceAuthenticationConfiguration'},
+        'cors_configuration': {'key': 'properties.corsConfiguration', 'type': 'CorsConfiguration'},
         'service_url': {'key': 'properties.serviceUrl', 'type': 'str'},
         'private_endpoint_connections': {'key': 'properties.privateEndpointConnections', 'type': '[PrivateEndpointConnection]'},
         'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
@@ -334,12 +396,13 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
     def __init__(
         self,
         *,
-        identity: Optional["ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         etag: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        authentication_configuration: Optional["DicomServiceAuthenticationConfiguration"] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
+        authentication_configuration: Optional["_models.DicomServiceAuthenticationConfiguration"] = None,
+        cors_configuration: Optional["_models.CorsConfiguration"] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         **kwargs
     ):
         """
@@ -356,8 +419,10 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         :keyword authentication_configuration: Dicom Service authentication configuration.
         :paramtype authentication_configuration:
          ~azure.mgmt.healthcareapis.models.DicomServiceAuthenticationConfiguration
+        :keyword cors_configuration: Dicom Service Cors configuration.
+        :paramtype cors_configuration: ~azure.mgmt.healthcareapis.models.CorsConfiguration
         :keyword public_network_access: Control permission for data plane traffic coming from public
-         networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+         networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
         """
         super(DicomService, self).__init__(etag=etag, location=location, tags=tags, identity=identity, **kwargs)
@@ -365,6 +430,7 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         self.system_data = None
         self.provisioning_state = None
         self.authentication_configuration = authentication_configuration
+        self.cors_configuration = cors_configuration
         self.service_url = None
         self.private_endpoint_connections = None
         self.public_network_access = public_network_access
@@ -374,12 +440,6 @@ class DicomService(TaggedResource, ServiceManagedIdentity):
         self.etag = etag
         self.location = location
         self.tags = tags
-        self.system_data = None
-        self.provisioning_state = None
-        self.authentication_configuration = authentication_configuration
-        self.service_url = None
-        self.private_endpoint_connections = None
-        self.public_network_access = public_network_access
 
 
 class DicomServiceAuthenticationConfiguration(msrest.serialization.Model):
@@ -432,7 +492,7 @@ class DicomServiceCollection(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["DicomService"]] = None,
+        value: Optional[List["_models.DicomService"]] = None,
         **kwargs
     ):
         """
@@ -464,7 +524,7 @@ class DicomServicePatchResource(ResourceTags, ServiceManagedIdentity):
     def __init__(
         self,
         *,
-        identity: Optional["ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
@@ -494,7 +554,7 @@ class Error(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetailsInternal"] = None,
+        error: Optional["_models.ErrorDetailsInternal"] = None,
         **kwargs
     ):
         """
@@ -519,7 +579,7 @@ class ErrorDetails(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetailsInternal"] = None,
+        error: Optional["_models.ErrorDetailsInternal"] = None,
         **kwargs
     ):
         """
@@ -588,13 +648,13 @@ class FhirService(TaggedResource, ServiceManagedIdentity):
     :vartype location: str
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
-    :ivar kind: The kind of the service. Possible values include: "fhir-Stu3", "fhir-R4".
+    :ivar kind: The kind of the service. Known values are: "fhir-Stu3", "fhir-R4".
     :vartype kind: str or ~azure.mgmt.healthcareapis.models.FhirServiceKind
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
     :vartype system_data: ~azure.mgmt.healthcareapis.models.SystemData
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     :ivar access_policies: Fhir Service access policies.
     :vartype access_policies: list[~azure.mgmt.healthcareapis.models.FhirServiceAccessPolicyEntry]
@@ -612,14 +672,16 @@ class FhirService(TaggedResource, ServiceManagedIdentity):
     :vartype private_endpoint_connections:
      list[~azure.mgmt.healthcareapis.models.PrivateEndpointConnection]
     :ivar public_network_access: Control permission for data plane traffic coming from public
-     networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+     networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
-    :ivar event_state: Fhir Service event support status. Possible values include: "Disabled",
-     "Enabled", "Updating".
+    :ivar event_state: Fhir Service event support status. Known values are: "Disabled", "Enabled",
+     "Updating".
     :vartype event_state: str or ~azure.mgmt.healthcareapis.models.ServiceEventState
     :ivar resource_version_policy_configuration: Determines tracking of history for resources.
     :vartype resource_version_policy_configuration:
      ~azure.mgmt.healthcareapis.models.ResourceVersionPolicyConfiguration
+    :ivar import_configuration: Fhir Service import configuration.
+    :vartype import_configuration: ~azure.mgmt.healthcareapis.models.FhirServiceImportConfiguration
     """
 
     _validation = {
@@ -652,23 +714,25 @@ class FhirService(TaggedResource, ServiceManagedIdentity):
         'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
         'event_state': {'key': 'properties.eventState', 'type': 'str'},
         'resource_version_policy_configuration': {'key': 'properties.resourceVersionPolicyConfiguration', 'type': 'ResourceVersionPolicyConfiguration'},
+        'import_configuration': {'key': 'properties.importConfiguration', 'type': 'FhirServiceImportConfiguration'},
     }
 
     def __init__(
         self,
         *,
-        identity: Optional["ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         etag: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        kind: Optional[Union[str, "FhirServiceKind"]] = None,
-        access_policies: Optional[List["FhirServiceAccessPolicyEntry"]] = None,
-        acr_configuration: Optional["FhirServiceAcrConfiguration"] = None,
-        authentication_configuration: Optional["FhirServiceAuthenticationConfiguration"] = None,
-        cors_configuration: Optional["FhirServiceCorsConfiguration"] = None,
-        export_configuration: Optional["FhirServiceExportConfiguration"] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
-        resource_version_policy_configuration: Optional["ResourceVersionPolicyConfiguration"] = None,
+        kind: Optional[Union[str, "_models.FhirServiceKind"]] = None,
+        access_policies: Optional[List["_models.FhirServiceAccessPolicyEntry"]] = None,
+        acr_configuration: Optional["_models.FhirServiceAcrConfiguration"] = None,
+        authentication_configuration: Optional["_models.FhirServiceAuthenticationConfiguration"] = None,
+        cors_configuration: Optional["_models.FhirServiceCorsConfiguration"] = None,
+        export_configuration: Optional["_models.FhirServiceExportConfiguration"] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
+        resource_version_policy_configuration: Optional["_models.ResourceVersionPolicyConfiguration"] = None,
+        import_configuration: Optional["_models.FhirServiceImportConfiguration"] = None,
         **kwargs
     ):
         """
@@ -682,7 +746,7 @@ class FhirService(TaggedResource, ServiceManagedIdentity):
         :paramtype location: str
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword kind: The kind of the service. Possible values include: "fhir-Stu3", "fhir-R4".
+        :keyword kind: The kind of the service. Known values are: "fhir-Stu3", "fhir-R4".
         :paramtype kind: str or ~azure.mgmt.healthcareapis.models.FhirServiceKind
         :keyword access_policies: Fhir Service access policies.
         :paramtype access_policies:
@@ -698,11 +762,14 @@ class FhirService(TaggedResource, ServiceManagedIdentity):
         :paramtype export_configuration:
          ~azure.mgmt.healthcareapis.models.FhirServiceExportConfiguration
         :keyword public_network_access: Control permission for data plane traffic coming from public
-         networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+         networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
         :keyword resource_version_policy_configuration: Determines tracking of history for resources.
         :paramtype resource_version_policy_configuration:
          ~azure.mgmt.healthcareapis.models.ResourceVersionPolicyConfiguration
+        :keyword import_configuration: Fhir Service import configuration.
+        :paramtype import_configuration:
+         ~azure.mgmt.healthcareapis.models.FhirServiceImportConfiguration
         """
         super(FhirService, self).__init__(etag=etag, location=location, tags=tags, identity=identity, **kwargs)
         self.identity = identity
@@ -718,24 +785,13 @@ class FhirService(TaggedResource, ServiceManagedIdentity):
         self.public_network_access = public_network_access
         self.event_state = None
         self.resource_version_policy_configuration = resource_version_policy_configuration
+        self.import_configuration = import_configuration
         self.id = None
         self.name = None
         self.type = None
         self.etag = etag
         self.location = location
         self.tags = tags
-        self.kind = kind
-        self.system_data = None
-        self.provisioning_state = None
-        self.access_policies = access_policies
-        self.acr_configuration = acr_configuration
-        self.authentication_configuration = authentication_configuration
-        self.cors_configuration = cors_configuration
-        self.export_configuration = export_configuration
-        self.private_endpoint_connections = None
-        self.public_network_access = public_network_access
-        self.event_state = None
-        self.resource_version_policy_configuration = resource_version_policy_configuration
 
 
 class FhirServiceAccessPolicyEntry(msrest.serialization.Model):
@@ -789,7 +845,7 @@ class FhirServiceAcrConfiguration(msrest.serialization.Model):
         self,
         *,
         login_servers: Optional[List[str]] = None,
-        oci_artifacts: Optional[List["ServiceOciArtifactEntry"]] = None,
+        oci_artifacts: Optional[List["_models.ServiceOciArtifactEntry"]] = None,
         **kwargs
     ):
         """
@@ -860,7 +916,7 @@ class FhirServiceCollection(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["FhirService"]] = None,
+        value: Optional[List["_models.FhirService"]] = None,
         **kwargs
     ):
         """
@@ -956,6 +1012,45 @@ class FhirServiceExportConfiguration(msrest.serialization.Model):
         self.storage_account_name = storage_account_name
 
 
+class FhirServiceImportConfiguration(msrest.serialization.Model):
+    """Import operation configuration information.
+
+    :ivar integration_data_store: The name of the default integration storage account.
+    :vartype integration_data_store: str
+    :ivar initial_import_mode: If the FHIR service is in InitialImportMode.
+    :vartype initial_import_mode: bool
+    :ivar enabled: If the import operation is enabled.
+    :vartype enabled: bool
+    """
+
+    _attribute_map = {
+        'integration_data_store': {'key': 'integrationDataStore', 'type': 'str'},
+        'initial_import_mode': {'key': 'initialImportMode', 'type': 'bool'},
+        'enabled': {'key': 'enabled', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        integration_data_store: Optional[str] = None,
+        initial_import_mode: Optional[bool] = None,
+        enabled: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword integration_data_store: The name of the default integration storage account.
+        :paramtype integration_data_store: str
+        :keyword initial_import_mode: If the FHIR service is in InitialImportMode.
+        :paramtype initial_import_mode: bool
+        :keyword enabled: If the import operation is enabled.
+        :paramtype enabled: bool
+        """
+        super(FhirServiceImportConfiguration, self).__init__(**kwargs)
+        self.integration_data_store = integration_data_store
+        self.initial_import_mode = initial_import_mode
+        self.enabled = enabled
+
+
 class FhirServicePatchResource(ResourceTags, ServiceManagedIdentity):
     """FhirService patch properties.
 
@@ -974,7 +1069,7 @@ class FhirServicePatchResource(ResourceTags, ServiceManagedIdentity):
     def __init__(
         self,
         *,
-        identity: Optional["ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
@@ -1013,9 +1108,9 @@ class IotConnector(TaggedResource, ServiceManagedIdentity):
     :vartype tags: dict[str, str]
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
     :vartype system_data: ~azure.mgmt.healthcareapis.models.SystemData
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     :ivar ingestion_endpoint_configuration: Source configuration.
     :vartype ingestion_endpoint_configuration:
@@ -1049,12 +1144,12 @@ class IotConnector(TaggedResource, ServiceManagedIdentity):
     def __init__(
         self,
         *,
-        identity: Optional["ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         etag: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        ingestion_endpoint_configuration: Optional["IotEventHubIngestionEndpointConfiguration"] = None,
-        device_mapping: Optional["IotMappingProperties"] = None,
+        ingestion_endpoint_configuration: Optional["_models.IotEventHubIngestionEndpointConfiguration"] = None,
+        device_mapping: Optional["_models.IotMappingProperties"] = None,
         **kwargs
     ):
         """
@@ -1086,10 +1181,6 @@ class IotConnector(TaggedResource, ServiceManagedIdentity):
         self.etag = etag
         self.location = location
         self.tags = tags
-        self.system_data = None
-        self.provisioning_state = None
-        self.ingestion_endpoint_configuration = ingestion_endpoint_configuration
-        self.device_mapping = device_mapping
 
 
 class IotConnectorCollection(msrest.serialization.Model):
@@ -1110,7 +1201,7 @@ class IotConnectorCollection(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["IotConnector"]] = None,
+        value: Optional[List["_models.IotConnector"]] = None,
         **kwargs
     ):
         """
@@ -1142,7 +1233,7 @@ class IotConnectorPatchResource(ResourceTags, ServiceManagedIdentity):
     def __init__(
         self,
         *,
-        identity: Optional["ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
@@ -1163,9 +1254,9 @@ class IotDestinationProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     """
 
@@ -1248,12 +1339,12 @@ class IotFhirDestination(LocationBasedResource):
     :vartype location: str
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
     :vartype system_data: ~azure.mgmt.healthcareapis.models.SystemData
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     :ivar resource_identity_resolution_type: Required. Determines how resource identity is resolved
-     on the destination. Possible values include: "Create", "Lookup".
+     on the destination. Known values are: "Create", "Lookup".
     :vartype resource_identity_resolution_type: str or
      ~azure.mgmt.healthcareapis.models.IotIdentityResolutionType
     :ivar fhir_service_resource_id: Required. Fully qualified resource id of the FHIR service to
@@ -1290,9 +1381,9 @@ class IotFhirDestination(LocationBasedResource):
     def __init__(
         self,
         *,
-        resource_identity_resolution_type: Union[str, "IotIdentityResolutionType"],
+        resource_identity_resolution_type: Union[str, "_models.IotIdentityResolutionType"],
         fhir_service_resource_id: str,
-        fhir_mapping: "IotMappingProperties",
+        fhir_mapping: "_models.IotMappingProperties",
         etag: Optional[str] = None,
         location: Optional[str] = None,
         **kwargs
@@ -1304,7 +1395,7 @@ class IotFhirDestination(LocationBasedResource):
         :keyword location: The resource location.
         :paramtype location: str
         :keyword resource_identity_resolution_type: Required. Determines how resource identity is
-         resolved on the destination. Possible values include: "Create", "Lookup".
+         resolved on the destination. Known values are: "Create", "Lookup".
         :paramtype resource_identity_resolution_type: str or
          ~azure.mgmt.healthcareapis.models.IotIdentityResolutionType
         :keyword fhir_service_resource_id: Required. Fully qualified resource id of the FHIR service to
@@ -1339,7 +1430,7 @@ class IotFhirDestinationCollection(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["IotFhirDestination"]] = None,
+        value: Optional[List["_models.IotFhirDestination"]] = None,
         **kwargs
     ):
         """
@@ -1360,12 +1451,12 @@ class IotFhirDestinationProperties(IotDestinationProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     :ivar resource_identity_resolution_type: Required. Determines how resource identity is resolved
-     on the destination. Possible values include: "Create", "Lookup".
+     on the destination. Known values are: "Create", "Lookup".
     :vartype resource_identity_resolution_type: str or
      ~azure.mgmt.healthcareapis.models.IotIdentityResolutionType
     :ivar fhir_service_resource_id: Required. Fully qualified resource id of the FHIR service to
@@ -1392,14 +1483,14 @@ class IotFhirDestinationProperties(IotDestinationProperties):
     def __init__(
         self,
         *,
-        resource_identity_resolution_type: Union[str, "IotIdentityResolutionType"],
+        resource_identity_resolution_type: Union[str, "_models.IotIdentityResolutionType"],
         fhir_service_resource_id: str,
-        fhir_mapping: "IotMappingProperties",
+        fhir_mapping: "_models.IotMappingProperties",
         **kwargs
     ):
         """
         :keyword resource_identity_resolution_type: Required. Determines how resource identity is
-         resolved on the destination. Possible values include: "Create", "Lookup".
+         resolved on the destination. Known values are: "Create", "Lookup".
         :paramtype resource_identity_resolution_type: str or
          ~azure.mgmt.healthcareapis.models.IotIdentityResolutionType
         :keyword fhir_service_resource_id: Required. Fully qualified resource id of the FHIR service to
@@ -1580,10 +1671,20 @@ class MetricSpecification(msrest.serialization.Model):
     :ivar fill_gap_with_zero: Optional. If set to true, then zero will be returned for time
      duration where no metric is emitted/published.
     :vartype fill_gap_with_zero: bool
+    :ivar metric_filter_pattern: Pattern for the filter of the metric.
+    :vartype metric_filter_pattern: str
     :ivar dimensions: Dimensions of the metric.
     :vartype dimensions: list[~azure.mgmt.healthcareapis.models.MetricDimension]
-    :ivar source_mdm_namespace: Name of the MDM namespace. Optional.
+    :ivar is_internal: Whether the metric is internal.
+    :vartype is_internal: bool
+    :ivar source_mdm_account: The source MDM account.
+    :vartype source_mdm_account: str
+    :ivar source_mdm_namespace: The source MDM namespace.
     :vartype source_mdm_namespace: str
+    :ivar enable_regional_mdm_account: Whether regional MDM account enabled.
+    :vartype enable_regional_mdm_account: bool
+    :ivar resource_id_dimension_name_override: The resource Id dimension name override.
+    :vartype resource_id_dimension_name_override: str
     """
 
     _attribute_map = {
@@ -1596,8 +1697,13 @@ class MetricSpecification(msrest.serialization.Model):
         'supported_aggregation_types': {'key': 'supportedAggregationTypes', 'type': '[str]'},
         'supported_time_grain_types': {'key': 'supportedTimeGrainTypes', 'type': '[str]'},
         'fill_gap_with_zero': {'key': 'fillGapWithZero', 'type': 'bool'},
+        'metric_filter_pattern': {'key': 'metricFilterPattern', 'type': 'str'},
         'dimensions': {'key': 'dimensions', 'type': '[MetricDimension]'},
+        'is_internal': {'key': 'isInternal', 'type': 'bool'},
+        'source_mdm_account': {'key': 'sourceMdmAccount', 'type': 'str'},
         'source_mdm_namespace': {'key': 'sourceMdmNamespace', 'type': 'str'},
+        'enable_regional_mdm_account': {'key': 'enableRegionalMdmAccount', 'type': 'bool'},
+        'resource_id_dimension_name_override': {'key': 'resourceIdDimensionNameOverride', 'type': 'str'},
     }
 
     def __init__(
@@ -1612,8 +1718,13 @@ class MetricSpecification(msrest.serialization.Model):
         supported_aggregation_types: Optional[List[str]] = None,
         supported_time_grain_types: Optional[List[str]] = None,
         fill_gap_with_zero: Optional[bool] = None,
-        dimensions: Optional[List["MetricDimension"]] = None,
+        metric_filter_pattern: Optional[str] = None,
+        dimensions: Optional[List["_models.MetricDimension"]] = None,
+        is_internal: Optional[bool] = None,
+        source_mdm_account: Optional[str] = None,
         source_mdm_namespace: Optional[str] = None,
+        enable_regional_mdm_account: Optional[bool] = None,
+        resource_id_dimension_name_override: Optional[str] = None,
         **kwargs
     ):
         """
@@ -1638,10 +1749,20 @@ class MetricSpecification(msrest.serialization.Model):
         :keyword fill_gap_with_zero: Optional. If set to true, then zero will be returned for time
          duration where no metric is emitted/published.
         :paramtype fill_gap_with_zero: bool
+        :keyword metric_filter_pattern: Pattern for the filter of the metric.
+        :paramtype metric_filter_pattern: str
         :keyword dimensions: Dimensions of the metric.
         :paramtype dimensions: list[~azure.mgmt.healthcareapis.models.MetricDimension]
-        :keyword source_mdm_namespace: Name of the MDM namespace. Optional.
+        :keyword is_internal: Whether the metric is internal.
+        :paramtype is_internal: bool
+        :keyword source_mdm_account: The source MDM account.
+        :paramtype source_mdm_account: str
+        :keyword source_mdm_namespace: The source MDM namespace.
         :paramtype source_mdm_namespace: str
+        :keyword enable_regional_mdm_account: Whether regional MDM account enabled.
+        :paramtype enable_regional_mdm_account: bool
+        :keyword resource_id_dimension_name_override: The resource Id dimension name override.
+        :paramtype resource_id_dimension_name_override: str
         """
         super(MetricSpecification, self).__init__(**kwargs)
         self.name = name
@@ -1653,8 +1774,13 @@ class MetricSpecification(msrest.serialization.Model):
         self.supported_aggregation_types = supported_aggregation_types
         self.supported_time_grain_types = supported_time_grain_types
         self.fill_gap_with_zero = fill_gap_with_zero
+        self.metric_filter_pattern = metric_filter_pattern
         self.dimensions = dimensions
+        self.is_internal = is_internal
+        self.source_mdm_account = source_mdm_account
         self.source_mdm_namespace = source_mdm_namespace
+        self.enable_regional_mdm_account = enable_regional_mdm_account
+        self.resource_id_dimension_name_override = resource_id_dimension_name_override
 
 
 class OperationDetail(msrest.serialization.Model):
@@ -1672,7 +1798,7 @@ class OperationDetail(msrest.serialization.Model):
     :ivar origin: Default value is 'user,system'.
     :vartype origin: str
     :ivar action_type: Enum. Indicates the action type. "Internal" refers to actions that are for
-     internal only APIs. Possible values include: "Internal".
+     internal only APIs. Known values are: "Internal".
     :vartype action_type: str or ~azure.mgmt.healthcareapis.models.ActionType
     :ivar properties: Properties of the operation.
     :vartype properties: ~azure.mgmt.healthcareapis.models.OperationProperties
@@ -1697,8 +1823,8 @@ class OperationDetail(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        display: Optional["OperationDisplay"] = None,
-        properties: Optional["OperationProperties"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
+        properties: Optional["_models.OperationProperties"] = None,
         **kwargs
     ):
         """
@@ -1772,7 +1898,7 @@ class OperationProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        service_specification: Optional["ServiceSpecification"] = None,
+        service_specification: Optional["_models.ServiceSpecification"] = None,
         **kwargs
     ):
         """
@@ -1792,7 +1918,7 @@ class OperationResultsDescription(msrest.serialization.Model):
     :vartype id: str
     :ivar name: The name of the operation result.
     :vartype name: str
-    :ivar status: The status of the operation being performed. Possible values include: "Canceled",
+    :ivar status: The status of the operation being performed. Known values are: "Canceled",
      "Succeeded", "Failed", "Requested", "Running".
     :vartype status: str or ~azure.mgmt.healthcareapis.models.OperationResultStatus
     :ivar start_time: The time that the operation was started.
@@ -1925,7 +2051,7 @@ class PrivateEndpointConnection(Resource):
     :vartype private_link_service_connection_state:
      ~azure.mgmt.healthcareapis.models.PrivateLinkServiceConnectionState
     :ivar provisioning_state: The provisioning state of the private endpoint connection resource.
-     Possible values include: "Succeeded", "Creating", "Deleting", "Failed".
+     Known values are: "Succeeded", "Creating", "Deleting", "Failed".
     :vartype provisioning_state: str or
      ~azure.mgmt.healthcareapis.models.PrivateEndpointConnectionProvisioningState
     """
@@ -1949,8 +2075,8 @@ class PrivateEndpointConnection(Resource):
     def __init__(
         self,
         *,
-        private_endpoint: Optional["PrivateEndpoint"] = None,
-        private_link_service_connection_state: Optional["PrivateLinkServiceConnectionState"] = None,
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+        private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
         **kwargs
     ):
         """
@@ -1987,7 +2113,7 @@ class PrivateEndpointConnectionDescription(PrivateEndpointConnection):
     :vartype private_link_service_connection_state:
      ~azure.mgmt.healthcareapis.models.PrivateLinkServiceConnectionState
     :ivar provisioning_state: The provisioning state of the private endpoint connection resource.
-     Possible values include: "Succeeded", "Creating", "Deleting", "Failed".
+     Known values are: "Succeeded", "Creating", "Deleting", "Failed".
     :vartype provisioning_state: str or
      ~azure.mgmt.healthcareapis.models.PrivateEndpointConnectionProvisioningState
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
@@ -2015,8 +2141,8 @@ class PrivateEndpointConnectionDescription(PrivateEndpointConnection):
     def __init__(
         self,
         *,
-        private_endpoint: Optional["PrivateEndpoint"] = None,
-        private_link_service_connection_state: Optional["PrivateLinkServiceConnectionState"] = None,
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+        private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
         **kwargs
     ):
         """
@@ -2045,7 +2171,7 @@ class PrivateEndpointConnectionListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateEndpointConnection"]] = None,
+        value: Optional[List["_models.PrivateEndpointConnection"]] = None,
         **kwargs
     ):
         """
@@ -2070,7 +2196,7 @@ class PrivateEndpointConnectionListResultDescription(msrest.serialization.Model)
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateEndpointConnectionDescription"]] = None,
+        value: Optional[List["_models.PrivateEndpointConnectionDescription"]] = None,
         **kwargs
     ):
         """
@@ -2205,7 +2331,7 @@ class PrivateLinkResourceListResultDescription(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateLinkResourceDescription"]] = None,
+        value: Optional[List["_models.PrivateLinkResourceDescription"]] = None,
         **kwargs
     ):
         """
@@ -2220,7 +2346,7 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     """A collection of information about the state of the connection between service consumer and provider.
 
     :ivar status: Indicates whether the connection has been Approved/Rejected/Removed by the owner
-     of the service. Possible values include: "Pending", "Approved", "Rejected".
+     of the service. Known values are: "Pending", "Approved", "Rejected".
     :vartype status: str or
      ~azure.mgmt.healthcareapis.models.PrivateEndpointServiceConnectionStatus
     :ivar description: The reason for approval/rejection of the connection.
@@ -2239,14 +2365,14 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Optional[Union[str, "PrivateEndpointServiceConnectionStatus"]] = None,
+        status: Optional[Union[str, "_models.PrivateEndpointServiceConnectionStatus"]] = None,
         description: Optional[str] = None,
         actions_required: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword status: Indicates whether the connection has been Approved/Rejected/Removed by the
-         owner of the service. Possible values include: "Pending", "Approved", "Rejected".
+         owner of the service. Known values are: "Pending", "Approved", "Rejected".
         :paramtype status: str or
          ~azure.mgmt.healthcareapis.models.PrivateEndpointServiceConnectionStatus
         :keyword description: The reason for approval/rejection of the connection.
@@ -2264,8 +2390,8 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
 class ResourceVersionPolicyConfiguration(msrest.serialization.Model):
     """The settings for history tracking for FHIR resources.
 
-    :ivar default: The default value for tracking history across all resources. Possible values
-     include: "no-version", "versioned", "versioned-update".
+    :ivar default: The default value for tracking history across all resources. Known values are:
+     "no-version", "versioned", "versioned-update".
     :vartype default: str or ~azure.mgmt.healthcareapis.models.FhirResourceVersionPolicy
     :ivar resource_type_overrides: A list of FHIR Resources and their version policy overrides.
     :vartype resource_type_overrides: dict[str, str or
@@ -2280,13 +2406,13 @@ class ResourceVersionPolicyConfiguration(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        default: Optional[Union[str, "FhirResourceVersionPolicy"]] = None,
-        resource_type_overrides: Optional[Dict[str, Union[str, "FhirResourceVersionPolicy"]]] = None,
+        default: Optional[Union[str, "_models.FhirResourceVersionPolicy"]] = None,
+        resource_type_overrides: Optional[Dict[str, Union[str, "_models.FhirResourceVersionPolicy"]]] = None,
         **kwargs
     ):
         """
-        :keyword default: The default value for tracking history across all resources. Possible values
-         include: "no-version", "versioned", "versioned-update".
+        :keyword default: The default value for tracking history across all resources. Known values
+         are: "no-version", "versioned", "versioned-update".
         :paramtype default: str or ~azure.mgmt.healthcareapis.models.FhirResourceVersionPolicy
         :keyword resource_type_overrides: A list of FHIR Resources and their version policy overrides.
         :paramtype resource_type_overrides: dict[str, str or
@@ -2348,7 +2474,7 @@ class ServiceAcrConfigurationInfo(msrest.serialization.Model):
         self,
         *,
         login_servers: Optional[List[str]] = None,
-        oci_artifacts: Optional[List["ServiceOciArtifactEntry"]] = None,
+        oci_artifacts: Optional[List["_models.ServiceOciArtifactEntry"]] = None,
         **kwargs
     ):
         """
@@ -2519,6 +2645,45 @@ class ServiceExportConfigurationInfo(msrest.serialization.Model):
         self.storage_account_name = storage_account_name
 
 
+class ServiceImportConfigurationInfo(msrest.serialization.Model):
+    """Import operation configuration information.
+
+    :ivar integration_data_store: The name of the default integration storage account.
+    :vartype integration_data_store: str
+    :ivar initial_import_mode: If the FHIR service is in InitialImportMode.
+    :vartype initial_import_mode: bool
+    :ivar enabled: If the import operation is enabled.
+    :vartype enabled: bool
+    """
+
+    _attribute_map = {
+        'integration_data_store': {'key': 'integrationDataStore', 'type': 'str'},
+        'initial_import_mode': {'key': 'initialImportMode', 'type': 'bool'},
+        'enabled': {'key': 'enabled', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        integration_data_store: Optional[str] = None,
+        initial_import_mode: Optional[bool] = None,
+        enabled: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword integration_data_store: The name of the default integration storage account.
+        :paramtype integration_data_store: str
+        :keyword initial_import_mode: If the FHIR service is in InitialImportMode.
+        :paramtype initial_import_mode: bool
+        :keyword enabled: If the import operation is enabled.
+        :paramtype enabled: bool
+        """
+        super(ServiceImportConfigurationInfo, self).__init__(**kwargs)
+        self.integration_data_store = integration_data_store
+        self.initial_import_mode = initial_import_mode
+        self.enabled = enabled
+
+
 class ServiceManagedIdentityIdentity(msrest.serialization.Model):
     """Setting indicating whether the service has a managed identity associated with it.
 
@@ -2527,7 +2692,7 @@ class ServiceManagedIdentityIdentity(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. Type of identity being specified, currently SystemAssigned and None are
-     allowed. Possible values include: "None", "SystemAssigned", "UserAssigned",
+     allowed. Known values are: "None", "SystemAssigned", "UserAssigned",
      "SystemAssigned,UserAssigned".
     :vartype type: str or ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityType
     :ivar principal_id: The service principal ID of the system assigned identity. This property
@@ -2560,13 +2725,13 @@ class ServiceManagedIdentityIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Union[str, "ServiceManagedIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "UserAssignedIdentity"]] = None,
+        type: Union[str, "_models.ServiceManagedIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs
     ):
         """
         :keyword type: Required. Type of identity being specified, currently SystemAssigned and None
-         are allowed. Possible values include: "None", "SystemAssigned", "UserAssigned",
+         are allowed. Known values are: "None", "SystemAssigned", "UserAssigned",
          "SystemAssigned,UserAssigned".
         :paramtype type: str or ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityType
         :keyword user_assigned_identities: The set of user assigned identities associated with the
@@ -2635,7 +2800,7 @@ class ServicesResource(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The resource type.
     :vartype type: str
-    :ivar kind: Required. The kind of the service. Possible values include: "fhir", "fhir-Stu3",
+    :ivar kind: Required. The kind of the service. Known values are: "fhir", "fhir-Stu3",
      "fhir-R4".
     :vartype kind: str or ~azure.mgmt.healthcareapis.models.Kind
     :ivar location: Required. The resource location.
@@ -2672,15 +2837,15 @@ class ServicesResource(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        kind: Union[str, "Kind"],
+        kind: Union[str, "_models.Kind"],
         location: str,
         tags: Optional[Dict[str, str]] = None,
         etag: Optional[str] = None,
-        identity: Optional["ServicesResourceIdentity"] = None,
+        identity: Optional["_models.ServicesResourceIdentity"] = None,
         **kwargs
     ):
         """
-        :keyword kind: Required. The kind of the service. Possible values include: "fhir", "fhir-Stu3",
+        :keyword kind: Required. The kind of the service. Known values are: "fhir", "fhir-Stu3",
          "fhir-R4".
         :paramtype kind: str or ~azure.mgmt.healthcareapis.models.Kind
         :keyword location: Required. The resource location.
@@ -2718,7 +2883,7 @@ class ServicesDescription(ServicesResource):
     :vartype name: str
     :ivar type: The resource type.
     :vartype type: str
-    :ivar kind: Required. The kind of the service. Possible values include: "fhir", "fhir-Stu3",
+    :ivar kind: Required. The kind of the service. Known values are: "fhir", "fhir-Stu3",
      "fhir-R4".
     :vartype kind: str or ~azure.mgmt.healthcareapis.models.Kind
     :ivar location: Required. The resource location.
@@ -2762,16 +2927,16 @@ class ServicesDescription(ServicesResource):
     def __init__(
         self,
         *,
-        kind: Union[str, "Kind"],
+        kind: Union[str, "_models.Kind"],
         location: str,
         tags: Optional[Dict[str, str]] = None,
         etag: Optional[str] = None,
-        identity: Optional["ServicesResourceIdentity"] = None,
-        properties: Optional["ServicesProperties"] = None,
+        identity: Optional["_models.ServicesResourceIdentity"] = None,
+        properties: Optional["_models.ServicesProperties"] = None,
         **kwargs
     ):
         """
-        :keyword kind: Required. The kind of the service. Possible values include: "fhir", "fhir-Stu3",
+        :keyword kind: Required. The kind of the service. Known values are: "fhir", "fhir-Stu3",
          "fhir-R4".
         :paramtype kind: str or ~azure.mgmt.healthcareapis.models.Kind
         :keyword location: Required. The resource location.
@@ -2810,7 +2975,7 @@ class ServicesDescriptionListResult(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["ServicesDescription"]] = None,
+        value: Optional[List["_models.ServicesDescription"]] = None,
         **kwargs
     ):
         """
@@ -2831,8 +2996,7 @@ class ServicesNameAvailabilityInfo(msrest.serialization.Model):
 
     :ivar name_available: The value which indicates whether the provided name is available.
     :vartype name_available: bool
-    :ivar reason: The reason for unavailability. Possible values include: "Invalid",
-     "AlreadyExists".
+    :ivar reason: The reason for unavailability. Known values are: "Invalid", "AlreadyExists".
     :vartype reason: str or ~azure.mgmt.healthcareapis.models.ServiceNameUnavailabilityReason
     :ivar message: The detailed reason message.
     :vartype message: str
@@ -2871,7 +3035,7 @@ class ServicesPatchDescription(msrest.serialization.Model):
     :ivar tags: A set of tags. Instance tags.
     :vartype tags: dict[str, str]
     :ivar public_network_access: Control permission for data plane traffic coming from public
-     networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+     networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
     """
 
@@ -2884,14 +3048,14 @@ class ServicesPatchDescription(msrest.serialization.Model):
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         **kwargs
     ):
         """
         :keyword tags: A set of tags. Instance tags.
         :paramtype tags: dict[str, str]
         :keyword public_network_access: Control permission for data plane traffic coming from public
-         networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+         networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
         """
         super(ServicesPatchDescription, self).__init__(**kwargs)
@@ -2916,8 +3080,8 @@ class ServiceSpecification(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        log_specifications: Optional[List["LogSpecification"]] = None,
-        metric_specifications: Optional[List["MetricSpecification"]] = None,
+        log_specifications: Optional[List["_models.LogSpecification"]] = None,
+        metric_specifications: Optional[List["_models.MetricSpecification"]] = None,
         **kwargs
     ):
         """
@@ -2936,9 +3100,9 @@ class ServicesProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     :ivar access_policies: The access policies of the service instance.
     :vartype access_policies: list[~azure.mgmt.healthcareapis.models.ServiceAccessPolicyEntry]
@@ -2957,11 +3121,13 @@ class ServicesProperties(msrest.serialization.Model):
     :vartype private_endpoint_connections:
      list[~azure.mgmt.healthcareapis.models.PrivateEndpointConnection]
     :ivar public_network_access: Control permission for data plane traffic coming from public
-     networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+     networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
     :ivar acr_configuration: The azure container registry settings used for convert data operation
      of the service instance.
     :vartype acr_configuration: ~azure.mgmt.healthcareapis.models.ServiceAcrConfigurationInfo
+    :ivar import_configuration: The settings for the import operation of the service instance.
+    :vartype import_configuration: ~azure.mgmt.healthcareapis.models.ServiceImportConfigurationInfo
     """
 
     _validation = {
@@ -2978,19 +3144,21 @@ class ServicesProperties(msrest.serialization.Model):
         'private_endpoint_connections': {'key': 'privateEndpointConnections', 'type': '[PrivateEndpointConnection]'},
         'public_network_access': {'key': 'publicNetworkAccess', 'type': 'str'},
         'acr_configuration': {'key': 'acrConfiguration', 'type': 'ServiceAcrConfigurationInfo'},
+        'import_configuration': {'key': 'importConfiguration', 'type': 'ServiceImportConfigurationInfo'},
     }
 
     def __init__(
         self,
         *,
-        access_policies: Optional[List["ServiceAccessPolicyEntry"]] = None,
-        cosmos_db_configuration: Optional["ServiceCosmosDbConfigurationInfo"] = None,
-        authentication_configuration: Optional["ServiceAuthenticationConfigurationInfo"] = None,
-        cors_configuration: Optional["ServiceCorsConfigurationInfo"] = None,
-        export_configuration: Optional["ServiceExportConfigurationInfo"] = None,
-        private_endpoint_connections: Optional[List["PrivateEndpointConnection"]] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
-        acr_configuration: Optional["ServiceAcrConfigurationInfo"] = None,
+        access_policies: Optional[List["_models.ServiceAccessPolicyEntry"]] = None,
+        cosmos_db_configuration: Optional["_models.ServiceCosmosDbConfigurationInfo"] = None,
+        authentication_configuration: Optional["_models.ServiceAuthenticationConfigurationInfo"] = None,
+        cors_configuration: Optional["_models.ServiceCorsConfigurationInfo"] = None,
+        export_configuration: Optional["_models.ServiceExportConfigurationInfo"] = None,
+        private_endpoint_connections: Optional[List["_models.PrivateEndpointConnection"]] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
+        acr_configuration: Optional["_models.ServiceAcrConfigurationInfo"] = None,
+        import_configuration: Optional["_models.ServiceImportConfigurationInfo"] = None,
         **kwargs
     ):
         """
@@ -3013,11 +3181,14 @@ class ServicesProperties(msrest.serialization.Model):
         :paramtype private_endpoint_connections:
          list[~azure.mgmt.healthcareapis.models.PrivateEndpointConnection]
         :keyword public_network_access: Control permission for data plane traffic coming from public
-         networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+         networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
         :keyword acr_configuration: The azure container registry settings used for convert data
          operation of the service instance.
         :paramtype acr_configuration: ~azure.mgmt.healthcareapis.models.ServiceAcrConfigurationInfo
+        :keyword import_configuration: The settings for the import operation of the service instance.
+        :paramtype import_configuration:
+         ~azure.mgmt.healthcareapis.models.ServiceImportConfigurationInfo
         """
         super(ServicesProperties, self).__init__(**kwargs)
         self.provisioning_state = None
@@ -3029,6 +3200,7 @@ class ServicesProperties(msrest.serialization.Model):
         self.private_endpoint_connections = private_endpoint_connections
         self.public_network_access = public_network_access
         self.acr_configuration = acr_configuration
+        self.import_configuration = import_configuration
 
 
 class ServicesResourceIdentity(msrest.serialization.Model):
@@ -3041,7 +3213,7 @@ class ServicesResourceIdentity(msrest.serialization.Model):
     :ivar tenant_id: The tenant ID of the resource.
     :vartype tenant_id: str
     :ivar type: Type of identity being specified, currently SystemAssigned and None are allowed.
-     Possible values include: "SystemAssigned", "None".
+     Known values are: "SystemAssigned", "None".
     :vartype type: str or ~azure.mgmt.healthcareapis.models.ManagedServiceIdentityType
     """
 
@@ -3059,12 +3231,12 @@ class ServicesResourceIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "ManagedServiceIdentityType"]] = None,
+        type: Optional[Union[str, "_models.ManagedServiceIdentityType"]] = None,
         **kwargs
     ):
         """
         :keyword type: Type of identity being specified, currently SystemAssigned and None are allowed.
-         Possible values include: "SystemAssigned", "None".
+         Known values are: "SystemAssigned", "None".
         :paramtype type: str or ~azure.mgmt.healthcareapis.models.ManagedServiceIdentityType
         """
         super(ServicesResourceIdentity, self).__init__(**kwargs)
@@ -3078,15 +3250,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.healthcareapis.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.healthcareapis.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -3105,25 +3277,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.healthcareapis.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.healthcareapis.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
@@ -3217,7 +3389,7 @@ class Workspace(TaggedResource):
         etag: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        properties: Optional["WorkspaceProperties"] = None,
+        properties: Optional["_models.WorkspaceProperties"] = None,
         **kwargs
     ):
         """
@@ -3254,7 +3426,7 @@ class WorkspaceList(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["Workspace"]] = None,
+        value: Optional[List["_models.Workspace"]] = None,
         **kwargs
     ):
         """
@@ -3297,16 +3469,16 @@ class WorkspaceProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: The provisioning state. Possible values include: "Deleting",
-     "Succeeded", "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled",
-     "Deprovisioned", "Moving", "Suspended", "Warned", "SystemMaintenance".
+    :ivar provisioning_state: The provisioning state. Known values are: "Deleting", "Succeeded",
+     "Creating", "Accepted", "Verifying", "Updating", "Failed", "Canceled", "Deprovisioned",
+     "Moving", "Suspended", "Warned", "SystemMaintenance".
     :vartype provisioning_state: str or ~azure.mgmt.healthcareapis.models.ProvisioningState
     :ivar private_endpoint_connections: The list of private endpoint connections that are set up
      for this resource.
     :vartype private_endpoint_connections:
      list[~azure.mgmt.healthcareapis.models.PrivateEndpointConnection]
     :ivar public_network_access: Control permission for data plane traffic coming from public
-     networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+     networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
     """
 
@@ -3324,12 +3496,12 @@ class WorkspaceProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         **kwargs
     ):
         """
         :keyword public_network_access: Control permission for data plane traffic coming from public
-         networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+         networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.healthcareapis.models.PublicNetworkAccess
         """
         super(WorkspaceProperties, self).__init__(**kwargs)

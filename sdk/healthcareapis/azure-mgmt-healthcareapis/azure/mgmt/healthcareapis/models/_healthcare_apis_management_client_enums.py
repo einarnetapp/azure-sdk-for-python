@@ -7,17 +7,16 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
     """
 
     INTERNAL = "Internal"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -26,7 +25,7 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class FhirResourceVersionPolicy(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class FhirResourceVersionPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Controls how resources are versioned on the FHIR service
     """
 
@@ -34,21 +33,21 @@ class FhirResourceVersionPolicy(with_metaclass(CaseInsensitiveEnumMeta, str, Enu
     VERSIONED = "versioned"
     VERSIONED_UPDATE = "versioned-update"
 
-class FhirServiceKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class FhirServiceKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of the service.
     """
 
     FHIR_STU3 = "fhir-Stu3"
     FHIR_R4 = "fhir-R4"
 
-class IotIdentityResolutionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotIdentityResolutionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of IoT identity resolution to use with the destination.
     """
 
     CREATE = "Create"
     LOOKUP = "Lookup"
 
-class Kind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Kind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of the service.
     """
 
@@ -56,14 +55,14 @@ class Kind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FHIR_STU3 = "fhir-Stu3"
     FHIR_R4 = "fhir-R4"
 
-class ManagedServiceIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of identity being specified, currently SystemAssigned and None are allowed.
     """
 
     SYSTEM_ASSIGNED = "SystemAssigned"
     NONE = "None"
 
-class OperationResultStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class OperationResultStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the operation being performed.
     """
 
@@ -73,7 +72,7 @@ class OperationResultStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     REQUESTED = "Requested"
     RUNNING = "Running"
 
-class PrivateEndpointConnectionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The current provisioning state.
     """
 
@@ -82,7 +81,7 @@ class PrivateEndpointConnectionProvisioningState(with_metaclass(CaseInsensitiveE
     DELETING = "Deleting"
     FAILED = "Failed"
 
-class PrivateEndpointServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The private endpoint connection status.
     """
 
@@ -90,7 +89,7 @@ class PrivateEndpointServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumM
     APPROVED = "Approved"
     REJECTED = "Rejected"
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state.
     """
 
@@ -108,7 +107,7 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     WARNED = "Warned"
     SYSTEM_MAINTENANCE = "SystemMaintenance"
 
-class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Control permission for data plane traffic coming from public networks while private endpoint is
     enabled.
     """
@@ -116,7 +115,7 @@ class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class ServiceEventState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ServiceEventState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates the current status of event support for the resource.
     """
 
@@ -124,7 +123,7 @@ class ServiceEventState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ENABLED = "Enabled"
     UPDATING = "Updating"
 
-class ServiceManagedIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ServiceManagedIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of identity being specified, currently SystemAssigned and None are allowed.
     """
 
@@ -133,7 +132,7 @@ class ServiceManagedIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, En
     USER_ASSIGNED = "UserAssigned"
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
-class ServiceNameUnavailabilityReason(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ServiceNameUnavailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The reason for unavailability.
     """
 

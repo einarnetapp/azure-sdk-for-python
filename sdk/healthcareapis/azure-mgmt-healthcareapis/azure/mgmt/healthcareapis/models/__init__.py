@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import CheckNameAvailabilityParameters
+from ._models_py3 import CorsConfiguration
 from ._models_py3 import DicomService
 from ._models_py3 import DicomServiceAuthenticationConfiguration
 from ._models_py3 import DicomServiceCollection
@@ -21,6 +22,7 @@ from ._models_py3 import FhirServiceAuthenticationConfiguration
 from ._models_py3 import FhirServiceCollection
 from ._models_py3 import FhirServiceCorsConfiguration
 from ._models_py3 import FhirServiceExportConfiguration
+from ._models_py3 import FhirServiceImportConfiguration
 from ._models_py3 import FhirServicePatchResource
 from ._models_py3 import IotConnector
 from ._models_py3 import IotConnectorCollection
@@ -59,6 +61,7 @@ from ._models_py3 import ServiceAuthenticationConfigurationInfo
 from ._models_py3 import ServiceCorsConfigurationInfo
 from ._models_py3 import ServiceCosmosDbConfigurationInfo
 from ._models_py3 import ServiceExportConfigurationInfo
+from ._models_py3 import ServiceImportConfigurationInfo
 from ._models_py3 import ServiceManagedIdentity
 from ._models_py3 import ServiceManagedIdentityIdentity
 from ._models_py3 import ServiceOciArtifactEntry
@@ -96,9 +99,12 @@ from ._healthcare_apis_management_client_enums import (
     ServiceManagedIdentityType,
     ServiceNameUnavailabilityReason,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'CheckNameAvailabilityParameters',
+    'CorsConfiguration',
     'DicomService',
     'DicomServiceAuthenticationConfiguration',
     'DicomServiceCollection',
@@ -113,6 +119,7 @@ __all__ = [
     'FhirServiceCollection',
     'FhirServiceCorsConfiguration',
     'FhirServiceExportConfiguration',
+    'FhirServiceImportConfiguration',
     'FhirServicePatchResource',
     'IotConnector',
     'IotConnectorCollection',
@@ -151,6 +158,7 @@ __all__ = [
     'ServiceCorsConfigurationInfo',
     'ServiceCosmosDbConfigurationInfo',
     'ServiceExportConfigurationInfo',
+    'ServiceImportConfigurationInfo',
     'ServiceManagedIdentity',
     'ServiceManagedIdentityIdentity',
     'ServiceOciArtifactEntry',
@@ -185,3 +193,5 @@ __all__ = [
     'ServiceManagedIdentityType',
     'ServiceNameUnavailabilityReason',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
