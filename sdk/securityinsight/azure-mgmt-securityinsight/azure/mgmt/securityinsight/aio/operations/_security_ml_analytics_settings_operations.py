@@ -20,18 +20,18 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._metadata_operations import build_create_request, build_delete_request, build_get_request, build_list_request, build_update_request
+from ...operations._security_ml_analytics_settings_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class MetadataOperations:
+class SecurityMLAnalyticsSettingsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.aio.SecurityInsights`'s
-        :attr:`metadata` attribute.
+        :attr:`security_ml_analytics_settings` attribute.
     """
 
     models = _models
@@ -49,39 +49,26 @@ class MetadataOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        filter: Optional[str] = None,
-        orderby: Optional[str] = None,
-        top: Optional[int] = None,
-        skip: Optional[int] = None,
         **kwargs: Any
-    ) -> AsyncIterable[_models.MetadataList]:
-        """List of all metadata.
+    ) -> AsyncIterable[_models.SecurityMLAnalyticsSettingsList]:
+        """Gets all Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param filter: Filters the results, based on a Boolean condition. Optional. Default value is
-         None.
-        :type filter: str
-        :param orderby: Sorts the results. Optional. Default value is None.
-        :type orderby: str
-        :param top: Returns only the first n results. Optional. Default value is None.
-        :type top: int
-        :param skip: Used to skip n elements in the OData query (offset). Returns a nextLink to the
-         next page of results if there are any left. Default value is None.
-        :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either MetadataList or the result of cls(response)
+        :return: An iterator like instance of either SecurityMLAnalyticsSettingsList or the result of
+         cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.MetadataList]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsList]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MetadataList]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSettingsList]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -95,10 +82,6 @@ class MetadataOperations:
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     api_version=api_version,
-                    filter=filter,
-                    orderby=orderby,
-                    top=top,
-                    skip=skip,
                     template_url=self.list.metadata['url'],
                     headers=_headers,
                     params=_params,
@@ -113,10 +96,6 @@ class MetadataOperations:
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     api_version=api_version,
-                    filter=filter,
-                    orderby=orderby,
-                    top=top,
-                    skip=skip,
                     template_url=next_link,
                     headers=_headers,
                     params=_params,
@@ -127,7 +106,7 @@ class MetadataOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("MetadataList", pipeline_response)
+            deserialized = self._deserialize("SecurityMLAnalyticsSettingsList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -153,27 +132,27 @@ class MetadataOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings"}  # type: ignore
 
     @distributed_trace_async
     async def get(
         self,
         resource_group_name: str,
         workspace_name: str,
-        metadata_name: str,
+        settings_resource_name: str,
         **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Get a Metadata.
+    ) -> _models.SecurityMLAnalyticsSetting:
+        """Gets the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param metadata_name: The Metadata name.
-        :type metadata_name: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -185,14 +164,14 @@ class MetadataOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MetadataModel]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSetting]
 
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            metadata_name=metadata_name,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
             headers=_headers,
@@ -212,14 +191,93 @@ class MetadataOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('MetadataModel', pipeline_response)
+        deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        settings_resource_name: str,
+        security_ml_analytics_setting: _models.SecurityMLAnalyticsSetting,
+        **kwargs: Any
+    ) -> _models.SecurityMLAnalyticsSetting:
+        """Creates or updates the Security ML Analytics Settings.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
+        :param security_ml_analytics_setting: The security ML Analytics setting.
+        :type security_ml_analytics_setting:
+         ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSetting]
+
+        _json = self._serialize.body(security_ml_analytics_setting, 'SecurityMLAnalyticsSetting')
+
+        request = build_create_or_update_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            settings_resource_name=settings_resource_name,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.create_or_update.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
 
     @distributed_trace_async
@@ -227,17 +285,17 @@ class MetadataOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        metadata_name: str,
+        settings_resource_name: str,
         **kwargs: Any
     ) -> None:
-        """Delete a Metadata.
+        """Delete the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param metadata_name: The Metadata name.
-        :type metadata_name: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -259,7 +317,7 @@ class MetadataOperations:
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            metadata_name=metadata_name,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
             headers=_headers,
@@ -282,157 +340,5 @@ class MetadataOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"}  # type: ignore
-
-
-    @distributed_trace_async
-    async def create(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata: _models.MetadataModel,
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Create a Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name.
-        :type metadata_name: str
-        :param metadata: Metadata resource.
-        :type metadata: ~azure.mgmt.securityinsight.models.MetadataModel
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MetadataModel]
-
-        _json = self._serialize.body(metadata, 'MetadataModel')
-
-        request = build_create_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            metadata_name=metadata_name,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.create.metadata['url'],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('MetadataModel', pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize('MetadataModel', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"}  # type: ignore
-
-
-    @distributed_trace_async
-    async def update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        metadata_name: str,
-        metadata_patch: _models.MetadataPatch,
-        **kwargs: Any
-    ) -> _models.MetadataModel:
-        """Update an existing Metadata.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace.
-        :type workspace_name: str
-        :param metadata_name: The Metadata name.
-        :type metadata_name: str
-        :param metadata_patch: Partial metadata request.
-        :type metadata_patch: ~azure.mgmt.securityinsight.models.MetadataPatch
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: MetadataModel, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.MetadataModel
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MetadataModel]
-
-        _json = self._serialize.body(metadata_patch, 'MetadataPatch')
-
-        request = build_update_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            metadata_name=metadata_name,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.update.metadata['url'],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('MetadataModel', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/metadata/{metadataName}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
