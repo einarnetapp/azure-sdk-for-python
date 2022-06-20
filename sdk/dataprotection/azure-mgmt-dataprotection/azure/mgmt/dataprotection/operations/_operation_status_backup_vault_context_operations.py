@@ -28,7 +28,8 @@ _SERIALIZER.client_side_validation = False
 
 def build_get_request(
     subscription_id: str,
-    location: str,
+    resource_group_name: str,
+    vault_name: str,
     operation_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -39,10 +40,11 @@ def build_get_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationStatus/{operationId}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/operationStatus/{operationId}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
-        "location": _SERIALIZER.url("location", location, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+        "vaultName": _SERIALIZER.url("vault_name", vault_name, 'str'),
         "operationId": _SERIALIZER.url("operation_id", operation_id, 'str'),
     }
 
@@ -62,14 +64,14 @@ def build_get_request(
         **kwargs
     )
 
-class OperationStatusOperations:
+class OperationStatusBackupVaultContextOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.dataprotection.DataProtectionClient`'s
-        :attr:`operation_status` attribute.
+        :attr:`operation_status_backup_vault_context` attribute.
     """
 
     models = _models
@@ -85,16 +87,19 @@ class OperationStatusOperations:
     @distributed_trace
     def get(
         self,
-        location: str,
+        resource_group_name: str,
+        vault_name: str,
         operation_id: str,
         **kwargs: Any
     ) -> _models.OperationResource:
-        """Gets the operation status for a resource.
+        """Gets the operation status for an operation over a BackupVault's context.
 
-        Gets the operation status for a resource.
+        Gets the operation status for an operation over a BackupVault's context.
 
-        :param location:
-        :type location: str
+        :param resource_group_name: The name of the resource group where the backup vault is present.
+        :type resource_group_name: str
+        :param vault_name: The name of the backup vault.
+        :type vault_name: str
         :param operation_id:
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -116,7 +121,8 @@ class OperationStatusOperations:
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
-            location=location,
+            resource_group_name=resource_group_name,
+            vault_name=vault_name,
             operation_id=operation_id,
             api_version=api_version,
             template_url=self.get.metadata['url'],
@@ -144,5 +150,5 @@ class OperationStatusOperations:
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationStatus/{operationId}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/operationStatus/{operationId}"}  # type: ignore
 
