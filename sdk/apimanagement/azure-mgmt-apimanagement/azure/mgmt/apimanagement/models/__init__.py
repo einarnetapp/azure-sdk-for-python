@@ -6,14 +6,10 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._models_py3 import AccessInformationCollection
 from ._models_py3 import AccessInformationContract
-from ._models_py3 import AccessInformationCreateParameters
-from ._models_py3 import AccessInformationSecretsContract
 from ._models_py3 import AccessInformationUpdateParameters
 from ._models_py3 import AdditionalLocation
 from ._models_py3 import ApiCollection
-from ._models_py3 import ApiContactInformation
 from ._models_py3 import ApiContract
 from ._models_py3 import ApiContractProperties
 from ._models_py3 import ApiContractUpdateProperties
@@ -22,13 +18,10 @@ from ._models_py3 import ApiCreateOrUpdateProperties
 from ._models_py3 import ApiCreateOrUpdatePropertiesWsdlSelector
 from ._models_py3 import ApiEntityBaseContract
 from ._models_py3 import ApiExportResult
-from ._models_py3 import ApiExportResultValue
-from ._models_py3 import ApiLicenseInformation
 from ._models_py3 import ApiManagementServiceApplyNetworkConfigurationParameters
 from ._models_py3 import ApiManagementServiceBackupRestoreParameters
 from ._models_py3 import ApiManagementServiceBaseProperties
 from ._models_py3 import ApiManagementServiceCheckNameAvailabilityParameters
-from ._models_py3 import ApiManagementServiceGetDomainOwnershipIdentifierResult
 from ._models_py3 import ApiManagementServiceGetSsoTokenResult
 from ._models_py3 import ApiManagementServiceIdentity
 from ._models_py3 import ApiManagementServiceListResult
@@ -36,41 +29,28 @@ from ._models_py3 import ApiManagementServiceNameAvailabilityResult
 from ._models_py3 import ApiManagementServiceProperties
 from ._models_py3 import ApiManagementServiceResource
 from ._models_py3 import ApiManagementServiceSkuProperties
+from ._models_py3 import ApiManagementServiceUpdateHostnameParameters
 from ._models_py3 import ApiManagementServiceUpdateParameters
 from ._models_py3 import ApiManagementServiceUpdateProperties
-from ._models_py3 import ApiManagementSku
-from ._models_py3 import ApiManagementSkuCapabilities
-from ._models_py3 import ApiManagementSkuCapacity
-from ._models_py3 import ApiManagementSkuCosts
-from ._models_py3 import ApiManagementSkuLocationInfo
-from ._models_py3 import ApiManagementSkuRestrictionInfo
-from ._models_py3 import ApiManagementSkuRestrictions
-from ._models_py3 import ApiManagementSkuZoneDetails
-from ._models_py3 import ApiManagementSkusResult
+from ._models_py3 import ApiManagementServiceUploadCertificateParameters
 from ._models_py3 import ApiReleaseCollection
 from ._models_py3 import ApiReleaseContract
 from ._models_py3 import ApiRevisionCollection
 from ._models_py3 import ApiRevisionContract
 from ._models_py3 import ApiRevisionInfoContract
-from ._models_py3 import ApiTagResourceContractProperties
 from ._models_py3 import ApiUpdateContract
-from ._models_py3 import ApiVersionConstraint
 from ._models_py3 import ApiVersionSetCollection
 from ._models_py3 import ApiVersionSetContract
-from ._models_py3 import ApiVersionSetContractDetails
 from ._models_py3 import ApiVersionSetContractProperties
 from ._models_py3 import ApiVersionSetEntityBase
 from ._models_py3 import ApiVersionSetUpdateParameters
 from ._models_py3 import ApiVersionSetUpdateParametersProperties
 from ._models_py3 import ApimResource
-from ._models_py3 import ArmIdWrapper
-from ._models_py3 import AssociationContract
 from ._models_py3 import AuthenticationSettingsContract
 from ._models_py3 import AuthorizationServerCollection
 from ._models_py3 import AuthorizationServerContract
 from ._models_py3 import AuthorizationServerContractBaseProperties
 from ._models_py3 import AuthorizationServerContractProperties
-from ._models_py3 import AuthorizationServerSecretsContract
 from ._models_py3 import AuthorizationServerUpdateContract
 from ._models_py3 import AuthorizationServerUpdateContractProperties
 from ._models_py3 import BackendAuthorizationHeaderCredentials
@@ -86,33 +66,12 @@ from ._models_py3 import BackendServiceFabricClusterProperties
 from ._models_py3 import BackendTlsProperties
 from ._models_py3 import BackendUpdateParameterProperties
 from ._models_py3 import BackendUpdateParameters
-from ._models_py3 import BodyDiagnosticSettings
-from ._models_py3 import CacheCollection
-from ._models_py3 import CacheContract
-from ._models_py3 import CacheUpdateParameters
 from ._models_py3 import CertificateCollection
 from ._models_py3 import CertificateConfiguration
 from ._models_py3 import CertificateContract
 from ._models_py3 import CertificateCreateOrUpdateParameters
 from ._models_py3 import CertificateInformation
-from ._models_py3 import ClientSecretContract
-from ._models_py3 import ConnectivityCheckRequest
-from ._models_py3 import ConnectivityCheckRequestDestination
-from ._models_py3 import ConnectivityCheckRequestProtocolConfiguration
-from ._models_py3 import ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration
-from ._models_py3 import ConnectivityCheckRequestSource
-from ._models_py3 import ConnectivityCheckResponse
-from ._models_py3 import ConnectivityHop
-from ._models_py3 import ConnectivityIssue
 from ._models_py3 import ConnectivityStatusContract
-from ._models_py3 import ContentItemCollection
-from ._models_py3 import ContentItemContract
-from ._models_py3 import ContentTypeCollection
-from ._models_py3 import ContentTypeContract
-from ._models_py3 import DataMasking
-from ._models_py3 import DataMaskingEntity
-from ._models_py3 import DeletedServiceContract
-from ._models_py3 import DeletedServicesCollection
 from ._models_py3 import DeployConfigurationParameters
 from ._models_py3 import DiagnosticCollection
 from ._models_py3 import DiagnosticContract
@@ -120,37 +79,18 @@ from ._models_py3 import EmailTemplateCollection
 from ._models_py3 import EmailTemplateContract
 from ._models_py3 import EmailTemplateParametersContractProperties
 from ._models_py3 import EmailTemplateUpdateParameters
-from ._models_py3 import EndpointDependency
-from ._models_py3 import EndpointDetail
 from ._models_py3 import ErrorFieldContract
 from ._models_py3 import ErrorResponse
-from ._models_py3 import ErrorResponseBody
-from ._models_py3 import GatewayCertificateAuthorityCollection
-from ._models_py3 import GatewayCertificateAuthorityContract
-from ._models_py3 import GatewayCollection
-from ._models_py3 import GatewayContract
-from ._models_py3 import GatewayHostnameConfigurationCollection
-from ._models_py3 import GatewayHostnameConfigurationContract
-from ._models_py3 import GatewayKeyRegenerationRequestContract
-from ._models_py3 import GatewayKeysContract
-from ._models_py3 import GatewayTokenContract
-from ._models_py3 import GatewayTokenRequestContract
 from ._models_py3 import GenerateSsoUrlResult
-from ._models_py3 import GlobalSchemaCollection
-from ._models_py3 import GlobalSchemaContract
 from ._models_py3 import GroupCollection
 from ._models_py3 import GroupContract
-from ._models_py3 import GroupContractProperties
 from ._models_py3 import GroupCreateParameters
 from ._models_py3 import GroupUpdateParameters
-from ._models_py3 import HTTPHeader
 from ._models_py3 import HostnameConfiguration
-from ._models_py3 import HttpMessageDiagnostic
+from ._models_py3 import HostnameConfigurationOld
 from ._models_py3 import IdentityProviderBaseParameters
 from ._models_py3 import IdentityProviderContract
 from ._models_py3 import IdentityProviderContractProperties
-from ._models_py3 import IdentityProviderCreateContract
-from ._models_py3 import IdentityProviderCreateContractProperties
 from ._models_py3 import IdentityProviderList
 from ._models_py3 import IdentityProviderUpdateParameters
 from ._models_py3 import IdentityProviderUpdateProperties
@@ -160,31 +100,14 @@ from ._models_py3 import IssueCollection
 from ._models_py3 import IssueCommentCollection
 from ._models_py3 import IssueCommentContract
 from ._models_py3 import IssueContract
-from ._models_py3 import IssueContractBaseProperties
-from ._models_py3 import IssueContractProperties
-from ._models_py3 import IssueUpdateContract
-from ._models_py3 import IssueUpdateContractProperties
-from ._models_py3 import KeyVaultContractCreateProperties
-from ._models_py3 import KeyVaultContractProperties
-from ._models_py3 import KeyVaultLastAccessStatusContractProperties
 from ._models_py3 import LoggerCollection
 from ._models_py3 import LoggerContract
+from ._models_py3 import LoggerSamplingContract
 from ._models_py3 import LoggerUpdateContract
-from ._models_py3 import NamedValueCollection
-from ._models_py3 import NamedValueContract
-from ._models_py3 import NamedValueContractProperties
-from ._models_py3 import NamedValueCreateContract
-from ._models_py3 import NamedValueCreateContractProperties
-from ._models_py3 import NamedValueEntityBaseParameters
-from ._models_py3 import NamedValueSecretContract
-from ._models_py3 import NamedValueUpdateParameterProperties
-from ._models_py3 import NamedValueUpdateParameters
 from ._models_py3 import NetworkStatusContract
-from ._models_py3 import NetworkStatusContractByLocation
 from ._models_py3 import NotificationCollection
 from ._models_py3 import NotificationContract
 from ._models_py3 import OAuth2AuthenticationSettingsContract
-from ._models_py3 import OpenIdAuthenticationSettingsContract
 from ._models_py3 import OpenIdConnectProviderCollection
 from ._models_py3 import OpenidConnectProviderContract
 from ._models_py3 import OpenidConnectProviderUpdateContract
@@ -194,49 +117,36 @@ from ._models_py3 import OperationContract
 from ._models_py3 import OperationContractProperties
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationEntityBaseContract
+from ._models_py3 import OperationEntityContract
 from ._models_py3 import OperationListResult
 from ._models_py3 import OperationResultContract
 from ._models_py3 import OperationResultLogItemContract
-from ._models_py3 import OperationTagResourceContractProperties
 from ._models_py3 import OperationUpdateContract
 from ._models_py3 import OperationUpdateContractProperties
-from ._models_py3 import OutboundEnvironmentEndpoint
-from ._models_py3 import OutboundEnvironmentEndpointList
 from ._models_py3 import ParameterContract
-from ._models_py3 import ParameterExampleContract
-from ._models_py3 import PipelineDiagnosticSettings
 from ._models_py3 import PolicyCollection
 from ._models_py3 import PolicyContract
-from ._models_py3 import PolicyDescriptionCollection
-from ._models_py3 import PolicyDescriptionContract
+from ._models_py3 import PolicySnippetContract
+from ._models_py3 import PolicySnippetsCollection
 from ._models_py3 import PortalDelegationSettings
-from ._models_py3 import PortalRevisionCollection
-from ._models_py3 import PortalRevisionContract
-from ._models_py3 import PortalSettingValidationKeyContract
-from ._models_py3 import PortalSettingsCollection
-from ._models_py3 import PortalSettingsContract
 from ._models_py3 import PortalSigninSettings
 from ._models_py3 import PortalSignupSettings
-from ._models_py3 import PrivateEndpoint
-from ._models_py3 import PrivateEndpointConnection
-from ._models_py3 import PrivateEndpointConnectionListResult
-from ._models_py3 import PrivateEndpointConnectionRequest
-from ._models_py3 import PrivateEndpointConnectionRequestProperties
-from ._models_py3 import PrivateLinkResource
-from ._models_py3 import PrivateLinkResourceListResult
-from ._models_py3 import PrivateLinkServiceConnectionState
 from ._models_py3 import ProductCollection
 from ._models_py3 import ProductContract
 from ._models_py3 import ProductContractProperties
 from ._models_py3 import ProductEntityBaseParameters
-from ._models_py3 import ProductTagResourceContractProperties
 from ._models_py3 import ProductUpdateParameters
 from ._models_py3 import ProductUpdateProperties
+from ._models_py3 import PropertyCollection
+from ._models_py3 import PropertyContract
+from ._models_py3 import PropertyContractProperties
+from ._models_py3 import PropertyEntityBaseParameters
+from ._models_py3 import PropertyUpdateParameterProperties
+from ._models_py3 import PropertyUpdateParameters
 from ._models_py3 import QuotaCounterCollection
 from ._models_py3 import QuotaCounterContract
 from ._models_py3 import QuotaCounterValueContract
 from ._models_py3 import QuotaCounterValueContractProperties
-from ._models_py3 import QuotaCounterValueUpdateContract
 from ._models_py3 import RecipientEmailCollection
 from ._models_py3 import RecipientEmailContract
 from ._models_py3 import RecipientUserCollection
@@ -245,7 +155,6 @@ from ._models_py3 import RecipientsContractProperties
 from ._models_py3 import RegionContract
 from ._models_py3 import RegionListResult
 from ._models_py3 import RegistrationDelegationSettingsProperties
-from ._models_py3 import RemotePrivateEndpointConnectionWrapper
 from ._models_py3 import ReportCollection
 from ._models_py3 import ReportRecordContract
 from ._models_py3 import RepresentationContract
@@ -253,13 +162,7 @@ from ._models_py3 import RequestContract
 from ._models_py3 import RequestReportCollection
 from ._models_py3 import RequestReportRecordContract
 from ._models_py3 import Resource
-from ._models_py3 import ResourceLocationDataContract
-from ._models_py3 import ResourceSku
-from ._models_py3 import ResourceSkuCapacity
-from ._models_py3 import ResourceSkuResult
-from ._models_py3 import ResourceSkuResults
 from ._models_py3 import ResponseContract
-from ._models_py3 import SamplingSettings
 from ._models_py3 import SaveConfigurationParameter
 from ._models_py3 import SchemaCollection
 from ._models_py3 import SchemaContract
@@ -267,10 +170,8 @@ from ._models_py3 import SubscriptionCollection
 from ._models_py3 import SubscriptionContract
 from ._models_py3 import SubscriptionCreateParameters
 from ._models_py3 import SubscriptionKeyParameterNamesContract
-from ._models_py3 import SubscriptionKeysContract
 from ._models_py3 import SubscriptionUpdateParameters
 from ._models_py3 import SubscriptionsDelegationSettingsProperties
-from ._models_py3 import SystemData
 from ._models_py3 import TagCollection
 from ._models_py3 import TagContract
 from ._models_py3 import TagCreateUpdateParameters
@@ -281,10 +182,7 @@ from ._models_py3 import TagDescriptionContractProperties
 from ._models_py3 import TagDescriptionCreateParameters
 from ._models_py3 import TagResourceCollection
 from ._models_py3 import TagResourceContract
-from ._models_py3 import TagResourceContractProperties
 from ._models_py3 import TenantConfigurationSyncStateContract
-from ._models_py3 import TenantSettingsCollection
-from ._models_py3 import TenantSettingsContract
 from ._models_py3 import TermsOfServiceProperties
 from ._models_py3 import TokenBodyParameterContract
 from ._models_py3 import UserCollection
@@ -295,7 +193,6 @@ from ._models_py3 import UserCreateParameters
 from ._models_py3 import UserEntityBaseParameters
 from ._models_py3 import UserIdentityCollection
 from ._models_py3 import UserIdentityContract
-from ._models_py3 import UserIdentityProperties
 from ._models_py3 import UserTokenParameters
 from ._models_py3 import UserTokenResult
 from ._models_py3 import UserUpdateParameters
@@ -306,85 +203,49 @@ from ._models_py3 import X509CertificateName
 
 from ._api_management_client_enums import (
     AccessIdName,
-    AccessType,
-    AlwaysLog,
-    ApiManagementSkuCapacityScaleType,
-    ApiManagementSkuRestrictionsReasonCode,
-    ApiManagementSkuRestrictionsType,
     ApiType,
-    ApiVersionSetContractDetailsVersioningScheme,
     ApimIdentityType,
-    AppType,
     AsyncOperationStatus,
     AuthorizationMethod,
     BackendProtocol,
     BearerTokenSendingMethod,
-    BearerTokenSendingMethods,
     CertificateConfigurationStoreName,
-    CertificateSource,
-    CertificateStatus,
     ClientAuthenticationMethod,
     ConfigurationIdName,
     Confirmation,
-    ConnectionStatus,
-    ConnectivityCheckProtocol,
     ConnectivityStatusType,
     ContentFormat,
-    CreatedByType,
-    DataMaskingMode,
     ExportApi,
     ExportFormat,
-    ExportResultFormat,
     GrantType,
     GroupType,
     HostnameType,
-    HttpCorrelationProtocol,
     IdentityProviderType,
-    IssueType,
     KeyType,
     LoggerType,
-    Method,
     NameAvailabilityReason,
     NotificationName,
-    OperationNameFormat,
-    Origin,
-    PlatformVersion,
-    PolicyContentFormat,
-    PolicyExportFormat,
     PolicyIdName,
     PolicyScopeContract,
-    PortalRevisionStatus,
-    PreferredIPVersion,
-    PrivateEndpointConnectionProvisioningState,
-    PrivateEndpointServiceConnectionStatus,
     ProductState,
     Protocol,
-    PublicNetworkAccess,
-    ResourceSkuCapacityScaleType,
     SamplingType,
-    SchemaType,
-    SettingsTypeName,
-    Severity,
     SkuType,
-    SoapApiType,
     State,
     SubscriptionState,
     TemplateName,
     UserState,
-    Verbosity,
     VersioningScheme,
     VirtualNetworkType,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
-    'AccessInformationCollection',
     'AccessInformationContract',
-    'AccessInformationCreateParameters',
-    'AccessInformationSecretsContract',
     'AccessInformationUpdateParameters',
     'AdditionalLocation',
     'ApiCollection',
-    'ApiContactInformation',
     'ApiContract',
     'ApiContractProperties',
     'ApiContractUpdateProperties',
@@ -393,13 +254,10 @@ __all__ = [
     'ApiCreateOrUpdatePropertiesWsdlSelector',
     'ApiEntityBaseContract',
     'ApiExportResult',
-    'ApiExportResultValue',
-    'ApiLicenseInformation',
     'ApiManagementServiceApplyNetworkConfigurationParameters',
     'ApiManagementServiceBackupRestoreParameters',
     'ApiManagementServiceBaseProperties',
     'ApiManagementServiceCheckNameAvailabilityParameters',
-    'ApiManagementServiceGetDomainOwnershipIdentifierResult',
     'ApiManagementServiceGetSsoTokenResult',
     'ApiManagementServiceIdentity',
     'ApiManagementServiceListResult',
@@ -407,41 +265,28 @@ __all__ = [
     'ApiManagementServiceProperties',
     'ApiManagementServiceResource',
     'ApiManagementServiceSkuProperties',
+    'ApiManagementServiceUpdateHostnameParameters',
     'ApiManagementServiceUpdateParameters',
     'ApiManagementServiceUpdateProperties',
-    'ApiManagementSku',
-    'ApiManagementSkuCapabilities',
-    'ApiManagementSkuCapacity',
-    'ApiManagementSkuCosts',
-    'ApiManagementSkuLocationInfo',
-    'ApiManagementSkuRestrictionInfo',
-    'ApiManagementSkuRestrictions',
-    'ApiManagementSkuZoneDetails',
-    'ApiManagementSkusResult',
+    'ApiManagementServiceUploadCertificateParameters',
     'ApiReleaseCollection',
     'ApiReleaseContract',
     'ApiRevisionCollection',
     'ApiRevisionContract',
     'ApiRevisionInfoContract',
-    'ApiTagResourceContractProperties',
     'ApiUpdateContract',
-    'ApiVersionConstraint',
     'ApiVersionSetCollection',
     'ApiVersionSetContract',
-    'ApiVersionSetContractDetails',
     'ApiVersionSetContractProperties',
     'ApiVersionSetEntityBase',
     'ApiVersionSetUpdateParameters',
     'ApiVersionSetUpdateParametersProperties',
     'ApimResource',
-    'ArmIdWrapper',
-    'AssociationContract',
     'AuthenticationSettingsContract',
     'AuthorizationServerCollection',
     'AuthorizationServerContract',
     'AuthorizationServerContractBaseProperties',
     'AuthorizationServerContractProperties',
-    'AuthorizationServerSecretsContract',
     'AuthorizationServerUpdateContract',
     'AuthorizationServerUpdateContractProperties',
     'BackendAuthorizationHeaderCredentials',
@@ -457,33 +302,12 @@ __all__ = [
     'BackendTlsProperties',
     'BackendUpdateParameterProperties',
     'BackendUpdateParameters',
-    'BodyDiagnosticSettings',
-    'CacheCollection',
-    'CacheContract',
-    'CacheUpdateParameters',
     'CertificateCollection',
     'CertificateConfiguration',
     'CertificateContract',
     'CertificateCreateOrUpdateParameters',
     'CertificateInformation',
-    'ClientSecretContract',
-    'ConnectivityCheckRequest',
-    'ConnectivityCheckRequestDestination',
-    'ConnectivityCheckRequestProtocolConfiguration',
-    'ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration',
-    'ConnectivityCheckRequestSource',
-    'ConnectivityCheckResponse',
-    'ConnectivityHop',
-    'ConnectivityIssue',
     'ConnectivityStatusContract',
-    'ContentItemCollection',
-    'ContentItemContract',
-    'ContentTypeCollection',
-    'ContentTypeContract',
-    'DataMasking',
-    'DataMaskingEntity',
-    'DeletedServiceContract',
-    'DeletedServicesCollection',
     'DeployConfigurationParameters',
     'DiagnosticCollection',
     'DiagnosticContract',
@@ -491,37 +315,18 @@ __all__ = [
     'EmailTemplateContract',
     'EmailTemplateParametersContractProperties',
     'EmailTemplateUpdateParameters',
-    'EndpointDependency',
-    'EndpointDetail',
     'ErrorFieldContract',
     'ErrorResponse',
-    'ErrorResponseBody',
-    'GatewayCertificateAuthorityCollection',
-    'GatewayCertificateAuthorityContract',
-    'GatewayCollection',
-    'GatewayContract',
-    'GatewayHostnameConfigurationCollection',
-    'GatewayHostnameConfigurationContract',
-    'GatewayKeyRegenerationRequestContract',
-    'GatewayKeysContract',
-    'GatewayTokenContract',
-    'GatewayTokenRequestContract',
     'GenerateSsoUrlResult',
-    'GlobalSchemaCollection',
-    'GlobalSchemaContract',
     'GroupCollection',
     'GroupContract',
-    'GroupContractProperties',
     'GroupCreateParameters',
     'GroupUpdateParameters',
-    'HTTPHeader',
     'HostnameConfiguration',
-    'HttpMessageDiagnostic',
+    'HostnameConfigurationOld',
     'IdentityProviderBaseParameters',
     'IdentityProviderContract',
     'IdentityProviderContractProperties',
-    'IdentityProviderCreateContract',
-    'IdentityProviderCreateContractProperties',
     'IdentityProviderList',
     'IdentityProviderUpdateParameters',
     'IdentityProviderUpdateProperties',
@@ -531,31 +336,14 @@ __all__ = [
     'IssueCommentCollection',
     'IssueCommentContract',
     'IssueContract',
-    'IssueContractBaseProperties',
-    'IssueContractProperties',
-    'IssueUpdateContract',
-    'IssueUpdateContractProperties',
-    'KeyVaultContractCreateProperties',
-    'KeyVaultContractProperties',
-    'KeyVaultLastAccessStatusContractProperties',
     'LoggerCollection',
     'LoggerContract',
+    'LoggerSamplingContract',
     'LoggerUpdateContract',
-    'NamedValueCollection',
-    'NamedValueContract',
-    'NamedValueContractProperties',
-    'NamedValueCreateContract',
-    'NamedValueCreateContractProperties',
-    'NamedValueEntityBaseParameters',
-    'NamedValueSecretContract',
-    'NamedValueUpdateParameterProperties',
-    'NamedValueUpdateParameters',
     'NetworkStatusContract',
-    'NetworkStatusContractByLocation',
     'NotificationCollection',
     'NotificationContract',
     'OAuth2AuthenticationSettingsContract',
-    'OpenIdAuthenticationSettingsContract',
     'OpenIdConnectProviderCollection',
     'OpenidConnectProviderContract',
     'OpenidConnectProviderUpdateContract',
@@ -565,49 +353,36 @@ __all__ = [
     'OperationContractProperties',
     'OperationDisplay',
     'OperationEntityBaseContract',
+    'OperationEntityContract',
     'OperationListResult',
     'OperationResultContract',
     'OperationResultLogItemContract',
-    'OperationTagResourceContractProperties',
     'OperationUpdateContract',
     'OperationUpdateContractProperties',
-    'OutboundEnvironmentEndpoint',
-    'OutboundEnvironmentEndpointList',
     'ParameterContract',
-    'ParameterExampleContract',
-    'PipelineDiagnosticSettings',
     'PolicyCollection',
     'PolicyContract',
-    'PolicyDescriptionCollection',
-    'PolicyDescriptionContract',
+    'PolicySnippetContract',
+    'PolicySnippetsCollection',
     'PortalDelegationSettings',
-    'PortalRevisionCollection',
-    'PortalRevisionContract',
-    'PortalSettingValidationKeyContract',
-    'PortalSettingsCollection',
-    'PortalSettingsContract',
     'PortalSigninSettings',
     'PortalSignupSettings',
-    'PrivateEndpoint',
-    'PrivateEndpointConnection',
-    'PrivateEndpointConnectionListResult',
-    'PrivateEndpointConnectionRequest',
-    'PrivateEndpointConnectionRequestProperties',
-    'PrivateLinkResource',
-    'PrivateLinkResourceListResult',
-    'PrivateLinkServiceConnectionState',
     'ProductCollection',
     'ProductContract',
     'ProductContractProperties',
     'ProductEntityBaseParameters',
-    'ProductTagResourceContractProperties',
     'ProductUpdateParameters',
     'ProductUpdateProperties',
+    'PropertyCollection',
+    'PropertyContract',
+    'PropertyContractProperties',
+    'PropertyEntityBaseParameters',
+    'PropertyUpdateParameterProperties',
+    'PropertyUpdateParameters',
     'QuotaCounterCollection',
     'QuotaCounterContract',
     'QuotaCounterValueContract',
     'QuotaCounterValueContractProperties',
-    'QuotaCounterValueUpdateContract',
     'RecipientEmailCollection',
     'RecipientEmailContract',
     'RecipientUserCollection',
@@ -616,7 +391,6 @@ __all__ = [
     'RegionContract',
     'RegionListResult',
     'RegistrationDelegationSettingsProperties',
-    'RemotePrivateEndpointConnectionWrapper',
     'ReportCollection',
     'ReportRecordContract',
     'RepresentationContract',
@@ -624,13 +398,7 @@ __all__ = [
     'RequestReportCollection',
     'RequestReportRecordContract',
     'Resource',
-    'ResourceLocationDataContract',
-    'ResourceSku',
-    'ResourceSkuCapacity',
-    'ResourceSkuResult',
-    'ResourceSkuResults',
     'ResponseContract',
-    'SamplingSettings',
     'SaveConfigurationParameter',
     'SchemaCollection',
     'SchemaContract',
@@ -638,10 +406,8 @@ __all__ = [
     'SubscriptionContract',
     'SubscriptionCreateParameters',
     'SubscriptionKeyParameterNamesContract',
-    'SubscriptionKeysContract',
     'SubscriptionUpdateParameters',
     'SubscriptionsDelegationSettingsProperties',
-    'SystemData',
     'TagCollection',
     'TagContract',
     'TagCreateUpdateParameters',
@@ -652,10 +418,7 @@ __all__ = [
     'TagDescriptionCreateParameters',
     'TagResourceCollection',
     'TagResourceContract',
-    'TagResourceContractProperties',
     'TenantConfigurationSyncStateContract',
-    'TenantSettingsCollection',
-    'TenantSettingsContract',
     'TermsOfServiceProperties',
     'TokenBodyParameterContract',
     'UserCollection',
@@ -666,7 +429,6 @@ __all__ = [
     'UserEntityBaseParameters',
     'UserIdentityCollection',
     'UserIdentityContract',
-    'UserIdentityProperties',
     'UserTokenParameters',
     'UserTokenResult',
     'UserUpdateParameters',
@@ -674,72 +436,40 @@ __all__ = [
     'VirtualNetworkConfiguration',
     'X509CertificateName',
     'AccessIdName',
-    'AccessType',
-    'AlwaysLog',
-    'ApiManagementSkuCapacityScaleType',
-    'ApiManagementSkuRestrictionsReasonCode',
-    'ApiManagementSkuRestrictionsType',
     'ApiType',
-    'ApiVersionSetContractDetailsVersioningScheme',
     'ApimIdentityType',
-    'AppType',
     'AsyncOperationStatus',
     'AuthorizationMethod',
     'BackendProtocol',
     'BearerTokenSendingMethod',
-    'BearerTokenSendingMethods',
     'CertificateConfigurationStoreName',
-    'CertificateSource',
-    'CertificateStatus',
     'ClientAuthenticationMethod',
     'ConfigurationIdName',
     'Confirmation',
-    'ConnectionStatus',
-    'ConnectivityCheckProtocol',
     'ConnectivityStatusType',
     'ContentFormat',
-    'CreatedByType',
-    'DataMaskingMode',
     'ExportApi',
     'ExportFormat',
-    'ExportResultFormat',
     'GrantType',
     'GroupType',
     'HostnameType',
-    'HttpCorrelationProtocol',
     'IdentityProviderType',
-    'IssueType',
     'KeyType',
     'LoggerType',
-    'Method',
     'NameAvailabilityReason',
     'NotificationName',
-    'OperationNameFormat',
-    'Origin',
-    'PlatformVersion',
-    'PolicyContentFormat',
-    'PolicyExportFormat',
     'PolicyIdName',
     'PolicyScopeContract',
-    'PortalRevisionStatus',
-    'PreferredIPVersion',
-    'PrivateEndpointConnectionProvisioningState',
-    'PrivateEndpointServiceConnectionStatus',
     'ProductState',
     'Protocol',
-    'PublicNetworkAccess',
-    'ResourceSkuCapacityScaleType',
     'SamplingType',
-    'SchemaType',
-    'SettingsTypeName',
-    'Severity',
     'SkuType',
-    'SoapApiType',
     'State',
     'SubscriptionState',
     'TemplateName',
     'UserState',
-    'Verbosity',
     'VersioningScheme',
     'VirtualNetworkType',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
