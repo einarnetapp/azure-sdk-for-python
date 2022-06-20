@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import CheckNameAvailabilityParameters
+from ._models_py3 import CorsConfiguration
 from ._models_py3 import DicomService
 from ._models_py3 import DicomServiceAuthenticationConfiguration
 from ._models_py3 import DicomServiceCollection
@@ -96,9 +97,12 @@ from ._healthcare_apis_management_client_enums import (
     ServiceManagedIdentityType,
     ServiceNameUnavailabilityReason,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'CheckNameAvailabilityParameters',
+    'CorsConfiguration',
     'DicomService',
     'DicomServiceAuthenticationConfiguration',
     'DicomServiceCollection',
@@ -185,3 +189,5 @@ __all__ = [
     'ServiceManagedIdentityType',
     'ServiceNameUnavailabilityReason',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
