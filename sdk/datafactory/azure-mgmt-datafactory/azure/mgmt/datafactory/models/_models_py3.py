@@ -450,7 +450,7 @@ class AdditionalColumns(msrest.serialization.Model):
 
 
 class LinkedService(msrest.serialization.Model):
-    """The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.
+    """The nested object which contains the information and credential which can be used to connect with related store or compute resource.
 
     You probably want to use the sub-classes and not this class directly. Known
     sub-classes are: AmazonMWSLinkedService, AmazonRdsForOracleLinkedService, AmazonRdsForSqlServerLinkedService, AmazonRedshiftLinkedService, AmazonS3LinkedService, AmazonS3CompatibleLinkedService, AppFiguresLinkedService, AsanaLinkedService, AzureBatchLinkedService, AzureBlobFSLinkedService, AzureBlobStorageLinkedService, AzureDataExplorerLinkedService, AzureDataLakeAnalyticsLinkedService, AzureDataLakeStoreLinkedService, AzureDatabricksLinkedService, AzureDatabricksDeltaLakeLinkedService, AzureFileStorageLinkedService, AzureFunctionLinkedService, AzureKeyVaultLinkedService, AzureMLLinkedService, AzureMLServiceLinkedService, AzureMariaDBLinkedService, AzureMySqlLinkedService, AzurePostgreSqlLinkedService, AzureSearchLinkedService, AzureSqlDWLinkedService, AzureSqlDatabaseLinkedService, AzureSqlMILinkedService, AzureStorageLinkedService, AzureTableStorageLinkedService, CassandraLinkedService, CommonDataServiceForAppsLinkedService, ConcurLinkedService, CosmosDbLinkedService, CosmosDbMongoDbApiLinkedService, CouchbaseLinkedService, CustomDataSourceLinkedService, DataworldLinkedService, Db2LinkedService, DrillLinkedService, DynamicsLinkedService, DynamicsAXLinkedService, DynamicsCrmLinkedService, EloquaLinkedService, FileServerLinkedService, FtpServerLinkedService, GoogleAdWordsLinkedService, GoogleBigQueryLinkedService, GoogleCloudStorageLinkedService, GreenplumLinkedService, HBaseLinkedService, HDInsightLinkedService, HDInsightOnDemandLinkedService, HdfsLinkedService, HiveLinkedService, HttpLinkedService, HubspotLinkedService, ImpalaLinkedService, InformixLinkedService, JiraLinkedService, MagentoLinkedService, MariaDBLinkedService, MarketoLinkedService, MicrosoftAccessLinkedService, MongoDbLinkedService, MongoDbAtlasLinkedService, MongoDbV2LinkedService, MySqlLinkedService, NetezzaLinkedService, ODataLinkedService, OdbcLinkedService, Office365LinkedService, OracleLinkedService, OracleCloudStorageLinkedService, OracleServiceCloudLinkedService, PaypalLinkedService, PhoenixLinkedService, PostgreSqlLinkedService, PrestoLinkedService, QuickBooksLinkedService, QuickbaseLinkedService, ResponsysLinkedService, RestServiceLinkedService, SalesforceLinkedService, SalesforceMarketingCloudLinkedService, SalesforceServiceCloudLinkedService, SapBWLinkedService, SapCloudForCustomerLinkedService, SapEccLinkedService, SapHanaLinkedService, SapOdpLinkedService, SapOpenHubLinkedService, SapTableLinkedService, ServiceNowLinkedService, SftpServerLinkedService, SharePointOnlineListLinkedService, ShopifyLinkedService, SmartsheetLinkedService, SnowflakeLinkedService, SparkLinkedService, SqlServerLinkedService, SquareLinkedService, SybaseLinkedService, TeamDeskLinkedService, TeradataLinkedService, TwilioLinkedService, VerticaLinkedService, WebLinkedService, XeroLinkedService, ZendeskLinkedService, ZohoLinkedService.
@@ -33406,12 +33406,11 @@ class LinkedServiceListResponse(msrest.serialization.Model):
 class LinkedServiceReference(msrest.serialization.Model):
     """Linked service reference type.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Linked service reference type. Has constant value: "LinkedServiceReference".
-    :vartype type: str
+    :ivar type: Required. Linked service reference type. Known values are:
+     "LinkedServiceReference".
+    :vartype type: str or ~azure.mgmt.datafactory.models.Type
     :ivar reference_name: Required. Reference LinkedService name.
     :vartype reference_name: str
     :ivar parameters: Arguments for LinkedService.
@@ -33419,7 +33418,7 @@ class LinkedServiceReference(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True, 'constant': True},
+        'type': {'required': True},
         'reference_name': {'required': True},
     }
 
@@ -33429,22 +33428,25 @@ class LinkedServiceReference(msrest.serialization.Model):
         'parameters': {'key': 'parameters', 'type': '{object}'},
     }
 
-    type = "LinkedServiceReference"
-
     def __init__(
         self,
         *,
+        type: Union[str, "_models.Type"],
         reference_name: str,
         parameters: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
         """
+        :keyword type: Required. Linked service reference type. Known values are:
+         "LinkedServiceReference".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.Type
         :keyword reference_name: Required. Reference LinkedService name.
         :paramtype reference_name: str
         :keyword parameters: Arguments for LinkedService.
         :paramtype parameters: dict[str, any]
         """
         super(LinkedServiceReference, self).__init__(**kwargs)
+        self.type = type
         self.reference_name = reference_name
         self.parameters = parameters
 
