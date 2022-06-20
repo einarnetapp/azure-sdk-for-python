@@ -6,11 +6,13 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._container_instance_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AzureFileVolume(msrest.serialization.Model):
@@ -127,7 +129,7 @@ class CachedImagesListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["CachedImages"]] = None,
+        value: Optional[List["_models.CachedImages"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -248,7 +250,7 @@ class CapabilitiesListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Capabilities"]] = None,
+        value: Optional[List["_models.Capabilities"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -292,7 +294,7 @@ class CloudErrorBody(msrest.serialization.Model):
         code: Optional[str] = None,
         message: Optional[str] = None,
         target: Optional[str] = None,
-        details: Optional[List["CloudErrorBody"]] = None,
+        details: Optional[List["_models.CloudErrorBody"]] = None,
         **kwargs
     ):
         """
@@ -401,13 +403,13 @@ class Container(msrest.serialization.Model):
         *,
         name: str,
         image: str,
-        resources: "ResourceRequirements",
+        resources: "_models.ResourceRequirements",
         command: Optional[List[str]] = None,
-        ports: Optional[List["ContainerPort"]] = None,
-        environment_variables: Optional[List["EnvironmentVariable"]] = None,
-        volume_mounts: Optional[List["VolumeMount"]] = None,
-        liveness_probe: Optional["ContainerProbe"] = None,
-        readiness_probe: Optional["ContainerProbe"] = None,
+        ports: Optional[List["_models.ContainerPort"]] = None,
+        environment_variables: Optional[List["_models.EnvironmentVariable"]] = None,
+        volume_mounts: Optional[List["_models.VolumeMount"]] = None,
+        liveness_probe: Optional["_models.ContainerProbe"] = None,
+        readiness_probe: Optional["_models.ContainerProbe"] = None,
         **kwargs
     ):
         """
@@ -521,7 +523,7 @@ class ContainerExecRequest(msrest.serialization.Model):
         self,
         *,
         command: Optional[str] = None,
-        terminal_size: Optional["ContainerExecRequestTerminalSize"] = None,
+        terminal_size: Optional["_models.ContainerExecRequestTerminalSize"] = None,
         **kwargs
     ):
         """
@@ -693,13 +695,13 @@ class ContainerGroup(Resource):
     
      * ``Always`` Always restart
      * ``OnFailure`` Restart on failure
-     * ``Never`` Never restart. Possible values include: "Always", "OnFailure", "Never".
+     * ``Never`` Never restart. Known values are: "Always", "OnFailure", "Never".
     :vartype restart_policy: str or
      ~azure.mgmt.containerinstance.models.ContainerGroupRestartPolicy
     :ivar ip_address: The IP address type of the container group.
     :vartype ip_address: ~azure.mgmt.containerinstance.models.IpAddress
     :ivar os_type: Required. The operating system type required by the containers in the container
-     group. Possible values include: "Windows", "Linux".
+     group. Known values are: "Windows", "Linux".
     :vartype os_type: str or ~azure.mgmt.containerinstance.models.OperatingSystemTypes
     :ivar volumes: The list of volumes that can be mounted by containers in this container group.
     :vartype volumes: list[~azure.mgmt.containerinstance.models.Volume]
@@ -712,7 +714,7 @@ class ContainerGroup(Resource):
     :vartype subnet_ids: list[~azure.mgmt.containerinstance.models.ContainerGroupSubnetId]
     :ivar dns_config: The DNS config information for a container group.
     :vartype dns_config: ~azure.mgmt.containerinstance.models.DnsConfiguration
-    :ivar sku: The SKU for a container group. Possible values include: "Standard", "Dedicated".
+    :ivar sku: The SKU for a container group. Known values are: "Standard", "Dedicated".
     :vartype sku: str or ~azure.mgmt.containerinstance.models.ContainerGroupSku
     :ivar encryption_properties: The encryption properties for a container group.
     :vartype encryption_properties: ~azure.mgmt.containerinstance.models.EncryptionProperties
@@ -757,22 +759,22 @@ class ContainerGroup(Resource):
     def __init__(
         self,
         *,
-        containers: List["Container"],
-        os_type: Union[str, "OperatingSystemTypes"],
+        containers: List["_models.Container"],
+        os_type: Union[str, "_models.OperatingSystemTypes"],
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
         zones: Optional[List[str]] = None,
-        identity: Optional["ContainerGroupIdentity"] = None,
-        image_registry_credentials: Optional[List["ImageRegistryCredential"]] = None,
-        restart_policy: Optional[Union[str, "ContainerGroupRestartPolicy"]] = None,
-        ip_address: Optional["IpAddress"] = None,
-        volumes: Optional[List["Volume"]] = None,
-        diagnostics: Optional["ContainerGroupDiagnostics"] = None,
-        subnet_ids: Optional[List["ContainerGroupSubnetId"]] = None,
-        dns_config: Optional["DnsConfiguration"] = None,
-        sku: Optional[Union[str, "ContainerGroupSku"]] = None,
-        encryption_properties: Optional["EncryptionProperties"] = None,
-        init_containers: Optional[List["InitContainerDefinition"]] = None,
+        identity: Optional["_models.ContainerGroupIdentity"] = None,
+        image_registry_credentials: Optional[List["_models.ImageRegistryCredential"]] = None,
+        restart_policy: Optional[Union[str, "_models.ContainerGroupRestartPolicy"]] = None,
+        ip_address: Optional["_models.IpAddress"] = None,
+        volumes: Optional[List["_models.Volume"]] = None,
+        diagnostics: Optional["_models.ContainerGroupDiagnostics"] = None,
+        subnet_ids: Optional[List["_models.ContainerGroupSubnetId"]] = None,
+        dns_config: Optional["_models.DnsConfiguration"] = None,
+        sku: Optional[Union[str, "_models.ContainerGroupSku"]] = None,
+        encryption_properties: Optional["_models.EncryptionProperties"] = None,
+        init_containers: Optional[List["_models.InitContainerDefinition"]] = None,
         **kwargs
     ):
         """
@@ -795,13 +797,13 @@ class ContainerGroup(Resource):
         
          * ``Always`` Always restart
          * ``OnFailure`` Restart on failure
-         * ``Never`` Never restart. Possible values include: "Always", "OnFailure", "Never".
+         * ``Never`` Never restart. Known values are: "Always", "OnFailure", "Never".
         :paramtype restart_policy: str or
          ~azure.mgmt.containerinstance.models.ContainerGroupRestartPolicy
         :keyword ip_address: The IP address type of the container group.
         :paramtype ip_address: ~azure.mgmt.containerinstance.models.IpAddress
         :keyword os_type: Required. The operating system type required by the containers in the
-         container group. Possible values include: "Windows", "Linux".
+         container group. Known values are: "Windows", "Linux".
         :paramtype os_type: str or ~azure.mgmt.containerinstance.models.OperatingSystemTypes
         :keyword volumes: The list of volumes that can be mounted by containers in this container
          group.
@@ -812,7 +814,7 @@ class ContainerGroup(Resource):
         :paramtype subnet_ids: list[~azure.mgmt.containerinstance.models.ContainerGroupSubnetId]
         :keyword dns_config: The DNS config information for a container group.
         :paramtype dns_config: ~azure.mgmt.containerinstance.models.DnsConfiguration
-        :keyword sku: The SKU for a container group. Possible values include: "Standard", "Dedicated".
+        :keyword sku: The SKU for a container group. Known values are: "Standard", "Dedicated".
         :paramtype sku: str or ~azure.mgmt.containerinstance.models.ContainerGroupSku
         :keyword encryption_properties: The encryption properties for a container group.
         :paramtype encryption_properties: ~azure.mgmt.containerinstance.models.EncryptionProperties
@@ -851,7 +853,7 @@ class ContainerGroupDiagnostics(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        log_analytics: Optional["LogAnalytics"] = None,
+        log_analytics: Optional["_models.LogAnalytics"] = None,
         **kwargs
     ):
         """
@@ -875,8 +877,8 @@ class ContainerGroupIdentity(msrest.serialization.Model):
     :vartype tenant_id: str
     :ivar type: The type of identity used for the container group. The type 'SystemAssigned,
      UserAssigned' includes both an implicitly created identity and a set of user assigned
-     identities. The type 'None' will remove any identities from the container group. Possible
-     values include: "SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned", "None".
+     identities. The type 'None' will remove any identities from the container group. Known values
+     are: "SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned", "None".
     :vartype type: str or ~azure.mgmt.containerinstance.models.ResourceIdentityType
     :ivar user_assigned_identities: The list of user identities associated with the container
      group. The user identity dictionary key references will be ARM resource ids in the form:
@@ -900,15 +902,15 @@ class ContainerGroupIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "ResourceIdentityType"]] = None,
-        user_assigned_identities: Optional[Dict[str, "Components10Wh5UdSchemasContainergroupidentityPropertiesUserassignedidentitiesAdditionalproperties"]] = None,
+        type: Optional[Union[str, "_models.ResourceIdentityType"]] = None,
+        user_assigned_identities: Optional[Dict[str, "_models.Components10Wh5UdSchemasContainergroupidentityPropertiesUserassignedidentitiesAdditionalproperties"]] = None,
         **kwargs
     ):
         """
         :keyword type: The type of identity used for the container group. The type 'SystemAssigned,
          UserAssigned' includes both an implicitly created identity and a set of user assigned
-         identities. The type 'None' will remove any identities from the container group. Possible
-         values include: "SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned", "None".
+         identities. The type 'None' will remove any identities from the container group. Known values
+         are: "SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned", "None".
         :paramtype type: str or ~azure.mgmt.containerinstance.models.ResourceIdentityType
         :keyword user_assigned_identities: The list of user identities associated with the container
          group. The user identity dictionary key references will be ARM resource ids in the form:
@@ -940,7 +942,7 @@ class ContainerGroupListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ContainerGroup"]] = None,
+        value: Optional[List["_models.ContainerGroup"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1034,7 +1036,7 @@ class ContainerHttpGet(msrest.serialization.Model):
     :vartype path: str
     :ivar port: Required. The port number to probe.
     :vartype port: int
-    :ivar scheme: The scheme. Possible values include: "http", "https".
+    :ivar scheme: The scheme. Known values are: "http", "https".
     :vartype scheme: str or ~azure.mgmt.containerinstance.models.Scheme
     :ivar http_headers: The HTTP headers.
     :vartype http_headers: list[~azure.mgmt.containerinstance.models.HttpHeader]
@@ -1056,8 +1058,8 @@ class ContainerHttpGet(msrest.serialization.Model):
         *,
         port: int,
         path: Optional[str] = None,
-        scheme: Optional[Union[str, "Scheme"]] = None,
-        http_headers: Optional[List["HttpHeader"]] = None,
+        scheme: Optional[Union[str, "_models.Scheme"]] = None,
+        http_headers: Optional[List["_models.HttpHeader"]] = None,
         **kwargs
     ):
         """
@@ -1065,7 +1067,7 @@ class ContainerHttpGet(msrest.serialization.Model):
         :paramtype path: str
         :keyword port: Required. The port number to probe.
         :paramtype port: int
-        :keyword scheme: The scheme. Possible values include: "http", "https".
+        :keyword scheme: The scheme. Known values are: "http", "https".
         :paramtype scheme: str or ~azure.mgmt.containerinstance.models.Scheme
         :keyword http_headers: The HTTP headers.
         :paramtype http_headers: list[~azure.mgmt.containerinstance.models.HttpHeader]
@@ -1082,7 +1084,7 @@ class ContainerPort(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar protocol: The protocol associated with the port. Possible values include: "TCP", "UDP".
+    :ivar protocol: The protocol associated with the port. Known values are: "TCP", "UDP".
     :vartype protocol: str or ~azure.mgmt.containerinstance.models.ContainerNetworkProtocol
     :ivar port: Required. The port number exposed within the container group.
     :vartype port: int
@@ -1101,12 +1103,11 @@ class ContainerPort(msrest.serialization.Model):
         self,
         *,
         port: int,
-        protocol: Optional[Union[str, "ContainerNetworkProtocol"]] = None,
+        protocol: Optional[Union[str, "_models.ContainerNetworkProtocol"]] = None,
         **kwargs
     ):
         """
-        :keyword protocol: The protocol associated with the port. Possible values include: "TCP",
-         "UDP".
+        :keyword protocol: The protocol associated with the port. Known values are: "TCP", "UDP".
         :paramtype protocol: str or ~azure.mgmt.containerinstance.models.ContainerNetworkProtocol
         :keyword port: Required. The port number exposed within the container group.
         :paramtype port: int
@@ -1148,8 +1149,8 @@ class ContainerProbe(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        exec_property: Optional["ContainerExec"] = None,
-        http_get: Optional["ContainerHttpGet"] = None,
+        exec_property: Optional["_models.ContainerExec"] = None,
+        http_get: Optional["_models.ContainerHttpGet"] = None,
         initial_delay_seconds: Optional[int] = None,
         period_seconds: Optional[int] = None,
         failure_threshold: Optional[int] = None,
@@ -1518,8 +1519,7 @@ class GpuResource(msrest.serialization.Model):
 
     :ivar count: Required. The count of the GPU resource.
     :vartype count: int
-    :ivar sku: Required. The SKU of the GPU resource. Possible values include: "K80", "P100",
-     "V100".
+    :ivar sku: Required. The SKU of the GPU resource. Known values are: "K80", "P100", "V100".
     :vartype sku: str or ~azure.mgmt.containerinstance.models.GpuSku
     """
 
@@ -1537,14 +1537,13 @@ class GpuResource(msrest.serialization.Model):
         self,
         *,
         count: int,
-        sku: Union[str, "GpuSku"],
+        sku: Union[str, "_models.GpuSku"],
         **kwargs
     ):
         """
         :keyword count: Required. The count of the GPU resource.
         :paramtype count: int
-        :keyword sku: Required. The SKU of the GPU resource. Possible values include: "K80", "P100",
-         "V100".
+        :keyword sku: Required. The SKU of the GPU resource. Known values are: "K80", "P100", "V100".
         :paramtype sku: str or ~azure.mgmt.containerinstance.models.GpuSku
         """
         super(GpuResource, self).__init__(**kwargs)
@@ -1688,8 +1687,8 @@ class InitContainerDefinition(msrest.serialization.Model):
         name: str,
         image: Optional[str] = None,
         command: Optional[List[str]] = None,
-        environment_variables: Optional[List["EnvironmentVariable"]] = None,
-        volume_mounts: Optional[List["VolumeMount"]] = None,
+        environment_variables: Optional[List["_models.EnvironmentVariable"]] = None,
+        volume_mounts: Optional[List["_models.VolumeMount"]] = None,
         **kwargs
     ):
         """
@@ -1766,14 +1765,14 @@ class IpAddress(msrest.serialization.Model):
     :ivar ports: Required. The list of ports exposed on the container group.
     :vartype ports: list[~azure.mgmt.containerinstance.models.Port]
     :ivar type: Required. Specifies if the IP is exposed to the public internet or private VNET.
-     Possible values include: "Public", "Private".
+     Known values are: "Public", "Private".
     :vartype type: str or ~azure.mgmt.containerinstance.models.ContainerGroupIpAddressType
     :ivar ip: The IP exposed to the public internet.
     :vartype ip: str
     :ivar dns_name_label: The Dns name label for the IP.
     :vartype dns_name_label: str
-    :ivar dns_name_label_reuse_policy: The value representing the security enum. Possible values
-     include: "Unsecure", "TenantReuse", "SubscriptionReuse", "ResourceGroupReuse", "Noreuse".
+    :ivar dns_name_label_reuse_policy: The value representing the security enum. Known values are:
+     "Unsecure", "TenantReuse", "SubscriptionReuse", "ResourceGroupReuse", "Noreuse".
     :vartype dns_name_label_reuse_policy: str or
      ~azure.mgmt.containerinstance.models.AutoGeneratedDomainNameLabelScope
     :ivar fqdn: The FQDN for the IP.
@@ -1798,25 +1797,25 @@ class IpAddress(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        ports: List["Port"],
-        type: Union[str, "ContainerGroupIpAddressType"],
+        ports: List["_models.Port"],
+        type: Union[str, "_models.ContainerGroupIpAddressType"],
         ip: Optional[str] = None,
         dns_name_label: Optional[str] = None,
-        dns_name_label_reuse_policy: Optional[Union[str, "AutoGeneratedDomainNameLabelScope"]] = None,
+        dns_name_label_reuse_policy: Optional[Union[str, "_models.AutoGeneratedDomainNameLabelScope"]] = None,
         **kwargs
     ):
         """
         :keyword ports: Required. The list of ports exposed on the container group.
         :paramtype ports: list[~azure.mgmt.containerinstance.models.Port]
         :keyword type: Required. Specifies if the IP is exposed to the public internet or private VNET.
-         Possible values include: "Public", "Private".
+         Known values are: "Public", "Private".
         :paramtype type: str or ~azure.mgmt.containerinstance.models.ContainerGroupIpAddressType
         :keyword ip: The IP exposed to the public internet.
         :paramtype ip: str
         :keyword dns_name_label: The Dns name label for the IP.
         :paramtype dns_name_label: str
-        :keyword dns_name_label_reuse_policy: The value representing the security enum. Possible values
-         include: "Unsecure", "TenantReuse", "SubscriptionReuse", "ResourceGroupReuse", "Noreuse".
+        :keyword dns_name_label_reuse_policy: The value representing the security enum. Known values
+         are: "Unsecure", "TenantReuse", "SubscriptionReuse", "ResourceGroupReuse", "Noreuse".
         :paramtype dns_name_label_reuse_policy: str or
          ~azure.mgmt.containerinstance.models.AutoGeneratedDomainNameLabelScope
         """
@@ -1838,7 +1837,7 @@ class LogAnalytics(msrest.serialization.Model):
     :vartype workspace_id: str
     :ivar workspace_key: Required. The workspace key for log analytics.
     :vartype workspace_key: str
-    :ivar log_type: The log type to be used. Possible values include: "ContainerInsights",
+    :ivar log_type: The log type to be used. Known values are: "ContainerInsights",
      "ContainerInstanceLogs".
     :vartype log_type: str or ~azure.mgmt.containerinstance.models.LogAnalyticsLogType
     :ivar metadata: Metadata for log analytics.
@@ -1865,7 +1864,7 @@ class LogAnalytics(msrest.serialization.Model):
         *,
         workspace_id: str,
         workspace_key: str,
-        log_type: Optional[Union[str, "LogAnalyticsLogType"]] = None,
+        log_type: Optional[Union[str, "_models.LogAnalyticsLogType"]] = None,
         metadata: Optional[Dict[str, str]] = None,
         workspace_resource_id: Optional[str] = None,
         **kwargs
@@ -1875,7 +1874,7 @@ class LogAnalytics(msrest.serialization.Model):
         :paramtype workspace_id: str
         :keyword workspace_key: Required. The workspace key for log analytics.
         :paramtype workspace_key: str
-        :keyword log_type: The log type to be used. Possible values include: "ContainerInsights",
+        :keyword log_type: The log type to be used. Known values are: "ContainerInsights",
          "ContainerInstanceLogs".
         :paramtype log_type: str or ~azure.mgmt.containerinstance.models.LogAnalyticsLogType
         :keyword metadata: Metadata for log analytics.
@@ -1927,8 +1926,7 @@ class Operation(msrest.serialization.Model):
     :vartype display: ~azure.mgmt.containerinstance.models.OperationDisplay
     :ivar properties: The additional properties.
     :vartype properties: any
-    :ivar origin: The intended executor of the operation. Possible values include: "User",
-     "System".
+    :ivar origin: The intended executor of the operation. Known values are: "User", "System".
     :vartype origin: str or ~azure.mgmt.containerinstance.models.ContainerInstanceOperationsOrigin
     """
 
@@ -1948,9 +1946,9 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: str,
-        display: "OperationDisplay",
+        display: "_models.OperationDisplay",
         properties: Optional[Any] = None,
-        origin: Optional[Union[str, "ContainerInstanceOperationsOrigin"]] = None,
+        origin: Optional[Union[str, "_models.ContainerInstanceOperationsOrigin"]] = None,
         **kwargs
     ):
         """
@@ -1960,8 +1958,7 @@ class Operation(msrest.serialization.Model):
         :paramtype display: ~azure.mgmt.containerinstance.models.OperationDisplay
         :keyword properties: The additional properties.
         :paramtype properties: any
-        :keyword origin: The intended executor of the operation. Possible values include: "User",
-         "System".
+        :keyword origin: The intended executor of the operation. Known values are: "User", "System".
         :paramtype origin: str or
          ~azure.mgmt.containerinstance.models.ContainerInstanceOperationsOrigin
         """
@@ -2035,7 +2032,7 @@ class OperationListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2055,7 +2052,7 @@ class Port(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar protocol: The protocol associated with the port. Possible values include: "TCP", "UDP".
+    :ivar protocol: The protocol associated with the port. Known values are: "TCP", "UDP".
     :vartype protocol: str or ~azure.mgmt.containerinstance.models.ContainerGroupNetworkProtocol
     :ivar port: Required. The port number.
     :vartype port: int
@@ -2074,12 +2071,11 @@ class Port(msrest.serialization.Model):
         self,
         *,
         port: int,
-        protocol: Optional[Union[str, "ContainerGroupNetworkProtocol"]] = None,
+        protocol: Optional[Union[str, "_models.ContainerGroupNetworkProtocol"]] = None,
         **kwargs
     ):
         """
-        :keyword protocol: The protocol associated with the port. Possible values include: "TCP",
-         "UDP".
+        :keyword protocol: The protocol associated with the port. Known values are: "TCP", "UDP".
         :paramtype protocol: str or ~azure.mgmt.containerinstance.models.ContainerGroupNetworkProtocol
         :keyword port: Required. The port number.
         :paramtype port: int
@@ -2111,7 +2107,7 @@ class ResourceLimits(msrest.serialization.Model):
         *,
         memory_in_gb: Optional[float] = None,
         cpu: Optional[float] = None,
-        gpu: Optional["GpuResource"] = None,
+        gpu: Optional["_models.GpuResource"] = None,
         **kwargs
     ):
         """
@@ -2157,7 +2153,7 @@ class ResourceRequests(msrest.serialization.Model):
         *,
         memory_in_gb: float,
         cpu: float,
-        gpu: Optional["GpuResource"] = None,
+        gpu: Optional["_models.GpuResource"] = None,
         **kwargs
     ):
         """
@@ -2197,8 +2193,8 @@ class ResourceRequirements(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        requests: "ResourceRequests",
-        limits: Optional["ResourceLimits"] = None,
+        requests: "_models.ResourceRequests",
+        limits: Optional["_models.ResourceLimits"] = None,
         **kwargs
     ):
         """
@@ -2346,10 +2342,10 @@ class Volume(msrest.serialization.Model):
         self,
         *,
         name: str,
-        azure_file: Optional["AzureFileVolume"] = None,
+        azure_file: Optional["_models.AzureFileVolume"] = None,
         empty_dir: Optional[Any] = None,
         secret: Optional[Dict[str, str]] = None,
-        git_repo: Optional["GitRepoVolume"] = None,
+        git_repo: Optional["_models.GitRepoVolume"] = None,
         **kwargs
     ):
         """
