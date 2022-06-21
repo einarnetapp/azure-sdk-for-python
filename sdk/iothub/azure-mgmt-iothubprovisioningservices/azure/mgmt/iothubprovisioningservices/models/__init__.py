@@ -12,7 +12,7 @@ from ._models_py3 import CertificateListDescription
 from ._models_py3 import CertificateProperties
 from ._models_py3 import CertificateResponse
 from ._models_py3 import ErrorDetails
-from ._models_py3 import ErrorMesssage
+from ._models_py3 import ErrorMessage
 from ._models_py3 import GroupIdInformation
 from ._models_py3 import GroupIdInformationProperties
 from ._models_py3 import IotDpsPropertiesDescription
@@ -56,7 +56,9 @@ from ._iot_dps_client_enums import (
     PublicNetworkAccess,
     State,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AsyncOperationResult',
     'CertificateBodyDescription',
@@ -64,7 +66,7 @@ __all__ = [
     'CertificateProperties',
     'CertificateResponse',
     'ErrorDetails',
-    'ErrorMesssage',
+    'ErrorMessage',
     'GroupIdInformation',
     'GroupIdInformationProperties',
     'IotDpsPropertiesDescription',
@@ -105,3 +107,5 @@ __all__ = [
     'PublicNetworkAccess',
     'State',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

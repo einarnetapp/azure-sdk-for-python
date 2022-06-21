@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AccessRightsDescription(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AccessRightsDescription(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Rights that this key has.
     """
 
@@ -22,7 +21,7 @@ class AccessRightsDescription(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)
     REGISTRATION_STATUS_READ = "RegistrationStatusRead"
     REGISTRATION_STATUS_WRITE = "RegistrationStatusWrite"
 
-class AllocationPolicy(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AllocationPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Allocation policy to be used by this provisioning service.
     """
 
@@ -30,12 +29,12 @@ class AllocationPolicy(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     GEO_LATENCY = "GeoLatency"
     STATIC = "Static"
 
-class CertificatePurpose(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CertificatePurpose(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     CLIENT_AUTHENTICATION = "clientAuthentication"
     SERVER_AUTHENTICATION = "serverAuthentication"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -44,20 +43,20 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class IotDpsSku(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotDpsSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Sku name.
     """
 
     S1 = "S1"
 
-class IpFilterActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IpFilterActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The desired action for requests captured by this rule.
     """
 
     ACCEPT = "Accept"
     REJECT = "Reject"
 
-class IpFilterTargetType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IpFilterTargetType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Target for requests captured by this rule.
     """
 
@@ -65,14 +64,14 @@ class IpFilterTargetType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SERVICE_API = "serviceApi"
     DEVICE_API = "deviceApi"
 
-class NameUnavailabilityReason(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class NameUnavailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """specifies the reason a name is unavailable
     """
 
     INVALID = "Invalid"
     ALREADY_EXISTS = "AlreadyExists"
 
-class PrivateLinkServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateLinkServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of a private endpoint connection
     """
 
@@ -81,14 +80,14 @@ class PrivateLinkServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta,
     REJECTED = "Rejected"
     DISCONNECTED = "Disconnected"
 
-class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether requests from Public Network are allowed
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class State(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class State(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Current state of the provisioning service.
     """
 
