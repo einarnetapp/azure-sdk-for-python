@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import List, Optional, Union
+from typing import List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._authorization_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ErrorAdditionalInfo(msrest.serialization.Model):
@@ -40,6 +42,8 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -83,6 +87,8 @@ class ErrorDetail(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -94,8 +100,8 @@ class ErrorDetail(msrest.serialization.Model):
 class ErrorResponse(msrest.serialization.Model):
     """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
 
-    :param error: The error object.
-    :type error: ~azure.mgmt.authorization.v2020_04_01_preview.models.ErrorDetail
+    :ivar error: The error object.
+    :vartype error: ~azure.mgmt.authorization.v2020_04_01_preview.models.ErrorDetail
     """
 
     _attribute_map = {
@@ -105,9 +111,13 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetail"] = None,
+        error: Optional["_models.ErrorDetail"] = None,
         **kwargs
     ):
+        """
+        :keyword error: The error object.
+        :paramtype error: ~azure.mgmt.authorization.v2020_04_01_preview.models.ErrorDetail
+        """
         super(ErrorResponse, self).__init__(**kwargs)
         self.error = error
 
@@ -123,36 +133,37 @@ class RoleAssignment(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The role assignment type.
     :vartype type: str
-    :param scope: The role assignment scope.
-    :type scope: str
-    :param role_definition_id: The role definition ID.
-    :type role_definition_id: str
-    :param principal_id: The principal ID.
-    :type principal_id: str
-    :param principal_type: The principal type of the assigned principal ID. Possible values
-     include: "User", "Group", "ServicePrincipal", "ForeignGroup".
-    :type principal_type: str or ~azure.mgmt.authorization.v2020_04_01_preview.models.PrincipalType
-    :param can_delegate: The Delegation flag for the role assignment.
-    :type can_delegate: bool
-    :param description: Description of role assignment.
-    :type description: str
-    :param condition: The conditions on the role assignment. This limits the resources it can be
+    :ivar scope: The role assignment scope.
+    :vartype scope: str
+    :ivar role_definition_id: The role definition ID.
+    :vartype role_definition_id: str
+    :ivar principal_id: The principal ID.
+    :vartype principal_id: str
+    :ivar principal_type: The principal type of the assigned principal ID. Known values are:
+     "User", "Group", "ServicePrincipal", "ForeignGroup".
+    :vartype principal_type: str or
+     ~azure.mgmt.authorization.v2020_04_01_preview.models.PrincipalType
+    :ivar can_delegate: The Delegation flag for the role assignment.
+    :vartype can_delegate: bool
+    :ivar description: Description of role assignment.
+    :vartype description: str
+    :ivar condition: The conditions on the role assignment. This limits the resources it can be
      assigned to. e.g.:
      @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName]
      StringEqualsIgnoreCase 'foo_storage_container'.
-    :type condition: str
-    :param condition_version: Version of the condition. Currently accepted value is '2.0'.
-    :type condition_version: str
-    :param created_on: Time it was created.
-    :type created_on: ~datetime.datetime
-    :param updated_on: Time it was updated.
-    :type updated_on: ~datetime.datetime
-    :param created_by: Id of the user who created the assignment.
-    :type created_by: str
-    :param updated_by: Id of the user who updated the assignment.
-    :type updated_by: str
-    :param delegated_managed_identity_resource_id: Id of the delegated managed identity resource.
-    :type delegated_managed_identity_resource_id: str
+    :vartype condition: str
+    :ivar condition_version: Version of the condition. Currently accepted value is '2.0'.
+    :vartype condition_version: str
+    :ivar created_on: Time it was created.
+    :vartype created_on: ~datetime.datetime
+    :ivar updated_on: Time it was updated.
+    :vartype updated_on: ~datetime.datetime
+    :ivar created_by: Id of the user who created the assignment.
+    :vartype created_by: str
+    :ivar updated_by: Id of the user who updated the assignment.
+    :vartype updated_by: str
+    :ivar delegated_managed_identity_resource_id: Id of the delegated managed identity resource.
+    :vartype delegated_managed_identity_resource_id: str
     """
 
     _validation = {
@@ -186,7 +197,7 @@ class RoleAssignment(msrest.serialization.Model):
         scope: Optional[str] = None,
         role_definition_id: Optional[str] = None,
         principal_id: Optional[str] = None,
-        principal_type: Optional[Union[str, "PrincipalType"]] = None,
+        principal_type: Optional[Union[str, "_models.PrincipalType"]] = None,
         can_delegate: Optional[bool] = None,
         description: Optional[str] = None,
         condition: Optional[str] = None,
@@ -198,6 +209,39 @@ class RoleAssignment(msrest.serialization.Model):
         delegated_managed_identity_resource_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword scope: The role assignment scope.
+        :paramtype scope: str
+        :keyword role_definition_id: The role definition ID.
+        :paramtype role_definition_id: str
+        :keyword principal_id: The principal ID.
+        :paramtype principal_id: str
+        :keyword principal_type: The principal type of the assigned principal ID. Known values are:
+         "User", "Group", "ServicePrincipal", "ForeignGroup".
+        :paramtype principal_type: str or
+         ~azure.mgmt.authorization.v2020_04_01_preview.models.PrincipalType
+        :keyword can_delegate: The Delegation flag for the role assignment.
+        :paramtype can_delegate: bool
+        :keyword description: Description of role assignment.
+        :paramtype description: str
+        :keyword condition: The conditions on the role assignment. This limits the resources it can be
+         assigned to. e.g.:
+         @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName]
+         StringEqualsIgnoreCase 'foo_storage_container'.
+        :paramtype condition: str
+        :keyword condition_version: Version of the condition. Currently accepted value is '2.0'.
+        :paramtype condition_version: str
+        :keyword created_on: Time it was created.
+        :paramtype created_on: ~datetime.datetime
+        :keyword updated_on: Time it was updated.
+        :paramtype updated_on: ~datetime.datetime
+        :keyword created_by: Id of the user who created the assignment.
+        :paramtype created_by: str
+        :keyword updated_by: Id of the user who updated the assignment.
+        :paramtype updated_by: str
+        :keyword delegated_managed_identity_resource_id: Id of the delegated managed identity resource.
+        :paramtype delegated_managed_identity_resource_id: str
+        """
         super(RoleAssignment, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -222,27 +266,28 @@ class RoleAssignmentCreateParameters(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param role_definition_id: Required. The role definition ID used in the role assignment.
-    :type role_definition_id: str
-    :param principal_id: Required. The principal ID assigned to the role. This maps to the ID
-     inside the Active Directory. It can point to a user, service principal, or security group.
-    :type principal_id: str
-    :param principal_type: The principal type of the assigned principal ID. Possible values
-     include: "User", "Group", "ServicePrincipal", "ForeignGroup".
-    :type principal_type: str or ~azure.mgmt.authorization.v2020_04_01_preview.models.PrincipalType
-    :param can_delegate: The delegation flag used for creating a role assignment.
-    :type can_delegate: bool
-    :param description: Description of role assignment.
-    :type description: str
-    :param condition: The conditions on the role assignment. This limits the resources it can be
+    :ivar role_definition_id: Required. The role definition ID used in the role assignment.
+    :vartype role_definition_id: str
+    :ivar principal_id: Required. The principal ID assigned to the role. This maps to the ID inside
+     the Active Directory. It can point to a user, service principal, or security group.
+    :vartype principal_id: str
+    :ivar principal_type: The principal type of the assigned principal ID. Known values are:
+     "User", "Group", "ServicePrincipal", "ForeignGroup".
+    :vartype principal_type: str or
+     ~azure.mgmt.authorization.v2020_04_01_preview.models.PrincipalType
+    :ivar can_delegate: The delegation flag used for creating a role assignment.
+    :vartype can_delegate: bool
+    :ivar description: Description of role assignment.
+    :vartype description: str
+    :ivar condition: The conditions on the role assignment. This limits the resources it can be
      assigned to. e.g.:
      @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName]
      StringEqualsIgnoreCase 'foo_storage_container'.
-    :type condition: str
-    :param condition_version: Version of the condition. Currently accepted value is '2.0'.
-    :type condition_version: str
-    :param delegated_managed_identity_resource_id: Id of the delegated managed identity resource.
-    :type delegated_managed_identity_resource_id: str
+    :vartype condition: str
+    :ivar condition_version: Version of the condition. Currently accepted value is '2.0'.
+    :vartype condition_version: str
+    :ivar delegated_managed_identity_resource_id: Id of the delegated managed identity resource.
+    :vartype delegated_managed_identity_resource_id: str
     """
 
     _validation = {
@@ -266,7 +311,7 @@ class RoleAssignmentCreateParameters(msrest.serialization.Model):
         *,
         role_definition_id: str,
         principal_id: str,
-        principal_type: Optional[Union[str, "PrincipalType"]] = None,
+        principal_type: Optional[Union[str, "_models.PrincipalType"]] = None,
         can_delegate: Optional[bool] = None,
         description: Optional[str] = None,
         condition: Optional[str] = None,
@@ -274,6 +319,30 @@ class RoleAssignmentCreateParameters(msrest.serialization.Model):
         delegated_managed_identity_resource_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword role_definition_id: Required. The role definition ID used in the role assignment.
+        :paramtype role_definition_id: str
+        :keyword principal_id: Required. The principal ID assigned to the role. This maps to the ID
+         inside the Active Directory. It can point to a user, service principal, or security group.
+        :paramtype principal_id: str
+        :keyword principal_type: The principal type of the assigned principal ID. Known values are:
+         "User", "Group", "ServicePrincipal", "ForeignGroup".
+        :paramtype principal_type: str or
+         ~azure.mgmt.authorization.v2020_04_01_preview.models.PrincipalType
+        :keyword can_delegate: The delegation flag used for creating a role assignment.
+        :paramtype can_delegate: bool
+        :keyword description: Description of role assignment.
+        :paramtype description: str
+        :keyword condition: The conditions on the role assignment. This limits the resources it can be
+         assigned to. e.g.:
+         @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName]
+         StringEqualsIgnoreCase 'foo_storage_container'.
+        :paramtype condition: str
+        :keyword condition_version: Version of the condition. Currently accepted value is '2.0'.
+        :paramtype condition_version: str
+        :keyword delegated_managed_identity_resource_id: Id of the delegated managed identity resource.
+        :paramtype delegated_managed_identity_resource_id: str
+        """
         super(RoleAssignmentCreateParameters, self).__init__(**kwargs)
         self.role_definition_id = role_definition_id
         self.principal_id = principal_id
@@ -288,10 +357,10 @@ class RoleAssignmentCreateParameters(msrest.serialization.Model):
 class RoleAssignmentFilter(msrest.serialization.Model):
     """Role Assignments filter.
 
-    :param principal_id: Returns role assignment of the specific principal.
-    :type principal_id: str
-    :param can_delegate: The Delegation flag for the role assignment.
-    :type can_delegate: bool
+    :ivar principal_id: Returns role assignment of the specific principal.
+    :vartype principal_id: str
+    :ivar can_delegate: The Delegation flag for the role assignment.
+    :vartype can_delegate: bool
     """
 
     _attribute_map = {
@@ -306,6 +375,12 @@ class RoleAssignmentFilter(msrest.serialization.Model):
         can_delegate: Optional[bool] = None,
         **kwargs
     ):
+        """
+        :keyword principal_id: Returns role assignment of the specific principal.
+        :paramtype principal_id: str
+        :keyword can_delegate: The Delegation flag for the role assignment.
+        :paramtype can_delegate: bool
+        """
         super(RoleAssignmentFilter, self).__init__(**kwargs)
         self.principal_id = principal_id
         self.can_delegate = can_delegate
@@ -314,10 +389,10 @@ class RoleAssignmentFilter(msrest.serialization.Model):
 class RoleAssignmentListResult(msrest.serialization.Model):
     """Role assignment list operation result.
 
-    :param value: Role assignment list.
-    :type value: list[~azure.mgmt.authorization.v2020_04_01_preview.models.RoleAssignment]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: Role assignment list.
+    :vartype value: list[~azure.mgmt.authorization.v2020_04_01_preview.models.RoleAssignment]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -328,10 +403,16 @@ class RoleAssignmentListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["RoleAssignment"]] = None,
+        value: Optional[List["_models.RoleAssignment"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: Role assignment list.
+        :paramtype value: list[~azure.mgmt.authorization.v2020_04_01_preview.models.RoleAssignment]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(RoleAssignmentListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link

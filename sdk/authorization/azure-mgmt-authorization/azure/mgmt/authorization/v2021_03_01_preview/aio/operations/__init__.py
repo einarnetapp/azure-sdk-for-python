@@ -16,6 +16,9 @@ from ._access_review_schedule_definitions_assigned_for_my_approval_operations im
 from ._access_review_instances_assigned_for_my_approval_operations import AccessReviewInstancesAssignedForMyApprovalOperations
 from ._access_review_instance_my_decisions_operations import AccessReviewInstanceMyDecisionsOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'Operations',
     'AccessReviewScheduleDefinitionsOperations',
@@ -27,3 +30,5 @@ __all__ = [
     'AccessReviewInstancesAssignedForMyApprovalOperations',
     'AccessReviewInstanceMyDecisionsOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
