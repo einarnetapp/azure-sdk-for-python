@@ -65,12 +65,24 @@ class AzureOrbital:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.spacecrafts = SpacecraftsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.contacts = ContactsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.contact_profiles = ContactProfilesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.available_ground_stations = AvailableGroundStationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations_results = OperationsResultsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.spacecrafts = SpacecraftsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.contacts = ContactsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.contact_profiles = ContactProfilesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.available_ground_stations = AvailableGroundStationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations_results = OperationsResultsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
