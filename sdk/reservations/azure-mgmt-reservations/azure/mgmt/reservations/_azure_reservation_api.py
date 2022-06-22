@@ -60,13 +60,27 @@ class AzureReservationAPI(AzureReservationAPIOperationsMixin):    # pylint: disa
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.reservation = ReservationOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.reservation_order = ReservationOrderOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operation = OperationOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.calculate_exchange = CalculateExchangeOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.exchange = ExchangeOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.quota = QuotaOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.quota_request_status = QuotaRequestStatusOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.reservation = ReservationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.reservation_order = ReservationOrderOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operation = OperationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.calculate_exchange = CalculateExchangeOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.exchange = ExchangeOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.quota = QuotaOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.quota_request_status = QuotaRequestStatusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
