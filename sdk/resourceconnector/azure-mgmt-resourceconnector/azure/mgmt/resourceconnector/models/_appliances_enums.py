@@ -6,33 +6,17 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
-from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from enum import Enum
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class AccessProfileType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AccessProfileType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name which contains the role of the kubeconfig.
     """
 
     CLUSTER_USER = "clusterUser"
 
-class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -41,13 +25,13 @@ class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class Distro(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Distro(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represents a supported Fabric/Infra. (AKSEdge etc...).
     """
 
     AKS_EDGE = "AKSEdge"
 
-class Provider(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Provider(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Information about the connected appliance.
     """
 
@@ -55,14 +39,14 @@ class Provider(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     HCI = "HCI"
     SCVMM = "SCVMM"
 
-class ResourceIdentityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The identity type.
     """
 
     SYSTEM_ASSIGNED = "SystemAssigned"
     NONE = "None"
 
-class Status(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Appliance’s health and state of connection to on-prem
     """
 
