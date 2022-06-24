@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -6,56 +7,1072 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import datetime
-from typing import TYPE_CHECKING
-import warnings
+from typing import Any, Callable, Dict, Iterable, Optional, TypeVar, Union, cast
+
+from msrest import Serializer
 
 from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
 from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import HttpRequest, HttpResponse
+from azure.core.pipeline.transport import HttpResponse
 from azure.core.polling import LROPoller, NoPolling, PollingMethod
+from azure.core.rest import HttpRequest
+from azure.core.tracing.decorator import distributed_trace
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 from azure.mgmt.core.polling.arm_polling import ARMPolling
 
 from .. import models as _models
+from .._vendor import _convert_request, _format_url_section
+T = TypeVar('T')
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
-if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
-    from typing import Any, Callable, Dict, Generic, Iterable, Optional, TypeVar, Union
+_SERIALIZER = Serializer()
+_SERIALIZER.client_side_validation = False
 
-    T = TypeVar('T')
-    ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+def build_list_query_results_for_management_group_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    management_group_name: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-class PolicyStatesOperations(object):
-    """PolicyStatesOperations operations.
+    management_groups_namespace = kwargs.pop('management_groups_namespace', "Microsoft.Management")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
+    # Construct URL
+    _url = kwargs.pop("template_url", "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "managementGroupsNamespace": _SERIALIZER.url("management_groups_namespace", management_groups_namespace, 'str'),
+        "managementGroupName": _SERIALIZER.url("management_group_name", management_group_name, 'str'),
+    }
 
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.policyinsights.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_management_group_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    management_group_name: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    management_groups_namespace = kwargs.pop('management_groups_namespace', "Microsoft.Management")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "managementGroupsNamespace": _SERIALIZER.url("management_groups_namespace", management_groups_namespace, 'str'),
+        "managementGroupName": _SERIALIZER.url("management_group_name", management_group_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_list_query_results_for_subscription_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    subscription_id: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_subscription_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    subscription_id: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_list_query_results_for_resource_group_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    subscription_id: str,
+    resource_group_name: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_resource_group_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    subscription_id: str,
+    resource_group_name: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_list_query_results_for_resource_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    resource_id: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    expand: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "resourceId": _SERIALIZER.url("resource_id", resource_id, 'str', skip_quote=True),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if expand is not None:
+        _params['$expand'] = _SERIALIZER.query("expand", expand, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_resource_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    resource_id: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "resourceId": _SERIALIZER.url("resource_id", resource_id, 'str', skip_quote=True),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_trigger_subscription_evaluation_request_initial(
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_trigger_resource_group_evaluation_request_initial(
+    subscription_id: str,
+    resource_group_name: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_list_query_results_for_policy_set_definition_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    subscription_id: str,
+    policy_set_definition_name: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policySetDefinitionName": _SERIALIZER.url("policy_set_definition_name", policy_set_definition_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_policy_set_definition_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    subscription_id: str,
+    policy_set_definition_name: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policySetDefinitionName": _SERIALIZER.url("policy_set_definition_name", policy_set_definition_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_list_query_results_for_policy_definition_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    subscription_id: str,
+    policy_definition_name: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policyDefinitionName": _SERIALIZER.url("policy_definition_name", policy_definition_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_policy_definition_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    subscription_id: str,
+    policy_definition_name: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policyDefinitionName": _SERIALIZER.url("policy_definition_name", policy_definition_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_list_query_results_for_subscription_level_policy_assignment_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    subscription_id: str,
+    policy_assignment_name: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policyAssignmentName": _SERIALIZER.url("policy_assignment_name", policy_assignment_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_subscription_level_policy_assignment_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    subscription_id: str,
+    policy_assignment_name: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policyAssignmentName": _SERIALIZER.url("policy_assignment_name", policy_assignment_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_list_query_results_for_resource_group_level_policy_assignment_request(
+    policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+    subscription_id: str,
+    resource_group_name: str,
+    policy_assignment_name: str,
+    *,
+    top: Optional[int] = None,
+    order_by: Optional[str] = None,
+    select: Optional[str] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    apply: Optional[str] = None,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesResource": _SERIALIZER.url("policy_states_resource", policy_states_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policyAssignmentName": _SERIALIZER.url("policy_assignment_name", policy_assignment_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if order_by is not None:
+        _params['$orderby'] = _SERIALIZER.query("order_by", order_by, 'str')
+    if select is not None:
+        _params['$select'] = _SERIALIZER.query("select", select, 'str')
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+    if apply is not None:
+        _params['$apply'] = _SERIALIZER.query("apply", apply, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_summarize_for_resource_group_level_policy_assignment_request(
+    policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+    subscription_id: str,
+    resource_group_name: str,
+    policy_assignment_name: str,
+    *,
+    top: Optional[int] = None,
+    from_property: Optional[datetime.datetime] = None,
+    to: Optional[datetime.datetime] = None,
+    filter: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "policyStatesSummaryResource": _SERIALIZER.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+        "authorizationNamespace": _SERIALIZER.url("authorization_namespace", authorization_namespace, 'str'),
+        "policyAssignmentName": _SERIALIZER.url("policy_assignment_name", policy_assignment_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if top is not None:
+        _params['$top'] = _SERIALIZER.query("top", top, 'int', minimum=0)
+    if from_property is not None:
+        _params['$from'] = _SERIALIZER.query("from_property", from_property, 'iso-8601')
+    if to is not None:
+        _params['$to'] = _SERIALIZER.query("to", to, 'iso-8601')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_next_link_request(
+    next_link: str,
+    *,
+    skip_token: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "{nextLink}")
+    path_format_arguments = {
+        "nextLink": _SERIALIZER.url("next_link", next_link, 'str', skip_quote=True),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if skip_token is not None:
+        _params['$skiptoken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+class PolicyStatesOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
+
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.policyinsights.PolicyInsightsClient`'s
+        :attr:`policy_states` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer):
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs):
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
+
+    @distributed_trace
     def list_query_results_for_management_group(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        management_group_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        management_group_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the resources under the management group.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -64,92 +1081,107 @@ class PolicyStatesOperations(object):
         :type policy_states_resource: str or ~azure.mgmt.policyinsights.models.PolicyStatesResource
         :param management_group_name: Management group name.
         :type management_group_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword management_groups_namespace: The namespace for Microsoft Management RP; only
+         "Microsoft.Management" is allowed. Default value is "Microsoft.Management". Note that
+         overriding this default value may result in unsupported behavior.
+        :paramtype management_groups_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        management_groups_namespace = kwargs.pop('management_groups_namespace', "Microsoft.Management")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _skip_token = query_options.skip_token
-        management_groups_namespace = "Microsoft.Management"
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_management_group.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'managementGroupsNamespace': self._serialize.url("management_groups_namespace", management_groups_namespace, 'str'),
-                    'managementGroupName': self._serialize.url("management_group_name", management_group_name, 'str'),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_management_group_request(
+                    policy_states_resource=policy_states_resource,
+                    management_group_name=management_group_name,
+                    management_groups_namespace=management_groups_namespace,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_management_group.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -158,45 +1190,69 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_management_group.metadata = {'url': '/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_management_group.metadata = {'url': "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_management_group(
         self,
-        management_group_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        management_group_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the resources under the management group.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param management_group_name: Management group name.
         :type management_group_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword management_groups_namespace: The namespace for Microsoft Management RP; only
+         "Microsoft.Management" is allowed. Default value is "Microsoft.Management". Note that
+         overriding this default value may result in unsupported behavior.
+        :paramtype management_groups_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        management_groups_namespace = kwargs.pop('management_groups_namespace', "Microsoft.Management")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -206,43 +1262,33 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        management_groups_namespace = "Microsoft.Management"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_management_group.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'managementGroupsNamespace': self._serialize.url("management_groups_namespace", management_groups_namespace, 'str'),
-            'managementGroupName': self._serialize.url("management_group_name", management_group_name, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_management_group_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            management_group_name=management_group_name,
+            management_groups_namespace=management_groups_namespace,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_management_group.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -251,16 +1297,18 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_management_group.metadata = {'url': '/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
 
+    summarize_for_management_group.metadata = {'url': "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
+
+    @distributed_trace
     def list_query_results_for_subscription(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        subscription_id,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        subscription_id: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the resources under the subscription.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -269,90 +1317,101 @@ class PolicyStatesOperations(object):
         :type policy_states_resource: str or ~azure.mgmt.policyinsights.models.PolicyStatesResource
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _skip_token = query_options.skip_token
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_subscription.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_subscription_request(
+                    policy_states_resource=policy_states_resource,
+                    subscription_id=subscription_id,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_subscription.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -361,45 +1420,64 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_subscription.metadata = {'url': '/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_subscription(
         self,
-        subscription_id,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        subscription_id: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the resources under the subscription.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -409,41 +1487,32 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_subscription.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_subscription_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            subscription_id=subscription_id,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_subscription.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -452,17 +1521,19 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_subscription.metadata = {'url': '/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
 
+    summarize_for_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
+
+    @distributed_trace
     def list_query_results_for_resource_group(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        subscription_id,  # type: str
-        resource_group_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        subscription_id: str,
+        resource_group_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the resources under the resource group.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -473,91 +1544,102 @@ class PolicyStatesOperations(object):
         :type subscription_id: str
         :param resource_group_name: Resource group name.
         :type resource_group_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _skip_token = query_options.skip_token
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_resource_group.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-                    'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_resource_group_request(
+                    policy_states_resource=policy_states_resource,
+                    subscription_id=subscription_id,
+                    resource_group_name=resource_group_name,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_resource_group.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -566,48 +1648,67 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_resource_group.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_resource_group(
         self,
-        subscription_id,  # type: str
-        resource_group_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        subscription_id: str,
+        resource_group_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the resources under the resource group.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
         :param resource_group_name: Resource group name.
         :type resource_group_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -617,42 +1718,33 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_resource_group.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_resource_group_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            subscription_id=subscription_id,
+            resource_group_name=resource_group_name,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_resource_group.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -661,16 +1753,18 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_resource_group.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
 
+    summarize_for_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
+
+    @distributed_trace
     def list_query_results_for_resource(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        resource_id,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        resource_id: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the resource.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -679,94 +1773,106 @@ class PolicyStatesOperations(object):
         :type policy_states_resource: str or ~azure.mgmt.policyinsights.models.PolicyStatesResource
         :param resource_id: Resource ID.
         :type resource_id: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _expand = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _expand = query_options.expand
-            _skip_token = query_options.skip_token
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_resource.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'resourceId': self._serialize.url("resource_id", resource_id, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _expand is not None:
-                    query_parameters['$expand'] = self._serialize.query("expand", _expand, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _expand = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _expand = query_options.expand
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_resource_request(
+                    policy_states_resource=policy_states_resource,
+                    resource_id=resource_id,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    expand=_expand,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_resource.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _expand = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _expand = query_options.expand
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -775,45 +1881,64 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_resource.metadata = {'url': '/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_resource.metadata = {'url': "/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_resource(
         self,
-        resource_id,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        resource_id: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the resource.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param resource_id: Resource ID.
         :type resource_id: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -823,41 +1948,32 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_resource.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'resourceId': self._serialize.url("resource_id", resource_id, 'str', skip_quote=True),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_resource_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            resource_id=resource_id,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_resource.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -866,98 +1982,114 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_resource.metadata = {'url': '/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
 
-    def _trigger_subscription_evaluation_initial(
+    summarize_for_resource.metadata = {'url': "/{resourceId}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
+
+    def _trigger_subscription_evaluation_initial(  # pylint: disable=inconsistent-return-statements
         self,
-        subscription_id,  # type: str
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> None
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        subscription_id: str,
+        **kwargs: Any
+    ) -> None:
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2019-10-01"
-        accept = "application/json"
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        # Construct URL
-        url = self._trigger_subscription_evaluation_initial.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
+        
+        request = build_trigger_subscription_evaluation_request_initial(
+            subscription_id=subscription_id,
+            api_version=api_version,
+            template_url=self._trigger_subscription_evaluation_initial.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
-    _trigger_subscription_evaluation_initial.metadata = {'url': '/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation'}  # type: ignore
+    _trigger_subscription_evaluation_initial.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"}  # type: ignore
 
-    def begin_trigger_subscription_evaluation(
+
+    @distributed_trace
+    def begin_trigger_subscription_evaluation(  # pylint: disable=inconsistent-return-statements
         self,
-        subscription_id,  # type: str
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> LROPoller[None]
+        subscription_id: str,
+        **kwargs: Any
+    ) -> LROPoller[None]:
         """Triggers a policy evaluation scan for all the resources under the subscription.
 
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling.
-         Pass in False for this operation to not poll, or pass in your own initialized polling object for a personal polling strategy.
+        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
+         operation to not poll, or pass in your own initialized polling object for a personal polling
+         strategy.
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no Retry-After header is present.
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
         :return: An instance of LROPoller that returns either None or the result of cls(response)
         :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
+        :raises: ~azure.core.exceptions.HttpResponseError
         """
-        polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop(
             'polling_interval',
             self._config.polling_interval
         )
         cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
         if cont_token is None:
-            raw_result = self._trigger_subscription_evaluation_initial(
+            raw_result = self._trigger_subscription_evaluation_initial(  # type: ignore
                 subscription_id=subscription_id,
+                api_version=api_version,
                 cls=lambda x,y,z: x,
+                headers=_headers,
+                params=_params,
                 **kwargs
             )
-
         kwargs.pop('error_map', None)
-        kwargs.pop('content_type', None)
 
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
 
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-        }
 
-        if polling is True: polling_method = ARMPolling(lro_delay, lro_options={'final-state-via': 'location'}, path_format_arguments=path_format_arguments,  **kwargs)
-        elif polling is False: polling_method = NoPolling()
+        if polling is True:
+            polling_method = cast(PollingMethod, ARMPolling(
+                lro_delay,
+                lro_options={'final-state-via': 'location'},
+                
+                **kwargs
+        ))  # type: PollingMethod
+        elif polling is False: polling_method = cast(PollingMethod, NoPolling())
         else: polling_method = polling
         if cont_token:
             return LROPoller.from_continuation_token(
@@ -966,107 +2098,120 @@ class PolicyStatesOperations(object):
                 client=self._client,
                 deserialization_callback=get_long_running_output
             )
-        else:
-            return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
-    begin_trigger_subscription_evaluation.metadata = {'url': '/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation'}  # type: ignore
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    def _trigger_resource_group_evaluation_initial(
+    begin_trigger_subscription_evaluation.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"}  # type: ignore
+
+    def _trigger_resource_group_evaluation_initial(  # pylint: disable=inconsistent-return-statements
         self,
-        subscription_id,  # type: str
-        resource_group_name,  # type: str
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> None
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        subscription_id: str,
+        resource_group_name: str,
+        **kwargs: Any
+    ) -> None:
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2019-10-01"
-        accept = "application/json"
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        # Construct URL
-        url = self._trigger_resource_group_evaluation_initial.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
+        
+        request = build_trigger_resource_group_evaluation_request_initial(
+            subscription_id=subscription_id,
+            resource_group_name=resource_group_name,
+            api_version=api_version,
+            template_url=self._trigger_resource_group_evaluation_initial.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
-    _trigger_resource_group_evaluation_initial.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation'}  # type: ignore
+    _trigger_resource_group_evaluation_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"}  # type: ignore
 
-    def begin_trigger_resource_group_evaluation(
+
+    @distributed_trace
+    def begin_trigger_resource_group_evaluation(  # pylint: disable=inconsistent-return-statements
         self,
-        subscription_id,  # type: str
-        resource_group_name,  # type: str
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> LROPoller[None]
+        subscription_id: str,
+        resource_group_name: str,
+        **kwargs: Any
+    ) -> LROPoller[None]:
         """Triggers a policy evaluation scan for all the resources under the resource group.
 
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
         :param resource_group_name: Resource group name.
         :type resource_group_name: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling.
-         Pass in False for this operation to not poll, or pass in your own initialized polling object for a personal polling strategy.
+        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
+         operation to not poll, or pass in your own initialized polling object for a personal polling
+         strategy.
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no Retry-After header is present.
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
         :return: An instance of LROPoller that returns either None or the result of cls(response)
         :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
+        :raises: ~azure.core.exceptions.HttpResponseError
         """
-        polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop(
             'polling_interval',
             self._config.polling_interval
         )
         cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
         if cont_token is None:
-            raw_result = self._trigger_resource_group_evaluation_initial(
+            raw_result = self._trigger_resource_group_evaluation_initial(  # type: ignore
                 subscription_id=subscription_id,
                 resource_group_name=resource_group_name,
+                api_version=api_version,
                 cls=lambda x,y,z: x,
+                headers=_headers,
+                params=_params,
                 **kwargs
             )
-
         kwargs.pop('error_map', None)
-        kwargs.pop('content_type', None)
 
         def get_long_running_output(pipeline_response):
             if cls:
                 return cls(pipeline_response, None, {})
 
-        path_format_arguments = {
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-        }
 
-        if polling is True: polling_method = ARMPolling(lro_delay, lro_options={'final-state-via': 'location'}, path_format_arguments=path_format_arguments,  **kwargs)
-        elif polling is False: polling_method = NoPolling()
+        if polling is True:
+            polling_method = cast(PollingMethod, ARMPolling(
+                lro_delay,
+                lro_options={'final-state-via': 'location'},
+                
+                **kwargs
+        ))  # type: PollingMethod
+        elif polling is False: polling_method = cast(PollingMethod, NoPolling())
         else: polling_method = polling
         if cont_token:
             return LROPoller.from_continuation_token(
@@ -1075,19 +2220,19 @@ class PolicyStatesOperations(object):
                 client=self._client,
                 deserialization_callback=get_long_running_output
             )
-        else:
-            return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
-    begin_trigger_resource_group_evaluation.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation'}  # type: ignore
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
+    begin_trigger_resource_group_evaluation.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"}  # type: ignore
+
+    @distributed_trace
     def list_query_results_for_policy_set_definition(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        subscription_id,  # type: str
-        policy_set_definition_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        subscription_id: str,
+        policy_set_definition_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the subscription level policy set definition.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -1098,93 +2243,108 @@ class PolicyStatesOperations(object):
         :type subscription_id: str
         :param policy_set_definition_name: Policy set definition name.
         :type policy_set_definition_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _skip_token = query_options.skip_token
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_policy_set_definition.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-                    'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-                    'policySetDefinitionName': self._serialize.url("policy_set_definition_name", policy_set_definition_name, 'str'),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_policy_set_definition_request(
+                    policy_states_resource=policy_states_resource,
+                    subscription_id=subscription_id,
+                    policy_set_definition_name=policy_set_definition_name,
+                    authorization_namespace=authorization_namespace,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_policy_set_definition.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -1193,48 +2353,72 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_policy_set_definition.metadata = {'url': '/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_policy_set_definition.metadata = {'url': "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_policy_set_definition(
         self,
-        subscription_id,  # type: str
-        policy_set_definition_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        subscription_id: str,
+        policy_set_definition_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the subscription level policy set definition.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
         :param policy_set_definition_name: Policy set definition name.
         :type policy_set_definition_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -1244,44 +2428,34 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_policy_set_definition.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-            'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-            'policySetDefinitionName': self._serialize.url("policy_set_definition_name", policy_set_definition_name, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_policy_set_definition_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            subscription_id=subscription_id,
+            policy_set_definition_name=policy_set_definition_name,
+            authorization_namespace=authorization_namespace,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_policy_set_definition.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -1290,17 +2464,19 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_policy_set_definition.metadata = {'url': '/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
 
+    summarize_for_policy_set_definition.metadata = {'url': "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
+
+    @distributed_trace
     def list_query_results_for_policy_definition(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        subscription_id,  # type: str
-        policy_definition_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        subscription_id: str,
+        policy_definition_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the subscription level policy definition.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -1311,93 +2487,108 @@ class PolicyStatesOperations(object):
         :type subscription_id: str
         :param policy_definition_name: Policy definition name.
         :type policy_definition_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _skip_token = query_options.skip_token
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_policy_definition.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-                    'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-                    'policyDefinitionName': self._serialize.url("policy_definition_name", policy_definition_name, 'str'),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_policy_definition_request(
+                    policy_states_resource=policy_states_resource,
+                    subscription_id=subscription_id,
+                    policy_definition_name=policy_definition_name,
+                    authorization_namespace=authorization_namespace,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_policy_definition.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -1406,48 +2597,72 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_policy_definition.metadata = {'url': '/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_policy_definition.metadata = {'url': "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_policy_definition(
         self,
-        subscription_id,  # type: str
-        policy_definition_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        subscription_id: str,
+        policy_definition_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the subscription level policy definition.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
         :param policy_definition_name: Policy definition name.
         :type policy_definition_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -1457,44 +2672,34 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_policy_definition.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-            'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-            'policyDefinitionName': self._serialize.url("policy_definition_name", policy_definition_name, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_policy_definition_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            subscription_id=subscription_id,
+            policy_definition_name=policy_definition_name,
+            authorization_namespace=authorization_namespace,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_policy_definition.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -1503,17 +2708,19 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_policy_definition.metadata = {'url': '/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
 
+    summarize_for_policy_definition.metadata = {'url': "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
+
+    @distributed_trace
     def list_query_results_for_subscription_level_policy_assignment(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        subscription_id,  # type: str
-        policy_assignment_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        subscription_id: str,
+        policy_assignment_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the subscription level policy assignment.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -1524,93 +2731,108 @@ class PolicyStatesOperations(object):
         :type subscription_id: str
         :param policy_assignment_name: Policy assignment name.
         :type policy_assignment_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _skip_token = query_options.skip_token
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_subscription_level_policy_assignment.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-                    'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-                    'policyAssignmentName': self._serialize.url("policy_assignment_name", policy_assignment_name, 'str'),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_subscription_level_policy_assignment_request(
+                    policy_states_resource=policy_states_resource,
+                    subscription_id=subscription_id,
+                    policy_assignment_name=policy_assignment_name,
+                    authorization_namespace=authorization_namespace,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_subscription_level_policy_assignment.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -1619,48 +2841,72 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_subscription_level_policy_assignment.metadata = {'url': '/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_subscription_level_policy_assignment.metadata = {'url': "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_subscription_level_policy_assignment(
         self,
-        subscription_id,  # type: str
-        policy_assignment_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        subscription_id: str,
+        policy_assignment_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the subscription level policy assignment.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
         :param policy_assignment_name: Policy assignment name.
         :type policy_assignment_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -1670,44 +2916,34 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_subscription_level_policy_assignment.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-            'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-            'policyAssignmentName': self._serialize.url("policy_assignment_name", policy_assignment_name, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_subscription_level_policy_assignment_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            subscription_id=subscription_id,
+            policy_assignment_name=policy_assignment_name,
+            authorization_namespace=authorization_namespace,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_subscription_level_policy_assignment.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -1716,18 +2952,20 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_subscription_level_policy_assignment.metadata = {'url': '/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
 
+    summarize_for_subscription_level_policy_assignment.metadata = {'url': "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
+
+    @distributed_trace
     def list_query_results_for_resource_group_level_policy_assignment(
         self,
-        policy_states_resource,  # type: Union[str, "_models.PolicyStatesResource"]
-        subscription_id,  # type: str
-        resource_group_name,  # type: str
-        policy_assignment_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> Iterable["_models.PolicyStatesQueryResults"]
+        policy_states_resource: Union[str, "_models.PolicyStatesResource"],
+        subscription_id: str,
+        resource_group_name: str,
+        policy_assignment_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> Iterable[_models.PolicyStatesQueryResults]:
         """Queries policy states for the resource group level policy assignment.
 
         :param policy_states_resource: The virtual resource under PolicyStates resource type. In a
@@ -1740,94 +2978,109 @@ class PolicyStatesOperations(object):
         :type resource_group_name: str
         :param policy_assignment_name: Policy assignment name.
         :type policy_assignment_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PolicyStatesQueryResults or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
+        :return: An iterator like instance of either PolicyStatesQueryResults or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.policyinsights.models.PolicyStatesQueryResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PolicyStatesQueryResults"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PolicyStatesQueryResults]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
-        _top = None
-        _order_by = None
-        _select = None
-        _from_property = None
-        _to = None
-        _filter = None
-        _apply = None
-        _skip_token = None
-        if query_options is not None:
-            _top = query_options.top
-            _order_by = query_options.order_by
-            _select = query_options.select
-            _from_property = query_options.from_property
-            _to = query_options.to
-            _filter = query_options.filter
-            _apply = query_options.apply
-            _skip_token = query_options.skip_token
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
-
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
-            # Construct headers
-            header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
             if not next_link:
-                # Construct URL
-                url = self.list_query_results_for_resource_group_level_policy_assignment.metadata['url']  # type: ignore
-                path_format_arguments = {
-                    'policyStatesResource': self._serialize.url("policy_states_resource", policy_states_resource, 'str'),
-                    'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-                    'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-                    'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-                    'policyAssignmentName': self._serialize.url("policy_assignment_name", policy_assignment_name, 'str'),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _top is not None:
-                    query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-                if _order_by is not None:
-                    query_parameters['$orderby'] = self._serialize.query("order_by", _order_by, 'str')
-                if _select is not None:
-                    query_parameters['$select'] = self._serialize.query("select", _select, 'str')
-                if _from_property is not None:
-                    query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-                if _to is not None:
-                    query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-                if _filter is not None:
-                    query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-                if _apply is not None:
-                    query_parameters['$apply'] = self._serialize.query("apply", _apply, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_list_query_results_for_resource_group_level_policy_assignment_request(
+                    policy_states_resource=policy_states_resource,
+                    subscription_id=subscription_id,
+                    resource_group_name=resource_group_name,
+                    policy_assignment_name=policy_assignment_name,
+                    authorization_namespace=authorization_namespace,
+                    api_version=api_version,
+                    top=_top,
+                    order_by=_order_by,
+                    select=_select,
+                    from_property=_from_property,
+                    to=_to,
+                    filter=_filter,
+                    apply=_apply,
+                    skip_token=_skip_token,
+                    template_url=self.list_query_results_for_resource_group_level_policy_assignment.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             else:
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._serialize.url("next_link", next_link, 'str', skip_quote=True),
-                }
-                url = self._client.format_url(url, **path_format_arguments)
-                # Construct parameters
-                query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-                if _skip_token is not None:
-                    query_parameters['$skiptoken'] = self._serialize.query("skip_token", _skip_token, 'str')
+                _top = None
+                _order_by = None
+                _select = None
+                _from_property = None
+                _to = None
+                _filter = None
+                _apply = None
+                _skip_token = None
+                if query_options is not None:
+                    _top = query_options.top
+                    _order_by = query_options.order_by
+                    _select = query_options.select
+                    _from_property = query_options.from_property
+                    _to = query_options.to
+                    _filter = query_options.filter
+                    _apply = query_options.apply
+                    _skip_token = query_options.skip_token
+                
+                request = build_next_link_request(
+                    next_link=next_link,
+                    api_version=api_version,
+                    skip_token=_skip_token,
+                    template_url='{nextLink}',
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-                request = self._client.post(url, query_parameters, header_parameters)
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize('PolicyStatesQueryResults', pipeline_response)
+            deserialized = self._deserialize("PolicyStatesQueryResults", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -1836,51 +3089,75 @@ class PolicyStatesOperations(object):
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
-                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
+
         return ItemPaged(
             get_next, extract_data
         )
-    list_query_results_for_resource_group_level_policy_assignment.metadata = {'url': '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults'}  # type: ignore
+    list_query_results_for_resource_group_level_policy_assignment.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults"}  # type: ignore
 
+    @distributed_trace
     def summarize_for_resource_group_level_policy_assignment(
         self,
-        subscription_id,  # type: str
-        resource_group_name,  # type: str
-        policy_assignment_name,  # type: str
-        query_options=None,  # type: Optional["_models.QueryOptions"]
-        **kwargs  # type: Any
-    ):
-        # type: (...) -> "_models.SummarizeResults"
+        policy_states_summary_resource: Union[str, "_models.PolicyStatesSummaryResourceType"],
+        subscription_id: str,
+        resource_group_name: str,
+        policy_assignment_name: str,
+        query_options: Optional[_models.QueryOptions] = None,
+        **kwargs: Any
+    ) -> _models.SummarizeResults:
         """Summarizes policy states for the resource group level policy assignment.
 
+        :param policy_states_summary_resource: The virtual resource under PolicyStates resource type
+         for summarize action. In a given time range, 'latest' represents the latest policy state(s) and
+         is the only allowed value.
+        :type policy_states_summary_resource: str or
+         ~azure.mgmt.policyinsights.models.PolicyStatesSummaryResourceType
         :param subscription_id: Microsoft Azure subscription ID.
         :type subscription_id: str
         :param resource_group_name: Resource group name.
         :type resource_group_name: str
         :param policy_assignment_name: Policy assignment name.
         :type policy_assignment_name: str
-        :param query_options: Parameter group.
+        :param query_options: Parameter group. Default value is None.
         :type query_options: ~azure.mgmt.policyinsights.models.QueryOptions
+        :keyword authorization_namespace: The namespace for Microsoft Authorization resource provider;
+         only "Microsoft.Authorization" is allowed. Default value is "Microsoft.Authorization". Note
+         that overriding this default value may result in unsupported behavior.
+        :paramtype authorization_namespace: str
+        :keyword api_version: Api Version. Default value is "2022-06-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SummarizeResults, or the result of cls(response)
         :rtype: ~azure.mgmt.policyinsights.models.SummarizeResults
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SummarizeResults"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
-        
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        authorization_namespace = kwargs.pop('authorization_namespace', "Microsoft.Authorization")  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SummarizeResults]
+
         _top = None
         _from_property = None
         _to = None
@@ -1890,45 +3167,35 @@ class PolicyStatesOperations(object):
             _from_property = query_options.from_property
             _to = query_options.to
             _filter = query_options.filter
-        policy_states_summary_resource = "latest"
-        authorization_namespace = "Microsoft.Authorization"
-        api_version = "2019-10-01"
-        accept = "application/json"
 
-        # Construct URL
-        url = self.summarize_for_resource_group_level_policy_assignment.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'policyStatesSummaryResource': self._serialize.url("policy_states_summary_resource", policy_states_summary_resource, 'str'),
-            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'authorizationNamespace': self._serialize.url("authorization_namespace", authorization_namespace, 'str'),
-            'policyAssignmentName': self._serialize.url("policy_assignment_name", policy_assignment_name, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        request = build_summarize_for_resource_group_level_policy_assignment_request(
+            policy_states_summary_resource=policy_states_summary_resource,
+            subscription_id=subscription_id,
+            resource_group_name=resource_group_name,
+            policy_assignment_name=policy_assignment_name,
+            authorization_namespace=authorization_namespace,
+            api_version=api_version,
+            top=_top,
+            from_property=_from_property,
+            to=_to,
+            filter=_filter,
+            template_url=self.summarize_for_resource_group_level_policy_assignment.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
-        if _top is not None:
-            query_parameters['$top'] = self._serialize.query("top", _top, 'int', minimum=0)
-        if _from_property is not None:
-            query_parameters['$from'] = self._serialize.query("from_property", _from_property, 'iso-8601')
-        if _to is not None:
-            query_parameters['$to'] = self._serialize.query("to", _to, 'iso-8601')
-        if _filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", _filter, 'str')
-
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
-
-        request = self._client.post(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, response)
+            error = self._deserialize.failsafe_deserialize(_models.QueryFailure, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize('SummarizeResults', pipeline_response)
@@ -1937,4 +3204,6 @@ class PolicyStatesOperations(object):
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    summarize_for_resource_group_level_policy_assignment.metadata = {'url': '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize'}  # type: ignore
+
+    summarize_for_resource_group_level_policy_assignment.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize"}  # type: ignore
+
