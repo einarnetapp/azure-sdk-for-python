@@ -6,27 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
-from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from enum import Enum
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class ComplianceState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ComplianceState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The compliance state that should be set on the resource.
     """
 
@@ -37,7 +21,7 @@ class ComplianceState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: The compliance state of the resource is not known.
     UNKNOWN = "Unknown"
 
-class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -46,7 +30,7 @@ class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class FieldRestrictionResult(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class FieldRestrictionResult(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of restriction that is imposed on the field.
     """
 
@@ -57,12 +41,16 @@ class FieldRestrictionResult(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)
     #: The field and/or values will be denied by policy.
     DENY = "Deny"
 
-class PolicyStatesResource(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PolicyStatesResource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     DEFAULT = "default"
     LATEST = "latest"
 
-class ResourceDiscoveryMode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PolicyTrackedResourcesResourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    DEFAULT = "default"
+
+class ResourceDiscoveryMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The way resources to remediate are discovered. Defaults to ExistingNonCompliant if not
     specified.
     """
