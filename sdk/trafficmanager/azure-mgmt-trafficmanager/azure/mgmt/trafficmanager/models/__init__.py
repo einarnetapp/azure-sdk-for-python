@@ -24,6 +24,7 @@ from ._models_py3 import ProxyResource
 from ._models_py3 import QueryExperience
 from ._models_py3 import Region
 from ._models_py3 import Resource
+from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
 from ._models_py3 import TrafficFlow
 from ._models_py3 import TrafficManagerGeographicHierarchy
@@ -33,6 +34,8 @@ from ._models_py3 import UserMetricsModel
 
 from ._traffic_manager_management_client_enums import (
     AllowedEndpointRecordType,
+    AlwaysServe,
+    CreatedByType,
     EndpointMonitorStatus,
     EndpointStatus,
     EndpointType,
@@ -42,7 +45,9 @@ from ._traffic_manager_management_client_enums import (
     TrafficRoutingMethod,
     TrafficViewEnrollmentStatus,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'CheckTrafficManagerRelativeDnsNameAvailabilityParameters',
     'CloudErrorBody',
@@ -62,12 +67,15 @@ __all__ = [
     'QueryExperience',
     'Region',
     'Resource',
+    'SystemData',
     'TrackedResource',
     'TrafficFlow',
     'TrafficManagerGeographicHierarchy',
     'TrafficManagerNameAvailability',
     'UserMetricsModel',
     'AllowedEndpointRecordType',
+    'AlwaysServe',
+    'CreatedByType',
     'EndpointMonitorStatus',
     'EndpointStatus',
     'EndpointType',
@@ -77,3 +85,5 @@ __all__ = [
     'TrafficRoutingMethod',
     'TrafficViewEnrollmentStatus',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

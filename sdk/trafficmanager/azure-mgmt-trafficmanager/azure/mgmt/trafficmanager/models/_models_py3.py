@@ -7,11 +7,13 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._traffic_manager_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class CheckTrafficManagerRelativeDnsNameAvailabilityParameters(msrest.serialization.Model):
@@ -72,7 +74,7 @@ class CloudErrorBody(msrest.serialization.Model):
         code: Optional[str] = None,
         message: Optional[str] = None,
         target: Optional[str] = None,
-        details: Optional[List["CloudErrorBody"]] = None,
+        details: Optional[List["_models.CloudErrorBody"]] = None,
         **kwargs
     ):
         """
@@ -251,6 +253,8 @@ class ProxyResource(Resource):
 class Endpoint(ProxyResource):
     """Class representing a Traffic Manager endpoint.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}.
     :vartype id: str
@@ -258,6 +262,8 @@ class Endpoint(ProxyResource):
     :vartype name: str
     :ivar type: The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
     :vartype type: str
+    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :vartype system_data: ~azure.mgmt.trafficmanager.models.SystemData
     :ivar target_resource_id: The Azure Resource URI of the of the endpoint. Not applicable to
      endpoints of type 'ExternalEndpoints'.
     :vartype target_resource_id: str
@@ -265,8 +271,8 @@ class Endpoint(ProxyResource):
      returns this value in DNS responses to direct traffic to this endpoint.
     :vartype target: str
     :ivar endpoint_status: The status of the endpoint. If the endpoint is Enabled, it is probed for
-     endpoint health and is included in the traffic routing method. Possible values include:
-     "Enabled", "Disabled".
+     endpoint health and is included in the traffic routing method. Known values are: "Enabled",
+     "Disabled".
     :vartype endpoint_status: str or ~azure.mgmt.trafficmanager.models.EndpointStatus
     :ivar weight: The weight of this endpoint when using the 'Weighted' traffic routing method.
      Possible values are from 1 to 1000.
@@ -279,7 +285,7 @@ class Endpoint(ProxyResource):
     :ivar endpoint_location: Specifies the location of the external or nested endpoints when using
      the 'Performance' traffic routing method.
     :vartype endpoint_location: str
-    :ivar endpoint_monitor_status: The monitoring status of the endpoint. Possible values include:
+    :ivar endpoint_monitor_status: The monitoring status of the endpoint. Known values are:
      "CheckingEndpoint", "Online", "Degraded", "Disabled", "Inactive", "Stopped".
     :vartype endpoint_monitor_status: str or
      ~azure.mgmt.trafficmanager.models.EndpointMonitorStatus
@@ -306,12 +312,21 @@ class Endpoint(ProxyResource):
     :ivar custom_headers: List of custom headers.
     :vartype custom_headers:
      list[~azure.mgmt.trafficmanager.models.EndpointPropertiesCustomHeadersItem]
+    :ivar always_serve: If Always Serve is enabled, probing for endpoint health will be disabled
+     and endpoints will be included in the traffic routing method. Known values are: "Enabled",
+     "Disabled".
+    :vartype always_serve: str or ~azure.mgmt.trafficmanager.models.AlwaysServe
     """
+
+    _validation = {
+        'system_data': {'readonly': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'target_resource_id': {'key': 'properties.targetResourceId', 'type': 'str'},
         'target': {'key': 'properties.target', 'type': 'str'},
         'endpoint_status': {'key': 'properties.endpointStatus', 'type': 'str'},
@@ -325,6 +340,7 @@ class Endpoint(ProxyResource):
         'geo_mapping': {'key': 'properties.geoMapping', 'type': '[str]'},
         'subnets': {'key': 'properties.subnets', 'type': '[EndpointPropertiesSubnetsItem]'},
         'custom_headers': {'key': 'properties.customHeaders', 'type': '[EndpointPropertiesCustomHeadersItem]'},
+        'always_serve': {'key': 'properties.alwaysServe', 'type': 'str'},
     }
 
     def __init__(
@@ -335,17 +351,18 @@ class Endpoint(ProxyResource):
         type: Optional[str] = None,
         target_resource_id: Optional[str] = None,
         target: Optional[str] = None,
-        endpoint_status: Optional[Union[str, "EndpointStatus"]] = None,
+        endpoint_status: Optional[Union[str, "_models.EndpointStatus"]] = None,
         weight: Optional[int] = None,
         priority: Optional[int] = None,
         endpoint_location: Optional[str] = None,
-        endpoint_monitor_status: Optional[Union[str, "EndpointMonitorStatus"]] = None,
+        endpoint_monitor_status: Optional[Union[str, "_models.EndpointMonitorStatus"]] = None,
         min_child_endpoints: Optional[int] = None,
         min_child_endpoints_i_pv4: Optional[int] = None,
         min_child_endpoints_i_pv6: Optional[int] = None,
         geo_mapping: Optional[List[str]] = None,
-        subnets: Optional[List["EndpointPropertiesSubnetsItem"]] = None,
-        custom_headers: Optional[List["EndpointPropertiesCustomHeadersItem"]] = None,
+        subnets: Optional[List["_models.EndpointPropertiesSubnetsItem"]] = None,
+        custom_headers: Optional[List["_models.EndpointPropertiesCustomHeadersItem"]] = None,
+        always_serve: Optional[Union[str, "_models.AlwaysServe"]] = None,
         **kwargs
     ):
         """
@@ -363,8 +380,8 @@ class Endpoint(ProxyResource):
          returns this value in DNS responses to direct traffic to this endpoint.
         :paramtype target: str
         :keyword endpoint_status: The status of the endpoint. If the endpoint is Enabled, it is probed
-         for endpoint health and is included in the traffic routing method. Possible values include:
-         "Enabled", "Disabled".
+         for endpoint health and is included in the traffic routing method. Known values are: "Enabled",
+         "Disabled".
         :paramtype endpoint_status: str or ~azure.mgmt.trafficmanager.models.EndpointStatus
         :keyword weight: The weight of this endpoint when using the 'Weighted' traffic routing method.
          Possible values are from 1 to 1000.
@@ -377,8 +394,8 @@ class Endpoint(ProxyResource):
         :keyword endpoint_location: Specifies the location of the external or nested endpoints when
          using the 'Performance' traffic routing method.
         :paramtype endpoint_location: str
-        :keyword endpoint_monitor_status: The monitoring status of the endpoint. Possible values
-         include: "CheckingEndpoint", "Online", "Degraded", "Disabled", "Inactive", "Stopped".
+        :keyword endpoint_monitor_status: The monitoring status of the endpoint. Known values are:
+         "CheckingEndpoint", "Online", "Degraded", "Disabled", "Inactive", "Stopped".
         :paramtype endpoint_monitor_status: str or
          ~azure.mgmt.trafficmanager.models.EndpointMonitorStatus
         :keyword min_child_endpoints: The minimum number of endpoints that must be available in the
@@ -404,8 +421,13 @@ class Endpoint(ProxyResource):
         :keyword custom_headers: List of custom headers.
         :paramtype custom_headers:
          list[~azure.mgmt.trafficmanager.models.EndpointPropertiesCustomHeadersItem]
+        :keyword always_serve: If Always Serve is enabled, probing for endpoint health will be disabled
+         and endpoints will be included in the traffic routing method. Known values are: "Enabled",
+         "Disabled".
+        :paramtype always_serve: str or ~azure.mgmt.trafficmanager.models.AlwaysServe
         """
         super(Endpoint, self).__init__(id=id, name=name, type=type, **kwargs)
+        self.system_data = None
         self.target_resource_id = target_resource_id
         self.target = target
         self.endpoint_status = endpoint_status
@@ -419,6 +441,7 @@ class Endpoint(ProxyResource):
         self.geo_mapping = geo_mapping
         self.subnets = subnets
         self.custom_headers = custom_headers
+        self.always_serve = always_serve
 
 
 class EndpointPropertiesCustomHeadersItem(msrest.serialization.Model):
@@ -527,6 +550,8 @@ class HeatMapEndpoint(msrest.serialization.Model):
 class HeatMapModel(ProxyResource):
     """Class representing a Traffic Manager HeatMap.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}.
     :vartype id: str
@@ -534,6 +559,8 @@ class HeatMapModel(ProxyResource):
     :vartype name: str
     :ivar type: The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
     :vartype type: str
+    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :vartype system_data: ~azure.mgmt.trafficmanager.models.SystemData
     :ivar start_time: The beginning of the time window for this HeatMap, inclusive.
     :vartype start_time: ~datetime.datetime
     :ivar end_time: The ending of the time window for this HeatMap, exclusive.
@@ -544,10 +571,15 @@ class HeatMapModel(ProxyResource):
     :vartype traffic_flows: list[~azure.mgmt.trafficmanager.models.TrafficFlow]
     """
 
+    _validation = {
+        'system_data': {'readonly': True},
+    }
+
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'start_time': {'key': 'properties.startTime', 'type': 'iso-8601'},
         'end_time': {'key': 'properties.endTime', 'type': 'iso-8601'},
         'endpoints': {'key': 'properties.endpoints', 'type': '[HeatMapEndpoint]'},
@@ -562,8 +594,8 @@ class HeatMapModel(ProxyResource):
         type: Optional[str] = None,
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
-        endpoints: Optional[List["HeatMapEndpoint"]] = None,
-        traffic_flows: Optional[List["TrafficFlow"]] = None,
+        endpoints: Optional[List["_models.HeatMapEndpoint"]] = None,
+        traffic_flows: Optional[List["_models.TrafficFlow"]] = None,
         **kwargs
     ):
         """
@@ -584,6 +616,7 @@ class HeatMapModel(ProxyResource):
         :paramtype traffic_flows: list[~azure.mgmt.trafficmanager.models.TrafficFlow]
         """
         super(HeatMapModel, self).__init__(id=id, name=name, type=type, **kwargs)
+        self.system_data = None
         self.start_time = start_time
         self.end_time = end_time
         self.endpoints = endpoints
@@ -594,11 +627,10 @@ class MonitorConfig(msrest.serialization.Model):
     """Class containing endpoint monitoring settings in a Traffic Manager profile.
 
     :ivar profile_monitor_status: The profile-level monitoring status of the Traffic Manager
-     profile. Possible values include: "CheckingEndpoints", "Online", "Degraded", "Disabled",
-     "Inactive".
+     profile. Known values are: "CheckingEndpoints", "Online", "Degraded", "Disabled", "Inactive".
     :vartype profile_monitor_status: str or ~azure.mgmt.trafficmanager.models.ProfileMonitorStatus
-    :ivar protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health. Possible
-     values include: "HTTP", "HTTPS", "TCP".
+    :ivar protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health. Known
+     values are: "HTTP", "HTTPS", "TCP".
     :vartype protocol: str or ~azure.mgmt.trafficmanager.models.MonitorProtocol
     :ivar port: The TCP port used to probe for endpoint health.
     :vartype port: long
@@ -636,25 +668,24 @@ class MonitorConfig(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        profile_monitor_status: Optional[Union[str, "ProfileMonitorStatus"]] = None,
-        protocol: Optional[Union[str, "MonitorProtocol"]] = None,
+        profile_monitor_status: Optional[Union[str, "_models.ProfileMonitorStatus"]] = None,
+        protocol: Optional[Union[str, "_models.MonitorProtocol"]] = None,
         port: Optional[int] = None,
         path: Optional[str] = None,
         interval_in_seconds: Optional[int] = None,
         timeout_in_seconds: Optional[int] = None,
         tolerated_number_of_failures: Optional[int] = None,
-        custom_headers: Optional[List["MonitorConfigCustomHeadersItem"]] = None,
-        expected_status_code_ranges: Optional[List["MonitorConfigExpectedStatusCodeRangesItem"]] = None,
+        custom_headers: Optional[List["_models.MonitorConfigCustomHeadersItem"]] = None,
+        expected_status_code_ranges: Optional[List["_models.MonitorConfigExpectedStatusCodeRangesItem"]] = None,
         **kwargs
     ):
         """
         :keyword profile_monitor_status: The profile-level monitoring status of the Traffic Manager
-         profile. Possible values include: "CheckingEndpoints", "Online", "Degraded", "Disabled",
-         "Inactive".
+         profile. Known values are: "CheckingEndpoints", "Online", "Degraded", "Disabled", "Inactive".
         :paramtype profile_monitor_status: str or
          ~azure.mgmt.trafficmanager.models.ProfileMonitorStatus
-        :keyword protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.
-         Possible values include: "HTTP", "HTTPS", "TCP".
+        :keyword protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health. Known
+         values are: "HTTP", "HTTPS", "TCP".
         :paramtype protocol: str or ~azure.mgmt.trafficmanager.models.MonitorProtocol
         :keyword port: The TCP port used to probe for endpoint health.
         :paramtype port: long
@@ -808,6 +839,8 @@ class TrackedResource(Resource):
 class Profile(TrackedResource):
     """Class representing a Traffic Manager profile.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}.
     :vartype id: str
@@ -819,12 +852,13 @@ class Profile(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: The Azure Region where the resource lives.
     :vartype location: str
-    :ivar profile_status: The status of the Traffic Manager profile. Possible values include:
-     "Enabled", "Disabled".
+    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :vartype system_data: ~azure.mgmt.trafficmanager.models.SystemData
+    :ivar profile_status: The status of the Traffic Manager profile. Known values are: "Enabled",
+     "Disabled".
     :vartype profile_status: str or ~azure.mgmt.trafficmanager.models.ProfileStatus
-    :ivar traffic_routing_method: The traffic routing method of the Traffic Manager profile.
-     Possible values include: "Performance", "Priority", "Weighted", "Geographic", "MultiValue",
-     "Subnet".
+    :ivar traffic_routing_method: The traffic routing method of the Traffic Manager profile. Known
+     values are: "Performance", "Priority", "Weighted", "Geographic", "MultiValue", "Subnet".
     :vartype traffic_routing_method: str or ~azure.mgmt.trafficmanager.models.TrafficRoutingMethod
     :ivar dns_config: The DNS settings of the Traffic Manager profile.
     :vartype dns_config: ~azure.mgmt.trafficmanager.models.DnsConfig
@@ -834,8 +868,7 @@ class Profile(TrackedResource):
     :vartype endpoints: list[~azure.mgmt.trafficmanager.models.Endpoint]
     :ivar traffic_view_enrollment_status: Indicates whether Traffic View is 'Enabled' or 'Disabled'
      for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will
-     increase the cost of the Traffic Manage profile. Possible values include: "Enabled",
-     "Disabled".
+     increase the cost of the Traffic Manage profile. Known values are: "Enabled", "Disabled".
     :vartype traffic_view_enrollment_status: str or
      ~azure.mgmt.trafficmanager.models.TrafficViewEnrollmentStatus
     :ivar allowed_endpoint_record_types: The list of allowed endpoint record types.
@@ -845,12 +878,17 @@ class Profile(TrackedResource):
     :vartype max_return: long
     """
 
+    _validation = {
+        'system_data': {'readonly': True},
+    }
+
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'location': {'key': 'location', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'profile_status': {'key': 'properties.profileStatus', 'type': 'str'},
         'traffic_routing_method': {'key': 'properties.trafficRoutingMethod', 'type': 'str'},
         'dns_config': {'key': 'properties.dnsConfig', 'type': 'DnsConfig'},
@@ -869,13 +907,13 @@ class Profile(TrackedResource):
         type: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
         location: Optional[str] = None,
-        profile_status: Optional[Union[str, "ProfileStatus"]] = None,
-        traffic_routing_method: Optional[Union[str, "TrafficRoutingMethod"]] = None,
-        dns_config: Optional["DnsConfig"] = None,
-        monitor_config: Optional["MonitorConfig"] = None,
-        endpoints: Optional[List["Endpoint"]] = None,
-        traffic_view_enrollment_status: Optional[Union[str, "TrafficViewEnrollmentStatus"]] = None,
-        allowed_endpoint_record_types: Optional[List[Union[str, "AllowedEndpointRecordType"]]] = None,
+        profile_status: Optional[Union[str, "_models.ProfileStatus"]] = None,
+        traffic_routing_method: Optional[Union[str, "_models.TrafficRoutingMethod"]] = None,
+        dns_config: Optional["_models.DnsConfig"] = None,
+        monitor_config: Optional["_models.MonitorConfig"] = None,
+        endpoints: Optional[List["_models.Endpoint"]] = None,
+        traffic_view_enrollment_status: Optional[Union[str, "_models.TrafficViewEnrollmentStatus"]] = None,
+        allowed_endpoint_record_types: Optional[List[Union[str, "_models.AllowedEndpointRecordType"]]] = None,
         max_return: Optional[int] = None,
         **kwargs
     ):
@@ -891,12 +929,11 @@ class Profile(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: The Azure Region where the resource lives.
         :paramtype location: str
-        :keyword profile_status: The status of the Traffic Manager profile. Possible values include:
+        :keyword profile_status: The status of the Traffic Manager profile. Known values are:
          "Enabled", "Disabled".
         :paramtype profile_status: str or ~azure.mgmt.trafficmanager.models.ProfileStatus
         :keyword traffic_routing_method: The traffic routing method of the Traffic Manager profile.
-         Possible values include: "Performance", "Priority", "Weighted", "Geographic", "MultiValue",
-         "Subnet".
+         Known values are: "Performance", "Priority", "Weighted", "Geographic", "MultiValue", "Subnet".
         :paramtype traffic_routing_method: str or
          ~azure.mgmt.trafficmanager.models.TrafficRoutingMethod
         :keyword dns_config: The DNS settings of the Traffic Manager profile.
@@ -907,8 +944,7 @@ class Profile(TrackedResource):
         :paramtype endpoints: list[~azure.mgmt.trafficmanager.models.Endpoint]
         :keyword traffic_view_enrollment_status: Indicates whether Traffic View is 'Enabled' or
          'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature
-         will increase the cost of the Traffic Manage profile. Possible values include: "Enabled",
-         "Disabled".
+         will increase the cost of the Traffic Manage profile. Known values are: "Enabled", "Disabled".
         :paramtype traffic_view_enrollment_status: str or
          ~azure.mgmt.trafficmanager.models.TrafficViewEnrollmentStatus
         :keyword allowed_endpoint_record_types: The list of allowed endpoint record types.
@@ -918,6 +954,7 @@ class Profile(TrackedResource):
         :paramtype max_return: long
         """
         super(Profile, self).__init__(id=id, name=name, type=type, tags=tags, location=location, **kwargs)
+        self.system_data = None
         self.profile_status = profile_status
         self.traffic_routing_method = traffic_routing_method
         self.dns_config = dns_config
@@ -942,7 +979,7 @@ class ProfileListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Profile"]] = None,
+        value: Optional[List["_models.Profile"]] = None,
         **kwargs
     ):
         """
@@ -1023,7 +1060,7 @@ class Region(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         name: Optional[str] = None,
-        regions: Optional[List["Region"]] = None,
+        regions: Optional[List["_models.Region"]] = None,
         **kwargs
     ):
         """
@@ -1038,6 +1075,70 @@ class Region(msrest.serialization.Model):
         self.code = code
         self.name = name
         self.regions = regions
+
+
+class SystemData(msrest.serialization.Model):
+    """Metadata pertaining to creation and last modification of the resource.
+
+    :ivar created_by: The identity that created the resource.
+    :vartype created_by: str
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
+     "User", "Application", "ManagedIdentity", "Key".
+    :vartype created_by_type: str or ~azure.mgmt.trafficmanager.models.CreatedByType
+    :ivar created_at: The timestamp of resource creation (UTC).
+    :vartype created_at: ~datetime.datetime
+    :ivar last_modified_by: The identity that last modified the resource.
+    :vartype last_modified_by: str
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
+    :vartype last_modified_by_type: str or ~azure.mgmt.trafficmanager.models.CreatedByType
+    :ivar last_modified_at: The timestamp of resource last modification (UTC).
+    :vartype last_modified_at: ~datetime.datetime
+    """
+
+    _attribute_map = {
+        'created_by': {'key': 'createdBy', 'type': 'str'},
+        'created_by_type': {'key': 'createdByType', 'type': 'str'},
+        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
+        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
+        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
+        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        created_by: Optional[str] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
+        created_at: Optional[datetime.datetime] = None,
+        last_modified_by: Optional[str] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
+        last_modified_at: Optional[datetime.datetime] = None,
+        **kwargs
+    ):
+        """
+        :keyword created_by: The identity that created the resource.
+        :paramtype created_by: str
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
+        :paramtype created_by_type: str or ~azure.mgmt.trafficmanager.models.CreatedByType
+        :keyword created_at: The timestamp of resource creation (UTC).
+        :paramtype created_at: ~datetime.datetime
+        :keyword last_modified_by: The identity that last modified the resource.
+        :paramtype last_modified_by: str
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
+        :paramtype last_modified_by_type: str or ~azure.mgmt.trafficmanager.models.CreatedByType
+        :keyword last_modified_at: The timestamp of resource last modification (UTC).
+        :paramtype last_modified_at: ~datetime.datetime
+        """
+        super(SystemData, self).__init__(**kwargs)
+        self.created_by = created_by
+        self.created_by_type = created_by_type
+        self.created_at = created_at
+        self.last_modified_by = last_modified_by
+        self.last_modified_by_type = last_modified_by_type
+        self.last_modified_at = last_modified_at
 
 
 class TrafficFlow(msrest.serialization.Model):
@@ -1066,7 +1167,7 @@ class TrafficFlow(msrest.serialization.Model):
         source_ip: Optional[str] = None,
         latitude: Optional[float] = None,
         longitude: Optional[float] = None,
-        query_experiences: Optional[List["QueryExperience"]] = None,
+        query_experiences: Optional[List["_models.QueryExperience"]] = None,
         **kwargs
     ):
         """
@@ -1089,6 +1190,8 @@ class TrafficFlow(msrest.serialization.Model):
 class TrafficManagerGeographicHierarchy(ProxyResource):
     """Class representing the Geographic hierarchy used with the Geographic traffic routing method.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}.
     :vartype id: str
@@ -1096,15 +1199,22 @@ class TrafficManagerGeographicHierarchy(ProxyResource):
     :vartype name: str
     :ivar type: The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
     :vartype type: str
+    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :vartype system_data: ~azure.mgmt.trafficmanager.models.SystemData
     :ivar geographic_hierarchy: The region at the root of the hierarchy from all the regions in the
      hierarchy can be retrieved.
     :vartype geographic_hierarchy: ~azure.mgmt.trafficmanager.models.Region
     """
 
+    _validation = {
+        'system_data': {'readonly': True},
+    }
+
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'geographic_hierarchy': {'key': 'properties.geographicHierarchy', 'type': 'Region'},
     }
 
@@ -1114,7 +1224,7 @@ class TrafficManagerGeographicHierarchy(ProxyResource):
         id: Optional[str] = None,
         name: Optional[str] = None,
         type: Optional[str] = None,
-        geographic_hierarchy: Optional["Region"] = None,
+        geographic_hierarchy: Optional["_models.Region"] = None,
         **kwargs
     ):
         """
@@ -1130,6 +1240,7 @@ class TrafficManagerGeographicHierarchy(ProxyResource):
         :paramtype geographic_hierarchy: ~azure.mgmt.trafficmanager.models.Region
         """
         super(TrafficManagerGeographicHierarchy, self).__init__(id=id, name=name, type=type, **kwargs)
+        self.system_data = None
         self.geographic_hierarchy = geographic_hierarchy
 
 
@@ -1191,6 +1302,8 @@ class TrafficManagerNameAvailability(msrest.serialization.Model):
 class UserMetricsModel(ProxyResource):
     """Class representing Traffic Manager User Metrics.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}.
     :vartype id: str
@@ -1198,14 +1311,21 @@ class UserMetricsModel(ProxyResource):
     :vartype name: str
     :ivar type: The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
     :vartype type: str
+    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :vartype system_data: ~azure.mgmt.trafficmanager.models.SystemData
     :ivar key: The key returned by the User Metrics operation.
     :vartype key: str
     """
+
+    _validation = {
+        'system_data': {'readonly': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'key': {'key': 'properties.key', 'type': 'str'},
     }
 
@@ -1230,4 +1350,5 @@ class UserMetricsModel(ProxyResource):
         :paramtype key: str
         """
         super(UserMetricsModel, self).__init__(id=id, name=name, type=type, **kwargs)
+        self.system_data = None
         self.key = key

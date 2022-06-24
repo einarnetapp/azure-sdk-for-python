@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AllowedEndpointRecordType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AllowedEndpointRecordType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The allowed type DNS record types for this profile.
     """
 
@@ -20,7 +19,24 @@ class AllowedEndpointRecordType(with_metaclass(CaseInsensitiveEnumMeta, str, Enu
     I_PV6_ADDRESS = "IPv6Address"
     ANY = "Any"
 
-class EndpointMonitorStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AlwaysServe(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be
+    included in the traffic routing method.
+    """
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of identity that created the resource.
+    """
+
+    USER = "User"
+    APPLICATION = "Application"
+    MANAGED_IDENTITY = "ManagedIdentity"
+    KEY = "Key"
+
+class EndpointMonitorStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The monitoring status of the endpoint.
     """
 
@@ -31,7 +47,7 @@ class EndpointMonitorStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     INACTIVE = "Inactive"
     STOPPED = "Stopped"
 
-class EndpointStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class EndpointStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the endpoint. If the endpoint is Enabled, it is probed for endpoint health and is
     included in the traffic routing method.
     """
@@ -39,13 +55,13 @@ class EndpointStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class EndpointType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class EndpointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     AZURE_ENDPOINTS = "AzureEndpoints"
     EXTERNAL_ENDPOINTS = "ExternalEndpoints"
     NESTED_ENDPOINTS = "NestedEndpoints"
 
-class MonitorProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class MonitorProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.
     """
 
@@ -53,7 +69,7 @@ class MonitorProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     HTTPS = "HTTPS"
     TCP = "TCP"
 
-class ProfileMonitorStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProfileMonitorStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The profile-level monitoring status of the Traffic Manager profile.
     """
 
@@ -63,14 +79,14 @@ class ProfileMonitorStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DISABLED = "Disabled"
     INACTIVE = "Inactive"
 
-class ProfileStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProfileStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the Traffic Manager profile.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class TrafficRoutingMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class TrafficRoutingMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The traffic routing method of the Traffic Manager profile.
     """
 
@@ -81,7 +97,7 @@ class TrafficRoutingMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MULTI_VALUE = "MultiValue"
     SUBNET = "Subnet"
 
-class TrafficViewEnrollmentStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class TrafficViewEnrollmentStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates whether Traffic View is 'Enabled' or 'Disabled' for the Traffic Manager profile.
     Null, indicates 'Disabled'. Enabling this feature will increase the cost of the Traffic Manage
     profile.
