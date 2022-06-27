@@ -1808,7 +1808,7 @@ class ReservationTransaction(ReservationTransactionResource):
     :vartype reservation_order_id: str
     :ivar description: The description of the transaction.
     :vartype description: str
-    :ivar event_type: The type of the transaction (Purchase, Cancel, etc.).
+    :ivar event_type: The type of the transaction (Purchase, Cancel or Refund).
     :vartype event_type: str
     :ivar quantity: The quantity of the transaction.
     :vartype quantity: float
@@ -1966,7 +1966,7 @@ class LegacyReservationTransaction(ReservationTransaction):
     :vartype reservation_order_id: str
     :ivar description: The description of the transaction.
     :vartype description: str
-    :ivar event_type: The type of the transaction (Purchase, Cancel, etc.).
+    :ivar event_type: The type of the transaction (Purchase, Cancel or Refund).
     :vartype event_type: str
     :ivar quantity: The quantity of the transaction.
     :vartype quantity: float
@@ -3464,7 +3464,7 @@ class ModernReservationTransaction(ReservationTransactionResource):
     :vartype description: str
     :ivar event_date: The date of the transaction.
     :vartype event_date: ~datetime.datetime
-    :ivar event_type: The type of the transaction (Purchase, Cancel, etc.).
+    :ivar event_type: The type of the transaction (Purchase, Cancel or Refund).
     :vartype event_type: str
     :ivar invoice: Invoice Number.
     :vartype invoice: str
