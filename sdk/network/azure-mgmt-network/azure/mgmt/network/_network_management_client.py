@@ -78,11 +78,7 @@ class NetworkManagementClient(NetworkManagementClientOperationsMixin, MultiApiCl
             'network_manager_effective_security_admin_rules': '2021-02-01-preview',
             'network_managers': '2021-02-01-preview',
             'network_security_perimeters': '2021-02-01-preview',
-            'nsp_access_rules': '2021-02-01-preview',
-            'nsp_associations': '2021-02-01-preview',
-            'nsp_profiles': '2021-02-01-preview',
             'p2_svpn_server_configurations': '2019-07-01',
-            'perimeter_associable_resource_types': '2021-02-01-preview',
             'security_admin_configurations': '2021-02-01-preview',
             'security_user_configurations': '2021-02-01-preview',
             'user_rule_collections': '2021-02-01-preview',
@@ -4890,45 +4886,6 @@ class NetworkManagementClient(NetworkManagementClientOperationsMixin, MultiApiCl
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
-    def nsp_access_rules(self):
-        """Instance depends on the API version:
-
-           * 2021-02-01-preview: :class:`NspAccessRulesOperations<azure.mgmt.network.v2021_02_01_preview.operations.NspAccessRulesOperations>`
-        """
-        api_version = self._get_api_version('nsp_access_rules')
-        if api_version == '2021-02-01-preview':
-            from .v2021_02_01_preview.operations import NspAccessRulesOperations as OperationClass
-        else:
-            raise ValueError("API version {} does not have operation group 'nsp_access_rules'".format(api_version))
-        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
-
-    @property
-    def nsp_associations(self):
-        """Instance depends on the API version:
-
-           * 2021-02-01-preview: :class:`NspAssociationsOperations<azure.mgmt.network.v2021_02_01_preview.operations.NspAssociationsOperations>`
-        """
-        api_version = self._get_api_version('nsp_associations')
-        if api_version == '2021-02-01-preview':
-            from .v2021_02_01_preview.operations import NspAssociationsOperations as OperationClass
-        else:
-            raise ValueError("API version {} does not have operation group 'nsp_associations'".format(api_version))
-        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
-
-    @property
-    def nsp_profiles(self):
-        """Instance depends on the API version:
-
-           * 2021-02-01-preview: :class:`NspProfilesOperations<azure.mgmt.network.v2021_02_01_preview.operations.NspProfilesOperations>`
-        """
-        api_version = self._get_api_version('nsp_profiles')
-        if api_version == '2021-02-01-preview':
-            from .v2021_02_01_preview.operations import NspProfilesOperations as OperationClass
-        else:
-            raise ValueError("API version {} does not have operation group 'nsp_profiles'".format(api_version))
-        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
-
-    @property
     def operations(self):
         """Instance depends on the API version:
 
@@ -5291,19 +5248,6 @@ class NetworkManagementClient(NetworkManagementClientOperationsMixin, MultiApiCl
             from .v2021_08_01.operations import PeerExpressRouteCircuitConnectionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'peer_express_route_circuit_connections'".format(api_version))
-        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
-
-    @property
-    def perimeter_associable_resource_types(self):
-        """Instance depends on the API version:
-
-           * 2021-02-01-preview: :class:`PerimeterAssociableResourceTypesOperations<azure.mgmt.network.v2021_02_01_preview.operations.PerimeterAssociableResourceTypesOperations>`
-        """
-        api_version = self._get_api_version('perimeter_associable_resource_types')
-        if api_version == '2021-02-01-preview':
-            from .v2021_02_01_preview.operations import PerimeterAssociableResourceTypesOperations as OperationClass
-        else:
-            raise ValueError("API version {} does not have operation group 'perimeter_associable_resource_types'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property

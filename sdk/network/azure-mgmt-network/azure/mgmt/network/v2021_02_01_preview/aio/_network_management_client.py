@@ -16,7 +16,7 @@ from azure.mgmt.core import AsyncARMPipelineClient
 
 from .. import models
 from ._configuration import NetworkManagementClientConfiguration
-from .operations import ActiveConnectivityConfigurationsOperations, ActiveSecurityAdminRulesOperations, ActiveSecurityUserRulesOperations, AdminRuleCollectionsOperations, AdminRulesOperations, ConnectivityConfigurationsOperations, EffectiveConnectivityConfigurationsOperations, EffectiveVirtualNetworksOperations, NetworkGroupsOperations, NetworkManagerCommitsOperations, NetworkManagerDeploymentStatusOperations, NetworkManagerEffectiveSecurityAdminRulesOperations, NetworkManagersOperations, NetworkSecurityPerimetersOperations, NspAccessRulesOperations, NspAssociationsOperations, NspProfilesOperations, PerimeterAssociableResourceTypesOperations, SecurityAdminConfigurationsOperations, SecurityUserConfigurationsOperations, UserRuleCollectionsOperations, UserRulesOperations
+from .operations import ActiveConnectivityConfigurationsOperations, ActiveSecurityAdminRulesOperations, ActiveSecurityUserRulesOperations, AdminRuleCollectionsOperations, AdminRulesOperations, ConnectivityConfigurationsOperations, EffectiveConnectivityConfigurationsOperations, EffectiveVirtualNetworksOperations, NetworkGroupsOperations, NetworkManagerCommitsOperations, NetworkManagerDeploymentStatusOperations, NetworkManagerEffectiveSecurityAdminRulesOperations, NetworkManagersOperations, NetworkSecurityPerimetersOperations, SecurityAdminConfigurationsOperations, SecurityUserConfigurationsOperations, UserRuleCollectionsOperations, UserRulesOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -80,19 +80,6 @@ class NetworkManagementClient:    # pylint: disable=too-many-instance-attributes
     :ivar network_security_perimeters: NetworkSecurityPerimetersOperations operations
     :vartype network_security_perimeters:
      azure.mgmt.network.v2021_02_01_preview.aio.operations.NetworkSecurityPerimetersOperations
-    :ivar nsp_profiles: NspProfilesOperations operations
-    :vartype nsp_profiles:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspProfilesOperations
-    :ivar nsp_access_rules: NspAccessRulesOperations operations
-    :vartype nsp_access_rules:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAccessRulesOperations
-    :ivar nsp_associations: NspAssociationsOperations operations
-    :vartype nsp_associations:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAssociationsOperations
-    :ivar perimeter_associable_resource_types: PerimeterAssociableResourceTypesOperations
-     operations
-    :vartype perimeter_associable_resource_types:
-     azure.mgmt.network.v2021_02_01_preview.aio.operations.PerimeterAssociableResourceTypesOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription credentials which uniquely identify the Microsoft
@@ -103,8 +90,6 @@ class NetworkManagementClient:    # pylint: disable=too-many-instance-attributes
     :keyword api_version: Api Version. Default value is "2021-02-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
-    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-     Retry-After header is present.
     """
 
     def __init__(
@@ -121,28 +106,60 @@ class NetworkManagementClient:    # pylint: disable=too-many-instance-attributes
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.network_managers = NetworkManagersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_manager_commits = NetworkManagerCommitsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_manager_deployment_status = NetworkManagerDeploymentStatusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.effective_virtual_networks = EffectiveVirtualNetworksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.active_connectivity_configurations = ActiveConnectivityConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.active_security_admin_rules = ActiveSecurityAdminRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.active_security_user_rules = ActiveSecurityUserRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.connectivity_configurations = ConnectivityConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.effective_connectivity_configurations = EffectiveConnectivityConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_manager_effective_security_admin_rules = NetworkManagerEffectiveSecurityAdminRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_groups = NetworkGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.security_user_configurations = SecurityUserConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.user_rule_collections = UserRuleCollectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.user_rules = UserRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.security_admin_configurations = SecurityAdminConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.admin_rule_collections = AdminRuleCollectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.admin_rules = AdminRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_security_perimeters = NetworkSecurityPerimetersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.nsp_profiles = NspProfilesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.nsp_access_rules = NspAccessRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.nsp_associations = NspAssociationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.perimeter_associable_resource_types = PerimeterAssociableResourceTypesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.network_managers = NetworkManagersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_manager_commits = NetworkManagerCommitsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_manager_deployment_status = NetworkManagerDeploymentStatusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.effective_virtual_networks = EffectiveVirtualNetworksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.active_connectivity_configurations = ActiveConnectivityConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.active_security_admin_rules = ActiveSecurityAdminRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.active_security_user_rules = ActiveSecurityUserRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.connectivity_configurations = ConnectivityConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.effective_connectivity_configurations = EffectiveConnectivityConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_manager_effective_security_admin_rules = NetworkManagerEffectiveSecurityAdminRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_groups = NetworkGroupsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.security_user_configurations = SecurityUserConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.user_rule_collections = UserRuleCollectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.user_rules = UserRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.security_admin_configurations = SecurityAdminConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.admin_rule_collections = AdminRuleCollectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.admin_rules = AdminRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_security_perimeters = NetworkSecurityPerimetersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(

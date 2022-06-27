@@ -24,11 +24,10 @@ from ._operations import SecurityAdminConfigurationsOperations
 from ._operations import AdminRuleCollectionsOperations
 from ._operations import AdminRulesOperations
 from ._operations import NetworkSecurityPerimetersOperations
-from ._operations import NspProfilesOperations
-from ._operations import NspAccessRulesOperations
-from ._operations import NspAssociationsOperations
-from ._operations import PerimeterAssociableResourceTypesOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'NetworkManagersOperations',
     'NetworkManagerCommitsOperations',
@@ -48,8 +47,6 @@ __all__ = [
     'AdminRuleCollectionsOperations',
     'AdminRulesOperations',
     'NetworkSecurityPerimetersOperations',
-    'NspProfilesOperations',
-    'NspAccessRulesOperations',
-    'NspAssociationsOperations',
-    'PerimeterAssociableResourceTypesOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

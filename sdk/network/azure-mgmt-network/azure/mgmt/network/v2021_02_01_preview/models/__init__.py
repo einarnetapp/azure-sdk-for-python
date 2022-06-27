@@ -38,7 +38,6 @@ from ._models_py3 import EffectiveVirtualNetworksListResult
 from ._models_py3 import EffectiveVirtualNetworksParameter
 from ._models_py3 import GroupMembersItem
 from ._models_py3 import Hub
-from ._models_py3 import LoggingCategory
 from ._models_py3 import NetworkGroup
 from ._models_py3 import NetworkGroupListResult
 from ._models_py3 import NetworkManager
@@ -53,15 +52,6 @@ from ._models_py3 import NetworkManagerPropertiesNetworkManagerScopes
 from ._models_py3 import NetworkManagerSecurityGroupItem
 from ._models_py3 import NetworkSecurityPerimeter
 from ._models_py3 import NetworkSecurityPerimeterListResult
-from ._models_py3 import NspAccessRule
-from ._models_py3 import NspAccessRuleListResult
-from ._models_py3 import NspAssociation
-from ._models_py3 import NspAssociationsListResult
-from ._models_py3 import NspProfile
-from ._models_py3 import NspProfileListResult
-from ._models_py3 import PerimeterAssociableResource
-from ._models_py3 import PerimeterAssociableResourcesListResult
-from ._models_py3 import PerimeterBasedAccessRule
 from ._models_py3 import ProxyResource
 from ._models_py3 import QueryRequestOptions
 from ._models_py3 import Resource
@@ -69,7 +59,6 @@ from ._models_py3 import RuleCollection
 from ._models_py3 import RuleCollectionListResult
 from ._models_py3 import SecurityConfiguration
 from ._models_py3 import SecurityConfigurationListResult
-from ._models_py3 import SubResource
 from ._models_py3 import SystemData
 from ._models_py3 import TagsObject
 from ._models_py3 import UserRule
@@ -77,10 +66,8 @@ from ._models_py3 import UserRuleListResult
 
 
 from ._network_management_client_enums import (
-    AccessRuleDirection,
     AddressPrefixType,
     AdminRuleKind,
-    AssociationAccessMode,
     ConfigurationType,
     ConnectivityTopology,
     CreatedByType,
@@ -92,7 +79,6 @@ from ._network_management_client_enums import (
     GroupConnectivity,
     IsGlobal,
     MembershipType,
-    NspProvisioningState,
     ProvisioningState,
     SecurityConfigurationRuleAccess,
     SecurityConfigurationRuleDirection,
@@ -101,7 +87,9 @@ from ._network_management_client_enums import (
     UseHubGateway,
     UserRuleKind,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'ActiveBaseSecurityAdminRule',
     'ActiveBaseSecurityUserRule',
@@ -135,7 +123,6 @@ __all__ = [
     'EffectiveVirtualNetworksParameter',
     'GroupMembersItem',
     'Hub',
-    'LoggingCategory',
     'NetworkGroup',
     'NetworkGroupListResult',
     'NetworkManager',
@@ -150,15 +137,6 @@ __all__ = [
     'NetworkManagerSecurityGroupItem',
     'NetworkSecurityPerimeter',
     'NetworkSecurityPerimeterListResult',
-    'NspAccessRule',
-    'NspAccessRuleListResult',
-    'NspAssociation',
-    'NspAssociationsListResult',
-    'NspProfile',
-    'NspProfileListResult',
-    'PerimeterAssociableResource',
-    'PerimeterAssociableResourcesListResult',
-    'PerimeterBasedAccessRule',
     'ProxyResource',
     'QueryRequestOptions',
     'Resource',
@@ -166,15 +144,12 @@ __all__ = [
     'RuleCollectionListResult',
     'SecurityConfiguration',
     'SecurityConfigurationListResult',
-    'SubResource',
     'SystemData',
     'TagsObject',
     'UserRule',
     'UserRuleListResult',
-    'AccessRuleDirection',
     'AddressPrefixType',
     'AdminRuleKind',
-    'AssociationAccessMode',
     'ConfigurationType',
     'ConnectivityTopology',
     'CreatedByType',
@@ -186,7 +161,6 @@ __all__ = [
     'GroupConnectivity',
     'IsGlobal',
     'MembershipType',
-    'NspProvisioningState',
     'ProvisioningState',
     'SecurityConfigurationRuleAccess',
     'SecurityConfigurationRuleDirection',
@@ -195,3 +169,5 @@ __all__ = [
     'UseHubGateway',
     'UserRuleKind',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
