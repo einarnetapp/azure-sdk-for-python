@@ -54,7 +54,9 @@ from ._service_linker_management_client_enums import (
     VNetSolutionType,
     ValidationResultStatus,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AuthInfoBase',
     'AzureKeyVaultProperties',
@@ -101,3 +103,5 @@ __all__ = [
     'VNetSolutionType',
     'ValidationResultStatus',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
