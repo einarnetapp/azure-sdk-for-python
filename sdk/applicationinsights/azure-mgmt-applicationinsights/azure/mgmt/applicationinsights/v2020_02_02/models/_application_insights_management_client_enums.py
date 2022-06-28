@@ -7,18 +7,17 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ApplicationType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ApplicationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of application being monitored.
     """
 
     WEB = "web"
     OTHER = "other"
 
-class FlowType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class FlowType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Used by the Application Insights system to determine what kind of flow this component was
     created by. This is to be set to 'Bluefield' when creating/updating a component via the REST
     API.
@@ -26,7 +25,7 @@ class FlowType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
 
     BLUEFIELD = "Bluefield"
 
-class IngestionMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IngestionMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates the flow of the ingestion.
     """
 
@@ -34,7 +33,7 @@ class IngestionMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     APPLICATION_INSIGHTS_WITH_DIAGNOSTIC_SETTINGS = "ApplicationInsightsWithDiagnosticSettings"
     LOG_ANALYTICS = "LogAnalytics"
 
-class PublicNetworkAccessType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PublicNetworkAccessType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The network access type for operating on the Application Insights Component. By default it is
     Enabled
     """
@@ -44,14 +43,14 @@ class PublicNetworkAccessType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)
     #: Disables public connectivity to Application Insights through public DNS.
     DISABLED = "Disabled"
 
-class PurgeState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PurgeState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the operation represented by the requested Id.
     """
 
     PENDING = "pending"
     COMPLETED = "completed"
 
-class RequestSource(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RequestSource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Describes what tool created this Application Insights component. Customers using this API
     should set this to the default 'rest'.
     """

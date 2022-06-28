@@ -6,12 +6,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._application_insights_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ErrorFieldContract(msrest.serialization.Model):
@@ -103,7 +105,7 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         **kwargs
     ):
         """
@@ -173,7 +175,7 @@ class OperationListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -202,7 +204,7 @@ class Resource(msrest.serialization.Model):
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
-    :ivar kind: The kind of workbook. Choices are user and shared. Possible values include: "user",
+    :ivar kind: The kind of workbook. Choices are user and shared. Known values are: "user",
      "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2018_06_17_preview.models.SharedTypeKind
     :ivar location: Required. Resource location.
@@ -231,13 +233,13 @@ class Resource(msrest.serialization.Model):
         self,
         *,
         location: str,
-        kind: Optional[Union[str, "SharedTypeKind"]] = None,
+        kind: Optional[Union[str, "_models.SharedTypeKind"]] = None,
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
-        :keyword kind: The kind of workbook. Choices are user and shared. Possible values include:
-         "user", "shared".
+        :keyword kind: The kind of workbook. Choices are user and shared. Known values are: "user",
+         "shared".
         :paramtype kind: str or
          ~azure.mgmt.applicationinsights.v2018_06_17_preview.models.SharedTypeKind
         :keyword location: Required. Resource location.
@@ -268,7 +270,7 @@ class Workbook(Resource):
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
-    :ivar kind: The kind of workbook. Choices are user and shared. Possible values include: "user",
+    :ivar kind: The kind of workbook. Choices are user and shared. Known values are: "user",
      "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2018_06_17_preview.models.SharedTypeKind
     :ivar location: Required. Resource location.
@@ -326,7 +328,7 @@ class Workbook(Resource):
         self,
         *,
         location: str,
-        kind: Optional[Union[str, "SharedTypeKind"]] = None,
+        kind: Optional[Union[str, "_models.SharedTypeKind"]] = None,
         tags: Optional[Dict[str, str]] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
@@ -337,8 +339,8 @@ class Workbook(Resource):
         **kwargs
     ):
         """
-        :keyword kind: The kind of workbook. Choices are user and shared. Possible values include:
-         "user", "shared".
+        :keyword kind: The kind of workbook. Choices are user and shared. Known values are: "user",
+         "shared".
         :paramtype kind: str or
          ~azure.mgmt.applicationinsights.v2018_06_17_preview.models.SharedTypeKind
         :keyword location: Required. Resource location.
@@ -395,7 +397,7 @@ class WorkbookError(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        details: Optional[List["ErrorFieldContract"]] = None,
+        details: Optional[List["_models.ErrorFieldContract"]] = None,
         **kwargs
     ):
         """
@@ -428,7 +430,7 @@ class WorkbooksListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Workbook"]] = None,
+        value: Optional[List["_models.Workbook"]] = None,
         **kwargs
     ):
         """
@@ -442,7 +444,7 @@ class WorkbooksListResult(msrest.serialization.Model):
 class WorkbookUpdateParameters(msrest.serialization.Model):
     """The parameters that can be provided when updating workbook properties properties.
 
-    :ivar kind: The kind of workbook. Choices are user and shared. Possible values include: "user",
+    :ivar kind: The kind of workbook. Choices are user and shared. Known values are: "user",
      "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2018_06_17_preview.models.SharedTypeKind
     :ivar tags: A set of tags. Resource tags.
@@ -471,7 +473,7 @@ class WorkbookUpdateParameters(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        kind: Optional[Union[str, "SharedTypeKind"]] = None,
+        kind: Optional[Union[str, "_models.SharedTypeKind"]] = None,
         tags: Optional[Dict[str, str]] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
@@ -480,8 +482,8 @@ class WorkbookUpdateParameters(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword kind: The kind of workbook. Choices are user and shared. Possible values include:
-         "user", "shared".
+        :keyword kind: The kind of workbook. Choices are user and shared. Known values are: "user",
+         "shared".
         :paramtype kind: str or
          ~azure.mgmt.applicationinsights.v2018_06_17_preview.models.SharedTypeKind
         :keyword tags: A set of tags. Resource tags.

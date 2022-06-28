@@ -6,12 +6,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._application_insights_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ComponentsResource(msrest.serialization.Model):
@@ -99,17 +101,17 @@ class ApplicationInsightsComponent(ComponentsResource):
     :vartype app_id: str
     :ivar name_properties_name: Application name.
     :vartype name_properties_name: str
-    :ivar application_type: Type of application being monitored. Possible values include: "web",
-     "other". Default value: "web".
+    :ivar application_type: Type of application being monitored. Known values are: "web", "other".
+     Default value: "web".
     :vartype application_type: str or
      ~azure.mgmt.applicationinsights.v2020_02_02.models.ApplicationType
     :ivar flow_type: Used by the Application Insights system to determine what kind of flow this
      component was created by. This is to be set to 'Bluefield' when creating/updating a component
-     via the REST API. Possible values include: "Bluefield". Default value: "Bluefield".
+     via the REST API. Known values are: "Bluefield". Default value: "Bluefield".
     :vartype flow_type: str or ~azure.mgmt.applicationinsights.v2020_02_02.models.FlowType
     :ivar request_source: Describes what tool created this Application Insights component.
-     Customers using this API should set this to the default 'rest'. Possible values include:
-     "rest". Default value: "rest".
+     Customers using this API should set this to the default 'rest'. Known values are: "rest".
+     Default value: "rest".
     :vartype request_source: str or
      ~azure.mgmt.applicationinsights.v2020_02_02.models.RequestSource
     :ivar instrumentation_key: Application Insights Instrumentation key. A read-only value that
@@ -152,14 +154,14 @@ class ApplicationInsightsComponent(ComponentsResource):
     :vartype private_link_scoped_resources:
      list[~azure.mgmt.applicationinsights.v2020_02_02.models.PrivateLinkScopedResource]
     :ivar public_network_access_for_ingestion: The network access type for accessing Application
-     Insights ingestion. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+     Insights ingestion. Known values are: "Enabled", "Disabled". Default value: "Enabled".
     :vartype public_network_access_for_ingestion: str or
      ~azure.mgmt.applicationinsights.v2020_02_02.models.PublicNetworkAccessType
     :ivar public_network_access_for_query: The network access type for accessing Application
-     Insights query. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+     Insights query. Known values are: "Enabled", "Disabled". Default value: "Enabled".
     :vartype public_network_access_for_query: str or
      ~azure.mgmt.applicationinsights.v2020_02_02.models.PublicNetworkAccessType
-    :ivar ingestion_mode: Indicates the flow of the ingestion. Possible values include:
+    :ivar ingestion_mode: Indicates the flow of the ingestion. Known values are:
      "ApplicationInsights", "ApplicationInsightsWithDiagnosticSettings", "LogAnalytics". Default
      value: "LogAnalytics".
     :vartype ingestion_mode: str or
@@ -232,18 +234,18 @@ class ApplicationInsightsComponent(ComponentsResource):
         kind: str,
         tags: Optional[Dict[str, str]] = None,
         etag: Optional[str] = None,
-        application_type: Optional[Union[str, "ApplicationType"]] = "web",
-        flow_type: Optional[Union[str, "FlowType"]] = "Bluefield",
-        request_source: Optional[Union[str, "RequestSource"]] = "rest",
+        application_type: Optional[Union[str, "_models.ApplicationType"]] = "web",
+        flow_type: Optional[Union[str, "_models.FlowType"]] = "Bluefield",
+        request_source: Optional[Union[str, "_models.RequestSource"]] = "rest",
         hockey_app_id: Optional[str] = None,
         sampling_percentage: Optional[float] = None,
         retention_in_days: Optional[int] = None,
         disable_ip_masking: Optional[bool] = None,
         immediate_purge_data_on30_days: Optional[bool] = None,
         workspace_resource_id: Optional[str] = None,
-        public_network_access_for_ingestion: Optional[Union[str, "PublicNetworkAccessType"]] = "Enabled",
-        public_network_access_for_query: Optional[Union[str, "PublicNetworkAccessType"]] = "Enabled",
-        ingestion_mode: Optional[Union[str, "IngestionMode"]] = "LogAnalytics",
+        public_network_access_for_ingestion: Optional[Union[str, "_models.PublicNetworkAccessType"]] = "Enabled",
+        public_network_access_for_query: Optional[Union[str, "_models.PublicNetworkAccessType"]] = "Enabled",
+        ingestion_mode: Optional[Union[str, "_models.IngestionMode"]] = "LogAnalytics",
         disable_local_auth: Optional[bool] = None,
         force_customer_storage_for_profiler: Optional[bool] = None,
         **kwargs
@@ -259,17 +261,17 @@ class ApplicationInsightsComponent(ComponentsResource):
         :paramtype kind: str
         :keyword etag: Resource etag.
         :paramtype etag: str
-        :keyword application_type: Type of application being monitored. Possible values include: "web",
+        :keyword application_type: Type of application being monitored. Known values are: "web",
          "other". Default value: "web".
         :paramtype application_type: str or
          ~azure.mgmt.applicationinsights.v2020_02_02.models.ApplicationType
         :keyword flow_type: Used by the Application Insights system to determine what kind of flow this
          component was created by. This is to be set to 'Bluefield' when creating/updating a component
-         via the REST API. Possible values include: "Bluefield". Default value: "Bluefield".
+         via the REST API. Known values are: "Bluefield". Default value: "Bluefield".
         :paramtype flow_type: str or ~azure.mgmt.applicationinsights.v2020_02_02.models.FlowType
         :keyword request_source: Describes what tool created this Application Insights component.
-         Customers using this API should set this to the default 'rest'. Possible values include:
-         "rest". Default value: "rest".
+         Customers using this API should set this to the default 'rest'. Known values are: "rest".
+         Default value: "rest".
         :paramtype request_source: str or
          ~azure.mgmt.applicationinsights.v2020_02_02.models.RequestSource
         :keyword hockey_app_id: The unique application ID created when a new application is added to
@@ -289,14 +291,14 @@ class ApplicationInsightsComponent(ComponentsResource):
          Applications from older versions will not have this property.
         :paramtype workspace_resource_id: str
         :keyword public_network_access_for_ingestion: The network access type for accessing Application
-         Insights ingestion. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+         Insights ingestion. Known values are: "Enabled", "Disabled". Default value: "Enabled".
         :paramtype public_network_access_for_ingestion: str or
          ~azure.mgmt.applicationinsights.v2020_02_02.models.PublicNetworkAccessType
         :keyword public_network_access_for_query: The network access type for accessing Application
-         Insights query. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+         Insights query. Known values are: "Enabled", "Disabled". Default value: "Enabled".
         :paramtype public_network_access_for_query: str or
          ~azure.mgmt.applicationinsights.v2020_02_02.models.PublicNetworkAccessType
-        :keyword ingestion_mode: Indicates the flow of the ingestion. Possible values include:
+        :keyword ingestion_mode: Indicates the flow of the ingestion. Known values are:
          "ApplicationInsights", "ApplicationInsightsWithDiagnosticSettings", "LogAnalytics". Default
          value: "LogAnalytics".
         :paramtype ingestion_mode: str or
@@ -362,7 +364,7 @@ class ApplicationInsightsComponentListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ApplicationInsightsComponent"],
+        value: List["_models.ApplicationInsightsComponent"],
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -406,7 +408,7 @@ class ComponentPurgeBody(msrest.serialization.Model):
         self,
         *,
         table: str,
-        filters: List["ComponentPurgeBodyFilters"],
+        filters: List["_models.ComponentPurgeBodyFilters"],
         **kwargs
     ):
         """
@@ -514,8 +516,8 @@ class ComponentPurgeStatusResponse(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar status: Required. Status of the operation represented by the requested Id. Possible
-     values include: "pending", "completed".
+    :ivar status: Required. Status of the operation represented by the requested Id. Known values
+     are: "pending", "completed".
     :vartype status: str or ~azure.mgmt.applicationinsights.v2020_02_02.models.PurgeState
     """
 
@@ -530,12 +532,12 @@ class ComponentPurgeStatusResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Union[str, "PurgeState"],
+        status: Union[str, "_models.PurgeState"],
         **kwargs
     ):
         """
-        :keyword status: Required. Status of the operation represented by the requested Id. Possible
-         values include: "pending", "completed".
+        :keyword status: Required. Status of the operation represented by the requested Id. Known
+         values are: "pending", "completed".
         :paramtype status: str or ~azure.mgmt.applicationinsights.v2020_02_02.models.PurgeState
         """
         super(ComponentPurgeStatusResponse, self).__init__(**kwargs)
@@ -557,7 +559,7 @@ class ErrorResponseComponents(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorResponseComponentsError"] = None,
+        error: Optional["_models.ErrorResponseComponentsError"] = None,
         **kwargs
     ):
         """

@@ -6,10 +6,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class Resource(msrest.serialization.Model):
@@ -172,7 +176,7 @@ class ErrorResponseLinkedStorage(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorResponseLinkedStorageError"] = None,
+        error: Optional["_models.ErrorResponseLinkedStorageError"] = None,
         **kwargs
     ):
         """
