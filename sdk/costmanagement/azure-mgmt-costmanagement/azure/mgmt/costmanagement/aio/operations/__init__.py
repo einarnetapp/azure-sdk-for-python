@@ -6,7 +6,10 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._settings_operations import SettingsOperations
+from ._exports_operations import ExportsOperations
+from ._generate_detailed_cost_report_operations import GenerateDetailedCostReportOperations
+from ._generate_detailed_cost_report_operation_results_operations import GenerateDetailedCostReportOperationResultsOperations
+from ._generate_detailed_cost_report_operation_status_operations import GenerateDetailedCostReportOperationStatusOperations
 from ._views_operations import ViewsOperations
 from ._alerts_operations import AlertsOperations
 from ._forecast_operations import ForecastOperations
@@ -14,10 +17,15 @@ from ._dimensions_operations import DimensionsOperations
 from ._query_operations import QueryOperations
 from ._generate_reservation_details_report_operations import GenerateReservationDetailsReportOperations
 from ._operations import Operations
-from ._exports_operations import ExportsOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
-    'SettingsOperations',
+    'ExportsOperations',
+    'GenerateDetailedCostReportOperations',
+    'GenerateDetailedCostReportOperationResultsOperations',
+    'GenerateDetailedCostReportOperationStatusOperations',
     'ViewsOperations',
     'AlertsOperations',
     'ForecastOperations',
@@ -25,5 +33,6 @@ __all__ = [
     'QueryOperations',
     'GenerateReservationDetailsReportOperations',
     'Operations',
-    'ExportsOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
