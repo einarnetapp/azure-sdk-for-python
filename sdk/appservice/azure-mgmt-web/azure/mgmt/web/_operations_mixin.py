@@ -11,6 +11,8 @@
 from msrest import Serializer, Deserializer
 from typing import TYPE_CHECKING
 
+from . import models as _models
+
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Iterable, Optional, Union
@@ -27,16 +29,16 @@ class WebSiteManagementClientOperationsMixin(object):
         is_fqdn=None,  # type: Optional[bool]
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.ResourceNameAvailability"
+        # type: (...) -> _models.ResourceNameAvailability
         """Check if a resource name is available.
 
-        Description for Check if a resource name is available.
+        Check if a resource name is available.
 
         :param name: Resource name to verify.
         :type name: str
         :param type: Resource type used for verification.
         :type type: str or ~azure.mgmt.web.v2021_03_01.models.CheckNameResourceTypes
-        :param is_fqdn: Is fully qualified domain name.
+        :param is_fqdn: Is fully qualified domain name. Default value is None.
         :type is_fqdn: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ResourceNameAvailability, or the result of cls(response)
@@ -76,10 +78,10 @@ class WebSiteManagementClientOperationsMixin(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.User"
+        # type: (...) -> _models.User
         """Gets publishing user.
 
-        Description for Gets publishing user.
+        Gets publishing user.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: User, or the result of cls(response)
@@ -120,10 +122,10 @@ class WebSiteManagementClientOperationsMixin(object):
         source_control_type,  # type: str
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.SourceControl"
+        # type: (...) -> _models.SourceControl
         """Gets source control token.
 
-        Description for Gets source control token.
+        Gets source control token.
 
         :param source_control_type: Type of source control.
         :type source_control_type: str
@@ -165,10 +167,10 @@ class WebSiteManagementClientOperationsMixin(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.DeploymentLocations"
+        # type: (...) -> _models.DeploymentLocations
         """Gets list of available geo regions plus ministamps.
 
-        Description for Gets list of available geo regions plus ministamps.
+        Gets list of available geo regions plus ministamps.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: DeploymentLocations, or the result of cls(response)
@@ -210,14 +212,14 @@ class WebSiteManagementClientOperationsMixin(object):
         os_type=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
-        # type: (...) -> Iterable["_models.BillingMeterCollection"]
+        # type: (...) -> Iterable[_models.BillingMeterCollection]
         """Gets a list of meters for a given location.
 
-        Description for Gets a list of meters for a given location.
+        Gets a list of meters for a given location.
 
-        :param billing_location: Azure Location of billable resource.
+        :param billing_location: Azure Location of billable resource. Default value is None.
         :type billing_location: str
-        :param os_type: App Service OS type meters used for.
+        :param os_type: App Service OS type meters used for. Default value is None.
         :type os_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either BillingMeterCollection or the result of
@@ -256,7 +258,7 @@ class WebSiteManagementClientOperationsMixin(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> Iterable["_models.CustomHostnameSitesCollection"]
+        # type: (...) -> Iterable[_models.CustomHostnameSitesCollection]
         """Get custom hostnames under this subscription.
 
         Get custom hostnames under this subscription.
@@ -289,21 +291,21 @@ class WebSiteManagementClientOperationsMixin(object):
         linux_dynamic_workers_enabled=None,  # type: Optional[bool]
         **kwargs  # type: Any
     ):
-        # type: (...) -> Iterable["_models.GeoRegionCollection"]
+        # type: (...) -> Iterable[_models.GeoRegionCollection]
         """Get a list of available geographical regions.
 
-        Description for Get a list of available geographical regions.
+        Get a list of available geographical regions.
 
-        :param sku: Name of SKU used to filter the regions.
+        :param sku: Name of SKU used to filter the regions. Default value is None.
         :type sku: str or ~azure.mgmt.web.v2021_03_01.models.SkuName
         :param linux_workers_enabled: Specify :code:`<code>true</code>` if you want to filter to only
-         regions that support Linux workers.
+         regions that support Linux workers. Default value is None.
         :type linux_workers_enabled: bool
         :param xenon_workers_enabled: Specify :code:`<code>true</code>` if you want to filter to only
-         regions that support Xenon workers.
+         regions that support Xenon workers. Default value is None.
         :type xenon_workers_enabled: bool
         :param linux_dynamic_workers_enabled: Specify :code:`<code>true</code>` if you want to filter
-         to only regions that support Linux Consumption Workers.
+         to only regions that support Linux Consumption Workers. Default value is None.
         :type linux_dynamic_workers_enabled: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either GeoRegionCollection or the result of cls(response)
@@ -343,10 +345,10 @@ class WebSiteManagementClientOperationsMixin(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> Iterable["_models.PremierAddOnOfferCollection"]
+        # type: (...) -> Iterable[_models.PremierAddOnOfferCollection]
         """List all premier add-on offers.
 
-        Description for List all premier add-on offers.
+        List all premier add-on offers.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either PremierAddOnOfferCollection or the result of
@@ -386,13 +388,13 @@ class WebSiteManagementClientOperationsMixin(object):
 
     def list_site_identifiers_assigned_to_host_name(
         self,
-        name_identifier,  # type: "_models.NameIdentifier"
+        name_identifier,  # type: _models.NameIdentifier
         **kwargs  # type: Any
     ):
-        # type: (...) -> Iterable["_models.IdentifierCollection"]
+        # type: (...) -> Iterable[_models.IdentifierCollection]
         """List all apps that are assigned to a hostname.
 
-        Description for List all apps that are assigned to a hostname.
+        List all apps that are assigned to a hostname.
 
         :param name_identifier: Hostname information.
         :type name_identifier: ~azure.mgmt.web.v2021_03_01.models.NameIdentifier
@@ -435,10 +437,10 @@ class WebSiteManagementClientOperationsMixin(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.SkuInfos"
+        # type: (...) -> _models.SkuInfos
         """List all SKUs.
 
-        Description for List all SKUs.
+        List all SKUs.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SkuInfos, or the result of cls(response)
@@ -478,10 +480,10 @@ class WebSiteManagementClientOperationsMixin(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> Iterable["_models.SourceControlCollection"]
+        # type: (...) -> Iterable[_models.SourceControlCollection]
         """Gets the source controls available for Azure websites.
 
-        Description for Gets the source controls available for Azure websites.
+        Gets the source controls available for Azure websites.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either SourceControlCollection or the result of
@@ -519,16 +521,16 @@ class WebSiteManagementClientOperationsMixin(object):
         mixin_instance._deserialize = Deserializer(self._models_dict(api_version))
         return mixin_instance.list_source_controls(**kwargs)
 
-    def move(
+    def move(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name,  # type: str
-        move_resource_envelope,  # type: "_models.CsmMoveResourceEnvelope"
+        move_resource_envelope,  # type: _models.CsmMoveResourceEnvelope
         **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Move resources between resource groups.
 
-        Description for Move resources between resource groups.
+        Move resources between resource groups.
 
         :param resource_group_name: Name of the resource group to which the resource belongs.
         :type resource_group_name: str
@@ -570,13 +572,13 @@ class WebSiteManagementClientOperationsMixin(object):
 
     def update_publishing_user(
         self,
-        user_details,  # type: "_models.User"
+        user_details,  # type: _models.User
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.User"
+        # type: (...) -> _models.User
         """Updates publishing user.
 
-        Description for Updates publishing user.
+        Updates publishing user.
 
         :param user_details: Details of publishing user.
         :type user_details: ~azure.mgmt.web.v2021_03_01.models.User
@@ -617,13 +619,13 @@ class WebSiteManagementClientOperationsMixin(object):
     def update_source_control(
         self,
         source_control_type,  # type: str
-        request_message,  # type: "_models.SourceControl"
+        request_message,  # type: _models.SourceControl
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.SourceControl"
+        # type: (...) -> _models.SourceControl
         """Updates source control token.
 
-        Description for Updates source control token.
+        Updates source control token.
 
         :param source_control_type: Type of source control.
         :type source_control_type: str
@@ -666,13 +668,13 @@ class WebSiteManagementClientOperationsMixin(object):
     def validate(
         self,
         resource_group_name,  # type: str
-        validate_request,  # type: "_models.ValidateRequest"
+        validate_request,  # type: _models.ValidateRequest
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.ValidateResponse"
+        # type: (...) -> _models.ValidateResponse
         """Validate if a resource can be created.
 
-        Description for Validate if a resource can be created.
+        Validate if a resource can be created.
 
         :param resource_group_name: Name of the resource group to which the resource belongs.
         :type resource_group_name: str
@@ -715,7 +717,7 @@ class WebSiteManagementClientOperationsMixin(object):
     def validate_container_settings(
         self,
         resource_group_name,  # type: str
-        validate_container_settings_request,  # type: "_models.ValidateContainerSettingsRequest"
+        validate_container_settings_request,  # type: _models.ValidateContainerSettingsRequest
         **kwargs  # type: Any
     ):
         # type: (...) -> Any
@@ -746,16 +748,16 @@ class WebSiteManagementClientOperationsMixin(object):
         mixin_instance._deserialize = Deserializer(self._models_dict(api_version))
         return mixin_instance.validate_container_settings(resource_group_name, validate_container_settings_request, **kwargs)
 
-    def validate_move(
+    def validate_move(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name,  # type: str
-        move_resource_envelope,  # type: "_models.CsmMoveResourceEnvelope"
+        move_resource_envelope,  # type: _models.CsmMoveResourceEnvelope
         **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Validate whether a resource can be moved.
 
-        Description for Validate whether a resource can be moved.
+        Validate whether a resource can be moved.
 
         :param resource_group_name: Name of the resource group to which the resource belongs.
         :type resource_group_name: str
@@ -797,15 +799,15 @@ class WebSiteManagementClientOperationsMixin(object):
 
     def verify_hosting_environment_vnet(
         self,
-        parameters,  # type: "_models.VnetParameters"
+        parameters,  # type: _models.VnetParameters
         **kwargs  # type: Any
     ):
-        # type: (...) -> "_models.VnetValidationFailureDetails"
+        # type: (...) -> _models.VnetValidationFailureDetails
         """Verifies if this VNET is compatible with an App Service Environment by analyzing the Network
         Security Group rules.
 
-        Description for Verifies if this VNET is compatible with an App Service Environment by
-        analyzing the Network Security Group rules.
+        Verifies if this VNET is compatible with an App Service Environment by analyzing the Network
+        Security Group rules.
 
         :param parameters: VNET information.
         :type parameters: ~azure.mgmt.web.v2021_03_01.models.VnetParameters
