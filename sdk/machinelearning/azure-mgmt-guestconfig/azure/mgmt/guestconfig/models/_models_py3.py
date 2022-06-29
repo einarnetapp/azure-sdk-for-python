@@ -6,12 +6,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import List, Optional, Union
+import datetime
+from typing import List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._guest_configuration_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AssignmentInfo(msrest.serialization.Model):
@@ -21,8 +24,8 @@ class AssignmentInfo(msrest.serialization.Model):
 
     :ivar name: Name of the guest configuration assignment.
     :vartype name: str
-    :param configuration: Information about the configuration.
-    :type configuration: ~azure.mgmt.guestconfig.models.ConfigurationInfo
+    :ivar configuration: Information about the configuration.
+    :vartype configuration: ~azure.mgmt.guestconfig.models.ConfigurationInfo
     """
 
     _validation = {
@@ -37,9 +40,13 @@ class AssignmentInfo(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        configuration: Optional["ConfigurationInfo"] = None,
+        configuration: Optional["_models.ConfigurationInfo"] = None,
         **kwargs
     ):
+        """
+        :keyword configuration: Information about the configuration.
+        :paramtype configuration: ~azure.mgmt.guestconfig.models.ConfigurationInfo
+        """
         super(AssignmentInfo, self).__init__(**kwargs)
         self.name = None
         self.configuration = configuration
@@ -55,10 +62,10 @@ class AssignmentReport(msrest.serialization.Model):
     :ivar report_id: GUID that identifies the guest configuration assignment report under a
      subscription, resource group.
     :vartype report_id: str
-    :param assignment: Configuration details of the guest configuration assignment.
-    :type assignment: ~azure.mgmt.guestconfig.models.AssignmentInfo
-    :param vm: Information about the VM.
-    :type vm: ~azure.mgmt.guestconfig.models.VMInfo
+    :ivar assignment: Configuration details of the guest configuration assignment.
+    :vartype assignment: ~azure.mgmt.guestconfig.models.AssignmentInfo
+    :ivar vm: Information about the VM.
+    :vartype vm: ~azure.mgmt.guestconfig.models.VMInfo
     :ivar start_time: Start date and time of the guest configuration assignment compliance status
      check.
     :vartype start_time: ~datetime.datetime
@@ -66,14 +73,14 @@ class AssignmentReport(msrest.serialization.Model):
      check.
     :vartype end_time: ~datetime.datetime
     :ivar compliance_status: A value indicating compliance status of the machine for the assigned
-     guest configuration. Possible values include: "Compliant", "NonCompliant", "Pending".
+     guest configuration. Known values are: "Compliant", "NonCompliant", "Pending".
     :vartype compliance_status: str or ~azure.mgmt.guestconfig.models.ComplianceStatus
-    :ivar operation_type: Type of report, Consistency or Initial. Possible values include:
-     "Consistency", "Initial".
+    :ivar operation_type: Type of report, Consistency or Initial. Known values are: "Consistency",
+     "Initial".
     :vartype operation_type: str or ~azure.mgmt.guestconfig.models.Type
-    :param resources: The list of resources for which guest configuration assignment compliance is
+    :ivar resources: The list of resources for which guest configuration assignment compliance is
      checked.
-    :type resources: list[~azure.mgmt.guestconfig.models.AssignmentReportResource]
+    :vartype resources: list[~azure.mgmt.guestconfig.models.AssignmentReportResource]
     """
 
     _validation = {
@@ -100,11 +107,20 @@ class AssignmentReport(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        assignment: Optional["AssignmentInfo"] = None,
-        vm: Optional["VMInfo"] = None,
-        resources: Optional[List["AssignmentReportResource"]] = None,
+        assignment: Optional["_models.AssignmentInfo"] = None,
+        vm: Optional["_models.VMInfo"] = None,
+        resources: Optional[List["_models.AssignmentReportResource"]] = None,
         **kwargs
     ):
+        """
+        :keyword assignment: Configuration details of the guest configuration assignment.
+        :paramtype assignment: ~azure.mgmt.guestconfig.models.AssignmentInfo
+        :keyword vm: Information about the VM.
+        :paramtype vm: ~azure.mgmt.guestconfig.models.VMInfo
+        :keyword resources: The list of resources for which guest configuration assignment compliance
+         is checked.
+        :paramtype resources: list[~azure.mgmt.guestconfig.models.AssignmentReportResource]
+        """
         super(AssignmentReport, self).__init__(**kwargs)
         self.id = None
         self.report_id = None
@@ -123,7 +139,7 @@ class AssignmentReportDetails(msrest.serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar compliance_status: A value indicating compliance status of the machine for the assigned
-     guest configuration. Possible values include: "Compliant", "NonCompliant", "Pending".
+     guest configuration. Known values are: "Compliant", "NonCompliant", "Pending".
     :vartype compliance_status: str or ~azure.mgmt.guestconfig.models.ComplianceStatus
     :ivar start_time: Start date and time of the guest configuration assignment compliance status
      check.
@@ -133,12 +149,12 @@ class AssignmentReportDetails(msrest.serialization.Model):
     :vartype end_time: ~datetime.datetime
     :ivar job_id: GUID of the report.
     :vartype job_id: str
-    :ivar operation_type: Type of report, Consistency or Initial. Possible values include:
-     "Consistency", "Initial".
+    :ivar operation_type: Type of report, Consistency or Initial. Known values are: "Consistency",
+     "Initial".
     :vartype operation_type: str or ~azure.mgmt.guestconfig.models.Type
-    :param resources: The list of resources for which guest configuration assignment compliance is
+    :ivar resources: The list of resources for which guest configuration assignment compliance is
      checked.
-    :type resources: list[~azure.mgmt.guestconfig.models.AssignmentReportResource]
+    :vartype resources: list[~azure.mgmt.guestconfig.models.AssignmentReportResource]
     """
 
     _validation = {
@@ -161,9 +177,14 @@ class AssignmentReportDetails(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        resources: Optional[List["AssignmentReportResource"]] = None,
+        resources: Optional[List["_models.AssignmentReportResource"]] = None,
         **kwargs
     ):
+        """
+        :keyword resources: The list of resources for which guest configuration assignment compliance
+         is checked.
+        :paramtype resources: list[~azure.mgmt.guestconfig.models.AssignmentReportResource]
+        """
         super(AssignmentReportDetails, self).__init__(**kwargs)
         self.compliance_status = None
         self.start_time = None
@@ -179,12 +200,12 @@ class AssignmentReportResource(msrest.serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar compliance_status: A value indicating compliance status of the machine for the assigned
-     guest configuration. Possible values include: "Compliant", "NonCompliant", "Pending".
+     guest configuration. Known values are: "Compliant", "NonCompliant", "Pending".
     :vartype compliance_status: str or ~azure.mgmt.guestconfig.models.ComplianceStatus
     :ivar resource_id: Name of the guest configuration assignment resource setting.
     :vartype resource_id: str
-    :param reasons: Compliance reason and reason code for a resource.
-    :type reasons: list[~azure.mgmt.guestconfig.models.AssignmentReportResourceComplianceReason]
+    :ivar reasons: Compliance reason and reason code for a resource.
+    :vartype reasons: list[~azure.mgmt.guestconfig.models.AssignmentReportResourceComplianceReason]
     :ivar properties: Properties of a guest configuration assignment resource.
     :vartype properties: any
     """
@@ -205,9 +226,14 @@ class AssignmentReportResource(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        reasons: Optional[List["AssignmentReportResourceComplianceReason"]] = None,
+        reasons: Optional[List["_models.AssignmentReportResourceComplianceReason"]] = None,
         **kwargs
     ):
+        """
+        :keyword reasons: Compliance reason and reason code for a resource.
+        :paramtype reasons:
+         list[~azure.mgmt.guestconfig.models.AssignmentReportResourceComplianceReason]
+        """
         super(AssignmentReportResource, self).__init__(**kwargs)
         self.compliance_status = None
         self.resource_id = None
@@ -240,6 +266,8 @@ class AssignmentReportResourceComplianceReason(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(AssignmentReportResourceComplianceReason, self).__init__(**kwargs)
         self.phrase = None
         self.code = None
@@ -270,6 +298,8 @@ class ConfigurationInfo(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ConfigurationInfo, self).__init__(**kwargs)
         self.name = None
         self.version = None
@@ -278,10 +308,10 @@ class ConfigurationInfo(msrest.serialization.Model):
 class ConfigurationParameter(msrest.serialization.Model):
     """Represents a configuration parameter.
 
-    :param name: Name of the configuration parameter.
-    :type name: str
-    :param value: Value of the configuration parameter.
-    :type value: str
+    :ivar name: Name of the configuration parameter.
+    :vartype name: str
+    :ivar value: Value of the configuration parameter.
+    :vartype value: str
     """
 
     _attribute_map = {
@@ -296,6 +326,12 @@ class ConfigurationParameter(msrest.serialization.Model):
         value: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the configuration parameter.
+        :paramtype name: str
+        :keyword value: Value of the configuration parameter.
+        :paramtype value: str
+        """
         super(ConfigurationParameter, self).__init__(**kwargs)
         self.name = name
         self.value = value
@@ -304,33 +340,43 @@ class ConfigurationParameter(msrest.serialization.Model):
 class ConfigurationSetting(msrest.serialization.Model):
     """Configuration setting of LCM (Local Configuration Manager).
 
-    :param configuration_mode: Specifies how the LCM(Local Configuration Manager) actually applies
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar configuration_mode: Specifies how the LCM(Local Configuration Manager) actually applies
      the configuration to the target nodes. Possible values are ApplyOnly, ApplyAndMonitor, and
-     ApplyAndAutoCorrect. Possible values include: "ApplyOnly", "ApplyAndMonitor",
-     "ApplyAndAutoCorrect".
-    :type configuration_mode: str or ~azure.mgmt.guestconfig.models.ConfigurationMode
-    :param allow_module_overwrite: If true - new configurations downloaded from the pull service
-     are allowed to overwrite the old ones on the target node. Otherwise, false.
-    :type allow_module_overwrite: bool
-    :param action_after_reboot: Specifies what happens after a reboot during the application of a
-     configuration. The possible values are ContinueConfiguration and StopConfiguration. Possible
-     values include: "ContinueConfiguration", "StopConfiguration".
-    :type action_after_reboot: str or ~azure.mgmt.guestconfig.models.ActionAfterReboot
-    :param refresh_frequency_mins: The time interval, in minutes, at which the LCM checks a pull
+     ApplyAndAutoCorrect. Known values are: "ApplyOnly", "ApplyAndMonitor", "ApplyAndAutoCorrect".
+    :vartype configuration_mode: str or ~azure.mgmt.guestconfig.models.ConfigurationMode
+    :ivar allow_module_overwrite: If true - new configurations downloaded from the pull service are
+     allowed to overwrite the old ones on the target node. Otherwise, false.
+    :vartype allow_module_overwrite: bool
+    :ivar action_after_reboot: Specifies what happens after a reboot during the application of a
+     configuration. The possible values are ContinueConfiguration and StopConfiguration. Known
+     values are: "ContinueConfiguration", "StopConfiguration".
+    :vartype action_after_reboot: str or ~azure.mgmt.guestconfig.models.ActionAfterReboot
+    :ivar refresh_frequency_mins: The time interval, in minutes, at which the LCM checks a pull
      service to get updated configurations. This value is ignored if the LCM is not configured in
      pull mode. The default value is 30.
-    :type refresh_frequency_mins: float
-    :param reboot_if_needed: Set this to true to automatically reboot the node after a
-     configuration that requires reboot is applied. Otherwise, you will have to manually reboot the
-     node for any configuration that requires it. The default value is false. To use this setting
-     when a reboot condition is enacted by something other than DSC (such as Windows Installer),
-     combine this setting with the xPendingReboot module.
-    :type reboot_if_needed: bool
-    :param configuration_mode_frequency_mins: How often, in minutes, the current configuration is
+    :vartype refresh_frequency_mins: float
+    :ivar reboot_if_needed: Set this to true to automatically reboot the node after a configuration
+     that requires reboot is applied. Otherwise, you will have to manually reboot the node for any
+     configuration that requires it. The default value is false. To use this setting when a reboot
+     condition is enacted by something other than DSC (such as Windows Installer), combine this
+     setting with the xPendingReboot module.
+    :vartype reboot_if_needed: bool
+    :ivar configuration_mode_frequency_mins: How often, in minutes, the current configuration is
      checked and applied. This property is ignored if the ConfigurationMode property is set to
      ApplyOnly. The default value is 15.
-    :type configuration_mode_frequency_mins: float
+    :vartype configuration_mode_frequency_mins: float
     """
+
+    _validation = {
+        'configuration_mode': {'readonly': True},
+        'allow_module_overwrite': {'readonly': True},
+        'action_after_reboot': {'readonly': True},
+        'refresh_frequency_mins': {'readonly': True},
+        'reboot_if_needed': {'readonly': True},
+        'configuration_mode_frequency_mins': {'readonly': True},
+    }
 
     _attribute_map = {
         'configuration_mode': {'key': 'configurationMode', 'type': 'str'},
@@ -343,29 +389,24 @@ class ConfigurationSetting(msrest.serialization.Model):
 
     def __init__(
         self,
-        *,
-        configuration_mode: Optional[Union[str, "ConfigurationMode"]] = None,
-        allow_module_overwrite: Optional[bool] = None,
-        action_after_reboot: Optional[Union[str, "ActionAfterReboot"]] = None,
-        refresh_frequency_mins: Optional[float] = 30,
-        reboot_if_needed: Optional[bool] = None,
-        configuration_mode_frequency_mins: Optional[float] = 15,
         **kwargs
     ):
+        """
+        """
         super(ConfigurationSetting, self).__init__(**kwargs)
-        self.configuration_mode = configuration_mode
-        self.allow_module_overwrite = allow_module_overwrite
-        self.action_after_reboot = action_after_reboot
-        self.refresh_frequency_mins = refresh_frequency_mins
-        self.reboot_if_needed = reboot_if_needed
-        self.configuration_mode_frequency_mins = configuration_mode_frequency_mins
+        self.configuration_mode = None
+        self.allow_module_overwrite = None
+        self.action_after_reboot = None
+        self.refresh_frequency_mins = None
+        self.reboot_if_needed = None
+        self.configuration_mode_frequency_mins = None
 
 
 class ErrorResponse(msrest.serialization.Model):
     """Error response of an operation failure.
 
-    :param error:
-    :type error: ~azure.mgmt.guestconfig.models.ErrorResponseError
+    :ivar error:
+    :vartype error: ~azure.mgmt.guestconfig.models.ErrorResponseError
     """
 
     _attribute_map = {
@@ -375,9 +416,13 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorResponseError"] = None,
+        error: Optional["_models.ErrorResponseError"] = None,
         **kwargs
     ):
+        """
+        :keyword error:
+        :paramtype error: ~azure.mgmt.guestconfig.models.ErrorResponseError
+        """
         super(ErrorResponse, self).__init__(**kwargs)
         self.error = error
 
@@ -385,10 +430,10 @@ class ErrorResponse(msrest.serialization.Model):
 class ErrorResponseError(msrest.serialization.Model):
     """ErrorResponseError.
 
-    :param code: Error code.
-    :type code: str
-    :param message: Detail error message indicating why the operation failed.
-    :type message: str
+    :ivar code: Error code.
+    :vartype code: str
+    :ivar message: Detail error message indicating why the operation failed.
+    :vartype message: str
     """
 
     _attribute_map = {
@@ -403,6 +448,12 @@ class ErrorResponseError(msrest.serialization.Model):
         message: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword code: Error code.
+        :paramtype code: str
+        :keyword message: Detail error message indicating why the operation failed.
+        :paramtype message: str
+        """
         super(ErrorResponseError, self).__init__(**kwargs)
         self.code = code
         self.message = message
@@ -415,10 +466,10 @@ class Resource(msrest.serialization.Model):
 
     :ivar id: ARM resource id of the guest configuration assignment.
     :vartype id: str
-    :param name: Name of the guest configuration assignment.
-    :type name: str
-    :param location: Region where the VM is located.
-    :type location: str
+    :ivar name: Name of the guest configuration assignment.
+    :vartype name: str
+    :ivar location: Region where the VM is located.
+    :vartype location: str
     :ivar type: The type of the resource.
     :vartype type: str
     """
@@ -442,6 +493,12 @@ class Resource(msrest.serialization.Model):
         location: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the guest configuration assignment.
+        :paramtype name: str
+        :keyword location: Region where the VM is located.
+        :paramtype location: str
+        """
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = name
@@ -456,10 +513,10 @@ class ProxyResource(Resource):
 
     :ivar id: ARM resource id of the guest configuration assignment.
     :vartype id: str
-    :param name: Name of the guest configuration assignment.
-    :type name: str
-    :param location: Region where the VM is located.
-    :type location: str
+    :ivar name: Name of the guest configuration assignment.
+    :vartype name: str
+    :ivar location: Region where the VM is located.
+    :vartype location: str
     :ivar type: The type of the resource.
     :vartype type: str
     """
@@ -483,6 +540,12 @@ class ProxyResource(Resource):
         location: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the guest configuration assignment.
+        :paramtype name: str
+        :keyword location: Region where the VM is located.
+        :paramtype location: str
+        """
         super(ProxyResource, self).__init__(name=name, location=location, **kwargs)
 
 
@@ -493,19 +556,23 @@ class GuestConfigurationAssignment(ProxyResource):
 
     :ivar id: ARM resource id of the guest configuration assignment.
     :vartype id: str
-    :param name: Name of the guest configuration assignment.
-    :type name: str
-    :param location: Region where the VM is located.
-    :type location: str
+    :ivar name: Name of the guest configuration assignment.
+    :vartype name: str
+    :ivar location: Region where the VM is located.
+    :vartype location: str
     :ivar type: The type of the resource.
     :vartype type: str
-    :param properties: Properties of the Guest configuration assignment.
-    :type properties: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentProperties
+    :ivar properties: Properties of the Guest configuration assignment.
+    :vartype properties: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentProperties
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.guestconfig.models.SystemData
     """
 
     _validation = {
         'id': {'readonly': True},
         'type': {'readonly': True},
+        'system_data': {'readonly': True},
     }
 
     _attribute_map = {
@@ -514,6 +581,7 @@ class GuestConfigurationAssignment(ProxyResource):
         'location': {'key': 'location', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'properties': {'key': 'properties', 'type': 'GuestConfigurationAssignmentProperties'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
     }
 
     def __init__(
@@ -521,18 +589,27 @@ class GuestConfigurationAssignment(ProxyResource):
         *,
         name: Optional[str] = None,
         location: Optional[str] = None,
-        properties: Optional["GuestConfigurationAssignmentProperties"] = None,
+        properties: Optional["_models.GuestConfigurationAssignmentProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the guest configuration assignment.
+        :paramtype name: str
+        :keyword location: Region where the VM is located.
+        :paramtype location: str
+        :keyword properties: Properties of the Guest configuration assignment.
+        :paramtype properties: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentProperties
+        """
         super(GuestConfigurationAssignment, self).__init__(name=name, location=location, **kwargs)
         self.properties = properties
+        self.system_data = None
 
 
 class GuestConfigurationAssignmentList(msrest.serialization.Model):
     """The response of the list guest configuration assignment operation.
 
-    :param value: Result of the list guest configuration assignment operation.
-    :type value: list[~azure.mgmt.guestconfig.models.GuestConfigurationAssignment]
+    :ivar value: Result of the list guest configuration assignment operation.
+    :vartype value: list[~azure.mgmt.guestconfig.models.GuestConfigurationAssignment]
     """
 
     _attribute_map = {
@@ -542,9 +619,13 @@ class GuestConfigurationAssignmentList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["GuestConfigurationAssignment"]] = None,
+        value: Optional[List["_models.GuestConfigurationAssignment"]] = None,
         **kwargs
     ):
+        """
+        :keyword value: Result of the list guest configuration assignment operation.
+        :paramtype value: list[~azure.mgmt.guestconfig.models.GuestConfigurationAssignment]
+        """
         super(GuestConfigurationAssignmentList, self).__init__(**kwargs)
         self.value = value
 
@@ -556,25 +637,30 @@ class GuestConfigurationAssignmentProperties(msrest.serialization.Model):
 
     :ivar target_resource_id: VM resource Id.
     :vartype target_resource_id: str
-    :param guest_configuration: The guest configuration to assign.
-    :type guest_configuration: ~azure.mgmt.guestconfig.models.GuestConfigurationNavigation
+    :ivar guest_configuration: The guest configuration to assign.
+    :vartype guest_configuration: ~azure.mgmt.guestconfig.models.GuestConfigurationNavigation
     :ivar compliance_status: A value indicating compliance status of the machine for the assigned
-     guest configuration. Possible values include: "Compliant", "NonCompliant", "Pending".
+     guest configuration. Known values are: "Compliant", "NonCompliant", "Pending".
     :vartype compliance_status: str or ~azure.mgmt.guestconfig.models.ComplianceStatus
     :ivar last_compliance_status_checked: Date and time when last compliance status was checked.
     :vartype last_compliance_status_checked: ~datetime.datetime
     :ivar latest_report_id: Id of the latest report for the guest configuration assignment.
     :vartype latest_report_id: str
-    :param latest_assignment_report: Last reported guest configuration assignment report.
-    :type latest_assignment_report: ~azure.mgmt.guestconfig.models.AssignmentReport
-    :param context: The source which initiated the guest configuration assignment. Ex: Azure
-     Policy.
-    :type context: str
+    :ivar parameter_hash: parameter hash for the guest configuration assignment.
+    :vartype parameter_hash: str
+    :ivar latest_assignment_report: Last reported guest configuration assignment report.
+    :vartype latest_assignment_report: ~azure.mgmt.guestconfig.models.AssignmentReport
+    :ivar context: The source which initiated the guest configuration assignment. Ex: Azure Policy.
+    :vartype context: str
     :ivar assignment_hash: Combined hash of the configuration package and parameters.
     :vartype assignment_hash: str
-    :ivar provisioning_state: The provisioning state, which only appears in the response. Possible
-     values include: "Succeeded", "Failed", "Canceled", "Created".
+    :ivar provisioning_state: The provisioning state, which only appears in the response. Known
+     values are: "Succeeded", "Failed", "Canceled", "Created".
     :vartype provisioning_state: str or ~azure.mgmt.guestconfig.models.ProvisioningState
+    :ivar resource_type: Type of the resource - VMSS / VM.
+    :vartype resource_type: str
+    :ivar vmss_vm_list: The list of VM Compliance data for VMSS.
+    :vartype vmss_vm_list: list[~azure.mgmt.guestconfig.models.VMSSVMInfo]
     """
 
     _validation = {
@@ -582,8 +668,10 @@ class GuestConfigurationAssignmentProperties(msrest.serialization.Model):
         'compliance_status': {'readonly': True},
         'last_compliance_status_checked': {'readonly': True},
         'latest_report_id': {'readonly': True},
+        'parameter_hash': {'readonly': True},
         'assignment_hash': {'readonly': True},
         'provisioning_state': {'readonly': True},
+        'resource_type': {'readonly': True},
     }
 
     _attribute_map = {
@@ -592,30 +680,48 @@ class GuestConfigurationAssignmentProperties(msrest.serialization.Model):
         'compliance_status': {'key': 'complianceStatus', 'type': 'str'},
         'last_compliance_status_checked': {'key': 'lastComplianceStatusChecked', 'type': 'iso-8601'},
         'latest_report_id': {'key': 'latestReportId', 'type': 'str'},
+        'parameter_hash': {'key': 'parameterHash', 'type': 'str'},
         'latest_assignment_report': {'key': 'latestAssignmentReport', 'type': 'AssignmentReport'},
         'context': {'key': 'context', 'type': 'str'},
         'assignment_hash': {'key': 'assignmentHash', 'type': 'str'},
         'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
+        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        'vmss_vm_list': {'key': 'vmssVMList', 'type': '[VMSSVMInfo]'},
     }
 
     def __init__(
         self,
         *,
-        guest_configuration: Optional["GuestConfigurationNavigation"] = None,
-        latest_assignment_report: Optional["AssignmentReport"] = None,
+        guest_configuration: Optional["_models.GuestConfigurationNavigation"] = None,
+        latest_assignment_report: Optional["_models.AssignmentReport"] = None,
         context: Optional[str] = None,
+        vmss_vm_list: Optional[List["_models.VMSSVMInfo"]] = None,
         **kwargs
     ):
+        """
+        :keyword guest_configuration: The guest configuration to assign.
+        :paramtype guest_configuration: ~azure.mgmt.guestconfig.models.GuestConfigurationNavigation
+        :keyword latest_assignment_report: Last reported guest configuration assignment report.
+        :paramtype latest_assignment_report: ~azure.mgmt.guestconfig.models.AssignmentReport
+        :keyword context: The source which initiated the guest configuration assignment. Ex: Azure
+         Policy.
+        :paramtype context: str
+        :keyword vmss_vm_list: The list of VM Compliance data for VMSS.
+        :paramtype vmss_vm_list: list[~azure.mgmt.guestconfig.models.VMSSVMInfo]
+        """
         super(GuestConfigurationAssignmentProperties, self).__init__(**kwargs)
         self.target_resource_id = None
         self.guest_configuration = guest_configuration
         self.compliance_status = None
         self.last_compliance_status_checked = None
         self.latest_report_id = None
+        self.parameter_hash = None
         self.latest_assignment_report = latest_assignment_report
         self.context = context
         self.assignment_hash = None
         self.provisioning_state = None
+        self.resource_type = None
+        self.vmss_vm_list = vmss_vm_list
 
 
 class GuestConfigurationAssignmentReport(msrest.serialization.Model):
@@ -628,8 +734,9 @@ class GuestConfigurationAssignmentReport(msrest.serialization.Model):
     :ivar name: GUID that identifies the guest configuration assignment report under a
      subscription, resource group.
     :vartype name: str
-    :param properties: Properties of the guest configuration report.
-    :type properties: ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReportProperties
+    :ivar properties: Properties of the guest configuration report.
+    :vartype properties:
+     ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReportProperties
     """
 
     _validation = {
@@ -646,9 +753,14 @@ class GuestConfigurationAssignmentReport(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        properties: Optional["GuestConfigurationAssignmentReportProperties"] = None,
+        properties: Optional["_models.GuestConfigurationAssignmentReportProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword properties: Properties of the guest configuration report.
+        :paramtype properties:
+         ~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReportProperties
+        """
         super(GuestConfigurationAssignmentReport, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -658,9 +770,9 @@ class GuestConfigurationAssignmentReport(msrest.serialization.Model):
 class GuestConfigurationAssignmentReportList(msrest.serialization.Model):
     """List of guest configuration assignment reports.
 
-    :param value: List of reports for the guest configuration. Report contains information such as
+    :ivar value: List of reports for the guest configuration. Report contains information such as
      compliance status, reason and more.
-    :type value: list[~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReport]
+    :vartype value: list[~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReport]
     """
 
     _attribute_map = {
@@ -670,9 +782,14 @@ class GuestConfigurationAssignmentReportList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["GuestConfigurationAssignmentReport"]] = None,
+        value: Optional[List["_models.GuestConfigurationAssignmentReport"]] = None,
         **kwargs
     ):
+        """
+        :keyword value: List of reports for the guest configuration. Report contains information such
+         as compliance status, reason and more.
+        :paramtype value: list[~azure.mgmt.guestconfig.models.GuestConfigurationAssignmentReport]
+        """
         super(GuestConfigurationAssignmentReportList, self).__init__(**kwargs)
         self.value = value
 
@@ -683,23 +800,25 @@ class GuestConfigurationAssignmentReportProperties(msrest.serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar compliance_status: A value indicating compliance status of the machine for the assigned
-     guest configuration. Possible values include: "Compliant", "NonCompliant", "Pending".
+     guest configuration. Known values are: "Compliant", "NonCompliant", "Pending".
     :vartype compliance_status: str or ~azure.mgmt.guestconfig.models.ComplianceStatus
     :ivar report_id: GUID that identifies the guest configuration assignment report under a
      subscription, resource group.
     :vartype report_id: str
-    :param assignment: Configuration details of the guest configuration assignment.
-    :type assignment: ~azure.mgmt.guestconfig.models.AssignmentInfo
-    :param vm: Information about the VM.
-    :type vm: ~azure.mgmt.guestconfig.models.VMInfo
+    :ivar assignment: Configuration details of the guest configuration assignment.
+    :vartype assignment: ~azure.mgmt.guestconfig.models.AssignmentInfo
+    :ivar vm: Information about the VM.
+    :vartype vm: ~azure.mgmt.guestconfig.models.VMInfo
     :ivar start_time: Start date and time of the guest configuration assignment compliance status
      check.
     :vartype start_time: ~datetime.datetime
     :ivar end_time: End date and time of the guest configuration assignment compliance status
      check.
     :vartype end_time: ~datetime.datetime
-    :param details: Details of the assignment report.
-    :type details: ~azure.mgmt.guestconfig.models.AssignmentReportDetails
+    :ivar details: Details of the assignment report.
+    :vartype details: ~azure.mgmt.guestconfig.models.AssignmentReportDetails
+    :ivar vmss_resource_id: Azure resource Id of the VMSS.
+    :vartype vmss_resource_id: str
     """
 
     _validation = {
@@ -707,6 +826,7 @@ class GuestConfigurationAssignmentReportProperties(msrest.serialization.Model):
         'report_id': {'readonly': True},
         'start_time': {'readonly': True},
         'end_time': {'readonly': True},
+        'vmss_resource_id': {'readonly': True},
     }
 
     _attribute_map = {
@@ -717,16 +837,25 @@ class GuestConfigurationAssignmentReportProperties(msrest.serialization.Model):
         'start_time': {'key': 'startTime', 'type': 'iso-8601'},
         'end_time': {'key': 'endTime', 'type': 'iso-8601'},
         'details': {'key': 'details', 'type': 'AssignmentReportDetails'},
+        'vmss_resource_id': {'key': 'vmssResourceId', 'type': 'str'},
     }
 
     def __init__(
         self,
         *,
-        assignment: Optional["AssignmentInfo"] = None,
-        vm: Optional["VMInfo"] = None,
-        details: Optional["AssignmentReportDetails"] = None,
+        assignment: Optional["_models.AssignmentInfo"] = None,
+        vm: Optional["_models.VMInfo"] = None,
+        details: Optional["_models.AssignmentReportDetails"] = None,
         **kwargs
     ):
+        """
+        :keyword assignment: Configuration details of the guest configuration assignment.
+        :paramtype assignment: ~azure.mgmt.guestconfig.models.AssignmentInfo
+        :keyword vm: Information about the VM.
+        :paramtype vm: ~azure.mgmt.guestconfig.models.VMInfo
+        :keyword details: Details of the assignment report.
+        :paramtype details: ~azure.mgmt.guestconfig.models.AssignmentReportDetails
+        """
         super(GuestConfigurationAssignmentReportProperties, self).__init__(**kwargs)
         self.compliance_status = None
         self.report_id = None
@@ -735,32 +864,194 @@ class GuestConfigurationAssignmentReportProperties(msrest.serialization.Model):
         self.start_time = None
         self.end_time = None
         self.details = details
+        self.vmss_resource_id = None
+
+
+class GuestConfigurationHealthCheckAssignment(msrest.serialization.Model):
+    """List all policy assignments with detailed properties on the VM.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar policy_definition_id: Policy definition Id.
+    :vartype policy_definition_id: str
+    :ivar policy_definition_name: Policy Definition Name.
+    :vartype policy_definition_name: str
+    :ivar policy_definition_effect: Policy Definition Effect.
+    :vartype policy_definition_effect: str
+    :ivar policy_type: Policy Type.
+    :vartype policy_type: str
+    :ivar policy_assignment_id: Policy Assignment Id.
+    :vartype policy_assignment_id: str
+    :ivar policy_display_name: Policy Display Name.
+    :vartype policy_display_name: str
+    :ivar guest_configuration_assignment_name: Guest Configuration Assignment Name.
+    :vartype guest_configuration_assignment_name: str
+    :ivar policy_assignment_scope: Policy Assignment Scope.
+    :vartype policy_assignment_scope: str
+    :ivar policy_assignment_parameters: Policy Assignment parameters.
+    :vartype policy_assignment_parameters: any
+    :ivar configuration_name: Configuration Name.
+    :vartype configuration_name: str
+    :ivar available_in_azure_policy: Available in Azure Policy.
+    :vartype available_in_azure_policy: bool
+    :ivar available_in_data_plane: Available In Data Plane.
+    :vartype available_in_data_plane: bool
+    :ivar is_visible_to_arm_in_dp: Policy Visibility to ARM In Data plane.
+    :vartype is_visible_to_arm_in_dp: bool
+    :ivar compliance_status_in_dp: A value indicating compliance status of the machine for the
+     assigned guest configuration in Data Plane. Known values are: "Compliant", "NonCompliant",
+     "Pending".
+    :vartype compliance_status_in_dp: str or ~azure.mgmt.guestconfig.models.ComplianceStatus
+    :ivar last_compliance_status_checked: Date and time when last compliance status was checked.
+    :vartype last_compliance_status_checked: ~datetime.datetime
+    :ivar latest_report_id: Id of the latest report for the guest configuration assignment.
+    :vartype latest_report_id: str
+    :ivar policy_definition: Definition of the Policy.
+    :vartype policy_definition: str
+    :ivar policy_configuration_parameters: The guest configuration to assign.
+    :vartype policy_configuration_parameters:
+     ~azure.mgmt.guestconfig.models.GuestConfigurationNavigation
+    """
+
+    _validation = {
+        'policy_assignment_parameters': {'readonly': True},
+        'compliance_status_in_dp': {'readonly': True},
+        'last_compliance_status_checked': {'readonly': True},
+        'latest_report_id': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'policy_definition_id': {'key': 'policyDefinitionId', 'type': 'str'},
+        'policy_definition_name': {'key': 'policyDefinitionName', 'type': 'str'},
+        'policy_definition_effect': {'key': 'policyDefinitionEffect', 'type': 'str'},
+        'policy_type': {'key': 'policyType', 'type': 'str'},
+        'policy_assignment_id': {'key': 'policyAssignmentId', 'type': 'str'},
+        'policy_display_name': {'key': 'policyDisplayName', 'type': 'str'},
+        'guest_configuration_assignment_name': {'key': 'guestConfigurationAssignmentName', 'type': 'str'},
+        'policy_assignment_scope': {'key': 'policyAssignmentScope', 'type': 'str'},
+        'policy_assignment_parameters': {'key': 'policyAssignmentParameters', 'type': 'object'},
+        'configuration_name': {'key': 'configurationName', 'type': 'str'},
+        'available_in_azure_policy': {'key': 'availableInAzurePolicy', 'type': 'bool'},
+        'available_in_data_plane': {'key': 'availableInDataPlane', 'type': 'bool'},
+        'is_visible_to_arm_in_dp': {'key': 'isVisibleToArmInDp', 'type': 'bool'},
+        'compliance_status_in_dp': {'key': 'complianceStatusInDp', 'type': 'str'},
+        'last_compliance_status_checked': {'key': 'lastComplianceStatusChecked', 'type': 'iso-8601'},
+        'latest_report_id': {'key': 'latestReportId', 'type': 'str'},
+        'policy_definition': {'key': 'policyDefinition', 'type': 'str'},
+        'policy_configuration_parameters': {'key': 'policyConfigurationParameters', 'type': 'GuestConfigurationNavigation'},
+    }
+
+    def __init__(
+        self,
+        *,
+        policy_definition_id: Optional[str] = None,
+        policy_definition_name: Optional[str] = None,
+        policy_definition_effect: Optional[str] = None,
+        policy_type: Optional[str] = None,
+        policy_assignment_id: Optional[str] = None,
+        policy_display_name: Optional[str] = None,
+        guest_configuration_assignment_name: Optional[str] = None,
+        policy_assignment_scope: Optional[str] = None,
+        configuration_name: Optional[str] = None,
+        available_in_azure_policy: Optional[bool] = None,
+        available_in_data_plane: Optional[bool] = None,
+        is_visible_to_arm_in_dp: Optional[bool] = None,
+        policy_definition: Optional[str] = None,
+        policy_configuration_parameters: Optional["_models.GuestConfigurationNavigation"] = None,
+        **kwargs
+    ):
+        """
+        :keyword policy_definition_id: Policy definition Id.
+        :paramtype policy_definition_id: str
+        :keyword policy_definition_name: Policy Definition Name.
+        :paramtype policy_definition_name: str
+        :keyword policy_definition_effect: Policy Definition Effect.
+        :paramtype policy_definition_effect: str
+        :keyword policy_type: Policy Type.
+        :paramtype policy_type: str
+        :keyword policy_assignment_id: Policy Assignment Id.
+        :paramtype policy_assignment_id: str
+        :keyword policy_display_name: Policy Display Name.
+        :paramtype policy_display_name: str
+        :keyword guest_configuration_assignment_name: Guest Configuration Assignment Name.
+        :paramtype guest_configuration_assignment_name: str
+        :keyword policy_assignment_scope: Policy Assignment Scope.
+        :paramtype policy_assignment_scope: str
+        :keyword configuration_name: Configuration Name.
+        :paramtype configuration_name: str
+        :keyword available_in_azure_policy: Available in Azure Policy.
+        :paramtype available_in_azure_policy: bool
+        :keyword available_in_data_plane: Available In Data Plane.
+        :paramtype available_in_data_plane: bool
+        :keyword is_visible_to_arm_in_dp: Policy Visibility to ARM In Data plane.
+        :paramtype is_visible_to_arm_in_dp: bool
+        :keyword policy_definition: Definition of the Policy.
+        :paramtype policy_definition: str
+        :keyword policy_configuration_parameters: The guest configuration to assign.
+        :paramtype policy_configuration_parameters:
+         ~azure.mgmt.guestconfig.models.GuestConfigurationNavigation
+        """
+        super(GuestConfigurationHealthCheckAssignment, self).__init__(**kwargs)
+        self.policy_definition_id = policy_definition_id
+        self.policy_definition_name = policy_definition_name
+        self.policy_definition_effect = policy_definition_effect
+        self.policy_type = policy_type
+        self.policy_assignment_id = policy_assignment_id
+        self.policy_display_name = policy_display_name
+        self.guest_configuration_assignment_name = guest_configuration_assignment_name
+        self.policy_assignment_scope = policy_assignment_scope
+        self.policy_assignment_parameters = None
+        self.configuration_name = configuration_name
+        self.available_in_azure_policy = available_in_azure_policy
+        self.available_in_data_plane = available_in_data_plane
+        self.is_visible_to_arm_in_dp = is_visible_to_arm_in_dp
+        self.compliance_status_in_dp = None
+        self.last_compliance_status_checked = None
+        self.latest_report_id = None
+        self.policy_definition = policy_definition
+        self.policy_configuration_parameters = policy_configuration_parameters
 
 
 class GuestConfigurationNavigation(msrest.serialization.Model):
     """Guest configuration is an artifact that encapsulates DSC configuration and its dependencies. The artifact is a zip file containing DSC configuration (as MOF) and dependent resources and other dependencies like modules.
 
-    :param kind: Kind of the guest configuration. For example:DSC. Possible values include: "DSC".
-    :type kind: str or ~azure.mgmt.guestconfig.models.Kind
-    :param name: Name of the guest configuration.
-    :type name: str
-    :param version: Version of the guest configuration.
-    :type version: str
-    :param content_uri: Uri of the storage where guest configuration package is uploaded.
-    :type content_uri: str
-    :param content_hash: Combined hash of the guest configuration package and configuration
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar kind: Kind of the guest configuration. For example:DSC. Known values are: "DSC".
+    :vartype kind: str or ~azure.mgmt.guestconfig.models.Kind
+    :ivar name: Name of the guest configuration.
+    :vartype name: str
+    :ivar version: Version of the guest configuration.
+    :vartype version: str
+    :ivar content_uri: Uri of the storage where guest configuration package is uploaded.
+    :vartype content_uri: str
+    :ivar content_hash: Combined hash of the guest configuration package and configuration
      parameters.
-    :type content_hash: str
-    :param assignment_type: Specifies the assignment type and execution of the configuration.
-     Possible values are Audit, DeployAndAutoCorrect, ApplyAndAutoCorrect and ApplyAndMonitor.
-     Possible values include: "Audit", "DeployAndAutoCorrect", "ApplyAndAutoCorrect",
-     "ApplyAndMonitor".
-    :type assignment_type: str or ~azure.mgmt.guestconfig.models.AssignmentType
-    :param configuration_parameter: The configuration parameters for the guest configuration.
-    :type configuration_parameter: list[~azure.mgmt.guestconfig.models.ConfigurationParameter]
-    :param configuration_setting: The configuration setting for the guest configuration.
-    :type configuration_setting: ~azure.mgmt.guestconfig.models.ConfigurationSetting
+    :vartype content_hash: str
+    :ivar assignment_type: Specifies the assignment type and execution of the configuration.
+     Possible values are Audit, DeployAndAutoCorrect, ApplyAndAutoCorrect and ApplyAndMonitor. Known
+     values are: "Audit", "DeployAndAutoCorrect", "ApplyAndAutoCorrect", "ApplyAndMonitor".
+    :vartype assignment_type: str or ~azure.mgmt.guestconfig.models.AssignmentType
+    :ivar assignment_source: Specifies the origin of the configuration.
+    :vartype assignment_source: str
+    :ivar content_type: Specifies the content type of the configuration. Possible values could be
+     Builtin or Custom.
+    :vartype content_type: str
+    :ivar configuration_parameter: The configuration parameters for the guest configuration.
+    :vartype configuration_parameter: list[~azure.mgmt.guestconfig.models.ConfigurationParameter]
+    :ivar configuration_protected_parameter: The protected configuration parameters for the guest
+     configuration.
+    :vartype configuration_protected_parameter:
+     list[~azure.mgmt.guestconfig.models.ConfigurationParameter]
+    :ivar configuration_setting: The configuration setting for the guest configuration.
+    :vartype configuration_setting: ~azure.mgmt.guestconfig.models.ConfigurationSetting
     """
+
+    _validation = {
+        'assignment_source': {'readonly': True},
+        'content_type': {'readonly': True},
+        'configuration_setting': {'readonly': True},
+    }
 
     _attribute_map = {
         'kind': {'key': 'kind', 'type': 'str'},
@@ -769,23 +1060,49 @@ class GuestConfigurationNavigation(msrest.serialization.Model):
         'content_uri': {'key': 'contentUri', 'type': 'str'},
         'content_hash': {'key': 'contentHash', 'type': 'str'},
         'assignment_type': {'key': 'assignmentType', 'type': 'str'},
+        'assignment_source': {'key': 'assignmentSource', 'type': 'str'},
+        'content_type': {'key': 'contentType', 'type': 'str'},
         'configuration_parameter': {'key': 'configurationParameter', 'type': '[ConfigurationParameter]'},
+        'configuration_protected_parameter': {'key': 'configurationProtectedParameter', 'type': '[ConfigurationParameter]'},
         'configuration_setting': {'key': 'configurationSetting', 'type': 'ConfigurationSetting'},
     }
 
     def __init__(
         self,
         *,
-        kind: Optional[Union[str, "Kind"]] = None,
+        kind: Optional[Union[str, "_models.Kind"]] = None,
         name: Optional[str] = None,
         version: Optional[str] = None,
         content_uri: Optional[str] = None,
         content_hash: Optional[str] = None,
-        assignment_type: Optional[Union[str, "AssignmentType"]] = None,
-        configuration_parameter: Optional[List["ConfigurationParameter"]] = None,
-        configuration_setting: Optional["ConfigurationSetting"] = None,
+        assignment_type: Optional[Union[str, "_models.AssignmentType"]] = None,
+        configuration_parameter: Optional[List["_models.ConfigurationParameter"]] = None,
+        configuration_protected_parameter: Optional[List["_models.ConfigurationParameter"]] = None,
         **kwargs
     ):
+        """
+        :keyword kind: Kind of the guest configuration. For example:DSC. Known values are: "DSC".
+        :paramtype kind: str or ~azure.mgmt.guestconfig.models.Kind
+        :keyword name: Name of the guest configuration.
+        :paramtype name: str
+        :keyword version: Version of the guest configuration.
+        :paramtype version: str
+        :keyword content_uri: Uri of the storage where guest configuration package is uploaded.
+        :paramtype content_uri: str
+        :keyword content_hash: Combined hash of the guest configuration package and configuration
+         parameters.
+        :paramtype content_hash: str
+        :keyword assignment_type: Specifies the assignment type and execution of the configuration.
+         Possible values are Audit, DeployAndAutoCorrect, ApplyAndAutoCorrect and ApplyAndMonitor. Known
+         values are: "Audit", "DeployAndAutoCorrect", "ApplyAndAutoCorrect", "ApplyAndMonitor".
+        :paramtype assignment_type: str or ~azure.mgmt.guestconfig.models.AssignmentType
+        :keyword configuration_parameter: The configuration parameters for the guest configuration.
+        :paramtype configuration_parameter: list[~azure.mgmt.guestconfig.models.ConfigurationParameter]
+        :keyword configuration_protected_parameter: The protected configuration parameters for the
+         guest configuration.
+        :paramtype configuration_protected_parameter:
+         list[~azure.mgmt.guestconfig.models.ConfigurationParameter]
+        """
         super(GuestConfigurationNavigation, self).__init__(**kwargs)
         self.kind = kind
         self.name = name
@@ -793,20 +1110,65 @@ class GuestConfigurationNavigation(msrest.serialization.Model):
         self.content_uri = content_uri
         self.content_hash = content_hash
         self.assignment_type = assignment_type
+        self.assignment_source = None
+        self.content_type = None
         self.configuration_parameter = configuration_parameter
-        self.configuration_setting = configuration_setting
+        self.configuration_protected_parameter = configuration_protected_parameter
+        self.configuration_setting = None
+
+
+class GuestConfigurationVMHealthCheckProperties(msrest.serialization.Model):
+    """Get the VM Health Details (policy assignments).
+
+    :ivar is_gc_extension_installed: Installation status for Guest Configuration extension on VM.
+    :vartype is_gc_extension_installed: bool
+    :ivar is_msi_enabled: MSI enablement status on VM.
+    :vartype is_msi_enabled: bool
+    :ivar assignments: List of policy assignment details on the VM.
+    :vartype assignments:
+     list[~azure.mgmt.guestconfig.models.GuestConfigurationHealthCheckAssignment]
+    """
+
+    _attribute_map = {
+        'is_gc_extension_installed': {'key': 'isGcExtensionInstalled', 'type': 'bool'},
+        'is_msi_enabled': {'key': 'isMsiEnabled', 'type': 'bool'},
+        'assignments': {'key': 'assignments', 'type': '[GuestConfigurationHealthCheckAssignment]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        is_gc_extension_installed: Optional[bool] = None,
+        is_msi_enabled: Optional[bool] = None,
+        assignments: Optional[List["_models.GuestConfigurationHealthCheckAssignment"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword is_gc_extension_installed: Installation status for Guest Configuration extension on
+         VM.
+        :paramtype is_gc_extension_installed: bool
+        :keyword is_msi_enabled: MSI enablement status on VM.
+        :paramtype is_msi_enabled: bool
+        :keyword assignments: List of policy assignment details on the VM.
+        :paramtype assignments:
+         list[~azure.mgmt.guestconfig.models.GuestConfigurationHealthCheckAssignment]
+        """
+        super(GuestConfigurationVMHealthCheckProperties, self).__init__(**kwargs)
+        self.is_gc_extension_installed = is_gc_extension_installed
+        self.is_msi_enabled = is_msi_enabled
+        self.assignments = assignments
 
 
 class Operation(msrest.serialization.Model):
     """GuestConfiguration REST API operation.
 
-    :param name: Operation name: For ex.
+    :ivar name: Operation name: For ex.
      providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/write or read.
-    :type name: str
-    :param display: Provider, Resource, Operation and description values.
-    :type display: ~azure.mgmt.guestconfig.models.OperationDisplay
-    :param status_code: Service provider: Microsoft.GuestConfiguration.
-    :type status_code: str
+    :vartype name: str
+    :ivar display: Provider, Resource, Operation and description values.
+    :vartype display: ~azure.mgmt.guestconfig.models.OperationDisplay
+    :ivar status_code: Service provider: Microsoft.GuestConfiguration.
+    :vartype status_code: str
     """
 
     _attribute_map = {
@@ -819,10 +1181,19 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         status_code: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Operation name: For ex.
+         providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/write or read.
+        :paramtype name: str
+        :keyword display: Provider, Resource, Operation and description values.
+        :paramtype display: ~azure.mgmt.guestconfig.models.OperationDisplay
+        :keyword status_code: Service provider: Microsoft.GuestConfiguration.
+        :paramtype status_code: str
+        """
         super(Operation, self).__init__(**kwargs)
         self.name = name
         self.display = display
@@ -832,14 +1203,14 @@ class Operation(msrest.serialization.Model):
 class OperationDisplay(msrest.serialization.Model):
     """Provider, Resource, Operation and description values.
 
-    :param provider: Service provider: Microsoft.GuestConfiguration.
-    :type provider: str
-    :param resource: Resource on which the operation is performed:  For ex.
-    :type resource: str
-    :param operation: Operation type: Read, write, delete, etc.
-    :type operation: str
-    :param description: Description about operation.
-    :type description: str
+    :ivar provider: Service provider: Microsoft.GuestConfiguration.
+    :vartype provider: str
+    :ivar resource: Resource on which the operation is performed:  For ex.
+    :vartype resource: str
+    :ivar operation: Operation type: Read, write, delete, etc.
+    :vartype operation: str
+    :ivar description: Description about operation.
+    :vartype description: str
     """
 
     _attribute_map = {
@@ -858,6 +1229,16 @@ class OperationDisplay(msrest.serialization.Model):
         description: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword provider: Service provider: Microsoft.GuestConfiguration.
+        :paramtype provider: str
+        :keyword resource: Resource on which the operation is performed:  For ex.
+        :paramtype resource: str
+        :keyword operation: Operation type: Read, write, delete, etc.
+        :paramtype operation: str
+        :keyword description: Description about operation.
+        :paramtype description: str
+        """
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = provider
         self.resource = resource
@@ -868,8 +1249,8 @@ class OperationDisplay(msrest.serialization.Model):
 class OperationList(msrest.serialization.Model):
     """The response model for the list of Automation operations.
 
-    :param value: List of Automation operations supported by the Automation resource provider.
-    :type value: list[~azure.mgmt.guestconfig.models.Operation]
+    :ivar value: List of Automation operations supported by the Automation resource provider.
+    :vartype value: list[~azure.mgmt.guestconfig.models.Operation]
     """
 
     _attribute_map = {
@@ -879,11 +1260,79 @@ class OperationList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         **kwargs
     ):
+        """
+        :keyword value: List of Automation operations supported by the Automation resource provider.
+        :paramtype value: list[~azure.mgmt.guestconfig.models.Operation]
+        """
         super(OperationList, self).__init__(**kwargs)
         self.value = value
+
+
+class SystemData(msrest.serialization.Model):
+    """Metadata pertaining to creation and last modification of the resource.
+
+    :ivar created_by: The identity that created the resource.
+    :vartype created_by: str
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
+     "User", "Application", "ManagedIdentity", "Key".
+    :vartype created_by_type: str or ~azure.mgmt.guestconfig.models.CreatedByType
+    :ivar created_at: The timestamp of resource creation (UTC).
+    :vartype created_at: ~datetime.datetime
+    :ivar last_modified_by: The identity that last modified the resource.
+    :vartype last_modified_by: str
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
+    :vartype last_modified_by_type: str or ~azure.mgmt.guestconfig.models.CreatedByType
+    :ivar last_modified_at: The timestamp of resource last modification (UTC).
+    :vartype last_modified_at: ~datetime.datetime
+    """
+
+    _attribute_map = {
+        'created_by': {'key': 'createdBy', 'type': 'str'},
+        'created_by_type': {'key': 'createdByType', 'type': 'str'},
+        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
+        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
+        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
+        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        created_by: Optional[str] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
+        created_at: Optional[datetime.datetime] = None,
+        last_modified_by: Optional[str] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
+        last_modified_at: Optional[datetime.datetime] = None,
+        **kwargs
+    ):
+        """
+        :keyword created_by: The identity that created the resource.
+        :paramtype created_by: str
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
+        :paramtype created_by_type: str or ~azure.mgmt.guestconfig.models.CreatedByType
+        :keyword created_at: The timestamp of resource creation (UTC).
+        :paramtype created_at: ~datetime.datetime
+        :keyword last_modified_by: The identity that last modified the resource.
+        :paramtype last_modified_by: str
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
+        :paramtype last_modified_by_type: str or ~azure.mgmt.guestconfig.models.CreatedByType
+        :keyword last_modified_at: The timestamp of resource last modification (UTC).
+        :paramtype last_modified_at: ~datetime.datetime
+        """
+        super(SystemData, self).__init__(**kwargs)
+        self.created_by = created_by
+        self.created_by_type = created_by_type
+        self.created_at = created_at
+        self.last_modified_by = last_modified_by
+        self.last_modified_by_type = last_modified_by_type
+        self.last_modified_at = last_modified_at
 
 
 class VMInfo(msrest.serialization.Model):
@@ -911,6 +1360,56 @@ class VMInfo(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(VMInfo, self).__init__(**kwargs)
         self.id = None
         self.uuid = None
+
+
+class VMSSVMInfo(msrest.serialization.Model):
+    """Information about VMSS VM.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar vm_id: UUID of the VM.
+    :vartype vm_id: str
+    :ivar vm_resource_id: Azure resource Id of the VM.
+    :vartype vm_resource_id: str
+    :ivar compliance_status: A value indicating compliance status of the machine for the assigned
+     guest configuration. Known values are: "Compliant", "NonCompliant", "Pending".
+    :vartype compliance_status: str or ~azure.mgmt.guestconfig.models.ComplianceStatus
+    :ivar latest_report_id: Id of the latest report for the guest configuration assignment.
+    :vartype latest_report_id: str
+    :ivar last_compliance_checked: Date and time when last compliance status was checked.
+    :vartype last_compliance_checked: ~datetime.datetime
+    """
+
+    _validation = {
+        'vm_id': {'readonly': True},
+        'vm_resource_id': {'readonly': True},
+        'compliance_status': {'readonly': True},
+        'latest_report_id': {'readonly': True},
+        'last_compliance_checked': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'vm_id': {'key': 'vmId', 'type': 'str'},
+        'vm_resource_id': {'key': 'vmResourceId', 'type': 'str'},
+        'compliance_status': {'key': 'complianceStatus', 'type': 'str'},
+        'latest_report_id': {'key': 'latestReportId', 'type': 'str'},
+        'last_compliance_checked': {'key': 'lastComplianceChecked', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(VMSSVMInfo, self).__init__(**kwargs)
+        self.vm_id = None
+        self.vm_resource_id = None
+        self.compliance_status = None
+        self.latest_report_id = None
+        self.last_compliance_checked = None
