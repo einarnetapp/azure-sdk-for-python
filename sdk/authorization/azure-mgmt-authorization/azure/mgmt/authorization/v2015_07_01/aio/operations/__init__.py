@@ -13,6 +13,9 @@ from ._global_administrator_operations import GlobalAdministratorOperations
 from ._role_assignments_operations import RoleAssignmentsOperations
 from ._classic_administrators_operations import ClassicAdministratorsOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'PermissionsOperations',
     'RoleDefinitionsOperations',
@@ -21,3 +24,5 @@ __all__ = [
     'RoleAssignmentsOperations',
     'ClassicAdministratorsOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
