@@ -30,8 +30,8 @@ _SERIALIZER.client_side_validation = False
 def build_get_request(
     subscription_id: str,
     resource_group_name: str,
-    host_pool_name: str,
-    session_host_name: str,
+    scaling_plan_name: str,
+    scaling_plan_schedule_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -41,12 +41,12 @@ def build_get_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "hostPoolName": _SERIALIZER.url("host_pool_name", host_pool_name, 'str', max_length=64, min_length=3),
-        "sessionHostName": _SERIALIZER.url("session_host_name", session_host_name, 'str', max_length=48, min_length=3),
+        "scalingPlanName": _SERIALIZER.url("scaling_plan_name", scaling_plan_name, 'str', max_length=64, min_length=3),
+        "scalingPlanScheduleName": _SERIALIZER.url("scaling_plan_schedule_name", scaling_plan_schedule_name, 'str', max_length=64, min_length=1),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -66,13 +66,58 @@ def build_get_request(
     )
 
 
+def build_create_request(
+    subscription_id: str,
+    resource_group_name: str,
+    scaling_plan_name: str,
+    scaling_plan_schedule_name: str,
+    *,
+    json: Optional[_models.ScalingPlanPooledSchedule] = None,
+    content: Any = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01-preview"))  # type: str
+    content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
+        "scalingPlanName": _SERIALIZER.url("scaling_plan_name", scaling_plan_name, 'str', max_length=64, min_length=3),
+        "scalingPlanScheduleName": _SERIALIZER.url("scaling_plan_schedule_name", scaling_plan_schedule_name, 'str', max_length=64, min_length=1),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    if content_type is not None:
+        _headers['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="PUT",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        json=json,
+        content=content,
+        **kwargs
+    )
+
+
 def build_delete_request(
     subscription_id: str,
     resource_group_name: str,
-    host_pool_name: str,
-    session_host_name: str,
-    *,
-    force: Optional[bool] = None,
+    scaling_plan_name: str,
+    scaling_plan_schedule_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -82,20 +127,18 @@ def build_delete_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "hostPoolName": _SERIALIZER.url("host_pool_name", host_pool_name, 'str', max_length=64, min_length=3),
-        "sessionHostName": _SERIALIZER.url("session_host_name", session_host_name, 'str', max_length=48, min_length=3),
+        "scalingPlanName": _SERIALIZER.url("scaling_plan_name", scaling_plan_name, 'str', max_length=64, min_length=3),
+        "scalingPlanScheduleName": _SERIALIZER.url("scaling_plan_schedule_name", scaling_plan_schedule_name, 'str', max_length=64, min_length=1),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-    if force is not None:
-        _params['force'] = _SERIALIZER.query("force", force, 'bool')
 
     # Construct headers
     _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
@@ -112,12 +155,11 @@ def build_delete_request(
 def build_update_request(
     subscription_id: str,
     resource_group_name: str,
-    host_pool_name: str,
-    session_host_name: str,
+    scaling_plan_name: str,
+    scaling_plan_schedule_name: str,
     *,
-    json: Optional[_models.SessionHostPatch] = None,
+    json: Optional[_models.ScalingPlanPooledSchedulePatch] = None,
     content: Any = None,
-    force: Optional[bool] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -128,20 +170,18 @@ def build_update_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "hostPoolName": _SERIALIZER.url("host_pool_name", host_pool_name, 'str', max_length=64, min_length=3),
-        "sessionHostName": _SERIALIZER.url("session_host_name", session_host_name, 'str', max_length=48, min_length=3),
+        "scalingPlanName": _SERIALIZER.url("scaling_plan_name", scaling_plan_name, 'str', max_length=64, min_length=3),
+        "scalingPlanScheduleName": _SERIALIZER.url("scaling_plan_schedule_name", scaling_plan_schedule_name, 'str', max_length=64, min_length=1),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-    if force is not None:
-        _params['force'] = _SERIALIZER.query("force", force, 'bool')
 
     # Construct headers
     if content_type is not None:
@@ -162,7 +202,7 @@ def build_update_request(
 def build_list_request(
     subscription_id: str,
     resource_group_name: str,
-    host_pool_name: str,
+    scaling_plan_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -172,11 +212,11 @@ def build_list_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "hostPoolName": _SERIALIZER.url("host_pool_name", host_pool_name, 'str', max_length=64, min_length=3),
+        "scalingPlanName": _SERIALIZER.url("scaling_plan_name", scaling_plan_name, 'str', max_length=64, min_length=3),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -195,14 +235,14 @@ def build_list_request(
         **kwargs
     )
 
-class SessionHostsOperations:
+class ScalingPlanPooledSchedulesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.desktopvirtualization.DesktopVirtualizationAPIClient`'s
-        :attr:`session_hosts` attribute.
+        :attr:`scaling_plan_pooled_schedules` attribute.
     """
 
     models = _models
@@ -219,21 +259,21 @@ class SessionHostsOperations:
     def get(
         self,
         resource_group_name: str,
-        host_pool_name: str,
-        session_host_name: str,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
         **kwargs: Any
-    ) -> _models.SessionHost:
-        """Get a session host.
+    ) -> _models.ScalingPlanPooledSchedule:
+        """Get a ScalingPlanPooledSchedule.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
-        :param session_host_name: The name of the session host within the specified host pool.
-        :type session_host_name: str
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SessionHost, or the result of cls(response)
-        :rtype: ~azure.mgmt.desktopvirtualization.models.SessionHost
+        :return: ScalingPlanPooledSchedule, or the result of cls(response)
+        :rtype: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -245,14 +285,14 @@ class SessionHostsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SessionHost]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledSchedule]
 
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
-            session_host_name=session_host_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
             headers=_headers,
@@ -272,36 +312,110 @@ class SessionHostsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SessionHost', pipeline_response)
+        deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
+
+
+    @distributed_trace
+    def create(
+        self,
+        resource_group_name: str,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
+        scaling_plan_schedule: _models.ScalingPlanPooledSchedule,
+        **kwargs: Any
+    ) -> _models.ScalingPlanPooledSchedule:
+        """Create or update a ScalingPlanPooledSchedule.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
+        :param scaling_plan_schedule: Object containing ScalingPlanPooledSchedule definitions.
+        :type scaling_plan_schedule: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ScalingPlanPooledSchedule, or the result of cls(response)
+        :rtype: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledSchedule]
+
+        _json = self._serialize.body(scaling_plan_schedule, 'ScalingPlanPooledSchedule')
+
+        request = build_create_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.create.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
 
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        host_pool_name: str,
-        session_host_name: str,
-        force: Optional[bool] = None,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
         **kwargs: Any
     ) -> None:
-        """Remove a SessionHost.
+        """Remove a ScalingPlanPooledSchedule.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
-        :param session_host_name: The name of the session host within the specified host pool.
-        :type session_host_name: str
-        :param force: Force flag to force sessionHost deletion even when userSession exists. Default
-         value is None.
-        :type force: bool
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -322,10 +436,9 @@ class SessionHostsOperations:
         request = build_delete_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
-            session_host_name=session_host_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
             api_version=api_version,
-            force=force,
             template_url=self.delete.metadata['url'],
             headers=_headers,
             params=_params,
@@ -347,35 +460,33 @@ class SessionHostsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
 
 
     @distributed_trace
     def update(
         self,
         resource_group_name: str,
-        host_pool_name: str,
-        session_host_name: str,
-        force: Optional[bool] = None,
-        session_host: Optional[_models.SessionHostPatch] = None,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
+        scaling_plan_schedule: Optional[_models.ScalingPlanPooledSchedulePatch] = None,
         **kwargs: Any
-    ) -> _models.SessionHost:
-        """Update a session host.
+    ) -> _models.ScalingPlanPooledSchedule:
+        """Update a ScalingPlanPooledSchedule.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
-        :param session_host_name: The name of the session host within the specified host pool.
-        :type session_host_name: str
-        :param force: Force flag to update assign, unassign or reassign personal desktop. Default value
-         is None.
-        :type force: bool
-        :param session_host: Object containing SessionHost definitions. Default value is None.
-        :type session_host: ~azure.mgmt.desktopvirtualization.models.SessionHostPatch
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
+        :param scaling_plan_schedule: Object containing ScalingPlanPooledSchedule definitions. Default
+         value is None.
+        :type scaling_plan_schedule:
+         ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedulePatch
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SessionHost, or the result of cls(response)
-        :rtype: ~azure.mgmt.desktopvirtualization.models.SessionHost
+        :return: ScalingPlanPooledSchedule, or the result of cls(response)
+        :rtype: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -388,22 +499,21 @@ class SessionHostsOperations:
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SessionHost]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledSchedule]
 
-        if session_host is not None:
-            _json = self._serialize.body(session_host, 'SessionHostPatch')
+        if scaling_plan_schedule is not None:
+            _json = self._serialize.body(scaling_plan_schedule, 'ScalingPlanPooledSchedulePatch')
         else:
             _json = None
 
         request = build_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
-            session_host_name=session_host_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
-            force=force,
             template_url=self.update.metadata['url'],
             headers=_headers,
             params=_params,
@@ -422,39 +532,41 @@ class SessionHostsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SessionHost', pipeline_response)
+        deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}"}  # type: ignore
+    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
 
 
     @distributed_trace
     def list(
         self,
         resource_group_name: str,
-        host_pool_name: str,
+        scaling_plan_name: str,
         **kwargs: Any
-    ) -> Iterable[_models.SessionHostList]:
-        """List sessionHosts.
+    ) -> Iterable[_models.ScalingPlanPooledScheduleList]:
+        """List ScalingPlanPooledSchedules.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SessionHostList or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.desktopvirtualization.models.SessionHostList]
+        :return: An iterator like instance of either ScalingPlanPooledScheduleList or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledScheduleList]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SessionHostList]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledScheduleList]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -466,7 +578,7 @@ class SessionHostsOperations:
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    host_pool_name=host_pool_name,
+                    scaling_plan_name=scaling_plan_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
                     headers=_headers,
@@ -480,7 +592,7 @@ class SessionHostsOperations:
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    host_pool_name=host_pool_name,
+                    scaling_plan_name=scaling_plan_name,
                     api_version=api_version,
                     template_url=next_link,
                     headers=_headers,
@@ -492,7 +604,7 @@ class SessionHostsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("SessionHostList", pipeline_response)
+            deserialized = self._deserialize("ScalingPlanPooledScheduleList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -518,4 +630,4 @@ class SessionHostsOperations:
         return ItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules"}  # type: ignore
