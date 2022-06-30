@@ -6,6 +6,9 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._mde_onboardings_operations import MdeOnboardingsOperations
+from ._custom_assessment_automations_operations import CustomAssessmentAutomationsOperations
+from ._custom_entity_store_assignments_operations import CustomEntityStoreAssignmentsOperations
 from ._compliance_results_operations import ComplianceResultsOperations
 from ._pricings_operations import PricingsOperations
 from ._advanced_threat_protection_operations import AdvancedThreatProtectionOperations
@@ -51,8 +54,23 @@ from ._alerts_operations import AlertsOperations
 from ._settings_operations import SettingsOperations
 from ._ingestion_settings_operations import IngestionSettingsOperations
 from ._software_inventories_operations import SoftwareInventoriesOperations
+from ._vm_scanners_operations import VmScannersOperations
+from ._security_connectors_operations import SecurityConnectorsOperations
+from ._governance_rule_operations import GovernanceRuleOperations
+from ._governance_rules_operations import GovernanceRulesOperations
+from ._security_connector_governance_rule_operations import SecurityConnectorGovernanceRuleOperations
+from ._security_connector_governance_rules_operations import SecurityConnectorGovernanceRulesOperations
+from ._subscription_governance_rules_execute_status_operations import SubscriptionGovernanceRulesExecuteStatusOperations
+from ._security_connector_governance_rules_execute_status_operations import SecurityConnectorGovernanceRulesExecuteStatusOperations
+from ._governance_assignments_operations import GovernanceAssignmentsOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
+    'MdeOnboardingsOperations',
+    'CustomAssessmentAutomationsOperations',
+    'CustomEntityStoreAssignmentsOperations',
     'ComplianceResultsOperations',
     'PricingsOperations',
     'AdvancedThreatProtectionOperations',
@@ -98,4 +116,15 @@ __all__ = [
     'SettingsOperations',
     'IngestionSettingsOperations',
     'SoftwareInventoriesOperations',
+    'VmScannersOperations',
+    'SecurityConnectorsOperations',
+    'GovernanceRuleOperations',
+    'GovernanceRulesOperations',
+    'SecurityConnectorGovernanceRuleOperations',
+    'SecurityConnectorGovernanceRulesOperations',
+    'SubscriptionGovernanceRulesExecuteStatusOperations',
+    'SecurityConnectorGovernanceRulesExecuteStatusOperations',
+    'GovernanceAssignmentsOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

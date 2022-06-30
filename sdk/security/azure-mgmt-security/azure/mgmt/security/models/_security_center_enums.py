@@ -6,27 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
-from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from enum import Enum
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class AadConnectivityStateEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AadConnectivityStateEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The connectivity state of the external AAD solution
     """
 
@@ -34,7 +18,7 @@ class AadConnectivityStateEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enu
     NOT_LICENSED = "NotLicensed"
     CONNECTED = "Connected"
 
-class ActionType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the action that will be triggered by the Automation
     """
 
@@ -42,7 +26,7 @@ class ActionType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     EVENT_HUB = "EventHub"
     WORKSPACE = "Workspace"
 
-class AdaptiveApplicationControlIssue(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AdaptiveApplicationControlIssue(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """An alert that machines within a group can have
     """
 
@@ -53,20 +37,20 @@ class AdaptiveApplicationControlIssue(with_metaclass(_CaseInsensitiveEnumMeta, s
     EXECUTABLE_VIOLATIONS_AUDITED = "ExecutableViolationsAudited"
     RULES_VIOLATED_MANUALLY = "RulesViolatedManually"
 
-class AdditionalWorkspaceDataType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AdditionalWorkspaceDataType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Data types sent to workspace.
     """
 
     ALERTS = "Alerts"
     RAW_EVENTS = "RawEvents"
 
-class AdditionalWorkspaceType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AdditionalWorkspaceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Workspace type.
     """
 
     SENTINEL = "Sentinel"
 
-class AlertNotifications(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AlertNotifications(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether to send security alerts notifications to the security contact
     """
 
@@ -75,7 +59,7 @@ class AlertNotifications(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Don't get notifications on new alerts.
     OFF = "Off"
 
-class AlertSeverity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AlertSeverity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The risk level of the threat that was detected. Learn more:
     https://docs.microsoft.com/en-us/azure/security-center/security-center-alerts-overview#how-are-alerts-classified.
     """
@@ -89,7 +73,7 @@ class AlertSeverity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: High.
     HIGH = "High"
 
-class AlertStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AlertStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The life cycle status of the alert.
     """
 
@@ -100,7 +84,7 @@ class AlertStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Alert dismissed as false positive.
     DISMISSED = "Dismissed"
 
-class AlertsToAdmins(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AlertsToAdmins(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether to send security alerts notifications to subscription admins
     """
 
@@ -109,7 +93,7 @@ class AlertsToAdmins(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Don't send notification on new alerts to the subscription's admins.
     OFF = "Off"
 
-class AssessedResourceType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AssessedResourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Sub-assessment resource type
     """
 
@@ -117,7 +101,7 @@ class AssessedResourceType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     CONTAINER_REGISTRY_VULNERABILITY = "ContainerRegistryVulnerability"
     SERVER_VULNERABILITY = "ServerVulnerability"
 
-class AssessmentStatusCode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AssessmentStatusCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Programmatic code for the status of the assessment
     """
 
@@ -128,22 +112,23 @@ class AssessmentStatusCode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Assessment for this resource did not happen.
     NOT_APPLICABLE = "NotApplicable"
 
-class AssessmentType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AssessmentType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment
     based on custom Azure Policy definition
     """
 
-    #: Azure Security Center managed assessments.
+    #: Microsoft Defender for Cloud managed assessments.
     BUILT_IN = "BuiltIn"
-    #: User defined policies that are automatically ingested from Azure Policy to Azure Security
-    #: Center.
+    #: User defined policies that are automatically ingested from Azure Policy to Microsoft Defender
+    #: for Cloud.
     CUSTOM_POLICY = "CustomPolicy"
-    #: User assessments pushed directly by the user or other third party to Azure Security Center.
+    #: User assessments pushed directly by the user or other third party to Microsoft Defender for
+    #: Cloud.
     CUSTOMER_MANAGED = "CustomerManaged"
     #: An assessment that was created by a verified 3rd party if the user connected it to ASC.
     VERIFIED_PARTNER = "VerifiedPartner"
 
-class AuthenticationProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AuthenticationProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of the multi-cloud connector
     """
 
@@ -156,7 +141,7 @@ class AuthenticationProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, s
     #: Incorrect policy of the connector.
     INCORRECT_POLICY = "IncorrectPolicy"
 
-class AuthenticationType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Connect to your cloud account, for AWS use either account credentials or role-based
     authentication. For GCP use account organization credentials.
     """
@@ -168,7 +153,7 @@ class AuthenticationType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: GCP account connector service to service authentication.
     GCP_CREDENTIALS = "gcpCredentials"
 
-class AutoProvision(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AutoProvision(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Describes what kind of security agent provisioning action to take
     """
 
@@ -177,7 +162,7 @@ class AutoProvision(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Do not install security agent on the VMs automatically.
     OFF = "Off"
 
-class BundleType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class BundleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Alert Simulator supported bundles.
     """
 
@@ -190,7 +175,7 @@ class BundleType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     STORAGE_ACCOUNTS = "StorageAccounts"
     VIRTUAL_MACHINES = "VirtualMachines"
 
-class Categories(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Categories(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The categories of resource that is at risk when the assessment is unhealthy
     """
 
@@ -200,7 +185,17 @@ class Categories(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     IDENTITY_AND_ACCESS = "IdentityAndAccess"
     IO_T = "IoT"
 
-class ConfigurationStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CloudName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The multi cloud resource's cloud name.
+    """
+
+    AZURE = "Azure"
+    AWS = "AWS"
+    GCP = "GCP"
+    GITHUB = "Github"
+    AZURE_DEV_OPS = "AzureDevOps"
+
+class ConfigurationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The configuration status of the machines group or machine or rule
     """
 
@@ -210,21 +205,21 @@ class ConfigurationStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     FAILED = "Failed"
     NO_STATUS = "NoStatus"
 
-class ConnectionType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     INTERNAL = "Internal"
     EXTERNAL = "External"
 
-class ControlType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ControlType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of security control (for example, BuiltIn)
     """
 
-    #: Azure Security Center managed assessments.
+    #: Microsoft Defender for Cloud managed assessments.
     BUILT_IN = "BuiltIn"
-    #: Non Azure Security Center managed assessments.
+    #: Non Microsoft Defender for Cloud managed assessments.
     CUSTOM = "Custom"
 
-class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -233,19 +228,19 @@ class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class DataSource(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DataSource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Devices twin data.
     TWIN_DATA = "TwinData"
 
-class Direction(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Direction(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The rule's direction
     """
 
     INBOUND = "Inbound"
     OUTBOUND = "Outbound"
 
-class EndOfSupportStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EndOfSupportStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """End of support status.
     """
 
@@ -255,7 +250,7 @@ class EndOfSupportStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     UPCOMING_NO_LONGER_SUPPORTED = "upcomingNoLongerSupported"
     UPCOMING_VERSION_NO_LONGER_SUPPORTED = "upcomingVersionNoLongerSupported"
 
-class EnforcementMode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EnforcementMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The application control policy enforcement/protection mode of the machine group
     """
 
@@ -263,7 +258,7 @@ class EnforcementMode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     ENFORCE = "Enforce"
     NONE = "None"
 
-class EnforcementSupport(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EnforcementSupport(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The machine supportability of Enforce feature
     """
 
@@ -271,32 +266,23 @@ class EnforcementSupport(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     NOT_SUPPORTED = "NotSupported"
     UNKNOWN = "Unknown"
 
-class Enum13(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EnvironmentType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of the environment data.
+    """
 
-    ACTIVATE = "Activate"
-    DISMISS = "Dismiss"
-    START = "Start"
-    RESOLVE = "Resolve"
-    CLOSE = "Close"
+    AWS_ACCOUNT = "AwsAccount"
+    GCP_PROJECT = "GcpProject"
+    GITHUB_SCOPE = "GithubScope"
+    AZURE_DEV_OPS_SCOPE = "AzureDevOpsScope"
 
-class Enum15(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-
-    EFFECTIVE = "effective"
-    CUSTOM = "custom"
-
-class Enum69(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-
-    MCAS = "MCAS"
-    WDATP = "WDATP"
-    WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW = "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW"
-    SENTINEL = "Sentinel"
-
-class EventSource(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EventSource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A valid event source type.
     """
 
     ASSESSMENTS = "Assessments"
+    ASSESSMENTS_SNAPSHOT = "AssessmentsSnapshot"
     SUB_ASSESSMENTS = "SubAssessments"
+    SUB_ASSESSMENTS_SNAPSHOT = "SubAssessmentsSnapshot"
     ALERTS = "Alerts"
     SECURE_SCORES = "SecureScores"
     SECURE_SCORES_SNAPSHOT = "SecureScoresSnapshot"
@@ -305,24 +291,24 @@ class EventSource(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     REGULATORY_COMPLIANCE_ASSESSMENT = "RegulatoryComplianceAssessment"
     REGULATORY_COMPLIANCE_ASSESSMENT_SNAPSHOT = "RegulatoryComplianceAssessmentSnapshot"
 
-class ExpandControlsEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ExpandControlsEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Add definition object for each control.
     DEFINITION = "definition"
 
-class ExpandEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ExpandEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: All links associated with an assessment.
     LINKS = "links"
     #: Assessment metadata.
     METADATA = "metadata"
 
-class ExportData(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ExportData(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Agent raw events.
     RAW_EVENTS = "RawEvents"
 
-class ExternalSecuritySolutionKindEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ExternalSecuritySolutionKindEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of the external solution
     """
 
@@ -330,7 +316,7 @@ class ExternalSecuritySolutionKindEnum(with_metaclass(_CaseInsensitiveEnumMeta, 
     ATA = "ATA"
     AAD = "AAD"
 
-class FileType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class FileType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the file (for Linux files - Executable is used)
     """
 
@@ -341,7 +327,44 @@ class FileType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     EXECUTABLE = "Executable"
     UNKNOWN = "Unknown"
 
-class HybridComputeProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class GovernanceRuleConditionOperator(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The governance rule Condition's Operator, for example Equals for severity or In for list of
+    assessments, see examples
+    """
+
+    #: Checks that the string value of the data defined in Property equals the given value - exact
+    #: fit.
+    EQUALS = "Equals"
+    #: Checks that the string value of the data defined in Property equals any of the given values
+    #: (exact fit).
+    IN_ENUM = "In"
+
+class GovernanceRuleOwnerSourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The owner type for the governance rule owner source
+    """
+
+    #: The rule source type defined using resource tag.
+    BY_TAG = "ByTag"
+    #: The rule source type defined manually.
+    MANUALLY = "Manually"
+
+class GovernanceRuleSourceResourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The governance rule source, what the rule affects, e.g. Assessments
+    """
+
+    #: The source of the governance rule is assessments.
+    ASSESSMENTS = "Assessments"
+
+class GovernanceRuleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The rule type of the governance rule, defines the source of the rule e.g. Integrated
+    """
+
+    #: The source of the rule type definition is integrated.
+    INTEGRATED = "Integrated"
+    #: The source of the rule type definition is ServiceNow.
+    SERVICE_NOW = "ServiceNow"
+
+class HybridComputeProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of the service principal and its secret
     """
 
@@ -352,7 +375,7 @@ class HybridComputeProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, st
     #: the service principal details are expired.
     EXPIRED = "Expired"
 
-class ImplementationEffort(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ImplementationEffort(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The implementation effort required to remediate this assessment
     """
 
@@ -360,7 +383,12 @@ class ImplementationEffort(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MODERATE = "Moderate"
     HIGH = "High"
 
-class Intent(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class InformationProtectionPolicyName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    EFFECTIVE = "effective"
+    CUSTOM = "custom"
+
+class Intent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kill chain related intent behind the alert. For list of supported values, and explanations
     of Azure Security Center's supported kill chain intents.
     """
@@ -418,14 +446,30 @@ class Intent(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: This stage is relevant for compute hosts and resources such as user accounts, certificates etc.
     EXPLOITATION = "Exploitation"
 
-class KindEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class KindEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of alert simulation.
     """
 
     #: Simulate alerts according to bundles.
     BUNDLES = "Bundles"
 
-class Operator(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class OfferingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of the security offering.
+    """
+
+    CSPM_MONITOR_AWS = "CspmMonitorAws"
+    DEFENDER_FOR_CONTAINERS_AWS = "DefenderForContainersAws"
+    DEFENDER_FOR_SERVERS_AWS = "DefenderForServersAws"
+    DEFENDER_FOR_DATABASES_AWS = "DefenderForDatabasesAws"
+    INFORMATION_PROTECTION_AWS = "InformationProtectionAws"
+    CSPM_MONITOR_GCP = "CspmMonitorGcp"
+    CSPM_MONITOR_GITHUB = "CspmMonitorGithub"
+    CSPM_MONITOR_AZURE_DEV_OPS = "CspmMonitorAzureDevOps"
+    DEFENDER_FOR_SERVERS_GCP = "DefenderForServersGcp"
+    DEFENDER_FOR_CONTAINERS_GCP = "DefenderForContainersGcp"
+    DEFENDER_FOR_DATABASES_GCP = "DefenderForDatabasesGcp"
+
+class Operator(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A valid comparer operator to use. A case-insensitive comparison will be applied for String
     PropertyType.
     """
@@ -449,7 +493,14 @@ class Operator(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Applies only for non-decimal operands.
     ENDS_WITH = "EndsWith"
 
-class PermissionProperty(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class OrganizationMembershipType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The multi cloud account's membership type in the organization
+    """
+
+    MEMBER = "Member"
+    ORGANIZATION = "Organization"
+
+class PermissionProperty(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A permission detected in the cloud account.
     """
 
@@ -463,18 +514,18 @@ class PermissionProperty(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: This permission provides read only access to GCP Security Command Center.
     GCP_SECURITY_CENTER_ADMIN_VIEWER = "GCP::Security Center Admin Viewer"
 
-class PricingTier(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """The pricing tier value. Azure Security Center is provided in two pricing tiers: free and
+class PricingTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The pricing tier value. Microsoft Defender for Cloud is provided in two pricing tiers: free and
     standard, with the standard tier available with a trial period. The standard tier offers
     advanced security capabilities, while the free tier offers basic security features.
     """
 
-    #: Get free Azure security center experience with basic security features.
+    #: Get free Microsoft Defender for Cloud experience with basic security features.
     FREE = "Free"
-    #: Get the standard Azure security center experience with advanced security features.
+    #: Get the standard Microsoft Defender for Cloud experience with advanced security features.
     STANDARD = "Standard"
 
-class PropertyType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PropertyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The data type of the compared operands (string, integer, floating point number or a boolean
     [true/false]]
     """
@@ -484,13 +535,13 @@ class PropertyType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     NUMBER = "Number"
     BOOLEAN = "Boolean"
 
-class ProtocolEnum(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ProtocolEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     TCP = "TCP"
     UDP = "UDP"
     ALL = "*"
 
-class ProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The security family provisioning State
     """
 
@@ -498,7 +549,7 @@ class ProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     FAILED = "Failed"
     UPDATING = "Updating"
 
-class Rank(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Rank(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The rank of the sensitivity label.
     """
 
@@ -508,7 +559,7 @@ class Rank(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     HIGH = "High"
     CRITICAL = "Critical"
 
-class RecommendationAction(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecommendationAction(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recommendation action of the machine or rule
     """
 
@@ -516,7 +567,7 @@ class RecommendationAction(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     ADD = "Add"
     REMOVE = "Remove"
 
-class RecommendationConfigStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecommendationConfigStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Recommendation status. When the recommendation status is disabled recommendations are not
     generated.
     """
@@ -524,7 +575,7 @@ class RecommendationConfigStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, E
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class RecommendationStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecommendationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The initial recommendation status of the machine group or machine
     """
 
@@ -533,7 +584,7 @@ class RecommendationStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     NOT_AVAILABLE = "NotAvailable"
     NO_STATUS = "NoStatus"
 
-class RecommendationType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecommendationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of IoT Security recommendation.
     """
 
@@ -582,7 +633,7 @@ class RecommendationType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Insecure TLS configurations detected. Immediate upgrade recommended.
     IO_T_VULNERABLE_TLS_CIPHER_SUITE = "IoT_VulnerableTLSCipherSuite"
 
-class ReportedSeverity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ReportedSeverity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Assessed alert severity.
     """
 
@@ -591,7 +642,7 @@ class ReportedSeverity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MEDIUM = "Medium"
     HIGH = "High"
 
-class ResourceIdentifierType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceIdentifierType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """There can be multiple identifiers of different type per alert, this field specify the
     identifier type.
     """
@@ -599,7 +650,7 @@ class ResourceIdentifierType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)
     AZURE_RESOURCE = "AzureResource"
     LOG_ANALYTICS = "LogAnalytics"
 
-class ResourceStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the resource regarding a single assessment
     """
 
@@ -612,7 +663,7 @@ class ResourceStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: This assessment on the resource is not healthy.
     NOT_HEALTHY = "NotHealthy"
 
-class RuleSeverity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RuleSeverity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The rule severity.
     """
 
@@ -627,7 +678,7 @@ class RuleSeverity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Obsolete.
     OBSOLETE = "Obsolete"
 
-class RuleState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RuleState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Possible states of the rule
     """
 
@@ -635,7 +686,7 @@ class RuleState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     DISABLED = "Disabled"
     EXPIRED = "Expired"
 
-class RuleStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RuleStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The rule result status.
     """
 
@@ -646,7 +697,7 @@ class RuleStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: InternalError.
     INTERNAL_ERROR = "InternalError"
 
-class RuleType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RuleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The rule type.
     """
 
@@ -659,7 +710,13 @@ class RuleType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: NegativeList.
     NEGATIVE_LIST = "NegativeList"
 
-class ScanState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ScanningMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The scanning mode.
+    """
+
+    DEFAULT = "Default"
+
+class ScanState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The scan status.
     """
 
@@ -672,7 +729,7 @@ class ScanState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Passed.
     PASSED = "Passed"
 
-class ScanTriggerType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ScanTriggerType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The scan trigger type.
     """
 
@@ -681,7 +738,7 @@ class ScanTriggerType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: Recurring.
     RECURRING = "Recurring"
 
-class SecurityFamily(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SecurityFamily(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The security family of the discovered solution
     """
 
@@ -690,14 +747,14 @@ class SecurityFamily(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     SAAS_WAF = "SaasWaf"
     VA = "Va"
 
-class SecuritySolutionStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SecuritySolutionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the IoT Security solution.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class ServerVulnerabilityAssessmentPropertiesProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ServerVulnerabilityAssessmentPropertiesProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioningState of the vulnerability assessment capability on the VM
     """
 
@@ -707,7 +764,7 @@ class ServerVulnerabilityAssessmentPropertiesProvisioningState(with_metaclass(_C
     PROVISIONING = "Provisioning"
     DEPROVISIONING = "Deprovisioning"
 
-class SettingKind(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SettingKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """the kind of the settings string
     """
 
@@ -715,7 +772,15 @@ class SettingKind(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     ALERT_SUPPRESSION_SETTING = "AlertSuppressionSetting"
     ALERT_SYNC_SETTINGS = "AlertSyncSettings"
 
-class Severity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SettingName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    MCAS = "MCAS"
+    WDATP = "WDATP"
+    WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW = "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW"
+    WDATP_UNIFIED_SOLUTION = "WDATP_UNIFIED_SOLUTION"
+    SENTINEL = "Sentinel"
+
+class Severity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The sub-assessment severity level
     """
 
@@ -723,7 +788,15 @@ class Severity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MEDIUM = "Medium"
     HIGH = "High"
 
-class Source(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SeverityEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The severity to relate to the assessments generated by this assessment automation.
+    """
+
+    HIGH = "High"
+    MEDIUM = "Medium"
+    LOW = "Low"
+
+class Source(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The platform where the assessed resource resides
     """
 
@@ -734,7 +807,7 @@ class Source(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: SQL Resource in an on premise machine connected to Azure cloud.
     ON_PREMISE_SQL = "OnPremiseSql"
 
-class SourceSystem(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SourceSystem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The source type of the machine group
     """
 
@@ -744,7 +817,7 @@ class SourceSystem(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     NON_AZURE_AUDIT_D = "NonAzure_AuditD"
     NONE = "None"
 
-class State(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class State(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Aggregative state based on the standard's supported controls states
     """
 
@@ -758,14 +831,14 @@ class State(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     #: No supported regulatory compliance data for the given standard.
     UNSUPPORTED = "Unsupported"
 
-class Status(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the port
     """
 
     REVOKED = "Revoked"
     INITIATED = "Initiated"
 
-class StatusReason(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class StatusReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A description of why the ``status`` has its value
     """
 
@@ -773,7 +846,7 @@ class StatusReason(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     USER_REQUESTED = "UserRequested"
     NEWER_REQUEST_INITIATED = "NewerRequestInitiated"
 
-class SubAssessmentStatusCode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SubAssessmentStatusCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Programmatic code for the status of the assessment
     """
 
@@ -784,7 +857,157 @@ class SubAssessmentStatusCode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum
     #: Assessment for this resource did not happen.
     NOT_APPLICABLE = "NotApplicable"
 
-class Threats(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SubPlan(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The available sub plans
+    """
+
+    P1 = "P1"
+    P2 = "P2"
+
+class SupportedCloudEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Relevant cloud for the custom assessment automation.
+    """
+
+    AWS = "AWS"
+    GCP = "GCP"
+
+class Tactics(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Tactic of the assessment
+    """
+
+    RECONNAISSANCE = "Reconnaissance"
+    RESOURCE_DEVELOPMENT = "Resource Development"
+    INITIAL_ACCESS = "Initial Access"
+    EXECUTION = "Execution"
+    PERSISTENCE = "Persistence"
+    PRIVILEGE_ESCALATION = "Privilege Escalation"
+    DEFENSE_EVASION = "Defense Evasion"
+    CREDENTIAL_ACCESS = "Credential Access"
+    DISCOVERY = "Discovery"
+    LATERAL_MOVEMENT = "Lateral Movement"
+    COLLECTION = "Collection"
+    COMMAND_AND_CONTROL = "Command and Control"
+    EXFILTRATION = "Exfiltration"
+    IMPACT = "Impact"
+
+class TaskUpdateActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    ACTIVATE = "Activate"
+    DISMISS = "Dismiss"
+    START = "Start"
+    RESOLVE = "Resolve"
+    CLOSE = "Close"
+
+class Techniques(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Techniques of the assessment
+    """
+
+    ABUSE_ELEVATION_CONTROL_MECHANISM = "Abuse Elevation Control Mechanism"
+    ACCESS_TOKEN_MANIPULATION = "Access Token Manipulation"
+    ACCOUNT_DISCOVERY = "Account Discovery"
+    ACCOUNT_MANIPULATION = "Account Manipulation"
+    ACTIVE_SCANNING = "Active Scanning"
+    APPLICATION_LAYER_PROTOCOL = "Application Layer Protocol"
+    AUDIO_CAPTURE = "Audio Capture"
+    BOOT_OR_LOGON_AUTOSTART_EXECUTION = "Boot or Logon Autostart Execution"
+    BOOT_OR_LOGON_INITIALIZATION_SCRIPTS = "Boot or Logon Initialization Scripts"
+    BRUTE_FORCE = "Brute Force"
+    CLOUD_INFRASTRUCTURE_DISCOVERY = "Cloud Infrastructure Discovery"
+    CLOUD_SERVICE_DASHBOARD = "Cloud Service Dashboard"
+    CLOUD_SERVICE_DISCOVERY = "Cloud Service Discovery"
+    COMMAND_AND_SCRIPTING_INTERPRETER = "Command and Scripting Interpreter"
+    COMPROMISE_CLIENT_SOFTWARE_BINARY = "Compromise Client Software Binary"
+    COMPROMISE_INFRASTRUCTURE = "Compromise Infrastructure"
+    CONTAINER_AND_RESOURCE_DISCOVERY = "Container and Resource Discovery"
+    CREATE_ACCOUNT = "Create Account"
+    CREATE_OR_MODIFY_SYSTEM_PROCESS = "Create or Modify System Process"
+    CREDENTIALS_FROM_PASSWORD_STORES = "Credentials from Password Stores"
+    DATA_DESTRUCTION = "Data Destruction"
+    DATA_ENCRYPTED_FOR_IMPACT = "Data Encrypted for Impact"
+    DATA_FROM_CLOUD_STORAGE_OBJECT = "Data from Cloud Storage Object"
+    DATA_FROM_CONFIGURATION_REPOSITORY = "Data from Configuration Repository"
+    DATA_FROM_INFORMATION_REPOSITORIES = "Data from Information Repositories"
+    DATA_FROM_LOCAL_SYSTEM = "Data from Local System"
+    DATA_MANIPULATION = "Data Manipulation"
+    DATA_STAGED = "Data Staged"
+    DEFACEMENT = "Defacement"
+    DEOBFUSCATE_DECODE_FILES_OR_INFORMATION = "Deobfuscate/Decode Files or Information"
+    DISK_WIPE = "Disk Wipe"
+    DOMAIN_TRUST_DISCOVERY = "Domain Trust Discovery"
+    DRIVE_BY_COMPROMISE = "Drive-by Compromise"
+    DYNAMIC_RESOLUTION = "Dynamic Resolution"
+    ENDPOINT_DENIAL_OF_SERVICE = "Endpoint Denial of Service"
+    EVENT_TRIGGERED_EXECUTION = "Event Triggered Execution"
+    EXFILTRATION_OVER_ALTERNATIVE_PROTOCOL = "Exfiltration Over Alternative Protocol"
+    EXPLOIT_PUBLIC_FACING_APPLICATION = "Exploit Public-Facing Application"
+    EXPLOITATION_FOR_CLIENT_EXECUTION = "Exploitation for Client Execution"
+    EXPLOITATION_FOR_CREDENTIAL_ACCESS = "Exploitation for Credential Access"
+    EXPLOITATION_FOR_DEFENSE_EVASION = "Exploitation for Defense Evasion"
+    EXPLOITATION_FOR_PRIVILEGE_ESCALATION = "Exploitation for Privilege Escalation"
+    EXPLOITATION_OF_REMOTE_SERVICES = "Exploitation of Remote Services"
+    EXTERNAL_REMOTE_SERVICES = "External Remote Services"
+    FALLBACK_CHANNELS = "Fallback Channels"
+    FILE_AND_DIRECTORY_DISCOVERY = "File and Directory Discovery"
+    GATHER_VICTIM_NETWORK_INFORMATION = "Gather Victim Network Information"
+    HIDE_ARTIFACTS = "Hide Artifacts"
+    HIJACK_EXECUTION_FLOW = "Hijack Execution Flow"
+    IMPAIR_DEFENSES = "Impair Defenses"
+    IMPLANT_CONTAINER_IMAGE = "Implant Container Image"
+    INDICATOR_REMOVAL_ON_HOST = "Indicator Removal on Host"
+    INDIRECT_COMMAND_EXECUTION = "Indirect Command Execution"
+    INGRESS_TOOL_TRANSFER = "Ingress Tool Transfer"
+    INPUT_CAPTURE = "Input Capture"
+    INTER_PROCESS_COMMUNICATION = "Inter-Process Communication"
+    LATERAL_TOOL_TRANSFER = "Lateral Tool Transfer"
+    MAN_IN_THE_MIDDLE = "Man-in-the-Middle"
+    MASQUERADING = "Masquerading"
+    MODIFY_AUTHENTICATION_PROCESS = "Modify Authentication Process"
+    MODIFY_REGISTRY = "Modify Registry"
+    NETWORK_DENIAL_OF_SERVICE = "Network Denial of Service"
+    NETWORK_SERVICE_SCANNING = "Network Service Scanning"
+    NETWORK_SNIFFING = "Network Sniffing"
+    NON_APPLICATION_LAYER_PROTOCOL = "Non-Application Layer Protocol"
+    NON_STANDARD_PORT = "Non-Standard Port"
+    OBTAIN_CAPABILITIES = "Obtain Capabilities"
+    OBFUSCATED_FILES_OR_INFORMATION = "Obfuscated Files or Information"
+    OFFICE_APPLICATION_STARTUP = "Office Application Startup"
+    OS_CREDENTIAL_DUMPING = "OS Credential Dumping"
+    PERMISSION_GROUPS_DISCOVERY = "Permission Groups Discovery"
+    PHISHING = "Phishing"
+    PRE_OS_BOOT = "Pre-OS Boot"
+    PROCESS_DISCOVERY = "Process Discovery"
+    PROCESS_INJECTION = "Process Injection"
+    PROTOCOL_TUNNELING = "Protocol Tunneling"
+    PROXY = "Proxy"
+    QUERY_REGISTRY = "Query Registry"
+    REMOTE_ACCESS_SOFTWARE = "Remote Access Software"
+    REMOTE_SERVICE_SESSION_HIJACKING = "Remote Service Session Hijacking"
+    REMOTE_SERVICES = "Remote Services"
+    REMOTE_SYSTEM_DISCOVERY = "Remote System Discovery"
+    RESOURCE_HIJACKING = "Resource Hijacking"
+    SCHEDULED_TASK_JOB = "Scheduled Task/Job"
+    SCREEN_CAPTURE = "Screen Capture"
+    SEARCH_VICTIM_OWNED_WEBSITES = "Search Victim-Owned Websites"
+    SERVER_SOFTWARE_COMPONENT = "Server Software Component"
+    SERVICE_STOP = "Service Stop"
+    SIGNED_BINARY_PROXY_EXECUTION = "Signed Binary Proxy Execution"
+    SOFTWARE_DEPLOYMENT_TOOLS = "Software Deployment Tools"
+    SQL_STORED_PROCEDURES = "SQL Stored Procedures"
+    STEAL_OR_FORGE_KERBEROS_TICKETS = "Steal or Forge Kerberos Tickets"
+    SUBVERT_TRUST_CONTROLS = "Subvert Trust Controls"
+    SUPPLY_CHAIN_COMPROMISE = "Supply Chain Compromise"
+    SYSTEM_INFORMATION_DISCOVERY = "System Information Discovery"
+    TAINT_SHARED_CONTENT = "Taint Shared Content"
+    TRAFFIC_SIGNALING = "Traffic Signaling"
+    TRANSFER_DATA_TO_CLOUD_ACCOUNT = "Transfer Data to Cloud Account"
+    TRUSTED_RELATIONSHIP = "Trusted Relationship"
+    UNSECURED_CREDENTIALS = "Unsecured Credentials"
+    USER_EXECUTION = "User Execution"
+    VALID_ACCOUNTS = "Valid Accounts"
+    WINDOWS_MANAGEMENT_INSTRUMENTATION = "Windows Management Instrumentation"
+    FILE_AND_DIRECTORY_PERMISSIONS_MODIFICATION = "File and Directory Permissions Modification"
+
+class Threats(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Threats impact of the assessment
     """
 
@@ -797,12 +1020,19 @@ class Threats(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MISSING_COVERAGE = "missingCoverage"
     DENIAL_OF_SERVICE = "denialOfService"
 
-class TransportProtocol(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class TransportProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     TCP = "TCP"
     UDP = "UDP"
 
-class UnmaskedIpLoggingStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'
+    """
+
+    QUALYS = "Qualys"
+    TVM = "TVM"
+
+class UnmaskedIpLoggingStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Unmasked IP address logging status
     """
 
@@ -811,7 +1041,7 @@ class UnmaskedIpLoggingStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum
     #: Unmasked IP logging is enabled.
     ENABLED = "Enabled"
 
-class UserImpact(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class UserImpact(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The user impact of the assessment
     """
 
@@ -819,7 +1049,7 @@ class UserImpact(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MODERATE = "Moderate"
     HIGH = "High"
 
-class ValueType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ValueType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The value type of the items in the list.
     """
 
