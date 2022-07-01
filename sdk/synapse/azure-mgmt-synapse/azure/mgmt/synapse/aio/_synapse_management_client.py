@@ -266,79 +266,225 @@ class SynapseManagementClient:    # pylint: disable=too-many-instance-attributes
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.azure_ad_only_authentications = AzureADOnlyAuthenticationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.ip_firewall_rules = IpFirewallRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.keys = KeysOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_link_resources = PrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_link_hub_private_link_resources = PrivateLinkHubPrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_link_hubs = PrivateLinkHubsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_endpoint_connections_private_link_hub = PrivateEndpointConnectionsPrivateLinkHubOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pools = SqlPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_metadata_sync_configs = SqlPoolMetadataSyncConfigsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_operation_results = SqlPoolOperationResultsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_geo_backup_policies = SqlPoolGeoBackupPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_data_warehouse_user_activities = SqlPoolDataWarehouseUserActivitiesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_restore_points = SqlPoolRestorePointsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_replication_links = SqlPoolReplicationLinksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_maintenance_windows = SqlPoolMaintenanceWindowsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_maintenance_window_options = SqlPoolMaintenanceWindowOptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_transparent_data_encryptions = SqlPoolTransparentDataEncryptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_blob_auditing_policies = SqlPoolBlobAuditingPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_operations = SqlPoolOperationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_usages = SqlPoolUsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_sensitivity_labels = SqlPoolSensitivityLabelsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_recommended_sensitivity_labels = SqlPoolRecommendedSensitivityLabelsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_schemas = SqlPoolSchemasOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_tables = SqlPoolTablesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_table_columns = SqlPoolTableColumnsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_connection_policies = SqlPoolConnectionPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_vulnerability_assessments = SqlPoolVulnerabilityAssessmentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_vulnerability_assessment_scans = SqlPoolVulnerabilityAssessmentScansOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_security_alert_policies = SqlPoolSecurityAlertPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_vulnerability_assessment_rule_baselines = SqlPoolVulnerabilityAssessmentRuleBaselinesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.extended_sql_pool_blob_auditing_policies = ExtendedSqlPoolBlobAuditingPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.data_masking_policies = DataMaskingPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.data_masking_rules = DataMaskingRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_columns = SqlPoolColumnsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_workload_group = SqlPoolWorkloadGroupOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sql_pool_workload_classifier = SqlPoolWorkloadClassifierOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_blob_auditing_policies = WorkspaceManagedSqlServerBlobAuditingPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_extended_blob_auditing_policies = WorkspaceManagedSqlServerExtendedBlobAuditingPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_security_alert_policy = WorkspaceManagedSqlServerSecurityAlertPolicyOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_vulnerability_assessments = WorkspaceManagedSqlServerVulnerabilityAssessmentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_encryption_protector = WorkspaceManagedSqlServerEncryptionProtectorOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_usages = WorkspaceManagedSqlServerUsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_recoverable_sql_pools = WorkspaceManagedSqlServerRecoverableSqlPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_sql_server_dedicated_sql_minimal_tls_settings = WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspaces = WorkspacesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_aad_admins = WorkspaceAadAdminsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_sql_aad_admins = WorkspaceSqlAadAdminsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workspace_managed_identity_sql_control_settings = WorkspaceManagedIdentitySqlControlSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.restorable_dropped_sql_pools = RestorableDroppedSqlPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.big_data_pools = BigDataPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.library = LibraryOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.libraries = LibrariesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtimes = IntegrationRuntimesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_node_ip_address = IntegrationRuntimeNodeIpAddressOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_object_metadata = IntegrationRuntimeObjectMetadataOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_nodes = IntegrationRuntimeNodesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_credentials = IntegrationRuntimeCredentialsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_connection_infos = IntegrationRuntimeConnectionInfosOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_auth_keys = IntegrationRuntimeAuthKeysOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_monitoring_data = IntegrationRuntimeMonitoringDataOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.integration_runtime_status = IntegrationRuntimeStatusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.spark_configuration = SparkConfigurationOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.spark_configurations = SparkConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_operations = KustoOperationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_pools = KustoPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_pool_child_resource = KustoPoolChildResourceOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_pool_attached_database_configurations = KustoPoolAttachedDatabaseConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_pool_databases = KustoPoolDatabasesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_pool_data_connections = KustoPoolDataConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_pool_principal_assignments = KustoPoolPrincipalAssignmentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.kusto_pool_database_principal_assignments = KustoPoolDatabasePrincipalAssignmentsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.azure_ad_only_authentications = AzureADOnlyAuthenticationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.ip_firewall_rules = IpFirewallRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.keys = KeysOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_link_resources = PrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_link_hub_private_link_resources = PrivateLinkHubPrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_link_hubs = PrivateLinkHubsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_endpoint_connections_private_link_hub = PrivateEndpointConnectionsPrivateLinkHubOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pools = SqlPoolsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_metadata_sync_configs = SqlPoolMetadataSyncConfigsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_operation_results = SqlPoolOperationResultsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_geo_backup_policies = SqlPoolGeoBackupPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_data_warehouse_user_activities = SqlPoolDataWarehouseUserActivitiesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_restore_points = SqlPoolRestorePointsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_replication_links = SqlPoolReplicationLinksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_maintenance_windows = SqlPoolMaintenanceWindowsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_maintenance_window_options = SqlPoolMaintenanceWindowOptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_transparent_data_encryptions = SqlPoolTransparentDataEncryptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_blob_auditing_policies = SqlPoolBlobAuditingPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_operations = SqlPoolOperationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_usages = SqlPoolUsagesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_sensitivity_labels = SqlPoolSensitivityLabelsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_recommended_sensitivity_labels = SqlPoolRecommendedSensitivityLabelsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_schemas = SqlPoolSchemasOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_tables = SqlPoolTablesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_table_columns = SqlPoolTableColumnsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_connection_policies = SqlPoolConnectionPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_vulnerability_assessments = SqlPoolVulnerabilityAssessmentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_vulnerability_assessment_scans = SqlPoolVulnerabilityAssessmentScansOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_security_alert_policies = SqlPoolSecurityAlertPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_vulnerability_assessment_rule_baselines = SqlPoolVulnerabilityAssessmentRuleBaselinesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.extended_sql_pool_blob_auditing_policies = ExtendedSqlPoolBlobAuditingPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.data_masking_policies = DataMaskingPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.data_masking_rules = DataMaskingRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_columns = SqlPoolColumnsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_workload_group = SqlPoolWorkloadGroupOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sql_pool_workload_classifier = SqlPoolWorkloadClassifierOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_blob_auditing_policies = WorkspaceManagedSqlServerBlobAuditingPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_extended_blob_auditing_policies = WorkspaceManagedSqlServerExtendedBlobAuditingPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_security_alert_policy = WorkspaceManagedSqlServerSecurityAlertPolicyOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_vulnerability_assessments = WorkspaceManagedSqlServerVulnerabilityAssessmentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_encryption_protector = WorkspaceManagedSqlServerEncryptionProtectorOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_usages = WorkspaceManagedSqlServerUsagesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_recoverable_sql_pools = WorkspaceManagedSqlServerRecoverableSqlPoolsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_sql_server_dedicated_sql_minimal_tls_settings = WorkspaceManagedSqlServerDedicatedSQLMinimalTlsSettingsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspaces = WorkspacesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_aad_admins = WorkspaceAadAdminsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_sql_aad_admins = WorkspaceSqlAadAdminsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workspace_managed_identity_sql_control_settings = WorkspaceManagedIdentitySqlControlSettingsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.restorable_dropped_sql_pools = RestorableDroppedSqlPoolsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.big_data_pools = BigDataPoolsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.library = LibraryOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.libraries = LibrariesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtimes = IntegrationRuntimesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_node_ip_address = IntegrationRuntimeNodeIpAddressOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_object_metadata = IntegrationRuntimeObjectMetadataOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_nodes = IntegrationRuntimeNodesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_credentials = IntegrationRuntimeCredentialsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_connection_infos = IntegrationRuntimeConnectionInfosOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_auth_keys = IntegrationRuntimeAuthKeysOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_monitoring_data = IntegrationRuntimeMonitoringDataOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.integration_runtime_status = IntegrationRuntimeStatusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.spark_configuration = SparkConfigurationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.spark_configurations = SparkConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_operations = KustoOperationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_pools = KustoPoolsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_pool_child_resource = KustoPoolChildResourceOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_pool_attached_database_configurations = KustoPoolAttachedDatabaseConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_pool_databases = KustoPoolDatabasesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_pool_data_connections = KustoPoolDataConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_pool_principal_assignments = KustoPoolPrincipalAssignmentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.kusto_pool_database_principal_assignments = KustoPoolDatabasePrincipalAssignmentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
