@@ -450,7 +450,7 @@ class AdditionalColumns(msrest.serialization.Model):
 
 
 class LinkedService(msrest.serialization.Model):
-    """The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.
+    """The nested object which contains the information and credential which can be used to connect with related store or compute resource.
 
     You probably want to use the sub-classes and not this class directly. Known
     sub-classes are: AmazonMWSLinkedService, AmazonRdsForOracleLinkedService, AmazonRdsForSqlServerLinkedService, AmazonRedshiftLinkedService, AmazonS3LinkedService, AmazonS3CompatibleLinkedService, AppFiguresLinkedService, AsanaLinkedService, AzureBatchLinkedService, AzureBlobFSLinkedService, AzureBlobStorageLinkedService, AzureDataExplorerLinkedService, AzureDataLakeAnalyticsLinkedService, AzureDataLakeStoreLinkedService, AzureDatabricksLinkedService, AzureDatabricksDeltaLakeLinkedService, AzureFileStorageLinkedService, AzureFunctionLinkedService, AzureKeyVaultLinkedService, AzureMLLinkedService, AzureMLServiceLinkedService, AzureMariaDBLinkedService, AzureMySqlLinkedService, AzurePostgreSqlLinkedService, AzureSearchLinkedService, AzureSqlDWLinkedService, AzureSqlDatabaseLinkedService, AzureSqlMILinkedService, AzureStorageLinkedService, AzureTableStorageLinkedService, CassandraLinkedService, CommonDataServiceForAppsLinkedService, ConcurLinkedService, CosmosDbLinkedService, CosmosDbMongoDbApiLinkedService, CouchbaseLinkedService, CustomDataSourceLinkedService, DataworldLinkedService, Db2LinkedService, DrillLinkedService, DynamicsLinkedService, DynamicsAXLinkedService, DynamicsCrmLinkedService, EloquaLinkedService, FileServerLinkedService, FtpServerLinkedService, GoogleAdWordsLinkedService, GoogleBigQueryLinkedService, GoogleCloudStorageLinkedService, GreenplumLinkedService, HBaseLinkedService, HDInsightLinkedService, HDInsightOnDemandLinkedService, HdfsLinkedService, HiveLinkedService, HttpLinkedService, HubspotLinkedService, ImpalaLinkedService, InformixLinkedService, JiraLinkedService, MagentoLinkedService, MariaDBLinkedService, MarketoLinkedService, MicrosoftAccessLinkedService, MongoDbLinkedService, MongoDbAtlasLinkedService, MongoDbV2LinkedService, MySqlLinkedService, NetezzaLinkedService, ODataLinkedService, OdbcLinkedService, Office365LinkedService, OracleLinkedService, OracleCloudStorageLinkedService, OracleServiceCloudLinkedService, PaypalLinkedService, PhoenixLinkedService, PostgreSqlLinkedService, PrestoLinkedService, QuickBooksLinkedService, QuickbaseLinkedService, ResponsysLinkedService, RestServiceLinkedService, SalesforceLinkedService, SalesforceMarketingCloudLinkedService, SalesforceServiceCloudLinkedService, SapBWLinkedService, SapCloudForCustomerLinkedService, SapEccLinkedService, SapHanaLinkedService, SapOdpLinkedService, SapOpenHubLinkedService, SapTableLinkedService, ServiceNowLinkedService, SftpServerLinkedService, SharePointOnlineListLinkedService, ShopifyLinkedService, SmartsheetLinkedService, SnowflakeLinkedService, SparkLinkedService, SqlServerLinkedService, SquareLinkedService, SybaseLinkedService, TeamDeskLinkedService, TeradataLinkedService, TwilioLinkedService, VerticaLinkedService, WebLinkedService, XeroLinkedService, ZendeskLinkedService, ZohoLinkedService.
@@ -29552,7 +29552,7 @@ class HttpLinkedService(LinkedService):
     :vartype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
     :ivar annotations: List of tags that can be used for describing the linked service.
     :vartype annotations: list[any]
-    :ivar url: Required. The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type:
+    :ivar url: Required. The base URL of the HTTP endpoint, e.g. https://www.microsoft.com. Type:
      string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: The authentication type to be used to connect to the HTTP server.
@@ -29640,8 +29640,8 @@ class HttpLinkedService(LinkedService):
         :paramtype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
         :keyword annotations: List of tags that can be used for describing the linked service.
         :paramtype annotations: list[any]
-        :keyword url: Required. The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type:
-         string (or Expression with resultType string).
+        :keyword url: Required. The base URL of the HTTP endpoint, e.g. https://www.microsoft.com.
+         Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword authentication_type: The authentication type to be used to connect to the HTTP server.
          Known values are: "Basic", "Anonymous", "Digest", "Windows", "ClientCertificate".
@@ -33406,12 +33406,11 @@ class LinkedServiceListResponse(msrest.serialization.Model):
 class LinkedServiceReference(msrest.serialization.Model):
     """Linked service reference type.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Linked service reference type. Has constant value: "LinkedServiceReference".
-    :vartype type: str
+    :ivar type: Required. Linked service reference type. Known values are:
+     "LinkedServiceReference".
+    :vartype type: str or ~azure.mgmt.datafactory.models.Type
     :ivar reference_name: Required. Reference LinkedService name.
     :vartype reference_name: str
     :ivar parameters: Arguments for LinkedService.
@@ -33419,7 +33418,7 @@ class LinkedServiceReference(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True, 'constant': True},
+        'type': {'required': True},
         'reference_name': {'required': True},
     }
 
@@ -33429,22 +33428,25 @@ class LinkedServiceReference(msrest.serialization.Model):
         'parameters': {'key': 'parameters', 'type': '{object}'},
     }
 
-    type = "LinkedServiceReference"
-
     def __init__(
         self,
         *,
+        type: Union[str, "_models.Type"],
         reference_name: str,
         parameters: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
         """
+        :keyword type: Required. Linked service reference type. Known values are:
+         "LinkedServiceReference".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.Type
         :keyword reference_name: Required. Reference LinkedService name.
         :paramtype reference_name: str
         :keyword parameters: Arguments for LinkedService.
         :paramtype parameters: dict[str, any]
         """
         super(LinkedServiceReference, self).__init__(**kwargs)
+        self.type = type
         self.reference_name = reference_name
         self.parameters = parameters
 
@@ -50038,7 +50040,7 @@ class SelfHostedIntegrationRuntime(IntegrationRuntime):
     :vartype type: str or ~azure.mgmt.datafactory.models.IntegrationRuntimeType
     :ivar description: Integration runtime description.
     :vartype description: str
-    :ivar linked_info: The base definition of a linked integration runtime.
+    :ivar linked_info: Linked integration runtime type from data factory.
     :vartype linked_info: ~azure.mgmt.datafactory.models.LinkedIntegrationRuntimeType
     """
 
@@ -50067,7 +50069,7 @@ class SelfHostedIntegrationRuntime(IntegrationRuntime):
         :paramtype additional_properties: dict[str, any]
         :keyword description: Integration runtime description.
         :paramtype description: str
-        :keyword linked_info: The base definition of a linked integration runtime.
+        :keyword linked_info: Linked integration runtime type from data factory.
         :paramtype linked_info: ~azure.mgmt.datafactory.models.LinkedIntegrationRuntimeType
         """
         super(SelfHostedIntegrationRuntime, self).__init__(additional_properties=additional_properties, description=description, **kwargs)
@@ -59018,8 +59020,8 @@ class WebLinkedServiceTypeProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59047,7 +59049,7 @@ class WebLinkedServiceTypeProperties(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         """
@@ -59061,8 +59063,8 @@ class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59086,7 +59088,7 @@ class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         """
@@ -59099,8 +59101,8 @@ class WebBasicAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59135,7 +59137,7 @@ class WebBasicAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword username: Required. User name for Basic authentication. Type: string (or Expression
@@ -59155,8 +59157,8 @@ class WebClientCertificateAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59190,7 +59192,7 @@ class WebClientCertificateAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword pfx: Required. Base64-encoded contents of a PFX file.
