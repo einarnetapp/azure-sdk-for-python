@@ -95,23 +95,57 @@ class ApplicationInsightsManagementClient:    # pylint: disable=too-many-instanc
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.annotations = AnnotationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.api_keys = APIKeysOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.export_configurations = ExportConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.component_current_billing_features = ComponentCurrentBillingFeaturesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.component_quota_status = ComponentQuotaStatusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.component_feature_capabilities = ComponentFeatureCapabilitiesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.component_available_features = ComponentAvailableFeaturesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.proactive_detection_configurations = ProactiveDetectionConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.components = ComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.work_item_configurations = WorkItemConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.favorites = FavoritesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.web_test_locations = WebTestLocationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.web_tests = WebTestsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.analytics_items = AnalyticsItemsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.workbooks = WorkbooksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.my_workbooks = MyWorkbooksOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.annotations = AnnotationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.api_keys = APIKeysOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.export_configurations = ExportConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.component_current_billing_features = ComponentCurrentBillingFeaturesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.component_quota_status = ComponentQuotaStatusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.component_feature_capabilities = ComponentFeatureCapabilitiesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.component_available_features = ComponentAvailableFeaturesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.proactive_detection_configurations = ProactiveDetectionConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.components = ComponentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.work_item_configurations = WorkItemConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.favorites = FavoritesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.web_test_locations = WebTestLocationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.web_tests = WebTestsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.analytics_items = AnalyticsItemsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.workbooks = WorkbooksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.my_workbooks = MyWorkbooksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(

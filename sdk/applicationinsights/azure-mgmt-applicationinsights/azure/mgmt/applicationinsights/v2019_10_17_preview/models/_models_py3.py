@@ -6,10 +6,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ErrorFieldContract(msrest.serialization.Model):
@@ -75,7 +79,7 @@ class WorkbookError(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        details: Optional[List["ErrorFieldContract"]] = None,
+        details: Optional[List["_models.ErrorFieldContract"]] = None,
         **kwargs
     ):
         """
@@ -210,8 +214,8 @@ class WorkbookTemplate(WorkbookTemplateResource):
         priority: Optional[int] = None,
         author: Optional[str] = None,
         template_data: Optional[Any] = None,
-        galleries: Optional[List["WorkbookTemplateGallery"]] = None,
-        localized: Optional[Dict[str, List["WorkbookTemplateLocalizedGallery"]]] = None,
+        galleries: Optional[List["_models.WorkbookTemplateGallery"]] = None,
+        localized: Optional[Dict[str, List["_models.WorkbookTemplateLocalizedGallery"]]] = None,
         **kwargs
     ):
         """
@@ -314,7 +318,7 @@ class WorkbookTemplateLocalizedGallery(msrest.serialization.Model):
         self,
         *,
         template_data: Optional[Any] = None,
-        galleries: Optional[List["WorkbookTemplateGallery"]] = None,
+        galleries: Optional[List["_models.WorkbookTemplateGallery"]] = None,
         **kwargs
     ):
         """
@@ -344,7 +348,7 @@ class WorkbookTemplatesListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["WorkbookTemplate"]] = None,
+        value: Optional[List["_models.WorkbookTemplate"]] = None,
         **kwargs
     ):
         """
@@ -393,8 +397,8 @@ class WorkbookTemplateUpdateParameters(msrest.serialization.Model):
         priority: Optional[int] = None,
         author: Optional[str] = None,
         template_data: Optional[Any] = None,
-        galleries: Optional[List["WorkbookTemplateGallery"]] = None,
-        localized: Optional[Dict[str, List["WorkbookTemplateLocalizedGallery"]]] = None,
+        galleries: Optional[List["_models.WorkbookTemplateGallery"]] = None,
+        localized: Optional[Dict[str, List["_models.WorkbookTemplateLocalizedGallery"]]] = None,
         **kwargs
     ):
         """

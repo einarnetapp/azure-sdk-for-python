@@ -13,6 +13,7 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
@@ -22,26 +23,24 @@ T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class AnalyticsItemsOperations:
-    """AnalyticsItemsOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.applicationinsights.v2015_05_01.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.applicationinsights.v2015_05_01.aio.ApplicationInsightsManagementClient`'s
+        :attr:`analytics_items` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace_async
     async def list(
@@ -53,7 +52,7 @@ class AnalyticsItemsOperations:
         type: Optional[Union[str, "_models.ItemTypeParameter"]] = "none",
         include_content: Optional[bool] = None,
         **kwargs: Any
-    ) -> List["_models.ApplicationInsightsComponentAnalyticsItem"]:
+    ) -> List[_models.ApplicationInsightsComponentAnalyticsItem]:
         """Gets a list of Analytics Items defined within an Application Insights component.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -77,13 +76,16 @@ class AnalyticsItemsOperations:
          list[~azure.mgmt.applicationinsights.v2015_05_01.models.ApplicationInsightsComponentAnalyticsItem]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[List["_models.ApplicationInsightsComponentAnalyticsItem"]]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[List[_models.ApplicationInsightsComponentAnalyticsItem]]
 
         
         request = build_list_request(
@@ -96,11 +98,13 @@ class AnalyticsItemsOperations:
             type=type,
             include_content=include_content,
             template_url=self.list.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -130,7 +134,7 @@ class AnalyticsItemsOperations:
         id: Optional[str] = None,
         name: Optional[str] = None,
         **kwargs: Any
-    ) -> "_models.ApplicationInsightsComponentAnalyticsItem":
+    ) -> _models.ApplicationInsightsComponentAnalyticsItem:
         """Gets a specific Analytics Items defined within an Application Insights component.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -152,13 +156,16 @@ class AnalyticsItemsOperations:
          ~azure.mgmt.applicationinsights.v2015_05_01.models.ApplicationInsightsComponentAnalyticsItem
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApplicationInsightsComponentAnalyticsItem"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ApplicationInsightsComponentAnalyticsItem]
 
         
         request = build_get_request(
@@ -170,11 +177,13 @@ class AnalyticsItemsOperations:
             id=id,
             name=name,
             template_url=self.get.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -201,10 +210,10 @@ class AnalyticsItemsOperations:
         resource_group_name: str,
         resource_name: str,
         scope_path: Union[str, "_models.ItemScopePath"],
-        item_properties: "_models.ApplicationInsightsComponentAnalyticsItem",
+        item_properties: _models.ApplicationInsightsComponentAnalyticsItem,
         override_item: Optional[bool] = None,
         **kwargs: Any
-    ) -> "_models.ApplicationInsightsComponentAnalyticsItem":
+    ) -> _models.ApplicationInsightsComponentAnalyticsItem:
         """Adds or Updates a specific Analytics Item within an Application Insights component.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -227,14 +236,17 @@ class AnalyticsItemsOperations:
          ~azure.mgmt.applicationinsights.v2015_05_01.models.ApplicationInsightsComponentAnalyticsItem
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ApplicationInsightsComponentAnalyticsItem"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ApplicationInsightsComponentAnalyticsItem]
 
         _json = self._serialize.body(item_properties, 'ApplicationInsightsComponentAnalyticsItem')
 
@@ -248,11 +260,13 @@ class AnalyticsItemsOperations:
             json=_json,
             override_item=override_item,
             template_url=self.put.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -303,13 +317,16 @@ class AnalyticsItemsOperations:
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
         request = build_delete_request(
@@ -321,11 +338,13 @@ class AnalyticsItemsOperations:
             id=id,
             name=name,
             template_url=self.delete.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
