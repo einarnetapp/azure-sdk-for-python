@@ -864,6 +864,12 @@ class TumblingWindowFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     HOUR = "Hour"
     MONTH = "Month"
 
+class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Linked service reference type.
+    """
+
+    LINKED_SERVICE_REFERENCE = "LinkedServiceReference"
+
 class VariableType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Variable type.
     """

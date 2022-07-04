@@ -450,7 +450,7 @@ class AdditionalColumns(msrest.serialization.Model):
 
 
 class LinkedService(msrest.serialization.Model):
-    """The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.
+    """The nested object which contains the information and credential which can be used to connect with related store or compute resource.
 
     You probably want to use the sub-classes and not this class directly. Known
     sub-classes are: AmazonMWSLinkedService, AmazonRdsForOracleLinkedService, AmazonRdsForSqlServerLinkedService, AmazonRedshiftLinkedService, AmazonS3LinkedService, AmazonS3CompatibleLinkedService, AppFiguresLinkedService, AsanaLinkedService, AzureBatchLinkedService, AzureBlobFSLinkedService, AzureBlobStorageLinkedService, AzureDataExplorerLinkedService, AzureDataLakeAnalyticsLinkedService, AzureDataLakeStoreLinkedService, AzureDatabricksLinkedService, AzureDatabricksDeltaLakeLinkedService, AzureFileStorageLinkedService, AzureFunctionLinkedService, AzureKeyVaultLinkedService, AzureMLLinkedService, AzureMLServiceLinkedService, AzureMariaDBLinkedService, AzureMySqlLinkedService, AzurePostgreSqlLinkedService, AzureSearchLinkedService, AzureSqlDWLinkedService, AzureSqlDatabaseLinkedService, AzureSqlMILinkedService, AzureStorageLinkedService, AzureTableStorageLinkedService, CassandraLinkedService, CommonDataServiceForAppsLinkedService, ConcurLinkedService, CosmosDbLinkedService, CosmosDbMongoDbApiLinkedService, CouchbaseLinkedService, CustomDataSourceLinkedService, DataworldLinkedService, Db2LinkedService, DrillLinkedService, DynamicsLinkedService, DynamicsAXLinkedService, DynamicsCrmLinkedService, EloquaLinkedService, FileServerLinkedService, FtpServerLinkedService, GoogleAdWordsLinkedService, GoogleBigQueryLinkedService, GoogleCloudStorageLinkedService, GreenplumLinkedService, HBaseLinkedService, HDInsightLinkedService, HDInsightOnDemandLinkedService, HdfsLinkedService, HiveLinkedService, HttpLinkedService, HubspotLinkedService, ImpalaLinkedService, InformixLinkedService, JiraLinkedService, MagentoLinkedService, MariaDBLinkedService, MarketoLinkedService, MicrosoftAccessLinkedService, MongoDbLinkedService, MongoDbAtlasLinkedService, MongoDbV2LinkedService, MySqlLinkedService, NetezzaLinkedService, ODataLinkedService, OdbcLinkedService, Office365LinkedService, OracleLinkedService, OracleCloudStorageLinkedService, OracleServiceCloudLinkedService, PaypalLinkedService, PhoenixLinkedService, PostgreSqlLinkedService, PrestoLinkedService, QuickBooksLinkedService, QuickbaseLinkedService, ResponsysLinkedService, RestServiceLinkedService, SalesforceLinkedService, SalesforceMarketingCloudLinkedService, SalesforceServiceCloudLinkedService, SapBWLinkedService, SapCloudForCustomerLinkedService, SapEccLinkedService, SapHanaLinkedService, SapOdpLinkedService, SapOpenHubLinkedService, SapTableLinkedService, ServiceNowLinkedService, SftpServerLinkedService, SharePointOnlineListLinkedService, ShopifyLinkedService, SmartsheetLinkedService, SnowflakeLinkedService, SparkLinkedService, SqlServerLinkedService, SquareLinkedService, SybaseLinkedService, TeamDeskLinkedService, TeradataLinkedService, TwilioLinkedService, VerticaLinkedService, WebLinkedService, XeroLinkedService, ZendeskLinkedService, ZohoLinkedService.
@@ -29552,7 +29552,7 @@ class HttpLinkedService(LinkedService):
     :vartype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
     :ivar annotations: List of tags that can be used for describing the linked service.
     :vartype annotations: list[any]
-    :ivar url: Required. The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type:
+    :ivar url: Required. The base URL of the HTTP endpoint, e.g. https://www.microsoft.com. Type:
      string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: The authentication type to be used to connect to the HTTP server.
@@ -29640,8 +29640,8 @@ class HttpLinkedService(LinkedService):
         :paramtype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
         :keyword annotations: List of tags that can be used for describing the linked service.
         :paramtype annotations: list[any]
-        :keyword url: Required. The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type:
-         string (or Expression with resultType string).
+        :keyword url: Required. The base URL of the HTTP endpoint, e.g. https://www.microsoft.com.
+         Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword authentication_type: The authentication type to be used to connect to the HTTP server.
          Known values are: "Basic", "Anonymous", "Digest", "Windows", "ClientCertificate".
@@ -31108,7 +31108,7 @@ class IntegrationRuntime(msrest.serialization.Model):
     """Azure Data Factory nested object which serves as a compute resource for activities.
 
     You probably want to use the sub-classes and not this class directly. Known
-    sub-classes are: ManagedIntegrationRuntime, SelfHostedIntegrationRuntime.
+    sub-classes are: ManagedIntegrationRuntimeBase, SelfHostedIntegrationRuntime.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -31133,7 +31133,7 @@ class IntegrationRuntime(msrest.serialization.Model):
     }
 
     _subtype_map = {
-        'type': {'Managed': 'ManagedIntegrationRuntime', 'SelfHosted': 'SelfHostedIntegrationRuntime'}
+        'type': {'ManagedIntegrationRuntimeBase': 'ManagedIntegrationRuntimeBase', 'SelfHosted': 'SelfHostedIntegrationRuntime'}
     }
 
     def __init__(
@@ -33406,12 +33406,11 @@ class LinkedServiceListResponse(msrest.serialization.Model):
 class LinkedServiceReference(msrest.serialization.Model):
     """Linked service reference type.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Linked service reference type. Has constant value: "LinkedServiceReference".
-    :vartype type: str
+    :ivar type: Required. Linked service reference type. Known values are:
+     "LinkedServiceReference".
+    :vartype type: str or ~azure.mgmt.datafactory.models.Type
     :ivar reference_name: Required. Reference LinkedService name.
     :vartype reference_name: str
     :ivar parameters: Arguments for LinkedService.
@@ -33419,7 +33418,7 @@ class LinkedServiceReference(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True, 'constant': True},
+        'type': {'required': True},
         'reference_name': {'required': True},
     }
 
@@ -33429,22 +33428,25 @@ class LinkedServiceReference(msrest.serialization.Model):
         'parameters': {'key': 'parameters', 'type': '{object}'},
     }
 
-    type = "LinkedServiceReference"
-
     def __init__(
         self,
         *,
+        type: Union[str, "_models.Type"],
         reference_name: str,
         parameters: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
         """
+        :keyword type: Required. Linked service reference type. Known values are:
+         "LinkedServiceReference".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.Type
         :keyword reference_name: Required. Reference LinkedService name.
         :paramtype reference_name: str
         :keyword parameters: Arguments for LinkedService.
         :paramtype parameters: dict[str, any]
         """
         super(LinkedServiceReference, self).__init__(**kwargs)
+        self.type = type
         self.reference_name = reference_name
         self.parameters = parameters
 
@@ -34107,10 +34109,11 @@ class ManagedIdentityCredential(Credential):
         self.resource_id = resource_id
 
 
-class ManagedIntegrationRuntime(IntegrationRuntime):
-    """Managed integration runtime, including managed elastic and managed dedicated integration runtimes.
+class ManagedIntegrationRuntimeBase(IntegrationRuntime):
+    """Managed integration runtime base.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
+    You probably want to use the sub-classes and not this class directly. Known
+    sub-classes are: ManagedIntegrationRuntime.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -34122,10 +34125,6 @@ class ManagedIntegrationRuntime(IntegrationRuntime):
     :vartype type: str or ~azure.mgmt.datafactory.models.IntegrationRuntimeType
     :ivar description: Integration runtime description.
     :vartype description: str
-    :ivar state: Integration runtime state, only valid for managed dedicated integration runtime.
-     Known values are: "Initial", "Stopped", "Started", "Starting", "Stopping", "NeedRegistration",
-     "Online", "Limited", "Offline", "AccessDenied".
-    :vartype state: str or ~azure.mgmt.datafactory.models.IntegrationRuntimeState
     :ivar managed_virtual_network: Managed Virtual Network reference.
     :vartype managed_virtual_network: ~azure.mgmt.datafactory.models.ManagedVirtualNetworkReference
     :ivar compute_properties: The compute resource for managed integration runtime.
@@ -34140,18 +34139,20 @@ class ManagedIntegrationRuntime(IntegrationRuntime):
 
     _validation = {
         'type': {'required': True},
-        'state': {'readonly': True},
     }
 
     _attribute_map = {
         'additional_properties': {'key': '', 'type': '{object}'},
         'type': {'key': 'type', 'type': 'str'},
         'description': {'key': 'description', 'type': 'str'},
-        'state': {'key': 'state', 'type': 'str'},
         'managed_virtual_network': {'key': 'managedVirtualNetwork', 'type': 'ManagedVirtualNetworkReference'},
         'compute_properties': {'key': 'typeProperties.computeProperties', 'type': 'IntegrationRuntimeComputeProperties'},
         'ssis_properties': {'key': 'typeProperties.ssisProperties', 'type': 'IntegrationRuntimeSsisProperties'},
         'customer_virtual_network': {'key': 'typeProperties.customerVirtualNetwork', 'type': 'IntegrationRuntimeCustomerVirtualNetwork'},
+    }
+
+    _subtype_map = {
+        'type': {'Managed': 'ManagedIntegrationRuntime'}
     }
 
     def __init__(
@@ -34184,13 +34185,94 @@ class ManagedIntegrationRuntime(IntegrationRuntime):
         :paramtype customer_virtual_network:
          ~azure.mgmt.datafactory.models.IntegrationRuntimeCustomerVirtualNetwork
         """
-        super(ManagedIntegrationRuntime, self).__init__(additional_properties=additional_properties, description=description, **kwargs)
-        self.type = 'Managed'  # type: str
-        self.state = None
+        super(ManagedIntegrationRuntimeBase, self).__init__(additional_properties=additional_properties, description=description, **kwargs)
+        self.type = 'ManagedIntegrationRuntimeBase'  # type: str
         self.managed_virtual_network = managed_virtual_network
         self.compute_properties = compute_properties
         self.ssis_properties = ssis_properties
         self.customer_virtual_network = customer_virtual_network
+
+
+class ManagedIntegrationRuntime(ManagedIntegrationRuntimeBase):
+    """Managed integration runtime, including managed elastic and managed dedicated integration runtimes.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Required. Type of integration runtime.Constant filled by server. Known values are:
+     "Managed", "SelfHosted".
+    :vartype type: str or ~azure.mgmt.datafactory.models.IntegrationRuntimeType
+    :ivar description: Integration runtime description.
+    :vartype description: str
+    :ivar managed_virtual_network: Managed Virtual Network reference.
+    :vartype managed_virtual_network: ~azure.mgmt.datafactory.models.ManagedVirtualNetworkReference
+    :ivar compute_properties: The compute resource for managed integration runtime.
+    :vartype compute_properties: ~azure.mgmt.datafactory.models.IntegrationRuntimeComputeProperties
+    :ivar ssis_properties: SSIS properties for managed integration runtime.
+    :vartype ssis_properties: ~azure.mgmt.datafactory.models.IntegrationRuntimeSsisProperties
+    :ivar customer_virtual_network: The name of virtual network to which Azure-SSIS integration
+     runtime will join.
+    :vartype customer_virtual_network:
+     ~azure.mgmt.datafactory.models.IntegrationRuntimeCustomerVirtualNetwork
+    :ivar state: Integration runtime state, only valid for managed dedicated integration runtime.
+     Known values are: "Initial", "Stopped", "Started", "Starting", "Stopping", "NeedRegistration",
+     "Online", "Limited", "Offline", "AccessDenied".
+    :vartype state: str or ~azure.mgmt.datafactory.models.IntegrationRuntimeState
+    """
+
+    _validation = {
+        'type': {'required': True},
+        'state': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'additional_properties': {'key': '', 'type': '{object}'},
+        'type': {'key': 'type', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'managed_virtual_network': {'key': 'managedVirtualNetwork', 'type': 'ManagedVirtualNetworkReference'},
+        'compute_properties': {'key': 'typeProperties.computeProperties', 'type': 'IntegrationRuntimeComputeProperties'},
+        'ssis_properties': {'key': 'typeProperties.ssisProperties', 'type': 'IntegrationRuntimeSsisProperties'},
+        'customer_virtual_network': {'key': 'typeProperties.customerVirtualNetwork', 'type': 'IntegrationRuntimeCustomerVirtualNetwork'},
+        'state': {'key': 'state', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        additional_properties: Optional[Dict[str, Any]] = None,
+        description: Optional[str] = None,
+        managed_virtual_network: Optional["_models.ManagedVirtualNetworkReference"] = None,
+        compute_properties: Optional["_models.IntegrationRuntimeComputeProperties"] = None,
+        ssis_properties: Optional["_models.IntegrationRuntimeSsisProperties"] = None,
+        customer_virtual_network: Optional["_models.IntegrationRuntimeCustomerVirtualNetwork"] = None,
+        **kwargs
+    ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword description: Integration runtime description.
+        :paramtype description: str
+        :keyword managed_virtual_network: Managed Virtual Network reference.
+        :paramtype managed_virtual_network:
+         ~azure.mgmt.datafactory.models.ManagedVirtualNetworkReference
+        :keyword compute_properties: The compute resource for managed integration runtime.
+        :paramtype compute_properties:
+         ~azure.mgmt.datafactory.models.IntegrationRuntimeComputeProperties
+        :keyword ssis_properties: SSIS properties for managed integration runtime.
+        :paramtype ssis_properties: ~azure.mgmt.datafactory.models.IntegrationRuntimeSsisProperties
+        :keyword customer_virtual_network: The name of virtual network to which Azure-SSIS integration
+         runtime will join.
+        :paramtype customer_virtual_network:
+         ~azure.mgmt.datafactory.models.IntegrationRuntimeCustomerVirtualNetwork
+        """
+        super(ManagedIntegrationRuntime, self).__init__(additional_properties=additional_properties, description=description, managed_virtual_network=managed_virtual_network, compute_properties=compute_properties, ssis_properties=ssis_properties, customer_virtual_network=customer_virtual_network, **kwargs)
+        self.type = 'Managed'  # type: str
+        self.state = None
 
 
 class ManagedIntegrationRuntimeError(msrest.serialization.Model):
@@ -59018,8 +59100,8 @@ class WebLinkedServiceTypeProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59047,7 +59129,7 @@ class WebLinkedServiceTypeProperties(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         """
@@ -59061,8 +59143,8 @@ class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59086,7 +59168,7 @@ class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         """
@@ -59099,8 +59181,8 @@ class WebBasicAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59135,7 +59217,7 @@ class WebBasicAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword username: Required. User name for Basic authentication. Type: string (or Expression
@@ -59155,8 +59237,8 @@ class WebClientCertificateAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59190,7 +59272,7 @@ class WebClientCertificateAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword pfx: Required. Base64-encoded contents of a PFX file.

@@ -393,6 +393,7 @@ from ._models_py3 import MagentoObjectDataset
 from ._models_py3 import MagentoSource
 from ._models_py3 import ManagedIdentityCredential
 from ._models_py3 import ManagedIntegrationRuntime
+from ._models_py3 import ManagedIntegrationRuntimeBase
 from ._models_py3 import ManagedIntegrationRuntimeError
 from ._models_py3 import ManagedIntegrationRuntimeNode
 from ._models_py3 import ManagedIntegrationRuntimeOperationResult
@@ -819,6 +820,7 @@ from ._data_factory_management_client_enums import (
     TriggerRunStatus,
     TriggerRuntimeState,
     TumblingWindowFrequency,
+    Type,
     VariableType,
     WebActivityMethod,
     WebAuthenticationType,
@@ -1216,6 +1218,7 @@ __all__ = [
     'MagentoSource',
     'ManagedIdentityCredential',
     'ManagedIntegrationRuntime',
+    'ManagedIntegrationRuntimeBase',
     'ManagedIntegrationRuntimeError',
     'ManagedIntegrationRuntimeNode',
     'ManagedIntegrationRuntimeOperationResult',
@@ -1639,6 +1642,7 @@ __all__ = [
     'TriggerRunStatus',
     'TriggerRuntimeState',
     'TumblingWindowFrequency',
+    'Type',
     'VariableType',
     'WebActivityMethod',
     'WebAuthenticationType',
