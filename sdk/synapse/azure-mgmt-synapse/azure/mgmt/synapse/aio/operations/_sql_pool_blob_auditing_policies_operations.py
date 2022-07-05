@@ -15,6 +15,7 @@ from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
@@ -24,26 +25,24 @@ T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class SqlPoolBlobAuditingPoliciesOperations:
-    """SqlPoolBlobAuditingPoliciesOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.synapse.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.synapse.aio.SynapseManagementClient`'s
+        :attr:`sql_pool_blob_auditing_policies` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace_async
     async def get(
@@ -52,7 +51,7 @@ class SqlPoolBlobAuditingPoliciesOperations:
         workspace_name: str,
         sql_pool_name: str,
         **kwargs: Any
-    ) -> "_models.SqlPoolBlobAuditingPolicy":
+    ) -> _models.SqlPoolBlobAuditingPolicy:
         """Get a SQL pool's blob auditing policy.
 
         Get a SQL pool's blob auditing policy.
@@ -74,14 +73,17 @@ class SqlPoolBlobAuditingPoliciesOperations:
         :rtype: ~azure.mgmt.synapse.models.SqlPoolBlobAuditingPolicy
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlPoolBlobAuditingPolicy"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
         blob_auditing_policy_name = kwargs.pop('blob_auditing_policy_name', "default")  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SqlPoolBlobAuditingPolicy]
 
         
         request = build_get_request(
@@ -92,11 +94,13 @@ class SqlPoolBlobAuditingPoliciesOperations:
             api_version=api_version,
             blob_auditing_policy_name=blob_auditing_policy_name,
             template_url=self.get.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -123,9 +127,9 @@ class SqlPoolBlobAuditingPoliciesOperations:
         resource_group_name: str,
         workspace_name: str,
         sql_pool_name: str,
-        parameters: "_models.SqlPoolBlobAuditingPolicy",
+        parameters: _models.SqlPoolBlobAuditingPolicy,
         **kwargs: Any
-    ) -> "_models.SqlPoolBlobAuditingPolicy":
+    ) -> _models.SqlPoolBlobAuditingPolicy:
         """Creates or updates a SQL pool's blob auditing policy.
 
         Creates or updates a SQL pool's blob auditing policy.
@@ -149,15 +153,18 @@ class SqlPoolBlobAuditingPoliciesOperations:
         :rtype: ~azure.mgmt.synapse.models.SqlPoolBlobAuditingPolicy
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlPoolBlobAuditingPolicy"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
         blob_auditing_policy_name = kwargs.pop('blob_auditing_policy_name', "default")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SqlPoolBlobAuditingPolicy]
 
         _json = self._serialize.body(parameters, 'SqlPoolBlobAuditingPolicy')
 
@@ -171,11 +178,13 @@ class SqlPoolBlobAuditingPoliciesOperations:
             content_type=content_type,
             json=_json,
             template_url=self.create_or_update.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -207,7 +216,7 @@ class SqlPoolBlobAuditingPoliciesOperations:
         workspace_name: str,
         sql_pool_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.SqlPoolBlobAuditingPolicyListResult"]:
+    ) -> AsyncIterable[_models.SqlPoolBlobAuditingPolicyListResult]:
         """Lists auditing settings of a Sql pool.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -226,13 +235,16 @@ class SqlPoolBlobAuditingPoliciesOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.synapse.models.SqlPoolBlobAuditingPolicyListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SqlPoolBlobAuditingPolicyListResult"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SqlPoolBlobAuditingPolicyListResult]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -243,9 +255,11 @@ class SqlPoolBlobAuditingPoliciesOperations:
                     sql_pool_name=sql_pool_name,
                     api_version=api_version,
                     template_url=self.list_by_sql_pool.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -256,9 +270,11 @@ class SqlPoolBlobAuditingPoliciesOperations:
                     sql_pool_name=sql_pool_name,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
