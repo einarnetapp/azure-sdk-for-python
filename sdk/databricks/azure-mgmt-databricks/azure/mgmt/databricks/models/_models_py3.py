@@ -7,20 +7,22 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._azure_databricks_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AddressSpace(msrest.serialization.Model):
     """AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network.
 
-    :param address_prefixes: A list of address blocks reserved for this virtual network in CIDR
+    :ivar address_prefixes: A list of address blocks reserved for this virtual network in CIDR
      notation.
-    :type address_prefixes: list[str]
+    :vartype address_prefixes: list[str]
     """
 
     _attribute_map = {
@@ -33,6 +35,11 @@ class AddressSpace(msrest.serialization.Model):
         address_prefixes: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword address_prefixes: A list of address blocks reserved for this virtual network in CIDR
+         notation.
+        :paramtype address_prefixes: list[str]
+        """
         super(AddressSpace, self).__init__(**kwargs)
         self.address_prefixes = address_prefixes
 
@@ -67,6 +74,8 @@ class CreatedBy(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(CreatedBy, self).__init__(**kwargs)
         self.oid = None
         self.puid = None
@@ -76,16 +85,16 @@ class CreatedBy(msrest.serialization.Model):
 class Encryption(msrest.serialization.Model):
     """The object that contains details of encryption used on the workspace.
 
-    :param key_source: The encryption keySource (provider). Possible values (case-insensitive):
-     Default, Microsoft.Keyvault. Possible values include: "Default", "Microsoft.Keyvault". Default
-     value: "Default".
-    :type key_source: str or ~azure_databricks_management_client.models.KeySource
-    :param key_name: The name of KeyVault key.
-    :type key_name: str
-    :param key_version: The version of KeyVault key.
-    :type key_version: str
-    :param key_vault_uri: The Uri of KeyVault.
-    :type key_vault_uri: str
+    :ivar key_source: The encryption keySource (provider). Possible values (case-insensitive):
+     Default, Microsoft.Keyvault. Known values are: "Default", "Microsoft.Keyvault". Default value:
+     "Default".
+    :vartype key_source: str or ~azure.mgmt.databricks.models.KeySource
+    :ivar key_name: The name of KeyVault key.
+    :vartype key_name: str
+    :ivar key_version: The version of KeyVault key.
+    :vartype key_version: str
+    :ivar key_vault_uri: The Uri of KeyVault.
+    :vartype key_vault_uri: str
     """
 
     _attribute_map = {
@@ -98,12 +107,24 @@ class Encryption(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        key_source: Optional[Union[str, "KeySource"]] = "Default",
+        key_source: Optional[Union[str, "_models.KeySource"]] = "Default",
         key_name: Optional[str] = None,
         key_version: Optional[str] = None,
         key_vault_uri: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword key_source: The encryption keySource (provider). Possible values (case-insensitive):
+         Default, Microsoft.Keyvault. Known values are: "Default", "Microsoft.Keyvault". Default value:
+         "Default".
+        :paramtype key_source: str or ~azure.mgmt.databricks.models.KeySource
+        :keyword key_name: The name of KeyVault key.
+        :paramtype key_name: str
+        :keyword key_version: The version of KeyVault key.
+        :paramtype key_version: str
+        :keyword key_vault_uri: The Uri of KeyVault.
+        :paramtype key_vault_uri: str
+        """
         super(Encryption, self).__init__(**kwargs)
         self.key_source = key_source
         self.key_name = key_name
@@ -114,8 +135,8 @@ class Encryption(msrest.serialization.Model):
 class EncryptionEntitiesDefinition(msrest.serialization.Model):
     """Encryption entities for databricks workspace resource.
 
-    :param managed_services: Encryption properties for the databricks managed services.
-    :type managed_services: ~azure_databricks_management_client.models.EncryptionV2
+    :ivar managed_services: Encryption properties for the databricks managed services.
+    :vartype managed_services: ~azure.mgmt.databricks.models.EncryptionV2
     """
 
     _attribute_map = {
@@ -125,9 +146,13 @@ class EncryptionEntitiesDefinition(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        managed_services: Optional["EncryptionV2"] = None,
+        managed_services: Optional["_models.EncryptionV2"] = None,
         **kwargs
     ):
+        """
+        :keyword managed_services: Encryption properties for the databricks managed services.
+        :paramtype managed_services: ~azure.mgmt.databricks.models.EncryptionV2
+        """
         super(EncryptionEntitiesDefinition, self).__init__(**kwargs)
         self.managed_services = managed_services
 
@@ -137,12 +162,11 @@ class EncryptionV2(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param key_source: Required. The encryption keySource (provider). Possible values
-     (case-insensitive):  Microsoft.Keyvault. Possible values include: "Microsoft.Keyvault".
-    :type key_source: str or ~azure_databricks_management_client.models.EncryptionKeySource
-    :param key_vault_properties: Key Vault input properties for encryption.
-    :type key_vault_properties:
-     ~azure_databricks_management_client.models.EncryptionV2KeyVaultProperties
+    :ivar key_source: Required. The encryption keySource (provider). Possible values
+     (case-insensitive):  Microsoft.Keyvault. Known values are: "Microsoft.Keyvault".
+    :vartype key_source: str or ~azure.mgmt.databricks.models.EncryptionKeySource
+    :ivar key_vault_properties: Key Vault input properties for encryption.
+    :vartype key_vault_properties: ~azure.mgmt.databricks.models.EncryptionV2KeyVaultProperties
     """
 
     _validation = {
@@ -157,10 +181,17 @@ class EncryptionV2(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        key_source: Union[str, "EncryptionKeySource"],
-        key_vault_properties: Optional["EncryptionV2KeyVaultProperties"] = None,
+        key_source: Union[str, "_models.EncryptionKeySource"],
+        key_vault_properties: Optional["_models.EncryptionV2KeyVaultProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword key_source: Required. The encryption keySource (provider). Possible values
+         (case-insensitive):  Microsoft.Keyvault. Known values are: "Microsoft.Keyvault".
+        :paramtype key_source: str or ~azure.mgmt.databricks.models.EncryptionKeySource
+        :keyword key_vault_properties: Key Vault input properties for encryption.
+        :paramtype key_vault_properties: ~azure.mgmt.databricks.models.EncryptionV2KeyVaultProperties
+        """
         super(EncryptionV2, self).__init__(**kwargs)
         self.key_source = key_source
         self.key_vault_properties = key_vault_properties
@@ -171,12 +202,12 @@ class EncryptionV2KeyVaultProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param key_vault_uri: Required. The Uri of KeyVault.
-    :type key_vault_uri: str
-    :param key_name: Required. The name of KeyVault key.
-    :type key_name: str
-    :param key_version: Required. The version of KeyVault key.
-    :type key_version: str
+    :ivar key_vault_uri: Required. The Uri of KeyVault.
+    :vartype key_vault_uri: str
+    :ivar key_name: Required. The name of KeyVault key.
+    :vartype key_name: str
+    :ivar key_version: Required. The version of KeyVault key.
+    :vartype key_version: str
     """
 
     _validation = {
@@ -199,10 +230,100 @@ class EncryptionV2KeyVaultProperties(msrest.serialization.Model):
         key_version: str,
         **kwargs
     ):
+        """
+        :keyword key_vault_uri: Required. The Uri of KeyVault.
+        :paramtype key_vault_uri: str
+        :keyword key_name: Required. The name of KeyVault key.
+        :paramtype key_name: str
+        :keyword key_version: Required. The version of KeyVault key.
+        :paramtype key_version: str
+        """
         super(EncryptionV2KeyVaultProperties, self).__init__(**kwargs)
         self.key_vault_uri = key_vault_uri
         self.key_name = key_name
         self.key_version = key_version
+
+
+class EndpointDependency(msrest.serialization.Model):
+    """A domain name or IP address the Workspace is reaching at.
+
+    :ivar domain_name: The domain name of the dependency.
+    :vartype domain_name: str
+    :ivar endpoint_details: The Ports used when connecting to domainName.
+    :vartype endpoint_details: list[~azure.mgmt.databricks.models.EndpointDetail]
+    """
+
+    _attribute_map = {
+        'domain_name': {'key': 'domainName', 'type': 'str'},
+        'endpoint_details': {'key': 'endpointDetails', 'type': '[EndpointDetail]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        domain_name: Optional[str] = None,
+        endpoint_details: Optional[List["_models.EndpointDetail"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword domain_name: The domain name of the dependency.
+        :paramtype domain_name: str
+        :keyword endpoint_details: The Ports used when connecting to domainName.
+        :paramtype endpoint_details: list[~azure.mgmt.databricks.models.EndpointDetail]
+        """
+        super(EndpointDependency, self).__init__(**kwargs)
+        self.domain_name = domain_name
+        self.endpoint_details = endpoint_details
+
+
+class EndpointDetail(msrest.serialization.Model):
+    """Connect information from the Workspace to a single endpoint.
+
+    :ivar ip_address: An IP Address that Domain Name currently resolves to.
+    :vartype ip_address: str
+    :ivar port: The port an endpoint is connected to.
+    :vartype port: int
+    :ivar latency: The time in milliseconds it takes for the connection to be created from the
+     Workspace to this IpAddress at this Port.
+    :vartype latency: float
+    :ivar is_accessible: Whether it is possible to create a connection from the Workspace to this
+     IpAddress at this Port.
+    :vartype is_accessible: bool
+    """
+
+    _attribute_map = {
+        'ip_address': {'key': 'ipAddress', 'type': 'str'},
+        'port': {'key': 'port', 'type': 'int'},
+        'latency': {'key': 'latency', 'type': 'float'},
+        'is_accessible': {'key': 'isAccessible', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        ip_address: Optional[str] = None,
+        port: Optional[int] = None,
+        latency: Optional[float] = None,
+        is_accessible: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword ip_address: An IP Address that Domain Name currently resolves to.
+        :paramtype ip_address: str
+        :keyword port: The port an endpoint is connected to.
+        :paramtype port: int
+        :keyword latency: The time in milliseconds it takes for the connection to be created from the
+         Workspace to this IpAddress at this Port.
+        :paramtype latency: float
+        :keyword is_accessible: Whether it is possible to create a connection from the Workspace to
+         this IpAddress at this Port.
+        :paramtype is_accessible: bool
+        """
+        super(EndpointDetail, self).__init__(**kwargs)
+        self.ip_address = ip_address
+        self.port = port
+        self.latency = latency
+        self.is_accessible = is_accessible
 
 
 class ErrorDetail(msrest.serialization.Model):
@@ -210,12 +331,12 @@ class ErrorDetail(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param code: Required. The error's code.
-    :type code: str
-    :param message: Required. A human readable error message.
-    :type message: str
-    :param target: Indicates which property in the request is responsible for the error.
-    :type target: str
+    :ivar code: Required. The error's code.
+    :vartype code: str
+    :ivar message: Required. A human readable error message.
+    :vartype message: str
+    :ivar target: Indicates which property in the request is responsible for the error.
+    :vartype target: str
     """
 
     _validation = {
@@ -237,6 +358,14 @@ class ErrorDetail(msrest.serialization.Model):
         target: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword code: Required. The error's code.
+        :paramtype code: str
+        :keyword message: Required. A human readable error message.
+        :paramtype message: str
+        :keyword target: Indicates which property in the request is responsible for the error.
+        :paramtype target: str
+        """
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = code
         self.message = message
@@ -248,14 +377,14 @@ class ErrorInfo(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param code: Required. A machine readable error code.
-    :type code: str
-    :param message: Required. A human readable error message.
-    :type message: str
-    :param details: error details.
-    :type details: list[~azure_databricks_management_client.models.ErrorDetail]
-    :param innererror: Inner error details if they exist.
-    :type innererror: str
+    :ivar code: Required. A machine readable error code.
+    :vartype code: str
+    :ivar message: Required. A human readable error message.
+    :vartype message: str
+    :ivar details: error details.
+    :vartype details: list[~azure.mgmt.databricks.models.ErrorDetail]
+    :ivar innererror: Inner error details if they exist.
+    :vartype innererror: str
     """
 
     _validation = {
@@ -275,10 +404,20 @@ class ErrorInfo(msrest.serialization.Model):
         *,
         code: str,
         message: str,
-        details: Optional[List["ErrorDetail"]] = None,
+        details: Optional[List["_models.ErrorDetail"]] = None,
         innererror: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword code: Required. A machine readable error code.
+        :paramtype code: str
+        :keyword message: Required. A human readable error message.
+        :paramtype message: str
+        :keyword details: error details.
+        :paramtype details: list[~azure.mgmt.databricks.models.ErrorDetail]
+        :keyword innererror: Inner error details if they exist.
+        :paramtype innererror: str
+        """
         super(ErrorInfo, self).__init__(**kwargs)
         self.code = code
         self.message = message
@@ -291,8 +430,8 @@ class ErrorResponse(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param error: Required. The error details.
-    :type error: ~azure_databricks_management_client.models.ErrorInfo
+    :ivar error: Required. The error details.
+    :vartype error: ~azure.mgmt.databricks.models.ErrorInfo
     """
 
     _validation = {
@@ -306,9 +445,13 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: "ErrorInfo",
+        error: "_models.ErrorInfo",
         **kwargs
     ):
+        """
+        :keyword error: Required. The error details.
+        :paramtype error: ~azure.mgmt.databricks.models.ErrorInfo
+        """
         super(ErrorResponse, self).__init__(**kwargs)
         self.error = error
 
@@ -344,6 +487,8 @@ class Resource(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -365,8 +510,8 @@ class GroupIdInformation(Resource):
     :ivar type: The type of the resource. Ex- Microsoft.Compute/virtualMachines or
      Microsoft.Storage/storageAccounts.
     :vartype type: str
-    :param properties: Required. The group id properties.
-    :type properties: ~azure_databricks_management_client.models.GroupIdInformationProperties
+    :ivar properties: Required. The group id properties.
+    :vartype properties: ~azure.mgmt.databricks.models.GroupIdInformationProperties
     """
 
     _validation = {
@@ -386,9 +531,13 @@ class GroupIdInformation(Resource):
     def __init__(
         self,
         *,
-        properties: "GroupIdInformationProperties",
+        properties: "_models.GroupIdInformationProperties",
         **kwargs
     ):
+        """
+        :keyword properties: Required. The group id properties.
+        :paramtype properties: ~azure.mgmt.databricks.models.GroupIdInformationProperties
+        """
         super(GroupIdInformation, self).__init__(**kwargs)
         self.properties = properties
 
@@ -396,12 +545,12 @@ class GroupIdInformation(Resource):
 class GroupIdInformationProperties(msrest.serialization.Model):
     """The properties for a group information object.
 
-    :param group_id: The group id.
-    :type group_id: str
-    :param required_members: The required members for a specific group id.
-    :type required_members: list[str]
-    :param required_zone_names: The required DNS zones for a specific group id.
-    :type required_zone_names: list[str]
+    :ivar group_id: The group id.
+    :vartype group_id: str
+    :ivar required_members: The required members for a specific group id.
+    :vartype required_members: list[str]
+    :ivar required_zone_names: The required DNS zones for a specific group id.
+    :vartype required_zone_names: list[str]
     """
 
     _attribute_map = {
@@ -418,6 +567,14 @@ class GroupIdInformationProperties(msrest.serialization.Model):
         required_zone_names: Optional[List[str]] = None,
         **kwargs
     ):
+        """
+        :keyword group_id: The group id.
+        :paramtype group_id: str
+        :keyword required_members: The required members for a specific group id.
+        :paramtype required_members: list[str]
+        :keyword required_zone_names: The required DNS zones for a specific group id.
+        :paramtype required_zone_names: list[str]
+        """
         super(GroupIdInformationProperties, self).__init__(**kwargs)
         self.group_id = group_id
         self.required_members = required_members
@@ -454,6 +611,8 @@ class ManagedIdentityConfiguration(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(ManagedIdentityConfiguration, self).__init__(**kwargs)
         self.principal_id = None
         self.tenant_id = None
@@ -463,10 +622,10 @@ class ManagedIdentityConfiguration(msrest.serialization.Model):
 class Operation(msrest.serialization.Model):
     """REST API operation.
 
-    :param name: Operation name: {provider}/{resource}/{operation}.
-    :type name: str
-    :param display: The object that represents the operation.
-    :type display: ~azure_databricks_management_client.models.OperationDisplay
+    :ivar name: Operation name: {provider}/{resource}/{operation}.
+    :vartype name: str
+    :ivar display: The object that represents the operation.
+    :vartype display: ~azure.mgmt.databricks.models.OperationDisplay
     """
 
     _attribute_map = {
@@ -478,9 +637,15 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         **kwargs
     ):
+        """
+        :keyword name: Operation name: {provider}/{resource}/{operation}.
+        :paramtype name: str
+        :keyword display: The object that represents the operation.
+        :paramtype display: ~azure.mgmt.databricks.models.OperationDisplay
+        """
         super(Operation, self).__init__(**kwargs)
         self.name = name
         self.display = display
@@ -489,12 +654,12 @@ class Operation(msrest.serialization.Model):
 class OperationDisplay(msrest.serialization.Model):
     """The object that represents the operation.
 
-    :param provider: Service provider: Microsoft.ResourceProvider.
-    :type provider: str
-    :param resource: Resource on which the operation is performed.
-    :type resource: str
-    :param operation: Operation type: Read, write, delete, etc.
-    :type operation: str
+    :ivar provider: Service provider: Microsoft.ResourceProvider.
+    :vartype provider: str
+    :ivar resource: Resource on which the operation is performed.
+    :vartype resource: str
+    :ivar operation: Operation type: Read, write, delete, etc.
+    :vartype operation: str
     """
 
     _attribute_map = {
@@ -511,6 +676,14 @@ class OperationDisplay(msrest.serialization.Model):
         operation: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword provider: Service provider: Microsoft.ResourceProvider.
+        :paramtype provider: str
+        :keyword resource: Resource on which the operation is performed.
+        :paramtype resource: str
+        :keyword operation: Operation type: Read, write, delete, etc.
+        :paramtype operation: str
+        """
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = provider
         self.resource = resource
@@ -520,11 +693,11 @@ class OperationDisplay(msrest.serialization.Model):
 class OperationListResult(msrest.serialization.Model):
     """Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.
 
-    :param value: List of Resource Provider operations supported by the Resource Provider resource
+    :ivar value: List of Resource Provider operations supported by the Resource Provider resource
      provider.
-    :type value: list[~azure_databricks_management_client.models.Operation]
-    :param next_link: URL to get the next set of operation list results if there are any.
-    :type next_link: str
+    :vartype value: list[~azure.mgmt.databricks.models.Operation]
+    :ivar next_link: URL to get the next set of operation list results if there are any.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -535,13 +708,54 @@ class OperationListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: List of Resource Provider operations supported by the Resource Provider
+         resource provider.
+        :paramtype value: list[~azure.mgmt.databricks.models.Operation]
+        :keyword next_link: URL to get the next set of operation list results if there are any.
+        :paramtype next_link: str
+        """
         super(OperationListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
+
+
+class OutboundEnvironmentEndpoint(msrest.serialization.Model):
+    """Egress endpoints which Workspace connects to for common purposes.
+
+    :ivar category: The category of endpoints accessed by the Workspace, e.g. azure-storage,
+     azure-mysql, etc.
+    :vartype category: str
+    :ivar endpoints: The endpoints that Workspace connect to.
+    :vartype endpoints: list[~azure.mgmt.databricks.models.EndpointDependency]
+    """
+
+    _attribute_map = {
+        'category': {'key': 'category', 'type': 'str'},
+        'endpoints': {'key': 'endpoints', 'type': '[EndpointDependency]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        category: Optional[str] = None,
+        endpoints: Optional[List["_models.EndpointDependency"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword category: The category of endpoints accessed by the Workspace, e.g. azure-storage,
+         azure-mysql, etc.
+        :paramtype category: str
+        :keyword endpoints: The endpoints that Workspace connect to.
+        :paramtype endpoints: list[~azure.mgmt.databricks.models.EndpointDependency]
+        """
+        super(OutboundEnvironmentEndpoint, self).__init__(**kwargs)
+        self.category = category
+        self.endpoints = endpoints
 
 
 class PrivateEndpoint(msrest.serialization.Model):
@@ -565,6 +779,8 @@ class PrivateEndpoint(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(PrivateEndpoint, self).__init__(**kwargs)
         self.id = None
 
@@ -582,9 +798,8 @@ class PrivateEndpointConnection(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The resource type.
     :vartype type: str
-    :param properties: Required. The private endpoint connection properties.
-    :type properties:
-     ~azure_databricks_management_client.models.PrivateEndpointConnectionProperties
+    :ivar properties: Required. The private endpoint connection properties.
+    :vartype properties: ~azure.mgmt.databricks.models.PrivateEndpointConnectionProperties
     """
 
     _validation = {
@@ -604,9 +819,13 @@ class PrivateEndpointConnection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        properties: "PrivateEndpointConnectionProperties",
+        properties: "_models.PrivateEndpointConnectionProperties",
         **kwargs
     ):
+        """
+        :keyword properties: Required. The private endpoint connection properties.
+        :paramtype properties: ~azure.mgmt.databricks.models.PrivateEndpointConnectionProperties
+        """
         super(PrivateEndpointConnection, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -621,15 +840,15 @@ class PrivateEndpointConnectionProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param private_endpoint: Private endpoint.
-    :type private_endpoint: ~azure_databricks_management_client.models.PrivateEndpoint
-    :param private_link_service_connection_state: Required. Private endpoint connection state.
-    :type private_link_service_connection_state:
-     ~azure_databricks_management_client.models.PrivateLinkServiceConnectionState
-    :ivar provisioning_state: Provisioning state of the private endpoint connection. Possible
-     values include: "Succeeded", "Creating", "Updating", "Deleting", "Failed".
+    :ivar private_endpoint: Private endpoint.
+    :vartype private_endpoint: ~azure.mgmt.databricks.models.PrivateEndpoint
+    :ivar private_link_service_connection_state: Required. Private endpoint connection state.
+    :vartype private_link_service_connection_state:
+     ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionState
+    :ivar provisioning_state: Provisioning state of the private endpoint connection. Known values
+     are: "Succeeded", "Creating", "Updating", "Deleting", "Failed".
     :vartype provisioning_state: str or
-     ~azure_databricks_management_client.models.PrivateEndpointConnectionProvisioningState
+     ~azure.mgmt.databricks.models.PrivateEndpointConnectionProvisioningState
     """
 
     _validation = {
@@ -646,10 +865,17 @@ class PrivateEndpointConnectionProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        private_link_service_connection_state: "PrivateLinkServiceConnectionState",
-        private_endpoint: Optional["PrivateEndpoint"] = None,
+        private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState",
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
         **kwargs
     ):
+        """
+        :keyword private_endpoint: Private endpoint.
+        :paramtype private_endpoint: ~azure.mgmt.databricks.models.PrivateEndpoint
+        :keyword private_link_service_connection_state: Required. Private endpoint connection state.
+        :paramtype private_link_service_connection_state:
+         ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionState
+        """
         super(PrivateEndpointConnectionProperties, self).__init__(**kwargs)
         self.private_endpoint = private_endpoint
         self.private_link_service_connection_state = private_link_service_connection_state
@@ -659,10 +885,10 @@ class PrivateEndpointConnectionProperties(msrest.serialization.Model):
 class PrivateEndpointConnectionsList(msrest.serialization.Model):
     """List of private link connections.
 
-    :param value: The list of returned private endpoint connection.
-    :type value: list[~azure_databricks_management_client.models.PrivateEndpointConnection]
-    :param next_link: The URL to get the next set of endpoint connections.
-    :type next_link: str
+    :ivar value: The list of returned private endpoint connection.
+    :vartype value: list[~azure.mgmt.databricks.models.PrivateEndpointConnection]
+    :ivar next_link: The URL to get the next set of endpoint connections.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -673,10 +899,16 @@ class PrivateEndpointConnectionsList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateEndpointConnection"]] = None,
+        value: Optional[List["_models.PrivateEndpointConnection"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: The list of returned private endpoint connection.
+        :paramtype value: list[~azure.mgmt.databricks.models.PrivateEndpointConnection]
+        :keyword next_link: The URL to get the next set of endpoint connections.
+        :paramtype next_link: str
+        """
         super(PrivateEndpointConnectionsList, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -685,10 +917,10 @@ class PrivateEndpointConnectionsList(msrest.serialization.Model):
 class PrivateLinkResourcesList(msrest.serialization.Model):
     """The available private link resources for a workspace.
 
-    :param value: The list of available private link resources for a workspace.
-    :type value: list[~azure_databricks_management_client.models.GroupIdInformation]
-    :param next_link: The URL to get the next set of private link resources.
-    :type next_link: str
+    :ivar value: The list of available private link resources for a workspace.
+    :vartype value: list[~azure.mgmt.databricks.models.GroupIdInformation]
+    :ivar next_link: The URL to get the next set of private link resources.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -699,10 +931,16 @@ class PrivateLinkResourcesList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["GroupIdInformation"]] = None,
+        value: Optional[List["_models.GroupIdInformation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: The list of available private link resources for a workspace.
+        :paramtype value: list[~azure.mgmt.databricks.models.GroupIdInformation]
+        :keyword next_link: The URL to get the next set of private link resources.
+        :paramtype next_link: str
+        """
         super(PrivateLinkResourcesList, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -713,14 +951,13 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param status: Required. The status of a private endpoint connection. Possible values include:
+    :ivar status: Required. The status of a private endpoint connection. Known values are:
      "Pending", "Approved", "Rejected", "Disconnected".
-    :type status: str or
-     ~azure_databricks_management_client.models.PrivateLinkServiceConnectionStatus
-    :param description: The description for the current state of a private endpoint connection.
-    :type description: str
-    :param action_required: Actions required for a private endpoint connection.
-    :type action_required: str
+    :vartype status: str or ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionStatus
+    :ivar description: The description for the current state of a private endpoint connection.
+    :vartype description: str
+    :ivar action_required: Actions required for a private endpoint connection.
+    :vartype action_required: str
     """
 
     _validation = {
@@ -736,11 +973,20 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Union[str, "PrivateLinkServiceConnectionStatus"],
+        status: Union[str, "_models.PrivateLinkServiceConnectionStatus"],
         description: Optional[str] = None,
         action_required: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword status: Required. The status of a private endpoint connection. Known values are:
+         "Pending", "Approved", "Rejected", "Disconnected".
+        :paramtype status: str or ~azure.mgmt.databricks.models.PrivateLinkServiceConnectionStatus
+        :keyword description: The description for the current state of a private endpoint connection.
+        :paramtype description: str
+        :keyword action_required: Actions required for a private endpoint connection.
+        :paramtype action_required: str
+        """
         super(PrivateLinkServiceConnectionState, self).__init__(**kwargs)
         self.status = status
         self.description = description
@@ -752,10 +998,10 @@ class Sku(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param name: Required. The SKU name.
-    :type name: str
-    :param tier: The SKU tier.
-    :type tier: str
+    :ivar name: Required. The SKU name.
+    :vartype name: str
+    :ivar tier: The SKU tier.
+    :vartype tier: str
     """
 
     _validation = {
@@ -774,6 +1020,12 @@ class Sku(msrest.serialization.Model):
         tier: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Required. The SKU name.
+        :paramtype name: str
+        :keyword tier: The SKU tier.
+        :paramtype tier: str
+        """
         super(Sku, self).__init__(**kwargs)
         self.name = name
         self.tier = tier
@@ -782,20 +1034,20 @@ class Sku(msrest.serialization.Model):
 class SystemData(msrest.serialization.Model):
     """Metadata pertaining to creation and last modification of the resource.
 
-    :param created_by: The identity that created the resource.
-    :type created_by: str
-    :param created_by_type: The type of identity that created the resource. Possible values
-     include: "User", "Application", "ManagedIdentity", "Key".
-    :type created_by_type: str or ~azure_databricks_management_client.models.CreatedByType
-    :param created_at: The timestamp of resource creation (UTC).
-    :type created_at: ~datetime.datetime
-    :param last_modified_by: The identity that last modified the resource.
-    :type last_modified_by: str
-    :param last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
-    :type last_modified_by_type: str or ~azure_databricks_management_client.models.CreatedByType
-    :param last_modified_at: The timestamp of resource last modification (UTC).
-    :type last_modified_at: ~datetime.datetime
+    :ivar created_by: The identity that created the resource.
+    :vartype created_by: str
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
+     "User", "Application", "ManagedIdentity", "Key".
+    :vartype created_by_type: str or ~azure.mgmt.databricks.models.CreatedByType
+    :ivar created_at: The timestamp of resource creation (UTC).
+    :vartype created_at: ~datetime.datetime
+    :ivar last_modified_by: The identity that last modified the resource.
+    :vartype last_modified_by: str
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
+    :vartype last_modified_by_type: str or ~azure.mgmt.databricks.models.CreatedByType
+    :ivar last_modified_at: The timestamp of resource last modification (UTC).
+    :vartype last_modified_at: ~datetime.datetime
     """
 
     _attribute_map = {
@@ -811,13 +1063,29 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword created_by: The identity that created the resource.
+        :paramtype created_by: str
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
+        :paramtype created_by_type: str or ~azure.mgmt.databricks.models.CreatedByType
+        :keyword created_at: The timestamp of resource creation (UTC).
+        :paramtype created_at: ~datetime.datetime
+        :keyword last_modified_by: The identity that last modified the resource.
+        :paramtype last_modified_by: str
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
+        :paramtype last_modified_by_type: str or ~azure.mgmt.databricks.models.CreatedByType
+        :keyword last_modified_at: The timestamp of resource last modification (UTC).
+        :paramtype last_modified_at: ~datetime.datetime
+        """
         super(SystemData, self).__init__(**kwargs)
         self.created_by = created_by
         self.created_by_type = created_by_type
@@ -842,10 +1110,10 @@ class TrackedResource(Resource):
     :ivar type: The type of the resource. Ex- Microsoft.Compute/virtualMachines or
      Microsoft.Storage/storageAccounts.
     :vartype type: str
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
-    :param location: Required. The geo-location where the resource lives.
-    :type location: str
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: Required. The geo-location where the resource lives.
+    :vartype location: str
     """
 
     _validation = {
@@ -870,6 +1138,12 @@ class TrackedResource(Resource):
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: Required. The geo-location where the resource lives.
+        :paramtype location: str
+        """
         super(TrackedResource, self).__init__(**kwargs)
         self.tags = tags
         self.location = location
@@ -888,41 +1162,40 @@ class VirtualNetworkPeering(msrest.serialization.Model):
     :vartype id: str
     :ivar type: type of the virtual network peering resource.
     :vartype type: str
-    :param allow_virtual_network_access: Whether the VMs in the local virtual network space would
-     be able to access the VMs in remote virtual network space.
-    :type allow_virtual_network_access: bool
-    :param allow_forwarded_traffic: Whether the forwarded traffic from the VMs in the local virtual
+    :ivar allow_virtual_network_access: Whether the VMs in the local virtual network space would be
+     able to access the VMs in remote virtual network space.
+    :vartype allow_virtual_network_access: bool
+    :ivar allow_forwarded_traffic: Whether the forwarded traffic from the VMs in the local virtual
      network will be allowed/disallowed in remote virtual network.
-    :type allow_forwarded_traffic: bool
-    :param allow_gateway_transit: If gateway links can be used in remote virtual networking to link
+    :vartype allow_forwarded_traffic: bool
+    :ivar allow_gateway_transit: If gateway links can be used in remote virtual networking to link
      to this virtual network.
-    :type allow_gateway_transit: bool
-    :param use_remote_gateways: If remote gateways can be used on this virtual network. If the flag
+    :vartype allow_gateway_transit: bool
+    :ivar use_remote_gateways: If remote gateways can be used on this virtual network. If the flag
      is set to true, and allowGatewayTransit on remote peering is also true, virtual network will
      use gateways of remote virtual network for transit. Only one peering can have this flag set to
      true. This flag cannot be set if virtual network already has a gateway.
-    :type use_remote_gateways: bool
-    :param databricks_virtual_network: The remote virtual network should be in the same region. See
+    :vartype use_remote_gateways: bool
+    :ivar databricks_virtual_network: The remote virtual network should be in the same region. See
      here to learn more
      (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
-    :type databricks_virtual_network:
-     ~azure_databricks_management_client.models.VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork
-    :param databricks_address_space: The reference to the databricks virtual network address space.
-    :type databricks_address_space: ~azure_databricks_management_client.models.AddressSpace
-    :param remote_virtual_network: Required. The remote virtual network should be in the same
+    :vartype databricks_virtual_network:
+     ~azure.mgmt.databricks.models.VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork
+    :ivar databricks_address_space: The reference to the databricks virtual network address space.
+    :vartype databricks_address_space: ~azure.mgmt.databricks.models.AddressSpace
+    :ivar remote_virtual_network: Required. The remote virtual network should be in the same
      region. See here to learn more
      (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
-    :type remote_virtual_network:
-     ~azure_databricks_management_client.models.VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork
-    :param remote_address_space: The reference to the remote virtual network address space.
-    :type remote_address_space: ~azure_databricks_management_client.models.AddressSpace
-    :ivar peering_state: The status of the virtual network peering. Possible values include:
-     "Initiated", "Connected", "Disconnected".
-    :vartype peering_state: str or ~azure_databricks_management_client.models.PeeringState
-    :ivar provisioning_state: The provisioning state of the virtual network peering resource.
-     Possible values include: "Succeeded", "Updating", "Deleting", "Failed".
-    :vartype provisioning_state: str or
-     ~azure_databricks_management_client.models.PeeringProvisioningState
+    :vartype remote_virtual_network:
+     ~azure.mgmt.databricks.models.VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork
+    :ivar remote_address_space: The reference to the remote virtual network address space.
+    :vartype remote_address_space: ~azure.mgmt.databricks.models.AddressSpace
+    :ivar peering_state: The status of the virtual network peering. Known values are: "Initiated",
+     "Connected", "Disconnected".
+    :vartype peering_state: str or ~azure.mgmt.databricks.models.PeeringState
+    :ivar provisioning_state: The provisioning state of the virtual network peering resource. Known
+     values are: "Succeeded", "Updating", "Deleting", "Failed".
+    :vartype provisioning_state: str or ~azure.mgmt.databricks.models.PeeringProvisioningState
     """
 
     _validation = {
@@ -953,16 +1226,47 @@ class VirtualNetworkPeering(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        remote_virtual_network: "VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork",
+        remote_virtual_network: "_models.VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork",
         allow_virtual_network_access: Optional[bool] = None,
         allow_forwarded_traffic: Optional[bool] = None,
         allow_gateway_transit: Optional[bool] = None,
         use_remote_gateways: Optional[bool] = None,
-        databricks_virtual_network: Optional["VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork"] = None,
-        databricks_address_space: Optional["AddressSpace"] = None,
-        remote_address_space: Optional["AddressSpace"] = None,
+        databricks_virtual_network: Optional["_models.VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork"] = None,
+        databricks_address_space: Optional["_models.AddressSpace"] = None,
+        remote_address_space: Optional["_models.AddressSpace"] = None,
         **kwargs
     ):
+        """
+        :keyword allow_virtual_network_access: Whether the VMs in the local virtual network space would
+         be able to access the VMs in remote virtual network space.
+        :paramtype allow_virtual_network_access: bool
+        :keyword allow_forwarded_traffic: Whether the forwarded traffic from the VMs in the local
+         virtual network will be allowed/disallowed in remote virtual network.
+        :paramtype allow_forwarded_traffic: bool
+        :keyword allow_gateway_transit: If gateway links can be used in remote virtual networking to
+         link to this virtual network.
+        :paramtype allow_gateway_transit: bool
+        :keyword use_remote_gateways: If remote gateways can be used on this virtual network. If the
+         flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network
+         will use gateways of remote virtual network for transit. Only one peering can have this flag
+         set to true. This flag cannot be set if virtual network already has a gateway.
+        :paramtype use_remote_gateways: bool
+        :keyword databricks_virtual_network: The remote virtual network should be in the same region.
+         See here to learn more
+         (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
+        :paramtype databricks_virtual_network:
+         ~azure.mgmt.databricks.models.VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork
+        :keyword databricks_address_space: The reference to the databricks virtual network address
+         space.
+        :paramtype databricks_address_space: ~azure.mgmt.databricks.models.AddressSpace
+        :keyword remote_virtual_network: Required. The remote virtual network should be in the same
+         region. See here to learn more
+         (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
+        :paramtype remote_virtual_network:
+         ~azure.mgmt.databricks.models.VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork
+        :keyword remote_address_space: The reference to the remote virtual network address space.
+        :paramtype remote_address_space: ~azure.mgmt.databricks.models.AddressSpace
+        """
         super(VirtualNetworkPeering, self).__init__(**kwargs)
         self.name = None
         self.id = None
@@ -982,11 +1286,11 @@ class VirtualNetworkPeering(msrest.serialization.Model):
 class VirtualNetworkPeeringList(msrest.serialization.Model):
     """Gets all virtual network peerings under a workspace.
 
-    :param value: List of virtual network peerings on workspace.
-    :type value: list[~azure_databricks_management_client.models.VirtualNetworkPeering]
-    :param next_link: URL to get the next set of virtual network peering list results if there are
+    :ivar value: List of virtual network peerings on workspace.
+    :vartype value: list[~azure.mgmt.databricks.models.VirtualNetworkPeering]
+    :ivar next_link: URL to get the next set of virtual network peering list results if there are
      any.
-    :type next_link: str
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -997,10 +1301,17 @@ class VirtualNetworkPeeringList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["VirtualNetworkPeering"]] = None,
+        value: Optional[List["_models.VirtualNetworkPeering"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: List of virtual network peerings on workspace.
+        :paramtype value: list[~azure.mgmt.databricks.models.VirtualNetworkPeering]
+        :keyword next_link: URL to get the next set of virtual network peering list results if there
+         are any.
+        :paramtype next_link: str
+        """
         super(VirtualNetworkPeeringList, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -1009,8 +1320,8 @@ class VirtualNetworkPeeringList(msrest.serialization.Model):
 class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(msrest.serialization.Model):
     """The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
 
-    :param id: The Id of the databricks virtual network.
-    :type id: str
+    :ivar id: The Id of the databricks virtual network.
+    :vartype id: str
     """
 
     _attribute_map = {
@@ -1023,6 +1334,10 @@ class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(msrest.seria
         id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword id: The Id of the databricks virtual network.
+        :paramtype id: str
+        """
         super(VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork, self).__init__(**kwargs)
         self.id = id
 
@@ -1030,8 +1345,8 @@ class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(msrest.seria
 class VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork(msrest.serialization.Model):
     """The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
 
-    :param id: The Id of the remote virtual network.
-    :type id: str
+    :ivar id: The Id of the remote virtual network.
+    :vartype id: str
     """
 
     _attribute_map = {
@@ -1044,6 +1359,10 @@ class VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork(msrest.serializa
         id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword id: The Id of the remote virtual network.
+        :paramtype id: str
+        """
         super(VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork, self).__init__(**kwargs)
         self.id = id
 
@@ -1063,34 +1382,32 @@ class Workspace(TrackedResource):
     :ivar type: The type of the resource. Ex- Microsoft.Compute/virtualMachines or
      Microsoft.Storage/storageAccounts.
     :vartype type: str
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
-    :param location: Required. The geo-location where the resource lives.
-    :type location: str
-    :param sku: The SKU of the resource.
-    :type sku: ~azure_databricks_management_client.models.Sku
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: Required. The geo-location where the resource lives.
+    :vartype location: str
+    :ivar sku: The SKU of the resource.
+    :vartype sku: ~azure.mgmt.databricks.models.Sku
     :ivar system_data: The system metadata relating to this resource.
-    :vartype system_data: ~azure_databricks_management_client.models.SystemData
-    :param managed_resource_group_id: Required. The managed resource group Id.
-    :type managed_resource_group_id: str
-    :param parameters: The workspace's custom parameters.
-    :type parameters: ~azure_databricks_management_client.models.WorkspaceCustomParameters
-    :ivar provisioning_state: The workspace provisioning state. Possible values include:
-     "Accepted", "Running", "Ready", "Creating", "Created", "Deleting", "Deleted", "Canceled",
-     "Failed", "Succeeded", "Updating".
-    :vartype provisioning_state: str or
-     ~azure_databricks_management_client.models.ProvisioningState
-    :param ui_definition_uri: The blob URI where the UI definition file is located.
-    :type ui_definition_uri: str
-    :param authorizations: The workspace provider authorizations.
-    :type authorizations:
-     list[~azure_databricks_management_client.models.WorkspaceProviderAuthorization]
-    :param created_by: Indicates the Object ID, PUID and Application ID of entity that created the
+    :vartype system_data: ~azure.mgmt.databricks.models.SystemData
+    :ivar managed_resource_group_id: Required. The managed resource group Id.
+    :vartype managed_resource_group_id: str
+    :ivar parameters: The workspace's custom parameters.
+    :vartype parameters: ~azure.mgmt.databricks.models.WorkspaceCustomParameters
+    :ivar provisioning_state: The workspace provisioning state. Known values are: "Accepted",
+     "Running", "Ready", "Creating", "Created", "Deleting", "Deleted", "Canceled", "Failed",
+     "Succeeded", "Updating".
+    :vartype provisioning_state: str or ~azure.mgmt.databricks.models.ProvisioningState
+    :ivar ui_definition_uri: The blob URI where the UI definition file is located.
+    :vartype ui_definition_uri: str
+    :ivar authorizations: The workspace provider authorizations.
+    :vartype authorizations: list[~azure.mgmt.databricks.models.WorkspaceProviderAuthorization]
+    :ivar created_by: Indicates the Object ID, PUID and Application ID of entity that created the
      workspace.
-    :type created_by: ~azure_databricks_management_client.models.CreatedBy
-    :param updated_by: Indicates the Object ID, PUID and Application ID of entity that last updated
+    :vartype created_by: ~azure.mgmt.databricks.models.CreatedBy
+    :ivar updated_by: Indicates the Object ID, PUID and Application ID of entity that last updated
      the workspace.
-    :type updated_by: ~azure_databricks_management_client.models.CreatedBy
+    :vartype updated_by: ~azure.mgmt.databricks.models.CreatedBy
     :ivar created_date_time: Specifies the date and time when the workspace is created.
     :vartype created_date_time: ~datetime.datetime
     :ivar workspace_id: The unique identifier of the databricks workspace in databricks control
@@ -1099,24 +1416,21 @@ class Workspace(TrackedResource):
     :ivar workspace_url: The workspace URL which is of the format
      'adb-{workspaceId}.{random}.azuredatabricks.net'.
     :vartype workspace_url: str
-    :param storage_account_identity: The details of Managed Identity of Storage Account.
-    :type storage_account_identity:
-     ~azure_databricks_management_client.models.ManagedIdentityConfiguration
-    :param encryption: Encryption properties for databricks workspace.
-    :type encryption: ~azure_databricks_management_client.models.WorkspacePropertiesEncryption
+    :ivar storage_account_identity: The details of Managed Identity of Storage Account.
+    :vartype storage_account_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
+    :ivar encryption: Encryption properties for databricks workspace.
+    :vartype encryption: ~azure.mgmt.databricks.models.WorkspacePropertiesEncryption
     :ivar private_endpoint_connections: Private endpoint connections created on the workspace.
     :vartype private_endpoint_connections:
-     list[~azure_databricks_management_client.models.PrivateEndpointConnection]
-    :param public_network_access: The network access type for accessing workspace. Set value to
-     disabled to access workspace only via private link. Possible values include: "Enabled",
-     "Disabled".
-    :type public_network_access: str or
-     ~azure_databricks_management_client.models.PublicNetworkAccess
-    :param required_nsg_rules: Gets or sets a value indicating whether data plane (clusters) to
+     list[~azure.mgmt.databricks.models.PrivateEndpointConnection]
+    :ivar public_network_access: The network access type for accessing workspace. Set value to
+     disabled to access workspace only via private link. Known values are: "Enabled", "Disabled".
+    :vartype public_network_access: str or ~azure.mgmt.databricks.models.PublicNetworkAccess
+    :ivar required_nsg_rules: Gets or sets a value indicating whether data plane (clusters) to
      control plane communication happen over private endpoint. Supported values are 'AllRules' and
-     'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only. Possible values
-     include: "AllRules", "NoAzureDatabricksRules", "NoAzureServiceRules".
-    :type required_nsg_rules: str or ~azure_databricks_management_client.models.RequiredNsgRules
+     'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only. Known values
+     are: "AllRules", "NoAzureDatabricksRules", "NoAzureServiceRules".
+    :vartype required_nsg_rules: str or ~azure.mgmt.databricks.models.RequiredNsgRules
     """
 
     _validation = {
@@ -1164,18 +1478,52 @@ class Workspace(TrackedResource):
         location: str,
         managed_resource_group_id: str,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["Sku"] = None,
-        parameters: Optional["WorkspaceCustomParameters"] = None,
+        sku: Optional["_models.Sku"] = None,
+        parameters: Optional["_models.WorkspaceCustomParameters"] = None,
         ui_definition_uri: Optional[str] = None,
-        authorizations: Optional[List["WorkspaceProviderAuthorization"]] = None,
-        created_by: Optional["CreatedBy"] = None,
-        updated_by: Optional["CreatedBy"] = None,
-        storage_account_identity: Optional["ManagedIdentityConfiguration"] = None,
-        encryption: Optional["WorkspacePropertiesEncryption"] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
-        required_nsg_rules: Optional[Union[str, "RequiredNsgRules"]] = None,
+        authorizations: Optional[List["_models.WorkspaceProviderAuthorization"]] = None,
+        created_by: Optional["_models.CreatedBy"] = None,
+        updated_by: Optional["_models.CreatedBy"] = None,
+        storage_account_identity: Optional["_models.ManagedIdentityConfiguration"] = None,
+        encryption: Optional["_models.WorkspacePropertiesEncryption"] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
+        required_nsg_rules: Optional[Union[str, "_models.RequiredNsgRules"]] = None,
         **kwargs
     ):
+        """
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: Required. The geo-location where the resource lives.
+        :paramtype location: str
+        :keyword sku: The SKU of the resource.
+        :paramtype sku: ~azure.mgmt.databricks.models.Sku
+        :keyword managed_resource_group_id: Required. The managed resource group Id.
+        :paramtype managed_resource_group_id: str
+        :keyword parameters: The workspace's custom parameters.
+        :paramtype parameters: ~azure.mgmt.databricks.models.WorkspaceCustomParameters
+        :keyword ui_definition_uri: The blob URI where the UI definition file is located.
+        :paramtype ui_definition_uri: str
+        :keyword authorizations: The workspace provider authorizations.
+        :paramtype authorizations: list[~azure.mgmt.databricks.models.WorkspaceProviderAuthorization]
+        :keyword created_by: Indicates the Object ID, PUID and Application ID of entity that created
+         the workspace.
+        :paramtype created_by: ~azure.mgmt.databricks.models.CreatedBy
+        :keyword updated_by: Indicates the Object ID, PUID and Application ID of entity that last
+         updated the workspace.
+        :paramtype updated_by: ~azure.mgmt.databricks.models.CreatedBy
+        :keyword storage_account_identity: The details of Managed Identity of Storage Account.
+        :paramtype storage_account_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
+        :keyword encryption: Encryption properties for databricks workspace.
+        :paramtype encryption: ~azure.mgmt.databricks.models.WorkspacePropertiesEncryption
+        :keyword public_network_access: The network access type for accessing workspace. Set value to
+         disabled to access workspace only via private link. Known values are: "Enabled", "Disabled".
+        :paramtype public_network_access: str or ~azure.mgmt.databricks.models.PublicNetworkAccess
+        :keyword required_nsg_rules: Gets or sets a value indicating whether data plane (clusters) to
+         control plane communication happen over private endpoint. Supported values are 'AllRules' and
+         'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only. Known values
+         are: "AllRules", "NoAzureDatabricksRules", "NoAzureServiceRules".
+        :paramtype required_nsg_rules: str or ~azure.mgmt.databricks.models.RequiredNsgRules
+        """
         super(Workspace, self).__init__(tags=tags, location=location, **kwargs)
         self.sku = sku
         self.system_data = None
@@ -1203,11 +1551,10 @@ class WorkspaceCustomBooleanParameter(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: The type of variable that this is. Possible values include: "Bool", "Object",
-     "String".
-    :vartype type: str or ~azure_databricks_management_client.models.CustomParameterType
-    :param value: Required. The value which should be used for this field.
-    :type value: bool
+    :ivar type: The type of variable that this is. Known values are: "Bool", "Object", "String".
+    :vartype type: str or ~azure.mgmt.databricks.models.CustomParameterType
+    :ivar value: Required. The value which should be used for this field.
+    :vartype value: bool
     """
 
     _validation = {
@@ -1226,6 +1573,10 @@ class WorkspaceCustomBooleanParameter(msrest.serialization.Model):
         value: bool,
         **kwargs
     ):
+        """
+        :keyword value: Required. The value which should be used for this field.
+        :paramtype value: bool
+        """
         super(WorkspaceCustomBooleanParameter, self).__init__(**kwargs)
         self.type = None
         self.value = value
@@ -1238,11 +1589,10 @@ class WorkspaceCustomObjectParameter(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: The type of variable that this is. Possible values include: "Bool", "Object",
-     "String".
-    :vartype type: str or ~azure_databricks_management_client.models.CustomParameterType
-    :param value: Required. The value which should be used for this field.
-    :type value: any
+    :ivar type: The type of variable that this is. Known values are: "Bool", "Object", "String".
+    :vartype type: str or ~azure.mgmt.databricks.models.CustomParameterType
+    :ivar value: Required. The value which should be used for this field.
+    :vartype value: any
     """
 
     _validation = {
@@ -1261,6 +1611,10 @@ class WorkspaceCustomObjectParameter(msrest.serialization.Model):
         value: Any,
         **kwargs
     ):
+        """
+        :keyword value: Required. The value which should be used for this field.
+        :paramtype value: any
+        """
         super(WorkspaceCustomObjectParameter, self).__init__(**kwargs)
         self.type = None
         self.value = value
@@ -1271,64 +1625,55 @@ class WorkspaceCustomParameters(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param aml_workspace_id: The ID of a Azure Machine Learning workspace to link with Databricks
+    :ivar aml_workspace_id: The ID of a Azure Machine Learning workspace to link with Databricks
      workspace.
-    :type aml_workspace_id:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param custom_virtual_network_id: The ID of a Virtual Network where this Databricks Cluster
+    :vartype aml_workspace_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar custom_virtual_network_id: The ID of a Virtual Network where this Databricks Cluster
      should be created.
-    :type custom_virtual_network_id:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param custom_public_subnet_name: The name of a Public Subnet within the Virtual Network.
-    :type custom_public_subnet_name:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param custom_private_subnet_name: The name of the Private Subnet within the Virtual Network.
-    :type custom_private_subnet_name:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param enable_no_public_ip: Should the Public IP be Disabled?.
-    :type enable_no_public_ip:
-     ~azure_databricks_management_client.models.WorkspaceCustomBooleanParameter
-    :param load_balancer_backend_pool_name: Name of the outbound Load Balancer Backend Pool for
+    :vartype custom_virtual_network_id:
+     ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar custom_public_subnet_name: The name of a Public Subnet within the Virtual Network.
+    :vartype custom_public_subnet_name:
+     ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar custom_private_subnet_name: The name of the Private Subnet within the Virtual Network.
+    :vartype custom_private_subnet_name:
+     ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar enable_no_public_ip: Should the Public IP be Disabled?.
+    :vartype enable_no_public_ip: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+    :ivar load_balancer_backend_pool_name: Name of the outbound Load Balancer Backend Pool for
      Secure Cluster Connectivity (No Public IP).
-    :type load_balancer_backend_pool_name:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param load_balancer_id: Resource URI of Outbound Load balancer for Secure Cluster Connectivity
+    :vartype load_balancer_backend_pool_name:
+     ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar load_balancer_id: Resource URI of Outbound Load balancer for Secure Cluster Connectivity
      (No Public IP) workspace.
-    :type load_balancer_id:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param nat_gateway_name: Name of the NAT gateway for Secure Cluster Connectivity (No Public IP)
+    :vartype load_balancer_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar nat_gateway_name: Name of the NAT gateway for Secure Cluster Connectivity (No Public IP)
      workspace subnets.
-    :type nat_gateway_name:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param public_ip_name: Name of the Public IP for No Public IP workspace with managed vNet.
-    :type public_ip_name: ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param prepare_encryption: Prepare the workspace for encryption. Enables the Managed Identity
+    :vartype nat_gateway_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar public_ip_name: Name of the Public IP for No Public IP workspace with managed vNet.
+    :vartype public_ip_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar prepare_encryption: Prepare the workspace for encryption. Enables the Managed Identity
      for managed storage account.
-    :type prepare_encryption:
-     ~azure_databricks_management_client.models.WorkspaceCustomBooleanParameter
-    :param encryption: Contains the encryption details for Customer-Managed Key (CMK) enabled
+    :vartype prepare_encryption: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+    :ivar encryption: Contains the encryption details for Customer-Managed Key (CMK) enabled
      workspace.
-    :type encryption: ~azure_databricks_management_client.models.WorkspaceEncryptionParameter
-    :param require_infrastructure_encryption: A boolean indicating whether or not the DBFS root
-     file system will be enabled with secondary layer of encryption with platform managed keys for
-     data at rest.
-    :type require_infrastructure_encryption:
-     ~azure_databricks_management_client.models.WorkspaceCustomBooleanParameter
-    :param storage_account_name: Default DBFS storage account name.
-    :type storage_account_name:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param storage_account_sku_name: Storage account SKU name, ex: Standard_GRS, Standard_LRS.
-     Refer https://aka.ms/storageskus for valid inputs.
-    :type storage_account_sku_name:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
-    :param vnet_address_prefix: Address prefix for Managed virtual network. Default value for this
+    :vartype encryption: ~azure.mgmt.databricks.models.WorkspaceEncryptionParameter
+    :ivar require_infrastructure_encryption: A boolean indicating whether or not the DBFS root file
+     system will be enabled with secondary layer of encryption with platform managed keys for data
+     at rest.
+    :vartype require_infrastructure_encryption:
+     ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+    :ivar storage_account_name: Default DBFS storage account name.
+    :vartype storage_account_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar storage_account_sku_name: Storage account SKU name, ex: Standard_GRS, Standard_LRS. Refer
+     https://aka.ms/storageskus for valid inputs.
+    :vartype storage_account_sku_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+    :ivar vnet_address_prefix: Address prefix for Managed virtual network. Default value for this
      input is 10.139.
-    :type vnet_address_prefix:
-     ~azure_databricks_management_client.models.WorkspaceCustomStringParameter
+    :vartype vnet_address_prefix: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar resource_tags: Tags applied to resources under Managed resource group. These can be
      updated by updating tags at workspace level.
-    :vartype resource_tags:
-     ~azure_databricks_management_client.models.WorkspaceCustomObjectParameter
+    :vartype resource_tags: ~azure.mgmt.databricks.models.WorkspaceCustomObjectParameter
     """
 
     _validation = {
@@ -1357,23 +1702,72 @@ class WorkspaceCustomParameters(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        aml_workspace_id: Optional["WorkspaceCustomStringParameter"] = None,
-        custom_virtual_network_id: Optional["WorkspaceCustomStringParameter"] = None,
-        custom_public_subnet_name: Optional["WorkspaceCustomStringParameter"] = None,
-        custom_private_subnet_name: Optional["WorkspaceCustomStringParameter"] = None,
-        enable_no_public_ip: Optional["WorkspaceCustomBooleanParameter"] = None,
-        load_balancer_backend_pool_name: Optional["WorkspaceCustomStringParameter"] = None,
-        load_balancer_id: Optional["WorkspaceCustomStringParameter"] = None,
-        nat_gateway_name: Optional["WorkspaceCustomStringParameter"] = None,
-        public_ip_name: Optional["WorkspaceCustomStringParameter"] = None,
-        prepare_encryption: Optional["WorkspaceCustomBooleanParameter"] = None,
-        encryption: Optional["WorkspaceEncryptionParameter"] = None,
-        require_infrastructure_encryption: Optional["WorkspaceCustomBooleanParameter"] = None,
-        storage_account_name: Optional["WorkspaceCustomStringParameter"] = None,
-        storage_account_sku_name: Optional["WorkspaceCustomStringParameter"] = None,
-        vnet_address_prefix: Optional["WorkspaceCustomStringParameter"] = None,
+        aml_workspace_id: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        custom_virtual_network_id: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        custom_public_subnet_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        custom_private_subnet_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        enable_no_public_ip: Optional["_models.WorkspaceCustomBooleanParameter"] = None,
+        load_balancer_backend_pool_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        load_balancer_id: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        nat_gateway_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        public_ip_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        prepare_encryption: Optional["_models.WorkspaceCustomBooleanParameter"] = None,
+        encryption: Optional["_models.WorkspaceEncryptionParameter"] = None,
+        require_infrastructure_encryption: Optional["_models.WorkspaceCustomBooleanParameter"] = None,
+        storage_account_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        storage_account_sku_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
+        vnet_address_prefix: Optional["_models.WorkspaceCustomStringParameter"] = None,
         **kwargs
     ):
+        """
+        :keyword aml_workspace_id: The ID of a Azure Machine Learning workspace to link with Databricks
+         workspace.
+        :paramtype aml_workspace_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword custom_virtual_network_id: The ID of a Virtual Network where this Databricks Cluster
+         should be created.
+        :paramtype custom_virtual_network_id:
+         ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword custom_public_subnet_name: The name of a Public Subnet within the Virtual Network.
+        :paramtype custom_public_subnet_name:
+         ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword custom_private_subnet_name: The name of the Private Subnet within the Virtual Network.
+        :paramtype custom_private_subnet_name:
+         ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword enable_no_public_ip: Should the Public IP be Disabled?.
+        :paramtype enable_no_public_ip: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+        :keyword load_balancer_backend_pool_name: Name of the outbound Load Balancer Backend Pool for
+         Secure Cluster Connectivity (No Public IP).
+        :paramtype load_balancer_backend_pool_name:
+         ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword load_balancer_id: Resource URI of Outbound Load balancer for Secure Cluster
+         Connectivity (No Public IP) workspace.
+        :paramtype load_balancer_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword nat_gateway_name: Name of the NAT gateway for Secure Cluster Connectivity (No Public
+         IP) workspace subnets.
+        :paramtype nat_gateway_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword public_ip_name: Name of the Public IP for No Public IP workspace with managed vNet.
+        :paramtype public_ip_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword prepare_encryption: Prepare the workspace for encryption. Enables the Managed Identity
+         for managed storage account.
+        :paramtype prepare_encryption: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+        :keyword encryption: Contains the encryption details for Customer-Managed Key (CMK) enabled
+         workspace.
+        :paramtype encryption: ~azure.mgmt.databricks.models.WorkspaceEncryptionParameter
+        :keyword require_infrastructure_encryption: A boolean indicating whether or not the DBFS root
+         file system will be enabled with secondary layer of encryption with platform managed keys for
+         data at rest.
+        :paramtype require_infrastructure_encryption:
+         ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+        :keyword storage_account_name: Default DBFS storage account name.
+        :paramtype storage_account_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword storage_account_sku_name: Storage account SKU name, ex: Standard_GRS, Standard_LRS.
+         Refer https://aka.ms/storageskus for valid inputs.
+        :paramtype storage_account_sku_name:
+         ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        :keyword vnet_address_prefix: Address prefix for Managed virtual network. Default value for
+         this input is 10.139.
+        :paramtype vnet_address_prefix: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
+        """
         super(WorkspaceCustomParameters, self).__init__(**kwargs)
         self.aml_workspace_id = aml_workspace_id
         self.custom_virtual_network_id = custom_virtual_network_id
@@ -1400,11 +1794,10 @@ class WorkspaceCustomStringParameter(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: The type of variable that this is. Possible values include: "Bool", "Object",
-     "String".
-    :vartype type: str or ~azure_databricks_management_client.models.CustomParameterType
-    :param value: Required. The value which should be used for this field.
-    :type value: str
+    :ivar type: The type of variable that this is. Known values are: "Bool", "Object", "String".
+    :vartype type: str or ~azure.mgmt.databricks.models.CustomParameterType
+    :ivar value: Required. The value which should be used for this field.
+    :vartype value: str
     """
 
     _validation = {
@@ -1423,6 +1816,10 @@ class WorkspaceCustomStringParameter(msrest.serialization.Model):
         value: str,
         **kwargs
     ):
+        """
+        :keyword value: Required. The value which should be used for this field.
+        :paramtype value: str
+        """
         super(WorkspaceCustomStringParameter, self).__init__(**kwargs)
         self.type = None
         self.value = value
@@ -1433,11 +1830,10 @@ class WorkspaceEncryptionParameter(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar type: The type of variable that this is. Possible values include: "Bool", "Object",
-     "String".
-    :vartype type: str or ~azure_databricks_management_client.models.CustomParameterType
-    :param value: The value which should be used for this field.
-    :type value: ~azure_databricks_management_client.models.Encryption
+    :ivar type: The type of variable that this is. Known values are: "Bool", "Object", "String".
+    :vartype type: str or ~azure.mgmt.databricks.models.CustomParameterType
+    :ivar value: The value which should be used for this field.
+    :vartype value: ~azure.mgmt.databricks.models.Encryption
     """
 
     _validation = {
@@ -1452,9 +1848,13 @@ class WorkspaceEncryptionParameter(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional["Encryption"] = None,
+        value: Optional["_models.Encryption"] = None,
         **kwargs
     ):
+        """
+        :keyword value: The value which should be used for this field.
+        :paramtype value: ~azure.mgmt.databricks.models.Encryption
+        """
         super(WorkspaceEncryptionParameter, self).__init__(**kwargs)
         self.type = None
         self.value = value
@@ -1463,10 +1863,10 @@ class WorkspaceEncryptionParameter(msrest.serialization.Model):
 class WorkspaceListResult(msrest.serialization.Model):
     """List of workspaces.
 
-    :param value: The array of workspaces.
-    :type value: list[~azure_databricks_management_client.models.Workspace]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: The array of workspaces.
+    :vartype value: list[~azure.mgmt.databricks.models.Workspace]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -1477,10 +1877,16 @@ class WorkspaceListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Workspace"]] = None,
+        value: Optional[List["_models.Workspace"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: The array of workspaces.
+        :paramtype value: list[~azure.mgmt.databricks.models.Workspace]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(WorkspaceListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -1491,8 +1897,8 @@ class WorkspacePropertiesEncryption(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param entities: Required. Encryption entities definition for the workspace.
-    :type entities: ~azure_databricks_management_client.models.EncryptionEntitiesDefinition
+    :ivar entities: Required. Encryption entities definition for the workspace.
+    :vartype entities: ~azure.mgmt.databricks.models.EncryptionEntitiesDefinition
     """
 
     _validation = {
@@ -1506,9 +1912,13 @@ class WorkspacePropertiesEncryption(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        entities: "EncryptionEntitiesDefinition",
+        entities: "_models.EncryptionEntitiesDefinition",
         **kwargs
     ):
+        """
+        :keyword entities: Required. Encryption entities definition for the workspace.
+        :paramtype entities: ~azure.mgmt.databricks.models.EncryptionEntitiesDefinition
+        """
         super(WorkspacePropertiesEncryption, self).__init__(**kwargs)
         self.entities = entities
 
@@ -1518,13 +1928,13 @@ class WorkspaceProviderAuthorization(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param principal_id: Required. The provider's principal identifier. This is the identity that
+    :ivar principal_id: Required. The provider's principal identifier. This is the identity that
      the provider will use to call ARM to manage the workspace resources.
-    :type principal_id: str
-    :param role_definition_id: Required. The provider's role definition identifier. This role will
+    :vartype principal_id: str
+    :ivar role_definition_id: Required. The provider's role definition identifier. This role will
      define all the permissions that the provider must have on the workspace's container resource
      group. This role definition cannot have permission to delete the resource group.
-    :type role_definition_id: str
+    :vartype role_definition_id: str
     """
 
     _validation = {
@@ -1544,6 +1954,15 @@ class WorkspaceProviderAuthorization(msrest.serialization.Model):
         role_definition_id: str,
         **kwargs
     ):
+        """
+        :keyword principal_id: Required. The provider's principal identifier. This is the identity that
+         the provider will use to call ARM to manage the workspace resources.
+        :paramtype principal_id: str
+        :keyword role_definition_id: Required. The provider's role definition identifier. This role
+         will define all the permissions that the provider must have on the workspace's container
+         resource group. This role definition cannot have permission to delete the resource group.
+        :paramtype role_definition_id: str
+        """
         super(WorkspaceProviderAuthorization, self).__init__(**kwargs)
         self.principal_id = principal_id
         self.role_definition_id = role_definition_id
@@ -1552,8 +1971,8 @@ class WorkspaceProviderAuthorization(msrest.serialization.Model):
 class WorkspaceUpdate(msrest.serialization.Model):
     """An update to a workspace.
 
-    :param tags: A set of tags. Resource tags.
-    :type tags: dict[str, str]
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
     """
 
     _attribute_map = {
@@ -1566,5 +1985,9 @@ class WorkspaceUpdate(msrest.serialization.Model):
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
+        """
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        """
         super(WorkspaceUpdate, self).__init__(**kwargs)
         self.tags = tags
