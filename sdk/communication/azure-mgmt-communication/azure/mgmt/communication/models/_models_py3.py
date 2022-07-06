@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._communication_service_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class CheckNameAvailabilityRequest(msrest.serialization.Model):
@@ -52,8 +54,8 @@ class CheckNameAvailabilityResponse(msrest.serialization.Model):
 
     :ivar name_available: Indicates if the resource name is available.
     :vartype name_available: bool
-    :ivar reason: The reason why the given name is not available. Possible values include:
-     "Invalid", "AlreadyExists".
+    :ivar reason: The reason why the given name is not available. Known values are: "Invalid",
+     "AlreadyExists".
     :vartype reason: str or ~azure.mgmt.communication.models.CheckNameAvailabilityReason
     :ivar message: Detailed reason why the given name is available.
     :vartype message: str
@@ -69,15 +71,15 @@ class CheckNameAvailabilityResponse(msrest.serialization.Model):
         self,
         *,
         name_available: Optional[bool] = None,
-        reason: Optional[Union[str, "CheckNameAvailabilityReason"]] = None,
+        reason: Optional[Union[str, "_models.CheckNameAvailabilityReason"]] = None,
         message: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword name_available: Indicates if the resource name is available.
         :paramtype name_available: bool
-        :keyword reason: The reason why the given name is not available. Possible values include:
-         "Invalid", "AlreadyExists".
+        :keyword reason: The reason why the given name is not available. Known values are: "Invalid",
+         "AlreadyExists".
         :paramtype reason: str or ~azure.mgmt.communication.models.CheckNameAvailabilityReason
         :keyword message: Detailed reason why the given name is available.
         :paramtype message: str
@@ -264,9 +266,8 @@ class CommunicationServiceResource(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Unknown", "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting",
-     "Moving".
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Unknown",
+     "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting", "Moving".
     :vartype provisioning_state: str or
      ~azure.mgmt.communication.models.CommunicationServicesProvisioningState
     :ivar host_name: FQDN of the CommunicationService instance.
@@ -360,7 +361,7 @@ class CommunicationServiceResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["CommunicationServiceResource"]] = None,
+        value: Optional[List["_models.CommunicationServiceResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -506,11 +507,11 @@ class DomainPropertiesVerificationRecords(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        domain: Optional["DnsRecord"] = None,
-        spf: Optional["DnsRecord"] = None,
-        dkim: Optional["DnsRecord"] = None,
-        dkim2: Optional["DnsRecord"] = None,
-        dmarc: Optional["DnsRecord"] = None,
+        domain: Optional["_models.DnsRecord"] = None,
+        spf: Optional["_models.DnsRecord"] = None,
+        dkim: Optional["_models.DnsRecord"] = None,
+        dkim2: Optional["_models.DnsRecord"] = None,
+        dmarc: Optional["_models.DnsRecord"] = None,
         **kwargs
     ):
         """
@@ -559,11 +560,11 @@ class DomainPropertiesVerificationStates(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        domain: Optional["VerificationStatusRecord"] = None,
-        spf: Optional["VerificationStatusRecord"] = None,
-        dkim: Optional["VerificationStatusRecord"] = None,
-        dkim2: Optional["VerificationStatusRecord"] = None,
-        dmarc: Optional["VerificationStatusRecord"] = None,
+        domain: Optional["_models.VerificationStatusRecord"] = None,
+        spf: Optional["_models.VerificationStatusRecord"] = None,
+        dkim: Optional["_models.VerificationStatusRecord"] = None,
+        dkim2: Optional["_models.VerificationStatusRecord"] = None,
+        dmarc: Optional["_models.VerificationStatusRecord"] = None,
         **kwargs
     ):
         """
@@ -608,9 +609,8 @@ class DomainResource(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Unknown", "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting",
-     "Moving".
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Unknown",
+     "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting", "Moving".
     :vartype provisioning_state: str or ~azure.mgmt.communication.models.DomainsProvisioningState
     :ivar data_location: The location where the Domains resource data is stored at rest.
     :vartype data_location: str
@@ -620,8 +620,8 @@ class DomainResource(TrackedResource):
     :ivar mail_from_sender_domain: P1 sender domain that is present on the email envelope [RFC
      5321].
     :vartype mail_from_sender_domain: str
-    :ivar domain_management: Describes how a Domains resource is being managed. Possible values
-     include: "AzureManaged", "CustomerManaged", "CustomerManagedInExchangeOnline".
+    :ivar domain_management: Describes how a Domains resource is being managed. Known values are:
+     "AzureManaged", "CustomerManaged", "CustomerManagedInExchangeOnline".
     :vartype domain_management: str or ~azure.mgmt.communication.models.DomainManagement
     :ivar verification_states: List of VerificationStatusRecord.
     :vartype verification_states:
@@ -633,7 +633,7 @@ class DomainResource(TrackedResource):
      where key=username and value=display name.
     :vartype valid_sender_usernames: dict[str, str]
     :ivar user_engagement_tracking: Describes whether user engagement tracking is enabled or
-     disabled. Possible values include: "Disabled", "Enabled".
+     disabled. Known values are: "Disabled", "Enabled".
     :vartype user_engagement_tracking: str or
      ~azure.mgmt.communication.models.UserEngagementTracking
     """
@@ -675,9 +675,9 @@ class DomainResource(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        domain_management: Optional[Union[str, "DomainManagement"]] = None,
+        domain_management: Optional[Union[str, "_models.DomainManagement"]] = None,
         valid_sender_usernames: Optional[Dict[str, str]] = None,
-        user_engagement_tracking: Optional[Union[str, "UserEngagementTracking"]] = None,
+        user_engagement_tracking: Optional[Union[str, "_models.UserEngagementTracking"]] = None,
         **kwargs
     ):
         """
@@ -685,14 +685,14 @@ class DomainResource(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: Required. The geo-location where the resource lives.
         :paramtype location: str
-        :keyword domain_management: Describes how a Domains resource is being managed. Possible values
-         include: "AzureManaged", "CustomerManaged", "CustomerManagedInExchangeOnline".
+        :keyword domain_management: Describes how a Domains resource is being managed. Known values
+         are: "AzureManaged", "CustomerManaged", "CustomerManagedInExchangeOnline".
         :paramtype domain_management: str or ~azure.mgmt.communication.models.DomainManagement
         :keyword valid_sender_usernames: Collection of valid sender usernames. This is a key-value pair
          where key=username and value=display name.
         :paramtype valid_sender_usernames: dict[str, str]
         :keyword user_engagement_tracking: Describes whether user engagement tracking is enabled or
-         disabled. Possible values include: "Disabled", "Enabled".
+         disabled. Known values are: "Disabled", "Enabled".
         :paramtype user_engagement_tracking: str or
          ~azure.mgmt.communication.models.UserEngagementTracking
         """
@@ -726,7 +726,7 @@ class DomainResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["DomainResource"]] = None,
+        value: Optional[List["_models.DomainResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -765,9 +765,8 @@ class EmailServiceResource(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Unknown", "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting",
-     "Moving".
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Unknown",
+     "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting", "Moving".
     :vartype provisioning_state: str or
      ~azure.mgmt.communication.models.EmailServicesProvisioningState
     :ivar data_location: The location where the email service stores its data at rest.
@@ -833,7 +832,7 @@ class EmailServiceResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["EmailServiceResource"]] = None,
+        value: Optional[List["_models.EmailServiceResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -969,7 +968,7 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetail"] = None,
+        error: Optional["_models.ErrorDetail"] = None,
         **kwargs
     ):
         """
@@ -1088,11 +1087,11 @@ class Operation(msrest.serialization.Model):
     :ivar display: Localized display information for this particular operation.
     :vartype display: ~azure.mgmt.communication.models.OperationDisplay
     :ivar origin: The intended executor of the operation; as in Resource Based Access Control
-     (RBAC) and audit logs UX. Default value is "user,system". Possible values include: "user",
-     "system", "user,system".
+     (RBAC) and audit logs UX. Default value is "user,system". Known values are: "user", "system",
+     "user,system".
     :vartype origin: str or ~azure.mgmt.communication.models.Origin
     :ivar action_type: Enum. Indicates the action type. "Internal" refers to actions that are for
-     internal only APIs. Possible values include: "Internal".
+     internal only APIs. Known values are: "Internal".
     :vartype action_type: str or ~azure.mgmt.communication.models.ActionType
     """
 
@@ -1114,7 +1113,7 @@ class Operation(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         **kwargs
     ):
         """
@@ -1211,7 +1210,7 @@ class RegenerateKeyParameters(msrest.serialization.Model):
     """Parameters describes the request to regenerate access keys.
 
     :ivar key_type: The keyType to regenerate. Must be either 'primary' or
-     'secondary'(case-insensitive). Possible values include: "Primary", "Secondary".
+     'secondary'(case-insensitive). Known values are: "Primary", "Secondary".
     :vartype key_type: str or ~azure.mgmt.communication.models.KeyType
     """
 
@@ -1222,12 +1221,12 @@ class RegenerateKeyParameters(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        key_type: Optional[Union[str, "KeyType"]] = None,
+        key_type: Optional[Union[str, "_models.KeyType"]] = None,
         **kwargs
     ):
         """
         :keyword key_type: The keyType to regenerate. Must be either 'primary' or
-         'secondary'(case-insensitive). Possible values include: "Primary", "Secondary".
+         'secondary'(case-insensitive). Known values are: "Primary", "Secondary".
         :paramtype key_type: str or ~azure.mgmt.communication.models.KeyType
         """
         super(RegenerateKeyParameters, self).__init__(**kwargs)
@@ -1239,15 +1238,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.communication.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.communication.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -1266,25 +1265,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.communication.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.communication.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
@@ -1308,7 +1307,7 @@ class UpdateDomainRequestParameters(TaggedResource):
      where key=username and value=display name.
     :vartype valid_sender_usernames: dict[str, str]
     :ivar user_engagement_tracking: Describes whether user engagement tracking is enabled or
-     disabled. Possible values include: "Disabled", "Enabled".
+     disabled. Known values are: "Disabled", "Enabled".
     :vartype user_engagement_tracking: str or
      ~azure.mgmt.communication.models.UserEngagementTracking
     """
@@ -1324,7 +1323,7 @@ class UpdateDomainRequestParameters(TaggedResource):
         *,
         tags: Optional[Dict[str, str]] = None,
         valid_sender_usernames: Optional[Dict[str, str]] = None,
-        user_engagement_tracking: Optional[Union[str, "UserEngagementTracking"]] = None,
+        user_engagement_tracking: Optional[Union[str, "_models.UserEngagementTracking"]] = None,
         **kwargs
     ):
         """
@@ -1335,7 +1334,7 @@ class UpdateDomainRequestParameters(TaggedResource):
          where key=username and value=display name.
         :paramtype valid_sender_usernames: dict[str, str]
         :keyword user_engagement_tracking: Describes whether user engagement tracking is enabled or
-         disabled. Possible values include: "Disabled", "Enabled".
+         disabled. Known values are: "Disabled", "Enabled".
         :paramtype user_engagement_tracking: str or
          ~azure.mgmt.communication.models.UserEngagementTracking
         """
@@ -1349,8 +1348,8 @@ class VerificationParameter(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar verification_type: Required. Type of verification. Possible values include: "Domain",
-     "SPF", "DKIM", "DKIM2", "DMARC".
+    :ivar verification_type: Required. Type of verification. Known values are: "Domain", "SPF",
+     "DKIM", "DKIM2", "DMARC".
     :vartype verification_type: str or ~azure.mgmt.communication.models.VerificationType
     """
 
@@ -1365,12 +1364,12 @@ class VerificationParameter(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        verification_type: Union[str, "VerificationType"],
+        verification_type: Union[str, "_models.VerificationType"],
         **kwargs
     ):
         """
-        :keyword verification_type: Required. Type of verification. Possible values include: "Domain",
-         "SPF", "DKIM", "DKIM2", "DMARC".
+        :keyword verification_type: Required. Type of verification. Known values are: "Domain", "SPF",
+         "DKIM", "DKIM2", "DMARC".
         :paramtype verification_type: str or ~azure.mgmt.communication.models.VerificationType
         """
         super(VerificationParameter, self).__init__(**kwargs)
@@ -1382,7 +1381,7 @@ class VerificationStatusRecord(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar status: Status of the verification operation. Possible values include: "NotStarted",
+    :ivar status: Status of the verification operation. Known values are: "NotStarted",
      "VerificationRequested", "VerificationInProgress", "VerificationFailed", "Verified",
      "CancellationRequested".
     :vartype status: str or ~azure.mgmt.communication.models.VerificationStatus
