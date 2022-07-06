@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class FrontDoorManagementClientConfiguration(Configuration):
+class FrontDoorManagementClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
     """Configuration for FrontDoorManagementClient.
 
     Note that all parameters used to create this instance are saved as instance
@@ -27,8 +27,12 @@ class FrontDoorManagementClientConfiguration(Configuration):
 
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    :param subscription_id: The subscription credentials which uniquely identify the Microsoft
+     Azure subscription. The subscription ID forms part of the URI for every service call.
     :type subscription_id: str
+    :keyword api_version: Api Version. Default value is "2022-07-01". Note that overriding this
+     default value may result in unsupported behavior.
+    :paramtype api_version: str
     """
 
     def __init__(
@@ -38,6 +42,8 @@ class FrontDoorManagementClientConfiguration(Configuration):
         **kwargs: Any
     ) -> None:
         super(FrontDoorManagementClientConfiguration, self).__init__(**kwargs)
+        api_version = kwargs.pop('api_version', "2022-07-01")  # type: str
+
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
         if subscription_id is None:
@@ -45,6 +51,7 @@ class FrontDoorManagementClientConfiguration(Configuration):
 
         self.credential = credential
         self.subscription_id = subscription_id
+        self.api_version = api_version
         self.credential_scopes = kwargs.pop('credential_scopes', ['https://management.azure.com/.default'])
         kwargs.setdefault('sdk_moniker', 'mgmt-frontdoor/{}'.format(VERSION))
         self._configure(**kwargs)
