@@ -20,18 +20,18 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._source_controls_operations import build_create_request, build_delete_request, build_get_request, build_list_request
+from ...operations._security_ml_analytics_settings_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class SourceControlsOperations:
+class SecurityMLAnalyticsSettingsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.aio.SecurityInsights`'s
-        :attr:`source_controls` attribute.
+        :attr:`security_ml_analytics_settings` attribute.
     """
 
     models = _models
@@ -50,24 +50,25 @@ class SourceControlsOperations:
         resource_group_name: str,
         workspace_name: str,
         **kwargs: Any
-    ) -> AsyncIterable[_models.SourceControlList]:
-        """Gets all source controls, without source control items.
+    ) -> AsyncIterable[_models.SecurityMLAnalyticsSettingsList]:
+        """Gets all Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SourceControlList or the result of cls(response)
+        :return: An iterator like instance of either SecurityMLAnalyticsSettingsList or the result of
+         cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.SourceControlList]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsList]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SourceControlList]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSettingsList]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -105,7 +106,7 @@ class SourceControlsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("SourceControlList", pipeline_response)
+            deserialized = self._deserialize("SecurityMLAnalyticsSettingsList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -131,27 +132,27 @@ class SourceControlsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings"}  # type: ignore
 
     @distributed_trace_async
     async def get(
         self,
         resource_group_name: str,
         workspace_name: str,
-        source_control_id: str,
+        settings_resource_name: str,
         **kwargs: Any
-    ) -> _models.SourceControl:
-        """Gets a source control byt its identifier.
+    ) -> _models.SecurityMLAnalyticsSetting:
+        """Gets the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param source_control_id: Source control Id.
-        :type source_control_id: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.SourceControl
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -163,14 +164,14 @@ class SourceControlsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SourceControl]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSetting]
 
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            source_control_id=source_control_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
             headers=_headers,
@@ -190,14 +191,93 @@ class SourceControlsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SourceControl', pipeline_response)
+        deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        settings_resource_name: str,
+        security_ml_analytics_setting: _models.SecurityMLAnalyticsSetting,
+        **kwargs: Any
+    ) -> _models.SecurityMLAnalyticsSetting:
+        """Creates or updates the Security ML Analytics Settings.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
+        :param security_ml_analytics_setting: The security ML Analytics setting.
+        :type security_ml_analytics_setting:
+         ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSetting]
+
+        _json = self._serialize.body(security_ml_analytics_setting, 'SecurityMLAnalyticsSetting')
+
+        request = build_create_or_update_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            settings_resource_name=settings_resource_name,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.create_or_update.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
 
     @distributed_trace_async
@@ -205,17 +285,17 @@ class SourceControlsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        source_control_id: str,
+        settings_resource_name: str,
         **kwargs: Any
     ) -> None:
-        """Delete a source control.
+        """Delete the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param source_control_id: Source control Id.
-        :type source_control_id: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -237,7 +317,7 @@ class SourceControlsOperations:
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            source_control_id=source_control_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
             headers=_headers,
@@ -260,83 +340,5 @@ class SourceControlsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}"}  # type: ignore
-
-
-    @distributed_trace_async
-    async def create(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        source_control_id: str,
-        source_control: _models.SourceControl,
-        **kwargs: Any
-    ) -> _models.SourceControl:
-        """Creates a source control.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace.
-        :type workspace_name: str
-        :param source_control_id: Source control Id.
-        :type source_control_id: str
-        :param source_control: The SourceControl.
-        :type source_control: ~azure.mgmt.securityinsight.models.SourceControl
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.SourceControl
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SourceControl]
-
-        _json = self._serialize.body(source_control, 'SourceControl')
-
-        request = build_create_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            source_control_id=source_control_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.create.metadata['url'],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('SourceControl', pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize('SourceControl', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
