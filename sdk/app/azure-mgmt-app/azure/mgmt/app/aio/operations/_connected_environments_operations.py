@@ -22,18 +22,18 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._managed_environments_operations import build_create_or_update_request_initial, build_delete_request_initial, build_get_request, build_list_by_resource_group_request, build_list_by_subscription_request, build_update_request_initial
+from ...operations._connected_environments_operations import build_check_name_availability_request, build_create_or_update_request_initial, build_delete_request_initial, build_get_request, build_list_by_resource_group_request, build_list_by_subscription_request, build_update_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class ManagedEnvironmentsOperations:
+class ConnectedEnvironmentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.aio.ContainerAppsAPIClient`'s
-        :attr:`managed_environments` attribute.
+        :attr:`connected_environments` attribute.
     """
 
     models = _models
@@ -50,23 +50,23 @@ class ManagedEnvironmentsOperations:
     def list_by_subscription(
         self,
         **kwargs: Any
-    ) -> AsyncIterable[_models.ManagedEnvironmentsCollection]:
-        """Get all Environments for a subscription.
+    ) -> AsyncIterable[_models.ConnectedEnvironmentCollection]:
+        """Get all connectedEnvironments for a subscription.
 
-        Get all Managed Environments for a subscription.
+        Description for Get all connectedEnvironments for a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ManagedEnvironmentsCollection or the result of
+        :return: An iterator like instance of either ConnectedEnvironmentCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ManagedEnvironmentsCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ConnectedEnvironmentCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironmentsCollection]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironmentCollection]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -100,7 +100,7 @@ class ManagedEnvironmentsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("ManagedEnvironmentsCollection", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironmentCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -127,32 +127,30 @@ class ManagedEnvironmentsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.App/managedEnvironments"}  # type: ignore
+    list_by_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.App/connectedEnvironments"}  # type: ignore
 
     @distributed_trace
     def list_by_resource_group(
         self,
         resource_group_name: str,
         **kwargs: Any
-    ) -> AsyncIterable[_models.ManagedEnvironmentsCollection]:
-        """Get all the Environments in a resource group.
-
-        Get all the Managed Environments in a resource group.
+    ) -> AsyncIterable[_models.ConnectedEnvironmentCollection]:
+        """Get all connectedEnvironments in a resource group.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ManagedEnvironmentsCollection or the result of
+        :return: An iterator like instance of either ConnectedEnvironmentCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ManagedEnvironmentsCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ConnectedEnvironmentCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironmentsCollection]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironmentCollection]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -188,7 +186,7 @@ class ManagedEnvironmentsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("ManagedEnvironmentsCollection", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironmentCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -215,26 +213,24 @@ class ManagedEnvironmentsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments"}  # type: ignore
+    list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments"}  # type: ignore
 
     @distributed_trace_async
     async def get(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         **kwargs: Any
-    ) -> _models.ManagedEnvironment:
-        """Get the properties of a Managed Environment.
-
-        Get the properties of a Managed Environment used to host container apps.
+    ) -> _models.ConnectedEnvironment:
+        """Get the properties of an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connectedEnvironment.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ManagedEnvironment, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ManagedEnvironment
+        :return: ConnectedEnvironment, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironment
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -246,13 +242,13 @@ class ManagedEnvironmentsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironment]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironment]
 
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
             headers=_headers,
@@ -273,23 +269,23 @@ class ManagedEnvironmentsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('ManagedEnvironment', pipeline_response)
+        deserialized = self._deserialize('ConnectedEnvironment', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
 
     async def _create_or_update_initial(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: _models.ManagedEnvironment,
+        connected_environment_name: str,
+        environment_envelope: _models.ConnectedEnvironment,
         **kwargs: Any
-    ) -> _models.ManagedEnvironment:
+    ) -> _models.ConnectedEnvironment:
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -300,14 +296,14 @@ class ManagedEnvironmentsOperations:
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironment]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironment]
 
-        _json = self._serialize.body(environment_envelope, 'ManagedEnvironment')
+        _json = self._serialize.body(environment_envelope, 'ConnectedEnvironment')
 
         request = build_create_or_update_request_initial(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -330,37 +326,35 @@ class ManagedEnvironmentsOperations:
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('ManagedEnvironment', pipeline_response)
+            deserialized = self._deserialize('ConnectedEnvironment', pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('ManagedEnvironment', pipeline_response)
+            deserialized = self._deserialize('ConnectedEnvironment', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_or_update_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    _create_or_update_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def begin_create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: _models.ManagedEnvironment,
+        connected_environment_name: str,
+        environment_envelope: _models.ConnectedEnvironment,
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ManagedEnvironment]:
-        """Creates or updates a Managed Environment.
-
-        Creates or updates a Managed Environment used to host container apps.
+    ) -> AsyncLROPoller[_models.ConnectedEnvironment]:
+        """Creates or updates an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment.
-        :type environment_envelope: ~azure.mgmt.app.models.ManagedEnvironment
+        :param connected_environment_name: Name of the connectedEnvironment.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment.
+        :type environment_envelope: ~azure.mgmt.app.models.ConnectedEnvironment
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -369,9 +363,9 @@ class ManagedEnvironmentsOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ManagedEnvironment or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ManagedEnvironment]
+        :return: An instance of AsyncLROPoller that returns either ConnectedEnvironment or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -379,7 +373,7 @@ class ManagedEnvironmentsOperations:
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironment]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironment]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
             'polling_interval',
@@ -389,7 +383,7 @@ class ManagedEnvironmentsOperations:
         if cont_token is None:
             raw_result = await self._create_or_update_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                environment_name=environment_name,
+                connected_environment_name=connected_environment_name,
                 environment_envelope=environment_envelope,
                 api_version=api_version,
                 content_type=content_type,
@@ -401,7 +395,7 @@ class ManagedEnvironmentsOperations:
         kwargs.pop('error_map', None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize('ManagedEnvironment', pipeline_response)
+            deserialized = self._deserialize('ConnectedEnvironment', pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -425,12 +419,12 @@ class ManagedEnvironmentsOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    begin_create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         **kwargs: Any
     ) -> None:
         error_map = {
@@ -448,7 +442,7 @@ class ManagedEnvironmentsOperations:
         request = build_delete_request_initial(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             api_version=api_version,
             template_url=self._delete_initial.metadata['url'],
             headers=_headers,
@@ -471,24 +465,24 @@ class ManagedEnvironmentsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    _delete_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def begin_delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Delete a Managed Environment.
+        """Delete an connectedEnvironment.
 
-        Delete a Managed Environment if it does not have any container apps.
+        Description for Delete an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connectedEnvironment.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -515,7 +509,7 @@ class ManagedEnvironmentsOperations:
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                environment_name=environment_name,
+                connected_environment_name=connected_environment_name,
                 api_version=api_version,
                 cls=lambda x,y,z: x,
                 headers=_headers,
@@ -547,37 +541,46 @@ class ManagedEnvironmentsOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    begin_delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
-    async def _update_initial(  # pylint: disable=inconsistent-return-statements
+    @distributed_trace_async
+    async def update(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: _models.ManagedEnvironment,
+        connected_environment_name: str,
         **kwargs: Any
-    ) -> None:
+    ) -> _models.ConnectedEnvironment:
+        """Update connected Environment's properties.
+
+        Patches a Managed Environment. Only patching of tags is supported currently.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the connectedEnvironment.
+        :type connected_environment_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ConnectedEnvironment, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironment
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
         error_map.update(kwargs.pop('error_map', {}) or {})
 
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironment]
 
-        _json = self._serialize.body(environment_envelope, 'ManagedEnvironment')
-
-        request = build_update_request_initial(
+        
+        request = build_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self._update_initial.metadata['url'],
+            template_url=self.update.metadata['url'],
             headers=_headers,
             params=_params,
         )
@@ -591,93 +594,91 @@ class ManagedEnvironmentsOperations:
         )
         response = pipeline_response.http_response
 
-        if response.status_code not in [202]:
+        if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('ConnectedEnvironment', pipeline_response)
 
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, deserialized, {})
 
-    _update_initial.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+        return deserialized
+
+    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
 
     @distributed_trace_async
-    async def begin_update(  # pylint: disable=inconsistent-return-statements
+    async def check_name_availability(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: _models.ManagedEnvironment,
+        connected_environment_name: str,
+        check_name_availability_request: _models.CheckNameAvailabilityRequest,
         **kwargs: Any
-    ) -> AsyncLROPoller[None]:
-        """Update Managed Environment's properties.
+    ) -> _models.CheckNameAvailabilityResponse:
+        """Checks the resource connectedEnvironmentName availability.
 
-        Patches a Managed Environment using JSON Merge Patch.
+        Checks if resource connectedEnvironmentName is available.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment.
-        :type environment_envelope: ~azure.mgmt.app.models.ManagedEnvironment
+        :param connected_environment_name: Name of the Managed Environment.
+        :type connected_environment_name: str
+        :param check_name_availability_request: The check connectedEnvironmentName availability
+         request.
+        :type check_name_availability_request: ~azure.mgmt.app.models.CheckNameAvailabilityRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :return: CheckNameAvailabilityResponse, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.CheckNameAvailabilityResponse
         :raises: ~azure.core.exceptions.HttpResponseError
         """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
-        polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
-        lro_delay = kwargs.pop(
-            'polling_interval',
-            self._config.polling_interval
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.CheckNameAvailabilityResponse]
+
+        _json = self._serialize.body(check_name_availability_request, 'CheckNameAvailabilityRequest')
+
+        request = build_check_name_availability_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            connected_environment_name=connected_environment_name,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.check_name_availability.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
-        cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
-        if cont_token is None:
-            raw_result = await self._update_initial(  # type: ignore
-                resource_group_name=resource_group_name,
-                environment_name=environment_name,
-                environment_envelope=environment_envelope,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x,y,z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop('error_map', None)
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        def get_long_running_output(pipeline_response):
-            if cls:
-                return cls(pipeline_response, None, {})
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
 
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(
-                lro_delay,
-                
-                
-                **kwargs
-        ))  # type: AsyncPollingMethod
-        elif polling is False: polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else: polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        deserialized = self._deserialize('CheckNameAvailabilityResponse', pipeline_response)
 
-    begin_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    check_name_availability.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/checkNameAvailability"}  # type: ignore
+

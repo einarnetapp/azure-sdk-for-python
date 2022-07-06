@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._container_apps_api_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AllowedAudiencesValidation(msrest.serialization.Model):
@@ -81,9 +83,9 @@ class Apple(msrest.serialization.Model):
      the set registration; otherwise, :code:`<code>true</code>`.
     :vartype enabled: bool
     :ivar registration: The configuration settings of the Apple registration.
-    :vartype registration: ~container_apps_api_client.models.AppleRegistration
+    :vartype registration: ~azure.mgmt.app.models.AppleRegistration
     :ivar login: The configuration settings of the login flow.
-    :vartype login: ~container_apps_api_client.models.LoginScopes
+    :vartype login: ~azure.mgmt.app.models.LoginScopes
     """
 
     _attribute_map = {
@@ -96,8 +98,8 @@ class Apple(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["AppleRegistration"] = None,
-        login: Optional["LoginScopes"] = None,
+        registration: Optional["_models.AppleRegistration"] = None,
+        login: Optional["_models.LoginScopes"] = None,
         **kwargs
     ):
         """
@@ -105,9 +107,9 @@ class Apple(msrest.serialization.Model):
          despite the set registration; otherwise, :code:`<code>true</code>`.
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the Apple registration.
-        :paramtype registration: ~container_apps_api_client.models.AppleRegistration
+        :paramtype registration: ~azure.mgmt.app.models.AppleRegistration
         :keyword login: The configuration settings of the login flow.
-        :paramtype login: ~container_apps_api_client.models.LoginScopes
+        :paramtype login: ~azure.mgmt.app.models.LoginScopes
         """
         super(Apple, self).__init__(**kwargs)
         self.enabled = enabled
@@ -153,8 +155,7 @@ class AppLogsConfiguration(msrest.serialization.Model):
     :ivar destination: Logs destination.
     :vartype destination: str
     :ivar log_analytics_configuration: Log Analytics configuration.
-    :vartype log_analytics_configuration:
-     ~container_apps_api_client.models.LogAnalyticsConfiguration
+    :vartype log_analytics_configuration: ~azure.mgmt.app.models.LogAnalyticsConfiguration
     """
 
     _attribute_map = {
@@ -166,15 +167,14 @@ class AppLogsConfiguration(msrest.serialization.Model):
         self,
         *,
         destination: Optional[str] = None,
-        log_analytics_configuration: Optional["LogAnalyticsConfiguration"] = None,
+        log_analytics_configuration: Optional["_models.LogAnalyticsConfiguration"] = None,
         **kwargs
     ):
         """
         :keyword destination: Logs destination.
         :paramtype destination: str
         :keyword log_analytics_configuration: Log Analytics configuration.
-        :paramtype log_analytics_configuration:
-         ~container_apps_api_client.models.LogAnalyticsConfiguration
+        :paramtype log_analytics_configuration: ~azure.mgmt.app.models.LogAnalyticsConfiguration
         """
         super(AppLogsConfiguration, self).__init__(**kwargs)
         self.destination = destination
@@ -228,7 +228,7 @@ class Resource(msrest.serialization.Model):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     """
 
     _validation = {
@@ -273,7 +273,7 @@ class ProxyResource(Resource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     """
 
     _validation = {
@@ -314,22 +314,22 @@ class AuthConfig(ProxyResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar platform: The configuration settings of the platform of ContainerApp Service
      Authentication/Authorization.
-    :vartype platform: ~container_apps_api_client.models.AuthPlatform
+    :vartype platform: ~azure.mgmt.app.models.AuthPlatform
     :ivar global_validation: The configuration settings that determines the validation flow of
      users using  Service Authentication/Authorization.
-    :vartype global_validation: ~container_apps_api_client.models.GlobalValidation
+    :vartype global_validation: ~azure.mgmt.app.models.GlobalValidation
     :ivar identity_providers: The configuration settings of each of the identity providers used to
      configure ContainerApp Service Authentication/Authorization.
-    :vartype identity_providers: ~container_apps_api_client.models.IdentityProviders
+    :vartype identity_providers: ~azure.mgmt.app.models.IdentityProviders
     :ivar login: The configuration settings of the login flow of users using ContainerApp Service
      Authentication/Authorization.
-    :vartype login: ~container_apps_api_client.models.Login
+    :vartype login: ~azure.mgmt.app.models.Login
     :ivar http_settings: The configuration settings of the HTTP requests for authentication and
      authorization requests made against ContainerApp Service Authentication/Authorization.
-    :vartype http_settings: ~container_apps_api_client.models.HttpSettings
+    :vartype http_settings: ~azure.mgmt.app.models.HttpSettings
     """
 
     _validation = {
@@ -354,29 +354,29 @@ class AuthConfig(ProxyResource):
     def __init__(
         self,
         *,
-        platform: Optional["AuthPlatform"] = None,
-        global_validation: Optional["GlobalValidation"] = None,
-        identity_providers: Optional["IdentityProviders"] = None,
-        login: Optional["Login"] = None,
-        http_settings: Optional["HttpSettings"] = None,
+        platform: Optional["_models.AuthPlatform"] = None,
+        global_validation: Optional["_models.GlobalValidation"] = None,
+        identity_providers: Optional["_models.IdentityProviders"] = None,
+        login: Optional["_models.Login"] = None,
+        http_settings: Optional["_models.HttpSettings"] = None,
         **kwargs
     ):
         """
         :keyword platform: The configuration settings of the platform of ContainerApp Service
          Authentication/Authorization.
-        :paramtype platform: ~container_apps_api_client.models.AuthPlatform
+        :paramtype platform: ~azure.mgmt.app.models.AuthPlatform
         :keyword global_validation: The configuration settings that determines the validation flow of
          users using  Service Authentication/Authorization.
-        :paramtype global_validation: ~container_apps_api_client.models.GlobalValidation
+        :paramtype global_validation: ~azure.mgmt.app.models.GlobalValidation
         :keyword identity_providers: The configuration settings of each of the identity providers used
          to configure ContainerApp Service Authentication/Authorization.
-        :paramtype identity_providers: ~container_apps_api_client.models.IdentityProviders
+        :paramtype identity_providers: ~azure.mgmt.app.models.IdentityProviders
         :keyword login: The configuration settings of the login flow of users using ContainerApp
          Service Authentication/Authorization.
-        :paramtype login: ~container_apps_api_client.models.Login
+        :paramtype login: ~azure.mgmt.app.models.Login
         :keyword http_settings: The configuration settings of the HTTP requests for authentication and
          authorization requests made against ContainerApp Service Authentication/Authorization.
-        :paramtype http_settings: ~container_apps_api_client.models.HttpSettings
+        :paramtype http_settings: ~azure.mgmt.app.models.HttpSettings
         """
         super(AuthConfig, self).__init__(**kwargs)
         self.platform = platform
@@ -394,7 +394,7 @@ class AuthConfigCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.AuthConfig]
+    :vartype value: list[~azure.mgmt.app.models.AuthConfig]
     :ivar next_link: Link to next page of resources.
     :vartype next_link: str
     """
@@ -412,12 +412,12 @@ class AuthConfigCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["AuthConfig"],
+        value: List["_models.AuthConfig"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.AuthConfig]
+        :paramtype value: list[~azure.mgmt.app.models.AuthConfig]
         """
         super(AuthConfigCollection, self).__init__(**kwargs)
         self.value = value
@@ -468,7 +468,7 @@ class AvailableOperations(msrest.serialization.Model):
     """Available operations of the service.
 
     :ivar value: Collection of available operation details.
-    :vartype value: list[~container_apps_api_client.models.OperationDetail]
+    :vartype value: list[~azure.mgmt.app.models.OperationDetail]
     :ivar next_link: URL client should use to fetch the next page (per server side paging).
      It's null for now, added for future use.
     :vartype next_link: str
@@ -482,13 +482,13 @@ class AvailableOperations(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["OperationDetail"]] = None,
+        value: Optional[List["_models.OperationDetail"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword value: Collection of available operation details.
-        :paramtype value: list[~container_apps_api_client.models.OperationDetail]
+        :paramtype value: list[~azure.mgmt.app.models.OperationDetail]
         :keyword next_link: URL client should use to fetch the next page (per server side paging).
          It's null for now, added for future use.
         :paramtype next_link: str
@@ -505,12 +505,12 @@ class AzureActiveDirectory(msrest.serialization.Model):
      enabled despite the set registration; otherwise, :code:`<code>true</code>`.
     :vartype enabled: bool
     :ivar registration: The configuration settings of the Azure Active Directory app registration.
-    :vartype registration: ~container_apps_api_client.models.AzureActiveDirectoryRegistration
+    :vartype registration: ~azure.mgmt.app.models.AzureActiveDirectoryRegistration
     :ivar login: The configuration settings of the Azure Active Directory login flow.
-    :vartype login: ~container_apps_api_client.models.AzureActiveDirectoryLogin
+    :vartype login: ~azure.mgmt.app.models.AzureActiveDirectoryLogin
     :ivar validation: The configuration settings of the Azure Active Directory token validation
      flow.
-    :vartype validation: ~container_apps_api_client.models.AzureActiveDirectoryValidation
+    :vartype validation: ~azure.mgmt.app.models.AzureActiveDirectoryValidation
     :ivar is_auto_provisioned: Gets a value indicating whether the Azure AD configuration was
      auto-provisioned using 1st party tooling.
      This is an internal flag primarily intended to support the Azure Management Portal. Users
@@ -531,9 +531,9 @@ class AzureActiveDirectory(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["AzureActiveDirectoryRegistration"] = None,
-        login: Optional["AzureActiveDirectoryLogin"] = None,
-        validation: Optional["AzureActiveDirectoryValidation"] = None,
+        registration: Optional["_models.AzureActiveDirectoryRegistration"] = None,
+        login: Optional["_models.AzureActiveDirectoryLogin"] = None,
+        validation: Optional["_models.AzureActiveDirectoryValidation"] = None,
         is_auto_provisioned: Optional[bool] = None,
         **kwargs
     ):
@@ -543,12 +543,12 @@ class AzureActiveDirectory(msrest.serialization.Model):
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the Azure Active Directory app
          registration.
-        :paramtype registration: ~container_apps_api_client.models.AzureActiveDirectoryRegistration
+        :paramtype registration: ~azure.mgmt.app.models.AzureActiveDirectoryRegistration
         :keyword login: The configuration settings of the Azure Active Directory login flow.
-        :paramtype login: ~container_apps_api_client.models.AzureActiveDirectoryLogin
+        :paramtype login: ~azure.mgmt.app.models.AzureActiveDirectoryLogin
         :keyword validation: The configuration settings of the Azure Active Directory token validation
          flow.
-        :paramtype validation: ~container_apps_api_client.models.AzureActiveDirectoryValidation
+        :paramtype validation: ~azure.mgmt.app.models.AzureActiveDirectoryValidation
         :keyword is_auto_provisioned: Gets a value indicating whether the Azure AD configuration was
          auto-provisioned using 1st party tooling.
          This is an internal flag primarily intended to support the Azure Management Portal. Users
@@ -703,14 +703,13 @@ class AzureActiveDirectoryValidation(msrest.serialization.Model):
 
     :ivar jwt_claim_checks: The configuration settings of the checks that should be made while
      validating the JWT Claims.
-    :vartype jwt_claim_checks: ~container_apps_api_client.models.JwtClaimChecks
+    :vartype jwt_claim_checks: ~azure.mgmt.app.models.JwtClaimChecks
     :ivar allowed_audiences: The list of audiences that can make successful
      authentication/authorization requests.
     :vartype allowed_audiences: list[str]
     :ivar default_authorization_policy: The configuration settings of the default authorization
      policy.
-    :vartype default_authorization_policy:
-     ~container_apps_api_client.models.DefaultAuthorizationPolicy
+    :vartype default_authorization_policy: ~azure.mgmt.app.models.DefaultAuthorizationPolicy
     """
 
     _attribute_map = {
@@ -722,22 +721,21 @@ class AzureActiveDirectoryValidation(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        jwt_claim_checks: Optional["JwtClaimChecks"] = None,
+        jwt_claim_checks: Optional["_models.JwtClaimChecks"] = None,
         allowed_audiences: Optional[List[str]] = None,
-        default_authorization_policy: Optional["DefaultAuthorizationPolicy"] = None,
+        default_authorization_policy: Optional["_models.DefaultAuthorizationPolicy"] = None,
         **kwargs
     ):
         """
         :keyword jwt_claim_checks: The configuration settings of the checks that should be made while
          validating the JWT Claims.
-        :paramtype jwt_claim_checks: ~container_apps_api_client.models.JwtClaimChecks
+        :paramtype jwt_claim_checks: ~azure.mgmt.app.models.JwtClaimChecks
         :keyword allowed_audiences: The list of audiences that can make successful
          authentication/authorization requests.
         :paramtype allowed_audiences: list[str]
         :keyword default_authorization_policy: The configuration settings of the default authorization
          policy.
-        :paramtype default_authorization_policy:
-         ~container_apps_api_client.models.DefaultAuthorizationPolicy
+        :paramtype default_authorization_policy: ~azure.mgmt.app.models.DefaultAuthorizationPolicy
         """
         super(AzureActiveDirectoryValidation, self).__init__(**kwargs)
         self.jwt_claim_checks = jwt_claim_checks
@@ -798,8 +796,8 @@ class AzureFileProperties(msrest.serialization.Model):
     :vartype account_name: str
     :ivar account_key: Storage account key for azure file.
     :vartype account_key: str
-    :ivar access_mode: Access mode for storage. Possible values include: "ReadOnly", "ReadWrite".
-    :vartype access_mode: str or ~container_apps_api_client.models.AccessMode
+    :ivar access_mode: Access mode for storage. Known values are: "ReadOnly", "ReadWrite".
+    :vartype access_mode: str or ~azure.mgmt.app.models.AccessMode
     :ivar share_name: Azure file share name.
     :vartype share_name: str
     """
@@ -816,7 +814,7 @@ class AzureFileProperties(msrest.serialization.Model):
         *,
         account_name: Optional[str] = None,
         account_key: Optional[str] = None,
-        access_mode: Optional[Union[str, "AccessMode"]] = None,
+        access_mode: Optional[Union[str, "_models.AccessMode"]] = None,
         share_name: Optional[str] = None,
         **kwargs
     ):
@@ -825,9 +823,8 @@ class AzureFileProperties(msrest.serialization.Model):
         :paramtype account_name: str
         :keyword account_key: Storage account key for azure file.
         :paramtype account_key: str
-        :keyword access_mode: Access mode for storage. Possible values include: "ReadOnly",
-         "ReadWrite".
-        :paramtype access_mode: str or ~container_apps_api_client.models.AccessMode
+        :keyword access_mode: Access mode for storage. Known values are: "ReadOnly", "ReadWrite".
+        :paramtype access_mode: str or ~azure.mgmt.app.models.AccessMode
         :keyword share_name: Azure file share name.
         :paramtype share_name: str
         """
@@ -845,7 +842,7 @@ class AzureStaticWebApps(msrest.serialization.Model):
      enabled despite the set registration; otherwise, :code:`<code>true</code>`.
     :vartype enabled: bool
     :ivar registration: The configuration settings of the Azure Static Web Apps registration.
-    :vartype registration: ~container_apps_api_client.models.AzureStaticWebAppsRegistration
+    :vartype registration: ~azure.mgmt.app.models.AzureStaticWebAppsRegistration
     """
 
     _attribute_map = {
@@ -857,7 +854,7 @@ class AzureStaticWebApps(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["AzureStaticWebAppsRegistration"] = None,
+        registration: Optional["_models.AzureStaticWebAppsRegistration"] = None,
         **kwargs
     ):
         """
@@ -865,7 +862,7 @@ class AzureStaticWebApps(msrest.serialization.Model):
          be enabled despite the set registration; otherwise, :code:`<code>true</code>`.
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the Azure Static Web Apps registration.
-        :paramtype registration: ~container_apps_api_client.models.AzureStaticWebAppsRegistration
+        :paramtype registration: ~azure.mgmt.app.models.AzureStaticWebAppsRegistration
         """
         super(AzureStaticWebApps, self).__init__(**kwargs)
         self.enabled = enabled
@@ -914,7 +911,7 @@ class TrackedResource(Resource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
@@ -973,13 +970,13 @@ class Certificate(TrackedResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
     :ivar properties: Certificate resource specific properties.
-    :vartype properties: ~container_apps_api_client.models.CertificateProperties
+    :vartype properties: ~azure.mgmt.app.models.CertificateProperties
     """
 
     _validation = {
@@ -1005,7 +1002,7 @@ class Certificate(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        properties: Optional["CertificateProperties"] = None,
+        properties: Optional["_models.CertificateProperties"] = None,
         **kwargs
     ):
         """
@@ -1014,7 +1011,7 @@ class Certificate(TrackedResource):
         :keyword location: Required. The geo-location where the resource lives.
         :paramtype location: str
         :keyword properties: Certificate resource specific properties.
-        :paramtype properties: ~container_apps_api_client.models.CertificateProperties
+        :paramtype properties: ~azure.mgmt.app.models.CertificateProperties
         """
         super(Certificate, self).__init__(tags=tags, location=location, **kwargs)
         self.properties = properties
@@ -1028,7 +1025,7 @@ class CertificateCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.Certificate]
+    :vartype value: list[~azure.mgmt.app.models.Certificate]
     :ivar next_link: Link to next page of resources.
     :vartype next_link: str
     """
@@ -1046,12 +1043,12 @@ class CertificateCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["Certificate"],
+        value: List["_models.Certificate"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.Certificate]
+        :paramtype value: list[~azure.mgmt.app.models.Certificate]
         """
         super(CertificateCollection, self).__init__(**kwargs)
         self.value = value
@@ -1088,10 +1085,9 @@ class CertificateProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: Provisioning state of the certificate. Possible values include:
-     "Succeeded", "Failed", "Canceled", "DeleteFailed", "Pending".
-    :vartype provisioning_state: str or
-     ~container_apps_api_client.models.CertificateProvisioningState
+    :ivar provisioning_state: Provisioning state of the certificate. Known values are: "Succeeded",
+     "Failed", "Canceled", "DeleteFailed", "Pending".
+    :vartype provisioning_state: str or ~azure.mgmt.app.models.CertificateProvisioningState
     :ivar password: Certificate password.
     :vartype password: str
     :ivar subject_name: Subject name of the certificate.
@@ -1162,6 +1158,79 @@ class CertificateProperties(msrest.serialization.Model):
         self.public_key_hash = None
 
 
+class CheckNameAvailabilityRequest(msrest.serialization.Model):
+    """The check availability request body.
+
+    :ivar name: The name of the resource for which availability needs to be checked.
+    :vartype name: str
+    :ivar type: The resource type.
+    :vartype type: str
+    """
+
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[str] = None,
+        type: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: The name of the resource for which availability needs to be checked.
+        :paramtype name: str
+        :keyword type: The resource type.
+        :paramtype type: str
+        """
+        super(CheckNameAvailabilityRequest, self).__init__(**kwargs)
+        self.name = name
+        self.type = type
+
+
+class CheckNameAvailabilityResponse(msrest.serialization.Model):
+    """The check availability result.
+
+    :ivar name_available: Indicates if the resource name is available.
+    :vartype name_available: bool
+    :ivar reason: The reason why the given name is not available. Known values are: "Invalid",
+     "AlreadyExists".
+    :vartype reason: str or ~azure.mgmt.app.models.CheckNameAvailabilityReason
+    :ivar message: Detailed reason why the given name is available.
+    :vartype message: str
+    """
+
+    _attribute_map = {
+        'name_available': {'key': 'nameAvailable', 'type': 'bool'},
+        'reason': {'key': 'reason', 'type': 'str'},
+        'message': {'key': 'message', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name_available: Optional[bool] = None,
+        reason: Optional[Union[str, "_models.CheckNameAvailabilityReason"]] = None,
+        message: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword name_available: Indicates if the resource name is available.
+        :paramtype name_available: bool
+        :keyword reason: The reason why the given name is not available. Known values are: "Invalid",
+         "AlreadyExists".
+        :paramtype reason: str or ~azure.mgmt.app.models.CheckNameAvailabilityReason
+        :keyword message: Detailed reason why the given name is available.
+        :paramtype message: str
+        """
+        super(CheckNameAvailabilityResponse, self).__init__(**kwargs)
+        self.name_available = name_available
+        self.reason = reason
+        self.message = message
+
+
 class ClientRegistration(msrest.serialization.Model):
     """The configuration settings of the app registration for providers that have client ids and client secrets.
 
@@ -1198,24 +1267,24 @@ class Configuration(msrest.serialization.Model):
     """Non versioned Container App configuration properties that define the mutable settings of a Container app.
 
     :ivar secrets: Collection of secrets used by a Container app.
-    :vartype secrets: list[~container_apps_api_client.models.Secret]
+    :vartype secrets: list[~azure.mgmt.app.models.Secret]
     :ivar active_revisions_mode: ActiveRevisionsMode controls how active revisions are handled for
      the Container app:
     
     
      .. raw:: html
     
-        <list><item>Multiple: multiple revisions can be active. If no value if provided, this is
-     the default</item><item>Single: Only one revision can be active at a time. Revision weights can
-     not be used in this mode</item></list>. Possible values include: "multiple", "single".
-    :vartype active_revisions_mode: str or ~container_apps_api_client.models.ActiveRevisionsMode
+        <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one
+     revision can be active at a time. Revision weights can not be used in this mode. If no value if
+     provided, this is the default.</item></list>. Known values are: "Multiple", "Single".
+    :vartype active_revisions_mode: str or ~azure.mgmt.app.models.ActiveRevisionsMode
     :ivar ingress: Ingress configurations.
-    :vartype ingress: ~container_apps_api_client.models.Ingress
+    :vartype ingress: ~azure.mgmt.app.models.Ingress
     :ivar registries: Collection of private container registry credentials for containers used by
      the Container app.
-    :vartype registries: list[~container_apps_api_client.models.RegistryCredentials]
+    :vartype registries: list[~azure.mgmt.app.models.RegistryCredentials]
     :ivar dapr: Dapr configuration for the Container App.
-    :vartype dapr: ~container_apps_api_client.models.Dapr
+    :vartype dapr: ~azure.mgmt.app.models.Dapr
     """
 
     _attribute_map = {
@@ -1229,33 +1298,33 @@ class Configuration(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        secrets: Optional[List["Secret"]] = None,
-        active_revisions_mode: Optional[Union[str, "ActiveRevisionsMode"]] = None,
-        ingress: Optional["Ingress"] = None,
-        registries: Optional[List["RegistryCredentials"]] = None,
-        dapr: Optional["Dapr"] = None,
+        secrets: Optional[List["_models.Secret"]] = None,
+        active_revisions_mode: Optional[Union[str, "_models.ActiveRevisionsMode"]] = None,
+        ingress: Optional["_models.Ingress"] = None,
+        registries: Optional[List["_models.RegistryCredentials"]] = None,
+        dapr: Optional["_models.Dapr"] = None,
         **kwargs
     ):
         """
         :keyword secrets: Collection of secrets used by a Container app.
-        :paramtype secrets: list[~container_apps_api_client.models.Secret]
+        :paramtype secrets: list[~azure.mgmt.app.models.Secret]
         :keyword active_revisions_mode: ActiveRevisionsMode controls how active revisions are handled
          for the Container app:
         
         
          .. raw:: html
         
-            <list><item>Multiple: multiple revisions can be active. If no value if provided, this is
-         the default</item><item>Single: Only one revision can be active at a time. Revision weights can
-         not be used in this mode</item></list>. Possible values include: "multiple", "single".
-        :paramtype active_revisions_mode: str or ~container_apps_api_client.models.ActiveRevisionsMode
+            <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one
+         revision can be active at a time. Revision weights can not be used in this mode. If no value if
+         provided, this is the default.</item></list>. Known values are: "Multiple", "Single".
+        :paramtype active_revisions_mode: str or ~azure.mgmt.app.models.ActiveRevisionsMode
         :keyword ingress: Ingress configurations.
-        :paramtype ingress: ~container_apps_api_client.models.Ingress
+        :paramtype ingress: ~azure.mgmt.app.models.Ingress
         :keyword registries: Collection of private container registry credentials for containers used
          by the Container app.
-        :paramtype registries: list[~container_apps_api_client.models.RegistryCredentials]
+        :paramtype registries: list[~azure.mgmt.app.models.RegistryCredentials]
         :keyword dapr: Dapr configuration for the Container App.
-        :paramtype dapr: ~container_apps_api_client.models.Dapr
+        :paramtype dapr: ~azure.mgmt.app.models.Dapr
         """
         super(Configuration, self).__init__(**kwargs)
         self.secrets = secrets
@@ -1263,6 +1332,235 @@ class Configuration(msrest.serialization.Model):
         self.ingress = ingress
         self.registries = registries
         self.dapr = dapr
+
+
+class ConnectedEnvironment(TrackedResource):
+    """An environment for Kubernetes cluster specialized for web workloads by Azure App Service.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
+    :ivar tags: A set of tags. Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: Required. The geo-location where the resource lives.
+    :vartype location: str
+    :ivar extended_location: The complex type of the extended location.
+    :vartype extended_location: ~azure.mgmt.app.models.ExtendedLocation
+    :ivar provisioning_state: Provisioning state of the Kubernetes Environment. Known values are:
+     "Succeeded", "Failed", "Canceled", "Waiting", "InitializationInProgress",
+     "InfrastructureSetupInProgress", "InfrastructureSetupComplete", "ScheduledForDelete".
+    :vartype provisioning_state: str or
+     ~azure.mgmt.app.models.ConnectedEnvironmentProvisioningState
+    :ivar deployment_errors: Any errors that occurred during deployment or deployment validation.
+    :vartype deployment_errors: str
+    :ivar default_domain: Default Domain Name for the cluster.
+    :vartype default_domain: str
+    :ivar static_ip: Static IP of the connectedEnvironment.
+    :vartype static_ip: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'location': {'required': True},
+        'provisioning_state': {'readonly': True},
+        'deployment_errors': {'readonly': True},
+        'default_domain': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+        'location': {'key': 'location', 'type': 'str'},
+        'extended_location': {'key': 'extendedLocation', 'type': 'ExtendedLocation'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'deployment_errors': {'key': 'properties.deploymentErrors', 'type': 'str'},
+        'default_domain': {'key': 'properties.defaultDomain', 'type': 'str'},
+        'static_ip': {'key': 'properties.staticIp', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: str,
+        tags: Optional[Dict[str, str]] = None,
+        extended_location: Optional["_models.ExtendedLocation"] = None,
+        static_ip: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword tags: A set of tags. Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: Required. The geo-location where the resource lives.
+        :paramtype location: str
+        :keyword extended_location: The complex type of the extended location.
+        :paramtype extended_location: ~azure.mgmt.app.models.ExtendedLocation
+        :keyword static_ip: Static IP of the connectedEnvironment.
+        :paramtype static_ip: str
+        """
+        super(ConnectedEnvironment, self).__init__(tags=tags, location=location, **kwargs)
+        self.extended_location = extended_location
+        self.provisioning_state = None
+        self.deployment_errors = None
+        self.default_domain = None
+        self.static_ip = static_ip
+
+
+class ConnectedEnvironmentCollection(msrest.serialization.Model):
+    """Collection of connectedEnvironments.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Collection of resources.
+    :vartype value: list[~azure.mgmt.app.models.ConnectedEnvironment]
+    :ivar next_link: Link to next page of resources.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ConnectedEnvironment]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.ConnectedEnvironment"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Collection of resources.
+        :paramtype value: list[~azure.mgmt.app.models.ConnectedEnvironment]
+        """
+        super(ConnectedEnvironmentCollection, self).__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
+class ConnectedEnvironmentStorage(ProxyResource):
+    """Storage resource for connectedEnvironment.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
+    :ivar properties: Storage properties.
+    :vartype properties: ~azure.mgmt.app.models.ConnectedEnvironmentStorageProperties
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'properties': {'key': 'properties', 'type': 'ConnectedEnvironmentStorageProperties'},
+    }
+
+    def __init__(
+        self,
+        *,
+        properties: Optional["_models.ConnectedEnvironmentStorageProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword properties: Storage properties.
+        :paramtype properties: ~azure.mgmt.app.models.ConnectedEnvironmentStorageProperties
+        """
+        super(ConnectedEnvironmentStorage, self).__init__(**kwargs)
+        self.properties = properties
+
+
+class ConnectedEnvironmentStorageProperties(msrest.serialization.Model):
+    """Storage properties.
+
+    :ivar azure_file: Azure file properties.
+    :vartype azure_file: ~azure.mgmt.app.models.AzureFileProperties
+    """
+
+    _attribute_map = {
+        'azure_file': {'key': 'azureFile', 'type': 'AzureFileProperties'},
+    }
+
+    def __init__(
+        self,
+        *,
+        azure_file: Optional["_models.AzureFileProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword azure_file: Azure file properties.
+        :paramtype azure_file: ~azure.mgmt.app.models.AzureFileProperties
+        """
+        super(ConnectedEnvironmentStorageProperties, self).__init__(**kwargs)
+        self.azure_file = azure_file
+
+
+class ConnectedEnvironmentStoragesCollection(msrest.serialization.Model):
+    """Collection of Storage for Environments.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: Required. Collection of storage resources.
+    :vartype value: list[~azure.mgmt.app.models.ConnectedEnvironmentStorage]
+    """
+
+    _validation = {
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ConnectedEnvironmentStorage]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: List["_models.ConnectedEnvironmentStorage"],
+        **kwargs
+    ):
+        """
+        :keyword value: Required. Collection of storage resources.
+        :paramtype value: list[~azure.mgmt.app.models.ConnectedEnvironmentStorage]
+        """
+        super(ConnectedEnvironmentStoragesCollection, self).__init__(**kwargs)
+        self.value = value
 
 
 class Container(msrest.serialization.Model):
@@ -1277,13 +1575,13 @@ class Container(msrest.serialization.Model):
     :ivar args: Container start command arguments.
     :vartype args: list[str]
     :ivar env: Container environment variables.
-    :vartype env: list[~container_apps_api_client.models.EnvironmentVar]
+    :vartype env: list[~azure.mgmt.app.models.EnvironmentVar]
     :ivar resources: Container resource requirements.
-    :vartype resources: ~container_apps_api_client.models.ContainerResources
+    :vartype resources: ~azure.mgmt.app.models.ContainerResources
     :ivar probes: List of probes for the container.
-    :vartype probes: list[~container_apps_api_client.models.ContainerAppProbe]
+    :vartype probes: list[~azure.mgmt.app.models.ContainerAppProbe]
     :ivar volume_mounts: Container volume mounts.
-    :vartype volume_mounts: list[~container_apps_api_client.models.VolumeMount]
+    :vartype volume_mounts: list[~azure.mgmt.app.models.VolumeMount]
     """
 
     _attribute_map = {
@@ -1304,10 +1602,10 @@ class Container(msrest.serialization.Model):
         name: Optional[str] = None,
         command: Optional[List[str]] = None,
         args: Optional[List[str]] = None,
-        env: Optional[List["EnvironmentVar"]] = None,
-        resources: Optional["ContainerResources"] = None,
-        probes: Optional[List["ContainerAppProbe"]] = None,
-        volume_mounts: Optional[List["VolumeMount"]] = None,
+        env: Optional[List["_models.EnvironmentVar"]] = None,
+        resources: Optional["_models.ContainerResources"] = None,
+        probes: Optional[List["_models.ContainerAppProbe"]] = None,
+        volume_mounts: Optional[List["_models.VolumeMount"]] = None,
         **kwargs
     ):
         """
@@ -1320,13 +1618,13 @@ class Container(msrest.serialization.Model):
         :keyword args: Container start command arguments.
         :paramtype args: list[str]
         :keyword env: Container environment variables.
-        :paramtype env: list[~container_apps_api_client.models.EnvironmentVar]
+        :paramtype env: list[~azure.mgmt.app.models.EnvironmentVar]
         :keyword resources: Container resource requirements.
-        :paramtype resources: ~container_apps_api_client.models.ContainerResources
+        :paramtype resources: ~azure.mgmt.app.models.ContainerResources
         :keyword probes: List of probes for the container.
-        :paramtype probes: list[~container_apps_api_client.models.ContainerAppProbe]
+        :paramtype probes: list[~azure.mgmt.app.models.ContainerAppProbe]
         :keyword volume_mounts: Container volume mounts.
-        :paramtype volume_mounts: list[~container_apps_api_client.models.VolumeMount]
+        :paramtype volume_mounts: list[~azure.mgmt.app.models.VolumeMount]
         """
         super(Container, self).__init__(**kwargs)
         self.image = image
@@ -1356,20 +1654,23 @@ class ContainerApp(TrackedResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
+    :ivar extended_location: The complex type of the extended location.
+    :vartype extended_location: ~azure.mgmt.app.models.ExtendedLocation
     :ivar identity: managed identities for the Container App to interact with other Azure services
      without maintaining any secrets or credentials in code.
-    :vartype identity: ~container_apps_api_client.models.ManagedServiceIdentity
-    :ivar provisioning_state: Provisioning state of the Container App. Possible values include:
+    :vartype identity: ~azure.mgmt.app.models.ManagedServiceIdentity
+    :ivar provisioning_state: Provisioning state of the Container App. Known values are:
      "InProgress", "Succeeded", "Failed", "Canceled".
-    :vartype provisioning_state: str or
-     ~container_apps_api_client.models.ContainerAppProvisioningState
-    :ivar managed_environment_id: Resource ID of the Container App's environment.
+    :vartype provisioning_state: str or ~azure.mgmt.app.models.ContainerAppProvisioningState
+    :ivar managed_environment_id: Deprecated. Resource ID of the Container App's environment.
     :vartype managed_environment_id: str
+    :ivar environment_id: Resource ID of environment.
+    :vartype environment_id: str
     :ivar latest_revision_name: Name of the latest revision of the Container App.
     :vartype latest_revision_name: str
     :ivar latest_revision_fqdn: Fully Qualified Domain Name of the latest revision of the Container
@@ -1378,9 +1679,9 @@ class ContainerApp(TrackedResource):
     :ivar custom_domain_verification_id: Id used to verify domain name ownership.
     :vartype custom_domain_verification_id: str
     :ivar configuration: Non versioned Container App configuration properties.
-    :vartype configuration: ~container_apps_api_client.models.Configuration
+    :vartype configuration: ~azure.mgmt.app.models.Configuration
     :ivar template: Container App versioned application definition.
-    :vartype template: ~container_apps_api_client.models.Template
+    :vartype template: ~azure.mgmt.app.models.Template
     :ivar outbound_ip_addresses: Outbound IP Addresses for container app.
     :vartype outbound_ip_addresses: list[str]
     """
@@ -1405,9 +1706,11 @@ class ContainerApp(TrackedResource):
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'location': {'key': 'location', 'type': 'str'},
+        'extended_location': {'key': 'extendedLocation', 'type': 'ExtendedLocation'},
         'identity': {'key': 'identity', 'type': 'ManagedServiceIdentity'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'managed_environment_id': {'key': 'properties.managedEnvironmentId', 'type': 'str'},
+        'environment_id': {'key': 'properties.environmentId', 'type': 'str'},
         'latest_revision_name': {'key': 'properties.latestRevisionName', 'type': 'str'},
         'latest_revision_fqdn': {'key': 'properties.latestRevisionFqdn', 'type': 'str'},
         'custom_domain_verification_id': {'key': 'properties.customDomainVerificationId', 'type': 'str'},
@@ -1421,10 +1724,12 @@ class ContainerApp(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["ManagedServiceIdentity"] = None,
+        extended_location: Optional["_models.ExtendedLocation"] = None,
+        identity: Optional["_models.ManagedServiceIdentity"] = None,
         managed_environment_id: Optional[str] = None,
-        configuration: Optional["Configuration"] = None,
-        template: Optional["Template"] = None,
+        environment_id: Optional[str] = None,
+        configuration: Optional["_models.Configuration"] = None,
+        template: Optional["_models.Template"] = None,
         **kwargs
     ):
         """
@@ -1432,20 +1737,26 @@ class ContainerApp(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: Required. The geo-location where the resource lives.
         :paramtype location: str
+        :keyword extended_location: The complex type of the extended location.
+        :paramtype extended_location: ~azure.mgmt.app.models.ExtendedLocation
         :keyword identity: managed identities for the Container App to interact with other Azure
          services without maintaining any secrets or credentials in code.
-        :paramtype identity: ~container_apps_api_client.models.ManagedServiceIdentity
-        :keyword managed_environment_id: Resource ID of the Container App's environment.
+        :paramtype identity: ~azure.mgmt.app.models.ManagedServiceIdentity
+        :keyword managed_environment_id: Deprecated. Resource ID of the Container App's environment.
         :paramtype managed_environment_id: str
+        :keyword environment_id: Resource ID of environment.
+        :paramtype environment_id: str
         :keyword configuration: Non versioned Container App configuration properties.
-        :paramtype configuration: ~container_apps_api_client.models.Configuration
+        :paramtype configuration: ~azure.mgmt.app.models.Configuration
         :keyword template: Container App versioned application definition.
-        :paramtype template: ~container_apps_api_client.models.Template
+        :paramtype template: ~azure.mgmt.app.models.Template
         """
         super(ContainerApp, self).__init__(tags=tags, location=location, **kwargs)
+        self.extended_location = extended_location
         self.identity = identity
         self.provisioning_state = None
         self.managed_environment_id = managed_environment_id
+        self.environment_id = environment_id
         self.latest_revision_name = None
         self.latest_revision_fqdn = None
         self.custom_domain_verification_id = None
@@ -1462,7 +1773,7 @@ class ContainerAppCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.ContainerApp]
+    :vartype value: list[~azure.mgmt.app.models.ContainerApp]
     :ivar next_link: Link to next page of resources.
     :vartype next_link: str
     """
@@ -1480,41 +1791,16 @@ class ContainerAppCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ContainerApp"],
+        value: List["_models.ContainerApp"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.ContainerApp]
+        :paramtype value: list[~azure.mgmt.app.models.ContainerApp]
         """
         super(ContainerAppCollection, self).__init__(**kwargs)
         self.value = value
         self.next_link = None
-
-
-class ContainerAppPatch(msrest.serialization.Model):
-    """Container App Patch.
-
-    :ivar tags: A set of tags. Application-specific metadata in the form of key-value pairs.
-    :vartype tags: dict[str, str]
-    """
-
-    _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-    }
-
-    def __init__(
-        self,
-        *,
-        tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
-        """
-        :keyword tags: A set of tags. Application-specific metadata in the form of key-value pairs.
-        :paramtype tags: dict[str, str]
-        """
-        super(ContainerAppPatch, self).__init__(**kwargs)
-        self.tags = tags
 
 
 class ContainerAppProbe(msrest.serialization.Model):
@@ -1524,7 +1810,7 @@ class ContainerAppProbe(msrest.serialization.Model):
      after having succeeded. Defaults to 3. Minimum value is 1. Maximum value is 10.
     :vartype failure_threshold: int
     :ivar http_get: HTTPGet specifies the http request to perform.
-    :vartype http_get: ~container_apps_api_client.models.ContainerAppProbeHttpGet
+    :vartype http_get: ~azure.mgmt.app.models.ContainerAppProbeHttpGet
     :ivar initial_delay_seconds: Number of seconds after the container has started before liveness
      probes are initiated. Minimum value is 1. Maximum value is 60.
     :vartype initial_delay_seconds: int
@@ -1537,7 +1823,7 @@ class ContainerAppProbe(msrest.serialization.Model):
     :vartype success_threshold: int
     :ivar tcp_socket: TCPSocket specifies an action involving a TCP port. TCP hooks not yet
      supported.
-    :vartype tcp_socket: ~container_apps_api_client.models.ContainerAppProbeTcpSocket
+    :vartype tcp_socket: ~azure.mgmt.app.models.ContainerAppProbeTcpSocket
     :ivar termination_grace_period_seconds: Optional duration in seconds the pod needs to terminate
      gracefully upon probe failure. The grace period is the duration in seconds after the processes
      running in the pod are sent a termination signal and the time when the processes are forcibly
@@ -1551,8 +1837,8 @@ class ContainerAppProbe(msrest.serialization.Model):
     :ivar timeout_seconds: Number of seconds after which the probe times out. Defaults to 1 second.
      Minimum value is 1. Maximum value is 240.
     :vartype timeout_seconds: int
-    :ivar type: The type of probe. Possible values include: "liveness", "readiness", "startup".
-    :vartype type: str or ~container_apps_api_client.models.Type
+    :ivar type: The type of probe. Known values are: "Liveness", "Readiness", "Startup".
+    :vartype type: str or ~azure.mgmt.app.models.Type
     """
 
     _attribute_map = {
@@ -1571,14 +1857,14 @@ class ContainerAppProbe(msrest.serialization.Model):
         self,
         *,
         failure_threshold: Optional[int] = None,
-        http_get: Optional["ContainerAppProbeHttpGet"] = None,
+        http_get: Optional["_models.ContainerAppProbeHttpGet"] = None,
         initial_delay_seconds: Optional[int] = None,
         period_seconds: Optional[int] = None,
         success_threshold: Optional[int] = None,
-        tcp_socket: Optional["ContainerAppProbeTcpSocket"] = None,
+        tcp_socket: Optional["_models.ContainerAppProbeTcpSocket"] = None,
         termination_grace_period_seconds: Optional[int] = None,
         timeout_seconds: Optional[int] = None,
-        type: Optional[Union[str, "Type"]] = None,
+        type: Optional[Union[str, "_models.Type"]] = None,
         **kwargs
     ):
         """
@@ -1586,7 +1872,7 @@ class ContainerAppProbe(msrest.serialization.Model):
          after having succeeded. Defaults to 3. Minimum value is 1. Maximum value is 10.
         :paramtype failure_threshold: int
         :keyword http_get: HTTPGet specifies the http request to perform.
-        :paramtype http_get: ~container_apps_api_client.models.ContainerAppProbeHttpGet
+        :paramtype http_get: ~azure.mgmt.app.models.ContainerAppProbeHttpGet
         :keyword initial_delay_seconds: Number of seconds after the container has started before
          liveness probes are initiated. Minimum value is 1. Maximum value is 60.
         :paramtype initial_delay_seconds: int
@@ -1599,7 +1885,7 @@ class ContainerAppProbe(msrest.serialization.Model):
         :paramtype success_threshold: int
         :keyword tcp_socket: TCPSocket specifies an action involving a TCP port. TCP hooks not yet
          supported.
-        :paramtype tcp_socket: ~container_apps_api_client.models.ContainerAppProbeTcpSocket
+        :paramtype tcp_socket: ~azure.mgmt.app.models.ContainerAppProbeTcpSocket
         :keyword termination_grace_period_seconds: Optional duration in seconds the pod needs to
          terminate gracefully upon probe failure. The grace period is the duration in seconds after the
          processes running in the pod are sent a termination signal and the time when the processes are
@@ -1613,8 +1899,8 @@ class ContainerAppProbe(msrest.serialization.Model):
         :keyword timeout_seconds: Number of seconds after which the probe times out. Defaults to 1
          second. Minimum value is 1. Maximum value is 240.
         :paramtype timeout_seconds: int
-        :keyword type: The type of probe. Possible values include: "liveness", "readiness", "startup".
-        :paramtype type: str or ~container_apps_api_client.models.Type
+        :keyword type: The type of probe. Known values are: "Liveness", "Readiness", "Startup".
+        :paramtype type: str or ~azure.mgmt.app.models.Type
         """
         super(ContainerAppProbe, self).__init__(**kwargs)
         self.failure_threshold = failure_threshold
@@ -1637,15 +1923,15 @@ class ContainerAppProbeHttpGet(msrest.serialization.Model):
      httpHeaders instead.
     :vartype host: str
     :ivar http_headers: Custom headers to set in the request. HTTP allows repeated headers.
-    :vartype http_headers:
-     list[~container_apps_api_client.models.ContainerAppProbeHttpGetHttpHeadersItem]
+    :vartype http_headers: list[~azure.mgmt.app.models.ContainerAppProbeHttpGetHttpHeadersItem]
     :ivar path: Path to access on the HTTP server.
     :vartype path: str
     :ivar port: Required. Name or number of the port to access on the container. Number must be in
      the range 1 to 65535. Name must be an IANA_SVC_NAME.
     :vartype port: int
-    :ivar scheme: Scheme to use for connecting to the host. Defaults to HTTP.
-    :vartype scheme: str
+    :ivar scheme: Scheme to use for connecting to the host. Defaults to HTTP. Known values are:
+     "HTTP", "HTTPS".
+    :vartype scheme: str or ~azure.mgmt.app.models.Scheme
     """
 
     _validation = {
@@ -1665,9 +1951,9 @@ class ContainerAppProbeHttpGet(msrest.serialization.Model):
         *,
         port: int,
         host: Optional[str] = None,
-        http_headers: Optional[List["ContainerAppProbeHttpGetHttpHeadersItem"]] = None,
+        http_headers: Optional[List["_models.ContainerAppProbeHttpGetHttpHeadersItem"]] = None,
         path: Optional[str] = None,
-        scheme: Optional[str] = None,
+        scheme: Optional[Union[str, "_models.Scheme"]] = None,
         **kwargs
     ):
         """
@@ -1675,15 +1961,15 @@ class ContainerAppProbeHttpGet(msrest.serialization.Model):
          in httpHeaders instead.
         :paramtype host: str
         :keyword http_headers: Custom headers to set in the request. HTTP allows repeated headers.
-        :paramtype http_headers:
-         list[~container_apps_api_client.models.ContainerAppProbeHttpGetHttpHeadersItem]
+        :paramtype http_headers: list[~azure.mgmt.app.models.ContainerAppProbeHttpGetHttpHeadersItem]
         :keyword path: Path to access on the HTTP server.
         :paramtype path: str
         :keyword port: Required. Name or number of the port to access on the container. Number must be
          in the range 1 to 65535. Name must be an IANA_SVC_NAME.
         :paramtype port: int
-        :keyword scheme: Scheme to use for connecting to the host. Defaults to HTTP.
-        :paramtype scheme: str
+        :keyword scheme: Scheme to use for connecting to the host. Defaults to HTTP. Known values are:
+         "HTTP", "HTTPS".
+        :paramtype scheme: str or ~azure.mgmt.app.models.Scheme
         """
         super(ContainerAppProbeHttpGet, self).__init__(**kwargs)
         self.host = host
@@ -1849,9 +2135,9 @@ class ContainerResources(msrest.serialization.Model):
 class CookieExpiration(msrest.serialization.Model):
     """The configuration settings of the session cookie's expiration.
 
-    :ivar convention: The convention used when determining the session cookie's expiration.
-     Possible values include: "FixedTime", "IdentityProviderDerived".
-    :vartype convention: str or ~container_apps_api_client.models.CookieExpirationConvention
+    :ivar convention: The convention used when determining the session cookie's expiration. Known
+     values are: "FixedTime", "IdentityProviderDerived".
+    :vartype convention: str or ~azure.mgmt.app.models.CookieExpirationConvention
     :ivar time_to_expiration: The time after the request is made when the session cookie should
      expire.
     :vartype time_to_expiration: str
@@ -1865,14 +2151,14 @@ class CookieExpiration(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        convention: Optional[Union[str, "CookieExpirationConvention"]] = None,
+        convention: Optional[Union[str, "_models.CookieExpirationConvention"]] = None,
         time_to_expiration: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword convention: The convention used when determining the session cookie's expiration.
-         Possible values include: "FixedTime", "IdentityProviderDerived".
-        :paramtype convention: str or ~container_apps_api_client.models.CookieExpirationConvention
+         Known values are: "FixedTime", "IdentityProviderDerived".
+        :paramtype convention: str or ~azure.mgmt.app.models.CookieExpirationConvention
         :keyword time_to_expiration: The time after the request is made when the session cookie should
          expire.
         :paramtype time_to_expiration: str
@@ -1889,9 +2175,8 @@ class CustomDomain(msrest.serialization.Model):
 
     :ivar name: Required. Hostname.
     :vartype name: str
-    :ivar binding_type: Custom Domain binding type. Possible values include: "Disabled",
-     "SniEnabled".
-    :vartype binding_type: str or ~container_apps_api_client.models.BindingType
+    :ivar binding_type: Custom Domain binding type. Known values are: "Disabled", "SniEnabled".
+    :vartype binding_type: str or ~azure.mgmt.app.models.BindingType
     :ivar certificate_id: Required. Resource Id of the Certificate to be bound to this hostname.
      Must exist in the Managed Environment.
     :vartype certificate_id: str
@@ -1913,15 +2198,14 @@ class CustomDomain(msrest.serialization.Model):
         *,
         name: str,
         certificate_id: str,
-        binding_type: Optional[Union[str, "BindingType"]] = None,
+        binding_type: Optional[Union[str, "_models.BindingType"]] = None,
         **kwargs
     ):
         """
         :keyword name: Required. Hostname.
         :paramtype name: str
-        :keyword binding_type: Custom Domain binding type. Possible values include: "Disabled",
-         "SniEnabled".
-        :paramtype binding_type: str or ~container_apps_api_client.models.BindingType
+        :keyword binding_type: Custom Domain binding type. Known values are: "Disabled", "SniEnabled".
+        :paramtype binding_type: str or ~azure.mgmt.app.models.BindingType
         :keyword certificate_id: Required. Resource Id of the Certificate to be bound to this hostname.
          Must exist in the Managed Environment.
         :paramtype certificate_id: str
@@ -1932,35 +2216,24 @@ class CustomDomain(msrest.serialization.Model):
         self.certificate_id = certificate_id
 
 
-class CustomHostnameAnalysisResult(ProxyResource):
+class CustomHostnameAnalysisResult(msrest.serialization.Model):
     """Custom domain analysis.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
-     information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
     :ivar host_name: Host name that was analyzed.
     :vartype host_name: str
     :ivar is_hostname_already_verified: :code:`<code>true</code>` if hostname is already verified;
      otherwise, :code:`<code>false</code>`.
     :vartype is_hostname_already_verified: bool
-    :ivar custom_domain_verification_test: DNS verification test result. Possible values include:
+    :ivar custom_domain_verification_test: DNS verification test result. Known values are:
      "Passed", "Failed", "Skipped".
     :vartype custom_domain_verification_test: str or
-     ~container_apps_api_client.models.DnsVerificationTestResult
+     ~azure.mgmt.app.models.DnsVerificationTestResult
     :ivar custom_domain_verification_failure_info: Raw failure information if DNS verification
      fails.
     :vartype custom_domain_verification_failure_info:
-     ~container_apps_api_client.models.DefaultErrorResponse
+     ~azure.mgmt.app.models.CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo
     :ivar has_conflict_on_managed_environment: :code:`<code>true</code>` if there is a conflict on
      the Container App's managed environment; otherwise, :code:`<code>false</code>`.
     :vartype has_conflict_on_managed_environment: bool
@@ -1980,10 +2253,6 @@ class CustomHostnameAnalysisResult(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
         'host_name': {'readonly': True},
         'is_hostname_already_verified': {'readonly': True},
         'custom_domain_verification_test': {'readonly': True},
@@ -1993,21 +2262,17 @@ class CustomHostnameAnalysisResult(ProxyResource):
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'host_name': {'key': 'properties.hostName', 'type': 'str'},
-        'is_hostname_already_verified': {'key': 'properties.isHostnameAlreadyVerified', 'type': 'bool'},
-        'custom_domain_verification_test': {'key': 'properties.customDomainVerificationTest', 'type': 'str'},
-        'custom_domain_verification_failure_info': {'key': 'properties.customDomainVerificationFailureInfo', 'type': 'DefaultErrorResponse'},
-        'has_conflict_on_managed_environment': {'key': 'properties.hasConflictOnManagedEnvironment', 'type': 'bool'},
-        'conflicting_container_app_resource_id': {'key': 'properties.conflictingContainerAppResourceId', 'type': 'str'},
-        'c_name_records': {'key': 'properties.cNameRecords', 'type': '[str]'},
-        'txt_records': {'key': 'properties.txtRecords', 'type': '[str]'},
-        'a_records': {'key': 'properties.aRecords', 'type': '[str]'},
-        'alternate_c_name_records': {'key': 'properties.alternateCNameRecords', 'type': '[str]'},
-        'alternate_txt_records': {'key': 'properties.alternateTxtRecords', 'type': '[str]'},
+        'host_name': {'key': 'hostName', 'type': 'str'},
+        'is_hostname_already_verified': {'key': 'isHostnameAlreadyVerified', 'type': 'bool'},
+        'custom_domain_verification_test': {'key': 'customDomainVerificationTest', 'type': 'str'},
+        'custom_domain_verification_failure_info': {'key': 'customDomainVerificationFailureInfo', 'type': 'CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo'},
+        'has_conflict_on_managed_environment': {'key': 'hasConflictOnManagedEnvironment', 'type': 'bool'},
+        'conflicting_container_app_resource_id': {'key': 'conflictingContainerAppResourceId', 'type': 'str'},
+        'c_name_records': {'key': 'cNameRecords', 'type': '[str]'},
+        'txt_records': {'key': 'txtRecords', 'type': '[str]'},
+        'a_records': {'key': 'aRecords', 'type': '[str]'},
+        'alternate_c_name_records': {'key': 'alternateCNameRecords', 'type': '[str]'},
+        'alternate_txt_records': {'key': 'alternateTxtRecords', 'type': '[str]'},
     }
 
     def __init__(
@@ -2046,6 +2311,90 @@ class CustomHostnameAnalysisResult(ProxyResource):
         self.alternate_txt_records = alternate_txt_records
 
 
+class CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo(msrest.serialization.Model):
+    """Raw failure information if DNS verification fails.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar code: Standardized string to programmatically identify the error.
+    :vartype code: str
+    :ivar message: Detailed error description and debugging information.
+    :vartype message: str
+    :ivar target: Detailed error description and debugging information.
+    :vartype target: str
+    :ivar details: Details or the error.
+    :vartype details:
+     list[~azure.mgmt.app.models.CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem]
+    """
+
+    _validation = {
+        'code': {'readonly': True},
+        'message': {'readonly': True},
+        'target': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'code': {'key': 'code', 'type': 'str'},
+        'message': {'key': 'message', 'type': 'str'},
+        'target': {'key': 'target', 'type': 'str'},
+        'details': {'key': 'details', 'type': '[CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        details: Optional[List["_models.CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword details: Details or the error.
+        :paramtype details:
+         list[~azure.mgmt.app.models.CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem]
+        """
+        super(CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo, self).__init__(**kwargs)
+        self.code = None
+        self.message = None
+        self.target = None
+        self.details = details
+
+
+class CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem(msrest.serialization.Model):
+    """Detailed errors.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar code: Standardized string to programmatically identify the error.
+    :vartype code: str
+    :ivar message: Detailed error description and debugging information.
+    :vartype message: str
+    :ivar target: Detailed error description and debugging information.
+    :vartype target: str
+    """
+
+    _validation = {
+        'code': {'readonly': True},
+        'message': {'readonly': True},
+        'target': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'code': {'key': 'code', 'type': 'str'},
+        'message': {'key': 'message', 'type': 'str'},
+        'target': {'key': 'target', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem, self).__init__(**kwargs)
+        self.code = None
+        self.message = None
+        self.target = None
+
+
 class CustomOpenIdConnectProvider(msrest.serialization.Model):
     """The configuration settings of the custom Open ID Connect provider.
 
@@ -2054,10 +2403,10 @@ class CustomOpenIdConnectProvider(msrest.serialization.Model):
     :vartype enabled: bool
     :ivar registration: The configuration settings of the app registration for the custom Open ID
      Connect provider.
-    :vartype registration: ~container_apps_api_client.models.OpenIdConnectRegistration
+    :vartype registration: ~azure.mgmt.app.models.OpenIdConnectRegistration
     :ivar login: The configuration settings of the login flow of the custom Open ID Connect
      provider.
-    :vartype login: ~container_apps_api_client.models.OpenIdConnectLogin
+    :vartype login: ~azure.mgmt.app.models.OpenIdConnectLogin
     """
 
     _attribute_map = {
@@ -2070,8 +2419,8 @@ class CustomOpenIdConnectProvider(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["OpenIdConnectRegistration"] = None,
-        login: Optional["OpenIdConnectLogin"] = None,
+        registration: Optional["_models.OpenIdConnectRegistration"] = None,
+        login: Optional["_models.OpenIdConnectLogin"] = None,
         **kwargs
     ):
         """
@@ -2080,10 +2429,10 @@ class CustomOpenIdConnectProvider(msrest.serialization.Model):
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the app registration for the custom Open
          ID Connect provider.
-        :paramtype registration: ~container_apps_api_client.models.OpenIdConnectRegistration
+        :paramtype registration: ~azure.mgmt.app.models.OpenIdConnectRegistration
         :keyword login: The configuration settings of the login flow of the custom Open ID Connect
          provider.
-        :paramtype login: ~container_apps_api_client.models.OpenIdConnectLogin
+        :paramtype login: ~azure.mgmt.app.models.OpenIdConnectLogin
         """
         super(CustomOpenIdConnectProvider, self).__init__(**kwargs)
         self.enabled = enabled
@@ -2100,7 +2449,7 @@ class CustomScaleRule(msrest.serialization.Model):
     :ivar metadata: Metadata properties to describe custom scale rule.
     :vartype metadata: dict[str, str]
     :ivar auth: Authentication secrets for the custom scale rule.
-    :vartype auth: list[~container_apps_api_client.models.ScaleRuleAuth]
+    :vartype auth: list[~azure.mgmt.app.models.ScaleRuleAuth]
     """
 
     _attribute_map = {
@@ -2114,7 +2463,7 @@ class CustomScaleRule(msrest.serialization.Model):
         *,
         type: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
-        auth: Optional[List["ScaleRuleAuth"]] = None,
+        auth: Optional[List["_models.ScaleRuleAuth"]] = None,
         **kwargs
     ):
         """
@@ -2124,7 +2473,7 @@ class CustomScaleRule(msrest.serialization.Model):
         :keyword metadata: Metadata properties to describe custom scale rule.
         :paramtype metadata: dict[str, str]
         :keyword auth: Authentication secrets for the custom scale rule.
-        :paramtype auth: list[~container_apps_api_client.models.ScaleRuleAuth]
+        :paramtype auth: list[~azure.mgmt.app.models.ScaleRuleAuth]
         """
         super(CustomScaleRule, self).__init__(**kwargs)
         self.type = type
@@ -2140,10 +2489,12 @@ class Dapr(msrest.serialization.Model):
     :ivar app_id: Dapr application identifier.
     :vartype app_id: str
     :ivar app_protocol: Tells Dapr which protocol your application is using. Valid options are http
-     and grpc. Default is http. Possible values include: "http", "grpc".
-    :vartype app_protocol: str or ~container_apps_api_client.models.AppProtocol
+     and grpc. Default is http. Known values are: "http", "grpc".
+    :vartype app_protocol: str or ~azure.mgmt.app.models.AppProtocol
     :ivar app_port: Tells Dapr which port your application is listening on.
     :vartype app_port: int
+    :ivar http_read_buffer_size:
+    :vartype http_read_buffer_size: int
     """
 
     _attribute_map = {
@@ -2151,6 +2502,7 @@ class Dapr(msrest.serialization.Model):
         'app_id': {'key': 'appId', 'type': 'str'},
         'app_protocol': {'key': 'appProtocol', 'type': 'str'},
         'app_port': {'key': 'appPort', 'type': 'int'},
+        'http_read_buffer_size': {'key': 'httpReadBufferSize', 'type': 'int'},
     }
 
     def __init__(
@@ -2158,8 +2510,9 @@ class Dapr(msrest.serialization.Model):
         *,
         enabled: Optional[bool] = None,
         app_id: Optional[str] = None,
-        app_protocol: Optional[Union[str, "AppProtocol"]] = None,
+        app_protocol: Optional[Union[str, "_models.AppProtocol"]] = None,
         app_port: Optional[int] = None,
+        http_read_buffer_size: Optional[int] = None,
         **kwargs
     ):
         """
@@ -2168,16 +2521,19 @@ class Dapr(msrest.serialization.Model):
         :keyword app_id: Dapr application identifier.
         :paramtype app_id: str
         :keyword app_protocol: Tells Dapr which protocol your application is using. Valid options are
-         http and grpc. Default is http. Possible values include: "http", "grpc".
-        :paramtype app_protocol: str or ~container_apps_api_client.models.AppProtocol
+         http and grpc. Default is http. Known values are: "http", "grpc".
+        :paramtype app_protocol: str or ~azure.mgmt.app.models.AppProtocol
         :keyword app_port: Tells Dapr which port your application is listening on.
         :paramtype app_port: int
+        :keyword http_read_buffer_size:
+        :paramtype http_read_buffer_size: int
         """
         super(Dapr, self).__init__(**kwargs)
         self.enabled = enabled
         self.app_id = app_id
         self.app_protocol = app_protocol
         self.app_port = app_port
+        self.http_read_buffer_size = http_read_buffer_size
 
 
 class DaprComponent(ProxyResource):
@@ -2195,7 +2551,7 @@ class DaprComponent(ProxyResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar component_type: Component type.
     :vartype component_type: str
     :ivar version: Component version.
@@ -2205,9 +2561,9 @@ class DaprComponent(ProxyResource):
     :ivar init_timeout: Initialization timeout.
     :vartype init_timeout: str
     :ivar secrets: Collection of secrets used by a Dapr component.
-    :vartype secrets: list[~container_apps_api_client.models.Secret]
+    :vartype secrets: list[~azure.mgmt.app.models.Secret]
     :ivar metadata: Component metadata.
-    :vartype metadata: list[~container_apps_api_client.models.DaprMetadata]
+    :vartype metadata: list[~azure.mgmt.app.models.DaprMetadata]
     :ivar scopes: Names of container apps that can use this Dapr component.
     :vartype scopes: list[str]
     """
@@ -2240,8 +2596,8 @@ class DaprComponent(ProxyResource):
         version: Optional[str] = None,
         ignore_errors: Optional[bool] = None,
         init_timeout: Optional[str] = None,
-        secrets: Optional[List["Secret"]] = None,
-        metadata: Optional[List["DaprMetadata"]] = None,
+        secrets: Optional[List["_models.Secret"]] = None,
+        metadata: Optional[List["_models.DaprMetadata"]] = None,
         scopes: Optional[List[str]] = None,
         **kwargs
     ):
@@ -2255,9 +2611,9 @@ class DaprComponent(ProxyResource):
         :keyword init_timeout: Initialization timeout.
         :paramtype init_timeout: str
         :keyword secrets: Collection of secrets used by a Dapr component.
-        :paramtype secrets: list[~container_apps_api_client.models.Secret]
+        :paramtype secrets: list[~azure.mgmt.app.models.Secret]
         :keyword metadata: Component metadata.
-        :paramtype metadata: list[~container_apps_api_client.models.DaprMetadata]
+        :paramtype metadata: list[~azure.mgmt.app.models.DaprMetadata]
         :keyword scopes: Names of container apps that can use this Dapr component.
         :paramtype scopes: list[str]
         """
@@ -2279,7 +2635,7 @@ class DaprComponentsCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.DaprComponent]
+    :vartype value: list[~azure.mgmt.app.models.DaprComponent]
     :ivar next_link: Link to next page of resources.
     :vartype next_link: str
     """
@@ -2297,12 +2653,12 @@ class DaprComponentsCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["DaprComponent"],
+        value: List["_models.DaprComponent"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.DaprComponent]
+        :paramtype value: list[~azure.mgmt.app.models.DaprComponent]
         """
         super(DaprComponentsCollection, self).__init__(**kwargs)
         self.value = value
@@ -2350,12 +2706,43 @@ class DaprMetadata(msrest.serialization.Model):
         self.secret_ref = secret_ref
 
 
+class DaprSecretsCollection(msrest.serialization.Model):
+    """Dapr component Secrets Collection ARM resource.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: Required. Collection of secrets used by a Dapr component.
+    :vartype value: list[~azure.mgmt.app.models.Secret]
+    """
+
+    _validation = {
+        'value': {'required': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[Secret]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: List["_models.Secret"],
+        **kwargs
+    ):
+        """
+        :keyword value: Required. Collection of secrets used by a Dapr component.
+        :paramtype value: list[~azure.mgmt.app.models.Secret]
+        """
+        super(DaprSecretsCollection, self).__init__(**kwargs)
+        self.value = value
+
+
 class DefaultAuthorizationPolicy(msrest.serialization.Model):
     """The configuration settings of the Azure Active Directory default authorization policy.
 
     :ivar allowed_principals: The configuration settings of the Azure Active Directory allowed
      principals.
-    :vartype allowed_principals: ~container_apps_api_client.models.AllowedPrincipals
+    :vartype allowed_principals: ~azure.mgmt.app.models.AllowedPrincipals
     :ivar allowed_applications: The configuration settings of the Azure Active Directory allowed
      applications.
     :vartype allowed_applications: list[str]
@@ -2369,14 +2756,14 @@ class DefaultAuthorizationPolicy(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        allowed_principals: Optional["AllowedPrincipals"] = None,
+        allowed_principals: Optional["_models.AllowedPrincipals"] = None,
         allowed_applications: Optional[List[str]] = None,
         **kwargs
     ):
         """
         :keyword allowed_principals: The configuration settings of the Azure Active Directory allowed
          principals.
-        :paramtype allowed_principals: ~container_apps_api_client.models.AllowedPrincipals
+        :paramtype allowed_principals: ~azure.mgmt.app.models.AllowedPrincipals
         :keyword allowed_applications: The configuration settings of the Azure Active Directory allowed
          applications.
         :paramtype allowed_applications: list[str]
@@ -2392,7 +2779,7 @@ class DefaultErrorResponse(msrest.serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar error: Error model.
-    :vartype error: ~container_apps_api_client.models.DefaultErrorResponseError
+    :vartype error: ~azure.mgmt.app.models.DefaultErrorResponseError
     """
 
     _validation = {
@@ -2425,7 +2812,7 @@ class DefaultErrorResponseError(msrest.serialization.Model):
     :ivar target: Detailed error description and debugging information.
     :vartype target: str
     :ivar details: Details or the error.
-    :vartype details: list[~container_apps_api_client.models.DefaultErrorResponseErrorDetailsItem]
+    :vartype details: list[~azure.mgmt.app.models.DefaultErrorResponseErrorDetailsItem]
     :ivar innererror: More information to debug error.
     :vartype innererror: str
     """
@@ -2448,13 +2835,12 @@ class DefaultErrorResponseError(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        details: Optional[List["DefaultErrorResponseErrorDetailsItem"]] = None,
+        details: Optional[List["_models.DefaultErrorResponseErrorDetailsItem"]] = None,
         **kwargs
     ):
         """
         :keyword details: Details or the error.
-        :paramtype details:
-         list[~container_apps_api_client.models.DefaultErrorResponseErrorDetailsItem]
+        :paramtype details: list[~azure.mgmt.app.models.DefaultErrorResponseErrorDetailsItem]
         """
         super(DefaultErrorResponseError, self).__init__(**kwargs)
         self.code = None
@@ -2501,6 +2887,497 @@ class DefaultErrorResponseErrorDetailsItem(msrest.serialization.Model):
         self.target = None
 
 
+class DiagnosticDataProviderMetadata(msrest.serialization.Model):
+    """Details of a diagnostics data provider.
+
+    :ivar provider_name: Name of data provider.
+    :vartype provider_name: str
+    :ivar property_bag: Collection of properties.
+    :vartype property_bag:
+     list[~azure.mgmt.app.models.DiagnosticDataProviderMetadataPropertyBagItem]
+    """
+
+    _attribute_map = {
+        'provider_name': {'key': 'providerName', 'type': 'str'},
+        'property_bag': {'key': 'propertyBag', 'type': '[DiagnosticDataProviderMetadataPropertyBagItem]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        provider_name: Optional[str] = None,
+        property_bag: Optional[List["_models.DiagnosticDataProviderMetadataPropertyBagItem"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword provider_name: Name of data provider.
+        :paramtype provider_name: str
+        :keyword property_bag: Collection of properties.
+        :paramtype property_bag:
+         list[~azure.mgmt.app.models.DiagnosticDataProviderMetadataPropertyBagItem]
+        """
+        super(DiagnosticDataProviderMetadata, self).__init__(**kwargs)
+        self.provider_name = provider_name
+        self.property_bag = property_bag
+
+
+class DiagnosticDataProviderMetadataPropertyBagItem(msrest.serialization.Model):
+    """Property details.
+
+    :ivar name: Property name.
+    :vartype name: str
+    :ivar value: Property value.
+    :vartype value: str
+    """
+
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'str'},
+        'value': {'key': 'value', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[str] = None,
+        value: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: Property name.
+        :paramtype name: str
+        :keyword value: Property value.
+        :paramtype value: str
+        """
+        super(DiagnosticDataProviderMetadataPropertyBagItem, self).__init__(**kwargs)
+        self.name = name
+        self.value = value
+
+
+class DiagnosticDataTableResponseColumn(msrest.serialization.Model):
+    """Diagnostics data column.
+
+    :ivar column_name: Column name.
+    :vartype column_name: str
+    :ivar data_type: Data type of the column.
+    :vartype data_type: str
+    :ivar column_type: Column type.
+    :vartype column_type: str
+    """
+
+    _attribute_map = {
+        'column_name': {'key': 'columnName', 'type': 'str'},
+        'data_type': {'key': 'dataType', 'type': 'str'},
+        'column_type': {'key': 'columnType', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        column_name: Optional[str] = None,
+        data_type: Optional[str] = None,
+        column_type: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword column_name: Column name.
+        :paramtype column_name: str
+        :keyword data_type: Data type of the column.
+        :paramtype data_type: str
+        :keyword column_type: Column type.
+        :paramtype column_type: str
+        """
+        super(DiagnosticDataTableResponseColumn, self).__init__(**kwargs)
+        self.column_name = column_name
+        self.data_type = data_type
+        self.column_type = column_type
+
+
+class DiagnosticDataTableResponseObject(msrest.serialization.Model):
+    """Diagnostics data table.
+
+    :ivar table_name: Table name.
+    :vartype table_name: str
+    :ivar columns: Columns in the table.
+    :vartype columns: list[~azure.mgmt.app.models.DiagnosticDataTableResponseColumn]
+    :ivar rows: Rows in the table.
+    :vartype rows: list[any]
+    """
+
+    _attribute_map = {
+        'table_name': {'key': 'tableName', 'type': 'str'},
+        'columns': {'key': 'columns', 'type': '[DiagnosticDataTableResponseColumn]'},
+        'rows': {'key': 'rows', 'type': '[object]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        table_name: Optional[str] = None,
+        columns: Optional[List["_models.DiagnosticDataTableResponseColumn"]] = None,
+        rows: Optional[List[Any]] = None,
+        **kwargs
+    ):
+        """
+        :keyword table_name: Table name.
+        :paramtype table_name: str
+        :keyword columns: Columns in the table.
+        :paramtype columns: list[~azure.mgmt.app.models.DiagnosticDataTableResponseColumn]
+        :keyword rows: Rows in the table.
+        :paramtype rows: list[any]
+        """
+        super(DiagnosticDataTableResponseObject, self).__init__(**kwargs)
+        self.table_name = table_name
+        self.columns = columns
+        self.rows = rows
+
+
+class DiagnosticRendering(msrest.serialization.Model):
+    """Rendering details of a diagnostics table.
+
+    :ivar type: Rendering type.
+    :vartype type: int
+    :ivar title: Title of the table.
+    :vartype title: str
+    :ivar description: Description of the table.
+    :vartype description: str
+    :ivar is_visible: Flag if the table should be rendered.
+    :vartype is_visible: bool
+    """
+
+    _attribute_map = {
+        'type': {'key': 'type', 'type': 'int'},
+        'title': {'key': 'title', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'is_visible': {'key': 'isVisible', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Optional[int] = None,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+        is_visible: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword type: Rendering type.
+        :paramtype type: int
+        :keyword title: Title of the table.
+        :paramtype title: str
+        :keyword description: Description of the table.
+        :paramtype description: str
+        :keyword is_visible: Flag if the table should be rendered.
+        :paramtype is_visible: bool
+        """
+        super(DiagnosticRendering, self).__init__(**kwargs)
+        self.type = type
+        self.title = title
+        self.description = description
+        self.is_visible = is_visible
+
+
+class Diagnostics(ProxyResource):
+    """Diagnostics data for a resource.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
+    :ivar properties: Diagnostics resource specific properties.
+    :vartype properties: ~azure.mgmt.app.models.DiagnosticsProperties
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'properties': {'key': 'properties', 'type': 'DiagnosticsProperties'},
+    }
+
+    def __init__(
+        self,
+        *,
+        properties: Optional["_models.DiagnosticsProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword properties: Diagnostics resource specific properties.
+        :paramtype properties: ~azure.mgmt.app.models.DiagnosticsProperties
+        """
+        super(Diagnostics, self).__init__(**kwargs)
+        self.properties = properties
+
+
+class DiagnosticsCollection(msrest.serialization.Model):
+    """Diagnostics data collection for a resource.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: Required. Collection of diagnostic data.
+    :vartype value: list[~azure.mgmt.app.models.Diagnostics]
+    :ivar next_link: Link to next page of resources.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'required': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[Diagnostics]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: List["_models.Diagnostics"],
+        **kwargs
+    ):
+        """
+        :keyword value: Required. Collection of diagnostic data.
+        :paramtype value: list[~azure.mgmt.app.models.Diagnostics]
+        """
+        super(DiagnosticsCollection, self).__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
+class DiagnosticsDataApiResponse(msrest.serialization.Model):
+    """Diagnostics data returned from a detector.
+
+    :ivar table: Table response.
+    :vartype table: ~azure.mgmt.app.models.DiagnosticDataTableResponseObject
+    :ivar rendering_properties: Details of the table response.
+    :vartype rendering_properties: ~azure.mgmt.app.models.DiagnosticRendering
+    """
+
+    _attribute_map = {
+        'table': {'key': 'table', 'type': 'DiagnosticDataTableResponseObject'},
+        'rendering_properties': {'key': 'renderingProperties', 'type': 'DiagnosticRendering'},
+    }
+
+    def __init__(
+        self,
+        *,
+        table: Optional["_models.DiagnosticDataTableResponseObject"] = None,
+        rendering_properties: Optional["_models.DiagnosticRendering"] = None,
+        **kwargs
+    ):
+        """
+        :keyword table: Table response.
+        :paramtype table: ~azure.mgmt.app.models.DiagnosticDataTableResponseObject
+        :keyword rendering_properties: Details of the table response.
+        :paramtype rendering_properties: ~azure.mgmt.app.models.DiagnosticRendering
+        """
+        super(DiagnosticsDataApiResponse, self).__init__(**kwargs)
+        self.table = table
+        self.rendering_properties = rendering_properties
+
+
+class DiagnosticsDefinition(msrest.serialization.Model):
+    """Metadata of the diagnostics response.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Unique detector name.
+    :vartype id: str
+    :ivar name: Display Name of the detector.
+    :vartype name: str
+    :ivar description: Details of the diagnostics info.
+    :vartype description: str
+    :ivar author: Authors' names of the detector.
+    :vartype author: str
+    :ivar category: Category of the detector.
+    :vartype category: str
+    :ivar support_topic_list: List of support topics.
+    :vartype support_topic_list: list[~azure.mgmt.app.models.DiagnosticSupportTopic]
+    :ivar analysis_types: List of analysis types.
+    :vartype analysis_types: list[str]
+    :ivar type: Authors' names of the detector.
+    :vartype type: str
+    :ivar score: Authors' names of the detector.
+    :vartype score: float
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'description': {'readonly': True},
+        'author': {'readonly': True},
+        'category': {'readonly': True},
+        'type': {'readonly': True},
+        'score': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'author': {'key': 'author', 'type': 'str'},
+        'category': {'key': 'category', 'type': 'str'},
+        'support_topic_list': {'key': 'supportTopicList', 'type': '[DiagnosticSupportTopic]'},
+        'analysis_types': {'key': 'analysisTypes', 'type': '[str]'},
+        'type': {'key': 'type', 'type': 'str'},
+        'score': {'key': 'score', 'type': 'float'},
+    }
+
+    def __init__(
+        self,
+        *,
+        support_topic_list: Optional[List["_models.DiagnosticSupportTopic"]] = None,
+        analysis_types: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword support_topic_list: List of support topics.
+        :paramtype support_topic_list: list[~azure.mgmt.app.models.DiagnosticSupportTopic]
+        :keyword analysis_types: List of analysis types.
+        :paramtype analysis_types: list[str]
+        """
+        super(DiagnosticsDefinition, self).__init__(**kwargs)
+        self.id = None
+        self.name = None
+        self.description = None
+        self.author = None
+        self.category = None
+        self.support_topic_list = support_topic_list
+        self.analysis_types = analysis_types
+        self.type = None
+        self.score = None
+
+
+class DiagnosticsProperties(msrest.serialization.Model):
+    """Diagnostics resource specific properties.
+
+    :ivar metadata: Metadata of the diagnostics response.
+    :vartype metadata: ~azure.mgmt.app.models.DiagnosticsDefinition
+    :ivar dataset: Set of data collections associated with the response.
+    :vartype dataset: list[~azure.mgmt.app.models.DiagnosticsDataApiResponse]
+    :ivar status: Status of the diagnostics response.
+    :vartype status: ~azure.mgmt.app.models.DiagnosticsStatus
+    :ivar data_provider_metadata: List of data providers' metadata.
+    :vartype data_provider_metadata: ~azure.mgmt.app.models.DiagnosticDataProviderMetadata
+    """
+
+    _attribute_map = {
+        'metadata': {'key': 'metadata', 'type': 'DiagnosticsDefinition'},
+        'dataset': {'key': 'dataset', 'type': '[DiagnosticsDataApiResponse]'},
+        'status': {'key': 'status', 'type': 'DiagnosticsStatus'},
+        'data_provider_metadata': {'key': 'dataProviderMetadata', 'type': 'DiagnosticDataProviderMetadata'},
+    }
+
+    def __init__(
+        self,
+        *,
+        metadata: Optional["_models.DiagnosticsDefinition"] = None,
+        dataset: Optional[List["_models.DiagnosticsDataApiResponse"]] = None,
+        status: Optional["_models.DiagnosticsStatus"] = None,
+        data_provider_metadata: Optional["_models.DiagnosticDataProviderMetadata"] = None,
+        **kwargs
+    ):
+        """
+        :keyword metadata: Metadata of the diagnostics response.
+        :paramtype metadata: ~azure.mgmt.app.models.DiagnosticsDefinition
+        :keyword dataset: Set of data collections associated with the response.
+        :paramtype dataset: list[~azure.mgmt.app.models.DiagnosticsDataApiResponse]
+        :keyword status: Status of the diagnostics response.
+        :paramtype status: ~azure.mgmt.app.models.DiagnosticsStatus
+        :keyword data_provider_metadata: List of data providers' metadata.
+        :paramtype data_provider_metadata: ~azure.mgmt.app.models.DiagnosticDataProviderMetadata
+        """
+        super(DiagnosticsProperties, self).__init__(**kwargs)
+        self.metadata = metadata
+        self.dataset = dataset
+        self.status = status
+        self.data_provider_metadata = data_provider_metadata
+
+
+class DiagnosticsStatus(msrest.serialization.Model):
+    """Rendering details of a diagnostics table.
+
+    :ivar message: Diagnostic message.
+    :vartype message: str
+    :ivar status_id: Status.
+    :vartype status_id: int
+    """
+
+    _attribute_map = {
+        'message': {'key': 'message', 'type': 'str'},
+        'status_id': {'key': 'statusId', 'type': 'int'},
+    }
+
+    def __init__(
+        self,
+        *,
+        message: Optional[str] = None,
+        status_id: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword message: Diagnostic message.
+        :paramtype message: str
+        :keyword status_id: Status.
+        :paramtype status_id: int
+        """
+        super(DiagnosticsStatus, self).__init__(**kwargs)
+        self.message = message
+        self.status_id = status_id
+
+
+class DiagnosticSupportTopic(msrest.serialization.Model):
+    """Support topic information.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Unique topic identifier.
+    :vartype id: str
+    :ivar pes_id: PES identifier.
+    :vartype pes_id: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'pes_id': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'pes_id': {'key': 'pesId', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(DiagnosticSupportTopic, self).__init__(**kwargs)
+        self.id = None
+        self.pes_id = None
+
+
 class EnvironmentVar(msrest.serialization.Model):
     """Container App container environment variable.
 
@@ -2542,6 +3419,38 @@ class EnvironmentVar(msrest.serialization.Model):
         self.secret_ref = secret_ref
 
 
+class ExtendedLocation(msrest.serialization.Model):
+    """The complex type of the extended location.
+
+    :ivar name: The name of the extended location.
+    :vartype name: str
+    :ivar type: The type of the extended location. Known values are: "CustomLocation".
+    :vartype type: str or ~azure.mgmt.app.models.ExtendedLocationTypes
+    """
+
+    _attribute_map = {
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[str] = None,
+        type: Optional[Union[str, "_models.ExtendedLocationTypes"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: The name of the extended location.
+        :paramtype name: str
+        :keyword type: The type of the extended location. Known values are: "CustomLocation".
+        :paramtype type: str or ~azure.mgmt.app.models.ExtendedLocationTypes
+        """
+        super(ExtendedLocation, self).__init__(**kwargs)
+        self.name = name
+        self.type = type
+
+
 class Facebook(msrest.serialization.Model):
     """The configuration settings of the Facebook provider.
 
@@ -2550,11 +3459,11 @@ class Facebook(msrest.serialization.Model):
     :vartype enabled: bool
     :ivar registration: The configuration settings of the app registration for the Facebook
      provider.
-    :vartype registration: ~container_apps_api_client.models.AppRegistration
+    :vartype registration: ~azure.mgmt.app.models.AppRegistration
     :ivar graph_api_version: The version of the Facebook api to be used while logging in.
     :vartype graph_api_version: str
     :ivar login: The configuration settings of the login flow.
-    :vartype login: ~container_apps_api_client.models.LoginScopes
+    :vartype login: ~azure.mgmt.app.models.LoginScopes
     """
 
     _attribute_map = {
@@ -2568,9 +3477,9 @@ class Facebook(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["AppRegistration"] = None,
+        registration: Optional["_models.AppRegistration"] = None,
         graph_api_version: Optional[str] = None,
-        login: Optional["LoginScopes"] = None,
+        login: Optional["_models.LoginScopes"] = None,
         **kwargs
     ):
         """
@@ -2579,11 +3488,11 @@ class Facebook(msrest.serialization.Model):
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the app registration for the Facebook
          provider.
-        :paramtype registration: ~container_apps_api_client.models.AppRegistration
+        :paramtype registration: ~azure.mgmt.app.models.AppRegistration
         :keyword graph_api_version: The version of the Facebook api to be used while logging in.
         :paramtype graph_api_version: str
         :keyword login: The configuration settings of the login flow.
-        :paramtype login: ~container_apps_api_client.models.LoginScopes
+        :paramtype login: ~azure.mgmt.app.models.LoginScopes
         """
         super(Facebook, self).__init__(**kwargs)
         self.enabled = enabled
@@ -2595,9 +3504,9 @@ class Facebook(msrest.serialization.Model):
 class ForwardProxy(msrest.serialization.Model):
     """The configuration settings of a forward proxy used to make the requests.
 
-    :ivar convention: The convention used to determine the url of the request made. Possible values
-     include: "NoProxy", "Standard", "Custom".
-    :vartype convention: str or ~container_apps_api_client.models.ForwardProxyConvention
+    :ivar convention: The convention used to determine the url of the request made. Known values
+     are: "NoProxy", "Standard", "Custom".
+    :vartype convention: str or ~azure.mgmt.app.models.ForwardProxyConvention
     :ivar custom_host_header_name: The name of the header containing the host of the request.
     :vartype custom_host_header_name: str
     :ivar custom_proto_header_name: The name of the header containing the scheme of the request.
@@ -2613,15 +3522,15 @@ class ForwardProxy(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        convention: Optional[Union[str, "ForwardProxyConvention"]] = None,
+        convention: Optional[Union[str, "_models.ForwardProxyConvention"]] = None,
         custom_host_header_name: Optional[str] = None,
         custom_proto_header_name: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword convention: The convention used to determine the url of the request made. Possible
-         values include: "NoProxy", "Standard", "Custom".
-        :paramtype convention: str or ~container_apps_api_client.models.ForwardProxyConvention
+        :keyword convention: The convention used to determine the url of the request made. Known values
+         are: "NoProxy", "Standard", "Custom".
+        :paramtype convention: str or ~azure.mgmt.app.models.ForwardProxyConvention
         :keyword custom_host_header_name: The name of the header containing the host of the request.
         :paramtype custom_host_header_name: str
         :keyword custom_proto_header_name: The name of the header containing the scheme of the request.
@@ -2640,9 +3549,9 @@ class GitHub(msrest.serialization.Model):
      the set registration; otherwise, :code:`<code>true</code>`.
     :vartype enabled: bool
     :ivar registration: The configuration settings of the app registration for the GitHub provider.
-    :vartype registration: ~container_apps_api_client.models.ClientRegistration
+    :vartype registration: ~azure.mgmt.app.models.ClientRegistration
     :ivar login: The configuration settings of the login flow.
-    :vartype login: ~container_apps_api_client.models.LoginScopes
+    :vartype login: ~azure.mgmt.app.models.LoginScopes
     """
 
     _attribute_map = {
@@ -2655,8 +3564,8 @@ class GitHub(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["ClientRegistration"] = None,
-        login: Optional["LoginScopes"] = None,
+        registration: Optional["_models.ClientRegistration"] = None,
+        login: Optional["_models.LoginScopes"] = None,
         **kwargs
     ):
         """
@@ -2665,9 +3574,9 @@ class GitHub(msrest.serialization.Model):
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the app registration for the GitHub
          provider.
-        :paramtype registration: ~container_apps_api_client.models.ClientRegistration
+        :paramtype registration: ~azure.mgmt.app.models.ClientRegistration
         :keyword login: The configuration settings of the login flow.
-        :paramtype login: ~container_apps_api_client.models.LoginScopes
+        :paramtype login: ~azure.mgmt.app.models.LoginScopes
         """
         super(GitHub, self).__init__(**kwargs)
         self.enabled = enabled
@@ -2679,25 +3588,28 @@ class GithubActionConfiguration(msrest.serialization.Model):
     """Configuration properties that define the mutable settings of a Container App SourceControl.
 
     :ivar registry_info: Registry configurations.
-    :vartype registry_info: ~container_apps_api_client.models.RegistryInfo
+    :vartype registry_info: ~azure.mgmt.app.models.RegistryInfo
     :ivar azure_credentials: AzureCredentials configurations.
-    :vartype azure_credentials: ~container_apps_api_client.models.AzureCredentials
-    :ivar dockerfile_path: Docker file path.
-    :vartype dockerfile_path: str
+    :vartype azure_credentials: ~azure.mgmt.app.models.AzureCredentials
+    :ivar context_path: Context path.
+    :vartype context_path: str
+    :ivar image: Image name.
+    :vartype image: str
     :ivar publish_type: Code or Image.
     :vartype publish_type: str
     :ivar os: Operation system.
     :vartype os: str
     :ivar runtime_stack: Runtime stack.
     :vartype runtime_stack: str
-    :ivar runtime_version: Runtime Version.
+    :ivar runtime_version: Runtime version.
     :vartype runtime_version: str
     """
 
     _attribute_map = {
         'registry_info': {'key': 'registryInfo', 'type': 'RegistryInfo'},
         'azure_credentials': {'key': 'azureCredentials', 'type': 'AzureCredentials'},
-        'dockerfile_path': {'key': 'dockerfilePath', 'type': 'str'},
+        'context_path': {'key': 'contextPath', 'type': 'str'},
+        'image': {'key': 'image', 'type': 'str'},
         'publish_type': {'key': 'publishType', 'type': 'str'},
         'os': {'key': 'os', 'type': 'str'},
         'runtime_stack': {'key': 'runtimeStack', 'type': 'str'},
@@ -2707,9 +3619,10 @@ class GithubActionConfiguration(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        registry_info: Optional["RegistryInfo"] = None,
-        azure_credentials: Optional["AzureCredentials"] = None,
-        dockerfile_path: Optional[str] = None,
+        registry_info: Optional["_models.RegistryInfo"] = None,
+        azure_credentials: Optional["_models.AzureCredentials"] = None,
+        context_path: Optional[str] = None,
+        image: Optional[str] = None,
         publish_type: Optional[str] = None,
         os: Optional[str] = None,
         runtime_stack: Optional[str] = None,
@@ -2718,24 +3631,27 @@ class GithubActionConfiguration(msrest.serialization.Model):
     ):
         """
         :keyword registry_info: Registry configurations.
-        :paramtype registry_info: ~container_apps_api_client.models.RegistryInfo
+        :paramtype registry_info: ~azure.mgmt.app.models.RegistryInfo
         :keyword azure_credentials: AzureCredentials configurations.
-        :paramtype azure_credentials: ~container_apps_api_client.models.AzureCredentials
-        :keyword dockerfile_path: Docker file path.
-        :paramtype dockerfile_path: str
+        :paramtype azure_credentials: ~azure.mgmt.app.models.AzureCredentials
+        :keyword context_path: Context path.
+        :paramtype context_path: str
+        :keyword image: Image name.
+        :paramtype image: str
         :keyword publish_type: Code or Image.
         :paramtype publish_type: str
         :keyword os: Operation system.
         :paramtype os: str
         :keyword runtime_stack: Runtime stack.
         :paramtype runtime_stack: str
-        :keyword runtime_version: Runtime Version.
+        :keyword runtime_version: Runtime version.
         :paramtype runtime_version: str
         """
         super(GithubActionConfiguration, self).__init__(**kwargs)
         self.registry_info = registry_info
         self.azure_credentials = azure_credentials
-        self.dockerfile_path = dockerfile_path
+        self.context_path = context_path
+        self.image = image
         self.publish_type = publish_type
         self.os = os
         self.runtime_stack = runtime_stack
@@ -2746,10 +3662,10 @@ class GlobalValidation(msrest.serialization.Model):
     """The configuration settings that determines the validation flow of users using ContainerApp Service Authentication/Authorization.
 
     :ivar unauthenticated_client_action: The action to take when an unauthenticated client attempts
-     to access the app. Possible values include: "RedirectToLoginPage", "AllowAnonymous",
-     "Return401", "Return403".
+     to access the app. Known values are: "RedirectToLoginPage", "AllowAnonymous", "Return401",
+     "Return403".
     :vartype unauthenticated_client_action: str or
-     ~container_apps_api_client.models.UnauthenticatedClientActionV2
+     ~azure.mgmt.app.models.UnauthenticatedClientActionV2
     :ivar redirect_to_provider: The default authentication provider to use when multiple providers
      are configured.
      This setting is only needed if multiple providers are configured and the unauthenticated
@@ -2770,17 +3686,17 @@ class GlobalValidation(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        unauthenticated_client_action: Optional[Union[str, "UnauthenticatedClientActionV2"]] = None,
+        unauthenticated_client_action: Optional[Union[str, "_models.UnauthenticatedClientActionV2"]] = None,
         redirect_to_provider: Optional[str] = None,
         excluded_paths: Optional[List[str]] = None,
         **kwargs
     ):
         """
         :keyword unauthenticated_client_action: The action to take when an unauthenticated client
-         attempts to access the app. Possible values include: "RedirectToLoginPage", "AllowAnonymous",
+         attempts to access the app. Known values are: "RedirectToLoginPage", "AllowAnonymous",
          "Return401", "Return403".
         :paramtype unauthenticated_client_action: str or
-         ~container_apps_api_client.models.UnauthenticatedClientActionV2
+         ~azure.mgmt.app.models.UnauthenticatedClientActionV2
         :keyword redirect_to_provider: The default authentication provider to use when multiple
          providers are configured.
          This setting is only needed if multiple providers are configured and the unauthenticated
@@ -2804,12 +3720,12 @@ class Google(msrest.serialization.Model):
      the set registration; otherwise, :code:`<code>true</code>`.
     :vartype enabled: bool
     :ivar registration: The configuration settings of the app registration for the Google provider.
-    :vartype registration: ~container_apps_api_client.models.ClientRegistration
+    :vartype registration: ~azure.mgmt.app.models.ClientRegistration
     :ivar login: The configuration settings of the login flow.
-    :vartype login: ~container_apps_api_client.models.LoginScopes
+    :vartype login: ~azure.mgmt.app.models.LoginScopes
     :ivar validation: The configuration settings of the Azure Active Directory token validation
      flow.
-    :vartype validation: ~container_apps_api_client.models.AllowedAudiencesValidation
+    :vartype validation: ~azure.mgmt.app.models.AllowedAudiencesValidation
     """
 
     _attribute_map = {
@@ -2823,9 +3739,9 @@ class Google(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["ClientRegistration"] = None,
-        login: Optional["LoginScopes"] = None,
-        validation: Optional["AllowedAudiencesValidation"] = None,
+        registration: Optional["_models.ClientRegistration"] = None,
+        login: Optional["_models.LoginScopes"] = None,
+        validation: Optional["_models.AllowedAudiencesValidation"] = None,
         **kwargs
     ):
         """
@@ -2834,12 +3750,12 @@ class Google(msrest.serialization.Model):
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the app registration for the Google
          provider.
-        :paramtype registration: ~container_apps_api_client.models.ClientRegistration
+        :paramtype registration: ~azure.mgmt.app.models.ClientRegistration
         :keyword login: The configuration settings of the login flow.
-        :paramtype login: ~container_apps_api_client.models.LoginScopes
+        :paramtype login: ~azure.mgmt.app.models.LoginScopes
         :keyword validation: The configuration settings of the Azure Active Directory token validation
          flow.
-        :paramtype validation: ~container_apps_api_client.models.AllowedAudiencesValidation
+        :paramtype validation: ~azure.mgmt.app.models.AllowedAudiencesValidation
         """
         super(Google, self).__init__(**kwargs)
         self.enabled = enabled
@@ -2854,7 +3770,7 @@ class HttpScaleRule(msrest.serialization.Model):
     :ivar metadata: Metadata properties to describe http scale rule.
     :vartype metadata: dict[str, str]
     :ivar auth: Authentication secrets for the custom scale rule.
-    :vartype auth: list[~container_apps_api_client.models.ScaleRuleAuth]
+    :vartype auth: list[~azure.mgmt.app.models.ScaleRuleAuth]
     """
 
     _attribute_map = {
@@ -2866,14 +3782,14 @@ class HttpScaleRule(msrest.serialization.Model):
         self,
         *,
         metadata: Optional[Dict[str, str]] = None,
-        auth: Optional[List["ScaleRuleAuth"]] = None,
+        auth: Optional[List["_models.ScaleRuleAuth"]] = None,
         **kwargs
     ):
         """
         :keyword metadata: Metadata properties to describe http scale rule.
         :paramtype metadata: dict[str, str]
         :keyword auth: Authentication secrets for the custom scale rule.
-        :paramtype auth: list[~container_apps_api_client.models.ScaleRuleAuth]
+        :paramtype auth: list[~azure.mgmt.app.models.ScaleRuleAuth]
         """
         super(HttpScaleRule, self).__init__(**kwargs)
         self.metadata = metadata
@@ -2887,9 +3803,9 @@ class HttpSettings(msrest.serialization.Model):
      not having the HTTPS scheme are permissible; otherwise, :code:`<code>true</code>`.
     :vartype require_https: bool
     :ivar routes: The configuration settings of the paths HTTP requests.
-    :vartype routes: ~container_apps_api_client.models.HttpSettingsRoutes
+    :vartype routes: ~azure.mgmt.app.models.HttpSettingsRoutes
     :ivar forward_proxy: The configuration settings of a forward proxy used to make the requests.
-    :vartype forward_proxy: ~container_apps_api_client.models.ForwardProxy
+    :vartype forward_proxy: ~azure.mgmt.app.models.ForwardProxy
     """
 
     _attribute_map = {
@@ -2902,8 +3818,8 @@ class HttpSettings(msrest.serialization.Model):
         self,
         *,
         require_https: Optional[bool] = None,
-        routes: Optional["HttpSettingsRoutes"] = None,
-        forward_proxy: Optional["ForwardProxy"] = None,
+        routes: Optional["_models.HttpSettingsRoutes"] = None,
+        forward_proxy: Optional["_models.ForwardProxy"] = None,
         **kwargs
     ):
         """
@@ -2911,10 +3827,10 @@ class HttpSettings(msrest.serialization.Model):
          responses not having the HTTPS scheme are permissible; otherwise, :code:`<code>true</code>`.
         :paramtype require_https: bool
         :keyword routes: The configuration settings of the paths HTTP requests.
-        :paramtype routes: ~container_apps_api_client.models.HttpSettingsRoutes
+        :paramtype routes: ~azure.mgmt.app.models.HttpSettingsRoutes
         :keyword forward_proxy: The configuration settings of a forward proxy used to make the
          requests.
-        :paramtype forward_proxy: ~container_apps_api_client.models.ForwardProxy
+        :paramtype forward_proxy: ~azure.mgmt.app.models.ForwardProxy
         """
         super(HttpSettings, self).__init__(**kwargs)
         self.require_https = require_https
@@ -2952,24 +3868,24 @@ class IdentityProviders(msrest.serialization.Model):
 
     :ivar azure_active_directory: The configuration settings of the Azure Active directory
      provider.
-    :vartype azure_active_directory: ~container_apps_api_client.models.AzureActiveDirectory
+    :vartype azure_active_directory: ~azure.mgmt.app.models.AzureActiveDirectory
     :ivar facebook: The configuration settings of the Facebook provider.
-    :vartype facebook: ~container_apps_api_client.models.Facebook
+    :vartype facebook: ~azure.mgmt.app.models.Facebook
     :ivar git_hub: The configuration settings of the GitHub provider.
-    :vartype git_hub: ~container_apps_api_client.models.GitHub
+    :vartype git_hub: ~azure.mgmt.app.models.GitHub
     :ivar google: The configuration settings of the Google provider.
-    :vartype google: ~container_apps_api_client.models.Google
+    :vartype google: ~azure.mgmt.app.models.Google
     :ivar twitter: The configuration settings of the Twitter provider.
-    :vartype twitter: ~container_apps_api_client.models.Twitter
+    :vartype twitter: ~azure.mgmt.app.models.Twitter
     :ivar apple: The configuration settings of the Apple provider.
-    :vartype apple: ~container_apps_api_client.models.Apple
+    :vartype apple: ~azure.mgmt.app.models.Apple
     :ivar azure_static_web_apps: The configuration settings of the Azure Static Web Apps provider.
-    :vartype azure_static_web_apps: ~container_apps_api_client.models.AzureStaticWebApps
+    :vartype azure_static_web_apps: ~azure.mgmt.app.models.AzureStaticWebApps
     :ivar custom_open_id_connect_providers: The map of the name of the alias of each custom Open ID
      Connect provider to the
      configuration settings of the custom Open ID Connect provider.
     :vartype custom_open_id_connect_providers: dict[str,
-     ~container_apps_api_client.models.CustomOpenIdConnectProvider]
+     ~azure.mgmt.app.models.CustomOpenIdConnectProvider]
     """
 
     _attribute_map = {
@@ -2986,38 +3902,38 @@ class IdentityProviders(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        azure_active_directory: Optional["AzureActiveDirectory"] = None,
-        facebook: Optional["Facebook"] = None,
-        git_hub: Optional["GitHub"] = None,
-        google: Optional["Google"] = None,
-        twitter: Optional["Twitter"] = None,
-        apple: Optional["Apple"] = None,
-        azure_static_web_apps: Optional["AzureStaticWebApps"] = None,
-        custom_open_id_connect_providers: Optional[Dict[str, "CustomOpenIdConnectProvider"]] = None,
+        azure_active_directory: Optional["_models.AzureActiveDirectory"] = None,
+        facebook: Optional["_models.Facebook"] = None,
+        git_hub: Optional["_models.GitHub"] = None,
+        google: Optional["_models.Google"] = None,
+        twitter: Optional["_models.Twitter"] = None,
+        apple: Optional["_models.Apple"] = None,
+        azure_static_web_apps: Optional["_models.AzureStaticWebApps"] = None,
+        custom_open_id_connect_providers: Optional[Dict[str, "_models.CustomOpenIdConnectProvider"]] = None,
         **kwargs
     ):
         """
         :keyword azure_active_directory: The configuration settings of the Azure Active directory
          provider.
-        :paramtype azure_active_directory: ~container_apps_api_client.models.AzureActiveDirectory
+        :paramtype azure_active_directory: ~azure.mgmt.app.models.AzureActiveDirectory
         :keyword facebook: The configuration settings of the Facebook provider.
-        :paramtype facebook: ~container_apps_api_client.models.Facebook
+        :paramtype facebook: ~azure.mgmt.app.models.Facebook
         :keyword git_hub: The configuration settings of the GitHub provider.
-        :paramtype git_hub: ~container_apps_api_client.models.GitHub
+        :paramtype git_hub: ~azure.mgmt.app.models.GitHub
         :keyword google: The configuration settings of the Google provider.
-        :paramtype google: ~container_apps_api_client.models.Google
+        :paramtype google: ~azure.mgmt.app.models.Google
         :keyword twitter: The configuration settings of the Twitter provider.
-        :paramtype twitter: ~container_apps_api_client.models.Twitter
+        :paramtype twitter: ~azure.mgmt.app.models.Twitter
         :keyword apple: The configuration settings of the Apple provider.
-        :paramtype apple: ~container_apps_api_client.models.Apple
+        :paramtype apple: ~azure.mgmt.app.models.Apple
         :keyword azure_static_web_apps: The configuration settings of the Azure Static Web Apps
          provider.
-        :paramtype azure_static_web_apps: ~container_apps_api_client.models.AzureStaticWebApps
+        :paramtype azure_static_web_apps: ~azure.mgmt.app.models.AzureStaticWebApps
         :keyword custom_open_id_connect_providers: The map of the name of the alias of each custom Open
          ID Connect provider to the
          configuration settings of the custom Open ID Connect provider.
         :paramtype custom_open_id_connect_providers: dict[str,
-         ~container_apps_api_client.models.CustomOpenIdConnectProvider]
+         ~azure.mgmt.app.models.CustomOpenIdConnectProvider]
         """
         super(IdentityProviders, self).__init__(**kwargs)
         self.azure_active_directory = azure_active_directory
@@ -3041,12 +3957,12 @@ class Ingress(msrest.serialization.Model):
     :vartype external: bool
     :ivar target_port: Target Port in containers for traffic from ingress.
     :vartype target_port: int
-    :ivar transport: Ingress transport protocol. Possible values include: "auto", "http", "http2".
-    :vartype transport: str or ~container_apps_api_client.models.IngressTransportMethod
+    :ivar transport: Ingress transport protocol. Known values are: "auto", "http", "http2".
+    :vartype transport: str or ~azure.mgmt.app.models.IngressTransportMethod
     :ivar traffic: Traffic weights for app's revisions.
-    :vartype traffic: list[~container_apps_api_client.models.TrafficWeight]
+    :vartype traffic: list[~azure.mgmt.app.models.TrafficWeight]
     :ivar custom_domains: custom domain bindings for Container Apps' hostnames.
-    :vartype custom_domains: list[~container_apps_api_client.models.CustomDomain]
+    :vartype custom_domains: list[~azure.mgmt.app.models.CustomDomain]
     :ivar allow_insecure: Bool indicating if HTTP connections to is allowed. If set to false HTTP
      connections are automatically redirected to HTTPS connections.
     :vartype allow_insecure: bool
@@ -3071,9 +3987,9 @@ class Ingress(msrest.serialization.Model):
         *,
         external: Optional[bool] = False,
         target_port: Optional[int] = None,
-        transport: Optional[Union[str, "IngressTransportMethod"]] = None,
-        traffic: Optional[List["TrafficWeight"]] = None,
-        custom_domains: Optional[List["CustomDomain"]] = None,
+        transport: Optional[Union[str, "_models.IngressTransportMethod"]] = None,
+        traffic: Optional[List["_models.TrafficWeight"]] = None,
+        custom_domains: Optional[List["_models.CustomDomain"]] = None,
         allow_insecure: Optional[bool] = None,
         **kwargs
     ):
@@ -3082,13 +3998,12 @@ class Ingress(msrest.serialization.Model):
         :paramtype external: bool
         :keyword target_port: Target Port in containers for traffic from ingress.
         :paramtype target_port: int
-        :keyword transport: Ingress transport protocol. Possible values include: "auto", "http",
-         "http2".
-        :paramtype transport: str or ~container_apps_api_client.models.IngressTransportMethod
+        :keyword transport: Ingress transport protocol. Known values are: "auto", "http", "http2".
+        :paramtype transport: str or ~azure.mgmt.app.models.IngressTransportMethod
         :keyword traffic: Traffic weights for app's revisions.
-        :paramtype traffic: list[~container_apps_api_client.models.TrafficWeight]
+        :paramtype traffic: list[~azure.mgmt.app.models.TrafficWeight]
         :keyword custom_domains: custom domain bindings for Container Apps' hostnames.
-        :paramtype custom_domains: list[~container_apps_api_client.models.CustomDomain]
+        :paramtype custom_domains: list[~azure.mgmt.app.models.CustomDomain]
         :keyword allow_insecure: Bool indicating if HTTP connections to is allowed. If set to false
          HTTP connections are automatically redirected to HTTPS connections.
         :paramtype allow_insecure: bool
@@ -3171,7 +4086,7 @@ class Login(msrest.serialization.Model):
     """The configuration settings of the login flow of users using ContainerApp Service Authentication/Authorization.
 
     :ivar routes: The routes that specify the endpoints used for login and logout requests.
-    :vartype routes: ~container_apps_api_client.models.LoginRoutes
+    :vartype routes: ~azure.mgmt.app.models.LoginRoutes
     :ivar preserve_url_fragments_for_logins: :code:`<code>true</code>` if the fragments from the
      request are preserved after the login request is made; otherwise, :code:`<code>false</code>`.
     :vartype preserve_url_fragments_for_logins: bool
@@ -3181,9 +4096,9 @@ class Login(msrest.serialization.Model):
      Note that URLs within the current domain are always implicitly allowed.
     :vartype allowed_external_redirect_urls: list[str]
     :ivar cookie_expiration: The configuration settings of the session cookie's expiration.
-    :vartype cookie_expiration: ~container_apps_api_client.models.CookieExpiration
+    :vartype cookie_expiration: ~azure.mgmt.app.models.CookieExpiration
     :ivar nonce: The configuration settings of the nonce used in the login flow.
-    :vartype nonce: ~container_apps_api_client.models.Nonce
+    :vartype nonce: ~azure.mgmt.app.models.Nonce
     """
 
     _attribute_map = {
@@ -3197,16 +4112,16 @@ class Login(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        routes: Optional["LoginRoutes"] = None,
+        routes: Optional["_models.LoginRoutes"] = None,
         preserve_url_fragments_for_logins: Optional[bool] = None,
         allowed_external_redirect_urls: Optional[List[str]] = None,
-        cookie_expiration: Optional["CookieExpiration"] = None,
-        nonce: Optional["Nonce"] = None,
+        cookie_expiration: Optional["_models.CookieExpiration"] = None,
+        nonce: Optional["_models.Nonce"] = None,
         **kwargs
     ):
         """
         :keyword routes: The routes that specify the endpoints used for login and logout requests.
-        :paramtype routes: ~container_apps_api_client.models.LoginRoutes
+        :paramtype routes: ~azure.mgmt.app.models.LoginRoutes
         :keyword preserve_url_fragments_for_logins: :code:`<code>true</code>` if the fragments from the
          request are preserved after the login request is made; otherwise, :code:`<code>false</code>`.
         :paramtype preserve_url_fragments_for_logins: bool
@@ -3216,9 +4131,9 @@ class Login(msrest.serialization.Model):
          Note that URLs within the current domain are always implicitly allowed.
         :paramtype allowed_external_redirect_urls: list[str]
         :keyword cookie_expiration: The configuration settings of the session cookie's expiration.
-        :paramtype cookie_expiration: ~container_apps_api_client.models.CookieExpiration
+        :paramtype cookie_expiration: ~azure.mgmt.app.models.CookieExpiration
         :keyword nonce: The configuration settings of the nonce used in the login flow.
-        :paramtype nonce: ~container_apps_api_client.models.Nonce
+        :paramtype nonce: ~azure.mgmt.app.models.Nonce
         """
         super(Login, self).__init__(**kwargs)
         self.routes = routes
@@ -3295,22 +4210,23 @@ class ManagedEnvironment(TrackedResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
-    :ivar provisioning_state: Provisioning state of the Environment. Possible values include:
-     "Succeeded", "Failed", "Canceled", "Waiting", "InitializationInProgress",
-     "InfrastructureSetupInProgress", "InfrastructureSetupComplete", "ScheduledForDelete",
-     "UpgradeRequested", "UpgradeFailed".
-    :vartype provisioning_state: str or
-     ~container_apps_api_client.models.EnvironmentProvisioningState
+    :ivar provisioning_state: Provisioning state of the Environment. Known values are: "Succeeded",
+     "Failed", "Canceled", "Waiting", "InitializationInProgress", "InfrastructureSetupInProgress",
+     "InfrastructureSetupComplete", "ScheduledForDelete", "UpgradeRequested", "UpgradeFailed".
+    :vartype provisioning_state: str or ~azure.mgmt.app.models.EnvironmentProvisioningState
     :ivar dapr_ai_instrumentation_key: Azure Monitor instrumentation key used by Dapr to export
      Service to Service communication telemetry.
     :vartype dapr_ai_instrumentation_key: str
+    :ivar dapr_ai_connection_string: Application Insights connection string used by Dapr to export
+     Service to Service communication telemetry.
+    :vartype dapr_ai_connection_string: str
     :ivar vnet_configuration: Vnet configuration for the environment.
-    :vartype vnet_configuration: ~container_apps_api_client.models.VnetConfiguration
+    :vartype vnet_configuration: ~azure.mgmt.app.models.VnetConfiguration
     :ivar deployment_errors: Any errors that occurred during deployment or deployment validation.
     :vartype deployment_errors: str
     :ivar default_domain: Default Domain Name for the cluster.
@@ -3320,7 +4236,9 @@ class ManagedEnvironment(TrackedResource):
     :ivar app_logs_configuration: Cluster configuration which enables the log daemon to export
      app logs to a destination. Currently only "log-analytics" is
      supported.
-    :vartype app_logs_configuration: ~container_apps_api_client.models.AppLogsConfiguration
+    :vartype app_logs_configuration: ~azure.mgmt.app.models.AppLogsConfiguration
+    :ivar zone_redundant: Whether or not this Managed Environment is zone-redundant.
+    :vartype zone_redundant: bool
     """
 
     _validation = {
@@ -3344,11 +4262,13 @@ class ManagedEnvironment(TrackedResource):
         'location': {'key': 'location', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'dapr_ai_instrumentation_key': {'key': 'properties.daprAIInstrumentationKey', 'type': 'str'},
+        'dapr_ai_connection_string': {'key': 'properties.daprAIConnectionString', 'type': 'str'},
         'vnet_configuration': {'key': 'properties.vnetConfiguration', 'type': 'VnetConfiguration'},
         'deployment_errors': {'key': 'properties.deploymentErrors', 'type': 'str'},
         'default_domain': {'key': 'properties.defaultDomain', 'type': 'str'},
         'static_ip': {'key': 'properties.staticIp', 'type': 'str'},
         'app_logs_configuration': {'key': 'properties.appLogsConfiguration', 'type': 'AppLogsConfiguration'},
+        'zone_redundant': {'key': 'properties.zoneRedundant', 'type': 'bool'},
     }
 
     def __init__(
@@ -3357,8 +4277,10 @@ class ManagedEnvironment(TrackedResource):
         location: str,
         tags: Optional[Dict[str, str]] = None,
         dapr_ai_instrumentation_key: Optional[str] = None,
-        vnet_configuration: Optional["VnetConfiguration"] = None,
-        app_logs_configuration: Optional["AppLogsConfiguration"] = None,
+        dapr_ai_connection_string: Optional[str] = None,
+        vnet_configuration: Optional["_models.VnetConfiguration"] = None,
+        app_logs_configuration: Optional["_models.AppLogsConfiguration"] = None,
+        zone_redundant: Optional[bool] = None,
         **kwargs
     ):
         """
@@ -3369,46 +4291,28 @@ class ManagedEnvironment(TrackedResource):
         :keyword dapr_ai_instrumentation_key: Azure Monitor instrumentation key used by Dapr to export
          Service to Service communication telemetry.
         :paramtype dapr_ai_instrumentation_key: str
+        :keyword dapr_ai_connection_string: Application Insights connection string used by Dapr to
+         export Service to Service communication telemetry.
+        :paramtype dapr_ai_connection_string: str
         :keyword vnet_configuration: Vnet configuration for the environment.
-        :paramtype vnet_configuration: ~container_apps_api_client.models.VnetConfiguration
+        :paramtype vnet_configuration: ~azure.mgmt.app.models.VnetConfiguration
         :keyword app_logs_configuration: Cluster configuration which enables the log daemon to export
          app logs to a destination. Currently only "log-analytics" is
          supported.
-        :paramtype app_logs_configuration: ~container_apps_api_client.models.AppLogsConfiguration
+        :paramtype app_logs_configuration: ~azure.mgmt.app.models.AppLogsConfiguration
+        :keyword zone_redundant: Whether or not this Managed Environment is zone-redundant.
+        :paramtype zone_redundant: bool
         """
         super(ManagedEnvironment, self).__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.dapr_ai_instrumentation_key = dapr_ai_instrumentation_key
+        self.dapr_ai_connection_string = dapr_ai_connection_string
         self.vnet_configuration = vnet_configuration
         self.deployment_errors = None
         self.default_domain = None
         self.static_ip = None
         self.app_logs_configuration = app_logs_configuration
-
-
-class ManagedEnvironmentPatch(msrest.serialization.Model):
-    """An environment for hosting container apps.
-
-    :ivar tags: A set of tags. Application-specific metadata in the form of key-value pairs.
-    :vartype tags: dict[str, str]
-    """
-
-    _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-    }
-
-    def __init__(
-        self,
-        *,
-        tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
-        """
-        :keyword tags: A set of tags. Application-specific metadata in the form of key-value pairs.
-        :paramtype tags: dict[str, str]
-        """
-        super(ManagedEnvironmentPatch, self).__init__(**kwargs)
-        self.tags = tags
+        self.zone_redundant = zone_redundant
 
 
 class ManagedEnvironmentsCollection(msrest.serialization.Model):
@@ -3419,7 +4323,7 @@ class ManagedEnvironmentsCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.ManagedEnvironment]
+    :vartype value: list[~azure.mgmt.app.models.ManagedEnvironment]
     :ivar next_link: Link to next page of resources.
     :vartype next_link: str
     """
@@ -3437,12 +4341,12 @@ class ManagedEnvironmentsCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ManagedEnvironment"],
+        value: List["_models.ManagedEnvironment"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.ManagedEnvironment]
+        :paramtype value: list[~azure.mgmt.app.models.ManagedEnvironment]
         """
         super(ManagedEnvironmentsCollection, self).__init__(**kwargs)
         self.value = value
@@ -3464,9 +4368,9 @@ class ManagedEnvironmentStorage(ProxyResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar properties: Storage properties.
-    :vartype properties: ~container_apps_api_client.models.ManagedEnvironmentStorageProperties
+    :vartype properties: ~azure.mgmt.app.models.ManagedEnvironmentStorageProperties
     """
 
     _validation = {
@@ -3487,12 +4391,12 @@ class ManagedEnvironmentStorage(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["ManagedEnvironmentStorageProperties"] = None,
+        properties: Optional["_models.ManagedEnvironmentStorageProperties"] = None,
         **kwargs
     ):
         """
         :keyword properties: Storage properties.
-        :paramtype properties: ~container_apps_api_client.models.ManagedEnvironmentStorageProperties
+        :paramtype properties: ~azure.mgmt.app.models.ManagedEnvironmentStorageProperties
         """
         super(ManagedEnvironmentStorage, self).__init__(**kwargs)
         self.properties = properties
@@ -3502,7 +4406,7 @@ class ManagedEnvironmentStorageProperties(msrest.serialization.Model):
     """Storage properties.
 
     :ivar azure_file: Azure file properties.
-    :vartype azure_file: ~container_apps_api_client.models.AzureFileProperties
+    :vartype azure_file: ~azure.mgmt.app.models.AzureFileProperties
     """
 
     _attribute_map = {
@@ -3512,12 +4416,12 @@ class ManagedEnvironmentStorageProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        azure_file: Optional["AzureFileProperties"] = None,
+        azure_file: Optional["_models.AzureFileProperties"] = None,
         **kwargs
     ):
         """
         :keyword azure_file: Azure file properties.
-        :paramtype azure_file: ~container_apps_api_client.models.AzureFileProperties
+        :paramtype azure_file: ~azure.mgmt.app.models.AzureFileProperties
         """
         super(ManagedEnvironmentStorageProperties, self).__init__(**kwargs)
         self.azure_file = azure_file
@@ -3529,7 +4433,7 @@ class ManagedEnvironmentStoragesCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of storage resources.
-    :vartype value: list[~container_apps_api_client.models.ManagedEnvironmentStorage]
+    :vartype value: list[~azure.mgmt.app.models.ManagedEnvironmentStorage]
     """
 
     _validation = {
@@ -3543,12 +4447,12 @@ class ManagedEnvironmentStoragesCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ManagedEnvironmentStorage"],
+        value: List["_models.ManagedEnvironmentStorage"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of storage resources.
-        :paramtype value: list[~container_apps_api_client.models.ManagedEnvironmentStorage]
+        :paramtype value: list[~azure.mgmt.app.models.ManagedEnvironmentStorage]
         """
         super(ManagedEnvironmentStoragesCollection, self).__init__(**kwargs)
         self.value = value
@@ -3568,15 +4472,14 @@ class ManagedServiceIdentity(msrest.serialization.Model):
      provided for a system assigned identity.
     :vartype tenant_id: str
     :ivar type: Required. Type of managed service identity (where both SystemAssigned and
-     UserAssigned types are allowed). Possible values include: "None", "SystemAssigned",
-     "UserAssigned", "SystemAssigned,UserAssigned".
-    :vartype type: str or ~container_apps_api_client.models.ManagedServiceIdentityType
+     UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+     "SystemAssigned,UserAssigned".
+    :vartype type: str or ~azure.mgmt.app.models.ManagedServiceIdentityType
     :ivar user_assigned_identities: The set of user assigned identities associated with the
      resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
      The dictionary values can be empty objects ({}) in requests.
-    :vartype user_assigned_identities: dict[str,
-     ~container_apps_api_client.models.UserAssignedIdentity]
+    :vartype user_assigned_identities: dict[str, ~azure.mgmt.app.models.UserAssignedIdentity]
     """
 
     _validation = {
@@ -3595,21 +4498,20 @@ class ManagedServiceIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Union[str, "ManagedServiceIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "UserAssignedIdentity"]] = None,
+        type: Union[str, "_models.ManagedServiceIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs
     ):
         """
         :keyword type: Required. Type of managed service identity (where both SystemAssigned and
-         UserAssigned types are allowed). Possible values include: "None", "SystemAssigned",
-         "UserAssigned", "SystemAssigned,UserAssigned".
-        :paramtype type: str or ~container_apps_api_client.models.ManagedServiceIdentityType
+         UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+         "SystemAssigned,UserAssigned".
+        :paramtype type: str or ~azure.mgmt.app.models.ManagedServiceIdentityType
         :keyword user_assigned_identities: The set of user assigned identities associated with the
          resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
          The dictionary values can be empty objects ({}) in requests.
-        :paramtype user_assigned_identities: dict[str,
-         ~container_apps_api_client.models.UserAssignedIdentity]
+        :paramtype user_assigned_identities: dict[str, ~azure.mgmt.app.models.UserAssignedIdentity]
         """
         super(ManagedServiceIdentity, self).__init__(**kwargs)
         self.principal_id = None
@@ -3784,10 +4686,10 @@ class OpenIdConnectRegistration(msrest.serialization.Model):
     :ivar client_id: The client id of the custom Open ID Connect provider.
     :vartype client_id: str
     :ivar client_credential: The authentication credentials of the custom Open ID Connect provider.
-    :vartype client_credential: ~container_apps_api_client.models.OpenIdConnectClientCredential
+    :vartype client_credential: ~azure.mgmt.app.models.OpenIdConnectClientCredential
     :ivar open_id_connect_configuration: The configuration settings of the endpoints used for the
      custom Open ID Connect provider.
-    :vartype open_id_connect_configuration: ~container_apps_api_client.models.OpenIdConnectConfig
+    :vartype open_id_connect_configuration: ~azure.mgmt.app.models.OpenIdConnectConfig
     """
 
     _attribute_map = {
@@ -3800,8 +4702,8 @@ class OpenIdConnectRegistration(msrest.serialization.Model):
         self,
         *,
         client_id: Optional[str] = None,
-        client_credential: Optional["OpenIdConnectClientCredential"] = None,
-        open_id_connect_configuration: Optional["OpenIdConnectConfig"] = None,
+        client_credential: Optional["_models.OpenIdConnectClientCredential"] = None,
+        open_id_connect_configuration: Optional["_models.OpenIdConnectConfig"] = None,
         **kwargs
     ):
         """
@@ -3809,10 +4711,10 @@ class OpenIdConnectRegistration(msrest.serialization.Model):
         :paramtype client_id: str
         :keyword client_credential: The authentication credentials of the custom Open ID Connect
          provider.
-        :paramtype client_credential: ~container_apps_api_client.models.OpenIdConnectClientCredential
+        :paramtype client_credential: ~azure.mgmt.app.models.OpenIdConnectClientCredential
         :keyword open_id_connect_configuration: The configuration settings of the endpoints used for
          the custom Open ID Connect provider.
-        :paramtype open_id_connect_configuration: ~container_apps_api_client.models.OpenIdConnectConfig
+        :paramtype open_id_connect_configuration: ~azure.mgmt.app.models.OpenIdConnectConfig
         """
         super(OpenIdConnectRegistration, self).__init__(**kwargs)
         self.client_id = client_id
@@ -3828,7 +4730,7 @@ class OperationDetail(msrest.serialization.Model):
     :ivar is_data_action: Indicates whether the operation is a data action.
     :vartype is_data_action: bool
     :ivar display: Display of the operation.
-    :vartype display: ~container_apps_api_client.models.OperationDisplay
+    :vartype display: ~azure.mgmt.app.models.OperationDisplay
     :ivar origin: Origin of the operation.
     :vartype origin: str
     """
@@ -3845,7 +4747,7 @@ class OperationDetail(msrest.serialization.Model):
         *,
         name: Optional[str] = None,
         is_data_action: Optional[bool] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         origin: Optional[str] = None,
         **kwargs
     ):
@@ -3855,7 +4757,7 @@ class OperationDetail(msrest.serialization.Model):
         :keyword is_data_action: Indicates whether the operation is a data action.
         :paramtype is_data_action: bool
         :keyword display: Display of the operation.
-        :paramtype display: ~container_apps_api_client.models.OperationDisplay
+        :paramtype display: ~azure.mgmt.app.models.OperationDisplay
         :keyword origin: Origin of the operation.
         :paramtype origin: str
         """
@@ -3920,7 +4822,7 @@ class QueueScaleRule(msrest.serialization.Model):
     :ivar queue_length: Queue length.
     :vartype queue_length: int
     :ivar auth: Authentication secrets for the queue scale rule.
-    :vartype auth: list[~container_apps_api_client.models.ScaleRuleAuth]
+    :vartype auth: list[~azure.mgmt.app.models.ScaleRuleAuth]
     """
 
     _attribute_map = {
@@ -3934,7 +4836,7 @@ class QueueScaleRule(msrest.serialization.Model):
         *,
         queue_name: Optional[str] = None,
         queue_length: Optional[int] = None,
-        auth: Optional[List["ScaleRuleAuth"]] = None,
+        auth: Optional[List["_models.ScaleRuleAuth"]] = None,
         **kwargs
     ):
         """
@@ -3943,7 +4845,7 @@ class QueueScaleRule(msrest.serialization.Model):
         :keyword queue_length: Queue length.
         :paramtype queue_length: int
         :keyword auth: Authentication secrets for the queue scale rule.
-        :paramtype auth: list[~container_apps_api_client.models.ScaleRuleAuth]
+        :paramtype auth: list[~azure.mgmt.app.models.ScaleRuleAuth]
         """
         super(QueueScaleRule, self).__init__(**kwargs)
         self.queue_name = queue_name
@@ -3960,12 +4862,17 @@ class RegistryCredentials(msrest.serialization.Model):
     :vartype username: str
     :ivar password_secret_ref: The name of the Secret that contains the registry login password.
     :vartype password_secret_ref: str
+    :ivar identity: A Managed Identity to use to authenticate with Azure Container Registry. For
+     user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned
+     identities, use 'system'.
+    :vartype identity: str
     """
 
     _attribute_map = {
         'server': {'key': 'server', 'type': 'str'},
         'username': {'key': 'username', 'type': 'str'},
         'password_secret_ref': {'key': 'passwordSecretRef', 'type': 'str'},
+        'identity': {'key': 'identity', 'type': 'str'},
     }
 
     def __init__(
@@ -3974,6 +4881,7 @@ class RegistryCredentials(msrest.serialization.Model):
         server: Optional[str] = None,
         username: Optional[str] = None,
         password_secret_ref: Optional[str] = None,
+        identity: Optional[str] = None,
         **kwargs
     ):
         """
@@ -3983,11 +4891,16 @@ class RegistryCredentials(msrest.serialization.Model):
         :paramtype username: str
         :keyword password_secret_ref: The name of the Secret that contains the registry login password.
         :paramtype password_secret_ref: str
+        :keyword identity: A Managed Identity to use to authenticate with Azure Container Registry. For
+         user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned
+         identities, use 'system'.
+        :paramtype identity: str
         """
         super(RegistryCredentials, self).__init__(**kwargs)
         self.server = server
         self.username = username
         self.password_secret_ref = password_secret_ref
+        self.identity = identity
 
 
 class RegistryInfo(msrest.serialization.Model):
@@ -4044,11 +4957,11 @@ class Replica(ProxyResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar created_time: Timestamp describing when the pod was created by controller.
     :vartype created_time: ~datetime.datetime
     :ivar containers: The containers collection under a replica.
-    :vartype containers: list[~container_apps_api_client.models.ReplicaContainer]
+    :vartype containers: list[~azure.mgmt.app.models.ReplicaContainer]
     """
 
     _validation = {
@@ -4071,12 +4984,12 @@ class Replica(ProxyResource):
     def __init__(
         self,
         *,
-        containers: Optional[List["ReplicaContainer"]] = None,
+        containers: Optional[List["_models.ReplicaContainer"]] = None,
         **kwargs
     ):
         """
         :keyword containers: The containers collection under a replica.
-        :paramtype containers: list[~container_apps_api_client.models.ReplicaContainer]
+        :paramtype containers: list[~azure.mgmt.app.models.ReplicaContainer]
         """
         super(Replica, self).__init__(**kwargs)
         self.created_time = None
@@ -4089,7 +5002,7 @@ class ReplicaCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.Replica]
+    :vartype value: list[~azure.mgmt.app.models.Replica]
     """
 
     _validation = {
@@ -4103,12 +5016,12 @@ class ReplicaCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["Replica"],
+        value: List["_models.Replica"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.Replica]
+        :paramtype value: list[~azure.mgmt.app.models.Replica]
         """
         super(ReplicaCollection, self).__init__(**kwargs)
         self.value = value
@@ -4182,7 +5095,7 @@ class Revision(ProxyResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
     :ivar created_time: Timestamp describing when the revision was created
      by controller.
     :vartype created_time: ~datetime.datetime
@@ -4191,21 +5104,23 @@ class Revision(ProxyResource):
     :ivar template: Container App Revision Template with all possible settings and the
      defaults if user did not provide them. The defaults are populated
      as they were at the creation time.
-    :vartype template: ~container_apps_api_client.models.Template
+    :vartype template: ~azure.mgmt.app.models.Template
     :ivar active: Boolean describing if the Revision is Active.
     :vartype active: bool
     :ivar replicas: Number of pods currently running for this revision.
     :vartype replicas: int
     :ivar traffic_weight: Traffic weight assigned to this revision.
     :vartype traffic_weight: int
+    :ivar traffic_labels: Traffic labels associated with this revision.
+    :vartype traffic_labels: list[~azure.mgmt.app.models.TrafficLabel]
     :ivar provisioning_error: Optional Field - Platform Error Message.
     :vartype provisioning_error: str
-    :ivar health_state: Current health State of the revision. Possible values include: "Healthy",
+    :ivar health_state: Current health State of the revision. Known values are: "Healthy",
      "Unhealthy", "None".
-    :vartype health_state: str or ~container_apps_api_client.models.RevisionHealthState
-    :ivar provisioning_state: Current provisioning State of the revision. Possible values include:
+    :vartype health_state: str or ~azure.mgmt.app.models.RevisionHealthState
+    :ivar provisioning_state: Current provisioning State of the revision. Known values are:
      "Provisioning", "Provisioned", "Failed", "Deprovisioning", "Deprovisioned".
-    :vartype provisioning_state: str or ~container_apps_api_client.models.RevisionProvisioningState
+    :vartype provisioning_state: str or ~azure.mgmt.app.models.RevisionProvisioningState
     """
 
     _validation = {
@@ -4219,6 +5134,7 @@ class Revision(ProxyResource):
         'active': {'readonly': True},
         'replicas': {'readonly': True},
         'traffic_weight': {'readonly': True},
+        'traffic_labels': {'readonly': True},
         'provisioning_error': {'readonly': True},
         'health_state': {'readonly': True},
         'provisioning_state': {'readonly': True},
@@ -4235,6 +5151,7 @@ class Revision(ProxyResource):
         'active': {'key': 'properties.active', 'type': 'bool'},
         'replicas': {'key': 'properties.replicas', 'type': 'int'},
         'traffic_weight': {'key': 'properties.trafficWeight', 'type': 'int'},
+        'traffic_labels': {'key': 'properties.trafficLabels', 'type': '[TrafficLabel]'},
         'provisioning_error': {'key': 'properties.provisioningError', 'type': 'str'},
         'health_state': {'key': 'properties.healthState', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
@@ -4253,6 +5170,7 @@ class Revision(ProxyResource):
         self.active = None
         self.replicas = None
         self.traffic_weight = None
+        self.traffic_labels = None
         self.provisioning_error = None
         self.health_state = None
         self.provisioning_state = None
@@ -4266,7 +5184,7 @@ class RevisionCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.Revision]
+    :vartype value: list[~azure.mgmt.app.models.Revision]
     :ivar next_link: Link to next page of resources.
     :vartype next_link: str
     """
@@ -4284,12 +5202,12 @@ class RevisionCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["Revision"],
+        value: List["_models.Revision"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.Revision]
+        :paramtype value: list[~azure.mgmt.app.models.Revision]
         """
         super(RevisionCollection, self).__init__(**kwargs)
         self.value = value
@@ -4304,7 +5222,7 @@ class Scale(msrest.serialization.Model):
     :ivar max_replicas: Optional. Maximum number of container replicas. Defaults to 10 if not set.
     :vartype max_replicas: int
     :ivar rules: Scaling rules.
-    :vartype rules: list[~container_apps_api_client.models.ScaleRule]
+    :vartype rules: list[~azure.mgmt.app.models.ScaleRule]
     """
 
     _attribute_map = {
@@ -4318,7 +5236,7 @@ class Scale(msrest.serialization.Model):
         *,
         min_replicas: Optional[int] = None,
         max_replicas: Optional[int] = None,
-        rules: Optional[List["ScaleRule"]] = None,
+        rules: Optional[List["_models.ScaleRule"]] = None,
         **kwargs
     ):
         """
@@ -4328,7 +5246,7 @@ class Scale(msrest.serialization.Model):
          set.
         :paramtype max_replicas: int
         :keyword rules: Scaling rules.
-        :paramtype rules: list[~container_apps_api_client.models.ScaleRule]
+        :paramtype rules: list[~azure.mgmt.app.models.ScaleRule]
         """
         super(Scale, self).__init__(**kwargs)
         self.min_replicas = min_replicas
@@ -4342,11 +5260,11 @@ class ScaleRule(msrest.serialization.Model):
     :ivar name: Scale Rule Name.
     :vartype name: str
     :ivar azure_queue: Azure Queue based scaling.
-    :vartype azure_queue: ~container_apps_api_client.models.QueueScaleRule
+    :vartype azure_queue: ~azure.mgmt.app.models.QueueScaleRule
     :ivar custom: Custom scale rule.
-    :vartype custom: ~container_apps_api_client.models.CustomScaleRule
+    :vartype custom: ~azure.mgmt.app.models.CustomScaleRule
     :ivar http: HTTP requests based scaling.
-    :vartype http: ~container_apps_api_client.models.HttpScaleRule
+    :vartype http: ~azure.mgmt.app.models.HttpScaleRule
     """
 
     _attribute_map = {
@@ -4360,20 +5278,20 @@ class ScaleRule(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        azure_queue: Optional["QueueScaleRule"] = None,
-        custom: Optional["CustomScaleRule"] = None,
-        http: Optional["HttpScaleRule"] = None,
+        azure_queue: Optional["_models.QueueScaleRule"] = None,
+        custom: Optional["_models.CustomScaleRule"] = None,
+        http: Optional["_models.HttpScaleRule"] = None,
         **kwargs
     ):
         """
         :keyword name: Scale Rule Name.
         :paramtype name: str
         :keyword azure_queue: Azure Queue based scaling.
-        :paramtype azure_queue: ~container_apps_api_client.models.QueueScaleRule
+        :paramtype azure_queue: ~azure.mgmt.app.models.QueueScaleRule
         :keyword custom: Custom scale rule.
-        :paramtype custom: ~container_apps_api_client.models.CustomScaleRule
+        :paramtype custom: ~azure.mgmt.app.models.CustomScaleRule
         :keyword http: HTTP requests based scaling.
-        :paramtype http: ~container_apps_api_client.models.HttpScaleRule
+        :paramtype http: ~azure.mgmt.app.models.HttpScaleRule
         """
         super(ScaleRule, self).__init__(**kwargs)
         self.name = name
@@ -4452,7 +5370,7 @@ class SecretsCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.ContainerAppSecret]
+    :vartype value: list[~azure.mgmt.app.models.ContainerAppSecret]
     """
 
     _validation = {
@@ -4466,12 +5384,12 @@ class SecretsCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ContainerAppSecret"],
+        value: List["_models.ContainerAppSecret"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.ContainerAppSecret]
+        :paramtype value: list[~azure.mgmt.app.models.ContainerAppSecret]
         """
         super(SecretsCollection, self).__init__(**kwargs)
         self.value = value
@@ -4492,10 +5410,10 @@ class SourceControl(ProxyResource):
     :vartype type: str
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
-    :vartype system_data: ~container_apps_api_client.models.SystemData
-    :ivar operation_state: Current provisioning State of the operation. Possible values include:
+    :vartype system_data: ~azure.mgmt.app.models.SystemData
+    :ivar operation_state: Current provisioning State of the operation. Known values are:
      "InProgress", "Succeeded", "Failed", "Canceled".
-    :vartype operation_state: str or ~container_apps_api_client.models.SourceControlOperationState
+    :vartype operation_state: str or ~azure.mgmt.app.models.SourceControlOperationState
     :ivar repo_url: The repo url which will be integrated to ContainerApp.
     :vartype repo_url: str
     :ivar branch: The branch which will trigger the auto deployment.
@@ -4504,8 +5422,7 @@ class SourceControl(ProxyResource):
      and the
      defaults if user did not provide them. The defaults are populated
      as they were at the creation time.
-    :vartype github_action_configuration:
-     ~container_apps_api_client.models.GithubActionConfiguration
+    :vartype github_action_configuration: ~azure.mgmt.app.models.GithubActionConfiguration
     """
 
     _validation = {
@@ -4532,7 +5449,7 @@ class SourceControl(ProxyResource):
         *,
         repo_url: Optional[str] = None,
         branch: Optional[str] = None,
-        github_action_configuration: Optional["GithubActionConfiguration"] = None,
+        github_action_configuration: Optional["_models.GithubActionConfiguration"] = None,
         **kwargs
     ):
         """
@@ -4544,8 +5461,7 @@ class SourceControl(ProxyResource):
          settings and the
          defaults if user did not provide them. The defaults are populated
          as they were at the creation time.
-        :paramtype github_action_configuration:
-         ~container_apps_api_client.models.GithubActionConfiguration
+        :paramtype github_action_configuration: ~azure.mgmt.app.models.GithubActionConfiguration
         """
         super(SourceControl, self).__init__(**kwargs)
         self.operation_state = None
@@ -4562,7 +5478,7 @@ class SourceControlCollection(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Required. Collection of resources.
-    :vartype value: list[~container_apps_api_client.models.SourceControl]
+    :vartype value: list[~azure.mgmt.app.models.SourceControl]
     :ivar next_link: Link to next page of resources.
     :vartype next_link: str
     """
@@ -4580,12 +5496,12 @@ class SourceControlCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["SourceControl"],
+        value: List["_models.SourceControl"],
         **kwargs
     ):
         """
         :keyword value: Required. Collection of resources.
-        :paramtype value: list[~container_apps_api_client.models.SourceControl]
+        :paramtype value: list[~azure.mgmt.app.models.SourceControl]
         """
         super(SourceControlCollection, self).__init__(**kwargs)
         self.value = value
@@ -4597,16 +5513,16 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
-    :vartype created_by_type: str or ~container_apps_api_client.models.CreatedByType
+    :vartype created_by_type: str or ~azure.mgmt.app.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
-    :vartype last_modified_by_type: str or ~container_apps_api_client.models.CreatedByType
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
+    :vartype last_modified_by_type: str or ~azure.mgmt.app.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
     """
@@ -4624,26 +5540,26 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
-        :paramtype created_by_type: str or ~container_apps_api_client.models.CreatedByType
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
+        :paramtype created_by_type: str or ~azure.mgmt.app.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
-        :paramtype last_modified_by_type: str or ~container_apps_api_client.models.CreatedByType
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
+        :paramtype last_modified_by_type: str or ~azure.mgmt.app.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
         """
@@ -4664,11 +5580,11 @@ Any changes to this section Will result in a new revision being created.
     :ivar revision_suffix: User friendly suffix that is appended to the revision name.
     :vartype revision_suffix: str
     :ivar containers: List of container definitions for the Container App.
-    :vartype containers: list[~container_apps_api_client.models.Container]
+    :vartype containers: list[~azure.mgmt.app.models.Container]
     :ivar scale: Scaling properties for the Container App.
-    :vartype scale: ~container_apps_api_client.models.Scale
+    :vartype scale: ~azure.mgmt.app.models.Scale
     :ivar volumes: List of volume definitions for the Container App.
-    :vartype volumes: list[~container_apps_api_client.models.Volume]
+    :vartype volumes: list[~azure.mgmt.app.models.Volume]
     """
 
     _attribute_map = {
@@ -4682,26 +5598,58 @@ Any changes to this section Will result in a new revision being created.
         self,
         *,
         revision_suffix: Optional[str] = None,
-        containers: Optional[List["Container"]] = None,
-        scale: Optional["Scale"] = None,
-        volumes: Optional[List["Volume"]] = None,
+        containers: Optional[List["_models.Container"]] = None,
+        scale: Optional["_models.Scale"] = None,
+        volumes: Optional[List["_models.Volume"]] = None,
         **kwargs
     ):
         """
         :keyword revision_suffix: User friendly suffix that is appended to the revision name.
         :paramtype revision_suffix: str
         :keyword containers: List of container definitions for the Container App.
-        :paramtype containers: list[~container_apps_api_client.models.Container]
+        :paramtype containers: list[~azure.mgmt.app.models.Container]
         :keyword scale: Scaling properties for the Container App.
-        :paramtype scale: ~container_apps_api_client.models.Scale
+        :paramtype scale: ~azure.mgmt.app.models.Scale
         :keyword volumes: List of volume definitions for the Container App.
-        :paramtype volumes: list[~container_apps_api_client.models.Volume]
+        :paramtype volumes: list[~azure.mgmt.app.models.Volume]
         """
         super(Template, self).__init__(**kwargs)
         self.revision_suffix = revision_suffix
         self.containers = containers
         self.scale = scale
         self.volumes = volumes
+
+
+class TrafficLabel(msrest.serialization.Model):
+    """Traffic label information.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar label: Traffic label assigned to a revision.
+    :vartype label: str
+    :ivar fqdn: Fully qualified domain name of a labelled revision.
+    :vartype fqdn: str
+    """
+
+    _validation = {
+        'label': {'readonly': True},
+        'fqdn': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'label': {'key': 'label', 'type': 'str'},
+        'fqdn': {'key': 'fqdn', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(TrafficLabel, self).__init__(**kwargs)
+        self.label = None
+        self.fqdn = None
 
 
 class TrafficWeight(msrest.serialization.Model):
@@ -4713,12 +5661,15 @@ class TrafficWeight(msrest.serialization.Model):
     :vartype weight: int
     :ivar latest_revision: Indicates that the traffic weight belongs to a latest stable revision.
     :vartype latest_revision: bool
+    :ivar label: Associates a traffic label with a revision.
+    :vartype label: str
     """
 
     _attribute_map = {
         'revision_name': {'key': 'revisionName', 'type': 'str'},
         'weight': {'key': 'weight', 'type': 'int'},
         'latest_revision': {'key': 'latestRevision', 'type': 'bool'},
+        'label': {'key': 'label', 'type': 'str'},
     }
 
     def __init__(
@@ -4727,6 +5678,7 @@ class TrafficWeight(msrest.serialization.Model):
         revision_name: Optional[str] = None,
         weight: Optional[int] = None,
         latest_revision: Optional[bool] = False,
+        label: Optional[str] = None,
         **kwargs
     ):
         """
@@ -4737,11 +5689,14 @@ class TrafficWeight(msrest.serialization.Model):
         :keyword latest_revision: Indicates that the traffic weight belongs to a latest stable
          revision.
         :paramtype latest_revision: bool
+        :keyword label: Associates a traffic label with a revision.
+        :paramtype label: str
         """
         super(TrafficWeight, self).__init__(**kwargs)
         self.revision_name = revision_name
         self.weight = weight
         self.latest_revision = latest_revision
+        self.label = label
 
 
 class Twitter(msrest.serialization.Model):
@@ -4752,7 +5707,7 @@ class Twitter(msrest.serialization.Model):
     :vartype enabled: bool
     :ivar registration: The configuration settings of the app registration for the Twitter
      provider.
-    :vartype registration: ~container_apps_api_client.models.TwitterRegistration
+    :vartype registration: ~azure.mgmt.app.models.TwitterRegistration
     """
 
     _attribute_map = {
@@ -4764,7 +5719,7 @@ class Twitter(msrest.serialization.Model):
         self,
         *,
         enabled: Optional[bool] = None,
-        registration: Optional["TwitterRegistration"] = None,
+        registration: Optional["_models.TwitterRegistration"] = None,
         **kwargs
     ):
         """
@@ -4773,7 +5728,7 @@ class Twitter(msrest.serialization.Model):
         :paramtype enabled: bool
         :keyword registration: The configuration settings of the app registration for the Twitter
          provider.
-        :paramtype registration: ~container_apps_api_client.models.TwitterRegistration
+        :paramtype registration: ~azure.mgmt.app.models.TwitterRegistration
         """
         super(Twitter, self).__init__(**kwargs)
         self.enabled = enabled
@@ -4856,8 +5811,8 @@ class VnetConfiguration(msrest.serialization.Model):
     """Configuration properties for apps environment to join a Virtual Network.
 
     :ivar internal: Boolean indicating the environment only has an internal load balancer. These
-     environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId
-     and AppSubnetResourceId if enabling this property.
+     environments do not have a public static IP resource. They must provide runtimeSubnetId and
+     infrastructureSubnetId if enabling this property.
     :vartype internal: bool
     :ivar infrastructure_subnet_id: Resource ID of a subnet for infrastructure components. This
      subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with
@@ -4900,8 +5855,8 @@ class VnetConfiguration(msrest.serialization.Model):
     ):
         """
         :keyword internal: Boolean indicating the environment only has an internal load balancer. These
-         environments do not have a public static IP resource, must provide ControlPlaneSubnetResourceId
-         and AppSubnetResourceId if enabling this property.
+         environments do not have a public static IP resource. They must provide runtimeSubnetId and
+         infrastructureSubnetId if enabling this property.
         :paramtype internal: bool
         :keyword infrastructure_subnet_id: Resource ID of a subnet for infrastructure components. This
          subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with
@@ -4935,9 +5890,9 @@ class Volume(msrest.serialization.Model):
 
     :ivar name: Volume name.
     :vartype name: str
-    :ivar storage_type: Storage type for the volume. If not provided, use EmptyDir. Possible values
-     include: "AzureFile", "EmptyDir".
-    :vartype storage_type: str or ~container_apps_api_client.models.StorageType
+    :ivar storage_type: Storage type for the volume. If not provided, use EmptyDir. Known values
+     are: "AzureFile", "EmptyDir".
+    :vartype storage_type: str or ~azure.mgmt.app.models.StorageType
     :ivar storage_name: Name of storage resource. No need to provide for EmptyDir.
     :vartype storage_name: str
     """
@@ -4952,16 +5907,16 @@ class Volume(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        storage_type: Optional[Union[str, "StorageType"]] = None,
+        storage_type: Optional[Union[str, "_models.StorageType"]] = None,
         storage_name: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword name: Volume name.
         :paramtype name: str
-        :keyword storage_type: Storage type for the volume. If not provided, use EmptyDir. Possible
-         values include: "AzureFile", "EmptyDir".
-        :paramtype storage_type: str or ~container_apps_api_client.models.StorageType
+        :keyword storage_type: Storage type for the volume. If not provided, use EmptyDir. Known values
+         are: "AzureFile", "EmptyDir".
+        :paramtype storage_type: str or ~azure.mgmt.app.models.StorageType
         :keyword storage_name: Name of storage resource. No need to provide for EmptyDir.
         :paramtype storage_name: str
         """
