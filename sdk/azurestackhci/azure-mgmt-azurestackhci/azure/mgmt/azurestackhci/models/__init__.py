@@ -50,7 +50,9 @@ from ._azure_stack_hci_client_enums import (
     Status,
     WindowsServerSubscription,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'ArcConnectivityProperties',
     'ArcIdentityResponse',
@@ -93,3 +95,5 @@ __all__ = [
     'Status',
     'WindowsServerSubscription',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

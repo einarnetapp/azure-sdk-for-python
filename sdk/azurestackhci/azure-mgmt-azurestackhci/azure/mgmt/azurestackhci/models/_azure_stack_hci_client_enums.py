@@ -7,17 +7,16 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
     """
 
     INTERNAL = "Internal"
 
-class ArcSettingAggregateState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ArcSettingAggregateState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Aggregate state of Arc agent across the nodes in this HCI cluster.
     """
 
@@ -37,7 +36,7 @@ class ArcSettingAggregateState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum
     PARTIALLY_CONNECTED = "PartiallyConnected"
     IN_PROGRESS = "InProgress"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -46,7 +45,7 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class DiagnosticLevel(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class DiagnosticLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Desired level of diagnostic data emitted by the cluster.
     """
 
@@ -54,7 +53,7 @@ class DiagnosticLevel(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     BASIC = "Basic"
     ENHANCED = "Enhanced"
 
-class ExtensionAggregateState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ExtensionAggregateState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Aggregate state of Arc Extensions across the nodes in this HCI cluster.
     """
 
@@ -74,14 +73,14 @@ class ExtensionAggregateState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)
     PARTIALLY_CONNECTED = "PartiallyConnected"
     IN_PROGRESS = "InProgress"
 
-class ImdsAttestation(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ImdsAttestation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """IMDS attestation status of the cluster.
     """
 
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class NodeArcState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class NodeArcState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of Arc agent in this node.
     """
 
@@ -98,7 +97,7 @@ class NodeArcState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DELETING = "Deleting"
     MOVING = "Moving"
 
-class NodeExtensionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class NodeExtensionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of Arc Extension in this node.
     """
 
@@ -115,7 +114,7 @@ class NodeExtensionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DELETING = "Deleting"
     MOVING = "Moving"
 
-class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit
     logs UX. Default value is "user,system"
     """
@@ -124,7 +123,7 @@ class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SYSTEM = "system"
     USER_SYSTEM = "user,system"
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the ArcSetting proxy resource.
     """
 
@@ -134,7 +133,7 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ACCEPTED = "Accepted"
     PROVISIONING = "Provisioning"
 
-class Status(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the cluster agent.
     """
 
@@ -144,7 +143,7 @@ class Status(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DISCONNECTED = "Disconnected"
     ERROR = "Error"
 
-class WindowsServerSubscription(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class WindowsServerSubscription(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Desired state of Windows Server Subscription.
     """
 

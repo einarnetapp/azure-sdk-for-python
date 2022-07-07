@@ -60,10 +60,18 @@ class AzureStackHCIClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.arc_settings = ArcSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.clusters = ClustersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.extensions = ExtensionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
+        self.arc_settings = ArcSettingsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.clusters = ClustersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.extensions = ExtensionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
