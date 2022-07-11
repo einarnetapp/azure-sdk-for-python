@@ -394,46 +394,6 @@ class EnterpriseGradeCdnStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DISABLED = "Disabled"
     DISABLING = "Disabling"
 
-class Enum14(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    WINDOWS = "Windows"
-    LINUX = "Linux"
-    WINDOWS_FUNCTIONS = "WindowsFunctions"
-    LINUX_FUNCTIONS = "LinuxFunctions"
-    ALL = "All"
-
-class Enum15(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    WINDOWS = "Windows"
-    LINUX = "Linux"
-    ALL = "All"
-
-class Enum16(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    WINDOWS = "Windows"
-    LINUX = "Linux"
-    ALL = "All"
-
-class Enum17(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    WINDOWS = "Windows"
-    LINUX = "Linux"
-    ALL = "All"
-
-class Enum18(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    WINDOWS = "Windows"
-    LINUX = "Linux"
-    ALL = "All"
-
-class Enum19(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    WINDOWS = "Windows"
-    LINUX = "Linux"
-    WINDOWS_FUNCTIONS = "WindowsFunctions"
-    LINUX_FUNCTIONS = "LinuxFunctions"
-    ALL = "All"
-
 class ForwardProxyConvention(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The convention used to determine the url of the request made.
     """
@@ -679,6 +639,20 @@ class ParameterType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ARRAY = "Array"
     OBJECT = "Object"
     SECURE_OBJECT = "SecureObject"
+
+class ProviderOsTypeSelected(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    WINDOWS = "Windows"
+    LINUX = "Linux"
+    WINDOWS_FUNCTIONS = "WindowsFunctions"
+    LINUX_FUNCTIONS = "LinuxFunctions"
+    ALL = "All"
+
+class ProviderStackOsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    WINDOWS = "Windows"
+    LINUX = "Linux"
+    ALL = "All"
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of certificate order.
