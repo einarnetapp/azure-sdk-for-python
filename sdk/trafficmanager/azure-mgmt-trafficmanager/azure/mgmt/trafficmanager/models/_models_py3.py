@@ -7,11 +7,13 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._traffic_manager_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class CheckTrafficManagerRelativeDnsNameAvailabilityParameters(msrest.serialization.Model):
@@ -72,7 +74,7 @@ class CloudErrorBody(msrest.serialization.Model):
         code: Optional[str] = None,
         message: Optional[str] = None,
         target: Optional[str] = None,
-        details: Optional[List["CloudErrorBody"]] = None,
+        details: Optional[List["_models.CloudErrorBody"]] = None,
         **kwargs
     ):
         """
@@ -265,8 +267,8 @@ class Endpoint(ProxyResource):
      returns this value in DNS responses to direct traffic to this endpoint.
     :vartype target: str
     :ivar endpoint_status: The status of the endpoint. If the endpoint is Enabled, it is probed for
-     endpoint health and is included in the traffic routing method. Possible values include:
-     "Enabled", "Disabled".
+     endpoint health and is included in the traffic routing method. Known values are: "Enabled",
+     "Disabled".
     :vartype endpoint_status: str or ~azure.mgmt.trafficmanager.models.EndpointStatus
     :ivar weight: The weight of this endpoint when using the 'Weighted' traffic routing method.
      Possible values are from 1 to 1000.
@@ -279,7 +281,7 @@ class Endpoint(ProxyResource):
     :ivar endpoint_location: Specifies the location of the external or nested endpoints when using
      the 'Performance' traffic routing method.
     :vartype endpoint_location: str
-    :ivar endpoint_monitor_status: The monitoring status of the endpoint. Possible values include:
+    :ivar endpoint_monitor_status: The monitoring status of the endpoint. Known values are:
      "CheckingEndpoint", "Online", "Degraded", "Disabled", "Inactive", "Stopped".
     :vartype endpoint_monitor_status: str or
      ~azure.mgmt.trafficmanager.models.EndpointMonitorStatus
@@ -335,17 +337,17 @@ class Endpoint(ProxyResource):
         type: Optional[str] = None,
         target_resource_id: Optional[str] = None,
         target: Optional[str] = None,
-        endpoint_status: Optional[Union[str, "EndpointStatus"]] = None,
+        endpoint_status: Optional[Union[str, "_models.EndpointStatus"]] = None,
         weight: Optional[int] = None,
         priority: Optional[int] = None,
         endpoint_location: Optional[str] = None,
-        endpoint_monitor_status: Optional[Union[str, "EndpointMonitorStatus"]] = None,
+        endpoint_monitor_status: Optional[Union[str, "_models.EndpointMonitorStatus"]] = None,
         min_child_endpoints: Optional[int] = None,
         min_child_endpoints_i_pv4: Optional[int] = None,
         min_child_endpoints_i_pv6: Optional[int] = None,
         geo_mapping: Optional[List[str]] = None,
-        subnets: Optional[List["EndpointPropertiesSubnetsItem"]] = None,
-        custom_headers: Optional[List["EndpointPropertiesCustomHeadersItem"]] = None,
+        subnets: Optional[List["_models.EndpointPropertiesSubnetsItem"]] = None,
+        custom_headers: Optional[List["_models.EndpointPropertiesCustomHeadersItem"]] = None,
         **kwargs
     ):
         """
@@ -363,8 +365,8 @@ class Endpoint(ProxyResource):
          returns this value in DNS responses to direct traffic to this endpoint.
         :paramtype target: str
         :keyword endpoint_status: The status of the endpoint. If the endpoint is Enabled, it is probed
-         for endpoint health and is included in the traffic routing method. Possible values include:
-         "Enabled", "Disabled".
+         for endpoint health and is included in the traffic routing method. Known values are: "Enabled",
+         "Disabled".
         :paramtype endpoint_status: str or ~azure.mgmt.trafficmanager.models.EndpointStatus
         :keyword weight: The weight of this endpoint when using the 'Weighted' traffic routing method.
          Possible values are from 1 to 1000.
@@ -377,8 +379,8 @@ class Endpoint(ProxyResource):
         :keyword endpoint_location: Specifies the location of the external or nested endpoints when
          using the 'Performance' traffic routing method.
         :paramtype endpoint_location: str
-        :keyword endpoint_monitor_status: The monitoring status of the endpoint. Possible values
-         include: "CheckingEndpoint", "Online", "Degraded", "Disabled", "Inactive", "Stopped".
+        :keyword endpoint_monitor_status: The monitoring status of the endpoint. Known values are:
+         "CheckingEndpoint", "Online", "Degraded", "Disabled", "Inactive", "Stopped".
         :paramtype endpoint_monitor_status: str or
          ~azure.mgmt.trafficmanager.models.EndpointMonitorStatus
         :keyword min_child_endpoints: The minimum number of endpoints that must be available in the
@@ -562,8 +564,8 @@ class HeatMapModel(ProxyResource):
         type: Optional[str] = None,
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
-        endpoints: Optional[List["HeatMapEndpoint"]] = None,
-        traffic_flows: Optional[List["TrafficFlow"]] = None,
+        endpoints: Optional[List["_models.HeatMapEndpoint"]] = None,
+        traffic_flows: Optional[List["_models.TrafficFlow"]] = None,
         **kwargs
     ):
         """
@@ -594,11 +596,10 @@ class MonitorConfig(msrest.serialization.Model):
     """Class containing endpoint monitoring settings in a Traffic Manager profile.
 
     :ivar profile_monitor_status: The profile-level monitoring status of the Traffic Manager
-     profile. Possible values include: "CheckingEndpoints", "Online", "Degraded", "Disabled",
-     "Inactive".
+     profile. Known values are: "CheckingEndpoints", "Online", "Degraded", "Disabled", "Inactive".
     :vartype profile_monitor_status: str or ~azure.mgmt.trafficmanager.models.ProfileMonitorStatus
-    :ivar protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health. Possible
-     values include: "HTTP", "HTTPS", "TCP".
+    :ivar protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health. Known
+     values are: "HTTP", "HTTPS", "TCP".
     :vartype protocol: str or ~azure.mgmt.trafficmanager.models.MonitorProtocol
     :ivar port: The TCP port used to probe for endpoint health.
     :vartype port: long
@@ -636,25 +637,24 @@ class MonitorConfig(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        profile_monitor_status: Optional[Union[str, "ProfileMonitorStatus"]] = None,
-        protocol: Optional[Union[str, "MonitorProtocol"]] = None,
+        profile_monitor_status: Optional[Union[str, "_models.ProfileMonitorStatus"]] = None,
+        protocol: Optional[Union[str, "_models.MonitorProtocol"]] = None,
         port: Optional[int] = None,
         path: Optional[str] = None,
         interval_in_seconds: Optional[int] = None,
         timeout_in_seconds: Optional[int] = None,
         tolerated_number_of_failures: Optional[int] = None,
-        custom_headers: Optional[List["MonitorConfigCustomHeadersItem"]] = None,
-        expected_status_code_ranges: Optional[List["MonitorConfigExpectedStatusCodeRangesItem"]] = None,
+        custom_headers: Optional[List["_models.MonitorConfigCustomHeadersItem"]] = None,
+        expected_status_code_ranges: Optional[List["_models.MonitorConfigExpectedStatusCodeRangesItem"]] = None,
         **kwargs
     ):
         """
         :keyword profile_monitor_status: The profile-level monitoring status of the Traffic Manager
-         profile. Possible values include: "CheckingEndpoints", "Online", "Degraded", "Disabled",
-         "Inactive".
+         profile. Known values are: "CheckingEndpoints", "Online", "Degraded", "Disabled", "Inactive".
         :paramtype profile_monitor_status: str or
          ~azure.mgmt.trafficmanager.models.ProfileMonitorStatus
-        :keyword protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.
-         Possible values include: "HTTP", "HTTPS", "TCP".
+        :keyword protocol: The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health. Known
+         values are: "HTTP", "HTTPS", "TCP".
         :paramtype protocol: str or ~azure.mgmt.trafficmanager.models.MonitorProtocol
         :keyword port: The TCP port used to probe for endpoint health.
         :paramtype port: long
@@ -819,12 +819,11 @@ class Profile(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: The Azure Region where the resource lives.
     :vartype location: str
-    :ivar profile_status: The status of the Traffic Manager profile. Possible values include:
-     "Enabled", "Disabled".
+    :ivar profile_status: The status of the Traffic Manager profile. Known values are: "Enabled",
+     "Disabled".
     :vartype profile_status: str or ~azure.mgmt.trafficmanager.models.ProfileStatus
-    :ivar traffic_routing_method: The traffic routing method of the Traffic Manager profile.
-     Possible values include: "Performance", "Priority", "Weighted", "Geographic", "MultiValue",
-     "Subnet".
+    :ivar traffic_routing_method: The traffic routing method of the Traffic Manager profile. Known
+     values are: "Performance", "Priority", "Weighted", "Geographic", "MultiValue", "Subnet".
     :vartype traffic_routing_method: str or ~azure.mgmt.trafficmanager.models.TrafficRoutingMethod
     :ivar dns_config: The DNS settings of the Traffic Manager profile.
     :vartype dns_config: ~azure.mgmt.trafficmanager.models.DnsConfig
@@ -834,8 +833,7 @@ class Profile(TrackedResource):
     :vartype endpoints: list[~azure.mgmt.trafficmanager.models.Endpoint]
     :ivar traffic_view_enrollment_status: Indicates whether Traffic View is 'Enabled' or 'Disabled'
      for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will
-     increase the cost of the Traffic Manage profile. Possible values include: "Enabled",
-     "Disabled".
+     increase the cost of the Traffic Manage profile. Known values are: "Enabled", "Disabled".
     :vartype traffic_view_enrollment_status: str or
      ~azure.mgmt.trafficmanager.models.TrafficViewEnrollmentStatus
     :ivar allowed_endpoint_record_types: The list of allowed endpoint record types.
@@ -869,13 +867,13 @@ class Profile(TrackedResource):
         type: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
         location: Optional[str] = None,
-        profile_status: Optional[Union[str, "ProfileStatus"]] = None,
-        traffic_routing_method: Optional[Union[str, "TrafficRoutingMethod"]] = None,
-        dns_config: Optional["DnsConfig"] = None,
-        monitor_config: Optional["MonitorConfig"] = None,
-        endpoints: Optional[List["Endpoint"]] = None,
-        traffic_view_enrollment_status: Optional[Union[str, "TrafficViewEnrollmentStatus"]] = None,
-        allowed_endpoint_record_types: Optional[List[Union[str, "AllowedEndpointRecordType"]]] = None,
+        profile_status: Optional[Union[str, "_models.ProfileStatus"]] = None,
+        traffic_routing_method: Optional[Union[str, "_models.TrafficRoutingMethod"]] = None,
+        dns_config: Optional["_models.DnsConfig"] = None,
+        monitor_config: Optional["_models.MonitorConfig"] = None,
+        endpoints: Optional[List["_models.Endpoint"]] = None,
+        traffic_view_enrollment_status: Optional[Union[str, "_models.TrafficViewEnrollmentStatus"]] = None,
+        allowed_endpoint_record_types: Optional[List[Union[str, "_models.AllowedEndpointRecordType"]]] = None,
         max_return: Optional[int] = None,
         **kwargs
     ):
@@ -891,12 +889,11 @@ class Profile(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: The Azure Region where the resource lives.
         :paramtype location: str
-        :keyword profile_status: The status of the Traffic Manager profile. Possible values include:
+        :keyword profile_status: The status of the Traffic Manager profile. Known values are:
          "Enabled", "Disabled".
         :paramtype profile_status: str or ~azure.mgmt.trafficmanager.models.ProfileStatus
         :keyword traffic_routing_method: The traffic routing method of the Traffic Manager profile.
-         Possible values include: "Performance", "Priority", "Weighted", "Geographic", "MultiValue",
-         "Subnet".
+         Known values are: "Performance", "Priority", "Weighted", "Geographic", "MultiValue", "Subnet".
         :paramtype traffic_routing_method: str or
          ~azure.mgmt.trafficmanager.models.TrafficRoutingMethod
         :keyword dns_config: The DNS settings of the Traffic Manager profile.
@@ -907,8 +904,7 @@ class Profile(TrackedResource):
         :paramtype endpoints: list[~azure.mgmt.trafficmanager.models.Endpoint]
         :keyword traffic_view_enrollment_status: Indicates whether Traffic View is 'Enabled' or
          'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature
-         will increase the cost of the Traffic Manage profile. Possible values include: "Enabled",
-         "Disabled".
+         will increase the cost of the Traffic Manage profile. Known values are: "Enabled", "Disabled".
         :paramtype traffic_view_enrollment_status: str or
          ~azure.mgmt.trafficmanager.models.TrafficViewEnrollmentStatus
         :keyword allowed_endpoint_record_types: The list of allowed endpoint record types.
@@ -942,7 +938,7 @@ class ProfileListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Profile"]] = None,
+        value: Optional[List["_models.Profile"]] = None,
         **kwargs
     ):
         """
@@ -1023,7 +1019,7 @@ class Region(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         name: Optional[str] = None,
-        regions: Optional[List["Region"]] = None,
+        regions: Optional[List["_models.Region"]] = None,
         **kwargs
     ):
         """
@@ -1066,7 +1062,7 @@ class TrafficFlow(msrest.serialization.Model):
         source_ip: Optional[str] = None,
         latitude: Optional[float] = None,
         longitude: Optional[float] = None,
-        query_experiences: Optional[List["QueryExperience"]] = None,
+        query_experiences: Optional[List["_models.QueryExperience"]] = None,
         **kwargs
     ):
         """
@@ -1114,7 +1110,7 @@ class TrafficManagerGeographicHierarchy(ProxyResource):
         id: Optional[str] = None,
         name: Optional[str] = None,
         type: Optional[str] = None,
-        geographic_hierarchy: Optional["Region"] = None,
+        geographic_hierarchy: Optional["_models.Region"] = None,
         **kwargs
     ):
         """
