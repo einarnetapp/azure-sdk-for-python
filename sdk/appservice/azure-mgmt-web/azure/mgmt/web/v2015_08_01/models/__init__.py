@@ -34,13 +34,12 @@ from ._models_py3 import SiteSealRequest
 
 
 from ._web_site_management_client_enums import (
-    AppServiceCertificateOrderPatchResourcePropertiesAppServiceCertificateNotRenewableReasonsItem,
-    AppServiceCertificateOrderPropertiesAppServiceCertificateNotRenewableReasonsItem,
     CertificateOrderActionType,
     CertificateOrderStatus,
     CertificateProductType,
     KeyVaultSecretStatus,
     ProvisioningState,
+    ResourceNotRenewableReason,
 )
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
@@ -71,13 +70,12 @@ __all__ = [
     'ServiceSpecification',
     'SiteSeal',
     'SiteSealRequest',
-    'AppServiceCertificateOrderPatchResourcePropertiesAppServiceCertificateNotRenewableReasonsItem',
-    'AppServiceCertificateOrderPropertiesAppServiceCertificateNotRenewableReasonsItem',
     'CertificateOrderActionType',
     'CertificateOrderStatus',
     'CertificateProductType',
     'KeyVaultSecretStatus',
     'ProvisioningState',
+    'ResourceNotRenewableReason',
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

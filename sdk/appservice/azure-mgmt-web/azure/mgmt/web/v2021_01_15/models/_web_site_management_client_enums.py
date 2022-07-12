@@ -10,18 +10,6 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AppServiceCertificateOrderPatchResourcePropertiesAppServiceCertificateNotRenewableReasonsItem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
-    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
-    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
-
-class AppServiceCertificateOrderPropertiesAppServiceCertificateNotRenewableReasonsItem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
-    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
-    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
-
 class AppServicePlanRestrictions(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """App Service plans this offer is restricted to.
     """
@@ -342,8 +330,6 @@ class Enum10(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WINDOWS = "Windows"
     LINUX = "Linux"
-    WINDOWS_FUNCTIONS = "WindowsFunctions"
-    LINUX_FUNCTIONS = "LinuxFunctions"
     ALL = "All"
 
 class Enum11(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -368,9 +354,11 @@ class Enum14(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WINDOWS = "Windows"
     LINUX = "Linux"
+    WINDOWS_FUNCTIONS = "WindowsFunctions"
+    LINUX_FUNCTIONS = "LinuxFunctions"
     ALL = "All"
 
-class Enum15(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class Enum9(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WINDOWS = "Windows"
     LINUX = "Linux"
@@ -663,6 +651,12 @@ class ResolveStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     OTHER_REASONS = "OtherReasons"
     FETCH_TIMED_OUT = "FetchTimedOut"
     UNAUTHORIZED_CLIENT = "UnauthorizedClient"
+
+class ResourceNotRenewableReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
+    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
+    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
 
 class ResourceScopeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name of a resource type this recommendation applies, e.g. Subscription, ServerFarm, Site.

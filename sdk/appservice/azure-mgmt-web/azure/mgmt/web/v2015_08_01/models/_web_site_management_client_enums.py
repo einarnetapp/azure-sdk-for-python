@@ -10,18 +10,6 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AppServiceCertificateOrderPatchResourcePropertiesAppServiceCertificateNotRenewableReasonsItem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
-    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
-    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
-
-class AppServiceCertificateOrderPropertiesAppServiceCertificateNotRenewableReasonsItem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
-    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
-    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
-
 class CertificateOrderActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Action type.
     """
@@ -88,3 +76,9 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CANCELED = "Canceled"
     IN_PROGRESS = "InProgress"
     DELETING = "Deleting"
+
+class ResourceNotRenewableReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
+    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
+    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"

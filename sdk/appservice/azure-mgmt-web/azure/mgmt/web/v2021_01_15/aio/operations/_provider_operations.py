@@ -47,7 +47,7 @@ class ProviderOperations:
     @distributed_trace
     def get_available_stacks(
         self,
-        os_type_selected: Optional[Union[str, "_models.Enum10"]] = None,
+        os_type_selected: Optional[Union[str, "_models.Enum9"]] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.ApplicationStackCollection]:
         """Get available application frameworks and their versions.
@@ -55,7 +55,7 @@ class ProviderOperations:
         Get available application frameworks and their versions.
 
         :param os_type_selected:  Default value is None.
-        :type os_type_selected: str or ~azure.mgmt.web.v2021_01_15.models.Enum10
+        :type os_type_selected: str or ~azure.mgmt.web.v2021_01_15.models.Enum9
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationStackCollection or the result of
          cls(response)
@@ -133,7 +133,7 @@ class ProviderOperations:
     @distributed_trace
     def get_function_app_stacks(
         self,
-        stack_os_type: Optional[Union[str, "_models.Enum11"]] = None,
+        stack_os_type: Optional[Union[str, "_models.Enum10"]] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.FunctionAppStackCollection]:
         """Get available Function app frameworks and their versions.
@@ -141,7 +141,7 @@ class ProviderOperations:
         Get available Function app frameworks and their versions.
 
         :param stack_os_type: Stack OS Type. Default value is None.
-        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum11
+        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum10
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either FunctionAppStackCollection or the result of
          cls(response)
@@ -220,7 +220,7 @@ class ProviderOperations:
     def get_function_app_stacks_for_location(
         self,
         location: str,
-        stack_os_type: Optional[Union[str, "_models.Enum12"]] = None,
+        stack_os_type: Optional[Union[str, "_models.Enum11"]] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.FunctionAppStackCollection]:
         """Get available Function app frameworks and their versions for location.
@@ -230,7 +230,7 @@ class ProviderOperations:
         :param location: Function App stack location.
         :type location: str
         :param stack_os_type: Stack OS Type. Default value is None.
-        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum12
+        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum11
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either FunctionAppStackCollection or the result of
          cls(response)
@@ -311,7 +311,7 @@ class ProviderOperations:
     def get_web_app_stacks_for_location(
         self,
         location: str,
-        stack_os_type: Optional[Union[str, "_models.Enum13"]] = None,
+        stack_os_type: Optional[Union[str, "_models.Enum12"]] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.WebAppStackCollection]:
         """Get available Web app frameworks and their versions for location.
@@ -321,7 +321,7 @@ class ProviderOperations:
         :param location: Web App stack location.
         :type location: str
         :param stack_os_type: Stack OS Type. Default value is None.
-        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum13
+        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum12
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WebAppStackCollection or the result of
          cls(response)
@@ -484,7 +484,7 @@ class ProviderOperations:
     @distributed_trace
     def get_web_app_stacks(
         self,
-        stack_os_type: Optional[Union[str, "_models.Enum14"]] = None,
+        stack_os_type: Optional[Union[str, "_models.Enum13"]] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.WebAppStackCollection]:
         """Get available Web app frameworks and their versions.
@@ -492,7 +492,7 @@ class ProviderOperations:
         Get available Web app frameworks and their versions.
 
         :param stack_os_type: Stack OS Type. Default value is None.
-        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum14
+        :type stack_os_type: str or ~azure.mgmt.web.v2021_01_15.models.Enum13
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WebAppStackCollection or the result of
          cls(response)
@@ -570,7 +570,7 @@ class ProviderOperations:
     @distributed_trace
     def get_available_stacks_on_prem(
         self,
-        os_type_selected: Optional[Union[str, "_models.Enum15"]] = None,
+        os_type_selected: Optional[Union[str, "_models.Enum14"]] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.ApplicationStackCollection]:
         """Get available application frameworks and their versions.
@@ -578,7 +578,7 @@ class ProviderOperations:
         Get available application frameworks and their versions.
 
         :param os_type_selected:  Default value is None.
-        :type os_type_selected: str or ~azure.mgmt.web.v2021_01_15.models.Enum15
+        :type os_type_selected: str or ~azure.mgmt.web.v2021_01_15.models.Enum14
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationStackCollection or the result of
          cls(response)

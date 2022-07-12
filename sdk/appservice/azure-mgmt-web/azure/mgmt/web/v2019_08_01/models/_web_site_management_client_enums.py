@@ -17,18 +17,6 @@ class AccessControlEntryAction(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PERMIT = "Permit"
     DENY = "Deny"
 
-class AppServiceCertificateOrderPatchResourcePropertiesAppServiceCertificateNotRenewableReasonsItem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
-    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
-    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
-
-class AppServiceCertificateOrderPropertiesAppServiceCertificateNotRenewableReasonsItem(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-
-    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
-    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
-    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
-
 class AppServicePlanRestrictions(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """App Service plans this offer is restricted to.
     """
@@ -303,14 +291,14 @@ class DomainType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REGULAR = "Regular"
     SOFT_DELETED = "SoftDeleted"
 
-class Enum4(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class Enum3(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WINDOWS = "Windows"
     LINUX = "Linux"
     WINDOWS_FUNCTIONS = "WindowsFunctions"
     LINUX_FUNCTIONS = "LinuxFunctions"
 
-class Enum5(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class Enum4(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WINDOWS = "Windows"
     LINUX = "Linux"
@@ -539,6 +527,12 @@ class ResolveStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SECRET_VERSION_NOT_FOUND = "SecretVersionNotFound"
     ACCESS_TO_KEY_VAULT_DENIED = "AccessToKeyVaultDenied"
     OTHER_REASONS = "OtherReasons"
+
+class ResourceNotRenewableReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
+    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
+    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
 
 class ResourceScopeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name of a resource type this recommendation applies, e.g. Subscription, ServerFarm, Site.

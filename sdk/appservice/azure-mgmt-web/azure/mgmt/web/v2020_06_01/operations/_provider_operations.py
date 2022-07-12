@@ -29,7 +29,7 @@ _SERIALIZER.client_side_validation = False
 
 def build_get_available_stacks_request(
     *,
-    os_type_selected: Optional[Union[str, "_models.Enum4"]] = None,
+    os_type_selected: Optional[Union[str, "_models.Enum3"]] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -88,7 +88,7 @@ def build_list_operations_request(
 def build_get_available_stacks_on_prem_request(
     subscription_id: str,
     *,
-    os_type_selected: Optional[Union[str, "_models.Enum5"]] = None,
+    os_type_selected: Optional[Union[str, "_models.Enum4"]] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -144,7 +144,7 @@ class ProviderOperations:
     @distributed_trace
     def get_available_stacks(
         self,
-        os_type_selected: Optional[Union[str, "_models.Enum4"]] = None,
+        os_type_selected: Optional[Union[str, "_models.Enum3"]] = None,
         **kwargs: Any
     ) -> Iterable[_models.ApplicationStackCollection]:
         """Get available application frameworks and their versions.
@@ -152,7 +152,7 @@ class ProviderOperations:
         Get available application frameworks and their versions.
 
         :param os_type_selected:  Default value is None.
-        :type os_type_selected: str or ~azure.mgmt.web.v2020_06_01.models.Enum4
+        :type os_type_selected: str or ~azure.mgmt.web.v2020_06_01.models.Enum3
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationStackCollection or the result of
          cls(response)
@@ -312,7 +312,7 @@ class ProviderOperations:
     @distributed_trace
     def get_available_stacks_on_prem(
         self,
-        os_type_selected: Optional[Union[str, "_models.Enum5"]] = None,
+        os_type_selected: Optional[Union[str, "_models.Enum4"]] = None,
         **kwargs: Any
     ) -> Iterable[_models.ApplicationStackCollection]:
         """Get available application frameworks and their versions.
@@ -320,7 +320,7 @@ class ProviderOperations:
         Get available application frameworks and their versions.
 
         :param os_type_selected:  Default value is None.
-        :type os_type_selected: str or ~azure.mgmt.web.v2020_06_01.models.Enum5
+        :type os_type_selected: str or ~azure.mgmt.web.v2020_06_01.models.Enum4
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ApplicationStackCollection or the result of
          cls(response)

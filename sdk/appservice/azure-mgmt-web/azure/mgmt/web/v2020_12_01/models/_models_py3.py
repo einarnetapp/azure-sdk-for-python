@@ -1147,7 +1147,7 @@ class AppServiceCertificateOrder(Resource):
     :ivar app_service_certificate_not_renewable_reasons: Reasons why App Service Certificate is not
      renewable at the current moment.
     :vartype app_service_certificate_not_renewable_reasons: list[str or
-     ~azure.mgmt.web.v2020_12_01.models.AppServiceCertificateOrderPropertiesAppServiceCertificateNotRenewableReasonsItem]
+     ~azure.mgmt.web.v2020_12_01.models.ResourceNotRenewableReason]
     :ivar next_auto_renewal_time_stamp: Time stamp when the certificate would be auto renewed next.
     :vartype next_auto_renewal_time_stamp: ~datetime.datetime
     :ivar contact: Contact info.
@@ -1358,7 +1358,7 @@ class AppServiceCertificateOrderPatchResource(ProxyOnlyResource):
     :ivar app_service_certificate_not_renewable_reasons: Reasons why App Service Certificate is not
      renewable at the current moment.
     :vartype app_service_certificate_not_renewable_reasons: list[str or
-     ~azure.mgmt.web.v2020_12_01.models.AppServiceCertificateOrderPatchResourcePropertiesAppServiceCertificateNotRenewableReasonsItem]
+     ~azure.mgmt.web.v2020_12_01.models.ResourceNotRenewableReason]
     :ivar next_auto_renewal_time_stamp: Time stamp when the certificate would be auto renewed next.
     :vartype next_auto_renewal_time_stamp: ~datetime.datetime
     :ivar contact: Contact info.
