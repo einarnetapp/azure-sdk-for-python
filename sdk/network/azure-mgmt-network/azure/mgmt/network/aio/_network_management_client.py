@@ -78,7 +78,9 @@ class NetworkManagementClient(NetworkManagementClientOperationsMixin, MultiApiCl
             'network_managers': '2021-02-01-preview',
             'network_security_perimeters': '2021-02-01-preview',
             'nsp_access_rules': '2021-02-01-preview',
+            'nsp_access_rules_reconcile': '2021-02-01-preview',
             'nsp_associations': '2021-02-01-preview',
+            'nsp_associations_proxy': '2021-02-01-preview',
             'nsp_profiles': '2021-02-01-preview',
             'p2_svpn_server_configurations': '2019-07-01',
             'perimeter_associable_resource_types': '2021-02-01-preview',
@@ -4902,6 +4904,19 @@ class NetworkManagementClient(NetworkManagementClientOperationsMixin, MultiApiCl
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
+    def nsp_access_rules_reconcile(self):
+        """Instance depends on the API version:
+
+           * 2021-02-01-preview: :class:`NspAccessRulesReconcileOperations<azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAccessRulesReconcileOperations>`
+        """
+        api_version = self._get_api_version('nsp_access_rules_reconcile')
+        if api_version == '2021-02-01-preview':
+            from ..v2021_02_01_preview.aio.operations import NspAccessRulesReconcileOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'nsp_access_rules_reconcile'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
     def nsp_associations(self):
         """Instance depends on the API version:
 
@@ -4912,6 +4927,19 @@ class NetworkManagementClient(NetworkManagementClientOperationsMixin, MultiApiCl
             from ..v2021_02_01_preview.aio.operations import NspAssociationsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'nsp_associations'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def nsp_associations_proxy(self):
+        """Instance depends on the API version:
+
+           * 2021-02-01-preview: :class:`NspAssociationsProxyOperations<azure.mgmt.network.v2021_02_01_preview.aio.operations.NspAssociationsProxyOperations>`
+        """
+        api_version = self._get_api_version('nsp_associations_proxy')
+        if api_version == '2021-02-01-preview':
+            from ..v2021_02_01_preview.aio.operations import NspAssociationsProxyOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'nsp_associations_proxy'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
