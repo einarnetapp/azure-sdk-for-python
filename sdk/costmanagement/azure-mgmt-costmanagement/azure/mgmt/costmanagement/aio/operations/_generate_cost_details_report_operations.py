@@ -20,18 +20,18 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._generate_reservation_details_report_operations import build_by_billing_account_id_request_initial, build_by_billing_profile_id_request_initial
+from ...operations._generate_cost_details_report_operations import build_create_operation_request_initial, build_get_operation_results_request_initial
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class GenerateReservationDetailsReportOperations:
+class GenerateCostDetailsReportOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.costmanagement.aio.CostManagementClient`'s
-        :attr:`generate_reservation_details_report` attribute.
+        :attr:`generate_cost_details_report` attribute.
     """
 
     models = _models
@@ -44,31 +44,32 @@ class GenerateReservationDetailsReportOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
 
-    async def _by_billing_account_id_initial(
+    async def _create_operation_initial(
         self,
-        billing_account_id: str,
-        start_date: str,
-        end_date: str,
+        scope: str,
+        parameters: _models.GenerateCostDetailsReportRequestDefinition,
         **kwargs: Any
-    ) -> Optional[_models.OperationStatus]:
+    ) -> Optional[_models.CostDetailsOperationResults]:
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
         error_map.update(kwargs.pop('error_map', {}) or {})
 
-        _headers = kwargs.pop("headers", {}) or {}
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.OperationStatus]]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.CostDetailsOperationResults]]
 
-        
-        request = build_by_billing_account_id_request_initial(
-            billing_account_id=billing_account_id,
+        _json = self._serialize.body(parameters, 'GenerateCostDetailsReportRequestDefinition')
+
+        request = build_create_operation_request_initial(
+            scope=scope,
             api_version=api_version,
-            start_date=start_date,
-            end_date=end_date,
-            template_url=self._by_billing_account_id_initial.metadata['url'],
+            content_type=content_type,
+            json=_json,
+            template_url=self._create_operation_initial.metadata['url'],
             headers=_headers,
             params=_params,
         )
@@ -89,7 +90,7 @@ class GenerateReservationDetailsReportOperations:
         deserialized = None
         response_headers = {}
         if response.status_code == 200:
-            deserialized = self._deserialize('OperationStatus', pipeline_response)
+            deserialized = self._deserialize('CostDetailsOperationResults', pipeline_response)
 
         if response.status_code == 202:
             response_headers['Location']=self._deserialize('str', response.headers.get('Location'))
@@ -101,29 +102,44 @@ class GenerateReservationDetailsReportOperations:
 
         return deserialized
 
-    _by_billing_account_id_initial.metadata = {'url': "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    _create_operation_initial.metadata = {'url': "/{scope}/providers/Microsoft.CostManagement/generateCostDetailsReport"}  # type: ignore
 
 
     @distributed_trace_async
-    async def begin_by_billing_account_id(
+    async def begin_create_operation(
         self,
-        billing_account_id: str,
-        start_date: str,
-        end_date: str,
+        scope: str,
+        parameters: _models.GenerateCostDetailsReportRequestDefinition,
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.OperationStatus]:
-        """Generates the reservations details report for provided date range asynchronously based on
-        enrollment id. The Reservation usage details can be viewed only by certain enterprise roles.
-        For more details on the roles see,
-        https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/understand-ea-roles#usage-and-costs-access-by-role.
+    ) -> AsyncLROPoller[_models.CostDetailsOperationResults]:
+        """This API is the replacement for all previously release Usage Details APIs. Request to generate
+        a cost details report for the provided date range, billing period (Only enterprise customers)
+        or Invoice Id asynchronously at a certain scope. The initial call to request a report will
+        return a 202 with a 'Location' and 'Retry-After' header. The 'Location' header will provide the
+        endpoint to poll to get the result of the report generation. The 'Retry-After' provides the
+        duration to wait before polling for the generated report. A call to poll the report operation
+        will provide a 202 response with a 'Location' header if the operation is still in progress.
+        Once the report generation operation completes, the polling endpoint will provide a 200
+        response along with details on the report blob(s) that are available for download. The details
+        on the file(s) available for download will be available in the polling response body.
 
-        :param billing_account_id: Enrollment ID (Legacy BillingAccount ID).
-        :type billing_account_id: str
-        :param start_date: Start Date.
-        :type start_date: str
-        :param end_date: End Date.
-        :type end_date: str
-        :keyword api_version: Api Version. Default value is "2021-10-01". Note that overriding this
+        :param scope: The scope associated with usage details operations. This includes
+         '/subscriptions/{subscriptionId}/' for subscription scope,
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,
+         '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope,
+         '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount
+         scope. Also, Modern Commerce Account scopes are
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope,
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
+         for billingProfile scope,
+         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
+         for invoiceSection scope, and
+         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
+         specific for partners.
+        :type scope: str
+        :param parameters: Parameters supplied to the Create cost details operation.
+        :type parameters: ~azure.mgmt.costmanagement.models.GenerateCostDetailsReportRequestDefinition
+        :keyword api_version: Api Version. Default value is "2022-05-01". Note that overriding this
          default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -134,16 +150,18 @@ class GenerateReservationDetailsReportOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either OperationStatus or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.costmanagement.models.OperationStatus]
+        :return: An instance of AsyncLROPoller that returns either CostDetailsOperationResults or the
+         result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.costmanagement.models.CostDetailsOperationResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        _headers = kwargs.pop("headers", {}) or {}
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.OperationStatus]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.CostDetailsOperationResults]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
             'polling_interval',
@@ -151,11 +169,11 @@ class GenerateReservationDetailsReportOperations:
         )
         cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
         if cont_token is None:
-            raw_result = await self._by_billing_account_id_initial(  # type: ignore
-                billing_account_id=billing_account_id,
-                start_date=start_date,
-                end_date=end_date,
+            raw_result = await self._create_operation_initial(  # type: ignore
+                scope=scope,
+                parameters=parameters,
                 api_version=api_version,
+                content_type=content_type,
                 cls=lambda x,y,z: x,
                 headers=_headers,
                 params=_params,
@@ -164,7 +182,7 @@ class GenerateReservationDetailsReportOperations:
         kwargs.pop('error_map', None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize('OperationStatus', pipeline_response)
+            deserialized = self._deserialize('CostDetailsOperationResults', pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -188,16 +206,14 @@ class GenerateReservationDetailsReportOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_by_billing_account_id.metadata = {'url': "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    begin_create_operation.metadata = {'url': "/{scope}/providers/Microsoft.CostManagement/generateCostDetailsReport"}  # type: ignore
 
-    async def _by_billing_profile_id_initial(
+    async def _get_operation_results_initial(
         self,
-        billing_account_id: str,
-        billing_profile_id: str,
-        start_date: str,
-        end_date: str,
+        scope: str,
+        operation_id: str,
         **kwargs: Any
-    ) -> Optional[_models.OperationStatus]:
+    ) -> Optional[_models.CostDetailsOperationResults]:
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
@@ -206,17 +222,15 @@ class GenerateReservationDetailsReportOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.OperationStatus]]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.CostDetailsOperationResults]]
 
         
-        request = build_by_billing_profile_id_request_initial(
-            billing_account_id=billing_account_id,
-            billing_profile_id=billing_profile_id,
+        request = build_get_operation_results_request_initial(
+            scope=scope,
+            operation_id=operation_id,
             api_version=api_version,
-            start_date=start_date,
-            end_date=end_date,
-            template_url=self._by_billing_profile_id_initial.metadata['url'],
+            template_url=self._get_operation_results_initial.metadata['url'],
             headers=_headers,
             params=_params,
         )
@@ -235,46 +249,44 @@ class GenerateReservationDetailsReportOperations:
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         deserialized = None
-        response_headers = {}
         if response.status_code == 200:
-            deserialized = self._deserialize('OperationStatus', pipeline_response)
-
-        if response.status_code == 202:
-            response_headers['Location']=self._deserialize('str', response.headers.get('Location'))
-            response_headers['Retry-After']=self._deserialize('int', response.headers.get('Retry-After'))
-            
+            deserialized = self._deserialize('CostDetailsOperationResults', pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _by_billing_profile_id_initial.metadata = {'url': "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    _get_operation_results_initial.metadata = {'url': "/{scope}/providers/Microsoft.CostManagement/costDetailsOperationResults/{operationId}"}  # type: ignore
 
 
     @distributed_trace_async
-    async def begin_by_billing_profile_id(
+    async def begin_get_operation_results(
         self,
-        billing_account_id: str,
-        billing_profile_id: str,
-        start_date: str,
-        end_date: str,
+        scope: str,
+        operation_id: str,
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.OperationStatus]:
-        """Generates the reservations details report for provided date range asynchronously by billing
-        profile. The Reservation usage details can be viewed by only certain enterprise roles by
-        default. For more details on the roles see,
-        https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access.
+    ) -> AsyncLROPoller[_models.CostDetailsOperationResults]:
+        """Get the result of the specified operation. This link is provided in the CostDetails creation
+        request response Location header.
 
-        :param billing_account_id: BillingAccount ID.
-        :type billing_account_id: str
-        :param billing_profile_id: BillingProfile ID.
-        :type billing_profile_id: str
-        :param start_date: Start Date.
-        :type start_date: str
-        :param end_date: End Date.
-        :type end_date: str
-        :keyword api_version: Api Version. Default value is "2021-10-01". Note that overriding this
+        :param scope: The scope associated with usage details operations. This includes
+         '/subscriptions/{subscriptionId}/' for subscription scope,
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,
+         '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope,
+         '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount
+         scope. Also, Modern Commerce Account scopes are
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope,
+         '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
+         for billingProfile scope,
+         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
+         for invoiceSection scope, and
+         'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
+         specific for partners.
+        :type scope: str
+        :param operation_id: The target operation Id.
+        :type operation_id: str
+        :keyword api_version: Api Version. Default value is "2022-05-01". Note that overriding this
          default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -285,16 +297,17 @@ class GenerateReservationDetailsReportOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either OperationStatus or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.costmanagement.models.OperationStatus]
+        :return: An instance of AsyncLROPoller that returns either CostDetailsOperationResults or the
+         result of cls(response)
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.costmanagement.models.CostDetailsOperationResults]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.OperationStatus]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.CostDetailsOperationResults]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
             'polling_interval',
@@ -302,11 +315,9 @@ class GenerateReservationDetailsReportOperations:
         )
         cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
         if cont_token is None:
-            raw_result = await self._by_billing_profile_id_initial(  # type: ignore
-                billing_account_id=billing_account_id,
-                billing_profile_id=billing_profile_id,
-                start_date=start_date,
-                end_date=end_date,
+            raw_result = await self._get_operation_results_initial(  # type: ignore
+                scope=scope,
+                operation_id=operation_id,
                 api_version=api_version,
                 cls=lambda x,y,z: x,
                 headers=_headers,
@@ -316,7 +327,7 @@ class GenerateReservationDetailsReportOperations:
         kwargs.pop('error_map', None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize('OperationStatus', pipeline_response)
+            deserialized = self._deserialize('CostDetailsOperationResults', pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -340,4 +351,4 @@ class GenerateReservationDetailsReportOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_by_billing_profile_id.metadata = {'url': "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateReservationDetailsReport"}  # type: ignore
+    begin_get_operation_results.metadata = {'url': "/{scope}/providers/Microsoft.CostManagement/costDetailsOperationResults/{operationId}"}  # type: ignore
