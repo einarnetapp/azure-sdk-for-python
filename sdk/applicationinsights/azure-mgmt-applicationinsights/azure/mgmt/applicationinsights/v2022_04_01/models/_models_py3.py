@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._application_insights_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ManagedServiceIdentity(msrest.serialization.Model):
@@ -29,8 +31,8 @@ class ManagedServiceIdentity(msrest.serialization.Model):
      provided for a system assigned identity.
     :vartype tenant_id: str
     :ivar type: Required. Type of managed service identity (where both SystemAssigned and
-     UserAssigned types are allowed). Possible values include: "None", "SystemAssigned",
-     "UserAssigned", "SystemAssigned,UserAssigned".
+     UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+     "SystemAssigned,UserAssigned".
     :vartype type: str or
      ~azure.mgmt.applicationinsights.v2022_04_01.models.ManagedServiceIdentityType
     :ivar user_assigned_identities: The set of user assigned identities associated with the
@@ -57,14 +59,14 @@ class ManagedServiceIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Union[str, "ManagedServiceIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "UserAssignedIdentity"]] = None,
+        type: Union[str, "_models.ManagedServiceIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs
     ):
         """
         :keyword type: Required. Type of managed service identity (where both SystemAssigned and
-         UserAssigned types are allowed). Possible values include: "None", "SystemAssigned",
-         "UserAssigned", "SystemAssigned,UserAssigned".
+         UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+         "SystemAssigned,UserAssigned".
         :paramtype type: str or
          ~azure.mgmt.applicationinsights.v2022_04_01.models.ManagedServiceIdentityType
         :keyword user_assigned_identities: The set of user assigned identities associated with the
@@ -125,7 +127,7 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or
      ~azure.mgmt.applicationinsights.v2022_04_01.models.CreatedByType
@@ -133,8 +135,8 @@ class SystemData(msrest.serialization.Model):
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or
      ~azure.mgmt.applicationinsights.v2022_04_01.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
@@ -154,26 +156,26 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or
          ~azure.mgmt.applicationinsights.v2022_04_01.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or
          ~azure.mgmt.applicationinsights.v2022_04_01.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
@@ -295,8 +297,7 @@ class WorkbookResource(TrackedResource):
     :vartype location: str
     :ivar identity: Identity used for BYOS.
     :vartype identity: ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookResourceIdentity
-    :ivar kind: The kind of workbook. Only valid value is shared. Possible values include:
-     "shared".
+    :ivar kind: The kind of workbook. Only valid value is shared. Known values are: "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookSharedTypeKind
     :ivar etag: Resource etag.
     :vartype etag: str
@@ -325,8 +326,8 @@ class WorkbookResource(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["WorkbookResourceIdentity"] = None,
-        kind: Optional[Union[str, "WorkbookSharedTypeKind"]] = None,
+        identity: Optional["_models.WorkbookResourceIdentity"] = None,
+        kind: Optional[Union[str, "_models.WorkbookSharedTypeKind"]] = None,
         etag: Optional[str] = None,
         **kwargs
     ):
@@ -338,8 +339,7 @@ class WorkbookResource(TrackedResource):
         :keyword identity: Identity used for BYOS.
         :paramtype identity:
          ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookResourceIdentity
-        :keyword kind: The kind of workbook. Only valid value is shared. Possible values include:
-         "shared".
+        :keyword kind: The kind of workbook. Only valid value is shared. Known values are: "shared".
         :paramtype kind: str or
          ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookSharedTypeKind
         :keyword etag: Resource etag.
@@ -372,8 +372,7 @@ class Workbook(WorkbookResource):
     :vartype location: str
     :ivar identity: Identity used for BYOS.
     :vartype identity: ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookResourceIdentity
-    :ivar kind: The kind of workbook. Only valid value is shared. Possible values include:
-     "shared".
+    :ivar kind: The kind of workbook. Only valid value is shared. Known values are: "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookSharedTypeKind
     :ivar etag: Resource etag.
     :vartype etag: str
@@ -445,8 +444,8 @@ class Workbook(WorkbookResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["WorkbookResourceIdentity"] = None,
-        kind: Optional[Union[str, "WorkbookSharedTypeKind"]] = None,
+        identity: Optional["_models.WorkbookResourceIdentity"] = None,
+        kind: Optional[Union[str, "_models.WorkbookSharedTypeKind"]] = None,
         etag: Optional[str] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
@@ -466,8 +465,7 @@ class Workbook(WorkbookResource):
         :keyword identity: Identity used for BYOS.
         :paramtype identity:
          ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookResourceIdentity
-        :keyword kind: The kind of workbook. Only valid value is shared. Possible values include:
-         "shared".
+        :keyword kind: The kind of workbook. Only valid value is shared. Known values are: "shared".
         :paramtype kind: str or
          ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookSharedTypeKind
         :keyword etag: Resource etag.
@@ -521,7 +519,7 @@ class WorkbookError(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["WorkbookErrorDefinition"] = None,
+        error: Optional["_models.WorkbookErrorDefinition"] = None,
         **kwargs
     ):
         """
@@ -610,8 +608,8 @@ class WorkbookResourceIdentity(ManagedServiceIdentity):
      provided for a system assigned identity.
     :vartype tenant_id: str
     :ivar type: Required. Type of managed service identity (where both SystemAssigned and
-     UserAssigned types are allowed). Possible values include: "None", "SystemAssigned",
-     "UserAssigned", "SystemAssigned,UserAssigned".
+     UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+     "SystemAssigned,UserAssigned".
     :vartype type: str or
      ~azure.mgmt.applicationinsights.v2022_04_01.models.ManagedServiceIdentityType
     :ivar user_assigned_identities: The set of user assigned identities associated with the
@@ -638,14 +636,14 @@ class WorkbookResourceIdentity(ManagedServiceIdentity):
     def __init__(
         self,
         *,
-        type: Union[str, "ManagedServiceIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "UserAssignedIdentity"]] = None,
+        type: Union[str, "_models.ManagedServiceIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs
     ):
         """
         :keyword type: Required. Type of managed service identity (where both SystemAssigned and
-         UserAssigned types are allowed). Possible values include: "None", "SystemAssigned",
-         "UserAssigned", "SystemAssigned,UserAssigned".
+         UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+         "SystemAssigned,UserAssigned".
         :paramtype type: str or
          ~azure.mgmt.applicationinsights.v2022_04_01.models.ManagedServiceIdentityType
         :keyword user_assigned_identities: The set of user assigned identities associated with the
@@ -696,8 +694,7 @@ class WorkbooksListResult(msrest.serialization.Model):
 class WorkbookUpdateParameters(msrest.serialization.Model):
     """The parameters that can be provided when updating workbook properties properties.
 
-    :ivar kind: The kind of workbook. Only valid value is shared. Possible values include:
-     "shared".
+    :ivar kind: The kind of workbook. Only valid value is shared. Known values are: "shared".
     :vartype kind: str or
      ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookUpdateSharedTypeKind
     :ivar tags: A set of tags. Resource tags.
@@ -732,7 +729,7 @@ class WorkbookUpdateParameters(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        kind: Optional[Union[str, "WorkbookUpdateSharedTypeKind"]] = None,
+        kind: Optional[Union[str, "_models.WorkbookUpdateSharedTypeKind"]] = None,
         tags: Optional[Dict[str, str]] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
@@ -743,8 +740,7 @@ class WorkbookUpdateParameters(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword kind: The kind of workbook. Only valid value is shared. Possible values include:
-         "shared".
+        :keyword kind: The kind of workbook. Only valid value is shared. Known values are: "shared".
         :paramtype kind: str or
          ~azure.mgmt.applicationinsights.v2022_04_01.models.WorkbookUpdateSharedTypeKind
         :keyword tags: A set of tags. Resource tags.

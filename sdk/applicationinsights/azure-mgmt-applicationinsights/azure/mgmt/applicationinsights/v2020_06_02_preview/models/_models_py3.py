@@ -6,10 +6,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, List, Optional
+from typing import Any, List, Optional, TYPE_CHECKING
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ErrorResponseLinkedStorage(msrest.serialization.Model):
@@ -28,7 +32,7 @@ class ErrorResponseLinkedStorage(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorResponseLinkedStorageError"] = None,
+        error: Optional["_models.ErrorResponseLinkedStorageError"] = None,
         **kwargs
     ):
         """
@@ -170,7 +174,7 @@ class OperationLive(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationInfo"] = None,
+        display: Optional["_models.OperationInfo"] = None,
         origin: Optional[str] = None,
         properties: Optional[Any] = None,
         **kwargs
@@ -209,7 +213,7 @@ class OperationsListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["OperationLive"]] = None,
+        value: Optional[List["_models.OperationLive"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):

@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._application_insights_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class Annotation(msrest.serialization.Model):
@@ -97,7 +99,7 @@ class AnnotationError(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        innererror: Optional["InnerError"] = None,
+        innererror: Optional["_models.InnerError"] = None,
         **kwargs
     ):
         """
@@ -261,17 +263,17 @@ class ApplicationInsightsComponent(ComponentsResource):
     :vartype application_id: str
     :ivar app_id: Application Insights Unique ID for your Application.
     :vartype app_id: str
-    :ivar application_type: Type of application being monitored. Possible values include: "web",
-     "other". Default value: "web".
+    :ivar application_type: Type of application being monitored. Known values are: "web", "other".
+     Default value: "web".
     :vartype application_type: str or
      ~azure.mgmt.applicationinsights.v2015_05_01.models.ApplicationType
     :ivar flow_type: Used by the Application Insights system to determine what kind of flow this
      component was created by. This is to be set to 'Bluefield' when creating/updating a component
-     via the REST API. Possible values include: "Bluefield". Default value: "Bluefield".
+     via the REST API. Known values are: "Bluefield". Default value: "Bluefield".
     :vartype flow_type: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.FlowType
     :ivar request_source: Describes what tool created this Application Insights component.
-     Customers using this API should set this to the default 'rest'. Possible values include:
-     "rest". Default value: "rest".
+     Customers using this API should set this to the default 'rest'. Known values are: "rest".
+     Default value: "rest".
     :vartype request_source: str or
      ~azure.mgmt.applicationinsights.v2015_05_01.models.RequestSource
     :ivar instrumentation_key: Application Insights Instrumentation key. A read-only value that
@@ -307,7 +309,7 @@ class ApplicationInsightsComponent(ComponentsResource):
     :ivar private_link_scoped_resources: List of linked private link scope resources.
     :vartype private_link_scoped_resources:
      list[~azure.mgmt.applicationinsights.v2015_05_01.models.PrivateLinkScopedResource]
-    :ivar ingestion_mode: Indicates the flow of the ingestion. Possible values include:
+    :ivar ingestion_mode: Indicates the flow of the ingestion. Known values are:
      "ApplicationInsights", "ApplicationInsightsWithDiagnosticSettings", "LogAnalytics". Default
      value: "ApplicationInsights".
     :vartype ingestion_mode: str or
@@ -364,15 +366,15 @@ class ApplicationInsightsComponent(ComponentsResource):
         location: str,
         kind: str,
         tags: Optional[Dict[str, str]] = None,
-        application_type: Optional[Union[str, "ApplicationType"]] = "web",
-        flow_type: Optional[Union[str, "FlowType"]] = "Bluefield",
-        request_source: Optional[Union[str, "RequestSource"]] = "rest",
+        application_type: Optional[Union[str, "_models.ApplicationType"]] = "web",
+        flow_type: Optional[Union[str, "_models.FlowType"]] = "Bluefield",
+        request_source: Optional[Union[str, "_models.RequestSource"]] = "rest",
         hockey_app_id: Optional[str] = None,
         sampling_percentage: Optional[float] = None,
         retention_in_days: Optional[int] = 90,
         disable_ip_masking: Optional[bool] = None,
         immediate_purge_data_on30_days: Optional[bool] = None,
-        ingestion_mode: Optional[Union[str, "IngestionMode"]] = "ApplicationInsights",
+        ingestion_mode: Optional[Union[str, "_models.IngestionMode"]] = "ApplicationInsights",
         **kwargs
     ):
         """
@@ -384,17 +386,17 @@ class ApplicationInsightsComponent(ComponentsResource):
          customize UI. This value is a freeform string, values should typically be one of the following:
          web, ios, other, store, java, phone.
         :paramtype kind: str
-        :keyword application_type: Type of application being monitored. Possible values include: "web",
+        :keyword application_type: Type of application being monitored. Known values are: "web",
          "other". Default value: "web".
         :paramtype application_type: str or
          ~azure.mgmt.applicationinsights.v2015_05_01.models.ApplicationType
         :keyword flow_type: Used by the Application Insights system to determine what kind of flow this
          component was created by. This is to be set to 'Bluefield' when creating/updating a component
-         via the REST API. Possible values include: "Bluefield". Default value: "Bluefield".
+         via the REST API. Known values are: "Bluefield". Default value: "Bluefield".
         :paramtype flow_type: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.FlowType
         :keyword request_source: Describes what tool created this Application Insights component.
-         Customers using this API should set this to the default 'rest'. Possible values include:
-         "rest". Default value: "rest".
+         Customers using this API should set this to the default 'rest'. Known values are: "rest".
+         Default value: "rest".
         :paramtype request_source: str or
          ~azure.mgmt.applicationinsights.v2015_05_01.models.RequestSource
         :keyword hockey_app_id: The unique application ID created when a new application is added to
@@ -409,7 +411,7 @@ class ApplicationInsightsComponent(ComponentsResource):
         :paramtype disable_ip_masking: bool
         :keyword immediate_purge_data_on30_days: Purge data immediately after 30 days.
         :paramtype immediate_purge_data_on30_days: bool
-        :keyword ingestion_mode: Indicates the flow of the ingestion. Possible values include:
+        :keyword ingestion_mode: Indicates the flow of the ingestion. Known values are:
          "ApplicationInsights", "ApplicationInsightsWithDiagnosticSettings", "LogAnalytics". Default
          value: "ApplicationInsights".
         :paramtype ingestion_mode: str or
@@ -452,11 +454,11 @@ class ApplicationInsightsComponentAnalyticsItem(msrest.serialization.Model):
      added.
     :vartype version: str
     :ivar scope: Enum indicating if this item definition is owned by a specific user or is shared
-     between all users with access to the Application Insights component. Possible values include:
+     between all users with access to the Application Insights component. Known values are:
      "shared", "user".
     :vartype scope: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.ItemScope
-    :ivar type: Enum indicating the type of the Analytics item. Possible values include: "none",
-     "query", "recent", "function".
+    :ivar type: Enum indicating the type of the Analytics item. Known values are: "none", "query",
+     "recent", "function".
     :vartype type: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.ItemType
     :ivar time_created: Date and time in UTC when this item was created.
     :vartype time_created: str
@@ -492,9 +494,9 @@ class ApplicationInsightsComponentAnalyticsItem(msrest.serialization.Model):
         id: Optional[str] = None,
         name: Optional[str] = None,
         content: Optional[str] = None,
-        scope: Optional[Union[str, "ItemScope"]] = None,
-        type: Optional[Union[str, "ItemType"]] = None,
-        properties: Optional["ApplicationInsightsComponentAnalyticsItemProperties"] = None,
+        scope: Optional[Union[str, "_models.ItemScope"]] = None,
+        type: Optional[Union[str, "_models.ItemType"]] = None,
+        properties: Optional["_models.ApplicationInsightsComponentAnalyticsItemProperties"] = None,
         **kwargs
     ):
         """
@@ -505,10 +507,10 @@ class ApplicationInsightsComponentAnalyticsItem(msrest.serialization.Model):
         :keyword content: The content of this item.
         :paramtype content: str
         :keyword scope: Enum indicating if this item definition is owned by a specific user or is
-         shared between all users with access to the Application Insights component. Possible values
-         include: "shared", "user".
+         shared between all users with access to the Application Insights component. Known values are:
+         "shared", "user".
         :paramtype scope: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.ItemScope
-        :keyword type: Enum indicating the type of the Analytics item. Possible values include: "none",
+        :keyword type: Enum indicating the type of the Analytics item. Known values are: "none",
          "query", "recent", "function".
         :paramtype type: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.ItemType
         :keyword properties: A set of properties that can be defined in the context of a specific item
@@ -636,7 +638,7 @@ class ApplicationInsightsComponentAPIKeyListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ApplicationInsightsComponentAPIKey"],
+        value: List["_models.ApplicationInsightsComponentAPIKey"],
         **kwargs
     ):
         """
@@ -695,7 +697,7 @@ class ApplicationInsightsComponentBillingFeatures(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        data_volume_cap: Optional["ApplicationInsightsComponentDataVolumeCap"] = None,
+        data_volume_cap: Optional["_models.ApplicationInsightsComponentDataVolumeCap"] = None,
         current_billing_features: Optional[List[str]] = None,
         **kwargs
     ):
@@ -1013,8 +1015,8 @@ class ApplicationInsightsComponentFavorite(msrest.serialization.Model):
     :ivar favorite_id: Internally assigned unique id of the favorite definition.
     :vartype favorite_id: str
     :ivar favorite_type: Enum indicating if this favorite definition is owned by a specific user or
-     is shared between all users with access to the Application Insights component. Possible values
-     include: "shared", "user".
+     is shared between all users with access to the Application Insights component. Known values
+     are: "shared", "user".
     :vartype favorite_type: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.FavoriteType
     :ivar source_type: The source of the favorite definition.
     :vartype source_type: str
@@ -1059,7 +1061,7 @@ class ApplicationInsightsComponentFavorite(msrest.serialization.Model):
         name: Optional[str] = None,
         config: Optional[str] = None,
         version: Optional[str] = None,
-        favorite_type: Optional[Union[str, "FavoriteType"]] = None,
+        favorite_type: Optional[Union[str, "_models.FavoriteType"]] = None,
         source_type: Optional[str] = None,
         tags: Optional[List[str]] = None,
         category: Optional[str] = None,
@@ -1077,8 +1079,8 @@ class ApplicationInsightsComponentFavorite(msrest.serialization.Model):
          Search.
         :paramtype version: str
         :keyword favorite_type: Enum indicating if this favorite definition is owned by a specific user
-         or is shared between all users with access to the Application Insights component. Possible
-         values include: "shared", "user".
+         or is shared between all users with access to the Application Insights component. Known values
+         are: "shared", "user".
         :paramtype favorite_type: str or
          ~azure.mgmt.applicationinsights.v2015_05_01.models.FavoriteType
         :keyword source_type: The source of the favorite definition.
@@ -1353,7 +1355,7 @@ class ApplicationInsightsComponentListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ApplicationInsightsComponent"],
+        value: List["_models.ApplicationInsightsComponent"],
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1407,7 +1409,7 @@ class ApplicationInsightsComponentProactiveDetectionConfiguration(msrest.seriali
         send_emails_to_subscription_owners: Optional[bool] = None,
         custom_emails: Optional[List[str]] = None,
         last_updated_time: Optional[str] = None,
-        rule_definitions: Optional["ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions"] = None,
+        rule_definitions: Optional["_models.ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions"] = None,
         **kwargs
     ):
         """
@@ -1604,7 +1606,7 @@ class ApplicationInsightsWebTestLocationsListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ApplicationInsightsComponentWebTestLocation"],
+        value: List["_models.ApplicationInsightsComponentWebTestLocation"],
         **kwargs
     ):
         """
@@ -1643,7 +1645,7 @@ class ComponentPurgeBody(msrest.serialization.Model):
         self,
         *,
         table: str,
-        filters: List["ComponentPurgeBodyFilters"],
+        filters: List["_models.ComponentPurgeBodyFilters"],
         **kwargs
     ):
         """
@@ -1751,8 +1753,8 @@ class ComponentPurgeStatusResponse(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar status: Required. Status of the operation represented by the requested Id. Possible
-     values include: "pending", "completed".
+    :ivar status: Required. Status of the operation represented by the requested Id. Known values
+     are: "pending", "completed".
     :vartype status: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.PurgeState
     """
 
@@ -1767,12 +1769,12 @@ class ComponentPurgeStatusResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Union[str, "PurgeState"],
+        status: Union[str, "_models.PurgeState"],
         **kwargs
     ):
         """
-        :keyword status: Required. Status of the operation represented by the requested Id. Possible
-         values include: "pending", "completed".
+        :keyword status: Required. Status of the operation represented by the requested Id. Known
+         values are: "pending", "completed".
         :paramtype status: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.PurgeState
         """
         super(ComponentPurgeStatusResponse, self).__init__(**kwargs)
@@ -1989,7 +1991,7 @@ class MyWorkbook(MyWorkbookResource):
     :vartype location: str
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
-    :ivar kind: The kind of workbook. Choices are user and shared. Possible values include: "user",
+    :ivar kind: The kind of workbook. Choices are user and shared. Known values are: "user",
      "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.SharedTypeKind
     :ivar display_name: The user-defined name of the private workbook.
@@ -2044,7 +2046,7 @@ class MyWorkbook(MyWorkbookResource):
         type: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        kind: Optional[Union[str, "SharedTypeKind"]] = None,
+        kind: Optional[Union[str, "_models.SharedTypeKind"]] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
         version: Optional[str] = None,
@@ -2064,8 +2066,8 @@ class MyWorkbook(MyWorkbookResource):
         :paramtype location: str
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword kind: The kind of workbook. Choices are user and shared. Possible values include:
-         "user", "shared".
+        :keyword kind: The kind of workbook. Choices are user and shared. Known values are: "user",
+         "shared".
         :paramtype kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.SharedTypeKind
         :keyword display_name: The user-defined name of the private workbook.
         :paramtype display_name: str
@@ -2118,7 +2120,7 @@ class MyWorkbookError(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        details: Optional[List["ErrorFieldContract"]] = None,
+        details: Optional[List["_models.ErrorFieldContract"]] = None,
         **kwargs
     ):
         """
@@ -2181,7 +2183,7 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         **kwargs
     ):
         """
@@ -2251,7 +2253,7 @@ class OperationListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2396,7 +2398,7 @@ class WebTest(WebtestsResource):
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
     :ivar kind: The kind of web test that this web test watches. Choices are ping and multistep.
-     Possible values include: "ping", "multistep".
+     Known values are: "ping", "multistep".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.WebTestKind
     :ivar synthetic_monitor_id: Unique ID of this WebTest. This is typically the same value as the
      Name field.
@@ -2411,8 +2413,8 @@ class WebTest(WebtestsResource):
     :vartype frequency: int
     :ivar timeout: Seconds until this WebTest will timeout and fail. Default value is 30.
     :vartype timeout: int
-    :ivar web_test_kind: The kind of web test this is, valid choices are ping and multistep.
-     Possible values include: "ping", "multistep".
+    :ivar web_test_kind: The kind of web test this is, valid choices are ping and multistep. Known
+     values are: "ping", "multistep".
     :vartype web_test_kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.WebTestKind
     :ivar retry_enabled: Allow for retries should this WebTest fail.
     :vartype retry_enabled: bool
@@ -2461,17 +2463,17 @@ class WebTest(WebtestsResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        kind: Optional[Union[str, "WebTestKind"]] = None,
+        kind: Optional[Union[str, "_models.WebTestKind"]] = None,
         synthetic_monitor_id: Optional[str] = None,
         web_test_name: Optional[str] = None,
         description: Optional[str] = None,
         enabled: Optional[bool] = None,
         frequency: Optional[int] = 300,
         timeout: Optional[int] = 30,
-        web_test_kind: Optional[Union[str, "WebTestKind"]] = None,
+        web_test_kind: Optional[Union[str, "_models.WebTestKind"]] = None,
         retry_enabled: Optional[bool] = None,
-        locations: Optional[List["WebTestGeolocation"]] = None,
-        configuration: Optional["WebTestPropertiesConfiguration"] = None,
+        locations: Optional[List["_models.WebTestGeolocation"]] = None,
+        configuration: Optional["_models.WebTestPropertiesConfiguration"] = None,
         **kwargs
     ):
         """
@@ -2480,7 +2482,7 @@ class WebTest(WebtestsResource):
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
         :keyword kind: The kind of web test that this web test watches. Choices are ping and multistep.
-         Possible values include: "ping", "multistep".
+         Known values are: "ping", "multistep".
         :paramtype kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.WebTestKind
         :keyword synthetic_monitor_id: Unique ID of this WebTest. This is typically the same value as
          the Name field.
@@ -2497,7 +2499,7 @@ class WebTest(WebtestsResource):
         :keyword timeout: Seconds until this WebTest will timeout and fail. Default value is 30.
         :paramtype timeout: int
         :keyword web_test_kind: The kind of web test this is, valid choices are ping and multistep.
-         Possible values include: "ping", "multistep".
+         Known values are: "ping", "multistep".
         :paramtype web_test_kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.WebTestKind
         :keyword retry_enabled: Allow for retries should this WebTest fail.
         :paramtype retry_enabled: bool
@@ -2573,7 +2575,7 @@ class WebTestListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["WebTest"],
+        value: List["_models.WebTest"],
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2681,7 +2683,7 @@ class Workbook(WorkbookResource):
     :vartype location: str
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
-    :ivar kind: The kind of workbook. Choices are user and shared. Possible values include: "user",
+    :ivar kind: The kind of workbook. Choices are user and shared. Known values are: "user",
      "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.SharedTypeKind
     :ivar name_properties_name: The user-defined name of the workbook.
@@ -2695,8 +2697,8 @@ class Workbook(WorkbookResource):
     :ivar workbook_id: Internally assigned unique id of the workbook definition.
     :vartype workbook_id: str
     :ivar shared_type_kind: Enum indicating if this workbook definition is owned by a specific user
-     or is shared between all users with access to the Application Insights component. Possible
-     values include: "user", "shared".
+     or is shared between all users with access to the Application Insights component. Known values
+     are: "user", "shared".
     :vartype shared_type_kind: str or
      ~azure.mgmt.applicationinsights.v2015_05_01.models.SharedTypeKind
     :ivar time_modified: Date and time in UTC of the last modification that was made to this
@@ -2744,12 +2746,12 @@ class Workbook(WorkbookResource):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        kind: Optional[Union[str, "SharedTypeKind"]] = None,
+        kind: Optional[Union[str, "_models.SharedTypeKind"]] = None,
         name_properties_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
         version: Optional[str] = None,
         workbook_id: Optional[str] = None,
-        shared_type_kind: Optional[Union[str, "SharedTypeKind"]] = None,
+        shared_type_kind: Optional[Union[str, "_models.SharedTypeKind"]] = None,
         category: Optional[str] = None,
         tags_properties_tags: Optional[List[str]] = None,
         user_id: Optional[str] = None,
@@ -2761,8 +2763,8 @@ class Workbook(WorkbookResource):
         :paramtype location: str
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword kind: The kind of workbook. Choices are user and shared. Possible values include:
-         "user", "shared".
+        :keyword kind: The kind of workbook. Choices are user and shared. Known values are: "user",
+         "shared".
         :paramtype kind: str or ~azure.mgmt.applicationinsights.v2015_05_01.models.SharedTypeKind
         :keyword name_properties_name: The user-defined name of the workbook.
         :paramtype name_properties_name: str
@@ -2775,8 +2777,8 @@ class Workbook(WorkbookResource):
         :keyword workbook_id: Internally assigned unique id of the workbook definition.
         :paramtype workbook_id: str
         :keyword shared_type_kind: Enum indicating if this workbook definition is owned by a specific
-         user or is shared between all users with access to the Application Insights component. Possible
-         values include: "user", "shared".
+         user or is shared between all users with access to the Application Insights component. Known
+         values are: "user", "shared".
         :paramtype shared_type_kind: str or
          ~azure.mgmt.applicationinsights.v2015_05_01.models.SharedTypeKind
         :keyword category: Workbook category, as defined by the user at creation time.
@@ -2826,7 +2828,7 @@ class WorkbookError(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        details: Optional[List["ErrorFieldContract"]] = None,
+        details: Optional[List["_models.ErrorFieldContract"]] = None,
         **kwargs
     ):
         """
@@ -2946,7 +2948,7 @@ class WorkItemConfigurationError(msrest.serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        innererror: Optional["InnerError"] = None,
+        innererror: Optional["_models.InnerError"] = None,
         **kwargs
     ):
         """

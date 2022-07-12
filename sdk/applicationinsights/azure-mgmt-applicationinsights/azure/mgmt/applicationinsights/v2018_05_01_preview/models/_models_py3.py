@@ -6,11 +6,13 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._application_insights_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ComponentsResource(msrest.serialization.Model):
@@ -94,17 +96,17 @@ class ApplicationInsightsComponent(ComponentsResource):
     :vartype application_id: str
     :ivar app_id: Application Insights Unique ID for your Application.
     :vartype app_id: str
-    :ivar application_type: Type of application being monitored. Possible values include: "web",
-     "other". Default value: "web".
+    :ivar application_type: Type of application being monitored. Known values are: "web", "other".
+     Default value: "web".
     :vartype application_type: str or
      ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.ApplicationType
     :ivar flow_type: Used by the Application Insights system to determine what kind of flow this
      component was created by. This is to be set to 'Bluefield' when creating/updating a component
-     via the REST API. Possible values include: "Bluefield". Default value: "Bluefield".
+     via the REST API. Known values are: "Bluefield". Default value: "Bluefield".
     :vartype flow_type: str or ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.FlowType
     :ivar request_source: Describes what tool created this Application Insights component.
-     Customers using this API should set this to the default 'rest'. Possible values include:
-     "rest". Default value: "rest".
+     Customers using this API should set this to the default 'rest'. Known values are: "rest".
+     Default value: "rest".
     :vartype request_source: str or
      ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.RequestSource
     :ivar instrumentation_key: Application Insights Instrumentation key. A read-only value that
@@ -141,14 +143,14 @@ class ApplicationInsightsComponent(ComponentsResource):
     :vartype private_link_scoped_resources:
      list[~azure.mgmt.applicationinsights.v2018_05_01_preview.models.PrivateLinkScopedResource]
     :ivar public_network_access_for_ingestion: The network access type for accessing Application
-     Insights ingestion. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+     Insights ingestion. Known values are: "Enabled", "Disabled". Default value: "Enabled".
     :vartype public_network_access_for_ingestion: str or
      ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.PublicNetworkAccessType
     :ivar public_network_access_for_query: The network access type for accessing Application
-     Insights query. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+     Insights query. Known values are: "Enabled", "Disabled". Default value: "Enabled".
     :vartype public_network_access_for_query: str or
      ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.PublicNetworkAccessType
-    :ivar ingestion_mode: Indicates the flow of the ingestion. Possible values include:
+    :ivar ingestion_mode: Indicates the flow of the ingestion. Known values are:
      "ApplicationInsights", "ApplicationInsightsWithDiagnosticSettings", "LogAnalytics". Default
      value: "ApplicationInsights".
     :vartype ingestion_mode: str or
@@ -207,17 +209,17 @@ class ApplicationInsightsComponent(ComponentsResource):
         location: str,
         kind: str,
         tags: Optional[Dict[str, str]] = None,
-        application_type: Optional[Union[str, "ApplicationType"]] = "web",
-        flow_type: Optional[Union[str, "FlowType"]] = "Bluefield",
-        request_source: Optional[Union[str, "RequestSource"]] = "rest",
+        application_type: Optional[Union[str, "_models.ApplicationType"]] = "web",
+        flow_type: Optional[Union[str, "_models.FlowType"]] = "Bluefield",
+        request_source: Optional[Union[str, "_models.RequestSource"]] = "rest",
         hockey_app_id: Optional[str] = None,
         sampling_percentage: Optional[float] = None,
         retention_in_days: Optional[int] = 90,
         disable_ip_masking: Optional[bool] = None,
         immediate_purge_data_on30_days: Optional[bool] = None,
-        public_network_access_for_ingestion: Optional[Union[str, "PublicNetworkAccessType"]] = "Enabled",
-        public_network_access_for_query: Optional[Union[str, "PublicNetworkAccessType"]] = "Enabled",
-        ingestion_mode: Optional[Union[str, "IngestionMode"]] = "ApplicationInsights",
+        public_network_access_for_ingestion: Optional[Union[str, "_models.PublicNetworkAccessType"]] = "Enabled",
+        public_network_access_for_query: Optional[Union[str, "_models.PublicNetworkAccessType"]] = "Enabled",
+        ingestion_mode: Optional[Union[str, "_models.IngestionMode"]] = "ApplicationInsights",
         **kwargs
     ):
         """
@@ -229,18 +231,18 @@ class ApplicationInsightsComponent(ComponentsResource):
          customize UI. This value is a freeform string, values should typically be one of the following:
          web, ios, other, store, java, phone.
         :paramtype kind: str
-        :keyword application_type: Type of application being monitored. Possible values include: "web",
+        :keyword application_type: Type of application being monitored. Known values are: "web",
          "other". Default value: "web".
         :paramtype application_type: str or
          ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.ApplicationType
         :keyword flow_type: Used by the Application Insights system to determine what kind of flow this
          component was created by. This is to be set to 'Bluefield' when creating/updating a component
-         via the REST API. Possible values include: "Bluefield". Default value: "Bluefield".
+         via the REST API. Known values are: "Bluefield". Default value: "Bluefield".
         :paramtype flow_type: str or
          ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.FlowType
         :keyword request_source: Describes what tool created this Application Insights component.
-         Customers using this API should set this to the default 'rest'. Possible values include:
-         "rest". Default value: "rest".
+         Customers using this API should set this to the default 'rest'. Known values are: "rest".
+         Default value: "rest".
         :paramtype request_source: str or
          ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.RequestSource
         :keyword hockey_app_id: The unique application ID created when a new application is added to
@@ -256,14 +258,14 @@ class ApplicationInsightsComponent(ComponentsResource):
         :keyword immediate_purge_data_on30_days: Purge data immediately after 30 days.
         :paramtype immediate_purge_data_on30_days: bool
         :keyword public_network_access_for_ingestion: The network access type for accessing Application
-         Insights ingestion. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+         Insights ingestion. Known values are: "Enabled", "Disabled". Default value: "Enabled".
         :paramtype public_network_access_for_ingestion: str or
          ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.PublicNetworkAccessType
         :keyword public_network_access_for_query: The network access type for accessing Application
-         Insights query. Possible values include: "Enabled", "Disabled". Default value: "Enabled".
+         Insights query. Known values are: "Enabled", "Disabled". Default value: "Enabled".
         :paramtype public_network_access_for_query: str or
          ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.PublicNetworkAccessType
-        :keyword ingestion_mode: Indicates the flow of the ingestion. Possible values include:
+        :keyword ingestion_mode: Indicates the flow of the ingestion. Known values are:
          "ApplicationInsights", "ApplicationInsightsWithDiagnosticSettings", "LogAnalytics". Default
          value: "ApplicationInsights".
         :paramtype ingestion_mode: str or
@@ -318,7 +320,7 @@ class ApplicationInsightsComponentListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["ApplicationInsightsComponent"],
+        value: List["_models.ApplicationInsightsComponent"],
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -393,7 +395,7 @@ class ApplicationInsightsComponentProactiveDetectionConfiguration(msrest.seriali
         enabled: Optional[bool] = None,
         send_emails_to_subscription_owners: Optional[bool] = None,
         custom_emails: Optional[List[str]] = None,
-        rule_definitions: Optional["ApplicationInsightsComponentProactiveDetectionConfigurationPropertiesRuleDefinitions"] = None,
+        rule_definitions: Optional["_models.ApplicationInsightsComponentProactiveDetectionConfigurationPropertiesRuleDefinitions"] = None,
         **kwargs
     ):
         """
@@ -529,7 +531,7 @@ class ComponentPurgeBody(msrest.serialization.Model):
         self,
         *,
         table: str,
-        filters: List["ComponentPurgeBodyFilters"],
+        filters: List["_models.ComponentPurgeBodyFilters"],
         **kwargs
     ):
         """
@@ -637,8 +639,8 @@ class ComponentPurgeStatusResponse(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar status: Required. Status of the operation represented by the requested Id. Possible
-     values include: "pending", "completed".
+    :ivar status: Required. Status of the operation represented by the requested Id. Known values
+     are: "pending", "completed".
     :vartype status: str or ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.PurgeState
     """
 
@@ -653,12 +655,12 @@ class ComponentPurgeStatusResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Union[str, "PurgeState"],
+        status: Union[str, "_models.PurgeState"],
         **kwargs
     ):
         """
-        :keyword status: Required. Status of the operation represented by the requested Id. Possible
-         values include: "pending", "completed".
+        :keyword status: Required. Status of the operation represented by the requested Id. Known
+         values are: "pending", "completed".
         :paramtype status: str or ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.PurgeState
         """
         super(ComponentPurgeStatusResponse, self).__init__(**kwargs)
@@ -721,7 +723,7 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationInfo"] = None,
+        display: Optional["_models.OperationInfo"] = None,
         origin: Optional[str] = None,
         properties: Optional[Any] = None,
         **kwargs
@@ -806,7 +808,7 @@ class OperationsListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -951,7 +953,7 @@ class WebTest(WebtestsResource):
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
     :ivar kind: The kind of WebTest that this web test watches. Choices are ping and multistep.
-     Possible values include: "ping", "multistep". Default value: "ping".
+     Known values are: "ping", "multistep". Default value: "ping".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.WebTestKind
     :ivar synthetic_monitor_id: Unique ID of this WebTest. This is typically the same value as the
      Name field.
@@ -967,7 +969,7 @@ class WebTest(WebtestsResource):
     :ivar timeout: Seconds until this WebTest will timeout and fail. Default value is 30.
     :vartype timeout: int
     :ivar web_test_kind: The kind of web test this is, valid choices are ping, multistep, basic,
-     and standard. Possible values include: "ping", "multistep", "basic", "standard". Default value:
+     and standard. Known values are: "ping", "multistep", "basic", "standard". Default value:
      "ping".
     :vartype web_test_kind: str or
      ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.WebTestKindEnum
@@ -1027,19 +1029,19 @@ class WebTest(WebtestsResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        kind: Optional[Union[str, "WebTestKind"]] = "ping",
+        kind: Optional[Union[str, "_models.WebTestKind"]] = "ping",
         synthetic_monitor_id: Optional[str] = None,
         web_test_name: Optional[str] = None,
         description: Optional[str] = None,
         enabled: Optional[bool] = None,
         frequency: Optional[int] = 300,
         timeout: Optional[int] = 30,
-        web_test_kind: Optional[Union[str, "WebTestKindEnum"]] = "ping",
+        web_test_kind: Optional[Union[str, "_models.WebTestKindEnum"]] = "ping",
         retry_enabled: Optional[bool] = None,
-        locations: Optional[List["WebTestGeolocation"]] = None,
-        configuration: Optional["WebTestPropertiesConfiguration"] = None,
-        request: Optional["WebTestPropertiesRequest"] = None,
-        validation_rules: Optional["WebTestPropertiesValidationRules"] = None,
+        locations: Optional[List["_models.WebTestGeolocation"]] = None,
+        configuration: Optional["_models.WebTestPropertiesConfiguration"] = None,
+        request: Optional["_models.WebTestPropertiesRequest"] = None,
+        validation_rules: Optional["_models.WebTestPropertiesValidationRules"] = None,
         **kwargs
     ):
         """
@@ -1048,7 +1050,7 @@ class WebTest(WebtestsResource):
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
         :keyword kind: The kind of WebTest that this web test watches. Choices are ping and multistep.
-         Possible values include: "ping", "multistep". Default value: "ping".
+         Known values are: "ping", "multistep". Default value: "ping".
         :paramtype kind: str or ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.WebTestKind
         :keyword synthetic_monitor_id: Unique ID of this WebTest. This is typically the same value as
          the Name field.
@@ -1065,7 +1067,7 @@ class WebTest(WebtestsResource):
         :keyword timeout: Seconds until this WebTest will timeout and fail. Default value is 30.
         :paramtype timeout: int
         :keyword web_test_kind: The kind of web test this is, valid choices are ping, multistep, basic,
-         and standard. Possible values include: "ping", "multistep", "basic", "standard". Default value:
+         and standard. Known values are: "ping", "multistep", "basic", "standard". Default value:
          "ping".
         :paramtype web_test_kind: str or
          ~azure.mgmt.applicationinsights.v2018_05_01_preview.models.WebTestKindEnum
@@ -1151,7 +1153,7 @@ class WebTestListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["WebTest"],
+        value: List["_models.WebTest"],
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1222,7 +1224,7 @@ class WebTestPropertiesRequest(msrest.serialization.Model):
         self,
         *,
         request_url: Optional[str] = None,
-        headers: Optional[List["HeaderField"]] = None,
+        headers: Optional[List["_models.HeaderField"]] = None,
         http_verb: Optional[str] = None,
         request_body: Optional[str] = None,
         parse_dependent_requests: Optional[bool] = None,
@@ -1282,7 +1284,7 @@ class WebTestPropertiesValidationRules(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        content_validation: Optional["WebTestPropertiesValidationRulesContentValidation"] = None,
+        content_validation: Optional["_models.WebTestPropertiesValidationRulesContentValidation"] = None,
         ssl_check: Optional[bool] = None,
         ssl_cert_remaining_lifetime_check: Optional[int] = None,
         expected_http_status_code: Optional[int] = None,

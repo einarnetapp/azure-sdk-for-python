@@ -15,6 +15,7 @@ from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
@@ -24,26 +25,24 @@ T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class MyWorkbooksOperations:
-    """MyWorkbooksOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.applicationinsights.v2021_03_08.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.applicationinsights.v2021_03_08.aio.ApplicationInsightsManagementClient`'s
+        :attr:`my_workbooks` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list_by_resource_group(
@@ -54,7 +53,7 @@ class MyWorkbooksOperations:
         source_id: Optional[str] = None,
         can_fetch_content: Optional[bool] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.MyWorkbooksListResult"]:
+    ) -> AsyncIterable[_models.MyWorkbooksListResult]:
         """Get all private workbooks defined within a specified resource group and category.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -77,13 +76,16 @@ class MyWorkbooksOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbooksListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-03-08")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.MyWorkbooksListResult"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-03-08"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MyWorkbooksListResult]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -96,9 +98,11 @@ class MyWorkbooksOperations:
                     source_id=source_id,
                     can_fetch_content=can_fetch_content,
                     template_url=self.list_by_resource_group.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -111,9 +115,11 @@ class MyWorkbooksOperations:
                     source_id=source_id,
                     can_fetch_content=can_fetch_content,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -154,7 +160,7 @@ class MyWorkbooksOperations:
         tags: Optional[List[str]] = None,
         can_fetch_content: Optional[bool] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.MyWorkbooksListResult"]:
+    ) -> AsyncIterable[_models.MyWorkbooksListResult]:
         """Get all private workbooks defined within a specified subscription and category.
 
         :param category: Category of workbook to return.
@@ -172,13 +178,16 @@ class MyWorkbooksOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbooksListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-03-08")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.MyWorkbooksListResult"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-03-08"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MyWorkbooksListResult]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -189,9 +198,11 @@ class MyWorkbooksOperations:
                     tags=tags,
                     can_fetch_content=can_fetch_content,
                     template_url=self.list_by_subscription.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -202,9 +213,11 @@ class MyWorkbooksOperations:
                     tags=tags,
                     can_fetch_content=can_fetch_content,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -244,7 +257,7 @@ class MyWorkbooksOperations:
         resource_group_name: str,
         resource_name: str,
         **kwargs: Any
-    ) -> "_models.MyWorkbook":
+    ) -> _models.MyWorkbook:
         """Get a single private workbook by its resourceName.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -256,13 +269,16 @@ class MyWorkbooksOperations:
         :rtype: ~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbook
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.MyWorkbook"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-03-08")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-03-08"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MyWorkbook]
 
         
         request = build_get_request(
@@ -271,11 +287,13 @@ class MyWorkbooksOperations:
             resource_name=resource_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -315,13 +333,16 @@ class MyWorkbooksOperations:
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-03-08")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-03-08"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
         request = build_delete_request(
@@ -330,11 +351,13 @@ class MyWorkbooksOperations:
             resource_name=resource_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -357,10 +380,10 @@ class MyWorkbooksOperations:
         self,
         resource_group_name: str,
         resource_name: str,
-        workbook_properties: "_models.MyWorkbook",
+        workbook_properties: _models.MyWorkbook,
         source_id: Optional[str] = None,
         **kwargs: Any
-    ) -> "_models.MyWorkbook":
+    ) -> _models.MyWorkbook:
         """Create a new private workbook.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -378,14 +401,17 @@ class MyWorkbooksOperations:
         :rtype: ~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbook
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.MyWorkbook"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-03-08")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-03-08"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MyWorkbook]
 
         _json = self._serialize.body(workbook_properties, 'MyWorkbook')
 
@@ -398,11 +424,13 @@ class MyWorkbooksOperations:
             json=_json,
             source_id=source_id,
             template_url=self.create_or_update.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -433,10 +461,10 @@ class MyWorkbooksOperations:
         self,
         resource_group_name: str,
         resource_name: str,
-        workbook_properties: "_models.MyWorkbook",
+        workbook_properties: _models.MyWorkbook,
         source_id: Optional[str] = None,
         **kwargs: Any
-    ) -> "_models.MyWorkbook":
+    ) -> _models.MyWorkbook:
         """Updates a private workbook that has already been added.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -454,14 +482,17 @@ class MyWorkbooksOperations:
         :rtype: ~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbook
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.MyWorkbook"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-03-08")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-03-08"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.MyWorkbook]
 
         _json = self._serialize.body(workbook_properties, 'MyWorkbook')
 
@@ -474,11 +505,13 @@ class MyWorkbooksOperations:
             json=_json,
             source_id=source_id,
             template_url=self.update.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
