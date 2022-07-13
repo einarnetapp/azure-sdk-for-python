@@ -35,7 +35,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -108,7 +108,7 @@ class AscOperationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.AscOperation]
 
         

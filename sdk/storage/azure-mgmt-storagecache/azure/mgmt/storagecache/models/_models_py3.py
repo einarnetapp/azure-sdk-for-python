@@ -305,8 +305,13 @@ class Cache(msrest.serialization.Model):
     :vartype system_data: ~azure.mgmt.storagecache.models.SystemData
     :ivar sku: SKU for the Cache.
     :vartype sku: ~azure.mgmt.storagecache.models.CacheSku
-    :ivar cache_size_gb: The size of this Cache, in GB.
+    :ivar cache_size_gb: The size of this Cache, in GB, when scalingFactor is 1.0.
     :vartype cache_size_gb: int
+    :ivar scaling_factor: Multiplier that sets the current storage and throughput capacity of the
+     cache. Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above
+     1.0 increase the cache size and throughput - for example, the scaling factor 1.33 gives a cache
+     that's 33% larger than its base size. Known values are: 1, 1.33, 2, 4. Default value: "1".
+    :vartype scaling_factor: float or ~azure.mgmt.storagecache.models.ScalingFactor
     :ivar health: Health of the Cache.
     :vartype health: ~azure.mgmt.storagecache.models.CacheHealth
     :ivar mount_addresses: Array of IP addresses that can be used by clients mounting this Cache.
@@ -362,6 +367,7 @@ class Cache(msrest.serialization.Model):
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
         'sku': {'key': 'sku', 'type': 'CacheSku'},
         'cache_size_gb': {'key': 'properties.cacheSizeGB', 'type': 'int'},
+        'scaling_factor': {'key': 'properties.scalingFactor', 'type': 'float'},
         'health': {'key': 'properties.health', 'type': 'CacheHealth'},
         'mount_addresses': {'key': 'properties.mountAddresses', 'type': '[str]'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
@@ -385,6 +391,7 @@ class Cache(msrest.serialization.Model):
         identity: Optional["_models.CacheIdentity"] = None,
         sku: Optional["_models.CacheSku"] = None,
         cache_size_gb: Optional[int] = None,
+        scaling_factor: Optional[Union[float, "_models.ScalingFactor"]] = 1,
         subnet: Optional[str] = None,
         upgrade_settings: Optional["_models.CacheUpgradeSettings"] = None,
         network_settings: Optional["_models.CacheNetworkSettings"] = None,
@@ -403,8 +410,14 @@ class Cache(msrest.serialization.Model):
         :paramtype identity: ~azure.mgmt.storagecache.models.CacheIdentity
         :keyword sku: SKU for the Cache.
         :paramtype sku: ~azure.mgmt.storagecache.models.CacheSku
-        :keyword cache_size_gb: The size of this Cache, in GB.
+        :keyword cache_size_gb: The size of this Cache, in GB, when scalingFactor is 1.0.
         :paramtype cache_size_gb: int
+        :keyword scaling_factor: Multiplier that sets the current storage and throughput capacity of
+         the cache. Values can be 1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values
+         above 1.0 increase the cache size and throughput - for example, the scaling factor 1.33 gives a
+         cache that's 33% larger than its base size. Known values are: 1, 1.33, 2, 4. Default value:
+         "1".
+        :paramtype scaling_factor: float or ~azure.mgmt.storagecache.models.ScalingFactor
         :keyword subnet: Subnet used for the Cache.
         :paramtype subnet: str
         :keyword upgrade_settings: Upgrade settings of the Cache.
@@ -431,6 +444,7 @@ class Cache(msrest.serialization.Model):
         self.system_data = None
         self.sku = sku
         self.cache_size_gb = cache_size_gb
+        self.scaling_factor = scaling_factor
         self.health = None
         self.mount_addresses = None
         self.provisioning_state = None

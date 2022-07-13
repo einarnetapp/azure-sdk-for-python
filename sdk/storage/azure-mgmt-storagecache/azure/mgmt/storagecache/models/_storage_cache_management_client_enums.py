@@ -128,6 +128,18 @@ class ReasonCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     QUOTA_ID = "QuotaId"
     NOT_AVAILABLE_FOR_SUBSCRIPTION = "NotAvailableForSubscription"
 
+class ScalingFactor(float, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Multiplier that sets the current storage and throughput capacity of the cache. Values can be
+    1.0 (the base size, listed in the SKU), 1.33, 2.0, or 4.0. Values above 1.0 increase the cache
+    size and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger than
+    its base size.
+    """
+
+    ONE = 1
+    ONE33 = 1.33
+    TWO = 2
+    FOUR = 4
+
 class StorageTargetType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of the Storage Target.
     """
