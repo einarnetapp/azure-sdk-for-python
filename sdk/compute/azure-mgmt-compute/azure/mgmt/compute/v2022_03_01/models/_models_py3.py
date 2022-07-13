@@ -4682,18 +4682,28 @@ class OSDisk(msrest.serialization.Model):
 class OSDiskImage(msrest.serialization.Model):
     """Contains the os disk image information.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     All required parameters must be populated in order to send to Azure.
 
+    :ivar size_in_gb: The image size in GB.
+    :vartype size_in_gb: int
+    :ivar size_in_bytes: The image size in bytes.
+    :vartype size_in_bytes: long
     :ivar operating_system: Required. The operating system of the osDiskImage. Known values are:
      "Windows", "Linux".
     :vartype operating_system: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemTypes
     """
 
     _validation = {
+        'size_in_gb': {'readonly': True},
+        'size_in_bytes': {'readonly': True},
         'operating_system': {'required': True},
     }
 
     _attribute_map = {
+        'size_in_gb': {'key': 'sizeInGb', 'type': 'int'},
+        'size_in_bytes': {'key': 'sizeInBytes', 'type': 'long'},
         'operating_system': {'key': 'operatingSystem', 'type': 'str'},
     }
 
@@ -4709,6 +4719,8 @@ class OSDiskImage(msrest.serialization.Model):
         :paramtype operating_system: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemTypes
         """
         super(OSDiskImage, self).__init__(**kwargs)
+        self.size_in_gb = None
+        self.size_in_bytes = None
         self.operating_system = operating_system
 
 
