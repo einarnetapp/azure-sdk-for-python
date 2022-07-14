@@ -11863,6 +11863,9 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):
     :ivar enable_accelerated_networking: Specifies whether the network interface is accelerated
      networking-enabled.
     :vartype enable_accelerated_networking: bool
+    :ivar disable_tcp_state_tracking: Specifies whether the network interface is disabled for tcp
+     state tracking.
+    :vartype disable_tcp_state_tracking: bool
     :ivar enable_fpga: Specifies whether the network interface is FPGA networking-enabled.
     :vartype enable_fpga: bool
     :ivar network_security_group: The network security group.
@@ -11889,6 +11892,7 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):
         'name': {'key': 'name', 'type': 'str'},
         'primary': {'key': 'properties.primary', 'type': 'bool'},
         'enable_accelerated_networking': {'key': 'properties.enableAcceleratedNetworking', 'type': 'bool'},
+        'disable_tcp_state_tracking': {'key': 'properties.disableTcpStateTracking', 'type': 'bool'},
         'enable_fpga': {'key': 'properties.enableFpga', 'type': 'bool'},
         'network_security_group': {'key': 'properties.networkSecurityGroup', 'type': 'SubResource'},
         'dns_settings': {'key': 'properties.dnsSettings', 'type': 'VirtualMachineScaleSetNetworkConfigurationDnsSettings'},
@@ -11904,6 +11908,7 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):
         id: Optional[str] = None,
         primary: Optional[bool] = None,
         enable_accelerated_networking: Optional[bool] = None,
+        disable_tcp_state_tracking: Optional[bool] = None,
         enable_fpga: Optional[bool] = None,
         network_security_group: Optional["_models.SubResource"] = None,
         dns_settings: Optional["_models.VirtualMachineScaleSetNetworkConfigurationDnsSettings"] = None,
@@ -11923,6 +11928,9 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):
         :keyword enable_accelerated_networking: Specifies whether the network interface is accelerated
          networking-enabled.
         :paramtype enable_accelerated_networking: bool
+        :keyword disable_tcp_state_tracking: Specifies whether the network interface is disabled for
+         tcp state tracking.
+        :paramtype disable_tcp_state_tracking: bool
         :keyword enable_fpga: Specifies whether the network interface is FPGA networking-enabled.
         :paramtype enable_fpga: bool
         :keyword network_security_group: The network security group.
@@ -11943,6 +11951,7 @@ class VirtualMachineScaleSetNetworkConfiguration(SubResource):
         self.name = name
         self.primary = primary
         self.enable_accelerated_networking = enable_accelerated_networking
+        self.disable_tcp_state_tracking = disable_tcp_state_tracking
         self.enable_fpga = enable_fpga
         self.network_security_group = network_security_group
         self.dns_settings = dns_settings
@@ -12900,6 +12909,9 @@ class VirtualMachineScaleSetUpdateNetworkConfiguration(SubResource):
     :ivar enable_accelerated_networking: Specifies whether the network interface is accelerated
      networking-enabled.
     :vartype enable_accelerated_networking: bool
+    :ivar disable_tcp_state_tracking: Specifies whether the network interface is disabled for tcp
+     state tracking.
+    :vartype disable_tcp_state_tracking: bool
     :ivar enable_fpga: Specifies whether the network interface is FPGA networking-enabled.
     :vartype enable_fpga: bool
     :ivar network_security_group: The network security group.
@@ -12922,6 +12934,7 @@ class VirtualMachineScaleSetUpdateNetworkConfiguration(SubResource):
         'name': {'key': 'name', 'type': 'str'},
         'primary': {'key': 'properties.primary', 'type': 'bool'},
         'enable_accelerated_networking': {'key': 'properties.enableAcceleratedNetworking', 'type': 'bool'},
+        'disable_tcp_state_tracking': {'key': 'properties.disableTcpStateTracking', 'type': 'bool'},
         'enable_fpga': {'key': 'properties.enableFpga', 'type': 'bool'},
         'network_security_group': {'key': 'properties.networkSecurityGroup', 'type': 'SubResource'},
         'dns_settings': {'key': 'properties.dnsSettings', 'type': 'VirtualMachineScaleSetNetworkConfigurationDnsSettings'},
@@ -12937,6 +12950,7 @@ class VirtualMachineScaleSetUpdateNetworkConfiguration(SubResource):
         name: Optional[str] = None,
         primary: Optional[bool] = None,
         enable_accelerated_networking: Optional[bool] = None,
+        disable_tcp_state_tracking: Optional[bool] = None,
         enable_fpga: Optional[bool] = None,
         network_security_group: Optional["_models.SubResource"] = None,
         dns_settings: Optional["_models.VirtualMachineScaleSetNetworkConfigurationDnsSettings"] = None,
@@ -12955,6 +12969,9 @@ class VirtualMachineScaleSetUpdateNetworkConfiguration(SubResource):
         :keyword enable_accelerated_networking: Specifies whether the network interface is accelerated
          networking-enabled.
         :paramtype enable_accelerated_networking: bool
+        :keyword disable_tcp_state_tracking: Specifies whether the network interface is disabled for
+         tcp state tracking.
+        :paramtype disable_tcp_state_tracking: bool
         :keyword enable_fpga: Specifies whether the network interface is FPGA networking-enabled.
         :paramtype enable_fpga: bool
         :keyword network_security_group: The network security group.
@@ -12975,6 +12992,7 @@ class VirtualMachineScaleSetUpdateNetworkConfiguration(SubResource):
         self.name = name
         self.primary = primary
         self.enable_accelerated_networking = enable_accelerated_networking
+        self.disable_tcp_state_tracking = disable_tcp_state_tracking
         self.enable_fpga = enable_fpga
         self.network_security_group = network_security_group
         self.dns_settings = dns_settings
