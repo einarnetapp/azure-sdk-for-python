@@ -450,10 +450,10 @@ class AdditionalColumns(msrest.serialization.Model):
 
 
 class LinkedService(msrest.serialization.Model):
-    """The Azure Data Factory nested object which contains the information and credential which can be used to connect with related store or compute resource.
+    """The nested object which contains the information and credential which can be used to connect with related store or compute resource.
 
     You probably want to use the sub-classes and not this class directly. Known
-    sub-classes are: AmazonMWSLinkedService, AmazonRdsForOracleLinkedService, AmazonRdsForSqlServerLinkedService, AmazonRedshiftLinkedService, AmazonS3LinkedService, AmazonS3CompatibleLinkedService, AppFiguresLinkedService, AsanaLinkedService, AzureBatchLinkedService, AzureBlobFSLinkedService, AzureBlobStorageLinkedService, AzureDataExplorerLinkedService, AzureDataLakeAnalyticsLinkedService, AzureDataLakeStoreLinkedService, AzureDatabricksLinkedService, AzureDatabricksDeltaLakeLinkedService, AzureFileStorageLinkedService, AzureFunctionLinkedService, AzureKeyVaultLinkedService, AzureMLLinkedService, AzureMLServiceLinkedService, AzureMariaDBLinkedService, AzureMySqlLinkedService, AzurePostgreSqlLinkedService, AzureSearchLinkedService, AzureSqlDWLinkedService, AzureSqlDatabaseLinkedService, AzureSqlMILinkedService, AzureStorageLinkedService, AzureTableStorageLinkedService, CassandraLinkedService, CommonDataServiceForAppsLinkedService, ConcurLinkedService, CosmosDbLinkedService, CosmosDbMongoDbApiLinkedService, CouchbaseLinkedService, CustomDataSourceLinkedService, DataworldLinkedService, Db2LinkedService, DrillLinkedService, DynamicsLinkedService, DynamicsAXLinkedService, DynamicsCrmLinkedService, EloquaLinkedService, FileServerLinkedService, FtpServerLinkedService, GoogleAdWordsLinkedService, GoogleBigQueryLinkedService, GoogleCloudStorageLinkedService, GreenplumLinkedService, HBaseLinkedService, HDInsightLinkedService, HDInsightOnDemandLinkedService, HdfsLinkedService, HiveLinkedService, HttpLinkedService, HubspotLinkedService, ImpalaLinkedService, InformixLinkedService, JiraLinkedService, MagentoLinkedService, MariaDBLinkedService, MarketoLinkedService, MicrosoftAccessLinkedService, MongoDbLinkedService, MongoDbAtlasLinkedService, MongoDbV2LinkedService, MySqlLinkedService, NetezzaLinkedService, ODataLinkedService, OdbcLinkedService, Office365LinkedService, OracleLinkedService, OracleCloudStorageLinkedService, OracleServiceCloudLinkedService, PaypalLinkedService, PhoenixLinkedService, PostgreSqlLinkedService, PrestoLinkedService, QuickBooksLinkedService, QuickbaseLinkedService, ResponsysLinkedService, RestServiceLinkedService, SalesforceLinkedService, SalesforceMarketingCloudLinkedService, SalesforceServiceCloudLinkedService, SapBWLinkedService, SapCloudForCustomerLinkedService, SapEccLinkedService, SapHanaLinkedService, SapOdpLinkedService, SapOpenHubLinkedService, SapTableLinkedService, ServiceNowLinkedService, SftpServerLinkedService, SharePointOnlineListLinkedService, ShopifyLinkedService, SmartsheetLinkedService, SnowflakeLinkedService, SparkLinkedService, SqlServerLinkedService, SquareLinkedService, SybaseLinkedService, TeamDeskLinkedService, TeradataLinkedService, TwilioLinkedService, VerticaLinkedService, WebLinkedService, XeroLinkedService, ZendeskLinkedService, ZohoLinkedService.
+    sub-classes are: AmazonMWSLinkedService, AmazonRdsForOracleLinkedService, AmazonRdsForSqlServerLinkedService, AmazonRedshiftLinkedService, AmazonS3LinkedService, AmazonS3CompatibleLinkedService, AppFiguresLinkedService, AsanaLinkedService, AzureBatchLinkedService, AzureBlobFSLinkedService, AzureBlobStorageLinkedService, AzureDataExplorerLinkedService, AzureDataLakeAnalyticsLinkedService, AzureDataLakeStoreLinkedService, AzureDatabricksLinkedService, AzureDatabricksDeltaLakeLinkedService, AzureFileStorageLinkedService, AzureFunctionLinkedService, AzureKeyVaultLinkedService, AzureMLLinkedService, AzureMLServiceLinkedService, AzureMariaDBLinkedService, AzureMySqlLinkedService, AzurePostgreSqlLinkedService, AzureSearchLinkedService, AzureSqlDWLinkedService, AzureSqlDatabaseLinkedService, AzureSqlMILinkedService, AzureStorageLinkedService, AzureSynapseArtifactsLinkedService, AzureTableStorageLinkedService, CassandraLinkedService, CommonDataServiceForAppsLinkedService, ConcurLinkedService, CosmosDbLinkedService, CosmosDbMongoDbApiLinkedService, CouchbaseLinkedService, CustomDataSourceLinkedService, DataworldLinkedService, Db2LinkedService, DrillLinkedService, DynamicsLinkedService, DynamicsAXLinkedService, DynamicsCrmLinkedService, EloquaLinkedService, FileServerLinkedService, FtpServerLinkedService, GoogleAdWordsLinkedService, GoogleBigQueryLinkedService, GoogleCloudStorageLinkedService, GreenplumLinkedService, HBaseLinkedService, HDInsightLinkedService, HDInsightOnDemandLinkedService, HdfsLinkedService, HiveLinkedService, HttpLinkedService, HubspotLinkedService, ImpalaLinkedService, InformixLinkedService, JiraLinkedService, MagentoLinkedService, MariaDBLinkedService, MarketoLinkedService, MicrosoftAccessLinkedService, MongoDbLinkedService, MongoDbAtlasLinkedService, MongoDbV2LinkedService, MySqlLinkedService, NetezzaLinkedService, ODataLinkedService, OdbcLinkedService, Office365LinkedService, OracleLinkedService, OracleCloudStorageLinkedService, OracleServiceCloudLinkedService, PaypalLinkedService, PhoenixLinkedService, PostgreSqlLinkedService, PrestoLinkedService, QuickBooksLinkedService, QuickbaseLinkedService, ResponsysLinkedService, RestServiceLinkedService, SalesforceLinkedService, SalesforceMarketingCloudLinkedService, SalesforceServiceCloudLinkedService, SapBWLinkedService, SapCloudForCustomerLinkedService, SapEccLinkedService, SapHanaLinkedService, SapOdpLinkedService, SapOpenHubLinkedService, SapTableLinkedService, ServiceNowLinkedService, SftpServerLinkedService, SharePointOnlineListLinkedService, ShopifyLinkedService, SmartsheetLinkedService, SnowflakeLinkedService, SparkLinkedService, SqlServerLinkedService, SquareLinkedService, SybaseLinkedService, TeamDeskLinkedService, TeradataLinkedService, TwilioLinkedService, VerticaLinkedService, WebLinkedService, XeroLinkedService, ZendeskLinkedService, ZohoLinkedService.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -486,7 +486,7 @@ class LinkedService(msrest.serialization.Model):
     }
 
     _subtype_map = {
-        'type': {'AmazonMWS': 'AmazonMWSLinkedService', 'AmazonRdsForOracle': 'AmazonRdsForOracleLinkedService', 'AmazonRdsForSqlServer': 'AmazonRdsForSqlServerLinkedService', 'AmazonRedshift': 'AmazonRedshiftLinkedService', 'AmazonS3': 'AmazonS3LinkedService', 'AmazonS3Compatible': 'AmazonS3CompatibleLinkedService', 'AppFigures': 'AppFiguresLinkedService', 'Asana': 'AsanaLinkedService', 'AzureBatch': 'AzureBatchLinkedService', 'AzureBlobFS': 'AzureBlobFSLinkedService', 'AzureBlobStorage': 'AzureBlobStorageLinkedService', 'AzureDataExplorer': 'AzureDataExplorerLinkedService', 'AzureDataLakeAnalytics': 'AzureDataLakeAnalyticsLinkedService', 'AzureDataLakeStore': 'AzureDataLakeStoreLinkedService', 'AzureDatabricks': 'AzureDatabricksLinkedService', 'AzureDatabricksDeltaLake': 'AzureDatabricksDeltaLakeLinkedService', 'AzureFileStorage': 'AzureFileStorageLinkedService', 'AzureFunction': 'AzureFunctionLinkedService', 'AzureKeyVault': 'AzureKeyVaultLinkedService', 'AzureML': 'AzureMLLinkedService', 'AzureMLService': 'AzureMLServiceLinkedService', 'AzureMariaDB': 'AzureMariaDBLinkedService', 'AzureMySql': 'AzureMySqlLinkedService', 'AzurePostgreSql': 'AzurePostgreSqlLinkedService', 'AzureSearch': 'AzureSearchLinkedService', 'AzureSqlDW': 'AzureSqlDWLinkedService', 'AzureSqlDatabase': 'AzureSqlDatabaseLinkedService', 'AzureSqlMI': 'AzureSqlMILinkedService', 'AzureStorage': 'AzureStorageLinkedService', 'AzureTableStorage': 'AzureTableStorageLinkedService', 'Cassandra': 'CassandraLinkedService', 'CommonDataServiceForApps': 'CommonDataServiceForAppsLinkedService', 'Concur': 'ConcurLinkedService', 'CosmosDb': 'CosmosDbLinkedService', 'CosmosDbMongoDbApi': 'CosmosDbMongoDbApiLinkedService', 'Couchbase': 'CouchbaseLinkedService', 'CustomDataSource': 'CustomDataSourceLinkedService', 'Dataworld': 'DataworldLinkedService', 'Db2': 'Db2LinkedService', 'Drill': 'DrillLinkedService', 'Dynamics': 'DynamicsLinkedService', 'DynamicsAX': 'DynamicsAXLinkedService', 'DynamicsCrm': 'DynamicsCrmLinkedService', 'Eloqua': 'EloquaLinkedService', 'FileServer': 'FileServerLinkedService', 'FtpServer': 'FtpServerLinkedService', 'GoogleAdWords': 'GoogleAdWordsLinkedService', 'GoogleBigQuery': 'GoogleBigQueryLinkedService', 'GoogleCloudStorage': 'GoogleCloudStorageLinkedService', 'Greenplum': 'GreenplumLinkedService', 'HBase': 'HBaseLinkedService', 'HDInsight': 'HDInsightLinkedService', 'HDInsightOnDemand': 'HDInsightOnDemandLinkedService', 'Hdfs': 'HdfsLinkedService', 'Hive': 'HiveLinkedService', 'HttpServer': 'HttpLinkedService', 'Hubspot': 'HubspotLinkedService', 'Impala': 'ImpalaLinkedService', 'Informix': 'InformixLinkedService', 'Jira': 'JiraLinkedService', 'Magento': 'MagentoLinkedService', 'MariaDB': 'MariaDBLinkedService', 'Marketo': 'MarketoLinkedService', 'MicrosoftAccess': 'MicrosoftAccessLinkedService', 'MongoDb': 'MongoDbLinkedService', 'MongoDbAtlas': 'MongoDbAtlasLinkedService', 'MongoDbV2': 'MongoDbV2LinkedService', 'MySql': 'MySqlLinkedService', 'Netezza': 'NetezzaLinkedService', 'OData': 'ODataLinkedService', 'Odbc': 'OdbcLinkedService', 'Office365': 'Office365LinkedService', 'Oracle': 'OracleLinkedService', 'OracleCloudStorage': 'OracleCloudStorageLinkedService', 'OracleServiceCloud': 'OracleServiceCloudLinkedService', 'Paypal': 'PaypalLinkedService', 'Phoenix': 'PhoenixLinkedService', 'PostgreSql': 'PostgreSqlLinkedService', 'Presto': 'PrestoLinkedService', 'QuickBooks': 'QuickBooksLinkedService', 'Quickbase': 'QuickbaseLinkedService', 'Responsys': 'ResponsysLinkedService', 'RestService': 'RestServiceLinkedService', 'Salesforce': 'SalesforceLinkedService', 'SalesforceMarketingCloud': 'SalesforceMarketingCloudLinkedService', 'SalesforceServiceCloud': 'SalesforceServiceCloudLinkedService', 'SapBW': 'SapBWLinkedService', 'SapCloudForCustomer': 'SapCloudForCustomerLinkedService', 'SapEcc': 'SapEccLinkedService', 'SapHana': 'SapHanaLinkedService', 'SapOdp': 'SapOdpLinkedService', 'SapOpenHub': 'SapOpenHubLinkedService', 'SapTable': 'SapTableLinkedService', 'ServiceNow': 'ServiceNowLinkedService', 'Sftp': 'SftpServerLinkedService', 'SharePointOnlineList': 'SharePointOnlineListLinkedService', 'Shopify': 'ShopifyLinkedService', 'Smartsheet': 'SmartsheetLinkedService', 'Snowflake': 'SnowflakeLinkedService', 'Spark': 'SparkLinkedService', 'SqlServer': 'SqlServerLinkedService', 'Square': 'SquareLinkedService', 'Sybase': 'SybaseLinkedService', 'TeamDesk': 'TeamDeskLinkedService', 'Teradata': 'TeradataLinkedService', 'Twilio': 'TwilioLinkedService', 'Vertica': 'VerticaLinkedService', 'Web': 'WebLinkedService', 'Xero': 'XeroLinkedService', 'Zendesk': 'ZendeskLinkedService', 'Zoho': 'ZohoLinkedService'}
+        'type': {'AmazonMWS': 'AmazonMWSLinkedService', 'AmazonRdsForOracle': 'AmazonRdsForOracleLinkedService', 'AmazonRdsForSqlServer': 'AmazonRdsForSqlServerLinkedService', 'AmazonRedshift': 'AmazonRedshiftLinkedService', 'AmazonS3': 'AmazonS3LinkedService', 'AmazonS3Compatible': 'AmazonS3CompatibleLinkedService', 'AppFigures': 'AppFiguresLinkedService', 'Asana': 'AsanaLinkedService', 'AzureBatch': 'AzureBatchLinkedService', 'AzureBlobFS': 'AzureBlobFSLinkedService', 'AzureBlobStorage': 'AzureBlobStorageLinkedService', 'AzureDataExplorer': 'AzureDataExplorerLinkedService', 'AzureDataLakeAnalytics': 'AzureDataLakeAnalyticsLinkedService', 'AzureDataLakeStore': 'AzureDataLakeStoreLinkedService', 'AzureDatabricks': 'AzureDatabricksLinkedService', 'AzureDatabricksDeltaLake': 'AzureDatabricksDeltaLakeLinkedService', 'AzureFileStorage': 'AzureFileStorageLinkedService', 'AzureFunction': 'AzureFunctionLinkedService', 'AzureKeyVault': 'AzureKeyVaultLinkedService', 'AzureML': 'AzureMLLinkedService', 'AzureMLService': 'AzureMLServiceLinkedService', 'AzureMariaDB': 'AzureMariaDBLinkedService', 'AzureMySql': 'AzureMySqlLinkedService', 'AzurePostgreSql': 'AzurePostgreSqlLinkedService', 'AzureSearch': 'AzureSearchLinkedService', 'AzureSqlDW': 'AzureSqlDWLinkedService', 'AzureSqlDatabase': 'AzureSqlDatabaseLinkedService', 'AzureSqlMI': 'AzureSqlMILinkedService', 'AzureStorage': 'AzureStorageLinkedService', 'AzureSynapseArtifacts': 'AzureSynapseArtifactsLinkedService', 'AzureTableStorage': 'AzureTableStorageLinkedService', 'Cassandra': 'CassandraLinkedService', 'CommonDataServiceForApps': 'CommonDataServiceForAppsLinkedService', 'Concur': 'ConcurLinkedService', 'CosmosDb': 'CosmosDbLinkedService', 'CosmosDbMongoDbApi': 'CosmosDbMongoDbApiLinkedService', 'Couchbase': 'CouchbaseLinkedService', 'CustomDataSource': 'CustomDataSourceLinkedService', 'Dataworld': 'DataworldLinkedService', 'Db2': 'Db2LinkedService', 'Drill': 'DrillLinkedService', 'Dynamics': 'DynamicsLinkedService', 'DynamicsAX': 'DynamicsAXLinkedService', 'DynamicsCrm': 'DynamicsCrmLinkedService', 'Eloqua': 'EloquaLinkedService', 'FileServer': 'FileServerLinkedService', 'FtpServer': 'FtpServerLinkedService', 'GoogleAdWords': 'GoogleAdWordsLinkedService', 'GoogleBigQuery': 'GoogleBigQueryLinkedService', 'GoogleCloudStorage': 'GoogleCloudStorageLinkedService', 'Greenplum': 'GreenplumLinkedService', 'HBase': 'HBaseLinkedService', 'HDInsight': 'HDInsightLinkedService', 'HDInsightOnDemand': 'HDInsightOnDemandLinkedService', 'Hdfs': 'HdfsLinkedService', 'Hive': 'HiveLinkedService', 'HttpServer': 'HttpLinkedService', 'Hubspot': 'HubspotLinkedService', 'Impala': 'ImpalaLinkedService', 'Informix': 'InformixLinkedService', 'Jira': 'JiraLinkedService', 'Magento': 'MagentoLinkedService', 'MariaDB': 'MariaDBLinkedService', 'Marketo': 'MarketoLinkedService', 'MicrosoftAccess': 'MicrosoftAccessLinkedService', 'MongoDb': 'MongoDbLinkedService', 'MongoDbAtlas': 'MongoDbAtlasLinkedService', 'MongoDbV2': 'MongoDbV2LinkedService', 'MySql': 'MySqlLinkedService', 'Netezza': 'NetezzaLinkedService', 'OData': 'ODataLinkedService', 'Odbc': 'OdbcLinkedService', 'Office365': 'Office365LinkedService', 'Oracle': 'OracleLinkedService', 'OracleCloudStorage': 'OracleCloudStorageLinkedService', 'OracleServiceCloud': 'OracleServiceCloudLinkedService', 'Paypal': 'PaypalLinkedService', 'Phoenix': 'PhoenixLinkedService', 'PostgreSql': 'PostgreSqlLinkedService', 'Presto': 'PrestoLinkedService', 'QuickBooks': 'QuickBooksLinkedService', 'Quickbase': 'QuickbaseLinkedService', 'Responsys': 'ResponsysLinkedService', 'RestService': 'RestServiceLinkedService', 'Salesforce': 'SalesforceLinkedService', 'SalesforceMarketingCloud': 'SalesforceMarketingCloudLinkedService', 'SalesforceServiceCloud': 'SalesforceServiceCloudLinkedService', 'SapBW': 'SapBWLinkedService', 'SapCloudForCustomer': 'SapCloudForCustomerLinkedService', 'SapEcc': 'SapEccLinkedService', 'SapHana': 'SapHanaLinkedService', 'SapOdp': 'SapOdpLinkedService', 'SapOpenHub': 'SapOpenHubLinkedService', 'SapTable': 'SapTableLinkedService', 'ServiceNow': 'ServiceNowLinkedService', 'Sftp': 'SftpServerLinkedService', 'SharePointOnlineList': 'SharePointOnlineListLinkedService', 'Shopify': 'ShopifyLinkedService', 'Smartsheet': 'SmartsheetLinkedService', 'Snowflake': 'SnowflakeLinkedService', 'Spark': 'SparkLinkedService', 'SqlServer': 'SqlServerLinkedService', 'Square': 'SquareLinkedService', 'Sybase': 'SybaseLinkedService', 'TeamDesk': 'TeamDeskLinkedService', 'Teradata': 'TeradataLinkedService', 'Twilio': 'TwilioLinkedService', 'Vertica': 'VerticaLinkedService', 'Web': 'WebLinkedService', 'Xero': 'XeroLinkedService', 'Zendesk': 'ZendeskLinkedService', 'Zoho': 'ZohoLinkedService'}
     }
 
     def __init__(
@@ -6473,7 +6473,7 @@ class ExecutionActivity(Activity):
     """Base class for all execution activities.
 
     You probably want to use the sub-classes and not this class directly. Known
-    sub-classes are: AzureDataExplorerCommandActivity, AzureFunctionActivity, AzureMLBatchExecutionActivity, AzureMLExecutePipelineActivity, AzureMLUpdateResourceActivity, CopyActivity, CustomActivity, DataLakeAnalyticsUSQLActivity, DatabricksNotebookActivity, DatabricksSparkJarActivity, DatabricksSparkPythonActivity, DeleteActivity, ExecuteDataFlowActivity, ExecuteSSISPackageActivity, GetMetadataActivity, HDInsightHiveActivity, HDInsightMapReduceActivity, HDInsightPigActivity, HDInsightSparkActivity, HDInsightStreamingActivity, LookupActivity, ScriptActivity, SqlServerStoredProcedureActivity, WebActivity.
+    sub-classes are: AzureDataExplorerCommandActivity, AzureFunctionActivity, AzureMLBatchExecutionActivity, AzureMLExecutePipelineActivity, AzureMLUpdateResourceActivity, CopyActivity, CustomActivity, DataLakeAnalyticsUSQLActivity, DatabricksNotebookActivity, DatabricksSparkJarActivity, DatabricksSparkPythonActivity, DeleteActivity, ExecuteDataFlowActivity, ExecuteSSISPackageActivity, GetMetadataActivity, HDInsightHiveActivity, HDInsightMapReduceActivity, HDInsightPigActivity, HDInsightSparkActivity, HDInsightStreamingActivity, LookupActivity, ScriptActivity, SynapseSparkJobDefinitionActivity, SqlServerStoredProcedureActivity, SynapseNotebookActivity, WebActivity.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -6513,7 +6513,7 @@ class ExecutionActivity(Activity):
     }
 
     _subtype_map = {
-        'type': {'AzureDataExplorerCommand': 'AzureDataExplorerCommandActivity', 'AzureFunctionActivity': 'AzureFunctionActivity', 'AzureMLBatchExecution': 'AzureMLBatchExecutionActivity', 'AzureMLExecutePipeline': 'AzureMLExecutePipelineActivity', 'AzureMLUpdateResource': 'AzureMLUpdateResourceActivity', 'Copy': 'CopyActivity', 'Custom': 'CustomActivity', 'DataLakeAnalyticsU-SQL': 'DataLakeAnalyticsUSQLActivity', 'DatabricksNotebook': 'DatabricksNotebookActivity', 'DatabricksSparkJar': 'DatabricksSparkJarActivity', 'DatabricksSparkPython': 'DatabricksSparkPythonActivity', 'Delete': 'DeleteActivity', 'ExecuteDataFlow': 'ExecuteDataFlowActivity', 'ExecuteSSISPackage': 'ExecuteSSISPackageActivity', 'GetMetadata': 'GetMetadataActivity', 'HDInsightHive': 'HDInsightHiveActivity', 'HDInsightMapReduce': 'HDInsightMapReduceActivity', 'HDInsightPig': 'HDInsightPigActivity', 'HDInsightSpark': 'HDInsightSparkActivity', 'HDInsightStreaming': 'HDInsightStreamingActivity', 'Lookup': 'LookupActivity', 'Script': 'ScriptActivity', 'SqlServerStoredProcedure': 'SqlServerStoredProcedureActivity', 'WebActivity': 'WebActivity'}
+        'type': {'AzureDataExplorerCommand': 'AzureDataExplorerCommandActivity', 'AzureFunctionActivity': 'AzureFunctionActivity', 'AzureMLBatchExecution': 'AzureMLBatchExecutionActivity', 'AzureMLExecutePipeline': 'AzureMLExecutePipelineActivity', 'AzureMLUpdateResource': 'AzureMLUpdateResourceActivity', 'Copy': 'CopyActivity', 'Custom': 'CustomActivity', 'DataLakeAnalyticsU-SQL': 'DataLakeAnalyticsUSQLActivity', 'DatabricksNotebook': 'DatabricksNotebookActivity', 'DatabricksSparkJar': 'DatabricksSparkJarActivity', 'DatabricksSparkPython': 'DatabricksSparkPythonActivity', 'Delete': 'DeleteActivity', 'ExecuteDataFlow': 'ExecuteDataFlowActivity', 'ExecuteSSISPackage': 'ExecuteSSISPackageActivity', 'GetMetadata': 'GetMetadataActivity', 'HDInsightHive': 'HDInsightHiveActivity', 'HDInsightMapReduce': 'HDInsightMapReduceActivity', 'HDInsightPig': 'HDInsightPigActivity', 'HDInsightSpark': 'HDInsightSparkActivity', 'HDInsightStreaming': 'HDInsightStreamingActivity', 'Lookup': 'LookupActivity', 'Script': 'ScriptActivity', 'SparkJob': 'SynapseSparkJobDefinitionActivity', 'SqlServerStoredProcedure': 'SqlServerStoredProcedureActivity', 'SynapseNotebook': 'SynapseNotebookActivity', 'WebActivity': 'WebActivity'}
     }
 
     def __init__(
@@ -11948,6 +11948,85 @@ class AzureStorageLinkedService(LinkedService):
         self.encrypted_credential = encrypted_credential
 
 
+class AzureSynapseArtifactsLinkedService(LinkedService):
+    """Azure Synapse Analytics (Artifacts) linked service.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar type: Required. Type of linked service.Constant filled by server.
+    :vartype type: str
+    :ivar connect_via: The integration runtime reference.
+    :vartype connect_via: ~azure.mgmt.datafactory.models.IntegrationRuntimeReference
+    :ivar description: Linked service description.
+    :vartype description: str
+    :ivar parameters: Parameters for linked service.
+    :vartype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
+    :ivar annotations: List of tags that can be used for describing the linked service.
+    :vartype annotations: list[any]
+    :ivar endpoint: Required. https://:code:`<workspacename>`.dev.azuresynapse.net, Azure Synapse
+     Analytics workspace URL. Type: string (or Expression with resultType string).
+    :vartype endpoint: any
+    :ivar authentication: Required to specify MSI, if using system assigned managed identity as
+     authentication method. Type: string (or Expression with resultType string).
+    :vartype authentication: any
+    """
+
+    _validation = {
+        'type': {'required': True},
+        'endpoint': {'required': True},
+    }
+
+    _attribute_map = {
+        'additional_properties': {'key': '', 'type': '{object}'},
+        'type': {'key': 'type', 'type': 'str'},
+        'connect_via': {'key': 'connectVia', 'type': 'IntegrationRuntimeReference'},
+        'description': {'key': 'description', 'type': 'str'},
+        'parameters': {'key': 'parameters', 'type': '{ParameterSpecification}'},
+        'annotations': {'key': 'annotations', 'type': '[object]'},
+        'endpoint': {'key': 'typeProperties.endpoint', 'type': 'object'},
+        'authentication': {'key': 'typeProperties.authentication', 'type': 'object'},
+    }
+
+    def __init__(
+        self,
+        *,
+        endpoint: Any,
+        additional_properties: Optional[Dict[str, Any]] = None,
+        connect_via: Optional["_models.IntegrationRuntimeReference"] = None,
+        description: Optional[str] = None,
+        parameters: Optional[Dict[str, "_models.ParameterSpecification"]] = None,
+        annotations: Optional[List[Any]] = None,
+        authentication: Optional[Any] = None,
+        **kwargs
+    ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword connect_via: The integration runtime reference.
+        :paramtype connect_via: ~azure.mgmt.datafactory.models.IntegrationRuntimeReference
+        :keyword description: Linked service description.
+        :paramtype description: str
+        :keyword parameters: Parameters for linked service.
+        :paramtype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
+        :keyword annotations: List of tags that can be used for describing the linked service.
+        :paramtype annotations: list[any]
+        :keyword endpoint: Required. https://:code:`<workspacename>`.dev.azuresynapse.net, Azure
+         Synapse Analytics workspace URL. Type: string (or Expression with resultType string).
+        :paramtype endpoint: any
+        :keyword authentication: Required to specify MSI, if using system assigned managed identity as
+         authentication method. Type: string (or Expression with resultType string).
+        :paramtype authentication: any
+        """
+        super(AzureSynapseArtifactsLinkedService, self).__init__(additional_properties=additional_properties, connect_via=connect_via, description=description, parameters=parameters, annotations=annotations, **kwargs)
+        self.type = 'AzureSynapseArtifacts'  # type: str
+        self.endpoint = endpoint
+        self.authentication = authentication
+
+
 class AzureTableDataset(Dataset):
     """The Azure Table storage dataset.
 
@@ -12366,6 +12445,48 @@ class AzureTableStorageLinkedService(LinkedService):
         self.sas_uri = sas_uri
         self.sas_token = sas_token
         self.encrypted_credential = encrypted_credential
+
+
+class BigDataPoolParametrizationReference(msrest.serialization.Model):
+    """Big data pool reference type.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar type: Required. Big data pool reference type. Known values are: "BigDataPoolReference".
+    :vartype type: str or ~azure.mgmt.datafactory.models.BigDataPoolReferenceType
+    :ivar reference_name: Required. Reference big data pool name. Type: string (or Expression with
+     resultType string).
+    :vartype reference_name: any
+    """
+
+    _validation = {
+        'type': {'required': True},
+        'reference_name': {'required': True},
+    }
+
+    _attribute_map = {
+        'type': {'key': 'type', 'type': 'str'},
+        'reference_name': {'key': 'referenceName', 'type': 'object'},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Union[str, "_models.BigDataPoolReferenceType"],
+        reference_name: Any,
+        **kwargs
+    ):
+        """
+        :keyword type: Required. Big data pool reference type. Known values are:
+         "BigDataPoolReference".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.BigDataPoolReferenceType
+        :keyword reference_name: Required. Reference big data pool name. Type: string (or Expression
+         with resultType string).
+        :paramtype reference_name: any
+        """
+        super(BigDataPoolParametrizationReference, self).__init__(**kwargs)
+        self.type = type
+        self.reference_name = reference_name
 
 
 class BinaryDataset(Dataset):
@@ -29552,7 +29673,7 @@ class HttpLinkedService(LinkedService):
     :vartype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
     :ivar annotations: List of tags that can be used for describing the linked service.
     :vartype annotations: list[any]
-    :ivar url: Required. The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type:
+    :ivar url: Required. The base URL of the HTTP endpoint, e.g. https://www.microsoft.com. Type:
      string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: The authentication type to be used to connect to the HTTP server.
@@ -29640,8 +29761,8 @@ class HttpLinkedService(LinkedService):
         :paramtype parameters: dict[str, ~azure.mgmt.datafactory.models.ParameterSpecification]
         :keyword annotations: List of tags that can be used for describing the linked service.
         :paramtype annotations: list[any]
-        :keyword url: Required. The base URL of the HTTP endpoint, e.g. http://www.microsoft.com. Type:
-         string (or Expression with resultType string).
+        :keyword url: Required. The base URL of the HTTP endpoint, e.g. https://www.microsoft.com.
+         Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword authentication_type: The authentication type to be used to connect to the HTTP server.
          Known values are: "Basic", "Anonymous", "Digest", "Windows", "ClientCertificate".
@@ -33406,12 +33527,11 @@ class LinkedServiceListResponse(msrest.serialization.Model):
 class LinkedServiceReference(msrest.serialization.Model):
     """Linked service reference type.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Linked service reference type. Has constant value: "LinkedServiceReference".
-    :vartype type: str
+    :ivar type: Required. Linked service reference type. Known values are:
+     "LinkedServiceReference".
+    :vartype type: str or ~azure.mgmt.datafactory.models.Type
     :ivar reference_name: Required. Reference LinkedService name.
     :vartype reference_name: str
     :ivar parameters: Arguments for LinkedService.
@@ -33419,7 +33539,7 @@ class LinkedServiceReference(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True, 'constant': True},
+        'type': {'required': True},
         'reference_name': {'required': True},
     }
 
@@ -33429,22 +33549,25 @@ class LinkedServiceReference(msrest.serialization.Model):
         'parameters': {'key': 'parameters', 'type': '{object}'},
     }
 
-    type = "LinkedServiceReference"
-
     def __init__(
         self,
         *,
+        type: Union[str, "_models.Type"],
         reference_name: str,
         parameters: Optional[Dict[str, Any]] = None,
         **kwargs
     ):
         """
+        :keyword type: Required. Linked service reference type. Known values are:
+         "LinkedServiceReference".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.Type
         :keyword reference_name: Required. Reference LinkedService name.
         :paramtype reference_name: str
         :keyword parameters: Arguments for LinkedService.
         :paramtype parameters: dict[str, any]
         """
         super(LinkedServiceReference, self).__init__(**kwargs)
+        self.type = type
         self.reference_name = reference_name
         self.parameters = parameters
 
@@ -37647,6 +37770,38 @@ class NetezzaTableDataset(Dataset):
         self.table_name = table_name
         self.table = table
         self.schema_type_properties_schema = schema_type_properties_schema
+
+
+class NotebookParameter(msrest.serialization.Model):
+    """Notebook parameter.
+
+    :ivar value: Notebook parameter value. Type: string (or Expression with resultType string).
+    :vartype value: any
+    :ivar type: Notebook parameter type. Known values are: "string", "int", "float", "bool".
+    :vartype type: str or ~azure.mgmt.datafactory.models.NotebookParameterType
+    """
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': 'object'},
+        'type': {'key': 'type', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[Any] = None,
+        type: Optional[Union[str, "_models.NotebookParameterType"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Notebook parameter value. Type: string (or Expression with resultType string).
+        :paramtype value: any
+        :keyword type: Notebook parameter type. Known values are: "string", "int", "float", "bool".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.NotebookParameterType
+        """
+        super(NotebookParameter, self).__init__(**kwargs)
+        self.value = value
+        self.type = type
 
 
 class ODataLinkedService(LinkedService):
@@ -56417,6 +56572,400 @@ class SybaseTableDataset(Dataset):
         self.table_name = table_name
 
 
+class SynapseNotebookActivity(ExecutionActivity):
+    """Execute Synapse notebook activity.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar name: Required. Activity name.
+    :vartype name: str
+    :ivar type: Required. Type of activity.Constant filled by server.
+    :vartype type: str
+    :ivar description: Activity description.
+    :vartype description: str
+    :ivar depends_on: Activity depends on condition.
+    :vartype depends_on: list[~azure.mgmt.datafactory.models.ActivityDependency]
+    :ivar user_properties: Activity user properties.
+    :vartype user_properties: list[~azure.mgmt.datafactory.models.UserProperty]
+    :ivar linked_service_name: Linked service reference.
+    :vartype linked_service_name: ~azure.mgmt.datafactory.models.LinkedServiceReference
+    :ivar policy: Activity policy.
+    :vartype policy: ~azure.mgmt.datafactory.models.ActivityPolicy
+    :ivar notebook: Required. Synapse notebook reference.
+    :vartype notebook: ~azure.mgmt.datafactory.models.SynapseNotebookReference
+    :ivar spark_pool: The name of the big data pool which will be used to execute the notebook.
+    :vartype spark_pool: ~azure.mgmt.datafactory.models.BigDataPoolParametrizationReference
+    :ivar parameters: Notebook parameters.
+    :vartype parameters: dict[str, ~azure.mgmt.datafactory.models.NotebookParameter]
+    :ivar executor_size: Number of core and memory to be used for executors allocated in the
+     specified Spark pool for the session, which will be used for overriding 'executorCores' and
+     'executorMemory' of the notebook you provide. Type: string (or Expression with resultType
+     string).
+    :vartype executor_size: any
+    :ivar conf: Spark configuration properties, which will override the 'conf' of the notebook you
+     provide.
+    :vartype conf: any
+    :ivar driver_size: Number of core and memory to be used for driver allocated in the specified
+     Spark pool for the session, which will be used for overriding 'driverCores' and 'driverMemory'
+     of the notebook you provide. Type: string (or Expression with resultType string).
+    :vartype driver_size: any
+    :ivar num_executors: Number of executors to launch for this session, which will override the
+     'numExecutors' of the notebook you provide.
+    :vartype num_executors: int
+    """
+
+    _validation = {
+        'name': {'required': True},
+        'type': {'required': True},
+        'notebook': {'required': True},
+    }
+
+    _attribute_map = {
+        'additional_properties': {'key': '', 'type': '{object}'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'depends_on': {'key': 'dependsOn', 'type': '[ActivityDependency]'},
+        'user_properties': {'key': 'userProperties', 'type': '[UserProperty]'},
+        'linked_service_name': {'key': 'linkedServiceName', 'type': 'LinkedServiceReference'},
+        'policy': {'key': 'policy', 'type': 'ActivityPolicy'},
+        'notebook': {'key': 'typeProperties.notebook', 'type': 'SynapseNotebookReference'},
+        'spark_pool': {'key': 'typeProperties.sparkPool', 'type': 'BigDataPoolParametrizationReference'},
+        'parameters': {'key': 'typeProperties.parameters', 'type': '{NotebookParameter}'},
+        'executor_size': {'key': 'typeProperties.executorSize', 'type': 'object'},
+        'conf': {'key': 'typeProperties.conf', 'type': 'object'},
+        'driver_size': {'key': 'typeProperties.driverSize', 'type': 'object'},
+        'num_executors': {'key': 'typeProperties.numExecutors', 'type': 'int'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: str,
+        notebook: "_models.SynapseNotebookReference",
+        additional_properties: Optional[Dict[str, Any]] = None,
+        description: Optional[str] = None,
+        depends_on: Optional[List["_models.ActivityDependency"]] = None,
+        user_properties: Optional[List["_models.UserProperty"]] = None,
+        linked_service_name: Optional["_models.LinkedServiceReference"] = None,
+        policy: Optional["_models.ActivityPolicy"] = None,
+        spark_pool: Optional["_models.BigDataPoolParametrizationReference"] = None,
+        parameters: Optional[Dict[str, "_models.NotebookParameter"]] = None,
+        executor_size: Optional[Any] = None,
+        conf: Optional[Any] = None,
+        driver_size: Optional[Any] = None,
+        num_executors: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword name: Required. Activity name.
+        :paramtype name: str
+        :keyword description: Activity description.
+        :paramtype description: str
+        :keyword depends_on: Activity depends on condition.
+        :paramtype depends_on: list[~azure.mgmt.datafactory.models.ActivityDependency]
+        :keyword user_properties: Activity user properties.
+        :paramtype user_properties: list[~azure.mgmt.datafactory.models.UserProperty]
+        :keyword linked_service_name: Linked service reference.
+        :paramtype linked_service_name: ~azure.mgmt.datafactory.models.LinkedServiceReference
+        :keyword policy: Activity policy.
+        :paramtype policy: ~azure.mgmt.datafactory.models.ActivityPolicy
+        :keyword notebook: Required. Synapse notebook reference.
+        :paramtype notebook: ~azure.mgmt.datafactory.models.SynapseNotebookReference
+        :keyword spark_pool: The name of the big data pool which will be used to execute the notebook.
+        :paramtype spark_pool: ~azure.mgmt.datafactory.models.BigDataPoolParametrizationReference
+        :keyword parameters: Notebook parameters.
+        :paramtype parameters: dict[str, ~azure.mgmt.datafactory.models.NotebookParameter]
+        :keyword executor_size: Number of core and memory to be used for executors allocated in the
+         specified Spark pool for the session, which will be used for overriding 'executorCores' and
+         'executorMemory' of the notebook you provide. Type: string (or Expression with resultType
+         string).
+        :paramtype executor_size: any
+        :keyword conf: Spark configuration properties, which will override the 'conf' of the notebook
+         you provide.
+        :paramtype conf: any
+        :keyword driver_size: Number of core and memory to be used for driver allocated in the
+         specified Spark pool for the session, which will be used for overriding 'driverCores' and
+         'driverMemory' of the notebook you provide. Type: string (or Expression with resultType
+         string).
+        :paramtype driver_size: any
+        :keyword num_executors: Number of executors to launch for this session, which will override the
+         'numExecutors' of the notebook you provide.
+        :paramtype num_executors: int
+        """
+        super(SynapseNotebookActivity, self).__init__(additional_properties=additional_properties, name=name, description=description, depends_on=depends_on, user_properties=user_properties, linked_service_name=linked_service_name, policy=policy, **kwargs)
+        self.type = 'SynapseNotebook'  # type: str
+        self.notebook = notebook
+        self.spark_pool = spark_pool
+        self.parameters = parameters
+        self.executor_size = executor_size
+        self.conf = conf
+        self.driver_size = driver_size
+        self.num_executors = num_executors
+
+
+class SynapseNotebookReference(msrest.serialization.Model):
+    """Synapse notebook reference type.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar type: Required. Synapse notebook reference type. Known values are: "NotebookReference".
+    :vartype type: str or ~azure.mgmt.datafactory.models.NotebookReferenceType
+    :ivar reference_name: Required. Reference notebook name. Type: string (or Expression with
+     resultType string).
+    :vartype reference_name: any
+    """
+
+    _validation = {
+        'type': {'required': True},
+        'reference_name': {'required': True},
+    }
+
+    _attribute_map = {
+        'type': {'key': 'type', 'type': 'str'},
+        'reference_name': {'key': 'referenceName', 'type': 'object'},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Union[str, "_models.NotebookReferenceType"],
+        reference_name: Any,
+        **kwargs
+    ):
+        """
+        :keyword type: Required. Synapse notebook reference type. Known values are:
+         "NotebookReference".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.NotebookReferenceType
+        :keyword reference_name: Required. Reference notebook name. Type: string (or Expression with
+         resultType string).
+        :paramtype reference_name: any
+        """
+        super(SynapseNotebookReference, self).__init__(**kwargs)
+        self.type = type
+        self.reference_name = reference_name
+
+
+class SynapseSparkJobDefinitionActivity(ExecutionActivity):
+    """Execute spark job activity.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar additional_properties: Unmatched properties from the message are deserialized to this
+     collection.
+    :vartype additional_properties: dict[str, any]
+    :ivar name: Required. Activity name.
+    :vartype name: str
+    :ivar type: Required. Type of activity.Constant filled by server.
+    :vartype type: str
+    :ivar description: Activity description.
+    :vartype description: str
+    :ivar depends_on: Activity depends on condition.
+    :vartype depends_on: list[~azure.mgmt.datafactory.models.ActivityDependency]
+    :ivar user_properties: Activity user properties.
+    :vartype user_properties: list[~azure.mgmt.datafactory.models.UserProperty]
+    :ivar linked_service_name: Linked service reference.
+    :vartype linked_service_name: ~azure.mgmt.datafactory.models.LinkedServiceReference
+    :ivar policy: Activity policy.
+    :vartype policy: ~azure.mgmt.datafactory.models.ActivityPolicy
+    :ivar spark_job: Required. Synapse spark job reference.
+    :vartype spark_job: ~azure.mgmt.datafactory.models.SynapseSparkJobReference
+    :ivar arguments: User specified arguments to SynapseSparkJobDefinitionActivity.
+    :vartype arguments: list[any]
+    :ivar file: The main file used for the job, which will override the 'file' of the spark job
+     definition you provide. Type: string (or Expression with resultType string).
+    :vartype file: any
+    :ivar class_name: The fully-qualified identifier or the main class that is in the main
+     definition file, which will override the 'className' of the spark job definition you provide.
+     Type: string (or Expression with resultType string).
+    :vartype class_name: any
+    :ivar files: Additional files used for reference in the main definition file, which will
+     override the 'files' of the spark job definition you provide.
+    :vartype files: list[any]
+    :ivar target_big_data_pool: The name of the big data pool which will be used to execute the
+     spark batch job, which will override the 'targetBigDataPool' of the spark job definition you
+     provide.
+    :vartype target_big_data_pool:
+     ~azure.mgmt.datafactory.models.BigDataPoolParametrizationReference
+    :ivar executor_size: Number of core and memory to be used for executors allocated in the
+     specified Spark pool for the job, which will be used for overriding 'executorCores' and
+     'executorMemory' of the spark job definition you provide. Type: string (or Expression with
+     resultType string).
+    :vartype executor_size: any
+    :ivar conf: Spark configuration properties, which will override the 'conf' of the spark job
+     definition you provide.
+    :vartype conf: any
+    :ivar driver_size: Number of core and memory to be used for driver allocated in the specified
+     Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of
+     the spark job definition you provide. Type: string (or Expression with resultType string).
+    :vartype driver_size: any
+    :ivar num_executors: Number of executors to launch for this job, which will override the
+     'numExecutors' of the spark job definition you provide.
+    :vartype num_executors: int
+    """
+
+    _validation = {
+        'name': {'required': True},
+        'type': {'required': True},
+        'spark_job': {'required': True},
+    }
+
+    _attribute_map = {
+        'additional_properties': {'key': '', 'type': '{object}'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'description': {'key': 'description', 'type': 'str'},
+        'depends_on': {'key': 'dependsOn', 'type': '[ActivityDependency]'},
+        'user_properties': {'key': 'userProperties', 'type': '[UserProperty]'},
+        'linked_service_name': {'key': 'linkedServiceName', 'type': 'LinkedServiceReference'},
+        'policy': {'key': 'policy', 'type': 'ActivityPolicy'},
+        'spark_job': {'key': 'typeProperties.sparkJob', 'type': 'SynapseSparkJobReference'},
+        'arguments': {'key': 'typeProperties.args', 'type': '[object]'},
+        'file': {'key': 'typeProperties.file', 'type': 'object'},
+        'class_name': {'key': 'typeProperties.className', 'type': 'object'},
+        'files': {'key': 'typeProperties.files', 'type': '[object]'},
+        'target_big_data_pool': {'key': 'typeProperties.targetBigDataPool', 'type': 'BigDataPoolParametrizationReference'},
+        'executor_size': {'key': 'typeProperties.executorSize', 'type': 'object'},
+        'conf': {'key': 'typeProperties.conf', 'type': 'object'},
+        'driver_size': {'key': 'typeProperties.driverSize', 'type': 'object'},
+        'num_executors': {'key': 'typeProperties.numExecutors', 'type': 'int'},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: str,
+        spark_job: "_models.SynapseSparkJobReference",
+        additional_properties: Optional[Dict[str, Any]] = None,
+        description: Optional[str] = None,
+        depends_on: Optional[List["_models.ActivityDependency"]] = None,
+        user_properties: Optional[List["_models.UserProperty"]] = None,
+        linked_service_name: Optional["_models.LinkedServiceReference"] = None,
+        policy: Optional["_models.ActivityPolicy"] = None,
+        arguments: Optional[List[Any]] = None,
+        file: Optional[Any] = None,
+        class_name: Optional[Any] = None,
+        files: Optional[List[Any]] = None,
+        target_big_data_pool: Optional["_models.BigDataPoolParametrizationReference"] = None,
+        executor_size: Optional[Any] = None,
+        conf: Optional[Any] = None,
+        driver_size: Optional[Any] = None,
+        num_executors: Optional[int] = None,
+        **kwargs
+    ):
+        """
+        :keyword additional_properties: Unmatched properties from the message are deserialized to this
+         collection.
+        :paramtype additional_properties: dict[str, any]
+        :keyword name: Required. Activity name.
+        :paramtype name: str
+        :keyword description: Activity description.
+        :paramtype description: str
+        :keyword depends_on: Activity depends on condition.
+        :paramtype depends_on: list[~azure.mgmt.datafactory.models.ActivityDependency]
+        :keyword user_properties: Activity user properties.
+        :paramtype user_properties: list[~azure.mgmt.datafactory.models.UserProperty]
+        :keyword linked_service_name: Linked service reference.
+        :paramtype linked_service_name: ~azure.mgmt.datafactory.models.LinkedServiceReference
+        :keyword policy: Activity policy.
+        :paramtype policy: ~azure.mgmt.datafactory.models.ActivityPolicy
+        :keyword spark_job: Required. Synapse spark job reference.
+        :paramtype spark_job: ~azure.mgmt.datafactory.models.SynapseSparkJobReference
+        :keyword arguments: User specified arguments to SynapseSparkJobDefinitionActivity.
+        :paramtype arguments: list[any]
+        :keyword file: The main file used for the job, which will override the 'file' of the spark job
+         definition you provide. Type: string (or Expression with resultType string).
+        :paramtype file: any
+        :keyword class_name: The fully-qualified identifier or the main class that is in the main
+         definition file, which will override the 'className' of the spark job definition you provide.
+         Type: string (or Expression with resultType string).
+        :paramtype class_name: any
+        :keyword files: Additional files used for reference in the main definition file, which will
+         override the 'files' of the spark job definition you provide.
+        :paramtype files: list[any]
+        :keyword target_big_data_pool: The name of the big data pool which will be used to execute the
+         spark batch job, which will override the 'targetBigDataPool' of the spark job definition you
+         provide.
+        :paramtype target_big_data_pool:
+         ~azure.mgmt.datafactory.models.BigDataPoolParametrizationReference
+        :keyword executor_size: Number of core and memory to be used for executors allocated in the
+         specified Spark pool for the job, which will be used for overriding 'executorCores' and
+         'executorMemory' of the spark job definition you provide. Type: string (or Expression with
+         resultType string).
+        :paramtype executor_size: any
+        :keyword conf: Spark configuration properties, which will override the 'conf' of the spark job
+         definition you provide.
+        :paramtype conf: any
+        :keyword driver_size: Number of core and memory to be used for driver allocated in the
+         specified Spark pool for the job, which will be used for overriding 'driverCores' and
+         'driverMemory' of the spark job definition you provide. Type: string (or Expression with
+         resultType string).
+        :paramtype driver_size: any
+        :keyword num_executors: Number of executors to launch for this job, which will override the
+         'numExecutors' of the spark job definition you provide.
+        :paramtype num_executors: int
+        """
+        super(SynapseSparkJobDefinitionActivity, self).__init__(additional_properties=additional_properties, name=name, description=description, depends_on=depends_on, user_properties=user_properties, linked_service_name=linked_service_name, policy=policy, **kwargs)
+        self.type = 'SparkJob'  # type: str
+        self.spark_job = spark_job
+        self.arguments = arguments
+        self.file = file
+        self.class_name = class_name
+        self.files = files
+        self.target_big_data_pool = target_big_data_pool
+        self.executor_size = executor_size
+        self.conf = conf
+        self.driver_size = driver_size
+        self.num_executors = num_executors
+
+
+class SynapseSparkJobReference(msrest.serialization.Model):
+    """Synapse spark job reference type.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar type: Required. Synapse spark job reference type. Known values are:
+     "SparkJobDefinitionReference".
+    :vartype type: str or ~azure.mgmt.datafactory.models.SparkJobReferenceType
+    :ivar reference_name: Required. Reference spark job name.
+    :vartype reference_name: str
+    """
+
+    _validation = {
+        'type': {'required': True},
+        'reference_name': {'required': True},
+    }
+
+    _attribute_map = {
+        'type': {'key': 'type', 'type': 'str'},
+        'reference_name': {'key': 'referenceName', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Union[str, "_models.SparkJobReferenceType"],
+        reference_name: str,
+        **kwargs
+    ):
+        """
+        :keyword type: Required. Synapse spark job reference type. Known values are:
+         "SparkJobDefinitionReference".
+        :paramtype type: str or ~azure.mgmt.datafactory.models.SparkJobReferenceType
+        :keyword reference_name: Required. Reference spark job name.
+        :paramtype reference_name: str
+        """
+        super(SynapseSparkJobReference, self).__init__(**kwargs)
+        self.type = type
+        self.reference_name = reference_name
+
+
 class TabularTranslator(CopyTranslator):
     """A copy activity tabular translator.
 
@@ -59018,8 +59567,8 @@ class WebLinkedServiceTypeProperties(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59047,7 +59596,7 @@ class WebLinkedServiceTypeProperties(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         """
@@ -59061,8 +59610,8 @@ class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59086,7 +59635,7 @@ class WebAnonymousAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         """
@@ -59099,8 +59648,8 @@ class WebBasicAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59135,7 +59684,7 @@ class WebBasicAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword username: Required. User name for Basic authentication. Type: string (or Expression
@@ -59155,8 +59704,8 @@ class WebClientCertificateAuthentication(WebLinkedServiceTypeProperties):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com . Type:
-     string (or Expression with resultType string).
+    :ivar url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
+     Type: string (or Expression with resultType string).
     :vartype url: any
     :ivar authentication_type: Required. Type of authentication used to connect to the web table
      source.Constant filled by server. Known values are: "Basic", "Anonymous", "ClientCertificate".
@@ -59190,7 +59739,7 @@ class WebClientCertificateAuthentication(WebLinkedServiceTypeProperties):
         **kwargs
     ):
         """
-        :keyword url: Required. The URL of the web service endpoint, e.g. http://www.microsoft.com .
+        :keyword url: Required. The URL of the web service endpoint, e.g. https://www.microsoft.com .
          Type: string (or Expression with resultType string).
         :paramtype url: any
         :keyword pfx: Required. Base64-encoded contents of a PFX file.

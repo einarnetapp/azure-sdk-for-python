@@ -115,10 +115,12 @@ from ._models_py3 import AzureSqlSink
 from ._models_py3 import AzureSqlSource
 from ._models_py3 import AzureSqlTableDataset
 from ._models_py3 import AzureStorageLinkedService
+from ._models_py3 import AzureSynapseArtifactsLinkedService
 from ._models_py3 import AzureTableDataset
 from ._models_py3 import AzureTableSink
 from ._models_py3 import AzureTableSource
 from ._models_py3 import AzureTableStorageLinkedService
+from ._models_py3 import BigDataPoolParametrizationReference
 from ._models_py3 import BinaryDataset
 from ._models_py3 import BinaryReadSettings
 from ._models_py3 import BinarySink
@@ -436,6 +438,7 @@ from ._models_py3 import NetezzaLinkedService
 from ._models_py3 import NetezzaPartitionSettings
 from ._models_py3 import NetezzaSource
 from ._models_py3 import NetezzaTableDataset
+from ._models_py3 import NotebookParameter
 from ._models_py3 import ODataLinkedService
 from ._models_py3 import ODataResourceDataset
 from ._models_py3 import ODataSource
@@ -657,6 +660,10 @@ from ._models_py3 import SwitchCase
 from ._models_py3 import SybaseLinkedService
 from ._models_py3 import SybaseSource
 from ._models_py3 import SybaseTableDataset
+from ._models_py3 import SynapseNotebookActivity
+from ._models_py3 import SynapseNotebookReference
+from ._models_py3 import SynapseSparkJobDefinitionActivity
+from ._models_py3 import SynapseSparkJobReference
 from ._models_py3 import TabularSource
 from ._models_py3 import TabularTranslator
 from ._models_py3 import TarGZipReadSettings
@@ -723,6 +730,7 @@ from ._data_factory_management_client_enums import (
     AvroCompressionCodec,
     AzureFunctionActivityMethod,
     AzureSearchIndexWriteBehaviorType,
+    BigDataPoolReferenceType,
     BlobEventTypes,
     CassandraSourceReadConsistencyLevels,
     CompressionCodec,
@@ -771,6 +779,8 @@ from ._data_factory_management_client_enums import (
     ManagedVirtualNetworkReferenceType,
     MongoDbAuthenticationType,
     NetezzaPartitionOption,
+    NotebookParameterType,
+    NotebookReferenceType,
     ODataAadServicePrincipalCredentialType,
     ODataAuthenticationType,
     OraclePartitionOption,
@@ -801,6 +811,7 @@ from ._data_factory_management_client_enums import (
     ServicePrincipalCredentialType,
     SftpAuthenticationType,
     SparkAuthenticationType,
+    SparkJobReferenceType,
     SparkServerType,
     SparkThriftTransportProtocol,
     SqlAlwaysEncryptedAkvAuthType,
@@ -819,6 +830,7 @@ from ._data_factory_management_client_enums import (
     TriggerRunStatus,
     TriggerRuntimeState,
     TumblingWindowFrequency,
+    Type,
     VariableType,
     WebActivityMethod,
     WebAuthenticationType,
@@ -938,10 +950,12 @@ __all__ = [
     'AzureSqlSource',
     'AzureSqlTableDataset',
     'AzureStorageLinkedService',
+    'AzureSynapseArtifactsLinkedService',
     'AzureTableDataset',
     'AzureTableSink',
     'AzureTableSource',
     'AzureTableStorageLinkedService',
+    'BigDataPoolParametrizationReference',
     'BinaryDataset',
     'BinaryReadSettings',
     'BinarySink',
@@ -1259,6 +1273,7 @@ __all__ = [
     'NetezzaPartitionSettings',
     'NetezzaSource',
     'NetezzaTableDataset',
+    'NotebookParameter',
     'ODataLinkedService',
     'ODataResourceDataset',
     'ODataSource',
@@ -1480,6 +1495,10 @@ __all__ = [
     'SybaseLinkedService',
     'SybaseSource',
     'SybaseTableDataset',
+    'SynapseNotebookActivity',
+    'SynapseNotebookReference',
+    'SynapseSparkJobDefinitionActivity',
+    'SynapseSparkJobReference',
     'TabularSource',
     'TabularTranslator',
     'TarGZipReadSettings',
@@ -1543,6 +1562,7 @@ __all__ = [
     'AvroCompressionCodec',
     'AzureFunctionActivityMethod',
     'AzureSearchIndexWriteBehaviorType',
+    'BigDataPoolReferenceType',
     'BlobEventTypes',
     'CassandraSourceReadConsistencyLevels',
     'CompressionCodec',
@@ -1591,6 +1611,8 @@ __all__ = [
     'ManagedVirtualNetworkReferenceType',
     'MongoDbAuthenticationType',
     'NetezzaPartitionOption',
+    'NotebookParameterType',
+    'NotebookReferenceType',
     'ODataAadServicePrincipalCredentialType',
     'ODataAuthenticationType',
     'OraclePartitionOption',
@@ -1621,6 +1643,7 @@ __all__ = [
     'ServicePrincipalCredentialType',
     'SftpAuthenticationType',
     'SparkAuthenticationType',
+    'SparkJobReferenceType',
     'SparkServerType',
     'SparkThriftTransportProtocol',
     'SqlAlwaysEncryptedAkvAuthType',
@@ -1639,6 +1662,7 @@ __all__ = [
     'TriggerRunStatus',
     'TriggerRuntimeState',
     'TumblingWindowFrequency',
+    'Type',
     'VariableType',
     'WebActivityMethod',
     'WebAuthenticationType',
