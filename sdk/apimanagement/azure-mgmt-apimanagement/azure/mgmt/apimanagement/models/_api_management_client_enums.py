@@ -7,16 +7,15 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AccessIdName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AccessIdName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     ACCESS = "access"
     GIT_ACCESS = "gitAccess"
 
-class AccessType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AccessType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of access to be used for the storage account.
     """
 
@@ -27,14 +26,14 @@ class AccessType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Use user assigned managed identity.
     USER_ASSIGNED_MANAGED_IDENTITY = "UserAssignedManagedIdentity"
 
-class AlwaysLog(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AlwaysLog(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Specifies for what type of messages sampling settings should not apply.
     """
 
     #: Always log all erroneous request regardless of sampling settings.
     ALL_ERRORS = "allErrors"
 
-class ApiManagementSkuCapacityScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ApiManagementSkuCapacityScaleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The scale type applicable to the sku.
     """
 
@@ -42,21 +41,21 @@ class ApiManagementSkuCapacityScaleType(with_metaclass(CaseInsensitiveEnumMeta, 
     MANUAL = "Manual"
     NONE = "None"
 
-class ApiManagementSkuRestrictionsReasonCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ApiManagementSkuRestrictionsReasonCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The reason for restriction.
     """
 
     QUOTA_ID = "QuotaId"
     NOT_AVAILABLE_FOR_SUBSCRIPTION = "NotAvailableForSubscription"
 
-class ApiManagementSkuRestrictionsType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ApiManagementSkuRestrictionsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of restrictions.
     """
 
     LOCATION = "Location"
     ZONE = "Zone"
 
-class ApimIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ApimIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes
     both an implicitly created identity and a set of user assigned identities. The type 'None' will
     remove any identities from the service.
@@ -67,7 +66,7 @@ class ApimIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned, UserAssigned"
     NONE = "None"
 
-class ApiType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ApiType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of API.
     """
 
@@ -76,7 +75,7 @@ class ApiType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     WEBSOCKET = "websocket"
     GRAPHQL = "graphql"
 
-class ApiVersionSetContractDetailsVersioningScheme(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ApiVersionSetContractDetailsVersioningScheme(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """An value that determines where the API Version identifier will be located in a HTTP request.
     """
 
@@ -84,14 +83,14 @@ class ApiVersionSetContractDetailsVersioningScheme(with_metaclass(CaseInsensitiv
     QUERY = "Query"
     HEADER = "Header"
 
-class AppType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AppType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: User create request was sent by legacy developer portal.
     PORTAL = "portal"
     #: User create request was sent by new developer portal.
     DEVELOPER_PORTAL = "developerPortal"
 
-class AsyncOperationStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AsyncOperationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of an async operation.
     """
 
@@ -100,7 +99,7 @@ class AsyncOperationStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
 
-class AuthorizationMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AuthorizationMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     HEAD = "HEAD"
     OPTIONS = "OPTIONS"
@@ -111,7 +110,7 @@ class AuthorizationMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     PATCH = "PATCH"
     DELETE = "DELETE"
 
-class BackendProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class BackendProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Backend communication protocol.
     """
 
@@ -120,12 +119,12 @@ class BackendProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The Backend is a SOAP service.
     SOAP = "soap"
 
-class BearerTokenSendingMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class BearerTokenSendingMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     AUTHORIZATION_HEADER = "authorizationHeader"
     QUERY = "query"
 
-class BearerTokenSendingMethods(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class BearerTokenSendingMethods(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Form of an authorization grant, which the client uses to request the access token.
     """
 
@@ -134,7 +133,7 @@ class BearerTokenSendingMethods(with_metaclass(CaseInsensitiveEnumMeta, str, Enu
     #: Access token will be transmitted as query parameters.
     QUERY = "query"
 
-class CertificateConfigurationStoreName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CertificateConfigurationStoreName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The System.Security.Cryptography.x509certificates.StoreName certificate store location. Only
     Root and CertificateAuthority are valid locations.
     """
@@ -142,7 +141,7 @@ class CertificateConfigurationStoreName(with_metaclass(CaseInsensitiveEnumMeta, 
     CERTIFICATE_AUTHORITY = "CertificateAuthority"
     ROOT = "Root"
 
-class CertificateSource(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CertificateSource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Certificate Source.
     """
 
@@ -151,7 +150,7 @@ class CertificateSource(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     CUSTOM = "Custom"
     BUILT_IN = "BuiltIn"
 
-class CertificateStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CertificateStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Certificate Status.
     """
 
@@ -159,18 +158,18 @@ class CertificateStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FAILED = "Failed"
     IN_PROGRESS = "InProgress"
 
-class ClientAuthenticationMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ClientAuthenticationMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Basic Client Authentication method.
     BASIC = "Basic"
     #: Body based Authentication method.
     BODY = "Body"
 
-class ConfigurationIdName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ConfigurationIdName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     CONFIGURATION = "configuration"
 
-class Confirmation(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Confirmation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Determines the type of confirmation e-mail that will be sent to the newly created user.
     """
 
@@ -179,7 +178,7 @@ class Confirmation(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Send an e-mail inviting the user to sign-up and complete registration.
     INVITE = "invite"
 
-class ConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The connection status.
     """
 
@@ -188,7 +187,7 @@ class ConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DISCONNECTED = "Disconnected"
     DEGRADED = "Degraded"
 
-class ConnectivityCheckProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ConnectivityCheckProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The request's protocol. Specific protocol configuration can be available based on this
     selection. The specified destination address must be coherent with this value.
     """
@@ -197,7 +196,7 @@ class ConnectivityCheckProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enu
     HTTP = "HTTP"
     HTTPS = "HTTPS"
 
-class ConnectivityStatusType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ConnectivityStatusType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Resource Connectivity Status Type identifier.
     """
 
@@ -205,7 +204,7 @@ class ConnectivityStatusType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum))
     SUCCESS = "success"
     FAILURE = "failure"
 
-class ContentFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ContentFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Format of the Content in which the API is getting imported.
     """
 
@@ -232,7 +231,7 @@ class ContentFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The GraphQL API endpoint hosted on a publicly accessible internet address.
     GRAPHQL_LINK = "graphql-link"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -241,7 +240,7 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class DataMaskingMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class DataMaskingMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Data masking mode.
     """
 
@@ -250,11 +249,11 @@ class DataMaskingMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Hide the presence of an entity.
     HIDE = "Hide"
 
-class ExportApi(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ExportApi(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     TRUE = "true"
 
-class ExportFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ExportFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Export the Api Definition in OpenAPI 2.0 Specification as JSON document to the Storage Blob.
     SWAGGER = "swagger-link"
@@ -268,7 +267,7 @@ class ExportFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Export the Api Definition in OpenAPI 3.0 Specification as JSON document to Storage Blob.
     OPENAPI_JSON = "openapi+json-link"
 
-class ExportResultFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ExportResultFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Format in which the API Details are exported to the Storage Blob with Sas Key valid for 5
     minutes.
     """
@@ -283,7 +282,7 @@ class ExportResultFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Export the API Definition in OpenAPI Specification 3.0 to Storage Blob.
     OPEN_API = "openapi-link"
 
-class GrantType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class GrantType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1.
     AUTHORIZATION_CODE = "authorizationCode"
@@ -295,7 +294,7 @@ class GrantType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.
     CLIENT_CREDENTIALS = "clientCredentials"
 
-class GroupType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class GroupType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Group type.
     """
 
@@ -303,7 +302,7 @@ class GroupType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SYSTEM = "system"
     EXTERNAL = "external"
 
-class HostnameType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class HostnameType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Hostname type.
     """
 
@@ -313,7 +312,7 @@ class HostnameType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SCM = "Scm"
     DEVELOPER_PORTAL = "DeveloperPortal"
 
-class HttpCorrelationProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class HttpCorrelationProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Sets correlation protocol to use for Application Insights diagnostics.
     """
 
@@ -325,7 +324,7 @@ class HttpCorrelationProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)
     #: Inject Trace Context headers. See https://w3c.github.io/trace-context.
     W3_C = "W3C"
 
-class IdentityProviderType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IdentityProviderType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Facebook as Identity provider.
     FACEBOOK = "facebook"
@@ -340,7 +339,7 @@ class IdentityProviderType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Azure Active Directory B2C as Identity provider.
     AAD_B2_C = "aadB2C"
 
-class IssueType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IssueType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of issue.
     """
 
@@ -354,14 +353,14 @@ class IssueType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     PORT_THROTTLED = "PortThrottled"
     PLATFORM = "Platform"
 
-class KeyType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class KeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The Key to be used to generate token for user.
     """
 
     PRIMARY = "primary"
     SECONDARY = "secondary"
 
-class LoggerType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class LoggerType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Logger type.
     """
 
@@ -372,14 +371,14 @@ class LoggerType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Azure Monitor.
     AZURE_MONITOR = "azureMonitor"
 
-class Method(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Method(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The HTTP method to be used.
     """
 
     GET = "GET"
     POST = "POST"
 
-class NameAvailabilityReason(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class NameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Invalid indicates the name provided does not match the resource provider’s naming requirements
     (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is
     already in use and is therefore unavailable.
@@ -389,7 +388,7 @@ class NameAvailabilityReason(with_metaclass(CaseInsensitiveEnumMeta, str, Enum))
     INVALID = "Invalid"
     ALREADY_EXISTS = "AlreadyExists"
 
-class NotificationName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class NotificationName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: The following email recipients and users will receive email notifications about subscription
     #: requests for API products requiring approval.
@@ -412,7 +411,7 @@ class NotificationName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: usage gets close to usage quota.
     QUOTA_LIMIT_APPROACHING_PUBLISHER_NOTIFICATION_MESSAGE = "QuotaLimitApproachingPublisherNotificationMessage"
 
-class OperationNameFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class OperationNameFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The format of the Operation Name for Application Insights telemetries. Default is Name.
     """
 
@@ -421,7 +420,7 @@ class OperationNameFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: HTTP_VERB URL.
     URL = "Url"
 
-class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The origin of the issue.
     """
 
@@ -429,7 +428,7 @@ class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     INBOUND = "Inbound"
     OUTBOUND = "Outbound"
 
-class PlatformVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PlatformVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Compute Platform Version running the service.
     """
 
@@ -442,7 +441,7 @@ class PlatformVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Platform running the service on Multi Tenant V1 platform.
     MTV1 = "mtv1"
 
-class PolicyContentFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PolicyContentFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Format of the policyContent.
     """
 
@@ -457,18 +456,18 @@ class PolicyContentFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Management service.
     RAWXML_LINK = "rawxml-link"
 
-class PolicyExportFormat(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PolicyExportFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: The contents are inline and Content type is an XML document.
     XML = "xml"
     #: The contents are inline and Content type is a non XML encoded policy document.
     RAWXML = "rawxml"
 
-class PolicyIdName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PolicyIdName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     POLICY = "policy"
 
-class PolicyScopeContract(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PolicyScopeContract(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     TENANT = "Tenant"
     PRODUCT = "Product"
@@ -476,7 +475,7 @@ class PolicyScopeContract(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     OPERATION = "Operation"
     ALL = "All"
 
-class PortalRevisionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PortalRevisionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the portal's revision.
     """
 
@@ -489,13 +488,13 @@ class PortalRevisionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Portal's revision publishing failed.
     FAILED = "failed"
 
-class PreferredIPVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PreferredIPVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The IP version to be used. Only IPv4 is supported for now.
     """
 
     I_PV4 = "IPv4"
 
-class PrivateEndpointConnectionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The current provisioning state.
     """
 
@@ -504,7 +503,7 @@ class PrivateEndpointConnectionProvisioningState(with_metaclass(CaseInsensitiveE
     DELETING = "Deleting"
     FAILED = "Failed"
 
-class PrivateEndpointServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The private endpoint connection status.
     """
 
@@ -512,7 +511,7 @@ class PrivateEndpointServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumM
     APPROVED = "Approved"
     REJECTED = "Rejected"
 
-class ProductState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProductState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """whether product is published or not. Published products are discoverable by users of developer
     portal. Non published products are visible only to administrators. Default state of Product is
     notPublished.
@@ -521,14 +520,14 @@ class ProductState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     NOT_PUBLISHED = "notPublished"
     PUBLISHED = "published"
 
-class Protocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Protocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     HTTP = "http"
     HTTPS = "https"
     WS = "ws"
     WSS = "wss"
 
-class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether or not public endpoint access is allowed for this API Management service.  Value is
     optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints
     are the exclusive access method. Default value is 'Enabled'
@@ -537,7 +536,7 @@ class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class ResourceSkuCapacityScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceSkuCapacityScaleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The scale type applicable to the sku.
     """
 
@@ -548,14 +547,14 @@ class ResourceSkuCapacityScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, 
     #: Scaling not supported.
     NONE = "none"
 
-class SamplingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SamplingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Sampling type.
     """
 
     #: Fixed-rate sampling.
     FIXED = "fixed"
 
-class SchemaType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SchemaType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Schema Type. Immutable.
     """
 
@@ -564,18 +563,18 @@ class SchemaType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Json schema type.
     JSON = "json"
 
-class SettingsTypeName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SettingsTypeName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     PUBLIC = "public"
 
-class Severity(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Severity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The severity of the issue.
     """
 
     ERROR = "Error"
     WARNING = "Warning"
 
-class SkuType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SkuType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name of the Sku.
     """
 
@@ -592,7 +591,7 @@ class SkuType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Isolated SKU of Api Management.
     ISOLATED = "Isolated"
 
-class SoapApiType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SoapApiType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of API to create.
     
     
@@ -611,7 +610,7 @@ class SoapApiType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Imports the API having a GraphQL front end.
     GRAPH_QL = "graphql"
 
-class State(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class State(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the issue.
     """
 
@@ -626,7 +625,7 @@ class State(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The issue was closed.
     CLOSED = "closed"
 
-class SubscriptionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SubscriptionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Subscription state. Possible states are * active – the subscription is active, * suspended –
     the subscription is blocked, and the subscriber cannot call any APIs of the product, *
     submitted – the subscription request has been made by the developer, but has not yet been
@@ -642,7 +641,7 @@ class SubscriptionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     REJECTED = "rejected"
     CANCELLED = "cancelled"
 
-class TemplateName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class TemplateName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     APPLICATION_APPROVED_NOTIFICATION_MESSAGE = "applicationApprovedNotificationMessage"
     ACCOUNT_CLOSED_DEVELOPER = "accountClosedDeveloper"
@@ -659,7 +658,7 @@ class TemplateName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     REJECT_DEVELOPER_NOTIFICATION_MESSAGE = "rejectDeveloperNotificationMessage"
     REQUEST_DEVELOPER_NOTIFICATION_MESSAGE = "requestDeveloperNotificationMessage"
 
-class UserState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class UserState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Account state. Specifies whether the user is active or not. Blocked users are unable to sign
     into the developer portal or call any APIs of subscribed products. Default state is Active.
     """
@@ -673,7 +672,7 @@ class UserState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: User account is closed. All identities and related entities are removed.
     DELETED = "deleted"
 
-class Verbosity(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Verbosity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The verbosity level applied to traces emitted by trace policies.
     """
 
@@ -687,7 +686,7 @@ class Verbosity(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: diagnostic instance.
     ERROR = "error"
 
-class VersioningScheme(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class VersioningScheme(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """An value that determines where the API Version identifier will be located in a HTTP request.
     """
 
@@ -698,7 +697,7 @@ class VersioningScheme(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The API Version is passed in a HTTP header.
     HEADER = "Header"
 
-class VirtualNetworkType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class VirtualNetworkType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of VPN in which API Management service needs to be configured in. None (Default Value)
     means the API Management service is not part of any Virtual Network, External means the API
     Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint,
