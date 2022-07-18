@@ -21,7 +21,6 @@ from ._models_py3 import GroupInformation
 from ._models_py3 import GroupInformationProperties
 from ._models_py3 import Instance
 from ._models_py3 import InstanceList
-from ._models_py3 import IotHubSettings
 from ._models_py3 import Location
 from ._models_py3 import ManagedServiceIdentity
 from ._models_py3 import Operation
@@ -66,7 +65,9 @@ from ._device_update_enums import (
     Role,
     SKU,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'Account',
     'AccountList',
@@ -83,7 +84,6 @@ __all__ = [
     'GroupInformationProperties',
     'Instance',
     'InstanceList',
-    'IotHubSettings',
     'Location',
     'ManagedServiceIdentity',
     'Operation',
@@ -125,3 +125,5 @@ __all__ = [
     'Role',
     'SKU',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
