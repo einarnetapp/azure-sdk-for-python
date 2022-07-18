@@ -20,18 +20,18 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._host_pools_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_by_resource_group_request, build_list_request, build_retrieve_registration_token_request, build_update_request
+from ...operations._scaling_plan_pooled_schedules_operations import build_create_request, build_delete_request, build_get_request, build_list_request, build_update_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class HostPoolsOperations:
+class ScalingPlanPooledSchedulesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.desktopvirtualization.aio.DesktopVirtualizationAPIClient`'s
-        :attr:`host_pools` attribute.
+        :attr:`scaling_plan_pooled_schedules` attribute.
     """
 
     models = _models
@@ -48,18 +48,21 @@ class HostPoolsOperations:
     async def get(
         self,
         resource_group_name: str,
-        host_pool_name: str,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
         **kwargs: Any
-    ) -> _models.HostPool:
-        """Get a host pool.
+    ) -> _models.ScalingPlanPooledSchedule:
+        """Get a ScalingPlanPooledSchedule.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: HostPool, or the result of cls(response)
-        :rtype: ~azure.mgmt.desktopvirtualization.models.HostPool
+        :return: ScalingPlanPooledSchedule, or the result of cls(response)
+        :rtype: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -71,13 +74,14 @@ class HostPoolsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-05-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.HostPool]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledSchedule]
 
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
             headers=_headers,
@@ -97,35 +101,38 @@ class HostPoolsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('HostPool', pipeline_response)
+        deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
 
 
     @distributed_trace_async
-    async def create_or_update(
+    async def create(
         self,
         resource_group_name: str,
-        host_pool_name: str,
-        host_pool: _models.HostPool,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
+        scaling_plan_schedule: _models.ScalingPlanPooledSchedule,
         **kwargs: Any
-    ) -> _models.HostPool:
-        """Create or update a host pool.
+    ) -> _models.ScalingPlanPooledSchedule:
+        """Create or update a ScalingPlanPooledSchedule.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
-        :param host_pool: Object containing HostPool definitions.
-        :type host_pool: ~azure.mgmt.desktopvirtualization.models.HostPool
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
+        :param scaling_plan_schedule: Object containing ScalingPlanPooledSchedule definitions.
+        :type scaling_plan_schedule: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: HostPool, or the result of cls(response)
-        :rtype: ~azure.mgmt.desktopvirtualization.models.HostPool
+        :return: ScalingPlanPooledSchedule, or the result of cls(response)
+        :rtype: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -138,18 +145,19 @@ class HostPoolsOperations:
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-05-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.HostPool]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledSchedule]
 
-        _json = self._serialize.body(host_pool, 'HostPool')
+        _json = self._serialize.body(scaling_plan_schedule, 'ScalingPlanPooledSchedule')
 
-        request = build_create_or_update_request(
+        request = build_create_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
-            template_url=self.create_or_update.metadata['url'],
+            template_url=self.create.metadata['url'],
             headers=_headers,
             params=_params,
         )
@@ -168,35 +176,35 @@ class HostPoolsOperations:
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('HostPool', pipeline_response)
+            deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('HostPool', pipeline_response)
+            deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}"}  # type: ignore
+    create.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        host_pool_name: str,
-        force: Optional[bool] = None,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
         **kwargs: Any
     ) -> None:
-        """Remove a host pool.
+        """Remove a ScalingPlanPooledSchedule.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
-        :param force: Force flag to delete sessionHost. Default value is None.
-        :type force: bool
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -217,9 +225,9 @@ class HostPoolsOperations:
         request = build_delete_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
             api_version=api_version,
-            force=force,
             template_url=self.delete.metadata['url'],
             headers=_headers,
             params=_params,
@@ -241,28 +249,33 @@ class HostPoolsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def update(
         self,
         resource_group_name: str,
-        host_pool_name: str,
-        host_pool: Optional[_models.HostPoolPatch] = None,
+        scaling_plan_name: str,
+        scaling_plan_schedule_name: str,
+        scaling_plan_schedule: Optional[_models.ScalingPlanPooledSchedulePatch] = None,
         **kwargs: Any
-    ) -> _models.HostPool:
-        """Update a host pool.
+    ) -> _models.ScalingPlanPooledSchedule:
+        """Update a ScalingPlanPooledSchedule.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
-        :param host_pool: Object containing HostPool definitions. Default value is None.
-        :type host_pool: ~azure.mgmt.desktopvirtualization.models.HostPoolPatch
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
+        :param scaling_plan_schedule_name: The name of the ScalingPlanSchedule.
+        :type scaling_plan_schedule_name: str
+        :param scaling_plan_schedule: Object containing ScalingPlanPooledSchedule definitions. Default
+         value is None.
+        :type scaling_plan_schedule:
+         ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedulePatch
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: HostPool, or the result of cls(response)
-        :rtype: ~azure.mgmt.desktopvirtualization.models.HostPool
+        :return: ScalingPlanPooledSchedule, or the result of cls(response)
+        :rtype: ~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledSchedule
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -275,17 +288,18 @@ class HostPoolsOperations:
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-05-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.HostPool]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledSchedule]
 
-        if host_pool is not None:
-            _json = self._serialize.body(host_pool, 'HostPoolPatch')
+        if scaling_plan_schedule is not None:
+            _json = self._serialize.body(scaling_plan_schedule, 'ScalingPlanPooledSchedulePatch')
         else:
             _json = None
 
         request = build_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
+            scaling_plan_name=scaling_plan_name,
+            scaling_plan_schedule_name=scaling_plan_schedule_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -307,118 +321,41 @@ class HostPoolsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('HostPool', pipeline_response)
+        deserialized = self._deserialize('ScalingPlanPooledSchedule', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}"}  # type: ignore
+    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}"}  # type: ignore
 
-
-    @distributed_trace
-    def list_by_resource_group(
-        self,
-        resource_group_name: str,
-        **kwargs: Any
-    ) -> AsyncIterable[_models.HostPoolList]:
-        """List hostPools.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either HostPoolList or the result of cls(response)
-        :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.desktopvirtualization.models.HostPoolList]
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-05-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.HostPoolList]
-
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-        def prepare_request(next_link=None):
-            if not next_link:
-                
-                request = build_list_by_resource_group_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=resource_group_name,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group.metadata['url'],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
-
-            else:
-                
-                request = build_list_by_resource_group_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=resource_group_name,
-                    api_version=api_version,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
-                request.method = "GET"
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("HostPoolList", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools"}  # type: ignore
 
     @distributed_trace
     def list(
         self,
+        resource_group_name: str,
+        scaling_plan_name: str,
         **kwargs: Any
-    ) -> AsyncIterable[_models.HostPoolList]:
-        """List hostPools in subscription.
+    ) -> AsyncIterable[_models.ScalingPlanPooledScheduleList]:
+        """List ScalingPlanPooledSchedules.
 
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param scaling_plan_name: The name of the scaling plan.
+        :type scaling_plan_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either HostPoolList or the result of cls(response)
+        :return: An iterator like instance of either ScalingPlanPooledScheduleList or the result of
+         cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.desktopvirtualization.models.HostPoolList]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.desktopvirtualization.models.ScalingPlanPooledScheduleList]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-05-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.HostPoolList]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ScalingPlanPooledScheduleList]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -429,6 +366,8 @@ class HostPoolsOperations:
                 
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    scaling_plan_name=scaling_plan_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
                     headers=_headers,
@@ -441,6 +380,8 @@ class HostPoolsOperations:
                 
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    scaling_plan_name=scaling_plan_name,
                     api_version=api_version,
                     template_url=next_link,
                     headers=_headers,
@@ -452,7 +393,7 @@ class HostPoolsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("HostPoolList", pipeline_response)
+            deserialized = self._deserialize("ScalingPlanPooledScheduleList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -478,67 +419,4 @@ class HostPoolsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/hostPools"}  # type: ignore
-
-    @distributed_trace_async
-    async def retrieve_registration_token(
-        self,
-        resource_group_name: str,
-        host_pool_name: str,
-        **kwargs: Any
-    ) -> _models.RegistrationInfo:
-        """Registration token of the host pool.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param host_pool_name: The name of the host pool within the specified resource group.
-        :type host_pool_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: RegistrationInfo, or the result of cls(response)
-        :rtype: ~azure.mgmt.desktopvirtualization.models.RegistrationInfo
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-05-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.RegistrationInfo]
-
-        
-        request = build_retrieve_registration_token_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            host_pool_name=host_pool_name,
-            api_version=api_version,
-            template_url=self.retrieve_registration_token.metadata['url'],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('RegistrationInfo', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    retrieve_registration_token.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/retrieveRegistrationToken"}  # type: ignore
-
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules"}  # type: ignore
