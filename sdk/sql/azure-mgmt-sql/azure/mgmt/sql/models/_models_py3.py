@@ -10305,6 +10305,188 @@ class ManagedInstanceAzureADOnlyAuthListResult(msrest.serialization.Model):
         self.next_link = None
 
 
+class ManagedInstanceDtc(ProxyResource):
+    """SQL Managed Instance DTC.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar dtc_enabled: Active status of managed instance DTC.
+    :vartype dtc_enabled: bool
+    :ivar security_settings: Security settings of managed instance DTC.
+    :vartype security_settings: ~azure.mgmt.sql.models.ManagedInstanceDtcSecuritySettings
+    :ivar external_dns_suffix_search_list: External dns suffix search list of managed instance DTC.
+    :vartype external_dns_suffix_search_list: list[str]
+    :ivar dtc_host_name_dns_suffix: Host name dns suffix of managed instance DTC.
+    :vartype dtc_host_name_dns_suffix: str
+    :ivar provisioning_state: Provisioning state of managed instance DTC. Known values are:
+     "Created", "InProgress", "Succeeded", "Failed", "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'dtc_host_name_dns_suffix': {'readonly': True},
+        'provisioning_state': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'dtc_enabled': {'key': 'properties.dtcEnabled', 'type': 'bool'},
+        'security_settings': {'key': 'properties.securitySettings', 'type': 'ManagedInstanceDtcSecuritySettings'},
+        'external_dns_suffix_search_list': {'key': 'properties.externalDnsSuffixSearchList', 'type': '[str]'},
+        'dtc_host_name_dns_suffix': {'key': 'properties.dtcHostNameDnsSuffix', 'type': 'str'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        dtc_enabled: Optional[bool] = None,
+        security_settings: Optional["_models.ManagedInstanceDtcSecuritySettings"] = None,
+        external_dns_suffix_search_list: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword dtc_enabled: Active status of managed instance DTC.
+        :paramtype dtc_enabled: bool
+        :keyword security_settings: Security settings of managed instance DTC.
+        :paramtype security_settings: ~azure.mgmt.sql.models.ManagedInstanceDtcSecuritySettings
+        :keyword external_dns_suffix_search_list: External dns suffix search list of managed instance
+         DTC.
+        :paramtype external_dns_suffix_search_list: list[str]
+        """
+        super(ManagedInstanceDtc, self).__init__(**kwargs)
+        self.dtc_enabled = dtc_enabled
+        self.security_settings = security_settings
+        self.external_dns_suffix_search_list = external_dns_suffix_search_list
+        self.dtc_host_name_dns_suffix = None
+        self.provisioning_state = None
+
+
+class ManagedInstanceDtcListResult(msrest.serialization.Model):
+    """A list of managed instance's DTCs.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ManagedInstanceDtc]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ManagedInstanceDtc]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(ManagedInstanceDtcListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
+class ManagedInstanceDtcSecuritySettings(msrest.serialization.Model):
+    """The Security Settings of managed instance DTC.
+
+    :ivar transaction_manager_communication_settings: Transaction Manager communication settings of
+     managed instance DTC.
+    :vartype transaction_manager_communication_settings:
+     ~azure.mgmt.sql.models.ManagedInstanceDtcTransactionManagerCommunicationSettings
+    :ivar xa_transactions_enabled: Allow XA Transactions to managed instance DTC.
+    :vartype xa_transactions_enabled: bool
+    :ivar sna_lu6_point2_transactions_enabled: Allow SNA LU 6.2 to managed instance DTC.
+    :vartype sna_lu6_point2_transactions_enabled: bool
+    """
+
+    _attribute_map = {
+        'transaction_manager_communication_settings': {'key': 'transactionManagerCommunicationSettings', 'type': 'ManagedInstanceDtcTransactionManagerCommunicationSettings'},
+        'xa_transactions_enabled': {'key': 'xaTransactionsEnabled', 'type': 'bool'},
+        'sna_lu6_point2_transactions_enabled': {'key': 'snaLu6point2TransactionsEnabled', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        transaction_manager_communication_settings: Optional["_models.ManagedInstanceDtcTransactionManagerCommunicationSettings"] = None,
+        xa_transactions_enabled: Optional[bool] = None,
+        sna_lu6_point2_transactions_enabled: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword transaction_manager_communication_settings: Transaction Manager communication settings
+         of managed instance DTC.
+        :paramtype transaction_manager_communication_settings:
+         ~azure.mgmt.sql.models.ManagedInstanceDtcTransactionManagerCommunicationSettings
+        :keyword xa_transactions_enabled: Allow XA Transactions to managed instance DTC.
+        :paramtype xa_transactions_enabled: bool
+        :keyword sna_lu6_point2_transactions_enabled: Allow SNA LU 6.2 to managed instance DTC.
+        :paramtype sna_lu6_point2_transactions_enabled: bool
+        """
+        super(ManagedInstanceDtcSecuritySettings, self).__init__(**kwargs)
+        self.transaction_manager_communication_settings = transaction_manager_communication_settings
+        self.xa_transactions_enabled = xa_transactions_enabled
+        self.sna_lu6_point2_transactions_enabled = sna_lu6_point2_transactions_enabled
+
+
+class ManagedInstanceDtcTransactionManagerCommunicationSettings(msrest.serialization.Model):
+    """The Transaction Manager Communication Settings of managed instance DTC.
+
+    :ivar allow_inbound_enabled: Allow Inbound traffic to managed instance DTC.
+    :vartype allow_inbound_enabled: bool
+    :ivar allow_outbound_enabled: Allow Outbound traffic of managed instance DTC.
+    :vartype allow_outbound_enabled: bool
+    :ivar authentication: Authentication type of managed instance DTC.
+    :vartype authentication: str
+    """
+
+    _attribute_map = {
+        'allow_inbound_enabled': {'key': 'allowInboundEnabled', 'type': 'bool'},
+        'allow_outbound_enabled': {'key': 'allowOutboundEnabled', 'type': 'bool'},
+        'authentication': {'key': 'authentication', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        allow_inbound_enabled: Optional[bool] = None,
+        allow_outbound_enabled: Optional[bool] = None,
+        authentication: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword allow_inbound_enabled: Allow Inbound traffic to managed instance DTC.
+        :paramtype allow_inbound_enabled: bool
+        :keyword allow_outbound_enabled: Allow Outbound traffic of managed instance DTC.
+        :paramtype allow_outbound_enabled: bool
+        :keyword authentication: Authentication type of managed instance DTC.
+        :paramtype authentication: str
+        """
+        super(ManagedInstanceDtcTransactionManagerCommunicationSettings, self).__init__(**kwargs)
+        self.allow_inbound_enabled = allow_inbound_enabled
+        self.allow_outbound_enabled = allow_outbound_enabled
+        self.authentication = authentication
+
+
 class ManagedInstanceEditionCapability(msrest.serialization.Model):
     """The managed server capability.
 
@@ -12154,140 +12336,6 @@ class ManagedInstanceVulnerabilityAssessmentListResult(msrest.serialization.Mode
         """
         """
         super(ManagedInstanceVulnerabilityAssessmentListResult, self).__init__(**kwargs)
-        self.value = None
-        self.next_link = None
-
-
-class ManagedServerDnsAlias(ProxyResource):
-    """A managed server DNS alias.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Resource ID.
-    :vartype id: str
-    :ivar name: Resource name.
-    :vartype name: str
-    :ivar type: Resource type.
-    :vartype type: str
-    :ivar azure_dns_record: The fully qualified DNS record for managed server alias.
-    :vartype azure_dns_record: str
-    :ivar public_azure_dns_record: The fully qualified public DNS record for managed server alias.
-    :vartype public_azure_dns_record: str
-    """
-
-    _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'azure_dns_record': {'readonly': True},
-        'public_azure_dns_record': {'readonly': True},
-    }
-
-    _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'azure_dns_record': {'key': 'properties.azureDnsRecord', 'type': 'str'},
-        'public_azure_dns_record': {'key': 'properties.publicAzureDnsRecord', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(ManagedServerDnsAlias, self).__init__(**kwargs)
-        self.azure_dns_record = None
-        self.public_azure_dns_record = None
-
-
-class ManagedServerDnsAliasAcquisition(msrest.serialization.Model):
-    """A managed server DNS alias acquisition request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar old_managed_server_dns_alias_resource_id: Required. The resource ID of the managed server
-     DNS alias that will be acquired to point to this managed server instead.
-    :vartype old_managed_server_dns_alias_resource_id: str
-    """
-
-    _validation = {
-        'old_managed_server_dns_alias_resource_id': {'required': True},
-    }
-
-    _attribute_map = {
-        'old_managed_server_dns_alias_resource_id': {'key': 'oldManagedServerDnsAliasResourceId', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        *,
-        old_managed_server_dns_alias_resource_id: str,
-        **kwargs
-    ):
-        """
-        :keyword old_managed_server_dns_alias_resource_id: Required. The resource ID of the managed
-         server DNS alias that will be acquired to point to this managed server instead.
-        :paramtype old_managed_server_dns_alias_resource_id: str
-        """
-        super(ManagedServerDnsAliasAcquisition, self).__init__(**kwargs)
-        self.old_managed_server_dns_alias_resource_id = old_managed_server_dns_alias_resource_id
-
-
-class ManagedServerDnsAliasCreation(msrest.serialization.Model):
-    """A managed server dns alias creation request.
-
-    :ivar create_dns_record: Whether or not DNS record should be created for this alias.
-    :vartype create_dns_record: bool
-    """
-
-    _attribute_map = {
-        'create_dns_record': {'key': 'createDnsRecord', 'type': 'bool'},
-    }
-
-    def __init__(
-        self,
-        *,
-        create_dns_record: Optional[bool] = True,
-        **kwargs
-    ):
-        """
-        :keyword create_dns_record: Whether or not DNS record should be created for this alias.
-        :paramtype create_dns_record: bool
-        """
-        super(ManagedServerDnsAliasCreation, self).__init__(**kwargs)
-        self.create_dns_record = create_dns_record
-
-
-class ManagedServerDnsAliasListResult(msrest.serialization.Model):
-    """A list of managed server DNS aliases.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar value: Array of results.
-    :vartype value: list[~azure.mgmt.sql.models.ManagedServerDnsAlias]
-    :ivar next_link: Link to retrieve next page of results.
-    :vartype next_link: str
-    """
-
-    _validation = {
-        'value': {'readonly': True},
-        'next_link': {'readonly': True},
-    }
-
-    _attribute_map = {
-        'value': {'key': 'value', 'type': '[ManagedServerDnsAlias]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(ManagedServerDnsAliasListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
 
