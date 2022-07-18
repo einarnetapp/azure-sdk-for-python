@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 
 from ._models_py3 import AccessKeys
+from ._models_py3 import Capability
 from ._models_py3 import Cluster
 from ._models_py3 import ClusterList
 from ._models_py3 import ClusterUpdate
@@ -21,6 +22,7 @@ from ._models_py3 import ExportClusterParameters
 from ._models_py3 import ForceUnlinkParameters
 from ._models_py3 import ImportClusterParameters
 from ._models_py3 import LinkedDatabase
+from ._models_py3 import LocationInfo
 from ._models_py3 import Module
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
@@ -35,8 +37,11 @@ from ._models_py3 import PrivateLinkResourceListResult
 from ._models_py3 import PrivateLinkServiceConnectionState
 from ._models_py3 import ProxyResource
 from ._models_py3 import RegenerateKeyParameters
+from ._models_py3 import RegionSkuDetail
+from ._models_py3 import RegionSkuDetails
 from ._models_py3 import Resource
 from ._models_py3 import Sku
+from ._models_py3 import SkuDetail
 from ._models_py3 import TrackedResource
 
 
@@ -47,6 +52,7 @@ from ._redis_enterprise_management_client_enums import (
     ClusteringPolicy,
     EvictionPolicy,
     LinkState,
+    Name,
     Origin,
     PrivateEndpointConnectionProvisioningState,
     PrivateEndpointServiceConnectionStatus,
@@ -57,9 +63,12 @@ from ._redis_enterprise_management_client_enums import (
     SkuName,
     TlsVersion,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AccessKeys',
+    'Capability',
     'Cluster',
     'ClusterList',
     'ClusterUpdate',
@@ -74,6 +83,7 @@ __all__ = [
     'ForceUnlinkParameters',
     'ImportClusterParameters',
     'LinkedDatabase',
+    'LocationInfo',
     'Module',
     'Operation',
     'OperationDisplay',
@@ -88,8 +98,11 @@ __all__ = [
     'PrivateLinkServiceConnectionState',
     'ProxyResource',
     'RegenerateKeyParameters',
+    'RegionSkuDetail',
+    'RegionSkuDetails',
     'Resource',
     'Sku',
+    'SkuDetail',
     'TrackedResource',
     'AccessKeyType',
     'ActionType',
@@ -97,6 +110,7 @@ __all__ = [
     'ClusteringPolicy',
     'EvictionPolicy',
     'LinkState',
+    'Name',
     'Origin',
     'PrivateEndpointConnectionProvisioningState',
     'PrivateEndpointServiceConnectionStatus',
@@ -107,3 +121,5 @@ __all__ = [
     'SkuName',
     'TlsVersion',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

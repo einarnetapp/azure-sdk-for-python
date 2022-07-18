@@ -27,10 +27,9 @@ ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dic
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_list_by_cluster_request(
-    resource_group_name: str,
-    cluster_name: str,
+def build_list_request(
     subscription_id: str,
+    location: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -40,11 +39,10 @@ def build_list_by_cluster_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateLinkResources")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus")
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "clusterName": _SERIALIZER.url("cluster_name", cluster_name, 'str'),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
+        "location": _SERIALIZER.url("location", location, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -63,14 +61,14 @@ def build_list_by_cluster_request(
         **kwargs
     )
 
-class PrivateLinkResourcesOperations:
+class SkusOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
-        :attr:`private_link_resources` attribute.
+        :attr:`skus` attribute.
     """
 
     models = _models
@@ -84,30 +82,25 @@ class PrivateLinkResourcesOperations:
 
 
     @distributed_trace
-    def list_by_cluster(
+    def list(
         self,
-        resource_group_name: str,
-        cluster_name: str,
+        location: str,
         **kwargs: Any
-    ) -> Iterable[_models.PrivateLinkResourceListResult]:
-        """Gets the private link resources that need to be created for a RedisEnterprise cluster.
+    ) -> Iterable[_models.RegionSkuDetails]:
+        """Gets information about skus in specified location for the given subscription id.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param cluster_name: The name of the RedisEnterprise cluster.
-        :type cluster_name: str
+        :param location: The location of the resource.
+        :type location: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PrivateLinkResourceListResult or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.redisenterprise.models.PrivateLinkResourceListResult]
+        :return: An iterator like instance of either RegionSkuDetails or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.redisenterprise.models.RegionSkuDetails]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PrivateLinkResourceListResult]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.RegionSkuDetails]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -116,12 +109,11 @@ class PrivateLinkResourcesOperations:
         def prepare_request(next_link=None):
             if not next_link:
                 
-                request = build_list_by_cluster_request(
-                    resource_group_name=resource_group_name,
-                    cluster_name=cluster_name,
+                request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    location=location,
                     api_version=api_version,
-                    template_url=self.list_by_cluster.metadata['url'],
+                    template_url=self.list.metadata['url'],
                     headers=_headers,
                     params=_params,
                 )
@@ -130,10 +122,9 @@ class PrivateLinkResourcesOperations:
 
             else:
                 
-                request = build_list_by_cluster_request(
-                    resource_group_name=resource_group_name,
-                    cluster_name=cluster_name,
+                request = build_list_request(
                     subscription_id=self._config.subscription_id,
+                    location=location,
                     api_version=api_version,
                     template_url=next_link,
                     headers=_headers,
@@ -145,7 +136,7 @@ class PrivateLinkResourcesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("PrivateLinkResourceListResult", pipeline_response)
+            deserialized = self._deserialize("RegionSkuDetails", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -172,4 +163,4 @@ class PrivateLinkResourcesOperations:
         return ItemPaged(
             get_next, extract_data
         )
-    list_by_cluster.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateLinkResources"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus"}  # type: ignore
