@@ -34,6 +34,7 @@ from ._models_py3 import ClientRegistration
 from ._models_py3 import Configuration
 from ._models_py3 import Container
 from ._models_py3 import ContainerApp
+from ._models_py3 import ContainerAppAuthToken
 from ._models_py3 import ContainerAppCollection
 from ._models_py3 import ContainerAppProbe
 from ._models_py3 import ContainerAppProbeHttpGet
@@ -137,7 +138,9 @@ from ._container_apps_api_client_enums import (
     Type,
     UnauthenticatedClientActionV2,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AllowedAudiencesValidation',
     'AllowedPrincipals',
@@ -167,6 +170,7 @@ __all__ = [
     'Configuration',
     'Container',
     'ContainerApp',
+    'ContainerAppAuthToken',
     'ContainerAppCollection',
     'ContainerAppProbe',
     'ContainerAppProbeHttpGet',
@@ -267,3 +271,5 @@ __all__ = [
     'Type',
     'UnauthenticatedClientActionV2',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
