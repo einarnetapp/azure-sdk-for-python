@@ -265,8 +265,6 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
     :vartype tde_certificates: azure.mgmt.sql.aio.operations.TdeCertificatesOperations
     :ivar time_zones: TimeZonesOperations operations
     :vartype time_zones: azure.mgmt.sql.aio.operations.TimeZonesOperations
-    :ivar virtual_clusters: VirtualClustersOperations operations
-    :vartype virtual_clusters: azure.mgmt.sql.aio.operations.VirtualClustersOperations
     :ivar virtual_network_rules: VirtualNetworkRulesOperations operations
     :vartype virtual_network_rules: azure.mgmt.sql.aio.operations.VirtualNetworkRulesOperations
     :ivar workload_classifiers: WorkloadClassifiersOperations operations
@@ -363,6 +361,8 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
     :ivar managed_server_dns_aliases: ManagedServerDnsAliasesOperations operations
     :vartype managed_server_dns_aliases:
      azure.mgmt.sql.aio.operations.ManagedServerDnsAliasesOperations
+    :ivar virtual_clusters: VirtualClustersOperations operations
+    :vartype virtual_clusters: azure.mgmt.sql.aio.operations.VirtualClustersOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription ID that identifies an Azure subscription.
@@ -657,9 +657,6 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.time_zones = TimeZonesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.virtual_clusters = VirtualClustersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.virtual_network_rules = VirtualNetworkRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -760,6 +757,9 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
             self._client, self._config, self._serialize, self._deserialize
         )
         self.managed_server_dns_aliases = ManagedServerDnsAliasesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_clusters = VirtualClustersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

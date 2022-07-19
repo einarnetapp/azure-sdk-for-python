@@ -19631,8 +19631,8 @@ class UpdateLongTermRetentionBackupParameters(msrest.serialization.Model):
         self.requested_backup_storage_redundancy = requested_backup_storage_redundancy
 
 
-class UpdateManagedInstanceDnsServersOperation(ProxyResource):
-    """A recoverable managed database resource.
+class UpdateVirtualClusterDnsServersOperation(ProxyResource):
+    """A refresh DNS servers operation.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -19642,8 +19642,9 @@ class UpdateManagedInstanceDnsServersOperation(ProxyResource):
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar status: The status of the DNS refresh operation. Known values are: "Succeeded", "Failed".
-    :vartype status: str or ~azure.mgmt.sql.models.DnsRefreshConfigurationPropertiesStatus
+    :ivar status: The status of the DNS refresh operation. Known values are: "Succeeded", "Failed",
+     "InProgress".
+    :vartype status: str or ~azure.mgmt.sql.models.DNSRefreshOperationStatus
     """
 
     _validation = {
@@ -19666,7 +19667,7 @@ class UpdateManagedInstanceDnsServersOperation(ProxyResource):
     ):
         """
         """
-        super(UpdateManagedInstanceDnsServersOperation, self).__init__(**kwargs)
+        super(UpdateVirtualClusterDnsServersOperation, self).__init__(**kwargs)
         self.status = None
 
 
@@ -19897,14 +19898,10 @@ class VirtualCluster(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar subnet_id: Subnet resource ID for the virtual cluster.
     :vartype subnet_id: str
-    :ivar family: If the service has different generations of hardware, for the same SKU, then that
-     can be captured here.
-    :vartype family: str
+    :ivar version: Virtual cluster version.
+    :vartype version: str
     :ivar child_resources: List of resources in this virtual cluster.
     :vartype child_resources: list[str]
-    :ivar maintenance_configuration_id: Specifies maintenance configuration id to apply to this
-     virtual cluster.
-    :vartype maintenance_configuration_id: str
     """
 
     _validation = {
@@ -19923,9 +19920,8 @@ class VirtualCluster(TrackedResource):
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'subnet_id': {'key': 'properties.subnetId', 'type': 'str'},
-        'family': {'key': 'properties.family', 'type': 'str'},
+        'version': {'key': 'properties.version', 'type': 'str'},
         'child_resources': {'key': 'properties.childResources', 'type': '[str]'},
-        'maintenance_configuration_id': {'key': 'properties.maintenanceConfigurationId', 'type': 'str'},
     }
 
     def __init__(
@@ -19933,8 +19929,7 @@ class VirtualCluster(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        family: Optional[str] = None,
-        maintenance_configuration_id: Optional[str] = None,
+        version: Optional[str] = None,
         **kwargs
     ):
         """
@@ -19942,18 +19937,13 @@ class VirtualCluster(TrackedResource):
         :paramtype location: str
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword family: If the service has different generations of hardware, for the same SKU, then
-         that can be captured here.
-        :paramtype family: str
-        :keyword maintenance_configuration_id: Specifies maintenance configuration id to apply to this
-         virtual cluster.
-        :paramtype maintenance_configuration_id: str
+        :keyword version: Virtual cluster version.
+        :paramtype version: str
         """
         super(VirtualCluster, self).__init__(location=location, tags=tags, **kwargs)
         self.subnet_id = None
-        self.family = family
+        self.version = version
         self.child_resources = None
-        self.maintenance_configuration_id = maintenance_configuration_id
 
 
 class VirtualClusterListResult(msrest.serialization.Model):
@@ -19989,7 +19979,7 @@ class VirtualClusterListResult(msrest.serialization.Model):
 
 
 class VirtualClusterUpdate(msrest.serialization.Model):
-    """An update request for an Azure SQL Database virtual cluster.
+    """An update request for virtual cluster.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -19997,14 +19987,10 @@ class VirtualClusterUpdate(msrest.serialization.Model):
     :vartype tags: dict[str, str]
     :ivar subnet_id: Subnet resource ID for the virtual cluster.
     :vartype subnet_id: str
-    :ivar family: If the service has different generations of hardware, for the same SKU, then that
-     can be captured here.
-    :vartype family: str
+    :ivar version: Virtual cluster version.
+    :vartype version: str
     :ivar child_resources: List of resources in this virtual cluster.
     :vartype child_resources: list[str]
-    :ivar maintenance_configuration_id: Specifies maintenance configuration id to apply to this
-     virtual cluster.
-    :vartype maintenance_configuration_id: str
     """
 
     _validation = {
@@ -20015,35 +20001,28 @@ class VirtualClusterUpdate(msrest.serialization.Model):
     _attribute_map = {
         'tags': {'key': 'tags', 'type': '{str}'},
         'subnet_id': {'key': 'properties.subnetId', 'type': 'str'},
-        'family': {'key': 'properties.family', 'type': 'str'},
+        'version': {'key': 'properties.version', 'type': 'str'},
         'child_resources': {'key': 'properties.childResources', 'type': '[str]'},
-        'maintenance_configuration_id': {'key': 'properties.maintenanceConfigurationId', 'type': 'str'},
     }
 
     def __init__(
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        family: Optional[str] = None,
-        maintenance_configuration_id: Optional[str] = None,
+        version: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword family: If the service has different generations of hardware, for the same SKU, then
-         that can be captured here.
-        :paramtype family: str
-        :keyword maintenance_configuration_id: Specifies maintenance configuration id to apply to this
-         virtual cluster.
-        :paramtype maintenance_configuration_id: str
+        :keyword version: Virtual cluster version.
+        :paramtype version: str
         """
         super(VirtualClusterUpdate, self).__init__(**kwargs)
         self.tags = tags
         self.subnet_id = None
-        self.family = family
+        self.version = version
         self.child_resources = None
-        self.maintenance_configuration_id = maintenance_configuration_id
 
 
 class VirtualNetworkRule(ProxyResource):

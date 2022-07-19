@@ -343,7 +343,7 @@ from ._models_py3 import TopQueries
 from ._models_py3 import TopQueriesListResult
 from ._models_py3 import TrackedResource
 from ._models_py3 import UpdateLongTermRetentionBackupParameters
-from ._models_py3 import UpdateManagedInstanceDnsServersOperation
+from ._models_py3 import UpdateVirtualClusterDnsServersOperation
 from ._models_py3 import UpsertManagedServerOperationParameters
 from ._models_py3 import UpsertManagedServerOperationStep
 from ._models_py3 import Usage
@@ -390,6 +390,7 @@ from ._sql_management_client_enums import (
     ConnectionPolicyName,
     CreateMode,
     CreatedByType,
+    DNSRefreshOperationStatus,
     DataMaskingFunction,
     DataMaskingRuleState,
     DataMaskingState,
@@ -401,7 +402,6 @@ from ._sql_management_client_enums import (
     DatabaseStatus,
     DayOfWeek,
     DiffBackupIntervalInHours,
-    DnsRefreshConfigurationPropertiesStatus,
     ElasticPoolLicenseType,
     ElasticPoolState,
     EncryptionProtectorName,
@@ -842,7 +842,7 @@ __all__ = [
     'TopQueriesListResult',
     'TrackedResource',
     'UpdateLongTermRetentionBackupParameters',
-    'UpdateManagedInstanceDnsServersOperation',
+    'UpdateVirtualClusterDnsServersOperation',
     'UpsertManagedServerOperationParameters',
     'UpsertManagedServerOperationStep',
     'Usage',
@@ -886,6 +886,7 @@ __all__ = [
     'ConnectionPolicyName',
     'CreateMode',
     'CreatedByType',
+    'DNSRefreshOperationStatus',
     'DataMaskingFunction',
     'DataMaskingRuleState',
     'DataMaskingState',
@@ -897,7 +898,6 @@ __all__ = [
     'DatabaseStatus',
     'DayOfWeek',
     'DiffBackupIntervalInHours',
-    'DnsRefreshConfigurationPropertiesStatus',
     'ElasticPoolLicenseType',
     'ElasticPoolState',
     'EncryptionProtectorName',

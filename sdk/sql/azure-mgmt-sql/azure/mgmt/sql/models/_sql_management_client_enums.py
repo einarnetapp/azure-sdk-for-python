@@ -385,12 +385,13 @@ class DiffBackupIntervalInHours(int, Enum, metaclass=CaseInsensitiveEnumMeta):
     TWELVE = 12
     TWENTY_FOUR = 24
 
-class DnsRefreshConfigurationPropertiesStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class DNSRefreshOperationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the DNS refresh operation.
     """
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
+    IN_PROGRESS = "InProgress"
 
 class ElasticPoolLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The license type to apply for this elastic pool.

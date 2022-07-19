@@ -96,7 +96,6 @@ from ._sync_groups_operations import SyncGroupsOperations
 from ._sync_members_operations import SyncMembersOperations
 from ._tde_certificates_operations import TdeCertificatesOperations
 from ._time_zones_operations import TimeZonesOperations
-from ._virtual_clusters_operations import VirtualClustersOperations
 from ._virtual_network_rules_operations import VirtualNetworkRulesOperations
 from ._workload_classifiers_operations import WorkloadClassifiersOperations
 from ._workload_groups_operations import WorkloadGroupsOperations
@@ -131,6 +130,7 @@ from ._extended_server_blob_auditing_policies_operations import ExtendedServerBl
 from ._database_advanced_threat_protection_settings_operations import DatabaseAdvancedThreatProtectionSettingsOperations
 from ._server_advanced_threat_protection_settings_operations import ServerAdvancedThreatProtectionSettingsOperations
 from ._managed_server_dns_aliases_operations import ManagedServerDnsAliasesOperations
+from ._virtual_clusters_operations import VirtualClustersOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
@@ -226,7 +226,6 @@ __all__ = [
     'SyncMembersOperations',
     'TdeCertificatesOperations',
     'TimeZonesOperations',
-    'VirtualClustersOperations',
     'VirtualNetworkRulesOperations',
     'WorkloadClassifiersOperations',
     'WorkloadGroupsOperations',
@@ -261,6 +260,7 @@ __all__ = [
     'DatabaseAdvancedThreatProtectionSettingsOperations',
     'ServerAdvancedThreatProtectionSettingsOperations',
     'ManagedServerDnsAliasesOperations',
+    'VirtualClustersOperations',
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
