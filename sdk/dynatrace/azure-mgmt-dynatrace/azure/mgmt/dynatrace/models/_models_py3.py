@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._dynatrace_observability_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AccountInfo(msrest.serialization.Model):
@@ -91,22 +93,22 @@ class AppServiceInfo(msrest.serialization.Model):
     :vartype resource_id: str
     :ivar version: Version of the Dynatrace agent installed on the App Service.
     :vartype version: str
-    :ivar monitoring_type: The monitoring mode of OneAgent. Possible values include:
+    :ivar monitoring_type: The monitoring mode of OneAgent. Known values are:
      "CLOUD_INFRASTRUCTURE", "FULL_STACK".
     :vartype monitoring_type: str or ~azure.mgmt.dynatrace.models.MonitoringType
-    :ivar auto_update_setting: Update settings of OneAgent. Possible values include: "ENABLED",
+    :ivar auto_update_setting: Update settings of OneAgent. Known values are: "ENABLED",
      "DISABLED".
     :vartype auto_update_setting: str or ~azure.mgmt.dynatrace.models.AutoUpdateSetting
-    :ivar update_status: The current update status of OneAgent. Possible values include:
-     "INCOMPATIBLE", "OUTDATED", "SCHEDULED", "SUPPRESSED", "UNKNOWN", "UP2DATE",
-     "UPDATE_IN_PROGRESS", "UPDATE_PENDING", "UPDATE_PROBLEM".
+    :ivar update_status: The current update status of OneAgent. Known values are: "INCOMPATIBLE",
+     "OUTDATED", "SCHEDULED", "SUPPRESSED", "UNKNOWN", "UP2DATE", "UPDATE_IN_PROGRESS",
+     "UPDATE_PENDING", "UPDATE_PROBLEM".
     :vartype update_status: str or ~azure.mgmt.dynatrace.models.UpdateStatus
-    :ivar availability_state: The availability state of OneAgent. Possible values include:
-     "CRASHED", "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
+    :ivar availability_state: The availability state of OneAgent. Known values are: "CRASHED",
+     "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
      "UNMONITORED".
     :vartype availability_state: str or ~azure.mgmt.dynatrace.models.AvailabilityState
-    :ivar log_module: Tells whether log modules are enabled or not. Possible values include:
-     "ENABLED", "DISABLED".
+    :ivar log_module: Tells whether log modules are enabled or not. Known values are: "ENABLED",
+     "DISABLED".
     :vartype log_module: str or ~azure.mgmt.dynatrace.models.LogModule
     :ivar host_group: The name of the host group.
     :vartype host_group: str
@@ -131,11 +133,11 @@ class AppServiceInfo(msrest.serialization.Model):
         *,
         resource_id: Optional[str] = None,
         version: Optional[str] = None,
-        monitoring_type: Optional[Union[str, "MonitoringType"]] = None,
-        auto_update_setting: Optional[Union[str, "AutoUpdateSetting"]] = None,
-        update_status: Optional[Union[str, "UpdateStatus"]] = None,
-        availability_state: Optional[Union[str, "AvailabilityState"]] = None,
-        log_module: Optional[Union[str, "LogModule"]] = None,
+        monitoring_type: Optional[Union[str, "_models.MonitoringType"]] = None,
+        auto_update_setting: Optional[Union[str, "_models.AutoUpdateSetting"]] = None,
+        update_status: Optional[Union[str, "_models.UpdateStatus"]] = None,
+        availability_state: Optional[Union[str, "_models.AvailabilityState"]] = None,
+        log_module: Optional[Union[str, "_models.LogModule"]] = None,
         host_group: Optional[str] = None,
         host_name: Optional[str] = None,
         **kwargs
@@ -145,22 +147,22 @@ class AppServiceInfo(msrest.serialization.Model):
         :paramtype resource_id: str
         :keyword version: Version of the Dynatrace agent installed on the App Service.
         :paramtype version: str
-        :keyword monitoring_type: The monitoring mode of OneAgent. Possible values include:
+        :keyword monitoring_type: The monitoring mode of OneAgent. Known values are:
          "CLOUD_INFRASTRUCTURE", "FULL_STACK".
         :paramtype monitoring_type: str or ~azure.mgmt.dynatrace.models.MonitoringType
-        :keyword auto_update_setting: Update settings of OneAgent. Possible values include: "ENABLED",
+        :keyword auto_update_setting: Update settings of OneAgent. Known values are: "ENABLED",
          "DISABLED".
         :paramtype auto_update_setting: str or ~azure.mgmt.dynatrace.models.AutoUpdateSetting
-        :keyword update_status: The current update status of OneAgent. Possible values include:
+        :keyword update_status: The current update status of OneAgent. Known values are:
          "INCOMPATIBLE", "OUTDATED", "SCHEDULED", "SUPPRESSED", "UNKNOWN", "UP2DATE",
          "UPDATE_IN_PROGRESS", "UPDATE_PENDING", "UPDATE_PROBLEM".
         :paramtype update_status: str or ~azure.mgmt.dynatrace.models.UpdateStatus
-        :keyword availability_state: The availability state of OneAgent. Possible values include:
-         "CRASHED", "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
+        :keyword availability_state: The availability state of OneAgent. Known values are: "CRASHED",
+         "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
          "UNMONITORED".
         :paramtype availability_state: str or ~azure.mgmt.dynatrace.models.AvailabilityState
-        :keyword log_module: Tells whether log modules are enabled or not. Possible values include:
-         "ENABLED", "DISABLED".
+        :keyword log_module: Tells whether log modules are enabled or not. Known values are: "ENABLED",
+         "DISABLED".
         :paramtype log_module: str or ~azure.mgmt.dynatrace.models.LogModule
         :keyword host_group: The name of the host group.
         :paramtype host_group: str
@@ -203,7 +205,7 @@ class AppServiceListResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["AppServiceInfo"],
+        value: List["_models.AppServiceInfo"],
         next_link: str,
         **kwargs
     ):
@@ -243,9 +245,9 @@ class DynatraceEnvironmentProperties(msrest.serialization.Model):
         self,
         *,
         user_id: Optional[str] = None,
-        account_info: Optional["AccountInfo"] = None,
-        environment_info: Optional["EnvironmentInfo"] = None,
-        single_sign_on_properties: Optional["DynatraceSingleSignOnProperties"] = None,
+        account_info: Optional["_models.AccountInfo"] = None,
+        environment_info: Optional["_models.EnvironmentInfo"] = None,
+        single_sign_on_properties: Optional["_models.DynatraceSingleSignOnProperties"] = None,
         **kwargs
     ):
         """
@@ -271,8 +273,8 @@ class DynatraceSingleSignOnProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar single_sign_on_state: State of Single Sign On. Possible values include: "Initial",
-     "Enable", "Disable", "Existing".
+    :ivar single_sign_on_state: State of Single Sign On. Known values are: "Initial", "Enable",
+     "Disable", "Existing".
     :vartype single_sign_on_state: str or ~azure.mgmt.dynatrace.models.SingleSignOnStates
     :ivar enterprise_app_id: Version of the Dynatrace agent installed on the VM.
     :vartype enterprise_app_id: str
@@ -280,8 +282,8 @@ class DynatraceSingleSignOnProperties(msrest.serialization.Model):
     :vartype single_sign_on_url: str
     :ivar aad_domains: array of Aad(azure active directory) domains.
     :vartype aad_domains: list[str]
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Accepted", "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Accepted",
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
      "NotSpecified".
     :vartype provisioning_state: str or ~azure.mgmt.dynatrace.models.ProvisioningState
     """
@@ -301,15 +303,15 @@ class DynatraceSingleSignOnProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        single_sign_on_state: Optional[Union[str, "SingleSignOnStates"]] = None,
+        single_sign_on_state: Optional[Union[str, "_models.SingleSignOnStates"]] = None,
         enterprise_app_id: Optional[str] = None,
         single_sign_on_url: Optional[str] = None,
         aad_domains: Optional[List[str]] = None,
         **kwargs
     ):
         """
-        :keyword single_sign_on_state: State of Single Sign On. Possible values include: "Initial",
-         "Enable", "Disable", "Existing".
+        :keyword single_sign_on_state: State of Single Sign On. Known values are: "Initial", "Enable",
+         "Disable", "Existing".
         :paramtype single_sign_on_state: str or ~azure.mgmt.dynatrace.models.SingleSignOnStates
         :keyword enterprise_app_id: Version of the Dynatrace agent installed on the VM.
         :paramtype enterprise_app_id: str
@@ -416,8 +418,8 @@ class DynatraceSingleSignOnResource(ProxyResource):
     :vartype type: str
     :ivar system_data: System metadata for this resource.
     :vartype system_data: ~azure.mgmt.dynatrace.models.SystemData
-    :ivar single_sign_on_state: State of Single Sign On. Possible values include: "Initial",
-     "Enable", "Disable", "Existing".
+    :ivar single_sign_on_state: State of Single Sign On. Known values are: "Initial", "Enable",
+     "Disable", "Existing".
     :vartype single_sign_on_state: str or ~azure.mgmt.dynatrace.models.SingleSignOnStates
     :ivar enterprise_app_id: Version of the Dynatrace agent installed on the VM.
     :vartype enterprise_app_id: str
@@ -425,8 +427,8 @@ class DynatraceSingleSignOnResource(ProxyResource):
     :vartype single_sign_on_url: str
     :ivar aad_domains: array of Aad(azure active directory) domains.
     :vartype aad_domains: list[str]
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Accepted", "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Accepted",
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
      "NotSpecified".
     :vartype provisioning_state: str or ~azure.mgmt.dynatrace.models.ProvisioningState
     """
@@ -454,15 +456,15 @@ class DynatraceSingleSignOnResource(ProxyResource):
     def __init__(
         self,
         *,
-        single_sign_on_state: Optional[Union[str, "SingleSignOnStates"]] = None,
+        single_sign_on_state: Optional[Union[str, "_models.SingleSignOnStates"]] = None,
         enterprise_app_id: Optional[str] = None,
         single_sign_on_url: Optional[str] = None,
         aad_domains: Optional[List[str]] = None,
         **kwargs
     ):
         """
-        :keyword single_sign_on_state: State of Single Sign On. Possible values include: "Initial",
-         "Enable", "Disable", "Existing".
+        :keyword single_sign_on_state: State of Single Sign On. Known values are: "Initial", "Enable",
+         "Disable", "Existing".
         :paramtype single_sign_on_state: str or ~azure.mgmt.dynatrace.models.SingleSignOnStates
         :keyword enterprise_app_id: Version of the Dynatrace agent installed on the VM.
         :paramtype enterprise_app_id: str
@@ -504,7 +506,7 @@ class DynatraceSingleSignOnResourceListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["DynatraceSingleSignOnResource"],
+        value: List["_models.DynatraceSingleSignOnResource"],
         next_link: str,
         **kwargs
     ):
@@ -658,7 +660,7 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetail"] = None,
+        error: Optional["_models.ErrorDetail"] = None,
         **kwargs
     ):
         """
@@ -676,8 +678,8 @@ class FilteringTag(msrest.serialization.Model):
     :vartype name: str
     :ivar value: The value of the tag.
     :vartype value: str
-    :ivar action: Valid actions for a filtering tag. Exclusion takes priority over inclusion.
-     Possible values include: "Include", "Exclude".
+    :ivar action: Valid actions for a filtering tag. Exclusion takes priority over inclusion. Known
+     values are: "Include", "Exclude".
     :vartype action: str or ~azure.mgmt.dynatrace.models.TagAction
     """
 
@@ -692,7 +694,7 @@ class FilteringTag(msrest.serialization.Model):
         *,
         name: Optional[str] = None,
         value: Optional[str] = None,
-        action: Optional[Union[str, "TagAction"]] = None,
+        action: Optional[Union[str, "_models.TagAction"]] = None,
         **kwargs
     ):
         """
@@ -701,7 +703,7 @@ class FilteringTag(msrest.serialization.Model):
         :keyword value: The value of the tag.
         :paramtype value: str
         :keyword action: Valid actions for a filtering tag. Exclusion takes priority over inclusion.
-         Possible values include: "Include", "Exclude".
+         Known values are: "Include", "Exclude".
         :paramtype action: str or ~azure.mgmt.dynatrace.models.TagAction
         """
         super(FilteringTag, self).__init__(**kwargs)
@@ -721,8 +723,8 @@ class IdentityProperties(msrest.serialization.Model):
     :vartype tenant_id: str
     :ivar principal_id: The active directory identifier of this principal.
     :vartype principal_id: str
-    :ivar type: Required. The type of managed identity assigned to this resource. Possible values
-     include: "SystemAssigned", "UserAssigned", "SystemAndUserAssigned".
+    :ivar type: Required. The type of managed identity assigned to this resource. Known values are:
+     "SystemAssigned", "UserAssigned", "SystemAndUserAssigned".
     :vartype type: str or ~azure.mgmt.dynatrace.models.ManagedIdentityType
     :ivar user_assigned_identities: The identities assigned to this resource by the user.
     :vartype user_assigned_identities: dict[str, ~azure.mgmt.dynatrace.models.UserAssignedIdentity]
@@ -744,13 +746,13 @@ class IdentityProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Union[str, "ManagedIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "UserAssignedIdentity"]] = None,
+        type: Union[str, "_models.ManagedIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs
     ):
         """
-        :keyword type: Required. The type of managed identity assigned to this resource. Possible
-         values include: "SystemAssigned", "UserAssigned", "SystemAndUserAssigned".
+        :keyword type: Required. The type of managed identity assigned to this resource. Known values
+         are: "SystemAssigned", "UserAssigned", "SystemAndUserAssigned".
         :paramtype type: str or ~azure.mgmt.dynatrace.models.ManagedIdentityType
         :keyword user_assigned_identities: The identities assigned to this resource by the user.
         :paramtype user_assigned_identities: dict[str,
@@ -780,7 +782,7 @@ class LinkableEnvironmentListResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["LinkableEnvironmentResponse"]] = None,
+        value: Optional[List["_models.LinkableEnvironmentResponse"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -856,7 +858,7 @@ class LinkableEnvironmentResponse(msrest.serialization.Model):
         *,
         environment_id: Optional[str] = None,
         environment_name: Optional[str] = None,
-        plan_data: Optional["PlanData"] = None,
+        plan_data: Optional["_models.PlanData"] = None,
         **kwargs
     ):
         """
@@ -876,14 +878,14 @@ class LinkableEnvironmentResponse(msrest.serialization.Model):
 class LogRules(msrest.serialization.Model):
     """Set of rules for sending logs for the Monitor resource.
 
-    :ivar send_aad_logs: Flag specifying if AAD logs should be sent for the Monitor resource.
-     Possible values include: "Enabled", "Disabled".
+    :ivar send_aad_logs: Flag specifying if AAD logs should be sent for the Monitor resource. Known
+     values are: "Enabled", "Disabled".
     :vartype send_aad_logs: str or ~azure.mgmt.dynatrace.models.SendAadLogsStatus
     :ivar send_subscription_logs: Flag specifying if subscription logs should be sent for the
-     Monitor resource. Possible values include: "Enabled", "Disabled".
+     Monitor resource. Known values are: "Enabled", "Disabled".
     :vartype send_subscription_logs: str or ~azure.mgmt.dynatrace.models.SendSubscriptionLogsStatus
     :ivar send_activity_logs: Flag specifying if activity logs from Azure resources should be sent
-     for the Monitor resource. Possible values include: "Enabled", "Disabled".
+     for the Monitor resource. Known values are: "Enabled", "Disabled".
     :vartype send_activity_logs: str or ~azure.mgmt.dynatrace.models.SendActivityLogsStatus
     :ivar filtering_tags: List of filtering tags to be used for capturing logs. This only takes
      effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.
@@ -903,22 +905,22 @@ class LogRules(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        send_aad_logs: Optional[Union[str, "SendAadLogsStatus"]] = None,
-        send_subscription_logs: Optional[Union[str, "SendSubscriptionLogsStatus"]] = None,
-        send_activity_logs: Optional[Union[str, "SendActivityLogsStatus"]] = None,
-        filtering_tags: Optional[List["FilteringTag"]] = None,
+        send_aad_logs: Optional[Union[str, "_models.SendAadLogsStatus"]] = None,
+        send_subscription_logs: Optional[Union[str, "_models.SendSubscriptionLogsStatus"]] = None,
+        send_activity_logs: Optional[Union[str, "_models.SendActivityLogsStatus"]] = None,
+        filtering_tags: Optional[List["_models.FilteringTag"]] = None,
         **kwargs
     ):
         """
         :keyword send_aad_logs: Flag specifying if AAD logs should be sent for the Monitor resource.
-         Possible values include: "Enabled", "Disabled".
+         Known values are: "Enabled", "Disabled".
         :paramtype send_aad_logs: str or ~azure.mgmt.dynatrace.models.SendAadLogsStatus
         :keyword send_subscription_logs: Flag specifying if subscription logs should be sent for the
-         Monitor resource. Possible values include: "Enabled", "Disabled".
+         Monitor resource. Known values are: "Enabled", "Disabled".
         :paramtype send_subscription_logs: str or
          ~azure.mgmt.dynatrace.models.SendSubscriptionLogsStatus
         :keyword send_activity_logs: Flag specifying if activity logs from Azure resources should be
-         sent for the Monitor resource. Possible values include: "Enabled", "Disabled".
+         sent for the Monitor resource. Known values are: "Enabled", "Disabled".
         :paramtype send_activity_logs: str or ~azure.mgmt.dynatrace.models.SendActivityLogsStatus
         :keyword filtering_tags: List of filtering tags to be used for capturing logs. This only takes
          effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.
@@ -951,7 +953,7 @@ class MetricRules(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        filtering_tags: Optional[List["FilteringTag"]] = None,
+        filtering_tags: Optional[List["_models.FilteringTag"]] = None,
         **kwargs
     ):
         """
@@ -970,14 +972,14 @@ class MonitoredResource(msrest.serialization.Model):
 
     :ivar id: The ARM id of the resource.
     :vartype id: str
-    :ivar sending_metrics: Flag indicating if resource is sending metrics to Dynatrace. Possible
-     values include: "Enabled", "Disabled".
+    :ivar sending_metrics: Flag indicating if resource is sending metrics to Dynatrace. Known
+     values are: "Enabled", "Disabled".
     :vartype sending_metrics: str or ~azure.mgmt.dynatrace.models.SendingMetricsStatus
     :ivar reason_for_metrics_status: Reason for why the resource is sending metrics (or why it is
      not sending).
     :vartype reason_for_metrics_status: str
-    :ivar sending_logs: Flag indicating if resource is sending logs to Dynatrace. Possible values
-     include: "Enabled", "Disabled".
+    :ivar sending_logs: Flag indicating if resource is sending logs to Dynatrace. Known values are:
+     "Enabled", "Disabled".
     :vartype sending_logs: str or ~azure.mgmt.dynatrace.models.SendingLogsStatus
     :ivar reason_for_logs_status: Reason for why the resource is sending logs (or why it is not
      sending).
@@ -996,23 +998,23 @@ class MonitoredResource(msrest.serialization.Model):
         self,
         *,
         id: Optional[str] = None,
-        sending_metrics: Optional[Union[str, "SendingMetricsStatus"]] = None,
+        sending_metrics: Optional[Union[str, "_models.SendingMetricsStatus"]] = None,
         reason_for_metrics_status: Optional[str] = None,
-        sending_logs: Optional[Union[str, "SendingLogsStatus"]] = None,
+        sending_logs: Optional[Union[str, "_models.SendingLogsStatus"]] = None,
         reason_for_logs_status: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword id: The ARM id of the resource.
         :paramtype id: str
-        :keyword sending_metrics: Flag indicating if resource is sending metrics to Dynatrace. Possible
-         values include: "Enabled", "Disabled".
+        :keyword sending_metrics: Flag indicating if resource is sending metrics to Dynatrace. Known
+         values are: "Enabled", "Disabled".
         :paramtype sending_metrics: str or ~azure.mgmt.dynatrace.models.SendingMetricsStatus
         :keyword reason_for_metrics_status: Reason for why the resource is sending metrics (or why it
          is not sending).
         :paramtype reason_for_metrics_status: str
-        :keyword sending_logs: Flag indicating if resource is sending logs to Dynatrace. Possible
-         values include: "Enabled", "Disabled".
+        :keyword sending_logs: Flag indicating if resource is sending logs to Dynatrace. Known values
+         are: "Enabled", "Disabled".
         :paramtype sending_logs: str or ~azure.mgmt.dynatrace.models.SendingLogsStatus
         :keyword reason_for_logs_status: Reason for why the resource is sending logs (or why it is not
          sending).
@@ -1050,7 +1052,7 @@ class MonitoredResourceListResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["MonitoredResource"],
+        value: List["_models.MonitoredResource"],
         next_link: str,
         **kwargs
     ):
@@ -1142,10 +1144,10 @@ class MonitorResource(TrackedResource):
     :vartype system_data: ~azure.mgmt.dynatrace.models.SystemData
     :ivar identity: The managed service identities assigned to this resource.
     :vartype identity: ~azure.mgmt.dynatrace.models.IdentityProperties
-    :ivar monitoring_status: Status of the monitor. Possible values include: "Enabled", "Disabled".
+    :ivar monitoring_status: Status of the monitor. Known values are: "Enabled", "Disabled".
     :vartype monitoring_status: str or ~azure.mgmt.dynatrace.models.MonitoringStatus
-    :ivar marketplace_subscription_status: Marketplace subscription status. Possible values
-     include: "Active", "Suspended".
+    :ivar marketplace_subscription_status: Marketplace subscription status. Known values are:
+     "Active", "Suspended".
     :vartype marketplace_subscription_status: str or
      ~azure.mgmt.dynatrace.models.MarketplaceSubscriptionStatus
     :ivar dynatrace_environment_properties: Properties of the Dynatrace environment.
@@ -1155,13 +1157,13 @@ class MonitorResource(TrackedResource):
     :vartype user_info: ~azure.mgmt.dynatrace.models.UserInfo
     :ivar plan_data: Billing plan information.
     :vartype plan_data: ~azure.mgmt.dynatrace.models.PlanData
-    :ivar liftr_resource_category: Liftr Resource category. Possible values include: "Unknown",
+    :ivar liftr_resource_category: Liftr Resource category. Known values are: "Unknown",
      "MonitorLogs".
     :vartype liftr_resource_category: str or ~azure.mgmt.dynatrace.models.LiftrResourceCategories
     :ivar liftr_resource_preference: The priority of the resource.
     :vartype liftr_resource_preference: int
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Accepted", "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Accepted",
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
      "NotSpecified".
     :vartype provisioning_state: str or ~azure.mgmt.dynatrace.models.ProvisioningState
     """
@@ -1200,12 +1202,12 @@ class MonitorResource(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["IdentityProperties"] = None,
-        monitoring_status: Optional[Union[str, "MonitoringStatus"]] = None,
-        marketplace_subscription_status: Optional[Union[str, "MarketplaceSubscriptionStatus"]] = None,
-        dynatrace_environment_properties: Optional["DynatraceEnvironmentProperties"] = None,
-        user_info: Optional["UserInfo"] = None,
-        plan_data: Optional["PlanData"] = None,
+        identity: Optional["_models.IdentityProperties"] = None,
+        monitoring_status: Optional[Union[str, "_models.MonitoringStatus"]] = None,
+        marketplace_subscription_status: Optional[Union[str, "_models.MarketplaceSubscriptionStatus"]] = None,
+        dynatrace_environment_properties: Optional["_models.DynatraceEnvironmentProperties"] = None,
+        user_info: Optional["_models.UserInfo"] = None,
+        plan_data: Optional["_models.PlanData"] = None,
         **kwargs
     ):
         """
@@ -1215,11 +1217,10 @@ class MonitorResource(TrackedResource):
         :paramtype location: str
         :keyword identity: The managed service identities assigned to this resource.
         :paramtype identity: ~azure.mgmt.dynatrace.models.IdentityProperties
-        :keyword monitoring_status: Status of the monitor. Possible values include: "Enabled",
-         "Disabled".
+        :keyword monitoring_status: Status of the monitor. Known values are: "Enabled", "Disabled".
         :paramtype monitoring_status: str or ~azure.mgmt.dynatrace.models.MonitoringStatus
-        :keyword marketplace_subscription_status: Marketplace subscription status. Possible values
-         include: "Active", "Suspended".
+        :keyword marketplace_subscription_status: Marketplace subscription status. Known values are:
+         "Active", "Suspended".
         :paramtype marketplace_subscription_status: str or
          ~azure.mgmt.dynatrace.models.MarketplaceSubscriptionStatus
         :keyword dynatrace_environment_properties: Properties of the Dynatrace environment.
@@ -1267,7 +1268,7 @@ class MonitorResourceListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["MonitorResource"],
+        value: List["_models.MonitorResource"],
         next_link: str,
         **kwargs
     ):
@@ -1287,10 +1288,10 @@ class MonitorResourceUpdate(msrest.serialization.Model):
 
     :ivar tags: A set of tags. Resource tags.
     :vartype tags: dict[str, str]
-    :ivar monitoring_status: Status of the monitor. Possible values include: "Enabled", "Disabled".
+    :ivar monitoring_status: Status of the monitor. Known values are: "Enabled", "Disabled".
     :vartype monitoring_status: str or ~azure.mgmt.dynatrace.models.MonitoringStatus
-    :ivar marketplace_subscription_status: Marketplace subscription status. Possible values
-     include: "Active", "Suspended".
+    :ivar marketplace_subscription_status: Marketplace subscription status. Known values are:
+     "Active", "Suspended".
     :vartype marketplace_subscription_status: str or
      ~azure.mgmt.dynatrace.models.MarketplaceSubscriptionStatus
     :ivar dynatrace_environment_properties: Properties of the Dynatrace environment.
@@ -1315,21 +1316,20 @@ class MonitorResourceUpdate(msrest.serialization.Model):
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        monitoring_status: Optional[Union[str, "MonitoringStatus"]] = None,
-        marketplace_subscription_status: Optional[Union[str, "MarketplaceSubscriptionStatus"]] = None,
-        dynatrace_environment_properties: Optional["DynatraceEnvironmentProperties"] = None,
-        user_info: Optional["UserInfo"] = None,
-        plan_data: Optional["PlanData"] = None,
+        monitoring_status: Optional[Union[str, "_models.MonitoringStatus"]] = None,
+        marketplace_subscription_status: Optional[Union[str, "_models.MarketplaceSubscriptionStatus"]] = None,
+        dynatrace_environment_properties: Optional["_models.DynatraceEnvironmentProperties"] = None,
+        user_info: Optional["_models.UserInfo"] = None,
+        plan_data: Optional["_models.PlanData"] = None,
         **kwargs
     ):
         """
         :keyword tags: A set of tags. Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword monitoring_status: Status of the monitor. Possible values include: "Enabled",
-         "Disabled".
+        :keyword monitoring_status: Status of the monitor. Known values are: "Enabled", "Disabled".
         :paramtype monitoring_status: str or ~azure.mgmt.dynatrace.models.MonitoringStatus
-        :keyword marketplace_subscription_status: Marketplace subscription status. Possible values
-         include: "Active", "Suspended".
+        :keyword marketplace_subscription_status: Marketplace subscription status. Known values are:
+         "Active", "Suspended".
         :paramtype marketplace_subscription_status: str or
          ~azure.mgmt.dynatrace.models.MarketplaceSubscriptionStatus
         :keyword dynatrace_environment_properties: Properties of the Dynatrace environment.
@@ -1363,11 +1363,11 @@ class Operation(msrest.serialization.Model):
     :ivar display: Localized display information for this particular operation.
     :vartype display: ~azure.mgmt.dynatrace.models.OperationDisplay
     :ivar origin: The intended executor of the operation; as in Resource Based Access Control
-     (RBAC) and audit logs UX. Default value is "user,system". Possible values include: "user",
-     "system", "user,system".
+     (RBAC) and audit logs UX. Default value is "user,system". Known values are: "user", "system",
+     "user,system".
     :vartype origin: str or ~azure.mgmt.dynatrace.models.Origin
     :ivar action_type: Enum. Indicates the action type. "Internal" refers to actions that are for
-     internal only APIs. Possible values include: "Internal".
+     internal only APIs. Known values are: "Internal".
     :vartype action_type: str or ~azure.mgmt.dynatrace.models.ActionType
     """
 
@@ -1389,7 +1389,7 @@ class Operation(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         **kwargs
     ):
         """
@@ -1562,8 +1562,8 @@ class SSODetailsRequest(msrest.serialization.Model):
 class SSODetailsResponse(msrest.serialization.Model):
     """SSO details from the Dynatrace partner.
 
-    :ivar is_sso_enabled: Whether the SSO is enabled for this resource or not. Possible values
-     include: "Enabled", "Disabled".
+    :ivar is_sso_enabled: Whether the SSO is enabled for this resource or not. Known values are:
+     "Enabled", "Disabled".
     :vartype is_sso_enabled: str or ~azure.mgmt.dynatrace.models.SSOStatus
     :ivar metadata_url: URL for Azure AD metadata.
     :vartype metadata_url: str
@@ -1586,7 +1586,7 @@ class SSODetailsResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        is_sso_enabled: Optional[Union[str, "SSOStatus"]] = None,
+        is_sso_enabled: Optional[Union[str, "_models.SSOStatus"]] = None,
         metadata_url: Optional[str] = None,
         single_sign_on_url: Optional[str] = None,
         aad_domains: Optional[List[str]] = None,
@@ -1594,8 +1594,8 @@ class SSODetailsResponse(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword is_sso_enabled: Whether the SSO is enabled for this resource or not. Possible values
-         include: "Enabled", "Disabled".
+        :keyword is_sso_enabled: Whether the SSO is enabled for this resource or not. Known values are:
+         "Enabled", "Disabled".
         :paramtype is_sso_enabled: str or ~azure.mgmt.dynatrace.models.SSOStatus
         :keyword metadata_url: URL for Azure AD metadata.
         :paramtype metadata_url: str
@@ -1619,15 +1619,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.dynatrace.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.dynatrace.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -1646,25 +1646,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.dynatrace.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.dynatrace.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
@@ -1697,8 +1697,8 @@ class TagRule(ProxyResource):
     :vartype log_rules: ~azure.mgmt.dynatrace.models.LogRules
     :ivar metric_rules: Set of rules for sending metrics for the Monitor resource.
     :vartype metric_rules: ~azure.mgmt.dynatrace.models.MetricRules
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Accepted", "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Accepted",
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled", "Deleted",
      "NotSpecified".
     :vartype provisioning_state: str or ~azure.mgmt.dynatrace.models.ProvisioningState
     """
@@ -1724,8 +1724,8 @@ class TagRule(ProxyResource):
     def __init__(
         self,
         *,
-        log_rules: Optional["LogRules"] = None,
-        metric_rules: Optional["MetricRules"] = None,
+        log_rules: Optional["_models.LogRules"] = None,
+        metric_rules: Optional["_models.MetricRules"] = None,
         **kwargs
     ):
         """
@@ -1765,7 +1765,7 @@ class TagRuleListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["TagRule"],
+        value: List["_models.TagRule"],
         next_link: str,
         **kwargs
     ):
@@ -1797,8 +1797,8 @@ class TagRuleUpdate(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        log_rules: Optional["LogRules"] = None,
-        metric_rules: Optional["MetricRules"] = None,
+        log_rules: Optional["_models.LogRules"] = None,
+        metric_rules: Optional["_models.MetricRules"] = None,
         **kwargs
     ):
         """
@@ -1968,7 +1968,7 @@ class VMHostsListResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: List["VMInfo"],
+        value: List["_models.VMInfo"],
         next_link: str,
         **kwargs
     ):
@@ -1990,22 +1990,22 @@ class VMInfo(msrest.serialization.Model):
     :vartype resource_id: str
     :ivar version: Version of the Dynatrace agent installed on the VM.
     :vartype version: str
-    :ivar monitoring_type: The monitoring mode of OneAgent. Possible values include:
+    :ivar monitoring_type: The monitoring mode of OneAgent. Known values are:
      "CLOUD_INFRASTRUCTURE", "FULL_STACK".
     :vartype monitoring_type: str or ~azure.mgmt.dynatrace.models.MonitoringType
-    :ivar auto_update_setting: Update settings of OneAgent. Possible values include: "ENABLED",
+    :ivar auto_update_setting: Update settings of OneAgent. Known values are: "ENABLED",
      "DISABLED".
     :vartype auto_update_setting: str or ~azure.mgmt.dynatrace.models.AutoUpdateSetting
-    :ivar update_status: The current update status of OneAgent. Possible values include:
-     "INCOMPATIBLE", "OUTDATED", "SCHEDULED", "SUPPRESSED", "UNKNOWN", "UP2DATE",
-     "UPDATE_IN_PROGRESS", "UPDATE_PENDING", "UPDATE_PROBLEM".
+    :ivar update_status: The current update status of OneAgent. Known values are: "INCOMPATIBLE",
+     "OUTDATED", "SCHEDULED", "SUPPRESSED", "UNKNOWN", "UP2DATE", "UPDATE_IN_PROGRESS",
+     "UPDATE_PENDING", "UPDATE_PROBLEM".
     :vartype update_status: str or ~azure.mgmt.dynatrace.models.UpdateStatus
-    :ivar availability_state: The availability state of OneAgent. Possible values include:
-     "CRASHED", "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
+    :ivar availability_state: The availability state of OneAgent. Known values are: "CRASHED",
+     "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
      "UNMONITORED".
     :vartype availability_state: str or ~azure.mgmt.dynatrace.models.AvailabilityState
-    :ivar log_module: Tells whether log modules are enabled or not. Possible values include:
-     "ENABLED", "DISABLED".
+    :ivar log_module: Tells whether log modules are enabled or not. Known values are: "ENABLED",
+     "DISABLED".
     :vartype log_module: str or ~azure.mgmt.dynatrace.models.LogModule
     :ivar host_group: The name of the host group.
     :vartype host_group: str
@@ -2030,11 +2030,11 @@ class VMInfo(msrest.serialization.Model):
         *,
         resource_id: Optional[str] = None,
         version: Optional[str] = None,
-        monitoring_type: Optional[Union[str, "MonitoringType"]] = None,
-        auto_update_setting: Optional[Union[str, "AutoUpdateSetting"]] = None,
-        update_status: Optional[Union[str, "UpdateStatus"]] = None,
-        availability_state: Optional[Union[str, "AvailabilityState"]] = None,
-        log_module: Optional[Union[str, "LogModule"]] = None,
+        monitoring_type: Optional[Union[str, "_models.MonitoringType"]] = None,
+        auto_update_setting: Optional[Union[str, "_models.AutoUpdateSetting"]] = None,
+        update_status: Optional[Union[str, "_models.UpdateStatus"]] = None,
+        availability_state: Optional[Union[str, "_models.AvailabilityState"]] = None,
+        log_module: Optional[Union[str, "_models.LogModule"]] = None,
         host_group: Optional[str] = None,
         host_name: Optional[str] = None,
         **kwargs
@@ -2044,22 +2044,22 @@ class VMInfo(msrest.serialization.Model):
         :paramtype resource_id: str
         :keyword version: Version of the Dynatrace agent installed on the VM.
         :paramtype version: str
-        :keyword monitoring_type: The monitoring mode of OneAgent. Possible values include:
+        :keyword monitoring_type: The monitoring mode of OneAgent. Known values are:
          "CLOUD_INFRASTRUCTURE", "FULL_STACK".
         :paramtype monitoring_type: str or ~azure.mgmt.dynatrace.models.MonitoringType
-        :keyword auto_update_setting: Update settings of OneAgent. Possible values include: "ENABLED",
+        :keyword auto_update_setting: Update settings of OneAgent. Known values are: "ENABLED",
          "DISABLED".
         :paramtype auto_update_setting: str or ~azure.mgmt.dynatrace.models.AutoUpdateSetting
-        :keyword update_status: The current update status of OneAgent. Possible values include:
+        :keyword update_status: The current update status of OneAgent. Known values are:
          "INCOMPATIBLE", "OUTDATED", "SCHEDULED", "SUPPRESSED", "UNKNOWN", "UP2DATE",
          "UPDATE_IN_PROGRESS", "UPDATE_PENDING", "UPDATE_PROBLEM".
         :paramtype update_status: str or ~azure.mgmt.dynatrace.models.UpdateStatus
-        :keyword availability_state: The availability state of OneAgent. Possible values include:
-         "CRASHED", "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
+        :keyword availability_state: The availability state of OneAgent. Known values are: "CRASHED",
+         "LOST", "MONITORED", "PRE_MONITORED", "SHUTDOWN", "UNEXPECTED_SHUTDOWN", "UNKNOWN",
          "UNMONITORED".
         :paramtype availability_state: str or ~azure.mgmt.dynatrace.models.AvailabilityState
-        :keyword log_module: Tells whether log modules are enabled or not. Possible values include:
-         "ENABLED", "DISABLED".
+        :keyword log_module: Tells whether log modules are enabled or not. Known values are: "ENABLED",
+         "DISABLED".
         :paramtype log_module: str or ~azure.mgmt.dynatrace.models.LogModule
         :keyword host_group: The name of the host group.
         :paramtype host_group: str
