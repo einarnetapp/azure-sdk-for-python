@@ -16,6 +16,7 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
@@ -32,9 +33,12 @@ def build_list_request(
     private_link_hub_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    accept = "application/json"
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections")  # pylint: disable=line-too-long
     path_format_arguments = {
@@ -46,18 +50,16 @@ def build_list_request(
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
         method="GET",
         url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
+        params=_params,
+        headers=_headers,
         **kwargs
     )
 
@@ -69,9 +71,12 @@ def build_get_request(
     private_endpoint_connection_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    accept = "application/json"
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/privateLinkHubs/{privateLinkHubName}/privateEndpointConnections/{privateEndpointConnectionName}")  # pylint: disable=line-too-long
     path_format_arguments = {
@@ -84,42 +89,38 @@ def build_get_request(
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
         method="GET",
         url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
+        params=_params,
+        headers=_headers,
         **kwargs
     )
 
-class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
-    """PrivateEndpointConnectionsPrivateLinkHubOperations operations.
+class PrivateEndpointConnectionsPrivateLinkHubOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.synapse.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.synapse.SynapseManagementClient`'s
+        :attr:`private_endpoint_connections_private_link_hub` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer):
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs):
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list(
@@ -127,7 +128,7 @@ class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
         resource_group_name: str,
         private_link_hub_name: str,
         **kwargs: Any
-    ) -> Iterable["_models.PrivateEndpointConnectionForPrivateLinkHubResourceCollectionResponse"]:
+    ) -> Iterable[_models.PrivateEndpointConnectionForPrivateLinkHubResourceCollectionResponse]:
         """Get all PrivateEndpointConnections in the PrivateLinkHub.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -145,13 +146,16 @@ class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
          ~azure.core.paging.ItemPaged[~azure.mgmt.synapse.models.PrivateEndpointConnectionForPrivateLinkHubResourceCollectionResponse]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateEndpointConnectionForPrivateLinkHubResourceCollectionResponse"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PrivateEndpointConnectionForPrivateLinkHubResourceCollectionResponse]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -161,9 +165,11 @@ class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
                     private_link_hub_name=private_link_hub_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -173,9 +179,11 @@ class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
                     private_link_hub_name=private_link_hub_name,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -216,7 +224,7 @@ class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
         private_link_hub_name: str,
         private_endpoint_connection_name: str,
         **kwargs: Any
-    ) -> "_models.PrivateEndpointConnectionForPrivateLinkHub":
+    ) -> _models.PrivateEndpointConnectionForPrivateLinkHub:
         """Get all PrivateEndpointConnection in the PrivateLinkHub by name.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -233,13 +241,16 @@ class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
         :rtype: ~azure.mgmt.synapse.models.PrivateEndpointConnectionForPrivateLinkHub
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateEndpointConnectionForPrivateLinkHub"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PrivateEndpointConnectionForPrivateLinkHub]
 
         
         request = build_get_request(
@@ -249,11 +260,13 @@ class PrivateEndpointConnectionsPrivateLinkHubOperations(object):
             private_endpoint_connection_name=private_endpoint_connection_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
