@@ -95,6 +95,49 @@ def build_list_by_resource_group_request(
     )
 
 
+def build_create_or_update_without_name_request(
+    resource_group_name: str,
+    subscription_id: str,
+    *,
+    json: Optional[_models.LogAnalyticsQueryPack] = None,
+    content: Any = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2019-09-01"))  # type: str
+    content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    if content_type is not None:
+        _headers['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="PUT",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        json=json,
+        content=content,
+        **kwargs
+    )
+
+
 def build_delete_request(
     resource_group_name: str,
     subscription_id: str,
@@ -450,6 +493,78 @@ class QueryPacksOperations:
             get_next, extract_data
         )
     list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks"}  # type: ignore
+
+    @distributed_trace
+    def create_or_update_without_name(
+        self,
+        resource_group_name: str,
+        log_analytics_query_pack_payload: _models.LogAnalyticsQueryPack,
+        **kwargs: Any
+    ) -> _models.LogAnalyticsQueryPack:
+        """Creates a Log Analytics QueryPack. Note: You cannot specify a different value for
+        InstrumentationKey nor AppId in the Put operation.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param log_analytics_query_pack_payload: Properties that need to be specified to create or
+         update a Log Analytics QueryPack.
+        :type log_analytics_query_pack_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPack
+        :keyword api_version: Api Version. Default value is "2019-09-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: LogAnalyticsQueryPack, or the result of cls(response)
+        :rtype: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPack
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2019-09-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.LogAnalyticsQueryPack]
+
+        _json = self._serialize.body(log_analytics_query_pack_payload, 'LogAnalyticsQueryPack')
+
+        request = build_create_or_update_without_name_request(
+            resource_group_name=resource_group_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.create_or_update_without_name.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('LogAnalyticsQueryPack', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_or_update_without_name.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks"}  # type: ignore
+
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements

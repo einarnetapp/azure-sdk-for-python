@@ -20,7 +20,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._query_packs_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_by_resource_group_request, build_list_request, build_update_tags_request
+from ...operations._query_packs_operations import build_create_or_update_request, build_create_or_update_without_name_request, build_delete_request, build_get_request, build_list_by_resource_group_request, build_list_request, build_update_tags_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -216,6 +216,78 @@ class QueryPacksOperations:
             get_next, extract_data
         )
     list_by_resource_group.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks"}  # type: ignore
+
+    @distributed_trace_async
+    async def create_or_update_without_name(
+        self,
+        resource_group_name: str,
+        log_analytics_query_pack_payload: _models.LogAnalyticsQueryPack,
+        **kwargs: Any
+    ) -> _models.LogAnalyticsQueryPack:
+        """Creates a Log Analytics QueryPack. Note: You cannot specify a different value for
+        InstrumentationKey nor AppId in the Put operation.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param log_analytics_query_pack_payload: Properties that need to be specified to create or
+         update a Log Analytics QueryPack.
+        :type log_analytics_query_pack_payload: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPack
+        :keyword api_version: Api Version. Default value is "2019-09-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: LogAnalyticsQueryPack, or the result of cls(response)
+        :rtype: ~azure.mgmt.loganalytics.models.LogAnalyticsQueryPack
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2019-09-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.LogAnalyticsQueryPack]
+
+        _json = self._serialize.body(log_analytics_query_pack_payload, 'LogAnalyticsQueryPack')
+
+        request = build_create_or_update_without_name_request(
+            resource_group_name=resource_group_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.create_or_update_without_name.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('LogAnalyticsQueryPack', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_or_update_without_name.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks"}  # type: ignore
+
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
