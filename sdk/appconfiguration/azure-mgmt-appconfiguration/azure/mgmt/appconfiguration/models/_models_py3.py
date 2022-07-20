@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._app_configuration_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ApiKey(msrest.serialization.Model):
@@ -85,7 +87,7 @@ class ApiKeyListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ApiKey"]] = None,
+        value: Optional[List["_models.ApiKey"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -107,8 +109,8 @@ class CheckNameAvailabilityParameters(msrest.serialization.Model):
 
     :ivar name: Required. The name to check for availability.
     :vartype name: str
-    :ivar type: Required. The resource type to check for name availability. Possible values
-     include: "Microsoft.AppConfiguration/configurationStores".
+    :ivar type: Required. The resource type to check for name availability. Known values are:
+     "Microsoft.AppConfiguration/configurationStores".
     :vartype type: str or ~azure.mgmt.appconfiguration.models.ConfigurationResourceType
     """
 
@@ -126,14 +128,14 @@ class CheckNameAvailabilityParameters(msrest.serialization.Model):
         self,
         *,
         name: str,
-        type: Union[str, "ConfigurationResourceType"],
+        type: Union[str, "_models.ConfigurationResourceType"],
         **kwargs
     ):
         """
         :keyword name: Required. The name to check for availability.
         :paramtype name: str
-        :keyword type: Required. The resource type to check for name availability. Possible values
-         include: "Microsoft.AppConfiguration/configurationStores".
+        :keyword type: Required. The resource type to check for name availability. Known values are:
+         "Microsoft.AppConfiguration/configurationStores".
         :paramtype type: str or ~azure.mgmt.appconfiguration.models.ConfigurationResourceType
         """
         super(CheckNameAvailabilityParameters, self).__init__(**kwargs)
@@ -259,8 +261,8 @@ class ConfigurationStore(TrackedResource):
     :vartype sku: ~azure.mgmt.appconfiguration.models.Sku
     :ivar system_data: Resource system metadata.
     :vartype system_data: ~azure.mgmt.appconfiguration.models.SystemData
-    :ivar provisioning_state: The provisioning state of the configuration store. Possible values
-     include: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled".
+    :ivar provisioning_state: The provisioning state of the configuration store. Known values are:
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled".
     :vartype provisioning_state: str or ~azure.mgmt.appconfiguration.models.ProvisioningState
     :ivar creation_date: The creation date of configuration store.
     :vartype creation_date: ~datetime.datetime
@@ -273,7 +275,7 @@ class ConfigurationStore(TrackedResource):
     :vartype private_endpoint_connections:
      list[~azure.mgmt.appconfiguration.models.PrivateEndpointConnectionReference]
     :ivar public_network_access: Control permission for data plane traffic coming from public
-     networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+     networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.appconfiguration.models.PublicNetworkAccess
     :ivar disable_local_auth: Disables all authentication methods other than AAD authentication.
     :vartype disable_local_auth: bool
@@ -283,8 +285,8 @@ class ConfigurationStore(TrackedResource):
     :ivar enable_purge_protection: Property specifying whether protection against purge is enabled
      for this configuration store.
     :vartype enable_purge_protection: bool
-    :ivar create_mode: Indicates whether the configuration store need to be recovered. Possible
-     values include: "Recover", "Default".
+    :ivar create_mode: Indicates whether the configuration store need to be recovered. Known values
+     are: "Recover", "Default".
     :vartype create_mode: str or ~azure.mgmt.appconfiguration.models.CreateMode
     """
 
@@ -326,15 +328,15 @@ class ConfigurationStore(TrackedResource):
         self,
         *,
         location: str,
-        sku: "Sku",
+        sku: "_models.Sku",
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["ResourceIdentity"] = None,
-        encryption: Optional["EncryptionProperties"] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
+        identity: Optional["_models.ResourceIdentity"] = None,
+        encryption: Optional["_models.EncryptionProperties"] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         disable_local_auth: Optional[bool] = False,
         soft_delete_retention_in_days: Optional[int] = 7,
         enable_purge_protection: Optional[bool] = False,
-        create_mode: Optional[Union[str, "CreateMode"]] = None,
+        create_mode: Optional[Union[str, "_models.CreateMode"]] = None,
         **kwargs
     ):
         """
@@ -349,7 +351,7 @@ class ConfigurationStore(TrackedResource):
         :keyword encryption: The encryption settings of the configuration store.
         :paramtype encryption: ~azure.mgmt.appconfiguration.models.EncryptionProperties
         :keyword public_network_access: Control permission for data plane traffic coming from public
-         networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+         networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or
          ~azure.mgmt.appconfiguration.models.PublicNetworkAccess
         :keyword disable_local_auth: Disables all authentication methods other than AAD authentication.
@@ -360,8 +362,8 @@ class ConfigurationStore(TrackedResource):
         :keyword enable_purge_protection: Property specifying whether protection against purge is
          enabled for this configuration store.
         :paramtype enable_purge_protection: bool
-        :keyword create_mode: Indicates whether the configuration store need to be recovered. Possible
-         values include: "Recover", "Default".
+        :keyword create_mode: Indicates whether the configuration store need to be recovered. Known
+         values are: "Recover", "Default".
         :paramtype create_mode: str or ~azure.mgmt.appconfiguration.models.CreateMode
         """
         super(ConfigurationStore, self).__init__(tags=tags, location=location, **kwargs)
@@ -397,7 +399,7 @@ class ConfigurationStoreListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ConfigurationStore"]] = None,
+        value: Optional[List["_models.ConfigurationStore"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -426,7 +428,7 @@ class ConfigurationStoreUpdateParameters(msrest.serialization.Model):
     :ivar disable_local_auth: Disables all authentication methods other than AAD authentication.
     :vartype disable_local_auth: bool
     :ivar public_network_access: Control permission for data plane traffic coming from public
-     networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+     networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.appconfiguration.models.PublicNetworkAccess
     :ivar enable_purge_protection: Property specifying whether protection against purge is enabled
      for this configuration store.
@@ -446,12 +448,12 @@ class ConfigurationStoreUpdateParameters(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        identity: Optional["ResourceIdentity"] = None,
-        sku: Optional["Sku"] = None,
+        identity: Optional["_models.ResourceIdentity"] = None,
+        sku: Optional["_models.Sku"] = None,
         tags: Optional[Dict[str, str]] = None,
-        encryption: Optional["EncryptionProperties"] = None,
+        encryption: Optional["_models.EncryptionProperties"] = None,
         disable_local_auth: Optional[bool] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         enable_purge_protection: Optional[bool] = None,
         **kwargs
     ):
@@ -467,7 +469,7 @@ class ConfigurationStoreUpdateParameters(msrest.serialization.Model):
         :keyword disable_local_auth: Disables all authentication methods other than AAD authentication.
         :paramtype disable_local_auth: bool
         :keyword public_network_access: Control permission for data plane traffic coming from public
-         networks while private endpoint is enabled. Possible values include: "Enabled", "Disabled".
+         networks while private endpoint is enabled. Known values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or
          ~azure.mgmt.appconfiguration.models.PublicNetworkAccess
         :keyword enable_purge_protection: Property specifying whether protection against purge is
@@ -568,7 +570,7 @@ class DeletedConfigurationStoreListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["DeletedConfigurationStore"]] = None,
+        value: Optional[List["_models.DeletedConfigurationStore"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -597,7 +599,7 @@ class EncryptionProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        key_vault_properties: Optional["KeyVaultProperties"] = None,
+        key_vault_properties: Optional["_models.KeyVaultProperties"] = None,
         **kwargs
     ):
         """
@@ -691,7 +693,7 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetails"] = None,
+        error: Optional["_models.ErrorDetails"] = None,
         **kwargs
     ):
         """
@@ -812,7 +814,7 @@ class KeyValueListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["KeyValue"]] = None,
+        value: Optional[List["_models.KeyValue"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -981,7 +983,7 @@ class MetricSpecification(msrest.serialization.Model):
         unit: Optional[str] = None,
         aggregation_type: Optional[str] = None,
         internal_metric_name: Optional[str] = None,
-        dimensions: Optional[List["MetricDimension"]] = None,
+        dimensions: Optional[List["_models.MetricDimension"]] = None,
         fill_gap_with_zero: Optional[bool] = None,
         **kwargs
     ):
@@ -1082,9 +1084,9 @@ class OperationDefinition(msrest.serialization.Model):
         *,
         name: Optional[str] = None,
         is_data_action: Optional[bool] = None,
-        display: Optional["OperationDefinitionDisplay"] = None,
+        display: Optional["_models.OperationDefinitionDisplay"] = None,
         origin: Optional[str] = None,
-        properties: Optional["OperationProperties"] = None,
+        properties: Optional["_models.OperationProperties"] = None,
         **kwargs
     ):
         """
@@ -1173,7 +1175,7 @@ class OperationDefinitionListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["OperationDefinition"]] = None,
+        value: Optional[List["_models.OperationDefinition"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1202,7 +1204,7 @@ class OperationProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        service_specification: Optional["ServiceSpecification"] = None,
+        service_specification: Optional["_models.ServiceSpecification"] = None,
         **kwargs
     ):
         """
@@ -1249,8 +1251,8 @@ class PrivateEndpointConnection(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The type of the resource.
     :vartype type: str
-    :ivar provisioning_state: The provisioning status of the private endpoint connection. Possible
-     values include: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled".
+    :ivar provisioning_state: The provisioning status of the private endpoint connection. Known
+     values are: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled".
     :vartype provisioning_state: str or ~azure.mgmt.appconfiguration.models.ProvisioningState
     :ivar private_endpoint: The resource of private endpoint.
     :vartype private_endpoint: ~azure.mgmt.appconfiguration.models.PrivateEndpoint
@@ -1279,8 +1281,8 @@ class PrivateEndpointConnection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        private_endpoint: Optional["PrivateEndpoint"] = None,
-        private_link_service_connection_state: Optional["PrivateLinkServiceConnectionState"] = None,
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+        private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
         **kwargs
     ):
         """
@@ -1317,7 +1319,7 @@ class PrivateEndpointConnectionListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateEndpointConnection"]] = None,
+        value: Optional[List["_models.PrivateEndpointConnection"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1343,8 +1345,8 @@ class PrivateEndpointConnectionReference(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The type of the resource.
     :vartype type: str
-    :ivar provisioning_state: The provisioning status of the private endpoint connection. Possible
-     values include: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled".
+    :ivar provisioning_state: The provisioning status of the private endpoint connection. Known
+     values are: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Canceled".
     :vartype provisioning_state: str or ~azure.mgmt.appconfiguration.models.ProvisioningState
     :ivar private_endpoint: The resource of private endpoint.
     :vartype private_endpoint: ~azure.mgmt.appconfiguration.models.PrivateEndpoint
@@ -1373,8 +1375,8 @@ class PrivateEndpointConnectionReference(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        private_endpoint: Optional["PrivateEndpoint"] = None,
-        private_link_service_connection_state: Optional["PrivateLinkServiceConnectionState"] = None,
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+        private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
         **kwargs
     ):
         """
@@ -1463,7 +1465,7 @@ class PrivateLinkResourceListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateLinkResource"]] = None,
+        value: Optional[List["_models.PrivateLinkResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1483,13 +1485,13 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar status: The private link service connection status. Possible values include: "Pending",
+    :ivar status: The private link service connection status. Known values are: "Pending",
      "Approved", "Rejected", "Disconnected".
     :vartype status: str or ~azure.mgmt.appconfiguration.models.ConnectionStatus
     :ivar description: The private link service connection description.
     :vartype description: str
     :ivar actions_required: Any action that is required beyond basic workflow (approve/ reject/
-     disconnect). Possible values include: "None", "Recreate".
+     disconnect). Known values are: "None", "Recreate".
     :vartype actions_required: str or ~azure.mgmt.appconfiguration.models.ActionsRequired
     """
 
@@ -1506,13 +1508,13 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Optional[Union[str, "ConnectionStatus"]] = None,
+        status: Optional[Union[str, "_models.ConnectionStatus"]] = None,
         description: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword status: The private link service connection status. Possible values include:
-         "Pending", "Approved", "Rejected", "Disconnected".
+        :keyword status: The private link service connection status. Known values are: "Pending",
+         "Approved", "Rejected", "Disconnected".
         :paramtype status: str or ~azure.mgmt.appconfiguration.models.ConnectionStatus
         :keyword description: The private link service connection description.
         :paramtype description: str
@@ -1555,7 +1557,7 @@ class ResourceIdentity(msrest.serialization.Model):
 
     :ivar type: The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes
      both an implicitly created identity and a set of user-assigned identities. The type 'None' will
-     remove any identities. Possible values include: "None", "SystemAssigned", "UserAssigned",
+     remove any identities. Known values are: "None", "SystemAssigned", "UserAssigned",
      "SystemAssigned, UserAssigned".
     :vartype type: str or ~azure.mgmt.appconfiguration.models.IdentityType
     :ivar user_assigned_identities: The list of user-assigned identities associated with the
@@ -1585,15 +1587,15 @@ class ResourceIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "IdentityType"]] = None,
-        user_assigned_identities: Optional[Dict[str, "UserIdentity"]] = None,
+        type: Optional[Union[str, "_models.IdentityType"]] = None,
+        user_assigned_identities: Optional[Dict[str, "_models.UserIdentity"]] = None,
         **kwargs
     ):
         """
         :keyword type: The type of managed identity used. The type 'SystemAssigned, UserAssigned'
          includes both an implicitly created identity and a set of user-assigned identities. The type
-         'None' will remove any identities. Possible values include: "None", "SystemAssigned",
-         "UserAssigned", "SystemAssigned, UserAssigned".
+         'None' will remove any identities. Known values are: "None", "SystemAssigned", "UserAssigned",
+         "SystemAssigned, UserAssigned".
         :paramtype type: str or ~azure.mgmt.appconfiguration.models.IdentityType
         :keyword user_assigned_identities: The list of user-assigned identities associated with the
          resource. The user-assigned identity dictionary keys will be ARM resource ids in the form:
@@ -1625,8 +1627,8 @@ class ServiceSpecification(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        log_specifications: Optional[List["LogSpecification"]] = None,
-        metric_specifications: Optional[List["MetricSpecification"]] = None,
+        log_specifications: Optional[List["_models.LogSpecification"]] = None,
+        metric_specifications: Optional[List["_models.MetricSpecification"]] = None,
         **kwargs
     ):
         """
@@ -1676,15 +1678,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.appconfiguration.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.appconfiguration.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -1703,25 +1705,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.appconfiguration.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.appconfiguration.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
