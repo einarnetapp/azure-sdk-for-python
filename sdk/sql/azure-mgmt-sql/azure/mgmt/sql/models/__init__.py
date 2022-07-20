@@ -159,6 +159,10 @@ from ._models_py3 import ManagedInstanceAdministrator
 from ._models_py3 import ManagedInstanceAdministratorListResult
 from ._models_py3 import ManagedInstanceAzureADOnlyAuthListResult
 from ._models_py3 import ManagedInstanceAzureADOnlyAuthentication
+from ._models_py3 import ManagedInstanceDtc
+from ._models_py3 import ManagedInstanceDtcListResult
+from ._models_py3 import ManagedInstanceDtcSecuritySettings
+from ._models_py3 import ManagedInstanceDtcTransactionManagerCommunicationSettings
 from ._models_py3 import ManagedInstanceEditionCapability
 from ._models_py3 import ManagedInstanceEncryptionProtector
 from ._models_py3 import ManagedInstanceEncryptionProtectorListResult
@@ -402,6 +406,7 @@ from ._sql_management_client_enums import (
     DayOfWeek,
     DiffBackupIntervalInHours,
     DnsRefreshConfigurationPropertiesStatus,
+    DtcName,
     ElasticPoolLicenseType,
     ElasticPoolState,
     EncryptionProtectorName,
@@ -658,6 +663,10 @@ __all__ = [
     'ManagedInstanceAdministratorListResult',
     'ManagedInstanceAzureADOnlyAuthListResult',
     'ManagedInstanceAzureADOnlyAuthentication',
+    'ManagedInstanceDtc',
+    'ManagedInstanceDtcListResult',
+    'ManagedInstanceDtcSecuritySettings',
+    'ManagedInstanceDtcTransactionManagerCommunicationSettings',
     'ManagedInstanceEditionCapability',
     'ManagedInstanceEncryptionProtector',
     'ManagedInstanceEncryptionProtectorListResult',
@@ -898,6 +907,7 @@ __all__ = [
     'DayOfWeek',
     'DiffBackupIntervalInHours',
     'DnsRefreshConfigurationPropertiesStatus',
+    'DtcName',
     'ElasticPoolLicenseType',
     'ElasticPoolState',
     'EncryptionProtectorName',
