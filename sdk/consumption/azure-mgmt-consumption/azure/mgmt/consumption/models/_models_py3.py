@@ -795,21 +795,20 @@ class CreditBalanceSummary(msrest.serialization.Model):
         self.estimated_balance_in_billing_currency = None
 
 
-class CreditSummary(Resource):
+class CreditSummary(ProxyResource):
     """A credit summary resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar id: The full qualified ARM ID of an event.
+    :ivar id: Resource Id.
     :vartype id: str
-    :ivar name: The ID that uniquely identifies an event.
+    :ivar name: Resource name.
     :vartype name: str
     :ivar type: Resource type.
     :vartype type: str
-    :ivar etag: The etag for the resource.
-    :vartype etag: str
-    :ivar tags: A set of tags. Resource tags.
-    :vartype tags: dict[str, str]
+    :ivar e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+     used to determine whether the user is updating the latest version or not.
+    :vartype e_tag: str
     :ivar balance_summary: Summary of balances associated with this credit summary.
     :vartype balance_summary: ~azure.mgmt.consumption.models.CreditBalanceSummary
     :ivar pending_credit_adjustments: Pending credit adjustments.
@@ -824,16 +823,14 @@ class CreditSummary(Resource):
     :vartype billing_currency: str
     :ivar reseller: Credit's reseller.
     :vartype reseller: ~azure.mgmt.consumption.models.Reseller
-    :ivar e_tag: The eTag for the resource.
-    :vartype e_tag: str
+    :ivar e_tag_properties_e_tag: The eTag for the resource.
+    :vartype e_tag_properties_e_tag: str
     """
 
     _validation = {
         'id': {'readonly': True},
         'name': {'readonly': True},
         'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'tags': {'readonly': True},
         'balance_summary': {'readonly': True},
         'pending_credit_adjustments': {'readonly': True},
         'expired_credit': {'readonly': True},
@@ -841,15 +838,14 @@ class CreditSummary(Resource):
         'credit_currency': {'readonly': True},
         'billing_currency': {'readonly': True},
         'reseller': {'readonly': True},
-        'e_tag': {'readonly': True},
+        'e_tag_properties_e_tag': {'readonly': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
+        'e_tag': {'key': 'eTag', 'type': 'str'},
         'balance_summary': {'key': 'properties.balanceSummary', 'type': 'CreditBalanceSummary'},
         'pending_credit_adjustments': {'key': 'properties.pendingCreditAdjustments', 'type': 'Amount'},
         'expired_credit': {'key': 'properties.expiredCredit', 'type': 'Amount'},
@@ -857,16 +853,21 @@ class CreditSummary(Resource):
         'credit_currency': {'key': 'properties.creditCurrency', 'type': 'str'},
         'billing_currency': {'key': 'properties.billingCurrency', 'type': 'str'},
         'reseller': {'key': 'properties.reseller', 'type': 'Reseller'},
-        'e_tag': {'key': 'properties.eTag', 'type': 'str'},
+        'e_tag_properties_e_tag': {'key': 'properties.eTag', 'type': 'str'},
     }
 
     def __init__(
         self,
+        *,
+        e_tag: Optional[str] = None,
         **kwargs
     ):
         """
+        :keyword e_tag: eTag of the resource. To handle concurrent update scenario, this field will be
+         used to determine whether the user is updating the latest version or not.
+        :paramtype e_tag: str
         """
-        super(CreditSummary, self).__init__(**kwargs)
+        super(CreditSummary, self).__init__(e_tag=e_tag, **kwargs)
         self.balance_summary = None
         self.pending_credit_adjustments = None
         self.expired_credit = None
@@ -874,7 +875,7 @@ class CreditSummary(Resource):
         self.credit_currency = None
         self.billing_currency = None
         self.reseller = None
-        self.e_tag = None
+        self.e_tag_properties_e_tag = None
 
 
 class CurrentSpend(msrest.serialization.Model):
@@ -1808,7 +1809,7 @@ class ReservationTransaction(ReservationTransactionResource):
     :vartype reservation_order_id: str
     :ivar description: The description of the transaction.
     :vartype description: str
-    :ivar event_type: The type of the transaction (Purchase, Cancel, etc.).
+    :ivar event_type: The type of the transaction (Purchase, Cancel or Refund).
     :vartype event_type: str
     :ivar quantity: The quantity of the transaction.
     :vartype quantity: float
@@ -1966,7 +1967,7 @@ class LegacyReservationTransaction(ReservationTransaction):
     :vartype reservation_order_id: str
     :ivar description: The description of the transaction.
     :vartype description: str
-    :ivar event_type: The type of the transaction (Purchase, Cancel, etc.).
+    :ivar event_type: The type of the transaction (Purchase, Cancel or Refund).
     :vartype event_type: str
     :ivar quantity: The quantity of the transaction.
     :vartype quantity: float
@@ -3464,7 +3465,7 @@ class ModernReservationTransaction(ReservationTransactionResource):
     :vartype description: str
     :ivar event_date: The date of the transaction.
     :vartype event_date: ~datetime.datetime
-    :ivar event_type: The type of the transaction (Purchase, Cancel, etc.).
+    :ivar event_type: The type of the transaction (Purchase, Cancel or Refund).
     :vartype event_type: str
     :ivar invoice: Invoice Number.
     :vartype invoice: str

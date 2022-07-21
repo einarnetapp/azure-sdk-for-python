@@ -50,7 +50,9 @@ class ReservationsDetailsOperations:
         filter: str,
         **kwargs: Any
     ) -> AsyncIterable[_models.ReservationDetailsListResult]:
-        """Lists the reservations details for provided date range.
+        """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
+        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
+        API call should be made with smaller date ranges.
 
         :param reservation_order_id: Order Id of the reservation.
         :type reservation_order_id: str
@@ -141,7 +143,9 @@ class ReservationsDetailsOperations:
         filter: str,
         **kwargs: Any
     ) -> AsyncIterable[_models.ReservationDetailsListResult]:
-        """Lists the reservations details for provided date range.
+        """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
+        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
+        API call should be made with smaller date ranges.
 
         :param reservation_order_id: Order Id of the reservation.
         :type reservation_order_id: str
@@ -239,7 +243,9 @@ class ReservationsDetailsOperations:
         reservation_order_id: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.ReservationDetailsListResult]:
-        """Lists the reservations details for the defined scope and provided date range.
+        """Lists the reservations details for the defined scope and provided date range. Note: ARM has a
+        payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM
+        limit. In such cases, API call should be made with smaller date ranges.
 
         :param resource_scope: The scope associated with reservations details operations. This includes
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope

@@ -50,12 +50,20 @@ class ReservationTransactionsOperations:
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.ReservationTransactionsListResult]:
-        """List of transactions for reserved instances on billing account scope.
+        """List of transactions for reserved instances on billing account scope. Note: The refund
+        transactions are posted along with its purchase transaction (i.e. in the purchase billing
+        month). For example, The refund is requested in May 2021. This refund transaction will have
+        event date as May 2021 but the billing month as April 2020 when the reservation purchase was
+        made.
 
         :param billing_account_id: BillingAccount ID.
         :type billing_account_id: str
         :param filter: Filter reservation transactions by date range. The properties/EventDate for
-         start date and end date. The filter supports 'le' and  'ge'. Default value is None.
+         start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the
+         entire start date's and end date's billing month. For example, filter
+         properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for
+         the entire December 2020 month (i.e. will contain records for dates December 30 and 31).
+         Default value is None.
         :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReservationTransactionsListResult or the result of
@@ -141,14 +149,21 @@ class ReservationTransactionsOperations:
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.ModernReservationTransactionsListResult]:
-        """List of transactions for reserved instances on billing account scope.
+        """List of transactions for reserved instances on billing profile scope. The refund transactions
+        are posted along with its purchase transaction (i.e. in the purchase billing month). For
+        example, The refund is requested in May 2021. This refund transaction will have event date as
+        May 2021 but the billing month as April 2020 when the reservation purchase was made.
 
         :param billing_account_id: BillingAccount ID.
         :type billing_account_id: str
         :param billing_profile_id: Azure Billing Profile ID.
         :type billing_profile_id: str
         :param filter: Filter reservation transactions by date range. The properties/EventDate for
-         start date and end date. The filter supports 'le' and  'ge'. Default value is None.
+         start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the
+         entire start date's and end date's billing month. For example, filter
+         properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for
+         entire December 2020 month (i.e. will contain records for dates December 30 and 31). Default
+         value is None.
         :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ModernReservationTransactionsListResult or the
