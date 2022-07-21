@@ -7,21 +7,22 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Optional, TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
+
+from msrest import Deserializer, Serializer
 
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
-from msrest import Deserializer, Serializer
 
 from . import models
-from ._configuration import LabServicesClientConfiguration
+from ._configuration import ManagedLabsClientConfiguration
 from .operations import ImagesOperations, LabPlansOperations, LabsOperations, OperationResultsOperations, Operations, SchedulesOperations, SkusOperations, UsagesOperations, UsersOperations, VirtualMachinesOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class LabServicesClient:
+class ManagedLabsClient:    # pylint: disable=too-many-instance-attributes
     """REST API for managing Azure Lab Services images.
 
     :ivar images: ImagesOperations operations
@@ -48,8 +49,11 @@ class LabServicesClient:
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is 'https://management.azure.com'.
+    :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2021-11-15-preview". Note that overriding
+     this default value may result in unsupported behavior.
+    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -61,28 +65,48 @@ class LabServicesClient:
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = LabServicesClientConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
+        self._config = ManagedLabsClientConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.images = ImagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.lab_plans = LabPlansOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.labs = LabsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operation_results = OperationResultsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.schedules = SchedulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.users = UsersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.virtual_machines = VirtualMachinesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.skus = SkusOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.images = ImagesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.lab_plans = LabPlansOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.labs = LabsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operation_results = OperationResultsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.schedules = SchedulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.users = UsersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_machines = VirtualMachinesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.usages = UsagesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.skus = SkusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
         self,
-        request,  # type: HttpRequest
+        request: HttpRequest,
         **kwargs: Any
     ) -> HttpResponse:
         """Runs the network request through the client's chained policies.
@@ -111,7 +135,7 @@ class LabServicesClient:
         self._client.close()
 
     def __enter__(self):
-        # type: () -> LabServicesClient
+        # type: () -> ManagedLabsClient
         self._client.__enter__()
         return self
 

@@ -7,17 +7,16 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
     """
 
     INTERNAL = "Internal"
 
-class ConnectionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A connection type for access labs and VMs (Public, Private or None).
     """
 
@@ -25,7 +24,7 @@ class ConnectionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     PRIVATE = "Private"
     NONE = "None"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -34,7 +33,7 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class CreateOption(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreateOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates what lab virtual machines are created from.
     """
 
@@ -44,14 +43,14 @@ class CreateOption(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: A template VM will be used to create all lab user virtual machines.
     TEMPLATE_VM = "TemplateVM"
 
-class EnableState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class EnableState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Property enabled state.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class InvitationState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class InvitationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The lab user invitation state.
     """
 
@@ -64,14 +63,14 @@ class InvitationState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: There was an error while sending the invitation.
     FAILED = "Failed"
 
-class LabServicesSkuTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class LabServicesSkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The tier of the SKU.
     """
 
     STANDARD = "Standard"
     PREMIUM = "Premium"
 
-class LabState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class LabState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The state of a virtual machine.
     """
 
@@ -86,7 +85,7 @@ class LabState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The lab has been published.
     PUBLISHED = "Published"
 
-class OperationStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class OperationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The operation status
     """
 
@@ -101,7 +100,7 @@ class OperationStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Not supported yet.
     CANCELED = "Canceled"
 
-class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit
     logs UX. Default value is "user,system"
     """
@@ -110,7 +109,7 @@ class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SYSTEM = "system"
     USER_SYSTEM = "user,system"
 
-class OsState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class OsState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The operating system state.
     """
 
@@ -119,14 +118,14 @@ class OsState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Image contains machine and user specific information.
     SPECIALIZED = "Specialized"
 
-class OsType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class OsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The operating system type.
     """
 
     WINDOWS = "Windows"
     LINUX = "Linux"
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Resource provisioning state.
     """
 
@@ -145,7 +144,7 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: finished.
     LOCKED = "Locked"
 
-class RecurrenceFrequency(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RecurrenceFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Schedule recurrence frequencies.
     """
 
@@ -154,7 +153,7 @@ class RecurrenceFrequency(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: Schedule will run every week on days specified in weekDays.
     WEEKLY = "Weekly"
 
-class RegistrationState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RegistrationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The user lab registration state.
     """
 
@@ -163,20 +162,20 @@ class RegistrationState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: User has registered with the lab.
     NOT_REGISTERED = "NotRegistered"
 
-class RestrictionReasonCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RestrictionReasonCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The reason for the restriction.
     """
 
     QUOTA_ID = "QuotaId"
     NOT_AVAILABLE_FOR_SUBSCRIPTION = "NotAvailableForSubscription"
 
-class RestrictionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RestrictionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of restriction.
     """
 
     LOCATION = "Location"
 
-class ScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ScaleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The localized name of the resource.
     """
 
@@ -187,7 +186,7 @@ class ScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The user is permitted to scale this SKU in and out.
     AUTOMATIC = "Automatic"
 
-class ShutdownOnIdleMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ShutdownOnIdleMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Defines whether to shut down VM on idle and the criteria for idle detection.
     """
 
@@ -199,7 +198,7 @@ class ShutdownOnIdleMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: consumption is low.
     LOW_USAGE = "LowUsage"
 
-class SkuTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """This field is required to be implemented by the Resource Provider if the service has more than
     one tier, but is not required on a PUT.
     """
@@ -209,13 +208,13 @@ class SkuTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     STANDARD = "Standard"
     PREMIUM = "Premium"
 
-class UsageUnit(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class UsageUnit(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The unit details.
     """
 
     COUNT = "Count"
 
-class VirtualMachineState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class VirtualMachineState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The state of a virtual machine.
     """
 
@@ -234,7 +233,7 @@ class VirtualMachineState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: The VM is being redeployed.
     REDEPLOYING = "Redeploying"
 
-class VirtualMachineType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class VirtualMachineType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the lab virtual machine.
     """
 
@@ -243,7 +242,7 @@ class VirtualMachineType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     #: A template VM.
     TEMPLATE = "Template"
 
-class WeekDay(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class WeekDay(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Days of the week.
     """
 
