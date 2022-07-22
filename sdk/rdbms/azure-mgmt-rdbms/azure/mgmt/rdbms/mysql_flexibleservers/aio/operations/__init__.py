@@ -16,6 +16,7 @@ from ._log_files_operations import LogFilesOperations
 from ._location_based_capabilities_operations import LocationBasedCapabilitiesOperations
 from ._check_virtual_network_subnet_usage_operations import CheckVirtualNetworkSubnetUsageOperations
 from ._check_name_availability_operations import CheckNameAvailabilityOperations
+from ._check_name_availability_without_location_operations import CheckNameAvailabilityWithoutLocationOperations
 from ._get_private_dns_zone_suffix_operations import GetPrivateDnsZoneSuffixOperations
 from ._operations import Operations
 
@@ -33,6 +34,7 @@ __all__ = [
     'LocationBasedCapabilitiesOperations',
     'CheckVirtualNetworkSubnetUsageOperations',
     'CheckNameAvailabilityOperations',
+    'CheckNameAvailabilityWithoutLocationOperations',
     'GetPrivateDnsZoneSuffixOperations',
     'Operations',
 ]

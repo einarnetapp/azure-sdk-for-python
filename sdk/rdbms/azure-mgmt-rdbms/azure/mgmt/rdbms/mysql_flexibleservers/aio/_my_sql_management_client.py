@@ -16,7 +16,7 @@ from azure.mgmt.core import AsyncARMPipelineClient
 
 from .. import models
 from ._configuration import MySQLManagementClientConfiguration
-from .operations import BackupsOperations, CheckNameAvailabilityOperations, CheckVirtualNetworkSubnetUsageOperations, ConfigurationsOperations, DatabasesOperations, FirewallRulesOperations, GetPrivateDnsZoneSuffixOperations, LocationBasedCapabilitiesOperations, LogFilesOperations, Operations, ReplicasOperations, ServersOperations
+from .operations import BackupsOperations, CheckNameAvailabilityOperations, CheckNameAvailabilityWithoutLocationOperations, CheckVirtualNetworkSubnetUsageOperations, ConfigurationsOperations, DatabasesOperations, FirewallRulesOperations, GetPrivateDnsZoneSuffixOperations, LocationBasedCapabilitiesOperations, LogFilesOperations, Operations, ReplicasOperations, ServersOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -52,6 +52,10 @@ class MySQLManagementClient:    # pylint: disable=too-many-instance-attributes
     :ivar check_name_availability: CheckNameAvailabilityOperations operations
     :vartype check_name_availability:
      azure.mgmt.rdbms.mysql_flexibleservers.aio.operations.CheckNameAvailabilityOperations
+    :ivar check_name_availability_without_location: CheckNameAvailabilityWithoutLocationOperations
+     operations
+    :vartype check_name_availability_without_location:
+     azure.mgmt.rdbms.mysql_flexibleservers.aio.operations.CheckNameAvailabilityWithoutLocationOperations
     :ivar get_private_dns_zone_suffix: GetPrivateDnsZoneSuffixOperations operations
     :vartype get_private_dns_zone_suffix:
      azure.mgmt.rdbms.mysql_flexibleservers.aio.operations.GetPrivateDnsZoneSuffixOperations
@@ -112,6 +116,9 @@ class MySQLManagementClient:    # pylint: disable=too-many-instance-attributes
             self._client, self._config, self._serialize, self._deserialize
         )
         self.check_name_availability = CheckNameAvailabilityOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.check_name_availability_without_location = CheckNameAvailabilityWithoutLocationOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.get_private_dns_zone_suffix = GetPrivateDnsZoneSuffixOperations(
