@@ -31,9 +31,6 @@ def build_list_request(
     subscription_id: str,
     resource_group_name: str,
     workspace_name: str,
-    watchlist_alias: str,
-    *,
-    skip_token: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -43,20 +40,17 @@ def build_list_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "watchlistAlias": _SERIALIZER.url("watchlist_alias", watchlist_alias, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-    if skip_token is not None:
-        _params['$skipToken'] = _SERIALIZER.query("skip_token", skip_token, 'str')
 
     # Construct headers
     _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
@@ -74,8 +68,7 @@ def build_get_request(
     subscription_id: str,
     resource_group_name: str,
     workspace_name: str,
-    watchlist_alias: str,
-    watchlist_item_id: str,
+    settings_resource_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -85,13 +78,12 @@ def build_get_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "watchlistAlias": _SERIALIZER.url("watchlist_alias", watchlist_alias, 'str'),
-        "watchlistItemId": _SERIALIZER.url("watchlist_item_id", watchlist_item_id, 'str'),
+        "settingsResourceName": _SERIALIZER.url("settings_resource_name", settings_resource_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -111,55 +103,13 @@ def build_get_request(
     )
 
 
-def build_delete_request(
-    subscription_id: str,
-    resource_group_name: str,
-    workspace_name: str,
-    watchlist_alias: str,
-    watchlist_item_id: str,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
-
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}")  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "watchlistAlias": _SERIALIZER.url("watchlist_alias", watchlist_alias, 'str'),
-        "watchlistItemId": _SERIALIZER.url("watchlist_item_id", watchlist_item_id, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
-
-    return HttpRequest(
-        method="DELETE",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
-
-
 def build_create_or_update_request(
     subscription_id: str,
     resource_group_name: str,
     workspace_name: str,
-    watchlist_alias: str,
-    watchlist_item_id: str,
+    settings_resource_name: str,
     *,
-    json: Optional[_models.WatchlistItem] = None,
+    json: Optional[_models.SecurityMLAnalyticsSetting] = None,
     content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
@@ -171,13 +121,12 @@ def build_create_or_update_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
-        "watchlistAlias": _SERIALIZER.url("watchlist_alias", watchlist_alias, 'str'),
-        "watchlistItemId": _SERIALIZER.url("watchlist_item_id", watchlist_item_id, 'str'),
+        "settingsResourceName": _SERIALIZER.url("settings_resource_name", settings_resource_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -200,14 +149,53 @@ def build_create_or_update_request(
         **kwargs
     )
 
-class WatchlistItemsOperations:
+
+def build_delete_request(
+    subscription_id: str,
+    resource_group_name: str,
+    workspace_name: str,
+    settings_resource_name: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
+        "settingsResourceName": _SERIALIZER.url("settings_resource_name", settings_resource_name, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="DELETE",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+class SecurityMLAnalyticsSettingsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.SecurityInsights`'s
-        :attr:`watchlist_items` attribute.
+        :attr:`security_ml_analytics_settings` attribute.
     """
 
     models = _models
@@ -225,33 +213,26 @@ class WatchlistItemsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        watchlist_alias: str,
-        skip_token: Optional[str] = None,
         **kwargs: Any
-    ) -> Iterable[_models.WatchlistItemList]:
-        """Gets all watchlist Items.
+    ) -> Iterable[_models.SecurityMLAnalyticsSettingsList]:
+        """Gets all Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias.
-        :type watchlist_alias: str
-        :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
-         a previous response contains a nextLink element, the value of the nextLink element will include
-         a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
-         Default value is None.
-        :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either WatchlistItemList or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.WatchlistItemList]
+        :return: An iterator like instance of either SecurityMLAnalyticsSettingsList or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSettingsList]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WatchlistItemList]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSettingsList]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -264,9 +245,7 @@ class WatchlistItemsOperations:
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
-                    watchlist_alias=watchlist_alias,
                     api_version=api_version,
-                    skip_token=skip_token,
                     template_url=self.list.metadata['url'],
                     headers=_headers,
                     params=_params,
@@ -280,9 +259,7 @@ class WatchlistItemsOperations:
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
-                    watchlist_alias=watchlist_alias,
                     api_version=api_version,
-                    skip_token=skip_token,
                     template_url=next_link,
                     headers=_headers,
                     params=_params,
@@ -293,7 +270,7 @@ class WatchlistItemsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("WatchlistItemList", pipeline_response)
+            deserialized = self._deserialize("SecurityMLAnalyticsSettingsList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -319,30 +296,27 @@ class WatchlistItemsOperations:
         return ItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings"}  # type: ignore
 
     @distributed_trace
     def get(
         self,
         resource_group_name: str,
         workspace_name: str,
-        watchlist_alias: str,
-        watchlist_item_id: str,
+        settings_resource_name: str,
         **kwargs: Any
-    ) -> _models.WatchlistItem:
-        """Gets a watchlist, without its watchlist items.
+    ) -> _models.SecurityMLAnalyticsSetting:
+        """Gets the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias.
-        :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID).
-        :type watchlist_item_id: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: WatchlistItem, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.WatchlistItem
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -354,15 +328,14 @@ class WatchlistItemsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WatchlistItem]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSetting]
 
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            watchlist_alias=watchlist_alias,
-            watchlist_item_id=watchlist_item_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
             headers=_headers,
@@ -382,81 +355,14 @@ class WatchlistItemsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('WatchlistItem', pipeline_response)
+        deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}"}  # type: ignore
-
-
-    @distributed_trace
-    def delete(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        watchlist_alias: str,
-        watchlist_item_id: str,
-        **kwargs: Any
-    ) -> None:
-        """Delete a watchlist item.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace.
-        :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias.
-        :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID).
-        :type watchlist_item_id: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None, or the result of cls(response)
-        :rtype: None
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
-
-        
-        request = build_delete_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            watchlist_alias=watchlist_alias,
-            watchlist_item_id=watchlist_item_id,
-            api_version=api_version,
-            template_url=self.delete.metadata['url'],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
 
     @distributed_trace
@@ -464,26 +370,24 @@ class WatchlistItemsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        watchlist_alias: str,
-        watchlist_item_id: str,
-        watchlist_item: _models.WatchlistItem,
+        settings_resource_name: str,
+        security_ml_analytics_setting: _models.SecurityMLAnalyticsSetting,
         **kwargs: Any
-    ) -> _models.WatchlistItem:
-        """Creates or updates a watchlist item.
+    ) -> _models.SecurityMLAnalyticsSetting:
+        """Creates or updates the Security ML Analytics Settings.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias.
-        :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID).
-        :type watchlist_item_id: str
-        :param watchlist_item: The watchlist item.
-        :type watchlist_item: ~azure.mgmt.securityinsight.models.WatchlistItem
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
+        :param security_ml_analytics_setting: The security ML Analytics setting.
+        :type security_ml_analytics_setting:
+         ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: WatchlistItem, or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.WatchlistItem
+        :return: SecurityMLAnalyticsSetting, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.SecurityMLAnalyticsSetting
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -496,16 +400,15 @@ class WatchlistItemsOperations:
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WatchlistItem]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityMLAnalyticsSetting]
 
-        _json = self._serialize.body(watchlist_item, 'WatchlistItem')
+        _json = self._serialize.body(security_ml_analytics_setting, 'SecurityMLAnalyticsSetting')
 
         request = build_create_or_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            watchlist_alias=watchlist_alias,
-            watchlist_item_id=watchlist_item_id,
+            settings_resource_name=settings_resource_name,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -528,15 +431,78 @@ class WatchlistItemsOperations:
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('WatchlistItem', pipeline_response)
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('WatchlistItem', pipeline_response)
+            deserialized = self._deserialize('SecurityMLAnalyticsSetting', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}"}  # type: ignore
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
+
+
+    @distributed_trace
+    def delete(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        settings_resource_name: str,
+        **kwargs: Any
+    ) -> None:
+        """Delete the Security ML Analytics Settings.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param settings_resource_name: Security ML Analytics Settings resource name.
+        :type settings_resource_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+
+        
+        request = build_delete_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            settings_resource_name=settings_resource_name,
+            api_version=api_version,
+            template_url=self.delete.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/securityMLAnalyticsSettings/{settingsResourceName}"}  # type: ignore
 
