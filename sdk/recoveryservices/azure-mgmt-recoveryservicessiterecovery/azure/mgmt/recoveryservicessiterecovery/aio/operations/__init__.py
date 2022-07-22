@@ -8,6 +8,7 @@
 
 from ._operations import Operations
 from ._replication_alert_settings_operations import ReplicationAlertSettingsOperations
+from ._replication_appliances_operations import ReplicationAppliancesOperations
 from ._replication_eligibility_results_operations import ReplicationEligibilityResultsOperations
 from ._replication_events_operations import ReplicationEventsOperations
 from ._replication_fabrics_operations import ReplicationFabricsOperations
@@ -34,9 +35,13 @@ from ._supported_operating_systems_operations import SupportedOperatingSystemsOp
 from ._replication_vault_health_operations import ReplicationVaultHealthOperations
 from ._replication_vault_setting_operations import ReplicationVaultSettingOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'Operations',
     'ReplicationAlertSettingsOperations',
+    'ReplicationAppliancesOperations',
     'ReplicationEligibilityResultsOperations',
     'ReplicationEventsOperations',
     'ReplicationFabricsOperations',
@@ -63,3 +68,5 @@ __all__ = [
     'ReplicationVaultHealthOperations',
     'ReplicationVaultSettingOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
