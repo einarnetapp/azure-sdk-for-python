@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._service_fabric_managed_clusters_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ScalingMechanism(msrest.serialization.Model):
@@ -24,7 +26,7 @@ class ScalingMechanism(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar kind: Required. Specifies the mechanism associated with this scaling policy.Constant
-     filled by server. Possible values include: "ScalePartitionInstanceCount",
+     filled by server. Known values are: "ScalePartitionInstanceCount",
      "AddRemoveIncrementalNamedPartition".
     :vartype kind: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ServiceScalingMechanismKind
@@ -58,7 +60,7 @@ class AddRemoveIncrementalNamedPartitionScalingMechanism(ScalingMechanism):
     All required parameters must be populated in order to send to Azure.
 
     :ivar kind: Required. Specifies the mechanism associated with this scaling policy.Constant
-     filled by server. Possible values include: "ScalePartitionInstanceCount",
+     filled by server. Known values are: "ScalePartitionInstanceCount",
      "AddRemoveIncrementalNamedPartition".
     :vartype kind: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ServiceScalingMechanismKind
@@ -153,8 +155,8 @@ class ApplicationHealthPolicy(msrest.serialization.Model):
         *,
         consider_warning_as_error: bool,
         max_percent_unhealthy_deployed_applications: int,
-        default_service_type_health_policy: Optional["ServiceTypeHealthPolicy"] = None,
-        service_type_health_policy_map: Optional[Dict[str, "ServiceTypeHealthPolicy"]] = None,
+        default_service_type_health_policy: Optional["_models.ServiceTypeHealthPolicy"] = None,
+        service_type_health_policy_map: Optional[Dict[str, "_models.ServiceTypeHealthPolicy"]] = None,
         **kwargs
     ):
         """
@@ -308,11 +310,11 @@ class ApplicationResource(ProxyResource):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["ManagedIdentity"] = None,
+        identity: Optional["_models.ManagedIdentity"] = None,
         version: Optional[str] = None,
         parameters: Optional[Dict[str, str]] = None,
-        upgrade_policy: Optional["ApplicationUpgradePolicy"] = None,
-        managed_identities: Optional[List["ApplicationUserAssignedIdentity"]] = None,
+        upgrade_policy: Optional["_models.ApplicationUpgradePolicy"] = None,
+        managed_identities: Optional[List["_models.ApplicationUserAssignedIdentity"]] = None,
         **kwargs
     ):
         """
@@ -368,7 +370,7 @@ class ApplicationResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ApplicationResource"]] = None,
+        value: Optional[List["_models.ApplicationResource"]] = None,
         **kwargs
     ):
         """
@@ -460,7 +462,7 @@ class ApplicationTypeResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ApplicationTypeResource"]] = None,
+        value: Optional[List["_models.ApplicationTypeResource"]] = None,
         **kwargs
     ):
         """
@@ -586,7 +588,7 @@ class ApplicationTypeVersionResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ApplicationTypeVersionResource"]] = None,
+        value: Optional[List["_models.ApplicationTypeVersionResource"]] = None,
         **kwargs
     ):
         """
@@ -702,7 +704,7 @@ class ApplicationUpgradePolicy(msrest.serialization.Model):
      a non-zero delay duration configured in the service description.
     :vartype instance_close_delay_duration: long
     :ivar upgrade_mode: The mode used to monitor health during a rolling upgrade. The values are
-     Monitored, and UnmonitoredAuto. Possible values include: "Monitored", "UnmonitoredAuto".
+     Monitored, and UnmonitoredAuto. Known values are: "Monitored", "UnmonitoredAuto".
     :vartype upgrade_mode: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.RollingUpgradeMode
     :ivar upgrade_replica_set_check_timeout: The maximum amount of time to block processing of an
@@ -729,11 +731,11 @@ class ApplicationUpgradePolicy(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        application_health_policy: Optional["ApplicationHealthPolicy"] = None,
+        application_health_policy: Optional["_models.ApplicationHealthPolicy"] = None,
         force_restart: Optional[bool] = False,
-        rolling_upgrade_monitoring_policy: Optional["RollingUpgradeMonitoringPolicy"] = None,
+        rolling_upgrade_monitoring_policy: Optional["_models.RollingUpgradeMonitoringPolicy"] = None,
         instance_close_delay_duration: Optional[int] = None,
-        upgrade_mode: Optional[Union[str, "RollingUpgradeMode"]] = None,
+        upgrade_mode: Optional[Union[str, "_models.RollingUpgradeMode"]] = None,
         upgrade_replica_set_check_timeout: Optional[int] = None,
         recreate_application: Optional[bool] = None,
         **kwargs
@@ -756,7 +758,7 @@ class ApplicationUpgradePolicy(msrest.serialization.Model):
          which have a non-zero delay duration configured in the service description.
         :paramtype instance_close_delay_duration: long
         :keyword upgrade_mode: The mode used to monitor health during a rolling upgrade. The values are
-         Monitored, and UnmonitoredAuto. Possible values include: "Monitored", "UnmonitoredAuto".
+         Monitored, and UnmonitoredAuto. Known values are: "Monitored", "UnmonitoredAuto".
         :paramtype upgrade_mode: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.RollingUpgradeMode
         :keyword upgrade_replica_set_check_timeout: The maximum amount of time to block processing of
@@ -873,7 +875,7 @@ class ScalingTrigger(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar kind: Required. Specifies the trigger associated with this scaling policy.Constant filled
-     by server. Possible values include: "AveragePartitionLoadTrigger", "AverageServiceLoadTrigger".
+     by server. Known values are: "AveragePartitionLoadTrigger", "AverageServiceLoadTrigger".
     :vartype kind: str or ~azure.mgmt.servicefabricmanagedclusters.models.ServiceScalingTriggerKind
     """
 
@@ -905,7 +907,7 @@ class AveragePartitionLoadScalingTrigger(ScalingTrigger):
     All required parameters must be populated in order to send to Azure.
 
     :ivar kind: Required. Specifies the trigger associated with this scaling policy.Constant filled
-     by server. Possible values include: "AveragePartitionLoadTrigger", "AverageServiceLoadTrigger".
+     by server. Known values are: "AveragePartitionLoadTrigger", "AverageServiceLoadTrigger".
     :vartype kind: str or ~azure.mgmt.servicefabricmanagedclusters.models.ServiceScalingTriggerKind
     :ivar metric_name: Required. The name of the metric for which usage should be tracked.
     :vartype metric_name: str
@@ -972,7 +974,7 @@ class AverageServiceLoadScalingTrigger(ScalingTrigger):
     All required parameters must be populated in order to send to Azure.
 
     :ivar kind: Required. Specifies the trigger associated with this scaling policy.Constant filled
-     by server. Possible values include: "AveragePartitionLoadTrigger", "AverageServiceLoadTrigger".
+     by server. Known values are: "AveragePartitionLoadTrigger", "AverageServiceLoadTrigger".
     :vartype kind: str or ~azure.mgmt.servicefabricmanagedclusters.models.ServiceScalingTriggerKind
     :ivar metric_name: Required. The name of the metric for which usage should be tracked.
     :vartype metric_name: str
@@ -1195,7 +1197,7 @@ class ErrorModel(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorModelError"] = None,
+        error: Optional["_models.ErrorModelError"] = None,
         **kwargs
     ):
         """
@@ -1242,7 +1244,7 @@ class FrontendConfiguration(msrest.serialization.Model):
     """Describes the frontend configurations for the node type.
 
     :ivar ip_address_type: The IP address type of this frontend configuration. If omitted the
-     default value is IPv4. Possible values include: "IPv4", "IPv6". Default value: "IPv4".
+     default value is IPv4. Known values are: "IPv4", "IPv6". Default value: "IPv4".
     :vartype ip_address_type: str or ~azure.mgmt.servicefabricmanagedclusters.models.IPAddressType
     :ivar load_balancer_backend_address_pool_id: The resource Id of the Load Balancer backend
      address pool that the VM instances of the node type are associated with. The format of the
@@ -1264,14 +1266,14 @@ class FrontendConfiguration(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        ip_address_type: Optional[Union[str, "IPAddressType"]] = "IPv4",
+        ip_address_type: Optional[Union[str, "_models.IPAddressType"]] = "IPv4",
         load_balancer_backend_address_pool_id: Optional[str] = None,
         load_balancer_inbound_nat_pool_id: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword ip_address_type: The IP address type of this frontend configuration. If omitted the
-         default value is IPv4. Possible values include: "IPv4", "IPv6". Default value: "IPv4".
+         default value is IPv4. Known values are: "IPv4", "IPv6". Default value: "IPv4".
         :paramtype ip_address_type: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.IPAddressType
         :keyword load_balancer_backend_address_pool_id: The resource Id of the Load Balancer backend
@@ -1342,13 +1344,13 @@ class LoadBalancingRule(msrest.serialization.Model):
      Acceptable values are between 1 and 65535.
     :vartype backend_port: int
     :ivar protocol: Required. The reference to the transport protocol used by the load balancing
-     rule. Possible values include: "tcp", "udp".
+     rule. Known values are: "tcp", "udp".
     :vartype protocol: str or ~azure.mgmt.servicefabricmanagedclusters.models.Protocol
     :ivar probe_port: The prob port used by the load balancing rule. Acceptable values are between
      1 and 65535.
     :vartype probe_port: int
     :ivar probe_protocol: Required. the reference to the load balancer probe used by the load
-     balancing rule. Possible values include: "tcp", "http", "https".
+     balancing rule. Known values are: "tcp", "http", "https".
     :vartype probe_protocol: str or ~azure.mgmt.servicefabricmanagedclusters.models.ProbeProtocol
     :ivar probe_request_path: The probe request path. Only supported for HTTP/HTTPS probes.
     :vartype probe_request_path: str
@@ -1379,8 +1381,8 @@ class LoadBalancingRule(msrest.serialization.Model):
         *,
         frontend_port: int,
         backend_port: int,
-        protocol: Union[str, "Protocol"],
-        probe_protocol: Union[str, "ProbeProtocol"],
+        protocol: Union[str, "_models.Protocol"],
+        probe_protocol: Union[str, "_models.ProbeProtocol"],
         probe_port: Optional[int] = None,
         probe_request_path: Optional[str] = None,
         load_distribution: Optional[str] = None,
@@ -1394,13 +1396,13 @@ class LoadBalancingRule(msrest.serialization.Model):
          Acceptable values are between 1 and 65535.
         :paramtype backend_port: int
         :keyword protocol: Required. The reference to the transport protocol used by the load balancing
-         rule. Possible values include: "tcp", "udp".
+         rule. Known values are: "tcp", "udp".
         :paramtype protocol: str or ~azure.mgmt.servicefabricmanagedclusters.models.Protocol
         :keyword probe_port: The prob port used by the load balancing rule. Acceptable values are
          between 1 and 65535.
         :paramtype probe_port: int
         :keyword probe_protocol: Required. the reference to the load balancer probe used by the load
-         balancing rule. Possible values include: "tcp", "http", "https".
+         balancing rule. Known values are: "tcp", "http", "https".
         :paramtype probe_protocol: str or ~azure.mgmt.servicefabricmanagedclusters.models.ProbeProtocol
         :keyword probe_request_path: The probe request path. Only supported for HTTP/HTTPS probes.
         :paramtype probe_request_path: str
@@ -1451,7 +1453,7 @@ class LongRunningOperationResult(msrest.serialization.Model):
         end_time: Optional[datetime.datetime] = None,
         percent_complete: Optional[float] = None,
         status: Optional[str] = None,
-        error: Optional["ErrorModelError"] = None,
+        error: Optional["_models.ErrorModelError"] = None,
         **kwargs
     ):
         """
@@ -1501,7 +1503,7 @@ class ManagedAzResiliencyStatus(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        base_resource_status: Optional[List["ResourceAzStatus"]] = None,
+        base_resource_status: Optional[List["_models.ResourceAzStatus"]] = None,
         **kwargs
     ):
         """
@@ -1611,8 +1613,8 @@ class ManagedCluster(Resource):
     :vartype ipv4_address: str
     :ivar cluster_id: A service generated unique identifier for the cluster resource.
     :vartype cluster_id: str
-    :ivar cluster_state: The current state of the cluster. Possible values include:
-     "WaitingForNodes", "Deploying", "BaselineUpgrade", "Upgrading", "UpgradeFailed", "Ready".
+    :ivar cluster_state: The current state of the cluster. Known values are: "WaitingForNodes",
+     "Deploying", "BaselineUpgrade", "Upgrading", "UpgradeFailed", "Ready".
     :vartype cluster_state: str or ~azure.mgmt.servicefabricmanagedclusters.models.ClusterState
     :ivar cluster_certificate_thumbprints: List of thumbprints of the cluster certificates.
     :vartype cluster_certificate_thumbprints: list[str]
@@ -1644,9 +1646,9 @@ class ManagedCluster(Resource):
     :ivar fabric_settings: The list of custom fabric settings to configure the cluster.
     :vartype fabric_settings:
      list[~azure.mgmt.servicefabricmanagedclusters.models.SettingsSectionDescription]
-    :ivar provisioning_state: The provisioning state of the managed cluster resource. Possible
-     values include: "None", "Creating", "Created", "Updating", "Succeeded", "Failed", "Canceled",
-     "Deleting", "Deleted", "Other".
+    :ivar provisioning_state: The provisioning state of the managed cluster resource. Known values
+     are: "None", "Creating", "Created", "Updating", "Succeeded", "Failed", "Canceled", "Deleting",
+     "Deleted", "Other".
     :vartype provisioning_state: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ManagedResourceProvisioningState
     :ivar cluster_code_version: The Service Fabric runtime version of the cluster. This property is
@@ -1655,13 +1657,12 @@ class ManagedCluster(Resource):
      list of available version for existing clusters use **availableClusterVersions**.
     :vartype cluster_code_version: str
     :ivar cluster_upgrade_mode: The upgrade mode of the cluster when new Service Fabric runtime
-     version is available. Possible values include: "Automatic", "Manual". Default value:
-     "Automatic".
+     version is available. Known values are: "Automatic", "Manual". Default value: "Automatic".
     :vartype cluster_upgrade_mode: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ClusterUpgradeMode
     :ivar cluster_upgrade_cadence: Indicates when new cluster runtime version upgrades will be
      applied after they are released. By default is Wave0. Only applies when **clusterUpgradeMode**
-     is set to 'Automatic'. Possible values include: "Wave0", "Wave1", "Wave2".
+     is set to 'Automatic'. Known values are: "Wave0", "Wave1", "Wave2".
     :vartype cluster_upgrade_cadence: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ClusterUpgradeCadence
     :ivar addon_features: List of add-on features to enable on the cluster.
@@ -1763,31 +1764,31 @@ class ManagedCluster(Resource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["Sku"] = None,
+        sku: Optional["_models.Sku"] = None,
         dns_name: Optional[str] = None,
         client_connection_port: Optional[int] = 19000,
         http_gateway_connection_port: Optional[int] = 19080,
         admin_user_name: Optional[str] = None,
         admin_password: Optional[str] = None,
-        load_balancing_rules: Optional[List["LoadBalancingRule"]] = None,
+        load_balancing_rules: Optional[List["_models.LoadBalancingRule"]] = None,
         allow_rdp_access: Optional[bool] = None,
-        network_security_rules: Optional[List["NetworkSecurityRule"]] = None,
-        clients: Optional[List["ClientCertificate"]] = None,
-        azure_active_directory: Optional["AzureActiveDirectory"] = None,
-        fabric_settings: Optional[List["SettingsSectionDescription"]] = None,
+        network_security_rules: Optional[List["_models.NetworkSecurityRule"]] = None,
+        clients: Optional[List["_models.ClientCertificate"]] = None,
+        azure_active_directory: Optional["_models.AzureActiveDirectory"] = None,
+        fabric_settings: Optional[List["_models.SettingsSectionDescription"]] = None,
         cluster_code_version: Optional[str] = None,
-        cluster_upgrade_mode: Optional[Union[str, "ClusterUpgradeMode"]] = "Automatic",
-        cluster_upgrade_cadence: Optional[Union[str, "ClusterUpgradeCadence"]] = None,
-        addon_features: Optional[List[Union[str, "ManagedClusterAddOnFeature"]]] = None,
+        cluster_upgrade_mode: Optional[Union[str, "_models.ClusterUpgradeMode"]] = "Automatic",
+        cluster_upgrade_cadence: Optional[Union[str, "_models.ClusterUpgradeCadence"]] = None,
+        addon_features: Optional[List[Union[str, "_models.ManagedClusterAddOnFeature"]]] = None,
         enable_auto_os_upgrade: Optional[bool] = None,
         zonal_resiliency: Optional[bool] = False,
-        application_type_versions_cleanup_policy: Optional["ApplicationTypeVersionsCleanupPolicy"] = None,
+        application_type_versions_cleanup_policy: Optional["_models.ApplicationTypeVersionsCleanupPolicy"] = None,
         enable_ipv6: Optional[bool] = None,
         subnet_id: Optional[str] = None,
-        ip_tags: Optional[List["IPTag"]] = None,
+        ip_tags: Optional[List["_models.IPTag"]] = None,
         enable_service_public_ip: Optional[bool] = None,
-        auxiliary_subnets: Optional[List["Subnet"]] = None,
-        service_endpoints: Optional[List["ServiceEndpoint"]] = None,
+        auxiliary_subnets: Optional[List["_models.Subnet"]] = None,
+        service_endpoints: Optional[List["_models.ServiceEndpoint"]] = None,
         **kwargs
     ):
         """
@@ -1833,13 +1834,12 @@ class ManagedCluster(Resource):
          list of available version for existing clusters use **availableClusterVersions**.
         :paramtype cluster_code_version: str
         :keyword cluster_upgrade_mode: The upgrade mode of the cluster when new Service Fabric runtime
-         version is available. Possible values include: "Automatic", "Manual". Default value:
-         "Automatic".
+         version is available. Known values are: "Automatic", "Manual". Default value: "Automatic".
         :paramtype cluster_upgrade_mode: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.ClusterUpgradeMode
         :keyword cluster_upgrade_cadence: Indicates when new cluster runtime version upgrades will be
          applied after they are released. By default is Wave0. Only applies when **clusterUpgradeMode**
-         is set to 'Automatic'. Possible values include: "Wave0", "Wave1", "Wave2".
+         is set to 'Automatic'. Known values are: "Wave0", "Wave1", "Wave2".
         :paramtype cluster_upgrade_cadence: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.ClusterUpgradeCadence
         :keyword addon_features: List of add-on features to enable on the cluster.
@@ -1923,7 +1923,7 @@ class ManagedClusterCodeVersionResult(msrest.serialization.Model):
     :vartype cluster_code_version: str
     :ivar support_expiry_utc: The date of expiry of support of the version.
     :vartype support_expiry_utc: str
-    :ivar os_type: Cluster operating system, the default will be Windows. Possible values include:
+    :ivar os_type: Cluster operating system, the default will be Windows. Known values are:
      "Windows".
     :vartype os_type: str or ~azure.mgmt.servicefabricmanagedclusters.models.OsType
     """
@@ -1945,7 +1945,7 @@ class ManagedClusterCodeVersionResult(msrest.serialization.Model):
         type: Optional[str] = None,
         cluster_code_version: Optional[str] = None,
         support_expiry_utc: Optional[str] = None,
-        os_type: Optional[Union[str, "OsType"]] = None,
+        os_type: Optional[Union[str, "_models.OsType"]] = None,
         **kwargs
     ):
         """
@@ -1959,8 +1959,8 @@ class ManagedClusterCodeVersionResult(msrest.serialization.Model):
         :paramtype cluster_code_version: str
         :keyword support_expiry_utc: The date of expiry of support of the version.
         :paramtype support_expiry_utc: str
-        :keyword os_type: Cluster operating system, the default will be Windows. Possible values
-         include: "Windows".
+        :keyword os_type: Cluster operating system, the default will be Windows. Known values are:
+         "Windows".
         :paramtype os_type: str or ~azure.mgmt.servicefabricmanagedclusters.models.OsType
         """
         super(ManagedClusterCodeVersionResult, self).__init__(**kwargs)
@@ -1989,7 +1989,7 @@ class ManagedClusterListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ManagedCluster"]] = None,
+        value: Optional[List["_models.ManagedCluster"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2040,7 +2040,7 @@ class ManagedIdentity(msrest.serialization.Model):
     :ivar tenant_id: The tenant id of the managed identity. This property will only be provided for
      a system assigned identity.
     :vartype tenant_id: str
-    :ivar type: The type of managed identity for the resource. Possible values include: "None",
+    :ivar type: The type of managed identity for the resource. Known values are: "None",
      "SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned".
     :vartype type: str or ~azure.mgmt.servicefabricmanagedclusters.models.ManagedIdentityType
     :ivar user_assigned_identities: The list of user identities associated with the resource. The
@@ -2065,12 +2065,12 @@ class ManagedIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "ManagedIdentityType"]] = None,
-        user_assigned_identities: Optional[Dict[str, "UserAssignedIdentity"]] = None,
+        type: Optional[Union[str, "_models.ManagedIdentityType"]] = None,
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs
     ):
         """
-        :keyword type: The type of managed identity for the resource. Possible values include: "None",
+        :keyword type: The type of managed identity for the resource. Known values are: "None",
          "SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned".
         :paramtype type: str or ~azure.mgmt.servicefabricmanagedclusters.models.ManagedIdentityType
         :keyword user_assigned_identities: The list of user identities associated with the resource.
@@ -2201,7 +2201,7 @@ class ManagedVMSizesResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ManagedVMSize"]] = None,
+        value: Optional[List["_models.ManagedVMSize"]] = None,
         **kwargs
     ):
         """
@@ -2222,7 +2222,7 @@ class Partition(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar partition_scheme: Required. Specifies how the service is partitioned.Constant filled by
-     server. Possible values include: "Singleton", "UniformInt64Range", "Named".
+     server. Known values are: "Singleton", "UniformInt64Range", "Named".
     :vartype partition_scheme: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.PartitionScheme
     """
@@ -2255,7 +2255,7 @@ class NamedPartitionScheme(Partition):
     All required parameters must be populated in order to send to Azure.
 
     :ivar partition_scheme: Required. Specifies how the service is partitioned.Constant filled by
-     server. Possible values include: "Singleton", "UniformInt64Range", "Named".
+     server. Known values are: "Singleton", "UniformInt64Range", "Named".
     :vartype partition_scheme: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.PartitionScheme
     :ivar names: Required. Array for the names of the partitions.
@@ -2296,8 +2296,8 @@ class NetworkSecurityRule(msrest.serialization.Model):
     :vartype name: str
     :ivar description: Network security rule description.
     :vartype description: str
-    :ivar protocol: Required. Network protocol this rule applies to. Possible values include:
-     "http", "https", "tcp", "udp", "icmp", "ah", "esp".
+    :ivar protocol: Required. Network protocol this rule applies to. Known values are: "http",
+     "https", "tcp", "udp", "icmp", "ah", "esp".
     :vartype protocol: str or ~azure.mgmt.servicefabricmanagedclusters.models.NsgProtocol
     :ivar source_address_prefixes: The CIDR or source IP ranges.
     :vartype source_address_prefixes: list[str]
@@ -2322,15 +2322,15 @@ class NetworkSecurityRule(msrest.serialization.Model):
     :ivar destination_port_range: he destination port or range. Integer or range between 0 and
      65535. Asterisk '*' can also be used to match all ports.
     :vartype destination_port_range: str
-    :ivar access: Required. The network traffic is allowed or denied. Possible values include:
-     "allow", "deny".
+    :ivar access: Required. The network traffic is allowed or denied. Known values are: "allow",
+     "deny".
     :vartype access: str or ~azure.mgmt.servicefabricmanagedclusters.models.Access
     :ivar priority: Required. The priority of the rule. The value can be in the range 1000 to 3000.
      Values outside this range are reserved for Service Fabric ManagerCluster Resource Provider. The
      priority number must be unique for each rule in the collection. The lower the priority number,
      the higher the priority of the rule.
     :vartype priority: int
-    :ivar direction: Required. Network security rule direction. Possible values include: "inbound",
+    :ivar direction: Required. Network security rule direction. Known values are: "inbound",
      "outbound".
     :vartype direction: str or ~azure.mgmt.servicefabricmanagedclusters.models.Direction
     """
@@ -2364,10 +2364,10 @@ class NetworkSecurityRule(msrest.serialization.Model):
         self,
         *,
         name: str,
-        protocol: Union[str, "NsgProtocol"],
-        access: Union[str, "Access"],
+        protocol: Union[str, "_models.NsgProtocol"],
+        access: Union[str, "_models.Access"],
         priority: int,
-        direction: Union[str, "Direction"],
+        direction: Union[str, "_models.Direction"],
         description: Optional[str] = None,
         source_address_prefixes: Optional[List[str]] = None,
         destination_address_prefixes: Optional[List[str]] = None,
@@ -2384,8 +2384,8 @@ class NetworkSecurityRule(msrest.serialization.Model):
         :paramtype name: str
         :keyword description: Network security rule description.
         :paramtype description: str
-        :keyword protocol: Required. Network protocol this rule applies to. Possible values include:
-         "http", "https", "tcp", "udp", "icmp", "ah", "esp".
+        :keyword protocol: Required. Network protocol this rule applies to. Known values are: "http",
+         "https", "tcp", "udp", "icmp", "ah", "esp".
         :paramtype protocol: str or ~azure.mgmt.servicefabricmanagedclusters.models.NsgProtocol
         :keyword source_address_prefixes: The CIDR or source IP ranges.
         :paramtype source_address_prefixes: list[str]
@@ -2410,16 +2410,16 @@ class NetworkSecurityRule(msrest.serialization.Model):
         :keyword destination_port_range: he destination port or range. Integer or range between 0 and
          65535. Asterisk '*' can also be used to match all ports.
         :paramtype destination_port_range: str
-        :keyword access: Required. The network traffic is allowed or denied. Possible values include:
-         "allow", "deny".
+        :keyword access: Required. The network traffic is allowed or denied. Known values are: "allow",
+         "deny".
         :paramtype access: str or ~azure.mgmt.servicefabricmanagedclusters.models.Access
         :keyword priority: Required. The priority of the rule. The value can be in the range 1000 to
          3000. Values outside this range are reserved for Service Fabric ManagerCluster Resource
          Provider. The priority number must be unique for each rule in the collection. The lower the
          priority number, the higher the priority of the rule.
         :paramtype priority: int
-        :keyword direction: Required. Network security rule direction. Possible values include:
-         "inbound", "outbound".
+        :keyword direction: Required. Network security rule direction. Known values are: "inbound",
+         "outbound".
         :paramtype direction: str or ~azure.mgmt.servicefabricmanagedclusters.models.Direction
         """
         super(NetworkSecurityRule, self).__init__(**kwargs)
@@ -2467,8 +2467,8 @@ class NodeType(ManagedProxyResource):
      GBs.
     :vartype data_disk_size_gb: int
     :ivar data_disk_type: Managed data disk type. Specifies the storage account type for the
-     managed disk. Possible values include: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS".
-     Default value: "StandardSSD_LRS".
+     managed disk. Known values are: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS". Default
+     value: "StandardSSD_LRS".
     :vartype data_disk_type: str or ~azure.mgmt.servicefabricmanagedclusters.models.DiskType
     :ivar data_disk_letter: Managed data disk letter. It can not use the reserved letter C or D and
      it can not change after created.
@@ -2532,9 +2532,9 @@ class NodeType(ManagedProxyResource):
      disk at host itself. Default: The Encryption at host will be disabled unless this property is
      set to true for the resource.
     :vartype enable_encryption_at_host: bool
-    :ivar provisioning_state: The provisioning state of the node type resource. Possible values
-     include: "None", "Creating", "Created", "Updating", "Succeeded", "Failed", "Canceled",
-     "Deleting", "Deleted", "Other".
+    :ivar provisioning_state: The provisioning state of the node type resource. Known values are:
+     "None", "Creating", "Created", "Updating", "Succeeded", "Failed", "Canceled", "Deleting",
+     "Deleted", "Other".
     :vartype provisioning_state: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ManagedResourceProvisioningState
     :ivar enable_accelerated_networking: Specifies whether the network interface is accelerated
@@ -2561,6 +2561,19 @@ class NodeType(ManagedProxyResource):
     :ivar is_spot_vm: Indicates whether the node type will be Spot Virtual Machines. Azure will
      allocate the VMs if there is capacity available and the VMs can be evicted at any time.
     :vartype is_spot_vm: bool
+    :ivar host_group_id: Specifies the full host group resource Id. This property is used for
+     deploying on azure dedicated hosts.
+    :vartype host_group_id: str
+    :ivar use_ephemeral_os_disk: Indicates whether to use ephemeral os disk. The sku selected on
+     the vmSize property needs to support this feature.
+    :vartype use_ephemeral_os_disk: bool
+    :ivar spot_restore_timeout: Indicates the time duration after which the platform will not try
+     to restore the VMSS SPOT instances specified as ISO 8601.
+    :vartype spot_restore_timeout: str
+    :ivar eviction_policy: Specifies the eviction policy for virtual machines in a SPOT node type.
+     Default is Delete. Known values are: "Delete", "Deallocate". Default value: "Delete".
+    :vartype eviction_policy: str or
+     ~azure.mgmt.servicefabricmanagedclusters.models.EvictionPolicyType
     """
 
     _validation = {
@@ -2610,35 +2623,39 @@ class NodeType(ManagedProxyResource):
         'enable_over_provisioning': {'key': 'properties.enableOverProvisioning', 'type': 'bool'},
         'zones': {'key': 'properties.zones', 'type': '[str]'},
         'is_spot_vm': {'key': 'properties.isSpotVM', 'type': 'bool'},
+        'host_group_id': {'key': 'properties.hostGroupId', 'type': 'str'},
+        'use_ephemeral_os_disk': {'key': 'properties.useEphemeralOSDisk', 'type': 'bool'},
+        'spot_restore_timeout': {'key': 'properties.spotRestoreTimeout', 'type': 'str'},
+        'eviction_policy': {'key': 'properties.evictionPolicy', 'type': 'str'},
     }
 
     def __init__(
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["NodeTypeSku"] = None,
+        sku: Optional["_models.NodeTypeSku"] = None,
         is_primary: Optional[bool] = None,
         vm_instance_count: Optional[int] = None,
         data_disk_size_gb: Optional[int] = None,
-        data_disk_type: Optional[Union[str, "DiskType"]] = "StandardSSD_LRS",
+        data_disk_type: Optional[Union[str, "_models.DiskType"]] = "StandardSSD_LRS",
         data_disk_letter: Optional[str] = None,
         placement_properties: Optional[Dict[str, str]] = None,
         capacities: Optional[Dict[str, str]] = None,
-        application_ports: Optional["EndpointRangeDescription"] = None,
-        ephemeral_ports: Optional["EndpointRangeDescription"] = None,
+        application_ports: Optional["_models.EndpointRangeDescription"] = None,
+        ephemeral_ports: Optional["_models.EndpointRangeDescription"] = None,
         vm_size: Optional[str] = None,
         vm_image_publisher: Optional[str] = None,
         vm_image_offer: Optional[str] = None,
         vm_image_sku: Optional[str] = None,
         vm_image_version: Optional[str] = None,
-        vm_secrets: Optional[List["VaultSecretGroup"]] = None,
-        vm_extensions: Optional[List["VMSSExtension"]] = None,
-        vm_managed_identity: Optional["VmManagedIdentity"] = None,
+        vm_secrets: Optional[List["_models.VaultSecretGroup"]] = None,
+        vm_extensions: Optional[List["_models.VMSSExtension"]] = None,
+        vm_managed_identity: Optional["_models.VmManagedIdentity"] = None,
         is_stateless: Optional[bool] = False,
         multiple_placement_groups: Optional[bool] = False,
-        frontend_configurations: Optional[List["FrontendConfiguration"]] = None,
-        network_security_rules: Optional[List["NetworkSecurityRule"]] = None,
-        additional_data_disks: Optional[List["VmssDataDisk"]] = None,
+        frontend_configurations: Optional[List["_models.FrontendConfiguration"]] = None,
+        network_security_rules: Optional[List["_models.NetworkSecurityRule"]] = None,
+        additional_data_disks: Optional[List["_models.VmssDataDisk"]] = None,
         enable_encryption_at_host: Optional[bool] = False,
         enable_accelerated_networking: Optional[bool] = None,
         use_default_public_load_balancer: Optional[bool] = None,
@@ -2646,6 +2663,10 @@ class NodeType(ManagedProxyResource):
         enable_over_provisioning: Optional[bool] = None,
         zones: Optional[List[str]] = None,
         is_spot_vm: Optional[bool] = None,
+        host_group_id: Optional[str] = None,
+        use_ephemeral_os_disk: Optional[bool] = None,
+        spot_restore_timeout: Optional[str] = None,
+        eviction_policy: Optional[Union[str, "_models.EvictionPolicyType"]] = "Delete",
         **kwargs
     ):
         """
@@ -2664,8 +2685,8 @@ class NodeType(ManagedProxyResource):
          in GBs.
         :paramtype data_disk_size_gb: int
         :keyword data_disk_type: Managed data disk type. Specifies the storage account type for the
-         managed disk. Possible values include: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS".
-         Default value: "StandardSSD_LRS".
+         managed disk. Known values are: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS". Default
+         value: "StandardSSD_LRS".
         :paramtype data_disk_type: str or ~azure.mgmt.servicefabricmanagedclusters.models.DiskType
         :keyword data_disk_letter: Managed data disk letter. It can not use the reserved letter C or D
          and it can not change after created.
@@ -2754,6 +2775,19 @@ class NodeType(ManagedProxyResource):
         :keyword is_spot_vm: Indicates whether the node type will be Spot Virtual Machines. Azure will
          allocate the VMs if there is capacity available and the VMs can be evicted at any time.
         :paramtype is_spot_vm: bool
+        :keyword host_group_id: Specifies the full host group resource Id. This property is used for
+         deploying on azure dedicated hosts.
+        :paramtype host_group_id: str
+        :keyword use_ephemeral_os_disk: Indicates whether to use ephemeral os disk. The sku selected on
+         the vmSize property needs to support this feature.
+        :paramtype use_ephemeral_os_disk: bool
+        :keyword spot_restore_timeout: Indicates the time duration after which the platform will not
+         try to restore the VMSS SPOT instances specified as ISO 8601.
+        :paramtype spot_restore_timeout: str
+        :keyword eviction_policy: Specifies the eviction policy for virtual machines in a SPOT node
+         type. Default is Delete. Known values are: "Delete", "Deallocate". Default value: "Delete".
+        :paramtype eviction_policy: str or
+         ~azure.mgmt.servicefabricmanagedclusters.models.EvictionPolicyType
         """
         super(NodeType, self).__init__(tags=tags, **kwargs)
         self.sku = sku
@@ -2787,6 +2821,10 @@ class NodeType(ManagedProxyResource):
         self.enable_over_provisioning = enable_over_provisioning
         self.zones = zones
         self.is_spot_vm = is_spot_vm
+        self.host_group_id = host_group_id
+        self.use_ephemeral_os_disk = use_ephemeral_os_disk
+        self.spot_restore_timeout = spot_restore_timeout
+        self.eviction_policy = eviction_policy
 
 
 class NodeTypeActionParameters(msrest.serialization.Model):
@@ -2882,7 +2920,7 @@ class NodeTypeListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["NodeType"]] = None,
+        value: Optional[List["_models.NodeType"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2914,7 +2952,7 @@ class NodeTypeListSkuResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["NodeTypeAvailableSku"]] = None,
+        value: Optional[List["_models.NodeTypeAvailableSku"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2993,7 +3031,7 @@ class NodeTypeSkuCapacity(msrest.serialization.Model):
     :vartype maximum: int
     :ivar default: Default node count in a node type.
     :vartype default: int
-    :ivar scale_type: Node type capacity scale type. Possible values include: "None", "Manual",
+    :ivar scale_type: Node type capacity scale type. Known values are: "None", "Manual",
      "Automatic". Default value: "None".
     :vartype scale_type: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.NodeTypeSkuScaleType
@@ -3077,7 +3115,7 @@ class NodeTypeUpdateParameters(msrest.serialization.Model):
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["NodeTypeSku"] = None,
+        sku: Optional["_models.NodeTypeSku"] = None,
         **kwargs
     ):
         """
@@ -3114,7 +3152,7 @@ class OperationListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["OperationResult"]] = None,
+        value: Optional[List["_models.OperationResult"]] = None,
         **kwargs
     ):
         """
@@ -3154,7 +3192,7 @@ class OperationResult(msrest.serialization.Model):
         *,
         name: Optional[str] = None,
         is_data_action: Optional[bool] = None,
-        display: Optional["AvailableOperationDisplay"] = None,
+        display: Optional["_models.AvailableOperationDisplay"] = None,
         origin: Optional[str] = None,
         next_link: Optional[str] = None,
         **kwargs
@@ -3185,7 +3223,7 @@ class PartitionInstanceCountScaleMechanism(ScalingMechanism):
     All required parameters must be populated in order to send to Azure.
 
     :ivar kind: Required. Specifies the mechanism associated with this scaling policy.Constant
-     filled by server. Possible values include: "ScalePartitionInstanceCount",
+     filled by server. Known values are: "ScalePartitionInstanceCount",
      "AddRemoveIncrementalNamedPartition".
     :vartype kind: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ServiceScalingMechanismKind
@@ -3281,8 +3319,8 @@ class RollingUpgradeMonitoringPolicy(msrest.serialization.Model):
     :ivar failure_action: Required. The compensating action to perform when a Monitored upgrade
      encounters monitoring policy or health policy violations. Invalid indicates the failure action
      is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual
-     indicates that the upgrade will switch to UnmonitoredManual upgrade mode. Possible values
-     include: "Rollback", "Manual".
+     indicates that the upgrade will switch to UnmonitoredManual upgrade mode. Known values are:
+     "Rollback", "Manual".
     :vartype failure_action: str or ~azure.mgmt.servicefabricmanagedclusters.models.FailureAction
     :ivar health_check_wait_duration: Required. The amount of time to wait after completing an
      upgrade domain before applying health policies. It is interpreted as a string representing an
@@ -3327,7 +3365,7 @@ class RollingUpgradeMonitoringPolicy(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        failure_action: Union[str, "FailureAction"],
+        failure_action: Union[str, "_models.FailureAction"],
         health_check_wait_duration: str,
         health_check_stable_duration: str,
         health_check_retry_timeout: str,
@@ -3339,8 +3377,8 @@ class RollingUpgradeMonitoringPolicy(msrest.serialization.Model):
         :keyword failure_action: Required. The compensating action to perform when a Monitored upgrade
          encounters monitoring policy or health policy violations. Invalid indicates the failure action
          is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual
-         indicates that the upgrade will switch to UnmonitoredManual upgrade mode. Possible values
-         include: "Rollback", "Manual".
+         indicates that the upgrade will switch to UnmonitoredManual upgrade mode. Known values are:
+         "Rollback", "Manual".
         :paramtype failure_action: str or ~azure.mgmt.servicefabricmanagedclusters.models.FailureAction
         :keyword health_check_wait_duration: Required. The amount of time to wait after completing an
          upgrade domain before applying health policies. It is interpreted as a string representing an
@@ -3396,8 +3434,8 @@ class ScalingPolicy(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        scaling_mechanism: "ScalingMechanism",
-        scaling_trigger: "ScalingTrigger",
+        scaling_mechanism: "_models.ScalingMechanism",
+        scaling_trigger: "_models.ScalingTrigger",
         **kwargs
     ):
         """
@@ -3418,8 +3456,8 @@ class ServiceCorrelation(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar scheme: Required. The ServiceCorrelationScheme which describes the relationship between
-     this service and the service specified via ServiceName. Possible values include:
-     "AlignedAffinity", "NonAlignedAffinity".
+     this service and the service specified via ServiceName. Known values are: "AlignedAffinity",
+     "NonAlignedAffinity".
     :vartype scheme: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ServiceCorrelationScheme
     :ivar service_name: Required. The Arm Resource ID of the service that the correlation
@@ -3440,13 +3478,13 @@ class ServiceCorrelation(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        scheme: Union[str, "ServiceCorrelationScheme"],
+        scheme: Union[str, "_models.ServiceCorrelationScheme"],
         service_name: str,
         **kwargs
     ):
         """
         :keyword scheme: Required. The ServiceCorrelationScheme which describes the relationship
-         between this service and the service specified via ServiceName. Possible values include:
+         between this service and the service specified via ServiceName. Known values are:
          "AlignedAffinity", "NonAlignedAffinity".
         :paramtype scheme: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.ServiceCorrelationScheme
@@ -3507,7 +3545,7 @@ class ServiceLoadMetric(msrest.serialization.Model):
      that metric names are case sensitive.
     :vartype name: str
     :ivar weight: The service load metric relative weight, compared to other metrics configured for
-     this service, as a number. Possible values include: "Zero", "Low", "Medium", "High".
+     this service, as a number. Known values are: "Zero", "Low", "Medium", "High".
     :vartype weight: str or ~azure.mgmt.servicefabricmanagedclusters.models.ServiceLoadMetricWeight
     :ivar primary_default_load: Used only for Stateful services. The default amount of load, as a
      number, that this service creates for this metric when it is a Primary replica.
@@ -3536,7 +3574,7 @@ class ServiceLoadMetric(msrest.serialization.Model):
         self,
         *,
         name: str,
-        weight: Optional[Union[str, "ServiceLoadMetricWeight"]] = None,
+        weight: Optional[Union[str, "_models.ServiceLoadMetricWeight"]] = None,
         primary_default_load: Optional[int] = None,
         secondary_default_load: Optional[int] = None,
         default_load: Optional[int] = None,
@@ -3548,7 +3586,7 @@ class ServiceLoadMetric(msrest.serialization.Model):
          that metric names are case sensitive.
         :paramtype name: str
         :keyword weight: The service load metric relative weight, compared to other metrics configured
-         for this service, as a number. Possible values include: "Zero", "Low", "Medium", "High".
+         for this service, as a number. Known values are: "Zero", "Low", "Medium", "High".
         :paramtype weight: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.ServiceLoadMetricWeight
         :keyword primary_default_load: Used only for Stateful services. The default amount of load, as
@@ -3578,7 +3616,7 @@ class ServicePlacementPolicy(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The type of placement policy for a service fabric service. Following are
-     the possible values.Constant filled by server. Possible values include: "InvalidDomain",
+     the possible values.Constant filled by server. Known values are: "InvalidDomain",
      "RequiredDomain", "PreferredPrimaryDomain", "RequiredDomainDistribution",
      "NonPartiallyPlaceService".
     :vartype type: str or
@@ -3613,7 +3651,7 @@ class ServicePlacementInvalidDomainPolicy(ServicePlacementPolicy):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The type of placement policy for a service fabric service. Following are
-     the possible values.Constant filled by server. Possible values include: "InvalidDomain",
+     the possible values.Constant filled by server. Known values are: "InvalidDomain",
      "RequiredDomain", "PreferredPrimaryDomain", "RequiredDomainDistribution",
      "NonPartiallyPlaceService".
     :vartype type: str or
@@ -3653,7 +3691,7 @@ class ServicePlacementNonPartiallyPlaceServicePolicy(ServicePlacementPolicy):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The type of placement policy for a service fabric service. Following are
-     the possible values.Constant filled by server. Possible values include: "InvalidDomain",
+     the possible values.Constant filled by server. Known values are: "InvalidDomain",
      "RequiredDomain", "PreferredPrimaryDomain", "RequiredDomainDistribution",
      "NonPartiallyPlaceService".
     :vartype type: str or
@@ -3691,7 +3729,7 @@ may not end up located in this domain due to failures, capacity limits, or other
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The type of placement policy for a service fabric service. Following are
-     the possible values.Constant filled by server. Possible values include: "InvalidDomain",
+     the possible values.Constant filled by server. Known values are: "InvalidDomain",
      "RequiredDomain", "PreferredPrimaryDomain", "RequiredDomainDistribution",
      "NonPartiallyPlaceService".
     :vartype type: str or
@@ -3733,7 +3771,7 @@ class ServicePlacementRequiredDomainPolicy(ServicePlacementPolicy):
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The type of placement policy for a service fabric service. Following are
-     the possible values.Constant filled by server. Possible values include: "InvalidDomain",
+     the possible values.Constant filled by server. Known values are: "InvalidDomain",
      "RequiredDomain", "PreferredPrimaryDomain", "RequiredDomainDistribution",
      "NonPartiallyPlaceService".
     :vartype type: str or
@@ -3783,7 +3821,7 @@ policy should be set.
     All required parameters must be populated in order to send to Azure.
 
     :ivar type: Required. The type of placement policy for a service fabric service. Following are
-     the possible values.Constant filled by server. Possible values include: "InvalidDomain",
+     the possible values.Constant filled by server. Known values are: "InvalidDomain",
      "RequiredDomain", "PreferredPrimaryDomain", "RequiredDomainDistribution",
      "NonPartiallyPlaceService".
     :vartype type: str or
@@ -3862,7 +3900,7 @@ class ServiceResource(ProxyResource):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        properties: Optional["ServiceResourceProperties"] = None,
+        properties: Optional["_models.ServiceResourceProperties"] = None,
         **kwargs
     ):
         """
@@ -3901,7 +3939,7 @@ class ServiceResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ServiceResource"]] = None,
+        value: Optional[List["_models.ServiceResource"]] = None,
         **kwargs
     ):
         """
@@ -3933,8 +3971,8 @@ class ServiceResourcePropertiesBase(msrest.serialization.Model):
      other services.
     :vartype service_placement_policies:
      list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-    :ivar default_move_cost: Specifies the move cost for the service. Possible values include:
-     "Zero", "Low", "Medium", "High".
+    :ivar default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+     "Low", "Medium", "High".
     :vartype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
     :ivar scaling_policies: Scaling policies for this service.
     :vartype scaling_policies: list[~azure.mgmt.servicefabricmanagedclusters.models.ScalingPolicy]
@@ -3953,11 +3991,11 @@ class ServiceResourcePropertiesBase(msrest.serialization.Model):
         self,
         *,
         placement_constraints: Optional[str] = None,
-        correlation_scheme: Optional[List["ServiceCorrelation"]] = None,
-        service_load_metrics: Optional[List["ServiceLoadMetric"]] = None,
-        service_placement_policies: Optional[List["ServicePlacementPolicy"]] = None,
-        default_move_cost: Optional[Union[str, "MoveCost"]] = None,
-        scaling_policies: Optional[List["ScalingPolicy"]] = None,
+        correlation_scheme: Optional[List["_models.ServiceCorrelation"]] = None,
+        service_load_metrics: Optional[List["_models.ServiceLoadMetric"]] = None,
+        service_placement_policies: Optional[List["_models.ServicePlacementPolicy"]] = None,
+        default_move_cost: Optional[Union[str, "_models.MoveCost"]] = None,
+        scaling_policies: Optional[List["_models.ScalingPolicy"]] = None,
         **kwargs
     ):
         """
@@ -3978,8 +4016,8 @@ class ServiceResourcePropertiesBase(msrest.serialization.Model):
          other services.
         :paramtype service_placement_policies:
          list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-        :keyword default_move_cost: Specifies the move cost for the service. Possible values include:
-         "Zero", "Low", "Medium", "High".
+        :keyword default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+         "Low", "Medium", "High".
         :paramtype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
         :keyword scaling_policies: Scaling policies for this service.
         :paramtype scaling_policies:
@@ -4021,8 +4059,8 @@ class ServiceResourceProperties(ServiceResourcePropertiesBase):
      other services.
     :vartype service_placement_policies:
      list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-    :ivar default_move_cost: Specifies the move cost for the service. Possible values include:
-     "Zero", "Low", "Medium", "High".
+    :ivar default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+     "Low", "Medium", "High".
     :vartype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
     :ivar scaling_policies: Scaling policies for this service.
     :vartype scaling_policies: list[~azure.mgmt.servicefabricmanagedclusters.models.ScalingPolicy]
@@ -4030,14 +4068,14 @@ class ServiceResourceProperties(ServiceResourcePropertiesBase):
      the response.
     :vartype provisioning_state: str
     :ivar service_kind: Required. The kind of service (Stateless or Stateful).Constant filled by
-     server. Possible values include: "Stateless", "Stateful".
+     server. Known values are: "Stateless", "Stateful".
     :vartype service_kind: str or ~azure.mgmt.servicefabricmanagedclusters.models.ServiceKind
     :ivar service_type_name: Required. The name of the service type.
     :vartype service_type_name: str
     :ivar partition_description: Required. Describes how the service is partitioned.
     :vartype partition_description: ~azure.mgmt.servicefabricmanagedclusters.models.Partition
-    :ivar service_package_activation_mode: The activation Mode of the service package. Possible
-     values include: "SharedProcess", "ExclusiveProcess".
+    :ivar service_package_activation_mode: The activation Mode of the service package. Known values
+     are: "SharedProcess", "ExclusiveProcess".
     :vartype service_package_activation_mode: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ServicePackageActivationMode
     """
@@ -4071,14 +4109,14 @@ class ServiceResourceProperties(ServiceResourcePropertiesBase):
         self,
         *,
         service_type_name: str,
-        partition_description: "Partition",
+        partition_description: "_models.Partition",
         placement_constraints: Optional[str] = None,
-        correlation_scheme: Optional[List["ServiceCorrelation"]] = None,
-        service_load_metrics: Optional[List["ServiceLoadMetric"]] = None,
-        service_placement_policies: Optional[List["ServicePlacementPolicy"]] = None,
-        default_move_cost: Optional[Union[str, "MoveCost"]] = None,
-        scaling_policies: Optional[List["ScalingPolicy"]] = None,
-        service_package_activation_mode: Optional[Union[str, "ServicePackageActivationMode"]] = None,
+        correlation_scheme: Optional[List["_models.ServiceCorrelation"]] = None,
+        service_load_metrics: Optional[List["_models.ServiceLoadMetric"]] = None,
+        service_placement_policies: Optional[List["_models.ServicePlacementPolicy"]] = None,
+        default_move_cost: Optional[Union[str, "_models.MoveCost"]] = None,
+        scaling_policies: Optional[List["_models.ScalingPolicy"]] = None,
+        service_package_activation_mode: Optional[Union[str, "_models.ServicePackageActivationMode"]] = None,
         **kwargs
     ):
         """
@@ -4099,8 +4137,8 @@ class ServiceResourceProperties(ServiceResourcePropertiesBase):
          other services.
         :paramtype service_placement_policies:
          list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-        :keyword default_move_cost: Specifies the move cost for the service. Possible values include:
-         "Zero", "Low", "Medium", "High".
+        :keyword default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+         "Low", "Medium", "High".
         :paramtype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
         :keyword scaling_policies: Scaling policies for this service.
         :paramtype scaling_policies:
@@ -4109,8 +4147,8 @@ class ServiceResourceProperties(ServiceResourcePropertiesBase):
         :paramtype service_type_name: str
         :keyword partition_description: Required. Describes how the service is partitioned.
         :paramtype partition_description: ~azure.mgmt.servicefabricmanagedclusters.models.Partition
-        :keyword service_package_activation_mode: The activation Mode of the service package. Possible
-         values include: "SharedProcess", "ExclusiveProcess".
+        :keyword service_package_activation_mode: The activation Mode of the service package. Known
+         values are: "SharedProcess", "ExclusiveProcess".
         :paramtype service_package_activation_mode: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.ServicePackageActivationMode
         """
@@ -4313,7 +4351,7 @@ class SettingsSectionDescription(msrest.serialization.Model):
         self,
         *,
         name: str,
-        parameters: List["SettingsParameterDescription"],
+        parameters: List["_models.SettingsParameterDescription"],
         **kwargs
     ):
         """
@@ -4334,7 +4372,7 @@ class SingletonPartitionScheme(Partition):
     All required parameters must be populated in order to send to Azure.
 
     :ivar partition_scheme: Required. Specifies how the service is partitioned.Constant filled by
-     server. Possible values include: "Singleton", "UniformInt64Range", "Named".
+     server. Known values are: "Singleton", "UniformInt64Range", "Named".
     :vartype partition_scheme: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.PartitionScheme
     """
@@ -4362,7 +4400,7 @@ class Sku(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar name: Required. Sku Name. Possible values include: "Basic", "Standard".
+    :ivar name: Required. Sku Name. Known values are: "Basic", "Standard".
     :vartype name: str or ~azure.mgmt.servicefabricmanagedclusters.models.SkuName
     """
 
@@ -4377,11 +4415,11 @@ class Sku(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        name: Union[str, "SkuName"],
+        name: Union[str, "_models.SkuName"],
         **kwargs
     ):
         """
-        :keyword name: Required. Sku Name. Possible values include: "Basic", "Standard".
+        :keyword name: Required. Sku Name. Known values are: "Basic", "Standard".
         :paramtype name: str or ~azure.mgmt.servicefabricmanagedclusters.models.SkuName
         """
         super(Sku, self).__init__(**kwargs)
@@ -4412,8 +4450,8 @@ class StatefulServiceProperties(ServiceResourceProperties):
      other services.
     :vartype service_placement_policies:
      list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-    :ivar default_move_cost: Specifies the move cost for the service. Possible values include:
-     "Zero", "Low", "Medium", "High".
+    :ivar default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+     "Low", "Medium", "High".
     :vartype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
     :ivar scaling_policies: Scaling policies for this service.
     :vartype scaling_policies: list[~azure.mgmt.servicefabricmanagedclusters.models.ScalingPolicy]
@@ -4421,14 +4459,14 @@ class StatefulServiceProperties(ServiceResourceProperties):
      the response.
     :vartype provisioning_state: str
     :ivar service_kind: Required. The kind of service (Stateless or Stateful).Constant filled by
-     server. Possible values include: "Stateless", "Stateful".
+     server. Known values are: "Stateless", "Stateful".
     :vartype service_kind: str or ~azure.mgmt.servicefabricmanagedclusters.models.ServiceKind
     :ivar service_type_name: Required. The name of the service type.
     :vartype service_type_name: str
     :ivar partition_description: Required. Describes how the service is partitioned.
     :vartype partition_description: ~azure.mgmt.servicefabricmanagedclusters.models.Partition
-    :ivar service_package_activation_mode: The activation Mode of the service package. Possible
-     values include: "SharedProcess", "ExclusiveProcess".
+    :ivar service_package_activation_mode: The activation Mode of the service package. Known values
+     are: "SharedProcess", "ExclusiveProcess".
     :vartype service_package_activation_mode: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ServicePackageActivationMode
     :ivar has_persisted_state: A flag indicating whether this is a persistent service which stores
@@ -4486,14 +4524,14 @@ class StatefulServiceProperties(ServiceResourceProperties):
         self,
         *,
         service_type_name: str,
-        partition_description: "Partition",
+        partition_description: "_models.Partition",
         placement_constraints: Optional[str] = None,
-        correlation_scheme: Optional[List["ServiceCorrelation"]] = None,
-        service_load_metrics: Optional[List["ServiceLoadMetric"]] = None,
-        service_placement_policies: Optional[List["ServicePlacementPolicy"]] = None,
-        default_move_cost: Optional[Union[str, "MoveCost"]] = None,
-        scaling_policies: Optional[List["ScalingPolicy"]] = None,
-        service_package_activation_mode: Optional[Union[str, "ServicePackageActivationMode"]] = None,
+        correlation_scheme: Optional[List["_models.ServiceCorrelation"]] = None,
+        service_load_metrics: Optional[List["_models.ServiceLoadMetric"]] = None,
+        service_placement_policies: Optional[List["_models.ServicePlacementPolicy"]] = None,
+        default_move_cost: Optional[Union[str, "_models.MoveCost"]] = None,
+        scaling_policies: Optional[List["_models.ScalingPolicy"]] = None,
+        service_package_activation_mode: Optional[Union[str, "_models.ServicePackageActivationMode"]] = None,
         has_persisted_state: Optional[bool] = None,
         target_replica_set_size: Optional[int] = None,
         min_replica_set_size: Optional[int] = None,
@@ -4521,8 +4559,8 @@ class StatefulServiceProperties(ServiceResourceProperties):
          other services.
         :paramtype service_placement_policies:
          list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-        :keyword default_move_cost: Specifies the move cost for the service. Possible values include:
-         "Zero", "Low", "Medium", "High".
+        :keyword default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+         "Low", "Medium", "High".
         :paramtype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
         :keyword scaling_policies: Scaling policies for this service.
         :paramtype scaling_policies:
@@ -4531,8 +4569,8 @@ class StatefulServiceProperties(ServiceResourceProperties):
         :paramtype service_type_name: str
         :keyword partition_description: Required. Describes how the service is partitioned.
         :paramtype partition_description: ~azure.mgmt.servicefabricmanagedclusters.models.Partition
-        :keyword service_package_activation_mode: The activation Mode of the service package. Possible
-         values include: "SharedProcess", "ExclusiveProcess".
+        :keyword service_package_activation_mode: The activation Mode of the service package. Known
+         values are: "SharedProcess", "ExclusiveProcess".
         :paramtype service_package_activation_mode: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.ServicePackageActivationMode
         :keyword has_persisted_state: A flag indicating whether this is a persistent service which
@@ -4591,8 +4629,8 @@ class StatelessServiceProperties(ServiceResourceProperties):
      other services.
     :vartype service_placement_policies:
      list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-    :ivar default_move_cost: Specifies the move cost for the service. Possible values include:
-     "Zero", "Low", "Medium", "High".
+    :ivar default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+     "Low", "Medium", "High".
     :vartype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
     :ivar scaling_policies: Scaling policies for this service.
     :vartype scaling_policies: list[~azure.mgmt.servicefabricmanagedclusters.models.ScalingPolicy]
@@ -4600,14 +4638,14 @@ class StatelessServiceProperties(ServiceResourceProperties):
      the response.
     :vartype provisioning_state: str
     :ivar service_kind: Required. The kind of service (Stateless or Stateful).Constant filled by
-     server. Possible values include: "Stateless", "Stateful".
+     server. Known values are: "Stateless", "Stateful".
     :vartype service_kind: str or ~azure.mgmt.servicefabricmanagedclusters.models.ServiceKind
     :ivar service_type_name: Required. The name of the service type.
     :vartype service_type_name: str
     :ivar partition_description: Required. Describes how the service is partitioned.
     :vartype partition_description: ~azure.mgmt.servicefabricmanagedclusters.models.Partition
-    :ivar service_package_activation_mode: The activation Mode of the service package. Possible
-     values include: "SharedProcess", "ExclusiveProcess".
+    :ivar service_package_activation_mode: The activation Mode of the service package. Known values
+     are: "SharedProcess", "ExclusiveProcess".
     :vartype service_package_activation_mode: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.ServicePackageActivationMode
     :ivar instance_count: Required. The instance count.
@@ -4657,15 +4695,15 @@ class StatelessServiceProperties(ServiceResourceProperties):
         self,
         *,
         service_type_name: str,
-        partition_description: "Partition",
+        partition_description: "_models.Partition",
         instance_count: int,
         placement_constraints: Optional[str] = None,
-        correlation_scheme: Optional[List["ServiceCorrelation"]] = None,
-        service_load_metrics: Optional[List["ServiceLoadMetric"]] = None,
-        service_placement_policies: Optional[List["ServicePlacementPolicy"]] = None,
-        default_move_cost: Optional[Union[str, "MoveCost"]] = None,
-        scaling_policies: Optional[List["ScalingPolicy"]] = None,
-        service_package_activation_mode: Optional[Union[str, "ServicePackageActivationMode"]] = None,
+        correlation_scheme: Optional[List["_models.ServiceCorrelation"]] = None,
+        service_load_metrics: Optional[List["_models.ServiceLoadMetric"]] = None,
+        service_placement_policies: Optional[List["_models.ServicePlacementPolicy"]] = None,
+        default_move_cost: Optional[Union[str, "_models.MoveCost"]] = None,
+        scaling_policies: Optional[List["_models.ScalingPolicy"]] = None,
+        service_package_activation_mode: Optional[Union[str, "_models.ServicePackageActivationMode"]] = None,
         min_instance_count: Optional[int] = None,
         min_instance_percentage: Optional[int] = None,
         **kwargs
@@ -4688,8 +4726,8 @@ class StatelessServiceProperties(ServiceResourceProperties):
          other services.
         :paramtype service_placement_policies:
          list[~azure.mgmt.servicefabricmanagedclusters.models.ServicePlacementPolicy]
-        :keyword default_move_cost: Specifies the move cost for the service. Possible values include:
-         "Zero", "Low", "Medium", "High".
+        :keyword default_move_cost: Specifies the move cost for the service. Known values are: "Zero",
+         "Low", "Medium", "High".
         :paramtype default_move_cost: str or ~azure.mgmt.servicefabricmanagedclusters.models.MoveCost
         :keyword scaling_policies: Scaling policies for this service.
         :paramtype scaling_policies:
@@ -4698,8 +4736,8 @@ class StatelessServiceProperties(ServiceResourceProperties):
         :paramtype service_type_name: str
         :keyword partition_description: Required. Describes how the service is partitioned.
         :paramtype partition_description: ~azure.mgmt.servicefabricmanagedclusters.models.Partition
-        :keyword service_package_activation_mode: The activation Mode of the service package. Possible
-         values include: "SharedProcess", "ExclusiveProcess".
+        :keyword service_package_activation_mode: The activation Mode of the service package. Known
+         values are: "SharedProcess", "ExclusiveProcess".
         :paramtype service_package_activation_mode: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.ServicePackageActivationMode
         :keyword instance_count: Required. The instance count.
@@ -4737,11 +4775,11 @@ class Subnet(msrest.serialization.Model):
      same configuration as the cluster.
     :vartype enable_ipv6: bool
     :ivar private_endpoint_network_policies: Enable or Disable apply network policies on private
-     end point in the subnet. Possible values include: "enabled", "disabled".
+     end point in the subnet. Known values are: "enabled", "disabled".
     :vartype private_endpoint_network_policies: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.PrivateEndpointNetworkPolicies
     :ivar private_link_service_network_policies: Enable or Disable apply network policies on
-     private link service in the subnet. Possible values include: "enabled", "disabled".
+     private link service in the subnet. Known values are: "enabled", "disabled".
     :vartype private_link_service_network_policies: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.PrivateLinkServiceNetworkPolicies
     :ivar network_security_group_id: Full resource id for the network security group.
@@ -4765,8 +4803,8 @@ class Subnet(msrest.serialization.Model):
         *,
         name: str,
         enable_ipv6: Optional[bool] = None,
-        private_endpoint_network_policies: Optional[Union[str, "PrivateEndpointNetworkPolicies"]] = None,
-        private_link_service_network_policies: Optional[Union[str, "PrivateLinkServiceNetworkPolicies"]] = None,
+        private_endpoint_network_policies: Optional[Union[str, "_models.PrivateEndpointNetworkPolicies"]] = None,
+        private_link_service_network_policies: Optional[Union[str, "_models.PrivateLinkServiceNetworkPolicies"]] = None,
         network_security_group_id: Optional[str] = None,
         **kwargs
     ):
@@ -4777,11 +4815,11 @@ class Subnet(msrest.serialization.Model):
          same configuration as the cluster.
         :paramtype enable_ipv6: bool
         :keyword private_endpoint_network_policies: Enable or Disable apply network policies on private
-         end point in the subnet. Possible values include: "enabled", "disabled".
+         end point in the subnet. Known values are: "enabled", "disabled".
         :paramtype private_endpoint_network_policies: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.PrivateEndpointNetworkPolicies
         :keyword private_link_service_network_policies: Enable or Disable apply network policies on
-         private link service in the subnet. Possible values include: "enabled", "disabled".
+         private link service in the subnet. Known values are: "enabled", "disabled".
         :paramtype private_link_service_network_policies: str or
          ~azure.mgmt.servicefabricmanagedclusters.models.PrivateLinkServiceNetworkPolicies
         :keyword network_security_group_id: Full resource id for the network security group.
@@ -4886,7 +4924,7 @@ class UniformInt64RangePartitionScheme(Partition):
     All required parameters must be populated in order to send to Azure.
 
     :ivar partition_scheme: Required. Specifies how the service is partitioned.Constant filled by
-     server. Possible values include: "Singleton", "UniformInt64Range", "Named".
+     server. Known values are: "Singleton", "UniformInt64Range", "Named".
     :vartype partition_scheme: str or
      ~azure.mgmt.servicefabricmanagedclusters.models.PartitionScheme
     :ivar count: Required. The number of partitions.
@@ -5058,8 +5096,8 @@ class VaultSecretGroup(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        source_vault: "SubResource",
-        vault_certificates: List["VaultCertificate"],
+        source_vault: "_models.SubResource",
+        vault_certificates: List["_models.VaultCertificate"],
         **kwargs
     ):
         """
@@ -5144,8 +5182,8 @@ class VmssDataDisk(msrest.serialization.Model):
     :ivar disk_size_gb: Required. Disk size for each vm in the node type in GBs.
     :vartype disk_size_gb: int
     :ivar disk_type: Required. Managed data disk type. Specifies the storage account type for the
-     managed disk. Possible values include: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS".
-     Default value: "StandardSSD_LRS".
+     managed disk. Known values are: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS". Default
+     value: "StandardSSD_LRS".
     :vartype disk_type: str or ~azure.mgmt.servicefabricmanagedclusters.models.DiskType
     :ivar disk_letter: Required. Managed data disk letter. It can not use the reserved letter C or
      D and it can not change after created.
@@ -5171,7 +5209,7 @@ class VmssDataDisk(msrest.serialization.Model):
         *,
         lun: int,
         disk_size_gb: int,
-        disk_type: Union[str, "DiskType"] = "StandardSSD_LRS",
+        disk_type: Union[str, "_models.DiskType"] = "StandardSSD_LRS",
         disk_letter: str,
         **kwargs
     ):
@@ -5183,8 +5221,8 @@ class VmssDataDisk(msrest.serialization.Model):
         :keyword disk_size_gb: Required. Disk size for each vm in the node type in GBs.
         :paramtype disk_size_gb: int
         :keyword disk_type: Required. Managed data disk type. Specifies the storage account type for
-         the managed disk. Possible values include: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS".
-         Default value: "StandardSSD_LRS".
+         the managed disk. Known values are: "Standard_LRS", "StandardSSD_LRS", "Premium_LRS". Default
+         value: "StandardSSD_LRS".
         :paramtype disk_type: str or ~azure.mgmt.servicefabricmanagedclusters.models.DiskType
         :keyword disk_letter: Required. Managed data disk letter. It can not use the reserved letter C
          or D and it can not change after created.

@@ -104,6 +104,7 @@ from ._service_fabric_managed_clusters_management_client_enums import (
     ClusterUpgradeMode,
     Direction,
     DiskType,
+    EvictionPolicyType,
     FailureAction,
     IPAddressType,
     ManagedClusterAddOnFeature,
@@ -129,7 +130,9 @@ from ._service_fabric_managed_clusters_management_client_enums import (
     ServiceScalingTriggerKind,
     SkuName,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AddRemoveIncrementalNamedPartitionScalingMechanism',
     'ApplicationHealthPolicy',
@@ -226,6 +229,7 @@ __all__ = [
     'ClusterUpgradeMode',
     'Direction',
     'DiskType',
+    'EvictionPolicyType',
     'FailureAction',
     'IPAddressType',
     'ManagedClusterAddOnFeature',
@@ -251,3 +255,5 @@ __all__ = [
     'ServiceScalingTriggerKind',
     'SkuName',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

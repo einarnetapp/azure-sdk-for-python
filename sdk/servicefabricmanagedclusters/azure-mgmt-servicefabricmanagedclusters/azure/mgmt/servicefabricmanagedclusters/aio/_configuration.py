@@ -29,7 +29,7 @@ class ServiceFabricManagedClustersManagementClientConfiguration(Configuration): 
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The customer subscription identifier.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-06-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
@@ -41,7 +41,7 @@ class ServiceFabricManagedClustersManagementClientConfiguration(Configuration): 
         **kwargs: Any
     ) -> None:
         super(ServiceFabricManagedClustersManagementClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop('api_version', "2022-02-01-preview")  # type: str
+        api_version = kwargs.pop('api_version', "2022-06-01-preview")  # type: str
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")

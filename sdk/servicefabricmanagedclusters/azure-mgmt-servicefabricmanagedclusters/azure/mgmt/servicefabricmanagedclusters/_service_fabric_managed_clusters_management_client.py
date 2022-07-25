@@ -67,7 +67,7 @@ class ServiceFabricManagedClustersManagementClient:    # pylint: disable=too-man
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-06-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -88,19 +88,45 @@ class ServiceFabricManagedClustersManagementClient:    # pylint: disable=too-man
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.application_types = ApplicationTypesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.application_type_versions = ApplicationTypeVersionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.applications = ApplicationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.managed_clusters = ManagedClustersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.managed_az_resiliency_status = ManagedAzResiliencyStatusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.managed_cluster_version = ManagedClusterVersionOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.managed_unsupported_vm_sizes = ManagedUnsupportedVMSizesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operation_status = OperationStatusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operation_results = OperationResultsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.node_types = NodeTypesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.node_type_skus = NodeTypeSkusOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.application_types = ApplicationTypesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.application_type_versions = ApplicationTypeVersionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.applications = ApplicationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.services = ServicesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_clusters = ManagedClustersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_az_resiliency_status = ManagedAzResiliencyStatusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_cluster_version = ManagedClusterVersionOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_unsupported_vm_sizes = ManagedUnsupportedVMSizesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operation_status = OperationStatusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operation_results = OperationResultsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.node_types = NodeTypesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.node_type_skus = NodeTypeSkusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
