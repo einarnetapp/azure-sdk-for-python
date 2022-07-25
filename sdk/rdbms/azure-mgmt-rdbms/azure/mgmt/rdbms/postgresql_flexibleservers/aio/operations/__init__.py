@@ -16,6 +16,9 @@ from ._operations import Operations
 from ._databases_operations import DatabasesOperations
 from ._get_private_dns_zone_suffix_operations import GetPrivateDnsZoneSuffixOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'ServersOperations',
     'FirewallRulesOperations',
@@ -27,3 +30,5 @@ __all__ = [
     'DatabasesOperations',
     'GetPrivateDnsZoneSuffixOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
