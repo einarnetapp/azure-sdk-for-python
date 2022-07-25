@@ -7,11 +7,12 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, Optional, TYPE_CHECKING
+from typing import Any, Awaitable, TYPE_CHECKING
+
+from msrest import Deserializer, Serializer
 
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
-from msrest import Deserializer, Serializer
 
 from .. import models
 from ._configuration import SubscriptionClientConfiguration
@@ -21,7 +22,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials_async import AsyncTokenCredential
 
-class SubscriptionClient:
+class SubscriptionClient:    # pylint: disable=too-many-instance-attributes
     """The subscription client.
 
     :ivar subscriptions: SubscriptionsOperations operations
@@ -41,7 +42,7 @@ class SubscriptionClient:
     :vartype billing_account: azure.mgmt.subscription.aio.operations.BillingAccountOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param base_url: Service URL. Default value is 'https://management.azure.com'.
+    :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -60,13 +61,27 @@ class SubscriptionClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.subscriptions = SubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.tenants = TenantsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.subscription = SubscriptionOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.alias = AliasOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.subscription_policy = SubscriptionPolicyOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.billing_account = BillingAccountOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.subscriptions = SubscriptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.tenants = TenantsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.subscription = SubscriptionOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.alias = AliasOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.subscription_policy = SubscriptionPolicyOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.billing_account = BillingAccountOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(

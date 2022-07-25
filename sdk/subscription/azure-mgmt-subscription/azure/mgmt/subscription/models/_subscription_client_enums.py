@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AcceptOwnership(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AcceptOwnership(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The accept ownership state of the resource.
     """
 
@@ -19,7 +18,7 @@ class AcceptOwnership(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     COMPLETED = "Completed"
     EXPIRED = "Expired"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -28,7 +27,7 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state of the resource.
     """
 
@@ -36,7 +35,7 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
 
-class SpendingLimit(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SpendingLimit(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The subscription spending limit.
     """
 
@@ -44,7 +43,7 @@ class SpendingLimit(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     OFF = "Off"
     CURRENT_PERIOD_OFF = "CurrentPeriodOff"
 
-class SubscriptionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SubscriptionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.
     """
 
@@ -54,7 +53,7 @@ class SubscriptionState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DISABLED = "Disabled"
     DELETED = "Deleted"
 
-class Workload(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Workload(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The workload type of the subscription. It can be either Production or DevTest.
     """
 
