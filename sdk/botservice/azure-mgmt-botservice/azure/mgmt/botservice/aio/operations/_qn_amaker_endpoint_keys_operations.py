@@ -8,69 +8,33 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Optional, TypeVar
 
-from msrest import Serializer
-
 from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import HttpResponse
+from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
-from azure.core.tracing.decorator import distributed_trace
+from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
-from .. import models as _models
-from .._vendor import _convert_request, _format_url_section
+from ... import models as _models
+from ..._vendor import _convert_request
+from ...operations._qn_amaker_endpoint_keys_operations import build_get_request
 T = TypeVar('T')
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-_SERIALIZER = Serializer()
-_SERIALIZER.client_side_validation = False
-
-def build_get_request(
-    subscription_id: str,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
-
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/hostSettings")
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
-
-    # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
-
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
-
-class HostSettingsOperations:
+class QnAMakerEndpointKeysOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.botservice.AzureBotService`'s
-        :attr:`host_settings` attribute.
+        :class:`~azure.mgmt.botservice.aio.AzureBotService`'s
+        :attr:`qn_amaker_endpoint_keys` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -78,16 +42,20 @@ class HostSettingsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
 
-    @distributed_trace
-    def get(
+    @distributed_trace_async
+    async def get(
         self,
+        parameters: _models.QnAMakerEndpointKeysRequestBody,
         **kwargs: Any
-    ) -> _models.HostSettingsResponse:
-        """Get per subscription settings needed to host bot in compute resource such as Azure App Service.
+    ) -> _models.QnAMakerEndpointKeysResponse:
+        """Lists the QnA Maker endpoint keys.
 
+        :param parameters: The request body parameters to provide for the check name availability
+         request.
+        :type parameters: ~azure.mgmt.botservice.models.QnAMakerEndpointKeysRequestBody
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: HostSettingsResponse, or the result of cls(response)
-        :rtype: ~azure.mgmt.botservice.models.HostSettingsResponse
+        :return: QnAMakerEndpointKeysResponse, or the result of cls(response)
+        :rtype: ~azure.mgmt.botservice.models.QnAMakerEndpointKeysResponse
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -95,16 +63,20 @@ class HostSettingsOperations:
         }
         error_map.update(kwargs.pop('error_map', {}) or {})
 
-        _headers = kwargs.pop("headers", {}) or {}
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.HostSettingsResponse]
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.QnAMakerEndpointKeysResponse]
 
-        
+        _json = self._serialize.body(parameters, 'QnAMakerEndpointKeysRequestBody')
+
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             api_version=api_version,
+            content_type=content_type,
+            json=_json,
             template_url=self.get.metadata['url'],
             headers=_headers,
             params=_params,
@@ -112,7 +84,7 @@ class HostSettingsOperations:
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -124,12 +96,12 @@ class HostSettingsOperations:
             error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('HostSettingsResponse', pipeline_response)
+        deserialized = self._deserialize('QnAMakerEndpointKeysResponse', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/hostSettings"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/listQnAMakerEndpointKeys"}  # type: ignore
 

@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ChannelName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ChannelName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     ALEXA_CHANNEL = "AlexaChannel"
     FACEBOOK_CHANNEL = "FacebookChannel"
@@ -28,14 +27,14 @@ class ChannelName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DIRECT_LINE_SPEECH_CHANNEL = "DirectLineSpeechChannel"
     OUTLOOK_CHANNEL = "OutlookChannel"
 
-class Key(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Key(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Determines which key is to be regenerated
     """
 
     KEY1 = "key1"
     KEY2 = "key2"
 
-class Kind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Kind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates the type of bot service
     """
 
@@ -45,7 +44,7 @@ class Kind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FUNCTION = "function"
     AZUREBOT = "azurebot"
 
-class MsaAppType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class MsaAppType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Microsoft App Type for the bot
     """
 
@@ -53,7 +52,7 @@ class MsaAppType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SINGLE_TENANT = "SingleTenant"
     MULTI_TENANT = "MultiTenant"
 
-class OperationResultStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class OperationResultStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the operation being performed.
     """
 
@@ -63,7 +62,7 @@ class OperationResultStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     REQUESTED = "Requested"
     RUNNING = "Running"
 
-class PrivateEndpointConnectionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The current provisioning state.
     """
 
@@ -72,7 +71,7 @@ class PrivateEndpointConnectionProvisioningState(with_metaclass(CaseInsensitiveE
     DELETING = "Deleting"
     FAILED = "Failed"
 
-class PrivateEndpointServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The private endpoint connection status.
     """
 
@@ -80,26 +79,26 @@ class PrivateEndpointServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumM
     APPROVED = "Approved"
     REJECTED = "Rejected"
 
-class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether the bot is in an isolated network
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class RegenerateKeysChannelName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RegenerateKeysChannelName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WEB_CHAT_CHANNEL = "WebChatChannel"
     DIRECT_LINE_CHANNEL = "DirectLineChannel"
 
-class SkuName(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The name of SKU.
     """
 
     F0 = "F0"
     S1 = "S1"
 
-class SkuTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets the sku tier. This is based on the SKU name.
     """
 

@@ -6,12 +6,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._azure_bot_service_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class Channel(msrest.serialization.Model):
@@ -107,7 +109,7 @@ class AlexaChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["AlexaChannelProperties"] = None,
+        properties: Optional["_models.AlexaChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -191,7 +193,7 @@ class Resource(msrest.serialization.Model):
     :vartype tags: dict[str, str]
     :ivar sku: Gets or sets the SKU of the resource.
     :vartype sku: ~azure.mgmt.botservice.models.Sku
-    :ivar kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+    :ivar kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
      "designer", "bot", "function", "azurebot".
     :vartype kind: str or ~azure.mgmt.botservice.models.Kind
     :ivar etag: Entity Tag.
@@ -224,8 +226,8 @@ class Resource(msrest.serialization.Model):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["Sku"] = None,
-        kind: Optional[Union[str, "Kind"]] = None,
+        sku: Optional["_models.Sku"] = None,
+        kind: Optional[Union[str, "_models.Kind"]] = None,
         etag: Optional[str] = None,
         **kwargs
     ):
@@ -236,7 +238,7 @@ class Resource(msrest.serialization.Model):
         :paramtype tags: dict[str, str]
         :keyword sku: Gets or sets the SKU of the resource.
         :paramtype sku: ~azure.mgmt.botservice.models.Sku
-        :keyword kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+        :keyword kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
          "designer", "bot", "function", "azurebot".
         :paramtype kind: str or ~azure.mgmt.botservice.models.Kind
         :keyword etag: Entity Tag.
@@ -271,7 +273,7 @@ class Bot(Resource):
     :vartype tags: dict[str, str]
     :ivar sku: Gets or sets the SKU of the resource.
     :vartype sku: ~azure.mgmt.botservice.models.Sku
-    :ivar kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+    :ivar kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
      "designer", "bot", "function", "azurebot".
     :vartype kind: str or ~azure.mgmt.botservice.models.Kind
     :ivar etag: Entity Tag.
@@ -307,10 +309,10 @@ class Bot(Resource):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["Sku"] = None,
-        kind: Optional[Union[str, "Kind"]] = None,
+        sku: Optional["_models.Sku"] = None,
+        kind: Optional[Union[str, "_models.Kind"]] = None,
         etag: Optional[str] = None,
-        properties: Optional["BotProperties"] = None,
+        properties: Optional["_models.BotProperties"] = None,
         **kwargs
     ):
         """
@@ -320,7 +322,7 @@ class Bot(Resource):
         :paramtype tags: dict[str, str]
         :keyword sku: Gets or sets the SKU of the resource.
         :paramtype sku: ~azure.mgmt.botservice.models.Sku
-        :keyword kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+        :keyword kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
          "designer", "bot", "function", "azurebot".
         :paramtype kind: str or ~azure.mgmt.botservice.models.Kind
         :keyword etag: Entity Tag.
@@ -349,7 +351,7 @@ class BotChannel(Resource):
     :vartype tags: dict[str, str]
     :ivar sku: Gets or sets the SKU of the resource.
     :vartype sku: ~azure.mgmt.botservice.models.Sku
-    :ivar kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+    :ivar kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
      "designer", "bot", "function", "azurebot".
     :vartype kind: str or ~azure.mgmt.botservice.models.Kind
     :ivar etag: Entity Tag.
@@ -385,10 +387,10 @@ class BotChannel(Resource):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["Sku"] = None,
-        kind: Optional[Union[str, "Kind"]] = None,
+        sku: Optional["_models.Sku"] = None,
+        kind: Optional[Union[str, "_models.Kind"]] = None,
         etag: Optional[str] = None,
-        properties: Optional["Channel"] = None,
+        properties: Optional["_models.Channel"] = None,
         **kwargs
     ):
         """
@@ -398,7 +400,7 @@ class BotChannel(Resource):
         :paramtype tags: dict[str, str]
         :keyword sku: Gets or sets the SKU of the resource.
         :paramtype sku: ~azure.mgmt.botservice.models.Sku
-        :keyword kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+        :keyword kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
          "designer", "bot", "function", "azurebot".
         :paramtype kind: str or ~azure.mgmt.botservice.models.Kind
         :keyword etag: Entity Tag.
@@ -433,7 +435,7 @@ class BotProperties(msrest.serialization.Model):
     :vartype parameters: dict[str, str]
     :ivar manifest_url: The bot's manifest url.
     :vartype manifest_url: str
-    :ivar msa_app_type: Microsoft App Type for the bot. Possible values include: "UserAssignedMSI",
+    :ivar msa_app_type: Microsoft App Type for the bot. Known values are: "UserAssignedMSI",
      "SingleTenant", "MultiTenant".
     :vartype msa_app_type: str or ~azure.mgmt.botservice.models.MsaAppType
     :ivar msa_app_id: Required. Microsoft App Id for the bot.
@@ -462,8 +464,8 @@ class BotProperties(msrest.serialization.Model):
     :vartype cmek_key_vault_url: str
     :ivar cmek_encryption_status: The CMK encryption status.
     :vartype cmek_encryption_status: str
-    :ivar public_network_access: Whether the bot is in an isolated network. Possible values
-     include: "Enabled", "Disabled". Default value: "Enabled".
+    :ivar public_network_access: Whether the bot is in an isolated network. Known values are:
+     "Enabled", "Disabled". Default value: "Enabled".
     :vartype public_network_access: str or ~azure.mgmt.botservice.models.PublicNetworkAccess
     :ivar is_streaming_supported: Whether the bot is streaming supported.
     :vartype is_streaming_supported: bool
@@ -556,7 +558,7 @@ class BotProperties(msrest.serialization.Model):
         all_settings: Optional[Dict[str, str]] = None,
         parameters: Optional[Dict[str, str]] = None,
         manifest_url: Optional[str] = None,
-        msa_app_type: Optional[Union[str, "MsaAppType"]] = None,
+        msa_app_type: Optional[Union[str, "_models.MsaAppType"]] = None,
         msa_app_tenant_id: Optional[str] = None,
         msa_app_msi_resource_id: Optional[str] = None,
         developer_app_insight_key: Optional[str] = None,
@@ -566,7 +568,7 @@ class BotProperties(msrest.serialization.Model):
         luis_key: Optional[str] = None,
         is_cmek_enabled: Optional[bool] = None,
         cmek_key_vault_url: Optional[str] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = "Enabled",
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = "Enabled",
         is_streaming_supported: Optional[bool] = False,
         disable_local_auth: Optional[bool] = None,
         schema_transformation_version: Optional[str] = None,
@@ -591,8 +593,8 @@ class BotProperties(msrest.serialization.Model):
         :paramtype parameters: dict[str, str]
         :keyword manifest_url: The bot's manifest url.
         :paramtype manifest_url: str
-        :keyword msa_app_type: Microsoft App Type for the bot. Possible values include:
-         "UserAssignedMSI", "SingleTenant", "MultiTenant".
+        :keyword msa_app_type: Microsoft App Type for the bot. Known values are: "UserAssignedMSI",
+         "SingleTenant", "MultiTenant".
         :paramtype msa_app_type: str or ~azure.mgmt.botservice.models.MsaAppType
         :keyword msa_app_id: Required. Microsoft App Id for the bot.
         :paramtype msa_app_id: str
@@ -614,8 +616,8 @@ class BotProperties(msrest.serialization.Model):
         :paramtype is_cmek_enabled: bool
         :keyword cmek_key_vault_url: The CMK Url.
         :paramtype cmek_key_vault_url: str
-        :keyword public_network_access: Whether the bot is in an isolated network. Possible values
-         include: "Enabled", "Disabled". Default value: "Enabled".
+        :keyword public_network_access: Whether the bot is in an isolated network. Known values are:
+         "Enabled", "Disabled". Default value: "Enabled".
         :paramtype public_network_access: str or ~azure.mgmt.botservice.models.PublicNetworkAccess
         :keyword is_streaming_supported: Whether the bot is streaming supported.
         :paramtype is_streaming_supported: bool
@@ -783,7 +785,7 @@ class ChannelSettings(msrest.serialization.Model):
         *,
         extension_key1: Optional[str] = None,
         extension_key2: Optional[str] = None,
-        sites: Optional[List["Site"]] = None,
+        sites: Optional[List["_models.Site"]] = None,
         channel_id: Optional[str] = None,
         channel_display_name: Optional[str] = None,
         bot_id: Optional[str] = None,
@@ -935,7 +937,7 @@ class ConnectionSetting(Resource):
     :vartype tags: dict[str, str]
     :ivar sku: Gets or sets the SKU of the resource.
     :vartype sku: ~azure.mgmt.botservice.models.Sku
-    :ivar kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+    :ivar kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
      "designer", "bot", "function", "azurebot".
     :vartype kind: str or ~azure.mgmt.botservice.models.Kind
     :ivar etag: Entity Tag.
@@ -971,10 +973,10 @@ class ConnectionSetting(Resource):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["Sku"] = None,
-        kind: Optional[Union[str, "Kind"]] = None,
+        sku: Optional["_models.Sku"] = None,
+        kind: Optional[Union[str, "_models.Kind"]] = None,
         etag: Optional[str] = None,
-        properties: Optional["ConnectionSettingProperties"] = None,
+        properties: Optional["_models.ConnectionSettingProperties"] = None,
         **kwargs
     ):
         """
@@ -984,7 +986,7 @@ class ConnectionSetting(Resource):
         :paramtype tags: dict[str, str]
         :keyword sku: Gets or sets the SKU of the resource.
         :paramtype sku: ~azure.mgmt.botservice.models.Sku
-        :keyword kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+        :keyword kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
          "designer", "bot", "function", "azurebot".
         :paramtype kind: str or ~azure.mgmt.botservice.models.Kind
         :keyword etag: Entity Tag.
@@ -1083,7 +1085,7 @@ class ConnectionSettingProperties(msrest.serialization.Model):
         scopes: Optional[str] = None,
         service_provider_id: Optional[str] = None,
         service_provider_display_name: Optional[str] = None,
-        parameters: Optional[List["ConnectionSettingParameter"]] = None,
+        parameters: Optional[List["_models.ConnectionSettingParameter"]] = None,
         provisioning_state: Optional[str] = None,
         **kwargs
     ):
@@ -1195,7 +1197,7 @@ class DirectLineChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["DirectLineChannelProperties"] = None,
+        properties: Optional["_models.DirectLineChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -1228,7 +1230,7 @@ class DirectLineChannelProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        sites: Optional[List["DirectLineSite"]] = None,
+        sites: Optional[List["_models.DirectLineSite"]] = None,
         direct_line_embed_code: Optional[str] = None,
         **kwargs
     ):
@@ -1379,7 +1381,7 @@ class DirectLineSpeechChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["DirectLineSpeechChannelProperties"] = None,
+        properties: Optional["_models.DirectLineSpeechChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -1505,7 +1507,7 @@ class EmailChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["EmailChannelProperties"] = None,
+        properties: Optional["_models.EmailChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -1583,7 +1585,7 @@ class Error(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorBody"] = None,
+        error: Optional["_models.ErrorBody"] = None,
         **kwargs
     ):
         """
@@ -1670,7 +1672,7 @@ class FacebookChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["FacebookChannelProperties"] = None,
+        properties: Optional["_models.FacebookChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -1730,7 +1732,7 @@ class FacebookChannelProperties(msrest.serialization.Model):
         *,
         app_id: str,
         is_enabled: bool,
-        pages: Optional[List["FacebookPage"]] = None,
+        pages: Optional[List["_models.FacebookPage"]] = None,
         app_secret: Optional[str] = None,
         **kwargs
     ):
@@ -1909,7 +1911,7 @@ class KikChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["KikChannelProperties"] = None,
+        properties: Optional["_models.KikChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -2017,7 +2019,7 @@ class LineChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["LineChannelProperties"] = None,
+        properties: Optional["_models.LineChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -2063,7 +2065,7 @@ class LineChannelProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        line_registrations: List["LineRegistration"],
+        line_registrations: List["_models.LineRegistration"],
         **kwargs
     ):
         """
@@ -2135,7 +2137,7 @@ class ListChannelWithKeysResponse(BotChannel):
     :vartype tags: dict[str, str]
     :ivar sku: Gets or sets the SKU of the resource.
     :vartype sku: ~azure.mgmt.botservice.models.Sku
-    :ivar kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+    :ivar kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
      "designer", "bot", "function", "azurebot".
     :vartype kind: str or ~azure.mgmt.botservice.models.Kind
     :ivar etag: Entity Tag.
@@ -2186,12 +2188,12 @@ class ListChannelWithKeysResponse(BotChannel):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["Sku"] = None,
-        kind: Optional[Union[str, "Kind"]] = None,
+        sku: Optional["_models.Sku"] = None,
+        kind: Optional[Union[str, "_models.Kind"]] = None,
         etag: Optional[str] = None,
-        properties: Optional["Channel"] = None,
-        resource: Optional["Channel"] = None,
-        setting: Optional["ChannelSettings"] = None,
+        properties: Optional["_models.Channel"] = None,
+        resource: Optional["_models.Channel"] = None,
+        setting: Optional["_models.ChannelSettings"] = None,
         provisioning_state: Optional[str] = None,
         entity_tag: Optional[str] = None,
         changed_time: Optional[str] = None,
@@ -2204,7 +2206,7 @@ class ListChannelWithKeysResponse(BotChannel):
         :paramtype tags: dict[str, str]
         :keyword sku: Gets or sets the SKU of the resource.
         :paramtype sku: ~azure.mgmt.botservice.models.Sku
-        :keyword kind: Required. Gets or sets the Kind of the resource. Possible values include: "sdk",
+        :keyword kind: Required. Gets or sets the Kind of the resource. Known values are: "sdk",
          "designer", "bot", "function", "azurebot".
         :paramtype kind: str or ~azure.mgmt.botservice.models.Kind
         :keyword etag: Entity Tag.
@@ -2267,7 +2269,7 @@ class MsTeamsChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["MsTeamsChannelProperties"] = None,
+        properties: Optional["_models.MsTeamsChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -2419,7 +2421,7 @@ class OperationEntity(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationDisplayInfo"] = None,
+        display: Optional["_models.OperationDisplayInfo"] = None,
         origin: Optional[str] = None,
         properties: Optional[Any] = None,
         **kwargs
@@ -2459,7 +2461,7 @@ class OperationEntityListResult(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["OperationEntity"]] = None,
+        value: Optional[List["_models.OperationEntity"]] = None,
         **kwargs
     ):
         """
@@ -2482,7 +2484,7 @@ class OperationResultsDescription(msrest.serialization.Model):
     :vartype id: str
     :ivar name: The name of the operation result.
     :vartype name: str
-    :ivar status: The status of the operation being performed. Possible values include: "Canceled",
+    :ivar status: The status of the operation being performed. Known values are: "Canceled",
      "Succeeded", "Failed", "Requested", "Running".
     :vartype status: str or ~azure.mgmt.botservice.models.OperationResultStatus
     :ivar start_time: The time that the operation was started.
@@ -2602,7 +2604,7 @@ class PrivateEndpointConnection(PrivateLinkResourceBase):
     :vartype private_link_service_connection_state:
      ~azure.mgmt.botservice.models.PrivateLinkServiceConnectionState
     :ivar provisioning_state: The provisioning state of the private endpoint connection resource.
-     Possible values include: "Succeeded", "Creating", "Deleting", "Failed".
+     Known values are: "Succeeded", "Creating", "Deleting", "Failed".
     :vartype provisioning_state: str or
      ~azure.mgmt.botservice.models.PrivateEndpointConnectionProvisioningState
     """
@@ -2626,8 +2628,8 @@ class PrivateEndpointConnection(PrivateLinkResourceBase):
     def __init__(
         self,
         *,
-        private_endpoint: Optional["PrivateEndpoint"] = None,
-        private_link_service_connection_state: Optional["PrivateLinkServiceConnectionState"] = None,
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+        private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
         **kwargs
     ):
         """
@@ -2658,7 +2660,7 @@ class PrivateEndpointConnectionListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateEndpointConnection"]] = None,
+        value: Optional[List["_models.PrivateEndpointConnection"]] = None,
         **kwargs
     ):
         """
@@ -2737,7 +2739,7 @@ class PrivateLinkResourceListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateLinkResource"]] = None,
+        value: Optional[List["_models.PrivateLinkResource"]] = None,
         **kwargs
     ):
         """
@@ -2752,7 +2754,7 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     """A collection of information about the state of the connection between service consumer and provider.
 
     :ivar status: Indicates whether the connection has been Approved/Rejected/Removed by the owner
-     of the service. Possible values include: "Pending", "Approved", "Rejected".
+     of the service. Known values are: "Pending", "Approved", "Rejected".
     :vartype status: str or ~azure.mgmt.botservice.models.PrivateEndpointServiceConnectionStatus
     :ivar description: The reason for approval/rejection of the connection.
     :vartype description: str
@@ -2770,14 +2772,14 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Optional[Union[str, "PrivateEndpointServiceConnectionStatus"]] = None,
+        status: Optional[Union[str, "_models.PrivateEndpointServiceConnectionStatus"]] = None,
         description: Optional[str] = None,
         actions_required: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword status: Indicates whether the connection has been Approved/Rejected/Removed by the
-         owner of the service. Possible values include: "Pending", "Approved", "Rejected".
+         owner of the service. Known values are: "Pending", "Approved", "Rejected".
         :paramtype status: str or ~azure.mgmt.botservice.models.PrivateEndpointServiceConnectionStatus
         :keyword description: The reason for approval/rejection of the connection.
         :paramtype description: str
@@ -2789,6 +2791,84 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
         self.status = status
         self.description = description
         self.actions_required = actions_required
+
+
+class QnAMakerEndpointKeysRequestBody(msrest.serialization.Model):
+    """The request body for a request to Bot Service Management to list QnA Maker endpoint keys.
+
+    :ivar hostname: the host name of the QnA Maker endpoint.
+    :vartype hostname: str
+    :ivar authkey: Subscription key which provides access to this API.
+    :vartype authkey: str
+    """
+
+    _attribute_map = {
+        'hostname': {'key': 'hostname', 'type': 'str'},
+        'authkey': {'key': 'authkey', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        hostname: Optional[str] = None,
+        authkey: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword hostname: the host name of the QnA Maker endpoint.
+        :paramtype hostname: str
+        :keyword authkey: Subscription key which provides access to this API.
+        :paramtype authkey: str
+        """
+        super(QnAMakerEndpointKeysRequestBody, self).__init__(**kwargs)
+        self.hostname = hostname
+        self.authkey = authkey
+
+
+class QnAMakerEndpointKeysResponse(msrest.serialization.Model):
+    """Schema for EndpointKeys generate/refresh operations.
+
+    :ivar primary_endpoint_key: Primary Access Key.
+    :vartype primary_endpoint_key: str
+    :ivar secondary_endpoint_key: Secondary Access Key.
+    :vartype secondary_endpoint_key: str
+    :ivar installed_version: Current version of runtime.
+    :vartype installed_version: str
+    :ivar last_stable_version: Latest version of runtime.
+    :vartype last_stable_version: str
+    """
+
+    _attribute_map = {
+        'primary_endpoint_key': {'key': 'primaryEndpointKey', 'type': 'str'},
+        'secondary_endpoint_key': {'key': 'secondaryEndpointKey', 'type': 'str'},
+        'installed_version': {'key': 'installedVersion', 'type': 'str'},
+        'last_stable_version': {'key': 'lastStableVersion', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        primary_endpoint_key: Optional[str] = None,
+        secondary_endpoint_key: Optional[str] = None,
+        installed_version: Optional[str] = None,
+        last_stable_version: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword primary_endpoint_key: Primary Access Key.
+        :paramtype primary_endpoint_key: str
+        :keyword secondary_endpoint_key: Secondary Access Key.
+        :paramtype secondary_endpoint_key: str
+        :keyword installed_version: Current version of runtime.
+        :paramtype installed_version: str
+        :keyword last_stable_version: Latest version of runtime.
+        :paramtype last_stable_version: str
+        """
+        super(QnAMakerEndpointKeysResponse, self).__init__(**kwargs)
+        self.primary_endpoint_key = primary_endpoint_key
+        self.secondary_endpoint_key = secondary_endpoint_key
+        self.installed_version = installed_version
+        self.last_stable_version = last_stable_version
 
 
 class ServiceProvider(msrest.serialization.Model):
@@ -2805,7 +2885,7 @@ class ServiceProvider(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        properties: Optional["ServiceProviderProperties"] = None,
+        properties: Optional["_models.ServiceProviderProperties"] = None,
         **kwargs
     ):
         """
@@ -2887,7 +2967,7 @@ class ServiceProviderParameterMetadata(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        constraints: Optional["ServiceProviderParameterMetadataConstraints"] = None,
+        constraints: Optional["_models.ServiceProviderParameterMetadataConstraints"] = None,
         **kwargs
     ):
         """
@@ -2963,7 +3043,7 @@ class ServiceProviderProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        parameters: Optional[List["ServiceProviderParameter"]] = None,
+        parameters: Optional[List["_models.ServiceProviderParameter"]] = None,
         **kwargs
     ):
         """
@@ -3203,8 +3283,6 @@ class Site(WebChatSite, DirectLineSite):
         self.key2 = None
         self.is_enabled = is_enabled
         self.is_webchat_preview_enabled = is_webchat_preview_enabled
-        self.is_token_enabled = is_token_enabled
-        self.e_tag = e_tag
 
 
 class SiteInfo(msrest.serialization.Model):
@@ -3214,8 +3292,8 @@ class SiteInfo(msrest.serialization.Model):
 
     :ivar site_name: Required. The site name.
     :vartype site_name: str
-    :ivar key: Required. Determines which key is to be regenerated. Possible values include:
-     "key1", "key2".
+    :ivar key: Required. Determines which key is to be regenerated. Known values are: "key1",
+     "key2".
     :vartype key: str or ~azure.mgmt.botservice.models.Key
     """
 
@@ -3233,14 +3311,14 @@ class SiteInfo(msrest.serialization.Model):
         self,
         *,
         site_name: str,
-        key: Union[str, "Key"],
+        key: Union[str, "_models.Key"],
         **kwargs
     ):
         """
         :keyword site_name: Required. The site name.
         :paramtype site_name: str
-        :keyword key: Required. Determines which key is to be regenerated. Possible values include:
-         "key1", "key2".
+        :keyword key: Required. Determines which key is to be regenerated. Known values are: "key1",
+         "key2".
         :paramtype key: str or ~azure.mgmt.botservice.models.Key
         """
         super(SiteInfo, self).__init__(**kwargs)
@@ -3255,9 +3333,9 @@ class Sku(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar name: Required. The sku name. Possible values include: "F0", "S1".
+    :ivar name: Required. The sku name. Known values are: "F0", "S1".
     :vartype name: str or ~azure.mgmt.botservice.models.SkuName
-    :ivar tier: Gets the sku tier. This is based on the SKU name. Possible values include: "Free",
+    :ivar tier: Gets the sku tier. This is based on the SKU name. Known values are: "Free",
      "Standard".
     :vartype tier: str or ~azure.mgmt.botservice.models.SkuTier
     """
@@ -3275,11 +3353,11 @@ class Sku(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        name: Union[str, "SkuName"],
+        name: Union[str, "_models.SkuName"],
         **kwargs
     ):
         """
-        :keyword name: Required. The sku name. Possible values include: "F0", "S1".
+        :keyword name: Required. The sku name. Known values are: "F0", "S1".
         :paramtype name: str or ~azure.mgmt.botservice.models.SkuName
         """
         super(Sku, self).__init__(**kwargs)
@@ -3324,7 +3402,7 @@ class SkypeChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["SkypeChannelProperties"] = None,
+        properties: Optional["_models.SkypeChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -3471,7 +3549,7 @@ class SlackChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["SlackChannelProperties"] = None,
+        properties: Optional["_models.SlackChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -3524,7 +3602,6 @@ class SlackChannelProperties(msrest.serialization.Model):
     _validation = {
         'redirect_action': {'readonly': True},
         'last_submission_id': {'readonly': True},
-        'register_before_o_auth_flow': {'readonly': True},
         'is_validated': {'readonly': True},
         'is_enabled': {'required': True},
     }
@@ -3552,6 +3629,7 @@ class SlackChannelProperties(msrest.serialization.Model):
         verification_token: Optional[str] = None,
         scopes: Optional[str] = None,
         landing_page_url: Optional[str] = None,
+        register_before_o_auth_flow: Optional[bool] = None,
         signing_secret: Optional[str] = None,
         **kwargs
     ):
@@ -3568,6 +3646,9 @@ class SlackChannelProperties(msrest.serialization.Model):
         :paramtype scopes: str
         :keyword landing_page_url: The Slack landing page Url.
         :paramtype landing_page_url: str
+        :keyword register_before_o_auth_flow: Whether to register the settings before OAuth validation
+         is performed. Recommended to True.
+        :paramtype register_before_o_auth_flow: bool
         :keyword signing_secret: The Slack signing secret.
         :paramtype signing_secret: str
         :keyword is_enabled: Required. Whether this channel is enabled for the bot.
@@ -3581,7 +3662,7 @@ class SlackChannelProperties(msrest.serialization.Model):
         self.landing_page_url = landing_page_url
         self.redirect_action = None
         self.last_submission_id = None
-        self.register_before_o_auth_flow = None
+        self.register_before_o_auth_flow = register_before_o_auth_flow
         self.is_validated = None
         self.signing_secret = signing_secret
         self.is_enabled = is_enabled
@@ -3624,7 +3705,7 @@ class SmsChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["SmsChannelProperties"] = None,
+        properties: Optional["_models.SmsChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -3742,7 +3823,7 @@ class TelegramChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["TelegramChannelProperties"] = None,
+        properties: Optional["_models.TelegramChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -3842,7 +3923,7 @@ class WebChatChannel(Channel):
         *,
         etag: Optional[str] = None,
         location: Optional[str] = "global",
-        properties: Optional["WebChatChannelProperties"] = None,
+        properties: Optional["_models.WebChatChannelProperties"] = None,
         **kwargs
     ):
         """
@@ -3881,7 +3962,7 @@ class WebChatChannelProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        sites: Optional[List["WebChatSite"]] = None,
+        sites: Optional[List["_models.WebChatSite"]] = None,
         **kwargs
     ):
         """
