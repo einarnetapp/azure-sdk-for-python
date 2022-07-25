@@ -2181,16 +2181,24 @@ class VirtualNetworkSubnetUsageResult(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
+    :ivar location: The location name.
+    :vartype location: str
+    :ivar subscription_id: The subscription id.
+    :vartype subscription_id: str
     :ivar delegated_subnets_usage: A list of delegated subnet usage.
     :vartype delegated_subnets_usage:
      list[~azure.mgmt.rdbms.mysql_flexibleservers.models.DelegatedSubnetUsage]
     """
 
     _validation = {
+        'location': {'readonly': True},
+        'subscription_id': {'readonly': True},
         'delegated_subnets_usage': {'readonly': True},
     }
 
     _attribute_map = {
+        'location': {'key': 'location', 'type': 'str'},
+        'subscription_id': {'key': 'subscriptionId', 'type': 'str'},
         'delegated_subnets_usage': {'key': 'delegatedSubnetsUsage', 'type': '[DelegatedSubnetUsage]'},
     }
 
@@ -2201,4 +2209,6 @@ class VirtualNetworkSubnetUsageResult(msrest.serialization.Model):
         """
         """
         super(VirtualNetworkSubnetUsageResult, self).__init__(**kwargs)
+        self.location = None
+        self.subscription_id = None
         self.delegated_subnets_usage = None
