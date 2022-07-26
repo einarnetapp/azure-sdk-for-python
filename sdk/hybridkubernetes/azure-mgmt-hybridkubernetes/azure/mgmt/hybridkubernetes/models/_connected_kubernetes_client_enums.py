@@ -6,34 +6,18 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
-from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from enum import Enum
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class AuthenticationMethod(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AuthenticationMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The mode of client authentication.
     """
 
     TOKEN = "Token"
     AAD = "AAD"
 
-class ConnectivityStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ConnectivityStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represents the connectivity status of the connected cluster.
     """
 
@@ -42,7 +26,7 @@ class ConnectivityStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     OFFLINE = "Offline"
     EXPIRED = "Expired"
 
-class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -51,7 +35,7 @@ class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class LastModifiedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class LastModifiedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that last modified the resource.
     """
 
@@ -60,7 +44,7 @@ class LastModifiedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class ProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The current deployment state of connectedClusters.
     """
 
@@ -72,7 +56,7 @@ class ProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     DELETING = "Deleting"
     ACCEPTED = "Accepted"
 
-class ResourceIdentityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity used for the connected cluster. The type 'SystemAssigned, includes a
     system created identity. The type 'None' means no identity is assigned to the connected
     cluster.
