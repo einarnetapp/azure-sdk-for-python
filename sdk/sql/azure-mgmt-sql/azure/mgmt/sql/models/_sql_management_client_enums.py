@@ -392,6 +392,10 @@ class DnsRefreshConfigurationPropertiesStatus(str, Enum, metaclass=CaseInsensiti
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
 
+class DtcName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    CURRENT = "current"
+
 class ElasticPoolLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The license type to apply for this elastic pool.
     """
