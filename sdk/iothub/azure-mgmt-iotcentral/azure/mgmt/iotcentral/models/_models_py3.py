@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._iot_central_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class Resource(msrest.serialization.Model):
@@ -145,7 +147,7 @@ class App(TrackedResource):
     :vartype sku: ~azure.mgmt.iotcentral.models.AppSkuInfo
     :ivar identity: The managed identities for the IoT Central application.
     :vartype identity: ~azure.mgmt.iotcentral.models.SystemAssignedServiceIdentity
-    :ivar provisioning_state: The provisioning state of the application. Possible values include:
+    :ivar provisioning_state: The provisioning state of the application. Known values are:
      "Creating", "Deleting", "Updating", "Succeeded", "Failed", "Canceled".
     :vartype provisioning_state: str or ~azure.mgmt.iotcentral.models.ProvisioningState
     :ivar application_id: The ID of the application.
@@ -158,11 +160,10 @@ class App(TrackedResource):
      characteristics and behaviors of an application. Optional; if not specified, defaults to a
      blank blueprint and allows the application to be defined from scratch.
     :vartype template: str
-    :ivar state: The current state of the application. Possible values include: "created",
-     "suspended".
+    :ivar state: The current state of the application. Known values are: "created", "suspended".
     :vartype state: str or ~azure.mgmt.iotcentral.models.AppState
-    :ivar public_network_access: Whether requests from the public network are allowed. Possible
-     values include: "Enabled", "Disabled".
+    :ivar public_network_access: Whether requests from the public network are allowed. Known values
+     are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.iotcentral.models.PublicNetworkAccess
     :ivar network_rule_sets: Network Rule Set Properties of this IoT Central application.
     :vartype network_rule_sets: ~azure.mgmt.iotcentral.models.NetworkRuleSets
@@ -209,14 +210,14 @@ class App(TrackedResource):
         self,
         *,
         location: str,
-        sku: "AppSkuInfo",
+        sku: "_models.AppSkuInfo",
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["SystemAssignedServiceIdentity"] = None,
+        identity: Optional["_models.SystemAssignedServiceIdentity"] = None,
         display_name: Optional[str] = None,
         subdomain: Optional[str] = None,
         template: Optional[str] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
-        network_rule_sets: Optional["NetworkRuleSets"] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
+        network_rule_sets: Optional["_models.NetworkRuleSets"] = None,
         **kwargs
     ):
         """
@@ -236,8 +237,8 @@ class App(TrackedResource):
          characteristics and behaviors of an application. Optional; if not specified, defaults to a
          blank blueprint and allows the application to be defined from scratch.
         :paramtype template: str
-        :keyword public_network_access: Whether requests from the public network are allowed. Possible
-         values include: "Enabled", "Disabled".
+        :keyword public_network_access: Whether requests from the public network are allowed. Known
+         values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.iotcentral.models.PublicNetworkAccess
         :keyword network_rule_sets: Network Rule Set Properties of this IoT Central application.
         :paramtype network_rule_sets: ~azure.mgmt.iotcentral.models.NetworkRuleSets
@@ -311,7 +312,7 @@ class AppListResult(msrest.serialization.Model):
         self,
         *,
         next_link: Optional[str] = None,
-        value: Optional[List["App"]] = None,
+        value: Optional[List["_models.App"]] = None,
         **kwargs
     ):
         """
@@ -336,7 +337,7 @@ class AppPatch(msrest.serialization.Model):
     :vartype sku: ~azure.mgmt.iotcentral.models.AppSkuInfo
     :ivar identity: The managed identities for the IoT Central application.
     :vartype identity: ~azure.mgmt.iotcentral.models.SystemAssignedServiceIdentity
-    :ivar provisioning_state: The provisioning state of the application. Possible values include:
+    :ivar provisioning_state: The provisioning state of the application. Known values are:
      "Creating", "Deleting", "Updating", "Succeeded", "Failed", "Canceled".
     :vartype provisioning_state: str or ~azure.mgmt.iotcentral.models.ProvisioningState
     :ivar application_id: The ID of the application.
@@ -349,11 +350,10 @@ class AppPatch(msrest.serialization.Model):
      characteristics and behaviors of an application. Optional; if not specified, defaults to a
      blank blueprint and allows the application to be defined from scratch.
     :vartype template: str
-    :ivar state: The current state of the application. Possible values include: "created",
-     "suspended".
+    :ivar state: The current state of the application. Known values are: "created", "suspended".
     :vartype state: str or ~azure.mgmt.iotcentral.models.AppState
-    :ivar public_network_access: Whether requests from the public network are allowed. Possible
-     values include: "Enabled", "Disabled".
+    :ivar public_network_access: Whether requests from the public network are allowed. Known values
+     are: "Enabled", "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.iotcentral.models.PublicNetworkAccess
     :ivar network_rule_sets: Network Rule Set Properties of this IoT Central application.
     :vartype network_rule_sets: ~azure.mgmt.iotcentral.models.NetworkRuleSets
@@ -389,13 +389,13 @@ class AppPatch(msrest.serialization.Model):
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        sku: Optional["AppSkuInfo"] = None,
-        identity: Optional["SystemAssignedServiceIdentity"] = None,
+        sku: Optional["_models.AppSkuInfo"] = None,
+        identity: Optional["_models.SystemAssignedServiceIdentity"] = None,
         display_name: Optional[str] = None,
         subdomain: Optional[str] = None,
         template: Optional[str] = None,
-        public_network_access: Optional[Union[str, "PublicNetworkAccess"]] = None,
-        network_rule_sets: Optional["NetworkRuleSets"] = None,
+        public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
+        network_rule_sets: Optional["_models.NetworkRuleSets"] = None,
         **kwargs
     ):
         """
@@ -413,8 +413,8 @@ class AppPatch(msrest.serialization.Model):
          characteristics and behaviors of an application. Optional; if not specified, defaults to a
          blank blueprint and allows the application to be defined from scratch.
         :paramtype template: str
-        :keyword public_network_access: Whether requests from the public network are allowed. Possible
-         values include: "Enabled", "Disabled".
+        :keyword public_network_access: Whether requests from the public network are allowed. Known
+         values are: "Enabled", "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.iotcentral.models.PublicNetworkAccess
         :keyword network_rule_sets: Network Rule Set Properties of this IoT Central application.
         :paramtype network_rule_sets: ~azure.mgmt.iotcentral.models.NetworkRuleSets
@@ -439,7 +439,7 @@ class AppSkuInfo(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar name: Required. The name of the SKU. Possible values include: "ST0", "ST1", "ST2".
+    :ivar name: Required. The name of the SKU. Known values are: "ST0", "ST1", "ST2".
     :vartype name: str or ~azure.mgmt.iotcentral.models.AppSku
     """
 
@@ -454,11 +454,11 @@ class AppSkuInfo(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        name: Union[str, "AppSku"],
+        name: Union[str, "_models.AppSku"],
         **kwargs
     ):
         """
-        :keyword name: Required. The name of the SKU. Possible values include: "ST0", "ST1", "ST2".
+        :keyword name: Required. The name of the SKU. Known values are: "ST0", "ST1", "ST2".
         :paramtype name: str or ~azure.mgmt.iotcentral.models.AppSku
         """
         super(AppSkuInfo, self).__init__(**kwargs)
@@ -479,7 +479,7 @@ class AppTemplate(msrest.serialization.Model):
     :ivar title: The title of the template.
     :vartype title: str
     :ivar order: The order of the template in the templates list.
-    :vartype order: float
+    :vartype order: int
     :ivar description: The description of the template.
     :vartype description: str
     :ivar industry: The industry of the template.
@@ -504,7 +504,7 @@ class AppTemplate(msrest.serialization.Model):
         'manifest_version': {'key': 'manifestVersion', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'title': {'key': 'title', 'type': 'str'},
-        'order': {'key': 'order', 'type': 'float'},
+        'order': {'key': 'order', 'type': 'int'},
         'description': {'key': 'description', 'type': 'str'},
         'industry': {'key': 'industry', 'type': 'str'},
         'locations': {'key': 'locations', 'type': '[AppTemplateLocations]'},
@@ -687,7 +687,7 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetail"] = None,
+        error: Optional["_models.ErrorDetail"] = None,
         **kwargs
     ):
         """
@@ -701,13 +701,22 @@ class ErrorResponse(msrest.serialization.Model):
 class NetworkRuleSetIpRule(msrest.serialization.Model):
     """An object for an IP range that will be allowed access.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar action: The network action for the IP mask. Known values are: "Allow".
+    :vartype action: str or ~azure.mgmt.iotcentral.models.IpRuleAction
     :ivar filter_name: The readable name of the IP rule.
     :vartype filter_name: str
     :ivar ip_mask: The CIDR block defining the IP range.
     :vartype ip_mask: str
     """
 
+    _validation = {
+        'action': {'readonly': True},
+    }
+
     _attribute_map = {
+        'action': {'key': 'action', 'type': 'str'},
         'filter_name': {'key': 'filterName', 'type': 'str'},
         'ip_mask': {'key': 'ipMask', 'type': 'str'},
     }
@@ -726,6 +735,7 @@ class NetworkRuleSetIpRule(msrest.serialization.Model):
         :paramtype ip_mask: str
         """
         super(NetworkRuleSetIpRule, self).__init__(**kwargs)
+        self.action = None
         self.filter_name = filter_name
         self.ip_mask = ip_mask
 
@@ -739,8 +749,7 @@ class NetworkRuleSets(msrest.serialization.Model):
     :ivar apply_to_io_t_central: Whether these rules apply for connectivity via IoT Central web
      portal and APIs.
     :vartype apply_to_io_t_central: bool
-    :ivar default_action: The default network action to apply. Possible values include: "Allow",
-     "Deny".
+    :ivar default_action: The default network action to apply. Known values are: "Allow", "Deny".
     :vartype default_action: str or ~azure.mgmt.iotcentral.models.NetworkAction
     :ivar ip_rules: List of IP rules.
     :vartype ip_rules: list[~azure.mgmt.iotcentral.models.NetworkRuleSetIpRule]
@@ -758,8 +767,8 @@ class NetworkRuleSets(msrest.serialization.Model):
         *,
         apply_to_devices: Optional[bool] = None,
         apply_to_io_t_central: Optional[bool] = None,
-        default_action: Optional[Union[str, "NetworkAction"]] = None,
-        ip_rules: Optional[List["NetworkRuleSetIpRule"]] = None,
+        default_action: Optional[Union[str, "_models.NetworkAction"]] = None,
+        ip_rules: Optional[List["_models.NetworkRuleSetIpRule"]] = None,
         **kwargs
     ):
         """
@@ -769,7 +778,7 @@ class NetworkRuleSets(msrest.serialization.Model):
         :keyword apply_to_io_t_central: Whether these rules apply for connectivity via IoT Central web
          portal and APIs.
         :paramtype apply_to_io_t_central: bool
-        :keyword default_action: The default network action to apply. Possible values include: "Allow",
+        :keyword default_action: The default network action to apply. Known values are: "Allow",
          "Deny".
         :paramtype default_action: str or ~azure.mgmt.iotcentral.models.NetworkAction
         :keyword ip_rules: List of IP rules.
@@ -813,7 +822,7 @@ class Operation(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         **kwargs
     ):
         """
@@ -994,7 +1003,7 @@ class PrivateEndpointConnection(Resource):
     :vartype private_link_service_connection_state:
      ~azure.mgmt.iotcentral.models.PrivateLinkServiceConnectionState
     :ivar provisioning_state: The provisioning state of the private endpoint connection resource.
-     Possible values include: "Succeeded", "Creating", "Deleting", "Failed".
+     Known values are: "Succeeded", "Creating", "Deleting", "Failed".
     :vartype provisioning_state: str or
      ~azure.mgmt.iotcentral.models.PrivateEndpointConnectionProvisioningState
     """
@@ -1022,8 +1031,8 @@ class PrivateEndpointConnection(Resource):
     def __init__(
         self,
         *,
-        private_endpoint: Optional["PrivateEndpoint"] = None,
-        private_link_service_connection_state: Optional["PrivateLinkServiceConnectionState"] = None,
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+        private_link_service_connection_state: Optional["_models.PrivateLinkServiceConnectionState"] = None,
         **kwargs
     ):
         """
@@ -1055,7 +1064,7 @@ class PrivateEndpointConnectionListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateEndpointConnection"]] = None,
+        value: Optional[List["_models.PrivateEndpointConnection"]] = None,
         **kwargs
     ):
         """
@@ -1139,7 +1148,7 @@ class PrivateLinkResourceListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["PrivateLinkResource"]] = None,
+        value: Optional[List["_models.PrivateLinkResource"]] = None,
         **kwargs
     ):
         """
@@ -1154,7 +1163,7 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     """A collection of information about the state of the connection between service consumer and provider.
 
     :ivar status: Indicates whether the connection has been Approved/Rejected/Removed by the owner
-     of the service. Possible values include: "Pending", "Approved", "Rejected".
+     of the service. Known values are: "Pending", "Approved", "Rejected".
     :vartype status: str or ~azure.mgmt.iotcentral.models.PrivateEndpointServiceConnectionStatus
     :ivar description: The reason for approval/rejection of the connection.
     :vartype description: str
@@ -1172,14 +1181,14 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Optional[Union[str, "PrivateEndpointServiceConnectionStatus"]] = None,
+        status: Optional[Union[str, "_models.PrivateEndpointServiceConnectionStatus"]] = None,
         description: Optional[str] = None,
         actions_required: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword status: Indicates whether the connection has been Approved/Rejected/Removed by the
-         owner of the service. Possible values include: "Pending", "Approved", "Rejected".
+         owner of the service. Known values are: "Pending", "Approved", "Rejected".
         :paramtype status: str or ~azure.mgmt.iotcentral.models.PrivateEndpointServiceConnectionStatus
         :keyword description: The reason for approval/rejection of the connection.
         :paramtype description: str
@@ -1206,8 +1215,8 @@ class SystemAssignedServiceIdentity(msrest.serialization.Model):
     :ivar tenant_id: The tenant ID of the system assigned identity. This property will only be
      provided for a system assigned identity.
     :vartype tenant_id: str
-    :ivar type: Required. Type of managed service identity (either system assigned, or none).
-     Possible values include: "None", "SystemAssigned".
+    :ivar type: Required. Type of managed service identity (either system assigned, or none). Known
+     values are: "None", "SystemAssigned".
     :vartype type: str or ~azure.mgmt.iotcentral.models.SystemAssignedServiceIdentityType
     """
 
@@ -1226,12 +1235,12 @@ class SystemAssignedServiceIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Union[str, "SystemAssignedServiceIdentityType"],
+        type: Union[str, "_models.SystemAssignedServiceIdentityType"],
         **kwargs
     ):
         """
         :keyword type: Required. Type of managed service identity (either system assigned, or none).
-         Possible values include: "None", "SystemAssigned".
+         Known values are: "None", "SystemAssigned".
         :paramtype type: str or ~azure.mgmt.iotcentral.models.SystemAssignedServiceIdentityType
         """
         super(SystemAssignedServiceIdentity, self).__init__(**kwargs)
@@ -1245,15 +1254,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.iotcentral.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.iotcentral.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -1272,25 +1281,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.iotcentral.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.iotcentral.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
