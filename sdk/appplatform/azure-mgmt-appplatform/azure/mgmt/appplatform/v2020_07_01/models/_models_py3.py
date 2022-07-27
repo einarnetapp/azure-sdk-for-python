@@ -6,11 +6,13 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._app_platform_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class Resource(msrest.serialization.Model):
@@ -121,8 +123,8 @@ class AppResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["AppResourceProperties"] = None,
-        identity: Optional["ManagedIdentityProperties"] = None,
+        properties: Optional["_models.AppResourceProperties"] = None,
+        identity: Optional["_models.ManagedIdentityProperties"] = None,
         location: Optional[str] = None,
         **kwargs
     ):
@@ -159,7 +161,7 @@ class AppResourceCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["AppResource"]] = None,
+        value: Optional[List["_models.AppResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -184,7 +186,7 @@ class AppResourceProperties(msrest.serialization.Model):
     :vartype public: bool
     :ivar url: URL of the App.
     :vartype url: str
-    :ivar provisioning_state: Provisioning state of the App. Possible values include: "Succeeded",
+    :ivar provisioning_state: Provisioning state of the App. Known values are: "Succeeded",
      "Failed", "Creating", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.appplatform.v2020_07_01.models.AppResourceProvisioningState
@@ -227,8 +229,8 @@ class AppResourceProperties(msrest.serialization.Model):
         active_deployment_name: Optional[str] = None,
         fqdn: Optional[str] = None,
         https_only: Optional[bool] = False,
-        temporary_disk: Optional["TemporaryDisk"] = None,
-        persistent_disk: Optional["PersistentDisk"] = None,
+        temporary_disk: Optional["_models.TemporaryDisk"] = None,
+        persistent_disk: Optional["_models.PersistentDisk"] = None,
         **kwargs
     ):
         """
@@ -275,7 +277,7 @@ class AvailableOperations(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["OperationDetail"]] = None,
+        value: Optional[List["_models.OperationDetail"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -349,7 +351,7 @@ class BindingResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["BindingResourceProperties"] = None,
+        properties: Optional["_models.BindingResourceProperties"] = None,
         **kwargs
     ):
         """
@@ -378,7 +380,7 @@ class BindingResourceCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["BindingResource"]] = None,
+        value: Optional[List["_models.BindingResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -578,7 +580,7 @@ class CertificateResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["CertificateProperties"] = None,
+        properties: Optional["_models.CertificateProperties"] = None,
         **kwargs
     ):
         """
@@ -606,7 +608,7 @@ class CertificateResourceCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["CertificateResource"]] = None,
+        value: Optional[List["_models.CertificateResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -650,7 +652,7 @@ class CloudErrorBody(msrest.serialization.Model):
         code: Optional[str] = None,
         message: Optional[str] = None,
         target: Optional[str] = None,
-        details: Optional[List["CloudErrorBody"]] = None,
+        details: Optional[List["_models.CloudErrorBody"]] = None,
         **kwargs
     ):
         """
@@ -678,9 +680,8 @@ class ClusterResourceProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: Provisioning state of the Service. Possible values include:
-     "Creating", "Updating", "Deleting", "Deleted", "Succeeded", "Failed", "Moving", "Moved",
-     "MoveFailed".
+    :ivar provisioning_state: Provisioning state of the Service. Known values are: "Creating",
+     "Updating", "Deleting", "Deleted", "Succeeded", "Failed", "Moving", "Moved", "MoveFailed".
     :vartype provisioning_state: str or
      ~azure.mgmt.appplatform.v2020_07_01.models.ProvisioningState
     :ivar network_profile: Network profile of the Service.
@@ -707,7 +708,7 @@ class ClusterResourceProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        network_profile: Optional["NetworkProfile"] = None,
+        network_profile: Optional["_models.NetworkProfile"] = None,
         **kwargs
     ):
         """
@@ -769,7 +770,7 @@ class ConfigServerGitProperty(msrest.serialization.Model):
         self,
         *,
         uri: str,
-        repositories: Optional[List["GitPatternRepository"]] = None,
+        repositories: Optional[List["_models.GitPatternRepository"]] = None,
         label: Optional[str] = None,
         search_paths: Optional[List[str]] = None,
         username: Optional[str] = None,
@@ -820,7 +821,7 @@ class ConfigServerProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: State of the config server. Possible values include: "NotAvailable",
+    :ivar provisioning_state: State of the config server. Known values are: "NotAvailable",
      "Deleted", "Failed", "Succeeded", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.appplatform.v2020_07_01.models.ConfigServerState
@@ -843,8 +844,8 @@ class ConfigServerProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["Error"] = None,
-        config_server: Optional["ConfigServerSettings"] = None,
+        error: Optional["_models.Error"] = None,
+        config_server: Optional["_models.ConfigServerSettings"] = None,
         **kwargs
     ):
         """
@@ -890,7 +891,7 @@ class ConfigServerResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["ConfigServerProperties"] = None,
+        properties: Optional["_models.ConfigServerProperties"] = None,
         **kwargs
     ):
         """
@@ -915,7 +916,7 @@ class ConfigServerSettings(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        git_property: Optional["ConfigServerGitProperty"] = None,
+        git_property: Optional["_models.ConfigServerGitProperty"] = None,
         **kwargs
     ):
         """
@@ -984,7 +985,7 @@ class ConfigServerSettingsValidateResult(msrest.serialization.Model):
         self,
         *,
         is_valid: Optional[bool] = None,
-        details: Optional[List["ConfigServerSettingsErrorRecord"]] = None,
+        details: Optional[List["_models.ConfigServerSettingsErrorRecord"]] = None,
         **kwargs
     ):
         """
@@ -1072,7 +1073,7 @@ class CustomDomainResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["CustomDomainProperties"] = None,
+        properties: Optional["_models.CustomDomainProperties"] = None,
         **kwargs
     ):
         """
@@ -1100,7 +1101,7 @@ class CustomDomainResourceCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["CustomDomainResource"]] = None,
+        value: Optional[List["_models.CustomDomainResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1259,8 +1260,8 @@ class DeploymentResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["DeploymentResourceProperties"] = None,
-        sku: Optional["Sku"] = None,
+        properties: Optional["_models.DeploymentResourceProperties"] = None,
+        sku: Optional["_models.Sku"] = None,
         **kwargs
     ):
         """
@@ -1292,7 +1293,7 @@ class DeploymentResourceCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["DeploymentResource"]] = None,
+        value: Optional[List["_models.DeploymentResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1319,12 +1320,12 @@ class DeploymentResourceProperties(msrest.serialization.Model):
     :vartype app_name: str
     :ivar deployment_settings: Deployment settings of the Deployment.
     :vartype deployment_settings: ~azure.mgmt.appplatform.v2020_07_01.models.DeploymentSettings
-    :ivar provisioning_state: Provisioning state of the Deployment. Possible values include:
-     "Creating", "Updating", "Succeeded", "Failed".
+    :ivar provisioning_state: Provisioning state of the Deployment. Known values are: "Creating",
+     "Updating", "Succeeded", "Failed".
     :vartype provisioning_state: str or
      ~azure.mgmt.appplatform.v2020_07_01.models.DeploymentResourceProvisioningState
-    :ivar status: Status of the Deployment. Possible values include: "Unknown", "Stopped",
-     "Running", "Failed", "Allocating", "Upgrading", "Compiling".
+    :ivar status: Status of the Deployment. Known values are: "Unknown", "Stopped", "Running",
+     "Failed", "Allocating", "Upgrading", "Compiling".
     :vartype status: str or ~azure.mgmt.appplatform.v2020_07_01.models.DeploymentResourceStatus
     :ivar active: Indicates whether the Deployment is active.
     :vartype active: bool
@@ -1357,8 +1358,8 @@ class DeploymentResourceProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        source: Optional["UserSourceInfo"] = None,
-        deployment_settings: Optional["DeploymentSettings"] = None,
+        source: Optional["_models.UserSourceInfo"] = None,
+        deployment_settings: Optional["_models.DeploymentSettings"] = None,
         **kwargs
     ):
         """
@@ -1392,8 +1393,8 @@ class DeploymentSettings(msrest.serialization.Model):
     :vartype net_core_main_entry_path: str
     :ivar environment_variables: Collection of environment variables.
     :vartype environment_variables: dict[str, str]
-    :ivar runtime_version: Runtime version. Possible values include: "Java_8", "Java_11",
-     "NetCore_31". Default value: "Java_8".
+    :ivar runtime_version: Runtime version. Known values are: "Java_8", "Java_11", "NetCore_31".
+     Default value: "Java_8".
     :vartype runtime_version: str or ~azure.mgmt.appplatform.v2020_07_01.models.RuntimeVersion
     """
 
@@ -1414,7 +1415,7 @@ class DeploymentSettings(msrest.serialization.Model):
         jvm_options: Optional[str] = None,
         net_core_main_entry_path: Optional[str] = None,
         environment_variables: Optional[Dict[str, str]] = None,
-        runtime_version: Optional[Union[str, "RuntimeVersion"]] = "Java_8",
+        runtime_version: Optional[Union[str, "_models.RuntimeVersion"]] = "Java_8",
         **kwargs
     ):
         """
@@ -1429,8 +1430,8 @@ class DeploymentSettings(msrest.serialization.Model):
         :paramtype net_core_main_entry_path: str
         :keyword environment_variables: Collection of environment variables.
         :paramtype environment_variables: dict[str, str]
-        :keyword runtime_version: Runtime version. Possible values include: "Java_8", "Java_11",
-         "NetCore_31". Default value: "Java_8".
+        :keyword runtime_version: Runtime version. Known values are: "Java_8", "Java_11", "NetCore_31".
+         Default value: "Java_8".
         :paramtype runtime_version: str or ~azure.mgmt.appplatform.v2020_07_01.models.RuntimeVersion
         """
         super(DeploymentSettings, self).__init__(**kwargs)
@@ -1649,7 +1650,7 @@ class LogSpecification(msrest.serialization.Model):
 class ManagedIdentityProperties(msrest.serialization.Model):
     """Managed identity properties retrieved from ARM request headers.
 
-    :ivar type: Type of the managed identity. Possible values include: "None", "SystemAssigned",
+    :ivar type: Type of the managed identity. Known values are: "None", "SystemAssigned",
      "UserAssigned", "SystemAssigned,UserAssigned".
     :vartype type: str or ~azure.mgmt.appplatform.v2020_07_01.models.ManagedIdentityType
     :ivar principal_id: Principal Id.
@@ -1667,13 +1668,13 @@ class ManagedIdentityProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "ManagedIdentityType"]] = None,
+        type: Optional[Union[str, "_models.ManagedIdentityType"]] = None,
         principal_id: Optional[str] = None,
         tenant_id: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword type: Type of the managed identity. Possible values include: "None", "SystemAssigned",
+        :keyword type: Type of the managed identity. Known values are: "None", "SystemAssigned",
          "UserAssigned", "SystemAssigned,UserAssigned".
         :paramtype type: str or ~azure.mgmt.appplatform.v2020_07_01.models.ManagedIdentityType
         :keyword principal_id: Principal Id.
@@ -1784,7 +1785,7 @@ class MetricSpecification(msrest.serialization.Model):
         supported_aggregation_types: Optional[List[str]] = None,
         supported_time_grain_types: Optional[List[str]] = None,
         fill_gap_with_zero: Optional[bool] = None,
-        dimensions: Optional[List["MetricDimension"]] = None,
+        dimensions: Optional[List["_models.MetricDimension"]] = None,
         source_mdm_namespace: Optional[str] = None,
         **kwargs
     ):
@@ -1834,8 +1835,8 @@ class MonitoringSettingProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: State of the Monitoring Setting. Possible values include:
-     "NotAvailable", "Failed", "Succeeded", "Updating".
+    :ivar provisioning_state: State of the Monitoring Setting. Known values are: "NotAvailable",
+     "Failed", "Succeeded", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.appplatform.v2020_07_01.models.MonitoringSettingState
     :ivar error: Error when apply Monitoring Setting changes.
@@ -1860,7 +1861,7 @@ class MonitoringSettingProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["Error"] = None,
+        error: Optional["_models.Error"] = None,
         trace_enabled: Optional[bool] = None,
         app_insights_instrumentation_key: Optional[str] = None,
         **kwargs
@@ -1911,7 +1912,7 @@ class MonitoringSettingResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional["MonitoringSettingProperties"] = None,
+        properties: Optional["_models.MonitoringSettingProperties"] = None,
         **kwargs
     ):
         """
@@ -2114,7 +2115,7 @@ class OperationDetail(msrest.serialization.Model):
     :ivar display: Display of the operation.
     :vartype display: ~azure.mgmt.appplatform.v2020_07_01.models.OperationDisplay
     :ivar action_type: Enum. Indicates the action type. "Internal" refers to actions that are for
-     internal only APIs. Possible values include: "Internal".
+     internal only APIs. Known values are: "Internal".
     :vartype action_type: str or ~azure.mgmt.appplatform.v2020_07_01.models.ActionType
     :ivar origin: Origin of the operation.
     :vartype origin: str
@@ -2140,9 +2141,9 @@ class OperationDetail(msrest.serialization.Model):
         *,
         name: Optional[str] = None,
         is_data_action: Optional[bool] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         origin: Optional[str] = None,
-        properties: Optional["OperationProperties"] = None,
+        properties: Optional["_models.OperationProperties"] = None,
         **kwargs
     ):
         """
@@ -2226,7 +2227,7 @@ class OperationProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        service_specification: Optional["ServiceSpecification"] = None,
+        service_specification: Optional["_models.ServiceSpecification"] = None,
         **kwargs
     ):
         """
@@ -2286,8 +2287,7 @@ class RegenerateTestKeyRequestPayload(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar key_type: Required. Type of the test key. Possible values include: "Primary",
-     "Secondary".
+    :ivar key_type: Required. Type of the test key. Known values are: "Primary", "Secondary".
     :vartype key_type: str or ~azure.mgmt.appplatform.v2020_07_01.models.TestKeyType
     """
 
@@ -2302,12 +2302,11 @@ class RegenerateTestKeyRequestPayload(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        key_type: Union[str, "TestKeyType"],
+        key_type: Union[str, "_models.TestKeyType"],
         **kwargs
     ):
         """
-        :keyword key_type: Required. Type of the test key. Possible values include: "Primary",
-         "Secondary".
+        :keyword key_type: Required. Type of the test key. Known values are: "Primary", "Secondary".
         :paramtype key_type: str or ~azure.mgmt.appplatform.v2020_07_01.models.TestKeyType
         """
         super(RegenerateTestKeyRequestPayload, self).__init__(**kwargs)
@@ -2327,8 +2326,7 @@ class RequiredTraffic(msrest.serialization.Model):
     :vartype ips: list[str]
     :ivar fqdns: The FQDN list of required traffic.
     :vartype fqdns: list[str]
-    :ivar direction: The direction of required traffic. Possible values include: "Inbound",
-     "Outbound".
+    :ivar direction: The direction of required traffic. Known values are: "Inbound", "Outbound".
     :vartype direction: str or ~azure.mgmt.appplatform.v2020_07_01.models.TrafficDirection
     """
 
@@ -2400,10 +2398,10 @@ class ResourceSku(msrest.serialization.Model):
         resource_type: Optional[str] = None,
         name: Optional[str] = None,
         tier: Optional[str] = None,
-        capacity: Optional["SkuCapacity"] = None,
+        capacity: Optional["_models.SkuCapacity"] = None,
         locations: Optional[List[str]] = None,
-        location_info: Optional[List["ResourceSkuLocationInfo"]] = None,
-        restrictions: Optional[List["ResourceSkuRestrictions"]] = None,
+        location_info: Optional[List["_models.ResourceSkuLocationInfo"]] = None,
+        restrictions: Optional[List["_models.ResourceSkuRestrictions"]] = None,
         **kwargs
     ):
         """
@@ -2486,7 +2484,7 @@ class ResourceSkuCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ResourceSku"]] = None,
+        value: Optional[List["_models.ResourceSku"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2524,7 +2522,7 @@ class ResourceSkuLocationInfo(msrest.serialization.Model):
         *,
         location: Optional[str] = None,
         zones: Optional[List[str]] = None,
-        zone_details: Optional[List["ResourceSkuZoneDetails"]] = None,
+        zone_details: Optional[List["_models.ResourceSkuZoneDetails"]] = None,
         **kwargs
     ):
         """
@@ -2577,8 +2575,8 @@ class ResourceSkuRestrictionInfo(msrest.serialization.Model):
 class ResourceSkuRestrictions(msrest.serialization.Model):
     """Restrictions where the SKU cannot be used.
 
-    :ivar type: Gets the type of restrictions. Possible values include: 'Location', 'Zone'.
-     Possible values include: "Location", "Zone".
+    :ivar type: Gets the type of restrictions. Possible values include: 'Location', 'Zone'. Known
+     values are: "Location", "Zone".
     :vartype type: str or ~azure.mgmt.appplatform.v2020_07_01.models.ResourceSkuRestrictionsType
     :ivar values: Gets the value of restrictions. If the restriction type is set to
      location. This would be different locations where the SKU is restricted.
@@ -2588,8 +2586,7 @@ class ResourceSkuRestrictions(msrest.serialization.Model):
     :vartype restriction_info:
      ~azure.mgmt.appplatform.v2020_07_01.models.ResourceSkuRestrictionInfo
     :ivar reason_code: Gets the reason for restriction. Possible values include: 'QuotaId',
-     'NotAvailableForSubscription'. Possible values include: "QuotaId",
-     "NotAvailableForSubscription".
+     'NotAvailableForSubscription'. Known values are: "QuotaId", "NotAvailableForSubscription".
     :vartype reason_code: str or
      ~azure.mgmt.appplatform.v2020_07_01.models.ResourceSkuRestrictionsReasonCode
     """
@@ -2604,15 +2601,15 @@ class ResourceSkuRestrictions(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "ResourceSkuRestrictionsType"]] = None,
+        type: Optional[Union[str, "_models.ResourceSkuRestrictionsType"]] = None,
         values: Optional[List[str]] = None,
-        restriction_info: Optional["ResourceSkuRestrictionInfo"] = None,
-        reason_code: Optional[Union[str, "ResourceSkuRestrictionsReasonCode"]] = None,
+        restriction_info: Optional["_models.ResourceSkuRestrictionInfo"] = None,
+        reason_code: Optional[Union[str, "_models.ResourceSkuRestrictionsReasonCode"]] = None,
         **kwargs
     ):
         """
         :keyword type: Gets the type of restrictions. Possible values include: 'Location', 'Zone'.
-         Possible values include: "Location", "Zone".
+         Known values are: "Location", "Zone".
         :paramtype type: str or ~azure.mgmt.appplatform.v2020_07_01.models.ResourceSkuRestrictionsType
         :keyword values: Gets the value of restrictions. If the restriction type is set to
          location. This would be different locations where the SKU is restricted.
@@ -2622,8 +2619,7 @@ class ResourceSkuRestrictions(msrest.serialization.Model):
         :paramtype restriction_info:
          ~azure.mgmt.appplatform.v2020_07_01.models.ResourceSkuRestrictionInfo
         :keyword reason_code: Gets the reason for restriction. Possible values include: 'QuotaId',
-         'NotAvailableForSubscription'. Possible values include: "QuotaId",
-         "NotAvailableForSubscription".
+         'NotAvailableForSubscription'. Known values are: "QuotaId", "NotAvailableForSubscription".
         :paramtype reason_code: str or
          ~azure.mgmt.appplatform.v2020_07_01.models.ResourceSkuRestrictionsReasonCode
         """
@@ -2654,7 +2650,7 @@ class ResourceSkuZoneDetails(msrest.serialization.Model):
         self,
         *,
         name: Optional[List[str]] = None,
-        capabilities: Optional[List["ResourceSkuCapabilities"]] = None,
+        capabilities: Optional[List["_models.ResourceSkuCapabilities"]] = None,
         **kwargs
     ):
         """
@@ -2797,8 +2793,8 @@ class ServiceResource(TrackedResource):
         *,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
-        properties: Optional["ClusterResourceProperties"] = None,
-        sku: Optional["Sku"] = None,
+        properties: Optional["_models.ClusterResourceProperties"] = None,
+        sku: Optional["_models.Sku"] = None,
         **kwargs
     ):
         """
@@ -2835,7 +2831,7 @@ class ServiceResourceList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ServiceResource"]] = None,
+        value: Optional[List["_models.ServiceResource"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -2869,8 +2865,8 @@ class ServiceSpecification(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        log_specifications: Optional[List["LogSpecification"]] = None,
-        metric_specifications: Optional[List["MetricSpecification"]] = None,
+        log_specifications: Optional[List["_models.LogSpecification"]] = None,
+        metric_specifications: Optional[List["_models.MetricSpecification"]] = None,
         **kwargs
     ):
         """
@@ -2936,8 +2932,8 @@ class SkuCapacity(msrest.serialization.Model):
     :vartype maximum: int
     :ivar default: Gets or sets the default.
     :vartype default: int
-    :ivar scale_type: Gets or sets the type of the scale. Possible values include: "None",
-     "Manual", "Automatic".
+    :ivar scale_type: Gets or sets the type of the scale. Known values are: "None", "Manual",
+     "Automatic".
     :vartype scale_type: str or ~azure.mgmt.appplatform.v2020_07_01.models.SkuScaleType
     """
 
@@ -2958,7 +2954,7 @@ class SkuCapacity(msrest.serialization.Model):
         minimum: int,
         maximum: Optional[int] = None,
         default: Optional[int] = None,
-        scale_type: Optional[Union[str, "SkuScaleType"]] = None,
+        scale_type: Optional[Union[str, "_models.SkuScaleType"]] = None,
         **kwargs
     ):
         """
@@ -2968,8 +2964,8 @@ class SkuCapacity(msrest.serialization.Model):
         :paramtype maximum: int
         :keyword default: Gets or sets the default.
         :paramtype default: int
-        :keyword scale_type: Gets or sets the type of the scale. Possible values include: "None",
-         "Manual", "Automatic".
+        :keyword scale_type: Gets or sets the type of the scale. Known values are: "None", "Manual",
+         "Automatic".
         :paramtype scale_type: str or ~azure.mgmt.appplatform.v2020_07_01.models.SkuScaleType
         """
         super(SkuCapacity, self).__init__(**kwargs)
@@ -2982,11 +2978,11 @@ class SkuCapacity(msrest.serialization.Model):
 class SupportedRuntimeVersion(msrest.serialization.Model):
     """Supported deployment runtime version descriptor.
 
-    :ivar value: The raw value which could be passed to deployment CRUD operations. Possible values
-     include: "Java_8", "Java_11", "NetCore_31".
+    :ivar value: The raw value which could be passed to deployment CRUD operations. Known values
+     are: "Java_8", "Java_11", "NetCore_31".
     :vartype value: str or ~azure.mgmt.appplatform.v2020_07_01.models.SupportedRuntimeValue
-    :ivar platform: The platform of this runtime version (possible values: "Java" or ".NET").
-     Possible values include: "Java", ".NET Core".
+    :ivar platform: The platform of this runtime version (possible values: "Java" or ".NET"). Known
+     values are: "Java", ".NET Core".
     :vartype platform: str or ~azure.mgmt.appplatform.v2020_07_01.models.SupportedRuntimePlatform
     :ivar version: The detailed version (major.minor) of the platform.
     :vartype version: str
@@ -3001,17 +2997,17 @@ class SupportedRuntimeVersion(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[Union[str, "SupportedRuntimeValue"]] = None,
-        platform: Optional[Union[str, "SupportedRuntimePlatform"]] = None,
+        value: Optional[Union[str, "_models.SupportedRuntimeValue"]] = None,
+        platform: Optional[Union[str, "_models.SupportedRuntimePlatform"]] = None,
         version: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword value: The raw value which could be passed to deployment CRUD operations. Possible
-         values include: "Java_8", "Java_11", "NetCore_31".
+        :keyword value: The raw value which could be passed to deployment CRUD operations. Known values
+         are: "Java_8", "Java_11", "NetCore_31".
         :paramtype value: str or ~azure.mgmt.appplatform.v2020_07_01.models.SupportedRuntimeValue
         :keyword platform: The platform of this runtime version (possible values: "Java" or ".NET").
-         Possible values include: "Java", ".NET Core".
+         Known values are: "Java", ".NET Core".
         :paramtype platform: str or ~azure.mgmt.appplatform.v2020_07_01.models.SupportedRuntimePlatform
         :keyword version: The detailed version (major.minor) of the platform.
         :paramtype version: str
@@ -3114,8 +3110,7 @@ class TestKeys(msrest.serialization.Model):
 class UserSourceInfo(msrest.serialization.Model):
     """Source information for a deployment.
 
-    :ivar type: Type of the source uploaded. Possible values include: "Jar", "NetCoreZip",
-     "Source".
+    :ivar type: Type of the source uploaded. Known values are: "Jar", "NetCoreZip", "Source".
     :vartype type: str or ~azure.mgmt.appplatform.v2020_07_01.models.UserSourceType
     :ivar relative_path: Relative path of the storage which stores the source.
     :vartype relative_path: str
@@ -3137,15 +3132,14 @@ class UserSourceInfo(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "UserSourceType"]] = None,
+        type: Optional[Union[str, "_models.UserSourceType"]] = None,
         relative_path: Optional[str] = None,
         version: Optional[str] = None,
         artifact_selector: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword type: Type of the source uploaded. Possible values include: "Jar", "NetCoreZip",
-         "Source".
+        :keyword type: Type of the source uploaded. Known values are: "Jar", "NetCoreZip", "Source".
         :paramtype type: str or ~azure.mgmt.appplatform.v2020_07_01.models.UserSourceType
         :keyword relative_path: Relative path of the storage which stores the source.
         :paramtype relative_path: str
