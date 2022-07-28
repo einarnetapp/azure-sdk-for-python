@@ -14,7 +14,7 @@ from azure.core.rest import HttpRequest, HttpResponse
 
 from ._configuration import DeviceUpdateClientConfiguration
 from ._serialization import Deserializer, Serializer
-from .operations import DeviceManagementOperations, DeviceUpdateOperations
+from .operations import DeploymentsOperations, DevicesOperations, UpdatesOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -31,37 +31,33 @@ class DeviceUpdateClient:  # pylint: disable=client-accepts-api-version-keyword
     knows when and how to update devices, enabling customers to focus on their business goals and
     let Device Update for IoT Hub handle the updates.
 
-    :ivar device_update: DeviceUpdateOperations operations
-    :vartype device_update: azure.iot.deviceupdate.operations.DeviceUpdateOperations
-    :ivar device_management: DeviceManagementOperations operations
-    :vartype device_management: azure.iot.deviceupdate.operations.DeviceManagementOperations
-    :param endpoint: Account endpoint. Required.
-    :type endpoint: str
+    :ivar updates: UpdatesOperations operations
+    :vartype updates: azure.iot.deviceupdate.operations.UpdatesOperations
+    :ivar devices: DevicesOperations operations
+    :vartype devices: azure.iot.deviceupdate.operations.DevicesOperations
+    :ivar deployments: DeploymentsOperations operations
+    :vartype deployments: azure.iot.deviceupdate.operations.DeploymentsOperations
+    :param account_endpoint: Account endpoint. Required.
+    :type account_endpoint: str
     :param instance_id: Account instance identifier. Required.
     :type instance_id: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :keyword api_version: Api Version. Default value is "2022-07-01-preview". Note that overriding
-     this default value may result in unsupported behavior.
-    :paramtype api_version: str
-    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-     Retry-After header is present.
     """
 
-    def __init__(self, endpoint: str, instance_id: str, credential: "TokenCredential", **kwargs: Any) -> None:
-        _endpoint = "https://{endpoint}"
+    def __init__(self, account_endpoint: str, instance_id: str, credential: "TokenCredential", **kwargs: Any) -> None:
+        _endpoint = "https://{accountEndpoint}"
         self._config = DeviceUpdateClientConfiguration(
-            endpoint=endpoint, instance_id=instance_id, credential=credential, **kwargs
+            account_endpoint=account_endpoint, instance_id=instance_id, credential=credential, **kwargs
         )
         self._client = PipelineClient(base_url=_endpoint, config=self._config, **kwargs)
 
         self._serialize = Serializer()
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
-        self.device_update = DeviceUpdateOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.device_management = DeviceManagementOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.updates = UpdatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.devices = DevicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.deployments = DeploymentsOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
@@ -83,7 +79,9 @@ class DeviceUpdateClient:  # pylint: disable=client-accepts-api-version-keyword
 
         request_copy = deepcopy(request)
         path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
+            "accountEndpoint": self._serialize.url(
+                "self._config.account_endpoint", self._config.account_endpoint, "str", skip_quote=True
+            ),
         }
 
         request_copy.url = self._client.format_url(request_copy.url, **path_format_arguments)
