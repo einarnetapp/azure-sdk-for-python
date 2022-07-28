@@ -27,10 +27,10 @@ ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dic
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_list_request(
+def build_list_detectors_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
+    container_app_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -40,11 +40,11 @@ def build_list_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
+        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -64,11 +64,11 @@ def build_list_request(
     )
 
 
-def build_get_request(
+def build_get_detector_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
-    certificate_name: str,
+    container_app_name: str,
+    detector_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -78,12 +78,12 @@ def build_get_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors/{detectorName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, 'str'),
+        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, 'str'),
+        "detectorName": _SERIALIZER.url("detector_name", detector_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -103,58 +103,52 @@ def build_get_request(
     )
 
 
-def build_create_or_update_request(
+def build_list_revisions_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
-    certificate_name: str,
+    container_app_name: str,
     *,
-    json: Optional[_models.Certificate] = None,
-    content: Any = None,
+    filter: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
-    content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, 'str'),
+        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    if filter is not None:
+        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
 
     # Construct headers
-    if content_type is not None:
-        _headers['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
     _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
-        method="PUT",
+        method="GET",
         url=_url,
         params=_params,
         headers=_headers,
-        json=json,
-        content=content,
         **kwargs
     )
 
 
-def build_delete_request(
+def build_get_revision_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
-    certificate_name: str,
+    container_app_name: str,
+    revision_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -164,12 +158,12 @@ def build_delete_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/{revisionName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, 'str'),
+        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, 'str'),
+        "revisionName": _SERIALIZER.url("revision_name", revision_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -181,7 +175,7 @@ def build_delete_request(
     _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
-        method="DELETE",
+        method="GET",
         url=_url,
         params=_params,
         headers=_headers,
@@ -189,30 +183,24 @@ def build_delete_request(
     )
 
 
-def build_update_request(
+def build_get_root_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
-    certificate_name: str,
-    *,
-    json: Optional[_models.CertificatePatch] = None,
-    content: Any = None,
+    container_app_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
-    content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/rootApi/")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, 'str'),
+        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -221,28 +209,24 @@ def build_update_request(
     _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
-    if content_type is not None:
-        _headers['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
     _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
-        method="PATCH",
+        method="GET",
         url=_url,
         params=_params,
         headers=_headers,
-        json=json,
-        content=content,
         **kwargs
     )
 
-class CertificatesOperations:
+class ContainerAppsDiagnosticsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.ContainerAppsAPIClient`'s
-        :attr:`certificates` attribute.
+        :attr:`container_apps_diagnostics` attribute.
     """
 
     models = _models
@@ -256,31 +240,31 @@ class CertificatesOperations:
 
 
     @distributed_trace
-    def list(
+    def list_detectors(
         self,
         resource_group_name: str,
-        environment_name: str,
+        container_app_name: str,
         **kwargs: Any
-    ) -> Iterable[_models.CertificateCollection]:
-        """Get the Certificates in a given managed environment.
+    ) -> Iterable[_models.DiagnosticsCollection]:
+        """Get the list of diagnostics for a given Container App.
 
-        Get the Certificates in a given managed environment.
+        Get the list of diagnostics for a given Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param container_app_name: Name of the Container App for which detector info is needed.
+        :type container_app_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either CertificateCollection or the result of
+        :return: An iterator like instance of either DiagnosticsCollection or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.CertificateCollection]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.DiagnosticsCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.CertificateCollection]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.DiagnosticsCollection]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -289,12 +273,12 @@ class CertificatesOperations:
         def prepare_request(next_link=None):
             if not next_link:
                 
-                request = build_list_request(
+                request = build_list_detectors_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    container_app_name=container_app_name,
                     api_version=api_version,
-                    template_url=self.list.metadata['url'],
+                    template_url=self.list_detectors.metadata['url'],
                     headers=_headers,
                     params=_params,
                 )
@@ -303,10 +287,10 @@ class CertificatesOperations:
 
             else:
                 
-                request = build_list_request(
+                request = build_list_detectors_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    container_app_name=container_app_name,
                     api_version=api_version,
                     template_url=next_link,
                     headers=_headers,
@@ -318,7 +302,7 @@ class CertificatesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("CertificateCollection", pipeline_response)
+            deserialized = self._deserialize("DiagnosticsCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -345,29 +329,29 @@ class CertificatesOperations:
         return ItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates"}  # type: ignore
+    list_detectors.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors"}  # type: ignore
 
     @distributed_trace
-    def get(
+    def get_detector(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
+        container_app_name: str,
+        detector_name: str,
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Get the specified Certificate.
+    ) -> _models.Diagnostics:
+        """Get a diagnostics result of a Container App.
 
-        Get the specified Certificate.
+        Get a diagnostics result of a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
+        :param container_app_name: Name of the Container App.
+        :type container_app_name: str
+        :param detector_name: Name of the Container App Detector.
+        :type detector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: Diagnostics, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.Diagnostics
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -379,16 +363,16 @@ class CertificatesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Certificate]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Diagnostics]
 
         
-        request = build_get_request(
+        request = build_get_detector_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            container_app_name=container_app_name,
+            detector_name=detector_name,
             api_version=api_version,
-            template_url=self.get.metadata['url'],
+            template_url=self.get_detector.metadata['url'],
             headers=_headers,
             params=_params,
         )
@@ -407,117 +391,133 @@ class CertificatesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('Certificate', pipeline_response)
+        deserialized = self._deserialize('Diagnostics', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    get_detector.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectors/{detectorName}"}  # type: ignore
 
 
     @distributed_trace
-    def create_or_update(
+    def list_revisions(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: Optional[_models.Certificate] = None,
+        container_app_name: str,
+        filter: Optional[str] = None,
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Create or Update a Certificate.
+    ) -> Iterable[_models.RevisionCollection]:
+        """Get the Revisions for a given Container App.
 
-        Create or Update a Certificate.
+        Get the Revisions for a given Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
-        :param certificate_envelope: Certificate to be created or updated. Default value is None.
-        :type certificate_envelope: ~azure.mgmt.app.models.Certificate
+        :param container_app_name: Name of the Container App for which Revisions are needed.
+        :type container_app_name: str
+        :param filter: The filter to apply on the operation. Default value is None.
+        :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: An iterator like instance of either RevisionCollection or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.RevisionCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.RevisionCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
         error_map.update(kwargs.pop('error_map', {}) or {})
+        def prepare_request(next_link=None):
+            if not next_link:
+                
+                request = build_list_revisions_request(
+                    subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    container_app_name=container_app_name,
+                    api_version=api_version,
+                    filter=filter,
+                    template_url=self.list_revisions.metadata['url'],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+            else:
+                
+                request = build_list_revisions_request(
+                    subscription_id=self._config.subscription_id,
+                    resource_group_name=resource_group_name,
+                    container_app_name=container_app_name,
+                    api_version=api_version,
+                    filter=filter,
+                    template_url=next_link,
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+                request.method = "GET"
+            return request
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Certificate]
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize("RevisionCollection", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
 
-        if certificate_envelope is not None:
-            _json = self._serialize.body(certificate_envelope, 'Certificate')
-        else:
-            _json = None
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
 
-        request = build_create_or_update_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.create_or_update.metadata['url'],
-            headers=_headers,
-            params=_params,
+            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+
+        return ItemPaged(
+            get_next, extract_data
         )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('Certificate', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
-
+    list_revisions.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/"}  # type: ignore
 
     @distributed_trace
-    def delete(  # pylint: disable=inconsistent-return-statements
+    def get_revision(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
+        container_app_name: str,
+        revision_name: str,
         **kwargs: Any
-    ) -> None:
-        """Deletes the specified Certificate.
+    ) -> _models.Revision:
+        """Get a revision of a Container App.
 
-        Deletes the specified Certificate.
+        Get a revision of a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
+        :param container_app_name: Name of the Container App.
+        :type container_app_name: str
+        :param revision_name: Name of the Container App Revision.
+        :type revision_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None, or the result of cls(response)
-        :rtype: None
+        :return: Revision, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.Revision
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -529,89 +529,16 @@ class CertificatesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Revision]
 
         
-        request = build_delete_request(
+        request = build_get_revision_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            container_app_name=container_app_name,
+            revision_name=revision_name,
             api_version=api_version,
-            template_url=self.delete.metadata['url'],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
-
-
-    @distributed_trace
-    def update(
-        self,
-        resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: _models.CertificatePatch,
-        **kwargs: Any
-    ) -> _models.Certificate:
-        """Update properties of a certificate.
-
-        Patches a certificate. Currently only patching of tags is supported.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-        :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate.
-        :type certificate_name: str
-        :param certificate_envelope: Properties of a certificate that need to be updated.
-        :type certificate_envelope: ~azure.mgmt.app.models.CertificatePatch
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Certificate]
-
-        _json = self._serialize.body(certificate_envelope, 'CertificatePatch')
-
-        request = build_update_request(
-            subscription_id=self._config.subscription_id,
-            resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            template_url=self.update.metadata['url'],
+            template_url=self.get_revision.metadata['url'],
             headers=_headers,
             params=_params,
         )
@@ -630,12 +557,78 @@ class CertificatesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('Certificate', pipeline_response)
+        deserialized = self._deserialize('Revision', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    get_revision.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/revisionsApi/revisions/{revisionName}"}  # type: ignore
+
+
+    @distributed_trace
+    def get_root(
+        self,
+        resource_group_name: str,
+        container_app_name: str,
+        **kwargs: Any
+    ) -> _models.ContainerApp:
+        """Get the properties of a Container App.
+
+        Get the properties of a Container App.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param container_app_name: Name of the Container App.
+        :type container_app_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ContainerApp, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ContainerApp
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ContainerApp]
+
+        
+        request = build_get_root_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            container_app_name=container_app_name,
+            api_version=api_version,
+            template_url=self.get_root.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('ContainerApp', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get_root.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/detectorproperties/rootApi/"}  # type: ignore
 
