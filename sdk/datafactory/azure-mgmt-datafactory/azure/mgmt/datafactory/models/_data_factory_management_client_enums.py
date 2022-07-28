@@ -43,6 +43,12 @@ class AzureSearchIndexWriteBehaviorType(str, Enum, metaclass=CaseInsensitiveEnum
     MERGE = "Merge"
     UPLOAD = "Upload"
 
+class BigDataPoolReferenceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Big data pool reference type.
+    """
+
+    BIG_DATA_POOL_REFERENCE = "BigDataPoolReference"
+
 class BlobEventTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     MICROSOFT_STORAGE_BLOB_CREATED = "Microsoft.Storage.BlobCreated"
@@ -444,6 +450,21 @@ class NetezzaPartitionOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DATA_SLICE = "DataSlice"
     DYNAMIC_RANGE = "DynamicRange"
 
+class NotebookParameterType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Notebook parameter type.
+    """
+
+    STRING = "string"
+    INT = "int"
+    FLOAT = "float"
+    BOOL = "bool"
+
+class NotebookReferenceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Synapse notebook reference type.
+    """
+
+    NOTEBOOK_REFERENCE = "NotebookReference"
+
 class ODataAadServicePrincipalCredentialType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Specify the credential type (key or cert) is used for service principal.
     """
@@ -487,6 +508,13 @@ class ParameterType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     BOOL = "Bool"
     ARRAY = "Array"
     SECURE_STRING = "SecureString"
+
+class ParquetCompressionCodecEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    NONE = "none"
+    GZIP = "gzip"
+    SNAPPY = "snappy"
+    LZO = "lzo"
 
 class PhoenixAuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The authentication mechanism used to connect to the Phoenix server.
@@ -721,6 +749,12 @@ class SparkAuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     USERNAME_AND_PASSWORD = "UsernameAndPassword"
     WINDOWS_AZURE_HD_INSIGHT_SERVICE = "WindowsAzureHDInsightService"
 
+class SparkJobReferenceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Synapse spark job reference type.
+    """
+
+    SPARK_JOB_DEFINITION_REFERENCE = "SparkJobDefinitionReference"
+
 class SparkServerType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of Spark server.
     """
@@ -863,6 +897,12 @@ class TumblingWindowFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MINUTE = "Minute"
     HOUR = "Hour"
     MONTH = "Month"
+
+class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Linked service reference type.
+    """
+
+    LINKED_SERVICE_REFERENCE = "LinkedServiceReference"
 
 class VariableType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Variable type.
