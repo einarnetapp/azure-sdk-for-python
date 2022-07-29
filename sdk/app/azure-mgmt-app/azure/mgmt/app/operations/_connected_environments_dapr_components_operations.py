@@ -30,7 +30,7 @@ _SERIALIZER.client_side_validation = False
 def build_list_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
+    connected_environment_name: str,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -40,11 +40,11 @@ def build_list_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, 'str'),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -67,7 +67,7 @@ def build_list_request(
 def build_get_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
+    connected_environment_name: str,
     component_name: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -78,11 +78,11 @@ def build_get_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, 'str'),
         "componentName": _SERIALIZER.url("component_name", component_name, 'str'),
     }
 
@@ -106,7 +106,7 @@ def build_get_request(
 def build_create_or_update_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
+    connected_environment_name: str,
     component_name: str,
     *,
     json: Optional[_models.DaprComponent] = None,
@@ -121,11 +121,11 @@ def build_create_or_update_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, 'str'),
         "componentName": _SERIALIZER.url("component_name", component_name, 'str'),
     }
 
@@ -153,7 +153,7 @@ def build_create_or_update_request(
 def build_delete_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
+    connected_environment_name: str,
     component_name: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -164,11 +164,11 @@ def build_delete_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, 'str'),
         "componentName": _SERIALIZER.url("component_name", component_name, 'str'),
     }
 
@@ -192,7 +192,7 @@ def build_delete_request(
 def build_list_secrets_request(
     subscription_id: str,
     resource_group_name: str,
-    environment_name: str,
+    connected_environment_name: str,
     component_name: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -203,11 +203,11 @@ def build_list_secrets_request(
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets")  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, 'str'),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, 'str'),
         "componentName": _SERIALIZER.url("component_name", component_name, 'str'),
     }
 
@@ -227,14 +227,14 @@ def build_list_secrets_request(
         **kwargs
     )
 
-class DaprComponentsOperations:
+class ConnectedEnvironmentsDaprComponentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.ContainerAppsAPIClient`'s
-        :attr:`dapr_components` attribute.
+        :attr:`connected_environments_dapr_components` attribute.
     """
 
     models = _models
@@ -251,17 +251,17 @@ class DaprComponentsOperations:
     def list(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         **kwargs: Any
     ) -> Iterable[_models.DaprComponentsCollection]:
-        """Get the Dapr Components for a managed environment.
+        """Get the Dapr Components for a connected environment.
 
-        Get the Dapr Components for a managed environment.
+        Get the Dapr Components for a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connected environment.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either DaprComponentsCollection or the result of
          cls(response)
@@ -284,7 +284,7 @@ class DaprComponentsOperations:
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    connected_environment_name=connected_environment_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
                     headers=_headers,
@@ -298,7 +298,7 @@ class DaprComponentsOperations:
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    connected_environment_name=connected_environment_name,
                     api_version=api_version,
                     template_url=next_link,
                     headers=_headers,
@@ -337,13 +337,13 @@ class DaprComponentsOperations:
         return ItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents"}  # type: ignore
 
     @distributed_trace
     def get(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         component_name: str,
         **kwargs: Any
     ) -> _models.DaprComponent:
@@ -353,8 +353,8 @@ class DaprComponentsOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connected environment.
+        :type connected_environment_name: str
         :param component_name: Name of the Dapr Component.
         :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -377,7 +377,7 @@ class DaprComponentsOperations:
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             component_name=component_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
@@ -406,26 +406,26 @@ class DaprComponentsOperations:
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
 
     @distributed_trace
     def create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         component_name: str,
         dapr_component_envelope: _models.DaprComponent,
         **kwargs: Any
     ) -> _models.DaprComponent:
         """Creates or updates a Dapr Component.
 
-        Creates or updates a Dapr Component in a Managed Environment.
+        Creates or updates a Dapr Component in a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connected environment.
+        :type connected_environment_name: str
         :param component_name: Name of the Dapr Component.
         :type component_name: str
         :param dapr_component_envelope: Configuration details of the Dapr Component.
@@ -452,7 +452,7 @@ class DaprComponentsOperations:
         request = build_create_or_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             component_name=component_name,
             api_version=api_version,
             content_type=content_type,
@@ -483,25 +483,25 @@ class DaprComponentsOperations:
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}"}  # type: ignore
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         component_name: str,
         **kwargs: Any
     ) -> None:
         """Delete a Dapr Component.
 
-        Delete a Dapr Component from a Managed Environment.
+        Delete a Dapr Component from a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connected environment.
+        :type connected_environment_name: str
         :param component_name: Name of the Dapr Component.
         :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -524,7 +524,7 @@ class DaprComponentsOperations:
         request = build_delete_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             component_name=component_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
@@ -549,14 +549,14 @@ class DaprComponentsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
 
     @distributed_trace
     def list_secrets(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         component_name: str,
         **kwargs: Any
     ) -> _models.DaprSecretsCollection:
@@ -566,8 +566,8 @@ class DaprComponentsOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connected environment.
+        :type connected_environment_name: str
         :param component_name: Name of the Dapr Component.
         :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -590,7 +590,7 @@ class DaprComponentsOperations:
         request = build_list_secrets_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             component_name=component_name,
             api_version=api_version,
             template_url=self.list_secrets.metadata['url'],
@@ -619,5 +619,5 @@ class DaprComponentsOperations:
 
         return deserialized
 
-    list_secrets.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/daprComponents/{componentName}/listSecrets"}  # type: ignore
+    list_secrets.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets"}  # type: ignore
 
