@@ -39,7 +39,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -81,7 +81,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -122,7 +122,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -166,7 +166,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -229,13 +229,13 @@ class WatchlistItemsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> Iterable[_models.WatchlistItemList]:
-        """Get all watchlist Items.
+        """Gets all watchlist Items.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: The watchlist alias.
+        :param watchlist_alias: Watchlist Alias.
         :type watchlist_alias: str
         :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
          a previous response contains a nextLink element, the value of the nextLink element will include
@@ -250,7 +250,7 @@ class WatchlistItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WatchlistItemList]
 
         error_map = {
@@ -330,15 +330,15 @@ class WatchlistItemsOperations:
         watchlist_item_id: str,
         **kwargs: Any
     ) -> _models.WatchlistItem:
-        """Get a watchlist item.
+        """Gets a watchlist, without its watchlist items.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: The watchlist alias.
+        :param watchlist_alias: Watchlist Alias.
         :type watchlist_alias: str
-        :param watchlist_item_id: The watchlist item id (GUID).
+        :param watchlist_item_id: Watchlist Item Id (GUID).
         :type watchlist_item_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: WatchlistItem, or the result of cls(response)
@@ -353,7 +353,7 @@ class WatchlistItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WatchlistItem]
 
         
@@ -407,9 +407,9 @@ class WatchlistItemsOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: The watchlist alias.
+        :param watchlist_alias: Watchlist Alias.
         :type watchlist_alias: str
-        :param watchlist_item_id: The watchlist item id (GUID).
+        :param watchlist_item_id: Watchlist Item Id (GUID).
         :type watchlist_item_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
@@ -424,7 +424,7 @@ class WatchlistItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -469,15 +469,15 @@ class WatchlistItemsOperations:
         watchlist_item: _models.WatchlistItem,
         **kwargs: Any
     ) -> _models.WatchlistItem:
-        """Create or update a watchlist item.
+        """Creates or updates a watchlist item.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: The watchlist alias.
+        :param watchlist_alias: Watchlist Alias.
         :type watchlist_alias: str
-        :param watchlist_item_id: The watchlist item id (GUID).
+        :param watchlist_item_id: Watchlist Item Id (GUID).
         :type watchlist_item_id: str
         :param watchlist_item: The watchlist item.
         :type watchlist_item: ~azure.mgmt.securityinsight.models.WatchlistItem
@@ -494,7 +494,7 @@ class WatchlistItemsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-09-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WatchlistItem]
 
