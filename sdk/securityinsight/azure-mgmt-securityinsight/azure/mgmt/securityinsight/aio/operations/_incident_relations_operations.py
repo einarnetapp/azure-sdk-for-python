@@ -56,7 +56,7 @@ class IncidentRelationsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable[_models.RelationList]:
-        """Gets all relations for a given incident.
+        """Gets all incident relations.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -85,7 +85,7 @@ class IncidentRelationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.RelationList]
 
         error_map = {
@@ -171,7 +171,7 @@ class IncidentRelationsOperations:
         relation_name: str,
         **kwargs: Any
     ) -> _models.Relation:
-        """Gets a relation for a given incident.
+        """Gets an incident relation.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -194,7 +194,7 @@ class IncidentRelationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Relation]
 
         
@@ -243,7 +243,7 @@ class IncidentRelationsOperations:
         relation: _models.Relation,
         **kwargs: Any
     ) -> _models.Relation:
-        """Creates or updates a relation for a given incident.
+        """Creates or updates the incident relation.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -268,7 +268,7 @@ class IncidentRelationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Relation]
 
@@ -324,7 +324,7 @@ class IncidentRelationsOperations:
         relation_name: str,
         **kwargs: Any
     ) -> None:
-        """Deletes a relation for a given incident.
+        """Delete the incident relation.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -347,7 +347,7 @@ class IncidentRelationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         

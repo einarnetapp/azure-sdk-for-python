@@ -36,7 +36,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -74,7 +74,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -116,7 +116,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -160,7 +160,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -182,6 +182,92 @@ def build_delete_request(
 
     return HttpRequest(
         method="DELETE",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_connect_request(
+    subscription_id: str,
+    resource_group_name: str,
+    workspace_name: str,
+    data_connector_id: str,
+    *,
+    json: Optional[_models.DataConnectorConnectBody] = None,
+    content: Any = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+    content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/connect")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
+        "dataConnectorId": _SERIALIZER.url("data_connector_id", data_connector_id, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    if content_type is not None:
+        _headers['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        json=json,
+        content=content,
+        **kwargs
+    )
+
+
+def build_disconnect_request(
+    subscription_id: str,
+    resource_group_name: str,
+    workspace_name: str,
+    data_connector_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/disconnect")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str', min_length=1),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, 'str', max_length=90, min_length=1),
+        "dataConnectorId": _SERIALIZER.url("data_connector_id", data_connector_id, 'str'),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="POST",
         url=_url,
         params=_params,
         headers=_headers,
@@ -229,7 +315,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DataConnectorList]
 
         error_map = {
@@ -325,7 +411,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DataConnector]
 
         
@@ -395,7 +481,7 @@ class DataConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DataConnector]
 
@@ -470,7 +556,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -502,4 +588,137 @@ class DataConnectorsOperations:
             return cls(pipeline_response, None, {})
 
     delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}"}  # type: ignore
+
+
+    @distributed_trace
+    def connect(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        data_connector_id: str,
+        connect_body: _models.DataConnectorConnectBody,
+        **kwargs: Any
+    ) -> None:
+        """Connects a data connector.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param data_connector_id: Connector ID.
+        :type data_connector_id: str
+        :param connect_body: The data connector.
+        :type connect_body: ~azure.mgmt.securityinsight.models.DataConnectorConnectBody
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+
+        _json = self._serialize.body(connect_body, 'DataConnectorConnectBody')
+
+        request = build_connect_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            data_connector_id=data_connector_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.connect.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    connect.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/connect"}  # type: ignore
+
+
+    @distributed_trace
+    def disconnect(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        data_connector_id: str,
+        **kwargs: Any
+    ) -> None:
+        """Disconnect a data connector.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param data_connector_id: Connector ID.
+        :type data_connector_id: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+
+        
+        request = build_disconnect_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            data_connector_id=data_connector_id,
+            api_version=api_version,
+            template_url=self.disconnect.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    disconnect.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/disconnect"}  # type: ignore
 

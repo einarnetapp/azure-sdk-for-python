@@ -39,7 +39,7 @@ def build_create_indicator_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -82,7 +82,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -124,7 +124,7 @@ def build_create_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -168,7 +168,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -209,7 +209,7 @@ def build_query_indicators_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -255,7 +255,7 @@ def build_append_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -302,7 +302,7 @@ def build_replace_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -386,7 +386,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.ThreatIntelligenceInformation]
 
@@ -460,7 +460,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.ThreatIntelligenceInformation]
 
         
@@ -532,7 +532,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.ThreatIntelligenceInformation]
 
@@ -607,7 +607,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -669,7 +669,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.ThreatIntelligenceInformationList]
 
@@ -776,7 +776,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
@@ -848,7 +848,7 @@ class ThreatIntelligenceIndicatorOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.ThreatIntelligenceInformation]
 

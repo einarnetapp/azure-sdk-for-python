@@ -20,7 +20,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._incidents_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_alerts_request, build_list_bookmarks_request, build_list_entities_request, build_list_request
+from ...operations._incidents_operations import build_create_or_update_request, build_create_team_request, build_delete_request, build_get_request, build_list_alerts_request, build_list_bookmarks_request, build_list_entities_request, build_list_request, build_run_playbook_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -42,6 +42,83 @@ class IncidentsOperations:
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
+
+    @distributed_trace_async
+    async def run_playbook(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        incident_identifier: str,
+        request_body: Optional[_models.ManualTriggerRequestBody] = None,
+        **kwargs: Any
+    ) -> Any:
+        """Triggers playbook on a specific incident.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param incident_identifier:
+        :type incident_identifier: str
+        :param request_body:  Default value is None.
+        :type request_body: ~azure.mgmt.securityinsight.models.ManualTriggerRequestBody
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: any, or the result of cls(response)
+        :rtype: any
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[Any]
+
+        if request_body is not None:
+            _json = self._serialize.body(request_body, 'ManualTriggerRequestBody')
+        else:
+            _json = None
+
+        request = build_run_playbook_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            incident_identifier=incident_identifier,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.run_playbook.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('object', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    run_playbook.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentIdentifier}/runPlaybook"}  # type: ignore
 
 
     @distributed_trace
@@ -82,7 +159,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.IncidentList]
 
         error_map = {
@@ -165,7 +242,7 @@ class IncidentsOperations:
         incident_id: str,
         **kwargs: Any
     ) -> _models.Incident:
-        """Gets a given incident.
+        """Gets an incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -186,7 +263,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Incident]
 
         
@@ -233,7 +310,7 @@ class IncidentsOperations:
         incident: _models.Incident,
         **kwargs: Any
     ) -> _models.Incident:
-        """Creates or updates an incident.
+        """Creates or updates the incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -256,7 +333,7 @@ class IncidentsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Incident]
 
@@ -310,7 +387,7 @@ class IncidentsOperations:
         incident_id: str,
         **kwargs: Any
     ) -> None:
-        """Deletes a given incident.
+        """Delete the incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -331,7 +408,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -366,6 +443,81 @@ class IncidentsOperations:
 
 
     @distributed_trace_async
+    async def create_team(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        incident_id: str,
+        team_properties: _models.TeamProperties,
+        **kwargs: Any
+    ) -> _models.TeamInformation:
+        """Creates a Microsoft team to investigate the incident by sharing information and insights
+        between participants.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param incident_id: Incident ID.
+        :type incident_id: str
+        :param team_properties: Team properties.
+        :type team_properties: ~azure.mgmt.securityinsight.models.TeamProperties
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: TeamInformation, or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.TeamInformation
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.TeamInformation]
+
+        _json = self._serialize.body(team_properties, 'TeamProperties')
+
+        request = build_create_team_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            incident_id=incident_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.create_team.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('TeamInformation', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_team.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/createTeam"}  # type: ignore
+
+
+    @distributed_trace_async
     async def list_alerts(
         self,
         resource_group_name: str,
@@ -373,7 +525,7 @@ class IncidentsOperations:
         incident_id: str,
         **kwargs: Any
     ) -> _models.IncidentAlertList:
-        """Gets all alerts for an incident.
+        """Gets all incident alerts.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -394,7 +546,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.IncidentAlertList]
 
         
@@ -440,7 +592,7 @@ class IncidentsOperations:
         incident_id: str,
         **kwargs: Any
     ) -> _models.IncidentBookmarkList:
-        """Gets all bookmarks for an incident.
+        """Gets all incident bookmarks.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -461,7 +613,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.IncidentBookmarkList]
 
         
@@ -507,7 +659,7 @@ class IncidentsOperations:
         incident_id: str,
         **kwargs: Any
     ) -> _models.IncidentEntitiesResponse:
-        """Gets all entities for an incident.
+        """Gets all incident related entities.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -528,7 +680,7 @@ class IncidentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-07-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.IncidentEntitiesResponse]
 
         
