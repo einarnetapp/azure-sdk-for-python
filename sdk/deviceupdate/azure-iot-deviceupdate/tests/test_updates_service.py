@@ -14,9 +14,9 @@ import os
 class UpdatesClientTest(DeviceUpdateTest):
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_providers(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:
@@ -28,10 +28,10 @@ class UpdatesClientTest(DeviceUpdateTest):
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_names(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
-            deviceupdate_update_provider,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
+        deviceupdate_update_provider,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:
@@ -43,9 +43,9 @@ class UpdatesClientTest(DeviceUpdateTest):
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_names_not_found(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:
@@ -57,11 +57,11 @@ class UpdatesClientTest(DeviceUpdateTest):
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_versions(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
-            deviceupdate_update_provider,
-            deviceupdate_update_name,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
+        deviceupdate_update_provider,
+        deviceupdate_update_name,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:
@@ -73,9 +73,9 @@ class UpdatesClientTest(DeviceUpdateTest):
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_versions_not_found(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:
@@ -87,22 +87,24 @@ class UpdatesClientTest(DeviceUpdateTest):
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
-            deviceupdate_update_provider,
-            deviceupdate_update_name,
-            deviceupdate_update_version,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
+        deviceupdate_update_provider,
+        deviceupdate_update_name,
+        deviceupdate_update_version,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
-        response = client.device_update.get_update(deviceupdate_update_provider, deviceupdate_update_name, deviceupdate_update_version)
+        response = client.device_update.get_update(
+            deviceupdate_update_provider, deviceupdate_update_name, deviceupdate_update_version
+        )
         self.assertIsNotNone(response)
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_not_found(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:
@@ -113,16 +115,18 @@ class UpdatesClientTest(DeviceUpdateTest):
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_files(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
-            deviceupdate_update_provider,
-            deviceupdate_update_name,
-            deviceupdate_update_version,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
+        deviceupdate_update_provider,
+        deviceupdate_update_name,
+        deviceupdate_update_version,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:
-            response = client.device_update.list_files(deviceupdate_update_provider, deviceupdate_update_name, deviceupdate_update_version)
+            response = client.device_update.list_files(
+                deviceupdate_update_provider, deviceupdate_update_name, deviceupdate_update_version
+            )
             result = [item for item in response]
             self.assertTrue(len(result) > 0)
         except ResourceNotFoundError as e:
@@ -130,9 +134,9 @@ class UpdatesClientTest(DeviceUpdateTest):
 
     @DeviceUpdatePowerShellPreparer()
     def test_get_update_files_not_found(
-            self,
-            deviceupdate_endpoint,
-            deviceupdate_instance_id,
+        self,
+        deviceupdate_endpoint,
+        deviceupdate_instance_id,
     ):
         client = self.create_client(endpoint=deviceupdate_endpoint, instance_id=deviceupdate_instance_id)
         try:

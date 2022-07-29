@@ -1,0 +1,11 @@
+{
+  "autorest": "3.8.1",
+  "use": [
+    "@autorest/python@6.1.0",
+    "@autorest/modelerfour@4.23.5"
+  ],
+  "commit": "413df7d74c9e85a6e6743c2ecb60fdd7319100b6",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
+  "autorest_command": "autorest README.md --use=@autorest/python@6.1.0 --use=@autorest/modelerfour@4.23.5 --version=3.8.1",
+  "readme": "specification/deviceupdate/data-plane/readme.md"
+}

@@ -21,7 +21,9 @@ try:
     update_provider = os.environ["DEVICEUPDATE_UPDATE_PROVIDER"]
     update_name = os.environ["DEVICEUPDATE_UPDATE_NAME"]
 except KeyError:
-    print("Missing one of environment variables: DEVICEUPDATE_ACCOUNT_ENDPOINT, DEVICEUPDATE_INSTANCE_ID, DEVICEUPDATE_UPDATE_PROVIDER, DEVICEUPDATE_UPDATE_NAME")
+    print(
+        "Missing one of environment variables: DEVICEUPDATE_ACCOUNT_ENDPOINT, DEVICEUPDATE_INSTANCE_ID, DEVICEUPDATE_UPDATE_PROVIDER, DEVICEUPDATE_UPDATE_NAME"
+    )
     exit()
 
 # Build a client through AAD
@@ -32,4 +34,4 @@ try:
     result = [item for item in response]
     print(result)
 except HttpResponseError as e:
-    print('Failed to get update versions: {}'.format(e.response.json()))
+    print("Failed to get update versions: {}".format(e.response.json()))
