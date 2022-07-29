@@ -20,18 +20,18 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._certificates_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request, build_update_request
+from ...operations._connected_environments_certificates_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request, build_update_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class CertificatesOperations:
+class ConnectedEnvironmentsCertificatesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.aio.ContainerAppsAPIClient`'s
-        :attr:`certificates` attribute.
+        :attr:`connected_environments_certificates` attribute.
     """
 
     models = _models
@@ -48,17 +48,17 @@ class CertificatesOperations:
     def list(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         **kwargs: Any
     ) -> AsyncIterable[_models.CertificateCollection]:
-        """Get the Certificates in a given managed environment.
+        """Get the Certificates in a given connected environment.
 
-        Get the Certificates in a given managed environment.
+        Get the Certificates in a given connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Connected Environment.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either CertificateCollection or the result of
          cls(response)
@@ -81,7 +81,7 @@ class CertificatesOperations:
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    connected_environment_name=connected_environment_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
                     headers=_headers,
@@ -95,7 +95,7 @@ class CertificatesOperations:
                 request = build_list_request(
                     subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    connected_environment_name=connected_environment_name,
                     api_version=api_version,
                     template_url=next_link,
                     headers=_headers,
@@ -134,13 +134,13 @@ class CertificatesOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/certificates"}  # type: ignore
 
     @distributed_trace_async
     async def get(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         certificate_name: str,
         **kwargs: Any
     ) -> _models.Certificate:
@@ -150,8 +150,8 @@ class CertificatesOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Connected Environment.
+        :type connected_environment_name: str
         :param certificate_name: Name of the Certificate.
         :type certificate_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -174,7 +174,7 @@ class CertificatesOperations:
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             certificate_name=certificate_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
@@ -203,14 +203,14 @@ class CertificatesOperations:
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/certificates/{certificateName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         certificate_name: str,
         certificate_envelope: Optional[_models.Certificate] = None,
         **kwargs: Any
@@ -221,8 +221,8 @@ class CertificatesOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Connected Environment.
+        :type connected_environment_name: str
         :param certificate_name: Name of the Certificate.
         :type certificate_name: str
         :param certificate_envelope: Certificate to be created or updated. Default value is None.
@@ -252,7 +252,7 @@ class CertificatesOperations:
         request = build_create_or_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             certificate_name=certificate_name,
             api_version=api_version,
             content_type=content_type,
@@ -283,14 +283,14 @@ class CertificatesOperations:
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/certificates/{certificateName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         certificate_name: str,
         **kwargs: Any
     ) -> None:
@@ -300,8 +300,8 @@ class CertificatesOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Connected Environment.
+        :type connected_environment_name: str
         :param certificate_name: Name of the Certificate.
         :type certificate_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -324,7 +324,7 @@ class CertificatesOperations:
         request = build_delete_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             certificate_name=certificate_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
@@ -349,14 +349,14 @@ class CertificatesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/certificates/{certificateName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def update(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         certificate_name: str,
         certificate_envelope: _models.CertificatePatch,
         **kwargs: Any
@@ -367,8 +367,8 @@ class CertificatesOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Connected Environment.
+        :type connected_environment_name: str
         :param certificate_name: Name of the Certificate.
         :type certificate_name: str
         :param certificate_envelope: Properties of a certificate that need to be updated.
@@ -395,7 +395,7 @@ class CertificatesOperations:
         request = build_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             certificate_name=certificate_name,
             api_version=api_version,
             content_type=content_type,
@@ -426,5 +426,5 @@ class CertificatesOperations:
 
         return deserialized
 
-    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/certificates/{certificateName}"}  # type: ignore
 
