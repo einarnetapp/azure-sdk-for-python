@@ -3296,7 +3296,8 @@ class ImageOSDisk(ImageDisk):
      values are: :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>` **Linux**. Known
      values are: "Windows", "Linux".
     :vartype os_type: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemTypes
-    :ivar os_state: Required. The OS State. Known values are: "Generalized", "Specialized".
+    :ivar os_state: Required. The OS State. For managed images, use Generalized. Known values are:
+     "Generalized", "Specialized".
     :vartype os_state: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemStateTypes
     """
 
@@ -3362,7 +3363,8 @@ class ImageOSDisk(ImageDisk):
          values are: :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>` **Linux**. Known
          values are: "Windows", "Linux".
         :paramtype os_type: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemTypes
-        :keyword os_state: Required. The OS State. Known values are: "Generalized", "Specialized".
+        :keyword os_state: Required. The OS State. For managed images, use Generalized. Known values
+         are: "Generalized", "Specialized".
         :paramtype os_state: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemStateTypes
         """
         super(ImageOSDisk, self).__init__(snapshot=snapshot, managed_disk=managed_disk, blob_uri=blob_uri, caching=caching, disk_size_gb=disk_size_gb, storage_account_type=storage_account_type, disk_encryption_set=disk_encryption_set, **kwargs)
@@ -5908,6 +5910,8 @@ class RestorePointSourceMetadata(msrest.serialization.Model):
     :vartype security_profile: ~azure.mgmt.compute.v2022_03_01.models.SecurityProfile
     :ivar location: Location of the VM from which the restore point was created.
     :vartype location: str
+    :ivar user_data: The userData associated with the source VM.
+    :vartype user_data: str
     """
 
     _attribute_map = {
@@ -5919,6 +5923,7 @@ class RestorePointSourceMetadata(msrest.serialization.Model):
         'vm_id': {'key': 'vmId', 'type': 'str'},
         'security_profile': {'key': 'securityProfile', 'type': 'SecurityProfile'},
         'location': {'key': 'location', 'type': 'str'},
+        'user_data': {'key': 'userData', 'type': 'str'},
     }
 
     def __init__(
@@ -5932,6 +5937,7 @@ class RestorePointSourceMetadata(msrest.serialization.Model):
         vm_id: Optional[str] = None,
         security_profile: Optional["_models.SecurityProfile"] = None,
         location: Optional[str] = None,
+        user_data: Optional[str] = None,
         **kwargs
     ):
         """
@@ -5952,6 +5958,8 @@ class RestorePointSourceMetadata(msrest.serialization.Model):
         :paramtype security_profile: ~azure.mgmt.compute.v2022_03_01.models.SecurityProfile
         :keyword location: Location of the VM from which the restore point was created.
         :paramtype location: str
+        :keyword user_data: The userData associated with the source VM.
+        :paramtype user_data: str
         """
         super(RestorePointSourceMetadata, self).__init__(**kwargs)
         self.hardware_profile = hardware_profile
@@ -5962,6 +5970,7 @@ class RestorePointSourceMetadata(msrest.serialization.Model):
         self.vm_id = vm_id
         self.security_profile = security_profile
         self.location = location
+        self.user_data = user_data
 
 
 class RestorePointSourceVMDataDisk(msrest.serialization.Model):
