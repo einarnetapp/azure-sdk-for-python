@@ -26,23 +26,23 @@ ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dic
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_list_by_bot_resource_request(
-    resource_group_name: str,
-    resource_name: str,
+def build_get_request(
     subscription_id: str,
+    *,
+    json: Optional[_models.QnAMakerEndpointKeysRequestBody] = None,
+    content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-15-preview"))  # type: str
+    content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateLinkResources")  # pylint: disable=line-too-long
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/listQnAMakerEndpointKeys")  # pylint: disable=line-too-long
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str', max_length=64, min_length=2, pattern=r'^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'),
-        "resourceName": _SERIALIZER.url("resource_name", resource_name, 'str', max_length=64, min_length=2, pattern=r'^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
     }
 
@@ -52,24 +52,28 @@ def build_list_by_bot_resource_request(
     _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
+    if content_type is not None:
+        _headers['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
     _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
-        method="GET",
+        method="POST",
         url=_url,
         params=_params,
         headers=_headers,
+        json=json,
+        content=content,
         **kwargs
     )
 
-class PrivateLinkResourcesOperations:
+class QnAMakerEndpointKeysOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.botservice.AzureBotService`'s
-        :attr:`private_link_resources` attribute.
+        :attr:`qn_amaker_endpoint_keys` attribute.
     """
 
     models = _models
@@ -83,21 +87,19 @@ class PrivateLinkResourcesOperations:
 
 
     @distributed_trace
-    def list_by_bot_resource(
+    def get(
         self,
-        resource_group_name: str,
-        resource_name: str,
+        parameters: _models.QnAMakerEndpointKeysRequestBody,
         **kwargs: Any
-    ) -> _models.PrivateLinkResourceListResult:
-        """Gets the private link resources that need to be created for a Bot.
+    ) -> _models.QnAMakerEndpointKeysResponse:
+        """Lists the QnA Maker endpoint keys.
 
-        :param resource_group_name: The name of the Bot resource group in the user subscription.
-        :type resource_group_name: str
-        :param resource_name: The name of the Bot resource.
-        :type resource_name: str
+        :param parameters: The request body parameters to provide for the check name availability
+         request.
+        :type parameters: ~azure.mgmt.botservice.models.QnAMakerEndpointKeysRequestBody
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PrivateLinkResourceListResult, or the result of cls(response)
-        :rtype: ~azure.mgmt.botservice.models.PrivateLinkResourceListResult
+        :return: QnAMakerEndpointKeysResponse, or the result of cls(response)
+        :rtype: ~azure.mgmt.botservice.models.QnAMakerEndpointKeysResponse
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -105,19 +107,21 @@ class PrivateLinkResourcesOperations:
         }
         error_map.update(kwargs.pop('error_map', {}) or {})
 
-        _headers = kwargs.pop("headers", {}) or {}
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-15-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PrivateLinkResourceListResult]
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.QnAMakerEndpointKeysResponse]
 
-        
-        request = build_list_by_bot_resource_request(
-            resource_group_name=resource_group_name,
-            resource_name=resource_name,
+        _json = self._serialize.body(parameters, 'QnAMakerEndpointKeysRequestBody')
+
+        request = build_get_request(
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.list_by_bot_resource.metadata['url'],
+            content_type=content_type,
+            json=_json,
+            template_url=self.get.metadata['url'],
             headers=_headers,
             params=_params,
         )
@@ -136,12 +140,12 @@ class PrivateLinkResourcesOperations:
             error = self._deserialize.failsafe_deserialize(_models.Error, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('PrivateLinkResourceListResult', pipeline_response)
+        deserialized = self._deserialize('QnAMakerEndpointKeysResponse', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list_by_bot_resource.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/privateLinkResources"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/listQnAMakerEndpointKeys"}  # type: ignore
 
