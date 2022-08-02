@@ -7,11 +7,13 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._sql_virtual_machine_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AdditionalFeaturesServerConfigurations(msrest.serialization.Model):
@@ -42,15 +44,9 @@ class AdditionalFeaturesServerConfigurations(msrest.serialization.Model):
 class AgConfiguration(msrest.serialization.Model):
     """Availability group configuration.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar replicas: Replica configurations.
     :vartype replicas: list[~azure.mgmt.sqlvirtualmachine.models.AgReplica]
     """
-
-    _validation = {
-        'replicas': {'readonly': True},
-    }
 
     _attribute_map = {
         'replicas': {'key': 'replicas', 'type': '[AgReplica]'},
@@ -58,12 +54,16 @@ class AgConfiguration(msrest.serialization.Model):
 
     def __init__(
         self,
+        *,
+        replicas: Optional[List["_models.AgReplica"]] = None,
         **kwargs
     ):
         """
+        :keyword replicas: Replica configurations.
+        :paramtype replicas: list[~azure.mgmt.sqlvirtualmachine.models.AgReplica]
         """
         super(AgConfiguration, self).__init__(**kwargs)
-        self.replicas = None
+        self.replicas = replicas
 
 
 class AgReplica(msrest.serialization.Model):
@@ -71,17 +71,16 @@ class AgReplica(msrest.serialization.Model):
 
     :ivar sql_virtual_machine_instance_id: Sql VirtualMachine Instance Id.
     :vartype sql_virtual_machine_instance_id: str
-    :ivar role: Replica Role in availability group. Possible values include: "PRIMARY",
-     "SECONDARY".
+    :ivar role: Replica Role in availability group. Known values are: "PRIMARY", "SECONDARY".
     :vartype role: str or ~azure.mgmt.sqlvirtualmachine.models.Role
-    :ivar commit: Replica commit mode in availability group. Possible values include:
+    :ivar commit: Replica commit mode in availability group. Known values are:
      "SYNCHRONOUS_COMMIT", "ASYNCHRONOUS_COMMIT".
     :vartype commit: str or ~azure.mgmt.sqlvirtualmachine.models.Commit
-    :ivar failover: Replica failover mode in availability group. Possible values include:
-     "AUTOMATIC", "MANUAL".
+    :ivar failover: Replica failover mode in availability group. Known values are: "AUTOMATIC",
+     "MANUAL".
     :vartype failover: str or ~azure.mgmt.sqlvirtualmachine.models.Failover
-    :ivar readable_secondary: Replica readable secondary mode in availability group. Possible
-     values include: "NO", "ALL", "READ_ONLY".
+    :ivar readable_secondary: Replica readable secondary mode in availability group. Known values
+     are: "NO", "ALL", "READ_ONLY".
     :vartype readable_secondary: str or ~azure.mgmt.sqlvirtualmachine.models.ReadableSecondary
     """
 
@@ -97,26 +96,25 @@ class AgReplica(msrest.serialization.Model):
         self,
         *,
         sql_virtual_machine_instance_id: Optional[str] = None,
-        role: Optional[Union[str, "Role"]] = None,
-        commit: Optional[Union[str, "Commit"]] = None,
-        failover: Optional[Union[str, "Failover"]] = None,
-        readable_secondary: Optional[Union[str, "ReadableSecondary"]] = None,
+        role: Optional[Union[str, "_models.Role"]] = None,
+        commit: Optional[Union[str, "_models.Commit"]] = None,
+        failover: Optional[Union[str, "_models.Failover"]] = None,
+        readable_secondary: Optional[Union[str, "_models.ReadableSecondary"]] = None,
         **kwargs
     ):
         """
         :keyword sql_virtual_machine_instance_id: Sql VirtualMachine Instance Id.
         :paramtype sql_virtual_machine_instance_id: str
-        :keyword role: Replica Role in availability group. Possible values include: "PRIMARY",
-         "SECONDARY".
+        :keyword role: Replica Role in availability group. Known values are: "PRIMARY", "SECONDARY".
         :paramtype role: str or ~azure.mgmt.sqlvirtualmachine.models.Role
-        :keyword commit: Replica commit mode in availability group. Possible values include:
+        :keyword commit: Replica commit mode in availability group. Known values are:
          "SYNCHRONOUS_COMMIT", "ASYNCHRONOUS_COMMIT".
         :paramtype commit: str or ~azure.mgmt.sqlvirtualmachine.models.Commit
-        :keyword failover: Replica failover mode in availability group. Possible values include:
-         "AUTOMATIC", "MANUAL".
+        :keyword failover: Replica failover mode in availability group. Known values are: "AUTOMATIC",
+         "MANUAL".
         :paramtype failover: str or ~azure.mgmt.sqlvirtualmachine.models.Failover
-        :keyword readable_secondary: Replica readable secondary mode in availability group. Possible
-         values include: "NO", "ALL", "READ_ONLY".
+        :keyword readable_secondary: Replica readable secondary mode in availability group. Known
+         values are: "NO", "ALL", "READ_ONLY".
         :paramtype readable_secondary: str or ~azure.mgmt.sqlvirtualmachine.models.ReadableSecondary
         """
         super(AgReplica, self).__init__(**kwargs)
@@ -149,7 +147,7 @@ class AssessmentSettings(msrest.serialization.Model):
         *,
         enable: Optional[bool] = None,
         run_immediately: Optional[bool] = None,
-        schedule: Optional["Schedule"] = None,
+        schedule: Optional["_models.Schedule"] = None,
         **kwargs
     ):
         """
@@ -185,11 +183,10 @@ class AutoBackupSettings(msrest.serialization.Model):
     :vartype password: str
     :ivar backup_system_dbs: Include or exclude system databases from auto backup.
     :vartype backup_system_dbs: bool
-    :ivar backup_schedule_type: Backup schedule type. Possible values include: "Manual",
-     "Automated".
+    :ivar backup_schedule_type: Backup schedule type. Known values are: "Manual", "Automated".
     :vartype backup_schedule_type: str or ~azure.mgmt.sqlvirtualmachine.models.BackupScheduleType
     :ivar full_backup_frequency: Frequency of full backups. In both cases, full backups begin
-     during the next scheduled time window. Possible values include: "Daily", "Weekly".
+     during the next scheduled time window. Known values are: "Daily", "Weekly".
     :vartype full_backup_frequency: str or
      ~azure.mgmt.sqlvirtualmachine.models.FullBackupFrequencyType
     :ivar days_of_week: Days of the week for the backups when FullBackupFrequency is set to Weekly.
@@ -232,9 +229,9 @@ class AutoBackupSettings(msrest.serialization.Model):
         storage_access_key: Optional[str] = None,
         password: Optional[str] = None,
         backup_system_dbs: Optional[bool] = None,
-        backup_schedule_type: Optional[Union[str, "BackupScheduleType"]] = None,
-        full_backup_frequency: Optional[Union[str, "FullBackupFrequencyType"]] = None,
-        days_of_week: Optional[List[Union[str, "AutoBackupDaysOfWeek"]]] = None,
+        backup_schedule_type: Optional[Union[str, "_models.BackupScheduleType"]] = None,
+        full_backup_frequency: Optional[Union[str, "_models.FullBackupFrequencyType"]] = None,
+        days_of_week: Optional[List[Union[str, "_models.AutoBackupDaysOfWeek"]]] = None,
         full_backup_start_time: Optional[int] = None,
         full_backup_window_hours: Optional[int] = None,
         log_backup_frequency: Optional[int] = None,
@@ -257,11 +254,10 @@ class AutoBackupSettings(msrest.serialization.Model):
         :paramtype password: str
         :keyword backup_system_dbs: Include or exclude system databases from auto backup.
         :paramtype backup_system_dbs: bool
-        :keyword backup_schedule_type: Backup schedule type. Possible values include: "Manual",
-         "Automated".
+        :keyword backup_schedule_type: Backup schedule type. Known values are: "Manual", "Automated".
         :paramtype backup_schedule_type: str or ~azure.mgmt.sqlvirtualmachine.models.BackupScheduleType
         :keyword full_backup_frequency: Frequency of full backups. In both cases, full backups begin
-         during the next scheduled time window. Possible values include: "Daily", "Weekly".
+         during the next scheduled time window. Known values are: "Daily", "Weekly".
         :paramtype full_backup_frequency: str or
          ~azure.mgmt.sqlvirtualmachine.models.FullBackupFrequencyType
         :keyword days_of_week: Days of the week for the backups when FullBackupFrequency is set to
@@ -298,8 +294,8 @@ class AutoPatchingSettings(msrest.serialization.Model):
 
     :ivar enable: Enable or disable autopatching on SQL virtual machine.
     :vartype enable: bool
-    :ivar day_of_week: Day of week to apply the patch on. Possible values include: "Everyday",
-     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday".
+    :ivar day_of_week: Day of week to apply the patch on. Known values are: "Everyday", "Monday",
+     "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday".
     :vartype day_of_week: str or ~azure.mgmt.sqlvirtualmachine.models.DayOfWeek
     :ivar maintenance_window_starting_hour: Hour of the day when patching is initiated. Local VM
      time.
@@ -319,7 +315,7 @@ class AutoPatchingSettings(msrest.serialization.Model):
         self,
         *,
         enable: Optional[bool] = None,
-        day_of_week: Optional[Union[str, "DayOfWeek"]] = None,
+        day_of_week: Optional[Union[str, "_models.DayOfWeek"]] = None,
         maintenance_window_starting_hour: Optional[int] = None,
         maintenance_window_duration: Optional[int] = None,
         **kwargs
@@ -327,7 +323,7 @@ class AutoPatchingSettings(msrest.serialization.Model):
         """
         :keyword enable: Enable or disable autopatching on SQL virtual machine.
         :paramtype enable: bool
-        :keyword day_of_week: Day of week to apply the patch on. Possible values include: "Everyday",
+        :keyword day_of_week: Day of week to apply the patch on. Known values are: "Everyday",
          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday".
         :paramtype day_of_week: str or ~azure.mgmt.sqlvirtualmachine.models.DayOfWeek
         :keyword maintenance_window_starting_hour: Hour of the day when patching is initiated. Local VM
@@ -435,6 +431,10 @@ class AvailabilityGroupListener(ProxyResource):
      group listener.
     :vartype load_balancer_configurations:
      list[~azure.mgmt.sqlvirtualmachine.models.LoadBalancerConfiguration]
+    :ivar multi_subnet_ip_configurations: List of multi subnet IP configurations for an AG
+     listener.
+    :vartype multi_subnet_ip_configurations:
+     list[~azure.mgmt.sqlvirtualmachine.models.MultiSubnetIpConfiguration]
     :ivar create_default_availability_group_if_not_exist: Create a default availability group if it
      does not exist.
     :vartype create_default_availability_group_if_not_exist: bool
@@ -460,6 +460,7 @@ class AvailabilityGroupListener(ProxyResource):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'availability_group_name': {'key': 'properties.availabilityGroupName', 'type': 'str'},
         'load_balancer_configurations': {'key': 'properties.loadBalancerConfigurations', 'type': '[LoadBalancerConfiguration]'},
+        'multi_subnet_ip_configurations': {'key': 'properties.multiSubnetIpConfigurations', 'type': '[MultiSubnetIpConfiguration]'},
         'create_default_availability_group_if_not_exist': {'key': 'properties.createDefaultAvailabilityGroupIfNotExist', 'type': 'bool'},
         'port': {'key': 'properties.port', 'type': 'int'},
         'availability_group_configuration': {'key': 'properties.availabilityGroupConfiguration', 'type': 'AgConfiguration'},
@@ -469,10 +470,11 @@ class AvailabilityGroupListener(ProxyResource):
         self,
         *,
         availability_group_name: Optional[str] = None,
-        load_balancer_configurations: Optional[List["LoadBalancerConfiguration"]] = None,
+        load_balancer_configurations: Optional[List["_models.LoadBalancerConfiguration"]] = None,
+        multi_subnet_ip_configurations: Optional[List["_models.MultiSubnetIpConfiguration"]] = None,
         create_default_availability_group_if_not_exist: Optional[bool] = None,
         port: Optional[int] = None,
-        availability_group_configuration: Optional["AgConfiguration"] = None,
+        availability_group_configuration: Optional["_models.AgConfiguration"] = None,
         **kwargs
     ):
         """
@@ -482,6 +484,10 @@ class AvailabilityGroupListener(ProxyResource):
          group listener.
         :paramtype load_balancer_configurations:
          list[~azure.mgmt.sqlvirtualmachine.models.LoadBalancerConfiguration]
+        :keyword multi_subnet_ip_configurations: List of multi subnet IP configurations for an AG
+         listener.
+        :paramtype multi_subnet_ip_configurations:
+         list[~azure.mgmt.sqlvirtualmachine.models.MultiSubnetIpConfiguration]
         :keyword create_default_availability_group_if_not_exist: Create a default availability group if
          it does not exist.
         :paramtype create_default_availability_group_if_not_exist: bool
@@ -496,6 +502,7 @@ class AvailabilityGroupListener(ProxyResource):
         self.provisioning_state = None
         self.availability_group_name = availability_group_name
         self.load_balancer_configurations = load_balancer_configurations
+        self.multi_subnet_ip_configurations = multi_subnet_ip_configurations
         self.create_default_availability_group_if_not_exist = create_default_availability_group_if_not_exist
         self.port = port
         self.availability_group_configuration = availability_group_configuration
@@ -613,7 +620,7 @@ class LoadBalancerConfiguration(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        private_ip_address: Optional["PrivateIPAddress"] = None,
+        private_ip_address: Optional["_models.PrivateIPAddress"] = None,
         public_ip_address_resource_id: Optional[str] = None,
         load_balancer_resource_id: Optional[str] = None,
         probe_port: Optional[int] = None,
@@ -641,6 +648,47 @@ class LoadBalancerConfiguration(msrest.serialization.Model):
         self.sql_virtual_machine_instances = sql_virtual_machine_instances
 
 
+class MultiSubnetIpConfiguration(msrest.serialization.Model):
+    """Multi subnet ip configuration for an availability group listener.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar private_ip_address: Required. Private IP address.
+    :vartype private_ip_address: ~azure.mgmt.sqlvirtualmachine.models.PrivateIPAddress
+    :ivar sql_virtual_machine_instance: Required. SQL virtual machine instance resource id that are
+     enrolled into the availability group listener.
+    :vartype sql_virtual_machine_instance: str
+    """
+
+    _validation = {
+        'private_ip_address': {'required': True},
+        'sql_virtual_machine_instance': {'required': True},
+    }
+
+    _attribute_map = {
+        'private_ip_address': {'key': 'privateIpAddress', 'type': 'PrivateIPAddress'},
+        'sql_virtual_machine_instance': {'key': 'sqlVirtualMachineInstance', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        private_ip_address: "_models.PrivateIPAddress",
+        sql_virtual_machine_instance: str,
+        **kwargs
+    ):
+        """
+        :keyword private_ip_address: Required. Private IP address.
+        :paramtype private_ip_address: ~azure.mgmt.sqlvirtualmachine.models.PrivateIPAddress
+        :keyword sql_virtual_machine_instance: Required. SQL virtual machine instance resource id that
+         are enrolled into the availability group listener.
+        :paramtype sql_virtual_machine_instance: str
+        """
+        super(MultiSubnetIpConfiguration, self).__init__(**kwargs)
+        self.private_ip_address = private_ip_address
+        self.sql_virtual_machine_instance = sql_virtual_machine_instance
+
+
 class Operation(msrest.serialization.Model):
     """SQL REST API operation definition.
 
@@ -650,8 +698,7 @@ class Operation(msrest.serialization.Model):
     :vartype name: str
     :ivar display: The localized display information for this particular operation / action.
     :vartype display: ~azure.mgmt.sqlvirtualmachine.models.OperationDisplay
-    :ivar origin: The intended executor of the operation. Possible values include: "user",
-     "system".
+    :ivar origin: The intended executor of the operation. Known values are: "user", "system".
     :vartype origin: str or ~azure.mgmt.sqlvirtualmachine.models.OperationOrigin
     :ivar properties: Additional descriptions for the operation.
     :vartype properties: dict[str, any]
@@ -799,8 +846,8 @@ class ResourceIdentity(msrest.serialization.Model):
     :ivar principal_id: The Azure Active Directory principal id.
     :vartype principal_id: str
     :ivar type: The identity type. Set this to 'SystemAssigned' in order to automatically create
-     and assign an Azure Active Directory principal for the resource. Possible values include:
-     "None", "SystemAssigned".
+     and assign an Azure Active Directory principal for the resource. Known values are: "None",
+     "SystemAssigned".
     :vartype type: str or ~azure.mgmt.sqlvirtualmachine.models.IdentityType
     :ivar tenant_id: The Azure Active Directory tenant id.
     :vartype tenant_id: str
@@ -820,13 +867,13 @@ class ResourceIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "IdentityType"]] = None,
+        type: Optional[Union[str, "_models.IdentityType"]] = None,
         **kwargs
     ):
         """
         :keyword type: The identity type. Set this to 'SystemAssigned' in order to automatically create
-         and assign an Azure Active Directory principal for the resource. Possible values include:
-         "None", "SystemAssigned".
+         and assign an Azure Active Directory principal for the resource. Known values are: "None",
+         "SystemAssigned".
         :paramtype type: str or ~azure.mgmt.sqlvirtualmachine.models.IdentityType
         """
         super(ResourceIdentity, self).__init__(**kwargs)
@@ -836,7 +883,7 @@ class ResourceIdentity(msrest.serialization.Model):
 
 
 class Schedule(msrest.serialization.Model):
-    """Schedule.
+    """Set assessment schedule for SQL Server.
 
     :ivar enable: Enable or disable assessment schedule on SQL virtual machine.
     :vartype enable: bool
@@ -846,8 +893,8 @@ class Schedule(msrest.serialization.Model):
     :ivar monthly_occurrence: Occurrence of the DayOfWeek day within a month to schedule
      assessment. Takes values: 1,2,3,4 and -1. Use -1 for last DayOfWeek day of the month.
     :vartype monthly_occurrence: int
-    :ivar day_of_week: Day of the week to run assessment. Possible values include: "Monday",
-     "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday".
+    :ivar day_of_week: Day of the week to run assessment. Known values are: "Monday", "Tuesday",
+     "Wednesday", "Thursday", "Friday", "Saturday", "Sunday".
     :vartype day_of_week: str or ~azure.mgmt.sqlvirtualmachine.models.AssessmentDayOfWeek
     :ivar start_time: Time of the day in HH:mm format. Eg. 17:30.
     :vartype start_time: str
@@ -867,7 +914,7 @@ class Schedule(msrest.serialization.Model):
         enable: Optional[bool] = None,
         weekly_interval: Optional[int] = None,
         monthly_occurrence: Optional[int] = None,
-        day_of_week: Optional[Union[str, "AssessmentDayOfWeek"]] = None,
+        day_of_week: Optional[Union[str, "_models.AssessmentDayOfWeek"]] = None,
         start_time: Optional[str] = None,
         **kwargs
     ):
@@ -880,8 +927,8 @@ class Schedule(msrest.serialization.Model):
         :keyword monthly_occurrence: Occurrence of the DayOfWeek day within a month to schedule
          assessment. Takes values: 1,2,3,4 and -1. Use -1 for last DayOfWeek day of the month.
         :paramtype monthly_occurrence: int
-        :keyword day_of_week: Day of the week to run assessment. Possible values include: "Monday",
-         "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday".
+        :keyword day_of_week: Day of the week to run assessment. Known values are: "Monday", "Tuesday",
+         "Wednesday", "Thursday", "Friday", "Saturday", "Sunday".
         :paramtype day_of_week: str or ~azure.mgmt.sqlvirtualmachine.models.AssessmentDayOfWeek
         :keyword start_time: Time of the day in HH:mm format. Eg. 17:30.
         :paramtype start_time: str
@@ -924,11 +971,11 @@ class ServerConfigurationsManagementSettings(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        sql_connectivity_update_settings: Optional["SqlConnectivityUpdateSettings"] = None,
-        sql_workload_type_update_settings: Optional["SqlWorkloadTypeUpdateSettings"] = None,
-        sql_storage_update_settings: Optional["SqlStorageUpdateSettings"] = None,
-        additional_features_server_configurations: Optional["AdditionalFeaturesServerConfigurations"] = None,
-        sql_instance_settings: Optional["SQLInstanceSettings"] = None,
+        sql_connectivity_update_settings: Optional["_models.SqlConnectivityUpdateSettings"] = None,
+        sql_workload_type_update_settings: Optional["_models.SqlWorkloadTypeUpdateSettings"] = None,
+        sql_storage_update_settings: Optional["_models.SqlStorageUpdateSettings"] = None,
+        additional_features_server_configurations: Optional["_models.AdditionalFeaturesServerConfigurations"] = None,
+        sql_instance_settings: Optional["_models.SQLInstanceSettings"] = None,
         **kwargs
     ):
         """
@@ -958,8 +1005,8 @@ class ServerConfigurationsManagementSettings(msrest.serialization.Model):
 class SqlConnectivityUpdateSettings(msrest.serialization.Model):
     """Set the access level and network port settings for SQL Server.
 
-    :ivar connectivity_type: SQL Server connectivity option. Possible values include: "LOCAL",
-     "PRIVATE", "PUBLIC".
+    :ivar connectivity_type: SQL Server connectivity option. Known values are: "LOCAL", "PRIVATE",
+     "PUBLIC".
     :vartype connectivity_type: str or ~azure.mgmt.sqlvirtualmachine.models.ConnectivityType
     :ivar port: SQL Server port.
     :vartype port: int
@@ -979,14 +1026,14 @@ class SqlConnectivityUpdateSettings(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        connectivity_type: Optional[Union[str, "ConnectivityType"]] = None,
+        connectivity_type: Optional[Union[str, "_models.ConnectivityType"]] = None,
         port: Optional[int] = None,
         sql_auth_update_user_name: Optional[str] = None,
         sql_auth_update_password: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword connectivity_type: SQL Server connectivity option. Possible values include: "LOCAL",
+        :keyword connectivity_type: SQL Server connectivity option. Known values are: "LOCAL",
          "PRIVATE", "PUBLIC".
         :paramtype connectivity_type: str or ~azure.mgmt.sqlvirtualmachine.models.ConnectivityType
         :keyword port: SQL Server port.
@@ -1016,6 +1063,10 @@ class SQLInstanceSettings(msrest.serialization.Model):
     :vartype min_server_memory_mb: int
     :ivar max_server_memory_mb: SQL Server maximum memory.
     :vartype max_server_memory_mb: int
+    :ivar is_lpim_enabled: SQL Server LPIM.
+    :vartype is_lpim_enabled: bool
+    :ivar is_ifi_enabled: SQL Server IFI.
+    :vartype is_ifi_enabled: bool
     """
 
     _attribute_map = {
@@ -1024,6 +1075,8 @@ class SQLInstanceSettings(msrest.serialization.Model):
         'is_optimize_for_ad_hoc_workloads_enabled': {'key': 'isOptimizeForAdHocWorkloadsEnabled', 'type': 'bool'},
         'min_server_memory_mb': {'key': 'minServerMemoryMB', 'type': 'int'},
         'max_server_memory_mb': {'key': 'maxServerMemoryMB', 'type': 'int'},
+        'is_lpim_enabled': {'key': 'isLpimEnabled', 'type': 'bool'},
+        'is_ifi_enabled': {'key': 'isIfiEnabled', 'type': 'bool'},
     }
 
     def __init__(
@@ -1034,6 +1087,8 @@ class SQLInstanceSettings(msrest.serialization.Model):
         is_optimize_for_ad_hoc_workloads_enabled: Optional[bool] = None,
         min_server_memory_mb: Optional[int] = None,
         max_server_memory_mb: Optional[int] = None,
+        is_lpim_enabled: Optional[bool] = None,
+        is_ifi_enabled: Optional[bool] = None,
         **kwargs
     ):
         """
@@ -1047,6 +1102,10 @@ class SQLInstanceSettings(msrest.serialization.Model):
         :paramtype min_server_memory_mb: int
         :keyword max_server_memory_mb: SQL Server maximum memory.
         :paramtype max_server_memory_mb: int
+        :keyword is_lpim_enabled: SQL Server LPIM.
+        :paramtype is_lpim_enabled: bool
+        :keyword is_ifi_enabled: SQL Server IFI.
+        :paramtype is_ifi_enabled: bool
         """
         super(SQLInstanceSettings, self).__init__(**kwargs)
         self.collation = collation
@@ -1054,6 +1113,8 @@ class SQLInstanceSettings(msrest.serialization.Model):
         self.is_optimize_for_ad_hoc_workloads_enabled = is_optimize_for_ad_hoc_workloads_enabled
         self.min_server_memory_mb = min_server_memory_mb
         self.max_server_memory_mb = max_server_memory_mb
+        self.is_lpim_enabled = is_lpim_enabled
+        self.is_ifi_enabled = is_ifi_enabled
 
 
 class SQLStorageSettings(msrest.serialization.Model):
@@ -1095,8 +1156,8 @@ class SqlStorageUpdateSettings(msrest.serialization.Model):
     :vartype disk_count: int
     :ivar starting_device_id: Device id of the first disk to be updated.
     :vartype starting_device_id: int
-    :ivar disk_configuration_type: Disk configuration to apply to SQL Server. Possible values
-     include: "NEW", "EXTEND", "ADD".
+    :ivar disk_configuration_type: Disk configuration to apply to SQL Server. Known values are:
+     "NEW", "EXTEND", "ADD".
     :vartype disk_configuration_type: str or
      ~azure.mgmt.sqlvirtualmachine.models.DiskConfigurationType
     """
@@ -1112,7 +1173,7 @@ class SqlStorageUpdateSettings(msrest.serialization.Model):
         *,
         disk_count: Optional[int] = None,
         starting_device_id: Optional[int] = None,
-        disk_configuration_type: Optional[Union[str, "DiskConfigurationType"]] = None,
+        disk_configuration_type: Optional[Union[str, "_models.DiskConfigurationType"]] = None,
         **kwargs
     ):
         """
@@ -1120,8 +1181,8 @@ class SqlStorageUpdateSettings(msrest.serialization.Model):
         :paramtype disk_count: int
         :keyword starting_device_id: Device id of the first disk to be updated.
         :paramtype starting_device_id: int
-        :keyword disk_configuration_type: Disk configuration to apply to SQL Server. Possible values
-         include: "NEW", "EXTEND", "ADD".
+        :keyword disk_configuration_type: Disk configuration to apply to SQL Server. Known values are:
+         "NEW", "EXTEND", "ADD".
         :paramtype disk_configuration_type: str or
          ~azure.mgmt.sqlvirtualmachine.models.DiskConfigurationType
         """
@@ -1132,18 +1193,22 @@ class SqlStorageUpdateSettings(msrest.serialization.Model):
 
 
 class SQLTempDbSettings(msrest.serialization.Model):
-    """SQLTempDbSettings.
+    """Set tempDb storage settings for SQL Server.
 
-    :ivar data_file_size: SQL Server default file size.
+    :ivar data_file_size: SQL Server tempdb data file size.
     :vartype data_file_size: int
-    :ivar data_growth: SQL Server default file autoGrowth size.
+    :ivar data_growth: SQL Server tempdb data file autoGrowth size.
     :vartype data_growth: int
-    :ivar log_file_size: SQL Server default file size.
+    :ivar log_file_size: SQL Server tempdb log file size.
     :vartype log_file_size: int
-    :ivar log_growth: SQL Server default file autoGrowth size.
+    :ivar log_growth: SQL Server tempdb log file autoGrowth size.
     :vartype log_growth: int
-    :ivar data_file_count: SQL Server default file count.
+    :ivar data_file_count: SQL Server tempdb data file count.
     :vartype data_file_count: int
+    :ivar persist_folder: SQL Server tempdb persist folder choice.
+    :vartype persist_folder: bool
+    :ivar persist_folder_path: SQL Server tempdb persist folder location.
+    :vartype persist_folder_path: str
     :ivar luns: Logical Unit Numbers for the disks.
     :vartype luns: list[int]
     :ivar default_file_path: SQL Server default file path.
@@ -1156,6 +1221,8 @@ class SQLTempDbSettings(msrest.serialization.Model):
         'log_file_size': {'key': 'logFileSize', 'type': 'int'},
         'log_growth': {'key': 'logGrowth', 'type': 'int'},
         'data_file_count': {'key': 'dataFileCount', 'type': 'int'},
+        'persist_folder': {'key': 'persistFolder', 'type': 'bool'},
+        'persist_folder_path': {'key': 'persistFolderPath', 'type': 'str'},
         'luns': {'key': 'luns', 'type': '[int]'},
         'default_file_path': {'key': 'defaultFilePath', 'type': 'str'},
     }
@@ -1168,21 +1235,27 @@ class SQLTempDbSettings(msrest.serialization.Model):
         log_file_size: Optional[int] = None,
         log_growth: Optional[int] = None,
         data_file_count: Optional[int] = None,
+        persist_folder: Optional[bool] = None,
+        persist_folder_path: Optional[str] = None,
         luns: Optional[List[int]] = None,
         default_file_path: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword data_file_size: SQL Server default file size.
+        :keyword data_file_size: SQL Server tempdb data file size.
         :paramtype data_file_size: int
-        :keyword data_growth: SQL Server default file autoGrowth size.
+        :keyword data_growth: SQL Server tempdb data file autoGrowth size.
         :paramtype data_growth: int
-        :keyword log_file_size: SQL Server default file size.
+        :keyword log_file_size: SQL Server tempdb log file size.
         :paramtype log_file_size: int
-        :keyword log_growth: SQL Server default file autoGrowth size.
+        :keyword log_growth: SQL Server tempdb log file autoGrowth size.
         :paramtype log_growth: int
-        :keyword data_file_count: SQL Server default file count.
+        :keyword data_file_count: SQL Server tempdb data file count.
         :paramtype data_file_count: int
+        :keyword persist_folder: SQL Server tempdb persist folder choice.
+        :paramtype persist_folder: bool
+        :keyword persist_folder_path: SQL Server tempdb persist folder location.
+        :paramtype persist_folder_path: str
         :keyword luns: Logical Unit Numbers for the disks.
         :paramtype luns: list[int]
         :keyword default_file_path: SQL Server default file path.
@@ -1194,6 +1267,8 @@ class SQLTempDbSettings(msrest.serialization.Model):
         self.log_file_size = log_file_size
         self.log_growth = log_growth
         self.data_file_count = data_file_count
+        self.persist_folder = persist_folder
+        self.persist_folder_path = persist_folder_path
         self.luns = luns
         self.default_file_path = default_file_path
 
@@ -1278,14 +1353,15 @@ class SqlVirtualMachine(TrackedResource):
     :vartype provisioning_state: str
     :ivar sql_image_offer: SQL image offer. Examples include SQL2016-WS2016, SQL2017-WS2016.
     :vartype sql_image_offer: str
-    :ivar sql_server_license_type: SQL Server license type. Possible values include: "PAYG",
-     "AHUB", "DR".
+    :ivar sql_server_license_type: SQL Server license type. Known values are: "PAYG", "AHUB", "DR".
     :vartype sql_server_license_type: str or
      ~azure.mgmt.sqlvirtualmachine.models.SqlServerLicenseType
-    :ivar sql_management: SQL Server Management type. Possible values include: "Full",
-     "LightWeight", "NoAgent".
+    :ivar sql_management: SQL Server Management type. Known values are: "Full", "LightWeight",
+     "NoAgent".
     :vartype sql_management: str or ~azure.mgmt.sqlvirtualmachine.models.SqlManagementMode
-    :ivar sql_image_sku: SQL Server edition type. Possible values include: "Developer", "Express",
+    :ivar least_privilege_mode: SQL IaaS Agent least privilege mode. Known values are: "Enabled".
+    :vartype least_privilege_mode: str or ~azure.mgmt.sqlvirtualmachine.models.LeastPrivilegeMode
+    :ivar sql_image_sku: SQL Server edition type. Known values are: "Developer", "Express",
      "Standard", "Enterprise", "Web".
     :vartype sql_image_sku: str or ~azure.mgmt.sqlvirtualmachine.models.SqlImageSku
     :ivar sql_virtual_machine_group_resource_id: ARM resource id of the SQL virtual machine group
@@ -1294,6 +1370,9 @@ class SqlVirtualMachine(TrackedResource):
     :ivar wsfc_domain_credentials: Domain credentials for setting up Windows Server Failover
      Cluster for SQL availability group.
     :vartype wsfc_domain_credentials: ~azure.mgmt.sqlvirtualmachine.models.WsfcDomainCredentials
+    :ivar wsfc_static_ip: Domain credentials for setting up Windows Server Failover Cluster for SQL
+     availability group.
+    :vartype wsfc_static_ip: str
     :ivar auto_patching_settings: Auto patching settings for applying critical security updates to
      SQL virtual machine.
     :vartype auto_patching_settings: ~azure.mgmt.sqlvirtualmachine.models.AutoPatchingSettings
@@ -1310,6 +1389,8 @@ class SqlVirtualMachine(TrackedResource):
      ~azure.mgmt.sqlvirtualmachine.models.StorageConfigurationSettings
     :ivar assessment_settings: Assessment Settings.
     :vartype assessment_settings: ~azure.mgmt.sqlvirtualmachine.models.AssessmentSettings
+    :ivar enable_automatic_upgrade: Enable automatic upgrade of Sql IaaS extension Agent.
+    :vartype enable_automatic_upgrade: bool
     """
 
     _validation = {
@@ -1334,15 +1415,18 @@ class SqlVirtualMachine(TrackedResource):
         'sql_image_offer': {'key': 'properties.sqlImageOffer', 'type': 'str'},
         'sql_server_license_type': {'key': 'properties.sqlServerLicenseType', 'type': 'str'},
         'sql_management': {'key': 'properties.sqlManagement', 'type': 'str'},
+        'least_privilege_mode': {'key': 'properties.leastPrivilegeMode', 'type': 'str'},
         'sql_image_sku': {'key': 'properties.sqlImageSku', 'type': 'str'},
         'sql_virtual_machine_group_resource_id': {'key': 'properties.sqlVirtualMachineGroupResourceId', 'type': 'str'},
         'wsfc_domain_credentials': {'key': 'properties.wsfcDomainCredentials', 'type': 'WsfcDomainCredentials'},
+        'wsfc_static_ip': {'key': 'properties.wsfcStaticIp', 'type': 'str'},
         'auto_patching_settings': {'key': 'properties.autoPatchingSettings', 'type': 'AutoPatchingSettings'},
         'auto_backup_settings': {'key': 'properties.autoBackupSettings', 'type': 'AutoBackupSettings'},
         'key_vault_credential_settings': {'key': 'properties.keyVaultCredentialSettings', 'type': 'KeyVaultCredentialSettings'},
         'server_configurations_management_settings': {'key': 'properties.serverConfigurationsManagementSettings', 'type': 'ServerConfigurationsManagementSettings'},
         'storage_configuration_settings': {'key': 'properties.storageConfigurationSettings', 'type': 'StorageConfigurationSettings'},
         'assessment_settings': {'key': 'properties.assessmentSettings', 'type': 'AssessmentSettings'},
+        'enable_automatic_upgrade': {'key': 'properties.enableAutomaticUpgrade', 'type': 'bool'},
     }
 
     def __init__(
@@ -1350,20 +1434,23 @@ class SqlVirtualMachine(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        identity: Optional["ResourceIdentity"] = None,
+        identity: Optional["_models.ResourceIdentity"] = None,
         virtual_machine_resource_id: Optional[str] = None,
         sql_image_offer: Optional[str] = None,
-        sql_server_license_type: Optional[Union[str, "SqlServerLicenseType"]] = None,
-        sql_management: Optional[Union[str, "SqlManagementMode"]] = None,
-        sql_image_sku: Optional[Union[str, "SqlImageSku"]] = None,
+        sql_server_license_type: Optional[Union[str, "_models.SqlServerLicenseType"]] = None,
+        sql_management: Optional[Union[str, "_models.SqlManagementMode"]] = None,
+        least_privilege_mode: Optional[Union[str, "_models.LeastPrivilegeMode"]] = None,
+        sql_image_sku: Optional[Union[str, "_models.SqlImageSku"]] = None,
         sql_virtual_machine_group_resource_id: Optional[str] = None,
-        wsfc_domain_credentials: Optional["WsfcDomainCredentials"] = None,
-        auto_patching_settings: Optional["AutoPatchingSettings"] = None,
-        auto_backup_settings: Optional["AutoBackupSettings"] = None,
-        key_vault_credential_settings: Optional["KeyVaultCredentialSettings"] = None,
-        server_configurations_management_settings: Optional["ServerConfigurationsManagementSettings"] = None,
-        storage_configuration_settings: Optional["StorageConfigurationSettings"] = None,
-        assessment_settings: Optional["AssessmentSettings"] = None,
+        wsfc_domain_credentials: Optional["_models.WsfcDomainCredentials"] = None,
+        wsfc_static_ip: Optional[str] = None,
+        auto_patching_settings: Optional["_models.AutoPatchingSettings"] = None,
+        auto_backup_settings: Optional["_models.AutoBackupSettings"] = None,
+        key_vault_credential_settings: Optional["_models.KeyVaultCredentialSettings"] = None,
+        server_configurations_management_settings: Optional["_models.ServerConfigurationsManagementSettings"] = None,
+        storage_configuration_settings: Optional["_models.StorageConfigurationSettings"] = None,
+        assessment_settings: Optional["_models.AssessmentSettings"] = None,
+        enable_automatic_upgrade: Optional[bool] = None,
         **kwargs
     ):
         """
@@ -1378,15 +1465,18 @@ class SqlVirtualMachine(TrackedResource):
         :paramtype virtual_machine_resource_id: str
         :keyword sql_image_offer: SQL image offer. Examples include SQL2016-WS2016, SQL2017-WS2016.
         :paramtype sql_image_offer: str
-        :keyword sql_server_license_type: SQL Server license type. Possible values include: "PAYG",
-         "AHUB", "DR".
+        :keyword sql_server_license_type: SQL Server license type. Known values are: "PAYG", "AHUB",
+         "DR".
         :paramtype sql_server_license_type: str or
          ~azure.mgmt.sqlvirtualmachine.models.SqlServerLicenseType
-        :keyword sql_management: SQL Server Management type. Possible values include: "Full",
-         "LightWeight", "NoAgent".
+        :keyword sql_management: SQL Server Management type. Known values are: "Full", "LightWeight",
+         "NoAgent".
         :paramtype sql_management: str or ~azure.mgmt.sqlvirtualmachine.models.SqlManagementMode
-        :keyword sql_image_sku: SQL Server edition type. Possible values include: "Developer",
-         "Express", "Standard", "Enterprise", "Web".
+        :keyword least_privilege_mode: SQL IaaS Agent least privilege mode. Known values are:
+         "Enabled".
+        :paramtype least_privilege_mode: str or ~azure.mgmt.sqlvirtualmachine.models.LeastPrivilegeMode
+        :keyword sql_image_sku: SQL Server edition type. Known values are: "Developer", "Express",
+         "Standard", "Enterprise", "Web".
         :paramtype sql_image_sku: str or ~azure.mgmt.sqlvirtualmachine.models.SqlImageSku
         :keyword sql_virtual_machine_group_resource_id: ARM resource id of the SQL virtual machine
          group this SQL virtual machine is or will be part of.
@@ -1394,6 +1484,9 @@ class SqlVirtualMachine(TrackedResource):
         :keyword wsfc_domain_credentials: Domain credentials for setting up Windows Server Failover
          Cluster for SQL availability group.
         :paramtype wsfc_domain_credentials: ~azure.mgmt.sqlvirtualmachine.models.WsfcDomainCredentials
+        :keyword wsfc_static_ip: Domain credentials for setting up Windows Server Failover Cluster for
+         SQL availability group.
+        :paramtype wsfc_static_ip: str
         :keyword auto_patching_settings: Auto patching settings for applying critical security updates
          to SQL virtual machine.
         :paramtype auto_patching_settings: ~azure.mgmt.sqlvirtualmachine.models.AutoPatchingSettings
@@ -1411,6 +1504,8 @@ class SqlVirtualMachine(TrackedResource):
          ~azure.mgmt.sqlvirtualmachine.models.StorageConfigurationSettings
         :keyword assessment_settings: Assessment Settings.
         :paramtype assessment_settings: ~azure.mgmt.sqlvirtualmachine.models.AssessmentSettings
+        :keyword enable_automatic_upgrade: Enable automatic upgrade of Sql IaaS extension Agent.
+        :paramtype enable_automatic_upgrade: bool
         """
         super(SqlVirtualMachine, self).__init__(location=location, tags=tags, **kwargs)
         self.identity = identity
@@ -1420,15 +1515,18 @@ class SqlVirtualMachine(TrackedResource):
         self.sql_image_offer = sql_image_offer
         self.sql_server_license_type = sql_server_license_type
         self.sql_management = sql_management
+        self.least_privilege_mode = least_privilege_mode
         self.sql_image_sku = sql_image_sku
         self.sql_virtual_machine_group_resource_id = sql_virtual_machine_group_resource_id
         self.wsfc_domain_credentials = wsfc_domain_credentials
+        self.wsfc_static_ip = wsfc_static_ip
         self.auto_patching_settings = auto_patching_settings
         self.auto_backup_settings = auto_backup_settings
         self.key_vault_credential_settings = key_vault_credential_settings
         self.server_configurations_management_settings = server_configurations_management_settings
         self.storage_configuration_settings = storage_configuration_settings
         self.assessment_settings = assessment_settings
+        self.enable_automatic_upgrade = enable_automatic_upgrade
 
 
 class SqlVirtualMachineGroup(TrackedResource):
@@ -1454,14 +1552,14 @@ class SqlVirtualMachineGroup(TrackedResource):
     :vartype provisioning_state: str
     :ivar sql_image_offer: SQL image offer. Examples may include SQL2016-WS2016, SQL2017-WS2016.
     :vartype sql_image_offer: str
-    :ivar sql_image_sku: SQL image sku. Possible values include: "Developer", "Enterprise".
+    :ivar sql_image_sku: SQL image sku. Known values are: "Developer", "Enterprise".
     :vartype sql_image_sku: str or ~azure.mgmt.sqlvirtualmachine.models.SqlVmGroupImageSku
-    :ivar scale_type: Scale type. Possible values include: "HA".
+    :ivar scale_type: Scale type. Known values are: "HA".
     :vartype scale_type: str or ~azure.mgmt.sqlvirtualmachine.models.ScaleType
     :ivar cluster_manager_type: Type of cluster manager: Windows Server Failover Cluster (WSFC),
-     implied by the scale type of the group and the OS type. Possible values include: "WSFC".
+     implied by the scale type of the group and the OS type. Known values are: "WSFC".
     :vartype cluster_manager_type: str or ~azure.mgmt.sqlvirtualmachine.models.ClusterManagerType
-    :ivar cluster_configuration: Cluster type. Possible values include: "Domainful".
+    :ivar cluster_configuration: Cluster type. Known values are: "Domainful".
     :vartype cluster_configuration: str or
      ~azure.mgmt.sqlvirtualmachine.models.ClusterConfiguration
     :ivar wsfc_domain_profile: Cluster Active Directory domain profile.
@@ -1502,8 +1600,8 @@ class SqlVirtualMachineGroup(TrackedResource):
         location: str,
         tags: Optional[Dict[str, str]] = None,
         sql_image_offer: Optional[str] = None,
-        sql_image_sku: Optional[Union[str, "SqlVmGroupImageSku"]] = None,
-        wsfc_domain_profile: Optional["WsfcDomainProfile"] = None,
+        sql_image_sku: Optional[Union[str, "_models.SqlVmGroupImageSku"]] = None,
+        wsfc_domain_profile: Optional["_models.WsfcDomainProfile"] = None,
         **kwargs
     ):
         """
@@ -1513,7 +1611,7 @@ class SqlVirtualMachineGroup(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword sql_image_offer: SQL image offer. Examples may include SQL2016-WS2016, SQL2017-WS2016.
         :paramtype sql_image_offer: str
-        :keyword sql_image_sku: SQL image sku. Possible values include: "Developer", "Enterprise".
+        :keyword sql_image_sku: SQL image sku. Known values are: "Developer", "Enterprise".
         :paramtype sql_image_sku: str or ~azure.mgmt.sqlvirtualmachine.models.SqlVmGroupImageSku
         :keyword wsfc_domain_profile: Cluster Active Directory domain profile.
         :paramtype wsfc_domain_profile: ~azure.mgmt.sqlvirtualmachine.models.WsfcDomainProfile
@@ -1646,8 +1744,7 @@ class SqlVirtualMachineUpdate(msrest.serialization.Model):
 class SqlWorkloadTypeUpdateSettings(msrest.serialization.Model):
     """Set workload type to optimize storage for SQL Server.
 
-    :ivar sql_workload_type: SQL Server workload type. Possible values include: "GENERAL", "OLTP",
-     "DW".
+    :ivar sql_workload_type: SQL Server workload type. Known values are: "GENERAL", "OLTP", "DW".
     :vartype sql_workload_type: str or ~azure.mgmt.sqlvirtualmachine.models.SqlWorkloadType
     """
 
@@ -1658,12 +1755,12 @@ class SqlWorkloadTypeUpdateSettings(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        sql_workload_type: Optional[Union[str, "SqlWorkloadType"]] = None,
+        sql_workload_type: Optional[Union[str, "_models.SqlWorkloadType"]] = None,
         **kwargs
     ):
         """
-        :keyword sql_workload_type: SQL Server workload type. Possible values include: "GENERAL",
-         "OLTP", "DW".
+        :keyword sql_workload_type: SQL Server workload type. Known values are: "GENERAL", "OLTP",
+         "DW".
         :paramtype sql_workload_type: str or ~azure.mgmt.sqlvirtualmachine.models.SqlWorkloadType
         """
         super(SqlWorkloadTypeUpdateSettings, self).__init__(**kwargs)
@@ -1681,12 +1778,11 @@ class StorageConfigurationSettings(msrest.serialization.Model):
     :vartype sql_temp_db_settings: ~azure.mgmt.sqlvirtualmachine.models.SQLTempDbSettings
     :ivar sql_system_db_on_data_disk: SQL Server SystemDb Storage on DataPool if true.
     :vartype sql_system_db_on_data_disk: bool
-    :ivar disk_configuration_type: Disk configuration to apply to SQL Server. Possible values
-     include: "NEW", "EXTEND", "ADD".
+    :ivar disk_configuration_type: Disk configuration to apply to SQL Server. Known values are:
+     "NEW", "EXTEND", "ADD".
     :vartype disk_configuration_type: str or
      ~azure.mgmt.sqlvirtualmachine.models.DiskConfigurationType
-    :ivar storage_workload_type: Storage workload type. Possible values include: "GENERAL", "OLTP",
-     "DW".
+    :ivar storage_workload_type: Storage workload type. Known values are: "GENERAL", "OLTP", "DW".
     :vartype storage_workload_type: str or ~azure.mgmt.sqlvirtualmachine.models.StorageWorkloadType
     """
 
@@ -1702,12 +1798,12 @@ class StorageConfigurationSettings(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        sql_data_settings: Optional["SQLStorageSettings"] = None,
-        sql_log_settings: Optional["SQLStorageSettings"] = None,
-        sql_temp_db_settings: Optional["SQLTempDbSettings"] = None,
+        sql_data_settings: Optional["_models.SQLStorageSettings"] = None,
+        sql_log_settings: Optional["_models.SQLStorageSettings"] = None,
+        sql_temp_db_settings: Optional["_models.SQLTempDbSettings"] = None,
         sql_system_db_on_data_disk: Optional[bool] = None,
-        disk_configuration_type: Optional[Union[str, "DiskConfigurationType"]] = None,
-        storage_workload_type: Optional[Union[str, "StorageWorkloadType"]] = None,
+        disk_configuration_type: Optional[Union[str, "_models.DiskConfigurationType"]] = None,
+        storage_workload_type: Optional[Union[str, "_models.StorageWorkloadType"]] = None,
         **kwargs
     ):
         """
@@ -1719,12 +1815,12 @@ class StorageConfigurationSettings(msrest.serialization.Model):
         :paramtype sql_temp_db_settings: ~azure.mgmt.sqlvirtualmachine.models.SQLTempDbSettings
         :keyword sql_system_db_on_data_disk: SQL Server SystemDb Storage on DataPool if true.
         :paramtype sql_system_db_on_data_disk: bool
-        :keyword disk_configuration_type: Disk configuration to apply to SQL Server. Possible values
-         include: "NEW", "EXTEND", "ADD".
+        :keyword disk_configuration_type: Disk configuration to apply to SQL Server. Known values are:
+         "NEW", "EXTEND", "ADD".
         :paramtype disk_configuration_type: str or
          ~azure.mgmt.sqlvirtualmachine.models.DiskConfigurationType
-        :keyword storage_workload_type: Storage workload type. Possible values include: "GENERAL",
-         "OLTP", "DW".
+        :keyword storage_workload_type: Storage workload type. Known values are: "GENERAL", "OLTP",
+         "DW".
         :paramtype storage_workload_type: str or
          ~azure.mgmt.sqlvirtualmachine.models.StorageWorkloadType
         """
@@ -1742,15 +1838,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.sqlvirtualmachine.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.sqlvirtualmachine.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -1769,25 +1865,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.sqlvirtualmachine.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.sqlvirtualmachine.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
@@ -1862,6 +1958,9 @@ class WsfcDomainProfile(msrest.serialization.Model):
     :vartype storage_account_url: str
     :ivar storage_account_primary_key: Primary key of the witness storage account.
     :vartype storage_account_primary_key: str
+    :ivar cluster_subnet_type: Cluster subnet type. Known values are: "SingleSubnet",
+     "MultiSubnet".
+    :vartype cluster_subnet_type: str or ~azure.mgmt.sqlvirtualmachine.models.ClusterSubnetType
     """
 
     _attribute_map = {
@@ -1873,6 +1972,7 @@ class WsfcDomainProfile(msrest.serialization.Model):
         'file_share_witness_path': {'key': 'fileShareWitnessPath', 'type': 'str'},
         'storage_account_url': {'key': 'storageAccountUrl', 'type': 'str'},
         'storage_account_primary_key': {'key': 'storageAccountPrimaryKey', 'type': 'str'},
+        'cluster_subnet_type': {'key': 'clusterSubnetType', 'type': 'str'},
     }
 
     def __init__(
@@ -1886,6 +1986,7 @@ class WsfcDomainProfile(msrest.serialization.Model):
         file_share_witness_path: Optional[str] = None,
         storage_account_url: Optional[str] = None,
         storage_account_primary_key: Optional[str] = None,
+        cluster_subnet_type: Optional[Union[str, "_models.ClusterSubnetType"]] = None,
         **kwargs
     ):
         """
@@ -1908,6 +2009,9 @@ class WsfcDomainProfile(msrest.serialization.Model):
         :paramtype storage_account_url: str
         :keyword storage_account_primary_key: Primary key of the witness storage account.
         :paramtype storage_account_primary_key: str
+        :keyword cluster_subnet_type: Cluster subnet type. Known values are: "SingleSubnet",
+         "MultiSubnet".
+        :paramtype cluster_subnet_type: str or ~azure.mgmt.sqlvirtualmachine.models.ClusterSubnetType
         """
         super(WsfcDomainProfile, self).__init__(**kwargs)
         self.domain_fqdn = domain_fqdn
@@ -1918,3 +2022,4 @@ class WsfcDomainProfile(msrest.serialization.Model):
         self.file_share_witness_path = file_share_witness_path
         self.storage_account_url = storage_account_url
         self.storage_account_primary_key = storage_account_primary_key
+        self.cluster_subnet_type = cluster_subnet_type

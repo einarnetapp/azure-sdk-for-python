@@ -16,6 +16,7 @@ from ._models_py3 import AvailabilityGroupListener
 from ._models_py3 import AvailabilityGroupListenerListResult
 from ._models_py3 import KeyVaultCredentialSettings
 from ._models_py3 import LoadBalancerConfiguration
+from ._models_py3 import MultiSubnetIpConfiguration
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationListResult
@@ -50,6 +51,7 @@ from ._sql_virtual_machine_management_client_enums import (
     BackupScheduleType,
     ClusterConfiguration,
     ClusterManagerType,
+    ClusterSubnetType,
     Commit,
     ConnectivityType,
     CreatedByType,
@@ -58,6 +60,7 @@ from ._sql_virtual_machine_management_client_enums import (
     Failover,
     FullBackupFrequencyType,
     IdentityType,
+    LeastPrivilegeMode,
     OperationOrigin,
     ReadableSecondary,
     Role,
@@ -69,7 +72,9 @@ from ._sql_virtual_machine_management_client_enums import (
     SqlWorkloadType,
     StorageWorkloadType,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AdditionalFeaturesServerConfigurations',
     'AgConfiguration',
@@ -81,6 +86,7 @@ __all__ = [
     'AvailabilityGroupListenerListResult',
     'KeyVaultCredentialSettings',
     'LoadBalancerConfiguration',
+    'MultiSubnetIpConfiguration',
     'Operation',
     'OperationDisplay',
     'OperationListResult',
@@ -112,6 +118,7 @@ __all__ = [
     'BackupScheduleType',
     'ClusterConfiguration',
     'ClusterManagerType',
+    'ClusterSubnetType',
     'Commit',
     'ConnectivityType',
     'CreatedByType',
@@ -120,6 +127,7 @@ __all__ = [
     'Failover',
     'FullBackupFrequencyType',
     'IdentityType',
+    'LeastPrivilegeMode',
     'OperationOrigin',
     'ReadableSecondary',
     'Role',
@@ -131,3 +139,5 @@ __all__ = [
     'SqlWorkloadType',
     'StorageWorkloadType',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
