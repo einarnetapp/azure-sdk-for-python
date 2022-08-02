@@ -149,7 +149,11 @@ from ._models_py3 import MaintenanceWindows
 from ._models_py3 import ManagedBackupShortTermRetentionPolicy
 from ._models_py3 import ManagedBackupShortTermRetentionPolicyListResult
 from ._models_py3 import ManagedDatabase
+from ._models_py3 import ManagedDatabaseAdvancedThreatProtection
+from ._models_py3 import ManagedDatabaseAdvancedThreatProtectionListResult
 from ._models_py3 import ManagedDatabaseListResult
+from ._models_py3 import ManagedDatabaseMoveOperationListResult
+from ._models_py3 import ManagedDatabaseMoveOperationResult
 from ._models_py3 import ManagedDatabaseRestoreDetailsResult
 from ._models_py3 import ManagedDatabaseSecurityAlertPolicy
 from ._models_py3 import ManagedDatabaseSecurityAlertPolicyListResult
@@ -157,8 +161,14 @@ from ._models_py3 import ManagedDatabaseUpdate
 from ._models_py3 import ManagedInstance
 from ._models_py3 import ManagedInstanceAdministrator
 from ._models_py3 import ManagedInstanceAdministratorListResult
+from ._models_py3 import ManagedInstanceAdvancedThreatProtection
+from ._models_py3 import ManagedInstanceAdvancedThreatProtectionListResult
 from ._models_py3 import ManagedInstanceAzureADOnlyAuthListResult
 from ._models_py3 import ManagedInstanceAzureADOnlyAuthentication
+from ._models_py3 import ManagedInstanceDtc
+from ._models_py3 import ManagedInstanceDtcListResult
+from ._models_py3 import ManagedInstanceDtcSecuritySettings
+from ._models_py3 import ManagedInstanceDtcTransactionManagerCommunicationSettings
 from ._models_py3 import ManagedInstanceEditionCapability
 from ._models_py3 import ManagedInstanceEncryptionProtector
 from ._models_py3 import ManagedInstanceEncryptionProtectorListResult
@@ -402,6 +412,7 @@ from ._sql_management_client_enums import (
     DayOfWeek,
     DiffBackupIntervalInHours,
     DnsRefreshConfigurationPropertiesStatus,
+    DtcName,
     ElasticPoolLicenseType,
     ElasticPoolState,
     EncryptionProtectorName,
@@ -437,6 +448,7 @@ from ._sql_management_client_enums import (
     ManagementOperationState,
     MaxSizeUnit,
     MetricType,
+    MoveOperationMode,
     OperationMode,
     OperationOrigin,
     PauseDelayTimeUnit,
@@ -648,7 +660,11 @@ __all__ = [
     'ManagedBackupShortTermRetentionPolicy',
     'ManagedBackupShortTermRetentionPolicyListResult',
     'ManagedDatabase',
+    'ManagedDatabaseAdvancedThreatProtection',
+    'ManagedDatabaseAdvancedThreatProtectionListResult',
     'ManagedDatabaseListResult',
+    'ManagedDatabaseMoveOperationListResult',
+    'ManagedDatabaseMoveOperationResult',
     'ManagedDatabaseRestoreDetailsResult',
     'ManagedDatabaseSecurityAlertPolicy',
     'ManagedDatabaseSecurityAlertPolicyListResult',
@@ -656,8 +672,14 @@ __all__ = [
     'ManagedInstance',
     'ManagedInstanceAdministrator',
     'ManagedInstanceAdministratorListResult',
+    'ManagedInstanceAdvancedThreatProtection',
+    'ManagedInstanceAdvancedThreatProtectionListResult',
     'ManagedInstanceAzureADOnlyAuthListResult',
     'ManagedInstanceAzureADOnlyAuthentication',
+    'ManagedInstanceDtc',
+    'ManagedInstanceDtcListResult',
+    'ManagedInstanceDtcSecuritySettings',
+    'ManagedInstanceDtcTransactionManagerCommunicationSettings',
     'ManagedInstanceEditionCapability',
     'ManagedInstanceEncryptionProtector',
     'ManagedInstanceEncryptionProtectorListResult',
@@ -898,6 +920,7 @@ __all__ = [
     'DayOfWeek',
     'DiffBackupIntervalInHours',
     'DnsRefreshConfigurationPropertiesStatus',
+    'DtcName',
     'ElasticPoolLicenseType',
     'ElasticPoolState',
     'EncryptionProtectorName',
@@ -933,6 +956,7 @@ __all__ = [
     'ManagementOperationState',
     'MaxSizeUnit',
     'MetricType',
+    'MoveOperationMode',
     'OperationMode',
     'OperationOrigin',
     'PauseDelayTimeUnit',

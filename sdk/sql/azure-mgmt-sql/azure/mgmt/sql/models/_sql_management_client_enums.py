@@ -392,6 +392,10 @@ class DnsRefreshConfigurationPropertiesStatus(str, Enum, metaclass=CaseInsensiti
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
 
+class DtcName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    CURRENT = "current"
+
 class ElasticPoolLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The license type to apply for this elastic pool.
     """
@@ -678,6 +682,13 @@ class MetricType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     LOG_IO = "logIo"
     DURATION = "duration"
     DTU = "dtu"
+
+class MoveOperationMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Operation mode.
+    """
+
+    MOVE = "Move"
+    COPY = "Copy"
 
 class OperationMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Operation Mode.
