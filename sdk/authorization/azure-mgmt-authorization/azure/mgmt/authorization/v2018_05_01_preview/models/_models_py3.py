@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import List, Optional, Union
+from typing import List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._authorization_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AccessReviewDecision(msrest.serialization.Model):
@@ -26,21 +28,22 @@ class AccessReviewDecision(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The resource type.
     :vartype type: str
-    :ivar recommendation: The feature- generated recommendation shown to the reviewer. Possible
-     values include: "Approve", "Deny", "NoInfoAvailable".
+    :ivar recommendation: The feature- generated recommendation shown to the reviewer. Known values
+     are: "Approve", "Deny", "NoInfoAvailable".
     :vartype recommendation: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessRecommendationType
-    :param decision: The decision on the approval step. This value is initially set to NotReviewed.
-     Approvers can take action of Approve/Deny. Possible values include: "Approve", "Deny",
-     "NotReviewed", "DontKnow", "NotNotified".
-    :type decision: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewResult
-    :param justification: Justification provided by approvers for their action.
-    :type justification: str
+    :ivar decision: The decision on the approval step. This value is initially set to NotReviewed.
+     Approvers can take action of Approve/Deny. Known values are: "Approve", "Deny", "NotReviewed",
+     "DontKnow", "NotNotified".
+    :vartype decision: str or
+     ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewResult
+    :ivar justification: Justification provided by approvers for their action.
+    :vartype justification: str
     :ivar reviewed_date_time: Date Time when a decision was taken.
     :vartype reviewed_date_time: ~datetime.datetime
-    :ivar apply_result: The outcome of applying the decision. Possible values include: "New",
-     "Applying", "AppliedSuccessfully", "AppliedWithUnknownFailure",
-     "AppliedSuccessfullyButObjectNotFound", "ApplyNotSupported".
+    :ivar apply_result: The outcome of applying the decision. Known values are: "New", "Applying",
+     "AppliedSuccessfully", "AppliedWithUnknownFailure", "AppliedSuccessfullyButObjectNotFound",
+     "ApplyNotSupported".
     :vartype apply_result: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewApplyResult
     :ivar applied_date_time: The date and time when the review decision was applied.
@@ -48,7 +51,7 @@ class AccessReviewDecision(msrest.serialization.Model):
     :ivar principal_id_properties_applied_by_principal_id: The identity id.
     :vartype principal_id_properties_applied_by_principal_id: str
     :ivar principal_type_properties_applied_by_principal_type: The identity type :
-     user/servicePrincipal. Possible values include: "user", "servicePrincipal".
+     user/servicePrincipal. Known values are: "user", "servicePrincipal".
     :vartype principal_type_properties_applied_by_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewActorIdentityType
     :ivar principal_name_properties_applied_by_principal_name: The identity display name.
@@ -59,7 +62,7 @@ class AccessReviewDecision(msrest.serialization.Model):
     :ivar principal_id_properties_reviewed_by_principal_id: The identity id.
     :vartype principal_id_properties_reviewed_by_principal_id: str
     :ivar principal_type_properties_reviewed_by_principal_type: The identity type :
-     user/servicePrincipal. Possible values include: "user", "servicePrincipal".
+     user/servicePrincipal. Known values are: "user", "servicePrincipal".
     :vartype principal_type_properties_reviewed_by_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewActorIdentityType
     :ivar principal_name_properties_reviewed_by_principal_name: The identity display name.
@@ -67,10 +70,9 @@ class AccessReviewDecision(msrest.serialization.Model):
     :ivar user_principal_name_properties_reviewed_by_user_principal_name: The user principal
      name(if valid).
     :vartype user_principal_name_properties_reviewed_by_user_principal_name: str
-    :param type_properties_target_type: The type of decision target :
-     User/ServicePrincipal.Constant filled by server.  Possible values include: "user",
-     "servicePrincipal".
-    :type type_properties_target_type: str or
+    :ivar type_properties_target_type: The type of decision target : User/ServicePrincipal.Constant
+     filled by server. Known values are: "user", "servicePrincipal".
+    :vartype type_properties_target_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
     """
 
@@ -116,10 +118,19 @@ class AccessReviewDecision(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        decision: Optional[Union[str, "AccessReviewResult"]] = None,
+        decision: Optional[Union[str, "_models.AccessReviewResult"]] = None,
         justification: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword decision: The decision on the approval step. This value is initially set to
+         NotReviewed. Approvers can take action of Approve/Deny. Known values are: "Approve", "Deny",
+         "NotReviewed", "DontKnow", "NotNotified".
+        :paramtype decision: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewResult
+        :keyword justification: Justification provided by approvers for their action.
+        :paramtype justification: str
+        """
         super(AccessReviewDecision, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -144,10 +155,10 @@ class AccessReviewDecision(msrest.serialization.Model):
 class AccessReviewDecisionListResult(msrest.serialization.Model):
     """List of access review decisions.
 
-    :param value: Access Review Decision list.
-    :type value: list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewDecision]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: Access Review Decision list.
+    :vartype value: list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewDecision]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -158,10 +169,17 @@ class AccessReviewDecisionListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["AccessReviewDecision"]] = None,
+        value: Optional[List["_models.AccessReviewDecision"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: Access Review Decision list.
+        :paramtype value:
+         list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewDecision]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(AccessReviewDecisionListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -172,21 +190,22 @@ class AccessReviewDecisionProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar recommendation: The feature- generated recommendation shown to the reviewer. Possible
-     values include: "Approve", "Deny", "NoInfoAvailable".
+    :ivar recommendation: The feature- generated recommendation shown to the reviewer. Known values
+     are: "Approve", "Deny", "NoInfoAvailable".
     :vartype recommendation: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessRecommendationType
-    :param decision: The decision on the approval step. This value is initially set to NotReviewed.
-     Approvers can take action of Approve/Deny. Possible values include: "Approve", "Deny",
-     "NotReviewed", "DontKnow", "NotNotified".
-    :type decision: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewResult
-    :param justification: Justification provided by approvers for their action.
-    :type justification: str
+    :ivar decision: The decision on the approval step. This value is initially set to NotReviewed.
+     Approvers can take action of Approve/Deny. Known values are: "Approve", "Deny", "NotReviewed",
+     "DontKnow", "NotNotified".
+    :vartype decision: str or
+     ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewResult
+    :ivar justification: Justification provided by approvers for their action.
+    :vartype justification: str
     :ivar reviewed_date_time: Date Time when a decision was taken.
     :vartype reviewed_date_time: ~datetime.datetime
-    :ivar apply_result: The outcome of applying the decision. Possible values include: "New",
-     "Applying", "AppliedSuccessfully", "AppliedWithUnknownFailure",
-     "AppliedSuccessfullyButObjectNotFound", "ApplyNotSupported".
+    :ivar apply_result: The outcome of applying the decision. Known values are: "New", "Applying",
+     "AppliedSuccessfully", "AppliedWithUnknownFailure", "AppliedSuccessfullyButObjectNotFound",
+     "ApplyNotSupported".
     :vartype apply_result: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewApplyResult
     :ivar applied_date_time: The date and time when the review decision was applied.
@@ -194,7 +213,7 @@ class AccessReviewDecisionProperties(msrest.serialization.Model):
     :ivar principal_id_applied_by_principal_id: The identity id.
     :vartype principal_id_applied_by_principal_id: str
     :ivar principal_type_applied_by_principal_type: The identity type : user/servicePrincipal.
-     Possible values include: "user", "servicePrincipal".
+     Known values are: "user", "servicePrincipal".
     :vartype principal_type_applied_by_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewActorIdentityType
     :ivar principal_name_applied_by_principal_name: The identity display name.
@@ -204,16 +223,16 @@ class AccessReviewDecisionProperties(msrest.serialization.Model):
     :ivar principal_id_reviewed_by_principal_id: The identity id.
     :vartype principal_id_reviewed_by_principal_id: str
     :ivar principal_type_reviewed_by_principal_type: The identity type : user/servicePrincipal.
-     Possible values include: "user", "servicePrincipal".
+     Known values are: "user", "servicePrincipal".
     :vartype principal_type_reviewed_by_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewActorIdentityType
     :ivar principal_name_reviewed_by_principal_name: The identity display name.
     :vartype principal_name_reviewed_by_principal_name: str
     :ivar user_principal_name_reviewed_by_user_principal_name: The user principal name(if valid).
     :vartype user_principal_name_reviewed_by_user_principal_name: str
-    :param type: The type of decision target : User/ServicePrincipal.Constant filled by server.
-     Possible values include: "user", "servicePrincipal".
-    :type type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
+    :ivar type: The type of decision target : User/ServicePrincipal.Constant filled by server.
+     Known values are: "user", "servicePrincipal".
+    :vartype type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
     """
 
     _validation = {
@@ -252,10 +271,19 @@ class AccessReviewDecisionProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        decision: Optional[Union[str, "AccessReviewResult"]] = None,
+        decision: Optional[Union[str, "_models.AccessReviewResult"]] = None,
         justification: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword decision: The decision on the approval step. This value is initially set to
+         NotReviewed. Approvers can take action of Approve/Deny. Known values are: "Approve", "Deny",
+         "NotReviewed", "DontKnow", "NotNotified".
+        :paramtype decision: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewResult
+        :keyword justification: Justification provided by approvers for their action.
+        :paramtype justification: str
+        """
         super(AccessReviewDecisionProperties, self).__init__(**kwargs)
         self.recommendation = None
         self.decision = decision
@@ -282,9 +310,9 @@ class AccessReviewDecisionTarget(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param type: Required. The type of decision target : User/ServicePrincipal.Constant filled by
-     server.  Possible values include: "user", "servicePrincipal".
-    :type type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
+    :ivar type: Required. The type of decision target : User/ServicePrincipal.Constant filled by
+     server. Known values are: "user", "servicePrincipal".
+    :vartype type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
     """
 
     _validation = {
@@ -303,6 +331,8 @@ class AccessReviewDecisionTarget(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(AccessReviewDecisionTarget, self).__init__(**kwargs)
         self.type = None  # type: Optional[str]
 
@@ -319,50 +349,50 @@ class AccessReviewDefaultSettings(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The resource type.
     :vartype type: str
-    :param mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
+    :ivar mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
      review creator is enabled.
-    :type mail_notifications_enabled: bool
-    :param reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+    :vartype mail_notifications_enabled: bool
+    :ivar reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
      reviewers are enabled.
-    :type reminder_notifications_enabled: bool
-    :param default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+    :vartype reminder_notifications_enabled: bool
+    :ivar default_decision_enabled: Flag to indicate whether reviewers are required to provide a
      justification when reviewing access.
-    :type default_decision_enabled: bool
-    :param justification_required_on_approval: Flag to indicate whether the reviewer is required to
+    :vartype default_decision_enabled: bool
+    :ivar justification_required_on_approval: Flag to indicate whether the reviewer is required to
      pass justification when recording a decision.
-    :type justification_required_on_approval: bool
-    :param default_decision: This specifies the behavior for the autoReview feature when an access
-     review completes. Possible values include: "Approve", "Deny", "Recommendation".
-    :type default_decision: str or
+    :vartype justification_required_on_approval: bool
+    :ivar default_decision: This specifies the behavior for the autoReview feature when an access
+     review completes. Known values are: "Approve", "Deny", "Recommendation".
+    :vartype default_decision: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
-    :param auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+    :ivar auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
      automatically change the target object access resource, is enabled. If not enabled, a user
      must, after the review completes, apply the access review.
-    :type auto_apply_decisions_enabled: bool
-    :param recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
-     is enabled.
-    :type recommendations_enabled: bool
-    :param instance_duration_in_days: The duration in days for an instance.
-    :type instance_duration_in_days: int
-    :param type_properties_recurrence_range_type: The recurrence range type. The possible values
-     are: endDate, noEnd, numbered. Possible values include: "endDate", "noEnd", "numbered".
-    :type type_properties_recurrence_range_type: str or
+    :vartype auto_apply_decisions_enabled: bool
+    :ivar recommendations_enabled: Flag to indicate whether showing recommendations to reviewers is
+     enabled.
+    :vartype recommendations_enabled: bool
+    :ivar instance_duration_in_days: The duration in days for an instance.
+    :vartype instance_duration_in_days: int
+    :ivar type_properties_recurrence_range_type: The recurrence range type. The possible values
+     are: endDate, noEnd, numbered. Known values are: "endDate", "noEnd", "numbered".
+    :vartype type_properties_recurrence_range_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
-    :param number_of_occurrences: The number of times to repeat the access review. Required and
-     must be positive if type is numbered.
-    :type number_of_occurrences: int
-    :param start_date: The DateTime when the review is scheduled to be start. This could be a date
+    :ivar number_of_occurrences: The number of times to repeat the access review. Required and must
+     be positive if type is numbered.
+    :vartype number_of_occurrences: int
+    :ivar start_date: The DateTime when the review is scheduled to be start. This could be a date
      in the future. Required on create.
-    :type start_date: ~datetime.datetime
-    :param end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
-    :type end_date: ~datetime.datetime
-    :param type_properties_recurrence_pattern_type: The recurrence type : weekly, monthly, etc.
-     Possible values include: "weekly", "absoluteMonthly".
-    :type type_properties_recurrence_pattern_type: str or
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
+    :vartype end_date: ~datetime.datetime
+    :ivar type_properties_recurrence_pattern_type: The recurrence type : weekly, monthly, etc.
+     Known values are: "weekly", "absoluteMonthly".
+    :vartype type_properties_recurrence_pattern_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
-    :param interval: The interval for recurrence. For a quarterly review, the interval is 3 for
-     type : absoluteMonthly.
-    :type interval: int
+    :ivar interval: The interval for recurrence. For a quarterly review, the interval is 3 for type
+     : absoluteMonthly.
+    :vartype interval: int
     """
 
     _validation = {
@@ -398,18 +428,65 @@ class AccessReviewDefaultSettings(msrest.serialization.Model):
         reminder_notifications_enabled: Optional[bool] = None,
         default_decision_enabled: Optional[bool] = None,
         justification_required_on_approval: Optional[bool] = None,
-        default_decision: Optional[Union[str, "DefaultDecisionType"]] = None,
+        default_decision: Optional[Union[str, "_models.DefaultDecisionType"]] = None,
         auto_apply_decisions_enabled: Optional[bool] = None,
         recommendations_enabled: Optional[bool] = None,
         instance_duration_in_days: Optional[int] = None,
-        type_properties_recurrence_range_type: Optional[Union[str, "AccessReviewRecurrenceRangeType"]] = None,
+        type_properties_recurrence_range_type: Optional[Union[str, "_models.AccessReviewRecurrenceRangeType"]] = None,
         number_of_occurrences: Optional[int] = None,
         start_date: Optional[datetime.datetime] = None,
         end_date: Optional[datetime.datetime] = None,
-        type_properties_recurrence_pattern_type: Optional[Union[str, "AccessReviewRecurrencePatternType"]] = None,
+        type_properties_recurrence_pattern_type: Optional[Union[str, "_models.AccessReviewRecurrencePatternType"]] = None,
         interval: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and
+         the review creator is enabled.
+        :paramtype mail_notifications_enabled: bool
+        :keyword reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+         reviewers are enabled.
+        :paramtype reminder_notifications_enabled: bool
+        :keyword default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+         justification when reviewing access.
+        :paramtype default_decision_enabled: bool
+        :keyword justification_required_on_approval: Flag to indicate whether the reviewer is required
+         to pass justification when recording a decision.
+        :paramtype justification_required_on_approval: bool
+        :keyword default_decision: This specifies the behavior for the autoReview feature when an
+         access review completes. Known values are: "Approve", "Deny", "Recommendation".
+        :paramtype default_decision: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
+        :keyword auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+         automatically change the target object access resource, is enabled. If not enabled, a user
+         must, after the review completes, apply the access review.
+        :paramtype auto_apply_decisions_enabled: bool
+        :keyword recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
+         is enabled.
+        :paramtype recommendations_enabled: bool
+        :keyword instance_duration_in_days: The duration in days for an instance.
+        :paramtype instance_duration_in_days: int
+        :keyword type_properties_recurrence_range_type: The recurrence range type. The possible values
+         are: endDate, noEnd, numbered. Known values are: "endDate", "noEnd", "numbered".
+        :paramtype type_properties_recurrence_range_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
+        :keyword number_of_occurrences: The number of times to repeat the access review. Required and
+         must be positive if type is numbered.
+        :paramtype number_of_occurrences: int
+        :keyword start_date: The DateTime when the review is scheduled to be start. This could be a
+         date in the future. Required on create.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The DateTime when the review is scheduled to end. Required if type is
+         endDate.
+        :paramtype end_date: ~datetime.datetime
+        :keyword type_properties_recurrence_pattern_type: The recurrence type : weekly, monthly, etc.
+         Known values are: "weekly", "absoluteMonthly".
+        :paramtype type_properties_recurrence_pattern_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
+        :keyword interval: The interval for recurrence. For a quarterly review, the interval is 3 for
+         type : absoluteMonthly.
+        :paramtype interval: int
+        """
         super(AccessReviewDefaultSettings, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -441,15 +518,15 @@ class AccessReviewInstance(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The resource type.
     :vartype type: str
-    :ivar status: This read-only field specifies the status of an access review instance. Possible
-     values include: "NotStarted", "InProgress", "Completed", "Applied", "Initializing", "Applying",
+    :ivar status: This read-only field specifies the status of an access review instance. Known
+     values are: "NotStarted", "InProgress", "Completed", "Applied", "Initializing", "Applying",
      "Completing", "Scheduled", "AutoReviewing", "AutoReviewed", "Starting".
     :vartype status: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstanceStatus
-    :param start_date_time: The DateTime when the review instance is scheduled to be start.
-    :type start_date_time: ~datetime.datetime
-    :param end_date_time: The DateTime when the review instance is scheduled to end.
-    :type end_date_time: ~datetime.datetime
+    :ivar start_date_time: The DateTime when the review instance is scheduled to be start.
+    :vartype start_date_time: ~datetime.datetime
+    :ivar end_date_time: The DateTime when the review instance is scheduled to end.
+    :vartype end_date_time: ~datetime.datetime
     """
 
     _validation = {
@@ -475,6 +552,12 @@ class AccessReviewInstance(msrest.serialization.Model):
         end_date_time: Optional[datetime.datetime] = None,
         **kwargs
     ):
+        """
+        :keyword start_date_time: The DateTime when the review instance is scheduled to be start.
+        :paramtype start_date_time: ~datetime.datetime
+        :keyword end_date_time: The DateTime when the review instance is scheduled to end.
+        :paramtype end_date_time: ~datetime.datetime
+        """
         super(AccessReviewInstance, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -487,10 +570,10 @@ class AccessReviewInstance(msrest.serialization.Model):
 class AccessReviewInstanceListResult(msrest.serialization.Model):
     """List of Access Review Instances.
 
-    :param value: Access Review Instance list.
-    :type value: list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstance]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar value: Access Review Instance list.
+    :vartype value: list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstance]
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -501,10 +584,17 @@ class AccessReviewInstanceListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["AccessReviewInstance"]] = None,
+        value: Optional[List["_models.AccessReviewInstance"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: Access Review Instance list.
+        :paramtype value:
+         list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstance]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(AccessReviewInstanceListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -515,10 +605,10 @@ class AccessReviewReviewer(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param principal_id: The id of the reviewer(user/servicePrincipal).
-    :type principal_id: str
-    :ivar principal_type: The identity type : user/servicePrincipal. Possible values include:
-     "user", "servicePrincipal".
+    :ivar principal_id: The id of the reviewer(user/servicePrincipal).
+    :vartype principal_id: str
+    :ivar principal_type: The identity type : user/servicePrincipal. Known values are: "user",
+     "servicePrincipal".
     :vartype principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewReviewerType
     """
@@ -538,6 +628,10 @@ class AccessReviewReviewer(msrest.serialization.Model):
         principal_id: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword principal_id: The id of the reviewer(user/servicePrincipal).
+        :paramtype principal_id: str
+        """
         super(AccessReviewReviewer, self).__init__(**kwargs)
         self.principal_id = principal_id
         self.principal_type = None
@@ -554,87 +648,87 @@ class AccessReviewScheduleDefinition(msrest.serialization.Model):
     :vartype name: str
     :ivar type: The resource type.
     :vartype type: str
-    :param display_name: The display name for the schedule definition.
-    :type display_name: str
-    :ivar status: This read-only field specifies the status of an accessReview. Possible values
-     include: "NotStarted", "InProgress", "Completed", "Applied", "Initializing", "Applying",
-     "Completing", "Scheduled", "AutoReviewing", "AutoReviewed", "Starting".
+    :ivar display_name: The display name for the schedule definition.
+    :vartype display_name: str
+    :ivar status: This read-only field specifies the status of an accessReview. Known values are:
+     "NotStarted", "InProgress", "Completed", "Applied", "Initializing", "Applying", "Completing",
+     "Scheduled", "AutoReviewing", "AutoReviewed", "Starting".
     :vartype status: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScheduleDefinitionStatus
-    :param description_for_admins: The description provided by the access review creator and
-     visible to admins.
-    :type description_for_admins: str
-    :param description_for_reviewers: The description provided by the access review creator to be
+    :ivar description_for_admins: The description provided by the access review creator and visible
+     to admins.
+    :vartype description_for_admins: str
+    :ivar description_for_reviewers: The description provided by the access review creator to be
      shown to reviewers.
-    :type description_for_reviewers: str
-    :param reviewers: This is the collection of reviewers.
-    :type reviewers:
+    :vartype description_for_reviewers: str
+    :ivar reviewers: This is the collection of reviewers.
+    :vartype reviewers:
      list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewReviewer]
     :ivar reviewers_type: This field specifies the type of reviewers for a review. Usually for a
      review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be
-     assigned and instead be chosen dynamically. For example managers review or self review.
-     Possible values include: "Assigned", "Self", "Managers".
+     assigned and instead be chosen dynamically. For example managers review or self review. Known
+     values are: "Assigned", "Self", "Managers".
     :vartype reviewers_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScheduleDefinitionReviewersType
-    :param instances: This is the collection of instances returned when one does an expand on it.
-    :type instances:
+    :ivar instances: This is the collection of instances returned when one does an expand on it.
+    :vartype instances:
      list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstance]
     :ivar resource_id: ResourceId in which this review is getting created.
     :vartype resource_id: str
     :ivar role_definition_id: This is used to indicate the role being reviewed.
     :vartype role_definition_id: str
     :ivar principal_type_properties_scope_principal_type: The identity type user/servicePrincipal
-     to review. Possible values include: "user", "servicePrincipal".
+     to review. Known values are: "user", "servicePrincipal".
     :vartype principal_type_properties_scope_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScopePrincipalType
-    :param mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
+    :ivar mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
      review creator is enabled.
-    :type mail_notifications_enabled: bool
-    :param reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+    :vartype mail_notifications_enabled: bool
+    :ivar reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
      reviewers are enabled.
-    :type reminder_notifications_enabled: bool
-    :param default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+    :vartype reminder_notifications_enabled: bool
+    :ivar default_decision_enabled: Flag to indicate whether reviewers are required to provide a
      justification when reviewing access.
-    :type default_decision_enabled: bool
-    :param justification_required_on_approval: Flag to indicate whether the reviewer is required to
+    :vartype default_decision_enabled: bool
+    :ivar justification_required_on_approval: Flag to indicate whether the reviewer is required to
      pass justification when recording a decision.
-    :type justification_required_on_approval: bool
-    :param default_decision: This specifies the behavior for the autoReview feature when an access
-     review completes. Possible values include: "Approve", "Deny", "Recommendation".
-    :type default_decision: str or
+    :vartype justification_required_on_approval: bool
+    :ivar default_decision: This specifies the behavior for the autoReview feature when an access
+     review completes. Known values are: "Approve", "Deny", "Recommendation".
+    :vartype default_decision: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
-    :param auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+    :ivar auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
      automatically change the target object access resource, is enabled. If not enabled, a user
      must, after the review completes, apply the access review.
-    :type auto_apply_decisions_enabled: bool
-    :param recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
-     is enabled.
-    :type recommendations_enabled: bool
-    :param instance_duration_in_days: The duration in days for an instance.
-    :type instance_duration_in_days: int
-    :param type_properties_settings_recurrence_range_type: The recurrence range type. The possible
-     values are: endDate, noEnd, numbered. Possible values include: "endDate", "noEnd", "numbered".
-    :type type_properties_settings_recurrence_range_type: str or
+    :vartype auto_apply_decisions_enabled: bool
+    :ivar recommendations_enabled: Flag to indicate whether showing recommendations to reviewers is
+     enabled.
+    :vartype recommendations_enabled: bool
+    :ivar instance_duration_in_days: The duration in days for an instance.
+    :vartype instance_duration_in_days: int
+    :ivar type_properties_settings_recurrence_range_type: The recurrence range type. The possible
+     values are: endDate, noEnd, numbered. Known values are: "endDate", "noEnd", "numbered".
+    :vartype type_properties_settings_recurrence_range_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
-    :param number_of_occurrences: The number of times to repeat the access review. Required and
-     must be positive if type is numbered.
-    :type number_of_occurrences: int
-    :param start_date: The DateTime when the review is scheduled to be start. This could be a date
+    :ivar number_of_occurrences: The number of times to repeat the access review. Required and must
+     be positive if type is numbered.
+    :vartype number_of_occurrences: int
+    :ivar start_date: The DateTime when the review is scheduled to be start. This could be a date
      in the future. Required on create.
-    :type start_date: ~datetime.datetime
-    :param end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
-    :type end_date: ~datetime.datetime
-    :param type_properties_settings_recurrence_pattern_type: The recurrence type : weekly, monthly,
-     etc. Possible values include: "weekly", "absoluteMonthly".
-    :type type_properties_settings_recurrence_pattern_type: str or
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
+    :vartype end_date: ~datetime.datetime
+    :ivar type_properties_settings_recurrence_pattern_type: The recurrence type : weekly, monthly,
+     etc. Known values are: "weekly", "absoluteMonthly".
+    :vartype type_properties_settings_recurrence_pattern_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
-    :param interval: The interval for recurrence. For a quarterly review, the interval is 3 for
-     type : absoluteMonthly.
-    :type interval: int
+    :ivar interval: The interval for recurrence. For a quarterly review, the interval is 3 for type
+     : absoluteMonthly.
+    :vartype interval: int
     :ivar principal_id: The identity id.
     :vartype principal_id: str
     :ivar principal_type_properties_created_by_principal_type: The identity type :
-     user/servicePrincipal. Possible values include: "user", "servicePrincipal".
+     user/servicePrincipal. Known values are: "user", "servicePrincipal".
     :vartype principal_type_properties_created_by_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewActorIdentityType
     :ivar principal_name: The identity display name.
@@ -698,24 +792,86 @@ class AccessReviewScheduleDefinition(msrest.serialization.Model):
         display_name: Optional[str] = None,
         description_for_admins: Optional[str] = None,
         description_for_reviewers: Optional[str] = None,
-        reviewers: Optional[List["AccessReviewReviewer"]] = None,
-        instances: Optional[List["AccessReviewInstance"]] = None,
+        reviewers: Optional[List["_models.AccessReviewReviewer"]] = None,
+        instances: Optional[List["_models.AccessReviewInstance"]] = None,
         mail_notifications_enabled: Optional[bool] = None,
         reminder_notifications_enabled: Optional[bool] = None,
         default_decision_enabled: Optional[bool] = None,
         justification_required_on_approval: Optional[bool] = None,
-        default_decision: Optional[Union[str, "DefaultDecisionType"]] = None,
+        default_decision: Optional[Union[str, "_models.DefaultDecisionType"]] = None,
         auto_apply_decisions_enabled: Optional[bool] = None,
         recommendations_enabled: Optional[bool] = None,
         instance_duration_in_days: Optional[int] = None,
-        type_properties_settings_recurrence_range_type: Optional[Union[str, "AccessReviewRecurrenceRangeType"]] = None,
+        type_properties_settings_recurrence_range_type: Optional[Union[str, "_models.AccessReviewRecurrenceRangeType"]] = None,
         number_of_occurrences: Optional[int] = None,
         start_date: Optional[datetime.datetime] = None,
         end_date: Optional[datetime.datetime] = None,
-        type_properties_settings_recurrence_pattern_type: Optional[Union[str, "AccessReviewRecurrencePatternType"]] = None,
+        type_properties_settings_recurrence_pattern_type: Optional[Union[str, "_models.AccessReviewRecurrencePatternType"]] = None,
         interval: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The display name for the schedule definition.
+        :paramtype display_name: str
+        :keyword description_for_admins: The description provided by the access review creator and
+         visible to admins.
+        :paramtype description_for_admins: str
+        :keyword description_for_reviewers: The description provided by the access review creator to be
+         shown to reviewers.
+        :paramtype description_for_reviewers: str
+        :keyword reviewers: This is the collection of reviewers.
+        :paramtype reviewers:
+         list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewReviewer]
+        :keyword instances: This is the collection of instances returned when one does an expand on it.
+        :paramtype instances:
+         list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstance]
+        :keyword mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and
+         the review creator is enabled.
+        :paramtype mail_notifications_enabled: bool
+        :keyword reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+         reviewers are enabled.
+        :paramtype reminder_notifications_enabled: bool
+        :keyword default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+         justification when reviewing access.
+        :paramtype default_decision_enabled: bool
+        :keyword justification_required_on_approval: Flag to indicate whether the reviewer is required
+         to pass justification when recording a decision.
+        :paramtype justification_required_on_approval: bool
+        :keyword default_decision: This specifies the behavior for the autoReview feature when an
+         access review completes. Known values are: "Approve", "Deny", "Recommendation".
+        :paramtype default_decision: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
+        :keyword auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+         automatically change the target object access resource, is enabled. If not enabled, a user
+         must, after the review completes, apply the access review.
+        :paramtype auto_apply_decisions_enabled: bool
+        :keyword recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
+         is enabled.
+        :paramtype recommendations_enabled: bool
+        :keyword instance_duration_in_days: The duration in days for an instance.
+        :paramtype instance_duration_in_days: int
+        :keyword type_properties_settings_recurrence_range_type: The recurrence range type. The
+         possible values are: endDate, noEnd, numbered. Known values are: "endDate", "noEnd",
+         "numbered".
+        :paramtype type_properties_settings_recurrence_range_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
+        :keyword number_of_occurrences: The number of times to repeat the access review. Required and
+         must be positive if type is numbered.
+        :paramtype number_of_occurrences: int
+        :keyword start_date: The DateTime when the review is scheduled to be start. This could be a
+         date in the future. Required on create.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The DateTime when the review is scheduled to end. Required if type is
+         endDate.
+        :paramtype end_date: ~datetime.datetime
+        :keyword type_properties_settings_recurrence_pattern_type: The recurrence type : weekly,
+         monthly, etc. Known values are: "weekly", "absoluteMonthly".
+        :paramtype type_properties_settings_recurrence_pattern_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
+        :keyword interval: The interval for recurrence. For a quarterly review, the interval is 3 for
+         type : absoluteMonthly.
+        :paramtype interval: int
+        """
         super(AccessReviewScheduleDefinition, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -753,11 +909,11 @@ class AccessReviewScheduleDefinition(msrest.serialization.Model):
 class AccessReviewScheduleDefinitionListResult(msrest.serialization.Model):
     """List of Access Review Schedule Definitions.
 
-    :param value: Access Review Schedule Definition list.
-    :type value:
+    :ivar value: Access Review Schedule Definition list.
+    :vartype value:
      list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScheduleDefinition]
-    :param next_link: The URL to use for getting the next set of results.
-    :type next_link: str
+    :ivar next_link: The URL to use for getting the next set of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -768,10 +924,17 @@ class AccessReviewScheduleDefinitionListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["AccessReviewScheduleDefinition"]] = None,
+        value: Optional[List["_models.AccessReviewScheduleDefinition"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: Access Review Schedule Definition list.
+        :paramtype value:
+         list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScheduleDefinition]
+        :keyword next_link: The URL to use for getting the next set of results.
+        :paramtype next_link: str
+        """
         super(AccessReviewScheduleDefinitionListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -782,87 +945,87 @@ class AccessReviewScheduleDefinitionProperties(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :param display_name: The display name for the schedule definition.
-    :type display_name: str
-    :ivar status: This read-only field specifies the status of an accessReview. Possible values
-     include: "NotStarted", "InProgress", "Completed", "Applied", "Initializing", "Applying",
-     "Completing", "Scheduled", "AutoReviewing", "AutoReviewed", "Starting".
+    :ivar display_name: The display name for the schedule definition.
+    :vartype display_name: str
+    :ivar status: This read-only field specifies the status of an accessReview. Known values are:
+     "NotStarted", "InProgress", "Completed", "Applied", "Initializing", "Applying", "Completing",
+     "Scheduled", "AutoReviewing", "AutoReviewed", "Starting".
     :vartype status: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScheduleDefinitionStatus
-    :param description_for_admins: The description provided by the access review creator and
-     visible to admins.
-    :type description_for_admins: str
-    :param description_for_reviewers: The description provided by the access review creator to be
+    :ivar description_for_admins: The description provided by the access review creator and visible
+     to admins.
+    :vartype description_for_admins: str
+    :ivar description_for_reviewers: The description provided by the access review creator to be
      shown to reviewers.
-    :type description_for_reviewers: str
-    :param reviewers: This is the collection of reviewers.
-    :type reviewers:
+    :vartype description_for_reviewers: str
+    :ivar reviewers: This is the collection of reviewers.
+    :vartype reviewers:
      list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewReviewer]
     :ivar reviewers_type: This field specifies the type of reviewers for a review. Usually for a
      review, reviewers are explicitly assigned. However, in some cases, the reviewers may not be
-     assigned and instead be chosen dynamically. For example managers review or self review.
-     Possible values include: "Assigned", "Self", "Managers".
+     assigned and instead be chosen dynamically. For example managers review or self review. Known
+     values are: "Assigned", "Self", "Managers".
     :vartype reviewers_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScheduleDefinitionReviewersType
-    :param instances: This is the collection of instances returned when one does an expand on it.
-    :type instances:
+    :ivar instances: This is the collection of instances returned when one does an expand on it.
+    :vartype instances:
      list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstance]
     :ivar resource_id: ResourceId in which this review is getting created.
     :vartype resource_id: str
     :ivar role_definition_id: This is used to indicate the role being reviewed.
     :vartype role_definition_id: str
     :ivar principal_type_scope_principal_type: The identity type user/servicePrincipal to review.
-     Possible values include: "user", "servicePrincipal".
+     Known values are: "user", "servicePrincipal".
     :vartype principal_type_scope_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewScopePrincipalType
-    :param mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
+    :ivar mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
      review creator is enabled.
-    :type mail_notifications_enabled: bool
-    :param reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+    :vartype mail_notifications_enabled: bool
+    :ivar reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
      reviewers are enabled.
-    :type reminder_notifications_enabled: bool
-    :param default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+    :vartype reminder_notifications_enabled: bool
+    :ivar default_decision_enabled: Flag to indicate whether reviewers are required to provide a
      justification when reviewing access.
-    :type default_decision_enabled: bool
-    :param justification_required_on_approval: Flag to indicate whether the reviewer is required to
+    :vartype default_decision_enabled: bool
+    :ivar justification_required_on_approval: Flag to indicate whether the reviewer is required to
      pass justification when recording a decision.
-    :type justification_required_on_approval: bool
-    :param default_decision: This specifies the behavior for the autoReview feature when an access
-     review completes. Possible values include: "Approve", "Deny", "Recommendation".
-    :type default_decision: str or
+    :vartype justification_required_on_approval: bool
+    :ivar default_decision: This specifies the behavior for the autoReview feature when an access
+     review completes. Known values are: "Approve", "Deny", "Recommendation".
+    :vartype default_decision: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
-    :param auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+    :ivar auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
      automatically change the target object access resource, is enabled. If not enabled, a user
      must, after the review completes, apply the access review.
-    :type auto_apply_decisions_enabled: bool
-    :param recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
-     is enabled.
-    :type recommendations_enabled: bool
-    :param instance_duration_in_days: The duration in days for an instance.
-    :type instance_duration_in_days: int
-    :param type_settings_recurrence_range_type: The recurrence range type. The possible values are:
-     endDate, noEnd, numbered. Possible values include: "endDate", "noEnd", "numbered".
-    :type type_settings_recurrence_range_type: str or
+    :vartype auto_apply_decisions_enabled: bool
+    :ivar recommendations_enabled: Flag to indicate whether showing recommendations to reviewers is
+     enabled.
+    :vartype recommendations_enabled: bool
+    :ivar instance_duration_in_days: The duration in days for an instance.
+    :vartype instance_duration_in_days: int
+    :ivar type_settings_recurrence_range_type: The recurrence range type. The possible values are:
+     endDate, noEnd, numbered. Known values are: "endDate", "noEnd", "numbered".
+    :vartype type_settings_recurrence_range_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
-    :param number_of_occurrences: The number of times to repeat the access review. Required and
-     must be positive if type is numbered.
-    :type number_of_occurrences: int
-    :param start_date: The DateTime when the review is scheduled to be start. This could be a date
+    :ivar number_of_occurrences: The number of times to repeat the access review. Required and must
+     be positive if type is numbered.
+    :vartype number_of_occurrences: int
+    :ivar start_date: The DateTime when the review is scheduled to be start. This could be a date
      in the future. Required on create.
-    :type start_date: ~datetime.datetime
-    :param end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
-    :type end_date: ~datetime.datetime
-    :param type_settings_recurrence_pattern_type: The recurrence type : weekly, monthly, etc.
-     Possible values include: "weekly", "absoluteMonthly".
-    :type type_settings_recurrence_pattern_type: str or
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
+    :vartype end_date: ~datetime.datetime
+    :ivar type_settings_recurrence_pattern_type: The recurrence type : weekly, monthly, etc. Known
+     values are: "weekly", "absoluteMonthly".
+    :vartype type_settings_recurrence_pattern_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
-    :param interval: The interval for recurrence. For a quarterly review, the interval is 3 for
-     type : absoluteMonthly.
-    :type interval: int
+    :ivar interval: The interval for recurrence. For a quarterly review, the interval is 3 for type
+     : absoluteMonthly.
+    :vartype interval: int
     :ivar principal_id: The identity id.
     :vartype principal_id: str
     :ivar principal_type_created_by_principal_type: The identity type : user/servicePrincipal.
-     Possible values include: "user", "servicePrincipal".
+     Known values are: "user", "servicePrincipal".
     :vartype principal_type_created_by_principal_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewActorIdentityType
     :ivar principal_name: The identity display name.
@@ -920,24 +1083,85 @@ class AccessReviewScheduleDefinitionProperties(msrest.serialization.Model):
         display_name: Optional[str] = None,
         description_for_admins: Optional[str] = None,
         description_for_reviewers: Optional[str] = None,
-        reviewers: Optional[List["AccessReviewReviewer"]] = None,
-        instances: Optional[List["AccessReviewInstance"]] = None,
+        reviewers: Optional[List["_models.AccessReviewReviewer"]] = None,
+        instances: Optional[List["_models.AccessReviewInstance"]] = None,
         mail_notifications_enabled: Optional[bool] = None,
         reminder_notifications_enabled: Optional[bool] = None,
         default_decision_enabled: Optional[bool] = None,
         justification_required_on_approval: Optional[bool] = None,
-        default_decision: Optional[Union[str, "DefaultDecisionType"]] = None,
+        default_decision: Optional[Union[str, "_models.DefaultDecisionType"]] = None,
         auto_apply_decisions_enabled: Optional[bool] = None,
         recommendations_enabled: Optional[bool] = None,
         instance_duration_in_days: Optional[int] = None,
-        type_settings_recurrence_range_type: Optional[Union[str, "AccessReviewRecurrenceRangeType"]] = None,
+        type_settings_recurrence_range_type: Optional[Union[str, "_models.AccessReviewRecurrenceRangeType"]] = None,
         number_of_occurrences: Optional[int] = None,
         start_date: Optional[datetime.datetime] = None,
         end_date: Optional[datetime.datetime] = None,
-        type_settings_recurrence_pattern_type: Optional[Union[str, "AccessReviewRecurrencePatternType"]] = None,
+        type_settings_recurrence_pattern_type: Optional[Union[str, "_models.AccessReviewRecurrencePatternType"]] = None,
         interval: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword display_name: The display name for the schedule definition.
+        :paramtype display_name: str
+        :keyword description_for_admins: The description provided by the access review creator and
+         visible to admins.
+        :paramtype description_for_admins: str
+        :keyword description_for_reviewers: The description provided by the access review creator to be
+         shown to reviewers.
+        :paramtype description_for_reviewers: str
+        :keyword reviewers: This is the collection of reviewers.
+        :paramtype reviewers:
+         list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewReviewer]
+        :keyword instances: This is the collection of instances returned when one does an expand on it.
+        :paramtype instances:
+         list[~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewInstance]
+        :keyword mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and
+         the review creator is enabled.
+        :paramtype mail_notifications_enabled: bool
+        :keyword reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+         reviewers are enabled.
+        :paramtype reminder_notifications_enabled: bool
+        :keyword default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+         justification when reviewing access.
+        :paramtype default_decision_enabled: bool
+        :keyword justification_required_on_approval: Flag to indicate whether the reviewer is required
+         to pass justification when recording a decision.
+        :paramtype justification_required_on_approval: bool
+        :keyword default_decision: This specifies the behavior for the autoReview feature when an
+         access review completes. Known values are: "Approve", "Deny", "Recommendation".
+        :paramtype default_decision: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
+        :keyword auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+         automatically change the target object access resource, is enabled. If not enabled, a user
+         must, after the review completes, apply the access review.
+        :paramtype auto_apply_decisions_enabled: bool
+        :keyword recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
+         is enabled.
+        :paramtype recommendations_enabled: bool
+        :keyword instance_duration_in_days: The duration in days for an instance.
+        :paramtype instance_duration_in_days: int
+        :keyword type_settings_recurrence_range_type: The recurrence range type. The possible values
+         are: endDate, noEnd, numbered. Known values are: "endDate", "noEnd", "numbered".
+        :paramtype type_settings_recurrence_range_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
+        :keyword number_of_occurrences: The number of times to repeat the access review. Required and
+         must be positive if type is numbered.
+        :paramtype number_of_occurrences: int
+        :keyword start_date: The DateTime when the review is scheduled to be start. This could be a
+         date in the future. Required on create.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The DateTime when the review is scheduled to end. Required if type is
+         endDate.
+        :paramtype end_date: ~datetime.datetime
+        :keyword type_settings_recurrence_pattern_type: The recurrence type : weekly, monthly, etc.
+         Known values are: "weekly", "absoluteMonthly".
+        :paramtype type_settings_recurrence_pattern_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
+        :keyword interval: The interval for recurrence. For a quarterly review, the interval is 3 for
+         type : absoluteMonthly.
+        :paramtype interval: int
+        """
         super(AccessReviewScheduleDefinitionProperties, self).__init__(**kwargs)
         self.display_name = display_name
         self.status = None
@@ -972,50 +1196,50 @@ class AccessReviewScheduleDefinitionProperties(msrest.serialization.Model):
 class AccessReviewScheduleSettings(msrest.serialization.Model):
     """Settings of an Access Review.
 
-    :param mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
+    :ivar mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and the
      review creator is enabled.
-    :type mail_notifications_enabled: bool
-    :param reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+    :vartype mail_notifications_enabled: bool
+    :ivar reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
      reviewers are enabled.
-    :type reminder_notifications_enabled: bool
-    :param default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+    :vartype reminder_notifications_enabled: bool
+    :ivar default_decision_enabled: Flag to indicate whether reviewers are required to provide a
      justification when reviewing access.
-    :type default_decision_enabled: bool
-    :param justification_required_on_approval: Flag to indicate whether the reviewer is required to
+    :vartype default_decision_enabled: bool
+    :ivar justification_required_on_approval: Flag to indicate whether the reviewer is required to
      pass justification when recording a decision.
-    :type justification_required_on_approval: bool
-    :param default_decision: This specifies the behavior for the autoReview feature when an access
-     review completes. Possible values include: "Approve", "Deny", "Recommendation".
-    :type default_decision: str or
+    :vartype justification_required_on_approval: bool
+    :ivar default_decision: This specifies the behavior for the autoReview feature when an access
+     review completes. Known values are: "Approve", "Deny", "Recommendation".
+    :vartype default_decision: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
-    :param auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+    :ivar auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
      automatically change the target object access resource, is enabled. If not enabled, a user
      must, after the review completes, apply the access review.
-    :type auto_apply_decisions_enabled: bool
-    :param recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
-     is enabled.
-    :type recommendations_enabled: bool
-    :param instance_duration_in_days: The duration in days for an instance.
-    :type instance_duration_in_days: int
-    :param type_recurrence_range_type: The recurrence range type. The possible values are: endDate,
-     noEnd, numbered. Possible values include: "endDate", "noEnd", "numbered".
-    :type type_recurrence_range_type: str or
+    :vartype auto_apply_decisions_enabled: bool
+    :ivar recommendations_enabled: Flag to indicate whether showing recommendations to reviewers is
+     enabled.
+    :vartype recommendations_enabled: bool
+    :ivar instance_duration_in_days: The duration in days for an instance.
+    :vartype instance_duration_in_days: int
+    :ivar type_recurrence_range_type: The recurrence range type. The possible values are: endDate,
+     noEnd, numbered. Known values are: "endDate", "noEnd", "numbered".
+    :vartype type_recurrence_range_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
-    :param number_of_occurrences: The number of times to repeat the access review. Required and
-     must be positive if type is numbered.
-    :type number_of_occurrences: int
-    :param start_date: The DateTime when the review is scheduled to be start. This could be a date
+    :ivar number_of_occurrences: The number of times to repeat the access review. Required and must
+     be positive if type is numbered.
+    :vartype number_of_occurrences: int
+    :ivar start_date: The DateTime when the review is scheduled to be start. This could be a date
      in the future. Required on create.
-    :type start_date: ~datetime.datetime
-    :param end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
-    :type end_date: ~datetime.datetime
-    :param type_recurrence_pattern_type: The recurrence type : weekly, monthly, etc. Possible
-     values include: "weekly", "absoluteMonthly".
-    :type type_recurrence_pattern_type: str or
+    :vartype start_date: ~datetime.datetime
+    :ivar end_date: The DateTime when the review is scheduled to end. Required if type is endDate.
+    :vartype end_date: ~datetime.datetime
+    :ivar type_recurrence_pattern_type: The recurrence type : weekly, monthly, etc. Known values
+     are: "weekly", "absoluteMonthly".
+    :vartype type_recurrence_pattern_type: str or
      ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
-    :param interval: The interval for recurrence. For a quarterly review, the interval is 3 for
-     type : absoluteMonthly.
-    :type interval: int
+    :ivar interval: The interval for recurrence. For a quarterly review, the interval is 3 for type
+     : absoluteMonthly.
+    :vartype interval: int
     """
 
     _attribute_map = {
@@ -1042,18 +1266,65 @@ class AccessReviewScheduleSettings(msrest.serialization.Model):
         reminder_notifications_enabled: Optional[bool] = None,
         default_decision_enabled: Optional[bool] = None,
         justification_required_on_approval: Optional[bool] = None,
-        default_decision: Optional[Union[str, "DefaultDecisionType"]] = None,
+        default_decision: Optional[Union[str, "_models.DefaultDecisionType"]] = None,
         auto_apply_decisions_enabled: Optional[bool] = None,
         recommendations_enabled: Optional[bool] = None,
         instance_duration_in_days: Optional[int] = None,
-        type_recurrence_range_type: Optional[Union[str, "AccessReviewRecurrenceRangeType"]] = None,
+        type_recurrence_range_type: Optional[Union[str, "_models.AccessReviewRecurrenceRangeType"]] = None,
         number_of_occurrences: Optional[int] = None,
         start_date: Optional[datetime.datetime] = None,
         end_date: Optional[datetime.datetime] = None,
-        type_recurrence_pattern_type: Optional[Union[str, "AccessReviewRecurrencePatternType"]] = None,
+        type_recurrence_pattern_type: Optional[Union[str, "_models.AccessReviewRecurrencePatternType"]] = None,
         interval: Optional[int] = None,
         **kwargs
     ):
+        """
+        :keyword mail_notifications_enabled: Flag to indicate whether sending mails to reviewers and
+         the review creator is enabled.
+        :paramtype mail_notifications_enabled: bool
+        :keyword reminder_notifications_enabled: Flag to indicate whether sending reminder emails to
+         reviewers are enabled.
+        :paramtype reminder_notifications_enabled: bool
+        :keyword default_decision_enabled: Flag to indicate whether reviewers are required to provide a
+         justification when reviewing access.
+        :paramtype default_decision_enabled: bool
+        :keyword justification_required_on_approval: Flag to indicate whether the reviewer is required
+         to pass justification when recording a decision.
+        :paramtype justification_required_on_approval: bool
+        :keyword default_decision: This specifies the behavior for the autoReview feature when an
+         access review completes. Known values are: "Approve", "Deny", "Recommendation".
+        :paramtype default_decision: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.DefaultDecisionType
+        :keyword auto_apply_decisions_enabled: Flag to indicate whether auto-apply capability, to
+         automatically change the target object access resource, is enabled. If not enabled, a user
+         must, after the review completes, apply the access review.
+        :paramtype auto_apply_decisions_enabled: bool
+        :keyword recommendations_enabled: Flag to indicate whether showing recommendations to reviewers
+         is enabled.
+        :paramtype recommendations_enabled: bool
+        :keyword instance_duration_in_days: The duration in days for an instance.
+        :paramtype instance_duration_in_days: int
+        :keyword type_recurrence_range_type: The recurrence range type. The possible values are:
+         endDate, noEnd, numbered. Known values are: "endDate", "noEnd", "numbered".
+        :paramtype type_recurrence_range_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrenceRangeType
+        :keyword number_of_occurrences: The number of times to repeat the access review. Required and
+         must be positive if type is numbered.
+        :paramtype number_of_occurrences: int
+        :keyword start_date: The DateTime when the review is scheduled to be start. This could be a
+         date in the future. Required on create.
+        :paramtype start_date: ~datetime.datetime
+        :keyword end_date: The DateTime when the review is scheduled to end. Required if type is
+         endDate.
+        :paramtype end_date: ~datetime.datetime
+        :keyword type_recurrence_pattern_type: The recurrence type : weekly, monthly, etc. Known values
+         are: "weekly", "absoluteMonthly".
+        :paramtype type_recurrence_pattern_type: str or
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.AccessReviewRecurrencePatternType
+        :keyword interval: The interval for recurrence. For a quarterly review, the interval is 3 for
+         type : absoluteMonthly.
+        :paramtype interval: int
+        """
         super(AccessReviewScheduleSettings, self).__init__(**kwargs)
         self.mail_notifications_enabled = mail_notifications_enabled
         self.reminder_notifications_enabled = reminder_notifications_enabled
@@ -1074,8 +1345,8 @@ class AccessReviewScheduleSettings(msrest.serialization.Model):
 class ErrorDefinition(msrest.serialization.Model):
     """Error description and code explaining why an operation failed.
 
-    :param error: Error of the list gateway status.
-    :type error: ~azure.mgmt.authorization.v2018_05_01_preview.models.ErrorDefinitionProperties
+    :ivar error: Error of the list gateway status.
+    :vartype error: ~azure.mgmt.authorization.v2018_05_01_preview.models.ErrorDefinitionProperties
     """
 
     _attribute_map = {
@@ -1085,9 +1356,14 @@ class ErrorDefinition(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDefinitionProperties"] = None,
+        error: Optional["_models.ErrorDefinitionProperties"] = None,
         **kwargs
     ):
+        """
+        :keyword error: Error of the list gateway status.
+        :paramtype error:
+         ~azure.mgmt.authorization.v2018_05_01_preview.models.ErrorDefinitionProperties
+        """
         super(ErrorDefinition, self).__init__(**kwargs)
         self.error = error
 
@@ -1099,8 +1375,8 @@ class ErrorDefinitionProperties(msrest.serialization.Model):
 
     :ivar message: Description of the error.
     :vartype message: str
-    :param code: Error code of list gateway.
-    :type code: str
+    :ivar code: Error code of list gateway.
+    :vartype code: str
     """
 
     _validation = {
@@ -1118,6 +1394,10 @@ class ErrorDefinitionProperties(msrest.serialization.Model):
         code: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword code: Error code of list gateway.
+        :paramtype code: str
+        """
         super(ErrorDefinitionProperties, self).__init__(**kwargs)
         self.message = None
         self.code = code
@@ -1126,14 +1406,14 @@ class ErrorDefinitionProperties(msrest.serialization.Model):
 class Operation(msrest.serialization.Model):
     """The definition of a Microsoft.Authorization operation.
 
-    :param name: Name of the operation.
-    :type name: str
-    :param is_data_action: Indicates whether the operation is a data action.
-    :type is_data_action: bool
-    :param display: Display of the operation.
-    :type display: ~azure.mgmt.authorization.v2018_05_01_preview.models.OperationDisplay
-    :param origin: Origin of the operation.
-    :type origin: str
+    :ivar name: Name of the operation.
+    :vartype name: str
+    :ivar is_data_action: Indicates whether the operation is a data action.
+    :vartype is_data_action: bool
+    :ivar display: Display of the operation.
+    :vartype display: ~azure.mgmt.authorization.v2018_05_01_preview.models.OperationDisplay
+    :ivar origin: Origin of the operation.
+    :vartype origin: str
     """
 
     _attribute_map = {
@@ -1148,10 +1428,20 @@ class Operation(msrest.serialization.Model):
         *,
         name: Optional[str] = None,
         is_data_action: Optional[bool] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         origin: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword name: Name of the operation.
+        :paramtype name: str
+        :keyword is_data_action: Indicates whether the operation is a data action.
+        :paramtype is_data_action: bool
+        :keyword display: Display of the operation.
+        :paramtype display: ~azure.mgmt.authorization.v2018_05_01_preview.models.OperationDisplay
+        :keyword origin: Origin of the operation.
+        :paramtype origin: str
+        """
         super(Operation, self).__init__(**kwargs)
         self.name = name
         self.is_data_action = is_data_action
@@ -1192,6 +1482,8 @@ class OperationDisplay(msrest.serialization.Model):
         self,
         **kwargs
     ):
+        """
+        """
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = None
         self.resource = None
@@ -1202,10 +1494,10 @@ class OperationDisplay(msrest.serialization.Model):
 class OperationListResult(msrest.serialization.Model):
     """The result of a request to list Microsoft.Authorization operations.
 
-    :param value: The collection value.
-    :type value: list[~azure.mgmt.authorization.v2018_05_01_preview.models.Operation]
-    :param next_link: The URI that can be used to request the next set of paged results.
-    :type next_link: str
+    :ivar value: The collection value.
+    :vartype value: list[~azure.mgmt.authorization.v2018_05_01_preview.models.Operation]
+    :ivar next_link: The URI that can be used to request the next set of paged results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
@@ -1216,10 +1508,16 @@ class OperationListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
+        """
+        :keyword value: The collection value.
+        :paramtype value: list[~azure.mgmt.authorization.v2018_05_01_preview.models.Operation]
+        :keyword next_link: The URI that can be used to request the next set of paged results.
+        :paramtype next_link: str
+        """
         super(OperationListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
@@ -1232,9 +1530,9 @@ class ServicePrincipalDecisionTarget(AccessReviewDecisionTarget):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param type: Required. The type of decision target : User/ServicePrincipal.Constant filled by
-     server.  Possible values include: "user", "servicePrincipal".
-    :type type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
+    :ivar type: Required. The type of decision target : User/ServicePrincipal.Constant filled by
+     server. Known values are: "user", "servicePrincipal".
+    :vartype type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
     :ivar principal_id: The id of service principal whose access is reviewed.
     :vartype principal_id: str
     :ivar principal_name: The display name of the service principal whose access was reviewed.
@@ -1261,6 +1559,8 @@ class ServicePrincipalDecisionTarget(AccessReviewDecisionTarget):
         self,
         **kwargs
     ):
+        """
+        """
         super(ServicePrincipalDecisionTarget, self).__init__(**kwargs)
         self.type = 'servicePrincipal'  # type: str
         self.principal_id = None
@@ -1275,9 +1575,9 @@ class UserDecisionTarget(AccessReviewDecisionTarget):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param type: Required. The type of decision target : User/ServicePrincipal.Constant filled by
-     server.  Possible values include: "user", "servicePrincipal".
-    :type type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
+    :ivar type: Required. The type of decision target : User/ServicePrincipal.Constant filled by
+     server. Known values are: "user", "servicePrincipal".
+    :vartype type: str or ~azure.mgmt.authorization.v2018_05_01_preview.models.DecisionTargetType
     :ivar principal_id: The id of user whose access was reviewed.
     :vartype principal_id: str
     :ivar principal_name: The display name of the user whose access was reviewed.
@@ -1304,6 +1604,8 @@ class UserDecisionTarget(AccessReviewDecisionTarget):
         self,
         **kwargs
     ):
+        """
+        """
         super(UserDecisionTarget, self).__init__(**kwargs)
         self.type = 'user'  # type: str
         self.principal_id = None

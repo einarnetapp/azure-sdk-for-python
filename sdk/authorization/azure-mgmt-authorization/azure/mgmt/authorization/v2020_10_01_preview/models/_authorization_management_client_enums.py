@@ -6,27 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
-from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from enum import Enum
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class ApprovalMode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ApprovalMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of rule
     """
 
@@ -35,14 +19,14 @@ class ApprovalMode(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     PARALLEL = "Parallel"
     NO_APPROVAL = "NoApproval"
 
-class AssignmentType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AssignmentType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Assignment type of the role assignment schedule
     """
 
     ACTIVATED = "Activated"
     ASSIGNED = "Assigned"
 
-class EnablementRules(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EnablementRules(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of enable rules
     """
 
@@ -50,7 +34,7 @@ class EnablementRules(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     JUSTIFICATION = "Justification"
     TICKETING = "Ticketing"
 
-class MemberType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MemberType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Membership type of the role assignment schedule
     """
 
@@ -58,13 +42,13 @@ class MemberType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     DIRECT = "Direct"
     GROUP = "Group"
 
-class NotificationDeliveryMechanism(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class NotificationDeliveryMechanism(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of notification.
     """
 
     EMAIL = "Email"
 
-class NotificationLevel(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class NotificationLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The notification level.
     """
 
@@ -72,7 +56,7 @@ class NotificationLevel(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     CRITICAL = "Critical"
     ALL = "All"
 
-class PrincipalType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PrincipalType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The principal type of the assigned principal ID.
     """
 
@@ -82,7 +66,7 @@ class PrincipalType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     FOREIGN_GROUP = "ForeignGroup"
     DEVICE = "Device"
 
-class RecipientType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecipientType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recipient type.
     """
 
@@ -90,7 +74,7 @@ class RecipientType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     APPROVER = "Approver"
     ADMIN = "Admin"
 
-class RequestType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RequestType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the role assignment schedule request. Eg: SelfActivate, AdminAssign etc
     """
 
@@ -104,7 +88,7 @@ class RequestType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     SELF_EXTEND = "SelfExtend"
     SELF_RENEW = "SelfRenew"
 
-class RoleManagementPolicyRuleType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RoleManagementPolicyRuleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of rule
     """
 
@@ -114,7 +98,7 @@ class RoleManagementPolicyRuleType(with_metaclass(_CaseInsensitiveEnumMeta, str,
     ROLE_MANAGEMENT_POLICY_EXPIRATION_RULE = "RoleManagementPolicyExpirationRule"
     ROLE_MANAGEMENT_POLICY_NOTIFICATION_RULE = "RoleManagementPolicyNotificationRule"
 
-class Status(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the role assignment schedule.
     """
 
@@ -141,7 +125,7 @@ class Status(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     SCHEDULE_CREATED = "ScheduleCreated"
     PENDING_EXTERNAL_PROVISIONING = "PendingExternalProvisioning"
 
-class Type(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of the role assignment schedule expiration
     """
 
@@ -149,7 +133,7 @@ class Type(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     AFTER_DATE_TIME = "AfterDateTime"
     NO_EXPIRATION = "NoExpiration"
 
-class UserType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class UserType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of user.
     """
 
