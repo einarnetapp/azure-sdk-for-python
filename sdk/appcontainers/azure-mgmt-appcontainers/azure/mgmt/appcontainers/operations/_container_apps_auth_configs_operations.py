@@ -16,12 +16,12 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
 from .._vendor import _convert_request, _format_url_section
 T = TypeVar('T')
-JSONType = Any
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
 _SERIALIZER = Serializer()
@@ -33,9 +33,12 @@ def build_list_by_container_app_request(
     container_app_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    accept = "application/json"
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs")  # pylint: disable=line-too-long
     path_format_arguments = {
@@ -47,18 +50,16 @@ def build_list_by_container_app_request(
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
         method="GET",
         url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
+        params=_params,
+        headers=_headers,
         **kwargs
     )
 
@@ -70,9 +71,12 @@ def build_get_request(
     auth_config_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    accept = "application/json"
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}")  # pylint: disable=line-too-long
     path_format_arguments = {
@@ -85,18 +89,16 @@ def build_get_request(
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
         method="GET",
         url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
+        params=_params,
+        headers=_headers,
         **kwargs
     )
 
@@ -107,14 +109,17 @@ def build_create_or_update_request(
     container_app_name: str,
     auth_config_name: str,
     *,
-    json: JSONType = None,
+    json: Optional[_models.AuthConfig] = None,
     content: Any = None,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
-    content_type = kwargs.pop('content_type', None)  # type: Optional[str]
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    accept = "application/json"
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+    content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
+    accept = _headers.pop('Accept', "application/json")
+
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}")  # pylint: disable=line-too-long
     path_format_arguments = {
@@ -127,20 +132,18 @@ def build_create_or_update_request(
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
     if content_type is not None:
-        _header_parameters['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+        _headers['Content-Type'] = _SERIALIZER.header("content_type", content_type, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
         method="PUT",
         url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
+        params=_params,
+        headers=_headers,
         json=json,
         content=content,
         **kwargs
@@ -154,9 +157,12 @@ def build_delete_request(
     auth_config_name: str,
     **kwargs: Any
 ) -> HttpRequest:
-    api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    accept = "application/json"
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}")  # pylint: disable=line-too-long
     path_format_arguments = {
@@ -169,42 +175,38 @@ def build_delete_request(
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _query_parameters = kwargs.pop("params", {})  # type: Dict[str, Any]
-    _query_parameters['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
 
     # Construct headers
-    _header_parameters = kwargs.pop("headers", {})  # type: Dict[str, Any]
-    _header_parameters['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
 
     return HttpRequest(
         method="DELETE",
         url=_url,
-        params=_query_parameters,
-        headers=_header_parameters,
+        params=_params,
+        headers=_headers,
         **kwargs
     )
 
-class ContainerAppsAuthConfigsOperations(object):
-    """ContainerAppsAuthConfigsOperations operations.
+class ContainerAppsAuthConfigsOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.appcontainers.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.appcontainers.ContainerAppsAPIClient`'s
+        :attr:`container_apps_auth_configs` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer):
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs):
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list_by_container_app(
@@ -212,7 +214,7 @@ class ContainerAppsAuthConfigsOperations(object):
         resource_group_name: str,
         container_app_name: str,
         **kwargs: Any
-    ) -> Iterable["_models.AuthConfigCollection"]:
+    ) -> Iterable[_models.AuthConfigCollection]:
         """Get the Container App AuthConfigs in a given resource group.
 
         Get the Container App AuthConfigs in a given resource group.
@@ -227,13 +229,16 @@ class ContainerAppsAuthConfigsOperations(object):
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.appcontainers.models.AuthConfigCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthConfigCollection"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.AuthConfigCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -243,9 +248,11 @@ class ContainerAppsAuthConfigsOperations(object):
                     container_app_name=container_app_name,
                     api_version=api_version,
                     template_url=self.list_by_container_app.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -255,9 +262,11 @@ class ContainerAppsAuthConfigsOperations(object):
                     container_app_name=container_app_name,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -298,7 +307,7 @@ class ContainerAppsAuthConfigsOperations(object):
         container_app_name: str,
         auth_config_name: str,
         **kwargs: Any
-    ) -> "_models.AuthConfig":
+    ) -> _models.AuthConfig:
         """Get a AuthConfig of a Container App.
 
         Get a AuthConfig of a Container App.
@@ -314,13 +323,16 @@ class ContainerAppsAuthConfigsOperations(object):
         :rtype: ~azure.mgmt.appcontainers.models.AuthConfig
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthConfig"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.AuthConfig]
 
         
         request = build_get_request(
@@ -330,11 +342,13 @@ class ContainerAppsAuthConfigsOperations(object):
             auth_config_name=auth_config_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -362,12 +376,12 @@ class ContainerAppsAuthConfigsOperations(object):
         resource_group_name: str,
         container_app_name: str,
         auth_config_name: str,
-        auth_config_envelope: "_models.AuthConfig",
+        auth_config_envelope: _models.AuthConfig,
         **kwargs: Any
-    ) -> "_models.AuthConfig":
+    ) -> _models.AuthConfig:
         """Create or update the AuthConfig for a Container App.
 
-        Description for Create or update the AuthConfig for a Container App.
+        Create or update the AuthConfig for a Container App.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -382,14 +396,17 @@ class ContainerAppsAuthConfigsOperations(object):
         :rtype: ~azure.mgmt.appcontainers.models.AuthConfig
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.AuthConfig"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.AuthConfig]
 
         _json = self._serialize.body(auth_config_envelope, 'AuthConfig')
 
@@ -402,11 +419,13 @@ class ContainerAppsAuthConfigsOperations(object):
             content_type=content_type,
             json=_json,
             template_url=self.create_or_update.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -438,7 +457,7 @@ class ContainerAppsAuthConfigsOperations(object):
     ) -> None:
         """Delete a Container App AuthConfig.
 
-        Description for Delete a Container App AuthConfig.
+        Delete a Container App AuthConfig.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -451,13 +470,16 @@ class ContainerAppsAuthConfigsOperations(object):
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
         request = build_delete_request(
@@ -467,11 +489,13 @@ class ContainerAppsAuthConfigsOperations(object):
             auth_config_name=auth_config_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
