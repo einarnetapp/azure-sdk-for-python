@@ -10,7 +10,7 @@ from typing import Any, TYPE_CHECKING
 
 from azure.core.configuration import Configuration
 from azure.core.pipeline import policies
-from azure.mgmt.core.policies import ARMHttpLoggingPolicy
+from azure.mgmt.core.policies import ARMHttpLoggingPolicy, AsyncARMChallengeAuthenticationPolicy
 
 from .._version import VERSION
 
@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class OperationsManagementClientConfiguration(Configuration):
+class OperationsManagementClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
     """Configuration for OperationsManagementClient.
 
     Note that all parameters used to create this instance are saved as instance
@@ -27,43 +27,31 @@ class OperationsManagementClientConfiguration(Configuration):
 
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    :param subscription_id: Gets subscription credentials which uniquely identify Microsoft Azure
+     subscription. The subscription ID forms part of the URI for every service call.
     :type subscription_id: str
-    :param provider_name: Provider name for the parent resource.
-    :type provider_name: str
-    :param resource_type: Resource type for the parent resource.
-    :type resource_type: str
-    :param resource_name: Parent resource name.
-    :type resource_name: str
+    :keyword api_version: Api Version. Default value is "2015-11-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
+    :paramtype api_version: str
     """
 
     def __init__(
         self,
         credential: "AsyncTokenCredential",
         subscription_id: str,
-        provider_name: str,
-        resource_type: str,
-        resource_name: str,
         **kwargs: Any
     ) -> None:
+        super(OperationsManagementClientConfiguration, self).__init__(**kwargs)
+        api_version = kwargs.pop('api_version', "2015-11-01-preview")  # type: str
+
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
-        if provider_name is None:
-            raise ValueError("Parameter 'provider_name' must not be None.")
-        if resource_type is None:
-            raise ValueError("Parameter 'resource_type' must not be None.")
-        if resource_name is None:
-            raise ValueError("Parameter 'resource_name' must not be None.")
-        super(OperationsManagementClientConfiguration, self).__init__(**kwargs)
 
         self.credential = credential
         self.subscription_id = subscription_id
-        self.provider_name = provider_name
-        self.resource_type = resource_type
-        self.resource_name = resource_name
-        self.api_version = "2015-11-01-preview"
+        self.api_version = api_version
         self.credential_scopes = kwargs.pop('credential_scopes', ['https://management.azure.com/.default'])
         kwargs.setdefault('sdk_moniker', 'mgmt-operationsmanagement/{}'.format(VERSION))
         self._configure(**kwargs)
@@ -82,4 +70,4 @@ class OperationsManagementClientConfiguration(Configuration):
         self.redirect_policy = kwargs.get('redirect_policy') or policies.AsyncRedirectPolicy(**kwargs)
         self.authentication_policy = kwargs.get('authentication_policy')
         if self.credential and not self.authentication_policy:
-            self.authentication_policy = policies.AsyncBearerTokenCredentialPolicy(self.credential, *self.credential_scopes, **kwargs)
+            self.authentication_policy = AsyncARMChallengeAuthenticationPolicy(self.credential, *self.credential_scopes, **kwargs)
