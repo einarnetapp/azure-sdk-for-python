@@ -3296,7 +3296,8 @@ class ImageOSDisk(ImageDisk):
      values are: :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>` **Linux**. Known
      values are: "Windows", "Linux".
     :vartype os_type: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemTypes
-    :ivar os_state: Required. The OS State. Known values are: "Generalized", "Specialized".
+    :ivar os_state: Required. The OS State. For managed images, use Generalized. Known values are:
+     "Generalized", "Specialized".
     :vartype os_state: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemStateTypes
     """
 
@@ -3362,7 +3363,8 @@ class ImageOSDisk(ImageDisk):
          values are: :code:`<br>`:code:`<br>` **Windows** :code:`<br>`:code:`<br>` **Linux**. Known
          values are: "Windows", "Linux".
         :paramtype os_type: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemTypes
-        :keyword os_state: Required. The OS State. Known values are: "Generalized", "Specialized".
+        :keyword os_state: Required. The OS State. For managed images, use Generalized. Known values
+         are: "Generalized", "Specialized".
         :paramtype os_state: str or ~azure.mgmt.compute.v2022_03_01.models.OperatingSystemStateTypes
         """
         super(ImageOSDisk, self).__init__(snapshot=snapshot, managed_disk=managed_disk, blob_uri=blob_uri, caching=caching, disk_size_gb=disk_size_gb, storage_account_type=storage_account_type, disk_encryption_set=disk_encryption_set, **kwargs)
@@ -8620,7 +8622,8 @@ class VirtualMachineExtension(ResourceWithOptionalLocation):
     :vartype suppress_failures: bool
     :ivar protected_settings_from_key_vault: The extensions protected settings that are passed by
      reference, and consumed from key vault.
-    :vartype protected_settings_from_key_vault: any
+    :vartype protected_settings_from_key_vault:
+     ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
     """
 
     _validation = {
@@ -8647,7 +8650,7 @@ class VirtualMachineExtension(ResourceWithOptionalLocation):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'instance_view': {'key': 'properties.instanceView', 'type': 'VirtualMachineExtensionInstanceView'},
         'suppress_failures': {'key': 'properties.suppressFailures', 'type': 'bool'},
-        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'object'},
+        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'KeyVaultSecretReference'},
     }
 
     def __init__(
@@ -8665,7 +8668,7 @@ class VirtualMachineExtension(ResourceWithOptionalLocation):
         protected_settings: Optional[Any] = None,
         instance_view: Optional["_models.VirtualMachineExtensionInstanceView"] = None,
         suppress_failures: Optional[bool] = None,
-        protected_settings_from_key_vault: Optional[Any] = None,
+        protected_settings_from_key_vault: Optional["_models.KeyVaultSecretReference"] = None,
         **kwargs
     ):
         """
@@ -8704,7 +8707,8 @@ class VirtualMachineExtension(ResourceWithOptionalLocation):
         :paramtype suppress_failures: bool
         :keyword protected_settings_from_key_vault: The extensions protected settings that are passed
          by reference, and consumed from key vault.
-        :paramtype protected_settings_from_key_vault: any
+        :paramtype protected_settings_from_key_vault:
+         ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
         """
         super(VirtualMachineExtension, self).__init__(location=location, tags=tags, **kwargs)
         self.force_update_tag = force_update_tag
@@ -8961,7 +8965,8 @@ class VirtualMachineExtensionUpdate(UpdateResource):
     :vartype suppress_failures: bool
     :ivar protected_settings_from_key_vault: The extensions protected settings that are passed by
      reference, and consumed from key vault.
-    :vartype protected_settings_from_key_vault: any
+    :vartype protected_settings_from_key_vault:
+     ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
     """
 
     _attribute_map = {
@@ -8975,7 +8980,7 @@ class VirtualMachineExtensionUpdate(UpdateResource):
         'settings': {'key': 'properties.settings', 'type': 'object'},
         'protected_settings': {'key': 'properties.protectedSettings', 'type': 'object'},
         'suppress_failures': {'key': 'properties.suppressFailures', 'type': 'bool'},
-        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'object'},
+        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'KeyVaultSecretReference'},
     }
 
     def __init__(
@@ -8991,7 +8996,7 @@ class VirtualMachineExtensionUpdate(UpdateResource):
         settings: Optional[Any] = None,
         protected_settings: Optional[Any] = None,
         suppress_failures: Optional[bool] = None,
-        protected_settings_from_key_vault: Optional[Any] = None,
+        protected_settings_from_key_vault: Optional["_models.KeyVaultSecretReference"] = None,
         **kwargs
     ):
         """
@@ -9024,7 +9029,8 @@ class VirtualMachineExtensionUpdate(UpdateResource):
         :paramtype suppress_failures: bool
         :keyword protected_settings_from_key_vault: The extensions protected settings that are passed
          by reference, and consumed from key vault.
-        :paramtype protected_settings_from_key_vault: any
+        :paramtype protected_settings_from_key_vault:
+         ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
         """
         super(VirtualMachineExtensionUpdate, self).__init__(tags=tags, **kwargs)
         self.force_update_tag = force_update_tag
@@ -10995,7 +11001,8 @@ class VirtualMachineScaleSetExtension(SubResourceReadOnly):
     :vartype suppress_failures: bool
     :ivar protected_settings_from_key_vault: The extensions protected settings that are passed by
      reference, and consumed from key vault.
-    :vartype protected_settings_from_key_vault: any
+    :vartype protected_settings_from_key_vault:
+     ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
     """
 
     _validation = {
@@ -11019,7 +11026,7 @@ class VirtualMachineScaleSetExtension(SubResourceReadOnly):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'provision_after_extensions': {'key': 'properties.provisionAfterExtensions', 'type': '[str]'},
         'suppress_failures': {'key': 'properties.suppressFailures', 'type': 'bool'},
-        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'object'},
+        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'KeyVaultSecretReference'},
     }
 
     def __init__(
@@ -11036,7 +11043,7 @@ class VirtualMachineScaleSetExtension(SubResourceReadOnly):
         protected_settings: Optional[Any] = None,
         provision_after_extensions: Optional[List[str]] = None,
         suppress_failures: Optional[bool] = None,
-        protected_settings_from_key_vault: Optional[Any] = None,
+        protected_settings_from_key_vault: Optional["_models.KeyVaultSecretReference"] = None,
         **kwargs
     ):
         """
@@ -11073,7 +11080,8 @@ class VirtualMachineScaleSetExtension(SubResourceReadOnly):
         :paramtype suppress_failures: bool
         :keyword protected_settings_from_key_vault: The extensions protected settings that are passed
          by reference, and consumed from key vault.
-        :paramtype protected_settings_from_key_vault: any
+        :paramtype protected_settings_from_key_vault:
+         ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
         """
         super(VirtualMachineScaleSetExtension, self).__init__(**kwargs)
         self.name = name
@@ -11216,7 +11224,8 @@ class VirtualMachineScaleSetExtensionUpdate(SubResourceReadOnly):
     :vartype suppress_failures: bool
     :ivar protected_settings_from_key_vault: The extensions protected settings that are passed by
      reference, and consumed from key vault.
-    :vartype protected_settings_from_key_vault: any
+    :vartype protected_settings_from_key_vault:
+     ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
     """
 
     _validation = {
@@ -11241,7 +11250,7 @@ class VirtualMachineScaleSetExtensionUpdate(SubResourceReadOnly):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'provision_after_extensions': {'key': 'properties.provisionAfterExtensions', 'type': '[str]'},
         'suppress_failures': {'key': 'properties.suppressFailures', 'type': 'bool'},
-        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'object'},
+        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'KeyVaultSecretReference'},
     }
 
     def __init__(
@@ -11257,7 +11266,7 @@ class VirtualMachineScaleSetExtensionUpdate(SubResourceReadOnly):
         protected_settings: Optional[Any] = None,
         provision_after_extensions: Optional[List[str]] = None,
         suppress_failures: Optional[bool] = None,
-        protected_settings_from_key_vault: Optional[Any] = None,
+        protected_settings_from_key_vault: Optional["_models.KeyVaultSecretReference"] = None,
         **kwargs
     ):
         """
@@ -11292,7 +11301,8 @@ class VirtualMachineScaleSetExtensionUpdate(SubResourceReadOnly):
         :paramtype suppress_failures: bool
         :keyword protected_settings_from_key_vault: The extensions protected settings that are passed
          by reference, and consumed from key vault.
-        :paramtype protected_settings_from_key_vault: any
+        :paramtype protected_settings_from_key_vault:
+         ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
         """
         super(VirtualMachineScaleSetExtensionUpdate, self).__init__(**kwargs)
         self.name = None
@@ -13672,7 +13682,8 @@ class VirtualMachineScaleSetVMExtension(SubResourceReadOnly):
     :vartype suppress_failures: bool
     :ivar protected_settings_from_key_vault: The extensions protected settings that are passed by
      reference, and consumed from key vault.
-    :vartype protected_settings_from_key_vault: any
+    :vartype protected_settings_from_key_vault:
+     ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
     """
 
     _validation = {
@@ -13697,7 +13708,7 @@ class VirtualMachineScaleSetVMExtension(SubResourceReadOnly):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'instance_view': {'key': 'properties.instanceView', 'type': 'VirtualMachineExtensionInstanceView'},
         'suppress_failures': {'key': 'properties.suppressFailures', 'type': 'bool'},
-        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'object'},
+        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'KeyVaultSecretReference'},
     }
 
     def __init__(
@@ -13713,7 +13724,7 @@ class VirtualMachineScaleSetVMExtension(SubResourceReadOnly):
         protected_settings: Optional[Any] = None,
         instance_view: Optional["_models.VirtualMachineExtensionInstanceView"] = None,
         suppress_failures: Optional[bool] = None,
-        protected_settings_from_key_vault: Optional[Any] = None,
+        protected_settings_from_key_vault: Optional["_models.KeyVaultSecretReference"] = None,
         **kwargs
     ):
         """
@@ -13748,7 +13759,8 @@ class VirtualMachineScaleSetVMExtension(SubResourceReadOnly):
         :paramtype suppress_failures: bool
         :keyword protected_settings_from_key_vault: The extensions protected settings that are passed
          by reference, and consumed from key vault.
-        :paramtype protected_settings_from_key_vault: any
+        :paramtype protected_settings_from_key_vault:
+         ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
         """
         super(VirtualMachineScaleSetVMExtension, self).__init__(**kwargs)
         self.name = None
@@ -13865,7 +13877,8 @@ class VirtualMachineScaleSetVMExtensionUpdate(SubResourceReadOnly):
     :vartype suppress_failures: bool
     :ivar protected_settings_from_key_vault: The extensions protected settings that are passed by
      reference, and consumed from key vault.
-    :vartype protected_settings_from_key_vault: any
+    :vartype protected_settings_from_key_vault:
+     ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
     """
 
     _validation = {
@@ -13887,7 +13900,7 @@ class VirtualMachineScaleSetVMExtensionUpdate(SubResourceReadOnly):
         'settings': {'key': 'properties.settings', 'type': 'object'},
         'protected_settings': {'key': 'properties.protectedSettings', 'type': 'object'},
         'suppress_failures': {'key': 'properties.suppressFailures', 'type': 'bool'},
-        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'object'},
+        'protected_settings_from_key_vault': {'key': 'properties.protectedSettingsFromKeyVault', 'type': 'KeyVaultSecretReference'},
     }
 
     def __init__(
@@ -13902,7 +13915,7 @@ class VirtualMachineScaleSetVMExtensionUpdate(SubResourceReadOnly):
         settings: Optional[Any] = None,
         protected_settings: Optional[Any] = None,
         suppress_failures: Optional[bool] = None,
-        protected_settings_from_key_vault: Optional[Any] = None,
+        protected_settings_from_key_vault: Optional["_models.KeyVaultSecretReference"] = None,
         **kwargs
     ):
         """
@@ -13934,7 +13947,8 @@ class VirtualMachineScaleSetVMExtensionUpdate(SubResourceReadOnly):
         :paramtype suppress_failures: bool
         :keyword protected_settings_from_key_vault: The extensions protected settings that are passed
          by reference, and consumed from key vault.
-        :paramtype protected_settings_from_key_vault: any
+        :paramtype protected_settings_from_key_vault:
+         ~azure.mgmt.compute.v2022_03_01.models.KeyVaultSecretReference
         """
         super(VirtualMachineScaleSetVMExtensionUpdate, self).__init__(**kwargs)
         self.name = None
