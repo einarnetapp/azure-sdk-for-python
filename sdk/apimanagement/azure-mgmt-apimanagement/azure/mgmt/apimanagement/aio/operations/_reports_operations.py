@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -6,9 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import datetime
-import functools
-from typing import Any, AsyncIterable, Callable, Dict, Generic, Optional, TypeVar
-import warnings
+from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
@@ -16,36 +15,35 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
-from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._reports_operations import build_list_by_api_request, build_list_by_geo_request, build_list_by_operation_request, build_list_by_product_request, build_list_by_request_request, build_list_by_subscription_request, build_list_by_time_request, build_list_by_user_request
+from .._vendor import MixinABC
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class ReportsOperations:
-    """ReportsOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~api_management_client.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.apimanagement.aio.ApiManagementClient`'s
+        :attr:`reports` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list_by_api(
@@ -57,7 +55,7 @@ class ReportsOperations:
         skip: Optional[int] = None,
         orderby: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReportCollection"]:
+    ) -> AsyncIterable[_models.ReportCollection]:
         """Lists report records by API.
 
         :param resource_group_name: The name of the resource group.
@@ -66,22 +64,28 @@ class ReportsOperations:
         :type service_name: str
         :param filter: The filter to apply on the operation.
         :type filter: str
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
-        :param orderby: OData order by query option.
+        :param orderby: OData order by query option. Default value is None.
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -89,14 +93,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=self.list_by_api.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -104,14 +111,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -125,7 +135,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -139,7 +153,7 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_api.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi'}  # type: ignore
+    list_by_api.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byApi"}  # type: ignore
 
     @distributed_trace
     def list_by_user(
@@ -151,7 +165,7 @@ class ReportsOperations:
         skip: Optional[int] = None,
         orderby: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReportCollection"]:
+    ) -> AsyncIterable[_models.ReportCollection]:
         """Lists report records by User.
 
         :param resource_group_name: The name of the resource group.
@@ -172,22 +186,28 @@ class ReportsOperations:
          </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>|
          serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>.
         :type filter: str
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
-        :param orderby: OData order by query option.
+        :param orderby: OData order by query option. Default value is None.
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -195,14 +215,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=self.list_by_user.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -210,14 +233,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -231,7 +257,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -245,7 +275,7 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_user.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser'}  # type: ignore
+    list_by_user.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser"}  # type: ignore
 
     @distributed_trace
     def list_by_operation(
@@ -257,7 +287,7 @@ class ReportsOperations:
         skip: Optional[int] = None,
         orderby: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReportCollection"]:
+    ) -> AsyncIterable[_models.ReportCollection]:
         """Lists report records by API Operations.
 
         :param resource_group_name: The name of the resource group.
@@ -278,22 +308,28 @@ class ReportsOperations:
          </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>|
          serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>.
         :type filter: str
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
-        :param orderby: OData order by query option.
+        :param orderby: OData order by query option. Default value is None.
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -301,14 +337,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=self.list_by_operation.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -316,14 +355,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -337,7 +379,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -351,7 +397,7 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_operation.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation'}  # type: ignore
+    list_by_operation.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation"}  # type: ignore
 
     @distributed_trace
     def list_by_product(
@@ -363,7 +409,7 @@ class ReportsOperations:
         skip: Optional[int] = None,
         orderby: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReportCollection"]:
+    ) -> AsyncIterable[_models.ReportCollection]:
         """Lists report records by Product.
 
         :param resource_group_name: The name of the resource group.
@@ -383,22 +429,28 @@ class ReportsOperations:
          </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>|
          serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>.
         :type filter: str
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
-        :param orderby: OData order by query option.
+        :param orderby: OData order by query option. Default value is None.
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -406,14 +458,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=self.list_by_product.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -421,14 +476,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -442,7 +500,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -456,7 +518,7 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_product.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct'}  # type: ignore
+    list_by_product.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct"}  # type: ignore
 
     @distributed_trace
     def list_by_geo(
@@ -467,7 +529,7 @@ class ReportsOperations:
         top: Optional[int] = None,
         skip: Optional[int] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReportCollection"]:
+    ) -> AsyncIterable[_models.ReportCollection]:
         """Lists report records by geography.
 
         :param resource_group_name: The name of the resource group.
@@ -488,20 +550,26 @@ class ReportsOperations:
          serviceTimeAvg | select |     |     | </br>| serviceTimeMin | select |     |     | </br>|
          serviceTimeMax | select |     |     | </br>.
         :type filter: str
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -509,13 +577,16 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     template_url=self.list_by_geo.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -523,13 +594,16 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -543,7 +617,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -557,7 +635,7 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_geo.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo'}  # type: ignore
+    list_by_geo.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo"}  # type: ignore
 
     @distributed_trace
     def list_by_subscription(
@@ -569,7 +647,7 @@ class ReportsOperations:
         skip: Optional[int] = None,
         orderby: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReportCollection"]:
+    ) -> AsyncIterable[_models.ReportCollection]:
         """Lists report records by subscription.
 
         :param resource_group_name: The name of the resource group.
@@ -589,22 +667,28 @@ class ReportsOperations:
          </br>| apiTimeMax | select |     |     | </br>| serviceTimeAvg | select |     |     | </br>|
          serviceTimeMin | select |     |     | </br>| serviceTimeMax | select |     |     | </br>.
         :type filter: str
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
-        :param orderby: OData order by query option.
+        :param orderby: OData order by query option. Default value is None.
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -612,14 +696,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=self.list_by_subscription.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -627,14 +714,17 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -648,7 +738,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -662,7 +756,7 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_subscription.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription'}  # type: ignore
+    list_by_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription"}  # type: ignore
 
     @distributed_trace
     def list_by_time(
@@ -675,7 +769,7 @@ class ReportsOperations:
         skip: Optional[int] = None,
         orderby: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReportCollection"]:
+    ) -> AsyncIterable[_models.ReportCollection]:
         """Lists report records by Time.
 
         :param resource_group_name: The name of the resource group.
@@ -700,22 +794,28 @@ class ReportsOperations:
          code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new
          TimeSpan(hours, minutes, seconds)).
         :type interval: ~datetime.timedelta
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
-        :param orderby: OData order by query option.
+        :param orderby: OData order by query option. Default value is None.
         :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ReportCollection or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.ReportCollection]
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.ReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -723,15 +823,18 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     interval=interval,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=self.list_by_time.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -739,15 +842,18 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     interval=interval,
                     top=top,
                     skip=skip,
                     orderby=orderby,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -761,7 +867,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -775,7 +885,7 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_time.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime'}  # type: ignore
+    list_by_time.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime"}  # type: ignore
 
     @distributed_trace
     def list_by_request(
@@ -786,7 +896,7 @@ class ReportsOperations:
         top: Optional[int] = None,
         skip: Optional[int] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.RequestReportCollection"]:
+    ) -> AsyncIterable[_models.RequestReportCollection]:
         """Lists report records by Request.
 
         :param resource_group_name: The name of the resource group.
@@ -799,22 +909,27 @@ class ReportsOperations:
          | </br>| productId | filter | eq |     | </br>| userId | filter | eq |     | </br>| apiRegion |
          filter | eq |     | </br>| subscriptionId | filter | eq |     | </br>.
         :type filter: str
-        :param top: Number of records to return.
+        :param top: Number of records to return. Default value is None.
         :type top: int
-        :param skip: Number of records to skip.
+        :param skip: Number of records to skip. Default value is None.
         :type skip: int
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either RequestReportCollection or the result of
          cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~api_management_client.models.RequestReportCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.apimanagement.models.RequestReportCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.RequestReportCollection"]
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.RequestReportCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -822,13 +937,16 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     template_url=self.list_by_request.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -836,13 +954,16 @@ class ReportsOperations:
                     resource_group_name=resource_group_name,
                     service_name=service_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=api_version,
                     filter=filter,
                     top=top,
                     skip=skip,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -856,7 +977,11 @@ class ReportsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(request, stream=False, **kwargs)
+            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+                request,
+                stream=False,
+                **kwargs
+            )
             response = pipeline_response.http_response
 
             if response.status_code not in [200]:
@@ -870,4 +995,4 @@ class ReportsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list_by_request.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest'}  # type: ignore
+    list_by_request.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest"}  # type: ignore
