@@ -131,6 +131,10 @@ from ._extended_server_blob_auditing_policies_operations import ExtendedServerBl
 from ._database_advanced_threat_protection_settings_operations import DatabaseAdvancedThreatProtectionSettingsOperations
 from ._server_advanced_threat_protection_settings_operations import ServerAdvancedThreatProtectionSettingsOperations
 from ._managed_server_dns_aliases_operations import ManagedServerDnsAliasesOperations
+from ._managed_instance_dtcs_operations import ManagedInstanceDtcsOperations
+from ._managed_database_advanced_threat_protection_settings_operations import ManagedDatabaseAdvancedThreatProtectionSettingsOperations
+from ._managed_instance_advanced_threat_protection_settings_operations import ManagedInstanceAdvancedThreatProtectionSettingsOperations
+from ._managed_database_move_operations_operations import ManagedDatabaseMoveOperationsOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
@@ -261,6 +265,10 @@ __all__ = [
     'DatabaseAdvancedThreatProtectionSettingsOperations',
     'ServerAdvancedThreatProtectionSettingsOperations',
     'ManagedServerDnsAliasesOperations',
+    'ManagedInstanceDtcsOperations',
+    'ManagedDatabaseAdvancedThreatProtectionSettingsOperations',
+    'ManagedInstanceAdvancedThreatProtectionSettingsOperations',
+    'ManagedDatabaseMoveOperationsOperations',
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
