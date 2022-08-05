@@ -15,6 +15,7 @@ from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
@@ -24,26 +25,24 @@ T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class SqlPoolReplicationLinksOperations:
-    """SqlPoolReplicationLinksOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.synapse.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.synapse.aio.SynapseManagementClient`'s
+        :attr:`sql_pool_replication_links` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list(
@@ -52,7 +51,7 @@ class SqlPoolReplicationLinksOperations:
         workspace_name: str,
         sql_pool_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.ReplicationLinkListResult"]:
+    ) -> AsyncIterable[_models.ReplicationLinkListResult]:
         """Get SQL pool replication links.
 
         Lists a Sql pool's replication links.
@@ -73,13 +72,16 @@ class SqlPoolReplicationLinksOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.synapse.models.ReplicationLinkListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReplicationLinkListResult"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReplicationLinkListResult]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -90,9 +92,11 @@ class SqlPoolReplicationLinksOperations:
                     sql_pool_name=sql_pool_name,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -103,9 +107,11 @@ class SqlPoolReplicationLinksOperations:
                     sql_pool_name=sql_pool_name,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -147,7 +153,7 @@ class SqlPoolReplicationLinksOperations:
         sql_pool_name: str,
         link_id: str,
         **kwargs: Any
-    ) -> "_models.ReplicationLink":
+    ) -> _models.ReplicationLink:
         """Get SQL pool replication link by name.
 
         Get SQL pool replication link by name.
@@ -168,13 +174,16 @@ class SqlPoolReplicationLinksOperations:
         :rtype: ~azure.mgmt.synapse.models.ReplicationLink
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ReplicationLink"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-06-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReplicationLink]
 
         
         request = build_get_by_name_request(
@@ -185,11 +194,13 @@ class SqlPoolReplicationLinksOperations:
             link_id=link_id,
             api_version=api_version,
             template_url=self.get_by_name.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs

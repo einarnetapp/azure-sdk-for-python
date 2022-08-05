@@ -262,6 +262,7 @@ from ._models_py3 import WorkspaceRepositoryConfiguration
 
 
 from ._synapse_management_client_enums import (
+    ActualState,
     AzureADOnlyAuthenticationName,
     AzureScaleType,
     BlobAuditingPolicyName,
@@ -284,6 +285,7 @@ from ._synapse_management_client_enums import (
     DayOfWeek,
     DedicatedSQLMinimalTlsSettingsName,
     DefaultPrincipalsModificationKind,
+    DesiredState,
     EncryptionProtectorName,
     EventGridDataFormat,
     EventHubDataFormat,
@@ -302,8 +304,6 @@ from ._synapse_management_client_enums import (
     IotHubDataFormat,
     Kind,
     LanguageExtensionName,
-    ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState,
-    ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState,
     ManagedIntegrationRuntimeNodeStatus,
     ManagementOperationState,
     NodeSize,
@@ -346,7 +346,9 @@ from ._synapse_management_client_enums import (
     VulnerabilityAssessmentScanTriggerType,
     WorkspacePublicNetworkAccess,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AttachedDatabaseConfiguration',
     'AttachedDatabaseConfigurationListResult',
@@ -601,6 +603,7 @@ __all__ = [
     'WorkspaceKeyDetails',
     'WorkspacePatchInfo',
     'WorkspaceRepositoryConfiguration',
+    'ActualState',
     'AzureADOnlyAuthenticationName',
     'AzureScaleType',
     'BlobAuditingPolicyName',
@@ -623,6 +626,7 @@ __all__ = [
     'DayOfWeek',
     'DedicatedSQLMinimalTlsSettingsName',
     'DefaultPrincipalsModificationKind',
+    'DesiredState',
     'EncryptionProtectorName',
     'EventGridDataFormat',
     'EventHubDataFormat',
@@ -641,8 +645,6 @@ __all__ = [
     'IotHubDataFormat',
     'Kind',
     'LanguageExtensionName',
-    'ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityActualState',
-    'ManagedIdentitySqlControlSettingsModelPropertiesGrantSqlControlToManagedIdentityDesiredState',
     'ManagedIntegrationRuntimeNodeStatus',
     'ManagementOperationState',
     'NodeSize',
@@ -685,3 +687,5 @@ __all__ = [
     'VulnerabilityAssessmentScanTriggerType',
     'WorkspacePublicNetworkAccess',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

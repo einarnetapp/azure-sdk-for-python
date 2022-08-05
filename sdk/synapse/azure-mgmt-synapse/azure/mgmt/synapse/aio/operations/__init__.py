@@ -80,6 +80,9 @@ from ._kusto_pool_data_connections_operations import KustoPoolDataConnectionsOpe
 from ._kusto_pool_principal_assignments_operations import KustoPoolPrincipalAssignmentsOperations
 from ._kusto_pool_database_principal_assignments_operations import KustoPoolDatabasePrincipalAssignmentsOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AzureADOnlyAuthenticationsOperations',
     'Operations',
@@ -155,3 +158,5 @@ __all__ = [
     'KustoPoolPrincipalAssignmentsOperations',
     'KustoPoolDatabasePrincipalAssignmentsOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
