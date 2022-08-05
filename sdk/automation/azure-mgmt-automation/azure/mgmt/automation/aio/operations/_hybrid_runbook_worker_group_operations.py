@@ -61,7 +61,7 @@ class HybridRunbookWorkerGroupOperations:
         :type automation_account_name: str
         :param hybrid_runbook_worker_group_name: The hybrid runbook worker group name.
         :type hybrid_runbook_worker_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-06-22". Note that overriding this
+        :keyword api_version: Api Version. Default value is "2022-02-22". Note that overriding this
          default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -77,7 +77,7 @@ class HybridRunbookWorkerGroupOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-22"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-22"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -128,7 +128,7 @@ class HybridRunbookWorkerGroupOperations:
         :type automation_account_name: str
         :param hybrid_runbook_worker_group_name: The hybrid runbook worker group name.
         :type hybrid_runbook_worker_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-06-22". Note that overriding this
+        :keyword api_version: Api Version. Default value is "2022-02-22". Note that overriding this
          default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -144,7 +144,7 @@ class HybridRunbookWorkerGroupOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-22"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-22"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.HybridRunbookWorkerGroup]
 
         
@@ -204,7 +204,7 @@ class HybridRunbookWorkerGroupOperations:
          hybrid runbook worker group.
         :type hybrid_runbook_worker_group_creation_parameters:
          ~azure.mgmt.automation.models.HybridRunbookWorkerGroupCreateOrUpdateParameters
-        :keyword api_version: Api Version. Default value is "2021-06-22". Note that overriding this
+        :keyword api_version: Api Version. Default value is "2022-02-22". Note that overriding this
          default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -220,7 +220,7 @@ class HybridRunbookWorkerGroupOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-22"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-22"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.HybridRunbookWorkerGroup]
 
@@ -269,7 +269,7 @@ class HybridRunbookWorkerGroupOperations:
         resource_group_name: str,
         automation_account_name: str,
         hybrid_runbook_worker_group_name: str,
-        parameters: _models.HybridRunbookWorkerGroupCreateOrUpdateParameters,
+        hybrid_runbook_worker_group_updation_parameters: _models.HybridRunbookWorkerGroupCreateOrUpdateParameters,
         **kwargs: Any
     ) -> _models.HybridRunbookWorkerGroup:
         """Update a hybrid runbook worker group.
@@ -280,10 +280,10 @@ class HybridRunbookWorkerGroupOperations:
         :type automation_account_name: str
         :param hybrid_runbook_worker_group_name: The hybrid runbook worker group name.
         :type hybrid_runbook_worker_group_name: str
-        :param parameters: The hybrid runbook worker group.
-        :type parameters:
+        :param hybrid_runbook_worker_group_updation_parameters: The hybrid runbook worker group.
+        :type hybrid_runbook_worker_group_updation_parameters:
          ~azure.mgmt.automation.models.HybridRunbookWorkerGroupCreateOrUpdateParameters
-        :keyword api_version: Api Version. Default value is "2021-06-22". Note that overriding this
+        :keyword api_version: Api Version. Default value is "2022-02-22". Note that overriding this
          default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -299,11 +299,11 @@ class HybridRunbookWorkerGroupOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-22"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-22"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.HybridRunbookWorkerGroup]
 
-        _json = self._serialize.body(parameters, 'HybridRunbookWorkerGroupCreateOrUpdateParameters')
+        _json = self._serialize.body(hybrid_runbook_worker_group_updation_parameters, 'HybridRunbookWorkerGroupCreateOrUpdateParameters')
 
         request = build_update_request(
             resource_group_name=resource_group_name,
@@ -358,7 +358,7 @@ class HybridRunbookWorkerGroupOperations:
         :type automation_account_name: str
         :param filter: The filter to apply on the operation. Default value is None.
         :type filter: str
-        :keyword api_version: Api Version. Default value is "2021-06-22". Note that overriding this
+        :keyword api_version: Api Version. Default value is "2022-02-22". Note that overriding this
          default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -371,7 +371,7 @@ class HybridRunbookWorkerGroupOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-22"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-22"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.HybridRunbookWorkerGroupsListResult]
 
         error_map = {

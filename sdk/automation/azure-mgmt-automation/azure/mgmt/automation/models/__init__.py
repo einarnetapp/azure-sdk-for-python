@@ -42,6 +42,8 @@ from ._models_py3 import Credential
 from ._models_py3 import CredentialCreateOrUpdateParameters
 from ._models_py3 import CredentialListResult
 from ._models_py3 import CredentialUpdateParameters
+from ._models_py3 import DeletedAutomationAccount
+from ._models_py3 import DeletedAutomationAccountListResult
 from ._models_py3 import DscCompilationJob
 from ._models_py3 import DscCompilationJobCreateParameters
 from ._models_py3 import DscCompilationJobListResult
@@ -74,9 +76,7 @@ from ._models_py3 import HybridRunbookWorker
 from ._models_py3 import HybridRunbookWorkerCreateParameters
 from ._models_py3 import HybridRunbookWorkerGroup
 from ._models_py3 import HybridRunbookWorkerGroupCreateOrUpdateParameters
-from ._models_py3 import HybridRunbookWorkerGroupUpdateParameters
 from ._models_py3 import HybridRunbookWorkerGroupsListResult
-from ._models_py3 import HybridRunbookWorkerLegacy
 from ._models_py3 import HybridRunbookWorkerMoveParameters
 from ._models_py3 import HybridRunbookWorkersListResult
 from ._models_py3 import Identity
@@ -262,6 +262,8 @@ __all__ = [
     'CredentialCreateOrUpdateParameters',
     'CredentialListResult',
     'CredentialUpdateParameters',
+    'DeletedAutomationAccount',
+    'DeletedAutomationAccountListResult',
     'DscCompilationJob',
     'DscCompilationJobCreateParameters',
     'DscCompilationJobListResult',
@@ -294,9 +296,7 @@ __all__ = [
     'HybridRunbookWorkerCreateParameters',
     'HybridRunbookWorkerGroup',
     'HybridRunbookWorkerGroupCreateOrUpdateParameters',
-    'HybridRunbookWorkerGroupUpdateParameters',
     'HybridRunbookWorkerGroupsListResult',
-    'HybridRunbookWorkerLegacy',
     'HybridRunbookWorkerMoveParameters',
     'HybridRunbookWorkersListResult',
     'Identity',

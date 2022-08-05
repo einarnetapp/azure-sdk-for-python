@@ -16,7 +16,7 @@ from azure.mgmt.core import AsyncARMPipelineClient
 
 from .. import models
 from ._configuration import AutomationClientConfiguration
-from .operations import ActivityOperations, AgentRegistrationInformationOperations, AutomationAccountOperations, AutomationClientOperationsMixin, CertificateOperations, ConnectionOperations, ConnectionTypeOperations, CredentialOperations, DscCompilationJobOperations, DscCompilationJobStreamOperations, DscConfigurationOperations, DscNodeConfigurationOperations, DscNodeOperations, FieldsOperations, HybridRunbookWorkerGroupOperations, HybridRunbookWorkersOperations, JobOperations, JobScheduleOperations, JobStreamOperations, KeysOperations, LinkedWorkspaceOperations, ModuleOperations, NodeCountInformationOperations, NodeReportsOperations, ObjectDataTypesOperations, Operations, PrivateEndpointConnectionsOperations, PrivateLinkResourcesOperations, Python2PackageOperations, RunbookDraftOperations, RunbookOperations, ScheduleOperations, SoftwareUpdateConfigurationMachineRunsOperations, SoftwareUpdateConfigurationRunsOperations, SoftwareUpdateConfigurationsOperations, SourceControlOperations, SourceControlSyncJobOperations, SourceControlSyncJobStreamsOperations, StatisticsOperations, TestJobOperations, TestJobStreamsOperations, UsagesOperations, VariableOperations, WatcherOperations, WebhookOperations
+from .operations import ActivityOperations, AgentRegistrationInformationOperations, AutomationAccountOperations, AutomationClientOperationsMixin, CertificateOperations, ConnectionOperations, ConnectionTypeOperations, CredentialOperations, DeletedAutomationAccountsOperations, DscCompilationJobOperations, DscCompilationJobStreamOperations, DscConfigurationOperations, DscNodeConfigurationOperations, DscNodeOperations, FieldsOperations, HybridRunbookWorkerGroupOperations, HybridRunbookWorkersOperations, JobOperations, JobScheduleOperations, JobStreamOperations, KeysOperations, LinkedWorkspaceOperations, ModuleOperations, NodeCountInformationOperations, NodeReportsOperations, ObjectDataTypesOperations, Operations, PrivateEndpointConnectionsOperations, PrivateLinkResourcesOperations, Python2PackageOperations, RunbookDraftOperations, RunbookOperations, ScheduleOperations, SoftwareUpdateConfigurationMachineRunsOperations, SoftwareUpdateConfigurationRunsOperations, SoftwareUpdateConfigurationsOperations, SourceControlOperations, SourceControlSyncJobOperations, SourceControlSyncJobStreamsOperations, StatisticsOperations, TestJobOperations, TestJobStreamsOperations, UsagesOperations, VariableOperations, WatcherOperations, WebhookOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -75,9 +75,6 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
     :vartype connection_type: azure.mgmt.automation.aio.operations.ConnectionTypeOperations
     :ivar credential: CredentialOperations operations
     :vartype credential: azure.mgmt.automation.aio.operations.CredentialOperations
-    :ivar hybrid_runbook_worker_group: HybridRunbookWorkerGroupOperations operations
-    :vartype hybrid_runbook_worker_group:
-     azure.mgmt.automation.aio.operations.HybridRunbookWorkerGroupOperations
     :ivar job_schedule: JobScheduleOperations operations
     :vartype job_schedule: azure.mgmt.automation.aio.operations.JobScheduleOperations
     :ivar linked_workspace: LinkedWorkspaceOperations operations
@@ -127,6 +124,12 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
     :ivar hybrid_runbook_workers: HybridRunbookWorkersOperations operations
     :vartype hybrid_runbook_workers:
      azure.mgmt.automation.aio.operations.HybridRunbookWorkersOperations
+    :ivar deleted_automation_accounts: DeletedAutomationAccountsOperations operations
+    :vartype deleted_automation_accounts:
+     azure.mgmt.automation.aio.operations.DeletedAutomationAccountsOperations
+    :ivar hybrid_runbook_worker_group: HybridRunbookWorkerGroupOperations operations
+    :vartype hybrid_runbook_worker_group:
+     azure.mgmt.automation.aio.operations.HybridRunbookWorkerGroupOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: Gets subscription credentials which uniquely identify Microsoft Azure
@@ -215,9 +218,6 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
         self.credential = CredentialOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.hybrid_runbook_worker_group = HybridRunbookWorkerGroupOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.job_schedule = JobScheduleOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -282,6 +282,12 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
             self._client, self._config, self._serialize, self._deserialize
         )
         self.hybrid_runbook_workers = HybridRunbookWorkersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.deleted_automation_accounts = DeletedAutomationAccountsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.hybrid_runbook_worker_group = HybridRunbookWorkerGroupOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

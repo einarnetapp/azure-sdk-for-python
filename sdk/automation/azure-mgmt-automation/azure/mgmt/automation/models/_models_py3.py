@@ -1904,6 +1904,108 @@ class CredentialUpdateParameters(msrest.serialization.Model):
         self.description = description
 
 
+class DeletedAutomationAccount(msrest.serialization.Model):
+    """Definition of the deleted automation account type.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: The resource id.
+    :vartype id: str
+    :ivar name: Gets or sets name of the resource.
+    :vartype name: str
+    :ivar type: The resource type.
+    :vartype type: str
+    :ivar location: Gets or sets the location of the resource.
+    :vartype location: str
+    :ivar automation_account_resource_id: Gets or sets the Automation Account Resource Id.
+    :vartype automation_account_resource_id: str
+    :ivar automation_account_id: Gets or sets the Automation Account Id.
+    :vartype automation_account_id: str
+    :ivar location_properties_location: Gets or sets the location of the resource.
+    :vartype location_properties_location: str
+    :ivar deletion_time: Gets the deletion time.
+    :vartype deletion_time: ~datetime.datetime
+    """
+
+    _validation = {
+        'deletion_time': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'automation_account_resource_id': {'key': 'properties.automationAccountResourceId', 'type': 'str'},
+        'automation_account_id': {'key': 'properties.automationAccountId', 'type': 'str'},
+        'location_properties_location': {'key': 'properties.location', 'type': 'str'},
+        'deletion_time': {'key': 'properties.deletionTime', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        id: Optional[str] = None,
+        name: Optional[str] = None,
+        type: Optional[str] = None,
+        location: Optional[str] = None,
+        automation_account_resource_id: Optional[str] = None,
+        automation_account_id: Optional[str] = None,
+        location_properties_location: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword id: The resource id.
+        :paramtype id: str
+        :keyword name: Gets or sets name of the resource.
+        :paramtype name: str
+        :keyword type: The resource type.
+        :paramtype type: str
+        :keyword location: Gets or sets the location of the resource.
+        :paramtype location: str
+        :keyword automation_account_resource_id: Gets or sets the Automation Account Resource Id.
+        :paramtype automation_account_resource_id: str
+        :keyword automation_account_id: Gets or sets the Automation Account Id.
+        :paramtype automation_account_id: str
+        :keyword location_properties_location: Gets or sets the location of the resource.
+        :paramtype location_properties_location: str
+        """
+        super(DeletedAutomationAccount, self).__init__(**kwargs)
+        self.id = id
+        self.name = name
+        self.type = type
+        self.location = location
+        self.automation_account_resource_id = automation_account_resource_id
+        self.automation_account_id = automation_account_id
+        self.location_properties_location = location_properties_location
+        self.deletion_time = None
+
+
+class DeletedAutomationAccountListResult(msrest.serialization.Model):
+    """The response model for the list deleted automation account.
+
+    :ivar value: Gets or sets the list of deleted automation accounts.
+    :vartype value: list[~azure.mgmt.automation.models.DeletedAutomationAccount]
+    """
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[DeletedAutomationAccount]'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["_models.DeletedAutomationAccount"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword value: Gets or sets the list of deleted automation accounts.
+        :paramtype value: list[~azure.mgmt.automation.models.DeletedAutomationAccount]
+        """
+        super(DeletedAutomationAccountListResult, self).__init__(**kwargs)
+        self.value = value
+
+
 class DscCompilationJob(ProxyResource):
     """Definition of the Dsc Compilation job.
 
@@ -3656,28 +3758,28 @@ class HybridRunbookWorkerCreateParameters(msrest.serialization.Model):
         self.vm_resource_id = vm_resource_id
 
 
-class HybridRunbookWorkerGroup(msrest.serialization.Model):
+class HybridRunbookWorkerGroup(Resource):
     """Definition of hybrid runbook worker group.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar id: Gets or sets the id of the resource.
+    :ivar id: Fully qualified resource Id for the resource.
     :vartype id: str
-    :ivar name: Gets or sets the name of the group.
+    :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource.
     :vartype type: str
-    :ivar hybrid_runbook_workers: Gets or sets the list of hybrid runbook workers.
-    :vartype hybrid_runbook_workers: list[~azure.mgmt.automation.models.HybridRunbookWorkerLegacy]
-    :ivar credential: Sets the credential of a worker group.
-    :vartype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
-    :ivar group_type: Type of the HybridWorkerGroup. Known values are: "User", "System".
-    :vartype group_type: str or ~azure.mgmt.automation.models.GroupTypeEnum
     :ivar system_data: Resource system metadata.
     :vartype system_data: ~azure.mgmt.automation.models.SystemData
+    :ivar group_type: Type of the HybridWorkerGroup. Known values are: "User", "System".
+    :vartype group_type: str or ~azure.mgmt.automation.models.GroupTypeEnum
+    :ivar credential: Sets the credential of a worker group.
+    :vartype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
     """
 
     _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
         'type': {'readonly': True},
         'system_data': {'readonly': True},
     }
@@ -3686,67 +3788,59 @@ class HybridRunbookWorkerGroup(msrest.serialization.Model):
         'id': {'key': 'id', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
-        'hybrid_runbook_workers': {'key': 'hybridRunbookWorkers', 'type': '[HybridRunbookWorkerLegacy]'},
-        'credential': {'key': 'credential', 'type': 'RunAsCredentialAssociationProperty'},
-        'group_type': {'key': 'groupType', 'type': 'str'},
         'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'group_type': {'key': 'properties.groupType', 'type': 'str'},
+        'credential': {'key': 'properties.credential', 'type': 'RunAsCredentialAssociationProperty'},
     }
 
     def __init__(
         self,
         *,
-        id: Optional[str] = None,
-        name: Optional[str] = None,
-        hybrid_runbook_workers: Optional[List["_models.HybridRunbookWorkerLegacy"]] = None,
-        credential: Optional["_models.RunAsCredentialAssociationProperty"] = None,
         group_type: Optional[Union[str, "_models.GroupTypeEnum"]] = None,
+        credential: Optional["_models.RunAsCredentialAssociationProperty"] = None,
         **kwargs
     ):
         """
-        :keyword id: Gets or sets the id of the resource.
-        :paramtype id: str
-        :keyword name: Gets or sets the name of the group.
-        :paramtype name: str
-        :keyword hybrid_runbook_workers: Gets or sets the list of hybrid runbook workers.
-        :paramtype hybrid_runbook_workers:
-         list[~azure.mgmt.automation.models.HybridRunbookWorkerLegacy]
-        :keyword credential: Sets the credential of a worker group.
-        :paramtype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
         :keyword group_type: Type of the HybridWorkerGroup. Known values are: "User", "System".
         :paramtype group_type: str or ~azure.mgmt.automation.models.GroupTypeEnum
+        :keyword credential: Sets the credential of a worker group.
+        :paramtype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
         """
         super(HybridRunbookWorkerGroup, self).__init__(**kwargs)
-        self.id = id
-        self.name = name
-        self.type = None
-        self.hybrid_runbook_workers = hybrid_runbook_workers
-        self.credential = credential
-        self.group_type = group_type
         self.system_data = None
+        self.group_type = group_type
+        self.credential = credential
 
 
 class HybridRunbookWorkerGroupCreateOrUpdateParameters(msrest.serialization.Model):
-    """The parameters supplied to the create or update hybrid runbook worker group operation.
+    """The parameters supplied to the create hybrid runbook worker group operation.
 
+    :ivar name: Gets or sets the name of the resource.
+    :vartype name: str
     :ivar credential: Sets the credential of a worker group.
     :vartype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
     """
 
     _attribute_map = {
-        'credential': {'key': 'credential', 'type': 'RunAsCredentialAssociationProperty'},
+        'name': {'key': 'name', 'type': 'str'},
+        'credential': {'key': 'properties.credential', 'type': 'RunAsCredentialAssociationProperty'},
     }
 
     def __init__(
         self,
         *,
+        name: Optional[str] = None,
         credential: Optional["_models.RunAsCredentialAssociationProperty"] = None,
         **kwargs
     ):
         """
+        :keyword name: Gets or sets the name of the resource.
+        :paramtype name: str
         :keyword credential: Sets the credential of a worker group.
         :paramtype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
         """
         super(HybridRunbookWorkerGroupCreateOrUpdateParameters, self).__init__(**kwargs)
+        self.name = name
         self.credential = credential
 
 
@@ -3780,77 +3874,6 @@ class HybridRunbookWorkerGroupsListResult(msrest.serialization.Model):
         super(HybridRunbookWorkerGroupsListResult, self).__init__(**kwargs)
         self.value = value
         self.next_link = next_link
-
-
-class HybridRunbookWorkerGroupUpdateParameters(msrest.serialization.Model):
-    """Parameters supplied to the update operation.
-
-    :ivar credential: Sets the credential of a worker group.
-    :vartype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
-    """
-
-    _attribute_map = {
-        'credential': {'key': 'credential', 'type': 'RunAsCredentialAssociationProperty'},
-    }
-
-    def __init__(
-        self,
-        *,
-        credential: Optional["_models.RunAsCredentialAssociationProperty"] = None,
-        **kwargs
-    ):
-        """
-        :keyword credential: Sets the credential of a worker group.
-        :paramtype credential: ~azure.mgmt.automation.models.RunAsCredentialAssociationProperty
-        """
-        super(HybridRunbookWorkerGroupUpdateParameters, self).__init__(**kwargs)
-        self.credential = credential
-
-
-class HybridRunbookWorkerLegacy(msrest.serialization.Model):
-    """Definition of hybrid runbook worker Legacy.
-
-    :ivar name: Gets or sets the worker machine name.
-    :vartype name: str
-    :ivar ip: Gets or sets the assigned machine IP address.
-    :vartype ip: str
-    :ivar registration_time: Gets or sets the registration time of the worker machine.
-    :vartype registration_time: ~datetime.datetime
-    :ivar last_seen_date_time: Last Heartbeat from the Worker.
-    :vartype last_seen_date_time: ~datetime.datetime
-    """
-
-    _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'ip': {'key': 'ip', 'type': 'str'},
-        'registration_time': {'key': 'registrationTime', 'type': 'iso-8601'},
-        'last_seen_date_time': {'key': 'lastSeenDateTime', 'type': 'iso-8601'},
-    }
-
-    def __init__(
-        self,
-        *,
-        name: Optional[str] = None,
-        ip: Optional[str] = None,
-        registration_time: Optional[datetime.datetime] = None,
-        last_seen_date_time: Optional[datetime.datetime] = None,
-        **kwargs
-    ):
-        """
-        :keyword name: Gets or sets the worker machine name.
-        :paramtype name: str
-        :keyword ip: Gets or sets the assigned machine IP address.
-        :paramtype ip: str
-        :keyword registration_time: Gets or sets the registration time of the worker machine.
-        :paramtype registration_time: ~datetime.datetime
-        :keyword last_seen_date_time: Last Heartbeat from the Worker.
-        :paramtype last_seen_date_time: ~datetime.datetime
-        """
-        super(HybridRunbookWorkerLegacy, self).__init__(**kwargs)
-        self.name = name
-        self.ip = ip
-        self.registration_time = registration_time
-        self.last_seen_date_time = last_seen_date_time
 
 
 class HybridRunbookWorkerMoveParameters(msrest.serialization.Model):
