@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AccessRights(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AccessRights(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The permissions assigned to the shared access policy.
     """
 
@@ -31,21 +30,21 @@ class AccessRights(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     REGISTRY_WRITE_SERVICE_CONNECT_DEVICE_CONNECT = "RegistryWrite, ServiceConnect, DeviceConnect"
     REGISTRY_READ_REGISTRY_WRITE_SERVICE_CONNECT_DEVICE_CONNECT = "RegistryRead, RegistryWrite, ServiceConnect, DeviceConnect"
 
-class Capabilities(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Capabilities(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The capabilities and features enabled for the IoT hub.
     """
 
     NONE = "None"
     DEVICE_MANAGEMENT = "DeviceManagement"
 
-class IotHubNameUnavailabilityReason(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubNameUnavailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The reason for unavailability.
     """
 
     INVALID = "Invalid"
     ALREADY_EXISTS = "AlreadyExists"
 
-class IotHubScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubScaleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the scaling enabled.
     """
 
@@ -53,7 +52,7 @@ class IotHubScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANUAL = "Manual"
     NONE = "None"
 
-class IotHubSku(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The name of the SKU.
     """
 
@@ -62,21 +61,21 @@ class IotHubSku(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     S2 = "S2"
     S3 = "S3"
 
-class IotHubSkuTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubSkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The billing tier for the IoT hub.
     """
 
     FREE = "Free"
     STANDARD = "Standard"
 
-class IpFilterActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IpFilterActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The desired action for requests captured by this rule.
     """
 
     ACCEPT = "Accept"
     REJECT = "Reject"
 
-class JobStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class JobStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the job.
     """
 
@@ -87,7 +86,7 @@ class JobStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FAILED = "failed"
     CANCELLED = "cancelled"
 
-class JobType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class JobType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the job.
     """
 
@@ -102,7 +101,7 @@ class JobType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FACTORY_RESET_DEVICE = "factoryResetDevice"
     FIRMWARE_UPDATE = "firmwareUpdate"
 
-class OperationMonitoringLevel(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class OperationMonitoringLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The operations monitoring level.
     """
 

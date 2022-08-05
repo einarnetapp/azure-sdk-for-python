@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AccessRights(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AccessRights(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The permissions assigned to the shared access policy.
     """
 
@@ -31,21 +30,21 @@ class AccessRights(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     REGISTRY_WRITE_SERVICE_CONNECT_DEVICE_CONNECT = "RegistryWrite, ServiceConnect, DeviceConnect"
     REGISTRY_READ_REGISTRY_WRITE_SERVICE_CONNECT_DEVICE_CONNECT = "RegistryRead, RegistryWrite, ServiceConnect, DeviceConnect"
 
-class AuthenticationType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Specifies authentication type being used for connecting to the storage account.
     """
 
     KEY_BASED = "keyBased"
     IDENTITY_BASED = "identityBased"
 
-class Capabilities(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Capabilities(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The capabilities and features enabled for the IoT hub.
     """
 
     NONE = "None"
     DEVICE_MANAGEMENT = "DeviceManagement"
 
-class EndpointHealthStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class EndpointHealthStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Health statuses have following meanings. The 'healthy' status shows that the endpoint is
     accepting messages as expected. The 'unhealthy' status shows that the endpoint is not accepting
     messages as expected and IoT Hub is retrying to send data to this endpoint. The status of an
@@ -62,14 +61,14 @@ class EndpointHealthStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     UNHEALTHY = "unhealthy"
     DEAD = "dead"
 
-class IotHubNameUnavailabilityReason(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubNameUnavailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The reason for unavailability.
     """
 
     INVALID = "Invalid"
     ALREADY_EXISTS = "AlreadyExists"
 
-class IotHubReplicaRoleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubReplicaRoleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The role of the region, can be either primary or secondary. The primary region is where the IoT
     hub is currently provisioned. The secondary region is the Azure disaster recovery (DR) paired
     region and also the region where the IoT hub can failover to.
@@ -78,7 +77,7 @@ class IotHubReplicaRoleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     PRIMARY = "primary"
     SECONDARY = "secondary"
 
-class IotHubScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubScaleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the scaling enabled.
     """
 
@@ -86,7 +85,7 @@ class IotHubScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANUAL = "Manual"
     NONE = "None"
 
-class IotHubSku(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The name of the SKU.
     """
 
@@ -98,7 +97,7 @@ class IotHubSku(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     B2 = "B2"
     B3 = "B3"
 
-class IotHubSkuTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IotHubSkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The billing tier for the IoT hub.
     """
 
@@ -106,14 +105,14 @@ class IotHubSkuTier(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     STANDARD = "Standard"
     BASIC = "Basic"
 
-class IpFilterActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class IpFilterActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The desired action for requests captured by this rule.
     """
 
     ACCEPT = "Accept"
     REJECT = "Reject"
 
-class JobStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class JobStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the job.
     """
 
@@ -124,7 +123,7 @@ class JobStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FAILED = "failed"
     CANCELLED = "cancelled"
 
-class JobType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class JobType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of the job.
     """
 
@@ -139,7 +138,7 @@ class JobType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     FACTORY_RESET_DEVICE = "factoryResetDevice"
     FIRMWARE_UPDATE = "firmwareUpdate"
 
-class PrivateLinkServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateLinkServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of a private endpoint connection
     """
 
@@ -148,21 +147,21 @@ class PrivateLinkServiceConnectionStatus(with_metaclass(CaseInsensitiveEnumMeta,
     REJECTED = "Rejected"
     DISCONNECTED = "Disconnected"
 
-class PublicNetworkAccess(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether requests from Public Network are allowed
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
-class RouteErrorSeverity(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RouteErrorSeverity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Severity of the route error
     """
 
     ERROR = "error"
     WARNING = "warning"
 
-class RoutingSource(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RoutingSource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The source that the routing rule is to be applied to, such as DeviceMessages.
     """
 
@@ -172,7 +171,7 @@ class RoutingSource(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DEVICE_LIFECYCLE_EVENTS = "DeviceLifecycleEvents"
     DEVICE_JOB_LIFECYCLE_EVENTS = "DeviceJobLifecycleEvents"
 
-class RoutingStorageContainerPropertiesEncoding(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RoutingStorageContainerPropertiesEncoding(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Encoding that is used to serialize messages to blobs. Supported values are 'avro',
     'avrodeflate', and 'JSON'. Default value is 'avro'.
     """
@@ -181,7 +180,7 @@ class RoutingStorageContainerPropertiesEncoding(with_metaclass(CaseInsensitiveEn
     AVRO_DEFLATE = "AvroDeflate"
     JSON = "JSON"
 
-class TestResultStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class TestResultStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Result of testing route
     """
 
