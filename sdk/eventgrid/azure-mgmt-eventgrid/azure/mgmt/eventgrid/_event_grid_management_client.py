@@ -102,27 +102,69 @@ class EventGridManagementClient:    # pylint: disable=too-many-instance-attribut
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.channels = ChannelsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.domains = DomainsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.domain_topics = DomainTopicsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.topic_event_subscriptions = TopicEventSubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.domain_event_subscriptions = DomainEventSubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.event_subscriptions = EventSubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.domain_topic_event_subscriptions = DomainTopicEventSubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.system_topic_event_subscriptions = SystemTopicEventSubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.partner_topic_event_subscriptions = PartnerTopicEventSubscriptionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.topics = TopicsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.partner_configurations = PartnerConfigurationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.partner_namespaces = PartnerNamespacesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.partner_registrations = PartnerRegistrationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.partner_topics = PartnerTopicsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_link_resources = PrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.system_topics = SystemTopicsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.extension_topics = ExtensionTopicsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.topic_types = TopicTypesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.verified_partners = VerifiedPartnersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.channels = ChannelsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.domains = DomainsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.domain_topics = DomainTopicsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.topic_event_subscriptions = TopicEventSubscriptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.domain_event_subscriptions = DomainEventSubscriptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.event_subscriptions = EventSubscriptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.domain_topic_event_subscriptions = DomainTopicEventSubscriptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.system_topic_event_subscriptions = SystemTopicEventSubscriptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.partner_topic_event_subscriptions = PartnerTopicEventSubscriptionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.topics = TopicsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.partner_configurations = PartnerConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.partner_namespaces = PartnerNamespacesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.partner_registrations = PartnerRegistrationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.partner_topics = PartnerTopicsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_link_resources = PrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.system_topics = SystemTopicsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.extension_topics = ExtensionTopicsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.topic_types = TopicTypesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.verified_partners = VerifiedPartnersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
