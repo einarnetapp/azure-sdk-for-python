@@ -6,27 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
-from six import with_metaclass
-
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
+from enum import Enum
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class A2ARecoveryAvailabilityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class A2ARecoveryAvailabilityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery availability type of the virtual machine.
     """
 
@@ -34,7 +18,7 @@ class A2ARecoveryAvailabilityType(with_metaclass(_CaseInsensitiveEnumMeta, str, 
     AVAILABILITY_SET = "AvailabilitySet"
     AVAILABILITY_ZONE = "AvailabilityZone"
 
-class A2ARpRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class A2ARpRecoveryPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type.
     """
 
@@ -43,14 +27,14 @@ class A2ARpRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)
     LATEST_CRASH_CONSISTENT = "LatestCrashConsistent"
     LATEST_PROCESSED = "LatestProcessed"
 
-class AgentAutoUpdateStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AgentAutoUpdateStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether the auto update is enabled.
     """
 
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class AgentUpgradeBlockedReason(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AgentUpgradeBlockedReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     ALREADY_ON_LATEST_VERSION = "AlreadyOnLatestVersion"
     REBOOT_REQUIRED = "RebootRequired"
@@ -67,7 +51,7 @@ class AgentUpgradeBlockedReason(with_metaclass(_CaseInsensitiveEnumMeta, str, En
     INVALID_DRIVER_VERSION = "InvalidDriverVersion"
     UNKNOWN = "Unknown"
 
-class AgentVersionStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AgentVersionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether security update required.
     """
 
@@ -77,35 +61,42 @@ class AgentVersionStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     UPDATE_REQUIRED = "UpdateRequired"
     SECURITY_UPDATE_REQUIRED = "SecurityUpdateRequired"
 
-class AlternateLocationRecoveryOption(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AlternateLocationRecoveryOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The ALR option.
     """
 
     CREATE_VM_IF_NOT_FOUND = "CreateVmIfNotFound"
     NO_ACTION = "NoAction"
 
-class AutoProtectionOfDataDisk(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class AutomationAccountAuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """A value indicating the type authentication to use for automation Account.
+    """
+
+    RUN_AS_ACCOUNT = "RunAsAccount"
+    SYSTEM_ASSIGNED_IDENTITY = "SystemAssignedIdentity"
+
+class AutoProtectionOfDataDisk(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether the auto protection is enabled.
     """
 
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class DataSyncStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DataSyncStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The data sync option.
     """
 
     FOR_DOWN_TIME = "ForDownTime"
     FOR_SYNCHRONIZATION = "ForSynchronization"
 
-class DisableProtectionReason(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DisableProtectionReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Disable protection reason. It can have values NotSpecified/MigrationComplete.
     """
 
     NOT_SPECIFIED = "NotSpecified"
     MIGRATION_COMPLETE = "MigrationComplete"
 
-class DiskAccountType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DiskAccountType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The DiskType.
     """
 
@@ -113,7 +104,7 @@ class DiskAccountType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     PREMIUM_LRS = "Premium_LRS"
     STANDARD_SSD_LRS = "StandardSSD_LRS"
 
-class DiskReplicationProgressHealth(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class DiskReplicationProgressHealth(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The progress health.
     """
 
@@ -123,14 +114,14 @@ class DiskReplicationProgressHealth(with_metaclass(_CaseInsensitiveEnumMeta, str
     NO_PROGRESS = "NoProgress"
     QUEUED = "Queued"
 
-class EthernetAddressType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class EthernetAddressType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The source IP address type.
     """
 
     DYNAMIC = "Dynamic"
     STATIC = "Static"
 
-class ExportJobOutputSerializationType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ExportJobOutputSerializationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The output type of the jobs.
     """
 
@@ -138,7 +129,13 @@ class ExportJobOutputSerializationType(with_metaclass(_CaseInsensitiveEnumMeta, 
     XML = "Xml"
     EXCEL = "Excel"
 
-class FailoverDeploymentModel(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ExtendedLocationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The extended location type.
+    """
+
+    EDGE_ZONE = "EdgeZone"
+
+class FailoverDeploymentModel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The failover deployment model.
     """
 
@@ -146,7 +143,7 @@ class FailoverDeploymentModel(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum
     CLASSIC = "Classic"
     RESOURCE_MANAGER = "ResourceManager"
 
-class HealthErrorCategory(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class HealthErrorCategory(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The category of the health error.
     """
 
@@ -162,14 +159,14 @@ class HealthErrorCategory(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     AGENT_AUTO_UPDATE_RUN_AS_ACCOUNT_EXPIRY = "AgentAutoUpdateRunAsAccountExpiry"
     AGENT_AUTO_UPDATE_RUN_AS_ACCOUNT_EXPIRED = "AgentAutoUpdateRunAsAccountExpired"
 
-class HealthErrorCustomerResolvability(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class HealthErrorCustomerResolvability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Value indicating whether the health error is customer resolvable.
     """
 
     ALLOWED = "Allowed"
     NOT_ALLOWED = "NotAllowed"
 
-class HyperVReplicaAzureRpRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class HyperVReplicaAzureRpRecoveryPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type.
     """
 
@@ -177,14 +174,14 @@ class HyperVReplicaAzureRpRecoveryPointType(with_metaclass(_CaseInsensitiveEnumM
     LATEST_APPLICATION_CONSISTENT = "LatestApplicationConsistent"
     LATEST_PROCESSED = "LatestProcessed"
 
-class InMageRcmFailbackRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class InMageRcmFailbackRecoveryPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type.
     """
 
     APPLICATION_CONSISTENT = "ApplicationConsistent"
     CRASH_CONSISTENT = "CrashConsistent"
 
-class InMageV2RpRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class InMageV2RpRecoveryPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type.
     """
 
@@ -193,7 +190,7 @@ class InMageV2RpRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, 
     LATEST_CRASH_CONSISTENT = "LatestCrashConsistent"
     LATEST_PROCESSED = "LatestProcessed"
 
-class LicenseType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class LicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """License type.
     """
 
@@ -201,15 +198,17 @@ class LicenseType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     NO_LICENSE_TYPE = "NoLicenseType"
     WINDOWS_SERVER = "WindowsServer"
 
-class MigrationItemOperation(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MigrationItemOperation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     DISABLE_MIGRATION = "DisableMigration"
     TEST_MIGRATE = "TestMigrate"
     TEST_MIGRATE_CLEANUP = "TestMigrateCleanup"
     MIGRATE = "Migrate"
     START_RESYNC = "StartResync"
+    PAUSE_REPLICATION = "PauseReplication"
+    RESUME_REPLICATION = "ResumeReplication"
 
-class MigrationRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MigrationRecoveryPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type.
     """
 
@@ -217,7 +216,7 @@ class MigrationRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, E
     APPLICATION_CONSISTENT = "ApplicationConsistent"
     CRASH_CONSISTENT = "CrashConsistent"
 
-class MigrationState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MigrationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The migration status.
     """
 
@@ -232,8 +231,14 @@ class MigrationState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     MIGRATION_IN_PROGRESS = "MigrationInProgress"
     MIGRATION_SUCCEEDED = "MigrationSucceeded"
     MIGRATION_FAILED = "MigrationFailed"
+    RESUME_IN_PROGRESS = "ResumeInProgress"
+    RESUME_INITIATED = "ResumeInitiated"
+    SUSPENDING_PROTECTION = "SuspendingProtection"
+    PROTECTION_SUSPENDED = "ProtectionSuspended"
+    MIGRATION_COMPLETED_WITH_INFORMATION = "MigrationCompletedWithInformation"
+    MIGRATION_PARTIALLY_SUCCEEDED = "MigrationPartiallySucceeded"
 
-class MobilityAgentUpgradeState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MobilityAgentUpgradeState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The agent auto upgrade state.
     """
 
@@ -242,14 +247,14 @@ class MobilityAgentUpgradeState(with_metaclass(_CaseInsensitiveEnumMeta, str, En
     COMPLETED = "Completed"
     COMMIT = "Commit"
 
-class MultiVmGroupCreateOption(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MultiVmGroupCreateOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Whether Multi VM group is auto created or specified by user.
     """
 
     AUTO_CREATED = "AutoCreated"
     USER_SPECIFIED = "UserSpecified"
 
-class MultiVmSyncPointOption(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class MultiVmSyncPointOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether multi VM sync enabled VMs should use multi VM sync points for
     failover.
     """
@@ -257,7 +262,7 @@ class MultiVmSyncPointOption(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)
     USE_MULTI_VM_SYNC_RECOVERY_POINT = "UseMultiVmSyncRecoveryPoint"
     USE_PER_VM_RECOVERY_POINT = "UsePerVmRecoveryPoint"
 
-class PlannedFailoverStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PlannedFailoverStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The last planned failover status.
     """
 
@@ -266,12 +271,12 @@ class PlannedFailoverStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum))
     CANCELLED = "Cancelled"
     UNKNOWN = "Unknown"
 
-class PossibleOperationsDirections(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PossibleOperationsDirections(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     PRIMARY_TO_RECOVERY = "PrimaryToRecovery"
     RECOVERY_TO_PRIMARY = "RecoveryToPrimary"
 
-class PresenceStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PresenceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether the VM has a physical disk attached. String value of
     SrsDataContract.PresenceStatus enum.
     """
@@ -280,7 +285,7 @@ class PresenceStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     PRESENT = "Present"
     NOT_PRESENT = "NotPresent"
 
-class ProtectionHealth(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ProtectionHealth(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The health.
     """
 
@@ -289,7 +294,7 @@ class ProtectionHealth(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     WARNING = "Warning"
     CRITICAL = "Critical"
 
-class RcmComponentStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RcmComponentStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The throughput status.
     """
 
@@ -298,14 +303,14 @@ class RcmComponentStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     CRITICAL = "Critical"
     UNKNOWN = "Unknown"
 
-class RecoveryPlanActionLocation(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecoveryPlanActionLocation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The fabric location.
     """
 
     PRIMARY = "Primary"
     RECOVERY = "Recovery"
 
-class RecoveryPlanGroupType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecoveryPlanGroupType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The group type.
     """
 
@@ -313,7 +318,7 @@ class RecoveryPlanGroupType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum))
     BOOT = "Boot"
     FAILOVER = "Failover"
 
-class RecoveryPlanPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecoveryPlanPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type.
     """
 
@@ -322,14 +327,14 @@ class RecoveryPlanPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum))
     LATEST_CRASH_CONSISTENT = "LatestCrashConsistent"
     LATEST_PROCESSED = "LatestProcessed"
 
-class RecoveryPointSyncType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecoveryPointSyncType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether the recovery point is multi VM consistent.
     """
 
     MULTI_VM_SYNC_RECOVERY_POINT = "MultiVmSyncRecoveryPoint"
     PER_VM_RECOVERY_POINT = "PerVmRecoveryPoint"
 
-class RecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RecoveryPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type. Values from LatestTime, LatestTag or Custom. In the case of custom,
     the recovery point provided by RecoveryPointId will be used. In the other two cases, recovery
     point id will be ignored.
@@ -339,7 +344,7 @@ class RecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     LATEST_TAG = "LatestTag"
     CUSTOM = "Custom"
 
-class ReplicationProtectedItemOperation(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ReplicationProtectedItemOperation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     REVERSE_REPLICATE = "ReverseReplicate"
     COMMIT = "Commit"
@@ -356,7 +361,7 @@ class ReplicationProtectedItemOperation(with_metaclass(_CaseInsensitiveEnumMeta,
     SWITCH_PROTECTION = "SwitchProtection"
     COMPLETE_MIGRATION = "CompleteMigration"
 
-class ResyncState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ResyncState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The resync state.
     """
 
@@ -364,7 +369,7 @@ class ResyncState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     PREPARED_FOR_RESYNCHRONIZATION = "PreparedForResynchronization"
     STARTED_RESYNCHRONIZATION = "StartedResynchronization"
 
-class RpInMageRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RpInMageRecoveryPointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The recovery point type.
     """
 
@@ -372,7 +377,7 @@ class RpInMageRecoveryPointType(with_metaclass(_CaseInsensitiveEnumMeta, str, En
     LATEST_TAG = "LatestTag"
     CUSTOM = "Custom"
 
-class SetMultiVmSyncStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SetMultiVmSyncStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether multi-VM sync has to be enabled. Value should be 'Enabled' or
     'Disabled'.
     """
@@ -380,7 +385,7 @@ class SetMultiVmSyncStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     ENABLE = "Enable"
     DISABLE = "Disable"
 
-class Severity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class Severity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Severity of error.
     """
 
@@ -389,14 +394,14 @@ class Severity(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     ERROR = "Error"
     INFO = "Info"
 
-class SourceSiteOperations(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SourceSiteOperations(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """A value indicating whether source site operations are required.
     """
 
     REQUIRED = "Required"
     NOT_REQUIRED = "NotRequired"
 
-class SqlServerLicenseType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class SqlServerLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The SQL Server license type.
     """
 
@@ -405,7 +410,7 @@ class SqlServerLicenseType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     PAYG = "PAYG"
     AHUB = "AHUB"
 
-class TestMigrationState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class TestMigrationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The test migrate state.
     """
 
@@ -414,8 +419,10 @@ class TestMigrationState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     TEST_MIGRATION_SUCCEEDED = "TestMigrationSucceeded"
     TEST_MIGRATION_FAILED = "TestMigrationFailed"
     TEST_MIGRATION_CLEANUP_IN_PROGRESS = "TestMigrationCleanupInProgress"
+    TEST_MIGRATION_COMPLETED_WITH_INFORMATION = "TestMigrationCompletedWithInformation"
+    TEST_MIGRATION_PARTIALLY_SUCCEEDED = "TestMigrationPartiallySucceeded"
 
-class VmEncryptionType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class VmEncryptionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The encryption type of the VM.
     """
 
@@ -423,7 +430,7 @@ class VmEncryptionType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     ONE_PASS_ENCRYPTED = "OnePassEncrypted"
     TWO_PASS_ENCRYPTED = "TwoPassEncrypted"
 
-class VmReplicationProgressHealth(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class VmReplicationProgressHealth(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The initial replication progress health.
     """
 
