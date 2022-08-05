@@ -58,8 +58,12 @@ class ImageBuilderClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.virtual_machine_image_templates = VirtualMachineImageTemplatesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
+        self.virtual_machine_image_templates = VirtualMachineImageTemplatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(

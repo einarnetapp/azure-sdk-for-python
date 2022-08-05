@@ -7,11 +7,13 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._image_builder_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class CloudErrorBody(msrest.serialization.Model):
@@ -43,7 +45,7 @@ class CloudErrorBody(msrest.serialization.Model):
         code: Optional[str] = None,
         message: Optional[str] = None,
         target: Optional[str] = None,
-        details: Optional[List["CloudErrorBody"]] = None,
+        details: Optional[List["_models.CloudErrorBody"]] = None,
         **kwargs
     ):
         """
@@ -236,8 +238,8 @@ class ImageTemplate(TrackedResource):
     :vartype validate: ~azure.mgmt.imagebuilder.models.ImageTemplatePropertiesValidate
     :ivar distribute: The distribution targets where the image output needs to go to.
     :vartype distribute: list[~azure.mgmt.imagebuilder.models.ImageTemplateDistributor]
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Creating", "Updating", "Succeeded", "Failed", "Deleting".
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Creating",
+     "Updating", "Succeeded", "Failed", "Deleting".
     :vartype provisioning_state: str or ~azure.mgmt.imagebuilder.models.ProvisioningState
     :ivar provisioning_error: Provisioning error, if any.
     :vartype provisioning_error: ~azure.mgmt.imagebuilder.models.ProvisioningError
@@ -304,14 +306,14 @@ class ImageTemplate(TrackedResource):
         self,
         *,
         location: str,
-        identity: "ImageTemplateIdentity",
+        identity: "_models.ImageTemplateIdentity",
         tags: Optional[Dict[str, str]] = None,
-        source: Optional["ImageTemplateSource"] = None,
-        customize: Optional[List["ImageTemplateCustomizer"]] = None,
-        validate: Optional["ImageTemplatePropertiesValidate"] = None,
-        distribute: Optional[List["ImageTemplateDistributor"]] = None,
+        source: Optional["_models.ImageTemplateSource"] = None,
+        customize: Optional[List["_models.ImageTemplateCustomizer"]] = None,
+        validate: Optional["_models.ImageTemplatePropertiesValidate"] = None,
+        distribute: Optional[List["_models.ImageTemplateDistributor"]] = None,
         build_timeout_in_minutes: Optional[int] = 0,
-        vm_profile: Optional["ImageTemplateVmProfile"] = None,
+        vm_profile: Optional["_models.ImageTemplateVmProfile"] = None,
         staging_resource_group: Optional[str] = None,
         **kwargs
     ):
@@ -522,7 +524,7 @@ class ImageTemplateIdentity(msrest.serialization.Model):
     """Identity for the image template.
 
     :ivar type: The type of identity used for the image template. The type 'None' will remove any
-     identities from the image template. Possible values include: "UserAssigned", "None".
+     identities from the image template. Known values are: "UserAssigned", "None".
     :vartype type: str or ~azure.mgmt.imagebuilder.models.ResourceIdentityType
     :ivar user_assigned_identities: The list of user identities associated with the image template.
      The user identity dictionary key references will be ARM resource ids in the form:
@@ -539,13 +541,13 @@ class ImageTemplateIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "ResourceIdentityType"]] = None,
-        user_assigned_identities: Optional[Dict[str, "ComponentsVrq145SchemasImagetemplateidentityPropertiesUserassignedidentitiesAdditionalproperties"]] = None,
+        type: Optional[Union[str, "_models.ResourceIdentityType"]] = None,
+        user_assigned_identities: Optional[Dict[str, "_models.ComponentsVrq145SchemasImagetemplateidentityPropertiesUserassignedidentitiesAdditionalproperties"]] = None,
         **kwargs
     ):
         """
         :keyword type: The type of identity used for the image template. The type 'None' will remove
-         any identities from the image template. Possible values include: "UserAssigned", "None".
+         any identities from the image template. Known values are: "UserAssigned", "None".
         :paramtype type: str or ~azure.mgmt.imagebuilder.models.ResourceIdentityType
         :keyword user_assigned_identities: The list of user identities associated with the image
          template. The user identity dictionary key references will be ARM resource ids in the form:
@@ -608,10 +610,10 @@ class ImageTemplateLastRunStatus(msrest.serialization.Model):
     :vartype start_time: ~datetime.datetime
     :ivar end_time: End time of the last run (UTC).
     :vartype end_time: ~datetime.datetime
-    :ivar run_state: State of the last run. Possible values include: "Running", "Canceling",
-     "Succeeded", "PartiallySucceeded", "Failed", "Canceled".
+    :ivar run_state: State of the last run. Known values are: "Running", "Canceling", "Succeeded",
+     "PartiallySucceeded", "Failed", "Canceled".
     :vartype run_state: str or ~azure.mgmt.imagebuilder.models.RunState
-    :ivar run_sub_state: Sub-state of the last run. Possible values include: "Queued", "Building",
+    :ivar run_sub_state: Sub-state of the last run. Known values are: "Queued", "Building",
      "Customizing", "Validating", "Distributing".
     :vartype run_sub_state: str or ~azure.mgmt.imagebuilder.models.RunSubState
     :ivar message: Verbose information about the last run state.
@@ -631,8 +633,8 @@ class ImageTemplateLastRunStatus(msrest.serialization.Model):
         *,
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
-        run_state: Optional[Union[str, "RunState"]] = None,
-        run_sub_state: Optional[Union[str, "RunSubState"]] = None,
+        run_state: Optional[Union[str, "_models.RunState"]] = None,
+        run_sub_state: Optional[Union[str, "_models.RunSubState"]] = None,
         message: Optional[str] = None,
         **kwargs
     ):
@@ -641,11 +643,11 @@ class ImageTemplateLastRunStatus(msrest.serialization.Model):
         :paramtype start_time: ~datetime.datetime
         :keyword end_time: End time of the last run (UTC).
         :paramtype end_time: ~datetime.datetime
-        :keyword run_state: State of the last run. Possible values include: "Running", "Canceling",
+        :keyword run_state: State of the last run. Known values are: "Running", "Canceling",
          "Succeeded", "PartiallySucceeded", "Failed", "Canceled".
         :paramtype run_state: str or ~azure.mgmt.imagebuilder.models.RunState
-        :keyword run_sub_state: Sub-state of the last run. Possible values include: "Queued",
-         "Building", "Customizing", "Validating", "Distributing".
+        :keyword run_sub_state: Sub-state of the last run. Known values are: "Queued", "Building",
+         "Customizing", "Validating", "Distributing".
         :paramtype run_sub_state: str or ~azure.mgmt.imagebuilder.models.RunSubState
         :keyword message: Verbose information about the last run state.
         :paramtype message: str
@@ -675,7 +677,7 @@ class ImageTemplateListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["ImageTemplate"]] = None,
+        value: Optional[List["_models.ImageTemplate"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -876,7 +878,7 @@ class ImageTemplatePlatformImageSource(ImageTemplateSource):
         offer: Optional[str] = None,
         sku: Optional[str] = None,
         version: Optional[str] = None,
-        plan_info: Optional["PlatformImagePurchasePlan"] = None,
+        plan_info: Optional["_models.PlatformImagePurchasePlan"] = None,
         **kwargs
     ):
         """
@@ -1106,7 +1108,7 @@ class ImageTemplatePropertiesValidate(msrest.serialization.Model):
         *,
         continue_distribute_on_failure: Optional[bool] = False,
         source_validation_only: Optional[bool] = False,
-        in_vm_validations: Optional[List["ImageTemplateInVMValidator"]] = None,
+        in_vm_validations: Optional[List["_models.ImageTemplateInVMValidator"]] = None,
         **kwargs
     ):
         """
@@ -1210,7 +1212,7 @@ class ImageTemplateSharedImageDistributor(ImageTemplateDistributor):
      from latest. Omit to use the default (false).
     :vartype exclude_from_latest: bool
     :ivar storage_account_type: Storage account type to be used to store the shared image. Omit to
-     use the default (Standard_LRS). Possible values include: "Standard_LRS", "Standard_ZRS".
+     use the default (Standard_LRS). Known values are: "Standard_LRS", "Standard_ZRS".
     :vartype storage_account_type: str or
      ~azure.mgmt.imagebuilder.models.SharedImageStorageAccountType
     """
@@ -1240,7 +1242,7 @@ class ImageTemplateSharedImageDistributor(ImageTemplateDistributor):
         replication_regions: List[str],
         artifact_tags: Optional[Dict[str, str]] = None,
         exclude_from_latest: Optional[bool] = False,
-        storage_account_type: Optional[Union[str, "SharedImageStorageAccountType"]] = None,
+        storage_account_type: Optional[Union[str, "_models.SharedImageStorageAccountType"]] = None,
         **kwargs
     ):
         """
@@ -1257,7 +1259,7 @@ class ImageTemplateSharedImageDistributor(ImageTemplateDistributor):
          excluded from latest. Omit to use the default (false).
         :paramtype exclude_from_latest: bool
         :keyword storage_account_type: Storage account type to be used to store the shared image. Omit
-         to use the default (Standard_LRS). Possible values include: "Standard_LRS", "Standard_ZRS".
+         to use the default (Standard_LRS). Known values are: "Standard_LRS", "Standard_ZRS".
         :paramtype storage_account_type: str or
          ~azure.mgmt.imagebuilder.models.SharedImageStorageAccountType
         """
@@ -1441,7 +1443,7 @@ class ImageTemplateUpdateParameters(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        identity: Optional["ImageTemplateIdentity"] = None,
+        identity: Optional["_models.ImageTemplateIdentity"] = None,
         tags: Optional[Dict[str, str]] = None,
         **kwargs
     ):
@@ -1535,7 +1537,7 @@ class ImageTemplateVmProfile(msrest.serialization.Model):
         vm_size: Optional[str] = "",
         os_disk_size_gb: Optional[int] = 0,
         user_assigned_identities: Optional[List[str]] = None,
-        vnet_config: Optional["VirtualNetworkConfig"] = None,
+        vnet_config: Optional["_models.VirtualNetworkConfig"] = None,
         **kwargs
     ):
         """
@@ -1653,7 +1655,7 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         origin: Optional[str] = None,
         properties: Optional[Any] = None,
         is_data_action: Optional[bool] = None,
@@ -1742,7 +1744,7 @@ class OperationListResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1807,7 +1809,7 @@ class PlatformImagePurchasePlan(msrest.serialization.Model):
 class ProvisioningError(msrest.serialization.Model):
     """Describes the error happened when create or update an image template.
 
-    :ivar provisioning_error_code: Error code of the provisioning failure. Possible values include:
+    :ivar provisioning_error_code: Error code of the provisioning failure. Known values are:
      "BadSourceType", "BadPIRSource", "BadManagedImageSource", "BadSharedImageVersionSource",
      "BadCustomizerType", "UnsupportedCustomizerType", "NoCustomizerScript", "BadValidatorType",
      "UnsupportedValidatorType", "NoValidatorScript", "BadDistributeType",
@@ -1825,17 +1827,16 @@ class ProvisioningError(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        provisioning_error_code: Optional[Union[str, "ProvisioningErrorCode"]] = None,
+        provisioning_error_code: Optional[Union[str, "_models.ProvisioningErrorCode"]] = None,
         message: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword provisioning_error_code: Error code of the provisioning failure. Possible values
-         include: "BadSourceType", "BadPIRSource", "BadManagedImageSource",
-         "BadSharedImageVersionSource", "BadCustomizerType", "UnsupportedCustomizerType",
-         "NoCustomizerScript", "BadValidatorType", "UnsupportedValidatorType", "NoValidatorScript",
-         "BadDistributeType", "BadSharedImageDistribute", "BadStagingResourceGroup", "ServerError",
-         "Other".
+        :keyword provisioning_error_code: Error code of the provisioning failure. Known values are:
+         "BadSourceType", "BadPIRSource", "BadManagedImageSource", "BadSharedImageVersionSource",
+         "BadCustomizerType", "UnsupportedCustomizerType", "NoCustomizerScript", "BadValidatorType",
+         "UnsupportedValidatorType", "NoValidatorScript", "BadDistributeType",
+         "BadSharedImageDistribute", "BadStagingResourceGroup", "ServerError", "Other".
         :paramtype provisioning_error_code: str or
          ~azure.mgmt.imagebuilder.models.ProvisioningErrorCode
         :keyword message: Verbose error message about the provisioning failure.
@@ -1907,8 +1908,8 @@ class RunOutput(ProxyResource):
     :vartype artifact_id: str
     :ivar artifact_uri: The location URI of the artifact.
     :vartype artifact_uri: str
-    :ivar provisioning_state: Provisioning state of the resource. Possible values include:
-     "Creating", "Updating", "Succeeded", "Failed", "Deleting".
+    :ivar provisioning_state: Provisioning state of the resource. Known values are: "Creating",
+     "Updating", "Succeeded", "Failed", "Deleting".
     :vartype provisioning_state: str or ~azure.mgmt.imagebuilder.models.ProvisioningState
     """
 
@@ -1966,7 +1967,7 @@ class RunOutputCollection(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["RunOutput"]] = None,
+        value: Optional[List["_models.RunOutput"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -1986,15 +1987,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.imagebuilder.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.imagebuilder.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -2013,25 +2014,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.imagebuilder.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.imagebuilder.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
