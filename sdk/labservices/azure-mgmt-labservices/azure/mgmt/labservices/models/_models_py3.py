@@ -7,25 +7,27 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._lab_services_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class AutoShutdownProfile(msrest.serialization.Model):
     """Profile for how to handle shutting down virtual machines.
 
-    :ivar shutdown_on_disconnect: Whether shutdown on disconnect is enabled. Possible values
-     include: "Enabled", "Disabled".
+    :ivar shutdown_on_disconnect: Whether shutdown on disconnect is enabled. Known values are:
+     "Enabled", "Disabled".
     :vartype shutdown_on_disconnect: str or ~azure.mgmt.labservices.models.EnableState
     :ivar shutdown_when_not_connected: Whether a VM will get shutdown when it hasn't been connected
-     to after a period of time. Possible values include: "Enabled", "Disabled".
+     to after a period of time. Known values are: "Enabled", "Disabled".
     :vartype shutdown_when_not_connected: str or ~azure.mgmt.labservices.models.EnableState
     :ivar shutdown_on_idle: Whether a VM will get shutdown when it has idled for a period of time.
-     Possible values include: "None", "UserAbsence", "LowUsage".
+     Known values are: "None", "UserAbsence", "LowUsage".
     :vartype shutdown_on_idle: str or ~azure.mgmt.labservices.models.ShutdownOnIdleMode
     :ivar disconnect_delay: The amount of time a VM will stay running after a user disconnects if
      this behavior is enabled.
@@ -50,23 +52,23 @@ class AutoShutdownProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        shutdown_on_disconnect: Optional[Union[str, "EnableState"]] = None,
-        shutdown_when_not_connected: Optional[Union[str, "EnableState"]] = None,
-        shutdown_on_idle: Optional[Union[str, "ShutdownOnIdleMode"]] = None,
+        shutdown_on_disconnect: Optional[Union[str, "_models.EnableState"]] = None,
+        shutdown_when_not_connected: Optional[Union[str, "_models.EnableState"]] = None,
+        shutdown_on_idle: Optional[Union[str, "_models.ShutdownOnIdleMode"]] = None,
         disconnect_delay: Optional[datetime.timedelta] = None,
         no_connect_delay: Optional[datetime.timedelta] = None,
         idle_delay: Optional[datetime.timedelta] = None,
         **kwargs
     ):
         """
-        :keyword shutdown_on_disconnect: Whether shutdown on disconnect is enabled. Possible values
-         include: "Enabled", "Disabled".
+        :keyword shutdown_on_disconnect: Whether shutdown on disconnect is enabled. Known values are:
+         "Enabled", "Disabled".
         :paramtype shutdown_on_disconnect: str or ~azure.mgmt.labservices.models.EnableState
         :keyword shutdown_when_not_connected: Whether a VM will get shutdown when it hasn't been
-         connected to after a period of time. Possible values include: "Enabled", "Disabled".
+         connected to after a period of time. Known values are: "Enabled", "Disabled".
         :paramtype shutdown_when_not_connected: str or ~azure.mgmt.labservices.models.EnableState
         :keyword shutdown_on_idle: Whether a VM will get shutdown when it has idled for a period of
-         time. Possible values include: "None", "UserAbsence", "LowUsage".
+         time. Known values are: "None", "UserAbsence", "LowUsage".
         :paramtype shutdown_on_idle: str or ~azure.mgmt.labservices.models.ShutdownOnIdleMode
         :keyword disconnect_delay: The amount of time a VM will stay running after a user disconnects
          if this behavior is enabled.
@@ -90,17 +92,17 @@ class AutoShutdownProfile(msrest.serialization.Model):
 class ConnectionProfile(msrest.serialization.Model):
     """Connection profile for how users connect to lab virtual machines.
 
-    :ivar web_ssh_access: The enabled access level for Web Access over SSH. Possible values
-     include: "Public", "Private", "None".
+    :ivar web_ssh_access: The enabled access level for Web Access over SSH. Known values are:
+     "Public", "Private", "None".
     :vartype web_ssh_access: str or ~azure.mgmt.labservices.models.ConnectionType
-    :ivar web_rdp_access: The enabled access level for Web Access over RDP. Possible values
-     include: "Public", "Private", "None".
+    :ivar web_rdp_access: The enabled access level for Web Access over RDP. Known values are:
+     "Public", "Private", "None".
     :vartype web_rdp_access: str or ~azure.mgmt.labservices.models.ConnectionType
-    :ivar client_ssh_access: The enabled access level for Client Access over SSH. Possible values
-     include: "Public", "Private", "None".
+    :ivar client_ssh_access: The enabled access level for Client Access over SSH. Known values are:
+     "Public", "Private", "None".
     :vartype client_ssh_access: str or ~azure.mgmt.labservices.models.ConnectionType
-    :ivar client_rdp_access: The enabled access level for Client Access over RDP. Possible values
-     include: "Public", "Private", "None".
+    :ivar client_rdp_access: The enabled access level for Client Access over RDP. Known values are:
+     "Public", "Private", "None".
     :vartype client_rdp_access: str or ~azure.mgmt.labservices.models.ConnectionType
     """
 
@@ -114,24 +116,24 @@ class ConnectionProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        web_ssh_access: Optional[Union[str, "ConnectionType"]] = None,
-        web_rdp_access: Optional[Union[str, "ConnectionType"]] = None,
-        client_ssh_access: Optional[Union[str, "ConnectionType"]] = None,
-        client_rdp_access: Optional[Union[str, "ConnectionType"]] = None,
+        web_ssh_access: Optional[Union[str, "_models.ConnectionType"]] = None,
+        web_rdp_access: Optional[Union[str, "_models.ConnectionType"]] = None,
+        client_ssh_access: Optional[Union[str, "_models.ConnectionType"]] = None,
+        client_rdp_access: Optional[Union[str, "_models.ConnectionType"]] = None,
         **kwargs
     ):
         """
-        :keyword web_ssh_access: The enabled access level for Web Access over SSH. Possible values
-         include: "Public", "Private", "None".
+        :keyword web_ssh_access: The enabled access level for Web Access over SSH. Known values are:
+         "Public", "Private", "None".
         :paramtype web_ssh_access: str or ~azure.mgmt.labservices.models.ConnectionType
-        :keyword web_rdp_access: The enabled access level for Web Access over RDP. Possible values
-         include: "Public", "Private", "None".
+        :keyword web_rdp_access: The enabled access level for Web Access over RDP. Known values are:
+         "Public", "Private", "None".
         :paramtype web_rdp_access: str or ~azure.mgmt.labservices.models.ConnectionType
-        :keyword client_ssh_access: The enabled access level for Client Access over SSH. Possible
-         values include: "Public", "Private", "None".
+        :keyword client_ssh_access: The enabled access level for Client Access over SSH. Known values
+         are: "Public", "Private", "None".
         :paramtype client_ssh_access: str or ~azure.mgmt.labservices.models.ConnectionType
-        :keyword client_rdp_access: The enabled access level for Client Access over RDP. Possible
-         values include: "Public", "Private", "None".
+        :keyword client_rdp_access: The enabled access level for Client Access over RDP. Known values
+         are: "Public", "Private", "None".
         :paramtype client_rdp_access: str or ~azure.mgmt.labservices.models.ConnectionType
         """
         super(ConnectionProfile, self).__init__(**kwargs)
@@ -272,7 +274,7 @@ class ErrorResponse(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDetail"] = None,
+        error: Optional["_models.ErrorDetail"] = None,
         **kwargs
     ):
         """
@@ -373,9 +375,9 @@ class Image(ProxyResource):
     :vartype type: str
     :ivar system_data: Metadata pertaining to creation and last modification of the image.
     :vartype system_data: ~azure.mgmt.labservices.models.SystemData
-    :ivar enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+    :ivar enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
     :vartype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
-    :ivar provisioning_state: Current provisioning state of the image. Possible values include:
+    :ivar provisioning_state: Current provisioning state of the image. Known values are:
      "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     :ivar display_name: The image display name.
@@ -386,12 +388,12 @@ class Image(ProxyResource):
     :vartype icon_url: str
     :ivar author: The image author.
     :vartype author: str
-    :ivar os_type: The OS Type of the image. Possible values include: "Windows", "Linux".
+    :ivar os_type: The OS Type of the image. Known values are: "Windows", "Linux".
     :vartype os_type: str or ~azure.mgmt.labservices.models.OsType
     :ivar plan: The ID of marketplace plan associated with the image (optional).
     :vartype plan: str
     :ivar terms_status: The status of image terms of use (enabled = accepted, disabled = not
-     accepted). Possible values include: "Enabled", "Disabled".
+     accepted). Known values are: "Enabled", "Disabled".
     :vartype terms_status: str or ~azure.mgmt.labservices.models.EnableState
     :ivar offer: The ID of an offer associated with the image.
     :vartype offer: str
@@ -405,8 +407,7 @@ class Image(ProxyResource):
     :vartype shared_gallery_id: str
     :ivar available_regions: The available regions of the image in the shared gallery.
     :vartype available_regions: list[str]
-    :ivar os_state: The OS State of the image. Possible values include: "Generalized",
-     "Specialized".
+    :ivar os_state: The OS State of the image. Known values are: "Generalized", "Specialized".
     :vartype os_state: str or ~azure.mgmt.labservices.models.OsState
     """
 
@@ -457,12 +458,12 @@ class Image(ProxyResource):
     def __init__(
         self,
         *,
-        enabled_state: Optional[Union[str, "EnableState"]] = None,
+        enabled_state: Optional[Union[str, "_models.EnableState"]] = None,
         available_regions: Optional[List[str]] = None,
         **kwargs
     ):
         """
-        :keyword enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+        :keyword enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
         :paramtype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
         :keyword available_regions: The available regions of the image in the shared gallery.
         :paramtype available_regions: list[str]
@@ -490,7 +491,7 @@ class Image(ProxyResource):
 class ImageUpdateProperties(msrest.serialization.Model):
     """Properties of an image resource update.
 
-    :ivar enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+    :ivar enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
     :vartype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
     """
 
@@ -501,11 +502,11 @@ class ImageUpdateProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        enabled_state: Optional[Union[str, "EnableState"]] = None,
+        enabled_state: Optional[Union[str, "_models.EnableState"]] = None,
         **kwargs
     ):
         """
-        :keyword enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+        :keyword enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
         :paramtype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
         """
         super(ImageUpdateProperties, self).__init__(**kwargs)
@@ -517,9 +518,9 @@ class ImageProperties(ImageUpdateProperties):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+    :ivar enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
     :vartype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
-    :ivar provisioning_state: Current provisioning state of the image. Possible values include:
+    :ivar provisioning_state: Current provisioning state of the image. Known values are:
      "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     :ivar display_name: The image display name.
@@ -530,12 +531,12 @@ class ImageProperties(ImageUpdateProperties):
     :vartype icon_url: str
     :ivar author: The image author.
     :vartype author: str
-    :ivar os_type: The OS Type of the image. Possible values include: "Windows", "Linux".
+    :ivar os_type: The OS Type of the image. Known values are: "Windows", "Linux".
     :vartype os_type: str or ~azure.mgmt.labservices.models.OsType
     :ivar plan: The ID of marketplace plan associated with the image (optional).
     :vartype plan: str
     :ivar terms_status: The status of image terms of use (enabled = accepted, disabled = not
-     accepted). Possible values include: "Enabled", "Disabled".
+     accepted). Known values are: "Enabled", "Disabled".
     :vartype terms_status: str or ~azure.mgmt.labservices.models.EnableState
     :ivar offer: The ID of an offer associated with the image.
     :vartype offer: str
@@ -549,8 +550,7 @@ class ImageProperties(ImageUpdateProperties):
     :vartype shared_gallery_id: str
     :ivar available_regions: The available regions of the image in the shared gallery.
     :vartype available_regions: list[str]
-    :ivar os_state: The OS State of the image. Possible values include: "Generalized",
-     "Specialized".
+    :ivar os_state: The OS State of the image. Known values are: "Generalized", "Specialized".
     :vartype os_state: str or ~azure.mgmt.labservices.models.OsState
     """
 
@@ -593,12 +593,12 @@ class ImageProperties(ImageUpdateProperties):
     def __init__(
         self,
         *,
-        enabled_state: Optional[Union[str, "EnableState"]] = None,
+        enabled_state: Optional[Union[str, "_models.EnableState"]] = None,
         available_regions: Optional[List[str]] = None,
         **kwargs
     ):
         """
-        :keyword enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+        :keyword enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
         :paramtype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
         :keyword available_regions: The available regions of the image in the shared gallery.
         :paramtype available_regions: list[str]
@@ -688,7 +688,7 @@ class ImageReference(msrest.serialization.Model):
 class ImageUpdate(msrest.serialization.Model):
     """Lab services virtual machine image for updates.
 
-    :ivar enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+    :ivar enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
     :vartype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
     """
 
@@ -699,11 +699,11 @@ class ImageUpdate(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        enabled_state: Optional[Union[str, "EnableState"]] = None,
+        enabled_state: Optional[Union[str, "_models.EnableState"]] = None,
         **kwargs
     ):
         """
-        :keyword enabled_state: Is the image enabled. Possible values include: "Enabled", "Disabled".
+        :keyword enabled_state: Is the image enabled. Known values are: "Enabled", "Disabled".
         :paramtype enabled_state: str or ~azure.mgmt.labservices.models.EnableState
         """
         super(ImageUpdate, self).__init__(**kwargs)
@@ -830,14 +830,14 @@ class Lab(TrackedResource):
     :vartype title: str
     :ivar description: The description of the lab.
     :vartype description: str
-    :ivar provisioning_state: Current provisioning state of the lab. Possible values include:
-     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
+    :ivar provisioning_state: Current provisioning state of the lab. Known values are: "Creating",
+     "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     :ivar network_profile: The network profile for the lab, typically applied via a lab plan. This
      profile cannot be modified once a lab has been created.
     :vartype network_profile: ~azure.mgmt.labservices.models.LabNetworkProfile
-    :ivar state: The lab state. Possible values include: "Draft", "Publishing", "Scaling",
-     "Syncing", "Published".
+    :ivar state: The lab state. Known values are: "Draft", "Publishing", "Scaling", "Syncing",
+     "Published".
     :vartype state: str or ~azure.mgmt.labservices.models.LabState
     """
 
@@ -878,15 +878,15 @@ class Lab(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        connection_profile: Optional["ConnectionProfile"] = None,
-        virtual_machine_profile: Optional["VirtualMachineProfile"] = None,
-        security_profile: Optional["SecurityProfile"] = None,
-        roster_profile: Optional["RosterProfile"] = None,
+        auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        connection_profile: Optional["_models.ConnectionProfile"] = None,
+        virtual_machine_profile: Optional["_models.VirtualMachineProfile"] = None,
+        security_profile: Optional["_models.SecurityProfile"] = None,
+        roster_profile: Optional["_models.RosterProfile"] = None,
         lab_plan_id: Optional[str] = None,
         title: Optional[str] = None,
         description: Optional[str] = None,
-        network_profile: Optional["LabNetworkProfile"] = None,
+        network_profile: Optional["_models.LabNetworkProfile"] = None,
         **kwargs
     ):
         """
@@ -1023,7 +1023,7 @@ class LabPlan(TrackedResource):
     :ivar linked_lms_instance: Base Url of the lms instance this lab plan can link lab rosters
      against.
     :vartype linked_lms_instance: str
-    :ivar provisioning_state: Current provisioning state of the lab plan. Possible values include:
+    :ivar provisioning_state: Current provisioning state of the lab plan. Known values are:
      "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     """
@@ -1061,12 +1061,12 @@ class LabPlan(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        default_connection_profile: Optional["ConnectionProfile"] = None,
-        default_auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        default_network_profile: Optional["LabPlanNetworkProfile"] = None,
+        default_connection_profile: Optional["_models.ConnectionProfile"] = None,
+        default_auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        default_network_profile: Optional["_models.LabPlanNetworkProfile"] = None,
         allowed_regions: Optional[List[str]] = None,
         shared_gallery_id: Optional[str] = None,
-        support_info: Optional["SupportInfo"] = None,
+        support_info: Optional["_models.SupportInfo"] = None,
         linked_lms_instance: Optional[str] = None,
         **kwargs
     ):
@@ -1188,12 +1188,12 @@ class LabPlanUpdateProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        default_connection_profile: Optional["ConnectionProfile"] = None,
-        default_auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        default_network_profile: Optional["LabPlanNetworkProfile"] = None,
+        default_connection_profile: Optional["_models.ConnectionProfile"] = None,
+        default_auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        default_network_profile: Optional["_models.LabPlanNetworkProfile"] = None,
         allowed_regions: Optional[List[str]] = None,
         shared_gallery_id: Optional[str] = None,
-        support_info: Optional["SupportInfo"] = None,
+        support_info: Optional["_models.SupportInfo"] = None,
         linked_lms_instance: Optional[str] = None,
         **kwargs
     ):
@@ -1262,7 +1262,7 @@ class LabPlanProperties(LabPlanUpdateProperties):
     :ivar linked_lms_instance: Base Url of the lms instance this lab plan can link lab rosters
      against.
     :vartype linked_lms_instance: str
-    :ivar provisioning_state: Current provisioning state of the lab plan. Possible values include:
+    :ivar provisioning_state: Current provisioning state of the lab plan. Known values are:
      "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     """
@@ -1287,12 +1287,12 @@ class LabPlanProperties(LabPlanUpdateProperties):
     def __init__(
         self,
         *,
-        default_connection_profile: Optional["ConnectionProfile"] = None,
-        default_auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        default_network_profile: Optional["LabPlanNetworkProfile"] = None,
+        default_connection_profile: Optional["_models.ConnectionProfile"] = None,
+        default_auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        default_network_profile: Optional["_models.LabPlanNetworkProfile"] = None,
         allowed_regions: Optional[List[str]] = None,
         shared_gallery_id: Optional[str] = None,
-        support_info: Optional["SupportInfo"] = None,
+        support_info: Optional["_models.SupportInfo"] = None,
         linked_lms_instance: Optional[str] = None,
         **kwargs
     ):
@@ -1402,12 +1402,12 @@ class LabPlanUpdate(TrackedResourceUpdate):
         self,
         *,
         tags: Optional[List[str]] = None,
-        default_connection_profile: Optional["ConnectionProfile"] = None,
-        default_auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        default_network_profile: Optional["LabPlanNetworkProfile"] = None,
+        default_connection_profile: Optional["_models.ConnectionProfile"] = None,
+        default_auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        default_network_profile: Optional["_models.LabPlanNetworkProfile"] = None,
         allowed_regions: Optional[List[str]] = None,
         shared_gallery_id: Optional[str] = None,
-        support_info: Optional["SupportInfo"] = None,
+        support_info: Optional["_models.SupportInfo"] = None,
         linked_lms_instance: Optional[str] = None,
         **kwargs
     ):
@@ -1493,11 +1493,11 @@ class LabUpdateProperties(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        connection_profile: Optional["ConnectionProfile"] = None,
-        virtual_machine_profile: Optional["VirtualMachineProfile"] = None,
-        security_profile: Optional["SecurityProfile"] = None,
-        roster_profile: Optional["RosterProfile"] = None,
+        auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        connection_profile: Optional["_models.ConnectionProfile"] = None,
+        virtual_machine_profile: Optional["_models.VirtualMachineProfile"] = None,
+        security_profile: Optional["_models.SecurityProfile"] = None,
+        roster_profile: Optional["_models.RosterProfile"] = None,
         lab_plan_id: Optional[str] = None,
         title: Optional[str] = None,
         description: Optional[str] = None,
@@ -1561,14 +1561,14 @@ class LabProperties(LabUpdateProperties):
     :vartype title: str
     :ivar description: The description of the lab.
     :vartype description: str
-    :ivar provisioning_state: Current provisioning state of the lab. Possible values include:
-     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
+    :ivar provisioning_state: Current provisioning state of the lab. Known values are: "Creating",
+     "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     :ivar network_profile: The network profile for the lab, typically applied via a lab plan. This
      profile cannot be modified once a lab has been created.
     :vartype network_profile: ~azure.mgmt.labservices.models.LabNetworkProfile
-    :ivar state: The lab state. Possible values include: "Draft", "Publishing", "Scaling",
-     "Syncing", "Published".
+    :ivar state: The lab state. Known values are: "Draft", "Publishing", "Scaling", "Syncing",
+     "Published".
     :vartype state: str or ~azure.mgmt.labservices.models.LabState
     """
 
@@ -1596,15 +1596,15 @@ class LabProperties(LabUpdateProperties):
     def __init__(
         self,
         *,
-        auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        connection_profile: Optional["ConnectionProfile"] = None,
-        virtual_machine_profile: Optional["VirtualMachineProfile"] = None,
-        security_profile: Optional["SecurityProfile"] = None,
-        roster_profile: Optional["RosterProfile"] = None,
+        auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        connection_profile: Optional["_models.ConnectionProfile"] = None,
+        virtual_machine_profile: Optional["_models.VirtualMachineProfile"] = None,
+        security_profile: Optional["_models.SecurityProfile"] = None,
+        roster_profile: Optional["_models.RosterProfile"] = None,
         lab_plan_id: Optional[str] = None,
         title: Optional[str] = None,
         description: Optional[str] = None,
-        network_profile: Optional["LabNetworkProfile"] = None,
+        network_profile: Optional["_models.LabNetworkProfile"] = None,
         **kwargs
     ):
         """
@@ -1647,7 +1647,7 @@ class LabServicesSku(msrest.serialization.Model):
     :vartype resource_type: str
     :ivar name: The name of the SKU.
     :vartype name: str
-    :ivar tier: The tier of the SKU. Possible values include: "Standard", "Premium".
+    :ivar tier: The tier of the SKU. Known values are: "Standard", "Premium".
     :vartype tier: str or ~azure.mgmt.labservices.models.LabServicesSkuTier
     :ivar size: The SKU size.
     :vartype size: str
@@ -1693,7 +1693,7 @@ class LabServicesSku(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        capacity: Optional["LabServicesSkuCapacity"] = None,
+        capacity: Optional["_models.LabServicesSkuCapacity"] = None,
         **kwargs
     ):
         """
@@ -1756,8 +1756,8 @@ class LabServicesSkuCapacity(msrest.serialization.Model):
     :vartype minimum: long
     :ivar maximum: The highest permitted capacity for this resource.
     :vartype maximum: long
-    :ivar scale_type: The localized name of the resource. Possible values include: "None",
-     "Manual", "Automatic".
+    :ivar scale_type: The localized name of the resource. Known values are: "None", "Manual",
+     "Automatic".
     :vartype scale_type: str or ~azure.mgmt.labservices.models.ScaleType
     """
 
@@ -1830,11 +1830,11 @@ class LabServicesSkuRestrictions(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar type: The type of restriction. Possible values include: "Location".
+    :ivar type: The type of restriction. Known values are: "Location".
     :vartype type: str or ~azure.mgmt.labservices.models.RestrictionType
     :ivar values: The values of the restriction.
     :vartype values: list[str]
-    :ivar reason_code: The reason for the restriction. Possible values include: "QuotaId",
+    :ivar reason_code: The reason for the restriction. Known values are: "QuotaId",
      "NotAvailableForSubscription".
     :vartype reason_code: str or ~azure.mgmt.labservices.models.RestrictionReasonCode
     """
@@ -1911,11 +1911,11 @@ class LabUpdate(TrackedResourceUpdate):
         self,
         *,
         tags: Optional[List[str]] = None,
-        auto_shutdown_profile: Optional["AutoShutdownProfile"] = None,
-        connection_profile: Optional["ConnectionProfile"] = None,
-        virtual_machine_profile: Optional["VirtualMachineProfile"] = None,
-        security_profile: Optional["SecurityProfile"] = None,
-        roster_profile: Optional["RosterProfile"] = None,
+        auto_shutdown_profile: Optional["_models.AutoShutdownProfile"] = None,
+        connection_profile: Optional["_models.ConnectionProfile"] = None,
+        virtual_machine_profile: Optional["_models.VirtualMachineProfile"] = None,
+        security_profile: Optional["_models.SecurityProfile"] = None,
+        roster_profile: Optional["_models.RosterProfile"] = None,
         lab_plan_id: Optional[str] = None,
         title: Optional[str] = None,
         description: Optional[str] = None,
@@ -2002,11 +2002,11 @@ class Operation(msrest.serialization.Model):
     :ivar display: Localized display information for this particular operation.
     :vartype display: ~azure.mgmt.labservices.models.OperationDisplay
     :ivar origin: The intended executor of the operation; as in Resource Based Access Control
-     (RBAC) and audit logs UX. Default value is "user,system". Possible values include: "user",
-     "system", "user,system".
+     (RBAC) and audit logs UX. Default value is "user,system". Known values are: "user", "system",
+     "user,system".
     :vartype origin: str or ~azure.mgmt.labservices.models.Origin
     :ivar action_type: Enum. Indicates the action type. "Internal" refers to actions that are for
-     internal only APIs. Possible values include: "Internal".
+     internal only APIs. Known values are: "Internal".
     :vartype action_type: str or ~azure.mgmt.labservices.models.ActionType
     """
 
@@ -2028,7 +2028,7 @@ class Operation(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        display: Optional["OperationDisplay"] = None,
+        display: Optional["_models.OperationDisplay"] = None,
         **kwargs
     ):
         """
@@ -2133,8 +2133,8 @@ class OperationResult(msrest.serialization.Model):
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar status: Required. The operation status. Possible values include: "NotStarted",
-     "InProgress", "Succeeded", "Failed", "Canceled".
+    :ivar status: Required. The operation status. Known values are: "NotStarted", "InProgress",
+     "Succeeded", "Failed", "Canceled".
     :vartype status: str or ~azure.mgmt.labservices.models.OperationStatus
     :ivar start_time: Start time.
     :vartype start_time: ~datetime.datetime
@@ -2165,16 +2165,16 @@ class OperationResult(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        status: Union[str, "OperationStatus"],
+        status: Union[str, "_models.OperationStatus"],
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
         percent_complete: Optional[float] = None,
-        error: Optional["ErrorDetail"] = None,
+        error: Optional["_models.ErrorDetail"] = None,
         **kwargs
     ):
         """
-        :keyword status: Required. The operation status. Possible values include: "NotStarted",
-         "InProgress", "Succeeded", "Failed", "Canceled".
+        :keyword status: Required. The operation status. Known values are: "NotStarted", "InProgress",
+         "Succeeded", "Failed", "Canceled".
         :paramtype status: str or ~azure.mgmt.labservices.models.OperationStatus
         :keyword start_time: Start time.
         :paramtype start_time: ~datetime.datetime
@@ -2424,7 +2424,7 @@ class RecurrencePattern(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar frequency: Required. The frequency of the recurrence. Possible values include: "Daily",
+    :ivar frequency: Required. The frequency of the recurrence. Known values are: "Daily",
      "Weekly".
     :vartype frequency: str or ~azure.mgmt.labservices.models.RecurrenceFrequency
     :ivar week_days: The week days the schedule runs. Used for when the Frequency is set to Weekly.
@@ -2453,15 +2453,15 @@ class RecurrencePattern(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        frequency: Union[str, "RecurrenceFrequency"],
+        frequency: Union[str, "_models.RecurrenceFrequency"],
         expiration_date: datetime.date,
-        week_days: Optional[List[Union[str, "WeekDay"]]] = None,
+        week_days: Optional[List[Union[str, "_models.WeekDay"]]] = None,
         interval: Optional[int] = None,
         **kwargs
     ):
         """
-        :keyword frequency: Required. The frequency of the recurrence. Possible values include:
-         "Daily", "Weekly".
+        :keyword frequency: Required. The frequency of the recurrence. Known values are: "Daily",
+         "Weekly".
         :paramtype frequency: str or ~azure.mgmt.labservices.models.RecurrenceFrequency
         :keyword week_days: The week days the schedule runs. Used for when the Frequency is set to
          Weekly.
@@ -2640,7 +2640,7 @@ class Schedule(ProxyResource):
     :vartype time_zone_id: str
     :ivar notes: Notes for this schedule.
     :vartype notes: str
-    :ivar provisioning_state: Current provisioning state of the schedule. Possible values include:
+    :ivar provisioning_state: Current provisioning state of the schedule. Known values are:
      "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     """
@@ -2673,7 +2673,7 @@ class Schedule(ProxyResource):
         *,
         start_at: Optional[datetime.datetime] = None,
         stop_at: Optional[datetime.datetime] = None,
-        recurrence_pattern: Optional["RecurrencePattern"] = None,
+        recurrence_pattern: Optional["_models.RecurrencePattern"] = None,
         time_zone_id: Optional[str] = None,
         notes: Optional[str] = None,
         **kwargs
@@ -2737,7 +2737,7 @@ class ScheduleUpdateProperties(msrest.serialization.Model):
         *,
         start_at: Optional[datetime.datetime] = None,
         stop_at: Optional[datetime.datetime] = None,
-        recurrence_pattern: Optional["RecurrencePattern"] = None,
+        recurrence_pattern: Optional["_models.RecurrencePattern"] = None,
         time_zone_id: Optional[str] = None,
         notes: Optional[str] = None,
         **kwargs
@@ -2781,7 +2781,7 @@ class ScheduleProperties(ScheduleUpdateProperties):
     :vartype time_zone_id: str
     :ivar notes: Notes for this schedule.
     :vartype notes: str
-    :ivar provisioning_state: Current provisioning state of the schedule. Possible values include:
+    :ivar provisioning_state: Current provisioning state of the schedule. Known values are:
      "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     """
@@ -2806,7 +2806,7 @@ class ScheduleProperties(ScheduleUpdateProperties):
         *,
         start_at: Optional[datetime.datetime] = None,
         stop_at: Optional[datetime.datetime] = None,
-        recurrence_pattern: Optional["RecurrencePattern"] = None,
+        recurrence_pattern: Optional["_models.RecurrencePattern"] = None,
         time_zone_id: Optional[str] = None,
         notes: Optional[str] = None,
         **kwargs
@@ -2864,7 +2864,7 @@ class ScheduleUpdate(msrest.serialization.Model):
         *,
         start_at: Optional[datetime.datetime] = None,
         stop_at: Optional[datetime.datetime] = None,
-        recurrence_pattern: Optional["RecurrencePattern"] = None,
+        recurrence_pattern: Optional["_models.RecurrencePattern"] = None,
         time_zone_id: Optional[str] = None,
         notes: Optional[str] = None,
         **kwargs
@@ -2898,8 +2898,8 @@ class SecurityProfile(msrest.serialization.Model):
 
     :ivar registration_code: The registration code for the lab.
     :vartype registration_code: str
-    :ivar open_access: Whether any user or only specified users can register to a lab. Possible
-     values include: "Enabled", "Disabled".
+    :ivar open_access: Whether any user or only specified users can register to a lab. Known values
+     are: "Enabled", "Disabled".
     :vartype open_access: str or ~azure.mgmt.labservices.models.EnableState
     """
 
@@ -2915,12 +2915,12 @@ class SecurityProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        open_access: Optional[Union[str, "EnableState"]] = None,
+        open_access: Optional[Union[str, "_models.EnableState"]] = None,
         **kwargs
     ):
         """
-        :keyword open_access: Whether any user or only specified users can register to a lab. Possible
-         values include: "Enabled", "Disabled".
+        :keyword open_access: Whether any user or only specified users can register to a lab. Known
+         values are: "Enabled", "Disabled".
         :paramtype open_access: str or ~azure.mgmt.labservices.models.EnableState
         """
         super(SecurityProfile, self).__init__(**kwargs)
@@ -2936,7 +2936,7 @@ class Sku(msrest.serialization.Model):
     :ivar name: Required. The name of the SKU. Ex - P3. It is typically a letter+number code.
     :vartype name: str
     :ivar tier: This field is required to be implemented by the Resource Provider if the service
-     has more than one tier, but is not required on a PUT. Possible values include: "Free", "Basic",
+     has more than one tier, but is not required on a PUT. Known values are: "Free", "Basic",
      "Standard", "Premium".
     :vartype tier: str or ~azure.mgmt.labservices.models.SkuTier
     :ivar size: The SKU size. When the name field is the combination of tier and some other value,
@@ -2966,7 +2966,7 @@ class Sku(msrest.serialization.Model):
         self,
         *,
         name: str,
-        tier: Optional[Union[str, "SkuTier"]] = None,
+        tier: Optional[Union[str, "_models.SkuTier"]] = None,
         size: Optional[str] = None,
         family: Optional[str] = None,
         capacity: Optional[int] = None,
@@ -2976,7 +2976,7 @@ class Sku(msrest.serialization.Model):
         :keyword name: Required. The name of the SKU. Ex - P3. It is typically a letter+number code.
         :paramtype name: str
         :keyword tier: This field is required to be implemented by the Resource Provider if the service
-         has more than one tier, but is not required on a PUT. Possible values include: "Free", "Basic",
+         has more than one tier, but is not required on a PUT. Known values are: "Free", "Basic",
          "Standard", "Premium".
         :paramtype tier: str or ~azure.mgmt.labservices.models.SkuTier
         :keyword size: The SKU size. When the name field is the combination of tier and some other
@@ -3054,15 +3054,15 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or ~azure.mgmt.labservices.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.labservices.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
@@ -3081,25 +3081,25 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or ~azure.mgmt.labservices.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.labservices.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
@@ -3120,7 +3120,7 @@ class Usage(msrest.serialization.Model):
     :vartype current_value: long
     :ivar limit: The limit integer.
     :vartype limit: long
-    :ivar unit: The unit details. Possible values include: "Count".
+    :ivar unit: The unit details. Known values are: "Count".
     :vartype unit: str or ~azure.mgmt.labservices.models.UsageUnit
     :ivar name: The name.
     :vartype name: ~azure.mgmt.labservices.models.UsageName
@@ -3141,8 +3141,8 @@ class Usage(msrest.serialization.Model):
         *,
         current_value: Optional[int] = None,
         limit: Optional[int] = None,
-        unit: Optional[Union[str, "UsageUnit"]] = None,
-        name: Optional["UsageName"] = None,
+        unit: Optional[Union[str, "_models.UsageUnit"]] = None,
+        name: Optional["_models.UsageName"] = None,
         id: Optional[str] = None,
         **kwargs
     ):
@@ -3151,7 +3151,7 @@ class Usage(msrest.serialization.Model):
         :paramtype current_value: long
         :keyword limit: The limit integer.
         :paramtype limit: long
-        :keyword unit: The unit details. Possible values include: "Count".
+        :keyword unit: The unit details. Known values are: "Count".
         :paramtype unit: str or ~azure.mgmt.labservices.models.UsageUnit
         :keyword name: The name.
         :paramtype name: ~azure.mgmt.labservices.models.UsageName
@@ -3218,17 +3218,17 @@ class User(ProxyResource):
     :ivar additional_usage_quota: The amount of usage quota time the user gets in addition to the
      lab usage quota.
     :vartype additional_usage_quota: ~datetime.timedelta
-    :ivar provisioning_state: Current provisioning state of the user resource. Possible values
-     include: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
+    :ivar provisioning_state: Current provisioning state of the user resource. Known values are:
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     :ivar display_name: Display name of the user, for example user's full name.
     :vartype display_name: str
     :ivar email: Required. Email address of the user.
     :vartype email: str
-    :ivar registration_state: State of the user's registration within the lab. Possible values
-     include: "Registered", "NotRegistered".
+    :ivar registration_state: State of the user's registration within the lab. Known values are:
+     "Registered", "NotRegistered".
     :vartype registration_state: str or ~azure.mgmt.labservices.models.RegistrationState
-    :ivar invitation_state: State of the invitation message for the user. Possible values include:
+    :ivar invitation_state: State of the invitation message for the user. Known values are:
      "NotSent", "Sending", "Sent", "Failed".
     :vartype invitation_state: str or ~azure.mgmt.labservices.models.InvitationState
     :ivar invitation_sent: Date and time when the invitation message was sent to the user.
@@ -3329,17 +3329,17 @@ class UserProperties(UserUpdateProperties):
     :ivar additional_usage_quota: The amount of usage quota time the user gets in addition to the
      lab usage quota.
     :vartype additional_usage_quota: ~datetime.timedelta
-    :ivar provisioning_state: Current provisioning state of the user resource. Possible values
-     include: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
+    :ivar provisioning_state: Current provisioning state of the user resource. Known values are:
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
     :ivar display_name: Display name of the user, for example user's full name.
     :vartype display_name: str
     :ivar email: Required. Email address of the user.
     :vartype email: str
-    :ivar registration_state: State of the user's registration within the lab. Possible values
-     include: "Registered", "NotRegistered".
+    :ivar registration_state: State of the user's registration within the lab. Known values are:
+     "Registered", "NotRegistered".
     :vartype registration_state: str or ~azure.mgmt.labservices.models.RegistrationState
-    :ivar invitation_state: State of the invitation message for the user. Possible values include:
+    :ivar invitation_state: State of the invitation message for the user. Known values are:
      "NotSent", "Sending", "Sent", "Failed".
     :vartype invitation_state: str or ~azure.mgmt.labservices.models.InvitationState
     :ivar invitation_sent: Date and time when the invitation message was sent to the user.
@@ -3435,17 +3435,17 @@ class VirtualMachine(ProxyResource):
     :vartype type: str
     :ivar system_data: System data of the Lab virtual machine.
     :vartype system_data: ~azure.mgmt.labservices.models.SystemData
-    :ivar provisioning_state: Current provisioning state of the virtual machine. Possible values
-     include: "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
+    :ivar provisioning_state: Current provisioning state of the virtual machine. Known values are:
+     "Creating", "Updating", "Deleting", "Succeeded", "Failed", "Locked".
     :vartype provisioning_state: str or ~azure.mgmt.labservices.models.ProvisioningState
-    :ivar state: The current state of the virtual machine. Possible values include: "Stopped",
-     "Starting", "Running", "Stopping", "ResettingPassword", "Reimaging", "Redeploying".
+    :ivar state: The current state of the virtual machine. Known values are: "Stopped", "Starting",
+     "Running", "Stopping", "ResettingPassword", "Reimaging", "Redeploying".
     :vartype state: str or ~azure.mgmt.labservices.models.VirtualMachineState
     :ivar connection_profile: Profile for information about connecting to the virtual machine.
     :vartype connection_profile: ~azure.mgmt.labservices.models.VirtualMachineConnectionProfile
     :ivar claimed_by_user_id: The lab user ID (not the PUID!) of who claimed the virtual machine.
     :vartype claimed_by_user_id: str
-    :ivar vm_type: The type of this VM resource. Possible values include: "User", "Template".
+    :ivar vm_type: The type of this VM resource. Known values are: "User", "Template".
     :vartype vm_type: str or ~azure.mgmt.labservices.models.VirtualMachineType
     """
 
@@ -3491,7 +3491,7 @@ class VirtualMachine(ProxyResource):
 class VirtualMachineAdditionalCapabilities(msrest.serialization.Model):
     """The additional capabilities for a lab VM.
 
-    :ivar install_gpu_drivers: Flag to pre-install dedicated GPU drivers. Possible values include:
+    :ivar install_gpu_drivers: Flag to pre-install dedicated GPU drivers. Known values are:
      "Enabled", "Disabled".
     :vartype install_gpu_drivers: str or ~azure.mgmt.labservices.models.EnableState
     """
@@ -3503,12 +3503,12 @@ class VirtualMachineAdditionalCapabilities(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        install_gpu_drivers: Optional[Union[str, "EnableState"]] = None,
+        install_gpu_drivers: Optional[Union[str, "_models.EnableState"]] = None,
         **kwargs
     ):
         """
-        :keyword install_gpu_drivers: Flag to pre-install dedicated GPU drivers. Possible values
-         include: "Enabled", "Disabled".
+        :keyword install_gpu_drivers: Flag to pre-install dedicated GPU drivers. Known values are:
+         "Enabled", "Disabled".
         :paramtype install_gpu_drivers: str or ~azure.mgmt.labservices.models.EnableState
         """
         super(VirtualMachineAdditionalCapabilities, self).__init__(**kwargs)
@@ -3584,12 +3584,12 @@ class VirtualMachineProfile(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar create_option: Required. Indicates what lab virtual machines are created from. Possible
-     values include: "Image", "TemplateVM".
+    :ivar create_option: Required. Indicates what lab virtual machines are created from. Known
+     values are: "Image", "TemplateVM".
     :vartype create_option: str or ~azure.mgmt.labservices.models.CreateOption
     :ivar image_reference: Required. The image configuration for lab virtual machines.
     :vartype image_reference: ~azure.mgmt.labservices.models.ImageReference
-    :ivar os_type: The OS type of the image. Possible values include: "Windows", "Linux".
+    :ivar os_type: The OS type of the image. Known values are: "Windows", "Linux".
     :vartype os_type: str or ~azure.mgmt.labservices.models.OsType
     :ivar sku: Required. The SKU for the lab. Defines the type of virtual machines used in the lab.
     :vartype sku: ~azure.mgmt.labservices.models.Sku
@@ -3600,7 +3600,7 @@ class VirtualMachineProfile(msrest.serialization.Model):
      between 0 and 9999 hours.
     :vartype usage_quota: ~datetime.timedelta
     :ivar use_shared_password: Enabling this option will use the same password for all user VMs.
-     Possible values include: "Enabled", "Disabled".
+     Known values are: "Enabled", "Disabled".
     :vartype use_shared_password: str or ~azure.mgmt.labservices.models.EnableState
     :ivar admin_user: Required. Credentials for the admin user on the VM.
     :vartype admin_user: ~azure.mgmt.labservices.models.Credentials
@@ -3632,19 +3632,19 @@ class VirtualMachineProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        create_option: Union[str, "CreateOption"],
-        image_reference: "ImageReference",
-        sku: "Sku",
+        create_option: Union[str, "_models.CreateOption"],
+        image_reference: "_models.ImageReference",
+        sku: "_models.Sku",
         usage_quota: datetime.timedelta,
-        admin_user: "Credentials",
-        additional_capabilities: Optional["VirtualMachineAdditionalCapabilities"] = None,
-        use_shared_password: Optional[Union[str, "EnableState"]] = None,
-        non_admin_user: Optional["Credentials"] = None,
+        admin_user: "_models.Credentials",
+        additional_capabilities: Optional["_models.VirtualMachineAdditionalCapabilities"] = None,
+        use_shared_password: Optional[Union[str, "_models.EnableState"]] = None,
+        non_admin_user: Optional["_models.Credentials"] = None,
         **kwargs
     ):
         """
-        :keyword create_option: Required. Indicates what lab virtual machines are created from.
-         Possible values include: "Image", "TemplateVM".
+        :keyword create_option: Required. Indicates what lab virtual machines are created from. Known
+         values are: "Image", "TemplateVM".
         :paramtype create_option: str or ~azure.mgmt.labservices.models.CreateOption
         :keyword image_reference: Required. The image configuration for lab virtual machines.
         :paramtype image_reference: ~azure.mgmt.labservices.models.ImageReference
@@ -3658,7 +3658,7 @@ class VirtualMachineProfile(msrest.serialization.Model):
          between 0 and 9999 hours.
         :paramtype usage_quota: ~datetime.timedelta
         :keyword use_shared_password: Enabling this option will use the same password for all user VMs.
-         Possible values include: "Enabled", "Disabled".
+         Known values are: "Enabled", "Disabled".
         :paramtype use_shared_password: str or ~azure.mgmt.labservices.models.EnableState
         :keyword admin_user: Required. Credentials for the admin user on the VM.
         :paramtype admin_user: ~azure.mgmt.labservices.models.Credentials
