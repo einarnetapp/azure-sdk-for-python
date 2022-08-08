@@ -7319,6 +7319,45 @@ class ManagedServiceIdentity(msrest.serialization.Model):
         self.user_assigned_identities = user_assigned_identities
 
 
+class MaterializedViewDefinition(msrest.serialization.Model):
+    """Materialized View definition for the container.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar source_collection_id: Required. Name of the Cosmos DB SQL source container.
+    :vartype source_collection_id: str
+    :ivar definition: Required. Definition of the Cosmos DB SQL Materialized view.
+    :vartype definition: str
+    """
+
+    _validation = {
+        'source_collection_id': {'required': True},
+        'definition': {'required': True},
+    }
+
+    _attribute_map = {
+        'source_collection_id': {'key': 'sourceCollectionId', 'type': 'str'},
+        'definition': {'key': 'definition', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        source_collection_id: str,
+        definition: str,
+        **kwargs
+    ):
+        """
+        :keyword source_collection_id: Required. Name of the Cosmos DB SQL source container.
+        :paramtype source_collection_id: str
+        :keyword definition: Required. Definition of the Cosmos DB SQL Materialized view.
+        :paramtype definition: str
+        """
+        super(MaterializedViewDefinition, self).__init__(**kwargs)
+        self.source_collection_id = source_collection_id
+        self.definition = definition
+
+
 class MaterializedViewsBuilderRegionalServiceResource(RegionalServiceResource):
     """Resource for a regional service location.
 
@@ -11287,6 +11326,9 @@ class SqlContainerResource(msrest.serialization.Model):
     :vartype client_encryption_policy: ~azure.mgmt.cosmosdb.models.ClientEncryptionPolicy
     :ivar analytical_storage_ttl: Analytical TTL.
     :vartype analytical_storage_ttl: long
+    :ivar materialized_view_definition: The configuration for defining Materialized View. This
+     should be specified for creating a Materialized View container.
+    :vartype materialized_view_definition: ~azure.mgmt.cosmosdb.models.MaterializedViewDefinition
     """
 
     _validation = {
@@ -11302,6 +11344,7 @@ class SqlContainerResource(msrest.serialization.Model):
         'conflict_resolution_policy': {'key': 'conflictResolutionPolicy', 'type': 'ConflictResolutionPolicy'},
         'client_encryption_policy': {'key': 'clientEncryptionPolicy', 'type': 'ClientEncryptionPolicy'},
         'analytical_storage_ttl': {'key': 'analyticalStorageTtl', 'type': 'long'},
+        'materialized_view_definition': {'key': 'materializedViewDefinition', 'type': 'MaterializedViewDefinition'},
     }
 
     def __init__(
@@ -11315,6 +11358,7 @@ class SqlContainerResource(msrest.serialization.Model):
         conflict_resolution_policy: Optional["_models.ConflictResolutionPolicy"] = None,
         client_encryption_policy: Optional["_models.ClientEncryptionPolicy"] = None,
         analytical_storage_ttl: Optional[int] = None,
+        materialized_view_definition: Optional["_models.MaterializedViewDefinition"] = None,
         **kwargs
     ):
         """
@@ -11337,6 +11381,9 @@ class SqlContainerResource(msrest.serialization.Model):
         :paramtype client_encryption_policy: ~azure.mgmt.cosmosdb.models.ClientEncryptionPolicy
         :keyword analytical_storage_ttl: Analytical TTL.
         :paramtype analytical_storage_ttl: long
+        :keyword materialized_view_definition: The configuration for defining Materialized View. This
+         should be specified for creating a Materialized View container.
+        :paramtype materialized_view_definition: ~azure.mgmt.cosmosdb.models.MaterializedViewDefinition
         """
         super(SqlContainerResource, self).__init__(**kwargs)
         self.id = id
@@ -11347,6 +11394,7 @@ class SqlContainerResource(msrest.serialization.Model):
         self.conflict_resolution_policy = conflict_resolution_policy
         self.client_encryption_policy = client_encryption_policy
         self.analytical_storage_ttl = analytical_storage_ttl
+        self.materialized_view_definition = materialized_view_definition
 
 
 class RestorableSqlContainerPropertiesResourceContainer(ExtendedResourceProperties, SqlContainerResource):
@@ -11375,6 +11423,9 @@ class RestorableSqlContainerPropertiesResourceContainer(ExtendedResourceProperti
     :vartype client_encryption_policy: ~azure.mgmt.cosmosdb.models.ClientEncryptionPolicy
     :ivar analytical_storage_ttl: Analytical TTL.
     :vartype analytical_storage_ttl: long
+    :ivar materialized_view_definition: The configuration for defining Materialized View. This
+     should be specified for creating a Materialized View container.
+    :vartype materialized_view_definition: ~azure.mgmt.cosmosdb.models.MaterializedViewDefinition
     :ivar rid: A system generated property. A unique identifier.
     :vartype rid: str
     :ivar ts: A system generated property that denotes the last updated timestamp of the resource.
@@ -11404,6 +11455,7 @@ class RestorableSqlContainerPropertiesResourceContainer(ExtendedResourceProperti
         'conflict_resolution_policy': {'key': 'conflictResolutionPolicy', 'type': 'ConflictResolutionPolicy'},
         'client_encryption_policy': {'key': 'clientEncryptionPolicy', 'type': 'ClientEncryptionPolicy'},
         'analytical_storage_ttl': {'key': 'analyticalStorageTtl', 'type': 'long'},
+        'materialized_view_definition': {'key': 'materializedViewDefinition', 'type': 'MaterializedViewDefinition'},
         'rid': {'key': '_rid', 'type': 'str'},
         'ts': {'key': '_ts', 'type': 'float'},
         'etag': {'key': '_etag', 'type': 'str'},
@@ -11421,6 +11473,7 @@ class RestorableSqlContainerPropertiesResourceContainer(ExtendedResourceProperti
         conflict_resolution_policy: Optional["_models.ConflictResolutionPolicy"] = None,
         client_encryption_policy: Optional["_models.ClientEncryptionPolicy"] = None,
         analytical_storage_ttl: Optional[int] = None,
+        materialized_view_definition: Optional["_models.MaterializedViewDefinition"] = None,
         **kwargs
     ):
         """
@@ -11443,8 +11496,11 @@ class RestorableSqlContainerPropertiesResourceContainer(ExtendedResourceProperti
         :paramtype client_encryption_policy: ~azure.mgmt.cosmosdb.models.ClientEncryptionPolicy
         :keyword analytical_storage_ttl: Analytical TTL.
         :paramtype analytical_storage_ttl: long
+        :keyword materialized_view_definition: The configuration for defining Materialized View. This
+         should be specified for creating a Materialized View container.
+        :paramtype materialized_view_definition: ~azure.mgmt.cosmosdb.models.MaterializedViewDefinition
         """
-        super(RestorableSqlContainerPropertiesResourceContainer, self).__init__(id=id, indexing_policy=indexing_policy, partition_key=partition_key, default_ttl=default_ttl, unique_key_policy=unique_key_policy, conflict_resolution_policy=conflict_resolution_policy, client_encryption_policy=client_encryption_policy, analytical_storage_ttl=analytical_storage_ttl, **kwargs)
+        super(RestorableSqlContainerPropertiesResourceContainer, self).__init__(id=id, indexing_policy=indexing_policy, partition_key=partition_key, default_ttl=default_ttl, unique_key_policy=unique_key_policy, conflict_resolution_policy=conflict_resolution_policy, client_encryption_policy=client_encryption_policy, analytical_storage_ttl=analytical_storage_ttl, materialized_view_definition=materialized_view_definition, **kwargs)
         self.id = id
         self.indexing_policy = indexing_policy
         self.partition_key = partition_key
@@ -11453,6 +11509,7 @@ class RestorableSqlContainerPropertiesResourceContainer(ExtendedResourceProperti
         self.conflict_resolution_policy = conflict_resolution_policy
         self.client_encryption_policy = client_encryption_policy
         self.analytical_storage_ttl = analytical_storage_ttl
+        self.materialized_view_definition = materialized_view_definition
         self.self_property = None
         self.rid = None
         self.ts = None
@@ -12495,6 +12552,9 @@ class SqlContainerGetPropertiesResource(ExtendedResourceProperties, SqlContainer
     :vartype client_encryption_policy: ~azure.mgmt.cosmosdb.models.ClientEncryptionPolicy
     :ivar analytical_storage_ttl: Analytical TTL.
     :vartype analytical_storage_ttl: long
+    :ivar materialized_view_definition: The configuration for defining Materialized View. This
+     should be specified for creating a Materialized View container.
+    :vartype materialized_view_definition: ~azure.mgmt.cosmosdb.models.MaterializedViewDefinition
     :ivar rid: A system generated property. A unique identifier.
     :vartype rid: str
     :ivar ts: A system generated property that denotes the last updated timestamp of the resource.
@@ -12520,6 +12580,7 @@ class SqlContainerGetPropertiesResource(ExtendedResourceProperties, SqlContainer
         'conflict_resolution_policy': {'key': 'conflictResolutionPolicy', 'type': 'ConflictResolutionPolicy'},
         'client_encryption_policy': {'key': 'clientEncryptionPolicy', 'type': 'ClientEncryptionPolicy'},
         'analytical_storage_ttl': {'key': 'analyticalStorageTtl', 'type': 'long'},
+        'materialized_view_definition': {'key': 'materializedViewDefinition', 'type': 'MaterializedViewDefinition'},
         'rid': {'key': '_rid', 'type': 'str'},
         'ts': {'key': '_ts', 'type': 'float'},
         'etag': {'key': '_etag', 'type': 'str'},
@@ -12536,6 +12597,7 @@ class SqlContainerGetPropertiesResource(ExtendedResourceProperties, SqlContainer
         conflict_resolution_policy: Optional["_models.ConflictResolutionPolicy"] = None,
         client_encryption_policy: Optional["_models.ClientEncryptionPolicy"] = None,
         analytical_storage_ttl: Optional[int] = None,
+        materialized_view_definition: Optional["_models.MaterializedViewDefinition"] = None,
         **kwargs
     ):
         """
@@ -12558,8 +12620,11 @@ class SqlContainerGetPropertiesResource(ExtendedResourceProperties, SqlContainer
         :paramtype client_encryption_policy: ~azure.mgmt.cosmosdb.models.ClientEncryptionPolicy
         :keyword analytical_storage_ttl: Analytical TTL.
         :paramtype analytical_storage_ttl: long
+        :keyword materialized_view_definition: The configuration for defining Materialized View. This
+         should be specified for creating a Materialized View container.
+        :paramtype materialized_view_definition: ~azure.mgmt.cosmosdb.models.MaterializedViewDefinition
         """
-        super(SqlContainerGetPropertiesResource, self).__init__(id=id, indexing_policy=indexing_policy, partition_key=partition_key, default_ttl=default_ttl, unique_key_policy=unique_key_policy, conflict_resolution_policy=conflict_resolution_policy, client_encryption_policy=client_encryption_policy, analytical_storage_ttl=analytical_storage_ttl, **kwargs)
+        super(SqlContainerGetPropertiesResource, self).__init__(id=id, indexing_policy=indexing_policy, partition_key=partition_key, default_ttl=default_ttl, unique_key_policy=unique_key_policy, conflict_resolution_policy=conflict_resolution_policy, client_encryption_policy=client_encryption_policy, analytical_storage_ttl=analytical_storage_ttl, materialized_view_definition=materialized_view_definition, **kwargs)
         self.id = id
         self.indexing_policy = indexing_policy
         self.partition_key = partition_key
@@ -12568,6 +12633,7 @@ class SqlContainerGetPropertiesResource(ExtendedResourceProperties, SqlContainer
         self.conflict_resolution_policy = conflict_resolution_policy
         self.client_encryption_policy = client_encryption_policy
         self.analytical_storage_ttl = analytical_storage_ttl
+        self.materialized_view_definition = materialized_view_definition
         self.rid = None
         self.ts = None
         self.etag = None

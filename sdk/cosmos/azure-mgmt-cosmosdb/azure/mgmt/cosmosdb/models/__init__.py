@@ -139,6 +139,7 @@ from ._models_py3 import ManagedCassandraARMResourceProperties
 from ._models_py3 import ManagedCassandraManagedServiceIdentity
 from ._models_py3 import ManagedCassandraReaperStatus
 from ._models_py3 import ManagedServiceIdentity
+from ._models_py3 import MaterializedViewDefinition
 from ._models_py3 import MaterializedViewsBuilderRegionalServiceResource
 from ._models_py3 import MaterializedViewsBuilderServiceResource
 from ._models_py3 import MaterializedViewsBuilderServiceResourceProperties
@@ -492,6 +493,7 @@ __all__ = [
     'ManagedCassandraManagedServiceIdentity',
     'ManagedCassandraReaperStatus',
     'ManagedServiceIdentity',
+    'MaterializedViewDefinition',
     'MaterializedViewsBuilderRegionalServiceResource',
     'MaterializedViewsBuilderServiceResource',
     'MaterializedViewsBuilderServiceResourceProperties',
