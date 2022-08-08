@@ -890,7 +890,7 @@ class Database(TrackedResource):
      within an elastic pool.
     :vartype high_availability_replica_count: int
     :ivar secondary_type: The secondary type of the database if it is a secondary.  Valid values
-     are Geo and Named. Known values are: "Geo", "Named".
+     are Geo, Named and Standby. Known values are: "Geo", "Named", "Standby".
     :vartype secondary_type: str or ~azure.mgmt.sql.models.SecondaryType
     :ivar current_sku: The name and tier of the SKU.
     :vartype current_sku: ~azure.mgmt.sql.models.Sku
@@ -927,21 +927,21 @@ class Database(TrackedResource):
     :ivar source_resource_id: The resource identifier of the source associated with the create
      operation of this database.
     
+     This property is only supported for DataWarehouse edition and allows to restore across
+     subscriptions.
+    
      When sourceResourceId is specified, sourceDatabaseId, recoverableDatabaseId,
      restorableDroppedDatabaseId and sourceDatabaseDeletionDate must not be specified and CreateMode
      must be PointInTimeRestore, Restore or Recover.
     
-     When createMode is PointInTimeRestore, sourceResourceId must be the resource ID of an existing
-     database or existing sql pool, and restorePointInTime must be specified.
+     When createMode is PointInTimeRestore, sourceResourceId must be the resource ID of the
+     existing database or existing sql pool, and restorePointInTime must be specified.
     
      When createMode is Restore, sourceResourceId must be the resource ID of restorable dropped
      database or restorable dropped sql pool.
     
      When createMode is Recover, sourceResourceId must be the resource ID of recoverable database
      or recoverable sql pool.
-    
-     This property allows to restore across subscriptions which is only supported for DataWarehouse
-     edition.
     
      When source subscription belongs to a different tenant than target subscription,
      “x-ms-authorization-auxiliary” header must contain authentication token for the source tenant.
@@ -1163,7 +1163,7 @@ class Database(TrackedResource):
          within an elastic pool.
         :paramtype high_availability_replica_count: int
         :keyword secondary_type: The secondary type of the database if it is a secondary.  Valid values
-         are Geo and Named. Known values are: "Geo", "Named".
+         are Geo, Named and Standby. Known values are: "Geo", "Named", "Standby".
         :paramtype secondary_type: str or ~azure.mgmt.sql.models.SecondaryType
         :keyword auto_pause_delay: Time in minutes after which database is automatically paused. A
          value of -1 means that automatic pause is disabled.
@@ -1187,21 +1187,21 @@ class Database(TrackedResource):
         :keyword source_resource_id: The resource identifier of the source associated with the create
          operation of this database.
         
+         This property is only supported for DataWarehouse edition and allows to restore across
+         subscriptions.
+        
          When sourceResourceId is specified, sourceDatabaseId, recoverableDatabaseId,
          restorableDroppedDatabaseId and sourceDatabaseDeletionDate must not be specified and CreateMode
          must be PointInTimeRestore, Restore or Recover.
         
-         When createMode is PointInTimeRestore, sourceResourceId must be the resource ID of an existing
-         database or existing sql pool, and restorePointInTime must be specified.
+         When createMode is PointInTimeRestore, sourceResourceId must be the resource ID of the
+         existing database or existing sql pool, and restorePointInTime must be specified.
         
          When createMode is Restore, sourceResourceId must be the resource ID of restorable dropped
          database or restorable dropped sql pool.
         
          When createMode is Recover, sourceResourceId must be the resource ID of recoverable database
          or recoverable sql pool.
-        
-         This property allows to restore across subscriptions which is only supported for DataWarehouse
-         edition.
         
          When source subscription belongs to a different tenant than target subscription,
          “x-ms-authorization-auxiliary” header must contain authentication token for the source tenant.
@@ -2539,7 +2539,7 @@ class DatabaseUpdate(msrest.serialization.Model):
      within an elastic pool.
     :vartype high_availability_replica_count: int
     :ivar secondary_type: The secondary type of the database if it is a secondary.  Valid values
-     are Geo and Named. Known values are: "Geo", "Named".
+     are Geo, Named and Standby. Known values are: "Geo", "Named", "Standby".
     :vartype secondary_type: str or ~azure.mgmt.sql.models.SecondaryType
     :ivar current_sku: The name and tier of the SKU.
     :vartype current_sku: ~azure.mgmt.sql.models.Sku
@@ -2756,7 +2756,7 @@ class DatabaseUpdate(msrest.serialization.Model):
          within an elastic pool.
         :paramtype high_availability_replica_count: int
         :keyword secondary_type: The secondary type of the database if it is a secondary.  Valid values
-         are Geo and Named. Known values are: "Geo", "Named".
+         are Geo, Named and Standby. Known values are: "Geo", "Named", "Standby".
         :paramtype secondary_type: str or ~azure.mgmt.sql.models.SecondaryType
         :keyword auto_pause_delay: Time in minutes after which database is automatically paused. A
          value of -1 means that automatic pause is disabled.
@@ -9384,6 +9384,94 @@ class ManagedDatabase(TrackedResource):
         self.last_backup_name = last_backup_name
 
 
+class ManagedDatabaseAdvancedThreatProtection(ProxyResource):
+    """A managed database Advanced Threat Protection.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar system_data: SystemData of AdvancedThreatProtectionResource.
+    :vartype system_data: ~azure.mgmt.sql.models.SystemData
+    :ivar state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+     disabled or a state has not been applied yet on the specific database or server. Known values
+     are: "New", "Enabled", "Disabled".
+    :vartype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+    :ivar creation_time: Specifies the UTC creation time of the policy.
+    :vartype creation_time: ~datetime.datetime
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'creation_time': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'state': {'key': 'properties.state', 'type': 'str'},
+        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        state: Optional[Union[str, "_models.AdvancedThreatProtectionState"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+         disabled or a state has not been applied yet on the specific database or server. Known values
+         are: "New", "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+        """
+        super(ManagedDatabaseAdvancedThreatProtection, self).__init__(**kwargs)
+        self.system_data = None
+        self.state = state
+        self.creation_time = None
+
+
+class ManagedDatabaseAdvancedThreatProtectionListResult(msrest.serialization.Model):
+    """A list of the managed database's Advanced Threat Protection settings.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ManagedDatabaseAdvancedThreatProtection]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ManagedDatabaseAdvancedThreatProtection]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(ManagedDatabaseAdvancedThreatProtectionListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
 class ManagedDatabaseListResult(msrest.serialization.Model):
     """A list of managed databases.
 
@@ -10231,6 +10319,94 @@ class ManagedInstanceAdministratorListResult(msrest.serialization.Model):
         self.next_link = None
 
 
+class ManagedInstanceAdvancedThreatProtection(ProxyResource):
+    """A managed instance Advanced Threat Protection.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar system_data: SystemData of AdvancedThreatProtectionResource.
+    :vartype system_data: ~azure.mgmt.sql.models.SystemData
+    :ivar state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+     disabled or a state has not been applied yet on the specific database or server. Known values
+     are: "New", "Enabled", "Disabled".
+    :vartype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+    :ivar creation_time: Specifies the UTC creation time of the policy.
+    :vartype creation_time: ~datetime.datetime
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'system_data': {'readonly': True},
+        'creation_time': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        'state': {'key': 'properties.state', 'type': 'str'},
+        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-8601'},
+    }
+
+    def __init__(
+        self,
+        *,
+        state: Optional[Union[str, "_models.AdvancedThreatProtectionState"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword state: Specifies the state of the Advanced Threat Protection, whether it is enabled or
+         disabled or a state has not been applied yet on the specific database or server. Known values
+         are: "New", "Enabled", "Disabled".
+        :paramtype state: str or ~azure.mgmt.sql.models.AdvancedThreatProtectionState
+        """
+        super(ManagedInstanceAdvancedThreatProtection, self).__init__(**kwargs)
+        self.system_data = None
+        self.state = state
+        self.creation_time = None
+
+
+class ManagedInstanceAdvancedThreatProtectionListResult(msrest.serialization.Model):
+    """A list of the managed instance's Advanced Threat Protection settings.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ManagedInstanceAdvancedThreatProtection]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ManagedInstanceAdvancedThreatProtection]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(ManagedInstanceAdvancedThreatProtectionListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
 class ManagedInstanceAzureADOnlyAuthentication(ProxyResource):
     """Azure Active Directory only authentication.
 
@@ -10303,6 +10479,188 @@ class ManagedInstanceAzureADOnlyAuthListResult(msrest.serialization.Model):
         super(ManagedInstanceAzureADOnlyAuthListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
+
+
+class ManagedInstanceDtc(ProxyResource):
+    """SQL Managed Instance DTC.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar dtc_enabled: Active status of managed instance DTC.
+    :vartype dtc_enabled: bool
+    :ivar security_settings: Security settings of managed instance DTC.
+    :vartype security_settings: ~azure.mgmt.sql.models.ManagedInstanceDtcSecuritySettings
+    :ivar external_dns_suffix_search_list: External dns suffix search list of managed instance DTC.
+    :vartype external_dns_suffix_search_list: list[str]
+    :ivar dtc_host_name_dns_suffix: Host name dns suffix of managed instance DTC.
+    :vartype dtc_host_name_dns_suffix: str
+    :ivar provisioning_state: Provisioning state of managed instance DTC. Known values are:
+     "Created", "InProgress", "Succeeded", "Failed", "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
+        'dtc_host_name_dns_suffix': {'readonly': True},
+        'provisioning_state': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'dtc_enabled': {'key': 'properties.dtcEnabled', 'type': 'bool'},
+        'security_settings': {'key': 'properties.securitySettings', 'type': 'ManagedInstanceDtcSecuritySettings'},
+        'external_dns_suffix_search_list': {'key': 'properties.externalDnsSuffixSearchList', 'type': '[str]'},
+        'dtc_host_name_dns_suffix': {'key': 'properties.dtcHostNameDnsSuffix', 'type': 'str'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        dtc_enabled: Optional[bool] = None,
+        security_settings: Optional["_models.ManagedInstanceDtcSecuritySettings"] = None,
+        external_dns_suffix_search_list: Optional[List[str]] = None,
+        **kwargs
+    ):
+        """
+        :keyword dtc_enabled: Active status of managed instance DTC.
+        :paramtype dtc_enabled: bool
+        :keyword security_settings: Security settings of managed instance DTC.
+        :paramtype security_settings: ~azure.mgmt.sql.models.ManagedInstanceDtcSecuritySettings
+        :keyword external_dns_suffix_search_list: External dns suffix search list of managed instance
+         DTC.
+        :paramtype external_dns_suffix_search_list: list[str]
+        """
+        super(ManagedInstanceDtc, self).__init__(**kwargs)
+        self.dtc_enabled = dtc_enabled
+        self.security_settings = security_settings
+        self.external_dns_suffix_search_list = external_dns_suffix_search_list
+        self.dtc_host_name_dns_suffix = None
+        self.provisioning_state = None
+
+
+class ManagedInstanceDtcListResult(msrest.serialization.Model):
+    """A list of managed instance's DTCs.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ManagedInstanceDtc]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ManagedInstanceDtc]'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        """
+        """
+        super(ManagedInstanceDtcListResult, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
+class ManagedInstanceDtcSecuritySettings(msrest.serialization.Model):
+    """The Security Settings of managed instance DTC.
+
+    :ivar transaction_manager_communication_settings: Transaction Manager communication settings of
+     managed instance DTC.
+    :vartype transaction_manager_communication_settings:
+     ~azure.mgmt.sql.models.ManagedInstanceDtcTransactionManagerCommunicationSettings
+    :ivar xa_transactions_enabled: Allow XA Transactions to managed instance DTC.
+    :vartype xa_transactions_enabled: bool
+    :ivar sna_lu6_point2_transactions_enabled: Allow SNA LU 6.2 to managed instance DTC.
+    :vartype sna_lu6_point2_transactions_enabled: bool
+    """
+
+    _attribute_map = {
+        'transaction_manager_communication_settings': {'key': 'transactionManagerCommunicationSettings', 'type': 'ManagedInstanceDtcTransactionManagerCommunicationSettings'},
+        'xa_transactions_enabled': {'key': 'xaTransactionsEnabled', 'type': 'bool'},
+        'sna_lu6_point2_transactions_enabled': {'key': 'snaLu6point2TransactionsEnabled', 'type': 'bool'},
+    }
+
+    def __init__(
+        self,
+        *,
+        transaction_manager_communication_settings: Optional["_models.ManagedInstanceDtcTransactionManagerCommunicationSettings"] = None,
+        xa_transactions_enabled: Optional[bool] = None,
+        sna_lu6_point2_transactions_enabled: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword transaction_manager_communication_settings: Transaction Manager communication settings
+         of managed instance DTC.
+        :paramtype transaction_manager_communication_settings:
+         ~azure.mgmt.sql.models.ManagedInstanceDtcTransactionManagerCommunicationSettings
+        :keyword xa_transactions_enabled: Allow XA Transactions to managed instance DTC.
+        :paramtype xa_transactions_enabled: bool
+        :keyword sna_lu6_point2_transactions_enabled: Allow SNA LU 6.2 to managed instance DTC.
+        :paramtype sna_lu6_point2_transactions_enabled: bool
+        """
+        super(ManagedInstanceDtcSecuritySettings, self).__init__(**kwargs)
+        self.transaction_manager_communication_settings = transaction_manager_communication_settings
+        self.xa_transactions_enabled = xa_transactions_enabled
+        self.sna_lu6_point2_transactions_enabled = sna_lu6_point2_transactions_enabled
+
+
+class ManagedInstanceDtcTransactionManagerCommunicationSettings(msrest.serialization.Model):
+    """The Transaction Manager Communication Settings of managed instance DTC.
+
+    :ivar allow_inbound_enabled: Allow Inbound traffic to managed instance DTC.
+    :vartype allow_inbound_enabled: bool
+    :ivar allow_outbound_enabled: Allow Outbound traffic of managed instance DTC.
+    :vartype allow_outbound_enabled: bool
+    :ivar authentication: Authentication type of managed instance DTC.
+    :vartype authentication: str
+    """
+
+    _attribute_map = {
+        'allow_inbound_enabled': {'key': 'allowInboundEnabled', 'type': 'bool'},
+        'allow_outbound_enabled': {'key': 'allowOutboundEnabled', 'type': 'bool'},
+        'authentication': {'key': 'authentication', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        allow_inbound_enabled: Optional[bool] = None,
+        allow_outbound_enabled: Optional[bool] = None,
+        authentication: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword allow_inbound_enabled: Allow Inbound traffic to managed instance DTC.
+        :paramtype allow_inbound_enabled: bool
+        :keyword allow_outbound_enabled: Allow Outbound traffic of managed instance DTC.
+        :paramtype allow_outbound_enabled: bool
+        :keyword authentication: Authentication type of managed instance DTC.
+        :paramtype authentication: str
+        """
+        super(ManagedInstanceDtcTransactionManagerCommunicationSettings, self).__init__(**kwargs)
+        self.allow_inbound_enabled = allow_inbound_enabled
+        self.allow_outbound_enabled = allow_outbound_enabled
+        self.authentication = authentication
 
 
 class ManagedInstanceEditionCapability(msrest.serialization.Model):
@@ -14654,7 +15012,7 @@ class ReplicationLink(ProxyResource):
     :vartype replication_state: str or ~azure.mgmt.sql.models.ReplicationState
     :ivar is_termination_allowed: Whether the user is currently allowed to terminate the link.
     :vartype is_termination_allowed: bool
-    :ivar link_type: Link type (GEO, NAMED). Known values are: "GEO", "NAMED".
+    :ivar link_type: Link type (GEO, NAMED, STANDBY). Known values are: "GEO", "NAMED", "STANDBY".
     :vartype link_type: str or ~azure.mgmt.sql.models.ReplicationLinkType
     """
 

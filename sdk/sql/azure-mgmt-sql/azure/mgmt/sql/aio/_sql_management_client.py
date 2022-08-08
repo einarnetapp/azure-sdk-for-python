@@ -16,7 +16,7 @@ from azure.mgmt.core import AsyncARMPipelineClient
 
 from .. import models
 from ._configuration import SqlManagementClientConfiguration
-from .operations import BackupShortTermRetentionPoliciesOperations, CapabilitiesOperations, DataMaskingPoliciesOperations, DataMaskingRulesOperations, DataWarehouseUserActivitiesOperations, DatabaseAdvancedThreatProtectionSettingsOperations, DatabaseAdvisorsOperations, DatabaseAutomaticTuningOperations, DatabaseBlobAuditingPoliciesOperations, DatabaseColumnsOperations, DatabaseExtensionsOperations, DatabaseOperationsOperations, DatabaseRecommendedActionsOperations, DatabaseSchemasOperations, DatabaseSecurityAlertPoliciesOperations, DatabaseTablesOperations, DatabaseUsagesOperations, DatabaseVulnerabilityAssessmentRuleBaselinesOperations, DatabaseVulnerabilityAssessmentScansOperations, DatabaseVulnerabilityAssessmentsOperations, DatabasesOperations, DeletedServersOperations, DistributedAvailabilityGroupsOperations, ElasticPoolActivitiesOperations, ElasticPoolDatabaseActivitiesOperations, ElasticPoolOperationsOperations, ElasticPoolsOperations, EncryptionProtectorsOperations, EndpointCertificatesOperations, ExtendedDatabaseBlobAuditingPoliciesOperations, ExtendedServerBlobAuditingPoliciesOperations, FailoverGroupsOperations, FirewallRulesOperations, GeoBackupPoliciesOperations, IPv6FirewallRulesOperations, InstanceFailoverGroupsOperations, InstancePoolsOperations, JobAgentsOperations, JobCredentialsOperations, JobExecutionsOperations, JobStepExecutionsOperations, JobStepsOperations, JobTargetExecutionsOperations, JobTargetGroupsOperations, JobVersionsOperations, JobsOperations, LedgerDigestUploadsOperations, LongTermRetentionBackupsOperations, LongTermRetentionManagedInstanceBackupsOperations, LongTermRetentionPoliciesOperations, MaintenanceWindowOptionsOperations, MaintenanceWindowsOperations, ManagedBackupShortTermRetentionPoliciesOperations, ManagedDatabaseColumnsOperations, ManagedDatabaseQueriesOperations, ManagedDatabaseRecommendedSensitivityLabelsOperations, ManagedDatabaseRestoreDetailsOperations, ManagedDatabaseSchemasOperations, ManagedDatabaseSecurityAlertPoliciesOperations, ManagedDatabaseSecurityEventsOperations, ManagedDatabaseSensitivityLabelsOperations, ManagedDatabaseTablesOperations, ManagedDatabaseTransparentDataEncryptionOperations, ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations, ManagedDatabaseVulnerabilityAssessmentScansOperations, ManagedDatabaseVulnerabilityAssessmentsOperations, ManagedDatabasesOperations, ManagedInstanceAdministratorsOperations, ManagedInstanceAzureADOnlyAuthenticationsOperations, ManagedInstanceEncryptionProtectorsOperations, ManagedInstanceKeysOperations, ManagedInstanceLongTermRetentionPoliciesOperations, ManagedInstanceOperationsOperations, ManagedInstancePrivateEndpointConnectionsOperations, ManagedInstancePrivateLinkResourcesOperations, ManagedInstanceTdeCertificatesOperations, ManagedInstanceVulnerabilityAssessmentsOperations, ManagedInstancesOperations, ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations, ManagedServerDnsAliasesOperations, ManagedServerSecurityAlertPoliciesOperations, Operations, OutboundFirewallRulesOperations, PrivateEndpointConnectionsOperations, PrivateLinkResourcesOperations, RecommendedSensitivityLabelsOperations, RecoverableDatabasesOperations, RecoverableManagedDatabasesOperations, ReplicationLinksOperations, RestorableDroppedDatabasesOperations, RestorableDroppedManagedDatabasesOperations, RestorePointsOperations, SensitivityLabelsOperations, ServerAdvancedThreatProtectionSettingsOperations, ServerAdvisorsOperations, ServerAutomaticTuningOperations, ServerAzureADAdministratorsOperations, ServerAzureADOnlyAuthenticationsOperations, ServerBlobAuditingPoliciesOperations, ServerCommunicationLinksOperations, ServerConnectionPoliciesOperations, ServerDevOpsAuditSettingsOperations, ServerDnsAliasesOperations, ServerKeysOperations, ServerOperationsOperations, ServerSecurityAlertPoliciesOperations, ServerTrustCertificatesOperations, ServerTrustGroupsOperations, ServerUsagesOperations, ServerVulnerabilityAssessmentsOperations, ServersOperations, ServiceObjectivesOperations, SqlAgentOperations, SubscriptionUsagesOperations, SyncAgentsOperations, SyncGroupsOperations, SyncMembersOperations, TdeCertificatesOperations, TimeZonesOperations, TransparentDataEncryptionsOperations, UsagesOperations, VirtualClustersOperations, VirtualNetworkRulesOperations, WorkloadClassifiersOperations, WorkloadGroupsOperations
+from .operations import BackupShortTermRetentionPoliciesOperations, CapabilitiesOperations, DataMaskingPoliciesOperations, DataMaskingRulesOperations, DataWarehouseUserActivitiesOperations, DatabaseAdvancedThreatProtectionSettingsOperations, DatabaseAdvisorsOperations, DatabaseAutomaticTuningOperations, DatabaseBlobAuditingPoliciesOperations, DatabaseColumnsOperations, DatabaseExtensionsOperations, DatabaseOperationsOperations, DatabaseRecommendedActionsOperations, DatabaseSchemasOperations, DatabaseSecurityAlertPoliciesOperations, DatabaseTablesOperations, DatabaseUsagesOperations, DatabaseVulnerabilityAssessmentRuleBaselinesOperations, DatabaseVulnerabilityAssessmentScansOperations, DatabaseVulnerabilityAssessmentsOperations, DatabasesOperations, DeletedServersOperations, DistributedAvailabilityGroupsOperations, ElasticPoolActivitiesOperations, ElasticPoolDatabaseActivitiesOperations, ElasticPoolOperationsOperations, ElasticPoolsOperations, EncryptionProtectorsOperations, EndpointCertificatesOperations, ExtendedDatabaseBlobAuditingPoliciesOperations, ExtendedServerBlobAuditingPoliciesOperations, FailoverGroupsOperations, FirewallRulesOperations, GeoBackupPoliciesOperations, IPv6FirewallRulesOperations, InstanceFailoverGroupsOperations, InstancePoolsOperations, JobAgentsOperations, JobCredentialsOperations, JobExecutionsOperations, JobStepExecutionsOperations, JobStepsOperations, JobTargetExecutionsOperations, JobTargetGroupsOperations, JobVersionsOperations, JobsOperations, LedgerDigestUploadsOperations, LongTermRetentionBackupsOperations, LongTermRetentionManagedInstanceBackupsOperations, LongTermRetentionPoliciesOperations, MaintenanceWindowOptionsOperations, MaintenanceWindowsOperations, ManagedBackupShortTermRetentionPoliciesOperations, ManagedDatabaseAdvancedThreatProtectionSettingsOperations, ManagedDatabaseColumnsOperations, ManagedDatabaseQueriesOperations, ManagedDatabaseRecommendedSensitivityLabelsOperations, ManagedDatabaseRestoreDetailsOperations, ManagedDatabaseSchemasOperations, ManagedDatabaseSecurityAlertPoliciesOperations, ManagedDatabaseSecurityEventsOperations, ManagedDatabaseSensitivityLabelsOperations, ManagedDatabaseTablesOperations, ManagedDatabaseTransparentDataEncryptionOperations, ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations, ManagedDatabaseVulnerabilityAssessmentScansOperations, ManagedDatabaseVulnerabilityAssessmentsOperations, ManagedDatabasesOperations, ManagedInstanceAdministratorsOperations, ManagedInstanceAdvancedThreatProtectionSettingsOperations, ManagedInstanceAzureADOnlyAuthenticationsOperations, ManagedInstanceDtcsOperations, ManagedInstanceEncryptionProtectorsOperations, ManagedInstanceKeysOperations, ManagedInstanceLongTermRetentionPoliciesOperations, ManagedInstanceOperationsOperations, ManagedInstancePrivateEndpointConnectionsOperations, ManagedInstancePrivateLinkResourcesOperations, ManagedInstanceTdeCertificatesOperations, ManagedInstanceVulnerabilityAssessmentsOperations, ManagedInstancesOperations, ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations, ManagedServerDnsAliasesOperations, ManagedServerSecurityAlertPoliciesOperations, Operations, OutboundFirewallRulesOperations, PrivateEndpointConnectionsOperations, PrivateLinkResourcesOperations, RecommendedSensitivityLabelsOperations, RecoverableDatabasesOperations, RecoverableManagedDatabasesOperations, ReplicationLinksOperations, RestorableDroppedDatabasesOperations, RestorableDroppedManagedDatabasesOperations, RestorePointsOperations, SensitivityLabelsOperations, ServerAdvancedThreatProtectionSettingsOperations, ServerAdvisorsOperations, ServerAutomaticTuningOperations, ServerAzureADAdministratorsOperations, ServerAzureADOnlyAuthenticationsOperations, ServerBlobAuditingPoliciesOperations, ServerCommunicationLinksOperations, ServerConnectionPoliciesOperations, ServerDevOpsAuditSettingsOperations, ServerDnsAliasesOperations, ServerKeysOperations, ServerOperationsOperations, ServerSecurityAlertPoliciesOperations, ServerTrustCertificatesOperations, ServerTrustGroupsOperations, ServerUsagesOperations, ServerVulnerabilityAssessmentsOperations, ServersOperations, ServiceObjectivesOperations, SqlAgentOperations, SubscriptionUsagesOperations, SyncAgentsOperations, SyncGroupsOperations, SyncMembersOperations, TdeCertificatesOperations, TimeZonesOperations, TransparentDataEncryptionsOperations, UsagesOperations, VirtualClustersOperations, VirtualNetworkRulesOperations, WorkloadClassifiersOperations, WorkloadGroupsOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -323,8 +323,6 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
     :vartype ipv6_firewall_rules: azure.mgmt.sql.aio.operations.IPv6FirewallRulesOperations
     :ivar endpoint_certificates: EndpointCertificatesOperations operations
     :vartype endpoint_certificates: azure.mgmt.sql.aio.operations.EndpointCertificatesOperations
-    :ivar replication_links: ReplicationLinksOperations operations
-    :vartype replication_links: azure.mgmt.sql.aio.operations.ReplicationLinksOperations
     :ivar managed_database_sensitivity_labels: ManagedDatabaseSensitivityLabelsOperations
      operations
     :vartype managed_database_sensitivity_labels:
@@ -363,6 +361,18 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
     :ivar managed_server_dns_aliases: ManagedServerDnsAliasesOperations operations
     :vartype managed_server_dns_aliases:
      azure.mgmt.sql.aio.operations.ManagedServerDnsAliasesOperations
+    :ivar managed_instance_dtcs: ManagedInstanceDtcsOperations operations
+    :vartype managed_instance_dtcs: azure.mgmt.sql.aio.operations.ManagedInstanceDtcsOperations
+    :ivar managed_database_advanced_threat_protection_settings:
+     ManagedDatabaseAdvancedThreatProtectionSettingsOperations operations
+    :vartype managed_database_advanced_threat_protection_settings:
+     azure.mgmt.sql.aio.operations.ManagedDatabaseAdvancedThreatProtectionSettingsOperations
+    :ivar managed_instance_advanced_threat_protection_settings:
+     ManagedInstanceAdvancedThreatProtectionSettingsOperations operations
+    :vartype managed_instance_advanced_threat_protection_settings:
+     azure.mgmt.sql.aio.operations.ManagedInstanceAdvancedThreatProtectionSettingsOperations
+    :ivar replication_links: ReplicationLinksOperations operations
+    :vartype replication_links: azure.mgmt.sql.aio.operations.ReplicationLinksOperations
     :param credential: Credential needed for the client to connect to Azure.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription ID that identifies an Azure subscription.
@@ -726,9 +736,6 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.endpoint_certificates = EndpointCertificatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.replication_links = ReplicationLinksOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.managed_database_sensitivity_labels = ManagedDatabaseSensitivityLabelsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -760,6 +767,18 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
             self._client, self._config, self._serialize, self._deserialize
         )
         self.managed_server_dns_aliases = ManagedServerDnsAliasesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_instance_dtcs = ManagedInstanceDtcsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_database_advanced_threat_protection_settings = ManagedDatabaseAdvancedThreatProtectionSettingsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_instance_advanced_threat_protection_settings = ManagedInstanceAdvancedThreatProtectionSettingsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.replication_links = ReplicationLinksOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

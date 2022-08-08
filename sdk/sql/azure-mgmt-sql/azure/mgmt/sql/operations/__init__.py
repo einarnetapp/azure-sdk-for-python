@@ -119,7 +119,6 @@ from ._distributed_availability_groups_operations import DistributedAvailability
 from ._server_trust_certificates_operations import ServerTrustCertificatesOperations
 from ._ipv6_firewall_rules_operations import IPv6FirewallRulesOperations
 from ._endpoint_certificates_operations import EndpointCertificatesOperations
-from ._replication_links_operations import ReplicationLinksOperations
 from ._managed_database_sensitivity_labels_operations import ManagedDatabaseSensitivityLabelsOperations
 from ._managed_database_recommended_sensitivity_labels_operations import ManagedDatabaseRecommendedSensitivityLabelsOperations
 from ._sensitivity_labels_operations import SensitivityLabelsOperations
@@ -131,6 +130,10 @@ from ._extended_server_blob_auditing_policies_operations import ExtendedServerBl
 from ._database_advanced_threat_protection_settings_operations import DatabaseAdvancedThreatProtectionSettingsOperations
 from ._server_advanced_threat_protection_settings_operations import ServerAdvancedThreatProtectionSettingsOperations
 from ._managed_server_dns_aliases_operations import ManagedServerDnsAliasesOperations
+from ._managed_instance_dtcs_operations import ManagedInstanceDtcsOperations
+from ._managed_database_advanced_threat_protection_settings_operations import ManagedDatabaseAdvancedThreatProtectionSettingsOperations
+from ._managed_instance_advanced_threat_protection_settings_operations import ManagedInstanceAdvancedThreatProtectionSettingsOperations
+from ._replication_links_operations import ReplicationLinksOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
@@ -249,7 +252,6 @@ __all__ = [
     'ServerTrustCertificatesOperations',
     'IPv6FirewallRulesOperations',
     'EndpointCertificatesOperations',
-    'ReplicationLinksOperations',
     'ManagedDatabaseSensitivityLabelsOperations',
     'ManagedDatabaseRecommendedSensitivityLabelsOperations',
     'SensitivityLabelsOperations',
@@ -261,6 +263,10 @@ __all__ = [
     'DatabaseAdvancedThreatProtectionSettingsOperations',
     'ServerAdvancedThreatProtectionSettingsOperations',
     'ManagedServerDnsAliasesOperations',
+    'ManagedInstanceDtcsOperations',
+    'ManagedDatabaseAdvancedThreatProtectionSettingsOperations',
+    'ManagedInstanceAdvancedThreatProtectionSettingsOperations',
+    'ReplicationLinksOperations',
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
