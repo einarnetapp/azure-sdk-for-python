@@ -15,6 +15,7 @@ from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
@@ -24,26 +25,24 @@ T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class ContainerAppsRevisionsOperations:
-    """ContainerAppsRevisionsOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.appcontainers.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.appcontainers.aio.ContainerAppsAPIClient`'s
+        :attr:`container_apps_revisions` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list_revisions(
@@ -52,7 +51,7 @@ class ContainerAppsRevisionsOperations:
         container_app_name: str,
         filter: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable["_models.RevisionCollection"]:
+    ) -> AsyncIterable[_models.RevisionCollection]:
         """Get the Revisions for a given Container App.
 
         Get the Revisions for a given Container App.
@@ -69,13 +68,16 @@ class ContainerAppsRevisionsOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.appcontainers.models.RevisionCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.RevisionCollection"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.RevisionCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -86,9 +88,11 @@ class ContainerAppsRevisionsOperations:
                     api_version=api_version,
                     filter=filter,
                     template_url=self.list_revisions.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -99,9 +103,11 @@ class ContainerAppsRevisionsOperations:
                     api_version=api_version,
                     filter=filter,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -142,7 +148,7 @@ class ContainerAppsRevisionsOperations:
         container_app_name: str,
         revision_name: str,
         **kwargs: Any
-    ) -> "_models.Revision":
+    ) -> _models.Revision:
         """Get a revision of a Container App.
 
         Get a revision of a Container App.
@@ -158,13 +164,16 @@ class ContainerAppsRevisionsOperations:
         :rtype: ~azure.mgmt.appcontainers.models.Revision
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Revision"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Revision]
 
         
         request = build_get_revision_request(
@@ -174,11 +183,13 @@ class ContainerAppsRevisionsOperations:
             revision_name=revision_name,
             api_version=api_version,
             template_url=self.get_revision.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -223,13 +234,16 @@ class ContainerAppsRevisionsOperations:
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
         request = build_activate_revision_request(
@@ -239,11 +253,13 @@ class ContainerAppsRevisionsOperations:
             revision_name=revision_name,
             api_version=api_version,
             template_url=self.activate_revision.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -284,13 +300,16 @@ class ContainerAppsRevisionsOperations:
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
         request = build_deactivate_revision_request(
@@ -300,11 +319,13 @@ class ContainerAppsRevisionsOperations:
             revision_name=revision_name,
             api_version=api_version,
             template_url=self.deactivate_revision.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -345,13 +366,16 @@ class ContainerAppsRevisionsOperations:
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
         request = build_restart_revision_request(
@@ -361,11 +385,13 @@ class ContainerAppsRevisionsOperations:
             revision_name=revision_name,
             api_version=api_version,
             template_url=self.restart_revision.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs

@@ -18,6 +18,9 @@ from ._namespaces_operations import NamespacesOperations
 from ._managed_environments_storages_operations import ManagedEnvironmentsStoragesOperations
 from ._container_apps_source_controls_operations import ContainerAppsSourceControlsOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'ContainerAppsAuthConfigsOperations',
     'ContainerAppsOperations',
@@ -31,3 +34,5 @@ __all__ = [
     'ManagedEnvironmentsStoragesOperations',
     'ContainerAppsSourceControlsOperations',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
