@@ -13,23 +13,25 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._workloads_client_operations import build_sap_availability_zone_details_request, build_sap_disk_configurations_request, build_sap_sizing_recommendations_request, build_sap_supported_sku_request
+from .._vendor import MixinABC
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class WorkloadsClientOperationsMixin:
+class WorkloadsClientOperationsMixin(MixinABC):
 
     @distributed_trace_async
     async def sap_sizing_recommendations(
         self,
         location: str,
-        sap_sizing_recommendation: Optional["_models.SAPSizingRecommendationRequest"] = None,
+        sap_sizing_recommendation: Optional[_models.SAPSizingRecommendationRequest] = None,
         **kwargs: Any
-    ) -> "_models.SAPSizingRecommendationResult":
+    ) -> _models.SAPSizingRecommendationResult:
         """Get SAP sizing recommendations.
 
         :param location: The name of Azure region.
@@ -42,14 +44,17 @@ class WorkloadsClientOperationsMixin:
         :rtype: ~azure.mgmt.workloads.models.SAPSizingRecommendationResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SAPSizingRecommendationResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-12-01-preview")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SAPSizingRecommendationResult]
 
         if sap_sizing_recommendation is not None:
             _json = self._serialize.body(sap_sizing_recommendation, 'SAPSizingRecommendationRequest')
@@ -63,11 +68,13 @@ class WorkloadsClientOperationsMixin:
             content_type=content_type,
             json=_json,
             template_url=self.sap_sizing_recommendations.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -93,9 +100,9 @@ class WorkloadsClientOperationsMixin:
     async def sap_supported_sku(
         self,
         location: str,
-        sap_supported_sku: Optional["_models.SAPSupportedSkusRequest"] = None,
+        sap_supported_sku: Optional[_models.SAPSupportedSkusRequest] = None,
         **kwargs: Any
-    ) -> "_models.SAPSupportedResourceSkusResult":
+    ) -> _models.SAPSupportedResourceSkusResult:
         """Get SAP supported SKUs.
 
         :param location: The name of Azure region.
@@ -107,14 +114,17 @@ class WorkloadsClientOperationsMixin:
         :rtype: ~azure.mgmt.workloads.models.SAPSupportedResourceSkusResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SAPSupportedResourceSkusResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-12-01-preview")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SAPSupportedResourceSkusResult]
 
         if sap_supported_sku is not None:
             _json = self._serialize.body(sap_supported_sku, 'SAPSupportedSkusRequest')
@@ -128,11 +138,13 @@ class WorkloadsClientOperationsMixin:
             content_type=content_type,
             json=_json,
             template_url=self.sap_supported_sku.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -158,9 +170,9 @@ class WorkloadsClientOperationsMixin:
     async def sap_disk_configurations(
         self,
         location: str,
-        sap_disk_configurations: Optional["_models.SAPDiskConfigurationsRequest"] = None,
+        sap_disk_configurations: Optional[_models.SAPDiskConfigurationsRequest] = None,
         **kwargs: Any
-    ) -> "_models.SAPDiskConfigurationsResult":
+    ) -> _models.SAPDiskConfigurationsResult:
         """Get SAP Disk Configurations.
 
         :param location: The name of Azure region.
@@ -172,14 +184,17 @@ class WorkloadsClientOperationsMixin:
         :rtype: ~azure.mgmt.workloads.models.SAPDiskConfigurationsResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SAPDiskConfigurationsResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-12-01-preview")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SAPDiskConfigurationsResult]
 
         if sap_disk_configurations is not None:
             _json = self._serialize.body(sap_disk_configurations, 'SAPDiskConfigurationsRequest')
@@ -193,11 +208,13 @@ class WorkloadsClientOperationsMixin:
             content_type=content_type,
             json=_json,
             template_url=self.sap_disk_configurations.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -223,9 +240,9 @@ class WorkloadsClientOperationsMixin:
     async def sap_availability_zone_details(
         self,
         location: str,
-        sap_availability_zone_details: Optional["_models.SAPAvailabilityZoneDetailsRequest"] = None,
+        sap_availability_zone_details: Optional[_models.SAPAvailabilityZoneDetailsRequest] = None,
         **kwargs: Any
-    ) -> "_models.SAPAvailabilityZoneDetailsResult":
+    ) -> _models.SAPAvailabilityZoneDetailsResult:
         """Get SAP Availability Zone Details.
 
         :param location: The name of Azure region.
@@ -239,14 +256,17 @@ class WorkloadsClientOperationsMixin:
         :rtype: ~azure.mgmt.workloads.models.SAPAvailabilityZoneDetailsResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SAPAvailabilityZoneDetailsResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2021-12-01-preview")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SAPAvailabilityZoneDetailsResult]
 
         if sap_availability_zone_details is not None:
             _json = self._serialize.body(sap_availability_zone_details, 'SAPAvailabilityZoneDetailsRequest')
@@ -260,11 +280,13 @@ class WorkloadsClientOperationsMixin:
             content_type=content_type,
             json=_json,
             template_url=self.sap_availability_zone_details.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs

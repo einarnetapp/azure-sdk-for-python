@@ -76,16 +76,36 @@ class WorkloadsClient(WorkloadsClientOperationsMixin):    # pylint: disable=too-
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.php_workloads = PhpWorkloadsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.wordpress_instances = WordpressInstancesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sap_virtual_instances = SAPVirtualInstancesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sap_central_instances = SAPCentralInstancesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sap_database_instances = SAPDatabaseInstancesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sap_application_server_instances = SAPApplicationServerInstancesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.monitors = MonitorsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.provider_instances = ProviderInstancesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.skus = SkusOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.php_workloads = PhpWorkloadsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.wordpress_instances = WordpressInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sap_virtual_instances = SAPVirtualInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sap_central_instances = SAPCentralInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sap_database_instances = SAPDatabaseInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.sap_application_server_instances = SAPApplicationServerInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.monitors = MonitorsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.provider_instances = ProviderInstancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.skus = SkusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
