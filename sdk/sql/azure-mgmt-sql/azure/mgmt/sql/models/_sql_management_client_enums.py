@@ -130,7 +130,7 @@ class AutomaticTuningServerReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     AUTO_CONFIGURED = "AutoConfigured"
 
 class BackupStorageRedundancy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The storage account type used to store backups for this database.
+    """The storage redundancy type of the copied backup
     """
 
     GEO = "Geo"
@@ -391,6 +391,10 @@ class DnsRefreshConfigurationPropertiesStatus(str, Enum, metaclass=CaseInsensiti
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
+
+class DtcName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+
+    CURRENT = "current"
 
 class ElasticPoolLicenseType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The license type to apply for this elastic pool.
@@ -831,11 +835,12 @@ class RecommendedSensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitive
     DISABLE = "disable"
 
 class ReplicationLinkType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Link type (GEO, NAMED).
+    """Link type (GEO, NAMED, STANDBY).
     """
 
     GEO = "GEO"
     NAMED = "NAMED"
+    STANDBY = "STANDBY"
 
 class ReplicationMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The replication mode of a distributed availability group. Parameter will be ignored during link
@@ -889,11 +894,13 @@ class SampleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     WIDE_WORLD_IMPORTERS_FULL = "WideWorldImportersFull"
 
 class SecondaryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The secondary type of the database if it is a secondary.  Valid values are Geo and Named.
+    """The secondary type of the database if it is a secondary.  Valid values are Geo, Named and
+    Standby.
     """
 
     GEO = "Geo"
     NAMED = "Named"
+    STANDBY = "Standby"
 
 class SecurityAlertPolicyName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 

@@ -264,7 +264,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type server_name: str
         :param skip_token:  Default value is None.
         :type skip_token: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -275,7 +275,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DatabaseListResult]
 
         error_map = {
@@ -361,7 +361,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type server_name: str
         :param database_name: The name of the database.
         :type database_name: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -377,7 +377,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Database]
 
         
@@ -431,7 +431,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.Database]]
 
@@ -498,7 +498,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type database_name: str
         :param parameters: The requested database resource state.
         :type parameters: ~azure.mgmt.sql.models.Database
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -517,7 +517,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Database]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
@@ -583,7 +583,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -634,7 +634,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type server_name: str
         :param database_name: The name of the database.
         :type database_name: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -652,7 +652,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -714,7 +714,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.Database]]
 
@@ -778,7 +778,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type database_name: str
         :param parameters: The requested database resource state.
         :type parameters: ~azure.mgmt.sql.models.DatabaseUpdate
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -797,7 +797,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Database]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
@@ -864,7 +864,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.ImportExportOperationResult]]
 
@@ -928,7 +928,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type database_name: str
         :param parameters: The database export request parameters.
         :type parameters: ~azure.mgmt.sql.models.ExportDatabaseDefinition
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -947,7 +947,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.ImportExportOperationResult]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
@@ -1014,7 +1014,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -1069,7 +1069,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type database_name: str
         :param replica_type: The type of replica to be failed over. Default value is None.
         :type replica_type: str or ~azure.mgmt.sql.models.ReplicaType
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1087,7 +1087,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -1150,7 +1150,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.ImportExportOperationResult]]
 
@@ -1214,7 +1214,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type database_name: str
         :param parameters: The database import request parameters.
         :type parameters: ~azure.mgmt.sql.models.ImportExistingDatabaseDefinition
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1233,7 +1233,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.ImportExportOperationResult]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
@@ -1304,7 +1304,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type database_name: str
         :param parameters: The resource move definition for renaming this database.
         :type parameters: ~azure.mgmt.sql.models.ResourceMoveDefinition
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1320,7 +1320,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
@@ -1373,7 +1373,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.Database]]
 
         
@@ -1430,7 +1430,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type server_name: str
         :param database_name: The name of the database to be paused.
         :type database_name: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1449,7 +1449,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Database]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -1512,7 +1512,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.Database]]
 
         
@@ -1569,7 +1569,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type server_name: str
         :param database_name: The name of the database to be resumed.
         :type database_name: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1588,7 +1588,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Database]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -1651,7 +1651,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -1702,7 +1702,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type server_name: str
         :param database_name: The name of the database to be upgraded.
         :type database_name: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1720,7 +1720,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -1783,7 +1783,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type server_name: str
         :param elastic_pool_name: The name of the elastic pool.
         :type elastic_pool_name: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1794,7 +1794,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DatabaseListResult]
 
         error_map = {
@@ -1877,7 +1877,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         :type resource_group_name: str
         :param server_name: The name of the server.
         :type server_name: str
-        :keyword api_version: Api Version. Default value is "2021-05-01-preview". Note that overriding
+        :keyword api_version: Api Version. Default value is "2022-02-01-preview". Note that overriding
          this default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -1888,7 +1888,7 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-05-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-02-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DatabaseListResult]
 
         error_map = {
