@@ -80,17 +80,39 @@ class ContainerAppsAPIClient:    # pylint: disable=too-many-instance-attributes
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.container_apps_auth_configs = ContainerAppsAuthConfigsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.container_apps = ContainerAppsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.container_apps_revisions = ContainerAppsRevisionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.container_apps_revision_replicas = ContainerAppsRevisionReplicasOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.dapr_components = DaprComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.managed_environments = ManagedEnvironmentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.certificates = CertificatesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.namespaces = NamespacesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.managed_environments_storages = ManagedEnvironmentsStoragesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.container_apps_source_controls = ContainerAppsSourceControlsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.container_apps_auth_configs = ContainerAppsAuthConfigsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps = ContainerAppsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_revisions = ContainerAppsRevisionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_revision_replicas = ContainerAppsRevisionReplicasOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dapr_components = DaprComponentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_environments = ManagedEnvironmentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.certificates = CertificatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.namespaces = NamespacesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_environments_storages = ManagedEnvironmentsStoragesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_source_controls = ContainerAppsSourceControlsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
