@@ -18,18 +18,18 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._managed_environments_storages_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
+from ...operations._connected_environments_storages_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class ManagedEnvironmentsStoragesOperations:
+class ConnectedEnvironmentsStoragesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.aio.ContainerAppsAPIClient`'s
-        :attr:`managed_environments_storages` attribute.
+        :attr:`connected_environments_storages` attribute.
     """
 
     models = _models
@@ -46,20 +46,20 @@ class ManagedEnvironmentsStoragesOperations:
     async def list(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         **kwargs: Any
-    ) -> _models.ManagedEnvironmentStoragesCollection:
-        """Get all storages for a managedEnvironment.
+    ) -> _models.ConnectedEnvironmentStoragesCollection:
+        """Get all storages for a connectedEnvironment.
 
-        Get all storages for a managedEnvironment.
+        Get all storages for a connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Environment.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ManagedEnvironmentStoragesCollection, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ManagedEnvironmentStoragesCollection
+        :return: ConnectedEnvironmentStoragesCollection, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironmentStoragesCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -71,13 +71,13 @@ class ManagedEnvironmentsStoragesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironmentStoragesCollection]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironmentStoragesCollection]
 
         
         request = build_list_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             api_version=api_version,
             template_url=self.list.metadata['url'],
             headers=_headers,
@@ -98,37 +98,37 @@ class ManagedEnvironmentsStoragesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('ManagedEnvironmentStoragesCollection', pipeline_response)
+        deserialized = self._deserialize('ConnectedEnvironmentStoragesCollection', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages"}  # type: ignore
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/storages"}  # type: ignore
 
 
     @distributed_trace_async
     async def get(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         storage_name: str,
         **kwargs: Any
-    ) -> _models.ManagedEnvironmentStorage:
-        """Get storage for a managedEnvironment.
+    ) -> _models.ConnectedEnvironmentStorage:
+        """Get storage for a connectedEnvironment.
 
-        Get storage for a managedEnvironment.
+        Get storage for a connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Environment.
+        :type connected_environment_name: str
         :param storage_name: Name of the storage.
         :type storage_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ManagedEnvironmentStorage, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ManagedEnvironmentStorage
+        :return: ConnectedEnvironmentStorage, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironmentStorage
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -140,13 +140,13 @@ class ManagedEnvironmentsStoragesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironmentStorage]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironmentStorage]
 
         
         request = build_get_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             storage_name=storage_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
@@ -168,40 +168,40 @@ class ManagedEnvironmentsStoragesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('ManagedEnvironmentStorage', pipeline_response)
+        deserialized = self._deserialize('ConnectedEnvironmentStorage', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}"}  # type: ignore
+    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/storages/{storageName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         storage_name: str,
-        storage_envelope: _models.ManagedEnvironmentStorage,
+        storage_envelope: _models.ConnectedEnvironmentStorage,
         **kwargs: Any
-    ) -> _models.ManagedEnvironmentStorage:
-        """Create or update storage for a managedEnvironment.
+    ) -> _models.ConnectedEnvironmentStorage:
+        """Create or update storage for a connectedEnvironment.
 
-        Create or update storage for a managedEnvironment.
+        Create or update storage for a connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Environment.
+        :type connected_environment_name: str
         :param storage_name: Name of the storage.
         :type storage_name: str
         :param storage_envelope: Configuration details of storage.
-        :type storage_envelope: ~azure.mgmt.app.models.ManagedEnvironmentStorage
+        :type storage_envelope: ~azure.mgmt.app.models.ConnectedEnvironmentStorage
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ManagedEnvironmentStorage, or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ManagedEnvironmentStorage
+        :return: ConnectedEnvironmentStorage, or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironmentStorage
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         error_map = {
@@ -214,14 +214,14 @@ class ManagedEnvironmentsStoragesOperations:
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-06-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ManagedEnvironmentStorage]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ConnectedEnvironmentStorage]
 
-        _json = self._serialize.body(storage_envelope, 'ManagedEnvironmentStorage')
+        _json = self._serialize.body(storage_envelope, 'ConnectedEnvironmentStorage')
 
         request = build_create_or_update_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             storage_name=storage_name,
             api_version=api_version,
             content_type=content_type,
@@ -245,32 +245,32 @@ class ManagedEnvironmentsStoragesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('ManagedEnvironmentStorage', pipeline_response)
+        deserialized = self._deserialize('ConnectedEnvironmentStorage', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}"}  # type: ignore
+    create_or_update.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/storages/{storageName}"}  # type: ignore
 
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         storage_name: str,
         **kwargs: Any
     ) -> None:
-        """Delete storage for a managedEnvironment.
+        """Delete storage for a connectedEnvironment.
 
-        Delete storage for a managedEnvironment.
+        Delete storage for a connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment.
-        :type environment_name: str
+        :param connected_environment_name: Name of the Environment.
+        :type connected_environment_name: str
         :param storage_name: Name of the storage.
         :type storage_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -293,7 +293,7 @@ class ManagedEnvironmentsStoragesOperations:
         request = build_delete_request(
             subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             storage_name=storage_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
@@ -318,5 +318,5 @@ class ManagedEnvironmentsStoragesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/storages/{storageName}"}  # type: ignore
+    delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/storages/{storageName}"}  # type: ignore
 
