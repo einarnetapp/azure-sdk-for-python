@@ -67,6 +67,7 @@ from ._models_py3 import CustomRule
 from ._models_py3 import CustomRuleList
 from ._models_py3 import CustomerCertificate
 from ._models_py3 import CustomerCertificateParameters
+from ._models_py3 import DeepCreatedCustomDomain
 from ._models_py3 import DeepCreatedOrigin
 from ._models_py3 import DeepCreatedOriginGroup
 from ._models_py3 import DeliveryRule
@@ -274,6 +275,7 @@ from ._cdn_management_client_enums import (
     DestinationProtocol,
     DomainValidationState,
     EnabledState,
+    EndpointProvisioningState,
     EndpointResourceState,
     ForwardingProtocol,
     GeoFilterActions,
@@ -299,7 +301,9 @@ from ._cdn_management_client_enums import (
     MinimumTlsVersion,
     Operator,
     OptimizationType,
+    OriginGroupProvisioningState,
     OriginGroupResourceState,
+    OriginProvisioningState,
     OriginResourceState,
     ParamIndicator,
     PolicyEnabledState,
@@ -309,6 +313,7 @@ from ._cdn_management_client_enums import (
     PostArgsOperator,
     PrivateEndpointStatus,
     ProbeProtocol,
+    ProfileProvisioningState,
     ProfileResourceState,
     ProtocolType,
     ProvisioningState,
@@ -324,6 +329,7 @@ from ._cdn_management_client_enums import (
     RequestSchemeMatchConditionParametersMatchValuesItem,
     RequestUriOperator,
     ResourceType,
+    ResourceUsageUnit,
     ResponseBasedDetectedErrorTypes,
     RuleCacheBehavior,
     RuleIsCompressionEnabled,
@@ -353,7 +359,9 @@ from ._cdn_management_client_enums import (
     WafRankingType,
     WafRuleType,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AFDDomain',
     'AFDDomainHttpsParameters',
@@ -416,6 +424,7 @@ __all__ = [
     'CustomRuleList',
     'CustomerCertificate',
     'CustomerCertificateParameters',
+    'DeepCreatedCustomDomain',
     'DeepCreatedOrigin',
     'DeepCreatedOriginGroup',
     'DeliveryRule',
@@ -620,6 +629,7 @@ __all__ = [
     'DestinationProtocol',
     'DomainValidationState',
     'EnabledState',
+    'EndpointProvisioningState',
     'EndpointResourceState',
     'ForwardingProtocol',
     'GeoFilterActions',
@@ -645,7 +655,9 @@ __all__ = [
     'MinimumTlsVersion',
     'Operator',
     'OptimizationType',
+    'OriginGroupProvisioningState',
     'OriginGroupResourceState',
+    'OriginProvisioningState',
     'OriginResourceState',
     'ParamIndicator',
     'PolicyEnabledState',
@@ -655,6 +667,7 @@ __all__ = [
     'PostArgsOperator',
     'PrivateEndpointStatus',
     'ProbeProtocol',
+    'ProfileProvisioningState',
     'ProfileResourceState',
     'ProtocolType',
     'ProvisioningState',
@@ -670,6 +683,7 @@ __all__ = [
     'RequestSchemeMatchConditionParametersMatchValuesItem',
     'RequestUriOperator',
     'ResourceType',
+    'ResourceUsageUnit',
     'ResponseBasedDetectedErrorTypes',
     'RuleCacheBehavior',
     'RuleIsCompressionEnabled',
@@ -699,3 +713,5 @@ __all__ = [
     'WafRankingType',
     'WafRuleType',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
