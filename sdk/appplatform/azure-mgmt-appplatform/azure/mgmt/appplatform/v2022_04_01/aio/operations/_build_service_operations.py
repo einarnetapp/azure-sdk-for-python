@@ -15,6 +15,7 @@ from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
@@ -24,26 +25,24 @@ T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class BuildServiceOperations:
-    """BuildServiceOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.appplatform.v2022_04_01.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.appplatform.v2022_04_01.aio.AppPlatformManagementClient`'s
+        :attr:`build_service` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list_build_services(
@@ -51,7 +50,7 @@ class BuildServiceOperations:
         resource_group_name: str,
         service_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.BuildServiceCollection"]:
+    ) -> AsyncIterable[_models.BuildServiceCollection]:
         """List build services resource.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -66,13 +65,16 @@ class BuildServiceOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.appplatform.v2022_04_01.models.BuildServiceCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.BuildServiceCollection"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.BuildServiceCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -82,9 +84,11 @@ class BuildServiceOperations:
                     service_name=service_name,
                     api_version=api_version,
                     template_url=self.list_build_services.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -94,9 +98,11 @@ class BuildServiceOperations:
                     service_name=service_name,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -136,7 +142,7 @@ class BuildServiceOperations:
         service_name: str,
         build_service_name: str,
         **kwargs: Any
-    ) -> "_models.BuildService":
+    ) -> _models.BuildService:
         """Get a build service resource.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -151,13 +157,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.BuildService
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.BuildService"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.BuildService]
 
         
         request = build_get_build_service_request(
@@ -167,11 +176,13 @@ class BuildServiceOperations:
             build_service_name=build_service_name,
             api_version=api_version,
             template_url=self.get_build_service.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -199,7 +210,7 @@ class BuildServiceOperations:
         service_name: str,
         build_service_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.BuildCollection"]:
+    ) -> AsyncIterable[_models.BuildCollection]:
         """List KPack builds.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -215,13 +226,16 @@ class BuildServiceOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.appplatform.v2022_04_01.models.BuildCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.BuildCollection"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.BuildCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -232,9 +246,11 @@ class BuildServiceOperations:
                     build_service_name=build_service_name,
                     api_version=api_version,
                     template_url=self.list_builds.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -245,9 +261,11 @@ class BuildServiceOperations:
                     build_service_name=build_service_name,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -288,7 +306,7 @@ class BuildServiceOperations:
         build_service_name: str,
         build_name: str,
         **kwargs: Any
-    ) -> "_models.Build":
+    ) -> _models.Build:
         """Get a KPack build.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -305,13 +323,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.Build
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Build"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Build]
 
         
         request = build_get_build_request(
@@ -322,11 +343,13 @@ class BuildServiceOperations:
             build_name=build_name,
             api_version=api_version,
             template_url=self.get_build.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -354,9 +377,9 @@ class BuildServiceOperations:
         service_name: str,
         build_service_name: str,
         build_name: str,
-        build: "_models.Build",
+        build: _models.Build,
         **kwargs: Any
-    ) -> "_models.Build":
+    ) -> _models.Build:
         """Create or update a KPack build.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -375,14 +398,17 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.Build
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.Build"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Build]
 
         _json = self._serialize.body(build, 'Build')
 
@@ -396,11 +422,13 @@ class BuildServiceOperations:
             content_type=content_type,
             json=_json,
             template_url=self.create_or_update_build.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -433,7 +461,7 @@ class BuildServiceOperations:
         build_service_name: str,
         build_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.BuildResultCollection"]:
+    ) -> AsyncIterable[_models.BuildResultCollection]:
         """List KPack build results.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -452,13 +480,16 @@ class BuildServiceOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.appplatform.v2022_04_01.models.BuildResultCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.BuildResultCollection"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.BuildResultCollection]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -470,9 +501,11 @@ class BuildServiceOperations:
                     build_name=build_name,
                     api_version=api_version,
                     template_url=self.list_build_results.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -484,9 +517,11 @@ class BuildServiceOperations:
                     build_name=build_name,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -528,7 +563,7 @@ class BuildServiceOperations:
         build_name: str,
         build_result_name: str,
         **kwargs: Any
-    ) -> "_models.BuildResult":
+    ) -> _models.BuildResult:
         """Get a KPack build result.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -547,13 +582,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.BuildResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.BuildResult"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.BuildResult]
 
         
         request = build_get_build_result_request(
@@ -565,11 +603,13 @@ class BuildServiceOperations:
             build_result_name=build_result_name,
             api_version=api_version,
             template_url=self.get_build_result.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -599,7 +639,7 @@ class BuildServiceOperations:
         build_name: str,
         build_result_name: str,
         **kwargs: Any
-    ) -> "_models.BuildResultLog":
+    ) -> _models.BuildResultLog:
         """Get a KPack build result log download URL.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -618,13 +658,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.BuildResultLog
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.BuildResultLog"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.BuildResultLog]
 
         
         request = build_get_build_result_log_request(
@@ -636,11 +679,13 @@ class BuildServiceOperations:
             build_result_name=build_result_name,
             api_version=api_version,
             template_url=self.get_build_result_log.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -668,7 +713,7 @@ class BuildServiceOperations:
         service_name: str,
         build_service_name: str,
         **kwargs: Any
-    ) -> "_models.ResourceUploadDefinition":
+    ) -> _models.ResourceUploadDefinition:
         """Get an resource upload URL for build service, which may be artifacts or source archive.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -683,13 +728,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.ResourceUploadDefinition
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.ResourceUploadDefinition"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ResourceUploadDefinition]
 
         
         request = build_get_resource_upload_url_request(
@@ -699,11 +747,13 @@ class BuildServiceOperations:
             build_service_name=build_service_name,
             api_version=api_version,
             template_url=self.get_resource_upload_url.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -731,7 +781,7 @@ class BuildServiceOperations:
         service_name: str,
         build_service_name: str,
         **kwargs: Any
-    ) -> "_models.SupportedBuildpacksCollection":
+    ) -> _models.SupportedBuildpacksCollection:
         """Get all supported buildpacks.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -746,13 +796,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.SupportedBuildpacksCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SupportedBuildpacksCollection"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SupportedBuildpacksCollection]
 
         
         request = build_list_supported_buildpacks_request(
@@ -762,11 +815,13 @@ class BuildServiceOperations:
             build_service_name=build_service_name,
             api_version=api_version,
             template_url=self.list_supported_buildpacks.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -795,7 +850,7 @@ class BuildServiceOperations:
         build_service_name: str,
         buildpack_name: str,
         **kwargs: Any
-    ) -> "_models.SupportedBuildpackResource":
+    ) -> _models.SupportedBuildpackResource:
         """Get the supported buildpack resource.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -812,13 +867,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.SupportedBuildpackResource
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SupportedBuildpackResource"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SupportedBuildpackResource]
 
         
         request = build_get_supported_buildpack_request(
@@ -829,11 +887,13 @@ class BuildServiceOperations:
             buildpack_name=buildpack_name,
             api_version=api_version,
             template_url=self.get_supported_buildpack.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -861,7 +921,7 @@ class BuildServiceOperations:
         service_name: str,
         build_service_name: str,
         **kwargs: Any
-    ) -> "_models.SupportedStacksCollection":
+    ) -> _models.SupportedStacksCollection:
         """Get all supported stacks.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -876,13 +936,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.SupportedStacksCollection
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SupportedStacksCollection"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SupportedStacksCollection]
 
         
         request = build_list_supported_stacks_request(
@@ -892,11 +955,13 @@ class BuildServiceOperations:
             build_service_name=build_service_name,
             api_version=api_version,
             template_url=self.list_supported_stacks.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -925,7 +990,7 @@ class BuildServiceOperations:
         build_service_name: str,
         stack_name: str,
         **kwargs: Any
-    ) -> "_models.SupportedStackResource":
+    ) -> _models.SupportedStackResource:
         """Get the supported stack resource.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
@@ -942,13 +1007,16 @@ class BuildServiceOperations:
         :rtype: ~azure.mgmt.appplatform.v2022_04_01.models.SupportedStackResource
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.SupportedStackResource"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-04-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-04-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SupportedStackResource]
 
         
         request = build_get_supported_stack_request(
@@ -959,11 +1027,13 @@ class BuildServiceOperations:
             stack_name=stack_name,
             api_version=api_version,
             template_url=self.get_supported_stack.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs

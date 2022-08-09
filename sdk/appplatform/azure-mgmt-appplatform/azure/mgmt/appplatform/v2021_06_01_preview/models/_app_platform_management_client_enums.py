@@ -7,17 +7,16 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
     """
 
     INTERNAL = "Internal"
 
-class AppResourceProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class AppResourceProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the App
     """
 
@@ -26,7 +25,7 @@ class AppResourceProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, 
     CREATING = "Creating"
     UPDATING = "Updating"
 
-class ConfigServerState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ConfigServerState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of the config server.
     """
 
@@ -36,7 +35,7 @@ class ConfigServerState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SUCCEEDED = "Succeeded"
     UPDATING = "Updating"
 
-class DeploymentResourceProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class DeploymentResourceProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the Deployment
     """
 
@@ -45,7 +44,7 @@ class DeploymentResourceProvisioningState(with_metaclass(CaseInsensitiveEnumMeta
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
 
-class DeploymentResourceStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class DeploymentResourceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the Deployment
     """
 
@@ -57,7 +56,7 @@ class DeploymentResourceStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum
     UPGRADING = "Upgrading"
     COMPILING = "Compiling"
 
-class ManagedIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ManagedIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of the managed identity
     """
 
@@ -66,7 +65,7 @@ class ManagedIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     USER_ASSIGNED = "UserAssigned"
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
-class MonitoringSettingState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class MonitoringSettingState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of the Monitoring Setting.
     """
 
@@ -75,7 +74,7 @@ class MonitoringSettingState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum))
     SUCCEEDED = "Succeeded"
     UPDATING = "Updating"
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the Service
     """
 
@@ -89,7 +88,7 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MOVED = "Moved"
     MOVE_FAILED = "MoveFailed"
 
-class ResourceSkuRestrictionsReasonCode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceSkuRestrictionsReasonCode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets the reason for restriction. Possible values include: 'QuotaId',
     'NotAvailableForSubscription'
     """
@@ -97,14 +96,14 @@ class ResourceSkuRestrictionsReasonCode(with_metaclass(CaseInsensitiveEnumMeta, 
     QUOTA_ID = "QuotaId"
     NOT_AVAILABLE_FOR_SUBSCRIPTION = "NotAvailableForSubscription"
 
-class ResourceSkuRestrictionsType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ResourceSkuRestrictionsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets the type of restrictions. Possible values include: 'Location', 'Zone'
     """
 
     LOCATION = "Location"
     ZONE = "Zone"
 
-class RuntimeVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class RuntimeVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Runtime version
     """
 
@@ -112,7 +111,7 @@ class RuntimeVersion(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     JAVA11 = "Java_11"
     NET_CORE31 = "NetCore_31"
 
-class SkuScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SkuScaleType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets or sets the type of the scale.
     """
 
@@ -120,14 +119,14 @@ class SkuScaleType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANUAL = "Manual"
     AUTOMATIC = "Automatic"
 
-class SupportedRuntimePlatform(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SupportedRuntimePlatform(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The platform of this runtime version (possible values: "Java" or ".NET").
     """
 
     JAVA = "Java"
     _NET_CORE = ".NET Core"
 
-class SupportedRuntimeValue(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class SupportedRuntimeValue(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The raw value which could be passed to deployment CRUD operations.
     """
 
@@ -135,21 +134,21 @@ class SupportedRuntimeValue(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     JAVA11 = "Java_11"
     NET_CORE31 = "NetCore_31"
 
-class TestKeyType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class TestKeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of the test key
     """
 
     PRIMARY = "Primary"
     SECONDARY = "Secondary"
 
-class TrafficDirection(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class TrafficDirection(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The direction of required traffic
     """
 
     INBOUND = "Inbound"
     OUTBOUND = "Outbound"
 
-class UserSourceType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class UserSourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of the source uploaded
     """
 
