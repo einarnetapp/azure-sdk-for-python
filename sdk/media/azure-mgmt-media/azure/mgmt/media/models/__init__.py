@@ -28,6 +28,7 @@ from ._models_py3 import AssetStreamingLocator
 from ._models_py3 import AssetTrack
 from ._models_py3 import AssetTrackCollection
 from ._models_py3 import AssetTrackOperationStatus
+from ._models_py3 import AsyncOperationResult
 from ._models_py3 import Audio
 from ._models_py3 import AudioAnalyzerPreset
 from ._models_py3 import AudioOverlay
@@ -225,6 +226,7 @@ from ._azure_media_services_enums import (
     AnalysisResolution,
     AssetContainerPermission,
     AssetStorageEncryptionFormat,
+    AsyncOperationStatus,
     AttributeFilter,
     AudioAnalysisMode,
     BlurType,
@@ -308,6 +310,7 @@ __all__ = [
     'AssetTrack',
     'AssetTrackCollection',
     'AssetTrackOperationStatus',
+    'AsyncOperationResult',
     'Audio',
     'AudioAnalyzerPreset',
     'AudioOverlay',
@@ -502,6 +505,7 @@ __all__ = [
     'AnalysisResolution',
     'AssetContainerPermission',
     'AssetStorageEncryptionFormat',
+    'AsyncOperationStatus',
     'AttributeFilter',
     'AudioAnalysisMode',
     'BlurType',

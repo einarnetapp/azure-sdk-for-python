@@ -57,6 +57,9 @@ class LocationsOperations:
         :type location_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.CheckNameAvailabilityInput
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: EntityNameAvailabilityCheckOutput, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.EntityNameAvailabilityCheckOutput

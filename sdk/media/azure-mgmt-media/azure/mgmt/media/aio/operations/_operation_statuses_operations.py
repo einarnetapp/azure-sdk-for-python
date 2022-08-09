@@ -66,6 +66,9 @@ class OperationStatusesOperations:
         :type track_name: str
         :param operation_id: Operation Id.
         :type operation_id: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AssetTrackOperationStatus, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.AssetTrackOperationStatus

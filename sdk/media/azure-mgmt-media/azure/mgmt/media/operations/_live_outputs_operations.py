@@ -39,7 +39,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -79,7 +79,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -123,7 +123,7 @@ def build_create_request_initial(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -169,7 +169,7 @@ def build_delete_request_initial(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -192,6 +192,88 @@ def build_delete_request_initial(
 
     return HttpRequest(
         method="DELETE",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_async_operation_request(
+    subscription_id: str,
+    resource_group_name: str,
+    account_name: str,
+    operation_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveOutputOperations/{operationId}")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+        "accountName": _SERIALIZER.url("account_name", account_name, 'str'),
+        "operationId": _SERIALIZER.url("operation_id", operation_id, 'str', min_length=1),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="GET",
+        url=_url,
+        params=_params,
+        headers=_headers,
+        **kwargs
+    )
+
+
+def build_operation_location_request(
+    subscription_id: str,
+    resource_group_name: str,
+    account_name: str,
+    live_event_name: str,
+    live_output_name: str,
+    operation_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
+    accept = _headers.pop('Accept', "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/liveOutputs/{liveOutputName}/operationLocations/{operationId}")  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, 'str'),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, 'str'),
+        "accountName": _SERIALIZER.url("account_name", account_name, 'str'),
+        "liveEventName": _SERIALIZER.url("live_event_name", live_event_name, 'str', max_length=32, min_length=1, pattern=r'^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$'),
+        "liveOutputName": _SERIALIZER.url("live_output_name", live_output_name, 'str', max_length=256, min_length=1, pattern=r'^([a-zA-Z0-9])+(-*[a-zA-Z0-9])*$'),
+        "operationId": _SERIALIZER.url("operation_id", operation_id, 'str', min_length=1),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+
+    # Construct headers
+    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+
+    return HttpRequest(
+        method="GET",
         url=_url,
         params=_params,
         headers=_headers,
@@ -236,6 +318,9 @@ class LiveOutputsOperations:
         :type account_name: str
         :param live_event_name: The name of the live event, maximum length is 32.
         :type live_event_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either LiveOutputListResult or the result of
          cls(response)
@@ -245,7 +330,7 @@ class LiveOutputsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.LiveOutputListResult]
 
         error_map = {
@@ -336,6 +421,9 @@ class LiveOutputsOperations:
         :type live_event_name: str
         :param live_output_name: The name of the live output.
         :type live_output_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: LiveOutput, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.LiveOutput
@@ -349,7 +437,7 @@ class LiveOutputsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.LiveOutput]
 
         
@@ -406,7 +494,7 @@ class LiveOutputsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.LiveOutput]
 
@@ -477,6 +565,9 @@ class LiveOutputsOperations:
         :type live_output_name: str
         :param parameters: Live Output properties needed for creation.
         :type parameters: ~azure.mgmt.media.models.LiveOutput
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -492,7 +583,7 @@ class LiveOutputsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.LiveOutput]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
@@ -560,7 +651,7 @@ class LiveOutputsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -617,6 +708,9 @@ class LiveOutputsOperations:
         :type live_event_name: str
         :param live_output_name: The name of the live output.
         :type live_output_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -632,7 +726,7 @@ class LiveOutputsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop(
@@ -678,3 +772,159 @@ class LiveOutputsOperations:
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
     begin_delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/liveOutputs/{liveOutputName}"}  # type: ignore
+
+    @distributed_trace
+    def async_operation(
+        self,
+        resource_group_name: str,
+        account_name: str,
+        operation_id: str,
+        **kwargs: Any
+    ) -> _models.AsyncOperationResult:
+        """Get operation status.
+
+        Get a Live Output operation status.
+
+        :param resource_group_name: The name of the resource group within the Azure subscription.
+        :type resource_group_name: str
+        :param account_name: The Media Services account name.
+        :type account_name: str
+        :param operation_id: The ID of an ongoing async operation.
+        :type operation_id: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: AsyncOperationResult, or the result of cls(response)
+        :rtype: ~azure.mgmt.media.models.AsyncOperationResult
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.AsyncOperationResult]
+
+        
+        request = build_async_operation_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            account_name=account_name,
+            operation_id=operation_id,
+            api_version=api_version,
+            template_url=self.async_operation.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('AsyncOperationResult', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    async_operation.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveOutputOperations/{operationId}"}  # type: ignore
+
+
+    @distributed_trace
+    def operation_location(
+        self,
+        resource_group_name: str,
+        account_name: str,
+        live_event_name: str,
+        live_output_name: str,
+        operation_id: str,
+        **kwargs: Any
+    ) -> Optional[_models.LiveOutput]:
+        """Get operation status.
+
+        Get a Live Output operation status.
+
+        :param resource_group_name: The name of the resource group within the Azure subscription.
+        :type resource_group_name: str
+        :param account_name: The Media Services account name.
+        :type account_name: str
+        :param live_event_name: The name of the live event, maximum length is 32.
+        :type live_event_name: str
+        :param live_output_name: The name of the live output.
+        :type live_output_name: str
+        :param operation_id: The ID of an ongoing async operation.
+        :type operation_id: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: LiveOutput, or the result of cls(response)
+        :rtype: ~azure.mgmt.media.models.LiveOutput or None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.LiveOutput]]
+
+        
+        request = build_operation_location_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            account_name=account_name,
+            live_event_name=live_event_name,
+            live_output_name=live_output_name,
+            operation_id=operation_id,
+            api_version=api_version,
+            template_url=self.operation_location.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = None
+        if response.status_code == 200:
+            deserialized = self._deserialize('LiveOutput', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    operation_location.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/liveEvents/{liveEventName}/liveOutputs/{liveOutputName}/operationLocations/{operationId}"}  # type: ignore
+

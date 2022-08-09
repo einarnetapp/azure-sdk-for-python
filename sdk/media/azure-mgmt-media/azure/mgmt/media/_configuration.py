@@ -29,9 +29,6 @@ class AzureMediaServicesConfiguration(Configuration):  # pylint: disable=too-man
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The unique identifier for a Microsoft Azure subscription.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
-     default value may result in unsupported behavior.
-    :paramtype api_version: str
     """
 
     def __init__(
@@ -41,8 +38,6 @@ class AzureMediaServicesConfiguration(Configuration):  # pylint: disable=too-man
         **kwargs: Any
     ) -> None:
         super(AzureMediaServicesConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop('api_version', "2021-11-01")  # type: str
-
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
         if subscription_id is None:
@@ -50,7 +45,6 @@ class AzureMediaServicesConfiguration(Configuration):  # pylint: disable=too-man
 
         self.credential = credential
         self.subscription_id = subscription_id
-        self.api_version = api_version
         self.credential_scopes = kwargs.pop('credential_scopes', ['https://management.azure.com/.default'])
         kwargs.setdefault('sdk_moniker', 'mgmt-media/{}'.format(VERSION))
         self._configure(**kwargs)

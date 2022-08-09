@@ -71,6 +71,9 @@ class StreamingPoliciesOperations:
         :param orderby: Specifies the key by which the result collection should be ordered. Default
          value is None.
         :type orderby: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either StreamingPolicyCollection or the result of
          cls(response)
@@ -173,6 +176,9 @@ class StreamingPoliciesOperations:
         :type account_name: str
         :param streaming_policy_name: The Streaming Policy name.
         :type streaming_policy_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.StreamingPolicy
@@ -246,6 +252,9 @@ class StreamingPoliciesOperations:
         :type streaming_policy_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.StreamingPolicy
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.StreamingPolicy
@@ -320,6 +329,9 @@ class StreamingPoliciesOperations:
         :type account_name: str
         :param streaming_policy_name: The Streaming Policy name.
         :type streaming_policy_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None

@@ -71,6 +71,9 @@ class StreamingLocatorsOperations:
         :param orderby: Specifies the key by which the result collection should be ordered. Default
          value is None.
         :type orderby: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either StreamingLocatorCollection or the result of
          cls(response)
@@ -173,6 +176,9 @@ class StreamingLocatorsOperations:
         :type account_name: str
         :param streaming_locator_name: The Streaming Locator name.
         :type streaming_locator_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingLocator, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.StreamingLocator
@@ -246,6 +252,9 @@ class StreamingLocatorsOperations:
         :type streaming_locator_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.StreamingLocator
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingLocator, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.StreamingLocator
@@ -320,6 +329,9 @@ class StreamingLocatorsOperations:
         :type account_name: str
         :param streaming_locator_name: The Streaming Locator name.
         :type streaming_locator_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -386,6 +398,9 @@ class StreamingLocatorsOperations:
         :type account_name: str
         :param streaming_locator_name: The Streaming Locator name.
         :type streaming_locator_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListContentKeysResponse, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.ListContentKeysResponse
@@ -456,6 +471,9 @@ class StreamingLocatorsOperations:
         :type account_name: str
         :param streaming_locator_name: The Streaming Locator name.
         :type streaming_locator_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListPathsResponse, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.ListPathsResponse

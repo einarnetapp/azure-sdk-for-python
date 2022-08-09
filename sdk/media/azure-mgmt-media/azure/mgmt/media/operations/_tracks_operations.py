@@ -326,6 +326,9 @@ class TracksOperations:
         :type account_name: str
         :param asset_name: The Asset name.
         :type asset_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AssetTrackCollection or the result of
          cls(response)
@@ -426,6 +429,9 @@ class TracksOperations:
         :type asset_name: str
         :param track_name: The Asset Track name.
         :type track_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AssetTrack, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.AssetTrack
@@ -576,6 +582,9 @@ class TracksOperations:
         :type track_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.AssetTrack
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -728,6 +737,9 @@ class TracksOperations:
         :type asset_name: str
         :param track_name: The Asset Track name.
         :type track_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -879,6 +891,9 @@ class TracksOperations:
         :type track_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.AssetTrack
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -1034,6 +1049,9 @@ class TracksOperations:
         :type asset_name: str
         :param track_name: The Asset Track name.
         :type track_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this

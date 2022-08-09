@@ -51,6 +51,9 @@ class Operations:
 
         Lists all the Media Services operations.
 
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: OperationCollection, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.OperationCollection

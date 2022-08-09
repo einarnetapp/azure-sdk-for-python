@@ -66,6 +66,9 @@ class TransformsOperations:
         :param orderby: Specifies the key by which the result collection should be ordered. Default
          value is None.
         :type orderby: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either TransformCollection or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.media.models.TransformCollection]
@@ -164,6 +167,9 @@ class TransformsOperations:
         :type account_name: str
         :param transform_name: The Transform name.
         :type transform_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Transform, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.Transform
@@ -237,6 +243,9 @@ class TransformsOperations:
         :type transform_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.Transform
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Transform, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.Transform
@@ -315,6 +324,9 @@ class TransformsOperations:
         :type account_name: str
         :param transform_name: The Transform name.
         :type transform_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -384,6 +396,9 @@ class TransformsOperations:
         :type transform_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.Transform
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Transform, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.Transform

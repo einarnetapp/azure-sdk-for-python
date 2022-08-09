@@ -58,6 +58,9 @@ class MediaservicesOperations:
 
         :param resource_group_name: The name of the resource group within the Azure subscription.
         :type resource_group_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either MediaServiceCollection or the result of
          cls(response)
@@ -149,6 +152,9 @@ class MediaservicesOperations:
         :type resource_group_name: str
         :param account_name: The Media Services account name.
         :type account_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: MediaService, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.MediaService
@@ -287,6 +293,9 @@ class MediaservicesOperations:
         :type account_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.MediaService
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -374,6 +383,9 @@ class MediaservicesOperations:
         :type resource_group_name: str
         :param account_name: The Media Services account name.
         :type account_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -500,6 +512,9 @@ class MediaservicesOperations:
         :type account_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.MediaServiceUpdate
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -591,6 +606,9 @@ class MediaservicesOperations:
         :type account_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.SyncStorageKeysInput
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -660,6 +678,9 @@ class MediaservicesOperations:
         :type account_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.ListEdgePoliciesInput
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: EdgePolicies, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.EdgePolicies
@@ -724,6 +745,9 @@ class MediaservicesOperations:
 
         List Media Services accounts in the subscription.
 
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either MediaServiceCollection or the result of
          cls(response)

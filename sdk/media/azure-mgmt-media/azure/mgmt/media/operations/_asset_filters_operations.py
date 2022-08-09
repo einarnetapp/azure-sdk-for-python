@@ -283,6 +283,9 @@ class AssetFiltersOperations:
         :type account_name: str
         :param asset_name: The Asset name.
         :type asset_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either AssetFilterCollection or the result of
          cls(response)
@@ -383,6 +386,9 @@ class AssetFiltersOperations:
         :type asset_name: str
         :param filter_name: The Asset Filter name.
         :type filter_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AssetFilter, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.AssetFilter
@@ -460,6 +466,9 @@ class AssetFiltersOperations:
         :type filter_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.AssetFilter
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AssetFilter, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.AssetFilter
@@ -542,6 +551,9 @@ class AssetFiltersOperations:
         :type asset_name: str
         :param filter_name: The Asset Filter name.
         :type filter_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -615,6 +627,9 @@ class AssetFiltersOperations:
         :type filter_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.AssetFilter
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AssetFilter, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.AssetFilter

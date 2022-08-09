@@ -331,6 +331,9 @@ class ContentKeyPoliciesOperations:
         :param orderby: Specifies the key by which the result collection should be ordered. Default
          value is None.
         :type orderby: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ContentKeyPolicyCollection or the result of
          cls(response)
@@ -432,6 +435,9 @@ class ContentKeyPoliciesOperations:
         :type account_name: str
         :param content_key_policy_name: The Content Key Policy name.
         :type content_key_policy_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ContentKeyPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.ContentKeyPolicy
@@ -505,6 +511,9 @@ class ContentKeyPoliciesOperations:
         :type content_key_policy_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.ContentKeyPolicy
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ContentKeyPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.ContentKeyPolicy
@@ -583,6 +592,9 @@ class ContentKeyPoliciesOperations:
         :type account_name: str
         :param content_key_policy_name: The Content Key Policy name.
         :type content_key_policy_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -652,6 +664,9 @@ class ContentKeyPoliciesOperations:
         :type content_key_policy_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.ContentKeyPolicy
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ContentKeyPolicy, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.ContentKeyPolicy
@@ -726,6 +741,9 @@ class ContentKeyPoliciesOperations:
         :type account_name: str
         :param content_key_policy_name: The Content Key Policy name.
         :type content_key_policy_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ContentKeyPolicyProperties, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.ContentKeyPolicyProperties

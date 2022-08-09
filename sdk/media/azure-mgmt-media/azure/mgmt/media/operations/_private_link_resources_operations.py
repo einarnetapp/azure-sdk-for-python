@@ -136,6 +136,9 @@ class PrivateLinkResourcesOperations:
         :type resource_group_name: str
         :param account_name: The Media Services account name.
         :type account_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateLinkResourceListResult, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.PrivateLinkResourceListResult
@@ -205,6 +208,9 @@ class PrivateLinkResourcesOperations:
         :type account_name: str
         :param name:
         :type name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: PrivateLinkResource, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.PrivateLinkResource

@@ -1233,6 +1233,47 @@ class AssetTrackOperationStatus(msrest.serialization.Model):
         self.error = error
 
 
+class AsyncOperationResult(msrest.serialization.Model):
+    """The status of an async operation.
+
+    :ivar error: The error object.
+    :vartype error: ~azure.mgmt.media.models.ErrorDetail
+    :ivar name: Operation Id of the async operation.
+    :vartype name: str
+    :ivar status: Operation status of the async operation. Known values are: "Succeeded", "Failed",
+     "InProgress".
+    :vartype status: str or ~azure.mgmt.media.models.AsyncOperationStatus
+    """
+
+    _attribute_map = {
+        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        'name': {'key': 'name', 'type': 'str'},
+        'status': {'key': 'status', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        error: Optional["_models.ErrorDetail"] = None,
+        name: Optional[str] = None,
+        status: Optional[Union[str, "_models.AsyncOperationStatus"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword error: The error object.
+        :paramtype error: ~azure.mgmt.media.models.ErrorDetail
+        :keyword name: Operation Id of the async operation.
+        :paramtype name: str
+        :keyword status: Operation status of the async operation. Known values are: "Succeeded",
+         "Failed", "InProgress".
+        :paramtype status: str or ~azure.mgmt.media.models.AsyncOperationStatus
+        """
+        super(AsyncOperationResult, self).__init__(**kwargs)
+        self.error = error
+        self.name = name
+        self.status = status
+
+
 class Preset(msrest.serialization.Model):
     """Base type for all Presets, which define the recipe or instructions on how the input media files should be processed.
 
@@ -7430,6 +7471,12 @@ class LiveOutput(ProxyResource):
      maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and
      30 minutes of archive window.
     :vartype archive_window_length: ~datetime.timedelta
+    :ivar rewind_window_length: ISO 8601 time between 1 minute to the duration of
+     archiveWindowLength to control seek-able window length during Live. The service won't use this
+     property once LiveOutput stops. The archived VOD will have full content with original
+     ArchiveWindowLength. For example, use PT1H30M to indicate 1 hour and 30 minutes of rewind
+     window length. Service will use implicit default value 30m only if Live Event enables LL.
+    :vartype rewind_window_length: ~datetime.timedelta
     :ivar manifest_name: The manifest file name. If not provided, the service will generate one
      automatically.
     :vartype manifest_name: str
@@ -7468,6 +7515,7 @@ class LiveOutput(ProxyResource):
         'description': {'key': 'properties.description', 'type': 'str'},
         'asset_name': {'key': 'properties.assetName', 'type': 'str'},
         'archive_window_length': {'key': 'properties.archiveWindowLength', 'type': 'duration'},
+        'rewind_window_length': {'key': 'properties.rewindWindowLength', 'type': 'duration'},
         'manifest_name': {'key': 'properties.manifestName', 'type': 'str'},
         'hls': {'key': 'properties.hls', 'type': 'Hls'},
         'output_snap_time': {'key': 'properties.outputSnapTime', 'type': 'long'},
@@ -7483,6 +7531,7 @@ class LiveOutput(ProxyResource):
         description: Optional[str] = None,
         asset_name: Optional[str] = None,
         archive_window_length: Optional[datetime.timedelta] = None,
+        rewind_window_length: Optional[datetime.timedelta] = None,
         manifest_name: Optional[str] = None,
         hls: Optional["_models.Hls"] = None,
         output_snap_time: Optional[int] = None,
@@ -7498,6 +7547,12 @@ class LiveOutput(ProxyResource):
          the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour
          and 30 minutes of archive window.
         :paramtype archive_window_length: ~datetime.timedelta
+        :keyword rewind_window_length: ISO 8601 time between 1 minute to the duration of
+         archiveWindowLength to control seek-able window length during Live. The service won't use this
+         property once LiveOutput stops. The archived VOD will have full content with original
+         ArchiveWindowLength. For example, use PT1H30M to indicate 1 hour and 30 minutes of rewind
+         window length. Service will use implicit default value 30m only if Live Event enables LL.
+        :paramtype rewind_window_length: ~datetime.timedelta
         :keyword manifest_name: The manifest file name. If not provided, the service will generate one
          automatically.
         :paramtype manifest_name: str
@@ -7512,6 +7567,7 @@ class LiveOutput(ProxyResource):
         self.description = description
         self.asset_name = asset_name
         self.archive_window_length = archive_window_length
+        self.rewind_window_length = rewind_window_length
         self.manifest_name = manifest_name
         self.hls = hls
         self.output_snap_time = output_snap_time

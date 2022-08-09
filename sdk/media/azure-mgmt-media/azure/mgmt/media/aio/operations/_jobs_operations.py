@@ -69,6 +69,9 @@ class JobsOperations:
         :param orderby: Specifies the key by which the result collection should be ordered. Default
          value is None.
         :type orderby: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either JobCollection or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.media.models.JobCollection]
@@ -172,6 +175,9 @@ class JobsOperations:
         :type transform_name: str
         :param job_name: The Job name.
         :type job_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Job, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.Job
@@ -249,6 +255,9 @@ class JobsOperations:
         :type job_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.Job
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Job, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.Job
@@ -327,6 +336,9 @@ class JobsOperations:
         :type transform_name: str
         :param job_name: The Job name.
         :type job_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -402,6 +414,9 @@ class JobsOperations:
         :type job_name: str
         :param parameters: The request parameters.
         :type parameters: ~azure.mgmt.media.models.Job
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Job, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.Job
@@ -480,6 +495,9 @@ class JobsOperations:
         :type transform_name: str
         :param job_name: The Job name.
         :type job_name: str
+        :keyword api_version: Api Version. Default value is "2021-11-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None

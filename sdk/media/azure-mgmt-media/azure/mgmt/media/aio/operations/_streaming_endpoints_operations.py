@@ -22,7 +22,7 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._streaming_endpoints_operations import build_create_request_initial, build_delete_request_initial, build_get_request, build_list_request, build_scale_request_initial, build_skus_request, build_start_request_initial, build_stop_request_initial, build_update_request_initial
+from ...operations._streaming_endpoints_operations import build_async_operation_request, build_create_request_initial, build_delete_request_initial, build_get_request, build_list_request, build_operation_location_request, build_scale_request_initial, build_skus_request, build_start_request_initial, build_stop_request_initial, build_update_request_initial
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -61,6 +61,9 @@ class StreamingEndpointsOperations:
         :type resource_group_name: str
         :param account_name: The Media Services account name.
         :type account_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either StreamingEndpointListResult or the result of
          cls(response)
@@ -71,7 +74,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.StreamingEndpointListResult]
 
         error_map = {
@@ -157,6 +160,9 @@ class StreamingEndpointsOperations:
         :type account_name: str
         :param streaming_endpoint_name: The name of the streaming endpoint, maximum length is 24.
         :type streaming_endpoint_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingEndpoint, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.StreamingEndpoint
@@ -170,7 +176,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.StreamingEndpoint]
 
         
@@ -226,7 +232,7 @@ class StreamingEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.StreamingEndpoint]
 
@@ -298,6 +304,9 @@ class StreamingEndpointsOperations:
         :param auto_start: The flag indicates if the resource should be automatically started on
          creation. Default value is None.
         :type auto_start: bool
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -314,7 +323,7 @@ class StreamingEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.StreamingEndpoint]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
@@ -382,7 +391,7 @@ class StreamingEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.StreamingEndpoint]
 
@@ -449,6 +458,9 @@ class StreamingEndpointsOperations:
         :type streaming_endpoint_name: str
         :param parameters: Streaming endpoint properties needed for creation.
         :type parameters: ~azure.mgmt.media.models.StreamingEndpoint
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -465,7 +477,7 @@ class StreamingEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.StreamingEndpoint]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
@@ -531,7 +543,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -583,6 +595,9 @@ class StreamingEndpointsOperations:
         :type account_name: str
         :param streaming_endpoint_name: The name of the streaming endpoint, maximum length is 24.
         :type streaming_endpoint_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -598,7 +613,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -662,6 +677,9 @@ class StreamingEndpointsOperations:
         :type account_name: str
         :param streaming_endpoint_name: The name of the streaming endpoint, maximum length is 24.
         :type streaming_endpoint_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: StreamingEndpointSkuInfoListResult, or the result of cls(response)
         :rtype: ~azure.mgmt.media.models.StreamingEndpointSkuInfoListResult
@@ -675,7 +693,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.StreamingEndpointSkuInfoListResult]
 
         
@@ -729,7 +747,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -781,6 +799,9 @@ class StreamingEndpointsOperations:
         :type account_name: str
         :param streaming_endpoint_name: The name of the streaming endpoint, maximum length is 24.
         :type streaming_endpoint_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -796,7 +817,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -857,7 +878,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -909,6 +930,9 @@ class StreamingEndpointsOperations:
         :type account_name: str
         :param streaming_endpoint_name: The name of the streaming endpoint, maximum length is 24.
         :type streaming_endpoint_name: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -924,7 +948,7 @@ class StreamingEndpointsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop(
@@ -986,7 +1010,7 @@ class StreamingEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
@@ -1045,6 +1069,9 @@ class StreamingEndpointsOperations:
         :type streaming_endpoint_name: str
         :param parameters: Streaming endpoint scale parameters.
         :type parameters: ~azure.mgmt.media.models.StreamingEntityScaleUnit
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -1060,7 +1087,7 @@ class StreamingEndpointsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-11-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, AsyncPollingMethod]
@@ -1108,3 +1135,155 @@ class StreamingEndpointsOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
     begin_scale.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpoints/{streamingEndpointName}/scale"}  # type: ignore
+
+    @distributed_trace_async
+    async def async_operation(
+        self,
+        resource_group_name: str,
+        account_name: str,
+        operation_id: str,
+        **kwargs: Any
+    ) -> _models.AsyncOperationResult:
+        """Get operation status.
+
+        Get a streaming endpoint operation status.
+
+        :param resource_group_name: The name of the resource group within the Azure subscription.
+        :type resource_group_name: str
+        :param account_name: The Media Services account name.
+        :type account_name: str
+        :param operation_id: The ID of an ongoing async operation.
+        :type operation_id: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: AsyncOperationResult, or the result of cls(response)
+        :rtype: ~azure.mgmt.media.models.AsyncOperationResult
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.AsyncOperationResult]
+
+        
+        request = build_async_operation_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            account_name=account_name,
+            operation_id=operation_id,
+            api_version=api_version,
+            template_url=self.async_operation.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize('AsyncOperationResult', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    async_operation.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpointOperations/{operationId}"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def operation_location(
+        self,
+        resource_group_name: str,
+        account_name: str,
+        streaming_endpoint_name: str,
+        operation_id: str,
+        **kwargs: Any
+    ) -> Optional[_models.StreamingEndpoint]:
+        """Get operation status.
+
+        Get a streaming endpoint operation status.
+
+        :param resource_group_name: The name of the resource group within the Azure subscription.
+        :type resource_group_name: str
+        :param account_name: The Media Services account name.
+        :type account_name: str
+        :param streaming_endpoint_name: The name of the streaming endpoint, maximum length is 24.
+        :type streaming_endpoint_name: str
+        :param operation_id: The ID of an ongoing async operation.
+        :type operation_id: str
+        :keyword api_version: Api Version. Default value is "2022-08-01". Note that overriding this
+         default value may result in unsupported behavior.
+        :paramtype api_version: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: StreamingEndpoint, or the result of cls(response)
+        :rtype: ~azure.mgmt.media.models.StreamingEndpoint or None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.StreamingEndpoint]]
+
+        
+        request = build_operation_location_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            account_name=account_name,
+            streaming_endpoint_name=streaming_endpoint_name,
+            operation_id=operation_id,
+            api_version=api_version,
+            template_url=self.operation_location.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = None
+        if response.status_code == 200:
+            deserialized = self._deserialize('StreamingEndpoint', pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    operation_location.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/streamingEndpoints/{streamingEndpointName}/operationLocations/{operationId}"}  # type: ignore
+
