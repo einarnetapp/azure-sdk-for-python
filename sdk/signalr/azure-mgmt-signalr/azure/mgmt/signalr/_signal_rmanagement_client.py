@@ -7,11 +7,12 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Optional, TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
+
+from msrest import Deserializer, Serializer
 
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
-from msrest import Deserializer, Serializer
 
 from . import models
 from ._configuration import SignalRManagementClientConfiguration
@@ -21,7 +22,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class SignalRManagementClient:
+class SignalRManagementClient:    # pylint: disable=too-many-instance-attributes
     """REST API for Azure SignalR Service.
 
     :ivar operations: Operations operations
@@ -51,8 +52,11 @@ class SignalRManagementClient:
     :param subscription_id: Gets subscription Id which uniquely identify the Microsoft Azure
      subscription. The subscription ID forms part of the URI for every service call.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is 'https://management.azure.com'.
+    :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2022-02-01". Note that overriding this
+     default value may result in unsupported behavior.
+    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -71,19 +75,35 @@ class SignalRManagementClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.signal_r = SignalROperations(self._client, self._config, self._serialize, self._deserialize)
-        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.signal_rcustom_certificates = SignalRCustomCertificatesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.signal_rcustom_domains = SignalRCustomDomainsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.signal_rprivate_endpoint_connections = SignalRPrivateEndpointConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.signal_rprivate_link_resources = SignalRPrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.signal_rshared_private_link_resources = SignalRSharedPrivateLinkResourcesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.signal_r = SignalROperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.usages = UsagesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.signal_rcustom_certificates = SignalRCustomCertificatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.signal_rcustom_domains = SignalRCustomDomainsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.signal_rprivate_endpoint_connections = SignalRPrivateEndpointConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.signal_rprivate_link_resources = SignalRPrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.signal_rshared_private_link_resources = SignalRSharedPrivateLinkResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(
         self,
-        request,  # type: HttpRequest
+        request: HttpRequest,
         **kwargs: Any
     ) -> HttpResponse:
         """Runs the network request through the client's chained policies.
