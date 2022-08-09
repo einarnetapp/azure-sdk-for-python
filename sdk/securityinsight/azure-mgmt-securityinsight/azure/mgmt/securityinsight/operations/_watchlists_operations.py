@@ -38,7 +38,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -78,7 +78,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -117,7 +117,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -159,7 +159,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -220,7 +220,7 @@ class WatchlistsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> Iterable[_models.WatchlistList]:
-        """Get all watchlists, without watchlist items.
+        """Gets all watchlists, without watchlist items.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
@@ -239,7 +239,7 @@ class WatchlistsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WatchlistList]
 
         error_map = {
@@ -316,13 +316,13 @@ class WatchlistsOperations:
         watchlist_alias: str,
         **kwargs: Any
     ) -> _models.Watchlist:
-        """Get a watchlist, without its watchlist items.
+        """Gets a watchlist, without its watchlist items.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: The watchlist alias.
+        :param watchlist_alias: Watchlist Alias.
         :type watchlist_alias: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Watchlist, or the result of cls(response)
@@ -337,7 +337,7 @@ class WatchlistsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Watchlist]
 
         
@@ -389,7 +389,7 @@ class WatchlistsOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: The watchlist alias.
+        :param watchlist_alias: Watchlist Alias.
         :type watchlist_alias: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
@@ -404,7 +404,7 @@ class WatchlistsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -432,8 +432,13 @@ class WatchlistsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 200:
+            response_headers['Azure-AsyncOperation']=self._deserialize('str', response.headers.get('Azure-AsyncOperation'))
+            
+
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, None, response_headers)
 
     delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}"}  # type: ignore
 
@@ -448,14 +453,17 @@ class WatchlistsOperations:
         **kwargs: Any
     ) -> _models.Watchlist:
         """Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv
-        content type). To create a Watchlist and its Items, we should call this endpoint with
-        rawContent and contentType properties.
+        content type). To create a Watchlist and its Items, we should call this endpoint with either
+        rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for
+        small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large
+        watchlist, where the content size can go up to 500 MB. The status of processing such large file
+        can be polled through the URL returned in Azure-AsyncOperation header.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :param watchlist_alias: The watchlist alias.
+        :param watchlist_alias: Watchlist Alias.
         :type watchlist_alias: str
         :param watchlist: The watchlist.
         :type watchlist: ~azure.mgmt.securityinsight.models.Watchlist
@@ -472,7 +480,7 @@ class WatchlistsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Watchlist]
 
@@ -504,14 +512,17 @@ class WatchlistsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
+        response_headers = {}
         if response.status_code == 200:
             deserialized = self._deserialize('Watchlist', pipeline_response)
 
         if response.status_code == 201:
+            response_headers['Azure-AsyncOperation']=self._deserialize('str', response.headers.get('Azure-AsyncOperation'))
+            
             deserialized = self._deserialize('Watchlist', pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
