@@ -6,5 +6,4 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._app_configuration_management_client import AppConfigurationManagementClient
-__all__ = ['AppConfigurationManagementClient']
+VERSION = "1.0.0b1"
