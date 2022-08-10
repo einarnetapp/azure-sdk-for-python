@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """ProvisioningState represents a provisioning state.
     """
 
@@ -22,14 +21,14 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SUCCEEDED = "Succeeded"
     UPDATING = "Updating"
 
-class Visibility(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Visibility(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Visibility represents visibility.
     """
 
     PRIVATE = "Private"
     PUBLIC = "Public"
 
-class VMSize(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class VMSize(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """VMSize represents a VM size.
     """
 

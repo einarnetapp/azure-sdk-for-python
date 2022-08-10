@@ -7,17 +7,19 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._azure_red_hat_open_shift_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class APIServerProfile(msrest.serialization.Model):
     """APIServerProfile represents an API server profile.
 
-    :ivar visibility: API server visibility. Possible values include: "Private", "Public".
+    :ivar visibility: API server visibility. Known values are: "Private", "Public".
     :vartype visibility: str or ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.Visibility
     :ivar url: The URL to access the cluster API server.
     :vartype url: str
@@ -34,13 +36,13 @@ class APIServerProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        visibility: Optional[Union[str, "Visibility"]] = None,
+        visibility: Optional[Union[str, "_models.Visibility"]] = None,
         url: Optional[str] = None,
         ip: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword visibility: API server visibility. Possible values include: "Private", "Public".
+        :keyword visibility: API server visibility. Known values are: "Private", "Public".
         :paramtype visibility: str or ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.Visibility
         :keyword url: The URL to access the cluster API server.
         :paramtype url: str
@@ -82,7 +84,7 @@ class CloudErrorBody(msrest.serialization.Model):
         code: Optional[str] = None,
         message: Optional[str] = None,
         target: Optional[str] = None,
-        details: Optional[List["CloudErrorBody"]] = None,
+        details: Optional[List["_models.CloudErrorBody"]] = None,
         **kwargs
     ):
         """
@@ -227,7 +229,7 @@ class IngressProfile(msrest.serialization.Model):
 
     :ivar name: The ingress profile name.
     :vartype name: str
-    :ivar visibility: Ingress visibility. Possible values include: "Private", "Public".
+    :ivar visibility: Ingress visibility. Known values are: "Private", "Public".
     :vartype visibility: str or ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.Visibility
     :ivar ip: The IP of the ingress.
     :vartype ip: str
@@ -243,14 +245,14 @@ class IngressProfile(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        visibility: Optional[Union[str, "Visibility"]] = None,
+        visibility: Optional[Union[str, "_models.Visibility"]] = None,
         ip: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword name: The ingress profile name.
         :paramtype name: str
-        :keyword visibility: Ingress visibility. Possible values include: "Private", "Public".
+        :keyword visibility: Ingress visibility. Known values are: "Private", "Public".
         :paramtype visibility: str or ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.Visibility
         :keyword ip: The IP of the ingress.
         :paramtype ip: str
@@ -264,7 +266,7 @@ class IngressProfile(msrest.serialization.Model):
 class MasterProfile(msrest.serialization.Model):
     """MasterProfile represents a master profile.
 
-    :ivar vm_size: The size of the master VMs. Possible values include: "Standard_D16as_v4",
+    :ivar vm_size: The size of the master VMs. Known values are: "Standard_D16as_v4",
      "Standard_D16s_v3", "Standard_D2s_v3", "Standard_D32as_v4", "Standard_D32s_v3",
      "Standard_D4as_v4", "Standard_D4s_v3", "Standard_D8as_v4", "Standard_D8s_v3",
      "Standard_E16s_v3", "Standard_E32s_v3", "Standard_E4s_v3", "Standard_E64i_v3",
@@ -274,8 +276,8 @@ class MasterProfile(msrest.serialization.Model):
     :vartype vm_size: str or ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.VMSize
     :ivar subnet_id: The Azure resource ID of the master subnet.
     :vartype subnet_id: str
-    :ivar encryption_at_host: Whether master virtual machines are encrypted at host. Possible
-     values include: "Disabled", "Enabled".
+    :ivar encryption_at_host: Whether master virtual machines are encrypted at host. Known values
+     are: "Disabled", "Enabled".
     :vartype encryption_at_host: str or
      ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.EncryptionAtHost
     :ivar disk_encryption_set_id: The resource ID of an associated DiskEncryptionSet, if
@@ -293,14 +295,14 @@ class MasterProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        vm_size: Optional[Union[str, "VMSize"]] = None,
+        vm_size: Optional[Union[str, "_models.VMSize"]] = None,
         subnet_id: Optional[str] = None,
-        encryption_at_host: Optional[Union[str, "EncryptionAtHost"]] = None,
+        encryption_at_host: Optional[Union[str, "_models.EncryptionAtHost"]] = None,
         disk_encryption_set_id: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword vm_size: The size of the master VMs. Possible values include: "Standard_D16as_v4",
+        :keyword vm_size: The size of the master VMs. Known values are: "Standard_D16as_v4",
          "Standard_D16s_v3", "Standard_D2s_v3", "Standard_D32as_v4", "Standard_D32s_v3",
          "Standard_D4as_v4", "Standard_D4s_v3", "Standard_D8as_v4", "Standard_D8s_v3",
          "Standard_E16s_v3", "Standard_E32s_v3", "Standard_E4s_v3", "Standard_E64i_v3",
@@ -310,8 +312,8 @@ class MasterProfile(msrest.serialization.Model):
         :paramtype vm_size: str or ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.VMSize
         :keyword subnet_id: The Azure resource ID of the master subnet.
         :paramtype subnet_id: str
-        :keyword encryption_at_host: Whether master virtual machines are encrypted at host. Possible
-         values include: "Disabled", "Enabled".
+        :keyword encryption_at_host: Whether master virtual machines are encrypted at host. Known
+         values are: "Disabled", "Enabled".
         :paramtype encryption_at_host: str or
          ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.EncryptionAtHost
         :keyword disk_encryption_set_id: The resource ID of an associated DiskEncryptionSet, if
@@ -329,7 +331,7 @@ class NetworkProfile(msrest.serialization.Model):
     """NetworkProfile represents a network profile.
 
     :ivar software_defined_network: The software defined network (SDN) to use when installing the
-     cluster. Possible values include: "OVNKubernetes", "OpenShiftSDN".
+     cluster. Known values are: "OVNKubernetes", "OpenShiftSDN".
     :vartype software_defined_network: str or
      ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.SoftwareDefinedNetwork
     :ivar pod_cidr: The CIDR used for OpenShift/Kubernetes Pods.
@@ -347,14 +349,14 @@ class NetworkProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        software_defined_network: Optional[Union[str, "SoftwareDefinedNetwork"]] = None,
+        software_defined_network: Optional[Union[str, "_models.SoftwareDefinedNetwork"]] = None,
         pod_cidr: Optional[str] = None,
         service_cidr: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword software_defined_network: The software defined network (SDN) to use when installing
-         the cluster. Possible values include: "OVNKubernetes", "OpenShiftSDN".
+         the cluster. Known values are: "OVNKubernetes", "OpenShiftSDN".
         :paramtype software_defined_network: str or
          ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.SoftwareDefinedNetwork
         :keyword pod_cidr: The CIDR used for OpenShift/Kubernetes Pods.
@@ -482,8 +484,8 @@ class OpenShiftCluster(TrackedResource):
     :vartype location: str
     :ivar system_data: The system meta data relating to this resource.
     :vartype system_data: ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.SystemData
-    :ivar provisioning_state: The cluster provisioning state. Possible values include:
-     "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
+    :ivar provisioning_state: The cluster provisioning state. Known values are: "AdminUpdating",
+     "Creating", "Deleting", "Failed", "Succeeded", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.ProvisioningState
     :ivar cluster_profile: The cluster profile.
@@ -539,15 +541,15 @@ class OpenShiftCluster(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        provisioning_state: Optional[Union[str, "ProvisioningState"]] = None,
-        cluster_profile: Optional["ClusterProfile"] = None,
-        console_profile: Optional["ConsoleProfile"] = None,
-        service_principal_profile: Optional["ServicePrincipalProfile"] = None,
-        network_profile: Optional["NetworkProfile"] = None,
-        master_profile: Optional["MasterProfile"] = None,
-        worker_profiles: Optional[List["WorkerProfile"]] = None,
-        apiserver_profile: Optional["APIServerProfile"] = None,
-        ingress_profiles: Optional[List["IngressProfile"]] = None,
+        provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None,
+        cluster_profile: Optional["_models.ClusterProfile"] = None,
+        console_profile: Optional["_models.ConsoleProfile"] = None,
+        service_principal_profile: Optional["_models.ServicePrincipalProfile"] = None,
+        network_profile: Optional["_models.NetworkProfile"] = None,
+        master_profile: Optional["_models.MasterProfile"] = None,
+        worker_profiles: Optional[List["_models.WorkerProfile"]] = None,
+        apiserver_profile: Optional["_models.APIServerProfile"] = None,
+        ingress_profiles: Optional[List["_models.IngressProfile"]] = None,
         **kwargs
     ):
         """
@@ -555,8 +557,8 @@ class OpenShiftCluster(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: Required. The geo-location where the resource lives.
         :paramtype location: str
-        :keyword provisioning_state: The cluster provisioning state. Possible values include:
-         "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
+        :keyword provisioning_state: The cluster provisioning state. Known values are: "AdminUpdating",
+         "Creating", "Deleting", "Failed", "Succeeded", "Updating".
         :paramtype provisioning_state: str or
          ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.ProvisioningState
         :keyword cluster_profile: The cluster profile.
@@ -670,7 +672,7 @@ class OpenShiftClusterList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["OpenShiftCluster"]] = None,
+        value: Optional[List["_models.OpenShiftCluster"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -694,8 +696,8 @@ class OpenShiftClusterUpdate(msrest.serialization.Model):
     :vartype tags: dict[str, str]
     :ivar system_data: The system meta data relating to this resource.
     :vartype system_data: ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.SystemData
-    :ivar provisioning_state: The cluster provisioning state. Possible values include:
-     "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
+    :ivar provisioning_state: The cluster provisioning state. Known values are: "AdminUpdating",
+     "Creating", "Deleting", "Failed", "Succeeded", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.ProvisioningState
     :ivar cluster_profile: The cluster profile.
@@ -742,22 +744,22 @@ class OpenShiftClusterUpdate(msrest.serialization.Model):
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        provisioning_state: Optional[Union[str, "ProvisioningState"]] = None,
-        cluster_profile: Optional["ClusterProfile"] = None,
-        console_profile: Optional["ConsoleProfile"] = None,
-        service_principal_profile: Optional["ServicePrincipalProfile"] = None,
-        network_profile: Optional["NetworkProfile"] = None,
-        master_profile: Optional["MasterProfile"] = None,
-        worker_profiles: Optional[List["WorkerProfile"]] = None,
-        apiserver_profile: Optional["APIServerProfile"] = None,
-        ingress_profiles: Optional[List["IngressProfile"]] = None,
+        provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None,
+        cluster_profile: Optional["_models.ClusterProfile"] = None,
+        console_profile: Optional["_models.ConsoleProfile"] = None,
+        service_principal_profile: Optional["_models.ServicePrincipalProfile"] = None,
+        network_profile: Optional["_models.NetworkProfile"] = None,
+        master_profile: Optional["_models.MasterProfile"] = None,
+        worker_profiles: Optional[List["_models.WorkerProfile"]] = None,
+        apiserver_profile: Optional["_models.APIServerProfile"] = None,
+        ingress_profiles: Optional[List["_models.IngressProfile"]] = None,
         **kwargs
     ):
         """
         :keyword tags: A set of tags. The resource tags.
         :paramtype tags: dict[str, str]
-        :keyword provisioning_state: The cluster provisioning state. Possible values include:
-         "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
+        :keyword provisioning_state: The cluster provisioning state. Known values are: "AdminUpdating",
+         "Creating", "Deleting", "Failed", "Succeeded", "Updating".
         :paramtype provisioning_state: str or
          ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.ProvisioningState
         :keyword cluster_profile: The cluster profile.
@@ -820,7 +822,7 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["Display"] = None,
+        display: Optional["_models.Display"] = None,
         origin: Optional[str] = None,
         **kwargs
     ):
@@ -856,7 +858,7 @@ class OperationList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -908,7 +910,7 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or
      ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.CreatedByType
@@ -916,8 +918,8 @@ class SystemData(msrest.serialization.Model):
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or
      ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
@@ -937,26 +939,26 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or
          ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or
          ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
@@ -976,7 +978,7 @@ class WorkerProfile(msrest.serialization.Model):
 
     :ivar name: The worker profile name.
     :vartype name: str
-    :ivar vm_size: The size of the worker VMs. Possible values include: "Standard_D16as_v4",
+    :ivar vm_size: The size of the worker VMs. Known values are: "Standard_D16as_v4",
      "Standard_D16s_v3", "Standard_D2s_v3", "Standard_D32as_v4", "Standard_D32s_v3",
      "Standard_D4as_v4", "Standard_D4s_v3", "Standard_D8as_v4", "Standard_D8s_v3",
      "Standard_E16s_v3", "Standard_E32s_v3", "Standard_E4s_v3", "Standard_E64i_v3",
@@ -990,8 +992,8 @@ class WorkerProfile(msrest.serialization.Model):
     :vartype subnet_id: str
     :ivar count: The number of worker VMs.
     :vartype count: int
-    :ivar encryption_at_host: Whether master virtual machines are encrypted at host. Possible
-     values include: "Disabled", "Enabled".
+    :ivar encryption_at_host: Whether master virtual machines are encrypted at host. Known values
+     are: "Disabled", "Enabled".
     :vartype encryption_at_host: str or
      ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.EncryptionAtHost
     :ivar disk_encryption_set_id: The resource ID of an associated DiskEncryptionSet, if
@@ -1013,18 +1015,18 @@ class WorkerProfile(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        vm_size: Optional[Union[str, "VMSize"]] = None,
+        vm_size: Optional[Union[str, "_models.VMSize"]] = None,
         disk_size_gb: Optional[int] = None,
         subnet_id: Optional[str] = None,
         count: Optional[int] = None,
-        encryption_at_host: Optional[Union[str, "EncryptionAtHost"]] = None,
+        encryption_at_host: Optional[Union[str, "_models.EncryptionAtHost"]] = None,
         disk_encryption_set_id: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword name: The worker profile name.
         :paramtype name: str
-        :keyword vm_size: The size of the worker VMs. Possible values include: "Standard_D16as_v4",
+        :keyword vm_size: The size of the worker VMs. Known values are: "Standard_D16as_v4",
          "Standard_D16s_v3", "Standard_D2s_v3", "Standard_D32as_v4", "Standard_D32s_v3",
          "Standard_D4as_v4", "Standard_D4s_v3", "Standard_D8as_v4", "Standard_D8s_v3",
          "Standard_E16s_v3", "Standard_E32s_v3", "Standard_E4s_v3", "Standard_E64i_v3",
@@ -1038,8 +1040,8 @@ class WorkerProfile(msrest.serialization.Model):
         :paramtype subnet_id: str
         :keyword count: The number of worker VMs.
         :paramtype count: int
-        :keyword encryption_at_host: Whether master virtual machines are encrypted at host. Possible
-         values include: "Disabled", "Enabled".
+        :keyword encryption_at_host: Whether master virtual machines are encrypted at host. Known
+         values are: "Disabled", "Enabled".
         :paramtype encryption_at_host: str or
          ~azure.mgmt.redhatopenshift.v2021_09_01_preview.models.EncryptionAtHost
         :keyword disk_encryption_set_id: The resource ID of an associated DiskEncryptionSet, if

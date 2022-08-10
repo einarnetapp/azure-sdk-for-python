@@ -6,18 +6,19 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 import msrest.serialization
 
-from ._azure_red_hat_open_shift4_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class APIServerProfile(msrest.serialization.Model):
     """APIServerProfile represents an API server profile.
 
-    :ivar visibility: API server visibility (immutable). Possible values include: "Private",
-     "Public".
+    :ivar visibility: API server visibility (immutable). Known values are: "Private", "Public".
     :vartype visibility: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.Visibility
     :ivar url: The URL to access the cluster API server (immutable).
     :vartype url: str
@@ -34,14 +35,13 @@ class APIServerProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        visibility: Optional[Union[str, "Visibility"]] = None,
+        visibility: Optional[Union[str, "_models.Visibility"]] = None,
         url: Optional[str] = None,
         ip: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword visibility: API server visibility (immutable). Possible values include: "Private",
-         "Public".
+        :keyword visibility: API server visibility (immutable). Known values are: "Private", "Public".
         :paramtype visibility: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.Visibility
         :keyword url: The URL to access the cluster API server (immutable).
         :paramtype url: str
@@ -83,7 +83,7 @@ class CloudErrorBody(msrest.serialization.Model):
         code: Optional[str] = None,
         message: Optional[str] = None,
         target: Optional[str] = None,
-        details: Optional[List["CloudErrorBody"]] = None,
+        details: Optional[List["_models.CloudErrorBody"]] = None,
         **kwargs
     ):
         """
@@ -228,7 +228,7 @@ class IngressProfile(msrest.serialization.Model):
 
     :ivar name: The ingress profile name.  Must be "default" (immutable).
     :vartype name: str
-    :ivar visibility: Ingress visibility (immutable). Possible values include: "Private", "Public".
+    :ivar visibility: Ingress visibility (immutable). Known values are: "Private", "Public".
     :vartype visibility: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.Visibility
     :ivar ip: The IP of the ingress (immutable).
     :vartype ip: str
@@ -244,15 +244,14 @@ class IngressProfile(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        visibility: Optional[Union[str, "Visibility"]] = None,
+        visibility: Optional[Union[str, "_models.Visibility"]] = None,
         ip: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword name: The ingress profile name.  Must be "default" (immutable).
         :paramtype name: str
-        :keyword visibility: Ingress visibility (immutable). Possible values include: "Private",
-         "Public".
+        :keyword visibility: Ingress visibility (immutable). Known values are: "Private", "Public".
         :paramtype visibility: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.Visibility
         :keyword ip: The IP of the ingress (immutable).
         :paramtype ip: str
@@ -266,8 +265,8 @@ class IngressProfile(msrest.serialization.Model):
 class MasterProfile(msrest.serialization.Model):
     """MasterProfile represents a master profile.
 
-    :ivar vm_size: The size of the master VMs (immutable). Possible values include:
-     "Standard_D2s_v3", "Standard_D4s_v3", "Standard_D8s_v3".
+    :ivar vm_size: The size of the master VMs (immutable). Known values are: "Standard_D2s_v3",
+     "Standard_D4s_v3", "Standard_D8s_v3".
     :vartype vm_size: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.VMSize
     :ivar subnet_id: The Azure resource ID of the master subnet (immutable).
     :vartype subnet_id: str
@@ -281,13 +280,13 @@ class MasterProfile(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        vm_size: Optional[Union[str, "VMSize"]] = None,
+        vm_size: Optional[Union[str, "_models.VMSize"]] = None,
         subnet_id: Optional[str] = None,
         **kwargs
     ):
         """
-        :keyword vm_size: The size of the master VMs (immutable). Possible values include:
-         "Standard_D2s_v3", "Standard_D4s_v3", "Standard_D8s_v3".
+        :keyword vm_size: The size of the master VMs (immutable). Known values are: "Standard_D2s_v3",
+         "Standard_D4s_v3", "Standard_D8s_v3".
         :paramtype vm_size: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.VMSize
         :keyword subnet_id: The Azure resource ID of the master subnet (immutable).
         :paramtype subnet_id: str
@@ -441,7 +440,7 @@ class OpenShiftCluster(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
-    :ivar provisioning_state: The cluster provisioning state (immutable). Possible values include:
+    :ivar provisioning_state: The cluster provisioning state (immutable). Known values are:
      "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.redhatopenshift.v2020_04_30.models.ProvisioningState
@@ -493,15 +492,15 @@ class OpenShiftCluster(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
-        provisioning_state: Optional[Union[str, "ProvisioningState"]] = None,
-        cluster_profile: Optional["ClusterProfile"] = None,
-        console_profile: Optional["ConsoleProfile"] = None,
-        service_principal_profile: Optional["ServicePrincipalProfile"] = None,
-        network_profile: Optional["NetworkProfile"] = None,
-        master_profile: Optional["MasterProfile"] = None,
-        worker_profiles: Optional[List["WorkerProfile"]] = None,
-        apiserver_profile: Optional["APIServerProfile"] = None,
-        ingress_profiles: Optional[List["IngressProfile"]] = None,
+        provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None,
+        cluster_profile: Optional["_models.ClusterProfile"] = None,
+        console_profile: Optional["_models.ConsoleProfile"] = None,
+        service_principal_profile: Optional["_models.ServicePrincipalProfile"] = None,
+        network_profile: Optional["_models.NetworkProfile"] = None,
+        master_profile: Optional["_models.MasterProfile"] = None,
+        worker_profiles: Optional[List["_models.WorkerProfile"]] = None,
+        apiserver_profile: Optional["_models.APIServerProfile"] = None,
+        ingress_profiles: Optional[List["_models.IngressProfile"]] = None,
         **kwargs
     ):
         """
@@ -509,8 +508,8 @@ class OpenShiftCluster(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: Required. The geo-location where the resource lives.
         :paramtype location: str
-        :keyword provisioning_state: The cluster provisioning state (immutable). Possible values
-         include: "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
+        :keyword provisioning_state: The cluster provisioning state (immutable). Known values are:
+         "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
         :paramtype provisioning_state: str or
          ~azure.mgmt.redhatopenshift.v2020_04_30.models.ProvisioningState
         :keyword cluster_profile: The cluster profile.
@@ -593,7 +592,7 @@ class OpenShiftClusterList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["OpenShiftCluster"]] = None,
+        value: Optional[List["_models.OpenShiftCluster"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -613,7 +612,7 @@ class OpenShiftClusterUpdate(msrest.serialization.Model):
 
     :ivar tags: A set of tags. The resource tags.
     :vartype tags: dict[str, str]
-    :ivar provisioning_state: The cluster provisioning state (immutable). Possible values include:
+    :ivar provisioning_state: The cluster provisioning state (immutable). Known values are:
      "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
     :vartype provisioning_state: str or
      ~azure.mgmt.redhatopenshift.v2020_04_30.models.ProvisioningState
@@ -653,22 +652,22 @@ class OpenShiftClusterUpdate(msrest.serialization.Model):
         self,
         *,
         tags: Optional[Dict[str, str]] = None,
-        provisioning_state: Optional[Union[str, "ProvisioningState"]] = None,
-        cluster_profile: Optional["ClusterProfile"] = None,
-        console_profile: Optional["ConsoleProfile"] = None,
-        service_principal_profile: Optional["ServicePrincipalProfile"] = None,
-        network_profile: Optional["NetworkProfile"] = None,
-        master_profile: Optional["MasterProfile"] = None,
-        worker_profiles: Optional[List["WorkerProfile"]] = None,
-        apiserver_profile: Optional["APIServerProfile"] = None,
-        ingress_profiles: Optional[List["IngressProfile"]] = None,
+        provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None,
+        cluster_profile: Optional["_models.ClusterProfile"] = None,
+        console_profile: Optional["_models.ConsoleProfile"] = None,
+        service_principal_profile: Optional["_models.ServicePrincipalProfile"] = None,
+        network_profile: Optional["_models.NetworkProfile"] = None,
+        master_profile: Optional["_models.MasterProfile"] = None,
+        worker_profiles: Optional[List["_models.WorkerProfile"]] = None,
+        apiserver_profile: Optional["_models.APIServerProfile"] = None,
+        ingress_profiles: Optional[List["_models.IngressProfile"]] = None,
         **kwargs
     ):
         """
         :keyword tags: A set of tags. The resource tags.
         :paramtype tags: dict[str, str]
-        :keyword provisioning_state: The cluster provisioning state (immutable). Possible values
-         include: "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
+        :keyword provisioning_state: The cluster provisioning state (immutable). Known values are:
+         "AdminUpdating", "Creating", "Deleting", "Failed", "Succeeded", "Updating".
         :paramtype provisioning_state: str or
          ~azure.mgmt.redhatopenshift.v2020_04_30.models.ProvisioningState
         :keyword cluster_profile: The cluster profile.
@@ -725,7 +724,7 @@ class Operation(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        display: Optional["Display"] = None,
+        display: Optional["_models.Display"] = None,
         origin: Optional[str] = None,
         **kwargs
     ):
@@ -761,7 +760,7 @@ class OperationList(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["Operation"]] = None,
+        value: Optional[List["_models.Operation"]] = None,
         next_link: Optional[str] = None,
         **kwargs
     ):
@@ -813,8 +812,8 @@ class WorkerProfile(msrest.serialization.Model):
 
     :ivar name: The worker profile name.  Must be "worker" (immutable).
     :vartype name: str
-    :ivar vm_size: The size of the worker VMs (immutable). Possible values include:
-     "Standard_D2s_v3", "Standard_D4s_v3", "Standard_D8s_v3".
+    :ivar vm_size: The size of the worker VMs (immutable). Known values are: "Standard_D2s_v3",
+     "Standard_D4s_v3", "Standard_D8s_v3".
     :vartype vm_size: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.VMSize
     :ivar disk_size_gb: The disk size of the worker VMs.  Must be 128 or greater (immutable).
     :vartype disk_size_gb: int
@@ -836,7 +835,7 @@ class WorkerProfile(msrest.serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        vm_size: Optional[Union[str, "VMSize"]] = None,
+        vm_size: Optional[Union[str, "_models.VMSize"]] = None,
         disk_size_gb: Optional[int] = None,
         subnet_id: Optional[str] = None,
         count: Optional[int] = None,
@@ -845,8 +844,8 @@ class WorkerProfile(msrest.serialization.Model):
         """
         :keyword name: The worker profile name.  Must be "worker" (immutable).
         :paramtype name: str
-        :keyword vm_size: The size of the worker VMs (immutable). Possible values include:
-         "Standard_D2s_v3", "Standard_D4s_v3", "Standard_D8s_v3".
+        :keyword vm_size: The size of the worker VMs (immutable). Known values are: "Standard_D2s_v3",
+         "Standard_D4s_v3", "Standard_D8s_v3".
         :paramtype vm_size: str or ~azure.mgmt.redhatopenshift.v2020_04_30.models.VMSize
         :keyword disk_size_gb: The disk size of the worker VMs.  Must be 128 or greater (immutable).
         :paramtype disk_size_gb: int

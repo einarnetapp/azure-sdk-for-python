@@ -7,11 +7,10 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -20,21 +19,21 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class EncryptionAtHost(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class EncryptionAtHost(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """EncryptionAtHost represents encryption at host state
     """
 
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class FipsValidatedModules(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class FipsValidatedModules(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """FipsValidatedModules determines if FIPS is used.
     """
 
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """ProvisioningState represents a provisioning state.
     """
 
@@ -45,7 +44,7 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SUCCEEDED = "Succeeded"
     UPDATING = "Updating"
 
-class Visibility(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Visibility(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Visibility represents visibility.
     """
 
