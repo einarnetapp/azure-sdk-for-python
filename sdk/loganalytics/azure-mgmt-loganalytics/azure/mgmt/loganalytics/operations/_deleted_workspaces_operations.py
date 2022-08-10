@@ -34,7 +34,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -68,7 +68,7 @@ def build_list_by_resource_group_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -121,8 +121,8 @@ class DeletedWorkspacesOperations:
     ) -> Iterable[_models.WorkspaceListResult]:
         """Gets recently deleted workspaces in a subscription, available for recovery.
 
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WorkspaceListResult or the result of cls(response)
@@ -132,7 +132,7 @@ class DeletedWorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WorkspaceListResult]
 
         error_map = {
@@ -206,8 +206,8 @@ class DeletedWorkspacesOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WorkspaceListResult or the result of cls(response)
@@ -217,7 +217,7 @@ class DeletedWorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WorkspaceListResult]
 
         error_map = {

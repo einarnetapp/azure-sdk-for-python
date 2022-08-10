@@ -36,7 +36,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -70,7 +70,7 @@ def build_list_by_resource_group_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -109,7 +109,7 @@ def build_create_or_update_request_initial(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -153,7 +153,7 @@ def build_delete_request_initial(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -192,7 +192,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     accept = _headers.pop('Accept', "application/json")
 
     # Construct URL
@@ -232,7 +232,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
     content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
     accept = _headers.pop('Accept', "application/json")
 
@@ -291,8 +291,8 @@ class WorkspacesOperations:
     ) -> Iterable[_models.WorkspaceListResult]:
         """Gets the workspaces in a subscription.
 
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WorkspaceListResult or the result of cls(response)
@@ -302,7 +302,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WorkspaceListResult]
 
         error_map = {
@@ -376,8 +376,8 @@ class WorkspacesOperations:
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
         :type resource_group_name: str
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either WorkspaceListResult or the result of cls(response)
@@ -387,7 +387,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.WorkspaceListResult]
 
         error_map = {
@@ -468,7 +468,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.Workspace]]
 
@@ -530,8 +530,8 @@ class WorkspacesOperations:
         :type workspace_name: str
         :param parameters: The parameters required to create or update a workspace.
         :type parameters: ~azure.mgmt.loganalytics.models.Workspace
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
@@ -548,7 +548,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Workspace]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
@@ -613,7 +613,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -667,8 +667,8 @@ class WorkspacesOperations:
         :param force: Deletes the workspace without the recovery option. A workspace that was deleted
          with this flag cannot be recovered. Default value is None.
         :type force: bool
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
@@ -685,7 +685,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop(
@@ -744,8 +744,8 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace.
         :type workspace_name: str
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Workspace, or the result of cls(response)
@@ -760,7 +760,7 @@ class WorkspacesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Workspace]
 
         
@@ -814,8 +814,8 @@ class WorkspacesOperations:
         :type workspace_name: str
         :param parameters: The parameters required to patch a workspace.
         :type parameters: ~azure.mgmt.loganalytics.models.WorkspacePatch
-        :keyword api_version: Api Version. Default value is "2021-12-01-preview". Note that overriding
-         this default value may result in unsupported behavior.
+        :keyword api_version: Api Version. Default value is "2022-10-01". Note that overriding this
+         default value may result in unsupported behavior.
         :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Workspace, or the result of cls(response)
@@ -830,7 +830,7 @@ class WorkspacesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-10-01"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.Workspace]
 

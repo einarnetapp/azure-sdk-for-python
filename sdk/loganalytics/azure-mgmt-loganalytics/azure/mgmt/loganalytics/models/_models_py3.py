@@ -2175,18 +2175,27 @@ class PrivateLinkScopedResource(msrest.serialization.Model):
 class RestoredLogs(msrest.serialization.Model):
     """Restore parameters.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar start_restore_time: The timestamp to start the restore from (UTC).
     :vartype start_restore_time: ~datetime.datetime
     :ivar end_restore_time: The timestamp to end the restore by (UTC).
     :vartype end_restore_time: ~datetime.datetime
     :ivar source_table: The table to restore data from.
     :vartype source_table: str
+    :ivar azure_async_operation_id: Search results table async operation id.
+    :vartype azure_async_operation_id: str
     """
+
+    _validation = {
+        'azure_async_operation_id': {'readonly': True},
+    }
 
     _attribute_map = {
         'start_restore_time': {'key': 'startRestoreTime', 'type': 'iso-8601'},
         'end_restore_time': {'key': 'endRestoreTime', 'type': 'iso-8601'},
         'source_table': {'key': 'sourceTable', 'type': 'str'},
+        'azure_async_operation_id': {'key': 'azureAsyncOperationId', 'type': 'str'},
     }
 
     def __init__(
@@ -2209,6 +2218,7 @@ class RestoredLogs(msrest.serialization.Model):
         self.start_restore_time = start_restore_time
         self.end_restore_time = end_restore_time
         self.source_table = source_table
+        self.azure_async_operation_id = None
 
 
 class ResultStatistics(msrest.serialization.Model):
@@ -2220,16 +2230,20 @@ class ResultStatistics(msrest.serialization.Model):
     :vartype progress: float
     :ivar ingested_records: The number of rows that were returned by the search job.
     :vartype ingested_records: int
+    :ivar scanned_gb: Search job: Amount of scanned data.
+    :vartype scanned_gb: float
     """
 
     _validation = {
         'progress': {'readonly': True, 'multiple': 0.01},
         'ingested_records': {'readonly': True},
+        'scanned_gb': {'readonly': True, 'multiple': 0.01},
     }
 
     _attribute_map = {
         'progress': {'key': 'progress', 'type': 'float'},
         'ingested_records': {'key': 'ingestedRecords', 'type': 'int'},
+        'scanned_gb': {'key': 'scannedGb', 'type': 'float'},
     }
 
     def __init__(
@@ -2241,6 +2255,7 @@ class ResultStatistics(msrest.serialization.Model):
         super(ResultStatistics, self).__init__(**kwargs)
         self.progress = None
         self.ingested_records = None
+        self.scanned_gb = None
 
 
 class SavedSearch(ProxyResource):
@@ -2408,10 +2423,6 @@ class Schema(msrest.serialization.Model):
     :vartype table_sub_type: str or ~azure.mgmt.loganalytics.models.TableSubTypeEnum
     :ivar solutions: List of solutions the table is affiliated with.
     :vartype solutions: list[str]
-    :ivar search_results: Parameters of the search job that initiated this table.
-    :vartype search_results: ~azure.mgmt.loganalytics.models.SearchResults
-    :ivar restored_logs: Parameters of the restore operation that initiated this table.
-    :vartype restored_logs: ~azure.mgmt.loganalytics.models.RestoredLogs
     """
 
     _validation = {
@@ -2422,8 +2433,6 @@ class Schema(msrest.serialization.Model):
         'table_type': {'readonly': True},
         'table_sub_type': {'readonly': True},
         'solutions': {'readonly': True},
-        'search_results': {'readonly': True},
-        'restored_logs': {'readonly': True},
     }
 
     _attribute_map = {
@@ -2438,8 +2447,6 @@ class Schema(msrest.serialization.Model):
         'table_type': {'key': 'tableType', 'type': 'str'},
         'table_sub_type': {'key': 'tableSubType', 'type': 'str'},
         'solutions': {'key': 'solutions', 'type': '[str]'},
-        'search_results': {'key': 'searchResults', 'type': 'SearchResults'},
-        'restored_logs': {'key': 'restoredLogs', 'type': 'RestoredLogs'},
     }
 
     def __init__(
@@ -2473,8 +2480,6 @@ class Schema(msrest.serialization.Model):
         self.table_type = None
         self.table_sub_type = None
         self.solutions = None
-        self.search_results = None
-        self.restored_logs = None
 
 
 class SearchGetSchemaResponse(msrest.serialization.Model):
@@ -2695,10 +2700,13 @@ class SearchResults(msrest.serialization.Model):
     :vartype end_search_time: ~datetime.datetime
     :ivar source_table: The table used in the search job.
     :vartype source_table: str
+    :ivar azure_async_operation_id: Search results table async operation id.
+    :vartype azure_async_operation_id: str
     """
 
     _validation = {
         'source_table': {'readonly': True},
+        'azure_async_operation_id': {'readonly': True},
     }
 
     _attribute_map = {
@@ -2708,6 +2716,7 @@ class SearchResults(msrest.serialization.Model):
         'start_search_time': {'key': 'startSearchTime', 'type': 'iso-8601'},
         'end_search_time': {'key': 'endSearchTime', 'type': 'iso-8601'},
         'source_table': {'key': 'sourceTable', 'type': 'str'},
+        'azure_async_operation_id': {'key': 'azureAsyncOperationId', 'type': 'str'},
     }
 
     def __init__(
@@ -2739,6 +2748,7 @@ class SearchResults(msrest.serialization.Model):
         self.start_search_time = start_search_time
         self.end_search_time = end_search_time
         self.source_table = None
+        self.azure_async_operation_id = None
 
 
 class SearchSchemaValue(msrest.serialization.Model):
@@ -3238,6 +3248,12 @@ class Table(ProxyResource):
      resource lock due to ongoing operation, forbidding any update to the table until the ongoing
      operation is concluded. Known values are: "Updating", "InProgress", "Succeeded".
     :vartype provisioning_state: str or ~azure.mgmt.loganalytics.models.ProvisioningStateEnum
+    :ivar retention_in_days_as_default: True - Value originates from workspace retention in days,
+     False - Customer specific.
+    :vartype retention_in_days_as_default: bool
+    :ivar total_retention_in_days_as_default: True - Value originates from retention in days, False
+     - Customer specific.
+    :vartype total_retention_in_days_as_default: bool
     """
 
     _validation = {
@@ -3248,8 +3264,11 @@ class Table(ProxyResource):
         'retention_in_days': {'maximum': 730, 'minimum': 4},
         'total_retention_in_days': {'maximum': 2555, 'minimum': 4},
         'archive_retention_in_days': {'readonly': True},
+        'result_statistics': {'readonly': True},
         'last_plan_modified_date': {'readonly': True},
         'provisioning_state': {'readonly': True},
+        'retention_in_days_as_default': {'readonly': True},
+        'total_retention_in_days_as_default': {'readonly': True},
     }
 
     _attribute_map = {
@@ -3267,6 +3286,8 @@ class Table(ProxyResource):
         'last_plan_modified_date': {'key': 'properties.lastPlanModifiedDate', 'type': 'str'},
         'schema': {'key': 'properties.schema', 'type': 'Schema'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'retention_in_days_as_default': {'key': 'properties.retentionInDaysAsDefault', 'type': 'bool'},
+        'total_retention_in_days_as_default': {'key': 'properties.totalRetentionInDaysAsDefault', 'type': 'bool'},
     }
 
     def __init__(
@@ -3276,7 +3297,6 @@ class Table(ProxyResource):
         total_retention_in_days: Optional[int] = None,
         search_results: Optional["_models.SearchResults"] = None,
         restored_logs: Optional["_models.RestoredLogs"] = None,
-        result_statistics: Optional["_models.ResultStatistics"] = None,
         plan: Optional[Union[str, "_models.TablePlanEnum"]] = None,
         schema: Optional["_models.Schema"] = None,
         **kwargs
@@ -3292,8 +3312,6 @@ class Table(ProxyResource):
         :paramtype search_results: ~azure.mgmt.loganalytics.models.SearchResults
         :keyword restored_logs: Parameters of the restore operation that initiated this table.
         :paramtype restored_logs: ~azure.mgmt.loganalytics.models.RestoredLogs
-        :keyword result_statistics: Search job execution statistics.
-        :paramtype result_statistics: ~azure.mgmt.loganalytics.models.ResultStatistics
         :keyword plan: Instruct the system how to handle and charge the logs ingested to this table.
          Known values are: "Basic", "Analytics".
         :paramtype plan: str or ~azure.mgmt.loganalytics.models.TablePlanEnum
@@ -3307,11 +3325,13 @@ class Table(ProxyResource):
         self.archive_retention_in_days = None
         self.search_results = search_results
         self.restored_logs = restored_logs
-        self.result_statistics = result_statistics
+        self.result_statistics = None
         self.plan = plan
         self.last_plan_modified_date = None
         self.schema = schema
         self.provisioning_state = None
+        self.retention_in_days_as_default = None
+        self.total_retention_in_days_as_default = None
 
 
 class TablesListResult(msrest.serialization.Model):
@@ -3515,6 +3535,8 @@ class Workspace(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: Required. The geo-location where the resource lives.
     :vartype location: str
+    :ivar identity: The identity of the resource.
+    :vartype identity: ~azure.mgmt.loganalytics.models.Identity
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
     :vartype system_data: ~azure.mgmt.loganalytics.models.SystemDataAutoGenerated
     :ivar e_tag: The ETag of the workspace.
@@ -3577,6 +3599,7 @@ class Workspace(TrackedResource):
         'type': {'key': 'type', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'location': {'key': 'location', 'type': 'str'},
+        'identity': {'key': 'identity', 'type': 'Identity'},
         'system_data': {'key': 'systemData', 'type': 'SystemDataAutoGenerated'},
         'e_tag': {'key': 'eTag', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
@@ -3599,6 +3622,7 @@ class Workspace(TrackedResource):
         *,
         location: str,
         tags: Optional[Dict[str, str]] = None,
+        identity: Optional["_models.Identity"] = None,
         e_tag: Optional[str] = None,
         sku: Optional["_models.WorkspaceSku"] = None,
         retention_in_days: Optional[int] = None,
@@ -3615,6 +3639,8 @@ class Workspace(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: Required. The geo-location where the resource lives.
         :paramtype location: str
+        :keyword identity: The identity of the resource.
+        :paramtype identity: ~azure.mgmt.loganalytics.models.Identity
         :keyword e_tag: The ETag of the workspace.
         :paramtype e_tag: str
         :keyword sku: The SKU of the workspace.
@@ -3643,6 +3669,7 @@ class Workspace(TrackedResource):
         :paramtype default_data_collection_rule_resource_id: str
         """
         super(Workspace, self).__init__(tags=tags, location=location, **kwargs)
+        self.identity = identity
         self.system_data = None
         self.e_tag = e_tag
         self.provisioning_state = None
@@ -3858,6 +3885,8 @@ class WorkspacePatch(AzureEntityResource):
     :vartype type: str
     :ivar etag: Resource Etag.
     :vartype etag: str
+    :ivar identity: The identity of the resource.
+    :vartype identity: ~azure.mgmt.loganalytics.models.Identity
     :ivar tags: A set of tags. Resource tags. Optional.
     :vartype tags: dict[str, str]
     :ivar provisioning_state: The provisioning state of the workspace. Known values are:
@@ -3916,6 +3945,7 @@ class WorkspacePatch(AzureEntityResource):
         'name': {'key': 'name', 'type': 'str'},
         'type': {'key': 'type', 'type': 'str'},
         'etag': {'key': 'etag', 'type': 'str'},
+        'identity': {'key': 'identity', 'type': 'Identity'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'customer_id': {'key': 'properties.customerId', 'type': 'str'},
@@ -3935,6 +3965,7 @@ class WorkspacePatch(AzureEntityResource):
     def __init__(
         self,
         *,
+        identity: Optional["_models.Identity"] = None,
         tags: Optional[Dict[str, str]] = None,
         sku: Optional["_models.WorkspaceSku"] = None,
         retention_in_days: Optional[int] = None,
@@ -3947,6 +3978,8 @@ class WorkspacePatch(AzureEntityResource):
         **kwargs
     ):
         """
+        :keyword identity: The identity of the resource.
+        :paramtype identity: ~azure.mgmt.loganalytics.models.Identity
         :keyword tags: A set of tags. Resource tags. Optional.
         :paramtype tags: dict[str, str]
         :keyword sku: The SKU of the workspace.
@@ -3975,6 +4008,7 @@ class WorkspacePatch(AzureEntityResource):
         :paramtype default_data_collection_rule_resource_id: str
         """
         super(WorkspacePatch, self).__init__(**kwargs)
+        self.identity = identity
         self.tags = tags
         self.provisioning_state = None
         self.customer_id = None
