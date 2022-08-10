@@ -28,12 +28,18 @@ from ._models_py3 import Certificate
 from ._models_py3 import CertificateCollection
 from ._models_py3 import CertificatePatch
 from ._models_py3 import CertificateProperties
+from ._models_py3 import CheckNameAvailabilityRequest
+from ._models_py3 import CheckNameAvailabilityResponse
 from ._models_py3 import ClientRegistration
 from ._models_py3 import Configuration
+from ._models_py3 import ConnectedEnvironment
+from ._models_py3 import ConnectedEnvironmentCollection
+from ._models_py3 import ConnectedEnvironmentStorage
+from ._models_py3 import ConnectedEnvironmentStorageProperties
+from ._models_py3 import ConnectedEnvironmentStoragesCollection
 from ._models_py3 import Container
 from ._models_py3 import ContainerApp
 from ._models_py3 import ContainerAppCollection
-from ._models_py3 import ContainerAppPatch
 from ._models_py3 import ContainerAppProbe
 from ._models_py3 import ContainerAppProbeHttpGet
 from ._models_py3 import ContainerAppProbeHttpGetHttpHeadersItem
@@ -42,18 +48,35 @@ from ._models_py3 import ContainerAppSecret
 from ._models_py3 import ContainerResources
 from ._models_py3 import CookieExpiration
 from ._models_py3 import CustomDomain
+from ._models_py3 import CustomDomainConfiguration
 from ._models_py3 import CustomHostnameAnalysisResult
+from ._models_py3 import CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo
+from ._models_py3 import CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem
 from ._models_py3 import CustomOpenIdConnectProvider
 from ._models_py3 import CustomScaleRule
 from ._models_py3 import Dapr
 from ._models_py3 import DaprComponent
 from ._models_py3 import DaprComponentsCollection
 from ._models_py3 import DaprMetadata
+from ._models_py3 import DaprSecretsCollection
 from ._models_py3 import DefaultAuthorizationPolicy
 from ._models_py3 import DefaultErrorResponse
 from ._models_py3 import DefaultErrorResponseError
 from ._models_py3 import DefaultErrorResponseErrorDetailsItem
+from ._models_py3 import DiagnosticDataProviderMetadata
+from ._models_py3 import DiagnosticDataProviderMetadataPropertyBagItem
+from ._models_py3 import DiagnosticDataTableResponseColumn
+from ._models_py3 import DiagnosticDataTableResponseObject
+from ._models_py3 import DiagnosticRendering
+from ._models_py3 import DiagnosticSupportTopic
+from ._models_py3 import Diagnostics
+from ._models_py3 import DiagnosticsCollection
+from ._models_py3 import DiagnosticsDataApiResponse
+from ._models_py3 import DiagnosticsDefinition
+from ._models_py3 import DiagnosticsProperties
+from ._models_py3 import DiagnosticsStatus
 from ._models_py3 import EnvironmentVar
+from ._models_py3 import ExtendedLocation
 from ._models_py3 import Facebook
 from ._models_py3 import ForwardProxy
 from ._models_py3 import GitHub
@@ -71,7 +94,6 @@ from ._models_py3 import Login
 from ._models_py3 import LoginRoutes
 from ._models_py3 import LoginScopes
 from ._models_py3 import ManagedEnvironment
-from ._models_py3 import ManagedEnvironmentPatch
 from ._models_py3 import ManagedEnvironmentStorage
 from ._models_py3 import ManagedEnvironmentStorageProperties
 from ._models_py3 import ManagedEnvironmentStoragesCollection
@@ -104,6 +126,7 @@ from ._models_py3 import SourceControlCollection
 from ._models_py3 import SystemData
 from ._models_py3 import Template
 from ._models_py3 import TrackedResource
+from ._models_py3 import TrafficLabel
 from ._models_py3 import TrafficWeight
 from ._models_py3 import Twitter
 from ._models_py3 import TwitterRegistration
@@ -119,22 +142,29 @@ from ._container_apps_api_client_enums import (
     AppProtocol,
     BindingType,
     CertificateProvisioningState,
+    CheckNameAvailabilityReason,
+    ConnectedEnvironmentProvisioningState,
     ContainerAppProvisioningState,
     CookieExpirationConvention,
     CreatedByType,
     DnsVerificationTestResult,
     EnvironmentProvisioningState,
+    ExtendedLocationTypes,
     ForwardProxyConvention,
     IngressTransportMethod,
+    LogLevel,
     ManagedServiceIdentityType,
     RevisionHealthState,
     RevisionProvisioningState,
+    Scheme,
     SourceControlOperationState,
     StorageType,
     Type,
     UnauthenticatedClientActionV2,
 )
-
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     'AllowedAudiencesValidation',
     'AllowedPrincipals',
@@ -158,12 +188,18 @@ __all__ = [
     'CertificateCollection',
     'CertificatePatch',
     'CertificateProperties',
+    'CheckNameAvailabilityRequest',
+    'CheckNameAvailabilityResponse',
     'ClientRegistration',
     'Configuration',
+    'ConnectedEnvironment',
+    'ConnectedEnvironmentCollection',
+    'ConnectedEnvironmentStorage',
+    'ConnectedEnvironmentStorageProperties',
+    'ConnectedEnvironmentStoragesCollection',
     'Container',
     'ContainerApp',
     'ContainerAppCollection',
-    'ContainerAppPatch',
     'ContainerAppProbe',
     'ContainerAppProbeHttpGet',
     'ContainerAppProbeHttpGetHttpHeadersItem',
@@ -172,18 +208,35 @@ __all__ = [
     'ContainerResources',
     'CookieExpiration',
     'CustomDomain',
+    'CustomDomainConfiguration',
     'CustomHostnameAnalysisResult',
+    'CustomHostnameAnalysisResultCustomDomainVerificationFailureInfo',
+    'CustomHostnameAnalysisResultCustomDomainVerificationFailureInfoDetailsItem',
     'CustomOpenIdConnectProvider',
     'CustomScaleRule',
     'Dapr',
     'DaprComponent',
     'DaprComponentsCollection',
     'DaprMetadata',
+    'DaprSecretsCollection',
     'DefaultAuthorizationPolicy',
     'DefaultErrorResponse',
     'DefaultErrorResponseError',
     'DefaultErrorResponseErrorDetailsItem',
+    'DiagnosticDataProviderMetadata',
+    'DiagnosticDataProviderMetadataPropertyBagItem',
+    'DiagnosticDataTableResponseColumn',
+    'DiagnosticDataTableResponseObject',
+    'DiagnosticRendering',
+    'DiagnosticSupportTopic',
+    'Diagnostics',
+    'DiagnosticsCollection',
+    'DiagnosticsDataApiResponse',
+    'DiagnosticsDefinition',
+    'DiagnosticsProperties',
+    'DiagnosticsStatus',
     'EnvironmentVar',
+    'ExtendedLocation',
     'Facebook',
     'ForwardProxy',
     'GitHub',
@@ -201,7 +254,6 @@ __all__ = [
     'LoginRoutes',
     'LoginScopes',
     'ManagedEnvironment',
-    'ManagedEnvironmentPatch',
     'ManagedEnvironmentStorage',
     'ManagedEnvironmentStorageProperties',
     'ManagedEnvironmentStoragesCollection',
@@ -234,6 +286,7 @@ __all__ = [
     'SystemData',
     'Template',
     'TrackedResource',
+    'TrafficLabel',
     'TrafficWeight',
     'Twitter',
     'TwitterRegistration',
@@ -246,18 +299,25 @@ __all__ = [
     'AppProtocol',
     'BindingType',
     'CertificateProvisioningState',
+    'CheckNameAvailabilityReason',
+    'ConnectedEnvironmentProvisioningState',
     'ContainerAppProvisioningState',
     'CookieExpirationConvention',
     'CreatedByType',
     'DnsVerificationTestResult',
     'EnvironmentProvisioningState',
+    'ExtendedLocationTypes',
     'ForwardProxyConvention',
     'IngressTransportMethod',
+    'LogLevel',
     'ManagedServiceIdentityType',
     'RevisionHealthState',
     'RevisionProvisioningState',
+    'Scheme',
     'SourceControlOperationState',
     'StorageType',
     'Type',
     'UnauthenticatedClientActionV2',
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
