@@ -14,24 +14,23 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
-from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._replication_events_operations import build_get_request, build_list_request
+from ...operations._replication_appliances_operations import build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class ReplicationEventsOperations:
+class ReplicationAppliancesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.recoveryservicessiterecovery.aio.SiteRecoveryManagementClient`'s
-        :attr:`replication_events` attribute.
+        :attr:`replication_appliances` attribute.
     """
 
     models = _models
@@ -49,24 +48,24 @@ class ReplicationEventsOperations:
         self,
         filter: Optional[str] = None,
         **kwargs: Any
-    ) -> AsyncIterable[_models.EventCollection]:
-        """Gets the list of Azure Site Recovery events.
+    ) -> AsyncIterable[_models.ApplianceCollection]:
+        """Gets the list of appliances.
 
-        Gets the list of Azure Site Recovery events for the vault.
+        Gets the list of Azure Site Recovery appliances for the vault.
 
         :param filter: OData filter options. Default value is None.
         :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either EventCollection or the result of cls(response)
+        :return: An iterator like instance of either ApplianceCollection or the result of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.EventCollection]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.ApplianceCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.EventCollection]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ApplianceCollection]
 
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
@@ -106,7 +105,7 @@ class ReplicationEventsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("EventCollection", pipeline_response)
+            deserialized = self._deserialize("ApplianceCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -132,67 +131,4 @@ class ReplicationEventsOperations:
         return AsyncItemPaged(
             get_next, extract_data
         )
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationEvents"}  # type: ignore
-
-    @distributed_trace_async
-    async def get(
-        self,
-        event_name: str,
-        **kwargs: Any
-    ) -> _models.Event:
-        """Get the details of an Azure Site recovery event.
-
-        The operation to get the details of an Azure Site recovery event.
-
-        :param event_name: The name of the Azure Site Recovery event.
-        :type event_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Event, or the result of cls(response)
-        :rtype: ~azure.mgmt.recoveryservicessiterecovery.models.Event
-        :raises: ~azure.core.exceptions.HttpResponseError
-        """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-08-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.Event]
-
-        
-        request = build_get_request(
-            resource_name=self._config.resource_name,
-            resource_group_name=self._config.resource_group_name,
-            subscription_id=self._config.subscription_id,
-            event_name=event_name,
-            api_version=api_version,
-            template_url=self.get.metadata['url'],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
-        )
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize('Event', pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationEvents/{eventName}"}  # type: ignore
-
+    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances"}  # type: ignore
