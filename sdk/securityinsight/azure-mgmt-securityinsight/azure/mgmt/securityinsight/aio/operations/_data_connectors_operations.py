@@ -20,7 +20,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._data_connectors_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
+from ...operations._data_connectors_operations import build_connect_request, build_create_or_update_request, build_delete_request, build_disconnect_request, build_get_request, build_list_request
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -66,7 +66,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-11-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DataConnectorList]
 
         error_map = {
@@ -162,7 +162,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-11-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DataConnector]
 
         
@@ -232,7 +232,7 @@ class DataConnectorsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-11-01-preview"))  # type: str
         content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
         cls = kwargs.pop('cls', None)  # type: ClsType[_models.DataConnector]
 
@@ -307,7 +307,7 @@ class DataConnectorsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-11-01-preview"))  # type: str
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
@@ -339,4 +339,137 @@ class DataConnectorsOperations:
             return cls(pipeline_response, None, {})
 
     delete.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def connect(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        data_connector_id: str,
+        connect_body: _models.DataConnectorConnectBody,
+        **kwargs: Any
+    ) -> None:
+        """Connects a data connector.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param data_connector_id: Connector ID.
+        :type data_connector_id: str
+        :param connect_body: The data connector.
+        :type connect_body: ~azure.mgmt.securityinsight.models.DataConnectorConnectBody
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-11-01-preview"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+
+        _json = self._serialize.body(connect_body, 'DataConnectorConnectBody')
+
+        request = build_connect_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            data_connector_id=data_connector_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            template_url=self.connect.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    connect.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/connect"}  # type: ignore
+
+
+    @distributed_trace_async
+    async def disconnect(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        data_connector_id: str,
+        **kwargs: Any
+    ) -> None:
+        """Disconnect a data connector.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace.
+        :type workspace_name: str
+        :param data_connector_id: Connector ID.
+        :type data_connector_id: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        error_map = {
+            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+        }
+        error_map.update(kwargs.pop('error_map', {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-11-01-preview"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+
+        
+        request = build_disconnect_request(
+            subscription_id=self._config.subscription_id,
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            data_connector_id=data_connector_id,
+            api_version=api_version,
+            template_url=self.disconnect.metadata['url'],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request,
+            stream=False,
+            **kwargs
+        )
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    disconnect.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}/disconnect"}  # type: ignore
 
