@@ -15,6 +15,7 @@ from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
@@ -24,33 +25,31 @@ T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 class WebTestsOperations:
-    """WebTestsOperations async operations.
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
 
-    You should not instantiate this class directly. Instead, you should create a Client instance that
-    instantiates it for you and attaches it as an attribute.
-
-    :ivar models: Alias to model classes used in this operation group.
-    :type models: ~azure.mgmt.applicationinsights.v2015_05_01.models
-    :param client: Client for service requests.
-    :param config: Configuration of service client.
-    :param serializer: An object model serializer.
-    :param deserializer: An object model deserializer.
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.applicationinsights.v2015_05_01.aio.ApplicationInsightsManagementClient`'s
+        :attr:`web_tests` attribute.
     """
 
     models = _models
 
-    def __init__(self, client, config, serializer, deserializer) -> None:
-        self._client = client
-        self._serialize = serializer
-        self._deserialize = deserializer
-        self._config = config
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
 
     @distributed_trace
     def list_by_resource_group(
         self,
         resource_group_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.WebTestListResult"]:
+    ) -> AsyncIterable[_models.WebTestListResult]:
         """Get all Application Insights web tests defined within a specified resource group.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -61,13 +60,16 @@ class WebTestsOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.applicationinsights.v2015_05_01.models.WebTestListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.WebTestListResult"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WebTestListResult]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -76,9 +78,11 @@ class WebTestsOperations:
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=self.list_by_resource_group.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -87,9 +91,11 @@ class WebTestsOperations:
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -128,7 +134,7 @@ class WebTestsOperations:
         resource_group_name: str,
         web_test_name: str,
         **kwargs: Any
-    ) -> "_models.WebTest":
+    ) -> _models.WebTest:
         """Get a specific Application Insights web test definition.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -140,13 +146,16 @@ class WebTestsOperations:
         :rtype: ~azure.mgmt.applicationinsights.v2015_05_01.models.WebTest
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.WebTest"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WebTest]
 
         
         request = build_get_request(
@@ -155,11 +164,13 @@ class WebTestsOperations:
             web_test_name=web_test_name,
             api_version=api_version,
             template_url=self.get.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -185,9 +196,9 @@ class WebTestsOperations:
         self,
         resource_group_name: str,
         web_test_name: str,
-        web_test_definition: "_models.WebTest",
+        web_test_definition: _models.WebTest,
         **kwargs: Any
-    ) -> "_models.WebTest":
+    ) -> _models.WebTest:
         """Creates or updates an Application Insights web test definition.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -202,14 +213,17 @@ class WebTestsOperations:
         :rtype: ~azure.mgmt.applicationinsights.v2015_05_01.models.WebTest
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.WebTest"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WebTest]
 
         _json = self._serialize.body(web_test_definition, 'WebTest')
 
@@ -221,11 +235,13 @@ class WebTestsOperations:
             content_type=content_type,
             json=_json,
             template_url=self.create_or_update.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -251,9 +267,9 @@ class WebTestsOperations:
         self,
         resource_group_name: str,
         web_test_name: str,
-        web_test_tags: "_models.TagsResource",
+        web_test_tags: _models.TagsResource,
         **kwargs: Any
-    ) -> "_models.WebTest":
+    ) -> _models.WebTest:
         """Creates or updates an Application Insights web test definition.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -267,14 +283,17 @@ class WebTestsOperations:
         :rtype: ~azure.mgmt.applicationinsights.v2015_05_01.models.WebTest
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.WebTest"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
-        content_type = kwargs.pop('content_type', "application/json")  # type: Optional[str]
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', "application/json"))  # type: Optional[str]
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WebTest]
 
         _json = self._serialize.body(web_test_tags, 'TagsResource')
 
@@ -286,11 +305,13 @@ class WebTestsOperations:
             content_type=content_type,
             json=_json,
             template_url=self.update_tags.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -329,13 +350,16 @@ class WebTestsOperations:
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[None]
 
         
         request = build_delete_request(
@@ -344,11 +368,13 @@ class WebTestsOperations:
             web_test_name=web_test_name,
             api_version=api_version,
             template_url=self.delete.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -369,7 +395,7 @@ class WebTestsOperations:
     def list(
         self,
         **kwargs: Any
-    ) -> AsyncIterable["_models.WebTestListResult"]:
+    ) -> AsyncIterable[_models.WebTestListResult]:
         """Get all Application Insights web test alerts definitions within a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -378,13 +404,16 @@ class WebTestsOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.applicationinsights.v2015_05_01.models.WebTestListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.WebTestListResult"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WebTestListResult]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -392,9 +421,11 @@ class WebTestsOperations:
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=self.list.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -402,9 +433,11 @@ class WebTestsOperations:
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
@@ -443,7 +476,7 @@ class WebTestsOperations:
         component_name: str,
         resource_group_name: str,
         **kwargs: Any
-    ) -> AsyncIterable["_models.WebTestListResult"]:
+    ) -> AsyncIterable[_models.WebTestListResult]:
         """Get all Application Insights web tests defined for the specified component.
 
         :param component_name: The name of the Application Insights component resource.
@@ -456,13 +489,16 @@ class WebTestsOperations:
          ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.applicationinsights.v2015_05_01.models.WebTestListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        api_version = kwargs.pop('api_version', "2015-05-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.WebTestListResult"]
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2015-05-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.WebTestListResult]
+
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
         def prepare_request(next_link=None):
             if not next_link:
                 
@@ -472,9 +508,11 @@ class WebTestsOperations:
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=self.list_by_component.metadata['url'],
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
                 
@@ -484,9 +522,11 @@ class WebTestsOperations:
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=next_link,
+                    headers=_headers,
+                    params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)
+                request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 

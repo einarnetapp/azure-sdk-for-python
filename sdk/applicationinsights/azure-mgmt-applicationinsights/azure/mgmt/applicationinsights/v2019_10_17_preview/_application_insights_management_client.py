@@ -53,7 +53,9 @@ class ApplicationInsightsManagementClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.workbook_templates = WorkbookTemplatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.workbook_templates = WorkbookTemplatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
 
     def _send_request(

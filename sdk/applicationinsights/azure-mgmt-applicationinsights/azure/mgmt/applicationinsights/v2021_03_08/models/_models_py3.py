@@ -7,12 +7,14 @@
 # --------------------------------------------------------------------------
 
 import datetime
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from azure.core.exceptions import HttpResponseError
 import msrest.serialization
 
-from ._application_insights_management_client_enums import *
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    import __init__ as _models
 
 
 class ErrorDefinition(msrest.serialization.Model):
@@ -111,7 +113,7 @@ class MyWorkbookResource(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        identity: Optional["MyWorkbookManagedIdentity"] = None,
+        identity: Optional["_models.MyWorkbookManagedIdentity"] = None,
         id: Optional[str] = None,
         name: Optional[str] = None,
         type: Optional[str] = None,
@@ -166,7 +168,7 @@ class MyWorkbook(MyWorkbookResource):
     :vartype tags: dict[str, str]
     :ivar etag: Resource etag.
     :vartype etag: dict[str, str]
-    :ivar kind: The kind of workbook. Choices are user and shared. Possible values include: "user",
+    :ivar kind: The kind of workbook. Choices are user and shared. Known values are: "user",
      "shared".
     :vartype kind: str or ~azure.mgmt.applicationinsights.v2021_03_08.models.Kind
     :ivar system_data: Metadata pertaining to creation and last modification of the resource.
@@ -225,14 +227,14 @@ class MyWorkbook(MyWorkbookResource):
     def __init__(
         self,
         *,
-        identity: Optional["MyWorkbookManagedIdentity"] = None,
+        identity: Optional["_models.MyWorkbookManagedIdentity"] = None,
         id: Optional[str] = None,
         name: Optional[str] = None,
         type: Optional[str] = None,
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
         etag: Optional[Dict[str, str]] = None,
-        kind: Optional[Union[str, "Kind"]] = None,
+        kind: Optional[Union[str, "_models.Kind"]] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
         version: Optional[str] = None,
@@ -258,8 +260,8 @@ class MyWorkbook(MyWorkbookResource):
         :paramtype tags: dict[str, str]
         :keyword etag: Resource etag.
         :paramtype etag: dict[str, str]
-        :keyword kind: The kind of workbook. Choices are user and shared. Possible values include:
-         "user", "shared".
+        :keyword kind: The kind of workbook. Choices are user and shared. Known values are: "user",
+         "shared".
         :paramtype kind: str or ~azure.mgmt.applicationinsights.v2021_03_08.models.Kind
         :keyword display_name: The user-defined name of the private workbook.
         :paramtype display_name: str
@@ -307,7 +309,7 @@ class MyWorkbookError(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        error: Optional["ErrorDefinition"] = None,
+        error: Optional["_models.ErrorDefinition"] = None,
         **kwargs
     ):
         """
@@ -324,7 +326,7 @@ class MyWorkbookManagedIdentity(msrest.serialization.Model):
     :ivar user_assigned_identities: Customer Managed Identity.
     :vartype user_assigned_identities:
      ~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbookUserAssignedIdentities
-    :ivar type: The identity type. Possible values include: "UserAssigned", "None".
+    :ivar type: The identity type. Known values are: "UserAssigned", "None".
     :vartype type: str or
      ~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbookManagedIdentityType
     """
@@ -337,15 +339,15 @@ class MyWorkbookManagedIdentity(msrest.serialization.Model):
     def __init__(
         self,
         *,
-        user_assigned_identities: Optional["MyWorkbookUserAssignedIdentities"] = None,
-        type: Optional[Union[str, "MyWorkbookManagedIdentityType"]] = None,
+        user_assigned_identities: Optional["_models.MyWorkbookUserAssignedIdentities"] = None,
+        type: Optional[Union[str, "_models.MyWorkbookManagedIdentityType"]] = None,
         **kwargs
     ):
         """
         :keyword user_assigned_identities: Customer Managed Identity.
         :paramtype user_assigned_identities:
          ~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbookUserAssignedIdentities
-        :keyword type: The identity type. Possible values include: "UserAssigned", "None".
+        :keyword type: The identity type. Known values are: "UserAssigned", "None".
         :paramtype type: str or
          ~azure.mgmt.applicationinsights.v2021_03_08.models.MyWorkbookManagedIdentityType
         """
@@ -426,7 +428,7 @@ class SystemData(msrest.serialization.Model):
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
-    :ivar created_by_type: The type of identity that created the resource. Possible values include:
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
      "User", "Application", "ManagedIdentity", "Key".
     :vartype created_by_type: str or
      ~azure.mgmt.applicationinsights.v2021_03_08.models.CreatedByType
@@ -434,8 +436,8 @@ class SystemData(msrest.serialization.Model):
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
-    :ivar last_modified_by_type: The type of identity that last modified the resource. Possible
-     values include: "User", "Application", "ManagedIdentity", "Key".
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", "Key".
     :vartype last_modified_by_type: str or
      ~azure.mgmt.applicationinsights.v2021_03_08.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
@@ -455,26 +457,26 @@ class SystemData(msrest.serialization.Model):
         self,
         *,
         created_by: Optional[str] = None,
-        created_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         created_at: Optional[datetime.datetime] = None,
         last_modified_by: Optional[str] = None,
-        last_modified_by_type: Optional[Union[str, "CreatedByType"]] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
         last_modified_at: Optional[datetime.datetime] = None,
         **kwargs
     ):
         """
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
-        :keyword created_by_type: The type of identity that created the resource. Possible values
-         include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", "Key".
         :paramtype created_by_type: str or
          ~azure.mgmt.applicationinsights.v2021_03_08.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
-        :keyword last_modified_by_type: The type of identity that last modified the resource. Possible
-         values include: "User", "Application", "ManagedIdentity", "Key".
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", "Key".
         :paramtype last_modified_by_type: str or
          ~azure.mgmt.applicationinsights.v2021_03_08.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).

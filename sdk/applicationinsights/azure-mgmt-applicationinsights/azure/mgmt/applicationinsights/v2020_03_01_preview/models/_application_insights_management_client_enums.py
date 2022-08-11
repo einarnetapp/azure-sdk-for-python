@@ -7,10 +7,9 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class StorageType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class StorageType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     SERVICE_PROFILER = "ServiceProfiler"

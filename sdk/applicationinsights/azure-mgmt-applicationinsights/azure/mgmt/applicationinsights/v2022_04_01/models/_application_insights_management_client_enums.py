@@ -7,18 +7,17 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class CategoryType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CategoryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WORKBOOK = "workbook"
     TSG = "TSG"
     PERFORMANCE = "performance"
     RETENTION = "retention"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -27,7 +26,7 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class ManagedServiceIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of managed service identity (where both SystemAssigned and UserAssigned types are
     allowed).
     """
@@ -37,13 +36,13 @@ class ManagedServiceIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, En
     USER_ASSIGNED = "UserAssigned"
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
-class WorkbookSharedTypeKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class WorkbookSharedTypeKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of workbook. Only valid value is shared.
     """
 
     SHARED = "shared"
 
-class WorkbookUpdateSharedTypeKind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class WorkbookUpdateSharedTypeKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of workbook. Only valid value is shared.
     """
 

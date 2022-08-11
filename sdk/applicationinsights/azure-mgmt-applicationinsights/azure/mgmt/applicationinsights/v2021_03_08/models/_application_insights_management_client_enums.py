@@ -7,18 +7,17 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class CategoryType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CategoryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     WORKBOOK = "workbook"
     TSG = "TSG"
     PERFORMANCE = "performance"
     RETENTION = "retention"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource.
     """
 
@@ -27,14 +26,14 @@ class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class Kind(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class Kind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of workbook. Choices are user and shared.
     """
 
     USER = "user"
     SHARED = "shared"
 
-class MyWorkbookManagedIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+class MyWorkbookManagedIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The identity type.
     """
 
