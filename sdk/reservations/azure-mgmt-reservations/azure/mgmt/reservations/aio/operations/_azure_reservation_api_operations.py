@@ -13,15 +13,17 @@ from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._azure_reservation_api_operations import build_get_applied_reservation_list_request, build_get_catalog_request
+from .._vendor import MixinABC
 T = TypeVar('T')
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
-class AzureReservationAPIOperationsMixin:
+class AzureReservationAPIOperationsMixin(MixinABC):
 
     @distributed_trace_async
     async def get_catalog(
@@ -33,7 +35,7 @@ class AzureReservationAPIOperationsMixin:
         offer_id: Optional[str] = None,
         plan_id: Optional[str] = None,
         **kwargs: Any
-    ) -> List["_models.Catalog"]:
+    ) -> List[_models.Catalog]:
         """Get the regions and skus that are available for RI purchase for the specified Azure
         subscription.
 
@@ -62,13 +64,16 @@ class AzureReservationAPIOperationsMixin:
         :rtype: list[~azure.mgmt.reservations.models.Catalog]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[List["_models.Catalog"]]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[List[_models.Catalog]]
 
         
         request = build_get_catalog_request(
@@ -80,11 +85,13 @@ class AzureReservationAPIOperationsMixin:
             offer_id=offer_id,
             plan_id=plan_id,
             template_url=self.get_catalog.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
@@ -111,7 +118,7 @@ class AzureReservationAPIOperationsMixin:
         self,
         subscription_id: str,
         **kwargs: Any
-    ) -> "_models.AppliedReservations":
+    ) -> _models.AppliedReservations:
         """Get list of applicable ``Reservation``\ s.
 
         Get applicable ``Reservation``\ s that are applied to this subscription or a resource group
@@ -127,24 +134,29 @@ class AzureReservationAPIOperationsMixin:
         :rtype: ~azure.mgmt.reservations.models.AppliedReservations
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.AppliedReservations"]
         error_map = {
             401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
         }
-        error_map.update(kwargs.pop('error_map', {}))
+        error_map.update(kwargs.pop('error_map', {}) or {})
 
-        api_version = kwargs.pop('api_version', "2022-03-01")  # type: str
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop('api_version', _params.pop('api-version', "2022-03-01"))  # type: str
+        cls = kwargs.pop('cls', None)  # type: ClsType[_models.AppliedReservations]
 
         
         request = build_get_applied_reservation_list_request(
             subscription_id=subscription_id,
             api_version=api_version,
             template_url=self.get_applied_reservation_list.metadata['url'],
+            headers=_headers,
+            params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)
+        request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request,
             stream=False,
             **kwargs
