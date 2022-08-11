@@ -26,21 +26,18 @@ class CloudErrorBody(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[CloudErrorBody]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[CloudErrorBody]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudErrorBody, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
-        self.target = kwargs.get('target', None)
-        self.details = kwargs.get('details', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
+        self.target = kwargs.get("target", None)
+        self.details = kwargs.get("details", None)
 
 
 class DisableSerialConsoleResult(msrest.serialization.Model):
@@ -51,15 +48,12 @@ class DisableSerialConsoleResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disabled': {'key': 'disabled', 'type': 'bool'},
+        "disabled": {"key": "disabled", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DisableSerialConsoleResult, self).__init__(**kwargs)
-        self.disabled = kwargs.get('disabled', None)
+        self.disabled = kwargs.get("disabled", None)
 
 
 class EnableSerialConsoleResult(msrest.serialization.Model):
@@ -70,15 +64,12 @@ class EnableSerialConsoleResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disabled': {'key': 'disabled', 'type': 'bool'},
+        "disabled": {"key": "disabled", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnableSerialConsoleResult, self).__init__(**kwargs)
-        self.disabled = kwargs.get('disabled', None)
+        self.disabled = kwargs.get("disabled", None)
 
 
 class GetSerialConsoleSubscriptionNotFound(msrest.serialization.Model):
@@ -91,17 +82,14 @@ class GetSerialConsoleSubscriptionNotFound(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GetSerialConsoleSubscriptionNotFound, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
 
 
 class Resource(msrest.serialization.Model):
@@ -118,21 +106,18 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -153,21 +138,18 @@ class ProxyResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProxyResource, self).__init__(**kwargs)
 
 
@@ -179,15 +161,12 @@ class SerialConsoleOperations(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SerialConsoleOperationsValueItem]'},
+        "value": {"key": "value", "type": "[SerialConsoleOperationsValueItem]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SerialConsoleOperations, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class SerialConsoleOperationsValueItem(msrest.serialization.Model):
@@ -202,19 +181,16 @@ class SerialConsoleOperationsValueItem(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'SerialConsoleOperationsValueItemDisplay'},
+        "name": {"key": "name", "type": "str"},
+        "is_data_action": {"key": "isDataAction", "type": "str"},
+        "display": {"key": "display", "type": "SerialConsoleOperationsValueItemDisplay"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SerialConsoleOperationsValueItem, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
-        self.display = kwargs.get('display', None)
+        self.name = kwargs.get("name", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
+        self.display = kwargs.get("display", None)
 
 
 class SerialConsoleOperationsValueItemDisplay(msrest.serialization.Model):
@@ -231,21 +207,18 @@ class SerialConsoleOperationsValueItemDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SerialConsoleOperationsValueItemDisplay, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class SerialConsoleStatus(msrest.serialization.Model):
@@ -256,15 +229,12 @@ class SerialConsoleStatus(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disabled': {'key': 'disabled', 'type': 'bool'},
+        "disabled": {"key": "disabled", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SerialConsoleStatus, self).__init__(**kwargs)
-        self.disabled = kwargs.get('disabled', None)
+        self.disabled = kwargs.get("disabled", None)
 
 
 class SerialPort(ProxyResource):
@@ -284,24 +254,21 @@ class SerialPort(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'state': {'key': 'properties.state', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "state": {"key": "properties.state", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SerialPort, self).__init__(**kwargs)
-        self.state = kwargs.get('state', None)
+        self.state = kwargs.get("state", None)
 
 
 class SerialPortConnectResult(msrest.serialization.Model):
@@ -312,15 +279,12 @@ class SerialPortConnectResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'connection_string': {'key': 'connectionString', 'type': 'str'},
+        "connection_string": {"key": "connectionString", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SerialPortConnectResult, self).__init__(**kwargs)
-        self.connection_string = kwargs.get('connection_string', None)
+        self.connection_string = kwargs.get("connection_string", None)
 
 
 class SerialPortListResult(msrest.serialization.Model):
@@ -331,12 +295,9 @@ class SerialPortListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SerialPort]'},
+        "value": {"key": "value", "type": "[SerialPort]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SerialPortListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
