@@ -9,6 +9,7 @@
 from enum import Enum, EnumMeta
 from six import with_metaclass
 
+
 class _CaseInsensitiveEnumMeta(EnumMeta):
     def __getitem__(self, name):
         return super().__getitem__(name.upper())
@@ -27,17 +28,16 @@ class _CaseInsensitiveEnumMeta(EnumMeta):
 
 
 class IdentityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of identity that creates/modifies resources
-    """
+    """The type of identity that creates/modifies resources"""
 
     USER = "User"
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
+
 class SkuName(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """The name of the HealthBot SKU
-    """
+    """The name of the HealthBot SKU"""
 
     F0 = "F0"
     S1 = "S1"
