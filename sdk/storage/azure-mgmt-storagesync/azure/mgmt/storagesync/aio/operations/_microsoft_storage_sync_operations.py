@@ -24,50 +24,27 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._operation_status_operations import build_get_request
+from ...operations._microsoft_storage_sync_operations import build_location_operation_status_request
 from .._vendor import MixinABC
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class OperationStatusOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.storagesync.aio.MicrosoftStorageSync`'s
-        :attr:`operation_status` attribute.
-    """
-
-    models = _models
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
+class MicrosoftStorageSyncOperationsMixin(MixinABC):
     @distributed_trace_async
-    async def get(
-        self, resource_group_name: str, location_name: str, workflow_id: str, operation_id: str, **kwargs: Any
-    ) -> _models.OperationStatus:
+    async def location_operation_status(
+        self, location_name: str, operation_id: str, **kwargs: Any
+    ) -> _models.LocationOperationStatus:
         """Get Operation status.
 
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
         :param location_name: The desired region to obtain information from. Required.
         :type location_name: str
-        :param workflow_id: workflow Id. Required.
-        :type workflow_id: str
         :param operation_id: operation Id. Required.
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: OperationStatus or the result of cls(response)
-        :rtype: ~azure.mgmt.storagesync.models.OperationStatus
+        :return: LocationOperationStatus or the result of cls(response)
+        :rtype: ~azure.mgmt.storagesync.models.LocationOperationStatus
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -77,16 +54,14 @@ class OperationStatusOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationStatus]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.LocationOperationStatus]
 
-        request = build_get_request(
-            resource_group_name=resource_group_name,
+        request = build_location_operation_status_request(
             location_name=location_name,
-            workflow_id=workflow_id,
             operation_id=operation_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get.metadata["url"],
+            template_url=self.location_operation_status.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -110,11 +85,11 @@ class OperationStatusOperations:
             "str", response.headers.get("x-ms-correlation-request-id")
         )
 
-        deserialized = self._deserialize("OperationStatus", pipeline_response)
+        deserialized = self._deserialize("LocationOperationStatus", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/locations/{locationName}/workflows/{workflowId}/operations/{operationId}"}  # type: ignore
+    location_operation_status.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}"}  # type: ignore
