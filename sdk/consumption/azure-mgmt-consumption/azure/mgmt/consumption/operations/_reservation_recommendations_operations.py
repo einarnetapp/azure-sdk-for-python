@@ -7,10 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
+from urllib.parse import parse_qs, urljoin, urlparse
 
-from msrest import Serializer
-
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
@@ -20,48 +25,41 @@ from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
+from .._serialization import Serializer
 from .._vendor import _convert_request, _format_url_section
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_list_request(
-    resource_scope: str,
-    *,
-    filter: Optional[str] = None,
-    **kwargs: Any
-) -> HttpRequest:
+
+def build_list_request(resource_scope: str, *, filter: Optional[str] = None, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop("template_url", "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations")
     path_format_arguments = {
-        "resourceScope": _SERIALIZER.url("resource_scope", resource_scope, 'str', skip_quote=True),
+        "resourceScope": _SERIALIZER.url("resource_scope", resource_scope, "str", skip_quote=True),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     if filter is not None:
-        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
 
 class ReservationRecommendationsOperations:
     """
@@ -82,14 +80,10 @@ class ReservationRecommendationsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
     def list(
-        self,
-        resource_scope: str,
-        filter: Optional[str] = None,
-        **kwargs: Any
-    ) -> Iterable[_models.ReservationRecommendationsListResult]:
+        self, resource_scope: str, filter: Optional[str] = None, **kwargs: Any
+    ) -> Iterable["_models.ReservationRecommendation"]:
         """List of recommendations for purchasing reserved instances.
 
         :param resource_scope: The scope associated with reservation recommendations operations. This
@@ -97,7 +91,7 @@ class ReservationRecommendationsOperations:
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope,
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
-         for billingProfile scope.
+         for billingProfile scope. Required.
         :type resource_scope: str
         :param filter: May be used to filter reservationRecommendations by: properties/scope with
          allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with
@@ -108,30 +102,28 @@ class ReservationRecommendationsOperations:
          default value 'Last7Days'. Default value is None.
         :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ReservationRecommendationsListResult or the result
-         of cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationRecommendationsListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either ReservationRecommendation or the result of
+         cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationRecommendation]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReservationRecommendationsListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ReservationRecommendationsListResult]
 
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     resource_scope=resource_scope,
-                    api_version=api_version,
                     filter=filter,
-                    template_url=self.list.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -139,15 +131,11 @@ class ReservationRecommendationsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_request(
-                    resource_scope=resource_scope,
-                    api_version=api_version,
-                    filter=filter,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                # make call to next link with the client's api-version
+                _parsed_next_link = urlparse(next_link)
+                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -163,10 +151,8 @@ class ReservationRecommendationsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -177,8 +163,6 @@ class ReservationRecommendationsOperations:
 
             return pipeline_response
 
+        return ItemPaged(get_next, extract_data)
 
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations"}  # type: ignore
+    list.metadata = {"url": "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendations"}  # type: ignore

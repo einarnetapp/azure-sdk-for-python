@@ -7,9 +7,16 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar, Union
+from urllib.parse import parse_qs, urljoin, urlparse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -20,8 +27,10 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._usage_details_operations import build_list_request
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class UsageDetailsOperations:
     """
@@ -42,7 +51,6 @@ class UsageDetailsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
     def list(
         self,
@@ -53,7 +61,7 @@ class UsageDetailsOperations:
         top: Optional[int] = None,
         metric: Optional[Union[str, "_models.Metrictype"]] = None,
         **kwargs: Any
-    ) -> AsyncIterable[_models.UsageDetailsListResult]:
+    ) -> AsyncIterable["_models.UsageDetail"]:
         """Lists the usage details for the defined scope. Usage details are available via this API only
         for May 1, 2014 or later.
 
@@ -75,7 +83,7 @@ class UsageDetailsOperations:
          'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope, and
          'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
-         specific for partners.
+         specific for partners. Required.
         :type scope: str
         :param expand: May be used to expand the properties/additionalInfo or properties/meterDetails
          within a list of usage details. By default, these fields are not included when listing usage
@@ -97,37 +105,35 @@ class UsageDetailsOperations:
         :param top: May be used to limit the number of results to the most recent N usageDetails.
          Default value is None.
         :type top: int
-        :param metric: Allows to select different type of cost/usage records. Default value is None.
+        :param metric: Allows to select different type of cost/usage records. Known values are:
+         "actualcost", "amortizedcost", and "usage". Default value is None.
         :type metric: str or ~azure.mgmt.consumption.models.Metrictype
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either UsageDetailsListResult or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.consumption.models.UsageDetailsListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either UsageDetail or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.consumption.models.UsageDetail]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.UsageDetailsListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.UsageDetailsListResult]
 
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     scope=scope,
-                    api_version=api_version,
                     expand=expand,
                     filter=filter,
                     skiptoken=skiptoken,
                     top=top,
                     metric=metric,
-                    template_url=self.list.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -135,19 +141,11 @@ class UsageDetailsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_request(
-                    scope=scope,
-                    api_version=api_version,
-                    expand=expand,
-                    filter=filter,
-                    skiptoken=skiptoken,
-                    top=top,
-                    metric=metric,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                # make call to next link with the client's api-version
+                _parsed_next_link = urlparse(next_link)
+                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -163,10 +161,8 @@ class UsageDetailsOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -177,8 +173,6 @@ class UsageDetailsOperations:
 
             return pipeline_response
 
+        return AsyncItemPaged(get_next, extract_data)
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/{scope}/providers/Microsoft.Consumption/usageDetails"}  # type: ignore
+    list.metadata = {"url": "/{scope}/providers/Microsoft.Consumption/usageDetails"}  # type: ignore

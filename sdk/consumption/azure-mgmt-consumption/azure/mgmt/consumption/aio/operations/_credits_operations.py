@@ -8,7 +8,13 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Optional, TypeVar
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -19,8 +25,10 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._credits_operations import build_get_request
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class CreditsOperations:
     """
@@ -41,42 +49,35 @@ class CreditsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace_async
     async def get(
-        self,
-        billing_account_id: str,
-        billing_profile_id: str,
-        **kwargs: Any
+        self, billing_account_id: str, billing_profile_id: str, **kwargs: Any
     ) -> Optional[_models.CreditSummary]:
         """The credit summary by billingAccountId and billingProfileId.
 
-        :param billing_account_id: BillingAccount ID.
+        :param billing_account_id: BillingAccount ID. Required.
         :type billing_account_id: str
-        :param billing_profile_id: Azure Billing Profile ID.
+        :param billing_profile_id: Azure Billing Profile ID. Required.
         :type billing_profile_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: CreditSummary, or the result of cls(response)
+        :return: CreditSummary or None or the result of cls(response)
         :rtype: ~azure.mgmt.consumption.models.CreditSummary or None
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.CreditSummary]]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.CreditSummary]]
 
-        
         request = build_get_request(
             billing_account_id=billing_account_id,
             billing_profile_id=billing_profile_id,
             api_version=api_version,
-            template_url=self.get.metadata['url'],
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -84,10 +85,9 @@ class CreditsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
+
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 204]:
@@ -97,12 +97,11 @@ class CreditsOperations:
 
         deserialized = None
         if response.status_code == 200:
-            deserialized = self._deserialize('CreditSummary', pipeline_response)
+            deserialized = self._deserialize("CreditSummary", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/balanceSummary"}  # type: ignore
-
+    get.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/balanceSummary"}  # type: ignore

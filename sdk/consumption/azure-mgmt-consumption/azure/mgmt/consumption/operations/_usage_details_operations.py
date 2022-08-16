@@ -7,10 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Iterable, Optional, TypeVar, Union
+from urllib.parse import parse_qs, urljoin, urlparse
 
-from msrest import Serializer
-
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
@@ -20,12 +25,15 @@ from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
+from .._serialization import Serializer
 from .._vendor import _convert_request, _format_url_section
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
+
 
 def build_list_request(
     scope: str,
@@ -40,40 +48,35 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop("template_url", "/{scope}/providers/Microsoft.Consumption/usageDetails")
     path_format_arguments = {
-        "scope": _SERIALIZER.url("scope", scope, 'str', skip_quote=True),
+        "scope": _SERIALIZER.url("scope", scope, "str", skip_quote=True),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     if expand is not None:
-        _params['$expand'] = _SERIALIZER.query("expand", expand, 'str')
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
     if filter is not None:
-        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
     if skiptoken is not None:
-        _params['$skiptoken'] = _SERIALIZER.query("skiptoken", skiptoken, 'str')
+        _params["$skiptoken"] = _SERIALIZER.query("skiptoken", skiptoken, "str")
     if top is not None:
-        _params['$top'] = _SERIALIZER.query("top", top, 'int', maximum=1000, minimum=1)
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+        _params["$top"] = _SERIALIZER.query("top", top, "int", maximum=1000, minimum=1)
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if metric is not None:
-        _params['metric'] = _SERIALIZER.query("metric", metric, 'str')
+        _params["metric"] = _SERIALIZER.query("metric", metric, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
 
 class UsageDetailsOperations:
     """
@@ -94,7 +97,6 @@ class UsageDetailsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
     def list(
         self,
@@ -105,7 +107,7 @@ class UsageDetailsOperations:
         top: Optional[int] = None,
         metric: Optional[Union[str, "_models.Metrictype"]] = None,
         **kwargs: Any
-    ) -> Iterable[_models.UsageDetailsListResult]:
+    ) -> Iterable["_models.UsageDetail"]:
         """Lists the usage details for the defined scope. Usage details are available via this API only
         for May 1, 2014 or later.
 
@@ -127,7 +129,7 @@ class UsageDetailsOperations:
          'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}'
          for invoiceSection scope, and
          'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}'
-         specific for partners.
+         specific for partners. Required.
         :type scope: str
         :param expand: May be used to expand the properties/additionalInfo or properties/meterDetails
          within a list of usage details. By default, these fields are not included when listing usage
@@ -149,36 +151,35 @@ class UsageDetailsOperations:
         :param top: May be used to limit the number of results to the most recent N usageDetails.
          Default value is None.
         :type top: int
-        :param metric: Allows to select different type of cost/usage records. Default value is None.
+        :param metric: Allows to select different type of cost/usage records. Known values are:
+         "actualcost", "amortizedcost", and "usage". Default value is None.
         :type metric: str or ~azure.mgmt.consumption.models.Metrictype
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either UsageDetailsListResult or the result of
-         cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.UsageDetailsListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either UsageDetail or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.UsageDetail]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.UsageDetailsListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.UsageDetailsListResult]
 
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     scope=scope,
-                    api_version=api_version,
                     expand=expand,
                     filter=filter,
                     skiptoken=skiptoken,
                     top=top,
                     metric=metric,
-                    template_url=self.list.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -186,19 +187,11 @@ class UsageDetailsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_request(
-                    scope=scope,
-                    api_version=api_version,
-                    expand=expand,
-                    filter=filter,
-                    skiptoken=skiptoken,
-                    top=top,
-                    metric=metric,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                # make call to next link with the client's api-version
+                _parsed_next_link = urlparse(next_link)
+                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -214,10 +207,8 @@ class UsageDetailsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -228,8 +219,6 @@ class UsageDetailsOperations:
 
             return pipeline_response
 
+        return ItemPaged(get_next, extract_data)
 
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/{scope}/providers/Microsoft.Consumption/usageDetails"}  # type: ignore
+    list.metadata = {"url": "/{scope}/providers/Microsoft.Consumption/usageDetails"}  # type: ignore
