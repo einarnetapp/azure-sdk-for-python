@@ -49,7 +49,7 @@ def build_list_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -69,7 +69,7 @@ def build_list_request(
 
 
 def build_get_request(
-    hub_name: str, resource_group_name: str, resource_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, resource_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -80,13 +80,13 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "hubName": _SERIALIZER.url("hub_name", hub_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
         "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
+        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -101,7 +101,7 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    hub_name: str, resource_group_name: str, resource_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, resource_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -113,13 +113,13 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "hubName": _SERIALIZER.url("hub_name", hub_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
         "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
+        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -136,7 +136,7 @@ def build_create_or_update_request(
 
 
 def build_delete_request(
-    hub_name: str, resource_group_name: str, resource_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, resource_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -147,13 +147,13 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "hubName": _SERIALIZER.url("hub_name", hub_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
         "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
+        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -167,14 +167,14 @@ def build_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class WebPubSubHubsOperations:
+class WebPubSubCustomCertificatesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.webpubsub.WebPubSubManagementClient`'s
-        :attr:`web_pub_sub_hubs` attribute.
+        :attr:`web_pub_sub_custom_certificates` attribute.
     """
 
     models = _models
@@ -187,8 +187,10 @@ class WebPubSubHubsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, resource_group_name: str, resource_name: str, **kwargs: Any) -> Iterable["_models.WebPubSubHub"]:
-        """List hub settings.
+    def list(
+        self, resource_group_name: str, resource_name: str, **kwargs: Any
+    ) -> Iterable["_models.CustomCertificate"]:
+        """List all custom certificates.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal. Required.
@@ -196,15 +198,15 @@ class WebPubSubHubsOperations:
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either WebPubSubHub or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.webpubsub.models.WebPubSubHub]
+        :return: An iterator like instance of either CustomCertificate or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.webpubsub.models.CustomCertificate]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubHubList]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CustomCertificateList]
 
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
@@ -236,7 +238,7 @@ class WebPubSubHubsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("WebPubSubHubList", pipeline_response)
+            deserialized = self._deserialize("CustomCertificateList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -259,22 +261,24 @@ class WebPubSubHubsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates"}  # type: ignore
 
     @distributed_trace
-    def get(self, hub_name: str, resource_group_name: str, resource_name: str, **kwargs: Any) -> _models.WebPubSubHub:
-        """Get a hub setting.
+    def get(
+        self, resource_group_name: str, resource_name: str, certificate_name: str, **kwargs: Any
+    ) -> _models.CustomCertificate:
+        """Get a custom certificate.
 
-        :param hub_name: The hub name. Required.
-        :type hub_name: str
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
+        :param certificate_name: Custom certificate name. Required.
+        :type certificate_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: WebPubSubHub or the result of cls(response)
-        :rtype: ~azure.mgmt.webpubsub.models.WebPubSubHub
+        :return: CustomCertificate or the result of cls(response)
+        :rtype: ~azure.mgmt.webpubsub.models.CustomCertificate
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -284,12 +288,12 @@ class WebPubSubHubsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubHub]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CustomCertificate]
 
         request = build_get_request(
-            hub_name=hub_name,
             resource_group_name=resource_group_name,
             resource_name=resource_name,
+            certificate_name=certificate_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -310,23 +314,23 @@ class WebPubSubHubsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("WebPubSubHub", pipeline_response)
+        deserialized = self._deserialize("CustomCertificate", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}"}  # type: ignore
 
     def _create_or_update_initial(
         self,
-        hub_name: str,
         resource_group_name: str,
         resource_name: str,
-        parameters: Union[_models.WebPubSubHub, IO],
+        certificate_name: str,
+        parameters: Union[_models.CustomCertificate, IO],
         **kwargs: Any
-    ) -> _models.WebPubSubHub:
+    ) -> _models.CustomCertificate:
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -335,7 +339,7 @@ class WebPubSubHubsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubHub]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CustomCertificate]
 
         content_type = content_type or "application/json"
         _json = None
@@ -343,12 +347,12 @@ class WebPubSubHubsOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "WebPubSubHub")
+            _json = self._serialize.body(parameters, "CustomCertificate")
 
         request = build_create_or_update_request(
-            hub_name=hub_name,
             resource_group_name=resource_group_name,
             resource_name=resource_name,
+            certificate_name=certificate_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -373,40 +377,40 @@ class WebPubSubHubsOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("WebPubSubHub", pipeline_response)
+            deserialized = self._deserialize("CustomCertificate", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("WebPubSubHub", pipeline_response)
+            deserialized = self._deserialize("CustomCertificate", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}"}  # type: ignore
+    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}"}  # type: ignore
 
     @overload
     def begin_create_or_update(
         self,
-        hub_name: str,
         resource_group_name: str,
         resource_name: str,
-        parameters: _models.WebPubSubHub,
+        certificate_name: str,
+        parameters: _models.CustomCertificate,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.WebPubSubHub]:
-        """Create or update a hub setting.
+    ) -> LROPoller[_models.CustomCertificate]:
+        """Create or update a custom certificate.
 
-        :param hub_name: The hub name. Required.
-        :type hub_name: str
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: The resource of WebPubSubHub and its properties. Required.
-        :type parameters: ~azure.mgmt.webpubsub.models.WebPubSubHub
+        :param certificate_name: Custom certificate name. Required.
+        :type certificate_name: str
+        :param parameters: Required.
+        :type parameters: ~azure.mgmt.webpubsub.models.CustomCertificate
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -418,36 +422,36 @@ class WebPubSubHubsOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either WebPubSubHub or the result of
+        :return: An instance of LROPoller that returns either CustomCertificate or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.webpubsub.models.WebPubSubHub]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.webpubsub.models.CustomCertificate]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
     def begin_create_or_update(
         self,
-        hub_name: str,
         resource_group_name: str,
         resource_name: str,
+        certificate_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.WebPubSubHub]:
-        """Create or update a hub setting.
+    ) -> LROPoller[_models.CustomCertificate]:
+        """Create or update a custom certificate.
 
-        :param hub_name: The hub name. Required.
-        :type hub_name: str
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: The resource of WebPubSubHub and its properties. Required.
+        :param certificate_name: Custom certificate name. Required.
+        :type certificate_name: str
+        :param parameters: Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
+         Known values are: 'application/json', 'text/json'. Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
@@ -457,35 +461,34 @@ class WebPubSubHubsOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either WebPubSubHub or the result of
+        :return: An instance of LROPoller that returns either CustomCertificate or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.webpubsub.models.WebPubSubHub]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.webpubsub.models.CustomCertificate]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace
     def begin_create_or_update(
         self,
-        hub_name: str,
         resource_group_name: str,
         resource_name: str,
-        parameters: Union[_models.WebPubSubHub, IO],
+        certificate_name: str,
+        parameters: Union[_models.CustomCertificate, IO],
         **kwargs: Any
-    ) -> LROPoller[_models.WebPubSubHub]:
-        """Create or update a hub setting.
+    ) -> LROPoller[_models.CustomCertificate]:
+        """Create or update a custom certificate.
 
-        :param hub_name: The hub name. Required.
-        :type hub_name: str
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
         :param resource_name: The name of the resource. Required.
         :type resource_name: str
-        :param parameters: The resource of WebPubSubHub and its properties. Is either a model type or a
-         IO type. Required.
-        :type parameters: ~azure.mgmt.webpubsub.models.WebPubSubHub or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
+        :param certificate_name: Custom certificate name. Required.
+        :type certificate_name: str
+        :param parameters: Is either a model type or a IO type. Required.
+        :type parameters: ~azure.mgmt.webpubsub.models.CustomCertificate or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json',
+         'text/json'. Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
@@ -495,9 +498,9 @@ class WebPubSubHubsOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either WebPubSubHub or the result of
+        :return: An instance of LROPoller that returns either CustomCertificate or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.webpubsub.models.WebPubSubHub]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.webpubsub.models.CustomCertificate]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -505,15 +508,15 @@ class WebPubSubHubsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WebPubSubHub]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CustomCertificate]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
             raw_result = self._create_or_update_initial(  # type: ignore
-                hub_name=hub_name,
                 resource_group_name=resource_group_name,
                 resource_name=resource_name,
+                certificate_name=certificate_name,
                 parameters=parameters,
                 api_version=api_version,
                 content_type=content_type,
@@ -525,7 +528,7 @@ class WebPubSubHubsOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("WebPubSubHub", pipeline_response)
+            deserialized = self._deserialize("CustomCertificate", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -545,11 +548,26 @@ class WebPubSubHubsOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}"}  # type: ignore
+    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}"}  # type: ignore
 
-    def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, hub_name: str, resource_group_name: str, resource_name: str, **kwargs: Any
+    @distributed_trace
+    def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, resource_name: str, certificate_name: str, **kwargs: Any
     ) -> None:
+        """Delete a custom certificate.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param resource_name: The name of the resource. Required.
+        :type resource_name: str
+        :param certificate_name: Custom certificate name. Required.
+        :type certificate_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -560,12 +578,12 @@ class WebPubSubHubsOperations:
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_delete_request(
-            hub_name=hub_name,
             resource_group_name=resource_group_name,
             resource_name=resource_name,
+            certificate_name=certificate_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self._delete_initial.metadata["url"],
+            template_url=self.delete.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -578,7 +596,7 @@ class WebPubSubHubsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 202, 204]:
+        if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
@@ -586,73 +604,4 @@ class WebPubSubHubsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}"}  # type: ignore
-
-    @distributed_trace
-    def begin_delete(
-        self, hub_name: str, resource_group_name: str, resource_name: str, **kwargs: Any
-    ) -> LROPoller[None]:
-        """Delete a hub setting.
-
-        :param hub_name: The hub name. Required.
-        :type hub_name: str
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param resource_name: The name of the resource. Required.
-        :type resource_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
-        if cont_token is None:
-            raw_result = self._delete_initial(  # type: ignore
-                hub_name=hub_name,
-                resource_group_name=resource_group_name,
-                resource_name=resource_name,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})
-
-        if polling is True:
-            polling_method = cast(
-                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
-            )  # type: PollingMethod
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
-
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/hubs/{hubName}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}"}  # type: ignore
