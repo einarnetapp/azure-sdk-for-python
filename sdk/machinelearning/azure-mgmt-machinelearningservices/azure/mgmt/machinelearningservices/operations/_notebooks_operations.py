@@ -8,7 +8,13 @@
 from typing import TYPE_CHECKING
 import warnings
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpRequest, HttpResponse
 from azure.core.polling import LROPoller, NoPolling, PollingMethod
@@ -21,8 +27,9 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Callable, Dict, Generic, Optional, TypeVar, Union
 
-    T = TypeVar('T')
+    T = TypeVar("T")
     ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+
 
 class NotebooksOperations(object):
     """NotebooksOperations operations.
@@ -53,30 +60,28 @@ class NotebooksOperations(object):
         **kwargs  # type: Any
     ):
         # type: (...) -> Optional["_models.NotebookResourceInfo"]
-        cls = kwargs.pop('cls', None)  # type: ClsType[Optional["_models.NotebookResourceInfo"]]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
+        cls = kwargs.pop("cls", None)  # type: ClsType[Optional["_models.NotebookResourceInfo"]]
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}))
         api_version = "2020-08-01"
         accept = "application/json"
 
         # Construct URL
-        url = self._prepare_initial.metadata['url']  # type: ignore
+        url = self._prepare_initial.metadata["url"]  # type: ignore
         path_format_arguments = {
-            'subscriptionId': self._serialize.url("self._config.subscription_id", self._config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'workspaceName': self._serialize.url("workspace_name", workspace_name, 'str'),
+            "subscriptionId": self._serialize.url("self._config.subscription_id", self._config.subscription_id, "str"),
+            "resourceGroupName": self._serialize.url("resource_group_name", resource_group_name, "str"),
+            "workspaceName": self._serialize.url("workspace_name", workspace_name, "str"),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+        query_parameters["api-version"] = self._serialize.query("api_version", api_version, "str")
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
+        header_parameters["Accept"] = self._serialize.header("accept", accept, "str")
 
         request = self._client.post(url, query_parameters, header_parameters)
         pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
@@ -89,13 +94,14 @@ class NotebooksOperations(object):
 
         deserialized = None
         if response.status_code == 200:
-            deserialized = self._deserialize('NotebookResourceInfo', pipeline_response)
+            deserialized = self._deserialize("NotebookResourceInfo", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    _prepare_initial.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook'}  # type: ignore
+
+    _prepare_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook"}  # type: ignore
 
     def begin_prepare(
         self,
@@ -120,47 +126,50 @@ class NotebooksOperations(object):
         :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.NotebookResourceInfo]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        polling = kwargs.pop('polling', True)  # type: Union[bool, PollingMethod]
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.NotebookResourceInfo"]
-        lro_delay = kwargs.pop(
-            'polling_interval',
-            self._config.polling_interval
-        )
-        cont_token = kwargs.pop('continuation_token', None)  # type: Optional[str]
+        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        cls = kwargs.pop("cls", None)  # type: ClsType["_models.NotebookResourceInfo"]
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
             raw_result = self._prepare_initial(
-                resource_group_name=resource_group_name,
-                workspace_name=workspace_name,
-                cls=lambda x,y,z: x,
-                **kwargs
+                resource_group_name=resource_group_name, workspace_name=workspace_name, cls=lambda x, y, z: x, **kwargs
             )
 
-        kwargs.pop('error_map', None)
-        kwargs.pop('content_type', None)
+        kwargs.pop("error_map", None)
+        kwargs.pop("content_type", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize('NotebookResourceInfo', pipeline_response)
+            deserialized = self._deserialize("NotebookResourceInfo", pipeline_response)
 
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
 
         path_format_arguments = {
-            'subscriptionId': self._serialize.url("self._config.subscription_id", self._config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'workspaceName': self._serialize.url("workspace_name", workspace_name, 'str'),
+            "subscriptionId": self._serialize.url("self._config.subscription_id", self._config.subscription_id, "str"),
+            "resourceGroupName": self._serialize.url("resource_group_name", resource_group_name, "str"),
+            "workspaceName": self._serialize.url("workspace_name", workspace_name, "str"),
         }
 
-        if polling is True: polling_method = ARMPolling(lro_delay, lro_options={'final-state-via': 'location'}, path_format_arguments=path_format_arguments,  **kwargs)
-        elif polling is False: polling_method = NoPolling()
-        else: polling_method = polling
+        if polling is True:
+            polling_method = ARMPolling(
+                lro_delay,
+                lro_options={"final-state-via": "location"},
+                path_format_arguments=path_format_arguments,
+                **kwargs
+            )
+        elif polling is False:
+            polling_method = NoPolling()
+        else:
+            polling_method = polling
         if cont_token:
             return LROPoller.from_continuation_token(
                 polling_method=polling_method,
                 continuation_token=cont_token,
                 client=self._client,
-                deserialization_callback=get_long_running_output
+                deserialization_callback=get_long_running_output,
             )
         else:
             return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
-    begin_prepare.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook'}  # type: ignore
+
+    begin_prepare.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook"}  # type: ignore
