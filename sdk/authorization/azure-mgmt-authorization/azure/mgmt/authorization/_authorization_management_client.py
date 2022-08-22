@@ -9,21 +9,18 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from typing import TYPE_CHECKING
+from typing import Any, Optional, TYPE_CHECKING
 
 from azure.mgmt.core import ARMPipelineClient
 from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
-from msrest import Deserializer, Serializer
 
 from ._configuration import AuthorizationManagementClientConfiguration
+from ._serialization import Deserializer, Serializer
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from typing import Any, Optional
-
     from azure.core.credentials import TokenCredential
-    from azure.core.pipeline.transport import HttpRequest, HttpResponse
 
 class _SDKClient(object):
     def __init__(self, *args, **kwargs):
@@ -33,7 +30,7 @@ class _SDKClient(object):
         pass
 
 class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
-    """Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users.
+    """Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users.
 
     This ready contains multiple API versions, to help you deal with all of the Azure clouds
     (Azure Stack, Azure Government, Azure China, etc.).
@@ -43,10 +40,8 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     The api-version parameter sets the default API version if the operation
     group is not described in the profile.
 
-    :param credential: Credential needed for the client to connect to Azure.
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The ID of the target subscription.
-    :type subscription_id: str
     :param api_version: API version to use if no profile is provided, or if missing in profile.
     :type api_version: str
     :param base_url: Service URL
@@ -55,27 +50,32 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     :type profile: azure.profiles.KnownProfiles
     """
 
-    DEFAULT_API_VERSION = '2015-07-01'
+    DEFAULT_API_VERSION = '2020-10-01'
     _PROFILE_TAG = "azure.mgmt.authorization.AuthorizationManagementClient"
     LATEST_PROFILE = ProfileDefinition({
         _PROFILE_TAG: {
             None: DEFAULT_API_VERSION,
+            'classic_administrators': '2015-07-01',
+            'deny_assignments': '2018-07-01-preview',
+            'global_administrator': '2015-07-01',
+            'permissions': '2015-07-01',
+            'provider_operations_metadata': '2015-07-01',
+            'role_assignment_metrics': '2019-08-01-preview',
+            'role_assignments': '2015-07-01',
+            'role_definitions': '2015-07-01',
         }},
         _PROFILE_TAG + " latest"
     )
 
     def __init__(
         self,
-        credential,  # type: "TokenCredential"
-        subscription_id,  # type: str
+        credential: "TokenCredential",
         api_version=None, # type: Optional[str]
-        base_url=None,  # type: Optional[str]
+        base_url: str = "https://management.azure.com",
         profile=KnownProfiles.default, # type: KnownProfiles
         **kwargs  # type: Any
     ):
-        if not base_url:
-            base_url = 'https://management.azure.com'
-        self._config = AuthorizationManagementClientConfiguration(credential, subscription_id, **kwargs)
+        self._config = AuthorizationManagementClientConfiguration(credential, **kwargs)
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
         super(AuthorizationManagementClient, self).__init__(
             api_version=api_version,
@@ -98,9 +98,12 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
            * 2018-09-01-preview: :mod:`v2018_09_01_preview.models<azure.mgmt.authorization.v2018_09_01_preview.models>`
            * 2019-08-01-preview: :mod:`v2019_08_01_preview.models<azure.mgmt.authorization.v2019_08_01_preview.models>`
            * 2020-04-01-preview: :mod:`v2020_04_01_preview.models<azure.mgmt.authorization.v2020_04_01_preview.models>`
+           * 2020-10-01: :mod:`v2020_10_01.models<azure.mgmt.authorization.v2020_10_01.models>`
            * 2020-10-01-preview: :mod:`v2020_10_01_preview.models<azure.mgmt.authorization.v2020_10_01_preview.models>`
            * 2021-01-01-preview: :mod:`v2021_01_01_preview.models<azure.mgmt.authorization.v2021_01_01_preview.models>`
            * 2021-03-01-preview: :mod:`v2021_03_01_preview.models<azure.mgmt.authorization.v2021_03_01_preview.models>`
+           * 2021-07-01-preview: :mod:`v2021_07_01_preview.models<azure.mgmt.authorization.v2021_07_01_preview.models>`
+           * 2021-12-01-preview: :mod:`v2021_12_01_preview.models<azure.mgmt.authorization.v2021_12_01_preview.models>`
         """
         if api_version == '2015-06-01':
             from .v2015_06_01 import models
@@ -126,6 +129,9 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
         elif api_version == '2020-04-01-preview':
             from .v2020_04_01_preview import models
             return models
+        elif api_version == '2020-10-01':
+            from .v2020_10_01 import models
+            return models
         elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview import models
             return models
@@ -135,6 +141,12 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview import models
             return models
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview import models
+            return models
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview import models
+            return models
         raise ValueError("API version {} is not available".format(api_version))
 
     @property
@@ -143,14 +155,72 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewDefaultSettingsOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewDefaultSettingsOperations>`
            * 2021-03-01-preview: :class:`AccessReviewDefaultSettingsOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewDefaultSettingsOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewDefaultSettingsOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewDefaultSettingsOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewDefaultSettingsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewDefaultSettingsOperations>`
         """
         api_version = self._get_api_version('access_review_default_settings')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewDefaultSettingsOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewDefaultSettingsOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewDefaultSettingsOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewDefaultSettingsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_default_settings'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def access_review_history_definition(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`AccessReviewHistoryDefinitionOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewHistoryDefinitionOperations>`
+        """
+        api_version = self._get_api_version('access_review_history_definition')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewHistoryDefinitionOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'access_review_history_definition'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def access_review_history_definition_instance(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`AccessReviewHistoryDefinitionInstanceOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewHistoryDefinitionInstanceOperations>`
+        """
+        api_version = self._get_api_version('access_review_history_definition_instance')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewHistoryDefinitionInstanceOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'access_review_history_definition_instance'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def access_review_history_definition_instances(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`AccessReviewHistoryDefinitionInstancesOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewHistoryDefinitionInstancesOperations>`
+        """
+        api_version = self._get_api_version('access_review_history_definition_instances')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewHistoryDefinitionInstancesOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'access_review_history_definition_instances'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def access_review_history_definitions(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`AccessReviewHistoryDefinitionsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewHistoryDefinitionsOperations>`
+        """
+        api_version = self._get_api_version('access_review_history_definitions')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewHistoryDefinitionsOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'access_review_history_definitions'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -159,14 +229,36 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewInstanceOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewInstanceOperations>`
            * 2021-03-01-preview: :class:`AccessReviewInstanceOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewInstanceOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewInstanceOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewInstanceOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewInstanceOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewInstanceOperations>`
         """
         api_version = self._get_api_version('access_review_instance')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewInstanceOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewInstanceOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewInstanceOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewInstanceOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_instance'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def access_review_instance_contacted_reviewers(self):
+        """Instance depends on the API version:
+
+           * 2021-07-01-preview: :class:`AccessReviewInstanceContactedReviewersOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewInstanceContactedReviewersOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewInstanceContactedReviewersOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewInstanceContactedReviewersOperations>`
+        """
+        api_version = self._get_api_version('access_review_instance_contacted_reviewers')
+        if api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewInstanceContactedReviewersOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewInstanceContactedReviewersOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'access_review_instance_contacted_reviewers'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -175,12 +267,18 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewInstanceDecisionsOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewInstanceDecisionsOperations>`
            * 2021-03-01-preview: :class:`AccessReviewInstanceDecisionsOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewInstanceDecisionsOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewInstanceDecisionsOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewInstanceDecisionsOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewInstanceDecisionsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewInstanceDecisionsOperations>`
         """
         api_version = self._get_api_version('access_review_instance_decisions')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewInstanceDecisionsOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewInstanceDecisionsOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewInstanceDecisionsOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewInstanceDecisionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_instance_decisions'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -191,12 +289,18 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewInstanceMyDecisionsOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewInstanceMyDecisionsOperations>`
            * 2021-03-01-preview: :class:`AccessReviewInstanceMyDecisionsOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewInstanceMyDecisionsOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewInstanceMyDecisionsOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewInstanceMyDecisionsOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewInstanceMyDecisionsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewInstanceMyDecisionsOperations>`
         """
         api_version = self._get_api_version('access_review_instance_my_decisions')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewInstanceMyDecisionsOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewInstanceMyDecisionsOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewInstanceMyDecisionsOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewInstanceMyDecisionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_instance_my_decisions'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -207,12 +311,18 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewInstancesOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewInstancesOperations>`
            * 2021-03-01-preview: :class:`AccessReviewInstancesOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewInstancesOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewInstancesOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewInstancesOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewInstancesOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewInstancesOperations>`
         """
         api_version = self._get_api_version('access_review_instances')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewInstancesOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewInstancesOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewInstancesOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewInstancesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_instances'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -223,12 +333,18 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewInstancesAssignedForMyApprovalOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewInstancesAssignedForMyApprovalOperations>`
            * 2021-03-01-preview: :class:`AccessReviewInstancesAssignedForMyApprovalOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewInstancesAssignedForMyApprovalOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewInstancesAssignedForMyApprovalOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewInstancesAssignedForMyApprovalOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewInstancesAssignedForMyApprovalOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewInstancesAssignedForMyApprovalOperations>`
         """
         api_version = self._get_api_version('access_review_instances_assigned_for_my_approval')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewInstancesAssignedForMyApprovalOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewInstancesAssignedForMyApprovalOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewInstancesAssignedForMyApprovalOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewInstancesAssignedForMyApprovalOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_instances_assigned_for_my_approval'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -239,12 +355,18 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewScheduleDefinitionsOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewScheduleDefinitionsOperations>`
            * 2021-03-01-preview: :class:`AccessReviewScheduleDefinitionsOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewScheduleDefinitionsOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewScheduleDefinitionsOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewScheduleDefinitionsOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewScheduleDefinitionsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewScheduleDefinitionsOperations>`
         """
         api_version = self._get_api_version('access_review_schedule_definitions')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewScheduleDefinitionsOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewScheduleDefinitionsOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewScheduleDefinitionsOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewScheduleDefinitionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_schedule_definitions'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -255,12 +377,18 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
 
            * 2018-05-01-preview: :class:`AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations<azure.mgmt.authorization.v2018_05_01_preview.operations.AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations>`
            * 2021-03-01-preview: :class:`AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations<azure.mgmt.authorization.v2021_03_01_preview.operations.AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations>`
+           * 2021-07-01-preview: :class:`AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations>`
+           * 2021-12-01-preview: :class:`AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations>`
         """
         api_version = self._get_api_version('access_review_schedule_definitions_assigned_for_my_approval')
         if api_version == '2018-05-01-preview':
             from .v2018_05_01_preview.operations import AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import AccessReviewScheduleDefinitionsAssignedForMyApprovalOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'access_review_schedule_definitions_assigned_for_my_approval'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -298,10 +426,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def eligible_child_resources(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`EligibleChildResourcesOperations<azure.mgmt.authorization.v2020_10_01.operations.EligibleChildResourcesOperations>`
            * 2020-10-01-preview: :class:`EligibleChildResourcesOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.EligibleChildResourcesOperations>`
         """
         api_version = self._get_api_version('eligible_child_resources')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import EligibleChildResourcesOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import EligibleChildResourcesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'eligible_child_resources'".format(api_version))
@@ -327,6 +458,8 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
            * 2018-05-01-preview: :class:`Operations<azure.mgmt.authorization.v2018_05_01_preview.operations.Operations>`
            * 2021-01-01-preview: :class:`Operations<azure.mgmt.authorization.v2021_01_01_preview.operations.Operations>`
            * 2021-03-01-preview: :class:`Operations<azure.mgmt.authorization.v2021_03_01_preview.operations.Operations>`
+           * 2021-07-01-preview: :class:`Operations<azure.mgmt.authorization.v2021_07_01_preview.operations.Operations>`
+           * 2021-12-01-preview: :class:`Operations<azure.mgmt.authorization.v2021_12_01_preview.operations.Operations>`
         """
         api_version = self._get_api_version('operations')
         if api_version == '2018-05-01-preview':
@@ -335,6 +468,10 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2021_01_01_preview.operations import Operations as OperationClass
         elif api_version == '2021-03-01-preview':
             from .v2021_03_01_preview.operations import Operations as OperationClass
+        elif api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import Operations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
@@ -427,10 +564,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_assignment_schedule_instances(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleAssignmentScheduleInstancesOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleAssignmentScheduleInstancesOperations>`
            * 2020-10-01-preview: :class:`RoleAssignmentScheduleInstancesOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleAssignmentScheduleInstancesOperations>`
         """
         api_version = self._get_api_version('role_assignment_schedule_instances')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleAssignmentScheduleInstancesOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleAssignmentScheduleInstancesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_assignment_schedule_instances'".format(api_version))
@@ -440,10 +580,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_assignment_schedule_requests(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleAssignmentScheduleRequestsOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleAssignmentScheduleRequestsOperations>`
            * 2020-10-01-preview: :class:`RoleAssignmentScheduleRequestsOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleAssignmentScheduleRequestsOperations>`
         """
         api_version = self._get_api_version('role_assignment_schedule_requests')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleAssignmentScheduleRequestsOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleAssignmentScheduleRequestsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_assignment_schedule_requests'".format(api_version))
@@ -453,10 +596,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_assignment_schedules(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleAssignmentSchedulesOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleAssignmentSchedulesOperations>`
            * 2020-10-01-preview: :class:`RoleAssignmentSchedulesOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleAssignmentSchedulesOperations>`
         """
         api_version = self._get_api_version('role_assignment_schedules')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleAssignmentSchedulesOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleAssignmentSchedulesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_assignment_schedules'".format(api_version))
@@ -507,10 +653,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_eligibility_schedule_instances(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleEligibilityScheduleInstancesOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleEligibilityScheduleInstancesOperations>`
            * 2020-10-01-preview: :class:`RoleEligibilityScheduleInstancesOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleEligibilityScheduleInstancesOperations>`
         """
         api_version = self._get_api_version('role_eligibility_schedule_instances')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleEligibilityScheduleInstancesOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleEligibilityScheduleInstancesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_eligibility_schedule_instances'".format(api_version))
@@ -520,10 +669,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_eligibility_schedule_requests(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleEligibilityScheduleRequestsOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleEligibilityScheduleRequestsOperations>`
            * 2020-10-01-preview: :class:`RoleEligibilityScheduleRequestsOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleEligibilityScheduleRequestsOperations>`
         """
         api_version = self._get_api_version('role_eligibility_schedule_requests')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleEligibilityScheduleRequestsOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleEligibilityScheduleRequestsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_eligibility_schedule_requests'".format(api_version))
@@ -533,10 +685,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_eligibility_schedules(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleEligibilitySchedulesOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleEligibilitySchedulesOperations>`
            * 2020-10-01-preview: :class:`RoleEligibilitySchedulesOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleEligibilitySchedulesOperations>`
         """
         api_version = self._get_api_version('role_eligibility_schedules')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleEligibilitySchedulesOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleEligibilitySchedulesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_eligibility_schedules'".format(api_version))
@@ -546,10 +701,13 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_management_policies(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleManagementPoliciesOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleManagementPoliciesOperations>`
            * 2020-10-01-preview: :class:`RoleManagementPoliciesOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleManagementPoliciesOperations>`
         """
         api_version = self._get_api_version('role_management_policies')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleManagementPoliciesOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleManagementPoliciesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_management_policies'".format(api_version))
@@ -559,13 +717,146 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
     def role_management_policy_assignments(self):
         """Instance depends on the API version:
 
+           * 2020-10-01: :class:`RoleManagementPolicyAssignmentsOperations<azure.mgmt.authorization.v2020_10_01.operations.RoleManagementPolicyAssignmentsOperations>`
            * 2020-10-01-preview: :class:`RoleManagementPolicyAssignmentsOperations<azure.mgmt.authorization.v2020_10_01_preview.operations.RoleManagementPolicyAssignmentsOperations>`
         """
         api_version = self._get_api_version('role_management_policy_assignments')
-        if api_version == '2020-10-01-preview':
+        if api_version == '2020-10-01':
+            from .v2020_10_01.operations import RoleManagementPolicyAssignmentsOperations as OperationClass
+        elif api_version == '2020-10-01-preview':
             from .v2020_10_01_preview.operations import RoleManagementPolicyAssignmentsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'role_management_policy_assignments'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_default_settings(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewDefaultSettingsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewDefaultSettingsOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_default_settings')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewDefaultSettingsOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_default_settings'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_history_definition(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewHistoryDefinitionOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewHistoryDefinitionOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_history_definition')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewHistoryDefinitionOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_history_definition'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_history_definition_instance(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewHistoryDefinitionInstanceOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewHistoryDefinitionInstanceOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_history_definition_instance')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewHistoryDefinitionInstanceOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_history_definition_instance'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_history_definition_instances(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewHistoryDefinitionInstancesOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewHistoryDefinitionInstancesOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_history_definition_instances')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewHistoryDefinitionInstancesOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_history_definition_instances'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_history_definitions(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewHistoryDefinitionsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewHistoryDefinitionsOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_history_definitions')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewHistoryDefinitionsOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_history_definitions'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_instance(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewInstanceOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewInstanceOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_instance')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewInstanceOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_instance'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_instance_contacted_reviewers(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewInstanceContactedReviewersOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewInstanceContactedReviewersOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_instance_contacted_reviewers')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewInstanceContactedReviewersOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_instance_contacted_reviewers'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_instance_decisions(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewInstanceDecisionsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewInstanceDecisionsOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_instance_decisions')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewInstanceDecisionsOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_instance_decisions'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_instances(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewInstancesOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewInstancesOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_instances')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewInstancesOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_instances'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def scope_access_review_schedule_definitions(self):
+        """Instance depends on the API version:
+
+           * 2021-12-01-preview: :class:`ScopeAccessReviewScheduleDefinitionsOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.ScopeAccessReviewScheduleDefinitionsOperations>`
+        """
+        api_version = self._get_api_version('scope_access_review_schedule_definitions')
+        if api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import ScopeAccessReviewScheduleDefinitionsOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'scope_access_review_schedule_definitions'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -605,6 +896,22 @@ class AuthorizationManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2021_01_01_preview.operations import ScopeRoleAssignmentApprovalStepsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'scope_role_assignment_approval_steps'".format(api_version))
+        return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
+
+    @property
+    def tenant_level_access_review_instance_contacted_reviewers(self):
+        """Instance depends on the API version:
+
+           * 2021-07-01-preview: :class:`TenantLevelAccessReviewInstanceContactedReviewersOperations<azure.mgmt.authorization.v2021_07_01_preview.operations.TenantLevelAccessReviewInstanceContactedReviewersOperations>`
+           * 2021-12-01-preview: :class:`TenantLevelAccessReviewInstanceContactedReviewersOperations<azure.mgmt.authorization.v2021_12_01_preview.operations.TenantLevelAccessReviewInstanceContactedReviewersOperations>`
+        """
+        api_version = self._get_api_version('tenant_level_access_review_instance_contacted_reviewers')
+        if api_version == '2021-07-01-preview':
+            from .v2021_07_01_preview.operations import TenantLevelAccessReviewInstanceContactedReviewersOperations as OperationClass
+        elif api_version == '2021-12-01-preview':
+            from .v2021_12_01_preview.operations import TenantLevelAccessReviewInstanceContactedReviewersOperations as OperationClass
+        else:
+            raise ValueError("API version {} does not have operation group 'tenant_level_access_review_instance_contacted_reviewers'".format(api_version))
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     def close(self):

@@ -22,19 +22,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -59,25 +56,22 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -94,15 +88,12 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class RoleAssignmentMetricsResult(msrest.serialization.Model):
@@ -121,23 +112,20 @@ class RoleAssignmentMetricsResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'subscription_id': {'readonly': True},
-        'role_assignments_limit': {'readonly': True},
-        'role_assignments_current_count': {'readonly': True},
-        'role_assignments_remaining_count': {'readonly': True},
+        "subscription_id": {"readonly": True},
+        "role_assignments_limit": {"readonly": True},
+        "role_assignments_current_count": {"readonly": True},
+        "role_assignments_remaining_count": {"readonly": True},
     }
 
     _attribute_map = {
-        'subscription_id': {'key': 'subscriptionId', 'type': 'str'},
-        'role_assignments_limit': {'key': 'roleAssignmentsLimit', 'type': 'long'},
-        'role_assignments_current_count': {'key': 'roleAssignmentsCurrentCount', 'type': 'long'},
-        'role_assignments_remaining_count': {'key': 'roleAssignmentsRemainingCount', 'type': 'long'},
+        "subscription_id": {"key": "subscriptionId", "type": "str"},
+        "role_assignments_limit": {"key": "roleAssignmentsLimit", "type": "long"},
+        "role_assignments_current_count": {"key": "roleAssignmentsCurrentCount", "type": "long"},
+        "role_assignments_remaining_count": {"key": "roleAssignmentsRemainingCount", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentMetricsResult, self).__init__(**kwargs)
         self.subscription_id = None
         self.role_assignments_limit = None

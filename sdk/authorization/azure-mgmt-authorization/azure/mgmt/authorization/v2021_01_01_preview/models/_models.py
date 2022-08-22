@@ -18,15 +18,12 @@ class ErrorDefinition(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDefinitionProperties'},
+        "error": {"key": "error", "type": "ErrorDefinitionProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDefinition, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class ErrorDefinitionProperties(msrest.serialization.Model):
@@ -41,21 +38,18 @@ class ErrorDefinitionProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'message': {'readonly': True},
+        "message": {"readonly": True},
     }
 
     _attribute_map = {
-        'message': {'key': 'message', 'type': 'str'},
-        'code': {'key': 'code', 'type': 'str'},
+        "message": {"key": "message", "type": "str"},
+        "code": {"key": "code", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDefinitionProperties, self).__init__(**kwargs)
         self.message = None
-        self.code = kwargs.get('code', None)
+        self.code = kwargs.get("code", None)
 
 
 class Operation(msrest.serialization.Model):
@@ -72,21 +66,18 @@ class Operation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'display': {'key': 'display', 'type': 'OperationDisplay'},
-        'origin': {'key': 'origin', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "display": {"key": "display", "type": "OperationDisplay"},
+        "origin": {"key": "origin", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Operation, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
-        self.display = kwargs.get('display', None)
-        self.origin = kwargs.get('origin', None)
+        self.name = kwargs.get("name", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
+        self.display = kwargs.get("display", None)
+        self.origin = kwargs.get("origin", None)
 
 
 class OperationDisplay(msrest.serialization.Model):
@@ -105,23 +96,20 @@ class OperationDisplay(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider': {'readonly': True},
-        'resource': {'readonly': True},
-        'operation': {'readonly': True},
-        'description': {'readonly': True},
+        "provider": {"readonly": True},
+        "resource": {"readonly": True},
+        "operation": {"readonly": True},
+        "description": {"readonly": True},
     }
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = None
         self.resource = None
@@ -139,17 +127,14 @@ class OperationListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Operation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleAssignmentApproval(msrest.serialization.Model):
@@ -169,27 +154,24 @@ class RoleAssignmentApproval(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'stages': {'key': 'properties.stages', 'type': '[RoleAssignmentApprovalStep]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "stages": {"key": "properties.stages", "type": "[RoleAssignmentApprovalStep]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentApproval, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.stages = kwargs.get('stages', None)
+        self.stages = kwargs.get("stages", None)
 
 
 class RoleAssignmentApprovalListResult(msrest.serialization.Model):
@@ -204,20 +186,17 @@ class RoleAssignmentApprovalListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignmentApproval]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignmentApproval]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentApprovalListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -263,48 +242,45 @@ class RoleAssignmentApprovalStep(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'status': {'readonly': True},
-        'assigned_to_me': {'readonly': True},
-        'reviewed_date_time': {'readonly': True},
-        'principal_id': {'readonly': True},
-        'principal_type': {'readonly': True},
-        'principal_name': {'readonly': True},
-        'user_principal_name': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "status": {"readonly": True},
+        "assigned_to_me": {"readonly": True},
+        "reviewed_date_time": {"readonly": True},
+        "principal_id": {"readonly": True},
+        "principal_type": {"readonly": True},
+        "principal_name": {"readonly": True},
+        "user_principal_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'assigned_to_me': {'key': 'properties.assignedToMe', 'type': 'bool'},
-        'reviewed_date_time': {'key': 'properties.reviewedDateTime', 'type': 'iso-8601'},
-        'review_result': {'key': 'properties.reviewResult', 'type': 'str'},
-        'justification': {'key': 'properties.justification', 'type': 'str'},
-        'principal_id': {'key': 'properties.reviewedBy.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.reviewedBy.principalType', 'type': 'str'},
-        'principal_name': {'key': 'properties.reviewedBy.principalName', 'type': 'str'},
-        'user_principal_name': {'key': 'properties.reviewedBy.userPrincipalName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "assigned_to_me": {"key": "properties.assignedToMe", "type": "bool"},
+        "reviewed_date_time": {"key": "properties.reviewedDateTime", "type": "iso-8601"},
+        "review_result": {"key": "properties.reviewResult", "type": "str"},
+        "justification": {"key": "properties.justification", "type": "str"},
+        "principal_id": {"key": "properties.reviewedBy.principalId", "type": "str"},
+        "principal_type": {"key": "properties.reviewedBy.principalType", "type": "str"},
+        "principal_name": {"key": "properties.reviewedBy.principalName", "type": "str"},
+        "user_principal_name": {"key": "properties.reviewedBy.userPrincipalName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentApprovalStep, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.display_name = kwargs.get('display_name', None)
+        self.display_name = kwargs.get("display_name", None)
         self.status = None
         self.assigned_to_me = None
         self.reviewed_date_time = None
-        self.review_result = kwargs.get('review_result', None)
-        self.justification = kwargs.get('justification', None)
+        self.review_result = kwargs.get("review_result", None)
+        self.justification = kwargs.get("justification", None)
         self.principal_id = None
         self.principal_type = None
         self.principal_name = None
@@ -324,20 +300,17 @@ class RoleAssignmentApprovalStepListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignmentApprovalStep]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignmentApprovalStep]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentApprovalStepListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -377,39 +350,36 @@ class RoleAssignmentApprovalStepProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'status': {'readonly': True},
-        'assigned_to_me': {'readonly': True},
-        'reviewed_date_time': {'readonly': True},
-        'principal_id': {'readonly': True},
-        'principal_type': {'readonly': True},
-        'principal_name': {'readonly': True},
-        'user_principal_name': {'readonly': True},
+        "status": {"readonly": True},
+        "assigned_to_me": {"readonly": True},
+        "reviewed_date_time": {"readonly": True},
+        "principal_id": {"readonly": True},
+        "principal_type": {"readonly": True},
+        "principal_name": {"readonly": True},
+        "user_principal_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'assigned_to_me': {'key': 'assignedToMe', 'type': 'bool'},
-        'reviewed_date_time': {'key': 'reviewedDateTime', 'type': 'iso-8601'},
-        'review_result': {'key': 'reviewResult', 'type': 'str'},
-        'justification': {'key': 'justification', 'type': 'str'},
-        'principal_id': {'key': 'reviewedBy.principalId', 'type': 'str'},
-        'principal_type': {'key': 'reviewedBy.principalType', 'type': 'str'},
-        'principal_name': {'key': 'reviewedBy.principalName', 'type': 'str'},
-        'user_principal_name': {'key': 'reviewedBy.userPrincipalName', 'type': 'str'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "assigned_to_me": {"key": "assignedToMe", "type": "bool"},
+        "reviewed_date_time": {"key": "reviewedDateTime", "type": "iso-8601"},
+        "review_result": {"key": "reviewResult", "type": "str"},
+        "justification": {"key": "justification", "type": "str"},
+        "principal_id": {"key": "reviewedBy.principalId", "type": "str"},
+        "principal_type": {"key": "reviewedBy.principalType", "type": "str"},
+        "principal_name": {"key": "reviewedBy.principalName", "type": "str"},
+        "user_principal_name": {"key": "reviewedBy.userPrincipalName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentApprovalStepProperties, self).__init__(**kwargs)
-        self.display_name = kwargs.get('display_name', None)
+        self.display_name = kwargs.get("display_name", None)
         self.status = None
         self.assigned_to_me = None
         self.reviewed_date_time = None
-        self.review_result = kwargs.get('review_result', None)
-        self.justification = kwargs.get('justification', None)
+        self.review_result = kwargs.get("review_result", None)
+        self.justification = kwargs.get("justification", None)
         self.principal_id = None
         self.principal_type = None
         self.principal_name = None

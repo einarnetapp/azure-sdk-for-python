@@ -84,64 +84,79 @@ class AccessReviewDecision(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'recommendation': {'readonly': True},
-        'reviewed_date_time': {'readonly': True},
-        'apply_result': {'readonly': True},
-        'applied_date_time': {'readonly': True},
-        'principal_id_properties_applied_by_principal_id': {'readonly': True},
-        'principal_type_properties_applied_by_principal_type': {'readonly': True},
-        'principal_name_properties_applied_by_principal_name': {'readonly': True},
-        'user_principal_name_properties_applied_by_user_principal_name': {'readonly': True},
-        'principal_id_properties_reviewed_by_principal_id': {'readonly': True},
-        'principal_type_properties_reviewed_by_principal_type': {'readonly': True},
-        'principal_name_properties_reviewed_by_principal_name': {'readonly': True},
-        'user_principal_name_properties_reviewed_by_user_principal_name': {'readonly': True},
-        'id_properties_resource_id': {'readonly': True},
-        'display_name_properties_resource_display_name': {'readonly': True},
-        'id_properties_principal_id': {'readonly': True},
-        'display_name_properties_principal_display_name': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "recommendation": {"readonly": True},
+        "reviewed_date_time": {"readonly": True},
+        "apply_result": {"readonly": True},
+        "applied_date_time": {"readonly": True},
+        "principal_id_properties_applied_by_principal_id": {"readonly": True},
+        "principal_type_properties_applied_by_principal_type": {"readonly": True},
+        "principal_name_properties_applied_by_principal_name": {"readonly": True},
+        "user_principal_name_properties_applied_by_user_principal_name": {"readonly": True},
+        "principal_id_properties_reviewed_by_principal_id": {"readonly": True},
+        "principal_type_properties_reviewed_by_principal_type": {"readonly": True},
+        "principal_name_properties_reviewed_by_principal_name": {"readonly": True},
+        "user_principal_name_properties_reviewed_by_user_principal_name": {"readonly": True},
+        "id_properties_resource_id": {"readonly": True},
+        "display_name_properties_resource_display_name": {"readonly": True},
+        "id_properties_principal_id": {"readonly": True},
+        "display_name_properties_principal_display_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'recommendation': {'key': 'properties.recommendation', 'type': 'str'},
-        'decision': {'key': 'properties.decision', 'type': 'str'},
-        'justification': {'key': 'properties.justification', 'type': 'str'},
-        'reviewed_date_time': {'key': 'properties.reviewedDateTime', 'type': 'iso-8601'},
-        'apply_result': {'key': 'properties.applyResult', 'type': 'str'},
-        'applied_date_time': {'key': 'properties.appliedDateTime', 'type': 'iso-8601'},
-        'principal_id_properties_applied_by_principal_id': {'key': 'properties.appliedBy.principalId', 'type': 'str'},
-        'principal_type_properties_applied_by_principal_type': {'key': 'properties.appliedBy.principalType', 'type': 'str'},
-        'principal_name_properties_applied_by_principal_name': {'key': 'properties.appliedBy.principalName', 'type': 'str'},
-        'user_principal_name_properties_applied_by_user_principal_name': {'key': 'properties.appliedBy.userPrincipalName', 'type': 'str'},
-        'principal_id_properties_reviewed_by_principal_id': {'key': 'properties.reviewedBy.principalId', 'type': 'str'},
-        'principal_type_properties_reviewed_by_principal_type': {'key': 'properties.reviewedBy.principalType', 'type': 'str'},
-        'principal_name_properties_reviewed_by_principal_name': {'key': 'properties.reviewedBy.principalName', 'type': 'str'},
-        'user_principal_name_properties_reviewed_by_user_principal_name': {'key': 'properties.reviewedBy.userPrincipalName', 'type': 'str'},
-        'type_properties_resource_type': {'key': 'properties.resource.type', 'type': 'str'},
-        'id_properties_resource_id': {'key': 'properties.resource.id', 'type': 'str'},
-        'display_name_properties_resource_display_name': {'key': 'properties.resource.displayName', 'type': 'str'},
-        'type_properties_principal_type': {'key': 'properties.principal.type', 'type': 'str'},
-        'id_properties_principal_id': {'key': 'properties.principal.id', 'type': 'str'},
-        'display_name_properties_principal_display_name': {'key': 'properties.principal.displayName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "recommendation": {"key": "properties.recommendation", "type": "str"},
+        "decision": {"key": "properties.decision", "type": "str"},
+        "justification": {"key": "properties.justification", "type": "str"},
+        "reviewed_date_time": {"key": "properties.reviewedDateTime", "type": "iso-8601"},
+        "apply_result": {"key": "properties.applyResult", "type": "str"},
+        "applied_date_time": {"key": "properties.appliedDateTime", "type": "iso-8601"},
+        "principal_id_properties_applied_by_principal_id": {"key": "properties.appliedBy.principalId", "type": "str"},
+        "principal_type_properties_applied_by_principal_type": {
+            "key": "properties.appliedBy.principalType",
+            "type": "str",
+        },
+        "principal_name_properties_applied_by_principal_name": {
+            "key": "properties.appliedBy.principalName",
+            "type": "str",
+        },
+        "user_principal_name_properties_applied_by_user_principal_name": {
+            "key": "properties.appliedBy.userPrincipalName",
+            "type": "str",
+        },
+        "principal_id_properties_reviewed_by_principal_id": {"key": "properties.reviewedBy.principalId", "type": "str"},
+        "principal_type_properties_reviewed_by_principal_type": {
+            "key": "properties.reviewedBy.principalType",
+            "type": "str",
+        },
+        "principal_name_properties_reviewed_by_principal_name": {
+            "key": "properties.reviewedBy.principalName",
+            "type": "str",
+        },
+        "user_principal_name_properties_reviewed_by_user_principal_name": {
+            "key": "properties.reviewedBy.userPrincipalName",
+            "type": "str",
+        },
+        "type_properties_resource_type": {"key": "properties.resource.type", "type": "str"},
+        "id_properties_resource_id": {"key": "properties.resource.id", "type": "str"},
+        "display_name_properties_resource_display_name": {"key": "properties.resource.displayName", "type": "str"},
+        "type_properties_principal_type": {"key": "properties.principal.type", "type": "str"},
+        "id_properties_principal_id": {"key": "properties.principal.id", "type": "str"},
+        "display_name_properties_principal_display_name": {"key": "properties.principal.displayName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDecision, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
         self.recommendation = None
-        self.decision = kwargs.get('decision', None)
-        self.justification = kwargs.get('justification', None)
+        self.decision = kwargs.get("decision", None)
+        self.justification = kwargs.get("justification", None)
         self.reviewed_date_time = None
         self.apply_result = None
         self.applied_date_time = None
@@ -181,25 +196,25 @@ class AccessReviewDecisionIdentity(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True},
-        'id': {'readonly': True},
-        'display_name': {'readonly': True},
+        "type": {"required": True},
+        "id": {"readonly": True},
+        "display_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
     }
 
     _subtype_map = {
-        'type': {'servicePrincipal': 'AccessReviewDecisionServicePrincipalIdentity', 'user': 'AccessReviewDecisionUserIdentity'}
+        "type": {
+            "servicePrincipal": "AccessReviewDecisionServicePrincipalIdentity",
+            "user": "AccessReviewDecisionUserIdentity",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDecisionIdentity, self).__init__(**kwargs)
         self.type = None  # type: Optional[str]
         self.id = None
@@ -216,17 +231,14 @@ class AccessReviewDecisionListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[AccessReviewDecision]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[AccessReviewDecision]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDecisionListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AccessReviewDecisionProperties(msrest.serialization.Model):
@@ -294,55 +306,52 @@ class AccessReviewDecisionProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'recommendation': {'readonly': True},
-        'reviewed_date_time': {'readonly': True},
-        'apply_result': {'readonly': True},
-        'applied_date_time': {'readonly': True},
-        'principal_id_applied_by_principal_id': {'readonly': True},
-        'principal_type_applied_by_principal_type': {'readonly': True},
-        'principal_name_applied_by_principal_name': {'readonly': True},
-        'user_principal_name_applied_by_user_principal_name': {'readonly': True},
-        'principal_id_reviewed_by_principal_id': {'readonly': True},
-        'principal_type_reviewed_by_principal_type': {'readonly': True},
-        'principal_name_reviewed_by_principal_name': {'readonly': True},
-        'user_principal_name_reviewed_by_user_principal_name': {'readonly': True},
-        'id_resource_id': {'readonly': True},
-        'display_name_resource_display_name': {'readonly': True},
-        'id_principal_id': {'readonly': True},
-        'display_name_principal_display_name': {'readonly': True},
+        "recommendation": {"readonly": True},
+        "reviewed_date_time": {"readonly": True},
+        "apply_result": {"readonly": True},
+        "applied_date_time": {"readonly": True},
+        "principal_id_applied_by_principal_id": {"readonly": True},
+        "principal_type_applied_by_principal_type": {"readonly": True},
+        "principal_name_applied_by_principal_name": {"readonly": True},
+        "user_principal_name_applied_by_user_principal_name": {"readonly": True},
+        "principal_id_reviewed_by_principal_id": {"readonly": True},
+        "principal_type_reviewed_by_principal_type": {"readonly": True},
+        "principal_name_reviewed_by_principal_name": {"readonly": True},
+        "user_principal_name_reviewed_by_user_principal_name": {"readonly": True},
+        "id_resource_id": {"readonly": True},
+        "display_name_resource_display_name": {"readonly": True},
+        "id_principal_id": {"readonly": True},
+        "display_name_principal_display_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'recommendation': {'key': 'recommendation', 'type': 'str'},
-        'decision': {'key': 'decision', 'type': 'str'},
-        'justification': {'key': 'justification', 'type': 'str'},
-        'reviewed_date_time': {'key': 'reviewedDateTime', 'type': 'iso-8601'},
-        'apply_result': {'key': 'applyResult', 'type': 'str'},
-        'applied_date_time': {'key': 'appliedDateTime', 'type': 'iso-8601'},
-        'principal_id_applied_by_principal_id': {'key': 'appliedBy.principalId', 'type': 'str'},
-        'principal_type_applied_by_principal_type': {'key': 'appliedBy.principalType', 'type': 'str'},
-        'principal_name_applied_by_principal_name': {'key': 'appliedBy.principalName', 'type': 'str'},
-        'user_principal_name_applied_by_user_principal_name': {'key': 'appliedBy.userPrincipalName', 'type': 'str'},
-        'principal_id_reviewed_by_principal_id': {'key': 'reviewedBy.principalId', 'type': 'str'},
-        'principal_type_reviewed_by_principal_type': {'key': 'reviewedBy.principalType', 'type': 'str'},
-        'principal_name_reviewed_by_principal_name': {'key': 'reviewedBy.principalName', 'type': 'str'},
-        'user_principal_name_reviewed_by_user_principal_name': {'key': 'reviewedBy.userPrincipalName', 'type': 'str'},
-        'type_resource_type': {'key': 'resource.type', 'type': 'str'},
-        'id_resource_id': {'key': 'resource.id', 'type': 'str'},
-        'display_name_resource_display_name': {'key': 'resource.displayName', 'type': 'str'},
-        'type_principal_type': {'key': 'principal.type', 'type': 'str'},
-        'id_principal_id': {'key': 'principal.id', 'type': 'str'},
-        'display_name_principal_display_name': {'key': 'principal.displayName', 'type': 'str'},
+        "recommendation": {"key": "recommendation", "type": "str"},
+        "decision": {"key": "decision", "type": "str"},
+        "justification": {"key": "justification", "type": "str"},
+        "reviewed_date_time": {"key": "reviewedDateTime", "type": "iso-8601"},
+        "apply_result": {"key": "applyResult", "type": "str"},
+        "applied_date_time": {"key": "appliedDateTime", "type": "iso-8601"},
+        "principal_id_applied_by_principal_id": {"key": "appliedBy.principalId", "type": "str"},
+        "principal_type_applied_by_principal_type": {"key": "appliedBy.principalType", "type": "str"},
+        "principal_name_applied_by_principal_name": {"key": "appliedBy.principalName", "type": "str"},
+        "user_principal_name_applied_by_user_principal_name": {"key": "appliedBy.userPrincipalName", "type": "str"},
+        "principal_id_reviewed_by_principal_id": {"key": "reviewedBy.principalId", "type": "str"},
+        "principal_type_reviewed_by_principal_type": {"key": "reviewedBy.principalType", "type": "str"},
+        "principal_name_reviewed_by_principal_name": {"key": "reviewedBy.principalName", "type": "str"},
+        "user_principal_name_reviewed_by_user_principal_name": {"key": "reviewedBy.userPrincipalName", "type": "str"},
+        "type_resource_type": {"key": "resource.type", "type": "str"},
+        "id_resource_id": {"key": "resource.id", "type": "str"},
+        "display_name_resource_display_name": {"key": "resource.displayName", "type": "str"},
+        "type_principal_type": {"key": "principal.type", "type": "str"},
+        "id_principal_id": {"key": "principal.id", "type": "str"},
+        "display_name_principal_display_name": {"key": "principal.displayName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDecisionProperties, self).__init__(**kwargs)
         self.recommendation = None
-        self.decision = kwargs.get('decision', None)
-        self.justification = kwargs.get('justification', None)
+        self.decision = kwargs.get("decision", None)
+        self.justification = kwargs.get("justification", None)
         self.reviewed_date_time = None
         self.apply_result = None
         self.applied_date_time = None
@@ -382,25 +391,20 @@ class AccessReviewDecisionResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True},
-        'id': {'readonly': True},
-        'display_name': {'readonly': True},
+        "type": {"required": True},
+        "id": {"readonly": True},
+        "display_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
     }
 
-    _subtype_map = {
-        'type': {}
-    }
+    _subtype_map = {"type": {}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDecisionResource, self).__init__(**kwargs)
         self.type = None  # type: Optional[str]
         self.id = None
@@ -426,25 +430,22 @@ class AccessReviewDecisionServicePrincipalIdentity(AccessReviewDecisionIdentity)
     """
 
     _validation = {
-        'type': {'required': True},
-        'id': {'readonly': True},
-        'display_name': {'readonly': True},
-        'app_id': {'readonly': True},
+        "type": {"required": True},
+        "id": {"readonly": True},
+        "display_name": {"readonly": True},
+        "app_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'app_id': {'key': 'appId', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "app_id": {"key": "appId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDecisionServicePrincipalIdentity, self).__init__(**kwargs)
-        self.type = 'servicePrincipal'  # type: str
+        self.type = "servicePrincipal"  # type: str
         self.app_id = None
 
 
@@ -467,25 +468,22 @@ class AccessReviewDecisionUserIdentity(AccessReviewDecisionIdentity):
     """
 
     _validation = {
-        'type': {'required': True},
-        'id': {'readonly': True},
-        'display_name': {'readonly': True},
-        'user_principal_name': {'readonly': True},
+        "type": {"required": True},
+        "id": {"readonly": True},
+        "display_name": {"readonly": True},
+        "user_principal_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'user_principal_name': {'key': 'userPrincipalName', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "user_principal_name": {"key": "userPrincipalName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDecisionUserIdentity, self).__init__(**kwargs)
-        self.type = 'user'  # type: str
+        self.type = "user"  # type: str
         self.user_principal_name = None
 
 
@@ -548,53 +546,50 @@ class AccessReviewDefaultSettings(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'mail_notifications_enabled': {'key': 'properties.mailNotificationsEnabled', 'type': 'bool'},
-        'reminder_notifications_enabled': {'key': 'properties.reminderNotificationsEnabled', 'type': 'bool'},
-        'default_decision_enabled': {'key': 'properties.defaultDecisionEnabled', 'type': 'bool'},
-        'justification_required_on_approval': {'key': 'properties.justificationRequiredOnApproval', 'type': 'bool'},
-        'default_decision': {'key': 'properties.defaultDecision', 'type': 'str'},
-        'auto_apply_decisions_enabled': {'key': 'properties.autoApplyDecisionsEnabled', 'type': 'bool'},
-        'recommendations_enabled': {'key': 'properties.recommendationsEnabled', 'type': 'bool'},
-        'instance_duration_in_days': {'key': 'properties.instanceDurationInDays', 'type': 'int'},
-        'type_properties_recurrence_range_type': {'key': 'properties.recurrence.range.type', 'type': 'str'},
-        'number_of_occurrences': {'key': 'properties.recurrence.range.numberOfOccurrences', 'type': 'int'},
-        'start_date': {'key': 'properties.recurrence.range.startDate', 'type': 'iso-8601'},
-        'end_date': {'key': 'properties.recurrence.range.endDate', 'type': 'iso-8601'},
-        'type_properties_recurrence_pattern_type': {'key': 'properties.recurrence.pattern.type', 'type': 'str'},
-        'interval': {'key': 'properties.recurrence.pattern.interval', 'type': 'int'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "mail_notifications_enabled": {"key": "properties.mailNotificationsEnabled", "type": "bool"},
+        "reminder_notifications_enabled": {"key": "properties.reminderNotificationsEnabled", "type": "bool"},
+        "default_decision_enabled": {"key": "properties.defaultDecisionEnabled", "type": "bool"},
+        "justification_required_on_approval": {"key": "properties.justificationRequiredOnApproval", "type": "bool"},
+        "default_decision": {"key": "properties.defaultDecision", "type": "str"},
+        "auto_apply_decisions_enabled": {"key": "properties.autoApplyDecisionsEnabled", "type": "bool"},
+        "recommendations_enabled": {"key": "properties.recommendationsEnabled", "type": "bool"},
+        "instance_duration_in_days": {"key": "properties.instanceDurationInDays", "type": "int"},
+        "type_properties_recurrence_range_type": {"key": "properties.recurrence.range.type", "type": "str"},
+        "number_of_occurrences": {"key": "properties.recurrence.range.numberOfOccurrences", "type": "int"},
+        "start_date": {"key": "properties.recurrence.range.startDate", "type": "iso-8601"},
+        "end_date": {"key": "properties.recurrence.range.endDate", "type": "iso-8601"},
+        "type_properties_recurrence_pattern_type": {"key": "properties.recurrence.pattern.type", "type": "str"},
+        "interval": {"key": "properties.recurrence.pattern.interval", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewDefaultSettings, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.mail_notifications_enabled = kwargs.get('mail_notifications_enabled', None)
-        self.reminder_notifications_enabled = kwargs.get('reminder_notifications_enabled', None)
-        self.default_decision_enabled = kwargs.get('default_decision_enabled', None)
-        self.justification_required_on_approval = kwargs.get('justification_required_on_approval', None)
-        self.default_decision = kwargs.get('default_decision', None)
-        self.auto_apply_decisions_enabled = kwargs.get('auto_apply_decisions_enabled', None)
-        self.recommendations_enabled = kwargs.get('recommendations_enabled', None)
-        self.instance_duration_in_days = kwargs.get('instance_duration_in_days', None)
-        self.type_properties_recurrence_range_type = kwargs.get('type_properties_recurrence_range_type', None)
-        self.number_of_occurrences = kwargs.get('number_of_occurrences', None)
-        self.start_date = kwargs.get('start_date', None)
-        self.end_date = kwargs.get('end_date', None)
-        self.type_properties_recurrence_pattern_type = kwargs.get('type_properties_recurrence_pattern_type', None)
-        self.interval = kwargs.get('interval', None)
+        self.mail_notifications_enabled = kwargs.get("mail_notifications_enabled", None)
+        self.reminder_notifications_enabled = kwargs.get("reminder_notifications_enabled", None)
+        self.default_decision_enabled = kwargs.get("default_decision_enabled", None)
+        self.justification_required_on_approval = kwargs.get("justification_required_on_approval", None)
+        self.default_decision = kwargs.get("default_decision", None)
+        self.auto_apply_decisions_enabled = kwargs.get("auto_apply_decisions_enabled", None)
+        self.recommendations_enabled = kwargs.get("recommendations_enabled", None)
+        self.instance_duration_in_days = kwargs.get("instance_duration_in_days", None)
+        self.type_properties_recurrence_range_type = kwargs.get("type_properties_recurrence_range_type", None)
+        self.number_of_occurrences = kwargs.get("number_of_occurrences", None)
+        self.start_date = kwargs.get("start_date", None)
+        self.end_date = kwargs.get("end_date", None)
+        self.type_properties_recurrence_pattern_type = kwargs.get("type_properties_recurrence_pattern_type", None)
+        self.interval = kwargs.get("interval", None)
 
 
 class AccessReviewInstance(msrest.serialization.Model):
@@ -620,32 +615,29 @@ class AccessReviewInstance(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'status': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'start_date_time': {'key': 'properties.startDateTime', 'type': 'iso-8601'},
-        'end_date_time': {'key': 'properties.endDateTime', 'type': 'iso-8601'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "start_date_time": {"key": "properties.startDateTime", "type": "iso-8601"},
+        "end_date_time": {"key": "properties.endDateTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewInstance, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
         self.status = None
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
 
 
 class AccessReviewInstanceListResult(msrest.serialization.Model):
@@ -658,17 +650,14 @@ class AccessReviewInstanceListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[AccessReviewInstance]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[AccessReviewInstance]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewInstanceListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AccessReviewReviewer(msrest.serialization.Model):
@@ -685,20 +674,17 @@ class AccessReviewReviewer(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_type': {'readonly': True},
+        "principal_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'principal_type': {'key': 'principalType', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "principal_type": {"key": "principalType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewReviewer, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
+        self.principal_id = kwargs.get("principal_id", None)
         self.principal_type = None
 
 
@@ -815,93 +801,106 @@ class AccessReviewScheduleDefinition(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'status': {'readonly': True},
-        'reviewers_type': {'readonly': True},
-        'resource_id': {'readonly': True},
-        'role_definition_id': {'readonly': True},
-        'principal_type_properties_scope_principal_type': {'readonly': True},
-        'assignment_state': {'readonly': True},
-        'principal_id': {'readonly': True},
-        'principal_type_properties_created_by_principal_type': {'readonly': True},
-        'principal_name': {'readonly': True},
-        'user_principal_name': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "status": {"readonly": True},
+        "reviewers_type": {"readonly": True},
+        "resource_id": {"readonly": True},
+        "role_definition_id": {"readonly": True},
+        "principal_type_properties_scope_principal_type": {"readonly": True},
+        "assignment_state": {"readonly": True},
+        "principal_id": {"readonly": True},
+        "principal_type_properties_created_by_principal_type": {"readonly": True},
+        "principal_name": {"readonly": True},
+        "user_principal_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'description_for_admins': {'key': 'properties.descriptionForAdmins', 'type': 'str'},
-        'description_for_reviewers': {'key': 'properties.descriptionForReviewers', 'type': 'str'},
-        'reviewers': {'key': 'properties.reviewers', 'type': '[AccessReviewReviewer]'},
-        'backup_reviewers': {'key': 'properties.backupReviewers', 'type': '[AccessReviewReviewer]'},
-        'reviewers_type': {'key': 'properties.reviewersType', 'type': 'str'},
-        'instances': {'key': 'properties.instances', 'type': '[AccessReviewInstance]'},
-        'resource_id': {'key': 'properties.scope.resourceId', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.scope.roleDefinitionId', 'type': 'str'},
-        'principal_type_properties_scope_principal_type': {'key': 'properties.scope.principalType', 'type': 'str'},
-        'assignment_state': {'key': 'properties.scope.assignmentState', 'type': 'str'},
-        'inactive_duration': {'key': 'properties.scope.inactiveDuration', 'type': 'duration'},
-        'mail_notifications_enabled': {'key': 'properties.settings.mailNotificationsEnabled', 'type': 'bool'},
-        'reminder_notifications_enabled': {'key': 'properties.settings.reminderNotificationsEnabled', 'type': 'bool'},
-        'default_decision_enabled': {'key': 'properties.settings.defaultDecisionEnabled', 'type': 'bool'},
-        'justification_required_on_approval': {'key': 'properties.settings.justificationRequiredOnApproval', 'type': 'bool'},
-        'default_decision': {'key': 'properties.settings.defaultDecision', 'type': 'str'},
-        'auto_apply_decisions_enabled': {'key': 'properties.settings.autoApplyDecisionsEnabled', 'type': 'bool'},
-        'recommendations_enabled': {'key': 'properties.settings.recommendationsEnabled', 'type': 'bool'},
-        'instance_duration_in_days': {'key': 'properties.settings.instanceDurationInDays', 'type': 'int'},
-        'type_properties_settings_recurrence_range_type': {'key': 'properties.settings.recurrence.range.type', 'type': 'str'},
-        'number_of_occurrences': {'key': 'properties.settings.recurrence.range.numberOfOccurrences', 'type': 'int'},
-        'start_date': {'key': 'properties.settings.recurrence.range.startDate', 'type': 'iso-8601'},
-        'end_date': {'key': 'properties.settings.recurrence.range.endDate', 'type': 'iso-8601'},
-        'type_properties_settings_recurrence_pattern_type': {'key': 'properties.settings.recurrence.pattern.type', 'type': 'str'},
-        'interval': {'key': 'properties.settings.recurrence.pattern.interval', 'type': 'int'},
-        'principal_id': {'key': 'properties.createdBy.principalId', 'type': 'str'},
-        'principal_type_properties_created_by_principal_type': {'key': 'properties.createdBy.principalType', 'type': 'str'},
-        'principal_name': {'key': 'properties.createdBy.principalName', 'type': 'str'},
-        'user_principal_name': {'key': 'properties.createdBy.userPrincipalName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "description_for_admins": {"key": "properties.descriptionForAdmins", "type": "str"},
+        "description_for_reviewers": {"key": "properties.descriptionForReviewers", "type": "str"},
+        "reviewers": {"key": "properties.reviewers", "type": "[AccessReviewReviewer]"},
+        "backup_reviewers": {"key": "properties.backupReviewers", "type": "[AccessReviewReviewer]"},
+        "reviewers_type": {"key": "properties.reviewersType", "type": "str"},
+        "instances": {"key": "properties.instances", "type": "[AccessReviewInstance]"},
+        "resource_id": {"key": "properties.scope.resourceId", "type": "str"},
+        "role_definition_id": {"key": "properties.scope.roleDefinitionId", "type": "str"},
+        "principal_type_properties_scope_principal_type": {"key": "properties.scope.principalType", "type": "str"},
+        "assignment_state": {"key": "properties.scope.assignmentState", "type": "str"},
+        "inactive_duration": {"key": "properties.scope.inactiveDuration", "type": "duration"},
+        "mail_notifications_enabled": {"key": "properties.settings.mailNotificationsEnabled", "type": "bool"},
+        "reminder_notifications_enabled": {"key": "properties.settings.reminderNotificationsEnabled", "type": "bool"},
+        "default_decision_enabled": {"key": "properties.settings.defaultDecisionEnabled", "type": "bool"},
+        "justification_required_on_approval": {
+            "key": "properties.settings.justificationRequiredOnApproval",
+            "type": "bool",
+        },
+        "default_decision": {"key": "properties.settings.defaultDecision", "type": "str"},
+        "auto_apply_decisions_enabled": {"key": "properties.settings.autoApplyDecisionsEnabled", "type": "bool"},
+        "recommendations_enabled": {"key": "properties.settings.recommendationsEnabled", "type": "bool"},
+        "instance_duration_in_days": {"key": "properties.settings.instanceDurationInDays", "type": "int"},
+        "type_properties_settings_recurrence_range_type": {
+            "key": "properties.settings.recurrence.range.type",
+            "type": "str",
+        },
+        "number_of_occurrences": {"key": "properties.settings.recurrence.range.numberOfOccurrences", "type": "int"},
+        "start_date": {"key": "properties.settings.recurrence.range.startDate", "type": "iso-8601"},
+        "end_date": {"key": "properties.settings.recurrence.range.endDate", "type": "iso-8601"},
+        "type_properties_settings_recurrence_pattern_type": {
+            "key": "properties.settings.recurrence.pattern.type",
+            "type": "str",
+        },
+        "interval": {"key": "properties.settings.recurrence.pattern.interval", "type": "int"},
+        "principal_id": {"key": "properties.createdBy.principalId", "type": "str"},
+        "principal_type_properties_created_by_principal_type": {
+            "key": "properties.createdBy.principalType",
+            "type": "str",
+        },
+        "principal_name": {"key": "properties.createdBy.principalName", "type": "str"},
+        "user_principal_name": {"key": "properties.createdBy.userPrincipalName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewScheduleDefinition, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.display_name = kwargs.get('display_name', None)
+        self.display_name = kwargs.get("display_name", None)
         self.status = None
-        self.description_for_admins = kwargs.get('description_for_admins', None)
-        self.description_for_reviewers = kwargs.get('description_for_reviewers', None)
-        self.reviewers = kwargs.get('reviewers', None)
-        self.backup_reviewers = kwargs.get('backup_reviewers', None)
+        self.description_for_admins = kwargs.get("description_for_admins", None)
+        self.description_for_reviewers = kwargs.get("description_for_reviewers", None)
+        self.reviewers = kwargs.get("reviewers", None)
+        self.backup_reviewers = kwargs.get("backup_reviewers", None)
         self.reviewers_type = None
-        self.instances = kwargs.get('instances', None)
+        self.instances = kwargs.get("instances", None)
         self.resource_id = None
         self.role_definition_id = None
         self.principal_type_properties_scope_principal_type = None
         self.assignment_state = None
-        self.inactive_duration = kwargs.get('inactive_duration', None)
-        self.mail_notifications_enabled = kwargs.get('mail_notifications_enabled', None)
-        self.reminder_notifications_enabled = kwargs.get('reminder_notifications_enabled', None)
-        self.default_decision_enabled = kwargs.get('default_decision_enabled', None)
-        self.justification_required_on_approval = kwargs.get('justification_required_on_approval', None)
-        self.default_decision = kwargs.get('default_decision', None)
-        self.auto_apply_decisions_enabled = kwargs.get('auto_apply_decisions_enabled', None)
-        self.recommendations_enabled = kwargs.get('recommendations_enabled', None)
-        self.instance_duration_in_days = kwargs.get('instance_duration_in_days', None)
-        self.type_properties_settings_recurrence_range_type = kwargs.get('type_properties_settings_recurrence_range_type', None)
-        self.number_of_occurrences = kwargs.get('number_of_occurrences', None)
-        self.start_date = kwargs.get('start_date', None)
-        self.end_date = kwargs.get('end_date', None)
-        self.type_properties_settings_recurrence_pattern_type = kwargs.get('type_properties_settings_recurrence_pattern_type', None)
-        self.interval = kwargs.get('interval', None)
+        self.inactive_duration = kwargs.get("inactive_duration", None)
+        self.mail_notifications_enabled = kwargs.get("mail_notifications_enabled", None)
+        self.reminder_notifications_enabled = kwargs.get("reminder_notifications_enabled", None)
+        self.default_decision_enabled = kwargs.get("default_decision_enabled", None)
+        self.justification_required_on_approval = kwargs.get("justification_required_on_approval", None)
+        self.default_decision = kwargs.get("default_decision", None)
+        self.auto_apply_decisions_enabled = kwargs.get("auto_apply_decisions_enabled", None)
+        self.recommendations_enabled = kwargs.get("recommendations_enabled", None)
+        self.instance_duration_in_days = kwargs.get("instance_duration_in_days", None)
+        self.type_properties_settings_recurrence_range_type = kwargs.get(
+            "type_properties_settings_recurrence_range_type", None
+        )
+        self.number_of_occurrences = kwargs.get("number_of_occurrences", None)
+        self.start_date = kwargs.get("start_date", None)
+        self.end_date = kwargs.get("end_date", None)
+        self.type_properties_settings_recurrence_pattern_type = kwargs.get(
+            "type_properties_settings_recurrence_pattern_type", None
+        )
+        self.interval = kwargs.get("interval", None)
         self.principal_id = None
         self.principal_type_properties_created_by_principal_type = None
         self.principal_name = None
@@ -919,17 +918,14 @@ class AccessReviewScheduleDefinitionListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[AccessReviewScheduleDefinition]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[AccessReviewScheduleDefinition]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewScheduleDefinitionListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AccessReviewScheduleDefinitionProperties(msrest.serialization.Model):
@@ -1039,84 +1035,81 @@ class AccessReviewScheduleDefinitionProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'status': {'readonly': True},
-        'reviewers_type': {'readonly': True},
-        'resource_id': {'readonly': True},
-        'role_definition_id': {'readonly': True},
-        'principal_type_scope_principal_type': {'readonly': True},
-        'assignment_state': {'readonly': True},
-        'principal_id': {'readonly': True},
-        'principal_type_created_by_principal_type': {'readonly': True},
-        'principal_name': {'readonly': True},
-        'user_principal_name': {'readonly': True},
+        "status": {"readonly": True},
+        "reviewers_type": {"readonly": True},
+        "resource_id": {"readonly": True},
+        "role_definition_id": {"readonly": True},
+        "principal_type_scope_principal_type": {"readonly": True},
+        "assignment_state": {"readonly": True},
+        "principal_id": {"readonly": True},
+        "principal_type_created_by_principal_type": {"readonly": True},
+        "principal_name": {"readonly": True},
+        "user_principal_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'description_for_admins': {'key': 'descriptionForAdmins', 'type': 'str'},
-        'description_for_reviewers': {'key': 'descriptionForReviewers', 'type': 'str'},
-        'reviewers': {'key': 'reviewers', 'type': '[AccessReviewReviewer]'},
-        'backup_reviewers': {'key': 'backupReviewers', 'type': '[AccessReviewReviewer]'},
-        'reviewers_type': {'key': 'reviewersType', 'type': 'str'},
-        'instances': {'key': 'instances', 'type': '[AccessReviewInstance]'},
-        'resource_id': {'key': 'scope.resourceId', 'type': 'str'},
-        'role_definition_id': {'key': 'scope.roleDefinitionId', 'type': 'str'},
-        'principal_type_scope_principal_type': {'key': 'scope.principalType', 'type': 'str'},
-        'assignment_state': {'key': 'scope.assignmentState', 'type': 'str'},
-        'inactive_duration': {'key': 'scope.inactiveDuration', 'type': 'duration'},
-        'mail_notifications_enabled': {'key': 'settings.mailNotificationsEnabled', 'type': 'bool'},
-        'reminder_notifications_enabled': {'key': 'settings.reminderNotificationsEnabled', 'type': 'bool'},
-        'default_decision_enabled': {'key': 'settings.defaultDecisionEnabled', 'type': 'bool'},
-        'justification_required_on_approval': {'key': 'settings.justificationRequiredOnApproval', 'type': 'bool'},
-        'default_decision': {'key': 'settings.defaultDecision', 'type': 'str'},
-        'auto_apply_decisions_enabled': {'key': 'settings.autoApplyDecisionsEnabled', 'type': 'bool'},
-        'recommendations_enabled': {'key': 'settings.recommendationsEnabled', 'type': 'bool'},
-        'instance_duration_in_days': {'key': 'settings.instanceDurationInDays', 'type': 'int'},
-        'type_settings_recurrence_range_type': {'key': 'settings.recurrence.range.type', 'type': 'str'},
-        'number_of_occurrences': {'key': 'settings.recurrence.range.numberOfOccurrences', 'type': 'int'},
-        'start_date': {'key': 'settings.recurrence.range.startDate', 'type': 'iso-8601'},
-        'end_date': {'key': 'settings.recurrence.range.endDate', 'type': 'iso-8601'},
-        'type_settings_recurrence_pattern_type': {'key': 'settings.recurrence.pattern.type', 'type': 'str'},
-        'interval': {'key': 'settings.recurrence.pattern.interval', 'type': 'int'},
-        'principal_id': {'key': 'createdBy.principalId', 'type': 'str'},
-        'principal_type_created_by_principal_type': {'key': 'createdBy.principalType', 'type': 'str'},
-        'principal_name': {'key': 'createdBy.principalName', 'type': 'str'},
-        'user_principal_name': {'key': 'createdBy.userPrincipalName', 'type': 'str'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "description_for_admins": {"key": "descriptionForAdmins", "type": "str"},
+        "description_for_reviewers": {"key": "descriptionForReviewers", "type": "str"},
+        "reviewers": {"key": "reviewers", "type": "[AccessReviewReviewer]"},
+        "backup_reviewers": {"key": "backupReviewers", "type": "[AccessReviewReviewer]"},
+        "reviewers_type": {"key": "reviewersType", "type": "str"},
+        "instances": {"key": "instances", "type": "[AccessReviewInstance]"},
+        "resource_id": {"key": "scope.resourceId", "type": "str"},
+        "role_definition_id": {"key": "scope.roleDefinitionId", "type": "str"},
+        "principal_type_scope_principal_type": {"key": "scope.principalType", "type": "str"},
+        "assignment_state": {"key": "scope.assignmentState", "type": "str"},
+        "inactive_duration": {"key": "scope.inactiveDuration", "type": "duration"},
+        "mail_notifications_enabled": {"key": "settings.mailNotificationsEnabled", "type": "bool"},
+        "reminder_notifications_enabled": {"key": "settings.reminderNotificationsEnabled", "type": "bool"},
+        "default_decision_enabled": {"key": "settings.defaultDecisionEnabled", "type": "bool"},
+        "justification_required_on_approval": {"key": "settings.justificationRequiredOnApproval", "type": "bool"},
+        "default_decision": {"key": "settings.defaultDecision", "type": "str"},
+        "auto_apply_decisions_enabled": {"key": "settings.autoApplyDecisionsEnabled", "type": "bool"},
+        "recommendations_enabled": {"key": "settings.recommendationsEnabled", "type": "bool"},
+        "instance_duration_in_days": {"key": "settings.instanceDurationInDays", "type": "int"},
+        "type_settings_recurrence_range_type": {"key": "settings.recurrence.range.type", "type": "str"},
+        "number_of_occurrences": {"key": "settings.recurrence.range.numberOfOccurrences", "type": "int"},
+        "start_date": {"key": "settings.recurrence.range.startDate", "type": "iso-8601"},
+        "end_date": {"key": "settings.recurrence.range.endDate", "type": "iso-8601"},
+        "type_settings_recurrence_pattern_type": {"key": "settings.recurrence.pattern.type", "type": "str"},
+        "interval": {"key": "settings.recurrence.pattern.interval", "type": "int"},
+        "principal_id": {"key": "createdBy.principalId", "type": "str"},
+        "principal_type_created_by_principal_type": {"key": "createdBy.principalType", "type": "str"},
+        "principal_name": {"key": "createdBy.principalName", "type": "str"},
+        "user_principal_name": {"key": "createdBy.userPrincipalName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewScheduleDefinitionProperties, self).__init__(**kwargs)
-        self.display_name = kwargs.get('display_name', None)
+        self.display_name = kwargs.get("display_name", None)
         self.status = None
-        self.description_for_admins = kwargs.get('description_for_admins', None)
-        self.description_for_reviewers = kwargs.get('description_for_reviewers', None)
-        self.reviewers = kwargs.get('reviewers', None)
-        self.backup_reviewers = kwargs.get('backup_reviewers', None)
+        self.description_for_admins = kwargs.get("description_for_admins", None)
+        self.description_for_reviewers = kwargs.get("description_for_reviewers", None)
+        self.reviewers = kwargs.get("reviewers", None)
+        self.backup_reviewers = kwargs.get("backup_reviewers", None)
         self.reviewers_type = None
-        self.instances = kwargs.get('instances', None)
+        self.instances = kwargs.get("instances", None)
         self.resource_id = None
         self.role_definition_id = None
         self.principal_type_scope_principal_type = None
         self.assignment_state = None
-        self.inactive_duration = kwargs.get('inactive_duration', None)
-        self.mail_notifications_enabled = kwargs.get('mail_notifications_enabled', None)
-        self.reminder_notifications_enabled = kwargs.get('reminder_notifications_enabled', None)
-        self.default_decision_enabled = kwargs.get('default_decision_enabled', None)
-        self.justification_required_on_approval = kwargs.get('justification_required_on_approval', None)
-        self.default_decision = kwargs.get('default_decision', None)
-        self.auto_apply_decisions_enabled = kwargs.get('auto_apply_decisions_enabled', None)
-        self.recommendations_enabled = kwargs.get('recommendations_enabled', None)
-        self.instance_duration_in_days = kwargs.get('instance_duration_in_days', None)
-        self.type_settings_recurrence_range_type = kwargs.get('type_settings_recurrence_range_type', None)
-        self.number_of_occurrences = kwargs.get('number_of_occurrences', None)
-        self.start_date = kwargs.get('start_date', None)
-        self.end_date = kwargs.get('end_date', None)
-        self.type_settings_recurrence_pattern_type = kwargs.get('type_settings_recurrence_pattern_type', None)
-        self.interval = kwargs.get('interval', None)
+        self.inactive_duration = kwargs.get("inactive_duration", None)
+        self.mail_notifications_enabled = kwargs.get("mail_notifications_enabled", None)
+        self.reminder_notifications_enabled = kwargs.get("reminder_notifications_enabled", None)
+        self.default_decision_enabled = kwargs.get("default_decision_enabled", None)
+        self.justification_required_on_approval = kwargs.get("justification_required_on_approval", None)
+        self.default_decision = kwargs.get("default_decision", None)
+        self.auto_apply_decisions_enabled = kwargs.get("auto_apply_decisions_enabled", None)
+        self.recommendations_enabled = kwargs.get("recommendations_enabled", None)
+        self.instance_duration_in_days = kwargs.get("instance_duration_in_days", None)
+        self.type_settings_recurrence_range_type = kwargs.get("type_settings_recurrence_range_type", None)
+        self.number_of_occurrences = kwargs.get("number_of_occurrences", None)
+        self.start_date = kwargs.get("start_date", None)
+        self.end_date = kwargs.get("end_date", None)
+        self.type_settings_recurrence_pattern_type = kwargs.get("type_settings_recurrence_pattern_type", None)
+        self.interval = kwargs.get("interval", None)
         self.principal_id = None
         self.principal_type_created_by_principal_type = None
         self.principal_name = None
@@ -1173,41 +1166,38 @@ class AccessReviewScheduleSettings(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'mail_notifications_enabled': {'key': 'mailNotificationsEnabled', 'type': 'bool'},
-        'reminder_notifications_enabled': {'key': 'reminderNotificationsEnabled', 'type': 'bool'},
-        'default_decision_enabled': {'key': 'defaultDecisionEnabled', 'type': 'bool'},
-        'justification_required_on_approval': {'key': 'justificationRequiredOnApproval', 'type': 'bool'},
-        'default_decision': {'key': 'defaultDecision', 'type': 'str'},
-        'auto_apply_decisions_enabled': {'key': 'autoApplyDecisionsEnabled', 'type': 'bool'},
-        'recommendations_enabled': {'key': 'recommendationsEnabled', 'type': 'bool'},
-        'instance_duration_in_days': {'key': 'instanceDurationInDays', 'type': 'int'},
-        'type_recurrence_range_type': {'key': 'recurrence.range.type', 'type': 'str'},
-        'number_of_occurrences': {'key': 'recurrence.range.numberOfOccurrences', 'type': 'int'},
-        'start_date': {'key': 'recurrence.range.startDate', 'type': 'iso-8601'},
-        'end_date': {'key': 'recurrence.range.endDate', 'type': 'iso-8601'},
-        'type_recurrence_pattern_type': {'key': 'recurrence.pattern.type', 'type': 'str'},
-        'interval': {'key': 'recurrence.pattern.interval', 'type': 'int'},
+        "mail_notifications_enabled": {"key": "mailNotificationsEnabled", "type": "bool"},
+        "reminder_notifications_enabled": {"key": "reminderNotificationsEnabled", "type": "bool"},
+        "default_decision_enabled": {"key": "defaultDecisionEnabled", "type": "bool"},
+        "justification_required_on_approval": {"key": "justificationRequiredOnApproval", "type": "bool"},
+        "default_decision": {"key": "defaultDecision", "type": "str"},
+        "auto_apply_decisions_enabled": {"key": "autoApplyDecisionsEnabled", "type": "bool"},
+        "recommendations_enabled": {"key": "recommendationsEnabled", "type": "bool"},
+        "instance_duration_in_days": {"key": "instanceDurationInDays", "type": "int"},
+        "type_recurrence_range_type": {"key": "recurrence.range.type", "type": "str"},
+        "number_of_occurrences": {"key": "recurrence.range.numberOfOccurrences", "type": "int"},
+        "start_date": {"key": "recurrence.range.startDate", "type": "iso-8601"},
+        "end_date": {"key": "recurrence.range.endDate", "type": "iso-8601"},
+        "type_recurrence_pattern_type": {"key": "recurrence.pattern.type", "type": "str"},
+        "interval": {"key": "recurrence.pattern.interval", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccessReviewScheduleSettings, self).__init__(**kwargs)
-        self.mail_notifications_enabled = kwargs.get('mail_notifications_enabled', None)
-        self.reminder_notifications_enabled = kwargs.get('reminder_notifications_enabled', None)
-        self.default_decision_enabled = kwargs.get('default_decision_enabled', None)
-        self.justification_required_on_approval = kwargs.get('justification_required_on_approval', None)
-        self.default_decision = kwargs.get('default_decision', None)
-        self.auto_apply_decisions_enabled = kwargs.get('auto_apply_decisions_enabled', None)
-        self.recommendations_enabled = kwargs.get('recommendations_enabled', None)
-        self.instance_duration_in_days = kwargs.get('instance_duration_in_days', None)
-        self.type_recurrence_range_type = kwargs.get('type_recurrence_range_type', None)
-        self.number_of_occurrences = kwargs.get('number_of_occurrences', None)
-        self.start_date = kwargs.get('start_date', None)
-        self.end_date = kwargs.get('end_date', None)
-        self.type_recurrence_pattern_type = kwargs.get('type_recurrence_pattern_type', None)
-        self.interval = kwargs.get('interval', None)
+        self.mail_notifications_enabled = kwargs.get("mail_notifications_enabled", None)
+        self.reminder_notifications_enabled = kwargs.get("reminder_notifications_enabled", None)
+        self.default_decision_enabled = kwargs.get("default_decision_enabled", None)
+        self.justification_required_on_approval = kwargs.get("justification_required_on_approval", None)
+        self.default_decision = kwargs.get("default_decision", None)
+        self.auto_apply_decisions_enabled = kwargs.get("auto_apply_decisions_enabled", None)
+        self.recommendations_enabled = kwargs.get("recommendations_enabled", None)
+        self.instance_duration_in_days = kwargs.get("instance_duration_in_days", None)
+        self.type_recurrence_range_type = kwargs.get("type_recurrence_range_type", None)
+        self.number_of_occurrences = kwargs.get("number_of_occurrences", None)
+        self.start_date = kwargs.get("start_date", None)
+        self.end_date = kwargs.get("end_date", None)
+        self.type_recurrence_pattern_type = kwargs.get("type_recurrence_pattern_type", None)
+        self.interval = kwargs.get("interval", None)
 
 
 class ErrorDefinition(msrest.serialization.Model):
@@ -1218,15 +1208,12 @@ class ErrorDefinition(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDefinitionProperties'},
+        "error": {"key": "error", "type": "ErrorDefinitionProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDefinition, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class ErrorDefinitionProperties(msrest.serialization.Model):
@@ -1241,21 +1228,18 @@ class ErrorDefinitionProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'message': {'readonly': True},
+        "message": {"readonly": True},
     }
 
     _attribute_map = {
-        'message': {'key': 'message', 'type': 'str'},
-        'code': {'key': 'code', 'type': 'str'},
+        "message": {"key": "message", "type": "str"},
+        "code": {"key": "code", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDefinitionProperties, self).__init__(**kwargs)
         self.message = None
-        self.code = kwargs.get('code', None)
+        self.code = kwargs.get("code", None)
 
 
 class Operation(msrest.serialization.Model):
@@ -1272,21 +1256,18 @@ class Operation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'display': {'key': 'display', 'type': 'OperationDisplay'},
-        'origin': {'key': 'origin', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "display": {"key": "display", "type": "OperationDisplay"},
+        "origin": {"key": "origin", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Operation, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
-        self.display = kwargs.get('display', None)
-        self.origin = kwargs.get('origin', None)
+        self.name = kwargs.get("name", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
+        self.display = kwargs.get("display", None)
+        self.origin = kwargs.get("origin", None)
 
 
 class OperationDisplay(msrest.serialization.Model):
@@ -1305,23 +1286,20 @@ class OperationDisplay(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider': {'readonly': True},
-        'resource': {'readonly': True},
-        'operation': {'readonly': True},
-        'description': {'readonly': True},
+        "provider": {"readonly": True},
+        "resource": {"readonly": True},
+        "operation": {"readonly": True},
+        "description": {"readonly": True},
     }
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = None
         self.resource = None
@@ -1339,14 +1317,11 @@ class OperationListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Operation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)

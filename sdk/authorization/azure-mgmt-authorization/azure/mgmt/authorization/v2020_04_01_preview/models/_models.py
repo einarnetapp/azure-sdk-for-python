@@ -22,19 +22,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -59,25 +56,22 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -94,15 +88,12 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class RoleAssignment(msrest.serialization.Model):
@@ -149,51 +140,51 @@ class RoleAssignment(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'can_delegate': {'key': 'properties.canDelegate', 'type': 'bool'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'updated_on': {'key': 'properties.updatedOn', 'type': 'iso-8601'},
-        'created_by': {'key': 'properties.createdBy', 'type': 'str'},
-        'updated_by': {'key': 'properties.updatedBy', 'type': 'str'},
-        'delegated_managed_identity_resource_id': {'key': 'properties.delegatedManagedIdentityResourceId', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "can_delegate": {"key": "properties.canDelegate", "type": "bool"},
+        "description": {"key": "properties.description", "type": "str"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "updated_on": {"key": "properties.updatedOn", "type": "iso-8601"},
+        "created_by": {"key": "properties.createdBy", "type": "str"},
+        "updated_by": {"key": "properties.updatedBy", "type": "str"},
+        "delegated_managed_identity_resource_id": {
+            "key": "properties.delegatedManagedIdentityResourceId",
+            "type": "str",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignment, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.principal_type = kwargs.get('principal_type', None)
-        self.can_delegate = kwargs.get('can_delegate', None)
-        self.description = kwargs.get('description', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
-        self.created_on = kwargs.get('created_on', None)
-        self.updated_on = kwargs.get('updated_on', None)
-        self.created_by = kwargs.get('created_by', None)
-        self.updated_by = kwargs.get('updated_by', None)
-        self.delegated_managed_identity_resource_id = kwargs.get('delegated_managed_identity_resource_id', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.principal_type = kwargs.get("principal_type", None)
+        self.can_delegate = kwargs.get("can_delegate", None)
+        self.description = kwargs.get("description", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
+        self.created_on = kwargs.get("created_on", None)
+        self.updated_on = kwargs.get("updated_on", None)
+        self.created_by = kwargs.get("created_by", None)
+        self.updated_by = kwargs.get("updated_by", None)
+        self.delegated_managed_identity_resource_id = kwargs.get("delegated_managed_identity_resource_id", None)
 
 
 class RoleAssignmentCreateParameters(msrest.serialization.Model):
@@ -225,34 +216,34 @@ class RoleAssignmentCreateParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'role_definition_id': {'required': True},
-        'principal_id': {'required': True},
+        "role_definition_id": {"required": True},
+        "principal_id": {"required": True},
     }
 
     _attribute_map = {
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'can_delegate': {'key': 'properties.canDelegate', 'type': 'bool'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'delegated_managed_identity_resource_id': {'key': 'properties.delegatedManagedIdentityResourceId', 'type': 'str'},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "can_delegate": {"key": "properties.canDelegate", "type": "bool"},
+        "description": {"key": "properties.description", "type": "str"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "delegated_managed_identity_resource_id": {
+            "key": "properties.delegatedManagedIdentityResourceId",
+            "type": "str",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentCreateParameters, self).__init__(**kwargs)
-        self.role_definition_id = kwargs['role_definition_id']
-        self.principal_id = kwargs['principal_id']
-        self.principal_type = kwargs.get('principal_type', None)
-        self.can_delegate = kwargs.get('can_delegate', None)
-        self.description = kwargs.get('description', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
-        self.delegated_managed_identity_resource_id = kwargs.get('delegated_managed_identity_resource_id', None)
+        self.role_definition_id = kwargs["role_definition_id"]
+        self.principal_id = kwargs["principal_id"]
+        self.principal_type = kwargs.get("principal_type", None)
+        self.can_delegate = kwargs.get("can_delegate", None)
+        self.description = kwargs.get("description", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
+        self.delegated_managed_identity_resource_id = kwargs.get("delegated_managed_identity_resource_id", None)
 
 
 class RoleAssignmentFilter(msrest.serialization.Model):
@@ -265,17 +256,14 @@ class RoleAssignmentFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'can_delegate': {'key': 'canDelegate', 'type': 'bool'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "can_delegate": {"key": "canDelegate", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.can_delegate = kwargs.get('can_delegate', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.can_delegate = kwargs.get("can_delegate", None)
 
 
 class RoleAssignmentListResult(msrest.serialization.Model):
@@ -288,14 +276,11 @@ class RoleAssignmentListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignment]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
