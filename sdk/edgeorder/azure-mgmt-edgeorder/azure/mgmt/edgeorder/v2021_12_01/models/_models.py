@@ -25,21 +25,18 @@ class AddressDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'forward_address': {'required': True},
-        'return_address': {'readonly': True},
+        "forward_address": {"required": True},
+        "return_address": {"readonly": True},
     }
 
     _attribute_map = {
-        'forward_address': {'key': 'forwardAddress', 'type': 'AddressProperties'},
-        'return_address': {'key': 'returnAddress', 'type': 'AddressProperties'},
+        "forward_address": {"key": "forwardAddress", "type": "AddressProperties"},
+        "return_address": {"key": "returnAddress", "type": "AddressProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddressDetails, self).__init__(**kwargs)
-        self.forward_address = kwargs['forward_address']
+        self.forward_address = kwargs["forward_address"]
         self.return_address = None
 
 
@@ -61,23 +58,20 @@ class AddressProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'contact_details': {'required': True},
-        'address_validation_status': {'readonly': True},
+        "contact_details": {"required": True},
+        "address_validation_status": {"readonly": True},
     }
 
     _attribute_map = {
-        'shipping_address': {'key': 'shippingAddress', 'type': 'ShippingAddress'},
-        'contact_details': {'key': 'contactDetails', 'type': 'ContactDetails'},
-        'address_validation_status': {'key': 'addressValidationStatus', 'type': 'str'},
+        "shipping_address": {"key": "shippingAddress", "type": "ShippingAddress"},
+        "contact_details": {"key": "contactDetails", "type": "ContactDetails"},
+        "address_validation_status": {"key": "addressValidationStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddressProperties, self).__init__(**kwargs)
-        self.shipping_address = kwargs.get('shipping_address', None)
-        self.contact_details = kwargs['contact_details']
+        self.shipping_address = kwargs.get("shipping_address", None)
+        self.contact_details = kwargs["contact_details"]
         self.address_validation_status = None
 
 
@@ -97,21 +91,18 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -140,27 +131,24 @@ class TrackedResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TrackedResource, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.location = kwargs['location']
+        self.tags = kwargs.get("tags", None)
+        self.location = kwargs["location"]
 
 
 class AddressResource(TrackedResource):
@@ -195,35 +183,32 @@ class AddressResource(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
-        'system_data': {'readonly': True},
-        'contact_details': {'required': True},
-        'address_validation_status': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
+        "system_data": {"readonly": True},
+        "contact_details": {"required": True},
+        "address_validation_status": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'shipping_address': {'key': 'properties.shippingAddress', 'type': 'ShippingAddress'},
-        'contact_details': {'key': 'properties.contactDetails', 'type': 'ContactDetails'},
-        'address_validation_status': {'key': 'properties.addressValidationStatus', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "shipping_address": {"key": "properties.shippingAddress", "type": "ShippingAddress"},
+        "contact_details": {"key": "properties.contactDetails", "type": "ContactDetails"},
+        "address_validation_status": {"key": "properties.addressValidationStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddressResource, self).__init__(**kwargs)
         self.system_data = None
-        self.shipping_address = kwargs.get('shipping_address', None)
-        self.contact_details = kwargs['contact_details']
+        self.shipping_address = kwargs.get("shipping_address", None)
+        self.contact_details = kwargs["contact_details"]
         self.address_validation_status = None
 
 
@@ -239,21 +224,18 @@ class AddressResourceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[AddressResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[AddressResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddressResourceList, self).__init__(**kwargs)
         self.value = None
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AddressUpdateParameter(msrest.serialization.Model):
@@ -269,19 +251,16 @@ class AddressUpdateParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'shipping_address': {'key': 'properties.shippingAddress', 'type': 'ShippingAddress'},
-        'contact_details': {'key': 'properties.contactDetails', 'type': 'ContactDetails'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "shipping_address": {"key": "properties.shippingAddress", "type": "ShippingAddress"},
+        "contact_details": {"key": "properties.contactDetails", "type": "ContactDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddressUpdateParameter, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.shipping_address = kwargs.get('shipping_address', None)
-        self.contact_details = kwargs.get('contact_details', None)
+        self.tags = kwargs.get("tags", None)
+        self.shipping_address = kwargs.get("shipping_address", None)
+        self.contact_details = kwargs.get("contact_details", None)
 
 
 class AvailabilityInformation(msrest.serialization.Model):
@@ -302,21 +281,18 @@ class AvailabilityInformation(msrest.serialization.Model):
     """
 
     _validation = {
-        'availability_stage': {'readonly': True},
-        'disabled_reason': {'readonly': True},
-        'disabled_reason_message': {'readonly': True},
+        "availability_stage": {"readonly": True},
+        "disabled_reason": {"readonly": True},
+        "disabled_reason_message": {"readonly": True},
     }
 
     _attribute_map = {
-        'availability_stage': {'key': 'availabilityStage', 'type': 'str'},
-        'disabled_reason': {'key': 'disabledReason', 'type': 'str'},
-        'disabled_reason_message': {'key': 'disabledReasonMessage', 'type': 'str'},
+        "availability_stage": {"key": "availabilityStage", "type": "str"},
+        "disabled_reason": {"key": "disabledReason", "type": "str"},
+        "disabled_reason_message": {"key": "disabledReasonMessage", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailabilityInformation, self).__init__(**kwargs)
         self.availability_stage = None
         self.disabled_reason = None
@@ -344,27 +320,24 @@ class BasicInformation(msrest.serialization.Model):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'Description'},
-        'image_information': {'key': 'imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "description": {"key": "description", "type": "Description"},
+        "image_information": {"key": "imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BasicInformation, self).__init__(**kwargs)
         self.display_name = None
         self.description = None
@@ -391,23 +364,20 @@ class BillingMeterDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'meter_details': {'readonly': True},
-        'metering_type': {'readonly': True},
-        'frequency': {'readonly': True},
+        "name": {"readonly": True},
+        "meter_details": {"readonly": True},
+        "metering_type": {"readonly": True},
+        "frequency": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'meter_details': {'key': 'meterDetails', 'type': 'MeterDetails'},
-        'metering_type': {'key': 'meteringType', 'type': 'str'},
-        'frequency': {'key': 'frequency', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "meter_details": {"key": "meterDetails", "type": "MeterDetails"},
+        "metering_type": {"key": "meteringType", "type": "str"},
+        "frequency": {"key": "frequency", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BillingMeterDetails, self).__init__(**kwargs)
         self.name = None
         self.meter_details = None
@@ -425,19 +395,16 @@ class CancellationReason(msrest.serialization.Model):
     """
 
     _validation = {
-        'reason': {'required': True},
+        "reason": {"required": True},
     }
 
     _attribute_map = {
-        'reason': {'key': 'reason', 'type': 'str'},
+        "reason": {"key": "reason", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CancellationReason, self).__init__(**kwargs)
-        self.reason = kwargs['reason']
+        self.reason = kwargs["reason"]
 
 
 class CommonProperties(BasicInformation):
@@ -464,29 +431,26 @@ class CommonProperties(BasicInformation):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'Description'},
-        'image_information': {'key': 'imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'filterableProperties', 'type': '[FilterableProperty]'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "description": {"key": "description", "type": "Description"},
+        "image_information": {"key": "imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "filterableProperties", "type": "[FilterableProperty]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CommonProperties, self).__init__(**kwargs)
         self.filterable_properties = None
 
@@ -519,33 +483,30 @@ class Configuration(msrest.serialization.Model):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'specifications': {'readonly': True},
-        'dimensions': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "specifications": {"readonly": True},
+        "dimensions": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'Description'},
-        'image_information': {'key': 'properties.imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'properties.costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'properties.availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'properties.hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'properties.filterableProperties', 'type': '[FilterableProperty]'},
-        'specifications': {'key': 'properties.specifications', 'type': '[Specification]'},
-        'dimensions': {'key': 'properties.dimensions', 'type': 'Dimensions'},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "Description"},
+        "image_information": {"key": "properties.imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "properties.costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "properties.availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "properties.hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "properties.filterableProperties", "type": "[FilterableProperty]"},
+        "specifications": {"key": "properties.specifications", "type": "[Specification]"},
+        "dimensions": {"key": "properties.dimensions", "type": "Dimensions"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Configuration, self).__init__(**kwargs)
         self.display_name = None
         self.description = None
@@ -570,21 +531,18 @@ class ConfigurationFilters(msrest.serialization.Model):
     """
 
     _validation = {
-        'hierarchy_information': {'required': True},
+        "hierarchy_information": {"required": True},
     }
 
     _attribute_map = {
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_property': {'key': 'filterableProperty', 'type': '[FilterableProperty]'},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_property": {"key": "filterableProperty", "type": "[FilterableProperty]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConfigurationFilters, self).__init__(**kwargs)
-        self.hierarchy_information = kwargs['hierarchy_information']
-        self.filterable_property = kwargs.get('filterable_property', None)
+        self.hierarchy_information = kwargs["hierarchy_information"]
+        self.filterable_property = kwargs.get("filterable_property", None)
 
 
 class ConfigurationProperties(CommonProperties):
@@ -615,33 +573,30 @@ class ConfigurationProperties(CommonProperties):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'specifications': {'readonly': True},
-        'dimensions': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "specifications": {"readonly": True},
+        "dimensions": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'Description'},
-        'image_information': {'key': 'imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'filterableProperties', 'type': '[FilterableProperty]'},
-        'specifications': {'key': 'specifications', 'type': '[Specification]'},
-        'dimensions': {'key': 'dimensions', 'type': 'Dimensions'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "description": {"key": "description", "type": "Description"},
+        "image_information": {"key": "imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "filterableProperties", "type": "[FilterableProperty]"},
+        "specifications": {"key": "specifications", "type": "[Specification]"},
+        "dimensions": {"key": "dimensions", "type": "Dimensions"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConfigurationProperties, self).__init__(**kwargs)
         self.specifications = None
         self.dimensions = None
@@ -659,21 +614,18 @@ class Configurations(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Configuration]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Configuration]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Configurations, self).__init__(**kwargs)
         self.value = None
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ConfigurationsRequest(msrest.serialization.Model):
@@ -692,21 +644,18 @@ class ConfigurationsRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'configuration_filters': {'required': True, 'unique': True},
+        "configuration_filters": {"required": True, "unique": True},
     }
 
     _attribute_map = {
-        'configuration_filters': {'key': 'configurationFilters', 'type': '[ConfigurationFilters]'},
-        'customer_subscription_details': {'key': 'customerSubscriptionDetails', 'type': 'CustomerSubscriptionDetails'},
+        "configuration_filters": {"key": "configurationFilters", "type": "[ConfigurationFilters]"},
+        "customer_subscription_details": {"key": "customerSubscriptionDetails", "type": "CustomerSubscriptionDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConfigurationsRequest, self).__init__(**kwargs)
-        self.configuration_filters = kwargs['configuration_filters']
-        self.customer_subscription_details = kwargs.get('customer_subscription_details', None)
+        self.configuration_filters = kwargs["configuration_filters"]
+        self.customer_subscription_details = kwargs.get("customer_subscription_details", None)
 
 
 class ContactDetails(msrest.serialization.Model):
@@ -727,29 +676,26 @@ class ContactDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'contact_name': {'required': True},
-        'phone': {'required': True},
-        'email_list': {'required': True},
+        "contact_name": {"required": True},
+        "phone": {"required": True},
+        "email_list": {"required": True},
     }
 
     _attribute_map = {
-        'contact_name': {'key': 'contactName', 'type': 'str'},
-        'phone': {'key': 'phone', 'type': 'str'},
-        'phone_extension': {'key': 'phoneExtension', 'type': 'str'},
-        'mobile': {'key': 'mobile', 'type': 'str'},
-        'email_list': {'key': 'emailList', 'type': '[str]'},
+        "contact_name": {"key": "contactName", "type": "str"},
+        "phone": {"key": "phone", "type": "str"},
+        "phone_extension": {"key": "phoneExtension", "type": "str"},
+        "mobile": {"key": "mobile", "type": "str"},
+        "email_list": {"key": "emailList", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ContactDetails, self).__init__(**kwargs)
-        self.contact_name = kwargs['contact_name']
-        self.phone = kwargs['phone']
-        self.phone_extension = kwargs.get('phone_extension', None)
-        self.mobile = kwargs.get('mobile', None)
-        self.email_list = kwargs['email_list']
+        self.contact_name = kwargs["contact_name"]
+        self.phone = kwargs["phone"]
+        self.phone_extension = kwargs.get("phone_extension", None)
+        self.mobile = kwargs.get("mobile", None)
+        self.email_list = kwargs["email_list"]
 
 
 class CostInformation(msrest.serialization.Model):
@@ -765,19 +711,16 @@ class CostInformation(msrest.serialization.Model):
     """
 
     _validation = {
-        'billing_meter_details': {'readonly': True},
-        'billing_info_url': {'readonly': True},
+        "billing_meter_details": {"readonly": True},
+        "billing_info_url": {"readonly": True},
     }
 
     _attribute_map = {
-        'billing_meter_details': {'key': 'billingMeterDetails', 'type': '[BillingMeterDetails]'},
-        'billing_info_url': {'key': 'billingInfoUrl', 'type': 'str'},
+        "billing_meter_details": {"key": "billingMeterDetails", "type": "[BillingMeterDetails]"},
+        "billing_info_url": {"key": "billingInfoUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CostInformation, self).__init__(**kwargs)
         self.billing_meter_details = None
         self.billing_info_url = None
@@ -798,23 +741,20 @@ class CustomerSubscriptionDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'quota_id': {'required': True},
+        "quota_id": {"required": True},
     }
 
     _attribute_map = {
-        'registered_features': {'key': 'registeredFeatures', 'type': '[CustomerSubscriptionRegisteredFeatures]'},
-        'location_placement_id': {'key': 'locationPlacementId', 'type': 'str'},
-        'quota_id': {'key': 'quotaId', 'type': 'str'},
+        "registered_features": {"key": "registeredFeatures", "type": "[CustomerSubscriptionRegisteredFeatures]"},
+        "location_placement_id": {"key": "locationPlacementId", "type": "str"},
+        "quota_id": {"key": "quotaId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomerSubscriptionDetails, self).__init__(**kwargs)
-        self.registered_features = kwargs.get('registered_features', None)
-        self.location_placement_id = kwargs.get('location_placement_id', None)
-        self.quota_id = kwargs['quota_id']
+        self.registered_features = kwargs.get("registered_features", None)
+        self.location_placement_id = kwargs.get("location_placement_id", None)
+        self.quota_id = kwargs["quota_id"]
 
 
 class CustomerSubscriptionRegisteredFeatures(msrest.serialization.Model):
@@ -827,17 +767,14 @@ class CustomerSubscriptionRegisteredFeatures(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'state': {'key': 'state', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "state": {"key": "state", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomerSubscriptionRegisteredFeatures, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.state = kwargs.get('state', None)
+        self.name = kwargs.get("name", None)
+        self.state = kwargs.get("state", None)
 
 
 class Description(msrest.serialization.Model):
@@ -860,27 +797,24 @@ class Description(msrest.serialization.Model):
     """
 
     _validation = {
-        'description_type': {'readonly': True},
-        'short_description': {'readonly': True},
-        'long_description': {'readonly': True},
-        'keywords': {'readonly': True},
-        'attributes': {'readonly': True},
-        'links': {'readonly': True},
+        "description_type": {"readonly": True},
+        "short_description": {"readonly": True},
+        "long_description": {"readonly": True},
+        "keywords": {"readonly": True},
+        "attributes": {"readonly": True},
+        "links": {"readonly": True},
     }
 
     _attribute_map = {
-        'description_type': {'key': 'descriptionType', 'type': 'str'},
-        'short_description': {'key': 'shortDescription', 'type': 'str'},
-        'long_description': {'key': 'longDescription', 'type': 'str'},
-        'keywords': {'key': 'keywords', 'type': '[str]'},
-        'attributes': {'key': 'attributes', 'type': '[str]'},
-        'links': {'key': 'links', 'type': '[Link]'},
+        "description_type": {"key": "descriptionType", "type": "str"},
+        "short_description": {"key": "shortDescription", "type": "str"},
+        "long_description": {"key": "longDescription", "type": "str"},
+        "keywords": {"key": "keywords", "type": "[str]"},
+        "attributes": {"key": "attributes", "type": "[str]"},
+        "links": {"key": "links", "type": "[Link]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Description, self).__init__(**kwargs)
         self.description_type = None
         self.short_description = None
@@ -904,21 +838,18 @@ class DeviceDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'serial_number': {'readonly': True},
-        'management_resource_id': {'readonly': True},
-        'management_resource_tenant_id': {'readonly': True},
+        "serial_number": {"readonly": True},
+        "management_resource_id": {"readonly": True},
+        "management_resource_tenant_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'serial_number': {'key': 'serialNumber', 'type': 'str'},
-        'management_resource_id': {'key': 'managementResourceId', 'type': 'str'},
-        'management_resource_tenant_id': {'key': 'managementResourceTenantId', 'type': 'str'},
+        "serial_number": {"key": "serialNumber", "type": "str"},
+        "management_resource_id": {"key": "managementResourceId", "type": "str"},
+        "management_resource_tenant_id": {"key": "managementResourceTenantId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DeviceDetails, self).__init__(**kwargs)
         self.serial_number = None
         self.management_resource_id = None
@@ -948,29 +879,26 @@ class Dimensions(msrest.serialization.Model):
     """
 
     _validation = {
-        'length': {'readonly': True},
-        'height': {'readonly': True},
-        'width': {'readonly': True},
-        'length_height_unit': {'readonly': True},
-        'weight': {'readonly': True},
-        'depth': {'readonly': True},
-        'weight_unit': {'readonly': True},
+        "length": {"readonly": True},
+        "height": {"readonly": True},
+        "width": {"readonly": True},
+        "length_height_unit": {"readonly": True},
+        "weight": {"readonly": True},
+        "depth": {"readonly": True},
+        "weight_unit": {"readonly": True},
     }
 
     _attribute_map = {
-        'length': {'key': 'length', 'type': 'float'},
-        'height': {'key': 'height', 'type': 'float'},
-        'width': {'key': 'width', 'type': 'float'},
-        'length_height_unit': {'key': 'lengthHeightUnit', 'type': 'str'},
-        'weight': {'key': 'weight', 'type': 'float'},
-        'depth': {'key': 'depth', 'type': 'float'},
-        'weight_unit': {'key': 'weightUnit', 'type': 'str'},
+        "length": {"key": "length", "type": "float"},
+        "height": {"key": "height", "type": "float"},
+        "width": {"key": "width", "type": "float"},
+        "length_height_unit": {"key": "lengthHeightUnit", "type": "str"},
+        "weight": {"key": "weight", "type": "float"},
+        "depth": {"key": "depth", "type": "float"},
+        "weight_unit": {"key": "weightUnit", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Dimensions, self).__init__(**kwargs)
         self.length = None
         self.height = None
@@ -993,19 +921,16 @@ class DisplayInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'product_family_display_name': {'readonly': True},
-        'configuration_display_name': {'readonly': True},
+        "product_family_display_name": {"readonly": True},
+        "configuration_display_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'product_family_display_name': {'key': 'productFamilyDisplayName', 'type': 'str'},
-        'configuration_display_name': {'key': 'configurationDisplayName', 'type': 'str'},
+        "product_family_display_name": {"key": "productFamilyDisplayName", "type": "str"},
+        "configuration_display_name": {"key": "configurationDisplayName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DisplayInfo, self).__init__(**kwargs)
         self.product_family_display_name = None
         self.configuration_display_name = None
@@ -1022,15 +947,12 @@ class EncryptionPreferences(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'double_encryption_status': {'key': 'doubleEncryptionStatus', 'type': 'str'},
+        "double_encryption_status": {"key": "doubleEncryptionStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EncryptionPreferences, self).__init__(**kwargs)
-        self.double_encryption_status = kwargs.get('double_encryption_status', None)
+        self.double_encryption_status = kwargs.get("double_encryption_status", None)
 
 
 class ErrorAdditionalInfo(msrest.serialization.Model):
@@ -1045,19 +967,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -1081,25 +1000,22 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -1116,15 +1032,12 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class FilterableProperty(msrest.serialization.Model):
@@ -1140,22 +1053,19 @@ class FilterableProperty(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True},
-        'supported_values': {'required': True},
+        "type": {"required": True},
+        "supported_values": {"required": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'supported_values': {'key': 'supportedValues', 'type': '[str]'},
+        "type": {"key": "type", "type": "str"},
+        "supported_values": {"key": "supportedValues", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FilterableProperty, self).__init__(**kwargs)
-        self.type = kwargs['type']
-        self.supported_values = kwargs['supported_values']
+        self.type = kwargs["type"]
+        self.supported_values = kwargs["supported_values"]
 
 
 class ForwardShippingDetails(msrest.serialization.Model):
@@ -1175,23 +1085,20 @@ class ForwardShippingDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'carrier_name': {'readonly': True},
-        'carrier_display_name': {'readonly': True},
-        'tracking_id': {'readonly': True},
-        'tracking_url': {'readonly': True},
+        "carrier_name": {"readonly": True},
+        "carrier_display_name": {"readonly": True},
+        "tracking_id": {"readonly": True},
+        "tracking_url": {"readonly": True},
     }
 
     _attribute_map = {
-        'carrier_name': {'key': 'carrierName', 'type': 'str'},
-        'carrier_display_name': {'key': 'carrierDisplayName', 'type': 'str'},
-        'tracking_id': {'key': 'trackingId', 'type': 'str'},
-        'tracking_url': {'key': 'trackingUrl', 'type': 'str'},
+        "carrier_name": {"key": "carrierName", "type": "str"},
+        "carrier_display_name": {"key": "carrierDisplayName", "type": "str"},
+        "tracking_id": {"key": "trackingId", "type": "str"},
+        "tracking_url": {"key": "trackingUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ForwardShippingDetails, self).__init__(**kwargs)
         self.carrier_name = None
         self.carrier_display_name = None
@@ -1215,21 +1122,18 @@ class HierarchyInformation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'product_family_name': {'key': 'productFamilyName', 'type': 'str'},
-        'product_line_name': {'key': 'productLineName', 'type': 'str'},
-        'product_name': {'key': 'productName', 'type': 'str'},
-        'configuration_name': {'key': 'configurationName', 'type': 'str'},
+        "product_family_name": {"key": "productFamilyName", "type": "str"},
+        "product_line_name": {"key": "productLineName", "type": "str"},
+        "product_name": {"key": "productName", "type": "str"},
+        "configuration_name": {"key": "configurationName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HierarchyInformation, self).__init__(**kwargs)
-        self.product_family_name = kwargs.get('product_family_name', None)
-        self.product_line_name = kwargs.get('product_line_name', None)
-        self.product_name = kwargs.get('product_name', None)
-        self.configuration_name = kwargs.get('configuration_name', None)
+        self.product_family_name = kwargs.get("product_family_name", None)
+        self.product_line_name = kwargs.get("product_line_name", None)
+        self.product_name = kwargs.get("product_name", None)
+        self.configuration_name = kwargs.get("configuration_name", None)
 
 
 class ImageInformation(msrest.serialization.Model):
@@ -1245,19 +1149,16 @@ class ImageInformation(msrest.serialization.Model):
     """
 
     _validation = {
-        'image_type': {'readonly': True},
-        'image_url': {'readonly': True},
+        "image_type": {"readonly": True},
+        "image_url": {"readonly": True},
     }
 
     _attribute_map = {
-        'image_type': {'key': 'imageType', 'type': 'str'},
-        'image_url': {'key': 'imageUrl', 'type': 'str'},
+        "image_type": {"key": "imageType", "type": "str"},
+        "image_url": {"key": "imageUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ImageInformation, self).__init__(**kwargs)
         self.image_type = None
         self.image_url = None
@@ -1276,19 +1177,16 @@ class Link(msrest.serialization.Model):
     """
 
     _validation = {
-        'link_type': {'readonly': True},
-        'link_url': {'readonly': True},
+        "link_type": {"readonly": True},
+        "link_url": {"readonly": True},
     }
 
     _attribute_map = {
-        'link_type': {'key': 'linkType', 'type': 'str'},
-        'link_url': {'key': 'linkUrl', 'type': 'str'},
+        "link_type": {"key": "linkType", "type": "str"},
+        "link_url": {"key": "linkUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Link, self).__init__(**kwargs)
         self.link_type = None
         self.link_url = None
@@ -1302,15 +1200,12 @@ class ManagementResourcePreferences(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'preferred_management_resource_id': {'key': 'preferredManagementResourceId', 'type': 'str'},
+        "preferred_management_resource_id": {"key": "preferredManagementResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ManagementResourcePreferences, self).__init__(**kwargs)
-        self.preferred_management_resource_id = kwargs.get('preferred_management_resource_id', None)
+        self.preferred_management_resource_id = kwargs.get("preferred_management_resource_id", None)
 
 
 class MeterDetails(msrest.serialization.Model):
@@ -1333,25 +1228,20 @@ class MeterDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'billing_type': {'required': True},
-        'multiplier': {'readonly': True},
-        'charging_type': {'readonly': True},
+        "billing_type": {"required": True},
+        "multiplier": {"readonly": True},
+        "charging_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'billing_type': {'key': 'billingType', 'type': 'str'},
-        'multiplier': {'key': 'multiplier', 'type': 'float'},
-        'charging_type': {'key': 'chargingType', 'type': 'str'},
+        "billing_type": {"key": "billingType", "type": "str"},
+        "multiplier": {"key": "multiplier", "type": "float"},
+        "charging_type": {"key": "chargingType", "type": "str"},
     }
 
-    _subtype_map = {
-        'billing_type': {'Pav2': 'Pav2MeterDetails', 'Purchase': 'PurchaseMeterDetails'}
-    }
+    _subtype_map = {"billing_type": {"Pav2": "Pav2MeterDetails", "Purchase": "PurchaseMeterDetails"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MeterDetails, self).__init__(**kwargs)
         self.billing_type = None  # type: Optional[str]
         self.multiplier = None
@@ -1371,22 +1261,19 @@ class NotificationPreference(msrest.serialization.Model):
     """
 
     _validation = {
-        'stage_name': {'required': True},
-        'send_notification': {'required': True},
+        "stage_name": {"required": True},
+        "send_notification": {"required": True},
     }
 
     _attribute_map = {
-        'stage_name': {'key': 'stageName', 'type': 'str'},
-        'send_notification': {'key': 'sendNotification', 'type': 'bool'},
+        "stage_name": {"key": "stageName", "type": "str"},
+        "send_notification": {"key": "sendNotification", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationPreference, self).__init__(**kwargs)
-        self.stage_name = kwargs['stage_name']
-        self.send_notification = kwargs['send_notification']
+        self.stage_name = kwargs["stage_name"]
+        self.send_notification = kwargs["send_notification"]
 
 
 class Operation(msrest.serialization.Model):
@@ -1412,28 +1299,25 @@ class Operation(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'is_data_action': {'readonly': True},
-        'origin': {'readonly': True},
-        'action_type': {'readonly': True},
+        "name": {"readonly": True},
+        "is_data_action": {"readonly": True},
+        "origin": {"readonly": True},
+        "action_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'display': {'key': 'display', 'type': 'OperationDisplay'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'action_type': {'key': 'actionType', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "display": {"key": "display", "type": "OperationDisplay"},
+        "origin": {"key": "origin", "type": "str"},
+        "action_type": {"key": "actionType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Operation, self).__init__(**kwargs)
         self.name = None
         self.is_data_action = None
-        self.display = kwargs.get('display', None)
+        self.display = kwargs.get("display", None)
         self.origin = None
         self.action_type = None
 
@@ -1458,23 +1342,20 @@ class OperationDisplay(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider': {'readonly': True},
-        'resource': {'readonly': True},
-        'operation': {'readonly': True},
-        'description': {'readonly': True},
+        "provider": {"readonly": True},
+        "resource": {"readonly": True},
+        "operation": {"readonly": True},
+        "description": {"readonly": True},
     }
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplay, self).__init__(**kwargs)
         self.provider = None
         self.resource = None
@@ -1494,19 +1375,16 @@ class OperationListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
-        'next_link': {'readonly': True},
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Operation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1564,54 +1442,51 @@ class OrderItemDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'product_details': {'required': True},
-        'order_item_type': {'required': True},
-        'current_stage': {'readonly': True},
-        'order_item_stage_history': {'readonly': True},
-        'forward_shipping_details': {'readonly': True},
-        'reverse_shipping_details': {'readonly': True},
-        'cancellation_reason': {'readonly': True},
-        'cancellation_status': {'readonly': True},
-        'deletion_status': {'readonly': True},
-        'return_reason': {'readonly': True},
-        'return_status': {'readonly': True},
-        'management_rp_details': {'readonly': True},
-        'management_rp_details_list': {'readonly': True},
-        'error': {'readonly': True},
+        "product_details": {"required": True},
+        "order_item_type": {"required": True},
+        "current_stage": {"readonly": True},
+        "order_item_stage_history": {"readonly": True},
+        "forward_shipping_details": {"readonly": True},
+        "reverse_shipping_details": {"readonly": True},
+        "cancellation_reason": {"readonly": True},
+        "cancellation_status": {"readonly": True},
+        "deletion_status": {"readonly": True},
+        "return_reason": {"readonly": True},
+        "return_status": {"readonly": True},
+        "management_rp_details": {"readonly": True},
+        "management_rp_details_list": {"readonly": True},
+        "error": {"readonly": True},
     }
 
     _attribute_map = {
-        'product_details': {'key': 'productDetails', 'type': 'ProductDetails'},
-        'order_item_type': {'key': 'orderItemType', 'type': 'str'},
-        'current_stage': {'key': 'currentStage', 'type': 'StageDetails'},
-        'order_item_stage_history': {'key': 'orderItemStageHistory', 'type': '[StageDetails]'},
-        'preferences': {'key': 'preferences', 'type': 'Preferences'},
-        'forward_shipping_details': {'key': 'forwardShippingDetails', 'type': 'ForwardShippingDetails'},
-        'reverse_shipping_details': {'key': 'reverseShippingDetails', 'type': 'ReverseShippingDetails'},
-        'notification_email_list': {'key': 'notificationEmailList', 'type': '[str]'},
-        'cancellation_reason': {'key': 'cancellationReason', 'type': 'str'},
-        'cancellation_status': {'key': 'cancellationStatus', 'type': 'str'},
-        'deletion_status': {'key': 'deletionStatus', 'type': 'str'},
-        'return_reason': {'key': 'returnReason', 'type': 'str'},
-        'return_status': {'key': 'returnStatus', 'type': 'str'},
-        'management_rp_details': {'key': 'managementRpDetails', 'type': 'ResourceProviderDetails'},
-        'management_rp_details_list': {'key': 'managementRpDetailsList', 'type': '[ResourceProviderDetails]'},
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "product_details": {"key": "productDetails", "type": "ProductDetails"},
+        "order_item_type": {"key": "orderItemType", "type": "str"},
+        "current_stage": {"key": "currentStage", "type": "StageDetails"},
+        "order_item_stage_history": {"key": "orderItemStageHistory", "type": "[StageDetails]"},
+        "preferences": {"key": "preferences", "type": "Preferences"},
+        "forward_shipping_details": {"key": "forwardShippingDetails", "type": "ForwardShippingDetails"},
+        "reverse_shipping_details": {"key": "reverseShippingDetails", "type": "ReverseShippingDetails"},
+        "notification_email_list": {"key": "notificationEmailList", "type": "[str]"},
+        "cancellation_reason": {"key": "cancellationReason", "type": "str"},
+        "cancellation_status": {"key": "cancellationStatus", "type": "str"},
+        "deletion_status": {"key": "deletionStatus", "type": "str"},
+        "return_reason": {"key": "returnReason", "type": "str"},
+        "return_status": {"key": "returnStatus", "type": "str"},
+        "management_rp_details": {"key": "managementRpDetails", "type": "ResourceProviderDetails"},
+        "management_rp_details_list": {"key": "managementRpDetailsList", "type": "[ResourceProviderDetails]"},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OrderItemDetails, self).__init__(**kwargs)
-        self.product_details = kwargs['product_details']
-        self.order_item_type = kwargs['order_item_type']
+        self.product_details = kwargs["product_details"]
+        self.order_item_type = kwargs["order_item_type"]
         self.current_stage = None
         self.order_item_stage_history = None
-        self.preferences = kwargs.get('preferences', None)
+        self.preferences = kwargs.get("preferences", None)
         self.forward_shipping_details = None
         self.reverse_shipping_details = None
-        self.notification_email_list = kwargs.get('notification_email_list', None)
+        self.notification_email_list = kwargs.get("notification_email_list", None)
         self.cancellation_reason = None
         self.cancellation_status = None
         self.deletion_status = None
@@ -1654,40 +1529,37 @@ class OrderItemResource(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
-        'system_data': {'readonly': True},
-        'order_item_details': {'required': True},
-        'address_details': {'required': True},
-        'start_time': {'readonly': True},
-        'order_id': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
+        "system_data": {"readonly": True},
+        "order_item_details": {"required": True},
+        "address_details": {"required": True},
+        "start_time": {"readonly": True},
+        "order_id": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'order_item_details': {'key': 'properties.orderItemDetails', 'type': 'OrderItemDetails'},
-        'address_details': {'key': 'properties.addressDetails', 'type': 'AddressDetails'},
-        'start_time': {'key': 'properties.startTime', 'type': 'iso-8601'},
-        'order_id': {'key': 'properties.orderId', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "order_item_details": {"key": "properties.orderItemDetails", "type": "OrderItemDetails"},
+        "address_details": {"key": "properties.addressDetails", "type": "AddressDetails"},
+        "start_time": {"key": "properties.startTime", "type": "iso-8601"},
+        "order_id": {"key": "properties.orderId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OrderItemResource, self).__init__(**kwargs)
         self.system_data = None
-        self.order_item_details = kwargs['order_item_details']
-        self.address_details = kwargs['address_details']
+        self.order_item_details = kwargs["order_item_details"]
+        self.address_details = kwargs["address_details"]
         self.start_time = None
-        self.order_id = kwargs['order_id']
+        self.order_id = kwargs["order_id"]
 
 
 class OrderItemResourceList(msrest.serialization.Model):
@@ -1702,21 +1574,18 @@ class OrderItemResourceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[OrderItemResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[OrderItemResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OrderItemResourceList, self).__init__(**kwargs)
         self.value = None
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class OrderItemUpdateParameter(msrest.serialization.Model):
@@ -1734,21 +1603,18 @@ class OrderItemUpdateParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'forward_address': {'key': 'properties.forwardAddress', 'type': 'AddressProperties'},
-        'preferences': {'key': 'properties.preferences', 'type': 'Preferences'},
-        'notification_email_list': {'key': 'properties.notificationEmailList', 'type': '[str]'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "forward_address": {"key": "properties.forwardAddress", "type": "AddressProperties"},
+        "preferences": {"key": "properties.preferences", "type": "Preferences"},
+        "notification_email_list": {"key": "properties.notificationEmailList", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OrderItemUpdateParameter, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.forward_address = kwargs.get('forward_address', None)
-        self.preferences = kwargs.get('preferences', None)
-        self.notification_email_list = kwargs.get('notification_email_list', None)
+        self.tags = kwargs.get("tags", None)
+        self.forward_address = kwargs.get("forward_address", None)
+        self.preferences = kwargs.get("preferences", None)
+        self.notification_email_list = kwargs.get("notification_email_list", None)
 
 
 class ProxyResource(Resource):
@@ -1767,21 +1633,18 @@ class ProxyResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProxyResource, self).__init__(**kwargs)
 
 
@@ -1809,29 +1672,26 @@ class OrderResource(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'order_item_ids': {'readonly': True},
-        'current_stage': {'readonly': True},
-        'order_stage_history': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "order_item_ids": {"readonly": True},
+        "current_stage": {"readonly": True},
+        "order_stage_history": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'order_item_ids': {'key': 'properties.orderItemIds', 'type': '[str]'},
-        'current_stage': {'key': 'properties.currentStage', 'type': 'StageDetails'},
-        'order_stage_history': {'key': 'properties.orderStageHistory', 'type': '[StageDetails]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "order_item_ids": {"key": "properties.orderItemIds", "type": "[str]"},
+        "current_stage": {"key": "properties.currentStage", "type": "StageDetails"},
+        "order_stage_history": {"key": "properties.orderStageHistory", "type": "[StageDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OrderResource, self).__init__(**kwargs)
         self.system_data = None
         self.order_item_ids = None
@@ -1851,21 +1711,18 @@ class OrderResourceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[OrderResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[OrderResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OrderResourceList, self).__init__(**kwargs)
         self.value = None
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class Pav2MeterDetails(MeterDetails):
@@ -1887,25 +1744,22 @@ class Pav2MeterDetails(MeterDetails):
     """
 
     _validation = {
-        'billing_type': {'required': True},
-        'multiplier': {'readonly': True},
-        'charging_type': {'readonly': True},
-        'meter_guid': {'readonly': True},
+        "billing_type": {"required": True},
+        "multiplier": {"readonly": True},
+        "charging_type": {"readonly": True},
+        "meter_guid": {"readonly": True},
     }
 
     _attribute_map = {
-        'billing_type': {'key': 'billingType', 'type': 'str'},
-        'multiplier': {'key': 'multiplier', 'type': 'float'},
-        'charging_type': {'key': 'chargingType', 'type': 'str'},
-        'meter_guid': {'key': 'meterGuid', 'type': 'str'},
+        "billing_type": {"key": "billingType", "type": "str"},
+        "multiplier": {"key": "multiplier", "type": "float"},
+        "charging_type": {"key": "chargingType", "type": "str"},
+        "meter_guid": {"key": "meterGuid", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Pav2MeterDetails, self).__init__(**kwargs)
-        self.billing_type = 'Pav2'  # type: str
+        self.billing_type = "Pav2"  # type: str
         self.meter_guid = None
 
 
@@ -1925,21 +1779,21 @@ class Preferences(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'notification_preferences': {'key': 'notificationPreferences', 'type': '[NotificationPreference]'},
-        'transport_preferences': {'key': 'transportPreferences', 'type': 'TransportPreferences'},
-        'encryption_preferences': {'key': 'encryptionPreferences', 'type': 'EncryptionPreferences'},
-        'management_resource_preferences': {'key': 'managementResourcePreferences', 'type': 'ManagementResourcePreferences'},
+        "notification_preferences": {"key": "notificationPreferences", "type": "[NotificationPreference]"},
+        "transport_preferences": {"key": "transportPreferences", "type": "TransportPreferences"},
+        "encryption_preferences": {"key": "encryptionPreferences", "type": "EncryptionPreferences"},
+        "management_resource_preferences": {
+            "key": "managementResourcePreferences",
+            "type": "ManagementResourcePreferences",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Preferences, self).__init__(**kwargs)
-        self.notification_preferences = kwargs.get('notification_preferences', None)
-        self.transport_preferences = kwargs.get('transport_preferences', None)
-        self.encryption_preferences = kwargs.get('encryption_preferences', None)
-        self.management_resource_preferences = kwargs.get('management_resource_preferences', None)
+        self.notification_preferences = kwargs.get("notification_preferences", None)
+        self.transport_preferences = kwargs.get("transport_preferences", None)
+        self.encryption_preferences = kwargs.get("encryption_preferences", None)
+        self.management_resource_preferences = kwargs.get("management_resource_preferences", None)
 
 
 class Product(msrest.serialization.Model):
@@ -1968,31 +1822,28 @@ class Product(msrest.serialization.Model):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'configurations': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "configurations": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'Description'},
-        'image_information': {'key': 'properties.imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'properties.costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'properties.availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'properties.hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'properties.filterableProperties', 'type': '[FilterableProperty]'},
-        'configurations': {'key': 'properties.configurations', 'type': '[Configuration]'},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "Description"},
+        "image_information": {"key": "properties.imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "properties.costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "properties.availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "properties.hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "properties.filterableProperties", "type": "[FilterableProperty]"},
+        "configurations": {"key": "properties.configurations", "type": "[Configuration]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Product, self).__init__(**kwargs)
         self.display_name = None
         self.description = None
@@ -2027,27 +1878,24 @@ class ProductDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'hierarchy_information': {'required': True},
-        'count': {'readonly': True},
-        'product_double_encryption_status': {'readonly': True},
-        'device_details': {'readonly': True},
+        "hierarchy_information": {"required": True},
+        "count": {"readonly": True},
+        "product_double_encryption_status": {"readonly": True},
+        "device_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_info': {'key': 'displayInfo', 'type': 'DisplayInfo'},
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
-        'count': {'key': 'count', 'type': 'int'},
-        'product_double_encryption_status': {'key': 'productDoubleEncryptionStatus', 'type': 'str'},
-        'device_details': {'key': 'deviceDetails', 'type': '[DeviceDetails]'},
+        "display_info": {"key": "displayInfo", "type": "DisplayInfo"},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
+        "count": {"key": "count", "type": "int"},
+        "product_double_encryption_status": {"key": "productDoubleEncryptionStatus", "type": "str"},
+        "device_details": {"key": "deviceDetails", "type": "[DeviceDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductDetails, self).__init__(**kwargs)
-        self.display_info = kwargs.get('display_info', None)
-        self.hierarchy_information = kwargs['hierarchy_information']
+        self.display_info = kwargs.get("display_info", None)
+        self.hierarchy_information = kwargs["hierarchy_information"]
         self.count = None
         self.product_double_encryption_status = None
         self.device_details = None
@@ -2065,21 +1913,18 @@ class ProductFamilies(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ProductFamily]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ProductFamily]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductFamilies, self).__init__(**kwargs)
         self.value = None
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ProductFamiliesMetadata(msrest.serialization.Model):
@@ -2094,19 +1939,16 @@ class ProductFamiliesMetadata(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
-        'next_link': {'readonly': True},
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ProductFamiliesMetadataDetails]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ProductFamiliesMetadataDetails]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductFamiliesMetadata, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -2141,32 +1983,29 @@ class ProductFamiliesMetadataDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'product_lines': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "product_lines": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'Description'},
-        'image_information': {'key': 'properties.imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'properties.costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'properties.availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'properties.hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'properties.filterableProperties', 'type': '[FilterableProperty]'},
-        'product_lines': {'key': 'properties.productLines', 'type': '[ProductLine]'},
-        'resource_provider_details': {'key': 'properties.resourceProviderDetails', 'type': '[ResourceProviderDetails]'},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "Description"},
+        "image_information": {"key": "properties.imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "properties.costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "properties.availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "properties.hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "properties.filterableProperties", "type": "[FilterableProperty]"},
+        "product_lines": {"key": "properties.productLines", "type": "[ProductLine]"},
+        "resource_provider_details": {"key": "properties.resourceProviderDetails", "type": "[ResourceProviderDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductFamiliesMetadataDetails, self).__init__(**kwargs)
         self.display_name = None
         self.description = None
@@ -2176,7 +2015,7 @@ class ProductFamiliesMetadataDetails(msrest.serialization.Model):
         self.hierarchy_information = None
         self.filterable_properties = None
         self.product_lines = None
-        self.resource_provider_details = kwargs.get('resource_provider_details', None)
+        self.resource_provider_details = kwargs.get("resource_provider_details", None)
 
 
 class ProductFamiliesRequest(msrest.serialization.Model):
@@ -2194,21 +2033,18 @@ class ProductFamiliesRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'filterable_properties': {'required': True},
+        "filterable_properties": {"required": True},
     }
 
     _attribute_map = {
-        'filterable_properties': {'key': 'filterableProperties', 'type': '{[FilterableProperty]}'},
-        'customer_subscription_details': {'key': 'customerSubscriptionDetails', 'type': 'CustomerSubscriptionDetails'},
+        "filterable_properties": {"key": "filterableProperties", "type": "{[FilterableProperty]}"},
+        "customer_subscription_details": {"key": "customerSubscriptionDetails", "type": "CustomerSubscriptionDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductFamiliesRequest, self).__init__(**kwargs)
-        self.filterable_properties = kwargs['filterable_properties']
-        self.customer_subscription_details = kwargs.get('customer_subscription_details', None)
+        self.filterable_properties = kwargs["filterable_properties"]
+        self.customer_subscription_details = kwargs.get("customer_subscription_details", None)
 
 
 class ProductFamily(msrest.serialization.Model):
@@ -2240,32 +2076,29 @@ class ProductFamily(msrest.serialization.Model):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'product_lines': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "product_lines": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'Description'},
-        'image_information': {'key': 'properties.imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'properties.costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'properties.availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'properties.hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'properties.filterableProperties', 'type': '[FilterableProperty]'},
-        'product_lines': {'key': 'properties.productLines', 'type': '[ProductLine]'},
-        'resource_provider_details': {'key': 'properties.resourceProviderDetails', 'type': '[ResourceProviderDetails]'},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "Description"},
+        "image_information": {"key": "properties.imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "properties.costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "properties.availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "properties.hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "properties.filterableProperties", "type": "[FilterableProperty]"},
+        "product_lines": {"key": "properties.productLines", "type": "[ProductLine]"},
+        "resource_provider_details": {"key": "properties.resourceProviderDetails", "type": "[ResourceProviderDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductFamily, self).__init__(**kwargs)
         self.display_name = None
         self.description = None
@@ -2275,7 +2108,7 @@ class ProductFamily(msrest.serialization.Model):
         self.hierarchy_information = None
         self.filterable_properties = None
         self.product_lines = None
-        self.resource_provider_details = kwargs.get('resource_provider_details', None)
+        self.resource_provider_details = kwargs.get("resource_provider_details", None)
 
 
 class ProductFamilyProperties(CommonProperties):
@@ -2307,35 +2140,32 @@ class ProductFamilyProperties(CommonProperties):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'product_lines': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "product_lines": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'Description'},
-        'image_information': {'key': 'imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'filterableProperties', 'type': '[FilterableProperty]'},
-        'product_lines': {'key': 'productLines', 'type': '[ProductLine]'},
-        'resource_provider_details': {'key': 'resourceProviderDetails', 'type': '[ResourceProviderDetails]'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "description": {"key": "description", "type": "Description"},
+        "image_information": {"key": "imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "filterableProperties", "type": "[FilterableProperty]"},
+        "product_lines": {"key": "productLines", "type": "[ProductLine]"},
+        "resource_provider_details": {"key": "resourceProviderDetails", "type": "[ResourceProviderDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductFamilyProperties, self).__init__(**kwargs)
         self.product_lines = None
-        self.resource_provider_details = kwargs.get('resource_provider_details', None)
+        self.resource_provider_details = kwargs.get("resource_provider_details", None)
 
 
 class ProductLine(msrest.serialization.Model):
@@ -2364,31 +2194,28 @@ class ProductLine(msrest.serialization.Model):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'products': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "products": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'Description'},
-        'image_information': {'key': 'properties.imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'properties.costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'properties.availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'properties.hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'properties.filterableProperties', 'type': '[FilterableProperty]'},
-        'products': {'key': 'properties.products', 'type': '[Product]'},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "Description"},
+        "image_information": {"key": "properties.imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "properties.costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "properties.availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "properties.hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "properties.filterableProperties", "type": "[FilterableProperty]"},
+        "products": {"key": "properties.products", "type": "[Product]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductLine, self).__init__(**kwargs)
         self.display_name = None
         self.description = None
@@ -2426,31 +2253,28 @@ class ProductLineProperties(CommonProperties):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'products': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "products": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'Description'},
-        'image_information': {'key': 'imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'filterableProperties', 'type': '[FilterableProperty]'},
-        'products': {'key': 'products', 'type': '[Product]'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "description": {"key": "description", "type": "Description"},
+        "image_information": {"key": "imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "filterableProperties", "type": "[FilterableProperty]"},
+        "products": {"key": "products", "type": "[Product]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductLineProperties, self).__init__(**kwargs)
         self.products = None
 
@@ -2481,31 +2305,28 @@ class ProductProperties(CommonProperties):
     """
 
     _validation = {
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'image_information': {'readonly': True},
-        'cost_information': {'readonly': True},
-        'availability_information': {'readonly': True},
-        'hierarchy_information': {'readonly': True},
-        'filterable_properties': {'readonly': True},
-        'configurations': {'readonly': True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "image_information": {"readonly": True},
+        "cost_information": {"readonly": True},
+        "availability_information": {"readonly": True},
+        "hierarchy_information": {"readonly": True},
+        "filterable_properties": {"readonly": True},
+        "configurations": {"readonly": True},
     }
 
     _attribute_map = {
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'Description'},
-        'image_information': {'key': 'imageInformation', 'type': '[ImageInformation]'},
-        'cost_information': {'key': 'costInformation', 'type': 'CostInformation'},
-        'availability_information': {'key': 'availabilityInformation', 'type': 'AvailabilityInformation'},
-        'hierarchy_information': {'key': 'hierarchyInformation', 'type': 'HierarchyInformation'},
-        'filterable_properties': {'key': 'filterableProperties', 'type': '[FilterableProperty]'},
-        'configurations': {'key': 'configurations', 'type': '[Configuration]'},
+        "display_name": {"key": "displayName", "type": "str"},
+        "description": {"key": "description", "type": "Description"},
+        "image_information": {"key": "imageInformation", "type": "[ImageInformation]"},
+        "cost_information": {"key": "costInformation", "type": "CostInformation"},
+        "availability_information": {"key": "availabilityInformation", "type": "AvailabilityInformation"},
+        "hierarchy_information": {"key": "hierarchyInformation", "type": "HierarchyInformation"},
+        "filterable_properties": {"key": "filterableProperties", "type": "[FilterableProperty]"},
+        "configurations": {"key": "configurations", "type": "[Configuration]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProductProperties, self).__init__(**kwargs)
         self.configurations = None
 
@@ -2533,29 +2354,26 @@ class PurchaseMeterDetails(MeterDetails):
     """
 
     _validation = {
-        'billing_type': {'required': True},
-        'multiplier': {'readonly': True},
-        'charging_type': {'readonly': True},
-        'product_id': {'readonly': True},
-        'sku_id': {'readonly': True},
-        'term_id': {'readonly': True},
+        "billing_type": {"required": True},
+        "multiplier": {"readonly": True},
+        "charging_type": {"readonly": True},
+        "product_id": {"readonly": True},
+        "sku_id": {"readonly": True},
+        "term_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'billing_type': {'key': 'billingType', 'type': 'str'},
-        'multiplier': {'key': 'multiplier', 'type': 'float'},
-        'charging_type': {'key': 'chargingType', 'type': 'str'},
-        'product_id': {'key': 'productId', 'type': 'str'},
-        'sku_id': {'key': 'skuId', 'type': 'str'},
-        'term_id': {'key': 'termId', 'type': 'str'},
+        "billing_type": {"key": "billingType", "type": "str"},
+        "multiplier": {"key": "multiplier", "type": "float"},
+        "charging_type": {"key": "chargingType", "type": "str"},
+        "product_id": {"key": "productId", "type": "str"},
+        "sku_id": {"key": "skuId", "type": "str"},
+        "term_id": {"key": "termId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PurchaseMeterDetails, self).__init__(**kwargs)
-        self.billing_type = 'Purchase'  # type: str
+        self.billing_type = "Purchase"  # type: str
         self.product_id = None
         self.sku_id = None
         self.term_id = None
@@ -2575,22 +2393,19 @@ class ResourceIdentity(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'tenant_id': {'readonly': True},
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceIdentity, self).__init__(**kwargs)
-        self.type = kwargs.get('type', None)
+        self.type = kwargs.get("type", None)
         self.principal_id = None
         self.tenant_id = None
 
@@ -2605,17 +2420,14 @@ class ResourceProviderDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_provider_namespace': {'readonly': True},
+        "resource_provider_namespace": {"readonly": True},
     }
 
     _attribute_map = {
-        'resource_provider_namespace': {'key': 'resourceProviderNamespace', 'type': 'str'},
+        "resource_provider_namespace": {"key": "resourceProviderNamespace", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceProviderDetails, self).__init__(**kwargs)
         self.resource_provider_namespace = None
 
@@ -2636,25 +2448,22 @@ class ReturnOrderItemDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'return_reason': {'required': True},
+        "return_reason": {"required": True},
     }
 
     _attribute_map = {
-        'return_address': {'key': 'returnAddress', 'type': 'AddressProperties'},
-        'return_reason': {'key': 'returnReason', 'type': 'str'},
-        'service_tag': {'key': 'serviceTag', 'type': 'str'},
-        'shipping_box_required': {'key': 'shippingBoxRequired', 'type': 'bool'},
+        "return_address": {"key": "returnAddress", "type": "AddressProperties"},
+        "return_reason": {"key": "returnReason", "type": "str"},
+        "service_tag": {"key": "serviceTag", "type": "str"},
+        "shipping_box_required": {"key": "shippingBoxRequired", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReturnOrderItemDetails, self).__init__(**kwargs)
-        self.return_address = kwargs.get('return_address', None)
-        self.return_reason = kwargs['return_reason']
-        self.service_tag = kwargs.get('service_tag', None)
-        self.shipping_box_required = kwargs.get('shipping_box_required', False)
+        self.return_address = kwargs.get("return_address", None)
+        self.return_reason = kwargs["return_reason"]
+        self.service_tag = kwargs.get("service_tag", None)
+        self.shipping_box_required = kwargs.get("shipping_box_required", False)
 
 
 class ReverseShippingDetails(msrest.serialization.Model):
@@ -2676,25 +2485,22 @@ class ReverseShippingDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'sas_key_for_label': {'readonly': True},
-        'carrier_name': {'readonly': True},
-        'carrier_display_name': {'readonly': True},
-        'tracking_id': {'readonly': True},
-        'tracking_url': {'readonly': True},
+        "sas_key_for_label": {"readonly": True},
+        "carrier_name": {"readonly": True},
+        "carrier_display_name": {"readonly": True},
+        "tracking_id": {"readonly": True},
+        "tracking_url": {"readonly": True},
     }
 
     _attribute_map = {
-        'sas_key_for_label': {'key': 'sasKeyForLabel', 'type': 'str'},
-        'carrier_name': {'key': 'carrierName', 'type': 'str'},
-        'carrier_display_name': {'key': 'carrierDisplayName', 'type': 'str'},
-        'tracking_id': {'key': 'trackingId', 'type': 'str'},
-        'tracking_url': {'key': 'trackingUrl', 'type': 'str'},
+        "sas_key_for_label": {"key": "sasKeyForLabel", "type": "str"},
+        "carrier_name": {"key": "carrierName", "type": "str"},
+        "carrier_display_name": {"key": "carrierDisplayName", "type": "str"},
+        "tracking_id": {"key": "trackingId", "type": "str"},
+        "tracking_url": {"key": "trackingUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReverseShippingDetails, self).__init__(**kwargs)
         self.sas_key_for_label = None
         self.carrier_name = None
@@ -2732,38 +2538,35 @@ class ShippingAddress(msrest.serialization.Model):
     """
 
     _validation = {
-        'street_address1': {'required': True},
-        'country': {'required': True},
+        "street_address1": {"required": True},
+        "country": {"required": True},
     }
 
     _attribute_map = {
-        'street_address1': {'key': 'streetAddress1', 'type': 'str'},
-        'street_address2': {'key': 'streetAddress2', 'type': 'str'},
-        'street_address3': {'key': 'streetAddress3', 'type': 'str'},
-        'city': {'key': 'city', 'type': 'str'},
-        'state_or_province': {'key': 'stateOrProvince', 'type': 'str'},
-        'country': {'key': 'country', 'type': 'str'},
-        'postal_code': {'key': 'postalCode', 'type': 'str'},
-        'zip_extended_code': {'key': 'zipExtendedCode', 'type': 'str'},
-        'company_name': {'key': 'companyName', 'type': 'str'},
-        'address_type': {'key': 'addressType', 'type': 'str'},
+        "street_address1": {"key": "streetAddress1", "type": "str"},
+        "street_address2": {"key": "streetAddress2", "type": "str"},
+        "street_address3": {"key": "streetAddress3", "type": "str"},
+        "city": {"key": "city", "type": "str"},
+        "state_or_province": {"key": "stateOrProvince", "type": "str"},
+        "country": {"key": "country", "type": "str"},
+        "postal_code": {"key": "postalCode", "type": "str"},
+        "zip_extended_code": {"key": "zipExtendedCode", "type": "str"},
+        "company_name": {"key": "companyName", "type": "str"},
+        "address_type": {"key": "addressType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ShippingAddress, self).__init__(**kwargs)
-        self.street_address1 = kwargs['street_address1']
-        self.street_address2 = kwargs.get('street_address2', None)
-        self.street_address3 = kwargs.get('street_address3', None)
-        self.city = kwargs.get('city', None)
-        self.state_or_province = kwargs.get('state_or_province', None)
-        self.country = kwargs['country']
-        self.postal_code = kwargs.get('postal_code', None)
-        self.zip_extended_code = kwargs.get('zip_extended_code', None)
-        self.company_name = kwargs.get('company_name', None)
-        self.address_type = kwargs.get('address_type', None)
+        self.street_address1 = kwargs["street_address1"]
+        self.street_address2 = kwargs.get("street_address2", None)
+        self.street_address3 = kwargs.get("street_address3", None)
+        self.city = kwargs.get("city", None)
+        self.state_or_province = kwargs.get("state_or_province", None)
+        self.country = kwargs["country"]
+        self.postal_code = kwargs.get("postal_code", None)
+        self.zip_extended_code = kwargs.get("zip_extended_code", None)
+        self.company_name = kwargs.get("company_name", None)
+        self.address_type = kwargs.get("address_type", None)
 
 
 class ShippingDetails(msrest.serialization.Model):
@@ -2783,23 +2586,20 @@ class ShippingDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'carrier_name': {'readonly': True},
-        'carrier_display_name': {'readonly': True},
-        'tracking_id': {'readonly': True},
-        'tracking_url': {'readonly': True},
+        "carrier_name": {"readonly": True},
+        "carrier_display_name": {"readonly": True},
+        "tracking_id": {"readonly": True},
+        "tracking_url": {"readonly": True},
     }
 
     _attribute_map = {
-        'carrier_name': {'key': 'carrierName', 'type': 'str'},
-        'carrier_display_name': {'key': 'carrierDisplayName', 'type': 'str'},
-        'tracking_id': {'key': 'trackingId', 'type': 'str'},
-        'tracking_url': {'key': 'trackingUrl', 'type': 'str'},
+        "carrier_name": {"key": "carrierName", "type": "str"},
+        "carrier_display_name": {"key": "carrierDisplayName", "type": "str"},
+        "tracking_id": {"key": "trackingId", "type": "str"},
+        "tracking_url": {"key": "trackingUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ShippingDetails, self).__init__(**kwargs)
         self.carrier_name = None
         self.carrier_display_name = None
@@ -2819,19 +2619,16 @@ class Specification(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'value': {'readonly': True},
+        "name": {"readonly": True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Specification, self).__init__(**kwargs)
         self.name = None
         self.value = None
@@ -2856,23 +2653,20 @@ class StageDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'stage_status': {'readonly': True},
-        'stage_name': {'readonly': True},
-        'display_name': {'readonly': True},
-        'start_time': {'readonly': True},
+        "stage_status": {"readonly": True},
+        "stage_name": {"readonly": True},
+        "display_name": {"readonly": True},
+        "start_time": {"readonly": True},
     }
 
     _attribute_map = {
-        'stage_status': {'key': 'stageStatus', 'type': 'str'},
-        'stage_name': {'key': 'stageName', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
+        "stage_status": {"key": "stageStatus", "type": "str"},
+        "stage_name": {"key": "stageName", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StageDetails, self).__init__(**kwargs)
         self.stage_status = None
         self.stage_name = None
@@ -2900,25 +2694,22 @@ class SystemData(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'created_by': {'key': 'createdBy', 'type': 'str'},
-        'created_by_type': {'key': 'createdByType', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
-        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
-        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SystemData, self).__init__(**kwargs)
-        self.created_by = kwargs.get('created_by', None)
-        self.created_by_type = kwargs.get('created_by_type', None)
-        self.created_at = kwargs.get('created_at', None)
-        self.last_modified_by = kwargs.get('last_modified_by', None)
-        self.last_modified_by_type = kwargs.get('last_modified_by_type', None)
-        self.last_modified_at = kwargs.get('last_modified_at', None)
+        self.created_by = kwargs.get("created_by", None)
+        self.created_by_type = kwargs.get("created_by_type", None)
+        self.created_at = kwargs.get("created_at", None)
+        self.last_modified_by = kwargs.get("last_modified_by", None)
+        self.last_modified_by_type = kwargs.get("last_modified_by_type", None)
+        self.last_modified_at = kwargs.get("last_modified_at", None)
 
 
 class TransportPreferences(msrest.serialization.Model):
@@ -2933,16 +2724,13 @@ class TransportPreferences(msrest.serialization.Model):
     """
 
     _validation = {
-        'preferred_shipment_type': {'required': True},
+        "preferred_shipment_type": {"required": True},
     }
 
     _attribute_map = {
-        'preferred_shipment_type': {'key': 'preferredShipmentType', 'type': 'str'},
+        "preferred_shipment_type": {"key": "preferredShipmentType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TransportPreferences, self).__init__(**kwargs)
-        self.preferred_shipment_type = kwargs['preferred_shipment_type']
+        self.preferred_shipment_type = kwargs["preferred_shipment_type"]
