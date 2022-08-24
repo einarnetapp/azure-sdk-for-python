@@ -27,23 +27,20 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -75,30 +72,27 @@ class ApplyUpdate(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'resource_id': {'key': 'properties.resourceId', 'type': 'str'},
-        'last_update_time': {'key': 'properties.lastUpdateTime', 'type': 'iso-8601'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "status": {"key": "properties.status", "type": "str"},
+        "resource_id": {"key": "properties.resourceId", "type": "str"},
+        "last_update_time": {"key": "properties.lastUpdateTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplyUpdate, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.resource_id = kwargs.get('resource_id', None)
-        self.last_update_time = kwargs.get('last_update_time', None)
+        self.status = kwargs.get("status", None)
+        self.resource_id = kwargs.get("resource_id", None)
+        self.last_update_time = kwargs.get("last_update_time", None)
 
 
 class ConfigurationAssignment(Resource):
@@ -124,30 +118,27 @@ class ConfigurationAssignment(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'location': {'key': 'location', 'type': 'str'},
-        'maintenance_configuration_id': {'key': 'properties.maintenanceConfigurationId', 'type': 'str'},
-        'resource_id': {'key': 'properties.resourceId', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "location": {"key": "location", "type": "str"},
+        "maintenance_configuration_id": {"key": "properties.maintenanceConfigurationId", "type": "str"},
+        "resource_id": {"key": "properties.resourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConfigurationAssignment, self).__init__(**kwargs)
-        self.location = kwargs.get('location', None)
-        self.maintenance_configuration_id = kwargs.get('maintenance_configuration_id', None)
-        self.resource_id = kwargs.get('resource_id', None)
+        self.location = kwargs.get("location", None)
+        self.maintenance_configuration_id = kwargs.get("maintenance_configuration_id", None)
+        self.resource_id = kwargs.get("resource_id", None)
 
 
 class ErrorDetails(msrest.serialization.Model):
@@ -161,17 +152,14 @@ class ErrorDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetails, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
 
 
 class InputLinuxParameters(msrest.serialization.Model):
@@ -186,19 +174,16 @@ class InputLinuxParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'package_name_masks_to_exclude': {'key': 'packageNameMasksToExclude', 'type': '[str]'},
-        'package_name_masks_to_include': {'key': 'packageNameMasksToInclude', 'type': '[str]'},
-        'classifications_to_include': {'key': 'classificationsToInclude', 'type': '[str]'},
+        "package_name_masks_to_exclude": {"key": "packageNameMasksToExclude", "type": "[str]"},
+        "package_name_masks_to_include": {"key": "packageNameMasksToInclude", "type": "[str]"},
+        "classifications_to_include": {"key": "classificationsToInclude", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InputLinuxParameters, self).__init__(**kwargs)
-        self.package_name_masks_to_exclude = kwargs.get('package_name_masks_to_exclude', None)
-        self.package_name_masks_to_include = kwargs.get('package_name_masks_to_include', None)
-        self.classifications_to_include = kwargs.get('classifications_to_include', None)
+        self.package_name_masks_to_exclude = kwargs.get("package_name_masks_to_exclude", None)
+        self.package_name_masks_to_include = kwargs.get("package_name_masks_to_include", None)
+        self.classifications_to_include = kwargs.get("classifications_to_include", None)
 
 
 class InputPatchConfiguration(msrest.serialization.Model):
@@ -223,23 +208,20 @@ class InputPatchConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'reboot_setting': {'key': 'rebootSetting', 'type': 'str'},
-        'windows_parameters': {'key': 'windowsParameters', 'type': 'InputWindowsParameters'},
-        'linux_parameters': {'key': 'linuxParameters', 'type': 'InputLinuxParameters'},
-        'pre_tasks': {'key': 'tasks.preTasks', 'type': '[TaskProperties]'},
-        'post_tasks': {'key': 'tasks.postTasks', 'type': '[TaskProperties]'},
+        "reboot_setting": {"key": "rebootSetting", "type": "str"},
+        "windows_parameters": {"key": "windowsParameters", "type": "InputWindowsParameters"},
+        "linux_parameters": {"key": "linuxParameters", "type": "InputLinuxParameters"},
+        "pre_tasks": {"key": "tasks.preTasks", "type": "[TaskProperties]"},
+        "post_tasks": {"key": "tasks.postTasks", "type": "[TaskProperties]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InputPatchConfiguration, self).__init__(**kwargs)
-        self.reboot_setting = kwargs.get('reboot_setting', "IfRequired")
-        self.windows_parameters = kwargs.get('windows_parameters', None)
-        self.linux_parameters = kwargs.get('linux_parameters', None)
-        self.pre_tasks = kwargs.get('pre_tasks', None)
-        self.post_tasks = kwargs.get('post_tasks', None)
+        self.reboot_setting = kwargs.get("reboot_setting", "IfRequired")
+        self.windows_parameters = kwargs.get("windows_parameters", None)
+        self.linux_parameters = kwargs.get("linux_parameters", None)
+        self.pre_tasks = kwargs.get("pre_tasks", None)
+        self.post_tasks = kwargs.get("post_tasks", None)
 
 
 class InputWindowsParameters(msrest.serialization.Model):
@@ -256,21 +238,18 @@ class InputWindowsParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'kb_numbers_to_exclude': {'key': 'kbNumbersToExclude', 'type': '[str]'},
-        'kb_numbers_to_include': {'key': 'kbNumbersToInclude', 'type': '[str]'},
-        'classifications_to_include': {'key': 'classificationsToInclude', 'type': '[str]'},
-        'exclude_kbs_requiring_reboot': {'key': 'excludeKbsRequiringReboot', 'type': 'bool'},
+        "kb_numbers_to_exclude": {"key": "kbNumbersToExclude", "type": "[str]"},
+        "kb_numbers_to_include": {"key": "kbNumbersToInclude", "type": "[str]"},
+        "classifications_to_include": {"key": "classificationsToInclude", "type": "[str]"},
+        "exclude_kbs_requiring_reboot": {"key": "excludeKbsRequiringReboot", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InputWindowsParameters, self).__init__(**kwargs)
-        self.kb_numbers_to_exclude = kwargs.get('kb_numbers_to_exclude', None)
-        self.kb_numbers_to_include = kwargs.get('kb_numbers_to_include', None)
-        self.classifications_to_include = kwargs.get('classifications_to_include', None)
-        self.exclude_kbs_requiring_reboot = kwargs.get('exclude_kbs_requiring_reboot', None)
+        self.kb_numbers_to_exclude = kwargs.get("kb_numbers_to_exclude", None)
+        self.kb_numbers_to_include = kwargs.get("kb_numbers_to_include", None)
+        self.classifications_to_include = kwargs.get("classifications_to_include", None)
+        self.exclude_kbs_requiring_reboot = kwargs.get("exclude_kbs_requiring_reboot", None)
 
 
 class ListApplyUpdate(msrest.serialization.Model):
@@ -281,15 +260,12 @@ class ListApplyUpdate(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ApplyUpdate]'},
+        "value": {"key": "value", "type": "[ApplyUpdate]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ListApplyUpdate, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class ListConfigurationAssignmentsResult(msrest.serialization.Model):
@@ -300,15 +276,12 @@ class ListConfigurationAssignmentsResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ConfigurationAssignment]'},
+        "value": {"key": "value", "type": "[ConfigurationAssignment]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ListConfigurationAssignmentsResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class ListMaintenanceConfigurationsResult(msrest.serialization.Model):
@@ -319,15 +292,12 @@ class ListMaintenanceConfigurationsResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[MaintenanceConfiguration]'},
+        "value": {"key": "value", "type": "[MaintenanceConfiguration]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ListMaintenanceConfigurationsResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class ListUpdatesResult(msrest.serialization.Model):
@@ -338,15 +308,12 @@ class ListUpdatesResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Update]'},
+        "value": {"key": "value", "type": "[Update]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ListUpdatesResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class MaintenanceConfiguration(Resource):
@@ -412,48 +379,45 @@ class MaintenanceConfiguration(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'namespace': {'key': 'properties.namespace', 'type': 'str'},
-        'extension_properties': {'key': 'properties.extensionProperties', 'type': '{str}'},
-        'maintenance_scope': {'key': 'properties.maintenanceScope', 'type': 'str'},
-        'visibility': {'key': 'properties.visibility', 'type': 'str'},
-        'install_patches': {'key': 'properties.installPatches', 'type': 'InputPatchConfiguration'},
-        'start_date_time': {'key': 'properties.maintenanceWindow.startDateTime', 'type': 'str'},
-        'expiration_date_time': {'key': 'properties.maintenanceWindow.expirationDateTime', 'type': 'str'},
-        'duration': {'key': 'properties.maintenanceWindow.duration', 'type': 'str'},
-        'time_zone': {'key': 'properties.maintenanceWindow.timeZone', 'type': 'str'},
-        'recur_every': {'key': 'properties.maintenanceWindow.recurEvery', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "namespace": {"key": "properties.namespace", "type": "str"},
+        "extension_properties": {"key": "properties.extensionProperties", "type": "{str}"},
+        "maintenance_scope": {"key": "properties.maintenanceScope", "type": "str"},
+        "visibility": {"key": "properties.visibility", "type": "str"},
+        "install_patches": {"key": "properties.installPatches", "type": "InputPatchConfiguration"},
+        "start_date_time": {"key": "properties.maintenanceWindow.startDateTime", "type": "str"},
+        "expiration_date_time": {"key": "properties.maintenanceWindow.expirationDateTime", "type": "str"},
+        "duration": {"key": "properties.maintenanceWindow.duration", "type": "str"},
+        "time_zone": {"key": "properties.maintenanceWindow.timeZone", "type": "str"},
+        "recur_every": {"key": "properties.maintenanceWindow.recurEvery", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MaintenanceConfiguration, self).__init__(**kwargs)
-        self.location = kwargs.get('location', None)
-        self.tags = kwargs.get('tags', None)
-        self.namespace = kwargs.get('namespace', None)
-        self.extension_properties = kwargs.get('extension_properties', None)
-        self.maintenance_scope = kwargs.get('maintenance_scope', None)
-        self.visibility = kwargs.get('visibility', None)
-        self.install_patches = kwargs.get('install_patches', None)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.expiration_date_time = kwargs.get('expiration_date_time', None)
-        self.duration = kwargs.get('duration', None)
-        self.time_zone = kwargs.get('time_zone', None)
-        self.recur_every = kwargs.get('recur_every', None)
+        self.location = kwargs.get("location", None)
+        self.tags = kwargs.get("tags", None)
+        self.namespace = kwargs.get("namespace", None)
+        self.extension_properties = kwargs.get("extension_properties", None)
+        self.maintenance_scope = kwargs.get("maintenance_scope", None)
+        self.visibility = kwargs.get("visibility", None)
+        self.install_patches = kwargs.get("install_patches", None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.expiration_date_time = kwargs.get("expiration_date_time", None)
+        self.duration = kwargs.get("duration", None)
+        self.time_zone = kwargs.get("time_zone", None)
+        self.recur_every = kwargs.get("recur_every", None)
 
 
 class MaintenanceError(msrest.serialization.Model):
@@ -464,15 +428,12 @@ class MaintenanceError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetails'},
+        "error": {"key": "error", "type": "ErrorDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MaintenanceError, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class Operation(msrest.serialization.Model):
@@ -491,23 +452,20 @@ class Operation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'OperationInfo'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'object'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "OperationInfo"},
+        "origin": {"key": "origin", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Operation, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display = kwargs.get('display', None)
-        self.origin = kwargs.get('origin', None)
-        self.properties = kwargs.get('properties', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
+        self.name = kwargs.get("name", None)
+        self.display = kwargs.get("display", None)
+        self.origin = kwargs.get("origin", None)
+        self.properties = kwargs.get("properties", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
 
 
 class OperationInfo(msrest.serialization.Model):
@@ -524,21 +482,18 @@ class OperationInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationInfo, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class OperationsListResult(msrest.serialization.Model):
@@ -549,15 +504,12 @@ class OperationsListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
+        "value": {"key": "value", "type": "[Operation]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationsListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class SystemData(msrest.serialization.Model):
@@ -580,25 +532,22 @@ class SystemData(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'created_by': {'key': 'createdBy', 'type': 'str'},
-        'created_by_type': {'key': 'createdByType', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
-        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
-        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SystemData, self).__init__(**kwargs)
-        self.created_by = kwargs.get('created_by', None)
-        self.created_by_type = kwargs.get('created_by_type', None)
-        self.created_at = kwargs.get('created_at', None)
-        self.last_modified_by = kwargs.get('last_modified_by', None)
-        self.last_modified_by_type = kwargs.get('last_modified_by_type', None)
-        self.last_modified_at = kwargs.get('last_modified_at', None)
+        self.created_by = kwargs.get("created_by", None)
+        self.created_by_type = kwargs.get("created_by_type", None)
+        self.created_at = kwargs.get("created_at", None)
+        self.last_modified_by = kwargs.get("last_modified_by", None)
+        self.last_modified_by_type = kwargs.get("last_modified_by_type", None)
+        self.last_modified_at = kwargs.get("last_modified_at", None)
 
 
 class TaskProperties(msrest.serialization.Model):
@@ -614,19 +563,16 @@ class TaskProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'parameters': {'key': 'parameters', 'type': '{str}'},
-        'source': {'key': 'source', 'type': 'str'},
-        'task_scope': {'key': 'taskScope', 'type': 'str'},
+        "parameters": {"key": "parameters", "type": "{str}"},
+        "source": {"key": "source", "type": "str"},
+        "task_scope": {"key": "taskScope", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TaskProperties, self).__init__(**kwargs)
-        self.parameters = kwargs.get('parameters', None)
-        self.source = kwargs.get('source', None)
-        self.task_scope = kwargs.get('task_scope', "Global")
+        self.parameters = kwargs.get("parameters", None)
+        self.source = kwargs.get("source", None)
+        self.task_scope = kwargs.get("task_scope", "Global")
 
 
 class Update(msrest.serialization.Model):
@@ -651,22 +597,19 @@ class Update(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'maintenance_scope': {'key': 'maintenanceScope', 'type': 'str'},
-        'impact_type': {'key': 'impactType', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'impact_duration_in_sec': {'key': 'impactDurationInSec', 'type': 'int'},
-        'not_before': {'key': 'notBefore', 'type': 'iso-8601'},
-        'resource_id': {'key': 'properties.resourceId', 'type': 'str'},
+        "maintenance_scope": {"key": "maintenanceScope", "type": "str"},
+        "impact_type": {"key": "impactType", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "impact_duration_in_sec": {"key": "impactDurationInSec", "type": "int"},
+        "not_before": {"key": "notBefore", "type": "iso-8601"},
+        "resource_id": {"key": "properties.resourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Update, self).__init__(**kwargs)
-        self.maintenance_scope = kwargs.get('maintenance_scope', None)
-        self.impact_type = kwargs.get('impact_type', None)
-        self.status = kwargs.get('status', None)
-        self.impact_duration_in_sec = kwargs.get('impact_duration_in_sec', None)
-        self.not_before = kwargs.get('not_before', None)
-        self.resource_id = kwargs.get('resource_id', None)
+        self.maintenance_scope = kwargs.get("maintenance_scope", None)
+        self.impact_type = kwargs.get("impact_type", None)
+        self.status = kwargs.get("status", None)
+        self.impact_duration_in_sec = kwargs.get("impact_duration_in_sec", None)
+        self.not_before = kwargs.get("not_before", None)
+        self.resource_id = kwargs.get("resource_id", None)
