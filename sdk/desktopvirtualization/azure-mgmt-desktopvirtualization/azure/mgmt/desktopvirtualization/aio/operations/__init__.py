@@ -18,22 +18,24 @@ from ._user_sessions_operations import UserSessionsOperations
 from ._session_hosts_operations import SessionHostsOperations
 from ._msix_packages_operations import MSIXPackagesOperations
 from ._msix_images_operations import MsixImagesOperations
-from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations
-from ._private_link_resources_operations import PrivateLinkResourcesOperations
+
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    'Operations',
-    'WorkspacesOperations',
-    'ScalingPlansOperations',
-    'ApplicationGroupsOperations',
-    'StartMenuItemsOperations',
-    'ApplicationsOperations',
-    'DesktopsOperations',
-    'HostPoolsOperations',
-    'UserSessionsOperations',
-    'SessionHostsOperations',
-    'MSIXPackagesOperations',
-    'MsixImagesOperations',
-    'PrivateEndpointConnectionsOperations',
-    'PrivateLinkResourcesOperations',
+    "Operations",
+    "WorkspacesOperations",
+    "ScalingPlansOperations",
+    "ApplicationGroupsOperations",
+    "StartMenuItemsOperations",
+    "ApplicationsOperations",
+    "DesktopsOperations",
+    "HostPoolsOperations",
+    "UserSessionsOperations",
+    "SessionHostsOperations",
+    "MSIXPackagesOperations",
+    "MsixImagesOperations",
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()

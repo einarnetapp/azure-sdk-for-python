@@ -9,15 +9,22 @@ from typing import Any, AsyncIterable, Callable, Dict, Generic, Optional, TypeVa
 import warnings
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 
-T = TypeVar('T')
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class PrivateLinkResourcesOperations:
     """PrivateLinkResourcesOperations async operations.
@@ -42,10 +49,7 @@ class PrivateLinkResourcesOperations:
         self._config = config
 
     def list_by_host_pool(
-        self,
-        resource_group_name: str,
-        host_pool_name: str,
-        **kwargs: Any
+        self, resource_group_name: str, host_pool_name: str, **kwargs: Any
     ) -> AsyncIterable["_models.PrivateLinkResourceListResult"]:
         """List the private link resources available for this hostpool.
 
@@ -58,31 +62,35 @@ class PrivateLinkResourcesOperations:
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~desktop_virtualization_api_client.models.PrivateLinkResourceListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
+        cls = kwargs.pop("cls", None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}))
         api_version = "2021-09-03-preview"
         accept = "application/json"
 
         def prepare_request(next_link=None):
             # Construct headers
             header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
+            header_parameters["Accept"] = self._serialize.header("accept", accept, "str")
 
             if not next_link:
                 # Construct URL
-                url = self.list_by_host_pool.metadata['url']  # type: ignore
+                url = self.list_by_host_pool.metadata["url"]  # type: ignore
                 path_format_arguments = {
-                    'subscriptionId': self._serialize.url("self._config.subscription_id", self._config.subscription_id, 'str', min_length=1),
-                    'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-                    'hostPoolName': self._serialize.url("host_pool_name", host_pool_name, 'str', max_length=64, min_length=3),
+                    "subscriptionId": self._serialize.url(
+                        "self._config.subscription_id", self._config.subscription_id, "str", min_length=1
+                    ),
+                    "resourceGroupName": self._serialize.url(
+                        "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+                    ),
+                    "hostPoolName": self._serialize.url(
+                        "host_pool_name", host_pool_name, "str", max_length=64, min_length=3
+                    ),
                 }
                 url = self._client.format_url(url, **path_format_arguments)
                 # Construct parameters
                 query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+                query_parameters["api-version"] = self._serialize.query("api_version", api_version, "str")
 
                 request = self._client.get(url, query_parameters, header_parameters)
             else:
@@ -92,7 +100,7 @@ class PrivateLinkResourcesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize('PrivateLinkResourceListResult', pipeline_response)
+            deserialized = self._deserialize("PrivateLinkResourceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -110,16 +118,12 @@ class PrivateLinkResourcesOperations:
 
             return pipeline_response
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list_by_host_pool.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateLinkResources'}  # type: ignore
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_host_pool.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateLinkResources"}  # type: ignore
 
     def list_by_workspace(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, **kwargs: Any
     ) -> AsyncIterable["_models.PrivateLinkResourceListResult"]:
         """List the private link resources available for this workspace.
 
@@ -132,31 +136,35 @@ class PrivateLinkResourcesOperations:
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~desktop_virtualization_api_client.models.PrivateLinkResourceListResult]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}))
+        cls = kwargs.pop("cls", None)  # type: ClsType["_models.PrivateLinkResourceListResult"]
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}))
         api_version = "2021-09-03-preview"
         accept = "application/json"
 
         def prepare_request(next_link=None):
             # Construct headers
             header_parameters = {}  # type: Dict[str, Any]
-            header_parameters['Accept'] = self._serialize.header("accept", accept, 'str')
+            header_parameters["Accept"] = self._serialize.header("accept", accept, "str")
 
             if not next_link:
                 # Construct URL
-                url = self.list_by_workspace.metadata['url']  # type: ignore
+                url = self.list_by_workspace.metadata["url"]  # type: ignore
                 path_format_arguments = {
-                    'subscriptionId': self._serialize.url("self._config.subscription_id", self._config.subscription_id, 'str', min_length=1),
-                    'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=90, min_length=1),
-                    'workspaceName': self._serialize.url("workspace_name", workspace_name, 'str', max_length=64, min_length=3),
+                    "subscriptionId": self._serialize.url(
+                        "self._config.subscription_id", self._config.subscription_id, "str", min_length=1
+                    ),
+                    "resourceGroupName": self._serialize.url(
+                        "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+                    ),
+                    "workspaceName": self._serialize.url(
+                        "workspace_name", workspace_name, "str", max_length=64, min_length=3
+                    ),
                 }
                 url = self._client.format_url(url, **path_format_arguments)
                 # Construct parameters
                 query_parameters = {}  # type: Dict[str, Any]
-                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+                query_parameters["api-version"] = self._serialize.query("api_version", api_version, "str")
 
                 request = self._client.get(url, query_parameters, header_parameters)
             else:
@@ -166,7 +174,7 @@ class PrivateLinkResourcesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize('PrivateLinkResourceListResult', pipeline_response)
+            deserialized = self._deserialize("PrivateLinkResourceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -184,7 +192,6 @@ class PrivateLinkResourcesOperations:
 
             return pipeline_response
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list_by_workspace.metadata = {'url': '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateLinkResources'}  # type: ignore
+        return AsyncItemPaged(get_next, extract_data)
+
+    list_by_workspace.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateLinkResources"}  # type: ignore

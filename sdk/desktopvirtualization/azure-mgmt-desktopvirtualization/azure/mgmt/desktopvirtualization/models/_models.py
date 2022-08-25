@@ -25,21 +25,18 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -99,55 +96,52 @@ class Application(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
-        'command_line_setting': {'required': True},
-        'icon_hash': {'readonly': True},
-        'icon_content': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
+        "command_line_setting": {"required": True},
+        "icon_hash": {"readonly": True},
+        "icon_content": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'file_path': {'key': 'properties.filePath', 'type': 'str'},
-        'msix_package_family_name': {'key': 'properties.msixPackageFamilyName', 'type': 'str'},
-        'msix_package_application_id': {'key': 'properties.msixPackageApplicationId', 'type': 'str'},
-        'application_type': {'key': 'properties.applicationType', 'type': 'str'},
-        'command_line_setting': {'key': 'properties.commandLineSetting', 'type': 'str'},
-        'command_line_arguments': {'key': 'properties.commandLineArguments', 'type': 'str'},
-        'show_in_portal': {'key': 'properties.showInPortal', 'type': 'bool'},
-        'icon_path': {'key': 'properties.iconPath', 'type': 'str'},
-        'icon_index': {'key': 'properties.iconIndex', 'type': 'int'},
-        'icon_hash': {'key': 'properties.iconHash', 'type': 'str'},
-        'icon_content': {'key': 'properties.iconContent', 'type': 'bytearray'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "file_path": {"key": "properties.filePath", "type": "str"},
+        "msix_package_family_name": {"key": "properties.msixPackageFamilyName", "type": "str"},
+        "msix_package_application_id": {"key": "properties.msixPackageApplicationId", "type": "str"},
+        "application_type": {"key": "properties.applicationType", "type": "str"},
+        "command_line_setting": {"key": "properties.commandLineSetting", "type": "str"},
+        "command_line_arguments": {"key": "properties.commandLineArguments", "type": "str"},
+        "show_in_portal": {"key": "properties.showInPortal", "type": "bool"},
+        "icon_path": {"key": "properties.iconPath", "type": "str"},
+        "icon_index": {"key": "properties.iconIndex", "type": "int"},
+        "icon_hash": {"key": "properties.iconHash", "type": "str"},
+        "icon_content": {"key": "properties.iconContent", "type": "bytearray"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Application, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.file_path = kwargs.get('file_path', None)
-        self.msix_package_family_name = kwargs.get('msix_package_family_name', None)
-        self.msix_package_application_id = kwargs.get('msix_package_application_id', None)
-        self.application_type = kwargs.get('application_type', None)
-        self.command_line_setting = kwargs['command_line_setting']
-        self.command_line_arguments = kwargs.get('command_line_arguments', None)
-        self.show_in_portal = kwargs.get('show_in_portal', None)
-        self.icon_path = kwargs.get('icon_path', None)
-        self.icon_index = kwargs.get('icon_index', None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.file_path = kwargs.get("file_path", None)
+        self.msix_package_family_name = kwargs.get("msix_package_family_name", None)
+        self.msix_package_application_id = kwargs.get("msix_package_application_id", None)
+        self.application_type = kwargs.get("application_type", None)
+        self.command_line_setting = kwargs["command_line_setting"]
+        self.command_line_arguments = kwargs.get("command_line_arguments", None)
+        self.show_in_portal = kwargs.get("show_in_portal", None)
+        self.icon_path = kwargs.get("icon_path", None)
+        self.icon_index = kwargs.get("icon_index", None)
         self.icon_hash = None
         self.icon_content = None
 
@@ -194,43 +188,40 @@ class ResourceModelWithAllowedPropertySet(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'kind': {'pattern': r'^[-\w\._,\(\)]+$'},
-        'etag': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "kind": {"pattern": r"^[-\w\._,\(\)]+$"},
+        "etag": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'managed_by': {'key': 'managedBy', 'type': 'str'},
-        'kind': {'key': 'kind', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'identity', 'type': 'ResourceModelWithAllowedPropertySetIdentity'},
-        'sku': {'key': 'sku', 'type': 'ResourceModelWithAllowedPropertySetSku'},
-        'plan': {'key': 'plan', 'type': 'ResourceModelWithAllowedPropertySetPlan'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "managed_by": {"key": "managedBy", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "ResourceModelWithAllowedPropertySetIdentity"},
+        "sku": {"key": "sku", "type": "ResourceModelWithAllowedPropertySetSku"},
+        "plan": {"key": "plan", "type": "ResourceModelWithAllowedPropertySetPlan"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceModelWithAllowedPropertySet, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.location = kwargs.get('location', None)
-        self.managed_by = kwargs.get('managed_by', None)
-        self.kind = kwargs.get('kind', None)
+        self.location = kwargs.get("location", None)
+        self.managed_by = kwargs.get("managed_by", None)
+        self.kind = kwargs.get("kind", None)
         self.etag = None
-        self.tags = kwargs.get('tags', None)
-        self.identity = kwargs.get('identity', None)
-        self.sku = kwargs.get('sku', None)
-        self.plan = kwargs.get('plan', None)
+        self.tags = kwargs.get("tags", None)
+        self.identity = kwargs.get("identity", None)
+        self.sku = kwargs.get("sku", None)
+        self.plan = kwargs.get("plan", None)
 
 
 class ApplicationGroup(ResourceModelWithAllowedPropertySet):
@@ -297,55 +288,52 @@ class ApplicationGroup(ResourceModelWithAllowedPropertySet):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'kind': {'pattern': r'^[-\w\._,\(\)]+$'},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
-        'host_pool_arm_path': {'required': True},
-        'workspace_arm_path': {'readonly': True},
-        'application_group_type': {'required': True},
-        'cloud_pc_resource': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "kind": {"pattern": r"^[-\w\._,\(\)]+$"},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
+        "host_pool_arm_path": {"required": True},
+        "workspace_arm_path": {"readonly": True},
+        "application_group_type": {"required": True},
+        "cloud_pc_resource": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'managed_by': {'key': 'managedBy', 'type': 'str'},
-        'kind': {'key': 'kind', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'identity', 'type': 'ResourceModelWithAllowedPropertySetIdentity'},
-        'sku': {'key': 'sku', 'type': 'ResourceModelWithAllowedPropertySetSku'},
-        'plan': {'key': 'plan', 'type': 'ResourceModelWithAllowedPropertySetPlan'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'host_pool_arm_path': {'key': 'properties.hostPoolArmPath', 'type': 'str'},
-        'workspace_arm_path': {'key': 'properties.workspaceArmPath', 'type': 'str'},
-        'application_group_type': {'key': 'properties.applicationGroupType', 'type': 'str'},
-        'migration_request': {'key': 'properties.migrationRequest', 'type': 'MigrationRequestProperties'},
-        'cloud_pc_resource': {'key': 'properties.cloudPcResource', 'type': 'bool'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "managed_by": {"key": "managedBy", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "ResourceModelWithAllowedPropertySetIdentity"},
+        "sku": {"key": "sku", "type": "ResourceModelWithAllowedPropertySetSku"},
+        "plan": {"key": "plan", "type": "ResourceModelWithAllowedPropertySetPlan"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "host_pool_arm_path": {"key": "properties.hostPoolArmPath", "type": "str"},
+        "workspace_arm_path": {"key": "properties.workspaceArmPath", "type": "str"},
+        "application_group_type": {"key": "properties.applicationGroupType", "type": "str"},
+        "migration_request": {"key": "properties.migrationRequest", "type": "MigrationRequestProperties"},
+        "cloud_pc_resource": {"key": "properties.cloudPcResource", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationGroup, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.host_pool_arm_path = kwargs['host_pool_arm_path']
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.host_pool_arm_path = kwargs["host_pool_arm_path"]
         self.workspace_arm_path = None
-        self.application_group_type = kwargs['application_group_type']
-        self.migration_request = kwargs.get('migration_request', None)
+        self.application_group_type = kwargs["application_group_type"]
+        self.migration_request = kwargs.get("migration_request", None)
         self.cloud_pc_resource = None
 
 
@@ -361,20 +349,17 @@ class ApplicationGroupList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ApplicationGroup]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ApplicationGroup]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationGroupList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -400,28 +385,25 @@ class ApplicationGroupPatch(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationGroupPatch, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.tags = kwargs.get("tags", None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
 
 
 class ApplicationList(msrest.serialization.Model):
@@ -436,20 +418,17 @@ class ApplicationList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Application]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Application]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -488,37 +467,34 @@ class ApplicationPatch(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'file_path': {'key': 'properties.filePath', 'type': 'str'},
-        'command_line_setting': {'key': 'properties.commandLineSetting', 'type': 'str'},
-        'command_line_arguments': {'key': 'properties.commandLineArguments', 'type': 'str'},
-        'show_in_portal': {'key': 'properties.showInPortal', 'type': 'bool'},
-        'icon_path': {'key': 'properties.iconPath', 'type': 'str'},
-        'icon_index': {'key': 'properties.iconIndex', 'type': 'int'},
-        'msix_package_family_name': {'key': 'properties.msixPackageFamilyName', 'type': 'str'},
-        'msix_package_application_id': {'key': 'properties.msixPackageApplicationId', 'type': 'str'},
-        'application_type': {'key': 'properties.applicationType', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "file_path": {"key": "properties.filePath", "type": "str"},
+        "command_line_setting": {"key": "properties.commandLineSetting", "type": "str"},
+        "command_line_arguments": {"key": "properties.commandLineArguments", "type": "str"},
+        "show_in_portal": {"key": "properties.showInPortal", "type": "bool"},
+        "icon_path": {"key": "properties.iconPath", "type": "str"},
+        "icon_index": {"key": "properties.iconIndex", "type": "int"},
+        "msix_package_family_name": {"key": "properties.msixPackageFamilyName", "type": "str"},
+        "msix_package_application_id": {"key": "properties.msixPackageApplicationId", "type": "str"},
+        "application_type": {"key": "properties.applicationType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationPatch, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.file_path = kwargs.get('file_path', None)
-        self.command_line_setting = kwargs.get('command_line_setting', None)
-        self.command_line_arguments = kwargs.get('command_line_arguments', None)
-        self.show_in_portal = kwargs.get('show_in_portal', None)
-        self.icon_path = kwargs.get('icon_path', None)
-        self.icon_index = kwargs.get('icon_index', None)
-        self.msix_package_family_name = kwargs.get('msix_package_family_name', None)
-        self.msix_package_application_id = kwargs.get('msix_package_application_id', None)
-        self.application_type = kwargs.get('application_type', None)
+        self.tags = kwargs.get("tags", None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.file_path = kwargs.get("file_path", None)
+        self.command_line_setting = kwargs.get("command_line_setting", None)
+        self.command_line_arguments = kwargs.get("command_line_arguments", None)
+        self.show_in_portal = kwargs.get("show_in_portal", None)
+        self.icon_path = kwargs.get("icon_path", None)
+        self.icon_index = kwargs.get("icon_index", None)
+        self.msix_package_family_name = kwargs.get("msix_package_family_name", None)
+        self.msix_package_application_id = kwargs.get("msix_package_application_id", None)
+        self.application_type = kwargs.get("application_type", None)
 
 
 class CloudErrorProperties(msrest.serialization.Model):
@@ -531,17 +507,14 @@ class CloudErrorProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudErrorProperties, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
 
 
 class Desktop(Resource):
@@ -572,36 +545,33 @@ class Desktop(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
-        'icon_hash': {'readonly': True},
-        'icon_content': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
+        "icon_hash": {"readonly": True},
+        "icon_content": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'icon_hash': {'key': 'properties.iconHash', 'type': 'str'},
-        'icon_content': {'key': 'properties.iconContent', 'type': 'bytearray'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "icon_hash": {"key": "properties.iconHash", "type": "str"},
+        "icon_content": {"key": "properties.iconContent", "type": "bytearray"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Desktop, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
         self.icon_hash = None
         self.icon_content = None
 
@@ -618,20 +588,17 @@ class DesktopList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Desktop]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Desktop]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DesktopList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -647,19 +614,16 @@ class DesktopPatch(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DesktopPatch, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.tags = kwargs.get("tags", None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
 
 
 class ExpandMsixImage(Resource):
@@ -707,48 +671,45 @@ class ExpandMsixImage(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'package_alias': {'key': 'properties.packageAlias', 'type': 'str'},
-        'image_path': {'key': 'properties.imagePath', 'type': 'str'},
-        'package_name': {'key': 'properties.packageName', 'type': 'str'},
-        'package_family_name': {'key': 'properties.packageFamilyName', 'type': 'str'},
-        'package_full_name': {'key': 'properties.packageFullName', 'type': 'str'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'package_relative_path': {'key': 'properties.packageRelativePath', 'type': 'str'},
-        'is_regular_registration': {'key': 'properties.isRegularRegistration', 'type': 'bool'},
-        'is_active': {'key': 'properties.isActive', 'type': 'bool'},
-        'package_dependencies': {'key': 'properties.packageDependencies', 'type': '[MsixPackageDependencies]'},
-        'version': {'key': 'properties.version', 'type': 'str'},
-        'last_updated': {'key': 'properties.lastUpdated', 'type': 'iso-8601'},
-        'package_applications': {'key': 'properties.packageApplications', 'type': '[MsixPackageApplications]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "package_alias": {"key": "properties.packageAlias", "type": "str"},
+        "image_path": {"key": "properties.imagePath", "type": "str"},
+        "package_name": {"key": "properties.packageName", "type": "str"},
+        "package_family_name": {"key": "properties.packageFamilyName", "type": "str"},
+        "package_full_name": {"key": "properties.packageFullName", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "package_relative_path": {"key": "properties.packageRelativePath", "type": "str"},
+        "is_regular_registration": {"key": "properties.isRegularRegistration", "type": "bool"},
+        "is_active": {"key": "properties.isActive", "type": "bool"},
+        "package_dependencies": {"key": "properties.packageDependencies", "type": "[MsixPackageDependencies]"},
+        "version": {"key": "properties.version", "type": "str"},
+        "last_updated": {"key": "properties.lastUpdated", "type": "iso-8601"},
+        "package_applications": {"key": "properties.packageApplications", "type": "[MsixPackageApplications]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExpandMsixImage, self).__init__(**kwargs)
-        self.package_alias = kwargs.get('package_alias', None)
-        self.image_path = kwargs.get('image_path', None)
-        self.package_name = kwargs.get('package_name', None)
-        self.package_family_name = kwargs.get('package_family_name', None)
-        self.package_full_name = kwargs.get('package_full_name', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.package_relative_path = kwargs.get('package_relative_path', None)
-        self.is_regular_registration = kwargs.get('is_regular_registration', None)
-        self.is_active = kwargs.get('is_active', None)
-        self.package_dependencies = kwargs.get('package_dependencies', None)
-        self.version = kwargs.get('version', None)
-        self.last_updated = kwargs.get('last_updated', None)
-        self.package_applications = kwargs.get('package_applications', None)
+        self.package_alias = kwargs.get("package_alias", None)
+        self.image_path = kwargs.get("image_path", None)
+        self.package_name = kwargs.get("package_name", None)
+        self.package_family_name = kwargs.get("package_family_name", None)
+        self.package_full_name = kwargs.get("package_full_name", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.package_relative_path = kwargs.get("package_relative_path", None)
+        self.is_regular_registration = kwargs.get("is_regular_registration", None)
+        self.is_active = kwargs.get("is_active", None)
+        self.package_dependencies = kwargs.get("package_dependencies", None)
+        self.version = kwargs.get("version", None)
+        self.last_updated = kwargs.get("last_updated", None)
+        self.package_applications = kwargs.get("package_applications", None)
 
 
 class ExpandMsixImageList(msrest.serialization.Model):
@@ -763,20 +724,17 @@ class ExpandMsixImageList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ExpandMsixImage]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ExpandMsixImage]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExpandMsixImageList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -883,85 +841,82 @@ class HostPool(ResourceModelWithAllowedPropertySet):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'kind': {'pattern': r'^[-\w\._,\(\)]+$'},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
-        'host_pool_type': {'required': True},
-        'load_balancer_type': {'required': True},
-        'application_group_references': {'readonly': True},
-        'preferred_app_group_type': {'required': True},
-        'cloud_pc_resource': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "kind": {"pattern": r"^[-\w\._,\(\)]+$"},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
+        "host_pool_type": {"required": True},
+        "load_balancer_type": {"required": True},
+        "application_group_references": {"readonly": True},
+        "preferred_app_group_type": {"required": True},
+        "cloud_pc_resource": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'managed_by': {'key': 'managedBy', 'type': 'str'},
-        'kind': {'key': 'kind', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'identity', 'type': 'ResourceModelWithAllowedPropertySetIdentity'},
-        'sku': {'key': 'sku', 'type': 'ResourceModelWithAllowedPropertySetSku'},
-        'plan': {'key': 'plan', 'type': 'ResourceModelWithAllowedPropertySetPlan'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'host_pool_type': {'key': 'properties.hostPoolType', 'type': 'str'},
-        'personal_desktop_assignment_type': {'key': 'properties.personalDesktopAssignmentType', 'type': 'str'},
-        'custom_rdp_property': {'key': 'properties.customRdpProperty', 'type': 'str'},
-        'max_session_limit': {'key': 'properties.maxSessionLimit', 'type': 'int'},
-        'load_balancer_type': {'key': 'properties.loadBalancerType', 'type': 'str'},
-        'ring': {'key': 'properties.ring', 'type': 'int'},
-        'validation_environment': {'key': 'properties.validationEnvironment', 'type': 'bool'},
-        'registration_info': {'key': 'properties.registrationInfo', 'type': 'RegistrationInfo'},
-        'vm_template': {'key': 'properties.vmTemplate', 'type': 'str'},
-        'application_group_references': {'key': 'properties.applicationGroupReferences', 'type': '[str]'},
-        'ssoadfs_authority': {'key': 'properties.ssoadfsAuthority', 'type': 'str'},
-        'sso_client_id': {'key': 'properties.ssoClientId', 'type': 'str'},
-        'sso_client_secret_key_vault_path': {'key': 'properties.ssoClientSecretKeyVaultPath', 'type': 'str'},
-        'sso_secret_type': {'key': 'properties.ssoSecretType', 'type': 'str'},
-        'preferred_app_group_type': {'key': 'properties.preferredAppGroupType', 'type': 'str'},
-        'start_vm_on_connect': {'key': 'properties.startVMOnConnect', 'type': 'bool'},
-        'migration_request': {'key': 'properties.migrationRequest', 'type': 'MigrationRequestProperties'},
-        'cloud_pc_resource': {'key': 'properties.cloudPcResource', 'type': 'bool'},
-        'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "managed_by": {"key": "managedBy", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "ResourceModelWithAllowedPropertySetIdentity"},
+        "sku": {"key": "sku", "type": "ResourceModelWithAllowedPropertySetSku"},
+        "plan": {"key": "plan", "type": "ResourceModelWithAllowedPropertySetPlan"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "host_pool_type": {"key": "properties.hostPoolType", "type": "str"},
+        "personal_desktop_assignment_type": {"key": "properties.personalDesktopAssignmentType", "type": "str"},
+        "custom_rdp_property": {"key": "properties.customRdpProperty", "type": "str"},
+        "max_session_limit": {"key": "properties.maxSessionLimit", "type": "int"},
+        "load_balancer_type": {"key": "properties.loadBalancerType", "type": "str"},
+        "ring": {"key": "properties.ring", "type": "int"},
+        "validation_environment": {"key": "properties.validationEnvironment", "type": "bool"},
+        "registration_info": {"key": "properties.registrationInfo", "type": "RegistrationInfo"},
+        "vm_template": {"key": "properties.vmTemplate", "type": "str"},
+        "application_group_references": {"key": "properties.applicationGroupReferences", "type": "[str]"},
+        "ssoadfs_authority": {"key": "properties.ssoadfsAuthority", "type": "str"},
+        "sso_client_id": {"key": "properties.ssoClientId", "type": "str"},
+        "sso_client_secret_key_vault_path": {"key": "properties.ssoClientSecretKeyVaultPath", "type": "str"},
+        "sso_secret_type": {"key": "properties.ssoSecretType", "type": "str"},
+        "preferred_app_group_type": {"key": "properties.preferredAppGroupType", "type": "str"},
+        "start_vm_on_connect": {"key": "properties.startVMOnConnect", "type": "bool"},
+        "migration_request": {"key": "properties.migrationRequest", "type": "MigrationRequestProperties"},
+        "cloud_pc_resource": {"key": "properties.cloudPcResource", "type": "bool"},
+        "public_network_access": {"key": "properties.publicNetworkAccess", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HostPool, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.description = kwargs.get('description', None)
-        self.host_pool_type = kwargs['host_pool_type']
-        self.personal_desktop_assignment_type = kwargs.get('personal_desktop_assignment_type', None)
-        self.custom_rdp_property = kwargs.get('custom_rdp_property', None)
-        self.max_session_limit = kwargs.get('max_session_limit', None)
-        self.load_balancer_type = kwargs['load_balancer_type']
-        self.ring = kwargs.get('ring', None)
-        self.validation_environment = kwargs.get('validation_environment', None)
-        self.registration_info = kwargs.get('registration_info', None)
-        self.vm_template = kwargs.get('vm_template', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.description = kwargs.get("description", None)
+        self.host_pool_type = kwargs["host_pool_type"]
+        self.personal_desktop_assignment_type = kwargs.get("personal_desktop_assignment_type", None)
+        self.custom_rdp_property = kwargs.get("custom_rdp_property", None)
+        self.max_session_limit = kwargs.get("max_session_limit", None)
+        self.load_balancer_type = kwargs["load_balancer_type"]
+        self.ring = kwargs.get("ring", None)
+        self.validation_environment = kwargs.get("validation_environment", None)
+        self.registration_info = kwargs.get("registration_info", None)
+        self.vm_template = kwargs.get("vm_template", None)
         self.application_group_references = None
-        self.ssoadfs_authority = kwargs.get('ssoadfs_authority', None)
-        self.sso_client_id = kwargs.get('sso_client_id', None)
-        self.sso_client_secret_key_vault_path = kwargs.get('sso_client_secret_key_vault_path', None)
-        self.sso_secret_type = kwargs.get('sso_secret_type', None)
-        self.preferred_app_group_type = kwargs['preferred_app_group_type']
-        self.start_vm_on_connect = kwargs.get('start_vm_on_connect', None)
-        self.migration_request = kwargs.get('migration_request', None)
+        self.ssoadfs_authority = kwargs.get("ssoadfs_authority", None)
+        self.sso_client_id = kwargs.get("sso_client_id", None)
+        self.sso_client_secret_key_vault_path = kwargs.get("sso_client_secret_key_vault_path", None)
+        self.sso_secret_type = kwargs.get("sso_secret_type", None)
+        self.preferred_app_group_type = kwargs["preferred_app_group_type"]
+        self.start_vm_on_connect = kwargs.get("start_vm_on_connect", None)
+        self.migration_request = kwargs.get("migration_request", None)
         self.cloud_pc_resource = None
-        self.public_network_access = kwargs.get('public_network_access', None)
+        self.public_network_access = kwargs.get("public_network_access", None)
 
 
 class HostPoolList(msrest.serialization.Model):
@@ -976,20 +931,17 @@ class HostPoolList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[HostPool]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[HostPool]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HostPoolList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1055,58 +1007,55 @@ class HostPoolPatch(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'custom_rdp_property': {'key': 'properties.customRdpProperty', 'type': 'str'},
-        'max_session_limit': {'key': 'properties.maxSessionLimit', 'type': 'int'},
-        'personal_desktop_assignment_type': {'key': 'properties.personalDesktopAssignmentType', 'type': 'str'},
-        'load_balancer_type': {'key': 'properties.loadBalancerType', 'type': 'str'},
-        'ring': {'key': 'properties.ring', 'type': 'int'},
-        'validation_environment': {'key': 'properties.validationEnvironment', 'type': 'bool'},
-        'registration_info': {'key': 'properties.registrationInfo', 'type': 'RegistrationInfoPatch'},
-        'vm_template': {'key': 'properties.vmTemplate', 'type': 'str'},
-        'ssoadfs_authority': {'key': 'properties.ssoadfsAuthority', 'type': 'str'},
-        'sso_client_id': {'key': 'properties.ssoClientId', 'type': 'str'},
-        'sso_client_secret_key_vault_path': {'key': 'properties.ssoClientSecretKeyVaultPath', 'type': 'str'},
-        'sso_secret_type': {'key': 'properties.ssoSecretType', 'type': 'str'},
-        'preferred_app_group_type': {'key': 'properties.preferredAppGroupType', 'type': 'str'},
-        'start_vm_on_connect': {'key': 'properties.startVMOnConnect', 'type': 'bool'},
-        'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "custom_rdp_property": {"key": "properties.customRdpProperty", "type": "str"},
+        "max_session_limit": {"key": "properties.maxSessionLimit", "type": "int"},
+        "personal_desktop_assignment_type": {"key": "properties.personalDesktopAssignmentType", "type": "str"},
+        "load_balancer_type": {"key": "properties.loadBalancerType", "type": "str"},
+        "ring": {"key": "properties.ring", "type": "int"},
+        "validation_environment": {"key": "properties.validationEnvironment", "type": "bool"},
+        "registration_info": {"key": "properties.registrationInfo", "type": "RegistrationInfoPatch"},
+        "vm_template": {"key": "properties.vmTemplate", "type": "str"},
+        "ssoadfs_authority": {"key": "properties.ssoadfsAuthority", "type": "str"},
+        "sso_client_id": {"key": "properties.ssoClientId", "type": "str"},
+        "sso_client_secret_key_vault_path": {"key": "properties.ssoClientSecretKeyVaultPath", "type": "str"},
+        "sso_secret_type": {"key": "properties.ssoSecretType", "type": "str"},
+        "preferred_app_group_type": {"key": "properties.preferredAppGroupType", "type": "str"},
+        "start_vm_on_connect": {"key": "properties.startVMOnConnect", "type": "bool"},
+        "public_network_access": {"key": "properties.publicNetworkAccess", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HostPoolPatch, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.description = kwargs.get('description', None)
-        self.custom_rdp_property = kwargs.get('custom_rdp_property', None)
-        self.max_session_limit = kwargs.get('max_session_limit', None)
-        self.personal_desktop_assignment_type = kwargs.get('personal_desktop_assignment_type', None)
-        self.load_balancer_type = kwargs.get('load_balancer_type', None)
-        self.ring = kwargs.get('ring', None)
-        self.validation_environment = kwargs.get('validation_environment', None)
-        self.registration_info = kwargs.get('registration_info', None)
-        self.vm_template = kwargs.get('vm_template', None)
-        self.ssoadfs_authority = kwargs.get('ssoadfs_authority', None)
-        self.sso_client_id = kwargs.get('sso_client_id', None)
-        self.sso_client_secret_key_vault_path = kwargs.get('sso_client_secret_key_vault_path', None)
-        self.sso_secret_type = kwargs.get('sso_secret_type', None)
-        self.preferred_app_group_type = kwargs.get('preferred_app_group_type', None)
-        self.start_vm_on_connect = kwargs.get('start_vm_on_connect', None)
-        self.public_network_access = kwargs.get('public_network_access', None)
+        self.tags = kwargs.get("tags", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.description = kwargs.get("description", None)
+        self.custom_rdp_property = kwargs.get("custom_rdp_property", None)
+        self.max_session_limit = kwargs.get("max_session_limit", None)
+        self.personal_desktop_assignment_type = kwargs.get("personal_desktop_assignment_type", None)
+        self.load_balancer_type = kwargs.get("load_balancer_type", None)
+        self.ring = kwargs.get("ring", None)
+        self.validation_environment = kwargs.get("validation_environment", None)
+        self.registration_info = kwargs.get("registration_info", None)
+        self.vm_template = kwargs.get("vm_template", None)
+        self.ssoadfs_authority = kwargs.get("ssoadfs_authority", None)
+        self.sso_client_id = kwargs.get("sso_client_id", None)
+        self.sso_client_secret_key_vault_path = kwargs.get("sso_client_secret_key_vault_path", None)
+        self.sso_secret_type = kwargs.get("sso_secret_type", None)
+        self.preferred_app_group_type = kwargs.get("preferred_app_group_type", None)
+        self.start_vm_on_connect = kwargs.get("start_vm_on_connect", None)
+        self.public_network_access = kwargs.get("public_network_access", None)
 
 
 class Identity(msrest.serialization.Model):
@@ -1124,24 +1073,21 @@ class Identity(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'tenant_id': {'readonly': True},
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Identity, self).__init__(**kwargs)
         self.principal_id = None
         self.tenant_id = None
-        self.type = kwargs.get('type', None)
+        self.type = kwargs.get("type", None)
 
 
 class LogSpecification(msrest.serialization.Model):
@@ -1156,19 +1102,16 @@ class LogSpecification(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'blob_duration': {'key': 'blobDuration', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "blob_duration": {"key": "blobDuration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LogSpecification, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.blob_duration = kwargs.get('blob_duration', None)
+        self.name = kwargs.get("name", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.blob_duration = kwargs.get("blob_duration", None)
 
 
 class MigrationRequestProperties(msrest.serialization.Model):
@@ -1182,17 +1125,14 @@ class MigrationRequestProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'operation': {'key': 'operation', 'type': 'str'},
-        'migration_path': {'key': 'migrationPath', 'type': 'str'},
+        "operation": {"key": "operation", "type": "str"},
+        "migration_path": {"key": "migrationPath", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationRequestProperties, self).__init__(**kwargs)
-        self.operation = kwargs.get('operation', None)
-        self.migration_path = kwargs.get('migration_path', None)
+        self.operation = kwargs.get("operation", None)
+        self.migration_path = kwargs.get("migration_path", None)
 
 
 class MSIXImageURI(msrest.serialization.Model):
@@ -1203,15 +1143,12 @@ class MSIXImageURI(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'uri': {'key': 'uri', 'type': 'str'},
+        "uri": {"key": "uri", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MSIXImageURI, self).__init__(**kwargs)
-        self.uri = kwargs.get('uri', None)
+        self.uri = kwargs.get("uri", None)
 
 
 class MSIXPackage(Resource):
@@ -1257,47 +1194,44 @@ class MSIXPackage(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'image_path': {'key': 'properties.imagePath', 'type': 'str'},
-        'package_name': {'key': 'properties.packageName', 'type': 'str'},
-        'package_family_name': {'key': 'properties.packageFamilyName', 'type': 'str'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'package_relative_path': {'key': 'properties.packageRelativePath', 'type': 'str'},
-        'is_regular_registration': {'key': 'properties.isRegularRegistration', 'type': 'bool'},
-        'is_active': {'key': 'properties.isActive', 'type': 'bool'},
-        'package_dependencies': {'key': 'properties.packageDependencies', 'type': '[MsixPackageDependencies]'},
-        'version': {'key': 'properties.version', 'type': 'str'},
-        'last_updated': {'key': 'properties.lastUpdated', 'type': 'iso-8601'},
-        'package_applications': {'key': 'properties.packageApplications', 'type': '[MsixPackageApplications]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "image_path": {"key": "properties.imagePath", "type": "str"},
+        "package_name": {"key": "properties.packageName", "type": "str"},
+        "package_family_name": {"key": "properties.packageFamilyName", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "package_relative_path": {"key": "properties.packageRelativePath", "type": "str"},
+        "is_regular_registration": {"key": "properties.isRegularRegistration", "type": "bool"},
+        "is_active": {"key": "properties.isActive", "type": "bool"},
+        "package_dependencies": {"key": "properties.packageDependencies", "type": "[MsixPackageDependencies]"},
+        "version": {"key": "properties.version", "type": "str"},
+        "last_updated": {"key": "properties.lastUpdated", "type": "iso-8601"},
+        "package_applications": {"key": "properties.packageApplications", "type": "[MsixPackageApplications]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MSIXPackage, self).__init__(**kwargs)
         self.system_data = None
-        self.image_path = kwargs.get('image_path', None)
-        self.package_name = kwargs.get('package_name', None)
-        self.package_family_name = kwargs.get('package_family_name', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.package_relative_path = kwargs.get('package_relative_path', None)
-        self.is_regular_registration = kwargs.get('is_regular_registration', None)
-        self.is_active = kwargs.get('is_active', None)
-        self.package_dependencies = kwargs.get('package_dependencies', None)
-        self.version = kwargs.get('version', None)
-        self.last_updated = kwargs.get('last_updated', None)
-        self.package_applications = kwargs.get('package_applications', None)
+        self.image_path = kwargs.get("image_path", None)
+        self.package_name = kwargs.get("package_name", None)
+        self.package_family_name = kwargs.get("package_family_name", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.package_relative_path = kwargs.get("package_relative_path", None)
+        self.is_regular_registration = kwargs.get("is_regular_registration", None)
+        self.is_active = kwargs.get("is_active", None)
+        self.package_dependencies = kwargs.get("package_dependencies", None)
+        self.version = kwargs.get("version", None)
+        self.last_updated = kwargs.get("last_updated", None)
+        self.package_applications = kwargs.get("package_applications", None)
 
 
 class MsixPackageApplications(msrest.serialization.Model):
@@ -1321,27 +1255,24 @@ class MsixPackageApplications(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'app_id': {'key': 'appId', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'app_user_model_id': {'key': 'appUserModelID', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'icon_image_name': {'key': 'iconImageName', 'type': 'str'},
-        'raw_icon': {'key': 'rawIcon', 'type': 'bytearray'},
-        'raw_png': {'key': 'rawPng', 'type': 'bytearray'},
+        "app_id": {"key": "appId", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "app_user_model_id": {"key": "appUserModelID", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "icon_image_name": {"key": "iconImageName", "type": "str"},
+        "raw_icon": {"key": "rawIcon", "type": "bytearray"},
+        "raw_png": {"key": "rawPng", "type": "bytearray"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MsixPackageApplications, self).__init__(**kwargs)
-        self.app_id = kwargs.get('app_id', None)
-        self.description = kwargs.get('description', None)
-        self.app_user_model_id = kwargs.get('app_user_model_id', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.icon_image_name = kwargs.get('icon_image_name', None)
-        self.raw_icon = kwargs.get('raw_icon', None)
-        self.raw_png = kwargs.get('raw_png', None)
+        self.app_id = kwargs.get("app_id", None)
+        self.description = kwargs.get("description", None)
+        self.app_user_model_id = kwargs.get("app_user_model_id", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.icon_image_name = kwargs.get("icon_image_name", None)
+        self.raw_icon = kwargs.get("raw_icon", None)
+        self.raw_png = kwargs.get("raw_png", None)
 
 
 class MsixPackageDependencies(msrest.serialization.Model):
@@ -1356,19 +1287,16 @@ class MsixPackageDependencies(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'dependency_name': {'key': 'dependencyName', 'type': 'str'},
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'min_version': {'key': 'minVersion', 'type': 'str'},
+        "dependency_name": {"key": "dependencyName", "type": "str"},
+        "publisher": {"key": "publisher", "type": "str"},
+        "min_version": {"key": "minVersion", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MsixPackageDependencies, self).__init__(**kwargs)
-        self.dependency_name = kwargs.get('dependency_name', None)
-        self.publisher = kwargs.get('publisher', None)
-        self.min_version = kwargs.get('min_version', None)
+        self.dependency_name = kwargs.get("dependency_name", None)
+        self.publisher = kwargs.get("publisher", None)
+        self.min_version = kwargs.get("min_version", None)
 
 
 class MSIXPackageList(msrest.serialization.Model):
@@ -1383,20 +1311,17 @@ class MSIXPackageList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[MSIXPackage]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[MSIXPackage]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MSIXPackageList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1422,28 +1347,25 @@ class MSIXPackagePatch(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'is_active': {'key': 'properties.isActive', 'type': 'bool'},
-        'is_regular_registration': {'key': 'properties.isRegularRegistration', 'type': 'bool'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "is_active": {"key": "properties.isActive", "type": "bool"},
+        "is_regular_registration": {"key": "properties.isRegularRegistration", "type": "bool"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MSIXPackagePatch, self).__init__(**kwargs)
-        self.is_active = kwargs.get('is_active', None)
-        self.is_regular_registration = kwargs.get('is_regular_registration', None)
-        self.display_name = kwargs.get('display_name', None)
+        self.is_active = kwargs.get("is_active", None)
+        self.is_regular_registration = kwargs.get("is_regular_registration", None)
+        self.display_name = kwargs.get("display_name", None)
 
 
 class OperationProperties(msrest.serialization.Model):
@@ -1454,15 +1376,12 @@ class OperationProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'service_specification': {'key': 'serviceSpecification', 'type': 'ServiceSpecification'},
+        "service_specification": {"key": "serviceSpecification", "type": "ServiceSpecification"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationProperties, self).__init__(**kwargs)
-        self.service_specification = kwargs.get('service_specification', None)
+        self.service_specification = kwargs.get("service_specification", None)
 
 
 class Plan(msrest.serialization.Model):
@@ -1486,29 +1405,26 @@ class Plan(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
-        'publisher': {'required': True},
-        'product': {'required': True},
+        "name": {"required": True},
+        "publisher": {"required": True},
+        "product": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'product': {'key': 'product', 'type': 'str'},
-        'promotion_code': {'key': 'promotionCode', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "publisher": {"key": "publisher", "type": "str"},
+        "product": {"key": "product", "type": "str"},
+        "promotion_code": {"key": "promotionCode", "type": "str"},
+        "version": {"key": "version", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Plan, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.publisher = kwargs['publisher']
-        self.product = kwargs['product']
-        self.promotion_code = kwargs.get('promotion_code', None)
-        self.version = kwargs.get('version', None)
+        self.name = kwargs["name"]
+        self.publisher = kwargs["publisher"]
+        self.product = kwargs["product"]
+        self.promotion_code = kwargs.get("promotion_code", None)
+        self.version = kwargs.get("version", None)
 
 
 class PrivateEndpoint(msrest.serialization.Model):
@@ -1521,17 +1437,14 @@ class PrivateEndpoint(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
+        "id": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateEndpoint, self).__init__(**kwargs)
         self.id = None
 
@@ -1562,28 +1475,28 @@ class PrivateEndpointConnection(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'private_endpoint': {'key': 'properties.privateEndpoint', 'type': 'PrivateEndpoint'},
-        'private_link_service_connection_state': {'key': 'properties.privateLinkServiceConnectionState', 'type': 'PrivateLinkServiceConnectionState'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "private_endpoint": {"key": "properties.privateEndpoint", "type": "PrivateEndpoint"},
+        "private_link_service_connection_state": {
+            "key": "properties.privateLinkServiceConnectionState",
+            "type": "PrivateLinkServiceConnectionState",
+        },
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateEndpointConnection, self).__init__(**kwargs)
-        self.private_endpoint = kwargs.get('private_endpoint', None)
-        self.private_link_service_connection_state = kwargs.get('private_link_service_connection_state', None)
-        self.provisioning_state = kwargs.get('provisioning_state', None)
+        self.private_endpoint = kwargs.get("private_endpoint", None)
+        self.private_link_service_connection_state = kwargs.get("private_link_service_connection_state", None)
+        self.provisioning_state = kwargs.get("provisioning_state", None)
 
 
 class PrivateEndpointConnectionListResultWithSystemData(msrest.serialization.Model):
@@ -1599,20 +1512,17 @@ class PrivateEndpointConnectionListResultWithSystemData(msrest.serialization.Mod
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PrivateEndpointConnectionWithSystemData]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[PrivateEndpointConnectionWithSystemData]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateEndpointConnectionListResultWithSystemData, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1644,26 +1554,26 @@ class PrivateEndpointConnectionWithSystemData(PrivateEndpointConnection):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'private_endpoint': {'key': 'properties.privateEndpoint', 'type': 'PrivateEndpoint'},
-        'private_link_service_connection_state': {'key': 'properties.privateLinkServiceConnectionState', 'type': 'PrivateLinkServiceConnectionState'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "private_endpoint": {"key": "properties.privateEndpoint", "type": "PrivateEndpoint"},
+        "private_link_service_connection_state": {
+            "key": "properties.privateLinkServiceConnectionState",
+            "type": "PrivateLinkServiceConnectionState",
+        },
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateEndpointConnectionWithSystemData, self).__init__(**kwargs)
         self.system_data = None
 
@@ -1690,30 +1600,27 @@ class PrivateLinkResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'group_id': {'readonly': True},
-        'required_members': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "group_id": {"readonly": True},
+        "required_members": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'group_id': {'key': 'properties.groupId', 'type': 'str'},
-        'required_members': {'key': 'properties.requiredMembers', 'type': '[str]'},
-        'required_zone_names': {'key': 'properties.requiredZoneNames', 'type': '[str]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "group_id": {"key": "properties.groupId", "type": "str"},
+        "required_members": {"key": "properties.requiredMembers", "type": "[str]"},
+        "required_zone_names": {"key": "properties.requiredZoneNames", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateLinkResource, self).__init__(**kwargs)
         self.group_id = None
         self.required_members = None
-        self.required_zone_names = kwargs.get('required_zone_names', None)
+        self.required_zone_names = kwargs.get("required_zone_names", None)
 
 
 class PrivateLinkResourceListResult(msrest.serialization.Model):
@@ -1728,20 +1635,17 @@ class PrivateLinkResourceListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PrivateLinkResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[PrivateLinkResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateLinkResourceListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1760,19 +1664,16 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'actions_required': {'key': 'actionsRequired', 'type': 'str'},
+        "status": {"key": "status", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "actions_required": {"key": "actionsRequired", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateLinkServiceConnectionState, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.description = kwargs.get('description', None)
-        self.actions_required = kwargs.get('actions_required', None)
+        self.status = kwargs.get("status", None)
+        self.description = kwargs.get("description", None)
+        self.actions_required = kwargs.get("actions_required", None)
 
 
 class RegistrationInfo(msrest.serialization.Model):
@@ -1789,19 +1690,16 @@ class RegistrationInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'expiration_time': {'key': 'expirationTime', 'type': 'iso-8601'},
-        'token': {'key': 'token', 'type': 'str'},
-        'registration_token_operation': {'key': 'registrationTokenOperation', 'type': 'str'},
+        "expiration_time": {"key": "expirationTime", "type": "iso-8601"},
+        "token": {"key": "token", "type": "str"},
+        "registration_token_operation": {"key": "registrationTokenOperation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RegistrationInfo, self).__init__(**kwargs)
-        self.expiration_time = kwargs.get('expiration_time', None)
-        self.token = kwargs.get('token', None)
-        self.registration_token_operation = kwargs.get('registration_token_operation', None)
+        self.expiration_time = kwargs.get("expiration_time", None)
+        self.token = kwargs.get("token", None)
+        self.registration_token_operation = kwargs.get("registration_token_operation", None)
 
 
 class RegistrationInfoPatch(msrest.serialization.Model):
@@ -1816,17 +1714,14 @@ class RegistrationInfoPatch(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'expiration_time': {'key': 'expirationTime', 'type': 'iso-8601'},
-        'registration_token_operation': {'key': 'registrationTokenOperation', 'type': 'str'},
+        "expiration_time": {"key": "expirationTime", "type": "iso-8601"},
+        "registration_token_operation": {"key": "registrationTokenOperation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RegistrationInfoPatch, self).__init__(**kwargs)
-        self.expiration_time = kwargs.get('expiration_time', None)
-        self.registration_token_operation = kwargs.get('registration_token_operation', None)
+        self.expiration_time = kwargs.get("expiration_time", None)
+        self.registration_token_operation = kwargs.get("registration_token_operation", None)
 
 
 class ResourceModelWithAllowedPropertySetIdentity(Identity):
@@ -1844,20 +1739,17 @@ class ResourceModelWithAllowedPropertySetIdentity(Identity):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'tenant_id': {'readonly': True},
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceModelWithAllowedPropertySetIdentity, self).__init__(**kwargs)
 
 
@@ -1882,23 +1774,20 @@ class ResourceModelWithAllowedPropertySetPlan(Plan):
     """
 
     _validation = {
-        'name': {'required': True},
-        'publisher': {'required': True},
-        'product': {'required': True},
+        "name": {"required": True},
+        "publisher": {"required": True},
+        "product": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'product': {'key': 'product', 'type': 'str'},
-        'promotion_code': {'key': 'promotionCode', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "publisher": {"key": "publisher", "type": "str"},
+        "product": {"key": "product", "type": "str"},
+        "promotion_code": {"key": "promotionCode", "type": "str"},
+        "version": {"key": "version", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceModelWithAllowedPropertySetPlan, self).__init__(**kwargs)
 
 
@@ -1925,27 +1814,24 @@ class Sku(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
+        "name": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'tier': {'key': 'tier', 'type': 'str'},
-        'size': {'key': 'size', 'type': 'str'},
-        'family': {'key': 'family', 'type': 'str'},
-        'capacity': {'key': 'capacity', 'type': 'int'},
+        "name": {"key": "name", "type": "str"},
+        "tier": {"key": "tier", "type": "str"},
+        "size": {"key": "size", "type": "str"},
+        "family": {"key": "family", "type": "str"},
+        "capacity": {"key": "capacity", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Sku, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.tier = kwargs.get('tier', None)
-        self.size = kwargs.get('size', None)
-        self.family = kwargs.get('family', None)
-        self.capacity = kwargs.get('capacity', None)
+        self.name = kwargs["name"]
+        self.tier = kwargs.get("tier", None)
+        self.size = kwargs.get("size", None)
+        self.family = kwargs.get("family", None)
+        self.capacity = kwargs.get("capacity", None)
 
 
 class ResourceModelWithAllowedPropertySetSku(Sku):
@@ -1971,21 +1857,18 @@ class ResourceModelWithAllowedPropertySetSku(Sku):
     """
 
     _validation = {
-        'name': {'required': True},
+        "name": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'tier': {'key': 'tier', 'type': 'str'},
-        'size': {'key': 'size', 'type': 'str'},
-        'family': {'key': 'family', 'type': 'str'},
-        'capacity': {'key': 'capacity', 'type': 'int'},
+        "name": {"key": "name", "type": "str"},
+        "tier": {"key": "tier", "type": "str"},
+        "size": {"key": "size", "type": "str"},
+        "family": {"key": "family", "type": "str"},
+        "capacity": {"key": "capacity", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceModelWithAllowedPropertySetSku, self).__init__(**kwargs)
 
 
@@ -2003,21 +1886,18 @@ class ResourceProviderOperation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'ResourceProviderOperationDisplay'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'properties': {'key': 'properties', 'type': 'OperationProperties'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "ResourceProviderOperationDisplay"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "properties": {"key": "properties", "type": "OperationProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceProviderOperation, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display = kwargs.get('display', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
-        self.properties = kwargs.get('properties', None)
+        self.name = kwargs.get("name", None)
+        self.display = kwargs.get("display", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ResourceProviderOperationDisplay(msrest.serialization.Model):
@@ -2034,21 +1914,18 @@ class ResourceProviderOperationDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceProviderOperationDisplay, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class ResourceProviderOperationList(msrest.serialization.Model):
@@ -2063,20 +1940,17 @@ class ResourceProviderOperationList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ResourceProviderOperation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ResourceProviderOperation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceProviderOperationList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -2090,17 +1964,14 @@ class ScalingHostPoolReference(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'host_pool_arm_path': {'key': 'hostPoolArmPath', 'type': 'str'},
-        'scaling_plan_enabled': {'key': 'scalingPlanEnabled', 'type': 'bool'},
+        "host_pool_arm_path": {"key": "hostPoolArmPath", "type": "str"},
+        "scaling_plan_enabled": {"key": "scalingPlanEnabled", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScalingHostPoolReference, self).__init__(**kwargs)
-        self.host_pool_arm_path = kwargs.get('host_pool_arm_path', None)
-        self.scaling_plan_enabled = kwargs.get('scaling_plan_enabled', None)
+        self.host_pool_arm_path = kwargs.get("host_pool_arm_path", None)
+        self.scaling_plan_enabled = kwargs.get("scaling_plan_enabled", None)
 
 
 class ScalingPlan(ResourceModelWithAllowedPropertySet):
@@ -2164,52 +2035,49 @@ class ScalingPlan(ResourceModelWithAllowedPropertySet):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'kind': {'pattern': r'^[-\w\._,\(\)]+$'},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "kind": {"pattern": r"^[-\w\._,\(\)]+$"},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'managed_by': {'key': 'managedBy', 'type': 'str'},
-        'kind': {'key': 'kind', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'identity', 'type': 'ResourceModelWithAllowedPropertySetIdentity'},
-        'sku': {'key': 'sku', 'type': 'ResourceModelWithAllowedPropertySetSku'},
-        'plan': {'key': 'plan', 'type': 'ResourceModelWithAllowedPropertySetPlan'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'time_zone': {'key': 'properties.timeZone', 'type': 'str'},
-        'host_pool_type': {'key': 'properties.hostPoolType', 'type': 'str'},
-        'exclusion_tag': {'key': 'properties.exclusionTag', 'type': 'str'},
-        'schedules': {'key': 'properties.schedules', 'type': '[ScalingSchedule]'},
-        'host_pool_references': {'key': 'properties.hostPoolReferences', 'type': '[ScalingHostPoolReference]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "managed_by": {"key": "managedBy", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "ResourceModelWithAllowedPropertySetIdentity"},
+        "sku": {"key": "sku", "type": "ResourceModelWithAllowedPropertySetSku"},
+        "plan": {"key": "plan", "type": "ResourceModelWithAllowedPropertySetPlan"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "time_zone": {"key": "properties.timeZone", "type": "str"},
+        "host_pool_type": {"key": "properties.hostPoolType", "type": "str"},
+        "exclusion_tag": {"key": "properties.exclusionTag", "type": "str"},
+        "schedules": {"key": "properties.schedules", "type": "[ScalingSchedule]"},
+        "host_pool_references": {"key": "properties.hostPoolReferences", "type": "[ScalingHostPoolReference]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScalingPlan, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.time_zone = kwargs.get('time_zone', None)
-        self.host_pool_type = kwargs.get('host_pool_type', None)
-        self.exclusion_tag = kwargs.get('exclusion_tag', None)
-        self.schedules = kwargs.get('schedules', None)
-        self.host_pool_references = kwargs.get('host_pool_references', None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.time_zone = kwargs.get("time_zone", None)
+        self.host_pool_type = kwargs.get("host_pool_type", None)
+        self.exclusion_tag = kwargs.get("exclusion_tag", None)
+        self.schedules = kwargs.get("schedules", None)
+        self.host_pool_references = kwargs.get("host_pool_references", None)
 
 
 class ScalingPlanList(msrest.serialization.Model):
@@ -2224,20 +2092,17 @@ class ScalingPlanList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ScalingPlan]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ScalingPlan]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScalingPlanList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -2262,27 +2127,24 @@ class ScalingPlanPatch(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'time_zone': {'key': 'properties.timeZone', 'type': 'str'},
-        'exclusion_tag': {'key': 'properties.exclusionTag', 'type': 'str'},
-        'schedules': {'key': 'properties.schedules', 'type': '[ScalingSchedule]'},
-        'host_pool_references': {'key': 'properties.hostPoolReferences', 'type': '[ScalingHostPoolReference]'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "time_zone": {"key": "properties.timeZone", "type": "str"},
+        "exclusion_tag": {"key": "properties.exclusionTag", "type": "str"},
+        "schedules": {"key": "properties.schedules", "type": "[ScalingSchedule]"},
+        "host_pool_references": {"key": "properties.hostPoolReferences", "type": "[ScalingHostPoolReference]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScalingPlanPatch, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.time_zone = kwargs.get('time_zone', None)
-        self.exclusion_tag = kwargs.get('exclusion_tag', None)
-        self.schedules = kwargs.get('schedules', None)
-        self.host_pool_references = kwargs.get('host_pool_references', None)
+        self.tags = kwargs.get("tags", None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.time_zone = kwargs.get("time_zone", None)
+        self.exclusion_tag = kwargs.get("exclusion_tag", None)
+        self.schedules = kwargs.get("schedules", None)
+        self.host_pool_references = kwargs.get("host_pool_references", None)
 
 
 class ScalingSchedule(msrest.serialization.Model):
@@ -2338,56 +2200,53 @@ class ScalingSchedule(msrest.serialization.Model):
     """
 
     _validation = {
-        'ramp_up_minimum_hosts_pct': {'maximum': 100, 'minimum': 0},
-        'ramp_up_capacity_threshold_pct': {'maximum': 100, 'minimum': 1},
-        'ramp_down_minimum_hosts_pct': {'maximum': 100, 'minimum': 0},
-        'ramp_down_capacity_threshold_pct': {'maximum': 100, 'minimum': 0},
+        "ramp_up_minimum_hosts_pct": {"maximum": 100, "minimum": 0},
+        "ramp_up_capacity_threshold_pct": {"maximum": 100, "minimum": 1},
+        "ramp_down_minimum_hosts_pct": {"maximum": 100, "minimum": 0},
+        "ramp_down_capacity_threshold_pct": {"maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'days_of_week': {'key': 'daysOfWeek', 'type': '[str]'},
-        'ramp_up_start_time': {'key': 'rampUpStartTime', 'type': 'Time'},
-        'ramp_up_load_balancing_algorithm': {'key': 'rampUpLoadBalancingAlgorithm', 'type': 'str'},
-        'ramp_up_minimum_hosts_pct': {'key': 'rampUpMinimumHostsPct', 'type': 'int'},
-        'ramp_up_capacity_threshold_pct': {'key': 'rampUpCapacityThresholdPct', 'type': 'int'},
-        'peak_start_time': {'key': 'peakStartTime', 'type': 'Time'},
-        'peak_load_balancing_algorithm': {'key': 'peakLoadBalancingAlgorithm', 'type': 'str'},
-        'ramp_down_start_time': {'key': 'rampDownStartTime', 'type': 'Time'},
-        'ramp_down_load_balancing_algorithm': {'key': 'rampDownLoadBalancingAlgorithm', 'type': 'str'},
-        'ramp_down_minimum_hosts_pct': {'key': 'rampDownMinimumHostsPct', 'type': 'int'},
-        'ramp_down_capacity_threshold_pct': {'key': 'rampDownCapacityThresholdPct', 'type': 'int'},
-        'ramp_down_force_logoff_users': {'key': 'rampDownForceLogoffUsers', 'type': 'bool'},
-        'ramp_down_stop_hosts_when': {'key': 'rampDownStopHostsWhen', 'type': 'str'},
-        'ramp_down_wait_time_minutes': {'key': 'rampDownWaitTimeMinutes', 'type': 'int'},
-        'ramp_down_notification_message': {'key': 'rampDownNotificationMessage', 'type': 'str'},
-        'off_peak_start_time': {'key': 'offPeakStartTime', 'type': 'Time'},
-        'off_peak_load_balancing_algorithm': {'key': 'offPeakLoadBalancingAlgorithm', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "days_of_week": {"key": "daysOfWeek", "type": "[str]"},
+        "ramp_up_start_time": {"key": "rampUpStartTime", "type": "Time"},
+        "ramp_up_load_balancing_algorithm": {"key": "rampUpLoadBalancingAlgorithm", "type": "str"},
+        "ramp_up_minimum_hosts_pct": {"key": "rampUpMinimumHostsPct", "type": "int"},
+        "ramp_up_capacity_threshold_pct": {"key": "rampUpCapacityThresholdPct", "type": "int"},
+        "peak_start_time": {"key": "peakStartTime", "type": "Time"},
+        "peak_load_balancing_algorithm": {"key": "peakLoadBalancingAlgorithm", "type": "str"},
+        "ramp_down_start_time": {"key": "rampDownStartTime", "type": "Time"},
+        "ramp_down_load_balancing_algorithm": {"key": "rampDownLoadBalancingAlgorithm", "type": "str"},
+        "ramp_down_minimum_hosts_pct": {"key": "rampDownMinimumHostsPct", "type": "int"},
+        "ramp_down_capacity_threshold_pct": {"key": "rampDownCapacityThresholdPct", "type": "int"},
+        "ramp_down_force_logoff_users": {"key": "rampDownForceLogoffUsers", "type": "bool"},
+        "ramp_down_stop_hosts_when": {"key": "rampDownStopHostsWhen", "type": "str"},
+        "ramp_down_wait_time_minutes": {"key": "rampDownWaitTimeMinutes", "type": "int"},
+        "ramp_down_notification_message": {"key": "rampDownNotificationMessage", "type": "str"},
+        "off_peak_start_time": {"key": "offPeakStartTime", "type": "Time"},
+        "off_peak_load_balancing_algorithm": {"key": "offPeakLoadBalancingAlgorithm", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScalingSchedule, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.days_of_week = kwargs.get('days_of_week', None)
-        self.ramp_up_start_time = kwargs.get('ramp_up_start_time', None)
-        self.ramp_up_load_balancing_algorithm = kwargs.get('ramp_up_load_balancing_algorithm', None)
-        self.ramp_up_minimum_hosts_pct = kwargs.get('ramp_up_minimum_hosts_pct', None)
-        self.ramp_up_capacity_threshold_pct = kwargs.get('ramp_up_capacity_threshold_pct', None)
-        self.peak_start_time = kwargs.get('peak_start_time', None)
-        self.peak_load_balancing_algorithm = kwargs.get('peak_load_balancing_algorithm', None)
-        self.ramp_down_start_time = kwargs.get('ramp_down_start_time', None)
-        self.ramp_down_load_balancing_algorithm = kwargs.get('ramp_down_load_balancing_algorithm', None)
-        self.ramp_down_minimum_hosts_pct = kwargs.get('ramp_down_minimum_hosts_pct', None)
-        self.ramp_down_capacity_threshold_pct = kwargs.get('ramp_down_capacity_threshold_pct', None)
-        self.ramp_down_force_logoff_users = kwargs.get('ramp_down_force_logoff_users', None)
-        self.ramp_down_stop_hosts_when = kwargs.get('ramp_down_stop_hosts_when', None)
-        self.ramp_down_wait_time_minutes = kwargs.get('ramp_down_wait_time_minutes', None)
-        self.ramp_down_notification_message = kwargs.get('ramp_down_notification_message', None)
-        self.off_peak_start_time = kwargs.get('off_peak_start_time', None)
-        self.off_peak_load_balancing_algorithm = kwargs.get('off_peak_load_balancing_algorithm', None)
+        self.name = kwargs.get("name", None)
+        self.days_of_week = kwargs.get("days_of_week", None)
+        self.ramp_up_start_time = kwargs.get("ramp_up_start_time", None)
+        self.ramp_up_load_balancing_algorithm = kwargs.get("ramp_up_load_balancing_algorithm", None)
+        self.ramp_up_minimum_hosts_pct = kwargs.get("ramp_up_minimum_hosts_pct", None)
+        self.ramp_up_capacity_threshold_pct = kwargs.get("ramp_up_capacity_threshold_pct", None)
+        self.peak_start_time = kwargs.get("peak_start_time", None)
+        self.peak_load_balancing_algorithm = kwargs.get("peak_load_balancing_algorithm", None)
+        self.ramp_down_start_time = kwargs.get("ramp_down_start_time", None)
+        self.ramp_down_load_balancing_algorithm = kwargs.get("ramp_down_load_balancing_algorithm", None)
+        self.ramp_down_minimum_hosts_pct = kwargs.get("ramp_down_minimum_hosts_pct", None)
+        self.ramp_down_capacity_threshold_pct = kwargs.get("ramp_down_capacity_threshold_pct", None)
+        self.ramp_down_force_logoff_users = kwargs.get("ramp_down_force_logoff_users", None)
+        self.ramp_down_stop_hosts_when = kwargs.get("ramp_down_stop_hosts_when", None)
+        self.ramp_down_wait_time_minutes = kwargs.get("ramp_down_wait_time_minutes", None)
+        self.ramp_down_notification_message = kwargs.get("ramp_down_notification_message", None)
+        self.off_peak_start_time = kwargs.get("off_peak_start_time", None)
+        self.off_peak_load_balancing_algorithm = kwargs.get("off_peak_load_balancing_algorithm", None)
 
 
 class SendMessage(msrest.serialization.Model):
@@ -2400,17 +2259,14 @@ class SendMessage(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'message_title': {'key': 'messageTitle', 'type': 'str'},
-        'message_body': {'key': 'messageBody', 'type': 'str'},
+        "message_title": {"key": "messageTitle", "type": "str"},
+        "message_body": {"key": "messageBody", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SendMessage, self).__init__(**kwargs)
-        self.message_title = kwargs.get('message_title', None)
-        self.message_body = kwargs.get('message_body', None)
+        self.message_title = kwargs.get("message_title", None)
+        self.message_body = kwargs.get("message_body", None)
 
 
 class ServiceSpecification(msrest.serialization.Model):
@@ -2421,15 +2277,12 @@ class ServiceSpecification(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'log_specifications': {'key': 'logSpecifications', 'type': '[LogSpecification]'},
+        "log_specifications": {"key": "logSpecifications", "type": "[LogSpecification]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceSpecification, self).__init__(**kwargs)
-        self.log_specifications = kwargs.get('log_specifications', None)
+        self.log_specifications = kwargs.get("log_specifications", None)
 
 
 class SessionHost(Resource):
@@ -2487,62 +2340,62 @@ class SessionHost(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
-        'virtual_machine_id': {'readonly': True},
-        'resource_id': {'readonly': True},
-        'status_timestamp': {'readonly': True},
-        'last_update_time': {'readonly': True},
-        'session_host_health_check_results': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
+        "virtual_machine_id": {"readonly": True},
+        "resource_id": {"readonly": True},
+        "status_timestamp": {"readonly": True},
+        "last_update_time": {"readonly": True},
+        "session_host_health_check_results": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'last_heart_beat': {'key': 'properties.lastHeartBeat', 'type': 'iso-8601'},
-        'sessions': {'key': 'properties.sessions', 'type': 'int'},
-        'agent_version': {'key': 'properties.agentVersion', 'type': 'str'},
-        'allow_new_session': {'key': 'properties.allowNewSession', 'type': 'bool'},
-        'virtual_machine_id': {'key': 'properties.virtualMachineId', 'type': 'str'},
-        'resource_id': {'key': 'properties.resourceId', 'type': 'str'},
-        'assigned_user': {'key': 'properties.assignedUser', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'status_timestamp': {'key': 'properties.statusTimestamp', 'type': 'iso-8601'},
-        'os_version': {'key': 'properties.osVersion', 'type': 'str'},
-        'sx_s_stack_version': {'key': 'properties.sxSStackVersion', 'type': 'str'},
-        'update_state': {'key': 'properties.updateState', 'type': 'str'},
-        'last_update_time': {'key': 'properties.lastUpdateTime', 'type': 'iso-8601'},
-        'update_error_message': {'key': 'properties.updateErrorMessage', 'type': 'str'},
-        'session_host_health_check_results': {'key': 'properties.sessionHostHealthCheckResults', 'type': '[SessionHostHealthCheckReport]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "last_heart_beat": {"key": "properties.lastHeartBeat", "type": "iso-8601"},
+        "sessions": {"key": "properties.sessions", "type": "int"},
+        "agent_version": {"key": "properties.agentVersion", "type": "str"},
+        "allow_new_session": {"key": "properties.allowNewSession", "type": "bool"},
+        "virtual_machine_id": {"key": "properties.virtualMachineId", "type": "str"},
+        "resource_id": {"key": "properties.resourceId", "type": "str"},
+        "assigned_user": {"key": "properties.assignedUser", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "status_timestamp": {"key": "properties.statusTimestamp", "type": "iso-8601"},
+        "os_version": {"key": "properties.osVersion", "type": "str"},
+        "sx_s_stack_version": {"key": "properties.sxSStackVersion", "type": "str"},
+        "update_state": {"key": "properties.updateState", "type": "str"},
+        "last_update_time": {"key": "properties.lastUpdateTime", "type": "iso-8601"},
+        "update_error_message": {"key": "properties.updateErrorMessage", "type": "str"},
+        "session_host_health_check_results": {
+            "key": "properties.sessionHostHealthCheckResults",
+            "type": "[SessionHostHealthCheckReport]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SessionHost, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.last_heart_beat = kwargs.get('last_heart_beat', None)
-        self.sessions = kwargs.get('sessions', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.allow_new_session = kwargs.get('allow_new_session', None)
+        self.last_heart_beat = kwargs.get("last_heart_beat", None)
+        self.sessions = kwargs.get("sessions", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.allow_new_session = kwargs.get("allow_new_session", None)
         self.virtual_machine_id = None
         self.resource_id = None
-        self.assigned_user = kwargs.get('assigned_user', None)
-        self.status = kwargs.get('status', None)
+        self.assigned_user = kwargs.get("assigned_user", None)
+        self.status = kwargs.get("status", None)
         self.status_timestamp = None
-        self.os_version = kwargs.get('os_version', None)
-        self.sx_s_stack_version = kwargs.get('sx_s_stack_version', None)
-        self.update_state = kwargs.get('update_state', None)
+        self.os_version = kwargs.get("os_version", None)
+        self.sx_s_stack_version = kwargs.get("sx_s_stack_version", None)
+        self.update_state = kwargs.get("update_state", None)
         self.last_update_time = None
-        self.update_error_message = kwargs.get('update_error_message', None)
+        self.update_error_message = kwargs.get("update_error_message", None)
         self.session_host_health_check_results = None
 
 
@@ -2560,21 +2413,18 @@ class SessionHostHealthCheckFailureDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'message': {'readonly': True},
-        'error_code': {'readonly': True},
-        'last_health_check_date_time': {'readonly': True},
+        "message": {"readonly": True},
+        "error_code": {"readonly": True},
+        "last_health_check_date_time": {"readonly": True},
     }
 
     _attribute_map = {
-        'message': {'key': 'message', 'type': 'str'},
-        'error_code': {'key': 'errorCode', 'type': 'int'},
-        'last_health_check_date_time': {'key': 'lastHealthCheckDateTime', 'type': 'iso-8601'},
+        "message": {"key": "message", "type": "str"},
+        "error_code": {"key": "errorCode", "type": "int"},
+        "last_health_check_date_time": {"key": "lastHealthCheckDateTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SessionHostHealthCheckFailureDetails, self).__init__(**kwargs)
         self.message = None
         self.error_code = None
@@ -2603,21 +2453,21 @@ class SessionHostHealthCheckReport(msrest.serialization.Model):
     """
 
     _validation = {
-        'health_check_name': {'readonly': True},
-        'health_check_result': {'readonly': True},
-        'additional_failure_details': {'readonly': True},
+        "health_check_name": {"readonly": True},
+        "health_check_result": {"readonly": True},
+        "additional_failure_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'health_check_name': {'key': 'healthCheckName', 'type': 'str'},
-        'health_check_result': {'key': 'healthCheckResult', 'type': 'str'},
-        'additional_failure_details': {'key': 'additionalFailureDetails', 'type': 'SessionHostHealthCheckFailureDetails'},
+        "health_check_name": {"key": "healthCheckName", "type": "str"},
+        "health_check_result": {"key": "healthCheckResult", "type": "str"},
+        "additional_failure_details": {
+            "key": "additionalFailureDetails",
+            "type": "SessionHostHealthCheckFailureDetails",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SessionHostHealthCheckReport, self).__init__(**kwargs)
         self.health_check_name = None
         self.health_check_result = None
@@ -2636,20 +2486,17 @@ class SessionHostList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SessionHost]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[SessionHost]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SessionHostList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -2673,26 +2520,23 @@ class SessionHostPatch(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'allow_new_session': {'key': 'properties.allowNewSession', 'type': 'bool'},
-        'assigned_user': {'key': 'properties.assignedUser', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "allow_new_session": {"key": "properties.allowNewSession", "type": "bool"},
+        "assigned_user": {"key": "properties.assignedUser", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SessionHostPatch, self).__init__(**kwargs)
-        self.allow_new_session = kwargs.get('allow_new_session', None)
-        self.assigned_user = kwargs.get('assigned_user', None)
+        self.allow_new_session = kwargs.get("allow_new_session", None)
+        self.assigned_user = kwargs.get("assigned_user", None)
 
 
 class StartMenuItem(Resource):
@@ -2721,32 +2565,29 @@ class StartMenuItem(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'app_alias': {'key': 'properties.appAlias', 'type': 'str'},
-        'file_path': {'key': 'properties.filePath', 'type': 'str'},
-        'command_line_arguments': {'key': 'properties.commandLineArguments', 'type': 'str'},
-        'icon_path': {'key': 'properties.iconPath', 'type': 'str'},
-        'icon_index': {'key': 'properties.iconIndex', 'type': 'int'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "app_alias": {"key": "properties.appAlias", "type": "str"},
+        "file_path": {"key": "properties.filePath", "type": "str"},
+        "command_line_arguments": {"key": "properties.commandLineArguments", "type": "str"},
+        "icon_path": {"key": "properties.iconPath", "type": "str"},
+        "icon_index": {"key": "properties.iconIndex", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StartMenuItem, self).__init__(**kwargs)
-        self.app_alias = kwargs.get('app_alias', None)
-        self.file_path = kwargs.get('file_path', None)
-        self.command_line_arguments = kwargs.get('command_line_arguments', None)
-        self.icon_path = kwargs.get('icon_path', None)
-        self.icon_index = kwargs.get('icon_index', None)
+        self.app_alias = kwargs.get("app_alias", None)
+        self.file_path = kwargs.get("file_path", None)
+        self.command_line_arguments = kwargs.get("command_line_arguments", None)
+        self.icon_path = kwargs.get("icon_path", None)
+        self.icon_index = kwargs.get("icon_index", None)
 
 
 class StartMenuItemList(msrest.serialization.Model):
@@ -2761,20 +2602,17 @@ class StartMenuItemList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[StartMenuItem]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[StartMenuItem]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StartMenuItemList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -2798,25 +2636,22 @@ class SystemData(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'created_by': {'key': 'createdBy', 'type': 'str'},
-        'created_by_type': {'key': 'createdByType', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
-        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
-        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SystemData, self).__init__(**kwargs)
-        self.created_by = kwargs.get('created_by', None)
-        self.created_by_type = kwargs.get('created_by_type', None)
-        self.created_at = kwargs.get('created_at', None)
-        self.last_modified_by = kwargs.get('last_modified_by', None)
-        self.last_modified_by_type = kwargs.get('last_modified_by_type', None)
-        self.last_modified_at = kwargs.get('last_modified_at', None)
+        self.created_by = kwargs.get("created_by", None)
+        self.created_by_type = kwargs.get("created_by_type", None)
+        self.created_at = kwargs.get("created_at", None)
+        self.last_modified_by = kwargs.get("last_modified_by", None)
+        self.last_modified_by_type = kwargs.get("last_modified_by_type", None)
+        self.last_modified_at = kwargs.get("last_modified_at", None)
 
 
 class Time(msrest.serialization.Model):
@@ -2831,22 +2666,19 @@ class Time(msrest.serialization.Model):
     """
 
     _validation = {
-        'hour': {'required': True, 'maximum': 23, 'minimum': 0},
-        'minute': {'required': True, 'maximum': 59, 'minimum': 0},
+        "hour": {"required": True, "maximum": 23, "minimum": 0},
+        "minute": {"required": True, "maximum": 59, "minimum": 0},
     }
 
     _attribute_map = {
-        'hour': {'key': 'hour', 'type': 'int'},
-        'minute': {'key': 'minute', 'type': 'int'},
+        "hour": {"key": "hour", "type": "int"},
+        "minute": {"key": "minute", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Time, self).__init__(**kwargs)
-        self.hour = kwargs['hour']
-        self.minute = kwargs['minute']
+        self.hour = kwargs["hour"]
+        self.minute = kwargs["minute"]
 
 
 class UserSession(Resource):
@@ -2881,38 +2713,35 @@ class UserSession(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'user_principal_name': {'key': 'properties.userPrincipalName', 'type': 'str'},
-        'application_type': {'key': 'properties.applicationType', 'type': 'str'},
-        'session_state': {'key': 'properties.sessionState', 'type': 'str'},
-        'active_directory_user_name': {'key': 'properties.activeDirectoryUserName', 'type': 'str'},
-        'create_time': {'key': 'properties.createTime', 'type': 'iso-8601'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "user_principal_name": {"key": "properties.userPrincipalName", "type": "str"},
+        "application_type": {"key": "properties.applicationType", "type": "str"},
+        "session_state": {"key": "properties.sessionState", "type": "str"},
+        "active_directory_user_name": {"key": "properties.activeDirectoryUserName", "type": "str"},
+        "create_time": {"key": "properties.createTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserSession, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.user_principal_name = kwargs.get('user_principal_name', None)
-        self.application_type = kwargs.get('application_type', None)
-        self.session_state = kwargs.get('session_state', None)
-        self.active_directory_user_name = kwargs.get('active_directory_user_name', None)
-        self.create_time = kwargs.get('create_time', None)
+        self.user_principal_name = kwargs.get("user_principal_name", None)
+        self.application_type = kwargs.get("application_type", None)
+        self.session_state = kwargs.get("session_state", None)
+        self.active_directory_user_name = kwargs.get("active_directory_user_name", None)
+        self.create_time = kwargs.get("create_time", None)
 
 
 class UserSessionList(msrest.serialization.Model):
@@ -2927,20 +2756,17 @@ class UserSessionList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[UserSession]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[UserSession]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserSessionList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -3003,49 +2829,46 @@ class Workspace(ResourceModelWithAllowedPropertySet):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'kind': {'pattern': r'^[-\w\._,\(\)]+$'},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'object_id': {'readonly': True},
-        'cloud_pc_resource': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "kind": {"pattern": r"^[-\w\._,\(\)]+$"},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "object_id": {"readonly": True},
+        "cloud_pc_resource": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'managed_by': {'key': 'managedBy', 'type': 'str'},
-        'kind': {'key': 'kind', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'identity', 'type': 'ResourceModelWithAllowedPropertySetIdentity'},
-        'sku': {'key': 'sku', 'type': 'ResourceModelWithAllowedPropertySetSku'},
-        'plan': {'key': 'plan', 'type': 'ResourceModelWithAllowedPropertySetPlan'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'object_id': {'key': 'properties.objectId', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'application_group_references': {'key': 'properties.applicationGroupReferences', 'type': '[str]'},
-        'cloud_pc_resource': {'key': 'properties.cloudPcResource', 'type': 'bool'},
-        'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "managed_by": {"key": "managedBy", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "ResourceModelWithAllowedPropertySetIdentity"},
+        "sku": {"key": "sku", "type": "ResourceModelWithAllowedPropertySetSku"},
+        "plan": {"key": "plan", "type": "ResourceModelWithAllowedPropertySetPlan"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "object_id": {"key": "properties.objectId", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "application_group_references": {"key": "properties.applicationGroupReferences", "type": "[str]"},
+        "cloud_pc_resource": {"key": "properties.cloudPcResource", "type": "bool"},
+        "public_network_access": {"key": "properties.publicNetworkAccess", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Workspace, self).__init__(**kwargs)
         self.system_data = None
         self.object_id = None
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.application_group_references = kwargs.get('application_group_references', None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.application_group_references = kwargs.get("application_group_references", None)
         self.cloud_pc_resource = None
-        self.public_network_access = kwargs.get('public_network_access', None)
+        self.public_network_access = kwargs.get("public_network_access", None)
 
 
 class WorkspaceList(msrest.serialization.Model):
@@ -3060,20 +2883,17 @@ class WorkspaceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Workspace]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Workspace]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(WorkspaceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -3095,20 +2915,17 @@ class WorkspacePatch(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'application_group_references': {'key': 'properties.applicationGroupReferences', 'type': '[str]'},
-        'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "application_group_references": {"key": "properties.applicationGroupReferences", "type": "[str]"},
+        "public_network_access": {"key": "properties.publicNetworkAccess", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(WorkspacePatch, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.description = kwargs.get('description', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.application_group_references = kwargs.get('application_group_references', None)
-        self.public_network_access = kwargs.get('public_network_access', None)
+        self.tags = kwargs.get("tags", None)
+        self.description = kwargs.get("description", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.application_group_references = kwargs.get("application_group_references", None)
+        self.public_network_access = kwargs.get("public_network_access", None)
