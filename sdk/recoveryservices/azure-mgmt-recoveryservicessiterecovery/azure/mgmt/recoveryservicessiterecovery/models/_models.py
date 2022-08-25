@@ -22,21 +22,16 @@ class AddDisksProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'A2AAddDisksInput'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "A2AAddDisksInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddDisksProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -56,23 +51,20 @@ class A2AAddDisksInput(AddDisksProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[A2AVmDiskInputDetails]'},
-        'vm_managed_disks': {'key': 'vmManagedDisks', 'type': '[A2AVmManagedDiskInputDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[A2AVmDiskInputDetails]"},
+        "vm_managed_disks": {"key": "vmManagedDisks", "type": "[A2AVmManagedDiskInputDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AAddDisksInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.vm_disks = kwargs.get('vm_disks', None)
-        self.vm_managed_disks = kwargs.get('vm_managed_disks', None)
+        self.instance_type = "A2A"  # type: str
+        self.vm_disks = kwargs.get("vm_disks", None)
+        self.vm_managed_disks = kwargs.get("vm_managed_disks", None)
 
 
 class ApplyRecoveryPointProviderSpecificInput(msrest.serialization.Model):
@@ -88,21 +80,24 @@ class ApplyRecoveryPointProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AApplyRecoveryPointInput', 'A2ACrossClusterMigration': 'A2ACrossClusterMigrationApplyRecoveryPointInput', 'HyperVReplicaAzure': 'HyperVReplicaAzureApplyRecoveryPointInput', 'InMageAzureV2': 'InMageAzureV2ApplyRecoveryPointInput', 'InMageRcm': 'InMageRcmApplyRecoveryPointInput'}
+        "instance_type": {
+            "A2A": "A2AApplyRecoveryPointInput",
+            "A2ACrossClusterMigration": "A2ACrossClusterMigrationApplyRecoveryPointInput",
+            "HyperVReplicaAzure": "HyperVReplicaAzureApplyRecoveryPointInput",
+            "InMageAzureV2": "InMageAzureV2ApplyRecoveryPointInput",
+            "InMageRcm": "InMageRcmApplyRecoveryPointInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplyRecoveryPointProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -117,19 +112,16 @@ class A2AApplyRecoveryPointInput(ApplyRecoveryPointProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AApplyRecoveryPointInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
+        self.instance_type = "A2A"  # type: str
 
 
 class ReplicationProviderSpecificContainerCreationInput(msrest.serialization.Model):
@@ -145,21 +137,22 @@ class ReplicationProviderSpecificContainerCreationInput(msrest.serialization.Mod
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AContainerCreationInput', 'A2ACrossClusterMigration': 'A2ACrossClusterMigrationContainerCreationInput', 'VMwareCbt': 'VMwareCbtContainerCreationInput'}
+        "instance_type": {
+            "A2A": "A2AContainerCreationInput",
+            "A2ACrossClusterMigration": "A2ACrossClusterMigrationContainerCreationInput",
+            "VMwareCbt": "VMwareCbtContainerCreationInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProviderSpecificContainerCreationInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -174,19 +167,16 @@ class A2AContainerCreationInput(ReplicationProviderSpecificContainerCreationInpu
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AContainerCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
+        self.instance_type = "A2A"  # type: str
 
 
 class ReplicationProviderSpecificContainerMappingInput(msrest.serialization.Model):
@@ -202,21 +192,16 @@ class ReplicationProviderSpecificContainerMappingInput(msrest.serialization.Mode
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'A2AContainerMappingInput', 'VMwareCbt': 'VMwareCbtContainerMappingInput'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "A2AContainerMappingInput", "VMwareCbt": "VMwareCbtContainerMappingInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProviderSpecificContainerMappingInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -237,23 +222,20 @@ class A2AContainerMappingInput(ReplicationProviderSpecificContainerMappingInput)
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'agent_auto_update_status': {'key': 'agentAutoUpdateStatus', 'type': 'str'},
-        'automation_account_arm_id': {'key': 'automationAccountArmId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "agent_auto_update_status": {"key": "agentAutoUpdateStatus", "type": "str"},
+        "automation_account_arm_id": {"key": "automationAccountArmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AContainerMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.agent_auto_update_status = kwargs.get('agent_auto_update_status', None)
-        self.automation_account_arm_id = kwargs.get('automation_account_arm_id', None)
+        self.instance_type = "A2A"  # type: str
+        self.agent_auto_update_status = kwargs.get("agent_auto_update_status", None)
+        self.automation_account_arm_id = kwargs.get("automation_account_arm_id", None)
 
 
 class CreateProtectionIntentProviderSpecificDetails(msrest.serialization.Model):
@@ -269,21 +251,16 @@ class CreateProtectionIntentProviderSpecificDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'A2ACreateProtectionIntentInput'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "A2ACreateProtectionIntentInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateProtectionIntentProviderSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -350,63 +327,82 @@ class A2ACreateProtectionIntentInput(CreateProtectionIntentProviderSpecificDetai
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'fabric_object_id': {'required': True},
-        'primary_location': {'required': True},
-        'recovery_location': {'required': True},
-        'recovery_subscription_id': {'required': True},
-        'recovery_availability_type': {'required': True},
-        'recovery_resource_group_id': {'required': True},
+        "instance_type": {"required": True},
+        "fabric_object_id": {"required": True},
+        "primary_location": {"required": True},
+        "recovery_location": {"required": True},
+        "recovery_subscription_id": {"required": True},
+        "recovery_availability_type": {"required": True},
+        "recovery_resource_group_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'primary_location': {'key': 'primaryLocation', 'type': 'str'},
-        'recovery_location': {'key': 'recoveryLocation', 'type': 'str'},
-        'recovery_subscription_id': {'key': 'recoverySubscriptionId', 'type': 'str'},
-        'recovery_availability_type': {'key': 'recoveryAvailabilityType', 'type': 'str'},
-        'protection_profile_custom_input': {'key': 'protectionProfileCustomInput', 'type': 'ProtectionProfileCustomDetails'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'primary_staging_storage_account_custom_input': {'key': 'primaryStagingStorageAccountCustomInput', 'type': 'StorageAccountCustomDetails'},
-        'recovery_availability_set_custom_input': {'key': 'recoveryAvailabilitySetCustomInput', 'type': 'RecoveryAvailabilitySetCustomDetails'},
-        'recovery_virtual_network_custom_input': {'key': 'recoveryVirtualNetworkCustomInput', 'type': 'RecoveryVirtualNetworkCustomDetails'},
-        'recovery_proximity_placement_group_custom_input': {'key': 'recoveryProximityPlacementGroupCustomInput', 'type': 'RecoveryProximityPlacementGroupCustomDetails'},
-        'auto_protection_of_data_disk': {'key': 'autoProtectionOfDataDisk', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[A2AProtectionIntentDiskInputDetails]'},
-        'vm_managed_disks': {'key': 'vmManagedDisks', 'type': '[A2AProtectionIntentManagedDiskInputDetails]'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'recovery_boot_diag_storage_account': {'key': 'recoveryBootDiagStorageAccount', 'type': 'StorageAccountCustomDetails'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
-        'recovery_availability_zone': {'key': 'recoveryAvailabilityZone', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "primary_location": {"key": "primaryLocation", "type": "str"},
+        "recovery_location": {"key": "recoveryLocation", "type": "str"},
+        "recovery_subscription_id": {"key": "recoverySubscriptionId", "type": "str"},
+        "recovery_availability_type": {"key": "recoveryAvailabilityType", "type": "str"},
+        "protection_profile_custom_input": {
+            "key": "protectionProfileCustomInput",
+            "type": "ProtectionProfileCustomDetails",
+        },
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "primary_staging_storage_account_custom_input": {
+            "key": "primaryStagingStorageAccountCustomInput",
+            "type": "StorageAccountCustomDetails",
+        },
+        "recovery_availability_set_custom_input": {
+            "key": "recoveryAvailabilitySetCustomInput",
+            "type": "RecoveryAvailabilitySetCustomDetails",
+        },
+        "recovery_virtual_network_custom_input": {
+            "key": "recoveryVirtualNetworkCustomInput",
+            "type": "RecoveryVirtualNetworkCustomDetails",
+        },
+        "recovery_proximity_placement_group_custom_input": {
+            "key": "recoveryProximityPlacementGroupCustomInput",
+            "type": "RecoveryProximityPlacementGroupCustomDetails",
+        },
+        "auto_protection_of_data_disk": {"key": "autoProtectionOfDataDisk", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[A2AProtectionIntentDiskInputDetails]"},
+        "vm_managed_disks": {"key": "vmManagedDisks", "type": "[A2AProtectionIntentManagedDiskInputDetails]"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "recovery_boot_diag_storage_account": {
+            "key": "recoveryBootDiagStorageAccount",
+            "type": "StorageAccountCustomDetails",
+        },
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
+        "recovery_availability_zone": {"key": "recoveryAvailabilityZone", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ACreateProtectionIntentInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.fabric_object_id = kwargs['fabric_object_id']
-        self.primary_location = kwargs['primary_location']
-        self.recovery_location = kwargs['recovery_location']
-        self.recovery_subscription_id = kwargs['recovery_subscription_id']
-        self.recovery_availability_type = kwargs['recovery_availability_type']
-        self.protection_profile_custom_input = kwargs.get('protection_profile_custom_input', None)
-        self.recovery_resource_group_id = kwargs['recovery_resource_group_id']
-        self.primary_staging_storage_account_custom_input = kwargs.get('primary_staging_storage_account_custom_input', None)
-        self.recovery_availability_set_custom_input = kwargs.get('recovery_availability_set_custom_input', None)
-        self.recovery_virtual_network_custom_input = kwargs.get('recovery_virtual_network_custom_input', None)
-        self.recovery_proximity_placement_group_custom_input = kwargs.get('recovery_proximity_placement_group_custom_input', None)
-        self.auto_protection_of_data_disk = kwargs.get('auto_protection_of_data_disk', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
-        self.vm_managed_disks = kwargs.get('vm_managed_disks', None)
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
-        self.multi_vm_group_id = kwargs.get('multi_vm_group_id', None)
-        self.recovery_boot_diag_storage_account = kwargs.get('recovery_boot_diag_storage_account', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
-        self.recovery_availability_zone = kwargs.get('recovery_availability_zone', None)
+        self.instance_type = "A2A"  # type: str
+        self.fabric_object_id = kwargs["fabric_object_id"]
+        self.primary_location = kwargs["primary_location"]
+        self.recovery_location = kwargs["recovery_location"]
+        self.recovery_subscription_id = kwargs["recovery_subscription_id"]
+        self.recovery_availability_type = kwargs["recovery_availability_type"]
+        self.protection_profile_custom_input = kwargs.get("protection_profile_custom_input", None)
+        self.recovery_resource_group_id = kwargs["recovery_resource_group_id"]
+        self.primary_staging_storage_account_custom_input = kwargs.get(
+            "primary_staging_storage_account_custom_input", None
+        )
+        self.recovery_availability_set_custom_input = kwargs.get("recovery_availability_set_custom_input", None)
+        self.recovery_virtual_network_custom_input = kwargs.get("recovery_virtual_network_custom_input", None)
+        self.recovery_proximity_placement_group_custom_input = kwargs.get(
+            "recovery_proximity_placement_group_custom_input", None
+        )
+        self.auto_protection_of_data_disk = kwargs.get("auto_protection_of_data_disk", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
+        self.vm_managed_disks = kwargs.get("vm_managed_disks", None)
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
+        self.multi_vm_group_id = kwargs.get("multi_vm_group_id", None)
+        self.recovery_boot_diag_storage_account = kwargs.get("recovery_boot_diag_storage_account", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
+        self.recovery_availability_zone = kwargs.get("recovery_availability_zone", None)
 
 
 class A2ACrossClusterMigrationApplyRecoveryPointInput(ApplyRecoveryPointProviderSpecificInput):
@@ -419,19 +415,16 @@ class A2ACrossClusterMigrationApplyRecoveryPointInput(ApplyRecoveryPointProvider
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ACrossClusterMigrationApplyRecoveryPointInput, self).__init__(**kwargs)
-        self.instance_type = 'A2ACrossClusterMigration'  # type: str
+        self.instance_type = "A2ACrossClusterMigration"  # type: str
 
 
 class A2ACrossClusterMigrationContainerCreationInput(ReplicationProviderSpecificContainerCreationInput):
@@ -444,19 +437,16 @@ class A2ACrossClusterMigrationContainerCreationInput(ReplicationProviderSpecific
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ACrossClusterMigrationContainerCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'A2ACrossClusterMigration'  # type: str
+        self.instance_type = "A2ACrossClusterMigration"  # type: str
 
 
 class EnableProtectionProviderSpecificInput(msrest.serialization.Model):
@@ -472,21 +462,25 @@ class EnableProtectionProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AEnableProtectionInput', 'A2ACrossClusterMigration': 'A2ACrossClusterMigrationEnableProtectionInput', 'HyperVReplicaAzure': 'HyperVReplicaAzureEnableProtectionInput', 'InMage': 'InMageEnableProtectionInput', 'InMageAzureV2': 'InMageAzureV2EnableProtectionInput', 'InMageRcm': 'InMageRcmEnableProtectionInput'}
+        "instance_type": {
+            "A2A": "A2AEnableProtectionInput",
+            "A2ACrossClusterMigration": "A2ACrossClusterMigrationEnableProtectionInput",
+            "HyperVReplicaAzure": "HyperVReplicaAzureEnableProtectionInput",
+            "InMage": "InMageEnableProtectionInput",
+            "InMageAzureV2": "InMageAzureV2EnableProtectionInput",
+            "InMageRcm": "InMageRcmEnableProtectionInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnableProtectionProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -505,23 +499,20 @@ class A2ACrossClusterMigrationEnableProtectionInput(EnableProtectionProviderSpec
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'recovery_container_id': {'key': 'recoveryContainerId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "recovery_container_id": {"key": "recoveryContainerId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ACrossClusterMigrationEnableProtectionInput, self).__init__(**kwargs)
-        self.instance_type = 'A2ACrossClusterMigration'  # type: str
-        self.fabric_object_id = kwargs.get('fabric_object_id', None)
-        self.recovery_container_id = kwargs.get('recovery_container_id', None)
+        self.instance_type = "A2ACrossClusterMigration"  # type: str
+        self.fabric_object_id = kwargs.get("fabric_object_id", None)
+        self.recovery_container_id = kwargs.get("recovery_container_id", None)
 
 
 class PolicyProviderSpecificInput(msrest.serialization.Model):
@@ -537,21 +528,28 @@ class PolicyProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2APolicyCreationInput', 'A2ACrossClusterMigration': 'A2ACrossClusterMigrationPolicyCreationInput', 'HyperVReplica2012': 'HyperVReplicaPolicyInput', 'HyperVReplicaAzure': 'HyperVReplicaAzurePolicyInput', 'InMage': 'InMagePolicyInput', 'InMageAzureV2': 'InMageAzureV2PolicyInput', 'InMageRcm': 'InMageRcmPolicyCreationInput', 'InMageRcmFailback': 'InMageRcmFailbackPolicyCreationInput', 'VMwareCbt': 'VMwareCbtPolicyCreationInput'}
+        "instance_type": {
+            "A2A": "A2APolicyCreationInput",
+            "A2ACrossClusterMigration": "A2ACrossClusterMigrationPolicyCreationInput",
+            "HyperVReplica2012": "HyperVReplicaPolicyInput",
+            "HyperVReplicaAzure": "HyperVReplicaAzurePolicyInput",
+            "InMage": "InMagePolicyInput",
+            "InMageAzureV2": "InMageAzureV2PolicyInput",
+            "InMageRcm": "InMageRcmPolicyCreationInput",
+            "InMageRcmFailback": "InMageRcmFailbackPolicyCreationInput",
+            "VMwareCbt": "VMwareCbtPolicyCreationInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -566,19 +564,16 @@ class A2ACrossClusterMigrationPolicyCreationInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ACrossClusterMigrationPolicyCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'A2ACrossClusterMigration'  # type: str
+        self.instance_type = "A2ACrossClusterMigration"  # type: str
 
 
 class ReplicationProviderSpecificSettings(msrest.serialization.Model):
@@ -594,21 +589,29 @@ class ReplicationProviderSpecificSettings(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AReplicationDetails', 'A2ACrossClusterMigration': 'A2ACrossClusterMigrationReplicationDetails', 'HyperVReplica2012': 'HyperVReplicaReplicationDetails', 'HyperVReplica2012R2': 'HyperVReplicaBlueReplicationDetails', 'HyperVReplicaAzure': 'HyperVReplicaAzureReplicationDetails', 'HyperVReplicaBaseReplicationDetails': 'HyperVReplicaBaseReplicationDetails', 'InMage': 'InMageReplicationDetails', 'InMageAzureV2': 'InMageAzureV2ReplicationDetails', 'InMageRcm': 'InMageRcmReplicationDetails', 'InMageRcmFailback': 'InMageRcmFailbackReplicationDetails'}
+        "instance_type": {
+            "A2A": "A2AReplicationDetails",
+            "A2ACrossClusterMigration": "A2ACrossClusterMigrationReplicationDetails",
+            "HyperVReplica2012": "HyperVReplicaReplicationDetails",
+            "HyperVReplica2012R2": "HyperVReplicaBlueReplicationDetails",
+            "HyperVReplicaAzure": "HyperVReplicaAzureReplicationDetails",
+            "HyperVReplicaBaseReplicationDetails": "HyperVReplicaBaseReplicationDetails",
+            "InMage": "InMageReplicationDetails",
+            "InMageAzureV2": "InMageAzureV2ReplicationDetails",
+            "InMageRcm": "InMageRcmReplicationDetails",
+            "InMageRcmFailback": "InMageRcmFailbackReplicationDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProviderSpecificSettings, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -638,31 +641,28 @@ class A2ACrossClusterMigrationReplicationDetails(ReplicationProviderSpecificSett
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'primary_fabric_location': {'key': 'primaryFabricLocation', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'lifecycle_id': {'key': 'lifecycleId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "primary_fabric_location": {"key": "primaryFabricLocation", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "lifecycle_id": {"key": "lifecycleId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ACrossClusterMigrationReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'A2ACrossClusterMigration'  # type: str
-        self.fabric_object_id = kwargs.get('fabric_object_id', None)
-        self.primary_fabric_location = kwargs.get('primary_fabric_location', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.lifecycle_id = kwargs.get('lifecycle_id', None)
+        self.instance_type = "A2ACrossClusterMigration"  # type: str
+        self.fabric_object_id = kwargs.get("fabric_object_id", None)
+        self.primary_fabric_location = kwargs.get("primary_fabric_location", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.lifecycle_id = kwargs.get("lifecycle_id", None)
 
 
 class A2AEnableProtectionInput(EnableProtectionProviderSpecificInput):
@@ -708,52 +708,49 @@ class A2AEnableProtectionInput(EnableProtectionProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'fabric_object_id': {'required': True},
+        "instance_type": {"required": True},
+        "fabric_object_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'recovery_container_id': {'key': 'recoveryContainerId', 'type': 'str'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'recovery_cloud_service_id': {'key': 'recoveryCloudServiceId', 'type': 'str'},
-        'recovery_availability_set_id': {'key': 'recoveryAvailabilitySetId', 'type': 'str'},
-        'recovery_proximity_placement_group_id': {'key': 'recoveryProximityPlacementGroupId', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[A2AVmDiskInputDetails]'},
-        'vm_managed_disks': {'key': 'vmManagedDisks', 'type': '[A2AVmManagedDiskInputDetails]'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'recovery_boot_diag_storage_account_id': {'key': 'recoveryBootDiagStorageAccountId', 'type': 'str'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
-        'recovery_availability_zone': {'key': 'recoveryAvailabilityZone', 'type': 'str'},
-        'recovery_azure_network_id': {'key': 'recoveryAzureNetworkId', 'type': 'str'},
-        'recovery_subnet_name': {'key': 'recoverySubnetName', 'type': 'str'},
-        'recovery_virtual_machine_scale_set_id': {'key': 'recoveryVirtualMachineScaleSetId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "recovery_container_id": {"key": "recoveryContainerId", "type": "str"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "recovery_cloud_service_id": {"key": "recoveryCloudServiceId", "type": "str"},
+        "recovery_availability_set_id": {"key": "recoveryAvailabilitySetId", "type": "str"},
+        "recovery_proximity_placement_group_id": {"key": "recoveryProximityPlacementGroupId", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[A2AVmDiskInputDetails]"},
+        "vm_managed_disks": {"key": "vmManagedDisks", "type": "[A2AVmManagedDiskInputDetails]"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "recovery_boot_diag_storage_account_id": {"key": "recoveryBootDiagStorageAccountId", "type": "str"},
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
+        "recovery_availability_zone": {"key": "recoveryAvailabilityZone", "type": "str"},
+        "recovery_azure_network_id": {"key": "recoveryAzureNetworkId", "type": "str"},
+        "recovery_subnet_name": {"key": "recoverySubnetName", "type": "str"},
+        "recovery_virtual_machine_scale_set_id": {"key": "recoveryVirtualMachineScaleSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AEnableProtectionInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.fabric_object_id = kwargs['fabric_object_id']
-        self.recovery_container_id = kwargs.get('recovery_container_id', None)
-        self.recovery_resource_group_id = kwargs.get('recovery_resource_group_id', None)
-        self.recovery_cloud_service_id = kwargs.get('recovery_cloud_service_id', None)
-        self.recovery_availability_set_id = kwargs.get('recovery_availability_set_id', None)
-        self.recovery_proximity_placement_group_id = kwargs.get('recovery_proximity_placement_group_id', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
-        self.vm_managed_disks = kwargs.get('vm_managed_disks', None)
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
-        self.multi_vm_group_id = kwargs.get('multi_vm_group_id', None)
-        self.recovery_boot_diag_storage_account_id = kwargs.get('recovery_boot_diag_storage_account_id', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
-        self.recovery_availability_zone = kwargs.get('recovery_availability_zone', None)
-        self.recovery_azure_network_id = kwargs.get('recovery_azure_network_id', None)
-        self.recovery_subnet_name = kwargs.get('recovery_subnet_name', None)
-        self.recovery_virtual_machine_scale_set_id = kwargs.get('recovery_virtual_machine_scale_set_id', None)
+        self.instance_type = "A2A"  # type: str
+        self.fabric_object_id = kwargs["fabric_object_id"]
+        self.recovery_container_id = kwargs.get("recovery_container_id", None)
+        self.recovery_resource_group_id = kwargs.get("recovery_resource_group_id", None)
+        self.recovery_cloud_service_id = kwargs.get("recovery_cloud_service_id", None)
+        self.recovery_availability_set_id = kwargs.get("recovery_availability_set_id", None)
+        self.recovery_proximity_placement_group_id = kwargs.get("recovery_proximity_placement_group_id", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
+        self.vm_managed_disks = kwargs.get("vm_managed_disks", None)
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
+        self.multi_vm_group_id = kwargs.get("multi_vm_group_id", None)
+        self.recovery_boot_diag_storage_account_id = kwargs.get("recovery_boot_diag_storage_account_id", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
+        self.recovery_availability_zone = kwargs.get("recovery_availability_zone", None)
+        self.recovery_azure_network_id = kwargs.get("recovery_azure_network_id", None)
+        self.recovery_subnet_name = kwargs.get("recovery_subnet_name", None)
+        self.recovery_virtual_machine_scale_set_id = kwargs.get("recovery_virtual_machine_scale_set_id", None)
 
 
 class EventProviderSpecificDetails(msrest.serialization.Model):
@@ -770,21 +767,28 @@ class EventProviderSpecificDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AEventDetails', 'HyperVReplica2012': 'HyperVReplica2012EventDetails', 'HyperVReplica2012R2': 'HyperVReplica2012R2EventDetails', 'HyperVReplicaAzure': 'HyperVReplicaAzureEventDetails', 'HyperVReplicaBaseEventDetails': 'HyperVReplicaBaseEventDetails', 'InMageAzureV2': 'InMageAzureV2EventDetails', 'InMageRcm': 'InMageRcmEventDetails', 'InMageRcmFailback': 'InMageRcmFailbackEventDetails', 'VMwareCbt': 'VMwareCbtEventDetails'}
+        "instance_type": {
+            "A2A": "A2AEventDetails",
+            "HyperVReplica2012": "HyperVReplica2012EventDetails",
+            "HyperVReplica2012R2": "HyperVReplica2012R2EventDetails",
+            "HyperVReplicaAzure": "HyperVReplicaAzureEventDetails",
+            "HyperVReplicaBaseEventDetails": "HyperVReplicaBaseEventDetails",
+            "InMageAzureV2": "InMageAzureV2EventDetails",
+            "InMageRcm": "InMageRcmEventDetails",
+            "InMageRcmFailback": "InMageRcmFailbackEventDetails",
+            "VMwareCbt": "VMwareCbtEventDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EventProviderSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -812,31 +816,28 @@ class A2AEventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'protected_item_name': {'key': 'protectedItemName', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'fabric_name': {'key': 'fabricName', 'type': 'str'},
-        'fabric_location': {'key': 'fabricLocation', 'type': 'str'},
-        'remote_fabric_name': {'key': 'remoteFabricName', 'type': 'str'},
-        'remote_fabric_location': {'key': 'remoteFabricLocation', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "protected_item_name": {"key": "protectedItemName", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "fabric_name": {"key": "fabricName", "type": "str"},
+        "fabric_location": {"key": "fabricLocation", "type": "str"},
+        "remote_fabric_name": {"key": "remoteFabricName", "type": "str"},
+        "remote_fabric_location": {"key": "remoteFabricLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AEventDetails, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.protected_item_name = kwargs.get('protected_item_name', None)
-        self.fabric_object_id = kwargs.get('fabric_object_id', None)
-        self.fabric_name = kwargs.get('fabric_name', None)
-        self.fabric_location = kwargs.get('fabric_location', None)
-        self.remote_fabric_name = kwargs.get('remote_fabric_name', None)
-        self.remote_fabric_location = kwargs.get('remote_fabric_location', None)
+        self.instance_type = "A2A"  # type: str
+        self.protected_item_name = kwargs.get("protected_item_name", None)
+        self.fabric_object_id = kwargs.get("fabric_object_id", None)
+        self.fabric_name = kwargs.get("fabric_name", None)
+        self.fabric_location = kwargs.get("fabric_location", None)
+        self.remote_fabric_name = kwargs.get("remote_fabric_name", None)
+        self.remote_fabric_location = kwargs.get("remote_fabric_location", None)
 
 
 class A2APolicyCreationInput(PolicyProviderSpecificInput):
@@ -861,28 +862,25 @@ class A2APolicyCreationInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'multi_vm_sync_status': {'required': True},
+        "instance_type": {"required": True},
+        "multi_vm_sync_status": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2APolicyCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs['multi_vm_sync_status']
+        self.instance_type = "A2A"  # type: str
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs["multi_vm_sync_status"]
 
 
 class PolicyProviderSpecificDetails(msrest.serialization.Model):
@@ -899,21 +897,30 @@ class PolicyProviderSpecificDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2APolicyDetails', 'HyperVReplica2012': 'HyperVReplicaPolicyDetails', 'HyperVReplica2012R2': 'HyperVReplicaBluePolicyDetails', 'HyperVReplicaAzure': 'HyperVReplicaAzurePolicyDetails', 'HyperVReplicaBasePolicyDetails': 'HyperVReplicaBasePolicyDetails', 'InMage': 'InMagePolicyDetails', 'InMageAzureV2': 'InMageAzureV2PolicyDetails', 'InMageBasePolicyDetails': 'InMageBasePolicyDetails', 'InMageRcm': 'InMageRcmPolicyDetails', 'InMageRcmFailback': 'InMageRcmFailbackPolicyDetails', 'VMwareCbt': 'VmwareCbtPolicyDetails'}
+        "instance_type": {
+            "A2A": "A2APolicyDetails",
+            "HyperVReplica2012": "HyperVReplicaPolicyDetails",
+            "HyperVReplica2012R2": "HyperVReplicaBluePolicyDetails",
+            "HyperVReplicaAzure": "HyperVReplicaAzurePolicyDetails",
+            "HyperVReplicaBasePolicyDetails": "HyperVReplicaBasePolicyDetails",
+            "InMage": "InMagePolicyDetails",
+            "InMageAzureV2": "InMageAzureV2PolicyDetails",
+            "InMageBasePolicyDetails": "InMageBasePolicyDetails",
+            "InMageRcm": "InMageRcmPolicyDetails",
+            "InMageRcmFailback": "InMageRcmFailbackPolicyDetails",
+            "VMwareCbt": "VmwareCbtPolicyDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyProviderSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -941,29 +948,26 @@ class A2APolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_threshold_in_minutes': {'key': 'recoveryPointThresholdInMinutes', 'type': 'int'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_threshold_in_minutes": {"key": "recoveryPointThresholdInMinutes", "type": "int"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2APolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_point_threshold_in_minutes = kwargs.get('recovery_point_threshold_in_minutes', None)
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs.get('multi_vm_sync_status', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_point_threshold_in_minutes = kwargs.get("recovery_point_threshold_in_minutes", None)
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs.get("multi_vm_sync_status", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
 
 
 class A2AProtectedDiskDetails(msrest.serialization.Model):
@@ -1021,59 +1025,61 @@ class A2AProtectedDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_uri': {'key': 'diskUri', 'type': 'str'},
-        'recovery_azure_storage_account_id': {'key': 'recoveryAzureStorageAccountId', 'type': 'str'},
-        'primary_disk_azure_storage_account_id': {'key': 'primaryDiskAzureStorageAccountId', 'type': 'str'},
-        'recovery_disk_uri': {'key': 'recoveryDiskUri', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'disk_capacity_in_bytes': {'key': 'diskCapacityInBytes', 'type': 'long'},
-        'primary_staging_azure_storage_account_id': {'key': 'primaryStagingAzureStorageAccountId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'resync_required': {'key': 'resyncRequired', 'type': 'bool'},
-        'monitoring_percentage_completion': {'key': 'monitoringPercentageCompletion', 'type': 'int'},
-        'monitoring_job_type': {'key': 'monitoringJobType', 'type': 'str'},
-        'data_pending_in_staging_storage_account_in_mb': {'key': 'dataPendingInStagingStorageAccountInMB', 'type': 'float'},
-        'data_pending_at_source_agent_in_mb': {'key': 'dataPendingAtSourceAgentInMB', 'type': 'float'},
-        'disk_state': {'key': 'diskState', 'type': 'str'},
-        'allowed_disk_level_operation': {'key': 'allowedDiskLevelOperation', 'type': '[str]'},
-        'is_disk_encrypted': {'key': 'isDiskEncrypted', 'type': 'bool'},
-        'secret_identifier': {'key': 'secretIdentifier', 'type': 'str'},
-        'dek_key_vault_arm_id': {'key': 'dekKeyVaultArmId', 'type': 'str'},
-        'is_disk_key_encrypted': {'key': 'isDiskKeyEncrypted', 'type': 'bool'},
-        'key_identifier': {'key': 'keyIdentifier', 'type': 'str'},
-        'kek_key_vault_arm_id': {'key': 'kekKeyVaultArmId', 'type': 'str'},
-        'failover_disk_name': {'key': 'failoverDiskName', 'type': 'str'},
-        'tfo_disk_name': {'key': 'tfoDiskName', 'type': 'str'},
+        "disk_uri": {"key": "diskUri", "type": "str"},
+        "recovery_azure_storage_account_id": {"key": "recoveryAzureStorageAccountId", "type": "str"},
+        "primary_disk_azure_storage_account_id": {"key": "primaryDiskAzureStorageAccountId", "type": "str"},
+        "recovery_disk_uri": {"key": "recoveryDiskUri", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "disk_capacity_in_bytes": {"key": "diskCapacityInBytes", "type": "long"},
+        "primary_staging_azure_storage_account_id": {"key": "primaryStagingAzureStorageAccountId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "resync_required": {"key": "resyncRequired", "type": "bool"},
+        "monitoring_percentage_completion": {"key": "monitoringPercentageCompletion", "type": "int"},
+        "monitoring_job_type": {"key": "monitoringJobType", "type": "str"},
+        "data_pending_in_staging_storage_account_in_mb": {
+            "key": "dataPendingInStagingStorageAccountInMB",
+            "type": "float",
+        },
+        "data_pending_at_source_agent_in_mb": {"key": "dataPendingAtSourceAgentInMB", "type": "float"},
+        "disk_state": {"key": "diskState", "type": "str"},
+        "allowed_disk_level_operation": {"key": "allowedDiskLevelOperation", "type": "[str]"},
+        "is_disk_encrypted": {"key": "isDiskEncrypted", "type": "bool"},
+        "secret_identifier": {"key": "secretIdentifier", "type": "str"},
+        "dek_key_vault_arm_id": {"key": "dekKeyVaultArmId", "type": "str"},
+        "is_disk_key_encrypted": {"key": "isDiskKeyEncrypted", "type": "bool"},
+        "key_identifier": {"key": "keyIdentifier", "type": "str"},
+        "kek_key_vault_arm_id": {"key": "kekKeyVaultArmId", "type": "str"},
+        "failover_disk_name": {"key": "failoverDiskName", "type": "str"},
+        "tfo_disk_name": {"key": "tfoDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AProtectedDiskDetails, self).__init__(**kwargs)
-        self.disk_uri = kwargs.get('disk_uri', None)
-        self.recovery_azure_storage_account_id = kwargs.get('recovery_azure_storage_account_id', None)
-        self.primary_disk_azure_storage_account_id = kwargs.get('primary_disk_azure_storage_account_id', None)
-        self.recovery_disk_uri = kwargs.get('recovery_disk_uri', None)
-        self.disk_name = kwargs.get('disk_name', None)
-        self.disk_capacity_in_bytes = kwargs.get('disk_capacity_in_bytes', None)
-        self.primary_staging_azure_storage_account_id = kwargs.get('primary_staging_azure_storage_account_id', None)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.resync_required = kwargs.get('resync_required', None)
-        self.monitoring_percentage_completion = kwargs.get('monitoring_percentage_completion', None)
-        self.monitoring_job_type = kwargs.get('monitoring_job_type', None)
-        self.data_pending_in_staging_storage_account_in_mb = kwargs.get('data_pending_in_staging_storage_account_in_mb', None)
-        self.data_pending_at_source_agent_in_mb = kwargs.get('data_pending_at_source_agent_in_mb', None)
-        self.disk_state = kwargs.get('disk_state', None)
-        self.allowed_disk_level_operation = kwargs.get('allowed_disk_level_operation', None)
-        self.is_disk_encrypted = kwargs.get('is_disk_encrypted', None)
-        self.secret_identifier = kwargs.get('secret_identifier', None)
-        self.dek_key_vault_arm_id = kwargs.get('dek_key_vault_arm_id', None)
-        self.is_disk_key_encrypted = kwargs.get('is_disk_key_encrypted', None)
-        self.key_identifier = kwargs.get('key_identifier', None)
-        self.kek_key_vault_arm_id = kwargs.get('kek_key_vault_arm_id', None)
-        self.failover_disk_name = kwargs.get('failover_disk_name', None)
-        self.tfo_disk_name = kwargs.get('tfo_disk_name', None)
+        self.disk_uri = kwargs.get("disk_uri", None)
+        self.recovery_azure_storage_account_id = kwargs.get("recovery_azure_storage_account_id", None)
+        self.primary_disk_azure_storage_account_id = kwargs.get("primary_disk_azure_storage_account_id", None)
+        self.recovery_disk_uri = kwargs.get("recovery_disk_uri", None)
+        self.disk_name = kwargs.get("disk_name", None)
+        self.disk_capacity_in_bytes = kwargs.get("disk_capacity_in_bytes", None)
+        self.primary_staging_azure_storage_account_id = kwargs.get("primary_staging_azure_storage_account_id", None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.resync_required = kwargs.get("resync_required", None)
+        self.monitoring_percentage_completion = kwargs.get("monitoring_percentage_completion", None)
+        self.monitoring_job_type = kwargs.get("monitoring_job_type", None)
+        self.data_pending_in_staging_storage_account_in_mb = kwargs.get(
+            "data_pending_in_staging_storage_account_in_mb", None
+        )
+        self.data_pending_at_source_agent_in_mb = kwargs.get("data_pending_at_source_agent_in_mb", None)
+        self.disk_state = kwargs.get("disk_state", None)
+        self.allowed_disk_level_operation = kwargs.get("allowed_disk_level_operation", None)
+        self.is_disk_encrypted = kwargs.get("is_disk_encrypted", None)
+        self.secret_identifier = kwargs.get("secret_identifier", None)
+        self.dek_key_vault_arm_id = kwargs.get("dek_key_vault_arm_id", None)
+        self.is_disk_key_encrypted = kwargs.get("is_disk_key_encrypted", None)
+        self.key_identifier = kwargs.get("key_identifier", None)
+        self.kek_key_vault_arm_id = kwargs.get("kek_key_vault_arm_id", None)
+        self.failover_disk_name = kwargs.get("failover_disk_name", None)
+        self.tfo_disk_name = kwargs.get("tfo_disk_name", None)
 
 
 class A2AProtectedManagedDiskDetails(msrest.serialization.Model):
@@ -1143,69 +1149,71 @@ class A2AProtectedManagedDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'recovery_target_disk_id': {'key': 'recoveryTargetDiskId', 'type': 'str'},
-        'recovery_replica_disk_id': {'key': 'recoveryReplicaDiskId', 'type': 'str'},
-        'recovery_orignal_target_disk_id': {'key': 'recoveryOrignalTargetDiskId', 'type': 'str'},
-        'recovery_replica_disk_account_type': {'key': 'recoveryReplicaDiskAccountType', 'type': 'str'},
-        'recovery_target_disk_account_type': {'key': 'recoveryTargetDiskAccountType', 'type': 'str'},
-        'recovery_disk_encryption_set_id': {'key': 'recoveryDiskEncryptionSetId', 'type': 'str'},
-        'primary_disk_encryption_set_id': {'key': 'primaryDiskEncryptionSetId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'disk_capacity_in_bytes': {'key': 'diskCapacityInBytes', 'type': 'long'},
-        'primary_staging_azure_storage_account_id': {'key': 'primaryStagingAzureStorageAccountId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'resync_required': {'key': 'resyncRequired', 'type': 'bool'},
-        'monitoring_percentage_completion': {'key': 'monitoringPercentageCompletion', 'type': 'int'},
-        'monitoring_job_type': {'key': 'monitoringJobType', 'type': 'str'},
-        'data_pending_in_staging_storage_account_in_mb': {'key': 'dataPendingInStagingStorageAccountInMB', 'type': 'float'},
-        'data_pending_at_source_agent_in_mb': {'key': 'dataPendingAtSourceAgentInMB', 'type': 'float'},
-        'disk_state': {'key': 'diskState', 'type': 'str'},
-        'allowed_disk_level_operation': {'key': 'allowedDiskLevelOperation', 'type': '[str]'},
-        'is_disk_encrypted': {'key': 'isDiskEncrypted', 'type': 'bool'},
-        'secret_identifier': {'key': 'secretIdentifier', 'type': 'str'},
-        'dek_key_vault_arm_id': {'key': 'dekKeyVaultArmId', 'type': 'str'},
-        'is_disk_key_encrypted': {'key': 'isDiskKeyEncrypted', 'type': 'bool'},
-        'key_identifier': {'key': 'keyIdentifier', 'type': 'str'},
-        'kek_key_vault_arm_id': {'key': 'kekKeyVaultArmId', 'type': 'str'},
-        'failover_disk_name': {'key': 'failoverDiskName', 'type': 'str'},
-        'tfo_disk_name': {'key': 'tfoDiskName', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "recovery_target_disk_id": {"key": "recoveryTargetDiskId", "type": "str"},
+        "recovery_replica_disk_id": {"key": "recoveryReplicaDiskId", "type": "str"},
+        "recovery_orignal_target_disk_id": {"key": "recoveryOrignalTargetDiskId", "type": "str"},
+        "recovery_replica_disk_account_type": {"key": "recoveryReplicaDiskAccountType", "type": "str"},
+        "recovery_target_disk_account_type": {"key": "recoveryTargetDiskAccountType", "type": "str"},
+        "recovery_disk_encryption_set_id": {"key": "recoveryDiskEncryptionSetId", "type": "str"},
+        "primary_disk_encryption_set_id": {"key": "primaryDiskEncryptionSetId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "disk_capacity_in_bytes": {"key": "diskCapacityInBytes", "type": "long"},
+        "primary_staging_azure_storage_account_id": {"key": "primaryStagingAzureStorageAccountId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "resync_required": {"key": "resyncRequired", "type": "bool"},
+        "monitoring_percentage_completion": {"key": "monitoringPercentageCompletion", "type": "int"},
+        "monitoring_job_type": {"key": "monitoringJobType", "type": "str"},
+        "data_pending_in_staging_storage_account_in_mb": {
+            "key": "dataPendingInStagingStorageAccountInMB",
+            "type": "float",
+        },
+        "data_pending_at_source_agent_in_mb": {"key": "dataPendingAtSourceAgentInMB", "type": "float"},
+        "disk_state": {"key": "diskState", "type": "str"},
+        "allowed_disk_level_operation": {"key": "allowedDiskLevelOperation", "type": "[str]"},
+        "is_disk_encrypted": {"key": "isDiskEncrypted", "type": "bool"},
+        "secret_identifier": {"key": "secretIdentifier", "type": "str"},
+        "dek_key_vault_arm_id": {"key": "dekKeyVaultArmId", "type": "str"},
+        "is_disk_key_encrypted": {"key": "isDiskKeyEncrypted", "type": "bool"},
+        "key_identifier": {"key": "keyIdentifier", "type": "str"},
+        "kek_key_vault_arm_id": {"key": "kekKeyVaultArmId", "type": "str"},
+        "failover_disk_name": {"key": "failoverDiskName", "type": "str"},
+        "tfo_disk_name": {"key": "tfoDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AProtectedManagedDiskDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.recovery_resource_group_id = kwargs.get('recovery_resource_group_id', None)
-        self.recovery_target_disk_id = kwargs.get('recovery_target_disk_id', None)
-        self.recovery_replica_disk_id = kwargs.get('recovery_replica_disk_id', None)
-        self.recovery_orignal_target_disk_id = kwargs.get('recovery_orignal_target_disk_id', None)
-        self.recovery_replica_disk_account_type = kwargs.get('recovery_replica_disk_account_type', None)
-        self.recovery_target_disk_account_type = kwargs.get('recovery_target_disk_account_type', None)
-        self.recovery_disk_encryption_set_id = kwargs.get('recovery_disk_encryption_set_id', None)
-        self.primary_disk_encryption_set_id = kwargs.get('primary_disk_encryption_set_id', None)
-        self.disk_name = kwargs.get('disk_name', None)
-        self.disk_capacity_in_bytes = kwargs.get('disk_capacity_in_bytes', None)
-        self.primary_staging_azure_storage_account_id = kwargs.get('primary_staging_azure_storage_account_id', None)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.resync_required = kwargs.get('resync_required', None)
-        self.monitoring_percentage_completion = kwargs.get('monitoring_percentage_completion', None)
-        self.monitoring_job_type = kwargs.get('monitoring_job_type', None)
-        self.data_pending_in_staging_storage_account_in_mb = kwargs.get('data_pending_in_staging_storage_account_in_mb', None)
-        self.data_pending_at_source_agent_in_mb = kwargs.get('data_pending_at_source_agent_in_mb', None)
-        self.disk_state = kwargs.get('disk_state', None)
-        self.allowed_disk_level_operation = kwargs.get('allowed_disk_level_operation', None)
-        self.is_disk_encrypted = kwargs.get('is_disk_encrypted', None)
-        self.secret_identifier = kwargs.get('secret_identifier', None)
-        self.dek_key_vault_arm_id = kwargs.get('dek_key_vault_arm_id', None)
-        self.is_disk_key_encrypted = kwargs.get('is_disk_key_encrypted', None)
-        self.key_identifier = kwargs.get('key_identifier', None)
-        self.kek_key_vault_arm_id = kwargs.get('kek_key_vault_arm_id', None)
-        self.failover_disk_name = kwargs.get('failover_disk_name', None)
-        self.tfo_disk_name = kwargs.get('tfo_disk_name', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.recovery_resource_group_id = kwargs.get("recovery_resource_group_id", None)
+        self.recovery_target_disk_id = kwargs.get("recovery_target_disk_id", None)
+        self.recovery_replica_disk_id = kwargs.get("recovery_replica_disk_id", None)
+        self.recovery_orignal_target_disk_id = kwargs.get("recovery_orignal_target_disk_id", None)
+        self.recovery_replica_disk_account_type = kwargs.get("recovery_replica_disk_account_type", None)
+        self.recovery_target_disk_account_type = kwargs.get("recovery_target_disk_account_type", None)
+        self.recovery_disk_encryption_set_id = kwargs.get("recovery_disk_encryption_set_id", None)
+        self.primary_disk_encryption_set_id = kwargs.get("primary_disk_encryption_set_id", None)
+        self.disk_name = kwargs.get("disk_name", None)
+        self.disk_capacity_in_bytes = kwargs.get("disk_capacity_in_bytes", None)
+        self.primary_staging_azure_storage_account_id = kwargs.get("primary_staging_azure_storage_account_id", None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.resync_required = kwargs.get("resync_required", None)
+        self.monitoring_percentage_completion = kwargs.get("monitoring_percentage_completion", None)
+        self.monitoring_job_type = kwargs.get("monitoring_job_type", None)
+        self.data_pending_in_staging_storage_account_in_mb = kwargs.get(
+            "data_pending_in_staging_storage_account_in_mb", None
+        )
+        self.data_pending_at_source_agent_in_mb = kwargs.get("data_pending_at_source_agent_in_mb", None)
+        self.disk_state = kwargs.get("disk_state", None)
+        self.allowed_disk_level_operation = kwargs.get("allowed_disk_level_operation", None)
+        self.is_disk_encrypted = kwargs.get("is_disk_encrypted", None)
+        self.secret_identifier = kwargs.get("secret_identifier", None)
+        self.dek_key_vault_arm_id = kwargs.get("dek_key_vault_arm_id", None)
+        self.is_disk_key_encrypted = kwargs.get("is_disk_key_encrypted", None)
+        self.key_identifier = kwargs.get("key_identifier", None)
+        self.kek_key_vault_arm_id = kwargs.get("kek_key_vault_arm_id", None)
+        self.failover_disk_name = kwargs.get("failover_disk_name", None)
+        self.tfo_disk_name = kwargs.get("tfo_disk_name", None)
 
 
 class ProtectionContainerMappingProviderSpecificDetails(msrest.serialization.Model):
@@ -1222,21 +1230,22 @@ class ProtectionContainerMappingProviderSpecificDetails(msrest.serialization.Mod
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AProtectionContainerMappingDetails', 'InMageRcm': 'InMageRcmProtectionContainerMappingDetails', 'VMwareCbt': 'VMwareCbtProtectionContainerMappingDetails'}
+        "instance_type": {
+            "A2A": "A2AProtectionContainerMappingDetails",
+            "InMageRcm": "InMageRcmProtectionContainerMappingDetails",
+            "VMwareCbt": "VMwareCbtProtectionContainerMappingDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainerMappingProviderSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -1262,27 +1271,24 @@ class A2AProtectionContainerMappingDetails(ProtectionContainerMappingProviderSpe
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'agent_auto_update_status': {'key': 'agentAutoUpdateStatus', 'type': 'str'},
-        'automation_account_arm_id': {'key': 'automationAccountArmId', 'type': 'str'},
-        'schedule_name': {'key': 'scheduleName', 'type': 'str'},
-        'job_schedule_name': {'key': 'jobScheduleName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "agent_auto_update_status": {"key": "agentAutoUpdateStatus", "type": "str"},
+        "automation_account_arm_id": {"key": "automationAccountArmId", "type": "str"},
+        "schedule_name": {"key": "scheduleName", "type": "str"},
+        "job_schedule_name": {"key": "jobScheduleName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AProtectionContainerMappingDetails, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.agent_auto_update_status = kwargs.get('agent_auto_update_status', None)
-        self.automation_account_arm_id = kwargs.get('automation_account_arm_id', None)
-        self.schedule_name = kwargs.get('schedule_name', None)
-        self.job_schedule_name = kwargs.get('job_schedule_name', None)
+        self.instance_type = "A2A"  # type: str
+        self.agent_auto_update_status = kwargs.get("agent_auto_update_status", None)
+        self.automation_account_arm_id = kwargs.get("automation_account_arm_id", None)
+        self.schedule_name = kwargs.get("schedule_name", None)
+        self.job_schedule_name = kwargs.get("job_schedule_name", None)
 
 
 class A2AProtectionIntentDiskInputDetails(msrest.serialization.Model):
@@ -1301,23 +1307,30 @@ class A2AProtectionIntentDiskInputDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_uri': {'required': True},
+        "disk_uri": {"required": True},
     }
 
     _attribute_map = {
-        'disk_uri': {'key': 'diskUri', 'type': 'str'},
-        'recovery_azure_storage_account_custom_input': {'key': 'recoveryAzureStorageAccountCustomInput', 'type': 'StorageAccountCustomDetails'},
-        'primary_staging_storage_account_custom_input': {'key': 'primaryStagingStorageAccountCustomInput', 'type': 'StorageAccountCustomDetails'},
+        "disk_uri": {"key": "diskUri", "type": "str"},
+        "recovery_azure_storage_account_custom_input": {
+            "key": "recoveryAzureStorageAccountCustomInput",
+            "type": "StorageAccountCustomDetails",
+        },
+        "primary_staging_storage_account_custom_input": {
+            "key": "primaryStagingStorageAccountCustomInput",
+            "type": "StorageAccountCustomDetails",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AProtectionIntentDiskInputDetails, self).__init__(**kwargs)
-        self.disk_uri = kwargs['disk_uri']
-        self.recovery_azure_storage_account_custom_input = kwargs.get('recovery_azure_storage_account_custom_input', None)
-        self.primary_staging_storage_account_custom_input = kwargs.get('primary_staging_storage_account_custom_input', None)
+        self.disk_uri = kwargs["disk_uri"]
+        self.recovery_azure_storage_account_custom_input = kwargs.get(
+            "recovery_azure_storage_account_custom_input", None
+        )
+        self.primary_staging_storage_account_custom_input = kwargs.get(
+            "primary_staging_storage_account_custom_input", None
+        )
 
 
 class A2AProtectionIntentManagedDiskInputDetails(msrest.serialization.Model):
@@ -1347,31 +1360,36 @@ class A2AProtectionIntentManagedDiskInputDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'required': True},
+        "disk_id": {"required": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'primary_staging_storage_account_custom_input': {'key': 'primaryStagingStorageAccountCustomInput', 'type': 'StorageAccountCustomDetails'},
-        'recovery_resource_group_custom_input': {'key': 'recoveryResourceGroupCustomInput', 'type': 'RecoveryResourceGroupCustomDetails'},
-        'recovery_replica_disk_account_type': {'key': 'recoveryReplicaDiskAccountType', 'type': 'str'},
-        'recovery_target_disk_account_type': {'key': 'recoveryTargetDiskAccountType', 'type': 'str'},
-        'recovery_disk_encryption_set_id': {'key': 'recoveryDiskEncryptionSetId', 'type': 'str'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "primary_staging_storage_account_custom_input": {
+            "key": "primaryStagingStorageAccountCustomInput",
+            "type": "StorageAccountCustomDetails",
+        },
+        "recovery_resource_group_custom_input": {
+            "key": "recoveryResourceGroupCustomInput",
+            "type": "RecoveryResourceGroupCustomDetails",
+        },
+        "recovery_replica_disk_account_type": {"key": "recoveryReplicaDiskAccountType", "type": "str"},
+        "recovery_target_disk_account_type": {"key": "recoveryTargetDiskAccountType", "type": "str"},
+        "recovery_disk_encryption_set_id": {"key": "recoveryDiskEncryptionSetId", "type": "str"},
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AProtectionIntentManagedDiskInputDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs['disk_id']
-        self.primary_staging_storage_account_custom_input = kwargs.get('primary_staging_storage_account_custom_input', None)
-        self.recovery_resource_group_custom_input = kwargs.get('recovery_resource_group_custom_input', None)
-        self.recovery_replica_disk_account_type = kwargs.get('recovery_replica_disk_account_type', None)
-        self.recovery_target_disk_account_type = kwargs.get('recovery_target_disk_account_type', None)
-        self.recovery_disk_encryption_set_id = kwargs.get('recovery_disk_encryption_set_id', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
+        self.disk_id = kwargs["disk_id"]
+        self.primary_staging_storage_account_custom_input = kwargs.get(
+            "primary_staging_storage_account_custom_input", None
+        )
+        self.recovery_resource_group_custom_input = kwargs.get("recovery_resource_group_custom_input", None)
+        self.recovery_replica_disk_account_type = kwargs.get("recovery_replica_disk_account_type", None)
+        self.recovery_target_disk_account_type = kwargs.get("recovery_target_disk_account_type", None)
+        self.recovery_disk_encryption_set_id = kwargs.get("recovery_disk_encryption_set_id", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
 
 
 class ProviderSpecificRecoveryPointDetails(msrest.serialization.Model):
@@ -1387,21 +1405,22 @@ class ProviderSpecificRecoveryPointDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2ARecoveryPointDetails', 'InMageAzureV2': 'InMageAzureV2RecoveryPointDetails', 'InMageRcm': 'InMageRcmRecoveryPointDetails'}
+        "instance_type": {
+            "A2A": "A2ARecoveryPointDetails",
+            "InMageAzureV2": "InMageAzureV2RecoveryPointDetails",
+            "InMageRcm": "InMageRcmRecoveryPointDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProviderSpecificRecoveryPointDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -1422,23 +1441,20 @@ class A2ARecoveryPointDetails(ProviderSpecificRecoveryPointDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_sync_type': {'key': 'recoveryPointSyncType', 'type': 'str'},
-        'disks': {'key': 'disks', 'type': '[str]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_sync_type": {"key": "recoveryPointSyncType", "type": "str"},
+        "disks": {"key": "disks", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ARecoveryPointDetails, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_point_sync_type = kwargs.get('recovery_point_sync_type', None)
-        self.disks = kwargs.get('disks', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_point_sync_type = kwargs.get("recovery_point_sync_type", None)
+        self.disks = kwargs.get("disks", None)
 
 
 class RemoveDisksProviderSpecificInput(msrest.serialization.Model):
@@ -1454,21 +1470,16 @@ class RemoveDisksProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'A2ARemoveDisksInput'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "A2ARemoveDisksInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RemoveDisksProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -1487,23 +1498,20 @@ class A2ARemoveDisksInput(RemoveDisksProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vm_disks_uris': {'key': 'vmDisksUris', 'type': '[str]'},
-        'vm_managed_disks_ids': {'key': 'vmManagedDisksIds', 'type': '[str]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vm_disks_uris": {"key": "vmDisksUris", "type": "[str]"},
+        "vm_managed_disks_ids": {"key": "vmManagedDisksIds", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ARemoveDisksInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.vm_disks_uris = kwargs.get('vm_disks_uris', None)
-        self.vm_managed_disks_ids = kwargs.get('vm_managed_disks_ids', None)
+        self.instance_type = "A2A"  # type: str
+        self.vm_disks_uris = kwargs.get("vm_disks_uris", None)
+        self.vm_managed_disks_ids = kwargs.get("vm_managed_disks_ids", None)
 
 
 class A2AReplicationDetails(ReplicationProviderSpecificSettings):
@@ -1633,122 +1641,124 @@ class A2AReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'initial_primary_zone': {'readonly': True},
-        'initial_primary_fabric_location': {'readonly': True},
-        'initial_recovery_zone': {'readonly': True},
-        'initial_recovery_fabric_location': {'readonly': True},
-        'agent_certificate_expiry_date': {'readonly': True},
-        'vm_encryption_type': {'readonly': True},
-        'recovery_azure_generation': {'readonly': True},
+        "instance_type": {"required": True},
+        "initial_primary_zone": {"readonly": True},
+        "initial_primary_fabric_location": {"readonly": True},
+        "initial_recovery_zone": {"readonly": True},
+        "initial_recovery_fabric_location": {"readonly": True},
+        "agent_certificate_expiry_date": {"readonly": True},
+        "vm_encryption_type": {"readonly": True},
+        "recovery_azure_generation": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'initial_primary_zone': {'key': 'initialPrimaryZone', 'type': 'str'},
-        'initial_primary_fabric_location': {'key': 'initialPrimaryFabricLocation', 'type': 'str'},
-        'initial_recovery_zone': {'key': 'initialRecoveryZone', 'type': 'str'},
-        'initial_recovery_fabric_location': {'key': 'initialRecoveryFabricLocation', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'multi_vm_group_create_option': {'key': 'multiVmGroupCreateOption', 'type': 'str'},
-        'management_id': {'key': 'managementId', 'type': 'str'},
-        'protected_disks': {'key': 'protectedDisks', 'type': '[A2AProtectedDiskDetails]'},
-        'unprotected_disks': {'key': 'unprotectedDisks', 'type': '[A2AUnprotectedDiskDetails]'},
-        'protected_managed_disks': {'key': 'protectedManagedDisks', 'type': '[A2AProtectedManagedDiskDetails]'},
-        'recovery_boot_diag_storage_account_id': {'key': 'recoveryBootDiagStorageAccountId', 'type': 'str'},
-        'primary_fabric_location': {'key': 'primaryFabricLocation', 'type': 'str'},
-        'recovery_fabric_location': {'key': 'recoveryFabricLocation', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'recovery_azure_vm_size': {'key': 'recoveryAzureVMSize', 'type': 'str'},
-        'recovery_azure_vm_name': {'key': 'recoveryAzureVMName', 'type': 'str'},
-        'recovery_azure_resource_group_id': {'key': 'recoveryAzureResourceGroupId', 'type': 'str'},
-        'recovery_cloud_service': {'key': 'recoveryCloudService', 'type': 'str'},
-        'recovery_availability_set': {'key': 'recoveryAvailabilitySet', 'type': 'str'},
-        'selected_recovery_azure_network_id': {'key': 'selectedRecoveryAzureNetworkId', 'type': 'str'},
-        'selected_tfo_azure_network_id': {'key': 'selectedTfoAzureNetworkId', 'type': 'str'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicDetails]'},
-        'vm_synced_config_details': {'key': 'vmSyncedConfigDetails', 'type': 'AzureToAzureVmSyncedConfigDetails'},
-        'monitoring_percentage_completion': {'key': 'monitoringPercentageCompletion', 'type': 'int'},
-        'monitoring_job_type': {'key': 'monitoringJobType', 'type': 'str'},
-        'last_heartbeat': {'key': 'lastHeartbeat', 'type': 'iso-8601'},
-        'agent_version': {'key': 'agentVersion', 'type': 'str'},
-        'agent_expiry_date': {'key': 'agentExpiryDate', 'type': 'iso-8601'},
-        'is_replication_agent_update_required': {'key': 'isReplicationAgentUpdateRequired', 'type': 'bool'},
-        'agent_certificate_expiry_date': {'key': 'agentCertificateExpiryDate', 'type': 'iso-8601'},
-        'is_replication_agent_certificate_update_required': {'key': 'isReplicationAgentCertificateUpdateRequired', 'type': 'bool'},
-        'recovery_fabric_object_id': {'key': 'recoveryFabricObjectId', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'lifecycle_id': {'key': 'lifecycleId', 'type': 'str'},
-        'test_failover_recovery_fabric_object_id': {'key': 'testFailoverRecoveryFabricObjectId', 'type': 'str'},
-        'rpo_in_seconds': {'key': 'rpoInSeconds', 'type': 'long'},
-        'last_rpo_calculated_time': {'key': 'lastRpoCalculatedTime', 'type': 'iso-8601'},
-        'primary_availability_zone': {'key': 'primaryAvailabilityZone', 'type': 'str'},
-        'recovery_availability_zone': {'key': 'recoveryAvailabilityZone', 'type': 'str'},
-        'vm_encryption_type': {'key': 'vmEncryptionType', 'type': 'str'},
-        'tfo_azure_vm_name': {'key': 'tfoAzureVMName', 'type': 'str'},
-        'recovery_azure_generation': {'key': 'recoveryAzureGeneration', 'type': 'str'},
-        'recovery_proximity_placement_group_id': {'key': 'recoveryProximityPlacementGroupId', 'type': 'str'},
-        'auto_protection_of_data_disk': {'key': 'autoProtectionOfDataDisk', 'type': 'str'},
-        'recovery_virtual_machine_scale_set_id': {'key': 'recoveryVirtualMachineScaleSetId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "initial_primary_zone": {"key": "initialPrimaryZone", "type": "str"},
+        "initial_primary_fabric_location": {"key": "initialPrimaryFabricLocation", "type": "str"},
+        "initial_recovery_zone": {"key": "initialRecoveryZone", "type": "str"},
+        "initial_recovery_fabric_location": {"key": "initialRecoveryFabricLocation", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "multi_vm_group_create_option": {"key": "multiVmGroupCreateOption", "type": "str"},
+        "management_id": {"key": "managementId", "type": "str"},
+        "protected_disks": {"key": "protectedDisks", "type": "[A2AProtectedDiskDetails]"},
+        "unprotected_disks": {"key": "unprotectedDisks", "type": "[A2AUnprotectedDiskDetails]"},
+        "protected_managed_disks": {"key": "protectedManagedDisks", "type": "[A2AProtectedManagedDiskDetails]"},
+        "recovery_boot_diag_storage_account_id": {"key": "recoveryBootDiagStorageAccountId", "type": "str"},
+        "primary_fabric_location": {"key": "primaryFabricLocation", "type": "str"},
+        "recovery_fabric_location": {"key": "recoveryFabricLocation", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "recovery_azure_vm_size": {"key": "recoveryAzureVMSize", "type": "str"},
+        "recovery_azure_vm_name": {"key": "recoveryAzureVMName", "type": "str"},
+        "recovery_azure_resource_group_id": {"key": "recoveryAzureResourceGroupId", "type": "str"},
+        "recovery_cloud_service": {"key": "recoveryCloudService", "type": "str"},
+        "recovery_availability_set": {"key": "recoveryAvailabilitySet", "type": "str"},
+        "selected_recovery_azure_network_id": {"key": "selectedRecoveryAzureNetworkId", "type": "str"},
+        "selected_tfo_azure_network_id": {"key": "selectedTfoAzureNetworkId", "type": "str"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicDetails]"},
+        "vm_synced_config_details": {"key": "vmSyncedConfigDetails", "type": "AzureToAzureVmSyncedConfigDetails"},
+        "monitoring_percentage_completion": {"key": "monitoringPercentageCompletion", "type": "int"},
+        "monitoring_job_type": {"key": "monitoringJobType", "type": "str"},
+        "last_heartbeat": {"key": "lastHeartbeat", "type": "iso-8601"},
+        "agent_version": {"key": "agentVersion", "type": "str"},
+        "agent_expiry_date": {"key": "agentExpiryDate", "type": "iso-8601"},
+        "is_replication_agent_update_required": {"key": "isReplicationAgentUpdateRequired", "type": "bool"},
+        "agent_certificate_expiry_date": {"key": "agentCertificateExpiryDate", "type": "iso-8601"},
+        "is_replication_agent_certificate_update_required": {
+            "key": "isReplicationAgentCertificateUpdateRequired",
+            "type": "bool",
+        },
+        "recovery_fabric_object_id": {"key": "recoveryFabricObjectId", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "lifecycle_id": {"key": "lifecycleId", "type": "str"},
+        "test_failover_recovery_fabric_object_id": {"key": "testFailoverRecoveryFabricObjectId", "type": "str"},
+        "rpo_in_seconds": {"key": "rpoInSeconds", "type": "long"},
+        "last_rpo_calculated_time": {"key": "lastRpoCalculatedTime", "type": "iso-8601"},
+        "primary_availability_zone": {"key": "primaryAvailabilityZone", "type": "str"},
+        "recovery_availability_zone": {"key": "recoveryAvailabilityZone", "type": "str"},
+        "vm_encryption_type": {"key": "vmEncryptionType", "type": "str"},
+        "tfo_azure_vm_name": {"key": "tfoAzureVMName", "type": "str"},
+        "recovery_azure_generation": {"key": "recoveryAzureGeneration", "type": "str"},
+        "recovery_proximity_placement_group_id": {"key": "recoveryProximityPlacementGroupId", "type": "str"},
+        "auto_protection_of_data_disk": {"key": "autoProtectionOfDataDisk", "type": "str"},
+        "recovery_virtual_machine_scale_set_id": {"key": "recoveryVirtualMachineScaleSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.fabric_object_id = kwargs.get('fabric_object_id', None)
+        self.instance_type = "A2A"  # type: str
+        self.fabric_object_id = kwargs.get("fabric_object_id", None)
         self.initial_primary_zone = None
         self.initial_primary_fabric_location = None
         self.initial_recovery_zone = None
         self.initial_recovery_fabric_location = None
-        self.multi_vm_group_id = kwargs.get('multi_vm_group_id', None)
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
-        self.multi_vm_group_create_option = kwargs.get('multi_vm_group_create_option', None)
-        self.management_id = kwargs.get('management_id', None)
-        self.protected_disks = kwargs.get('protected_disks', None)
-        self.unprotected_disks = kwargs.get('unprotected_disks', None)
-        self.protected_managed_disks = kwargs.get('protected_managed_disks', None)
-        self.recovery_boot_diag_storage_account_id = kwargs.get('recovery_boot_diag_storage_account_id', None)
-        self.primary_fabric_location = kwargs.get('primary_fabric_location', None)
-        self.recovery_fabric_location = kwargs.get('recovery_fabric_location', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.recovery_azure_vm_size = kwargs.get('recovery_azure_vm_size', None)
-        self.recovery_azure_vm_name = kwargs.get('recovery_azure_vm_name', None)
-        self.recovery_azure_resource_group_id = kwargs.get('recovery_azure_resource_group_id', None)
-        self.recovery_cloud_service = kwargs.get('recovery_cloud_service', None)
-        self.recovery_availability_set = kwargs.get('recovery_availability_set', None)
-        self.selected_recovery_azure_network_id = kwargs.get('selected_recovery_azure_network_id', None)
-        self.selected_tfo_azure_network_id = kwargs.get('selected_tfo_azure_network_id', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.vm_synced_config_details = kwargs.get('vm_synced_config_details', None)
-        self.monitoring_percentage_completion = kwargs.get('monitoring_percentage_completion', None)
-        self.monitoring_job_type = kwargs.get('monitoring_job_type', None)
-        self.last_heartbeat = kwargs.get('last_heartbeat', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.agent_expiry_date = kwargs.get('agent_expiry_date', None)
-        self.is_replication_agent_update_required = kwargs.get('is_replication_agent_update_required', None)
+        self.multi_vm_group_id = kwargs.get("multi_vm_group_id", None)
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
+        self.multi_vm_group_create_option = kwargs.get("multi_vm_group_create_option", None)
+        self.management_id = kwargs.get("management_id", None)
+        self.protected_disks = kwargs.get("protected_disks", None)
+        self.unprotected_disks = kwargs.get("unprotected_disks", None)
+        self.protected_managed_disks = kwargs.get("protected_managed_disks", None)
+        self.recovery_boot_diag_storage_account_id = kwargs.get("recovery_boot_diag_storage_account_id", None)
+        self.primary_fabric_location = kwargs.get("primary_fabric_location", None)
+        self.recovery_fabric_location = kwargs.get("recovery_fabric_location", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.recovery_azure_vm_size = kwargs.get("recovery_azure_vm_size", None)
+        self.recovery_azure_vm_name = kwargs.get("recovery_azure_vm_name", None)
+        self.recovery_azure_resource_group_id = kwargs.get("recovery_azure_resource_group_id", None)
+        self.recovery_cloud_service = kwargs.get("recovery_cloud_service", None)
+        self.recovery_availability_set = kwargs.get("recovery_availability_set", None)
+        self.selected_recovery_azure_network_id = kwargs.get("selected_recovery_azure_network_id", None)
+        self.selected_tfo_azure_network_id = kwargs.get("selected_tfo_azure_network_id", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.vm_synced_config_details = kwargs.get("vm_synced_config_details", None)
+        self.monitoring_percentage_completion = kwargs.get("monitoring_percentage_completion", None)
+        self.monitoring_job_type = kwargs.get("monitoring_job_type", None)
+        self.last_heartbeat = kwargs.get("last_heartbeat", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.agent_expiry_date = kwargs.get("agent_expiry_date", None)
+        self.is_replication_agent_update_required = kwargs.get("is_replication_agent_update_required", None)
         self.agent_certificate_expiry_date = None
-        self.is_replication_agent_certificate_update_required = kwargs.get('is_replication_agent_certificate_update_required', None)
-        self.recovery_fabric_object_id = kwargs.get('recovery_fabric_object_id', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.lifecycle_id = kwargs.get('lifecycle_id', None)
-        self.test_failover_recovery_fabric_object_id = kwargs.get('test_failover_recovery_fabric_object_id', None)
-        self.rpo_in_seconds = kwargs.get('rpo_in_seconds', None)
-        self.last_rpo_calculated_time = kwargs.get('last_rpo_calculated_time', None)
-        self.primary_availability_zone = kwargs.get('primary_availability_zone', None)
-        self.recovery_availability_zone = kwargs.get('recovery_availability_zone', None)
+        self.is_replication_agent_certificate_update_required = kwargs.get(
+            "is_replication_agent_certificate_update_required", None
+        )
+        self.recovery_fabric_object_id = kwargs.get("recovery_fabric_object_id", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.lifecycle_id = kwargs.get("lifecycle_id", None)
+        self.test_failover_recovery_fabric_object_id = kwargs.get("test_failover_recovery_fabric_object_id", None)
+        self.rpo_in_seconds = kwargs.get("rpo_in_seconds", None)
+        self.last_rpo_calculated_time = kwargs.get("last_rpo_calculated_time", None)
+        self.primary_availability_zone = kwargs.get("primary_availability_zone", None)
+        self.recovery_availability_zone = kwargs.get("recovery_availability_zone", None)
         self.vm_encryption_type = None
-        self.tfo_azure_vm_name = kwargs.get('tfo_azure_vm_name', None)
+        self.tfo_azure_vm_name = kwargs.get("tfo_azure_vm_name", None)
         self.recovery_azure_generation = None
-        self.recovery_proximity_placement_group_id = kwargs.get('recovery_proximity_placement_group_id', None)
-        self.auto_protection_of_data_disk = kwargs.get('auto_protection_of_data_disk', None)
-        self.recovery_virtual_machine_scale_set_id = kwargs.get('recovery_virtual_machine_scale_set_id', None)
+        self.recovery_proximity_placement_group_id = kwargs.get("recovery_proximity_placement_group_id", None)
+        self.auto_protection_of_data_disk = kwargs.get("auto_protection_of_data_disk", None)
+        self.recovery_virtual_machine_scale_set_id = kwargs.get("recovery_virtual_machine_scale_set_id", None)
 
 
 class ReplicationProtectionIntentProviderSpecificSettings(msrest.serialization.Model):
@@ -1764,21 +1774,16 @@ class ReplicationProtectionIntentProviderSpecificSettings(msrest.serialization.M
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'A2AReplicationIntentDetails'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "A2AReplicationIntentDetails"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProtectionIntentProviderSpecificSettings, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -1843,58 +1848,64 @@ class A2AReplicationIntentDetails(ReplicationProtectionIntentProviderSpecificSet
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_availability_type': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_availability_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'primary_location': {'key': 'primaryLocation', 'type': 'str'},
-        'recovery_location': {'key': 'recoveryLocation', 'type': 'str'},
-        'recovery_subscription_id': {'key': 'recoverySubscriptionId', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[A2AProtectionIntentDiskInputDetails]'},
-        'vm_managed_disks': {'key': 'vmManagedDisks', 'type': '[A2AProtectionIntentManagedDiskInputDetails]'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'protection_profile': {'key': 'protectionProfile', 'type': 'ProtectionProfileCustomDetails'},
-        'primary_staging_storage_account': {'key': 'primaryStagingStorageAccount', 'type': 'StorageAccountCustomDetails'},
-        'recovery_availability_set': {'key': 'recoveryAvailabilitySet', 'type': 'RecoveryAvailabilitySetCustomDetails'},
-        'recovery_virtual_network': {'key': 'recoveryVirtualNetwork', 'type': 'RecoveryVirtualNetworkCustomDetails'},
-        'recovery_proximity_placement_group': {'key': 'recoveryProximityPlacementGroup', 'type': 'RecoveryProximityPlacementGroupCustomDetails'},
-        'auto_protection_of_data_disk': {'key': 'autoProtectionOfDataDisk', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'recovery_boot_diag_storage_account': {'key': 'recoveryBootDiagStorageAccount', 'type': 'StorageAccountCustomDetails'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
-        'recovery_availability_zone': {'key': 'recoveryAvailabilityZone', 'type': 'str'},
-        'recovery_availability_type': {'key': 'recoveryAvailabilityType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "primary_location": {"key": "primaryLocation", "type": "str"},
+        "recovery_location": {"key": "recoveryLocation", "type": "str"},
+        "recovery_subscription_id": {"key": "recoverySubscriptionId", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[A2AProtectionIntentDiskInputDetails]"},
+        "vm_managed_disks": {"key": "vmManagedDisks", "type": "[A2AProtectionIntentManagedDiskInputDetails]"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "protection_profile": {"key": "protectionProfile", "type": "ProtectionProfileCustomDetails"},
+        "primary_staging_storage_account": {
+            "key": "primaryStagingStorageAccount",
+            "type": "StorageAccountCustomDetails",
+        },
+        "recovery_availability_set": {"key": "recoveryAvailabilitySet", "type": "RecoveryAvailabilitySetCustomDetails"},
+        "recovery_virtual_network": {"key": "recoveryVirtualNetwork", "type": "RecoveryVirtualNetworkCustomDetails"},
+        "recovery_proximity_placement_group": {
+            "key": "recoveryProximityPlacementGroup",
+            "type": "RecoveryProximityPlacementGroupCustomDetails",
+        },
+        "auto_protection_of_data_disk": {"key": "autoProtectionOfDataDisk", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "recovery_boot_diag_storage_account": {
+            "key": "recoveryBootDiagStorageAccount",
+            "type": "StorageAccountCustomDetails",
+        },
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
+        "recovery_availability_zone": {"key": "recoveryAvailabilityZone", "type": "str"},
+        "recovery_availability_type": {"key": "recoveryAvailabilityType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AReplicationIntentDetails, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.fabric_object_id = kwargs.get('fabric_object_id', None)
-        self.primary_location = kwargs.get('primary_location', None)
-        self.recovery_location = kwargs.get('recovery_location', None)
-        self.recovery_subscription_id = kwargs.get('recovery_subscription_id', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
-        self.vm_managed_disks = kwargs.get('vm_managed_disks', None)
-        self.recovery_resource_group_id = kwargs.get('recovery_resource_group_id', None)
-        self.protection_profile = kwargs.get('protection_profile', None)
-        self.primary_staging_storage_account = kwargs.get('primary_staging_storage_account', None)
-        self.recovery_availability_set = kwargs.get('recovery_availability_set', None)
-        self.recovery_virtual_network = kwargs.get('recovery_virtual_network', None)
-        self.recovery_proximity_placement_group = kwargs.get('recovery_proximity_placement_group', None)
-        self.auto_protection_of_data_disk = kwargs.get('auto_protection_of_data_disk', None)
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
-        self.multi_vm_group_id = kwargs.get('multi_vm_group_id', None)
-        self.recovery_boot_diag_storage_account = kwargs.get('recovery_boot_diag_storage_account', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
-        self.recovery_availability_zone = kwargs.get('recovery_availability_zone', None)
-        self.recovery_availability_type = kwargs['recovery_availability_type']
+        self.instance_type = "A2A"  # type: str
+        self.fabric_object_id = kwargs.get("fabric_object_id", None)
+        self.primary_location = kwargs.get("primary_location", None)
+        self.recovery_location = kwargs.get("recovery_location", None)
+        self.recovery_subscription_id = kwargs.get("recovery_subscription_id", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
+        self.vm_managed_disks = kwargs.get("vm_managed_disks", None)
+        self.recovery_resource_group_id = kwargs.get("recovery_resource_group_id", None)
+        self.protection_profile = kwargs.get("protection_profile", None)
+        self.primary_staging_storage_account = kwargs.get("primary_staging_storage_account", None)
+        self.recovery_availability_set = kwargs.get("recovery_availability_set", None)
+        self.recovery_virtual_network = kwargs.get("recovery_virtual_network", None)
+        self.recovery_proximity_placement_group = kwargs.get("recovery_proximity_placement_group", None)
+        self.auto_protection_of_data_disk = kwargs.get("auto_protection_of_data_disk", None)
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
+        self.multi_vm_group_id = kwargs.get("multi_vm_group_id", None)
+        self.recovery_boot_diag_storage_account = kwargs.get("recovery_boot_diag_storage_account", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
+        self.recovery_availability_zone = kwargs.get("recovery_availability_zone", None)
+        self.recovery_availability_type = kwargs["recovery_availability_type"]
 
 
 class ReverseReplicationProviderSpecificInput(msrest.serialization.Model):
@@ -1910,21 +1921,25 @@ class ReverseReplicationProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AReprotectInput', 'HyperVReplicaAzure': 'HyperVReplicaAzureReprotectInput', 'InMage': 'InMageReprotectInput', 'InMageAzureV2': 'InMageAzureV2ReprotectInput', 'InMageRcm': 'InMageRcmReprotectInput', 'InMageRcmFailback': 'InMageRcmFailbackReprotectInput'}
+        "instance_type": {
+            "A2A": "A2AReprotectInput",
+            "HyperVReplicaAzure": "HyperVReplicaAzureReprotectInput",
+            "InMage": "InMageReprotectInput",
+            "InMageAzureV2": "InMageAzureV2ReprotectInput",
+            "InMageRcm": "InMageRcmReprotectInput",
+            "InMageRcmFailback": "InMageRcmFailbackReprotectInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReverseReplicationProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -1951,31 +1966,28 @@ class A2AReprotectInput(ReverseReplicationProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_container_id': {'key': 'recoveryContainerId', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[A2AVmDiskInputDetails]'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'recovery_cloud_service_id': {'key': 'recoveryCloudServiceId', 'type': 'str'},
-        'recovery_availability_set_id': {'key': 'recoveryAvailabilitySetId', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_container_id": {"key": "recoveryContainerId", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[A2AVmDiskInputDetails]"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "recovery_cloud_service_id": {"key": "recoveryCloudServiceId", "type": "str"},
+        "recovery_availability_set_id": {"key": "recoveryAvailabilitySetId", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AReprotectInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_container_id = kwargs.get('recovery_container_id', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
-        self.recovery_resource_group_id = kwargs.get('recovery_resource_group_id', None)
-        self.recovery_cloud_service_id = kwargs.get('recovery_cloud_service_id', None)
-        self.recovery_availability_set_id = kwargs.get('recovery_availability_set_id', None)
-        self.policy_id = kwargs.get('policy_id', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_container_id = kwargs.get("recovery_container_id", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
+        self.recovery_resource_group_id = kwargs.get("recovery_resource_group_id", None)
+        self.recovery_cloud_service_id = kwargs.get("recovery_cloud_service_id", None)
+        self.recovery_availability_set_id = kwargs.get("recovery_availability_set_id", None)
+        self.policy_id = kwargs.get("policy_id", None)
 
 
 class SwitchProtectionProviderSpecificInput(msrest.serialization.Model):
@@ -1991,21 +2003,16 @@ class SwitchProtectionProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'A2ASwitchProtectionInput'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "A2ASwitchProtectionInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SwitchProtectionProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -2045,43 +2052,40 @@ class A2ASwitchProtectionInput(SwitchProtectionProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_container_id': {'key': 'recoveryContainerId', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[A2AVmDiskInputDetails]'},
-        'vm_managed_disks': {'key': 'vmManagedDisks', 'type': '[A2AVmManagedDiskInputDetails]'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'recovery_cloud_service_id': {'key': 'recoveryCloudServiceId', 'type': 'str'},
-        'recovery_availability_set_id': {'key': 'recoveryAvailabilitySetId', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'recovery_boot_diag_storage_account_id': {'key': 'recoveryBootDiagStorageAccountId', 'type': 'str'},
-        'recovery_availability_zone': {'key': 'recoveryAvailabilityZone', 'type': 'str'},
-        'recovery_proximity_placement_group_id': {'key': 'recoveryProximityPlacementGroupId', 'type': 'str'},
-        'recovery_virtual_machine_scale_set_id': {'key': 'recoveryVirtualMachineScaleSetId', 'type': 'str'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_container_id": {"key": "recoveryContainerId", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[A2AVmDiskInputDetails]"},
+        "vm_managed_disks": {"key": "vmManagedDisks", "type": "[A2AVmManagedDiskInputDetails]"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "recovery_cloud_service_id": {"key": "recoveryCloudServiceId", "type": "str"},
+        "recovery_availability_set_id": {"key": "recoveryAvailabilitySetId", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "recovery_boot_diag_storage_account_id": {"key": "recoveryBootDiagStorageAccountId", "type": "str"},
+        "recovery_availability_zone": {"key": "recoveryAvailabilityZone", "type": "str"},
+        "recovery_proximity_placement_group_id": {"key": "recoveryProximityPlacementGroupId", "type": "str"},
+        "recovery_virtual_machine_scale_set_id": {"key": "recoveryVirtualMachineScaleSetId", "type": "str"},
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ASwitchProtectionInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_container_id = kwargs.get('recovery_container_id', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
-        self.vm_managed_disks = kwargs.get('vm_managed_disks', None)
-        self.recovery_resource_group_id = kwargs.get('recovery_resource_group_id', None)
-        self.recovery_cloud_service_id = kwargs.get('recovery_cloud_service_id', None)
-        self.recovery_availability_set_id = kwargs.get('recovery_availability_set_id', None)
-        self.policy_id = kwargs.get('policy_id', None)
-        self.recovery_boot_diag_storage_account_id = kwargs.get('recovery_boot_diag_storage_account_id', None)
-        self.recovery_availability_zone = kwargs.get('recovery_availability_zone', None)
-        self.recovery_proximity_placement_group_id = kwargs.get('recovery_proximity_placement_group_id', None)
-        self.recovery_virtual_machine_scale_set_id = kwargs.get('recovery_virtual_machine_scale_set_id', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_container_id = kwargs.get("recovery_container_id", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
+        self.vm_managed_disks = kwargs.get("vm_managed_disks", None)
+        self.recovery_resource_group_id = kwargs.get("recovery_resource_group_id", None)
+        self.recovery_cloud_service_id = kwargs.get("recovery_cloud_service_id", None)
+        self.recovery_availability_set_id = kwargs.get("recovery_availability_set_id", None)
+        self.policy_id = kwargs.get("policy_id", None)
+        self.recovery_boot_diag_storage_account_id = kwargs.get("recovery_boot_diag_storage_account_id", None)
+        self.recovery_availability_zone = kwargs.get("recovery_availability_zone", None)
+        self.recovery_proximity_placement_group_id = kwargs.get("recovery_proximity_placement_group_id", None)
+        self.recovery_virtual_machine_scale_set_id = kwargs.get("recovery_virtual_machine_scale_set_id", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
 
 
 class TestFailoverProviderSpecificInput(msrest.serialization.Model):
@@ -2097,21 +2101,24 @@ class TestFailoverProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2ATestFailoverInput', 'HyperVReplicaAzure': 'HyperVReplicaAzureTestFailoverInput', 'InMage': 'InMageTestFailoverInput', 'InMageAzureV2': 'InMageAzureV2TestFailoverInput', 'InMageRcm': 'InMageRcmTestFailoverInput'}
+        "instance_type": {
+            "A2A": "A2ATestFailoverInput",
+            "HyperVReplicaAzure": "HyperVReplicaAzureTestFailoverInput",
+            "InMage": "InMageTestFailoverInput",
+            "InMageAzureV2": "InMageAzureV2TestFailoverInput",
+            "InMageRcm": "InMageRcmTestFailoverInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestFailoverProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -2132,23 +2139,20 @@ class A2ATestFailoverInput(TestFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'cloud_service_creation_option': {'key': 'cloudServiceCreationOption', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "cloud_service_creation_option": {"key": "cloudServiceCreationOption", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2ATestFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
-        self.cloud_service_creation_option = kwargs.get('cloud_service_creation_option', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
+        self.cloud_service_creation_option = kwargs.get("cloud_service_creation_option", None)
 
 
 class UnplannedFailoverProviderSpecificInput(msrest.serialization.Model):
@@ -2164,21 +2168,24 @@ class UnplannedFailoverProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AUnplannedFailoverInput', 'HyperVReplicaAzure': 'HyperVReplicaAzureUnplannedFailoverInput', 'InMage': 'InMageUnplannedFailoverInput', 'InMageAzureV2': 'InMageAzureV2UnplannedFailoverInput', 'InMageRcm': 'InMageRcmUnplannedFailoverInput'}
+        "instance_type": {
+            "A2A": "A2AUnplannedFailoverInput",
+            "HyperVReplicaAzure": "HyperVReplicaAzureUnplannedFailoverInput",
+            "InMage": "InMageUnplannedFailoverInput",
+            "InMageAzureV2": "InMageAzureV2UnplannedFailoverInput",
+            "InMageRcm": "InMageRcmUnplannedFailoverInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnplannedFailoverProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -2199,23 +2206,20 @@ class A2AUnplannedFailoverInput(UnplannedFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'cloud_service_creation_option': {'key': 'cloudServiceCreationOption', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "cloud_service_creation_option": {"key": "cloudServiceCreationOption", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AUnplannedFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
-        self.cloud_service_creation_option = kwargs.get('cloud_service_creation_option', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
+        self.cloud_service_creation_option = kwargs.get("cloud_service_creation_option", None)
 
 
 class A2AUnprotectedDiskDetails(msrest.serialization.Model):
@@ -2230,17 +2234,14 @@ class A2AUnprotectedDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_lun_id': {'key': 'diskLunId', 'type': 'int'},
-        'disk_auto_protection_status': {'key': 'diskAutoProtectionStatus', 'type': 'str'},
+        "disk_lun_id": {"key": "diskLunId", "type": "int"},
+        "disk_auto_protection_status": {"key": "diskAutoProtectionStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AUnprotectedDiskDetails, self).__init__(**kwargs)
-        self.disk_lun_id = kwargs.get('disk_lun_id', None)
-        self.disk_auto_protection_status = kwargs.get('disk_auto_protection_status', None)
+        self.disk_lun_id = kwargs.get("disk_lun_id", None)
+        self.disk_auto_protection_status = kwargs.get("disk_auto_protection_status", None)
 
 
 class ReplicationProviderSpecificUpdateContainerMappingInput(msrest.serialization.Model):
@@ -2256,21 +2257,18 @@ class ReplicationProviderSpecificUpdateContainerMappingInput(msrest.serializatio
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AUpdateContainerMappingInput', 'InMageRcm': 'InMageRcmUpdateContainerMappingInput'}
+        "instance_type": {"A2A": "A2AUpdateContainerMappingInput", "InMageRcm": "InMageRcmUpdateContainerMappingInput"}
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProviderSpecificUpdateContainerMappingInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -2291,23 +2289,20 @@ class A2AUpdateContainerMappingInput(ReplicationProviderSpecificUpdateContainerM
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'agent_auto_update_status': {'key': 'agentAutoUpdateStatus', 'type': 'str'},
-        'automation_account_arm_id': {'key': 'automationAccountArmId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "agent_auto_update_status": {"key": "agentAutoUpdateStatus", "type": "str"},
+        "automation_account_arm_id": {"key": "automationAccountArmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AUpdateContainerMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.agent_auto_update_status = kwargs.get('agent_auto_update_status', None)
-        self.automation_account_arm_id = kwargs.get('automation_account_arm_id', None)
+        self.instance_type = "A2A"  # type: str
+        self.agent_auto_update_status = kwargs.get("agent_auto_update_status", None)
+        self.automation_account_arm_id = kwargs.get("automation_account_arm_id", None)
 
 
 class UpdateReplicationProtectedItemProviderInput(msrest.serialization.Model):
@@ -2323,21 +2318,23 @@ class UpdateReplicationProtectedItemProviderInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'A2AUpdateReplicationProtectedItemInput', 'HyperVReplicaAzure': 'HyperVReplicaAzureUpdateReplicationProtectedItemInput', 'InMageAzureV2': 'InMageAzureV2UpdateReplicationProtectedItemInput', 'InMageRcm': 'InMageRcmUpdateReplicationProtectedItemInput'}
+        "instance_type": {
+            "A2A": "A2AUpdateReplicationProtectedItemInput",
+            "HyperVReplicaAzure": "HyperVReplicaAzureUpdateReplicationProtectedItemInput",
+            "InMageAzureV2": "InMageAzureV2UpdateReplicationProtectedItemInput",
+            "InMageRcm": "InMageRcmUpdateReplicationProtectedItemInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateReplicationProtectedItemProviderInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -2369,35 +2366,32 @@ class A2AUpdateReplicationProtectedItemInput(UpdateReplicationProtectedItemProvi
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_cloud_service_id': {'key': 'recoveryCloudServiceId', 'type': 'str'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'managed_disk_update_details': {'key': 'managedDiskUpdateDetails', 'type': '[A2AVmManagedDiskUpdateDetails]'},
-        'recovery_boot_diag_storage_account_id': {'key': 'recoveryBootDiagStorageAccountId', 'type': 'str'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
-        'tfo_azure_vm_name': {'key': 'tfoAzureVMName', 'type': 'str'},
-        'recovery_proximity_placement_group_id': {'key': 'recoveryProximityPlacementGroupId', 'type': 'str'},
-        'recovery_virtual_machine_scale_set_id': {'key': 'recoveryVirtualMachineScaleSetId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_cloud_service_id": {"key": "recoveryCloudServiceId", "type": "str"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "managed_disk_update_details": {"key": "managedDiskUpdateDetails", "type": "[A2AVmManagedDiskUpdateDetails]"},
+        "recovery_boot_diag_storage_account_id": {"key": "recoveryBootDiagStorageAccountId", "type": "str"},
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
+        "tfo_azure_vm_name": {"key": "tfoAzureVMName", "type": "str"},
+        "recovery_proximity_placement_group_id": {"key": "recoveryProximityPlacementGroupId", "type": "str"},
+        "recovery_virtual_machine_scale_set_id": {"key": "recoveryVirtualMachineScaleSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AUpdateReplicationProtectedItemInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_cloud_service_id = kwargs.get('recovery_cloud_service_id', None)
-        self.recovery_resource_group_id = kwargs.get('recovery_resource_group_id', None)
-        self.managed_disk_update_details = kwargs.get('managed_disk_update_details', None)
-        self.recovery_boot_diag_storage_account_id = kwargs.get('recovery_boot_diag_storage_account_id', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
-        self.tfo_azure_vm_name = kwargs.get('tfo_azure_vm_name', None)
-        self.recovery_proximity_placement_group_id = kwargs.get('recovery_proximity_placement_group_id', None)
-        self.recovery_virtual_machine_scale_set_id = kwargs.get('recovery_virtual_machine_scale_set_id', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_cloud_service_id = kwargs.get("recovery_cloud_service_id", None)
+        self.recovery_resource_group_id = kwargs.get("recovery_resource_group_id", None)
+        self.managed_disk_update_details = kwargs.get("managed_disk_update_details", None)
+        self.recovery_boot_diag_storage_account_id = kwargs.get("recovery_boot_diag_storage_account_id", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
+        self.tfo_azure_vm_name = kwargs.get("tfo_azure_vm_name", None)
+        self.recovery_proximity_placement_group_id = kwargs.get("recovery_proximity_placement_group_id", None)
+        self.recovery_virtual_machine_scale_set_id = kwargs.get("recovery_virtual_machine_scale_set_id", None)
 
 
 class A2AVmDiskInputDetails(msrest.serialization.Model):
@@ -2415,25 +2409,22 @@ class A2AVmDiskInputDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_uri': {'required': True},
-        'recovery_azure_storage_account_id': {'required': True},
-        'primary_staging_azure_storage_account_id': {'required': True},
+        "disk_uri": {"required": True},
+        "recovery_azure_storage_account_id": {"required": True},
+        "primary_staging_azure_storage_account_id": {"required": True},
     }
 
     _attribute_map = {
-        'disk_uri': {'key': 'diskUri', 'type': 'str'},
-        'recovery_azure_storage_account_id': {'key': 'recoveryAzureStorageAccountId', 'type': 'str'},
-        'primary_staging_azure_storage_account_id': {'key': 'primaryStagingAzureStorageAccountId', 'type': 'str'},
+        "disk_uri": {"key": "diskUri", "type": "str"},
+        "recovery_azure_storage_account_id": {"key": "recoveryAzureStorageAccountId", "type": "str"},
+        "primary_staging_azure_storage_account_id": {"key": "primaryStagingAzureStorageAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AVmDiskInputDetails, self).__init__(**kwargs)
-        self.disk_uri = kwargs['disk_uri']
-        self.recovery_azure_storage_account_id = kwargs['recovery_azure_storage_account_id']
-        self.primary_staging_azure_storage_account_id = kwargs['primary_staging_azure_storage_account_id']
+        self.disk_uri = kwargs["disk_uri"]
+        self.recovery_azure_storage_account_id = kwargs["recovery_azure_storage_account_id"]
+        self.primary_staging_azure_storage_account_id = kwargs["primary_staging_azure_storage_account_id"]
 
 
 class A2AVmManagedDiskInputDetails(msrest.serialization.Model):
@@ -2462,33 +2453,30 @@ class A2AVmManagedDiskInputDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'required': True},
-        'primary_staging_azure_storage_account_id': {'required': True},
-        'recovery_resource_group_id': {'required': True},
+        "disk_id": {"required": True},
+        "primary_staging_azure_storage_account_id": {"required": True},
+        "recovery_resource_group_id": {"required": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'primary_staging_azure_storage_account_id': {'key': 'primaryStagingAzureStorageAccountId', 'type': 'str'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
-        'recovery_replica_disk_account_type': {'key': 'recoveryReplicaDiskAccountType', 'type': 'str'},
-        'recovery_target_disk_account_type': {'key': 'recoveryTargetDiskAccountType', 'type': 'str'},
-        'recovery_disk_encryption_set_id': {'key': 'recoveryDiskEncryptionSetId', 'type': 'str'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "primary_staging_azure_storage_account_id": {"key": "primaryStagingAzureStorageAccountId", "type": "str"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
+        "recovery_replica_disk_account_type": {"key": "recoveryReplicaDiskAccountType", "type": "str"},
+        "recovery_target_disk_account_type": {"key": "recoveryTargetDiskAccountType", "type": "str"},
+        "recovery_disk_encryption_set_id": {"key": "recoveryDiskEncryptionSetId", "type": "str"},
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AVmManagedDiskInputDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs['disk_id']
-        self.primary_staging_azure_storage_account_id = kwargs['primary_staging_azure_storage_account_id']
-        self.recovery_resource_group_id = kwargs['recovery_resource_group_id']
-        self.recovery_replica_disk_account_type = kwargs.get('recovery_replica_disk_account_type', None)
-        self.recovery_target_disk_account_type = kwargs.get('recovery_target_disk_account_type', None)
-        self.recovery_disk_encryption_set_id = kwargs.get('recovery_disk_encryption_set_id', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
+        self.disk_id = kwargs["disk_id"]
+        self.primary_staging_azure_storage_account_id = kwargs["primary_staging_azure_storage_account_id"]
+        self.recovery_resource_group_id = kwargs["recovery_resource_group_id"]
+        self.recovery_replica_disk_account_type = kwargs.get("recovery_replica_disk_account_type", None)
+        self.recovery_target_disk_account_type = kwargs.get("recovery_target_disk_account_type", None)
+        self.recovery_disk_encryption_set_id = kwargs.get("recovery_disk_encryption_set_id", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
 
 
 class A2AVmManagedDiskUpdateDetails(msrest.serialization.Model):
@@ -2509,25 +2497,22 @@ class A2AVmManagedDiskUpdateDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'recovery_target_disk_account_type': {'key': 'recoveryTargetDiskAccountType', 'type': 'str'},
-        'recovery_replica_disk_account_type': {'key': 'recoveryReplicaDiskAccountType', 'type': 'str'},
-        'disk_encryption_info': {'key': 'diskEncryptionInfo', 'type': 'DiskEncryptionInfo'},
-        'failover_disk_name': {'key': 'failoverDiskName', 'type': 'str'},
-        'tfo_disk_name': {'key': 'tfoDiskName', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "recovery_target_disk_account_type": {"key": "recoveryTargetDiskAccountType", "type": "str"},
+        "recovery_replica_disk_account_type": {"key": "recoveryReplicaDiskAccountType", "type": "str"},
+        "disk_encryption_info": {"key": "diskEncryptionInfo", "type": "DiskEncryptionInfo"},
+        "failover_disk_name": {"key": "failoverDiskName", "type": "str"},
+        "tfo_disk_name": {"key": "tfoDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AVmManagedDiskUpdateDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.recovery_target_disk_account_type = kwargs.get('recovery_target_disk_account_type', None)
-        self.recovery_replica_disk_account_type = kwargs.get('recovery_replica_disk_account_type', None)
-        self.disk_encryption_info = kwargs.get('disk_encryption_info', None)
-        self.failover_disk_name = kwargs.get('failover_disk_name', None)
-        self.tfo_disk_name = kwargs.get('tfo_disk_name', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.recovery_target_disk_account_type = kwargs.get("recovery_target_disk_account_type", None)
+        self.recovery_replica_disk_account_type = kwargs.get("recovery_replica_disk_account_type", None)
+        self.disk_encryption_info = kwargs.get("disk_encryption_info", None)
+        self.failover_disk_name = kwargs.get("failover_disk_name", None)
+        self.tfo_disk_name = kwargs.get("tfo_disk_name", None)
 
 
 class A2AZoneDetails(msrest.serialization.Model):
@@ -2540,17 +2525,14 @@ class A2AZoneDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'source': {'key': 'source', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
+        "source": {"key": "source", "type": "str"},
+        "target": {"key": "target", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(A2AZoneDetails, self).__init__(**kwargs)
-        self.source = kwargs.get('source', None)
-        self.target = kwargs.get('target', None)
+        self.source = kwargs.get("source", None)
+        self.target = kwargs.get("target", None)
 
 
 class AddDisksInput(msrest.serialization.Model):
@@ -2561,15 +2543,12 @@ class AddDisksInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'AddDisksInputProperties'},
+        "properties": {"key": "properties", "type": "AddDisksInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddDisksInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class AddDisksInputProperties(msrest.serialization.Model):
@@ -2585,19 +2564,16 @@ class AddDisksInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider_specific_details': {'required': True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'AddDisksProviderSpecificInput'},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "AddDisksProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddDisksInputProperties, self).__init__(**kwargs)
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class AddRecoveryServicesProviderInput(msrest.serialization.Model):
@@ -2611,19 +2587,16 @@ class AddRecoveryServicesProviderInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'AddRecoveryServicesProviderInputProperties'},
+        "properties": {"key": "properties", "type": "AddRecoveryServicesProviderInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddRecoveryServicesProviderInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class AddRecoveryServicesProviderInputProperties(msrest.serialization.Model):
@@ -2652,31 +2625,31 @@ class AddRecoveryServicesProviderInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'machine_name': {'required': True},
-        'authentication_identity_input': {'required': True},
-        'resource_access_identity_input': {'required': True},
+        "machine_name": {"required": True},
+        "authentication_identity_input": {"required": True},
+        "resource_access_identity_input": {"required": True},
     }
 
     _attribute_map = {
-        'machine_name': {'key': 'machineName', 'type': 'str'},
-        'machine_id': {'key': 'machineId', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'authentication_identity_input': {'key': 'authenticationIdentityInput', 'type': 'IdentityProviderInput'},
-        'resource_access_identity_input': {'key': 'resourceAccessIdentityInput', 'type': 'IdentityProviderInput'},
-        'data_plane_authentication_identity_input': {'key': 'dataPlaneAuthenticationIdentityInput', 'type': 'IdentityProviderInput'},
+        "machine_name": {"key": "machineName", "type": "str"},
+        "machine_id": {"key": "machineId", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "authentication_identity_input": {"key": "authenticationIdentityInput", "type": "IdentityProviderInput"},
+        "resource_access_identity_input": {"key": "resourceAccessIdentityInput", "type": "IdentityProviderInput"},
+        "data_plane_authentication_identity_input": {
+            "key": "dataPlaneAuthenticationIdentityInput",
+            "type": "IdentityProviderInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddRecoveryServicesProviderInputProperties, self).__init__(**kwargs)
-        self.machine_name = kwargs['machine_name']
-        self.machine_id = kwargs.get('machine_id', None)
-        self.bios_id = kwargs.get('bios_id', None)
-        self.authentication_identity_input = kwargs['authentication_identity_input']
-        self.resource_access_identity_input = kwargs['resource_access_identity_input']
-        self.data_plane_authentication_identity_input = kwargs.get('data_plane_authentication_identity_input', None)
+        self.machine_name = kwargs["machine_name"]
+        self.machine_id = kwargs.get("machine_id", None)
+        self.bios_id = kwargs.get("bios_id", None)
+        self.authentication_identity_input = kwargs["authentication_identity_input"]
+        self.resource_access_identity_input = kwargs["resource_access_identity_input"]
+        self.data_plane_authentication_identity_input = kwargs.get("data_plane_authentication_identity_input", None)
 
 
 class AddVCenterRequest(msrest.serialization.Model):
@@ -2687,15 +2660,12 @@ class AddVCenterRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'AddVCenterRequestProperties'},
+        "properties": {"key": "properties", "type": "AddVCenterRequestProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddVCenterRequest, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class AddVCenterRequestProperties(msrest.serialization.Model):
@@ -2714,23 +2684,20 @@ class AddVCenterRequestProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'port': {'key': 'port', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "port": {"key": "port", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddVCenterRequestProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
-        self.port = kwargs.get('port', None)
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
+        self.port = kwargs.get("port", None)
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
 
 
 class AgentDetails(msrest.serialization.Model):
@@ -2751,25 +2718,22 @@ class AgentDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'agent_id': {'readonly': True},
-        'machine_id': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'fqdn': {'readonly': True},
-        'disks': {'readonly': True},
+        "agent_id": {"readonly": True},
+        "machine_id": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "fqdn": {"readonly": True},
+        "disks": {"readonly": True},
     }
 
     _attribute_map = {
-        'agent_id': {'key': 'agentId', 'type': 'str'},
-        'machine_id': {'key': 'machineId', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'disks': {'key': 'disks', 'type': '[AgentDiskDetails]'},
+        "agent_id": {"key": "agentId", "type": "str"},
+        "machine_id": {"key": "machineId", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "disks": {"key": "disks", "type": "[AgentDiskDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AgentDetails, self).__init__(**kwargs)
         self.agent_id = None
         self.machine_id = None
@@ -2796,25 +2760,22 @@ class AgentDiskDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'readonly': True},
-        'disk_name': {'readonly': True},
-        'is_os_disk': {'readonly': True},
-        'capacity_in_bytes': {'readonly': True},
-        'lun_id': {'readonly': True},
+        "disk_id": {"readonly": True},
+        "disk_name": {"readonly": True},
+        "is_os_disk": {"readonly": True},
+        "capacity_in_bytes": {"readonly": True},
+        "lun_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'is_os_disk': {'key': 'isOSDisk', 'type': 'str'},
-        'capacity_in_bytes': {'key': 'capacityInBytes', 'type': 'long'},
-        'lun_id': {'key': 'lunId', 'type': 'int'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "is_os_disk": {"key": "isOSDisk", "type": "str"},
+        "capacity_in_bytes": {"key": "capacityInBytes", "type": "long"},
+        "lun_id": {"key": "lunId", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AgentDiskDetails, self).__init__(**kwargs)
         self.disk_id = None
         self.disk_name = None
@@ -2839,27 +2800,24 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.location = kwargs.get('location', None)
+        self.location = kwargs.get("location", None)
 
 
 class Alert(Resource):
@@ -2880,25 +2838,22 @@ class Alert(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'AlertProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "AlertProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Alert, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class AlertCollection(msrest.serialization.Model):
@@ -2911,17 +2866,14 @@ class AlertCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Alert]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Alert]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AlertCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AlertProperties(msrest.serialization.Model):
@@ -2936,19 +2888,16 @@ class AlertProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'send_to_owners': {'key': 'sendToOwners', 'type': 'str'},
-        'custom_email_addresses': {'key': 'customEmailAddresses', 'type': '[str]'},
-        'locale': {'key': 'locale', 'type': 'str'},
+        "send_to_owners": {"key": "sendToOwners", "type": "str"},
+        "custom_email_addresses": {"key": "customEmailAddresses", "type": "[str]"},
+        "locale": {"key": "locale", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AlertProperties, self).__init__(**kwargs)
-        self.send_to_owners = kwargs.get('send_to_owners', None)
-        self.custom_email_addresses = kwargs.get('custom_email_addresses', None)
-        self.locale = kwargs.get('locale', None)
+        self.send_to_owners = kwargs.get("send_to_owners", None)
+        self.custom_email_addresses = kwargs.get("custom_email_addresses", None)
+        self.locale = kwargs.get("locale", None)
 
 
 class ApplyRecoveryPointInput(msrest.serialization.Model):
@@ -2962,19 +2911,16 @@ class ApplyRecoveryPointInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'ApplyRecoveryPointInputProperties'},
+        "properties": {"key": "properties", "type": "ApplyRecoveryPointInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplyRecoveryPointInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class ApplyRecoveryPointInputProperties(msrest.serialization.Model):
@@ -2991,21 +2937,21 @@ class ApplyRecoveryPointInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider_specific_details': {'required': True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'ApplyRecoveryPointProviderSpecificInput'},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "ApplyRecoveryPointProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplyRecoveryPointInputProperties, self).__init__(**kwargs)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class JobDetails(msrest.serialization.Model):
@@ -3025,25 +2971,28 @@ class JobDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'affected_object_details': {'key': 'affectedObjectDetails', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "affected_object_details": {"key": "affectedObjectDetails", "type": "{str}"},
     }
 
     _subtype_map = {
-        'instance_type': {'AsrJobDetails': 'AsrJobDetails', 'ExportJobDetails': 'ExportJobDetails', 'FailoverJobDetails': 'FailoverJobDetails', 'SwitchProtectionJobDetails': 'SwitchProtectionJobDetails', 'TestFailoverJobDetails': 'TestFailoverJobDetails'}
+        "instance_type": {
+            "AsrJobDetails": "AsrJobDetails",
+            "ExportJobDetails": "ExportJobDetails",
+            "FailoverJobDetails": "FailoverJobDetails",
+            "SwitchProtectionJobDetails": "SwitchProtectionJobDetails",
+            "TestFailoverJobDetails": "TestFailoverJobDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
-        self.affected_object_details = kwargs.get('affected_object_details', None)
+        self.affected_object_details = kwargs.get("affected_object_details", None)
 
 
 class AsrJobDetails(JobDetails):
@@ -3060,20 +3009,17 @@ class AsrJobDetails(JobDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'affected_object_details': {'key': 'affectedObjectDetails', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "affected_object_details": {"key": "affectedObjectDetails", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AsrJobDetails, self).__init__(**kwargs)
-        self.instance_type = 'AsrJobDetails'  # type: str
+        self.instance_type = "AsrJobDetails"  # type: str
 
 
 class ASRTask(msrest.serialization.Model):
@@ -3110,37 +3056,34 @@ class ASRTask(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'task_id': {'key': 'taskId', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
-        'end_time': {'key': 'endTime', 'type': 'iso-8601'},
-        'allowed_actions': {'key': 'allowedActions', 'type': '[str]'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'state': {'key': 'state', 'type': 'str'},
-        'state_description': {'key': 'stateDescription', 'type': 'str'},
-        'task_type': {'key': 'taskType', 'type': 'str'},
-        'custom_details': {'key': 'customDetails', 'type': 'TaskTypeDetails'},
-        'group_task_custom_details': {'key': 'groupTaskCustomDetails', 'type': 'GroupTaskDetails'},
-        'errors': {'key': 'errors', 'type': '[JobErrorDetails]'},
+        "task_id": {"key": "taskId", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
+        "end_time": {"key": "endTime", "type": "iso-8601"},
+        "allowed_actions": {"key": "allowedActions", "type": "[str]"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "state": {"key": "state", "type": "str"},
+        "state_description": {"key": "stateDescription", "type": "str"},
+        "task_type": {"key": "taskType", "type": "str"},
+        "custom_details": {"key": "customDetails", "type": "TaskTypeDetails"},
+        "group_task_custom_details": {"key": "groupTaskCustomDetails", "type": "GroupTaskDetails"},
+        "errors": {"key": "errors", "type": "[JobErrorDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ASRTask, self).__init__(**kwargs)
-        self.task_id = kwargs.get('task_id', None)
-        self.name = kwargs.get('name', None)
-        self.start_time = kwargs.get('start_time', None)
-        self.end_time = kwargs.get('end_time', None)
-        self.allowed_actions = kwargs.get('allowed_actions', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.state = kwargs.get('state', None)
-        self.state_description = kwargs.get('state_description', None)
-        self.task_type = kwargs.get('task_type', None)
-        self.custom_details = kwargs.get('custom_details', None)
-        self.group_task_custom_details = kwargs.get('group_task_custom_details', None)
-        self.errors = kwargs.get('errors', None)
+        self.task_id = kwargs.get("task_id", None)
+        self.name = kwargs.get("name", None)
+        self.start_time = kwargs.get("start_time", None)
+        self.end_time = kwargs.get("end_time", None)
+        self.allowed_actions = kwargs.get("allowed_actions", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.state = kwargs.get("state", None)
+        self.state_description = kwargs.get("state_description", None)
+        self.task_type = kwargs.get("task_type", None)
+        self.custom_details = kwargs.get("custom_details", None)
+        self.group_task_custom_details = kwargs.get("group_task_custom_details", None)
+        self.errors = kwargs.get("errors", None)
 
 
 class TaskTypeDetails(msrest.serialization.Model):
@@ -3156,21 +3099,25 @@ class TaskTypeDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'AutomationRunbookTaskDetails': 'AutomationRunbookTaskDetails', 'ConsistencyCheckTaskDetails': 'ConsistencyCheckTaskDetails', 'JobTaskDetails': 'JobTaskDetails', 'ManualActionTaskDetails': 'ManualActionTaskDetails', 'ScriptActionTaskDetails': 'ScriptActionTaskDetails', 'VmNicUpdatesTaskDetails': 'VmNicUpdatesTaskDetails'}
+        "instance_type": {
+            "AutomationRunbookTaskDetails": "AutomationRunbookTaskDetails",
+            "ConsistencyCheckTaskDetails": "ConsistencyCheckTaskDetails",
+            "JobTaskDetails": "JobTaskDetails",
+            "ManualActionTaskDetails": "ManualActionTaskDetails",
+            "ScriptActionTaskDetails": "ScriptActionTaskDetails",
+            "VmNicUpdatesTaskDetails": "VmNicUpdatesTaskDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TaskTypeDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -3203,37 +3150,34 @@ class AutomationRunbookTaskDetails(TaskTypeDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'cloud_service_name': {'key': 'cloudServiceName', 'type': 'str'},
-        'subscription_id': {'key': 'subscriptionId', 'type': 'str'},
-        'account_name': {'key': 'accountName', 'type': 'str'},
-        'runbook_id': {'key': 'runbookId', 'type': 'str'},
-        'runbook_name': {'key': 'runbookName', 'type': 'str'},
-        'job_id': {'key': 'jobId', 'type': 'str'},
-        'job_output': {'key': 'jobOutput', 'type': 'str'},
-        'is_primary_side_script': {'key': 'isPrimarySideScript', 'type': 'bool'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "cloud_service_name": {"key": "cloudServiceName", "type": "str"},
+        "subscription_id": {"key": "subscriptionId", "type": "str"},
+        "account_name": {"key": "accountName", "type": "str"},
+        "runbook_id": {"key": "runbookId", "type": "str"},
+        "runbook_name": {"key": "runbookName", "type": "str"},
+        "job_id": {"key": "jobId", "type": "str"},
+        "job_output": {"key": "jobOutput", "type": "str"},
+        "is_primary_side_script": {"key": "isPrimarySideScript", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AutomationRunbookTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'AutomationRunbookTaskDetails'  # type: str
-        self.name = kwargs.get('name', None)
-        self.cloud_service_name = kwargs.get('cloud_service_name', None)
-        self.subscription_id = kwargs.get('subscription_id', None)
-        self.account_name = kwargs.get('account_name', None)
-        self.runbook_id = kwargs.get('runbook_id', None)
-        self.runbook_name = kwargs.get('runbook_name', None)
-        self.job_id = kwargs.get('job_id', None)
-        self.job_output = kwargs.get('job_output', None)
-        self.is_primary_side_script = kwargs.get('is_primary_side_script', None)
+        self.instance_type = "AutomationRunbookTaskDetails"  # type: str
+        self.name = kwargs.get("name", None)
+        self.cloud_service_name = kwargs.get("cloud_service_name", None)
+        self.subscription_id = kwargs.get("subscription_id", None)
+        self.account_name = kwargs.get("account_name", None)
+        self.runbook_id = kwargs.get("runbook_id", None)
+        self.runbook_name = kwargs.get("runbook_name", None)
+        self.job_id = kwargs.get("job_id", None)
+        self.job_output = kwargs.get("job_output", None)
+        self.is_primary_side_script = kwargs.get("is_primary_side_script", None)
 
 
 class FabricSpecificCreationInput(msrest.serialization.Model):
@@ -3249,21 +3193,22 @@ class FabricSpecificCreationInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'Azure': 'AzureFabricCreationInput', 'InMageRcm': 'InMageRcmFabricCreationInput', 'VMwareV2': 'VMwareV2FabricCreationInput'}
+        "instance_type": {
+            "Azure": "AzureFabricCreationInput",
+            "InMageRcm": "InMageRcmFabricCreationInput",
+            "VMwareV2": "VMwareV2FabricCreationInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricSpecificCreationInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -3280,21 +3225,18 @@ class AzureFabricCreationInput(FabricSpecificCreationInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureFabricCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'Azure'  # type: str
-        self.location = kwargs.get('location', None)
+        self.instance_type = "Azure"  # type: str
+        self.location = kwargs.get("location", None)
 
 
 class FabricSpecificDetails(msrest.serialization.Model):
@@ -3311,21 +3253,25 @@ class FabricSpecificDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'Azure': 'AzureFabricSpecificDetails', 'HyperVSite': 'HyperVSiteDetails', 'InMageRcm': 'InMageRcmFabricSpecificDetails', 'VMM': 'VmmDetails', 'VMware': 'VMwareDetails', 'VMwareV2': 'VMwareV2FabricSpecificDetails'}
+        "instance_type": {
+            "Azure": "AzureFabricSpecificDetails",
+            "HyperVSite": "HyperVSiteDetails",
+            "InMageRcm": "InMageRcmFabricSpecificDetails",
+            "VMM": "VmmDetails",
+            "VMware": "VMwareDetails",
+            "VMwareV2": "VMwareV2FabricSpecificDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -3347,25 +3293,22 @@ class AzureFabricSpecificDetails(FabricSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'container_ids': {'key': 'containerIds', 'type': '[str]'},
-        'zones': {'key': 'zones', 'type': '[A2AZoneDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "container_ids": {"key": "containerIds", "type": "[str]"},
+        "zones": {"key": "zones", "type": "[A2AZoneDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureFabricSpecificDetails, self).__init__(**kwargs)
-        self.instance_type = 'Azure'  # type: str
-        self.location = kwargs.get('location', None)
-        self.container_ids = kwargs.get('container_ids', None)
-        self.zones = kwargs.get('zones', None)
+        self.instance_type = "Azure"  # type: str
+        self.location = kwargs.get("location", None)
+        self.container_ids = kwargs.get("container_ids", None)
+        self.zones = kwargs.get("zones", None)
 
 
 class FabricSpecificCreateNetworkMappingInput(msrest.serialization.Model):
@@ -3381,21 +3324,22 @@ class FabricSpecificCreateNetworkMappingInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'AzureToAzure': 'AzureToAzureCreateNetworkMappingInput', 'VmmToAzure': 'VmmToAzureCreateNetworkMappingInput', 'VmmToVmm': 'VmmToVmmCreateNetworkMappingInput'}
+        "instance_type": {
+            "AzureToAzure": "AzureToAzureCreateNetworkMappingInput",
+            "VmmToAzure": "VmmToAzureCreateNetworkMappingInput",
+            "VmmToVmm": "VmmToVmmCreateNetworkMappingInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricSpecificCreateNetworkMappingInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -3412,22 +3356,19 @@ class AzureToAzureCreateNetworkMappingInput(FabricSpecificCreateNetworkMappingIn
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'primary_network_id': {'required': True},
+        "instance_type": {"required": True},
+        "primary_network_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_network_id': {'key': 'primaryNetworkId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_network_id": {"key": "primaryNetworkId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureToAzureCreateNetworkMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'AzureToAzure'  # type: str
-        self.primary_network_id = kwargs['primary_network_id']
+        self.instance_type = "AzureToAzure"  # type: str
+        self.primary_network_id = kwargs["primary_network_id"]
 
 
 class NetworkMappingFabricSpecificSettings(msrest.serialization.Model):
@@ -3443,21 +3384,22 @@ class NetworkMappingFabricSpecificSettings(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'AzureToAzure': 'AzureToAzureNetworkMappingSettings', 'VmmToAzure': 'VmmToAzureNetworkMappingSettings', 'VmmToVmm': 'VmmToVmmNetworkMappingSettings'}
+        "instance_type": {
+            "AzureToAzure": "AzureToAzureNetworkMappingSettings",
+            "VmmToAzure": "VmmToAzureNetworkMappingSettings",
+            "VmmToVmm": "VmmToVmmNetworkMappingSettings",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkMappingFabricSpecificSettings, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -3476,23 +3418,20 @@ class AzureToAzureNetworkMappingSettings(NetworkMappingFabricSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_fabric_location': {'key': 'primaryFabricLocation', 'type': 'str'},
-        'recovery_fabric_location': {'key': 'recoveryFabricLocation', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_fabric_location": {"key": "primaryFabricLocation", "type": "str"},
+        "recovery_fabric_location": {"key": "recoveryFabricLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureToAzureNetworkMappingSettings, self).__init__(**kwargs)
-        self.instance_type = 'AzureToAzure'  # type: str
-        self.primary_fabric_location = kwargs.get('primary_fabric_location', None)
-        self.recovery_fabric_location = kwargs.get('recovery_fabric_location', None)
+        self.instance_type = "AzureToAzure"  # type: str
+        self.primary_fabric_location = kwargs.get("primary_fabric_location", None)
+        self.recovery_fabric_location = kwargs.get("recovery_fabric_location", None)
 
 
 class FabricSpecificUpdateNetworkMappingInput(msrest.serialization.Model):
@@ -3508,21 +3447,22 @@ class FabricSpecificUpdateNetworkMappingInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'AzureToAzure': 'AzureToAzureUpdateNetworkMappingInput', 'VmmToAzure': 'VmmToAzureUpdateNetworkMappingInput', 'VmmToVmm': 'VmmToVmmUpdateNetworkMappingInput'}
+        "instance_type": {
+            "AzureToAzure": "AzureToAzureUpdateNetworkMappingInput",
+            "VmmToAzure": "VmmToAzureUpdateNetworkMappingInput",
+            "VmmToVmm": "VmmToVmmUpdateNetworkMappingInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricSpecificUpdateNetworkMappingInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -3539,21 +3479,18 @@ class AzureToAzureUpdateNetworkMappingInput(FabricSpecificUpdateNetworkMappingIn
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_network_id': {'key': 'primaryNetworkId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_network_id": {"key": "primaryNetworkId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureToAzureUpdateNetworkMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'AzureToAzure'  # type: str
-        self.primary_network_id = kwargs.get('primary_network_id', None)
+        self.instance_type = "AzureToAzure"  # type: str
+        self.primary_network_id = kwargs.get("primary_network_id", None)
 
 
 class AzureToAzureVmSyncedConfigDetails(msrest.serialization.Model):
@@ -3566,17 +3503,14 @@ class AzureToAzureVmSyncedConfigDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'input_endpoints': {'key': 'inputEndpoints', 'type': '[InputEndpoint]'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "input_endpoints": {"key": "inputEndpoints", "type": "[InputEndpoint]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureToAzureVmSyncedConfigDetails, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.input_endpoints = kwargs.get('input_endpoints', None)
+        self.tags = kwargs.get("tags", None)
+        self.input_endpoints = kwargs.get("input_endpoints", None)
 
 
 class AzureVmDiskDetails(msrest.serialization.Model):
@@ -3605,33 +3539,30 @@ class AzureVmDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'vhd_type': {'key': 'vhdType', 'type': 'str'},
-        'vhd_id': {'key': 'vhdId', 'type': 'str'},
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'vhd_name': {'key': 'vhdName', 'type': 'str'},
-        'max_size_mb': {'key': 'maxSizeMB', 'type': 'str'},
-        'target_disk_location': {'key': 'targetDiskLocation', 'type': 'str'},
-        'target_disk_name': {'key': 'targetDiskName', 'type': 'str'},
-        'lun_id': {'key': 'lunId', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
-        'custom_target_disk_name': {'key': 'customTargetDiskName', 'type': 'str'},
+        "vhd_type": {"key": "vhdType", "type": "str"},
+        "vhd_id": {"key": "vhdId", "type": "str"},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "vhd_name": {"key": "vhdName", "type": "str"},
+        "max_size_mb": {"key": "maxSizeMB", "type": "str"},
+        "target_disk_location": {"key": "targetDiskLocation", "type": "str"},
+        "target_disk_name": {"key": "targetDiskName", "type": "str"},
+        "lun_id": {"key": "lunId", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
+        "custom_target_disk_name": {"key": "customTargetDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureVmDiskDetails, self).__init__(**kwargs)
-        self.vhd_type = kwargs.get('vhd_type', None)
-        self.vhd_id = kwargs.get('vhd_id', None)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.vhd_name = kwargs.get('vhd_name', None)
-        self.max_size_mb = kwargs.get('max_size_mb', None)
-        self.target_disk_location = kwargs.get('target_disk_location', None)
-        self.target_disk_name = kwargs.get('target_disk_name', None)
-        self.lun_id = kwargs.get('lun_id', None)
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
-        self.custom_target_disk_name = kwargs.get('custom_target_disk_name', None)
+        self.vhd_type = kwargs.get("vhd_type", None)
+        self.vhd_id = kwargs.get("vhd_id", None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.vhd_name = kwargs.get("vhd_name", None)
+        self.max_size_mb = kwargs.get("max_size_mb", None)
+        self.target_disk_location = kwargs.get("target_disk_location", None)
+        self.target_disk_name = kwargs.get("target_disk_name", None)
+        self.lun_id = kwargs.get("lun_id", None)
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
+        self.custom_target_disk_name = kwargs.get("custom_target_disk_name", None)
 
 
 class ComputeSizeErrorDetails(msrest.serialization.Model):
@@ -3644,17 +3575,14 @@ class ComputeSizeErrorDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'message': {'key': 'message', 'type': 'str'},
-        'severity': {'key': 'severity', 'type': 'str'},
+        "message": {"key": "message", "type": "str"},
+        "severity": {"key": "severity", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ComputeSizeErrorDetails, self).__init__(**kwargs)
-        self.message = kwargs.get('message', None)
-        self.severity = kwargs.get('severity', None)
+        self.message = kwargs.get("message", None)
+        self.severity = kwargs.get("severity", None)
 
 
 class ConfigurationSettings(msrest.serialization.Model):
@@ -3671,21 +3599,22 @@ class ConfigurationSettings(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'HyperVVirtualMachine': 'HyperVVirtualMachineDetails', 'ReplicationGroupDetails': 'ReplicationGroupDetails', 'VMwareVirtualMachine': 'VMwareVirtualMachineDetails'}
+        "instance_type": {
+            "HyperVVirtualMachine": "HyperVVirtualMachineDetails",
+            "ReplicationGroupDetails": "ReplicationGroupDetails",
+            "VMwareVirtualMachine": "VMwareVirtualMachineDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConfigurationSettings, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -3699,15 +3628,12 @@ class ConfigureAlertRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'ConfigureAlertRequestProperties'},
+        "properties": {"key": "properties", "type": "ConfigureAlertRequestProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConfigureAlertRequest, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ConfigureAlertRequestProperties(msrest.serialization.Model):
@@ -3722,19 +3648,16 @@ class ConfigureAlertRequestProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'send_to_owners': {'key': 'sendToOwners', 'type': 'str'},
-        'custom_email_addresses': {'key': 'customEmailAddresses', 'type': '[str]'},
-        'locale': {'key': 'locale', 'type': 'str'},
+        "send_to_owners": {"key": "sendToOwners", "type": "str"},
+        "custom_email_addresses": {"key": "customEmailAddresses", "type": "[str]"},
+        "locale": {"key": "locale", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConfigureAlertRequestProperties, self).__init__(**kwargs)
-        self.send_to_owners = kwargs.get('send_to_owners', None)
-        self.custom_email_addresses = kwargs.get('custom_email_addresses', None)
-        self.locale = kwargs.get('locale', None)
+        self.send_to_owners = kwargs.get("send_to_owners", None)
+        self.custom_email_addresses = kwargs.get("custom_email_addresses", None)
+        self.locale = kwargs.get("locale", None)
 
 
 class ConsistencyCheckTaskDetails(TaskTypeDetails):
@@ -3749,21 +3672,18 @@ class ConsistencyCheckTaskDetails(TaskTypeDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vm_details': {'key': 'vmDetails', 'type': '[InconsistentVmDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vm_details": {"key": "vmDetails", "type": "[InconsistentVmDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ConsistencyCheckTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'ConsistencyCheckTaskDetails'  # type: str
-        self.vm_details = kwargs.get('vm_details', None)
+        self.instance_type = "ConsistencyCheckTaskDetails"  # type: str
+        self.vm_details = kwargs.get("vm_details", None)
 
 
 class CreateNetworkMappingInput(msrest.serialization.Model):
@@ -3777,19 +3697,16 @@ class CreateNetworkMappingInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'CreateNetworkMappingInputProperties'},
+        "properties": {"key": "properties", "type": "CreateNetworkMappingInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateNetworkMappingInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class CreateNetworkMappingInputProperties(msrest.serialization.Model):
@@ -3807,23 +3724,20 @@ class CreateNetworkMappingInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'recovery_network_id': {'required': True},
+        "recovery_network_id": {"required": True},
     }
 
     _attribute_map = {
-        'recovery_fabric_name': {'key': 'recoveryFabricName', 'type': 'str'},
-        'recovery_network_id': {'key': 'recoveryNetworkId', 'type': 'str'},
-        'fabric_specific_details': {'key': 'fabricSpecificDetails', 'type': 'FabricSpecificCreateNetworkMappingInput'},
+        "recovery_fabric_name": {"key": "recoveryFabricName", "type": "str"},
+        "recovery_network_id": {"key": "recoveryNetworkId", "type": "str"},
+        "fabric_specific_details": {"key": "fabricSpecificDetails", "type": "FabricSpecificCreateNetworkMappingInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateNetworkMappingInputProperties, self).__init__(**kwargs)
-        self.recovery_fabric_name = kwargs.get('recovery_fabric_name', None)
-        self.recovery_network_id = kwargs['recovery_network_id']
-        self.fabric_specific_details = kwargs.get('fabric_specific_details', None)
+        self.recovery_fabric_name = kwargs.get("recovery_fabric_name", None)
+        self.recovery_network_id = kwargs["recovery_network_id"]
+        self.fabric_specific_details = kwargs.get("fabric_specific_details", None)
 
 
 class CreatePolicyInput(msrest.serialization.Model):
@@ -3834,15 +3748,12 @@ class CreatePolicyInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'CreatePolicyInputProperties'},
+        "properties": {"key": "properties", "type": "CreatePolicyInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreatePolicyInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class CreatePolicyInputProperties(msrest.serialization.Model):
@@ -3854,15 +3765,12 @@ class CreatePolicyInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider_specific_input': {'key': 'providerSpecificInput', 'type': 'PolicyProviderSpecificInput'},
+        "provider_specific_input": {"key": "providerSpecificInput", "type": "PolicyProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreatePolicyInputProperties, self).__init__(**kwargs)
-        self.provider_specific_input = kwargs.get('provider_specific_input', None)
+        self.provider_specific_input = kwargs.get("provider_specific_input", None)
 
 
 class CreateProtectionContainerInput(msrest.serialization.Model):
@@ -3874,15 +3782,12 @@ class CreateProtectionContainerInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'CreateProtectionContainerInputProperties'},
+        "properties": {"key": "properties", "type": "CreateProtectionContainerInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateProtectionContainerInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class CreateProtectionContainerInputProperties(msrest.serialization.Model):
@@ -3894,15 +3799,15 @@ class CreateProtectionContainerInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider_specific_input': {'key': 'providerSpecificInput', 'type': '[ReplicationProviderSpecificContainerCreationInput]'},
+        "provider_specific_input": {
+            "key": "providerSpecificInput",
+            "type": "[ReplicationProviderSpecificContainerCreationInput]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateProtectionContainerInputProperties, self).__init__(**kwargs)
-        self.provider_specific_input = kwargs.get('provider_specific_input', None)
+        self.provider_specific_input = kwargs.get("provider_specific_input", None)
 
 
 class CreateProtectionContainerMappingInput(msrest.serialization.Model):
@@ -3914,15 +3819,12 @@ class CreateProtectionContainerMappingInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'CreateProtectionContainerMappingInputProperties'},
+        "properties": {"key": "properties", "type": "CreateProtectionContainerMappingInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateProtectionContainerMappingInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class CreateProtectionContainerMappingInputProperties(msrest.serialization.Model):
@@ -3938,19 +3840,19 @@ class CreateProtectionContainerMappingInputProperties(msrest.serialization.Model
     """
 
     _attribute_map = {
-        'target_protection_container_id': {'key': 'targetProtectionContainerId', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'provider_specific_input': {'key': 'providerSpecificInput', 'type': 'ReplicationProviderSpecificContainerMappingInput'},
+        "target_protection_container_id": {"key": "targetProtectionContainerId", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "provider_specific_input": {
+            "key": "providerSpecificInput",
+            "type": "ReplicationProviderSpecificContainerMappingInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateProtectionContainerMappingInputProperties, self).__init__(**kwargs)
-        self.target_protection_container_id = kwargs.get('target_protection_container_id', None)
-        self.policy_id = kwargs.get('policy_id', None)
-        self.provider_specific_input = kwargs.get('provider_specific_input', None)
+        self.target_protection_container_id = kwargs.get("target_protection_container_id", None)
+        self.policy_id = kwargs.get("policy_id", None)
+        self.provider_specific_input = kwargs.get("provider_specific_input", None)
 
 
 class CreateProtectionIntentInput(msrest.serialization.Model):
@@ -3962,15 +3864,12 @@ class CreateProtectionIntentInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'CreateProtectionIntentProperties'},
+        "properties": {"key": "properties", "type": "CreateProtectionIntentProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateProtectionIntentInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class CreateProtectionIntentProperties(msrest.serialization.Model):
@@ -3983,15 +3882,15 @@ class CreateProtectionIntentProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'CreateProtectionIntentProviderSpecificDetails'},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "CreateProtectionIntentProviderSpecificDetails",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateProtectionIntentProperties, self).__init__(**kwargs)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class CreateRecoveryPlanInput(msrest.serialization.Model):
@@ -4005,19 +3904,16 @@ class CreateRecoveryPlanInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'CreateRecoveryPlanInputProperties'},
+        "properties": {"key": "properties", "type": "CreateRecoveryPlanInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateRecoveryPlanInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class CreateRecoveryPlanInputProperties(msrest.serialization.Model):
@@ -4041,29 +3937,26 @@ class CreateRecoveryPlanInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'primary_fabric_id': {'required': True},
-        'recovery_fabric_id': {'required': True},
-        'groups': {'required': True},
+        "primary_fabric_id": {"required": True},
+        "recovery_fabric_id": {"required": True},
+        "groups": {"required": True},
     }
 
     _attribute_map = {
-        'primary_fabric_id': {'key': 'primaryFabricId', 'type': 'str'},
-        'recovery_fabric_id': {'key': 'recoveryFabricId', 'type': 'str'},
-        'failover_deployment_model': {'key': 'failoverDeploymentModel', 'type': 'str'},
-        'groups': {'key': 'groups', 'type': '[RecoveryPlanGroup]'},
-        'provider_specific_input': {'key': 'providerSpecificInput', 'type': '[RecoveryPlanProviderSpecificInput]'},
+        "primary_fabric_id": {"key": "primaryFabricId", "type": "str"},
+        "recovery_fabric_id": {"key": "recoveryFabricId", "type": "str"},
+        "failover_deployment_model": {"key": "failoverDeploymentModel", "type": "str"},
+        "groups": {"key": "groups", "type": "[RecoveryPlanGroup]"},
+        "provider_specific_input": {"key": "providerSpecificInput", "type": "[RecoveryPlanProviderSpecificInput]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateRecoveryPlanInputProperties, self).__init__(**kwargs)
-        self.primary_fabric_id = kwargs['primary_fabric_id']
-        self.recovery_fabric_id = kwargs['recovery_fabric_id']
-        self.failover_deployment_model = kwargs.get('failover_deployment_model', None)
-        self.groups = kwargs['groups']
-        self.provider_specific_input = kwargs.get('provider_specific_input', None)
+        self.primary_fabric_id = kwargs["primary_fabric_id"]
+        self.recovery_fabric_id = kwargs["recovery_fabric_id"]
+        self.failover_deployment_model = kwargs.get("failover_deployment_model", None)
+        self.groups = kwargs["groups"]
+        self.provider_specific_input = kwargs.get("provider_specific_input", None)
 
 
 class CurrentJobDetails(msrest.serialization.Model):
@@ -4080,21 +3973,18 @@ class CurrentJobDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'job_name': {'readonly': True},
-        'job_id': {'readonly': True},
-        'start_time': {'readonly': True},
+        "job_name": {"readonly": True},
+        "job_id": {"readonly": True},
+        "start_time": {"readonly": True},
     }
 
     _attribute_map = {
-        'job_name': {'key': 'jobName', 'type': 'str'},
-        'job_id': {'key': 'jobId', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
+        "job_name": {"key": "jobName", "type": "str"},
+        "job_id": {"key": "jobId", "type": "str"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CurrentJobDetails, self).__init__(**kwargs)
         self.job_name = None
         self.job_id = None
@@ -4113,19 +4003,16 @@ class CurrentScenarioDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'scenario_name': {'key': 'scenarioName', 'type': 'str'},
-        'job_id': {'key': 'jobId', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
+        "scenario_name": {"key": "scenarioName", "type": "str"},
+        "job_id": {"key": "jobId", "type": "str"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CurrentScenarioDetails, self).__init__(**kwargs)
-        self.scenario_name = kwargs.get('scenario_name', None)
-        self.job_id = kwargs.get('job_id', None)
-        self.start_time = kwargs.get('start_time', None)
+        self.scenario_name = kwargs.get("scenario_name", None)
+        self.job_id = kwargs.get("job_id", None)
+        self.start_time = kwargs.get("start_time", None)
 
 
 class DataStore(msrest.serialization.Model):
@@ -4144,23 +4031,20 @@ class DataStore(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'symbolic_name': {'key': 'symbolicName', 'type': 'str'},
-        'uuid': {'key': 'uuid', 'type': 'str'},
-        'capacity': {'key': 'capacity', 'type': 'str'},
-        'free_space': {'key': 'freeSpace', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "symbolic_name": {"key": "symbolicName", "type": "str"},
+        "uuid": {"key": "uuid", "type": "str"},
+        "capacity": {"key": "capacity", "type": "str"},
+        "free_space": {"key": "freeSpace", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataStore, self).__init__(**kwargs)
-        self.symbolic_name = kwargs.get('symbolic_name', None)
-        self.uuid = kwargs.get('uuid', None)
-        self.capacity = kwargs.get('capacity', None)
-        self.free_space = kwargs.get('free_space', None)
-        self.type = kwargs.get('type', None)
+        self.symbolic_name = kwargs.get("symbolic_name", None)
+        self.uuid = kwargs.get("uuid", None)
+        self.capacity = kwargs.get("capacity", None)
+        self.free_space = kwargs.get("free_space", None)
+        self.type = kwargs.get("type", None)
 
 
 class DisableProtectionInput(msrest.serialization.Model):
@@ -4174,19 +4058,16 @@ class DisableProtectionInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'DisableProtectionInputProperties'},
+        "properties": {"key": "properties", "type": "DisableProtectionInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DisableProtectionInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class DisableProtectionInputProperties(msrest.serialization.Model):
@@ -4202,17 +4083,17 @@ class DisableProtectionInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disable_protection_reason': {'key': 'disableProtectionReason', 'type': 'str'},
-        'replication_provider_input': {'key': 'replicationProviderInput', 'type': 'DisableProtectionProviderSpecificInput'},
+        "disable_protection_reason": {"key": "disableProtectionReason", "type": "str"},
+        "replication_provider_input": {
+            "key": "replicationProviderInput",
+            "type": "DisableProtectionProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DisableProtectionInputProperties, self).__init__(**kwargs)
-        self.disable_protection_reason = kwargs.get('disable_protection_reason', None)
-        self.replication_provider_input = kwargs.get('replication_provider_input', None)
+        self.disable_protection_reason = kwargs.get("disable_protection_reason", None)
+        self.replication_provider_input = kwargs.get("replication_provider_input", None)
 
 
 class DisableProtectionProviderSpecificInput(msrest.serialization.Model):
@@ -4228,21 +4109,16 @@ class DisableProtectionProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'InMage': 'InMageDisableProtectionProviderSpecificInput'}
-    }
+    _subtype_map = {"instance_type": {"InMage": "InMageDisableProtectionProviderSpecificInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DisableProtectionProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -4256,15 +4132,12 @@ class DiscoverProtectableItemRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'DiscoverProtectableItemRequestProperties'},
+        "properties": {"key": "properties", "type": "DiscoverProtectableItemRequestProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiscoverProtectableItemRequest, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class DiscoverProtectableItemRequestProperties(msrest.serialization.Model):
@@ -4279,19 +4152,16 @@ class DiscoverProtectableItemRequestProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiscoverProtectableItemRequestProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.os_type = kwargs.get('os_type', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.os_type = kwargs.get("os_type", None)
 
 
 class DiskDetails(msrest.serialization.Model):
@@ -4308,21 +4178,18 @@ class DiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'max_size_mb': {'key': 'maxSizeMB', 'type': 'long'},
-        'vhd_type': {'key': 'vhdType', 'type': 'str'},
-        'vhd_id': {'key': 'vhdId', 'type': 'str'},
-        'vhd_name': {'key': 'vhdName', 'type': 'str'},
+        "max_size_mb": {"key": "maxSizeMB", "type": "long"},
+        "vhd_type": {"key": "vhdType", "type": "str"},
+        "vhd_id": {"key": "vhdId", "type": "str"},
+        "vhd_name": {"key": "vhdName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskDetails, self).__init__(**kwargs)
-        self.max_size_mb = kwargs.get('max_size_mb', None)
-        self.vhd_type = kwargs.get('vhd_type', None)
-        self.vhd_id = kwargs.get('vhd_id', None)
-        self.vhd_name = kwargs.get('vhd_name', None)
+        self.max_size_mb = kwargs.get("max_size_mb", None)
+        self.vhd_type = kwargs.get("vhd_type", None)
+        self.vhd_id = kwargs.get("vhd_id", None)
+        self.vhd_name = kwargs.get("vhd_name", None)
 
 
 class DiskEncryptionInfo(msrest.serialization.Model):
@@ -4337,17 +4204,14 @@ class DiskEncryptionInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_encryption_key_info': {'key': 'diskEncryptionKeyInfo', 'type': 'DiskEncryptionKeyInfo'},
-        'key_encryption_key_info': {'key': 'keyEncryptionKeyInfo', 'type': 'KeyEncryptionKeyInfo'},
+        "disk_encryption_key_info": {"key": "diskEncryptionKeyInfo", "type": "DiskEncryptionKeyInfo"},
+        "key_encryption_key_info": {"key": "keyEncryptionKeyInfo", "type": "KeyEncryptionKeyInfo"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskEncryptionInfo, self).__init__(**kwargs)
-        self.disk_encryption_key_info = kwargs.get('disk_encryption_key_info', None)
-        self.key_encryption_key_info = kwargs.get('key_encryption_key_info', None)
+        self.disk_encryption_key_info = kwargs.get("disk_encryption_key_info", None)
+        self.key_encryption_key_info = kwargs.get("key_encryption_key_info", None)
 
 
 class DiskEncryptionKeyInfo(msrest.serialization.Model):
@@ -4360,17 +4224,14 @@ class DiskEncryptionKeyInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'secret_identifier': {'key': 'secretIdentifier', 'type': 'str'},
-        'key_vault_resource_arm_id': {'key': 'keyVaultResourceArmId', 'type': 'str'},
+        "secret_identifier": {"key": "secretIdentifier", "type": "str"},
+        "key_vault_resource_arm_id": {"key": "keyVaultResourceArmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskEncryptionKeyInfo, self).__init__(**kwargs)
-        self.secret_identifier = kwargs.get('secret_identifier', None)
-        self.key_vault_resource_arm_id = kwargs.get('key_vault_resource_arm_id', None)
+        self.secret_identifier = kwargs.get("secret_identifier", None)
+        self.key_vault_resource_arm_id = kwargs.get("key_vault_resource_arm_id", None)
 
 
 class DiskVolumeDetails(msrest.serialization.Model):
@@ -4383,17 +4244,14 @@ class DiskVolumeDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'label': {'key': 'label', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "label": {"key": "label", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskVolumeDetails, self).__init__(**kwargs)
-        self.label = kwargs.get('label', None)
-        self.name = kwargs.get('name', None)
+        self.label = kwargs.get("label", None)
+        self.name = kwargs.get("name", None)
 
 
 class Display(msrest.serialization.Model):
@@ -4426,21 +4284,18 @@ class Display(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Display, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class DraDetails(msrest.serialization.Model):
@@ -4471,33 +4326,30 @@ class DraDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'version': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
-        'forward_protected_item_count': {'readonly': True},
-        'reverse_protected_item_count': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "version": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
+        "forward_protected_item_count": {"readonly": True},
+        "reverse_protected_item_count": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
-        'forward_protected_item_count': {'key': 'forwardProtectedItemCount', 'type': 'int'},
-        'reverse_protected_item_count': {'key': 'reverseProtectedItemCount', 'type': 'int'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
+        "forward_protected_item_count": {"key": "forwardProtectedItemCount", "type": "int"},
+        "reverse_protected_item_count": {"key": "reverseProtectedItemCount", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DraDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -4521,19 +4373,16 @@ class EnableMigrationInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'EnableMigrationInputProperties'},
+        "properties": {"key": "properties", "type": "EnableMigrationInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnableMigrationInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class EnableMigrationInputProperties(msrest.serialization.Model):
@@ -4549,22 +4398,19 @@ class EnableMigrationInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'policy_id': {'required': True},
-        'provider_specific_details': {'required': True},
+        "policy_id": {"required": True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'EnableMigrationProviderSpecificInput'},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "EnableMigrationProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnableMigrationInputProperties, self).__init__(**kwargs)
-        self.policy_id = kwargs['policy_id']
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.policy_id = kwargs["policy_id"]
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class EnableMigrationProviderSpecificInput(msrest.serialization.Model):
@@ -4580,21 +4426,16 @@ class EnableMigrationProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'VMwareCbt': 'VMwareCbtEnableMigrationInput'}
-    }
+    _subtype_map = {"instance_type": {"VMwareCbt": "VMwareCbtEnableMigrationInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnableMigrationProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -4608,15 +4449,12 @@ class EnableProtectionInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'EnableProtectionInputProperties'},
+        "properties": {"key": "properties", "type": "EnableProtectionInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnableProtectionInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class EnableProtectionInputProperties(msrest.serialization.Model):
@@ -4634,19 +4472,19 @@ class EnableProtectionInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'protectable_item_id': {'key': 'protectableItemId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'EnableProtectionProviderSpecificInput'},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "protectable_item_id": {"key": "protectableItemId", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "EnableProtectionProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnableProtectionInputProperties, self).__init__(**kwargs)
-        self.policy_id = kwargs.get('policy_id', None)
-        self.protectable_item_id = kwargs.get('protectable_item_id', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.policy_id = kwargs.get("policy_id", None)
+        self.protectable_item_id = kwargs.get("protectable_item_id", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class EncryptionDetails(msrest.serialization.Model):
@@ -4661,19 +4499,16 @@ class EncryptionDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'kek_state': {'key': 'kekState', 'type': 'str'},
-        'kek_cert_thumbprint': {'key': 'kekCertThumbprint', 'type': 'str'},
-        'kek_cert_expiry_date': {'key': 'kekCertExpiryDate', 'type': 'iso-8601'},
+        "kek_state": {"key": "kekState", "type": "str"},
+        "kek_cert_thumbprint": {"key": "kekCertThumbprint", "type": "str"},
+        "kek_cert_expiry_date": {"key": "kekCertExpiryDate", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EncryptionDetails, self).__init__(**kwargs)
-        self.kek_state = kwargs.get('kek_state', None)
-        self.kek_cert_thumbprint = kwargs.get('kek_cert_thumbprint', None)
-        self.kek_cert_expiry_date = kwargs.get('kek_cert_expiry_date', None)
+        self.kek_state = kwargs.get("kek_state", None)
+        self.kek_cert_thumbprint = kwargs.get("kek_cert_thumbprint", None)
+        self.kek_cert_expiry_date = kwargs.get("kek_cert_expiry_date", None)
 
 
 class Event(Resource):
@@ -4694,25 +4529,22 @@ class Event(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'EventProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "EventProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Event, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class EventCollection(msrest.serialization.Model):
@@ -4725,17 +4557,14 @@ class EventCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Event]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Event]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EventCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class EventProperties(msrest.serialization.Model):
@@ -4771,35 +4600,32 @@ class EventProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'event_code': {'key': 'eventCode', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'event_type': {'key': 'eventType', 'type': 'str'},
-        'affected_object_friendly_name': {'key': 'affectedObjectFriendlyName', 'type': 'str'},
-        'affected_object_correlation_id': {'key': 'affectedObjectCorrelationId', 'type': 'str'},
-        'severity': {'key': 'severity', 'type': 'str'},
-        'time_of_occurrence': {'key': 'timeOfOccurrence', 'type': 'iso-8601'},
-        'fabric_id': {'key': 'fabricId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'EventProviderSpecificDetails'},
-        'event_specific_details': {'key': 'eventSpecificDetails', 'type': 'EventSpecificDetails'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
+        "event_code": {"key": "eventCode", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "event_type": {"key": "eventType", "type": "str"},
+        "affected_object_friendly_name": {"key": "affectedObjectFriendlyName", "type": "str"},
+        "affected_object_correlation_id": {"key": "affectedObjectCorrelationId", "type": "str"},
+        "severity": {"key": "severity", "type": "str"},
+        "time_of_occurrence": {"key": "timeOfOccurrence", "type": "iso-8601"},
+        "fabric_id": {"key": "fabricId", "type": "str"},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "EventProviderSpecificDetails"},
+        "event_specific_details": {"key": "eventSpecificDetails", "type": "EventSpecificDetails"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EventProperties, self).__init__(**kwargs)
-        self.event_code = kwargs.get('event_code', None)
-        self.description = kwargs.get('description', None)
-        self.event_type = kwargs.get('event_type', None)
-        self.affected_object_friendly_name = kwargs.get('affected_object_friendly_name', None)
-        self.affected_object_correlation_id = kwargs.get('affected_object_correlation_id', None)
-        self.severity = kwargs.get('severity', None)
-        self.time_of_occurrence = kwargs.get('time_of_occurrence', None)
-        self.fabric_id = kwargs.get('fabric_id', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
-        self.event_specific_details = kwargs.get('event_specific_details', None)
-        self.health_errors = kwargs.get('health_errors', None)
+        self.event_code = kwargs.get("event_code", None)
+        self.description = kwargs.get("description", None)
+        self.event_type = kwargs.get("event_type", None)
+        self.affected_object_friendly_name = kwargs.get("affected_object_friendly_name", None)
+        self.affected_object_correlation_id = kwargs.get("affected_object_correlation_id", None)
+        self.severity = kwargs.get("severity", None)
+        self.time_of_occurrence = kwargs.get("time_of_occurrence", None)
+        self.fabric_id = kwargs.get("fabric_id", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
+        self.event_specific_details = kwargs.get("event_specific_details", None)
+        self.health_errors = kwargs.get("health_errors", None)
 
 
 class EventQueryParameter(msrest.serialization.Model):
@@ -4825,29 +4651,26 @@ class EventQueryParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'event_code': {'key': 'eventCode', 'type': 'str'},
-        'severity': {'key': 'severity', 'type': 'str'},
-        'event_type': {'key': 'eventType', 'type': 'str'},
-        'fabric_name': {'key': 'fabricName', 'type': 'str'},
-        'affected_object_friendly_name': {'key': 'affectedObjectFriendlyName', 'type': 'str'},
-        'affected_object_correlation_id': {'key': 'affectedObjectCorrelationId', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
-        'end_time': {'key': 'endTime', 'type': 'iso-8601'},
+        "event_code": {"key": "eventCode", "type": "str"},
+        "severity": {"key": "severity", "type": "str"},
+        "event_type": {"key": "eventType", "type": "str"},
+        "fabric_name": {"key": "fabricName", "type": "str"},
+        "affected_object_friendly_name": {"key": "affectedObjectFriendlyName", "type": "str"},
+        "affected_object_correlation_id": {"key": "affectedObjectCorrelationId", "type": "str"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
+        "end_time": {"key": "endTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EventQueryParameter, self).__init__(**kwargs)
-        self.event_code = kwargs.get('event_code', None)
-        self.severity = kwargs.get('severity', None)
-        self.event_type = kwargs.get('event_type', None)
-        self.fabric_name = kwargs.get('fabric_name', None)
-        self.affected_object_friendly_name = kwargs.get('affected_object_friendly_name', None)
-        self.affected_object_correlation_id = kwargs.get('affected_object_correlation_id', None)
-        self.start_time = kwargs.get('start_time', None)
-        self.end_time = kwargs.get('end_time', None)
+        self.event_code = kwargs.get("event_code", None)
+        self.severity = kwargs.get("severity", None)
+        self.event_type = kwargs.get("event_type", None)
+        self.fabric_name = kwargs.get("fabric_name", None)
+        self.affected_object_friendly_name = kwargs.get("affected_object_friendly_name", None)
+        self.affected_object_correlation_id = kwargs.get("affected_object_correlation_id", None)
+        self.start_time = kwargs.get("start_time", None)
+        self.end_time = kwargs.get("end_time", None)
 
 
 class EventSpecificDetails(msrest.serialization.Model):
@@ -4864,21 +4687,16 @@ class EventSpecificDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'JobStatus': 'JobStatusEventDetails'}
-    }
+    _subtype_map = {"instance_type": {"JobStatus": "JobStatusEventDetails"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EventSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -4896,21 +4714,16 @@ class ProtectionProfileCustomDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'resource_type': {'Existing': 'ExistingProtectionProfile', 'New': 'NewProtectionProfile'}
-    }
+    _subtype_map = {"resource_type": {"Existing": "ExistingProtectionProfile", "New": "NewProtectionProfile"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionProfileCustomDetails, self).__init__(**kwargs)
         self.resource_type = None  # type: Optional[str]
 
@@ -4928,22 +4741,19 @@ class ExistingProtectionProfile(ProtectionProfileCustomDetails):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'protection_profile_id': {'required': True},
+        "resource_type": {"required": True},
+        "protection_profile_id": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'protection_profile_id': {'key': 'protectionProfileId', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "protection_profile_id": {"key": "protectionProfileId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExistingProtectionProfile, self).__init__(**kwargs)
-        self.resource_type = 'Existing'  # type: str
-        self.protection_profile_id = kwargs['protection_profile_id']
+        self.resource_type = "Existing"  # type: str
+        self.protection_profile_id = kwargs["protection_profile_id"]
 
 
 class RecoveryAvailabilitySetCustomDetails(msrest.serialization.Model):
@@ -4959,21 +4769,16 @@ class RecoveryAvailabilitySetCustomDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'resource_type': {'Existing': 'ExistingRecoveryAvailabilitySet'}
-    }
+    _subtype_map = {"resource_type": {"Existing": "ExistingRecoveryAvailabilitySet"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryAvailabilitySetCustomDetails, self).__init__(**kwargs)
         self.resource_type = None  # type: Optional[str]
 
@@ -4991,21 +4796,18 @@ class ExistingRecoveryAvailabilitySet(RecoveryAvailabilitySetCustomDetails):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'recovery_availability_set_id': {'key': 'recoveryAvailabilitySetId', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "recovery_availability_set_id": {"key": "recoveryAvailabilitySetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExistingRecoveryAvailabilitySet, self).__init__(**kwargs)
-        self.resource_type = 'Existing'  # type: str
-        self.recovery_availability_set_id = kwargs.get('recovery_availability_set_id', None)
+        self.resource_type = "Existing"  # type: str
+        self.recovery_availability_set_id = kwargs.get("recovery_availability_set_id", None)
 
 
 class RecoveryProximityPlacementGroupCustomDetails(msrest.serialization.Model):
@@ -5021,21 +4823,16 @@ class RecoveryProximityPlacementGroupCustomDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'resource_type': {'Existing': 'ExistingRecoveryProximityPlacementGroup'}
-    }
+    _subtype_map = {"resource_type": {"Existing": "ExistingRecoveryProximityPlacementGroup"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryProximityPlacementGroupCustomDetails, self).__init__(**kwargs)
         self.resource_type = None  # type: Optional[str]
 
@@ -5053,21 +4850,18 @@ class ExistingRecoveryProximityPlacementGroup(RecoveryProximityPlacementGroupCus
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'recovery_proximity_placement_group_id': {'key': 'recoveryProximityPlacementGroupId', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "recovery_proximity_placement_group_id": {"key": "recoveryProximityPlacementGroupId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExistingRecoveryProximityPlacementGroup, self).__init__(**kwargs)
-        self.resource_type = 'Existing'  # type: str
-        self.recovery_proximity_placement_group_id = kwargs.get('recovery_proximity_placement_group_id', None)
+        self.resource_type = "Existing"  # type: str
+        self.recovery_proximity_placement_group_id = kwargs.get("recovery_proximity_placement_group_id", None)
 
 
 class RecoveryResourceGroupCustomDetails(msrest.serialization.Model):
@@ -5083,21 +4877,16 @@ class RecoveryResourceGroupCustomDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'resource_type': {'Existing': 'ExistingRecoveryResourceGroup'}
-    }
+    _subtype_map = {"resource_type": {"Existing": "ExistingRecoveryResourceGroup"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryResourceGroupCustomDetails, self).__init__(**kwargs)
         self.resource_type = None  # type: Optional[str]
 
@@ -5114,21 +4903,18 @@ class ExistingRecoveryResourceGroup(RecoveryResourceGroupCustomDetails):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'recovery_resource_group_id': {'key': 'recoveryResourceGroupId', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "recovery_resource_group_id": {"key": "recoveryResourceGroupId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExistingRecoveryResourceGroup, self).__init__(**kwargs)
-        self.resource_type = 'Existing'  # type: str
-        self.recovery_resource_group_id = kwargs.get('recovery_resource_group_id', None)
+        self.resource_type = "Existing"  # type: str
+        self.recovery_resource_group_id = kwargs.get("recovery_resource_group_id", None)
 
 
 class RecoveryVirtualNetworkCustomDetails(msrest.serialization.Model):
@@ -5144,21 +4930,16 @@ class RecoveryVirtualNetworkCustomDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'resource_type': {'Existing': 'ExistingRecoveryVirtualNetwork', 'New': 'NewRecoveryVirtualNetwork'}
-    }
+    _subtype_map = {"resource_type": {"Existing": "ExistingRecoveryVirtualNetwork", "New": "NewRecoveryVirtualNetwork"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryVirtualNetworkCustomDetails, self).__init__(**kwargs)
         self.resource_type = None  # type: Optional[str]
 
@@ -5178,24 +4959,21 @@ class ExistingRecoveryVirtualNetwork(RecoveryVirtualNetworkCustomDetails):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'recovery_virtual_network_id': {'required': True},
+        "resource_type": {"required": True},
+        "recovery_virtual_network_id": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'recovery_virtual_network_id': {'key': 'recoveryVirtualNetworkId', 'type': 'str'},
-        'recovery_subnet_name': {'key': 'recoverySubnetName', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "recovery_virtual_network_id": {"key": "recoveryVirtualNetworkId", "type": "str"},
+        "recovery_subnet_name": {"key": "recoverySubnetName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExistingRecoveryVirtualNetwork, self).__init__(**kwargs)
-        self.resource_type = 'Existing'  # type: str
-        self.recovery_virtual_network_id = kwargs['recovery_virtual_network_id']
-        self.recovery_subnet_name = kwargs.get('recovery_subnet_name', None)
+        self.resource_type = "Existing"  # type: str
+        self.recovery_virtual_network_id = kwargs["recovery_virtual_network_id"]
+        self.recovery_subnet_name = kwargs.get("recovery_subnet_name", None)
 
 
 class StorageAccountCustomDetails(msrest.serialization.Model):
@@ -5211,21 +4989,16 @@ class StorageAccountCustomDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'resource_type': {'Existing': 'ExistingStorageAccount'}
-    }
+    _subtype_map = {"resource_type": {"Existing": "ExistingStorageAccount"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageAccountCustomDetails, self).__init__(**kwargs)
         self.resource_type = None  # type: Optional[str]
 
@@ -5243,22 +5016,19 @@ class ExistingStorageAccount(StorageAccountCustomDetails):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'azure_storage_account_id': {'required': True},
+        "resource_type": {"required": True},
+        "azure_storage_account_id": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'azure_storage_account_id': {'key': 'azureStorageAccountId', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "azure_storage_account_id": {"key": "azureStorageAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExistingStorageAccount, self).__init__(**kwargs)
-        self.resource_type = 'Existing'  # type: str
-        self.azure_storage_account_id = kwargs['azure_storage_account_id']
+        self.resource_type = "Existing"  # type: str
+        self.azure_storage_account_id = kwargs["azure_storage_account_id"]
 
 
 class ExportJobDetails(JobDetails):
@@ -5279,24 +5049,21 @@ class ExportJobDetails(JobDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'affected_object_details': {'key': 'affectedObjectDetails', 'type': '{str}'},
-        'blob_uri': {'key': 'blobUri', 'type': 'str'},
-        'sas_token': {'key': 'sasToken', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "affected_object_details": {"key": "affectedObjectDetails", "type": "{str}"},
+        "blob_uri": {"key": "blobUri", "type": "str"},
+        "sas_token": {"key": "sasToken", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExportJobDetails, self).__init__(**kwargs)
-        self.instance_type = 'ExportJobDetails'  # type: str
-        self.blob_uri = kwargs.get('blob_uri', None)
-        self.sas_token = kwargs.get('sas_token', None)
+        self.instance_type = "ExportJobDetails"  # type: str
+        self.blob_uri = kwargs.get("blob_uri", None)
+        self.sas_token = kwargs.get("sas_token", None)
 
 
 class Fabric(Resource):
@@ -5317,25 +5084,22 @@ class Fabric(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'FabricProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "FabricProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Fabric, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class FabricCollection(msrest.serialization.Model):
@@ -5348,17 +5112,14 @@ class FabricCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Fabric]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Fabric]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class FabricCreationInput(msrest.serialization.Model):
@@ -5369,15 +5130,12 @@ class FabricCreationInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'FabricCreationInputProperties'},
+        "properties": {"key": "properties", "type": "FabricCreationInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricCreationInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class FabricCreationInputProperties(msrest.serialization.Model):
@@ -5389,15 +5147,12 @@ class FabricCreationInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'custom_details': {'key': 'customDetails', 'type': 'FabricSpecificCreationInput'},
+        "custom_details": {"key": "customDetails", "type": "FabricSpecificCreationInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricCreationInputProperties, self).__init__(**kwargs)
-        self.custom_details = kwargs.get('custom_details', None)
+        self.custom_details = kwargs.get("custom_details", None)
 
 
 class FabricProperties(msrest.serialization.Model):
@@ -5423,29 +5178,26 @@ class FabricProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'encryption_details': {'key': 'encryptionDetails', 'type': 'EncryptionDetails'},
-        'rollover_encryption_details': {'key': 'rolloverEncryptionDetails', 'type': 'EncryptionDetails'},
-        'internal_identifier': {'key': 'internalIdentifier', 'type': 'str'},
-        'bcdr_state': {'key': 'bcdrState', 'type': 'str'},
-        'custom_details': {'key': 'customDetails', 'type': 'FabricSpecificDetails'},
-        'health_error_details': {'key': 'healthErrorDetails', 'type': '[HealthError]'},
-        'health': {'key': 'health', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "encryption_details": {"key": "encryptionDetails", "type": "EncryptionDetails"},
+        "rollover_encryption_details": {"key": "rolloverEncryptionDetails", "type": "EncryptionDetails"},
+        "internal_identifier": {"key": "internalIdentifier", "type": "str"},
+        "bcdr_state": {"key": "bcdrState", "type": "str"},
+        "custom_details": {"key": "customDetails", "type": "FabricSpecificDetails"},
+        "health_error_details": {"key": "healthErrorDetails", "type": "[HealthError]"},
+        "health": {"key": "health", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.encryption_details = kwargs.get('encryption_details', None)
-        self.rollover_encryption_details = kwargs.get('rollover_encryption_details', None)
-        self.internal_identifier = kwargs.get('internal_identifier', None)
-        self.bcdr_state = kwargs.get('bcdr_state', None)
-        self.custom_details = kwargs.get('custom_details', None)
-        self.health_error_details = kwargs.get('health_error_details', None)
-        self.health = kwargs.get('health', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.encryption_details = kwargs.get("encryption_details", None)
+        self.rollover_encryption_details = kwargs.get("rollover_encryption_details", None)
+        self.internal_identifier = kwargs.get("internal_identifier", None)
+        self.bcdr_state = kwargs.get("bcdr_state", None)
+        self.custom_details = kwargs.get("custom_details", None)
+        self.health_error_details = kwargs.get("health_error_details", None)
+        self.health = kwargs.get("health", None)
 
 
 class FabricQueryParameter(msrest.serialization.Model):
@@ -5468,25 +5220,22 @@ class FabricQueryParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'zone_to_zone_mappings': {'key': 'zoneToZoneMappings', 'type': 'str'},
-        'fetch_agent_details': {'key': 'fetchAgentDetails', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'discovery_type': {'key': 'discoveryType', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
+        "zone_to_zone_mappings": {"key": "zoneToZoneMappings", "type": "str"},
+        "fetch_agent_details": {"key": "fetchAgentDetails", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "discovery_type": {"key": "discoveryType", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricQueryParameter, self).__init__(**kwargs)
-        self.zone_to_zone_mappings = kwargs.get('zone_to_zone_mappings', None)
-        self.fetch_agent_details = kwargs.get('fetch_agent_details', None)
-        self.bios_id = kwargs.get('bios_id', None)
-        self.fqdn = kwargs.get('fqdn', None)
-        self.discovery_type = kwargs.get('discovery_type', None)
-        self.os_type = kwargs.get('os_type', None)
+        self.zone_to_zone_mappings = kwargs.get("zone_to_zone_mappings", None)
+        self.fetch_agent_details = kwargs.get("fetch_agent_details", None)
+        self.bios_id = kwargs.get("bios_id", None)
+        self.fqdn = kwargs.get("fqdn", None)
+        self.discovery_type = kwargs.get("discovery_type", None)
+        self.os_type = kwargs.get("os_type", None)
 
 
 class JobTaskDetails(TaskTypeDetails):
@@ -5504,25 +5253,25 @@ class JobTaskDetails(TaskTypeDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'job_task': {'key': 'jobTask', 'type': 'JobEntity'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "job_task": {"key": "jobTask", "type": "JobEntity"},
     }
 
     _subtype_map = {
-        'instance_type': {'FabricReplicationGroupTaskDetails': 'FabricReplicationGroupTaskDetails', 'VirtualMachineTaskDetails': 'VirtualMachineTaskDetails'}
+        "instance_type": {
+            "FabricReplicationGroupTaskDetails": "FabricReplicationGroupTaskDetails",
+            "VirtualMachineTaskDetails": "VirtualMachineTaskDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'JobTaskDetails'  # type: str
-        self.job_task = kwargs.get('job_task', None)
+        self.instance_type = "JobTaskDetails"  # type: str
+        self.job_task = kwargs.get("job_task", None)
 
 
 class FabricReplicationGroupTaskDetails(JobTaskDetails):
@@ -5541,24 +5290,21 @@ class FabricReplicationGroupTaskDetails(JobTaskDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'job_task': {'key': 'jobTask', 'type': 'JobEntity'},
-        'skipped_reason': {'key': 'skippedReason', 'type': 'str'},
-        'skipped_reason_string': {'key': 'skippedReasonString', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "job_task": {"key": "jobTask", "type": "JobEntity"},
+        "skipped_reason": {"key": "skippedReason", "type": "str"},
+        "skipped_reason_string": {"key": "skippedReasonString", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FabricReplicationGroupTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'FabricReplicationGroupTaskDetails'  # type: str
-        self.skipped_reason = kwargs.get('skipped_reason', None)
-        self.skipped_reason_string = kwargs.get('skipped_reason_string', None)
+        self.instance_type = "FabricReplicationGroupTaskDetails"  # type: str
+        self.skipped_reason = kwargs.get("skipped_reason", None)
+        self.skipped_reason_string = kwargs.get("skipped_reason_string", None)
 
 
 class FailoverJobDetails(JobDetails):
@@ -5578,22 +5324,19 @@ class FailoverJobDetails(JobDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'affected_object_details': {'key': 'affectedObjectDetails', 'type': '{str}'},
-        'protected_item_details': {'key': 'protectedItemDetails', 'type': '[FailoverReplicationProtectedItemDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "affected_object_details": {"key": "affectedObjectDetails", "type": "{str}"},
+        "protected_item_details": {"key": "protectedItemDetails", "type": "[FailoverReplicationProtectedItemDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FailoverJobDetails, self).__init__(**kwargs)
-        self.instance_type = 'FailoverJobDetails'  # type: str
-        self.protected_item_details = kwargs.get('protected_item_details', None)
+        self.instance_type = "FailoverJobDetails"  # type: str
+        self.protected_item_details = kwargs.get("protected_item_details", None)
 
 
 class FailoverProcessServerRequest(msrest.serialization.Model):
@@ -5605,15 +5348,12 @@ class FailoverProcessServerRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'FailoverProcessServerRequestProperties'},
+        "properties": {"key": "properties", "type": "FailoverProcessServerRequestProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FailoverProcessServerRequest, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class FailoverProcessServerRequestProperties(msrest.serialization.Model):
@@ -5632,23 +5372,20 @@ class FailoverProcessServerRequestProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'container_name': {'key': 'containerName', 'type': 'str'},
-        'source_process_server_id': {'key': 'sourceProcessServerId', 'type': 'str'},
-        'target_process_server_id': {'key': 'targetProcessServerId', 'type': 'str'},
-        'vms_to_migrate': {'key': 'vmsToMigrate', 'type': '[str]'},
-        'update_type': {'key': 'updateType', 'type': 'str'},
+        "container_name": {"key": "containerName", "type": "str"},
+        "source_process_server_id": {"key": "sourceProcessServerId", "type": "str"},
+        "target_process_server_id": {"key": "targetProcessServerId", "type": "str"},
+        "vms_to_migrate": {"key": "vmsToMigrate", "type": "[str]"},
+        "update_type": {"key": "updateType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FailoverProcessServerRequestProperties, self).__init__(**kwargs)
-        self.container_name = kwargs.get('container_name', None)
-        self.source_process_server_id = kwargs.get('source_process_server_id', None)
-        self.target_process_server_id = kwargs.get('target_process_server_id', None)
-        self.vms_to_migrate = kwargs.get('vms_to_migrate', None)
-        self.update_type = kwargs.get('update_type', None)
+        self.container_name = kwargs.get("container_name", None)
+        self.source_process_server_id = kwargs.get("source_process_server_id", None)
+        self.target_process_server_id = kwargs.get("target_process_server_id", None)
+        self.vms_to_migrate = kwargs.get("vms_to_migrate", None)
+        self.update_type = kwargs.get("update_type", None)
 
 
 class FailoverReplicationProtectedItemDetails(msrest.serialization.Model):
@@ -5675,31 +5412,28 @@ class FailoverReplicationProtectedItemDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'test_vm_name': {'key': 'testVmName', 'type': 'str'},
-        'test_vm_friendly_name': {'key': 'testVmFriendlyName', 'type': 'str'},
-        'network_connection_status': {'key': 'networkConnectionStatus', 'type': 'str'},
-        'network_friendly_name': {'key': 'networkFriendlyName', 'type': 'str'},
-        'subnet': {'key': 'subnet', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'recovery_point_time': {'key': 'recoveryPointTime', 'type': 'iso-8601'},
+        "name": {"key": "name", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "test_vm_name": {"key": "testVmName", "type": "str"},
+        "test_vm_friendly_name": {"key": "testVmFriendlyName", "type": "str"},
+        "network_connection_status": {"key": "networkConnectionStatus", "type": "str"},
+        "network_friendly_name": {"key": "networkFriendlyName", "type": "str"},
+        "subnet": {"key": "subnet", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "recovery_point_time": {"key": "recoveryPointTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FailoverReplicationProtectedItemDetails, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.test_vm_name = kwargs.get('test_vm_name', None)
-        self.test_vm_friendly_name = kwargs.get('test_vm_friendly_name', None)
-        self.network_connection_status = kwargs.get('network_connection_status', None)
-        self.network_friendly_name = kwargs.get('network_friendly_name', None)
-        self.subnet = kwargs.get('subnet', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
-        self.recovery_point_time = kwargs.get('recovery_point_time', None)
+        self.name = kwargs.get("name", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.test_vm_name = kwargs.get("test_vm_name", None)
+        self.test_vm_friendly_name = kwargs.get("test_vm_friendly_name", None)
+        self.network_connection_status = kwargs.get("network_connection_status", None)
+        self.network_friendly_name = kwargs.get("network_friendly_name", None)
+        self.subnet = kwargs.get("subnet", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
+        self.recovery_point_time = kwargs.get("recovery_point_time", None)
 
 
 class GroupTaskDetails(msrest.serialization.Model):
@@ -5717,25 +5451,25 @@ class GroupTaskDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'child_tasks': {'key': 'childTasks', 'type': '[ASRTask]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "child_tasks": {"key": "childTasks", "type": "[ASRTask]"},
     }
 
     _subtype_map = {
-        'instance_type': {'InlineWorkflowTaskDetails': 'InlineWorkflowTaskDetails', 'RecoveryPlanGroupTaskDetails': 'RecoveryPlanGroupTaskDetails'}
+        "instance_type": {
+            "InlineWorkflowTaskDetails": "InlineWorkflowTaskDetails",
+            "RecoveryPlanGroupTaskDetails": "RecoveryPlanGroupTaskDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GroupTaskDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
-        self.child_tasks = kwargs.get('child_tasks', None)
+        self.child_tasks = kwargs.get("child_tasks", None)
 
 
 class HealthError(msrest.serialization.Model):
@@ -5781,43 +5515,40 @@ class HealthError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'inner_health_errors': {'key': 'innerHealthErrors', 'type': '[InnerHealthError]'},
-        'error_source': {'key': 'errorSource', 'type': 'str'},
-        'error_type': {'key': 'errorType', 'type': 'str'},
-        'error_level': {'key': 'errorLevel', 'type': 'str'},
-        'error_category': {'key': 'errorCategory', 'type': 'str'},
-        'error_code': {'key': 'errorCode', 'type': 'str'},
-        'summary_message': {'key': 'summaryMessage', 'type': 'str'},
-        'error_message': {'key': 'errorMessage', 'type': 'str'},
-        'possible_causes': {'key': 'possibleCauses', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
-        'creation_time_utc': {'key': 'creationTimeUtc', 'type': 'iso-8601'},
-        'recovery_provider_error_message': {'key': 'recoveryProviderErrorMessage', 'type': 'str'},
-        'entity_id': {'key': 'entityId', 'type': 'str'},
-        'error_id': {'key': 'errorId', 'type': 'str'},
-        'customer_resolvability': {'key': 'customerResolvability', 'type': 'str'},
+        "inner_health_errors": {"key": "innerHealthErrors", "type": "[InnerHealthError]"},
+        "error_source": {"key": "errorSource", "type": "str"},
+        "error_type": {"key": "errorType", "type": "str"},
+        "error_level": {"key": "errorLevel", "type": "str"},
+        "error_category": {"key": "errorCategory", "type": "str"},
+        "error_code": {"key": "errorCode", "type": "str"},
+        "summary_message": {"key": "summaryMessage", "type": "str"},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "possible_causes": {"key": "possibleCauses", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
+        "creation_time_utc": {"key": "creationTimeUtc", "type": "iso-8601"},
+        "recovery_provider_error_message": {"key": "recoveryProviderErrorMessage", "type": "str"},
+        "entity_id": {"key": "entityId", "type": "str"},
+        "error_id": {"key": "errorId", "type": "str"},
+        "customer_resolvability": {"key": "customerResolvability", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HealthError, self).__init__(**kwargs)
-        self.inner_health_errors = kwargs.get('inner_health_errors', None)
-        self.error_source = kwargs.get('error_source', None)
-        self.error_type = kwargs.get('error_type', None)
-        self.error_level = kwargs.get('error_level', None)
-        self.error_category = kwargs.get('error_category', None)
-        self.error_code = kwargs.get('error_code', None)
-        self.summary_message = kwargs.get('summary_message', None)
-        self.error_message = kwargs.get('error_message', None)
-        self.possible_causes = kwargs.get('possible_causes', None)
-        self.recommended_action = kwargs.get('recommended_action', None)
-        self.creation_time_utc = kwargs.get('creation_time_utc', None)
-        self.recovery_provider_error_message = kwargs.get('recovery_provider_error_message', None)
-        self.entity_id = kwargs.get('entity_id', None)
-        self.error_id = kwargs.get('error_id', None)
-        self.customer_resolvability = kwargs.get('customer_resolvability', None)
+        self.inner_health_errors = kwargs.get("inner_health_errors", None)
+        self.error_source = kwargs.get("error_source", None)
+        self.error_type = kwargs.get("error_type", None)
+        self.error_level = kwargs.get("error_level", None)
+        self.error_category = kwargs.get("error_category", None)
+        self.error_code = kwargs.get("error_code", None)
+        self.summary_message = kwargs.get("summary_message", None)
+        self.error_message = kwargs.get("error_message", None)
+        self.possible_causes = kwargs.get("possible_causes", None)
+        self.recommended_action = kwargs.get("recommended_action", None)
+        self.creation_time_utc = kwargs.get("creation_time_utc", None)
+        self.recovery_provider_error_message = kwargs.get("recovery_provider_error_message", None)
+        self.entity_id = kwargs.get("entity_id", None)
+        self.error_id = kwargs.get("error_id", None)
+        self.customer_resolvability = kwargs.get("customer_resolvability", None)
 
 
 class HealthErrorSummary(msrest.serialization.Model):
@@ -5847,27 +5578,24 @@ class HealthErrorSummary(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'summary_code': {'key': 'summaryCode', 'type': 'str'},
-        'category': {'key': 'category', 'type': 'str'},
-        'severity': {'key': 'severity', 'type': 'str'},
-        'summary_message': {'key': 'summaryMessage', 'type': 'str'},
-        'affected_resource_type': {'key': 'affectedResourceType', 'type': 'str'},
-        'affected_resource_subtype': {'key': 'affectedResourceSubtype', 'type': 'str'},
-        'affected_resource_correlation_ids': {'key': 'affectedResourceCorrelationIds', 'type': '[str]'},
+        "summary_code": {"key": "summaryCode", "type": "str"},
+        "category": {"key": "category", "type": "str"},
+        "severity": {"key": "severity", "type": "str"},
+        "summary_message": {"key": "summaryMessage", "type": "str"},
+        "affected_resource_type": {"key": "affectedResourceType", "type": "str"},
+        "affected_resource_subtype": {"key": "affectedResourceSubtype", "type": "str"},
+        "affected_resource_correlation_ids": {"key": "affectedResourceCorrelationIds", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HealthErrorSummary, self).__init__(**kwargs)
-        self.summary_code = kwargs.get('summary_code', None)
-        self.category = kwargs.get('category', None)
-        self.severity = kwargs.get('severity', None)
-        self.summary_message = kwargs.get('summary_message', None)
-        self.affected_resource_type = kwargs.get('affected_resource_type', None)
-        self.affected_resource_subtype = kwargs.get('affected_resource_subtype', None)
-        self.affected_resource_correlation_ids = kwargs.get('affected_resource_correlation_ids', None)
+        self.summary_code = kwargs.get("summary_code", None)
+        self.category = kwargs.get("category", None)
+        self.severity = kwargs.get("severity", None)
+        self.summary_message = kwargs.get("summary_message", None)
+        self.affected_resource_type = kwargs.get("affected_resource_type", None)
+        self.affected_resource_subtype = kwargs.get("affected_resource_subtype", None)
+        self.affected_resource_correlation_ids = kwargs.get("affected_resource_correlation_ids", None)
 
 
 class HyperVHostDetails(msrest.serialization.Model):
@@ -5884,21 +5612,18 @@ class HyperVHostDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'mars_agent_version': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "mars_agent_version": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'mars_agent_version': {'key': 'marsAgentVersion', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "mars_agent_version": {"key": "marsAgentVersion", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVHostDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -5924,27 +5649,24 @@ class HyperVReplica2012EventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'container_name': {'key': 'containerName', 'type': 'str'},
-        'fabric_name': {'key': 'fabricName', 'type': 'str'},
-        'remote_container_name': {'key': 'remoteContainerName', 'type': 'str'},
-        'remote_fabric_name': {'key': 'remoteFabricName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "container_name": {"key": "containerName", "type": "str"},
+        "fabric_name": {"key": "fabricName", "type": "str"},
+        "remote_container_name": {"key": "remoteContainerName", "type": "str"},
+        "remote_fabric_name": {"key": "remoteFabricName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplica2012EventDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012'  # type: str
-        self.container_name = kwargs.get('container_name', None)
-        self.fabric_name = kwargs.get('fabric_name', None)
-        self.remote_container_name = kwargs.get('remote_container_name', None)
-        self.remote_fabric_name = kwargs.get('remote_fabric_name', None)
+        self.instance_type = "HyperVReplica2012"  # type: str
+        self.container_name = kwargs.get("container_name", None)
+        self.fabric_name = kwargs.get("fabric_name", None)
+        self.remote_container_name = kwargs.get("remote_container_name", None)
+        self.remote_fabric_name = kwargs.get("remote_fabric_name", None)
 
 
 class HyperVReplica2012R2EventDetails(EventProviderSpecificDetails):
@@ -5966,27 +5688,24 @@ class HyperVReplica2012R2EventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'container_name': {'key': 'containerName', 'type': 'str'},
-        'fabric_name': {'key': 'fabricName', 'type': 'str'},
-        'remote_container_name': {'key': 'remoteContainerName', 'type': 'str'},
-        'remote_fabric_name': {'key': 'remoteFabricName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "container_name": {"key": "containerName", "type": "str"},
+        "fabric_name": {"key": "fabricName", "type": "str"},
+        "remote_container_name": {"key": "remoteContainerName", "type": "str"},
+        "remote_fabric_name": {"key": "remoteFabricName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplica2012R2EventDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012R2'  # type: str
-        self.container_name = kwargs.get('container_name', None)
-        self.fabric_name = kwargs.get('fabric_name', None)
-        self.remote_container_name = kwargs.get('remote_container_name', None)
-        self.remote_fabric_name = kwargs.get('remote_fabric_name', None)
+        self.instance_type = "HyperVReplica2012R2"  # type: str
+        self.container_name = kwargs.get("container_name", None)
+        self.fabric_name = kwargs.get("fabric_name", None)
+        self.remote_container_name = kwargs.get("remote_container_name", None)
+        self.remote_fabric_name = kwargs.get("remote_fabric_name", None)
 
 
 class HyperVReplicaAzureApplyRecoveryPointInput(ApplyRecoveryPointProviderSpecificInput):
@@ -6003,23 +5722,20 @@ class HyperVReplicaAzureApplyRecoveryPointInput(ApplyRecoveryPointProviderSpecif
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_kek_certificate_pfx': {'key': 'primaryKekCertificatePfx', 'type': 'str'},
-        'secondary_kek_certificate_pfx': {'key': 'secondaryKekCertificatePfx', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_kek_certificate_pfx": {"key": "primaryKekCertificatePfx", "type": "str"},
+        "secondary_kek_certificate_pfx": {"key": "secondaryKekCertificatePfx", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureApplyRecoveryPointInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.primary_kek_certificate_pfx = kwargs.get('primary_kek_certificate_pfx', None)
-        self.secondary_kek_certificate_pfx = kwargs.get('secondary_kek_certificate_pfx', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.primary_kek_certificate_pfx = kwargs.get("primary_kek_certificate_pfx", None)
+        self.secondary_kek_certificate_pfx = kwargs.get("secondary_kek_certificate_pfx", None)
 
 
 class HyperVReplicaAzureDiskInputDetails(msrest.serialization.Model):
@@ -6037,21 +5753,18 @@ class HyperVReplicaAzureDiskInputDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureDiskInputDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.log_storage_account_id = kwargs.get('log_storage_account_id', None)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.log_storage_account_id = kwargs.get("log_storage_account_id", None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
 
 
 class HyperVReplicaAzureEnableProtectionInput(EnableProtectionProviderSpecificInput):
@@ -6131,75 +5844,75 @@ class HyperVReplicaAzureEnableProtectionInput(EnableProtectionProviderSpecificIn
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'hv_host_vm_id': {'key': 'hvHostVmId', 'type': 'str'},
-        'vm_name': {'key': 'vmName', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'vhd_id': {'key': 'vhdId', 'type': 'str'},
-        'target_storage_account_id': {'key': 'targetStorageAccountId', 'type': 'str'},
-        'target_azure_network_id': {'key': 'targetAzureNetworkId', 'type': 'str'},
-        'target_azure_subnet_id': {'key': 'targetAzureSubnetId', 'type': 'str'},
-        'enable_rdp_on_target_option': {'key': 'enableRdpOnTargetOption', 'type': 'str'},
-        'target_azure_vm_name': {'key': 'targetAzureVmName', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'disks_to_include': {'key': 'disksToInclude', 'type': '[str]'},
-        'target_azure_v1_resource_group_id': {'key': 'targetAzureV1ResourceGroupId', 'type': 'str'},
-        'target_azure_v2_resource_group_id': {'key': 'targetAzureV2ResourceGroupId', 'type': 'str'},
-        'use_managed_disks': {'key': 'useManagedDisks', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'use_managed_disks_for_replication': {'key': 'useManagedDisksForReplication', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'disks_to_include_for_managed_disks': {'key': 'disksToIncludeForManagedDisks', 'type': '[HyperVReplicaAzureDiskInputDetails]'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'seed_managed_disk_tags': {'key': 'seedManagedDiskTags', 'type': '{str}'},
-        'target_managed_disk_tags': {'key': 'targetManagedDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "hv_host_vm_id": {"key": "hvHostVmId", "type": "str"},
+        "vm_name": {"key": "vmName", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "vhd_id": {"key": "vhdId", "type": "str"},
+        "target_storage_account_id": {"key": "targetStorageAccountId", "type": "str"},
+        "target_azure_network_id": {"key": "targetAzureNetworkId", "type": "str"},
+        "target_azure_subnet_id": {"key": "targetAzureSubnetId", "type": "str"},
+        "enable_rdp_on_target_option": {"key": "enableRdpOnTargetOption", "type": "str"},
+        "target_azure_vm_name": {"key": "targetAzureVmName", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "disks_to_include": {"key": "disksToInclude", "type": "[str]"},
+        "target_azure_v1_resource_group_id": {"key": "targetAzureV1ResourceGroupId", "type": "str"},
+        "target_azure_v2_resource_group_id": {"key": "targetAzureV2ResourceGroupId", "type": "str"},
+        "use_managed_disks": {"key": "useManagedDisks", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "use_managed_disks_for_replication": {"key": "useManagedDisksForReplication", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "disks_to_include_for_managed_disks": {
+            "key": "disksToIncludeForManagedDisks",
+            "type": "[HyperVReplicaAzureDiskInputDetails]",
+        },
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "seed_managed_disk_tags": {"key": "seedManagedDiskTags", "type": "{str}"},
+        "target_managed_disk_tags": {"key": "targetManagedDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureEnableProtectionInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.hv_host_vm_id = kwargs.get('hv_host_vm_id', None)
-        self.vm_name = kwargs.get('vm_name', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.vhd_id = kwargs.get('vhd_id', None)
-        self.target_storage_account_id = kwargs.get('target_storage_account_id', None)
-        self.target_azure_network_id = kwargs.get('target_azure_network_id', None)
-        self.target_azure_subnet_id = kwargs.get('target_azure_subnet_id', None)
-        self.enable_rdp_on_target_option = kwargs.get('enable_rdp_on_target_option', None)
-        self.target_azure_vm_name = kwargs.get('target_azure_vm_name', None)
-        self.log_storage_account_id = kwargs.get('log_storage_account_id', None)
-        self.disks_to_include = kwargs.get('disks_to_include', None)
-        self.target_azure_v1_resource_group_id = kwargs.get('target_azure_v1_resource_group_id', None)
-        self.target_azure_v2_resource_group_id = kwargs.get('target_azure_v2_resource_group_id', None)
-        self.use_managed_disks = kwargs.get('use_managed_disks', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.license_type = kwargs.get('license_type', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.use_managed_disks_for_replication = kwargs.get('use_managed_disks_for_replication', None)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.disks_to_include_for_managed_disks = kwargs.get('disks_to_include_for_managed_disks', None)
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.seed_managed_disk_tags = kwargs.get('seed_managed_disk_tags', None)
-        self.target_managed_disk_tags = kwargs.get('target_managed_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.hv_host_vm_id = kwargs.get("hv_host_vm_id", None)
+        self.vm_name = kwargs.get("vm_name", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.vhd_id = kwargs.get("vhd_id", None)
+        self.target_storage_account_id = kwargs.get("target_storage_account_id", None)
+        self.target_azure_network_id = kwargs.get("target_azure_network_id", None)
+        self.target_azure_subnet_id = kwargs.get("target_azure_subnet_id", None)
+        self.enable_rdp_on_target_option = kwargs.get("enable_rdp_on_target_option", None)
+        self.target_azure_vm_name = kwargs.get("target_azure_vm_name", None)
+        self.log_storage_account_id = kwargs.get("log_storage_account_id", None)
+        self.disks_to_include = kwargs.get("disks_to_include", None)
+        self.target_azure_v1_resource_group_id = kwargs.get("target_azure_v1_resource_group_id", None)
+        self.target_azure_v2_resource_group_id = kwargs.get("target_azure_v2_resource_group_id", None)
+        self.use_managed_disks = kwargs.get("use_managed_disks", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.license_type = kwargs.get("license_type", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.use_managed_disks_for_replication = kwargs.get("use_managed_disks_for_replication", None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.disks_to_include_for_managed_disks = kwargs.get("disks_to_include_for_managed_disks", None)
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.seed_managed_disk_tags = kwargs.get("seed_managed_disk_tags", None)
+        self.target_managed_disk_tags = kwargs.get("target_managed_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
 
 
 class HyperVReplicaAzureEventDetails(EventProviderSpecificDetails):
@@ -6219,25 +5932,22 @@ class HyperVReplicaAzureEventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'container_name': {'key': 'containerName', 'type': 'str'},
-        'fabric_name': {'key': 'fabricName', 'type': 'str'},
-        'remote_container_name': {'key': 'remoteContainerName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "container_name": {"key": "containerName", "type": "str"},
+        "fabric_name": {"key": "fabricName", "type": "str"},
+        "remote_container_name": {"key": "remoteContainerName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureEventDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.container_name = kwargs.get('container_name', None)
-        self.fabric_name = kwargs.get('fabric_name', None)
-        self.remote_container_name = kwargs.get('remote_container_name', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.container_name = kwargs.get("container_name", None)
+        self.fabric_name = kwargs.get("fabric_name", None)
+        self.remote_container_name = kwargs.get("remote_container_name", None)
 
 
 class PlannedFailoverProviderSpecificFailoverInput(msrest.serialization.Model):
@@ -6253,21 +5963,22 @@ class PlannedFailoverProviderSpecificFailoverInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'HyperVReplicaAzure': 'HyperVReplicaAzurePlannedFailoverProviderInput', 'HyperVReplicaAzureFailback': 'HyperVReplicaAzureFailbackProviderInput', 'InMageRcmFailback': 'InMageRcmFailbackPlannedFailoverProviderInput'}
+        "instance_type": {
+            "HyperVReplicaAzure": "HyperVReplicaAzurePlannedFailoverProviderInput",
+            "HyperVReplicaAzureFailback": "HyperVReplicaAzureFailbackProviderInput",
+            "InMageRcmFailback": "InMageRcmFailbackPlannedFailoverProviderInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PlannedFailoverProviderSpecificFailoverInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -6288,25 +5999,22 @@ class HyperVReplicaAzureFailbackProviderInput(PlannedFailoverProviderSpecificFai
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'data_sync_option': {'key': 'dataSyncOption', 'type': 'str'},
-        'recovery_vm_creation_option': {'key': 'recoveryVmCreationOption', 'type': 'str'},
-        'provider_id_for_alternate_recovery': {'key': 'providerIdForAlternateRecovery', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "data_sync_option": {"key": "dataSyncOption", "type": "str"},
+        "recovery_vm_creation_option": {"key": "recoveryVmCreationOption", "type": "str"},
+        "provider_id_for_alternate_recovery": {"key": "providerIdForAlternateRecovery", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureFailbackProviderInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzureFailback'  # type: str
-        self.data_sync_option = kwargs.get('data_sync_option', None)
-        self.recovery_vm_creation_option = kwargs.get('recovery_vm_creation_option', None)
-        self.provider_id_for_alternate_recovery = kwargs.get('provider_id_for_alternate_recovery', None)
+        self.instance_type = "HyperVReplicaAzureFailback"  # type: str
+        self.data_sync_option = kwargs.get("data_sync_option", None)
+        self.recovery_vm_creation_option = kwargs.get("recovery_vm_creation_option", None)
+        self.provider_id_for_alternate_recovery = kwargs.get("provider_id_for_alternate_recovery", None)
 
 
 class HyperVReplicaAzureManagedDiskDetails(msrest.serialization.Model):
@@ -6323,21 +6031,18 @@ class HyperVReplicaAzureManagedDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'seed_managed_disk_id': {'key': 'seedManagedDiskId', 'type': 'str'},
-        'replica_disk_type': {'key': 'replicaDiskType', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "seed_managed_disk_id": {"key": "seedManagedDiskId", "type": "str"},
+        "replica_disk_type": {"key": "replicaDiskType", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureManagedDiskDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.seed_managed_disk_id = kwargs.get('seed_managed_disk_id', None)
-        self.replica_disk_type = kwargs.get('replica_disk_type', None)
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.seed_managed_disk_id = kwargs.get("seed_managed_disk_id", None)
+        self.replica_disk_type = kwargs.get("replica_disk_type", None)
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
 
 
 class HyperVReplicaAzurePlannedFailoverProviderInput(PlannedFailoverProviderSpecificFailoverInput):
@@ -6357,25 +6062,22 @@ class HyperVReplicaAzurePlannedFailoverProviderInput(PlannedFailoverProviderSpec
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_kek_certificate_pfx': {'key': 'primaryKekCertificatePfx', 'type': 'str'},
-        'secondary_kek_certificate_pfx': {'key': 'secondaryKekCertificatePfx', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_kek_certificate_pfx": {"key": "primaryKekCertificatePfx", "type": "str"},
+        "secondary_kek_certificate_pfx": {"key": "secondaryKekCertificatePfx", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzurePlannedFailoverProviderInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.primary_kek_certificate_pfx = kwargs.get('primary_kek_certificate_pfx', None)
-        self.secondary_kek_certificate_pfx = kwargs.get('secondary_kek_certificate_pfx', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.primary_kek_certificate_pfx = kwargs.get("primary_kek_certificate_pfx", None)
+        self.secondary_kek_certificate_pfx = kwargs.get("secondary_kek_certificate_pfx", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class HyperVReplicaAzurePolicyDetails(PolicyProviderSpecificDetails):
@@ -6405,31 +6107,33 @@ class HyperVReplicaAzurePolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_history_duration_in_hours': {'key': 'recoveryPointHistoryDurationInHours', 'type': 'int'},
-        'application_consistent_snapshot_frequency_in_hours': {'key': 'applicationConsistentSnapshotFrequencyInHours', 'type': 'int'},
-        'replication_interval': {'key': 'replicationInterval', 'type': 'int'},
-        'online_replication_start_time': {'key': 'onlineReplicationStartTime', 'type': 'str'},
-        'encryption': {'key': 'encryption', 'type': 'str'},
-        'active_storage_account_id': {'key': 'activeStorageAccountId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_history_duration_in_hours": {"key": "recoveryPointHistoryDurationInHours", "type": "int"},
+        "application_consistent_snapshot_frequency_in_hours": {
+            "key": "applicationConsistentSnapshotFrequencyInHours",
+            "type": "int",
+        },
+        "replication_interval": {"key": "replicationInterval", "type": "int"},
+        "online_replication_start_time": {"key": "onlineReplicationStartTime", "type": "str"},
+        "encryption": {"key": "encryption", "type": "str"},
+        "active_storage_account_id": {"key": "activeStorageAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzurePolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.recovery_point_history_duration_in_hours = kwargs.get('recovery_point_history_duration_in_hours', None)
-        self.application_consistent_snapshot_frequency_in_hours = kwargs.get('application_consistent_snapshot_frequency_in_hours', None)
-        self.replication_interval = kwargs.get('replication_interval', None)
-        self.online_replication_start_time = kwargs.get('online_replication_start_time', None)
-        self.encryption = kwargs.get('encryption', None)
-        self.active_storage_account_id = kwargs.get('active_storage_account_id', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.recovery_point_history_duration_in_hours = kwargs.get("recovery_point_history_duration_in_hours", None)
+        self.application_consistent_snapshot_frequency_in_hours = kwargs.get(
+            "application_consistent_snapshot_frequency_in_hours", None
+        )
+        self.replication_interval = kwargs.get("replication_interval", None)
+        self.online_replication_start_time = kwargs.get("online_replication_start_time", None)
+        self.encryption = kwargs.get("encryption", None)
+        self.active_storage_account_id = kwargs.get("active_storage_account_id", None)
 
 
 class HyperVReplicaAzurePolicyInput(PolicyProviderSpecificInput):
@@ -6456,29 +6160,31 @@ class HyperVReplicaAzurePolicyInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_history_duration': {'key': 'recoveryPointHistoryDuration', 'type': 'int'},
-        'application_consistent_snapshot_frequency_in_hours': {'key': 'applicationConsistentSnapshotFrequencyInHours', 'type': 'int'},
-        'replication_interval': {'key': 'replicationInterval', 'type': 'int'},
-        'online_replication_start_time': {'key': 'onlineReplicationStartTime', 'type': 'str'},
-        'storage_accounts': {'key': 'storageAccounts', 'type': '[str]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_history_duration": {"key": "recoveryPointHistoryDuration", "type": "int"},
+        "application_consistent_snapshot_frequency_in_hours": {
+            "key": "applicationConsistentSnapshotFrequencyInHours",
+            "type": "int",
+        },
+        "replication_interval": {"key": "replicationInterval", "type": "int"},
+        "online_replication_start_time": {"key": "onlineReplicationStartTime", "type": "str"},
+        "storage_accounts": {"key": "storageAccounts", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzurePolicyInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.recovery_point_history_duration = kwargs.get('recovery_point_history_duration', None)
-        self.application_consistent_snapshot_frequency_in_hours = kwargs.get('application_consistent_snapshot_frequency_in_hours', None)
-        self.replication_interval = kwargs.get('replication_interval', None)
-        self.online_replication_start_time = kwargs.get('online_replication_start_time', None)
-        self.storage_accounts = kwargs.get('storage_accounts', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.recovery_point_history_duration = kwargs.get("recovery_point_history_duration", None)
+        self.application_consistent_snapshot_frequency_in_hours = kwargs.get(
+            "application_consistent_snapshot_frequency_in_hours", None
+        )
+        self.replication_interval = kwargs.get("replication_interval", None)
+        self.online_replication_start_time = kwargs.get("online_replication_start_time", None)
+        self.storage_accounts = kwargs.get("storage_accounts", None)
 
 
 class HyperVReplicaAzureReplicationDetails(ReplicationProviderSpecificSettings):
@@ -6567,86 +6273,83 @@ class HyperVReplicaAzureReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'last_recovery_point_received': {'readonly': True},
+        "instance_type": {"required": True},
+        "last_recovery_point_received": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'azure_vm_disk_details': {'key': 'azureVmDiskDetails', 'type': '[AzureVmDiskDetails]'},
-        'recovery_azure_vm_name': {'key': 'recoveryAzureVmName', 'type': 'str'},
-        'recovery_azure_vm_size': {'key': 'recoveryAzureVMSize', 'type': 'str'},
-        'recovery_azure_storage_account': {'key': 'recoveryAzureStorageAccount', 'type': 'str'},
-        'recovery_azure_log_storage_account_id': {'key': 'recoveryAzureLogStorageAccountId', 'type': 'str'},
-        'last_replicated_time': {'key': 'lastReplicatedTime', 'type': 'iso-8601'},
-        'rpo_in_seconds': {'key': 'rpoInSeconds', 'type': 'long'},
-        'last_rpo_calculated_time': {'key': 'lastRpoCalculatedTime', 'type': 'iso-8601'},
-        'vm_id': {'key': 'vmId', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'initial_replication_details': {'key': 'initialReplicationDetails', 'type': 'InitialReplicationDetails'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicDetails]'},
-        'selected_recovery_azure_network_id': {'key': 'selectedRecoveryAzureNetworkId', 'type': 'str'},
-        'selected_source_nic_id': {'key': 'selectedSourceNicId', 'type': 'str'},
-        'encryption': {'key': 'encryption', 'type': 'str'},
-        'o_s_details': {'key': 'oSDetails', 'type': 'OSDetails'},
-        'source_vm_ram_size_in_mb': {'key': 'sourceVmRamSizeInMB', 'type': 'int'},
-        'source_vm_cpu_count': {'key': 'sourceVmCpuCount', 'type': 'int'},
-        'enable_rdp_on_target_option': {'key': 'enableRdpOnTargetOption', 'type': 'str'},
-        'recovery_azure_resource_group_id': {'key': 'recoveryAzureResourceGroupId', 'type': 'str'},
-        'recovery_availability_set_id': {'key': 'recoveryAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'use_managed_disks': {'key': 'useManagedDisks', 'type': 'str'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'last_recovery_point_received': {'key': 'lastRecoveryPointReceived', 'type': 'iso-8601'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'seed_managed_disk_tags': {'key': 'seedManagedDiskTags', 'type': '{str}'},
-        'target_managed_disk_tags': {'key': 'targetManagedDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
-        'protected_managed_disks': {'key': 'protectedManagedDisks', 'type': '[HyperVReplicaAzureManagedDiskDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "azure_vm_disk_details": {"key": "azureVmDiskDetails", "type": "[AzureVmDiskDetails]"},
+        "recovery_azure_vm_name": {"key": "recoveryAzureVmName", "type": "str"},
+        "recovery_azure_vm_size": {"key": "recoveryAzureVMSize", "type": "str"},
+        "recovery_azure_storage_account": {"key": "recoveryAzureStorageAccount", "type": "str"},
+        "recovery_azure_log_storage_account_id": {"key": "recoveryAzureLogStorageAccountId", "type": "str"},
+        "last_replicated_time": {"key": "lastReplicatedTime", "type": "iso-8601"},
+        "rpo_in_seconds": {"key": "rpoInSeconds", "type": "long"},
+        "last_rpo_calculated_time": {"key": "lastRpoCalculatedTime", "type": "iso-8601"},
+        "vm_id": {"key": "vmId", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "initial_replication_details": {"key": "initialReplicationDetails", "type": "InitialReplicationDetails"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicDetails]"},
+        "selected_recovery_azure_network_id": {"key": "selectedRecoveryAzureNetworkId", "type": "str"},
+        "selected_source_nic_id": {"key": "selectedSourceNicId", "type": "str"},
+        "encryption": {"key": "encryption", "type": "str"},
+        "o_s_details": {"key": "oSDetails", "type": "OSDetails"},
+        "source_vm_ram_size_in_mb": {"key": "sourceVmRamSizeInMB", "type": "int"},
+        "source_vm_cpu_count": {"key": "sourceVmCpuCount", "type": "int"},
+        "enable_rdp_on_target_option": {"key": "enableRdpOnTargetOption", "type": "str"},
+        "recovery_azure_resource_group_id": {"key": "recoveryAzureResourceGroupId", "type": "str"},
+        "recovery_availability_set_id": {"key": "recoveryAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "use_managed_disks": {"key": "useManagedDisks", "type": "str"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "last_recovery_point_received": {"key": "lastRecoveryPointReceived", "type": "iso-8601"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "seed_managed_disk_tags": {"key": "seedManagedDiskTags", "type": "{str}"},
+        "target_managed_disk_tags": {"key": "targetManagedDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
+        "protected_managed_disks": {"key": "protectedManagedDisks", "type": "[HyperVReplicaAzureManagedDiskDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.azure_vm_disk_details = kwargs.get('azure_vm_disk_details', None)
-        self.recovery_azure_vm_name = kwargs.get('recovery_azure_vm_name', None)
-        self.recovery_azure_vm_size = kwargs.get('recovery_azure_vm_size', None)
-        self.recovery_azure_storage_account = kwargs.get('recovery_azure_storage_account', None)
-        self.recovery_azure_log_storage_account_id = kwargs.get('recovery_azure_log_storage_account_id', None)
-        self.last_replicated_time = kwargs.get('last_replicated_time', None)
-        self.rpo_in_seconds = kwargs.get('rpo_in_seconds', None)
-        self.last_rpo_calculated_time = kwargs.get('last_rpo_calculated_time', None)
-        self.vm_id = kwargs.get('vm_id', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.initial_replication_details = kwargs.get('initial_replication_details', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.selected_recovery_azure_network_id = kwargs.get('selected_recovery_azure_network_id', None)
-        self.selected_source_nic_id = kwargs.get('selected_source_nic_id', None)
-        self.encryption = kwargs.get('encryption', None)
-        self.o_s_details = kwargs.get('o_s_details', None)
-        self.source_vm_ram_size_in_mb = kwargs.get('source_vm_ram_size_in_mb', None)
-        self.source_vm_cpu_count = kwargs.get('source_vm_cpu_count', None)
-        self.enable_rdp_on_target_option = kwargs.get('enable_rdp_on_target_option', None)
-        self.recovery_azure_resource_group_id = kwargs.get('recovery_azure_resource_group_id', None)
-        self.recovery_availability_set_id = kwargs.get('recovery_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.use_managed_disks = kwargs.get('use_managed_disks', None)
-        self.license_type = kwargs.get('license_type', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.azure_vm_disk_details = kwargs.get("azure_vm_disk_details", None)
+        self.recovery_azure_vm_name = kwargs.get("recovery_azure_vm_name", None)
+        self.recovery_azure_vm_size = kwargs.get("recovery_azure_vm_size", None)
+        self.recovery_azure_storage_account = kwargs.get("recovery_azure_storage_account", None)
+        self.recovery_azure_log_storage_account_id = kwargs.get("recovery_azure_log_storage_account_id", None)
+        self.last_replicated_time = kwargs.get("last_replicated_time", None)
+        self.rpo_in_seconds = kwargs.get("rpo_in_seconds", None)
+        self.last_rpo_calculated_time = kwargs.get("last_rpo_calculated_time", None)
+        self.vm_id = kwargs.get("vm_id", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.initial_replication_details = kwargs.get("initial_replication_details", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.selected_recovery_azure_network_id = kwargs.get("selected_recovery_azure_network_id", None)
+        self.selected_source_nic_id = kwargs.get("selected_source_nic_id", None)
+        self.encryption = kwargs.get("encryption", None)
+        self.o_s_details = kwargs.get("o_s_details", None)
+        self.source_vm_ram_size_in_mb = kwargs.get("source_vm_ram_size_in_mb", None)
+        self.source_vm_cpu_count = kwargs.get("source_vm_cpu_count", None)
+        self.enable_rdp_on_target_option = kwargs.get("enable_rdp_on_target_option", None)
+        self.recovery_azure_resource_group_id = kwargs.get("recovery_azure_resource_group_id", None)
+        self.recovery_availability_set_id = kwargs.get("recovery_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.use_managed_disks = kwargs.get("use_managed_disks", None)
+        self.license_type = kwargs.get("license_type", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
         self.last_recovery_point_received = None
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.seed_managed_disk_tags = kwargs.get('seed_managed_disk_tags', None)
-        self.target_managed_disk_tags = kwargs.get('target_managed_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
-        self.protected_managed_disks = kwargs.get('protected_managed_disks', None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.seed_managed_disk_tags = kwargs.get("seed_managed_disk_tags", None)
+        self.target_managed_disk_tags = kwargs.get("target_managed_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
+        self.protected_managed_disks = kwargs.get("protected_managed_disks", None)
 
 
 class HyperVReplicaAzureReprotectInput(ReverseReplicationProviderSpecificInput):
@@ -6671,31 +6374,28 @@ class HyperVReplicaAzureReprotectInput(ReverseReplicationProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'hv_host_vm_id': {'key': 'hvHostVmId', 'type': 'str'},
-        'vm_name': {'key': 'vmName', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'v_hd_id': {'key': 'vHDId', 'type': 'str'},
-        'storage_account_id': {'key': 'storageAccountId', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "hv_host_vm_id": {"key": "hvHostVmId", "type": "str"},
+        "vm_name": {"key": "vmName", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "v_hd_id": {"key": "vHDId", "type": "str"},
+        "storage_account_id": {"key": "storageAccountId", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureReprotectInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.hv_host_vm_id = kwargs.get('hv_host_vm_id', None)
-        self.vm_name = kwargs.get('vm_name', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.v_hd_id = kwargs.get('v_hd_id', None)
-        self.storage_account_id = kwargs.get('storage_account_id', None)
-        self.log_storage_account_id = kwargs.get('log_storage_account_id', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.hv_host_vm_id = kwargs.get("hv_host_vm_id", None)
+        self.vm_name = kwargs.get("vm_name", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.v_hd_id = kwargs.get("v_hd_id", None)
+        self.storage_account_id = kwargs.get("storage_account_id", None)
+        self.log_storage_account_id = kwargs.get("log_storage_account_id", None)
 
 
 class HyperVReplicaAzureTestFailoverInput(TestFailoverProviderSpecificInput):
@@ -6715,25 +6415,22 @@ class HyperVReplicaAzureTestFailoverInput(TestFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_kek_certificate_pfx': {'key': 'primaryKekCertificatePfx', 'type': 'str'},
-        'secondary_kek_certificate_pfx': {'key': 'secondaryKekCertificatePfx', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_kek_certificate_pfx": {"key": "primaryKekCertificatePfx", "type": "str"},
+        "secondary_kek_certificate_pfx": {"key": "secondaryKekCertificatePfx", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureTestFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.primary_kek_certificate_pfx = kwargs.get('primary_kek_certificate_pfx', None)
-        self.secondary_kek_certificate_pfx = kwargs.get('secondary_kek_certificate_pfx', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.primary_kek_certificate_pfx = kwargs.get("primary_kek_certificate_pfx", None)
+        self.secondary_kek_certificate_pfx = kwargs.get("secondary_kek_certificate_pfx", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class HyperVReplicaAzureUnplannedFailoverInput(UnplannedFailoverProviderSpecificInput):
@@ -6753,25 +6450,22 @@ class HyperVReplicaAzureUnplannedFailoverInput(UnplannedFailoverProviderSpecific
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_kek_certificate_pfx': {'key': 'primaryKekCertificatePfx', 'type': 'str'},
-        'secondary_kek_certificate_pfx': {'key': 'secondaryKekCertificatePfx', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_kek_certificate_pfx": {"key": "primaryKekCertificatePfx", "type": "str"},
+        "secondary_kek_certificate_pfx": {"key": "secondaryKekCertificatePfx", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureUnplannedFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.primary_kek_certificate_pfx = kwargs.get('primary_kek_certificate_pfx', None)
-        self.secondary_kek_certificate_pfx = kwargs.get('secondary_kek_certificate_pfx', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.primary_kek_certificate_pfx = kwargs.get("primary_kek_certificate_pfx", None)
+        self.secondary_kek_certificate_pfx = kwargs.get("secondary_kek_certificate_pfx", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class HyperVReplicaAzureUpdateReplicationProtectedItemInput(UpdateReplicationProtectedItemProviderInput):
@@ -6812,41 +6506,38 @@ class HyperVReplicaAzureUpdateReplicationProtectedItemInput(UpdateReplicationPro
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_azure_v1_resource_group_id': {'key': 'recoveryAzureV1ResourceGroupId', 'type': 'str'},
-        'recovery_azure_v2_resource_group_id': {'key': 'recoveryAzureV2ResourceGroupId', 'type': 'str'},
-        'use_managed_disks': {'key': 'useManagedDisks', 'type': 'str'},
-        'disk_id_to_disk_encryption_map': {'key': 'diskIdToDiskEncryptionMap', 'type': '{str}'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'target_managed_disk_tags': {'key': 'targetManagedDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[UpdateDiskInput]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_azure_v1_resource_group_id": {"key": "recoveryAzureV1ResourceGroupId", "type": "str"},
+        "recovery_azure_v2_resource_group_id": {"key": "recoveryAzureV2ResourceGroupId", "type": "str"},
+        "use_managed_disks": {"key": "useManagedDisks", "type": "str"},
+        "disk_id_to_disk_encryption_map": {"key": "diskIdToDiskEncryptionMap", "type": "{str}"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "target_managed_disk_tags": {"key": "targetManagedDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[UpdateDiskInput]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaAzureUpdateReplicationProtectedItemInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.recovery_azure_v1_resource_group_id = kwargs.get('recovery_azure_v1_resource_group_id', None)
-        self.recovery_azure_v2_resource_group_id = kwargs.get('recovery_azure_v2_resource_group_id', None)
-        self.use_managed_disks = kwargs.get('use_managed_disks', None)
-        self.disk_id_to_disk_encryption_map = kwargs.get('disk_id_to_disk_encryption_map', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.target_managed_disk_tags = kwargs.get('target_managed_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.recovery_azure_v1_resource_group_id = kwargs.get("recovery_azure_v1_resource_group_id", None)
+        self.recovery_azure_v2_resource_group_id = kwargs.get("recovery_azure_v2_resource_group_id", None)
+        self.use_managed_disks = kwargs.get("use_managed_disks", None)
+        self.disk_id_to_disk_encryption_map = kwargs.get("disk_id_to_disk_encryption_map", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.target_managed_disk_tags = kwargs.get("target_managed_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
 
 
 class HyperVReplicaBaseEventDetails(EventProviderSpecificDetails):
@@ -6868,27 +6559,24 @@ class HyperVReplicaBaseEventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'container_name': {'key': 'containerName', 'type': 'str'},
-        'fabric_name': {'key': 'fabricName', 'type': 'str'},
-        'remote_container_name': {'key': 'remoteContainerName', 'type': 'str'},
-        'remote_fabric_name': {'key': 'remoteFabricName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "container_name": {"key": "containerName", "type": "str"},
+        "fabric_name": {"key": "fabricName", "type": "str"},
+        "remote_container_name": {"key": "remoteContainerName", "type": "str"},
+        "remote_fabric_name": {"key": "remoteFabricName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaBaseEventDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaBaseEventDetails'  # type: str
-        self.container_name = kwargs.get('container_name', None)
-        self.fabric_name = kwargs.get('fabric_name', None)
-        self.remote_container_name = kwargs.get('remote_container_name', None)
-        self.remote_fabric_name = kwargs.get('remote_fabric_name', None)
+        self.instance_type = "HyperVReplicaBaseEventDetails"  # type: str
+        self.container_name = kwargs.get("container_name", None)
+        self.fabric_name = kwargs.get("fabric_name", None)
+        self.remote_container_name = kwargs.get("remote_container_name", None)
+        self.remote_fabric_name = kwargs.get("remote_fabric_name", None)
 
 
 class HyperVReplicaBasePolicyDetails(PolicyProviderSpecificDetails):
@@ -6924,39 +6612,41 @@ class HyperVReplicaBasePolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_points': {'key': 'recoveryPoints', 'type': 'int'},
-        'application_consistent_snapshot_frequency_in_hours': {'key': 'applicationConsistentSnapshotFrequencyInHours', 'type': 'int'},
-        'compression': {'key': 'compression', 'type': 'str'},
-        'initial_replication_method': {'key': 'initialReplicationMethod', 'type': 'str'},
-        'online_replication_start_time': {'key': 'onlineReplicationStartTime', 'type': 'str'},
-        'offline_replication_import_path': {'key': 'offlineReplicationImportPath', 'type': 'str'},
-        'offline_replication_export_path': {'key': 'offlineReplicationExportPath', 'type': 'str'},
-        'replication_port': {'key': 'replicationPort', 'type': 'int'},
-        'allowed_authentication_type': {'key': 'allowedAuthenticationType', 'type': 'int'},
-        'replica_deletion_option': {'key': 'replicaDeletionOption', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_points": {"key": "recoveryPoints", "type": "int"},
+        "application_consistent_snapshot_frequency_in_hours": {
+            "key": "applicationConsistentSnapshotFrequencyInHours",
+            "type": "int",
+        },
+        "compression": {"key": "compression", "type": "str"},
+        "initial_replication_method": {"key": "initialReplicationMethod", "type": "str"},
+        "online_replication_start_time": {"key": "onlineReplicationStartTime", "type": "str"},
+        "offline_replication_import_path": {"key": "offlineReplicationImportPath", "type": "str"},
+        "offline_replication_export_path": {"key": "offlineReplicationExportPath", "type": "str"},
+        "replication_port": {"key": "replicationPort", "type": "int"},
+        "allowed_authentication_type": {"key": "allowedAuthenticationType", "type": "int"},
+        "replica_deletion_option": {"key": "replicaDeletionOption", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaBasePolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaBasePolicyDetails'  # type: str
-        self.recovery_points = kwargs.get('recovery_points', None)
-        self.application_consistent_snapshot_frequency_in_hours = kwargs.get('application_consistent_snapshot_frequency_in_hours', None)
-        self.compression = kwargs.get('compression', None)
-        self.initial_replication_method = kwargs.get('initial_replication_method', None)
-        self.online_replication_start_time = kwargs.get('online_replication_start_time', None)
-        self.offline_replication_import_path = kwargs.get('offline_replication_import_path', None)
-        self.offline_replication_export_path = kwargs.get('offline_replication_export_path', None)
-        self.replication_port = kwargs.get('replication_port', None)
-        self.allowed_authentication_type = kwargs.get('allowed_authentication_type', None)
-        self.replica_deletion_option = kwargs.get('replica_deletion_option', None)
+        self.instance_type = "HyperVReplicaBasePolicyDetails"  # type: str
+        self.recovery_points = kwargs.get("recovery_points", None)
+        self.application_consistent_snapshot_frequency_in_hours = kwargs.get(
+            "application_consistent_snapshot_frequency_in_hours", None
+        )
+        self.compression = kwargs.get("compression", None)
+        self.initial_replication_method = kwargs.get("initial_replication_method", None)
+        self.online_replication_start_time = kwargs.get("online_replication_start_time", None)
+        self.offline_replication_import_path = kwargs.get("offline_replication_import_path", None)
+        self.offline_replication_export_path = kwargs.get("offline_replication_export_path", None)
+        self.replication_port = kwargs.get("replication_port", None)
+        self.allowed_authentication_type = kwargs.get("allowed_authentication_type", None)
+        self.replica_deletion_option = kwargs.get("replica_deletion_option", None)
 
 
 class HyperVReplicaBaseReplicationDetails(ReplicationProviderSpecificSettings):
@@ -6984,33 +6674,30 @@ class HyperVReplicaBaseReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'last_replicated_time': {'key': 'lastReplicatedTime', 'type': 'iso-8601'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicDetails]'},
-        'vm_id': {'key': 'vmId', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'initial_replication_details': {'key': 'initialReplicationDetails', 'type': 'InitialReplicationDetails'},
-        'v_m_disk_details': {'key': 'vMDiskDetails', 'type': '[DiskDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "last_replicated_time": {"key": "lastReplicatedTime", "type": "iso-8601"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicDetails]"},
+        "vm_id": {"key": "vmId", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "initial_replication_details": {"key": "initialReplicationDetails", "type": "InitialReplicationDetails"},
+        "v_m_disk_details": {"key": "vMDiskDetails", "type": "[DiskDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaBaseReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaBaseReplicationDetails'  # type: str
-        self.last_replicated_time = kwargs.get('last_replicated_time', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.vm_id = kwargs.get('vm_id', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.initial_replication_details = kwargs.get('initial_replication_details', None)
-        self.v_m_disk_details = kwargs.get('v_m_disk_details', None)
+        self.instance_type = "HyperVReplicaBaseReplicationDetails"  # type: str
+        self.last_replicated_time = kwargs.get("last_replicated_time", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.vm_id = kwargs.get("vm_id", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.initial_replication_details = kwargs.get("initial_replication_details", None)
+        self.v_m_disk_details = kwargs.get("v_m_disk_details", None)
 
 
 class HyperVReplicaBluePolicyDetails(PolicyProviderSpecificDetails):
@@ -7048,41 +6735,43 @@ class HyperVReplicaBluePolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'replication_frequency_in_seconds': {'key': 'replicationFrequencyInSeconds', 'type': 'int'},
-        'recovery_points': {'key': 'recoveryPoints', 'type': 'int'},
-        'application_consistent_snapshot_frequency_in_hours': {'key': 'applicationConsistentSnapshotFrequencyInHours', 'type': 'int'},
-        'compression': {'key': 'compression', 'type': 'str'},
-        'initial_replication_method': {'key': 'initialReplicationMethod', 'type': 'str'},
-        'online_replication_start_time': {'key': 'onlineReplicationStartTime', 'type': 'str'},
-        'offline_replication_import_path': {'key': 'offlineReplicationImportPath', 'type': 'str'},
-        'offline_replication_export_path': {'key': 'offlineReplicationExportPath', 'type': 'str'},
-        'replication_port': {'key': 'replicationPort', 'type': 'int'},
-        'allowed_authentication_type': {'key': 'allowedAuthenticationType', 'type': 'int'},
-        'replica_deletion_option': {'key': 'replicaDeletionOption', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "replication_frequency_in_seconds": {"key": "replicationFrequencyInSeconds", "type": "int"},
+        "recovery_points": {"key": "recoveryPoints", "type": "int"},
+        "application_consistent_snapshot_frequency_in_hours": {
+            "key": "applicationConsistentSnapshotFrequencyInHours",
+            "type": "int",
+        },
+        "compression": {"key": "compression", "type": "str"},
+        "initial_replication_method": {"key": "initialReplicationMethod", "type": "str"},
+        "online_replication_start_time": {"key": "onlineReplicationStartTime", "type": "str"},
+        "offline_replication_import_path": {"key": "offlineReplicationImportPath", "type": "str"},
+        "offline_replication_export_path": {"key": "offlineReplicationExportPath", "type": "str"},
+        "replication_port": {"key": "replicationPort", "type": "int"},
+        "allowed_authentication_type": {"key": "allowedAuthenticationType", "type": "int"},
+        "replica_deletion_option": {"key": "replicaDeletionOption", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaBluePolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012R2'  # type: str
-        self.replication_frequency_in_seconds = kwargs.get('replication_frequency_in_seconds', None)
-        self.recovery_points = kwargs.get('recovery_points', None)
-        self.application_consistent_snapshot_frequency_in_hours = kwargs.get('application_consistent_snapshot_frequency_in_hours', None)
-        self.compression = kwargs.get('compression', None)
-        self.initial_replication_method = kwargs.get('initial_replication_method', None)
-        self.online_replication_start_time = kwargs.get('online_replication_start_time', None)
-        self.offline_replication_import_path = kwargs.get('offline_replication_import_path', None)
-        self.offline_replication_export_path = kwargs.get('offline_replication_export_path', None)
-        self.replication_port = kwargs.get('replication_port', None)
-        self.allowed_authentication_type = kwargs.get('allowed_authentication_type', None)
-        self.replica_deletion_option = kwargs.get('replica_deletion_option', None)
+        self.instance_type = "HyperVReplica2012R2"  # type: str
+        self.replication_frequency_in_seconds = kwargs.get("replication_frequency_in_seconds", None)
+        self.recovery_points = kwargs.get("recovery_points", None)
+        self.application_consistent_snapshot_frequency_in_hours = kwargs.get(
+            "application_consistent_snapshot_frequency_in_hours", None
+        )
+        self.compression = kwargs.get("compression", None)
+        self.initial_replication_method = kwargs.get("initial_replication_method", None)
+        self.online_replication_start_time = kwargs.get("online_replication_start_time", None)
+        self.offline_replication_import_path = kwargs.get("offline_replication_import_path", None)
+        self.offline_replication_export_path = kwargs.get("offline_replication_export_path", None)
+        self.replication_port = kwargs.get("replication_port", None)
+        self.allowed_authentication_type = kwargs.get("allowed_authentication_type", None)
+        self.replica_deletion_option = kwargs.get("replica_deletion_option", None)
 
 
 class HyperVReplicaPolicyInput(PolicyProviderSpecificInput):
@@ -7119,43 +6808,43 @@ class HyperVReplicaPolicyInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_points': {'key': 'recoveryPoints', 'type': 'int'},
-        'application_consistent_snapshot_frequency_in_hours': {'key': 'applicationConsistentSnapshotFrequencyInHours', 'type': 'int'},
-        'compression': {'key': 'compression', 'type': 'str'},
-        'initial_replication_method': {'key': 'initialReplicationMethod', 'type': 'str'},
-        'online_replication_start_time': {'key': 'onlineReplicationStartTime', 'type': 'str'},
-        'offline_replication_import_path': {'key': 'offlineReplicationImportPath', 'type': 'str'},
-        'offline_replication_export_path': {'key': 'offlineReplicationExportPath', 'type': 'str'},
-        'replication_port': {'key': 'replicationPort', 'type': 'int'},
-        'allowed_authentication_type': {'key': 'allowedAuthenticationType', 'type': 'int'},
-        'replica_deletion': {'key': 'replicaDeletion', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_points": {"key": "recoveryPoints", "type": "int"},
+        "application_consistent_snapshot_frequency_in_hours": {
+            "key": "applicationConsistentSnapshotFrequencyInHours",
+            "type": "int",
+        },
+        "compression": {"key": "compression", "type": "str"},
+        "initial_replication_method": {"key": "initialReplicationMethod", "type": "str"},
+        "online_replication_start_time": {"key": "onlineReplicationStartTime", "type": "str"},
+        "offline_replication_import_path": {"key": "offlineReplicationImportPath", "type": "str"},
+        "offline_replication_export_path": {"key": "offlineReplicationExportPath", "type": "str"},
+        "replication_port": {"key": "replicationPort", "type": "int"},
+        "allowed_authentication_type": {"key": "allowedAuthenticationType", "type": "int"},
+        "replica_deletion": {"key": "replicaDeletion", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'HyperVReplica2012R2': 'HyperVReplicaBluePolicyInput'}
-    }
+    _subtype_map = {"instance_type": {"HyperVReplica2012R2": "HyperVReplicaBluePolicyInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaPolicyInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012'  # type: str
-        self.recovery_points = kwargs.get('recovery_points', None)
-        self.application_consistent_snapshot_frequency_in_hours = kwargs.get('application_consistent_snapshot_frequency_in_hours', None)
-        self.compression = kwargs.get('compression', None)
-        self.initial_replication_method = kwargs.get('initial_replication_method', None)
-        self.online_replication_start_time = kwargs.get('online_replication_start_time', None)
-        self.offline_replication_import_path = kwargs.get('offline_replication_import_path', None)
-        self.offline_replication_export_path = kwargs.get('offline_replication_export_path', None)
-        self.replication_port = kwargs.get('replication_port', None)
-        self.allowed_authentication_type = kwargs.get('allowed_authentication_type', None)
-        self.replica_deletion = kwargs.get('replica_deletion', None)
+        self.instance_type = "HyperVReplica2012"  # type: str
+        self.recovery_points = kwargs.get("recovery_points", None)
+        self.application_consistent_snapshot_frequency_in_hours = kwargs.get(
+            "application_consistent_snapshot_frequency_in_hours", None
+        )
+        self.compression = kwargs.get("compression", None)
+        self.initial_replication_method = kwargs.get("initial_replication_method", None)
+        self.online_replication_start_time = kwargs.get("online_replication_start_time", None)
+        self.offline_replication_import_path = kwargs.get("offline_replication_import_path", None)
+        self.offline_replication_export_path = kwargs.get("offline_replication_export_path", None)
+        self.replication_port = kwargs.get("replication_port", None)
+        self.allowed_authentication_type = kwargs.get("allowed_authentication_type", None)
+        self.replica_deletion = kwargs.get("replica_deletion", None)
 
 
 class HyperVReplicaBluePolicyInput(HyperVReplicaPolicyInput):
@@ -7191,31 +6880,31 @@ class HyperVReplicaBluePolicyInput(HyperVReplicaPolicyInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_points': {'key': 'recoveryPoints', 'type': 'int'},
-        'application_consistent_snapshot_frequency_in_hours': {'key': 'applicationConsistentSnapshotFrequencyInHours', 'type': 'int'},
-        'compression': {'key': 'compression', 'type': 'str'},
-        'initial_replication_method': {'key': 'initialReplicationMethod', 'type': 'str'},
-        'online_replication_start_time': {'key': 'onlineReplicationStartTime', 'type': 'str'},
-        'offline_replication_import_path': {'key': 'offlineReplicationImportPath', 'type': 'str'},
-        'offline_replication_export_path': {'key': 'offlineReplicationExportPath', 'type': 'str'},
-        'replication_port': {'key': 'replicationPort', 'type': 'int'},
-        'allowed_authentication_type': {'key': 'allowedAuthenticationType', 'type': 'int'},
-        'replica_deletion': {'key': 'replicaDeletion', 'type': 'str'},
-        'replication_frequency_in_seconds': {'key': 'replicationFrequencyInSeconds', 'type': 'int'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_points": {"key": "recoveryPoints", "type": "int"},
+        "application_consistent_snapshot_frequency_in_hours": {
+            "key": "applicationConsistentSnapshotFrequencyInHours",
+            "type": "int",
+        },
+        "compression": {"key": "compression", "type": "str"},
+        "initial_replication_method": {"key": "initialReplicationMethod", "type": "str"},
+        "online_replication_start_time": {"key": "onlineReplicationStartTime", "type": "str"},
+        "offline_replication_import_path": {"key": "offlineReplicationImportPath", "type": "str"},
+        "offline_replication_export_path": {"key": "offlineReplicationExportPath", "type": "str"},
+        "replication_port": {"key": "replicationPort", "type": "int"},
+        "allowed_authentication_type": {"key": "allowedAuthenticationType", "type": "int"},
+        "replica_deletion": {"key": "replicaDeletion", "type": "str"},
+        "replication_frequency_in_seconds": {"key": "replicationFrequencyInSeconds", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaBluePolicyInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012R2'  # type: str
-        self.replication_frequency_in_seconds = kwargs.get('replication_frequency_in_seconds', None)
+        self.instance_type = "HyperVReplica2012R2"  # type: str
+        self.replication_frequency_in_seconds = kwargs.get("replication_frequency_in_seconds", None)
 
 
 class HyperVReplicaBlueReplicationDetails(ReplicationProviderSpecificSettings):
@@ -7243,33 +6932,30 @@ class HyperVReplicaBlueReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'last_replicated_time': {'key': 'lastReplicatedTime', 'type': 'iso-8601'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicDetails]'},
-        'vm_id': {'key': 'vmId', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'initial_replication_details': {'key': 'initialReplicationDetails', 'type': 'InitialReplicationDetails'},
-        'v_m_disk_details': {'key': 'vMDiskDetails', 'type': '[DiskDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "last_replicated_time": {"key": "lastReplicatedTime", "type": "iso-8601"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicDetails]"},
+        "vm_id": {"key": "vmId", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "initial_replication_details": {"key": "initialReplicationDetails", "type": "InitialReplicationDetails"},
+        "v_m_disk_details": {"key": "vMDiskDetails", "type": "[DiskDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaBlueReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012R2'  # type: str
-        self.last_replicated_time = kwargs.get('last_replicated_time', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.vm_id = kwargs.get('vm_id', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.initial_replication_details = kwargs.get('initial_replication_details', None)
-        self.v_m_disk_details = kwargs.get('v_m_disk_details', None)
+        self.instance_type = "HyperVReplica2012R2"  # type: str
+        self.last_replicated_time = kwargs.get("last_replicated_time", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.vm_id = kwargs.get("vm_id", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.initial_replication_details = kwargs.get("initial_replication_details", None)
+        self.v_m_disk_details = kwargs.get("v_m_disk_details", None)
 
 
 class HyperVReplicaPolicyDetails(PolicyProviderSpecificDetails):
@@ -7305,39 +6991,41 @@ class HyperVReplicaPolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_points': {'key': 'recoveryPoints', 'type': 'int'},
-        'application_consistent_snapshot_frequency_in_hours': {'key': 'applicationConsistentSnapshotFrequencyInHours', 'type': 'int'},
-        'compression': {'key': 'compression', 'type': 'str'},
-        'initial_replication_method': {'key': 'initialReplicationMethod', 'type': 'str'},
-        'online_replication_start_time': {'key': 'onlineReplicationStartTime', 'type': 'str'},
-        'offline_replication_import_path': {'key': 'offlineReplicationImportPath', 'type': 'str'},
-        'offline_replication_export_path': {'key': 'offlineReplicationExportPath', 'type': 'str'},
-        'replication_port': {'key': 'replicationPort', 'type': 'int'},
-        'allowed_authentication_type': {'key': 'allowedAuthenticationType', 'type': 'int'},
-        'replica_deletion_option': {'key': 'replicaDeletionOption', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_points": {"key": "recoveryPoints", "type": "int"},
+        "application_consistent_snapshot_frequency_in_hours": {
+            "key": "applicationConsistentSnapshotFrequencyInHours",
+            "type": "int",
+        },
+        "compression": {"key": "compression", "type": "str"},
+        "initial_replication_method": {"key": "initialReplicationMethod", "type": "str"},
+        "online_replication_start_time": {"key": "onlineReplicationStartTime", "type": "str"},
+        "offline_replication_import_path": {"key": "offlineReplicationImportPath", "type": "str"},
+        "offline_replication_export_path": {"key": "offlineReplicationExportPath", "type": "str"},
+        "replication_port": {"key": "replicationPort", "type": "int"},
+        "allowed_authentication_type": {"key": "allowedAuthenticationType", "type": "int"},
+        "replica_deletion_option": {"key": "replicaDeletionOption", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaPolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012'  # type: str
-        self.recovery_points = kwargs.get('recovery_points', None)
-        self.application_consistent_snapshot_frequency_in_hours = kwargs.get('application_consistent_snapshot_frequency_in_hours', None)
-        self.compression = kwargs.get('compression', None)
-        self.initial_replication_method = kwargs.get('initial_replication_method', None)
-        self.online_replication_start_time = kwargs.get('online_replication_start_time', None)
-        self.offline_replication_import_path = kwargs.get('offline_replication_import_path', None)
-        self.offline_replication_export_path = kwargs.get('offline_replication_export_path', None)
-        self.replication_port = kwargs.get('replication_port', None)
-        self.allowed_authentication_type = kwargs.get('allowed_authentication_type', None)
-        self.replica_deletion_option = kwargs.get('replica_deletion_option', None)
+        self.instance_type = "HyperVReplica2012"  # type: str
+        self.recovery_points = kwargs.get("recovery_points", None)
+        self.application_consistent_snapshot_frequency_in_hours = kwargs.get(
+            "application_consistent_snapshot_frequency_in_hours", None
+        )
+        self.compression = kwargs.get("compression", None)
+        self.initial_replication_method = kwargs.get("initial_replication_method", None)
+        self.online_replication_start_time = kwargs.get("online_replication_start_time", None)
+        self.offline_replication_import_path = kwargs.get("offline_replication_import_path", None)
+        self.offline_replication_export_path = kwargs.get("offline_replication_export_path", None)
+        self.replication_port = kwargs.get("replication_port", None)
+        self.allowed_authentication_type = kwargs.get("allowed_authentication_type", None)
+        self.replica_deletion_option = kwargs.get("replica_deletion_option", None)
 
 
 class HyperVReplicaReplicationDetails(ReplicationProviderSpecificSettings):
@@ -7365,33 +7053,30 @@ class HyperVReplicaReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'last_replicated_time': {'key': 'lastReplicatedTime', 'type': 'iso-8601'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicDetails]'},
-        'vm_id': {'key': 'vmId', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'initial_replication_details': {'key': 'initialReplicationDetails', 'type': 'InitialReplicationDetails'},
-        'v_m_disk_details': {'key': 'vMDiskDetails', 'type': '[DiskDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "last_replicated_time": {"key": "lastReplicatedTime", "type": "iso-8601"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicDetails]"},
+        "vm_id": {"key": "vmId", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "initial_replication_details": {"key": "initialReplicationDetails", "type": "InitialReplicationDetails"},
+        "v_m_disk_details": {"key": "vMDiskDetails", "type": "[DiskDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVReplicaReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplica2012'  # type: str
-        self.last_replicated_time = kwargs.get('last_replicated_time', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.vm_id = kwargs.get('vm_id', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.initial_replication_details = kwargs.get('initial_replication_details', None)
-        self.v_m_disk_details = kwargs.get('v_m_disk_details', None)
+        self.instance_type = "HyperVReplica2012"  # type: str
+        self.last_replicated_time = kwargs.get("last_replicated_time", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.vm_id = kwargs.get("vm_id", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.initial_replication_details = kwargs.get("initial_replication_details", None)
+        self.v_m_disk_details = kwargs.get("v_m_disk_details", None)
 
 
 class HyperVSiteDetails(FabricSpecificDetails):
@@ -7407,21 +7092,18 @@ class HyperVSiteDetails(FabricSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'hyper_v_hosts': {'key': 'hyperVHosts', 'type': '[HyperVHostDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "hyper_v_hosts": {"key": "hyperVHosts", "type": "[HyperVHostDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVSiteDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVSite'  # type: str
-        self.hyper_v_hosts = kwargs.get('hyper_v_hosts', None)
+        self.instance_type = "HyperVSite"  # type: str
+        self.hyper_v_hosts = kwargs.get("hyper_v_hosts", None)
 
 
 class HyperVVirtualMachineDetails(ConfigurationSettings):
@@ -7459,37 +7141,32 @@ class HyperVVirtualMachineDetails(ConfigurationSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'source_item_id': {'key': 'sourceItemId', 'type': 'str'},
-        'generation': {'key': 'generation', 'type': 'str'},
-        'os_details': {'key': 'osDetails', 'type': 'OSDetails'},
-        'disk_details': {'key': 'diskDetails', 'type': '[DiskDetails]'},
-        'has_physical_disk': {'key': 'hasPhysicalDisk', 'type': 'str'},
-        'has_fibre_channel_adapter': {'key': 'hasFibreChannelAdapter', 'type': 'str'},
-        'has_shared_vhd': {'key': 'hasSharedVhd', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "source_item_id": {"key": "sourceItemId", "type": "str"},
+        "generation": {"key": "generation", "type": "str"},
+        "os_details": {"key": "osDetails", "type": "OSDetails"},
+        "disk_details": {"key": "diskDetails", "type": "[DiskDetails]"},
+        "has_physical_disk": {"key": "hasPhysicalDisk", "type": "str"},
+        "has_fibre_channel_adapter": {"key": "hasFibreChannelAdapter", "type": "str"},
+        "has_shared_vhd": {"key": "hasSharedVhd", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'VmmVirtualMachine': 'VmmVirtualMachineDetails'}
-    }
+    _subtype_map = {"instance_type": {"VmmVirtualMachine": "VmmVirtualMachineDetails"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HyperVVirtualMachineDetails, self).__init__(**kwargs)
-        self.instance_type = 'HyperVVirtualMachine'  # type: str
-        self.source_item_id = kwargs.get('source_item_id', None)
-        self.generation = kwargs.get('generation', None)
-        self.os_details = kwargs.get('os_details', None)
-        self.disk_details = kwargs.get('disk_details', None)
-        self.has_physical_disk = kwargs.get('has_physical_disk', None)
-        self.has_fibre_channel_adapter = kwargs.get('has_fibre_channel_adapter', None)
-        self.has_shared_vhd = kwargs.get('has_shared_vhd', None)
+        self.instance_type = "HyperVVirtualMachine"  # type: str
+        self.source_item_id = kwargs.get("source_item_id", None)
+        self.generation = kwargs.get("generation", None)
+        self.os_details = kwargs.get("os_details", None)
+        self.disk_details = kwargs.get("disk_details", None)
+        self.has_physical_disk = kwargs.get("has_physical_disk", None)
+        self.has_fibre_channel_adapter = kwargs.get("has_fibre_channel_adapter", None)
+        self.has_shared_vhd = kwargs.get("has_shared_vhd", None)
 
 
 class IdentityProviderDetails(msrest.serialization.Model):
@@ -7512,23 +7189,20 @@ class IdentityProviderDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'application_id': {'key': 'applicationId', 'type': 'str'},
-        'object_id': {'key': 'objectId', 'type': 'str'},
-        'audience': {'key': 'audience', 'type': 'str'},
-        'aad_authority': {'key': 'aadAuthority', 'type': 'str'},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "application_id": {"key": "applicationId", "type": "str"},
+        "object_id": {"key": "objectId", "type": "str"},
+        "audience": {"key": "audience", "type": "str"},
+        "aad_authority": {"key": "aadAuthority", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(IdentityProviderDetails, self).__init__(**kwargs)
-        self.tenant_id = kwargs.get('tenant_id', None)
-        self.application_id = kwargs.get('application_id', None)
-        self.object_id = kwargs.get('object_id', None)
-        self.audience = kwargs.get('audience', None)
-        self.aad_authority = kwargs.get('aad_authority', None)
+        self.tenant_id = kwargs.get("tenant_id", None)
+        self.application_id = kwargs.get("application_id", None)
+        self.object_id = kwargs.get("object_id", None)
+        self.audience = kwargs.get("audience", None)
+        self.aad_authority = kwargs.get("aad_authority", None)
 
 
 class IdentityProviderInput(msrest.serialization.Model):
@@ -7553,31 +7227,28 @@ class IdentityProviderInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'tenant_id': {'required': True},
-        'application_id': {'required': True},
-        'object_id': {'required': True},
-        'audience': {'required': True},
-        'aad_authority': {'required': True},
+        "tenant_id": {"required": True},
+        "application_id": {"required": True},
+        "object_id": {"required": True},
+        "audience": {"required": True},
+        "aad_authority": {"required": True},
     }
 
     _attribute_map = {
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'application_id': {'key': 'applicationId', 'type': 'str'},
-        'object_id': {'key': 'objectId', 'type': 'str'},
-        'audience': {'key': 'audience', 'type': 'str'},
-        'aad_authority': {'key': 'aadAuthority', 'type': 'str'},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "application_id": {"key": "applicationId", "type": "str"},
+        "object_id": {"key": "objectId", "type": "str"},
+        "audience": {"key": "audience", "type": "str"},
+        "aad_authority": {"key": "aadAuthority", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(IdentityProviderInput, self).__init__(**kwargs)
-        self.tenant_id = kwargs['tenant_id']
-        self.application_id = kwargs['application_id']
-        self.object_id = kwargs['object_id']
-        self.audience = kwargs['audience']
-        self.aad_authority = kwargs['aad_authority']
+        self.tenant_id = kwargs["tenant_id"]
+        self.application_id = kwargs["application_id"]
+        self.object_id = kwargs["object_id"]
+        self.audience = kwargs["audience"]
+        self.aad_authority = kwargs["aad_authority"]
 
 
 class InconsistentVmDetails(msrest.serialization.Model):
@@ -7594,21 +7265,18 @@ class InconsistentVmDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'vm_name': {'key': 'vmName', 'type': 'str'},
-        'cloud_name': {'key': 'cloudName', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[str]'},
-        'error_ids': {'key': 'errorIds', 'type': '[str]'},
+        "vm_name": {"key": "vmName", "type": "str"},
+        "cloud_name": {"key": "cloudName", "type": "str"},
+        "details": {"key": "details", "type": "[str]"},
+        "error_ids": {"key": "errorIds", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InconsistentVmDetails, self).__init__(**kwargs)
-        self.vm_name = kwargs.get('vm_name', None)
-        self.cloud_name = kwargs.get('cloud_name', None)
-        self.details = kwargs.get('details', None)
-        self.error_ids = kwargs.get('error_ids', None)
+        self.vm_name = kwargs.get("vm_name", None)
+        self.cloud_name = kwargs.get("cloud_name", None)
+        self.details = kwargs.get("details", None)
+        self.error_ids = kwargs.get("error_ids", None)
 
 
 class InitialReplicationDetails(msrest.serialization.Model):
@@ -7621,17 +7289,14 @@ class InitialReplicationDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'initial_replication_type': {'key': 'initialReplicationType', 'type': 'str'},
-        'initial_replication_progress_percentage': {'key': 'initialReplicationProgressPercentage', 'type': 'str'},
+        "initial_replication_type": {"key": "initialReplicationType", "type": "str"},
+        "initial_replication_progress_percentage": {"key": "initialReplicationProgressPercentage", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InitialReplicationDetails, self).__init__(**kwargs)
-        self.initial_replication_type = kwargs.get('initial_replication_type', None)
-        self.initial_replication_progress_percentage = kwargs.get('initial_replication_progress_percentage', None)
+        self.initial_replication_type = kwargs.get("initial_replication_type", None)
+        self.initial_replication_progress_percentage = kwargs.get("initial_replication_progress_percentage", None)
 
 
 class InlineWorkflowTaskDetails(GroupTaskDetails):
@@ -7648,22 +7313,19 @@ class InlineWorkflowTaskDetails(GroupTaskDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'child_tasks': {'key': 'childTasks', 'type': '[ASRTask]'},
-        'workflow_ids': {'key': 'workflowIds', 'type': '[str]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "child_tasks": {"key": "childTasks", "type": "[ASRTask]"},
+        "workflow_ids": {"key": "workflowIds", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InlineWorkflowTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'InlineWorkflowTaskDetails'  # type: str
-        self.workflow_ids = kwargs.get('workflow_ids', None)
+        self.instance_type = "InlineWorkflowTaskDetails"  # type: str
+        self.workflow_ids = kwargs.get("workflow_ids", None)
 
 
 class InMageAgentDetails(msrest.serialization.Model):
@@ -7681,21 +7343,18 @@ class InMageAgentDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'agent_version': {'key': 'agentVersion', 'type': 'str'},
-        'agent_update_status': {'key': 'agentUpdateStatus', 'type': 'str'},
-        'post_update_reboot_status': {'key': 'postUpdateRebootStatus', 'type': 'str'},
-        'agent_expiry_date': {'key': 'agentExpiryDate', 'type': 'iso-8601'},
+        "agent_version": {"key": "agentVersion", "type": "str"},
+        "agent_update_status": {"key": "agentUpdateStatus", "type": "str"},
+        "post_update_reboot_status": {"key": "postUpdateRebootStatus", "type": "str"},
+        "agent_expiry_date": {"key": "agentExpiryDate", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAgentDetails, self).__init__(**kwargs)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.agent_update_status = kwargs.get('agent_update_status', None)
-        self.post_update_reboot_status = kwargs.get('post_update_reboot_status', None)
-        self.agent_expiry_date = kwargs.get('agent_expiry_date', None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.agent_update_status = kwargs.get("agent_update_status", None)
+        self.post_update_reboot_status = kwargs.get("post_update_reboot_status", None)
+        self.agent_expiry_date = kwargs.get("agent_expiry_date", None)
 
 
 class InMageAzureV2ApplyRecoveryPointInput(ApplyRecoveryPointProviderSpecificInput):
@@ -7708,19 +7367,16 @@ class InMageAzureV2ApplyRecoveryPointInput(ApplyRecoveryPointProviderSpecificInp
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2ApplyRecoveryPointInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
+        self.instance_type = "InMageAzureV2"  # type: str
 
 
 class InMageAzureV2DiskInputDetails(msrest.serialization.Model):
@@ -7738,21 +7394,18 @@ class InMageAzureV2DiskInputDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2DiskInputDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.log_storage_account_id = kwargs.get('log_storage_account_id', None)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.log_storage_account_id = kwargs.get("log_storage_account_id", None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
 
 
 class InMageAzureV2EnableProtectionInput(EnableProtectionProviderSpecificInput):
@@ -7826,71 +7479,68 @@ class InMageAzureV2EnableProtectionInput(EnableProtectionProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'master_target_id': {'key': 'masterTargetId', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'storage_account_id': {'key': 'storageAccountId', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'disks_to_include': {'key': 'disksToInclude', 'type': '[InMageAzureV2DiskInputDetails]'},
-        'target_azure_network_id': {'key': 'targetAzureNetworkId', 'type': 'str'},
-        'target_azure_subnet_id': {'key': 'targetAzureSubnetId', 'type': 'str'},
-        'enable_rdp_on_target_option': {'key': 'enableRdpOnTargetOption', 'type': 'str'},
-        'target_azure_vm_name': {'key': 'targetAzureVmName', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'target_azure_v1_resource_group_id': {'key': 'targetAzureV1ResourceGroupId', 'type': 'str'},
-        'target_azure_v2_resource_group_id': {'key': 'targetAzureV2ResourceGroupId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'seed_managed_disk_tags': {'key': 'seedManagedDiskTags', 'type': '{str}'},
-        'target_managed_disk_tags': {'key': 'targetManagedDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "master_target_id": {"key": "masterTargetId", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "storage_account_id": {"key": "storageAccountId", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "disks_to_include": {"key": "disksToInclude", "type": "[InMageAzureV2DiskInputDetails]"},
+        "target_azure_network_id": {"key": "targetAzureNetworkId", "type": "str"},
+        "target_azure_subnet_id": {"key": "targetAzureSubnetId", "type": "str"},
+        "enable_rdp_on_target_option": {"key": "enableRdpOnTargetOption", "type": "str"},
+        "target_azure_vm_name": {"key": "targetAzureVmName", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "target_azure_v1_resource_group_id": {"key": "targetAzureV1ResourceGroupId", "type": "str"},
+        "target_azure_v2_resource_group_id": {"key": "targetAzureV2ResourceGroupId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "seed_managed_disk_tags": {"key": "seedManagedDiskTags", "type": "{str}"},
+        "target_managed_disk_tags": {"key": "targetManagedDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2EnableProtectionInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.master_target_id = kwargs.get('master_target_id', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
-        self.storage_account_id = kwargs.get('storage_account_id', None)
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
-        self.multi_vm_group_id = kwargs.get('multi_vm_group_id', None)
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
-        self.disks_to_include = kwargs.get('disks_to_include', None)
-        self.target_azure_network_id = kwargs.get('target_azure_network_id', None)
-        self.target_azure_subnet_id = kwargs.get('target_azure_subnet_id', None)
-        self.enable_rdp_on_target_option = kwargs.get('enable_rdp_on_target_option', None)
-        self.target_azure_vm_name = kwargs.get('target_azure_vm_name', None)
-        self.log_storage_account_id = kwargs.get('log_storage_account_id', None)
-        self.target_azure_v1_resource_group_id = kwargs.get('target_azure_v1_resource_group_id', None)
-        self.target_azure_v2_resource_group_id = kwargs.get('target_azure_v2_resource_group_id', None)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.license_type = kwargs.get('license_type', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.seed_managed_disk_tags = kwargs.get('seed_managed_disk_tags', None)
-        self.target_managed_disk_tags = kwargs.get('target_managed_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.master_target_id = kwargs.get("master_target_id", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
+        self.storage_account_id = kwargs.get("storage_account_id", None)
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
+        self.multi_vm_group_id = kwargs.get("multi_vm_group_id", None)
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
+        self.disks_to_include = kwargs.get("disks_to_include", None)
+        self.target_azure_network_id = kwargs.get("target_azure_network_id", None)
+        self.target_azure_subnet_id = kwargs.get("target_azure_subnet_id", None)
+        self.enable_rdp_on_target_option = kwargs.get("enable_rdp_on_target_option", None)
+        self.target_azure_vm_name = kwargs.get("target_azure_vm_name", None)
+        self.log_storage_account_id = kwargs.get("log_storage_account_id", None)
+        self.target_azure_v1_resource_group_id = kwargs.get("target_azure_v1_resource_group_id", None)
+        self.target_azure_v2_resource_group_id = kwargs.get("target_azure_v2_resource_group_id", None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.license_type = kwargs.get("license_type", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.seed_managed_disk_tags = kwargs.get("seed_managed_disk_tags", None)
+        self.target_managed_disk_tags = kwargs.get("target_managed_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
 
 
 class InMageAzureV2EventDetails(EventProviderSpecificDetails):
@@ -7919,33 +7569,30 @@ class InMageAzureV2EventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'event_type': {'key': 'eventType', 'type': 'str'},
-        'category': {'key': 'category', 'type': 'str'},
-        'component': {'key': 'component', 'type': 'str'},
-        'corrective_action': {'key': 'correctiveAction', 'type': 'str'},
-        'details': {'key': 'details', 'type': 'str'},
-        'summary': {'key': 'summary', 'type': 'str'},
-        'site_name': {'key': 'siteName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "event_type": {"key": "eventType", "type": "str"},
+        "category": {"key": "category", "type": "str"},
+        "component": {"key": "component", "type": "str"},
+        "corrective_action": {"key": "correctiveAction", "type": "str"},
+        "details": {"key": "details", "type": "str"},
+        "summary": {"key": "summary", "type": "str"},
+        "site_name": {"key": "siteName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2EventDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.event_type = kwargs.get('event_type', None)
-        self.category = kwargs.get('category', None)
-        self.component = kwargs.get('component', None)
-        self.corrective_action = kwargs.get('corrective_action', None)
-        self.details = kwargs.get('details', None)
-        self.summary = kwargs.get('summary', None)
-        self.site_name = kwargs.get('site_name', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.event_type = kwargs.get("event_type", None)
+        self.category = kwargs.get("category", None)
+        self.component = kwargs.get("component", None)
+        self.corrective_action = kwargs.get("corrective_action", None)
+        self.details = kwargs.get("details", None)
+        self.summary = kwargs.get("summary", None)
+        self.site_name = kwargs.get("site_name", None)
 
 
 class InMageAzureV2ManagedDiskDetails(msrest.serialization.Model):
@@ -7964,23 +7611,20 @@ class InMageAzureV2ManagedDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'seed_managed_disk_id': {'key': 'seedManagedDiskId', 'type': 'str'},
-        'replica_disk_type': {'key': 'replicaDiskType', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
-        'target_disk_name': {'key': 'targetDiskName', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "seed_managed_disk_id": {"key": "seedManagedDiskId", "type": "str"},
+        "replica_disk_type": {"key": "replicaDiskType", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
+        "target_disk_name": {"key": "targetDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2ManagedDiskDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.seed_managed_disk_id = kwargs.get('seed_managed_disk_id', None)
-        self.replica_disk_type = kwargs.get('replica_disk_type', None)
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
-        self.target_disk_name = kwargs.get('target_disk_name', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.seed_managed_disk_id = kwargs.get("seed_managed_disk_id", None)
+        self.replica_disk_type = kwargs.get("replica_disk_type", None)
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
+        self.target_disk_name = kwargs.get("target_disk_name", None)
 
 
 class InMageAzureV2PolicyDetails(PolicyProviderSpecificDetails):
@@ -8006,29 +7650,26 @@ class InMageAzureV2PolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'recovery_point_threshold_in_minutes': {'key': 'recoveryPointThresholdInMinutes', 'type': 'int'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "recovery_point_threshold_in_minutes": {"key": "recoveryPointThresholdInMinutes", "type": "int"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2PolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.recovery_point_threshold_in_minutes = kwargs.get('recovery_point_threshold_in_minutes', None)
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs.get('multi_vm_sync_status', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.recovery_point_threshold_in_minutes = kwargs.get("recovery_point_threshold_in_minutes", None)
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs.get("multi_vm_sync_status", None)
 
 
 class InMageAzureV2PolicyInput(PolicyProviderSpecificInput):
@@ -8055,30 +7696,27 @@ class InMageAzureV2PolicyInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'multi_vm_sync_status': {'required': True},
+        "instance_type": {"required": True},
+        "multi_vm_sync_status": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_threshold_in_minutes': {'key': 'recoveryPointThresholdInMinutes', 'type': 'int'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_threshold_in_minutes": {"key": "recoveryPointThresholdInMinutes", "type": "int"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2PolicyInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.recovery_point_threshold_in_minutes = kwargs.get('recovery_point_threshold_in_minutes', None)
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs['multi_vm_sync_status']
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.recovery_point_threshold_in_minutes = kwargs.get("recovery_point_threshold_in_minutes", None)
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs["multi_vm_sync_status"]
 
 
 class InMageAzureV2ProtectedDiskDetails(msrest.serialization.Model):
@@ -8131,57 +7769,54 @@ class InMageAzureV2ProtectedDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'protection_stage': {'key': 'protectionStage', 'type': 'str'},
-        'health_error_code': {'key': 'healthErrorCode', 'type': 'str'},
-        'rpo_in_seconds': {'key': 'rpoInSeconds', 'type': 'long'},
-        'resync_required': {'key': 'resyncRequired', 'type': 'str'},
-        'resync_progress_percentage': {'key': 'resyncProgressPercentage', 'type': 'int'},
-        'resync_duration_in_seconds': {'key': 'resyncDurationInSeconds', 'type': 'long'},
-        'disk_capacity_in_bytes': {'key': 'diskCapacityInBytes', 'type': 'long'},
-        'file_system_capacity_in_bytes': {'key': 'fileSystemCapacityInBytes', 'type': 'long'},
-        'source_data_in_mega_bytes': {'key': 'sourceDataInMegaBytes', 'type': 'float'},
-        'ps_data_in_mega_bytes': {'key': 'psDataInMegaBytes', 'type': 'float'},
-        'target_data_in_mega_bytes': {'key': 'targetDataInMegaBytes', 'type': 'float'},
-        'disk_resized': {'key': 'diskResized', 'type': 'str'},
-        'last_rpo_calculated_time': {'key': 'lastRpoCalculatedTime', 'type': 'iso-8601'},
-        'resync_processed_bytes': {'key': 'resyncProcessedBytes', 'type': 'long'},
-        'resync_total_transferred_bytes': {'key': 'resyncTotalTransferredBytes', 'type': 'long'},
-        'resync_last15_minutes_transferred_bytes': {'key': 'resyncLast15MinutesTransferredBytes', 'type': 'long'},
-        'resync_last_data_transfer_time_utc': {'key': 'resyncLastDataTransferTimeUTC', 'type': 'iso-8601'},
-        'resync_start_time': {'key': 'resyncStartTime', 'type': 'iso-8601'},
-        'progress_health': {'key': 'progressHealth', 'type': 'str'},
-        'progress_status': {'key': 'progressStatus', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "protection_stage": {"key": "protectionStage", "type": "str"},
+        "health_error_code": {"key": "healthErrorCode", "type": "str"},
+        "rpo_in_seconds": {"key": "rpoInSeconds", "type": "long"},
+        "resync_required": {"key": "resyncRequired", "type": "str"},
+        "resync_progress_percentage": {"key": "resyncProgressPercentage", "type": "int"},
+        "resync_duration_in_seconds": {"key": "resyncDurationInSeconds", "type": "long"},
+        "disk_capacity_in_bytes": {"key": "diskCapacityInBytes", "type": "long"},
+        "file_system_capacity_in_bytes": {"key": "fileSystemCapacityInBytes", "type": "long"},
+        "source_data_in_mega_bytes": {"key": "sourceDataInMegaBytes", "type": "float"},
+        "ps_data_in_mega_bytes": {"key": "psDataInMegaBytes", "type": "float"},
+        "target_data_in_mega_bytes": {"key": "targetDataInMegaBytes", "type": "float"},
+        "disk_resized": {"key": "diskResized", "type": "str"},
+        "last_rpo_calculated_time": {"key": "lastRpoCalculatedTime", "type": "iso-8601"},
+        "resync_processed_bytes": {"key": "resyncProcessedBytes", "type": "long"},
+        "resync_total_transferred_bytes": {"key": "resyncTotalTransferredBytes", "type": "long"},
+        "resync_last15_minutes_transferred_bytes": {"key": "resyncLast15MinutesTransferredBytes", "type": "long"},
+        "resync_last_data_transfer_time_utc": {"key": "resyncLastDataTransferTimeUTC", "type": "iso-8601"},
+        "resync_start_time": {"key": "resyncStartTime", "type": "iso-8601"},
+        "progress_health": {"key": "progressHealth", "type": "str"},
+        "progress_status": {"key": "progressStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2ProtectedDiskDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.disk_name = kwargs.get('disk_name', None)
-        self.protection_stage = kwargs.get('protection_stage', None)
-        self.health_error_code = kwargs.get('health_error_code', None)
-        self.rpo_in_seconds = kwargs.get('rpo_in_seconds', None)
-        self.resync_required = kwargs.get('resync_required', None)
-        self.resync_progress_percentage = kwargs.get('resync_progress_percentage', None)
-        self.resync_duration_in_seconds = kwargs.get('resync_duration_in_seconds', None)
-        self.disk_capacity_in_bytes = kwargs.get('disk_capacity_in_bytes', None)
-        self.file_system_capacity_in_bytes = kwargs.get('file_system_capacity_in_bytes', None)
-        self.source_data_in_mega_bytes = kwargs.get('source_data_in_mega_bytes', None)
-        self.ps_data_in_mega_bytes = kwargs.get('ps_data_in_mega_bytes', None)
-        self.target_data_in_mega_bytes = kwargs.get('target_data_in_mega_bytes', None)
-        self.disk_resized = kwargs.get('disk_resized', None)
-        self.last_rpo_calculated_time = kwargs.get('last_rpo_calculated_time', None)
-        self.resync_processed_bytes = kwargs.get('resync_processed_bytes', None)
-        self.resync_total_transferred_bytes = kwargs.get('resync_total_transferred_bytes', None)
-        self.resync_last15_minutes_transferred_bytes = kwargs.get('resync_last15_minutes_transferred_bytes', None)
-        self.resync_last_data_transfer_time_utc = kwargs.get('resync_last_data_transfer_time_utc', None)
-        self.resync_start_time = kwargs.get('resync_start_time', None)
-        self.progress_health = kwargs.get('progress_health', None)
-        self.progress_status = kwargs.get('progress_status', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.disk_name = kwargs.get("disk_name", None)
+        self.protection_stage = kwargs.get("protection_stage", None)
+        self.health_error_code = kwargs.get("health_error_code", None)
+        self.rpo_in_seconds = kwargs.get("rpo_in_seconds", None)
+        self.resync_required = kwargs.get("resync_required", None)
+        self.resync_progress_percentage = kwargs.get("resync_progress_percentage", None)
+        self.resync_duration_in_seconds = kwargs.get("resync_duration_in_seconds", None)
+        self.disk_capacity_in_bytes = kwargs.get("disk_capacity_in_bytes", None)
+        self.file_system_capacity_in_bytes = kwargs.get("file_system_capacity_in_bytes", None)
+        self.source_data_in_mega_bytes = kwargs.get("source_data_in_mega_bytes", None)
+        self.ps_data_in_mega_bytes = kwargs.get("ps_data_in_mega_bytes", None)
+        self.target_data_in_mega_bytes = kwargs.get("target_data_in_mega_bytes", None)
+        self.disk_resized = kwargs.get("disk_resized", None)
+        self.last_rpo_calculated_time = kwargs.get("last_rpo_calculated_time", None)
+        self.resync_processed_bytes = kwargs.get("resync_processed_bytes", None)
+        self.resync_total_transferred_bytes = kwargs.get("resync_total_transferred_bytes", None)
+        self.resync_last15_minutes_transferred_bytes = kwargs.get("resync_last15_minutes_transferred_bytes", None)
+        self.resync_last_data_transfer_time_utc = kwargs.get("resync_last_data_transfer_time_utc", None)
+        self.resync_start_time = kwargs.get("resync_start_time", None)
+        self.progress_health = kwargs.get("progress_health", None)
+        self.progress_status = kwargs.get("progress_status", None)
 
 
 class InMageAzureV2RecoveryPointDetails(ProviderSpecificRecoveryPointDetails):
@@ -8197,21 +7832,18 @@ class InMageAzureV2RecoveryPointDetails(ProviderSpecificRecoveryPointDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'is_multi_vm_sync_point': {'key': 'isMultiVmSyncPoint', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "is_multi_vm_sync_point": {"key": "isMultiVmSyncPoint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2RecoveryPointDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.is_multi_vm_sync_point = kwargs.get('is_multi_vm_sync_point', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.is_multi_vm_sync_point = kwargs.get("is_multi_vm_sync_point", None)
 
 
 class InMageAzureV2ReplicationDetails(ReplicationProviderSpecificSettings):
@@ -8371,150 +8003,147 @@ class InMageAzureV2ReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'last_recovery_point_received': {'readonly': True},
+        "instance_type": {"required": True},
+        "last_recovery_point_received": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'infrastructure_vm_id': {'key': 'infrastructureVmId', 'type': 'str'},
-        'v_center_infrastructure_id': {'key': 'vCenterInfrastructureId', 'type': 'str'},
-        'protection_stage': {'key': 'protectionStage', 'type': 'str'},
-        'vm_id': {'key': 'vmId', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'resync_progress_percentage': {'key': 'resyncProgressPercentage', 'type': 'int'},
-        'rpo_in_seconds': {'key': 'rpoInSeconds', 'type': 'long'},
-        'compressed_data_rate_in_mb': {'key': 'compressedDataRateInMB', 'type': 'float'},
-        'uncompressed_data_rate_in_mb': {'key': 'uncompressedDataRateInMB', 'type': 'float'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'agent_version': {'key': 'agentVersion', 'type': 'str'},
-        'agent_expiry_date': {'key': 'agentExpiryDate', 'type': 'iso-8601'},
-        'is_agent_update_required': {'key': 'isAgentUpdateRequired', 'type': 'str'},
-        'is_reboot_after_update_required': {'key': 'isRebootAfterUpdateRequired', 'type': 'str'},
-        'last_heartbeat': {'key': 'lastHeartbeat', 'type': 'iso-8601'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'process_server_name': {'key': 'processServerName', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
-        'protected_disks': {'key': 'protectedDisks', 'type': '[InMageAzureV2ProtectedDiskDetails]'},
-        'disk_resized': {'key': 'diskResized', 'type': 'str'},
-        'master_target_id': {'key': 'masterTargetId', 'type': 'str'},
-        'source_vm_cpu_count': {'key': 'sourceVmCpuCount', 'type': 'int'},
-        'source_vm_ram_size_in_mb': {'key': 'sourceVmRamSizeInMB', 'type': 'int'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'vhd_name': {'key': 'vhdName', 'type': 'str'},
-        'os_disk_id': {'key': 'osDiskId', 'type': 'str'},
-        'azure_vm_disk_details': {'key': 'azureVMDiskDetails', 'type': '[AzureVmDiskDetails]'},
-        'recovery_azure_vm_name': {'key': 'recoveryAzureVMName', 'type': 'str'},
-        'recovery_azure_vm_size': {'key': 'recoveryAzureVMSize', 'type': 'str'},
-        'recovery_azure_storage_account': {'key': 'recoveryAzureStorageAccount', 'type': 'str'},
-        'recovery_azure_log_storage_account_id': {'key': 'recoveryAzureLogStorageAccountId', 'type': 'str'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicDetails]'},
-        'selected_recovery_azure_network_id': {'key': 'selectedRecoveryAzureNetworkId', 'type': 'str'},
-        'selected_tfo_azure_network_id': {'key': 'selectedTfoAzureNetworkId', 'type': 'str'},
-        'selected_source_nic_id': {'key': 'selectedSourceNicId', 'type': 'str'},
-        'discovery_type': {'key': 'discoveryType', 'type': 'str'},
-        'enable_rdp_on_target_option': {'key': 'enableRdpOnTargetOption', 'type': 'str'},
-        'datastores': {'key': 'datastores', 'type': '[str]'},
-        'target_vm_id': {'key': 'targetVmId', 'type': 'str'},
-        'recovery_azure_resource_group_id': {'key': 'recoveryAzureResourceGroupId', 'type': 'str'},
-        'recovery_availability_set_id': {'key': 'recoveryAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'use_managed_disks': {'key': 'useManagedDisks', 'type': 'str'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'validation_errors': {'key': 'validationErrors', 'type': '[HealthError]'},
-        'last_rpo_calculated_time': {'key': 'lastRpoCalculatedTime', 'type': 'iso-8601'},
-        'last_update_received_time': {'key': 'lastUpdateReceivedTime', 'type': 'iso-8601'},
-        'replica_id': {'key': 'replicaId', 'type': 'str'},
-        'os_version': {'key': 'osVersion', 'type': 'str'},
-        'protected_managed_disks': {'key': 'protectedManagedDisks', 'type': '[InMageAzureV2ManagedDiskDetails]'},
-        'last_recovery_point_received': {'key': 'lastRecoveryPointReceived', 'type': 'iso-8601'},
-        'firmware_type': {'key': 'firmwareType', 'type': 'str'},
-        'azure_vm_generation': {'key': 'azureVmGeneration', 'type': 'str'},
-        'is_additional_stats_available': {'key': 'isAdditionalStatsAvailable', 'type': 'bool'},
-        'total_data_transferred': {'key': 'totalDataTransferred', 'type': 'long'},
-        'total_progress_health': {'key': 'totalProgressHealth', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'seed_managed_disk_tags': {'key': 'seedManagedDiskTags', 'type': '{str}'},
-        'target_managed_disk_tags': {'key': 'targetManagedDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "infrastructure_vm_id": {"key": "infrastructureVmId", "type": "str"},
+        "v_center_infrastructure_id": {"key": "vCenterInfrastructureId", "type": "str"},
+        "protection_stage": {"key": "protectionStage", "type": "str"},
+        "vm_id": {"key": "vmId", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "resync_progress_percentage": {"key": "resyncProgressPercentage", "type": "int"},
+        "rpo_in_seconds": {"key": "rpoInSeconds", "type": "long"},
+        "compressed_data_rate_in_mb": {"key": "compressedDataRateInMB", "type": "float"},
+        "uncompressed_data_rate_in_mb": {"key": "uncompressedDataRateInMB", "type": "float"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "agent_version": {"key": "agentVersion", "type": "str"},
+        "agent_expiry_date": {"key": "agentExpiryDate", "type": "iso-8601"},
+        "is_agent_update_required": {"key": "isAgentUpdateRequired", "type": "str"},
+        "is_reboot_after_update_required": {"key": "isRebootAfterUpdateRequired", "type": "str"},
+        "last_heartbeat": {"key": "lastHeartbeat", "type": "iso-8601"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "process_server_name": {"key": "processServerName", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
+        "protected_disks": {"key": "protectedDisks", "type": "[InMageAzureV2ProtectedDiskDetails]"},
+        "disk_resized": {"key": "diskResized", "type": "str"},
+        "master_target_id": {"key": "masterTargetId", "type": "str"},
+        "source_vm_cpu_count": {"key": "sourceVmCpuCount", "type": "int"},
+        "source_vm_ram_size_in_mb": {"key": "sourceVmRamSizeInMB", "type": "int"},
+        "os_type": {"key": "osType", "type": "str"},
+        "vhd_name": {"key": "vhdName", "type": "str"},
+        "os_disk_id": {"key": "osDiskId", "type": "str"},
+        "azure_vm_disk_details": {"key": "azureVMDiskDetails", "type": "[AzureVmDiskDetails]"},
+        "recovery_azure_vm_name": {"key": "recoveryAzureVMName", "type": "str"},
+        "recovery_azure_vm_size": {"key": "recoveryAzureVMSize", "type": "str"},
+        "recovery_azure_storage_account": {"key": "recoveryAzureStorageAccount", "type": "str"},
+        "recovery_azure_log_storage_account_id": {"key": "recoveryAzureLogStorageAccountId", "type": "str"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicDetails]"},
+        "selected_recovery_azure_network_id": {"key": "selectedRecoveryAzureNetworkId", "type": "str"},
+        "selected_tfo_azure_network_id": {"key": "selectedTfoAzureNetworkId", "type": "str"},
+        "selected_source_nic_id": {"key": "selectedSourceNicId", "type": "str"},
+        "discovery_type": {"key": "discoveryType", "type": "str"},
+        "enable_rdp_on_target_option": {"key": "enableRdpOnTargetOption", "type": "str"},
+        "datastores": {"key": "datastores", "type": "[str]"},
+        "target_vm_id": {"key": "targetVmId", "type": "str"},
+        "recovery_azure_resource_group_id": {"key": "recoveryAzureResourceGroupId", "type": "str"},
+        "recovery_availability_set_id": {"key": "recoveryAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "use_managed_disks": {"key": "useManagedDisks", "type": "str"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "validation_errors": {"key": "validationErrors", "type": "[HealthError]"},
+        "last_rpo_calculated_time": {"key": "lastRpoCalculatedTime", "type": "iso-8601"},
+        "last_update_received_time": {"key": "lastUpdateReceivedTime", "type": "iso-8601"},
+        "replica_id": {"key": "replicaId", "type": "str"},
+        "os_version": {"key": "osVersion", "type": "str"},
+        "protected_managed_disks": {"key": "protectedManagedDisks", "type": "[InMageAzureV2ManagedDiskDetails]"},
+        "last_recovery_point_received": {"key": "lastRecoveryPointReceived", "type": "iso-8601"},
+        "firmware_type": {"key": "firmwareType", "type": "str"},
+        "azure_vm_generation": {"key": "azureVmGeneration", "type": "str"},
+        "is_additional_stats_available": {"key": "isAdditionalStatsAvailable", "type": "bool"},
+        "total_data_transferred": {"key": "totalDataTransferred", "type": "long"},
+        "total_progress_health": {"key": "totalProgressHealth", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "seed_managed_disk_tags": {"key": "seedManagedDiskTags", "type": "{str}"},
+        "target_managed_disk_tags": {"key": "targetManagedDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2ReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.infrastructure_vm_id = kwargs.get('infrastructure_vm_id', None)
-        self.v_center_infrastructure_id = kwargs.get('v_center_infrastructure_id', None)
-        self.protection_stage = kwargs.get('protection_stage', None)
-        self.vm_id = kwargs.get('vm_id', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.resync_progress_percentage = kwargs.get('resync_progress_percentage', None)
-        self.rpo_in_seconds = kwargs.get('rpo_in_seconds', None)
-        self.compressed_data_rate_in_mb = kwargs.get('compressed_data_rate_in_mb', None)
-        self.uncompressed_data_rate_in_mb = kwargs.get('uncompressed_data_rate_in_mb', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.agent_expiry_date = kwargs.get('agent_expiry_date', None)
-        self.is_agent_update_required = kwargs.get('is_agent_update_required', None)
-        self.is_reboot_after_update_required = kwargs.get('is_reboot_after_update_required', None)
-        self.last_heartbeat = kwargs.get('last_heartbeat', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
-        self.process_server_name = kwargs.get('process_server_name', None)
-        self.multi_vm_group_id = kwargs.get('multi_vm_group_id', None)
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
-        self.multi_vm_sync_status = kwargs.get('multi_vm_sync_status', None)
-        self.protected_disks = kwargs.get('protected_disks', None)
-        self.disk_resized = kwargs.get('disk_resized', None)
-        self.master_target_id = kwargs.get('master_target_id', None)
-        self.source_vm_cpu_count = kwargs.get('source_vm_cpu_count', None)
-        self.source_vm_ram_size_in_mb = kwargs.get('source_vm_ram_size_in_mb', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.vhd_name = kwargs.get('vhd_name', None)
-        self.os_disk_id = kwargs.get('os_disk_id', None)
-        self.azure_vm_disk_details = kwargs.get('azure_vm_disk_details', None)
-        self.recovery_azure_vm_name = kwargs.get('recovery_azure_vm_name', None)
-        self.recovery_azure_vm_size = kwargs.get('recovery_azure_vm_size', None)
-        self.recovery_azure_storage_account = kwargs.get('recovery_azure_storage_account', None)
-        self.recovery_azure_log_storage_account_id = kwargs.get('recovery_azure_log_storage_account_id', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.selected_recovery_azure_network_id = kwargs.get('selected_recovery_azure_network_id', None)
-        self.selected_tfo_azure_network_id = kwargs.get('selected_tfo_azure_network_id', None)
-        self.selected_source_nic_id = kwargs.get('selected_source_nic_id', None)
-        self.discovery_type = kwargs.get('discovery_type', None)
-        self.enable_rdp_on_target_option = kwargs.get('enable_rdp_on_target_option', None)
-        self.datastores = kwargs.get('datastores', None)
-        self.target_vm_id = kwargs.get('target_vm_id', None)
-        self.recovery_azure_resource_group_id = kwargs.get('recovery_azure_resource_group_id', None)
-        self.recovery_availability_set_id = kwargs.get('recovery_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.use_managed_disks = kwargs.get('use_managed_disks', None)
-        self.license_type = kwargs.get('license_type', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
-        self.validation_errors = kwargs.get('validation_errors', None)
-        self.last_rpo_calculated_time = kwargs.get('last_rpo_calculated_time', None)
-        self.last_update_received_time = kwargs.get('last_update_received_time', None)
-        self.replica_id = kwargs.get('replica_id', None)
-        self.os_version = kwargs.get('os_version', None)
-        self.protected_managed_disks = kwargs.get('protected_managed_disks', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.infrastructure_vm_id = kwargs.get("infrastructure_vm_id", None)
+        self.v_center_infrastructure_id = kwargs.get("v_center_infrastructure_id", None)
+        self.protection_stage = kwargs.get("protection_stage", None)
+        self.vm_id = kwargs.get("vm_id", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.resync_progress_percentage = kwargs.get("resync_progress_percentage", None)
+        self.rpo_in_seconds = kwargs.get("rpo_in_seconds", None)
+        self.compressed_data_rate_in_mb = kwargs.get("compressed_data_rate_in_mb", None)
+        self.uncompressed_data_rate_in_mb = kwargs.get("uncompressed_data_rate_in_mb", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.agent_expiry_date = kwargs.get("agent_expiry_date", None)
+        self.is_agent_update_required = kwargs.get("is_agent_update_required", None)
+        self.is_reboot_after_update_required = kwargs.get("is_reboot_after_update_required", None)
+        self.last_heartbeat = kwargs.get("last_heartbeat", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
+        self.process_server_name = kwargs.get("process_server_name", None)
+        self.multi_vm_group_id = kwargs.get("multi_vm_group_id", None)
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
+        self.multi_vm_sync_status = kwargs.get("multi_vm_sync_status", None)
+        self.protected_disks = kwargs.get("protected_disks", None)
+        self.disk_resized = kwargs.get("disk_resized", None)
+        self.master_target_id = kwargs.get("master_target_id", None)
+        self.source_vm_cpu_count = kwargs.get("source_vm_cpu_count", None)
+        self.source_vm_ram_size_in_mb = kwargs.get("source_vm_ram_size_in_mb", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.vhd_name = kwargs.get("vhd_name", None)
+        self.os_disk_id = kwargs.get("os_disk_id", None)
+        self.azure_vm_disk_details = kwargs.get("azure_vm_disk_details", None)
+        self.recovery_azure_vm_name = kwargs.get("recovery_azure_vm_name", None)
+        self.recovery_azure_vm_size = kwargs.get("recovery_azure_vm_size", None)
+        self.recovery_azure_storage_account = kwargs.get("recovery_azure_storage_account", None)
+        self.recovery_azure_log_storage_account_id = kwargs.get("recovery_azure_log_storage_account_id", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.selected_recovery_azure_network_id = kwargs.get("selected_recovery_azure_network_id", None)
+        self.selected_tfo_azure_network_id = kwargs.get("selected_tfo_azure_network_id", None)
+        self.selected_source_nic_id = kwargs.get("selected_source_nic_id", None)
+        self.discovery_type = kwargs.get("discovery_type", None)
+        self.enable_rdp_on_target_option = kwargs.get("enable_rdp_on_target_option", None)
+        self.datastores = kwargs.get("datastores", None)
+        self.target_vm_id = kwargs.get("target_vm_id", None)
+        self.recovery_azure_resource_group_id = kwargs.get("recovery_azure_resource_group_id", None)
+        self.recovery_availability_set_id = kwargs.get("recovery_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.use_managed_disks = kwargs.get("use_managed_disks", None)
+        self.license_type = kwargs.get("license_type", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
+        self.validation_errors = kwargs.get("validation_errors", None)
+        self.last_rpo_calculated_time = kwargs.get("last_rpo_calculated_time", None)
+        self.last_update_received_time = kwargs.get("last_update_received_time", None)
+        self.replica_id = kwargs.get("replica_id", None)
+        self.os_version = kwargs.get("os_version", None)
+        self.protected_managed_disks = kwargs.get("protected_managed_disks", None)
         self.last_recovery_point_received = None
-        self.firmware_type = kwargs.get('firmware_type', None)
-        self.azure_vm_generation = kwargs.get('azure_vm_generation', None)
-        self.is_additional_stats_available = kwargs.get('is_additional_stats_available', None)
-        self.total_data_transferred = kwargs.get('total_data_transferred', None)
-        self.total_progress_health = kwargs.get('total_progress_health', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.seed_managed_disk_tags = kwargs.get('seed_managed_disk_tags', None)
-        self.target_managed_disk_tags = kwargs.get('target_managed_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
+        self.firmware_type = kwargs.get("firmware_type", None)
+        self.azure_vm_generation = kwargs.get("azure_vm_generation", None)
+        self.is_additional_stats_available = kwargs.get("is_additional_stats_available", None)
+        self.total_data_transferred = kwargs.get("total_data_transferred", None)
+        self.total_progress_health = kwargs.get("total_progress_health", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.seed_managed_disk_tags = kwargs.get("seed_managed_disk_tags", None)
+        self.target_managed_disk_tags = kwargs.get("target_managed_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
 
 
 class InMageAzureV2ReprotectInput(ReverseReplicationProviderSpecificInput):
@@ -8541,33 +8170,30 @@ class InMageAzureV2ReprotectInput(ReverseReplicationProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'master_target_id': {'key': 'masterTargetId', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'storage_account_id': {'key': 'storageAccountId', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'disks_to_include': {'key': 'disksToInclude', 'type': '[str]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "master_target_id": {"key": "masterTargetId", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "storage_account_id": {"key": "storageAccountId", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "disks_to_include": {"key": "disksToInclude", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2ReprotectInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.master_target_id = kwargs.get('master_target_id', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
-        self.storage_account_id = kwargs.get('storage_account_id', None)
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
-        self.policy_id = kwargs.get('policy_id', None)
-        self.log_storage_account_id = kwargs.get('log_storage_account_id', None)
-        self.disks_to_include = kwargs.get('disks_to_include', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.master_target_id = kwargs.get("master_target_id", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
+        self.storage_account_id = kwargs.get("storage_account_id", None)
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
+        self.policy_id = kwargs.get("policy_id", None)
+        self.log_storage_account_id = kwargs.get("log_storage_account_id", None)
+        self.disks_to_include = kwargs.get("disks_to_include", None)
 
 
 class InMageAzureV2TestFailoverInput(TestFailoverProviderSpecificInput):
@@ -8583,21 +8209,18 @@ class InMageAzureV2TestFailoverInput(TestFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2TestFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class InMageAzureV2UnplannedFailoverInput(UnplannedFailoverProviderSpecificInput):
@@ -8613,21 +8236,18 @@ class InMageAzureV2UnplannedFailoverInput(UnplannedFailoverProviderSpecificInput
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2UnplannedFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class InMageAzureV2UpdateReplicationProtectedItemInput(UpdateReplicationProtectedItemProviderInput):
@@ -8665,39 +8285,36 @@ class InMageAzureV2UpdateReplicationProtectedItemInput(UpdateReplicationProtecte
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_azure_v1_resource_group_id': {'key': 'recoveryAzureV1ResourceGroupId', 'type': 'str'},
-        'recovery_azure_v2_resource_group_id': {'key': 'recoveryAzureV2ResourceGroupId', 'type': 'str'},
-        'use_managed_disks': {'key': 'useManagedDisks', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'target_managed_disk_tags': {'key': 'targetManagedDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[UpdateDiskInput]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_azure_v1_resource_group_id": {"key": "recoveryAzureV1ResourceGroupId", "type": "str"},
+        "recovery_azure_v2_resource_group_id": {"key": "recoveryAzureV2ResourceGroupId", "type": "str"},
+        "use_managed_disks": {"key": "useManagedDisks", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "target_managed_disk_tags": {"key": "targetManagedDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "vm_disks": {"key": "vmDisks", "type": "[UpdateDiskInput]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageAzureV2UpdateReplicationProtectedItemInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.recovery_azure_v1_resource_group_id = kwargs.get('recovery_azure_v1_resource_group_id', None)
-        self.recovery_azure_v2_resource_group_id = kwargs.get('recovery_azure_v2_resource_group_id', None)
-        self.use_managed_disks = kwargs.get('use_managed_disks', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.target_managed_disk_tags = kwargs.get('target_managed_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.recovery_azure_v1_resource_group_id = kwargs.get("recovery_azure_v1_resource_group_id", None)
+        self.recovery_azure_v2_resource_group_id = kwargs.get("recovery_azure_v2_resource_group_id", None)
+        self.use_managed_disks = kwargs.get("use_managed_disks", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.target_managed_disk_tags = kwargs.get("target_managed_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
 
 
 class InMageBasePolicyDetails(PolicyProviderSpecificDetails):
@@ -8720,27 +8337,24 @@ class InMageBasePolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_threshold_in_minutes': {'key': 'recoveryPointThresholdInMinutes', 'type': 'int'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_threshold_in_minutes": {"key": "recoveryPointThresholdInMinutes", "type": "int"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageBasePolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageBasePolicyDetails'  # type: str
-        self.recovery_point_threshold_in_minutes = kwargs.get('recovery_point_threshold_in_minutes', None)
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs.get('multi_vm_sync_status', None)
+        self.instance_type = "InMageBasePolicyDetails"  # type: str
+        self.recovery_point_threshold_in_minutes = kwargs.get("recovery_point_threshold_in_minutes", None)
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs.get("multi_vm_sync_status", None)
 
 
 class InMageDisableProtectionProviderSpecificInput(DisableProtectionProviderSpecificInput):
@@ -8756,21 +8370,18 @@ class InMageDisableProtectionProviderSpecificInput(DisableProtectionProviderSpec
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'replica_vm_deletion_status': {'key': 'replicaVmDeletionStatus', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "replica_vm_deletion_status": {"key": "replicaVmDeletionStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageDisableProtectionProviderSpecificInput, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.replica_vm_deletion_status = kwargs.get('replica_vm_deletion_status', None)
+        self.instance_type = "InMage"  # type: str
+        self.replica_vm_deletion_status = kwargs.get("replica_vm_deletion_status", None)
 
 
 class InMageDiskDetails(msrest.serialization.Model):
@@ -8791,25 +8402,22 @@ class InMageDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'disk_size_in_mb': {'key': 'diskSizeInMB', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'disk_configuration': {'key': 'diskConfiguration', 'type': 'str'},
-        'volume_list': {'key': 'volumeList', 'type': '[DiskVolumeDetails]'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "disk_size_in_mb": {"key": "diskSizeInMB", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "disk_configuration": {"key": "diskConfiguration", "type": "str"},
+        "volume_list": {"key": "volumeList", "type": "[DiskVolumeDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageDiskDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.disk_name = kwargs.get('disk_name', None)
-        self.disk_size_in_mb = kwargs.get('disk_size_in_mb', None)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.disk_configuration = kwargs.get('disk_configuration', None)
-        self.volume_list = kwargs.get('volume_list', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.disk_name = kwargs.get("disk_name", None)
+        self.disk_size_in_mb = kwargs.get("disk_size_in_mb", None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.disk_configuration = kwargs.get("disk_configuration", None)
+        self.volume_list = kwargs.get("volume_list", None)
 
 
 class InMageDiskExclusionInput(msrest.serialization.Model):
@@ -8824,17 +8432,14 @@ class InMageDiskExclusionInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'volume_options': {'key': 'volumeOptions', 'type': '[InMageVolumeExclusionOptions]'},
-        'disk_signature_options': {'key': 'diskSignatureOptions', 'type': '[InMageDiskSignatureExclusionOptions]'},
+        "volume_options": {"key": "volumeOptions", "type": "[InMageVolumeExclusionOptions]"},
+        "disk_signature_options": {"key": "diskSignatureOptions", "type": "[InMageDiskSignatureExclusionOptions]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageDiskExclusionInput, self).__init__(**kwargs)
-        self.volume_options = kwargs.get('volume_options', None)
-        self.disk_signature_options = kwargs.get('disk_signature_options', None)
+        self.volume_options = kwargs.get("volume_options", None)
+        self.disk_signature_options = kwargs.get("disk_signature_options", None)
 
 
 class InMageDiskSignatureExclusionOptions(msrest.serialization.Model):
@@ -8845,15 +8450,12 @@ class InMageDiskSignatureExclusionOptions(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_signature': {'key': 'diskSignature', 'type': 'str'},
+        "disk_signature": {"key": "diskSignature", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageDiskSignatureExclusionOptions, self).__init__(**kwargs)
-        self.disk_signature = kwargs.get('disk_signature', None)
+        self.disk_signature = kwargs.get("disk_signature", None)
 
 
 class InMageEnableProtectionInput(EnableProtectionProviderSpecificInput):
@@ -8887,44 +8489,41 @@ class InMageEnableProtectionInput(EnableProtectionProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'master_target_id': {'required': True},
-        'process_server_id': {'required': True},
-        'retention_drive': {'required': True},
-        'multi_vm_group_id': {'required': True},
-        'multi_vm_group_name': {'required': True},
+        "instance_type": {"required": True},
+        "master_target_id": {"required": True},
+        "process_server_id": {"required": True},
+        "retention_drive": {"required": True},
+        "multi_vm_group_id": {"required": True},
+        "multi_vm_group_name": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vm_friendly_name': {'key': 'vmFriendlyName', 'type': 'str'},
-        'master_target_id': {'key': 'masterTargetId', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'retention_drive': {'key': 'retentionDrive', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'datastore_name': {'key': 'datastoreName', 'type': 'str'},
-        'disk_exclusion_input': {'key': 'diskExclusionInput', 'type': 'InMageDiskExclusionInput'},
-        'disks_to_include': {'key': 'disksToInclude', 'type': '[str]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vm_friendly_name": {"key": "vmFriendlyName", "type": "str"},
+        "master_target_id": {"key": "masterTargetId", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "retention_drive": {"key": "retentionDrive", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "datastore_name": {"key": "datastoreName", "type": "str"},
+        "disk_exclusion_input": {"key": "diskExclusionInput", "type": "InMageDiskExclusionInput"},
+        "disks_to_include": {"key": "disksToInclude", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageEnableProtectionInput, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.vm_friendly_name = kwargs.get('vm_friendly_name', None)
-        self.master_target_id = kwargs['master_target_id']
-        self.process_server_id = kwargs['process_server_id']
-        self.retention_drive = kwargs['retention_drive']
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
-        self.multi_vm_group_id = kwargs['multi_vm_group_id']
-        self.multi_vm_group_name = kwargs['multi_vm_group_name']
-        self.datastore_name = kwargs.get('datastore_name', None)
-        self.disk_exclusion_input = kwargs.get('disk_exclusion_input', None)
-        self.disks_to_include = kwargs.get('disks_to_include', None)
+        self.instance_type = "InMage"  # type: str
+        self.vm_friendly_name = kwargs.get("vm_friendly_name", None)
+        self.master_target_id = kwargs["master_target_id"]
+        self.process_server_id = kwargs["process_server_id"]
+        self.retention_drive = kwargs["retention_drive"]
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
+        self.multi_vm_group_id = kwargs["multi_vm_group_id"]
+        self.multi_vm_group_name = kwargs["multi_vm_group_name"]
+        self.datastore_name = kwargs.get("datastore_name", None)
+        self.disk_exclusion_input = kwargs.get("disk_exclusion_input", None)
+        self.disks_to_include = kwargs.get("disks_to_include", None)
 
 
 class InMagePolicyDetails(PolicyProviderSpecificDetails):
@@ -8947,27 +8546,24 @@ class InMagePolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_threshold_in_minutes': {'key': 'recoveryPointThresholdInMinutes', 'type': 'int'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_threshold_in_minutes": {"key": "recoveryPointThresholdInMinutes", "type": "int"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMagePolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.recovery_point_threshold_in_minutes = kwargs.get('recovery_point_threshold_in_minutes', None)
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs.get('multi_vm_sync_status', None)
+        self.instance_type = "InMage"  # type: str
+        self.recovery_point_threshold_in_minutes = kwargs.get("recovery_point_threshold_in_minutes", None)
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs.get("multi_vm_sync_status", None)
 
 
 class InMagePolicyInput(PolicyProviderSpecificInput):
@@ -8991,28 +8587,25 @@ class InMagePolicyInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'multi_vm_sync_status': {'required': True},
+        "instance_type": {"required": True},
+        "multi_vm_sync_status": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_threshold_in_minutes': {'key': 'recoveryPointThresholdInMinutes', 'type': 'int'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_threshold_in_minutes": {"key": "recoveryPointThresholdInMinutes", "type": "int"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMagePolicyInput, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.recovery_point_threshold_in_minutes = kwargs.get('recovery_point_threshold_in_minutes', None)
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs['multi_vm_sync_status']
+        self.instance_type = "InMage"  # type: str
+        self.recovery_point_threshold_in_minutes = kwargs.get("recovery_point_threshold_in_minutes", None)
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs["multi_vm_sync_status"]
 
 
 class InMageProtectedDiskDetails(msrest.serialization.Model):
@@ -9065,57 +8658,54 @@ class InMageProtectedDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'protection_stage': {'key': 'protectionStage', 'type': 'str'},
-        'health_error_code': {'key': 'healthErrorCode', 'type': 'str'},
-        'rpo_in_seconds': {'key': 'rpoInSeconds', 'type': 'long'},
-        'resync_required': {'key': 'resyncRequired', 'type': 'str'},
-        'resync_progress_percentage': {'key': 'resyncProgressPercentage', 'type': 'int'},
-        'resync_duration_in_seconds': {'key': 'resyncDurationInSeconds', 'type': 'long'},
-        'disk_capacity_in_bytes': {'key': 'diskCapacityInBytes', 'type': 'long'},
-        'file_system_capacity_in_bytes': {'key': 'fileSystemCapacityInBytes', 'type': 'long'},
-        'source_data_in_mb': {'key': 'sourceDataInMB', 'type': 'float'},
-        'ps_data_in_mb': {'key': 'psDataInMB', 'type': 'float'},
-        'target_data_in_mb': {'key': 'targetDataInMB', 'type': 'float'},
-        'disk_resized': {'key': 'diskResized', 'type': 'str'},
-        'last_rpo_calculated_time': {'key': 'lastRpoCalculatedTime', 'type': 'iso-8601'},
-        'resync_processed_bytes': {'key': 'resyncProcessedBytes', 'type': 'long'},
-        'resync_total_transferred_bytes': {'key': 'resyncTotalTransferredBytes', 'type': 'long'},
-        'resync_last15_minutes_transferred_bytes': {'key': 'resyncLast15MinutesTransferredBytes', 'type': 'long'},
-        'resync_last_data_transfer_time_utc': {'key': 'resyncLastDataTransferTimeUTC', 'type': 'iso-8601'},
-        'resync_start_time': {'key': 'resyncStartTime', 'type': 'iso-8601'},
-        'progress_health': {'key': 'progressHealth', 'type': 'str'},
-        'progress_status': {'key': 'progressStatus', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "protection_stage": {"key": "protectionStage", "type": "str"},
+        "health_error_code": {"key": "healthErrorCode", "type": "str"},
+        "rpo_in_seconds": {"key": "rpoInSeconds", "type": "long"},
+        "resync_required": {"key": "resyncRequired", "type": "str"},
+        "resync_progress_percentage": {"key": "resyncProgressPercentage", "type": "int"},
+        "resync_duration_in_seconds": {"key": "resyncDurationInSeconds", "type": "long"},
+        "disk_capacity_in_bytes": {"key": "diskCapacityInBytes", "type": "long"},
+        "file_system_capacity_in_bytes": {"key": "fileSystemCapacityInBytes", "type": "long"},
+        "source_data_in_mb": {"key": "sourceDataInMB", "type": "float"},
+        "ps_data_in_mb": {"key": "psDataInMB", "type": "float"},
+        "target_data_in_mb": {"key": "targetDataInMB", "type": "float"},
+        "disk_resized": {"key": "diskResized", "type": "str"},
+        "last_rpo_calculated_time": {"key": "lastRpoCalculatedTime", "type": "iso-8601"},
+        "resync_processed_bytes": {"key": "resyncProcessedBytes", "type": "long"},
+        "resync_total_transferred_bytes": {"key": "resyncTotalTransferredBytes", "type": "long"},
+        "resync_last15_minutes_transferred_bytes": {"key": "resyncLast15MinutesTransferredBytes", "type": "long"},
+        "resync_last_data_transfer_time_utc": {"key": "resyncLastDataTransferTimeUTC", "type": "iso-8601"},
+        "resync_start_time": {"key": "resyncStartTime", "type": "iso-8601"},
+        "progress_health": {"key": "progressHealth", "type": "str"},
+        "progress_status": {"key": "progressStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageProtectedDiskDetails, self).__init__(**kwargs)
-        self.disk_id = kwargs.get('disk_id', None)
-        self.disk_name = kwargs.get('disk_name', None)
-        self.protection_stage = kwargs.get('protection_stage', None)
-        self.health_error_code = kwargs.get('health_error_code', None)
-        self.rpo_in_seconds = kwargs.get('rpo_in_seconds', None)
-        self.resync_required = kwargs.get('resync_required', None)
-        self.resync_progress_percentage = kwargs.get('resync_progress_percentage', None)
-        self.resync_duration_in_seconds = kwargs.get('resync_duration_in_seconds', None)
-        self.disk_capacity_in_bytes = kwargs.get('disk_capacity_in_bytes', None)
-        self.file_system_capacity_in_bytes = kwargs.get('file_system_capacity_in_bytes', None)
-        self.source_data_in_mb = kwargs.get('source_data_in_mb', None)
-        self.ps_data_in_mb = kwargs.get('ps_data_in_mb', None)
-        self.target_data_in_mb = kwargs.get('target_data_in_mb', None)
-        self.disk_resized = kwargs.get('disk_resized', None)
-        self.last_rpo_calculated_time = kwargs.get('last_rpo_calculated_time', None)
-        self.resync_processed_bytes = kwargs.get('resync_processed_bytes', None)
-        self.resync_total_transferred_bytes = kwargs.get('resync_total_transferred_bytes', None)
-        self.resync_last15_minutes_transferred_bytes = kwargs.get('resync_last15_minutes_transferred_bytes', None)
-        self.resync_last_data_transfer_time_utc = kwargs.get('resync_last_data_transfer_time_utc', None)
-        self.resync_start_time = kwargs.get('resync_start_time', None)
-        self.progress_health = kwargs.get('progress_health', None)
-        self.progress_status = kwargs.get('progress_status', None)
+        self.disk_id = kwargs.get("disk_id", None)
+        self.disk_name = kwargs.get("disk_name", None)
+        self.protection_stage = kwargs.get("protection_stage", None)
+        self.health_error_code = kwargs.get("health_error_code", None)
+        self.rpo_in_seconds = kwargs.get("rpo_in_seconds", None)
+        self.resync_required = kwargs.get("resync_required", None)
+        self.resync_progress_percentage = kwargs.get("resync_progress_percentage", None)
+        self.resync_duration_in_seconds = kwargs.get("resync_duration_in_seconds", None)
+        self.disk_capacity_in_bytes = kwargs.get("disk_capacity_in_bytes", None)
+        self.file_system_capacity_in_bytes = kwargs.get("file_system_capacity_in_bytes", None)
+        self.source_data_in_mb = kwargs.get("source_data_in_mb", None)
+        self.ps_data_in_mb = kwargs.get("ps_data_in_mb", None)
+        self.target_data_in_mb = kwargs.get("target_data_in_mb", None)
+        self.disk_resized = kwargs.get("disk_resized", None)
+        self.last_rpo_calculated_time = kwargs.get("last_rpo_calculated_time", None)
+        self.resync_processed_bytes = kwargs.get("resync_processed_bytes", None)
+        self.resync_total_transferred_bytes = kwargs.get("resync_total_transferred_bytes", None)
+        self.resync_last15_minutes_transferred_bytes = kwargs.get("resync_last15_minutes_transferred_bytes", None)
+        self.resync_last_data_transfer_time_utc = kwargs.get("resync_last_data_transfer_time_utc", None)
+        self.resync_start_time = kwargs.get("resync_start_time", None)
+        self.progress_health = kwargs.get("progress_health", None)
+        self.progress_status = kwargs.get("progress_status", None)
 
 
 class InMageRcmAgentUpgradeBlockingErrorDetails(msrest.serialization.Model):
@@ -9138,27 +8728,24 @@ class InMageRcmAgentUpgradeBlockingErrorDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'error_code': {'readonly': True},
-        'error_message': {'readonly': True},
-        'possible_causes': {'readonly': True},
-        'recommended_action': {'readonly': True},
-        'error_message_parameters': {'readonly': True},
-        'error_tags': {'readonly': True},
+        "error_code": {"readonly": True},
+        "error_message": {"readonly": True},
+        "possible_causes": {"readonly": True},
+        "recommended_action": {"readonly": True},
+        "error_message_parameters": {"readonly": True},
+        "error_tags": {"readonly": True},
     }
 
     _attribute_map = {
-        'error_code': {'key': 'errorCode', 'type': 'str'},
-        'error_message': {'key': 'errorMessage', 'type': 'str'},
-        'possible_causes': {'key': 'possibleCauses', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
-        'error_message_parameters': {'key': 'errorMessageParameters', 'type': '{str}'},
-        'error_tags': {'key': 'errorTags', 'type': '{str}'},
+        "error_code": {"key": "errorCode", "type": "str"},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "possible_causes": {"key": "possibleCauses", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
+        "error_message_parameters": {"key": "errorMessageParameters", "type": "{str}"},
+        "error_tags": {"key": "errorTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmAgentUpgradeBlockingErrorDetails, self).__init__(**kwargs)
         self.error_code = None
         self.error_message = None
@@ -9180,22 +8767,19 @@ class InMageRcmApplyRecoveryPointInput(ApplyRecoveryPointProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_id': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmApplyRecoveryPointInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.recovery_point_id = kwargs['recovery_point_id']
+        self.instance_type = "InMageRcm"  # type: str
+        self.recovery_point_id = kwargs["recovery_point_id"]
 
 
 class InMageRcmDiscoveredProtectedVmDetails(msrest.serialization.Model):
@@ -9230,39 +8814,36 @@ class InMageRcmDiscoveredProtectedVmDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'v_center_id': {'readonly': True},
-        'v_center_fqdn': {'readonly': True},
-        'datastores': {'readonly': True},
-        'ip_addresses': {'readonly': True},
-        'vmware_tools_status': {'readonly': True},
-        'power_status': {'readonly': True},
-        'vm_fqdn': {'readonly': True},
-        'os_name': {'readonly': True},
-        'created_timestamp': {'readonly': True},
-        'updated_timestamp': {'readonly': True},
-        'is_deleted': {'readonly': True},
-        'last_discovery_time_in_utc': {'readonly': True},
+        "v_center_id": {"readonly": True},
+        "v_center_fqdn": {"readonly": True},
+        "datastores": {"readonly": True},
+        "ip_addresses": {"readonly": True},
+        "vmware_tools_status": {"readonly": True},
+        "power_status": {"readonly": True},
+        "vm_fqdn": {"readonly": True},
+        "os_name": {"readonly": True},
+        "created_timestamp": {"readonly": True},
+        "updated_timestamp": {"readonly": True},
+        "is_deleted": {"readonly": True},
+        "last_discovery_time_in_utc": {"readonly": True},
     }
 
     _attribute_map = {
-        'v_center_id': {'key': 'vCenterId', 'type': 'str'},
-        'v_center_fqdn': {'key': 'vCenterFqdn', 'type': 'str'},
-        'datastores': {'key': 'datastores', 'type': '[str]'},
-        'ip_addresses': {'key': 'ipAddresses', 'type': '[str]'},
-        'vmware_tools_status': {'key': 'vmwareToolsStatus', 'type': 'str'},
-        'power_status': {'key': 'powerStatus', 'type': 'str'},
-        'vm_fqdn': {'key': 'vmFqdn', 'type': 'str'},
-        'os_name': {'key': 'osName', 'type': 'str'},
-        'created_timestamp': {'key': 'createdTimestamp', 'type': 'iso-8601'},
-        'updated_timestamp': {'key': 'updatedTimestamp', 'type': 'iso-8601'},
-        'is_deleted': {'key': 'isDeleted', 'type': 'bool'},
-        'last_discovery_time_in_utc': {'key': 'lastDiscoveryTimeInUtc', 'type': 'iso-8601'},
+        "v_center_id": {"key": "vCenterId", "type": "str"},
+        "v_center_fqdn": {"key": "vCenterFqdn", "type": "str"},
+        "datastores": {"key": "datastores", "type": "[str]"},
+        "ip_addresses": {"key": "ipAddresses", "type": "[str]"},
+        "vmware_tools_status": {"key": "vmwareToolsStatus", "type": "str"},
+        "power_status": {"key": "powerStatus", "type": "str"},
+        "vm_fqdn": {"key": "vmFqdn", "type": "str"},
+        "os_name": {"key": "osName", "type": "str"},
+        "created_timestamp": {"key": "createdTimestamp", "type": "iso-8601"},
+        "updated_timestamp": {"key": "updatedTimestamp", "type": "iso-8601"},
+        "is_deleted": {"key": "isDeleted", "type": "bool"},
+        "last_discovery_time_in_utc": {"key": "lastDiscoveryTimeInUtc", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmDiscoveredProtectedVmDetails, self).__init__(**kwargs)
         self.v_center_id = None
         self.v_center_fqdn = None
@@ -9295,27 +8876,24 @@ class InMageRcmDiskInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'required': True},
-        'log_storage_account_id': {'required': True},
-        'disk_type': {'required': True},
+        "disk_id": {"required": True},
+        "log_storage_account_id": {"required": True},
+        "disk_type": {"required": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmDiskInput, self).__init__(**kwargs)
-        self.disk_id = kwargs['disk_id']
-        self.log_storage_account_id = kwargs['log_storage_account_id']
-        self.disk_type = kwargs['disk_type']
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
+        self.disk_id = kwargs["disk_id"]
+        self.log_storage_account_id = kwargs["log_storage_account_id"]
+        self.disk_type = kwargs["disk_type"]
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
 
 
 class InMageRcmDisksDefaultInput(msrest.serialization.Model):
@@ -9333,24 +8911,21 @@ class InMageRcmDisksDefaultInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'log_storage_account_id': {'required': True},
-        'disk_type': {'required': True},
+        "log_storage_account_id": {"required": True},
+        "disk_type": {"required": True},
     }
 
     _attribute_map = {
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmDisksDefaultInput, self).__init__(**kwargs)
-        self.log_storage_account_id = kwargs['log_storage_account_id']
-        self.disk_type = kwargs['disk_type']
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
+        self.log_storage_account_id = kwargs["log_storage_account_id"]
+        self.disk_type = kwargs["disk_type"]
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
 
 
 class InMageRcmEnableProtectionInput(EnableProtectionProviderSpecificInput):
@@ -9402,58 +8977,55 @@ class InMageRcmEnableProtectionInput(EnableProtectionProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'fabric_discovery_machine_id': {'required': True},
-        'target_resource_group_id': {'required': True},
-        'process_server_id': {'required': True},
+        "instance_type": {"required": True},
+        "fabric_discovery_machine_id": {"required": True},
+        "target_resource_group_id": {"required": True},
+        "process_server_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'fabric_discovery_machine_id': {'key': 'fabricDiscoveryMachineId', 'type': 'str'},
-        'disks_to_include': {'key': 'disksToInclude', 'type': '[InMageRcmDiskInput]'},
-        'disks_default': {'key': 'disksDefault', 'type': 'InMageRcmDisksDefaultInput'},
-        'target_resource_group_id': {'key': 'targetResourceGroupId', 'type': 'str'},
-        'target_network_id': {'key': 'targetNetworkId', 'type': 'str'},
-        'test_network_id': {'key': 'testNetworkId', 'type': 'str'},
-        'target_subnet_name': {'key': 'targetSubnetName', 'type': 'str'},
-        'test_subnet_name': {'key': 'testSubnetName', 'type': 'str'},
-        'target_vm_name': {'key': 'targetVmName', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_boot_diagnostics_storage_account_id': {'key': 'targetBootDiagnosticsStorageAccountId', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "fabric_discovery_machine_id": {"key": "fabricDiscoveryMachineId", "type": "str"},
+        "disks_to_include": {"key": "disksToInclude", "type": "[InMageRcmDiskInput]"},
+        "disks_default": {"key": "disksDefault", "type": "InMageRcmDisksDefaultInput"},
+        "target_resource_group_id": {"key": "targetResourceGroupId", "type": "str"},
+        "target_network_id": {"key": "targetNetworkId", "type": "str"},
+        "test_network_id": {"key": "testNetworkId", "type": "str"},
+        "target_subnet_name": {"key": "targetSubnetName", "type": "str"},
+        "test_subnet_name": {"key": "testSubnetName", "type": "str"},
+        "target_vm_name": {"key": "targetVmName", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_boot_diagnostics_storage_account_id": {"key": "targetBootDiagnosticsStorageAccountId", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmEnableProtectionInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.fabric_discovery_machine_id = kwargs['fabric_discovery_machine_id']
-        self.disks_to_include = kwargs.get('disks_to_include', None)
-        self.disks_default = kwargs.get('disks_default', None)
-        self.target_resource_group_id = kwargs['target_resource_group_id']
-        self.target_network_id = kwargs.get('target_network_id', None)
-        self.test_network_id = kwargs.get('test_network_id', None)
-        self.target_subnet_name = kwargs.get('target_subnet_name', None)
-        self.test_subnet_name = kwargs.get('test_subnet_name', None)
-        self.target_vm_name = kwargs.get('target_vm_name', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.license_type = kwargs.get('license_type', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_boot_diagnostics_storage_account_id = kwargs.get('target_boot_diagnostics_storage_account_id', None)
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
-        self.process_server_id = kwargs['process_server_id']
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.fabric_discovery_machine_id = kwargs["fabric_discovery_machine_id"]
+        self.disks_to_include = kwargs.get("disks_to_include", None)
+        self.disks_default = kwargs.get("disks_default", None)
+        self.target_resource_group_id = kwargs["target_resource_group_id"]
+        self.target_network_id = kwargs.get("target_network_id", None)
+        self.test_network_id = kwargs.get("test_network_id", None)
+        self.target_subnet_name = kwargs.get("target_subnet_name", None)
+        self.test_subnet_name = kwargs.get("test_subnet_name", None)
+        self.target_vm_name = kwargs.get("target_vm_name", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.license_type = kwargs.get("license_type", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_boot_diagnostics_storage_account_id = kwargs.get("target_boot_diagnostics_storage_account_id", None)
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
+        self.process_server_id = kwargs["process_server_id"]
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
 
 
 class InMageRcmEventDetails(EventProviderSpecificDetails):
@@ -9485,35 +9057,32 @@ class InMageRcmEventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'protected_item_name': {'readonly': True},
-        'vm_name': {'readonly': True},
-        'latest_agent_version': {'readonly': True},
-        'job_id': {'readonly': True},
-        'fabric_name': {'readonly': True},
-        'appliance_name': {'readonly': True},
-        'server_type': {'readonly': True},
-        'component_display_name': {'readonly': True},
+        "instance_type": {"required": True},
+        "protected_item_name": {"readonly": True},
+        "vm_name": {"readonly": True},
+        "latest_agent_version": {"readonly": True},
+        "job_id": {"readonly": True},
+        "fabric_name": {"readonly": True},
+        "appliance_name": {"readonly": True},
+        "server_type": {"readonly": True},
+        "component_display_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'protected_item_name': {'key': 'protectedItemName', 'type': 'str'},
-        'vm_name': {'key': 'vmName', 'type': 'str'},
-        'latest_agent_version': {'key': 'latestAgentVersion', 'type': 'str'},
-        'job_id': {'key': 'jobId', 'type': 'str'},
-        'fabric_name': {'key': 'fabricName', 'type': 'str'},
-        'appliance_name': {'key': 'applianceName', 'type': 'str'},
-        'server_type': {'key': 'serverType', 'type': 'str'},
-        'component_display_name': {'key': 'componentDisplayName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "protected_item_name": {"key": "protectedItemName", "type": "str"},
+        "vm_name": {"key": "vmName", "type": "str"},
+        "latest_agent_version": {"key": "latestAgentVersion", "type": "str"},
+        "job_id": {"key": "jobId", "type": "str"},
+        "fabric_name": {"key": "fabricName", "type": "str"},
+        "appliance_name": {"key": "applianceName", "type": "str"},
+        "server_type": {"key": "serverType", "type": "str"},
+        "component_display_name": {"key": "componentDisplayName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmEventDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
+        self.instance_type = "InMageRcm"  # type: str
         self.protected_item_name = None
         self.vm_name = None
         self.latest_agent_version = None
@@ -9542,28 +9111,25 @@ class InMageRcmFabricCreationInput(FabricSpecificCreationInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'vmware_site_id': {'required': True},
-        'physical_site_id': {'required': True},
-        'source_agent_identity': {'required': True},
+        "instance_type": {"required": True},
+        "vmware_site_id": {"required": True},
+        "physical_site_id": {"required": True},
+        "source_agent_identity": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vmware_site_id': {'key': 'vmwareSiteId', 'type': 'str'},
-        'physical_site_id': {'key': 'physicalSiteId', 'type': 'str'},
-        'source_agent_identity': {'key': 'sourceAgentIdentity', 'type': 'IdentityProviderInput'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vmware_site_id": {"key": "vmwareSiteId", "type": "str"},
+        "physical_site_id": {"key": "physicalSiteId", "type": "str"},
+        "source_agent_identity": {"key": "sourceAgentIdentity", "type": "IdentityProviderInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFabricCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.vmware_site_id = kwargs['vmware_site_id']
-        self.physical_site_id = kwargs['physical_site_id']
-        self.source_agent_identity = kwargs['source_agent_identity']
+        self.instance_type = "InMageRcm"  # type: str
+        self.vmware_site_id = kwargs["vmware_site_id"]
+        self.physical_site_id = kwargs["physical_site_id"]
+        self.source_agent_identity = kwargs["source_agent_identity"]
 
 
 class InMageRcmFabricSpecificDetails(FabricSpecificDetails):
@@ -9616,50 +9182,47 @@ class InMageRcmFabricSpecificDetails(FabricSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'vmware_site_id': {'readonly': True},
-        'physical_site_id': {'readonly': True},
-        'service_endpoint': {'readonly': True},
-        'service_resource_id': {'readonly': True},
-        'service_container_id': {'readonly': True},
-        'data_plane_uri': {'readonly': True},
-        'control_plane_uri': {'readonly': True},
-        'process_servers': {'readonly': True},
-        'rcm_proxies': {'readonly': True},
-        'push_installers': {'readonly': True},
-        'replication_agents': {'readonly': True},
-        'reprotect_agents': {'readonly': True},
-        'mars_agents': {'readonly': True},
-        'dras': {'readonly': True},
-        'agent_details': {'readonly': True},
+        "instance_type": {"required": True},
+        "vmware_site_id": {"readonly": True},
+        "physical_site_id": {"readonly": True},
+        "service_endpoint": {"readonly": True},
+        "service_resource_id": {"readonly": True},
+        "service_container_id": {"readonly": True},
+        "data_plane_uri": {"readonly": True},
+        "control_plane_uri": {"readonly": True},
+        "process_servers": {"readonly": True},
+        "rcm_proxies": {"readonly": True},
+        "push_installers": {"readonly": True},
+        "replication_agents": {"readonly": True},
+        "reprotect_agents": {"readonly": True},
+        "mars_agents": {"readonly": True},
+        "dras": {"readonly": True},
+        "agent_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vmware_site_id': {'key': 'vmwareSiteId', 'type': 'str'},
-        'physical_site_id': {'key': 'physicalSiteId', 'type': 'str'},
-        'service_endpoint': {'key': 'serviceEndpoint', 'type': 'str'},
-        'service_resource_id': {'key': 'serviceResourceId', 'type': 'str'},
-        'service_container_id': {'key': 'serviceContainerId', 'type': 'str'},
-        'data_plane_uri': {'key': 'dataPlaneUri', 'type': 'str'},
-        'control_plane_uri': {'key': 'controlPlaneUri', 'type': 'str'},
-        'source_agent_identity_details': {'key': 'sourceAgentIdentityDetails', 'type': 'IdentityProviderDetails'},
-        'process_servers': {'key': 'processServers', 'type': '[ProcessServerDetails]'},
-        'rcm_proxies': {'key': 'rcmProxies', 'type': '[RcmProxyDetails]'},
-        'push_installers': {'key': 'pushInstallers', 'type': '[PushInstallerDetails]'},
-        'replication_agents': {'key': 'replicationAgents', 'type': '[ReplicationAgentDetails]'},
-        'reprotect_agents': {'key': 'reprotectAgents', 'type': '[ReprotectAgentDetails]'},
-        'mars_agents': {'key': 'marsAgents', 'type': '[MarsAgentDetails]'},
-        'dras': {'key': 'dras', 'type': '[DraDetails]'},
-        'agent_details': {'key': 'agentDetails', 'type': '[AgentDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vmware_site_id": {"key": "vmwareSiteId", "type": "str"},
+        "physical_site_id": {"key": "physicalSiteId", "type": "str"},
+        "service_endpoint": {"key": "serviceEndpoint", "type": "str"},
+        "service_resource_id": {"key": "serviceResourceId", "type": "str"},
+        "service_container_id": {"key": "serviceContainerId", "type": "str"},
+        "data_plane_uri": {"key": "dataPlaneUri", "type": "str"},
+        "control_plane_uri": {"key": "controlPlaneUri", "type": "str"},
+        "source_agent_identity_details": {"key": "sourceAgentIdentityDetails", "type": "IdentityProviderDetails"},
+        "process_servers": {"key": "processServers", "type": "[ProcessServerDetails]"},
+        "rcm_proxies": {"key": "rcmProxies", "type": "[RcmProxyDetails]"},
+        "push_installers": {"key": "pushInstallers", "type": "[PushInstallerDetails]"},
+        "replication_agents": {"key": "replicationAgents", "type": "[ReplicationAgentDetails]"},
+        "reprotect_agents": {"key": "reprotectAgents", "type": "[ReprotectAgentDetails]"},
+        "mars_agents": {"key": "marsAgents", "type": "[MarsAgentDetails]"},
+        "dras": {"key": "dras", "type": "[DraDetails]"},
+        "agent_details": {"key": "agentDetails", "type": "[AgentDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFabricSpecificDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
+        self.instance_type = "InMageRcm"  # type: str
         self.vmware_site_id = None
         self.physical_site_id = None
         self.service_endpoint = None
@@ -9667,7 +9230,7 @@ class InMageRcmFabricSpecificDetails(FabricSpecificDetails):
         self.service_container_id = None
         self.data_plane_uri = None
         self.control_plane_uri = None
-        self.source_agent_identity_details = kwargs.get('source_agent_identity_details', None)
+        self.source_agent_identity_details = kwargs.get("source_agent_identity_details", None)
         self.process_servers = None
         self.rcm_proxies = None
         self.push_installers = None
@@ -9710,39 +9273,36 @@ class InMageRcmFailbackDiscoveredProtectedVmDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'v_center_id': {'readonly': True},
-        'v_center_fqdn': {'readonly': True},
-        'datastores': {'readonly': True},
-        'ip_addresses': {'readonly': True},
-        'vmware_tools_status': {'readonly': True},
-        'power_status': {'readonly': True},
-        'vm_fqdn': {'readonly': True},
-        'os_name': {'readonly': True},
-        'created_timestamp': {'readonly': True},
-        'updated_timestamp': {'readonly': True},
-        'is_deleted': {'readonly': True},
-        'last_discovery_time_in_utc': {'readonly': True},
+        "v_center_id": {"readonly": True},
+        "v_center_fqdn": {"readonly": True},
+        "datastores": {"readonly": True},
+        "ip_addresses": {"readonly": True},
+        "vmware_tools_status": {"readonly": True},
+        "power_status": {"readonly": True},
+        "vm_fqdn": {"readonly": True},
+        "os_name": {"readonly": True},
+        "created_timestamp": {"readonly": True},
+        "updated_timestamp": {"readonly": True},
+        "is_deleted": {"readonly": True},
+        "last_discovery_time_in_utc": {"readonly": True},
     }
 
     _attribute_map = {
-        'v_center_id': {'key': 'vCenterId', 'type': 'str'},
-        'v_center_fqdn': {'key': 'vCenterFqdn', 'type': 'str'},
-        'datastores': {'key': 'datastores', 'type': '[str]'},
-        'ip_addresses': {'key': 'ipAddresses', 'type': '[str]'},
-        'vmware_tools_status': {'key': 'vmwareToolsStatus', 'type': 'str'},
-        'power_status': {'key': 'powerStatus', 'type': 'str'},
-        'vm_fqdn': {'key': 'vmFqdn', 'type': 'str'},
-        'os_name': {'key': 'osName', 'type': 'str'},
-        'created_timestamp': {'key': 'createdTimestamp', 'type': 'iso-8601'},
-        'updated_timestamp': {'key': 'updatedTimestamp', 'type': 'iso-8601'},
-        'is_deleted': {'key': 'isDeleted', 'type': 'bool'},
-        'last_discovery_time_in_utc': {'key': 'lastDiscoveryTimeInUtc', 'type': 'iso-8601'},
+        "v_center_id": {"key": "vCenterId", "type": "str"},
+        "v_center_fqdn": {"key": "vCenterFqdn", "type": "str"},
+        "datastores": {"key": "datastores", "type": "[str]"},
+        "ip_addresses": {"key": "ipAddresses", "type": "[str]"},
+        "vmware_tools_status": {"key": "vmwareToolsStatus", "type": "str"},
+        "power_status": {"key": "powerStatus", "type": "str"},
+        "vm_fqdn": {"key": "vmFqdn", "type": "str"},
+        "os_name": {"key": "osName", "type": "str"},
+        "created_timestamp": {"key": "createdTimestamp", "type": "iso-8601"},
+        "updated_timestamp": {"key": "updatedTimestamp", "type": "iso-8601"},
+        "is_deleted": {"key": "isDeleted", "type": "bool"},
+        "last_discovery_time_in_utc": {"key": "lastDiscoveryTimeInUtc", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackDiscoveredProtectedVmDetails, self).__init__(**kwargs)
         self.v_center_id = None
         self.v_center_fqdn = None
@@ -9781,29 +9341,26 @@ class InMageRcmFailbackEventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'protected_item_name': {'readonly': True},
-        'vm_name': {'readonly': True},
-        'appliance_name': {'readonly': True},
-        'server_type': {'readonly': True},
-        'component_display_name': {'readonly': True},
+        "instance_type": {"required": True},
+        "protected_item_name": {"readonly": True},
+        "vm_name": {"readonly": True},
+        "appliance_name": {"readonly": True},
+        "server_type": {"readonly": True},
+        "component_display_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'protected_item_name': {'key': 'protectedItemName', 'type': 'str'},
-        'vm_name': {'key': 'vmName', 'type': 'str'},
-        'appliance_name': {'key': 'applianceName', 'type': 'str'},
-        'server_type': {'key': 'serverType', 'type': 'str'},
-        'component_display_name': {'key': 'componentDisplayName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "protected_item_name": {"key": "protectedItemName", "type": "str"},
+        "vm_name": {"key": "vmName", "type": "str"},
+        "appliance_name": {"key": "applianceName", "type": "str"},
+        "server_type": {"key": "serverType", "type": "str"},
+        "component_display_name": {"key": "componentDisplayName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackEventDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcmFailback'  # type: str
+        self.instance_type = "InMageRcmFailback"  # type: str
         self.protected_item_name = None
         self.vm_name = None
         self.appliance_name = None
@@ -9839,33 +9396,30 @@ class InMageRcmFailbackMobilityAgentDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'version': {'readonly': True},
-        'latest_version': {'readonly': True},
-        'driver_version': {'readonly': True},
-        'latest_upgradable_version_without_reboot': {'readonly': True},
-        'agent_version_expiry_date': {'readonly': True},
-        'driver_version_expiry_date': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'reasons_blocking_upgrade': {'readonly': True},
-        'is_upgradeable': {'readonly': True},
+        "version": {"readonly": True},
+        "latest_version": {"readonly": True},
+        "driver_version": {"readonly": True},
+        "latest_upgradable_version_without_reboot": {"readonly": True},
+        "agent_version_expiry_date": {"readonly": True},
+        "driver_version_expiry_date": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "reasons_blocking_upgrade": {"readonly": True},
+        "is_upgradeable": {"readonly": True},
     }
 
     _attribute_map = {
-        'version': {'key': 'version', 'type': 'str'},
-        'latest_version': {'key': 'latestVersion', 'type': 'str'},
-        'driver_version': {'key': 'driverVersion', 'type': 'str'},
-        'latest_upgradable_version_without_reboot': {'key': 'latestUpgradableVersionWithoutReboot', 'type': 'str'},
-        'agent_version_expiry_date': {'key': 'agentVersionExpiryDate', 'type': 'iso-8601'},
-        'driver_version_expiry_date': {'key': 'driverVersionExpiryDate', 'type': 'iso-8601'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'reasons_blocking_upgrade': {'key': 'reasonsBlockingUpgrade', 'type': '[str]'},
-        'is_upgradeable': {'key': 'isUpgradeable', 'type': 'str'},
+        "version": {"key": "version", "type": "str"},
+        "latest_version": {"key": "latestVersion", "type": "str"},
+        "driver_version": {"key": "driverVersion", "type": "str"},
+        "latest_upgradable_version_without_reboot": {"key": "latestUpgradableVersionWithoutReboot", "type": "str"},
+        "agent_version_expiry_date": {"key": "agentVersionExpiryDate", "type": "iso-8601"},
+        "driver_version_expiry_date": {"key": "driverVersionExpiryDate", "type": "iso-8601"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "reasons_blocking_upgrade": {"key": "reasonsBlockingUpgrade", "type": "[str]"},
+        "is_upgradeable": {"key": "isUpgradeable", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackMobilityAgentDetails, self).__init__(**kwargs)
         self.version = None
         self.latest_version = None
@@ -9894,23 +9448,20 @@ class InMageRcmFailbackNicDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'mac_address': {'readonly': True},
-        'network_name': {'readonly': True},
-        'adapter_type': {'readonly': True},
-        'source_ip_address': {'readonly': True},
+        "mac_address": {"readonly": True},
+        "network_name": {"readonly": True},
+        "adapter_type": {"readonly": True},
+        "source_ip_address": {"readonly": True},
     }
 
     _attribute_map = {
-        'mac_address': {'key': 'macAddress', 'type': 'str'},
-        'network_name': {'key': 'networkName', 'type': 'str'},
-        'adapter_type': {'key': 'adapterType', 'type': 'str'},
-        'source_ip_address': {'key': 'sourceIpAddress', 'type': 'str'},
+        "mac_address": {"key": "macAddress", "type": "str"},
+        "network_name": {"key": "networkName", "type": "str"},
+        "adapter_type": {"key": "adapterType", "type": "str"},
+        "source_ip_address": {"key": "sourceIpAddress", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackNicDetails, self).__init__(**kwargs)
         self.mac_address = None
         self.network_name = None
@@ -9932,22 +9483,19 @@ class InMageRcmFailbackPlannedFailoverProviderInput(PlannedFailoverProviderSpeci
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_type': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackPlannedFailoverProviderInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcmFailback'  # type: str
-        self.recovery_point_type = kwargs['recovery_point_type']
+        self.instance_type = "InMageRcmFailback"  # type: str
+        self.recovery_point_type = kwargs["recovery_point_type"]
 
 
 class InMageRcmFailbackPolicyCreationInput(PolicyProviderSpecificInput):
@@ -9965,23 +9513,20 @@ class InMageRcmFailbackPolicyCreationInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackPolicyCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcmFailback'  # type: str
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
+        self.instance_type = "InMageRcmFailback"  # type: str
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
 
 
 class InMageRcmFailbackPolicyDetails(PolicyProviderSpecificDetails):
@@ -10000,23 +9545,20 @@ class InMageRcmFailbackPolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackPolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcmFailback'  # type: str
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
+        self.instance_type = "InMageRcmFailback"  # type: str
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
 
 
 class InMageRcmFailbackProtectedDiskDetails(msrest.serialization.Model):
@@ -10051,35 +9593,32 @@ class InMageRcmFailbackProtectedDiskDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'readonly': True},
-        'disk_name': {'readonly': True},
-        'is_os_disk': {'readonly': True},
-        'capacity_in_bytes': {'readonly': True},
-        'disk_uuid': {'readonly': True},
-        'data_pending_in_log_data_store_in_mb': {'readonly': True},
-        'data_pending_at_source_agent_in_mb': {'readonly': True},
-        'is_initial_replication_complete': {'readonly': True},
-        'last_sync_time': {'readonly': True},
+        "disk_id": {"readonly": True},
+        "disk_name": {"readonly": True},
+        "is_os_disk": {"readonly": True},
+        "capacity_in_bytes": {"readonly": True},
+        "disk_uuid": {"readonly": True},
+        "data_pending_in_log_data_store_in_mb": {"readonly": True},
+        "data_pending_at_source_agent_in_mb": {"readonly": True},
+        "is_initial_replication_complete": {"readonly": True},
+        "last_sync_time": {"readonly": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'is_os_disk': {'key': 'isOSDisk', 'type': 'str'},
-        'capacity_in_bytes': {'key': 'capacityInBytes', 'type': 'long'},
-        'disk_uuid': {'key': 'diskUuid', 'type': 'str'},
-        'data_pending_in_log_data_store_in_mb': {'key': 'dataPendingInLogDataStoreInMB', 'type': 'float'},
-        'data_pending_at_source_agent_in_mb': {'key': 'dataPendingAtSourceAgentInMB', 'type': 'float'},
-        'is_initial_replication_complete': {'key': 'isInitialReplicationComplete', 'type': 'str'},
-        'ir_details': {'key': 'irDetails', 'type': 'InMageRcmFailbackSyncDetails'},
-        'resync_details': {'key': 'resyncDetails', 'type': 'InMageRcmFailbackSyncDetails'},
-        'last_sync_time': {'key': 'lastSyncTime', 'type': 'iso-8601'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "is_os_disk": {"key": "isOSDisk", "type": "str"},
+        "capacity_in_bytes": {"key": "capacityInBytes", "type": "long"},
+        "disk_uuid": {"key": "diskUuid", "type": "str"},
+        "data_pending_in_log_data_store_in_mb": {"key": "dataPendingInLogDataStoreInMB", "type": "float"},
+        "data_pending_at_source_agent_in_mb": {"key": "dataPendingAtSourceAgentInMB", "type": "float"},
+        "is_initial_replication_complete": {"key": "isInitialReplicationComplete", "type": "str"},
+        "ir_details": {"key": "irDetails", "type": "InMageRcmFailbackSyncDetails"},
+        "resync_details": {"key": "resyncDetails", "type": "InMageRcmFailbackSyncDetails"},
+        "last_sync_time": {"key": "lastSyncTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackProtectedDiskDetails, self).__init__(**kwargs)
         self.disk_id = None
         self.disk_name = None
@@ -10089,8 +9628,8 @@ class InMageRcmFailbackProtectedDiskDetails(msrest.serialization.Model):
         self.data_pending_in_log_data_store_in_mb = None
         self.data_pending_at_source_agent_in_mb = None
         self.is_initial_replication_complete = None
-        self.ir_details = kwargs.get('ir_details', None)
-        self.resync_details = kwargs.get('resync_details', None)
+        self.ir_details = kwargs.get("ir_details", None)
+        self.resync_details = kwargs.get("resync_details", None)
         self.last_sync_time = None
 
 
@@ -10180,73 +9719,76 @@ class InMageRcmFailbackReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'internal_identifier': {'readonly': True},
-        'azure_virtual_machine_id': {'readonly': True},
-        'multi_vm_group_name': {'readonly': True},
-        'reprotect_agent_id': {'readonly': True},
-        'reprotect_agent_name': {'readonly': True},
-        'os_type': {'readonly': True},
-        'log_storage_account_id': {'readonly': True},
-        'targetv_center_id': {'readonly': True},
-        'target_data_store_name': {'readonly': True},
-        'target_vm_name': {'readonly': True},
-        'initial_replication_progress_percentage': {'readonly': True},
-        'initial_replication_processed_bytes': {'readonly': True},
-        'initial_replication_transferred_bytes': {'readonly': True},
-        'initial_replication_progress_health': {'readonly': True},
-        'resync_progress_percentage': {'readonly': True},
-        'resync_processed_bytes': {'readonly': True},
-        'resync_transferred_bytes': {'readonly': True},
-        'resync_progress_health': {'readonly': True},
-        'resync_required': {'readonly': True},
-        'resync_state': {'readonly': True},
-        'last_planned_failover_start_time': {'readonly': True},
-        'last_planned_failover_status': {'readonly': True},
-        'last_used_policy_id': {'readonly': True},
-        'last_used_policy_friendly_name': {'readonly': True},
-        'is_agent_registration_successful_after_failover': {'readonly': True},
+        "instance_type": {"required": True},
+        "internal_identifier": {"readonly": True},
+        "azure_virtual_machine_id": {"readonly": True},
+        "multi_vm_group_name": {"readonly": True},
+        "reprotect_agent_id": {"readonly": True},
+        "reprotect_agent_name": {"readonly": True},
+        "os_type": {"readonly": True},
+        "log_storage_account_id": {"readonly": True},
+        "targetv_center_id": {"readonly": True},
+        "target_data_store_name": {"readonly": True},
+        "target_vm_name": {"readonly": True},
+        "initial_replication_progress_percentage": {"readonly": True},
+        "initial_replication_processed_bytes": {"readonly": True},
+        "initial_replication_transferred_bytes": {"readonly": True},
+        "initial_replication_progress_health": {"readonly": True},
+        "resync_progress_percentage": {"readonly": True},
+        "resync_processed_bytes": {"readonly": True},
+        "resync_transferred_bytes": {"readonly": True},
+        "resync_progress_health": {"readonly": True},
+        "resync_required": {"readonly": True},
+        "resync_state": {"readonly": True},
+        "last_planned_failover_start_time": {"readonly": True},
+        "last_planned_failover_status": {"readonly": True},
+        "last_used_policy_id": {"readonly": True},
+        "last_used_policy_friendly_name": {"readonly": True},
+        "is_agent_registration_successful_after_failover": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'internal_identifier': {'key': 'internalIdentifier', 'type': 'str'},
-        'azure_virtual_machine_id': {'key': 'azureVirtualMachineId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'reprotect_agent_id': {'key': 'reprotectAgentId', 'type': 'str'},
-        'reprotect_agent_name': {'key': 'reprotectAgentName', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'targetv_center_id': {'key': 'targetvCenterId', 'type': 'str'},
-        'target_data_store_name': {'key': 'targetDataStoreName', 'type': 'str'},
-        'target_vm_name': {'key': 'targetVmName', 'type': 'str'},
-        'initial_replication_progress_percentage': {'key': 'initialReplicationProgressPercentage', 'type': 'int'},
-        'initial_replication_processed_bytes': {'key': 'initialReplicationProcessedBytes', 'type': 'long'},
-        'initial_replication_transferred_bytes': {'key': 'initialReplicationTransferredBytes', 'type': 'long'},
-        'initial_replication_progress_health': {'key': 'initialReplicationProgressHealth', 'type': 'str'},
-        'resync_progress_percentage': {'key': 'resyncProgressPercentage', 'type': 'int'},
-        'resync_processed_bytes': {'key': 'resyncProcessedBytes', 'type': 'long'},
-        'resync_transferred_bytes': {'key': 'resyncTransferredBytes', 'type': 'long'},
-        'resync_progress_health': {'key': 'resyncProgressHealth', 'type': 'str'},
-        'resync_required': {'key': 'resyncRequired', 'type': 'str'},
-        'resync_state': {'key': 'resyncState', 'type': 'str'},
-        'protected_disks': {'key': 'protectedDisks', 'type': '[InMageRcmFailbackProtectedDiskDetails]'},
-        'mobility_agent_details': {'key': 'mobilityAgentDetails', 'type': 'InMageRcmFailbackMobilityAgentDetails'},
-        'vm_nics': {'key': 'vmNics', 'type': '[InMageRcmFailbackNicDetails]'},
-        'last_planned_failover_start_time': {'key': 'lastPlannedFailoverStartTime', 'type': 'iso-8601'},
-        'last_planned_failover_status': {'key': 'lastPlannedFailoverStatus', 'type': 'str'},
-        'discovered_vm_details': {'key': 'discoveredVmDetails', 'type': 'InMageRcmFailbackDiscoveredProtectedVmDetails'},
-        'last_used_policy_id': {'key': 'lastUsedPolicyId', 'type': 'str'},
-        'last_used_policy_friendly_name': {'key': 'lastUsedPolicyFriendlyName', 'type': 'str'},
-        'is_agent_registration_successful_after_failover': {'key': 'isAgentRegistrationSuccessfulAfterFailover', 'type': 'bool'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "internal_identifier": {"key": "internalIdentifier", "type": "str"},
+        "azure_virtual_machine_id": {"key": "azureVirtualMachineId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "reprotect_agent_id": {"key": "reprotectAgentId", "type": "str"},
+        "reprotect_agent_name": {"key": "reprotectAgentName", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "targetv_center_id": {"key": "targetvCenterId", "type": "str"},
+        "target_data_store_name": {"key": "targetDataStoreName", "type": "str"},
+        "target_vm_name": {"key": "targetVmName", "type": "str"},
+        "initial_replication_progress_percentage": {"key": "initialReplicationProgressPercentage", "type": "int"},
+        "initial_replication_processed_bytes": {"key": "initialReplicationProcessedBytes", "type": "long"},
+        "initial_replication_transferred_bytes": {"key": "initialReplicationTransferredBytes", "type": "long"},
+        "initial_replication_progress_health": {"key": "initialReplicationProgressHealth", "type": "str"},
+        "resync_progress_percentage": {"key": "resyncProgressPercentage", "type": "int"},
+        "resync_processed_bytes": {"key": "resyncProcessedBytes", "type": "long"},
+        "resync_transferred_bytes": {"key": "resyncTransferredBytes", "type": "long"},
+        "resync_progress_health": {"key": "resyncProgressHealth", "type": "str"},
+        "resync_required": {"key": "resyncRequired", "type": "str"},
+        "resync_state": {"key": "resyncState", "type": "str"},
+        "protected_disks": {"key": "protectedDisks", "type": "[InMageRcmFailbackProtectedDiskDetails]"},
+        "mobility_agent_details": {"key": "mobilityAgentDetails", "type": "InMageRcmFailbackMobilityAgentDetails"},
+        "vm_nics": {"key": "vmNics", "type": "[InMageRcmFailbackNicDetails]"},
+        "last_planned_failover_start_time": {"key": "lastPlannedFailoverStartTime", "type": "iso-8601"},
+        "last_planned_failover_status": {"key": "lastPlannedFailoverStatus", "type": "str"},
+        "discovered_vm_details": {
+            "key": "discoveredVmDetails",
+            "type": "InMageRcmFailbackDiscoveredProtectedVmDetails",
+        },
+        "last_used_policy_id": {"key": "lastUsedPolicyId", "type": "str"},
+        "last_used_policy_friendly_name": {"key": "lastUsedPolicyFriendlyName", "type": "str"},
+        "is_agent_registration_successful_after_failover": {
+            "key": "isAgentRegistrationSuccessfulAfterFailover",
+            "type": "bool",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcmFailback'  # type: str
+        self.instance_type = "InMageRcmFailback"  # type: str
         self.internal_identifier = None
         self.azure_virtual_machine_id = None
         self.multi_vm_group_name = None
@@ -10267,12 +9809,12 @@ class InMageRcmFailbackReplicationDetails(ReplicationProviderSpecificSettings):
         self.resync_progress_health = None
         self.resync_required = None
         self.resync_state = None
-        self.protected_disks = kwargs.get('protected_disks', None)
-        self.mobility_agent_details = kwargs.get('mobility_agent_details', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
+        self.protected_disks = kwargs.get("protected_disks", None)
+        self.mobility_agent_details = kwargs.get("mobility_agent_details", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
         self.last_planned_failover_start_time = None
         self.last_planned_failover_status = None
-        self.discovered_vm_details = kwargs.get('discovered_vm_details', None)
+        self.discovered_vm_details = kwargs.get("discovered_vm_details", None)
         self.last_used_policy_id = None
         self.last_used_policy_friendly_name = None
         self.is_agent_registration_successful_after_failover = None
@@ -10294,27 +9836,24 @@ class InMageRcmFailbackReprotectInput(ReverseReplicationProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'process_server_id': {'required': True},
-        'policy_id': {'required': True},
+        "instance_type": {"required": True},
+        "process_server_id": {"required": True},
+        "policy_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackReprotectInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcmFailback'  # type: str
-        self.process_server_id = kwargs['process_server_id']
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
-        self.policy_id = kwargs['policy_id']
+        self.instance_type = "InMageRcmFailback"  # type: str
+        self.process_server_id = kwargs["process_server_id"]
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
+        self.policy_id = kwargs["policy_id"]
 
 
 class InMageRcmFailbackSyncDetails(msrest.serialization.Model):
@@ -10346,31 +9885,28 @@ class InMageRcmFailbackSyncDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'progress_health': {'readonly': True},
-        'transferred_bytes': {'readonly': True},
-        'last15_minutes_transferred_bytes': {'readonly': True},
-        'last_data_transfer_time_utc': {'readonly': True},
-        'processed_bytes': {'readonly': True},
-        'start_time': {'readonly': True},
-        'last_refresh_time': {'readonly': True},
-        'progress_percentage': {'readonly': True},
+        "progress_health": {"readonly": True},
+        "transferred_bytes": {"readonly": True},
+        "last15_minutes_transferred_bytes": {"readonly": True},
+        "last_data_transfer_time_utc": {"readonly": True},
+        "processed_bytes": {"readonly": True},
+        "start_time": {"readonly": True},
+        "last_refresh_time": {"readonly": True},
+        "progress_percentage": {"readonly": True},
     }
 
     _attribute_map = {
-        'progress_health': {'key': 'progressHealth', 'type': 'str'},
-        'transferred_bytes': {'key': 'transferredBytes', 'type': 'long'},
-        'last15_minutes_transferred_bytes': {'key': 'last15MinutesTransferredBytes', 'type': 'long'},
-        'last_data_transfer_time_utc': {'key': 'lastDataTransferTimeUtc', 'type': 'str'},
-        'processed_bytes': {'key': 'processedBytes', 'type': 'long'},
-        'start_time': {'key': 'startTime', 'type': 'str'},
-        'last_refresh_time': {'key': 'lastRefreshTime', 'type': 'str'},
-        'progress_percentage': {'key': 'progressPercentage', 'type': 'int'},
+        "progress_health": {"key": "progressHealth", "type": "str"},
+        "transferred_bytes": {"key": "transferredBytes", "type": "long"},
+        "last15_minutes_transferred_bytes": {"key": "last15MinutesTransferredBytes", "type": "long"},
+        "last_data_transfer_time_utc": {"key": "lastDataTransferTimeUtc", "type": "str"},
+        "processed_bytes": {"key": "processedBytes", "type": "long"},
+        "start_time": {"key": "startTime", "type": "str"},
+        "last_refresh_time": {"key": "lastRefreshTime", "type": "str"},
+        "progress_percentage": {"key": "progressPercentage", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmFailbackSyncDetails, self).__init__(**kwargs)
         self.progress_health = None
         self.transferred_bytes = None
@@ -10402,27 +9938,24 @@ class InMageRcmLastAgentUpgradeErrorDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'error_code': {'readonly': True},
-        'error_message': {'readonly': True},
-        'possible_causes': {'readonly': True},
-        'recommended_action': {'readonly': True},
-        'error_message_parameters': {'readonly': True},
-        'error_tags': {'readonly': True},
+        "error_code": {"readonly": True},
+        "error_message": {"readonly": True},
+        "possible_causes": {"readonly": True},
+        "recommended_action": {"readonly": True},
+        "error_message_parameters": {"readonly": True},
+        "error_tags": {"readonly": True},
     }
 
     _attribute_map = {
-        'error_code': {'key': 'errorCode', 'type': 'str'},
-        'error_message': {'key': 'errorMessage', 'type': 'str'},
-        'possible_causes': {'key': 'possibleCauses', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
-        'error_message_parameters': {'key': 'errorMessageParameters', 'type': '{str}'},
-        'error_tags': {'key': 'errorTags', 'type': '{str}'},
+        "error_code": {"key": "errorCode", "type": "str"},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "possible_causes": {"key": "possibleCauses", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
+        "error_message_parameters": {"key": "errorMessageParameters", "type": "{str}"},
+        "error_tags": {"key": "errorTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmLastAgentUpgradeErrorDetails, self).__init__(**kwargs)
         self.error_code = None
         self.error_message = None
@@ -10462,35 +9995,32 @@ class InMageRcmMobilityAgentDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'version': {'readonly': True},
-        'latest_version': {'readonly': True},
-        'latest_agent_release_date': {'readonly': True},
-        'driver_version': {'readonly': True},
-        'latest_upgradable_version_without_reboot': {'readonly': True},
-        'agent_version_expiry_date': {'readonly': True},
-        'driver_version_expiry_date': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'reasons_blocking_upgrade': {'readonly': True},
-        'is_upgradeable': {'readonly': True},
+        "version": {"readonly": True},
+        "latest_version": {"readonly": True},
+        "latest_agent_release_date": {"readonly": True},
+        "driver_version": {"readonly": True},
+        "latest_upgradable_version_without_reboot": {"readonly": True},
+        "agent_version_expiry_date": {"readonly": True},
+        "driver_version_expiry_date": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "reasons_blocking_upgrade": {"readonly": True},
+        "is_upgradeable": {"readonly": True},
     }
 
     _attribute_map = {
-        'version': {'key': 'version', 'type': 'str'},
-        'latest_version': {'key': 'latestVersion', 'type': 'str'},
-        'latest_agent_release_date': {'key': 'latestAgentReleaseDate', 'type': 'str'},
-        'driver_version': {'key': 'driverVersion', 'type': 'str'},
-        'latest_upgradable_version_without_reboot': {'key': 'latestUpgradableVersionWithoutReboot', 'type': 'str'},
-        'agent_version_expiry_date': {'key': 'agentVersionExpiryDate', 'type': 'iso-8601'},
-        'driver_version_expiry_date': {'key': 'driverVersionExpiryDate', 'type': 'iso-8601'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'reasons_blocking_upgrade': {'key': 'reasonsBlockingUpgrade', 'type': '[str]'},
-        'is_upgradeable': {'key': 'isUpgradeable', 'type': 'str'},
+        "version": {"key": "version", "type": "str"},
+        "latest_version": {"key": "latestVersion", "type": "str"},
+        "latest_agent_release_date": {"key": "latestAgentReleaseDate", "type": "str"},
+        "driver_version": {"key": "driverVersion", "type": "str"},
+        "latest_upgradable_version_without_reboot": {"key": "latestUpgradableVersionWithoutReboot", "type": "str"},
+        "agent_version_expiry_date": {"key": "agentVersionExpiryDate", "type": "iso-8601"},
+        "driver_version_expiry_date": {"key": "driverVersionExpiryDate", "type": "iso-8601"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "reasons_blocking_upgrade": {"key": "reasonsBlockingUpgrade", "type": "[str]"},
+        "is_upgradeable": {"key": "isUpgradeable", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmMobilityAgentDetails, self).__init__(**kwargs)
         self.version = None
         self.latest_version = None
@@ -10544,47 +10074,44 @@ class InMageRcmNicDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'nic_id': {'readonly': True},
-        'source_ip_address': {'readonly': True},
-        'source_ip_address_type': {'readonly': True},
-        'source_network_id': {'readonly': True},
-        'source_subnet_name': {'readonly': True},
+        "nic_id": {"readonly": True},
+        "source_ip_address": {"readonly": True},
+        "source_ip_address_type": {"readonly": True},
+        "source_network_id": {"readonly": True},
+        "source_subnet_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'nic_id': {'key': 'nicId', 'type': 'str'},
-        'is_primary_nic': {'key': 'isPrimaryNic', 'type': 'str'},
-        'is_selected_for_failover': {'key': 'isSelectedForFailover', 'type': 'str'},
-        'source_ip_address': {'key': 'sourceIPAddress', 'type': 'str'},
-        'source_ip_address_type': {'key': 'sourceIPAddressType', 'type': 'str'},
-        'source_network_id': {'key': 'sourceNetworkId', 'type': 'str'},
-        'source_subnet_name': {'key': 'sourceSubnetName', 'type': 'str'},
-        'target_ip_address': {'key': 'targetIPAddress', 'type': 'str'},
-        'target_ip_address_type': {'key': 'targetIPAddressType', 'type': 'str'},
-        'target_subnet_name': {'key': 'targetSubnetName', 'type': 'str'},
-        'test_subnet_name': {'key': 'testSubnetName', 'type': 'str'},
-        'test_ip_address': {'key': 'testIPAddress', 'type': 'str'},
-        'test_ip_address_type': {'key': 'testIPAddressType', 'type': 'str'},
+        "nic_id": {"key": "nicId", "type": "str"},
+        "is_primary_nic": {"key": "isPrimaryNic", "type": "str"},
+        "is_selected_for_failover": {"key": "isSelectedForFailover", "type": "str"},
+        "source_ip_address": {"key": "sourceIPAddress", "type": "str"},
+        "source_ip_address_type": {"key": "sourceIPAddressType", "type": "str"},
+        "source_network_id": {"key": "sourceNetworkId", "type": "str"},
+        "source_subnet_name": {"key": "sourceSubnetName", "type": "str"},
+        "target_ip_address": {"key": "targetIPAddress", "type": "str"},
+        "target_ip_address_type": {"key": "targetIPAddressType", "type": "str"},
+        "target_subnet_name": {"key": "targetSubnetName", "type": "str"},
+        "test_subnet_name": {"key": "testSubnetName", "type": "str"},
+        "test_ip_address": {"key": "testIPAddress", "type": "str"},
+        "test_ip_address_type": {"key": "testIPAddressType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmNicDetails, self).__init__(**kwargs)
         self.nic_id = None
-        self.is_primary_nic = kwargs.get('is_primary_nic', None)
-        self.is_selected_for_failover = kwargs.get('is_selected_for_failover', None)
+        self.is_primary_nic = kwargs.get("is_primary_nic", None)
+        self.is_selected_for_failover = kwargs.get("is_selected_for_failover", None)
         self.source_ip_address = None
         self.source_ip_address_type = None
         self.source_network_id = None
         self.source_subnet_name = None
-        self.target_ip_address = kwargs.get('target_ip_address', None)
-        self.target_ip_address_type = kwargs.get('target_ip_address_type', None)
-        self.target_subnet_name = kwargs.get('target_subnet_name', None)
-        self.test_subnet_name = kwargs.get('test_subnet_name', None)
-        self.test_ip_address = kwargs.get('test_ip_address', None)
-        self.test_ip_address_type = kwargs.get('test_ip_address_type', None)
+        self.target_ip_address = kwargs.get("target_ip_address", None)
+        self.target_ip_address_type = kwargs.get("target_ip_address_type", None)
+        self.target_subnet_name = kwargs.get("target_subnet_name", None)
+        self.test_subnet_name = kwargs.get("test_subnet_name", None)
+        self.test_ip_address = kwargs.get("test_ip_address", None)
+        self.test_ip_address_type = kwargs.get("test_ip_address_type", None)
 
 
 class InMageRcmNicInput(msrest.serialization.Model):
@@ -10609,32 +10136,29 @@ class InMageRcmNicInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'nic_id': {'required': True},
-        'is_primary_nic': {'required': True},
+        "nic_id": {"required": True},
+        "is_primary_nic": {"required": True},
     }
 
     _attribute_map = {
-        'nic_id': {'key': 'nicId', 'type': 'str'},
-        'is_primary_nic': {'key': 'isPrimaryNic', 'type': 'str'},
-        'is_selected_for_failover': {'key': 'isSelectedForFailover', 'type': 'str'},
-        'target_subnet_name': {'key': 'targetSubnetName', 'type': 'str'},
-        'target_static_ip_address': {'key': 'targetStaticIPAddress', 'type': 'str'},
-        'test_subnet_name': {'key': 'testSubnetName', 'type': 'str'},
-        'test_static_ip_address': {'key': 'testStaticIPAddress', 'type': 'str'},
+        "nic_id": {"key": "nicId", "type": "str"},
+        "is_primary_nic": {"key": "isPrimaryNic", "type": "str"},
+        "is_selected_for_failover": {"key": "isSelectedForFailover", "type": "str"},
+        "target_subnet_name": {"key": "targetSubnetName", "type": "str"},
+        "target_static_ip_address": {"key": "targetStaticIPAddress", "type": "str"},
+        "test_subnet_name": {"key": "testSubnetName", "type": "str"},
+        "test_static_ip_address": {"key": "testStaticIPAddress", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmNicInput, self).__init__(**kwargs)
-        self.nic_id = kwargs['nic_id']
-        self.is_primary_nic = kwargs['is_primary_nic']
-        self.is_selected_for_failover = kwargs.get('is_selected_for_failover', None)
-        self.target_subnet_name = kwargs.get('target_subnet_name', None)
-        self.target_static_ip_address = kwargs.get('target_static_ip_address', None)
-        self.test_subnet_name = kwargs.get('test_subnet_name', None)
-        self.test_static_ip_address = kwargs.get('test_static_ip_address', None)
+        self.nic_id = kwargs["nic_id"]
+        self.is_primary_nic = kwargs["is_primary_nic"]
+        self.is_selected_for_failover = kwargs.get("is_selected_for_failover", None)
+        self.target_subnet_name = kwargs.get("target_subnet_name", None)
+        self.target_static_ip_address = kwargs.get("target_static_ip_address", None)
+        self.test_subnet_name = kwargs.get("test_subnet_name", None)
+        self.test_static_ip_address = kwargs.get("test_static_ip_address", None)
 
 
 class InMageRcmPolicyCreationInput(PolicyProviderSpecificInput):
@@ -10657,27 +10181,24 @@ class InMageRcmPolicyCreationInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_history_in_minutes': {'key': 'recoveryPointHistoryInMinutes', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'enable_multi_vm_sync': {'key': 'enableMultiVmSync', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_history_in_minutes": {"key": "recoveryPointHistoryInMinutes", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "enable_multi_vm_sync": {"key": "enableMultiVmSync", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmPolicyCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.recovery_point_history_in_minutes = kwargs.get('recovery_point_history_in_minutes', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.enable_multi_vm_sync = kwargs.get('enable_multi_vm_sync', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.recovery_point_history_in_minutes = kwargs.get("recovery_point_history_in_minutes", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.enable_multi_vm_sync = kwargs.get("enable_multi_vm_sync", None)
 
 
 class InMageRcmPolicyDetails(PolicyProviderSpecificDetails):
@@ -10701,27 +10222,24 @@ class InMageRcmPolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_history_in_minutes': {'key': 'recoveryPointHistoryInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'enable_multi_vm_sync': {'key': 'enableMultiVmSync', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_history_in_minutes": {"key": "recoveryPointHistoryInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "enable_multi_vm_sync": {"key": "enableMultiVmSync", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmPolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.recovery_point_history_in_minutes = kwargs.get('recovery_point_history_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.enable_multi_vm_sync = kwargs.get('enable_multi_vm_sync', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.recovery_point_history_in_minutes = kwargs.get("recovery_point_history_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.enable_multi_vm_sync = kwargs.get("enable_multi_vm_sync", None)
 
 
 class InMageRcmProtectedDiskDetails(msrest.serialization.Model):
@@ -10762,40 +10280,37 @@ class InMageRcmProtectedDiskDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'readonly': True},
-        'disk_name': {'readonly': True},
-        'is_os_disk': {'readonly': True},
-        'capacity_in_bytes': {'readonly': True},
-        'log_storage_account_id': {'readonly': True},
-        'disk_encryption_set_id': {'readonly': True},
-        'seed_managed_disk_id': {'readonly': True},
-        'target_managed_disk_id': {'readonly': True},
-        'data_pending_in_log_data_store_in_mb': {'readonly': True},
-        'data_pending_at_source_agent_in_mb': {'readonly': True},
-        'is_initial_replication_complete': {'readonly': True},
+        "disk_id": {"readonly": True},
+        "disk_name": {"readonly": True},
+        "is_os_disk": {"readonly": True},
+        "capacity_in_bytes": {"readonly": True},
+        "log_storage_account_id": {"readonly": True},
+        "disk_encryption_set_id": {"readonly": True},
+        "seed_managed_disk_id": {"readonly": True},
+        "target_managed_disk_id": {"readonly": True},
+        "data_pending_in_log_data_store_in_mb": {"readonly": True},
+        "data_pending_at_source_agent_in_mb": {"readonly": True},
+        "is_initial_replication_complete": {"readonly": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'is_os_disk': {'key': 'isOSDisk', 'type': 'str'},
-        'capacity_in_bytes': {'key': 'capacityInBytes', 'type': 'long'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
-        'seed_managed_disk_id': {'key': 'seedManagedDiskId', 'type': 'str'},
-        'target_managed_disk_id': {'key': 'targetManagedDiskId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'data_pending_in_log_data_store_in_mb': {'key': 'dataPendingInLogDataStoreInMB', 'type': 'float'},
-        'data_pending_at_source_agent_in_mb': {'key': 'dataPendingAtSourceAgentInMB', 'type': 'float'},
-        'is_initial_replication_complete': {'key': 'isInitialReplicationComplete', 'type': 'str'},
-        'ir_details': {'key': 'irDetails', 'type': 'InMageRcmSyncDetails'},
-        'resync_details': {'key': 'resyncDetails', 'type': 'InMageRcmSyncDetails'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "is_os_disk": {"key": "isOSDisk", "type": "str"},
+        "capacity_in_bytes": {"key": "capacityInBytes", "type": "long"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
+        "seed_managed_disk_id": {"key": "seedManagedDiskId", "type": "str"},
+        "target_managed_disk_id": {"key": "targetManagedDiskId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "data_pending_in_log_data_store_in_mb": {"key": "dataPendingInLogDataStoreInMB", "type": "float"},
+        "data_pending_at_source_agent_in_mb": {"key": "dataPendingAtSourceAgentInMB", "type": "float"},
+        "is_initial_replication_complete": {"key": "isInitialReplicationComplete", "type": "str"},
+        "ir_details": {"key": "irDetails", "type": "InMageRcmSyncDetails"},
+        "resync_details": {"key": "resyncDetails", "type": "InMageRcmSyncDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmProtectedDiskDetails, self).__init__(**kwargs)
         self.disk_id = None
         self.disk_name = None
@@ -10805,12 +10320,12 @@ class InMageRcmProtectedDiskDetails(msrest.serialization.Model):
         self.disk_encryption_set_id = None
         self.seed_managed_disk_id = None
         self.target_managed_disk_id = None
-        self.disk_type = kwargs.get('disk_type', None)
+        self.disk_type = kwargs.get("disk_type", None)
         self.data_pending_in_log_data_store_in_mb = None
         self.data_pending_at_source_agent_in_mb = None
         self.is_initial_replication_complete = None
-        self.ir_details = kwargs.get('ir_details', None)
-        self.resync_details = kwargs.get('resync_details', None)
+        self.ir_details = kwargs.get("ir_details", None)
+        self.resync_details = kwargs.get("resync_details", None)
 
 
 class InMageRcmProtectionContainerMappingDetails(ProtectionContainerMappingProviderSpecificDetails):
@@ -10829,21 +10344,18 @@ class InMageRcmProtectionContainerMappingDetails(ProtectionContainerMappingProvi
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'enable_agent_auto_upgrade': {'readonly': True},
+        "instance_type": {"required": True},
+        "enable_agent_auto_upgrade": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'enable_agent_auto_upgrade': {'key': 'enableAgentAutoUpgrade', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "enable_agent_auto_upgrade": {"key": "enableAgentAutoUpgrade", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmProtectionContainerMappingDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
+        self.instance_type = "InMageRcm"  # type: str
         self.enable_agent_auto_upgrade = None
 
 
@@ -10862,21 +10374,18 @@ class InMageRcmRecoveryPointDetails(ProviderSpecificRecoveryPointDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'is_multi_vm_sync_point': {'readonly': True},
+        "instance_type": {"required": True},
+        "is_multi_vm_sync_point": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'is_multi_vm_sync_point': {'key': 'isMultiVmSyncPoint', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "is_multi_vm_sync_point": {"key": "isMultiVmSyncPoint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmRecoveryPointDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
+        self.instance_type = "InMageRcm"  # type: str
         self.is_multi_vm_sync_point = None
 
 
@@ -11016,104 +10525,110 @@ class InMageRcmReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'internal_identifier': {'readonly': True},
-        'fabric_discovery_machine_id': {'readonly': True},
-        'multi_vm_group_name': {'readonly': True},
-        'discovery_type': {'readonly': True},
-        'process_server_id': {'readonly': True},
-        'processor_core_count': {'readonly': True},
-        'allocated_memory_in_mb': {'readonly': True},
-        'process_server_name': {'readonly': True},
-        'run_as_account_id': {'readonly': True},
-        'os_type': {'readonly': True},
-        'firmware_type': {'readonly': True},
-        'primary_nic_ip_address': {'readonly': True},
-        'target_generation': {'readonly': True},
-        'failover_recovery_point_id': {'readonly': True},
-        'last_recovery_point_received': {'readonly': True},
-        'last_rpo_in_seconds': {'readonly': True},
-        'last_rpo_calculated_time': {'readonly': True},
-        'last_recovery_point_id': {'readonly': True},
-        'initial_replication_progress_percentage': {'readonly': True},
-        'initial_replication_processed_bytes': {'readonly': True},
-        'initial_replication_transferred_bytes': {'readonly': True},
-        'initial_replication_progress_health': {'readonly': True},
-        'resync_progress_percentage': {'readonly': True},
-        'resync_processed_bytes': {'readonly': True},
-        'resync_transferred_bytes': {'readonly': True},
-        'resync_progress_health': {'readonly': True},
-        'resync_required': {'readonly': True},
-        'resync_state': {'readonly': True},
-        'agent_upgrade_state': {'readonly': True},
-        'last_agent_upgrade_type': {'readonly': True},
-        'agent_upgrade_job_id': {'readonly': True},
-        'agent_upgrade_attempt_to_version': {'readonly': True},
-        'is_last_upgrade_successful': {'readonly': True},
-        'is_agent_registration_successful_after_failover': {'readonly': True},
+        "instance_type": {"required": True},
+        "internal_identifier": {"readonly": True},
+        "fabric_discovery_machine_id": {"readonly": True},
+        "multi_vm_group_name": {"readonly": True},
+        "discovery_type": {"readonly": True},
+        "process_server_id": {"readonly": True},
+        "processor_core_count": {"readonly": True},
+        "allocated_memory_in_mb": {"readonly": True},
+        "process_server_name": {"readonly": True},
+        "run_as_account_id": {"readonly": True},
+        "os_type": {"readonly": True},
+        "firmware_type": {"readonly": True},
+        "primary_nic_ip_address": {"readonly": True},
+        "target_generation": {"readonly": True},
+        "failover_recovery_point_id": {"readonly": True},
+        "last_recovery_point_received": {"readonly": True},
+        "last_rpo_in_seconds": {"readonly": True},
+        "last_rpo_calculated_time": {"readonly": True},
+        "last_recovery_point_id": {"readonly": True},
+        "initial_replication_progress_percentage": {"readonly": True},
+        "initial_replication_processed_bytes": {"readonly": True},
+        "initial_replication_transferred_bytes": {"readonly": True},
+        "initial_replication_progress_health": {"readonly": True},
+        "resync_progress_percentage": {"readonly": True},
+        "resync_processed_bytes": {"readonly": True},
+        "resync_transferred_bytes": {"readonly": True},
+        "resync_progress_health": {"readonly": True},
+        "resync_required": {"readonly": True},
+        "resync_state": {"readonly": True},
+        "agent_upgrade_state": {"readonly": True},
+        "last_agent_upgrade_type": {"readonly": True},
+        "agent_upgrade_job_id": {"readonly": True},
+        "agent_upgrade_attempt_to_version": {"readonly": True},
+        "is_last_upgrade_successful": {"readonly": True},
+        "is_agent_registration_successful_after_failover": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'internal_identifier': {'key': 'internalIdentifier', 'type': 'str'},
-        'fabric_discovery_machine_id': {'key': 'fabricDiscoveryMachineId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'discovery_type': {'key': 'discoveryType', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'processor_core_count': {'key': 'processorCoreCount', 'type': 'int'},
-        'allocated_memory_in_mb': {'key': 'allocatedMemoryInMB', 'type': 'float'},
-        'process_server_name': {'key': 'processServerName', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'firmware_type': {'key': 'firmwareType', 'type': 'str'},
-        'primary_nic_ip_address': {'key': 'primaryNicIpAddress', 'type': 'str'},
-        'target_generation': {'key': 'targetGeneration', 'type': 'str'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'target_vm_name': {'key': 'targetVmName', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'target_resource_group_id': {'key': 'targetResourceGroupId', 'type': 'str'},
-        'target_location': {'key': 'targetLocation', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_boot_diagnostics_storage_account_id': {'key': 'targetBootDiagnosticsStorageAccountId', 'type': 'str'},
-        'target_network_id': {'key': 'targetNetworkId', 'type': 'str'},
-        'test_network_id': {'key': 'testNetworkId', 'type': 'str'},
-        'failover_recovery_point_id': {'key': 'failoverRecoveryPointId', 'type': 'str'},
-        'last_recovery_point_received': {'key': 'lastRecoveryPointReceived', 'type': 'iso-8601'},
-        'last_rpo_in_seconds': {'key': 'lastRpoInSeconds', 'type': 'long'},
-        'last_rpo_calculated_time': {'key': 'lastRpoCalculatedTime', 'type': 'iso-8601'},
-        'last_recovery_point_id': {'key': 'lastRecoveryPointId', 'type': 'str'},
-        'initial_replication_progress_percentage': {'key': 'initialReplicationProgressPercentage', 'type': 'int'},
-        'initial_replication_processed_bytes': {'key': 'initialReplicationProcessedBytes', 'type': 'long'},
-        'initial_replication_transferred_bytes': {'key': 'initialReplicationTransferredBytes', 'type': 'long'},
-        'initial_replication_progress_health': {'key': 'initialReplicationProgressHealth', 'type': 'str'},
-        'resync_progress_percentage': {'key': 'resyncProgressPercentage', 'type': 'int'},
-        'resync_processed_bytes': {'key': 'resyncProcessedBytes', 'type': 'long'},
-        'resync_transferred_bytes': {'key': 'resyncTransferredBytes', 'type': 'long'},
-        'resync_progress_health': {'key': 'resyncProgressHealth', 'type': 'str'},
-        'resync_required': {'key': 'resyncRequired', 'type': 'str'},
-        'resync_state': {'key': 'resyncState', 'type': 'str'},
-        'agent_upgrade_state': {'key': 'agentUpgradeState', 'type': 'str'},
-        'last_agent_upgrade_type': {'key': 'lastAgentUpgradeType', 'type': 'str'},
-        'agent_upgrade_job_id': {'key': 'agentUpgradeJobId', 'type': 'str'},
-        'agent_upgrade_attempt_to_version': {'key': 'agentUpgradeAttemptToVersion', 'type': 'str'},
-        'protected_disks': {'key': 'protectedDisks', 'type': '[InMageRcmProtectedDiskDetails]'},
-        'is_last_upgrade_successful': {'key': 'isLastUpgradeSuccessful', 'type': 'str'},
-        'is_agent_registration_successful_after_failover': {'key': 'isAgentRegistrationSuccessfulAfterFailover', 'type': 'bool'},
-        'mobility_agent_details': {'key': 'mobilityAgentDetails', 'type': 'InMageRcmMobilityAgentDetails'},
-        'last_agent_upgrade_error_details': {'key': 'lastAgentUpgradeErrorDetails', 'type': '[InMageRcmLastAgentUpgradeErrorDetails]'},
-        'agent_upgrade_blocking_error_details': {'key': 'agentUpgradeBlockingErrorDetails', 'type': '[InMageRcmAgentUpgradeBlockingErrorDetails]'},
-        'vm_nics': {'key': 'vmNics', 'type': '[InMageRcmNicDetails]'},
-        'discovered_vm_details': {'key': 'discoveredVmDetails', 'type': 'InMageRcmDiscoveredProtectedVmDetails'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "internal_identifier": {"key": "internalIdentifier", "type": "str"},
+        "fabric_discovery_machine_id": {"key": "fabricDiscoveryMachineId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "discovery_type": {"key": "discoveryType", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "processor_core_count": {"key": "processorCoreCount", "type": "int"},
+        "allocated_memory_in_mb": {"key": "allocatedMemoryInMB", "type": "float"},
+        "process_server_name": {"key": "processServerName", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "firmware_type": {"key": "firmwareType", "type": "str"},
+        "primary_nic_ip_address": {"key": "primaryNicIpAddress", "type": "str"},
+        "target_generation": {"key": "targetGeneration", "type": "str"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "target_vm_name": {"key": "targetVmName", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "target_resource_group_id": {"key": "targetResourceGroupId", "type": "str"},
+        "target_location": {"key": "targetLocation", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_boot_diagnostics_storage_account_id": {"key": "targetBootDiagnosticsStorageAccountId", "type": "str"},
+        "target_network_id": {"key": "targetNetworkId", "type": "str"},
+        "test_network_id": {"key": "testNetworkId", "type": "str"},
+        "failover_recovery_point_id": {"key": "failoverRecoveryPointId", "type": "str"},
+        "last_recovery_point_received": {"key": "lastRecoveryPointReceived", "type": "iso-8601"},
+        "last_rpo_in_seconds": {"key": "lastRpoInSeconds", "type": "long"},
+        "last_rpo_calculated_time": {"key": "lastRpoCalculatedTime", "type": "iso-8601"},
+        "last_recovery_point_id": {"key": "lastRecoveryPointId", "type": "str"},
+        "initial_replication_progress_percentage": {"key": "initialReplicationProgressPercentage", "type": "int"},
+        "initial_replication_processed_bytes": {"key": "initialReplicationProcessedBytes", "type": "long"},
+        "initial_replication_transferred_bytes": {"key": "initialReplicationTransferredBytes", "type": "long"},
+        "initial_replication_progress_health": {"key": "initialReplicationProgressHealth", "type": "str"},
+        "resync_progress_percentage": {"key": "resyncProgressPercentage", "type": "int"},
+        "resync_processed_bytes": {"key": "resyncProcessedBytes", "type": "long"},
+        "resync_transferred_bytes": {"key": "resyncTransferredBytes", "type": "long"},
+        "resync_progress_health": {"key": "resyncProgressHealth", "type": "str"},
+        "resync_required": {"key": "resyncRequired", "type": "str"},
+        "resync_state": {"key": "resyncState", "type": "str"},
+        "agent_upgrade_state": {"key": "agentUpgradeState", "type": "str"},
+        "last_agent_upgrade_type": {"key": "lastAgentUpgradeType", "type": "str"},
+        "agent_upgrade_job_id": {"key": "agentUpgradeJobId", "type": "str"},
+        "agent_upgrade_attempt_to_version": {"key": "agentUpgradeAttemptToVersion", "type": "str"},
+        "protected_disks": {"key": "protectedDisks", "type": "[InMageRcmProtectedDiskDetails]"},
+        "is_last_upgrade_successful": {"key": "isLastUpgradeSuccessful", "type": "str"},
+        "is_agent_registration_successful_after_failover": {
+            "key": "isAgentRegistrationSuccessfulAfterFailover",
+            "type": "bool",
+        },
+        "mobility_agent_details": {"key": "mobilityAgentDetails", "type": "InMageRcmMobilityAgentDetails"},
+        "last_agent_upgrade_error_details": {
+            "key": "lastAgentUpgradeErrorDetails",
+            "type": "[InMageRcmLastAgentUpgradeErrorDetails]",
+        },
+        "agent_upgrade_blocking_error_details": {
+            "key": "agentUpgradeBlockingErrorDetails",
+            "type": "[InMageRcmAgentUpgradeBlockingErrorDetails]",
+        },
+        "vm_nics": {"key": "vmNics", "type": "[InMageRcmNicDetails]"},
+        "discovered_vm_details": {"key": "discoveredVmDetails", "type": "InMageRcmDiscoveredProtectedVmDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
+        self.instance_type = "InMageRcm"  # type: str
         self.internal_identifier = None
         self.fabric_discovery_machine_id = None
         self.multi_vm_group_name = None
@@ -11127,17 +10642,17 @@ class InMageRcmReplicationDetails(ReplicationProviderSpecificSettings):
         self.firmware_type = None
         self.primary_nic_ip_address = None
         self.target_generation = None
-        self.license_type = kwargs.get('license_type', None)
-        self.target_vm_name = kwargs.get('target_vm_name', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.target_resource_group_id = kwargs.get('target_resource_group_id', None)
-        self.target_location = kwargs.get('target_location', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_boot_diagnostics_storage_account_id = kwargs.get('target_boot_diagnostics_storage_account_id', None)
-        self.target_network_id = kwargs.get('target_network_id', None)
-        self.test_network_id = kwargs.get('test_network_id', None)
+        self.license_type = kwargs.get("license_type", None)
+        self.target_vm_name = kwargs.get("target_vm_name", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.target_resource_group_id = kwargs.get("target_resource_group_id", None)
+        self.target_location = kwargs.get("target_location", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_boot_diagnostics_storage_account_id = kwargs.get("target_boot_diagnostics_storage_account_id", None)
+        self.target_network_id = kwargs.get("target_network_id", None)
+        self.test_network_id = kwargs.get("test_network_id", None)
         self.failover_recovery_point_id = None
         self.last_recovery_point_received = None
         self.last_rpo_in_seconds = None
@@ -11157,14 +10672,14 @@ class InMageRcmReplicationDetails(ReplicationProviderSpecificSettings):
         self.last_agent_upgrade_type = None
         self.agent_upgrade_job_id = None
         self.agent_upgrade_attempt_to_version = None
-        self.protected_disks = kwargs.get('protected_disks', None)
+        self.protected_disks = kwargs.get("protected_disks", None)
         self.is_last_upgrade_successful = None
         self.is_agent_registration_successful_after_failover = None
-        self.mobility_agent_details = kwargs.get('mobility_agent_details', None)
-        self.last_agent_upgrade_error_details = kwargs.get('last_agent_upgrade_error_details', None)
-        self.agent_upgrade_blocking_error_details = kwargs.get('agent_upgrade_blocking_error_details', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.discovered_vm_details = kwargs.get('discovered_vm_details', None)
+        self.mobility_agent_details = kwargs.get("mobility_agent_details", None)
+        self.last_agent_upgrade_error_details = kwargs.get("last_agent_upgrade_error_details", None)
+        self.agent_upgrade_blocking_error_details = kwargs.get("agent_upgrade_blocking_error_details", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.discovered_vm_details = kwargs.get("discovered_vm_details", None)
 
 
 class InMageRcmReprotectInput(ReverseReplicationProviderSpecificInput):
@@ -11185,30 +10700,27 @@ class InMageRcmReprotectInput(ReverseReplicationProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'reprotect_agent_id': {'required': True},
-        'datastore_name': {'required': True},
-        'log_storage_account_id': {'required': True},
+        "instance_type": {"required": True},
+        "reprotect_agent_id": {"required": True},
+        "datastore_name": {"required": True},
+        "log_storage_account_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'reprotect_agent_id': {'key': 'reprotectAgentId', 'type': 'str'},
-        'datastore_name': {'key': 'datastoreName', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "reprotect_agent_id": {"key": "reprotectAgentId", "type": "str"},
+        "datastore_name": {"key": "datastoreName", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmReprotectInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.reprotect_agent_id = kwargs['reprotect_agent_id']
-        self.datastore_name = kwargs['datastore_name']
-        self.log_storage_account_id = kwargs['log_storage_account_id']
-        self.policy_id = kwargs.get('policy_id', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.reprotect_agent_id = kwargs["reprotect_agent_id"]
+        self.datastore_name = kwargs["datastore_name"]
+        self.log_storage_account_id = kwargs["log_storage_account_id"]
+        self.policy_id = kwargs.get("policy_id", None)
 
 
 class InMageRcmSyncDetails(msrest.serialization.Model):
@@ -11240,31 +10752,28 @@ class InMageRcmSyncDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'progress_health': {'readonly': True},
-        'transferred_bytes': {'readonly': True},
-        'last15_minutes_transferred_bytes': {'readonly': True},
-        'last_data_transfer_time_utc': {'readonly': True},
-        'processed_bytes': {'readonly': True},
-        'start_time': {'readonly': True},
-        'last_refresh_time': {'readonly': True},
-        'progress_percentage': {'readonly': True},
+        "progress_health": {"readonly": True},
+        "transferred_bytes": {"readonly": True},
+        "last15_minutes_transferred_bytes": {"readonly": True},
+        "last_data_transfer_time_utc": {"readonly": True},
+        "processed_bytes": {"readonly": True},
+        "start_time": {"readonly": True},
+        "last_refresh_time": {"readonly": True},
+        "progress_percentage": {"readonly": True},
     }
 
     _attribute_map = {
-        'progress_health': {'key': 'progressHealth', 'type': 'str'},
-        'transferred_bytes': {'key': 'transferredBytes', 'type': 'long'},
-        'last15_minutes_transferred_bytes': {'key': 'last15MinutesTransferredBytes', 'type': 'long'},
-        'last_data_transfer_time_utc': {'key': 'lastDataTransferTimeUtc', 'type': 'str'},
-        'processed_bytes': {'key': 'processedBytes', 'type': 'long'},
-        'start_time': {'key': 'startTime', 'type': 'str'},
-        'last_refresh_time': {'key': 'lastRefreshTime', 'type': 'str'},
-        'progress_percentage': {'key': 'progressPercentage', 'type': 'int'},
+        "progress_health": {"key": "progressHealth", "type": "str"},
+        "transferred_bytes": {"key": "transferredBytes", "type": "long"},
+        "last15_minutes_transferred_bytes": {"key": "last15MinutesTransferredBytes", "type": "long"},
+        "last_data_transfer_time_utc": {"key": "lastDataTransferTimeUtc", "type": "str"},
+        "processed_bytes": {"key": "processedBytes", "type": "long"},
+        "start_time": {"key": "startTime", "type": "str"},
+        "last_refresh_time": {"key": "lastRefreshTime", "type": "str"},
+        "progress_percentage": {"key": "progressPercentage", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmSyncDetails, self).__init__(**kwargs)
         self.progress_health = None
         self.transferred_bytes = None
@@ -11291,23 +10800,20 @@ class InMageRcmTestFailoverInput(TestFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'network_id': {'key': 'networkId', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "network_id": {"key": "networkId", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmTestFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.network_id = kwargs.get('network_id', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.network_id = kwargs.get("network_id", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class InMageRcmUnplannedFailoverInput(UnplannedFailoverProviderSpecificInput):
@@ -11325,24 +10831,21 @@ class InMageRcmUnplannedFailoverInput(UnplannedFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'perform_shutdown': {'required': True},
+        "instance_type": {"required": True},
+        "perform_shutdown": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'perform_shutdown': {'key': 'performShutdown', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "perform_shutdown": {"key": "performShutdown", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmUnplannedFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.perform_shutdown = kwargs['perform_shutdown']
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.perform_shutdown = kwargs["perform_shutdown"]
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class UpdateApplianceForReplicationProtectedItemProviderSpecificInput(msrest.serialization.Model):
@@ -11358,26 +10861,23 @@ class UpdateApplianceForReplicationProtectedItemProviderSpecificInput(msrest.ser
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'InMageRcm': 'InMageRcmUpdateApplianceForReplicationProtectedItemInput'}
-    }
+    _subtype_map = {"instance_type": {"InMageRcm": "InMageRcmUpdateApplianceForReplicationProtectedItemInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateApplianceForReplicationProtectedItemProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
 
-class InMageRcmUpdateApplianceForReplicationProtectedItemInput(UpdateApplianceForReplicationProtectedItemProviderSpecificInput):
+class InMageRcmUpdateApplianceForReplicationProtectedItemInput(
+    UpdateApplianceForReplicationProtectedItemProviderSpecificInput
+):
     """InMageRcm provider specific input to update appliance for replication protected item.
 
     All required parameters must be populated in order to send to Azure.
@@ -11389,21 +10889,18 @@ class InMageRcmUpdateApplianceForReplicationProtectedItemInput(UpdateApplianceFo
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmUpdateApplianceForReplicationProtectedItemInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
 
 
 class InMageRcmUpdateContainerMappingInput(ReplicationProviderSpecificUpdateContainerMappingInput):
@@ -11419,22 +10916,19 @@ class InMageRcmUpdateContainerMappingInput(ReplicationProviderSpecificUpdateCont
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'enable_agent_auto_upgrade': {'required': True},
+        "instance_type": {"required": True},
+        "enable_agent_auto_upgrade": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'enable_agent_auto_upgrade': {'key': 'enableAgentAutoUpgrade', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "enable_agent_auto_upgrade": {"key": "enableAgentAutoUpgrade", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmUpdateContainerMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.enable_agent_auto_upgrade = kwargs['enable_agent_auto_upgrade']
+        self.instance_type = "InMageRcm"  # type: str
+        self.enable_agent_auto_upgrade = kwargs["enable_agent_auto_upgrade"]
 
 
 class InMageRcmUpdateReplicationProtectedItemInput(UpdateReplicationProtectedItemProviderInput):
@@ -11471,41 +10965,38 @@ class InMageRcmUpdateReplicationProtectedItemInput(UpdateReplicationProtectedIte
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'target_vm_name': {'key': 'targetVmName', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'target_resource_group_id': {'key': 'targetResourceGroupId', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_boot_diagnostics_storage_account_id': {'key': 'targetBootDiagnosticsStorageAccountId', 'type': 'str'},
-        'target_network_id': {'key': 'targetNetworkId', 'type': 'str'},
-        'test_network_id': {'key': 'testNetworkId', 'type': 'str'},
-        'vm_nics': {'key': 'vmNics', 'type': '[InMageRcmNicInput]'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "target_vm_name": {"key": "targetVmName", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "target_resource_group_id": {"key": "targetResourceGroupId", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_boot_diagnostics_storage_account_id": {"key": "targetBootDiagnosticsStorageAccountId", "type": "str"},
+        "target_network_id": {"key": "targetNetworkId", "type": "str"},
+        "test_network_id": {"key": "testNetworkId", "type": "str"},
+        "vm_nics": {"key": "vmNics", "type": "[InMageRcmNicInput]"},
+        "license_type": {"key": "licenseType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageRcmUpdateReplicationProtectedItemInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.target_vm_name = kwargs.get('target_vm_name', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.target_resource_group_id = kwargs.get('target_resource_group_id', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_boot_diagnostics_storage_account_id = kwargs.get('target_boot_diagnostics_storage_account_id', None)
-        self.target_network_id = kwargs.get('target_network_id', None)
-        self.test_network_id = kwargs.get('test_network_id', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.license_type = kwargs.get('license_type', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.target_vm_name = kwargs.get("target_vm_name", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.target_resource_group_id = kwargs.get("target_resource_group_id", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_boot_diagnostics_storage_account_id = kwargs.get("target_boot_diagnostics_storage_account_id", None)
+        self.target_network_id = kwargs.get("target_network_id", None)
+        self.test_network_id = kwargs.get("test_network_id", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.license_type = kwargs.get("license_type", None)
 
 
 class InMageReplicationDetails(ReplicationProviderSpecificSettings):
@@ -11607,99 +11098,96 @@ class InMageReplicationDetails(ReplicationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'active_site_type': {'key': 'activeSiteType', 'type': 'str'},
-        'source_vm_cpu_count': {'key': 'sourceVmCpuCount', 'type': 'int'},
-        'source_vm_ram_size_in_mb': {'key': 'sourceVmRamSizeInMB', 'type': 'int'},
-        'os_details': {'key': 'osDetails', 'type': 'OSDiskDetails'},
-        'protection_stage': {'key': 'protectionStage', 'type': 'str'},
-        'vm_id': {'key': 'vmId', 'type': 'str'},
-        'vm_protection_state': {'key': 'vmProtectionState', 'type': 'str'},
-        'vm_protection_state_description': {'key': 'vmProtectionStateDescription', 'type': 'str'},
-        'resync_details': {'key': 'resyncDetails', 'type': 'InitialReplicationDetails'},
-        'retention_window_start': {'key': 'retentionWindowStart', 'type': 'iso-8601'},
-        'retention_window_end': {'key': 'retentionWindowEnd', 'type': 'iso-8601'},
-        'compressed_data_rate_in_mb': {'key': 'compressedDataRateInMB', 'type': 'float'},
-        'uncompressed_data_rate_in_mb': {'key': 'uncompressedDataRateInMB', 'type': 'float'},
-        'rpo_in_seconds': {'key': 'rpoInSeconds', 'type': 'long'},
-        'protected_disks': {'key': 'protectedDisks', 'type': '[InMageProtectedDiskDetails]'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'last_heartbeat': {'key': 'lastHeartbeat', 'type': 'iso-8601'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'master_target_id': {'key': 'masterTargetId', 'type': 'str'},
-        'consistency_points': {'key': 'consistencyPoints', 'type': '{iso-8601}'},
-        'disk_resized': {'key': 'diskResized', 'type': 'str'},
-        'reboot_after_update_status': {'key': 'rebootAfterUpdateStatus', 'type': 'str'},
-        'multi_vm_group_id': {'key': 'multiVmGroupId', 'type': 'str'},
-        'multi_vm_group_name': {'key': 'multiVmGroupName', 'type': 'str'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
-        'agent_details': {'key': 'agentDetails', 'type': 'InMageAgentDetails'},
-        'v_center_infrastructure_id': {'key': 'vCenterInfrastructureId', 'type': 'str'},
-        'infrastructure_vm_id': {'key': 'infrastructureVmId', 'type': 'str'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicDetails]'},
-        'discovery_type': {'key': 'discoveryType', 'type': 'str'},
-        'azure_storage_account_id': {'key': 'azureStorageAccountId', 'type': 'str'},
-        'datastores': {'key': 'datastores', 'type': '[str]'},
-        'validation_errors': {'key': 'validationErrors', 'type': '[HealthError]'},
-        'last_rpo_calculated_time': {'key': 'lastRpoCalculatedTime', 'type': 'iso-8601'},
-        'last_update_received_time': {'key': 'lastUpdateReceivedTime', 'type': 'iso-8601'},
-        'replica_id': {'key': 'replicaId', 'type': 'str'},
-        'os_version': {'key': 'osVersion', 'type': 'str'},
-        'is_additional_stats_available': {'key': 'isAdditionalStatsAvailable', 'type': 'bool'},
-        'total_data_transferred': {'key': 'totalDataTransferred', 'type': 'long'},
-        'total_progress_health': {'key': 'totalProgressHealth', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "active_site_type": {"key": "activeSiteType", "type": "str"},
+        "source_vm_cpu_count": {"key": "sourceVmCpuCount", "type": "int"},
+        "source_vm_ram_size_in_mb": {"key": "sourceVmRamSizeInMB", "type": "int"},
+        "os_details": {"key": "osDetails", "type": "OSDiskDetails"},
+        "protection_stage": {"key": "protectionStage", "type": "str"},
+        "vm_id": {"key": "vmId", "type": "str"},
+        "vm_protection_state": {"key": "vmProtectionState", "type": "str"},
+        "vm_protection_state_description": {"key": "vmProtectionStateDescription", "type": "str"},
+        "resync_details": {"key": "resyncDetails", "type": "InitialReplicationDetails"},
+        "retention_window_start": {"key": "retentionWindowStart", "type": "iso-8601"},
+        "retention_window_end": {"key": "retentionWindowEnd", "type": "iso-8601"},
+        "compressed_data_rate_in_mb": {"key": "compressedDataRateInMB", "type": "float"},
+        "uncompressed_data_rate_in_mb": {"key": "uncompressedDataRateInMB", "type": "float"},
+        "rpo_in_seconds": {"key": "rpoInSeconds", "type": "long"},
+        "protected_disks": {"key": "protectedDisks", "type": "[InMageProtectedDiskDetails]"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "last_heartbeat": {"key": "lastHeartbeat", "type": "iso-8601"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "master_target_id": {"key": "masterTargetId", "type": "str"},
+        "consistency_points": {"key": "consistencyPoints", "type": "{iso-8601}"},
+        "disk_resized": {"key": "diskResized", "type": "str"},
+        "reboot_after_update_status": {"key": "rebootAfterUpdateStatus", "type": "str"},
+        "multi_vm_group_id": {"key": "multiVmGroupId", "type": "str"},
+        "multi_vm_group_name": {"key": "multiVmGroupName", "type": "str"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
+        "agent_details": {"key": "agentDetails", "type": "InMageAgentDetails"},
+        "v_center_infrastructure_id": {"key": "vCenterInfrastructureId", "type": "str"},
+        "infrastructure_vm_id": {"key": "infrastructureVmId", "type": "str"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicDetails]"},
+        "discovery_type": {"key": "discoveryType", "type": "str"},
+        "azure_storage_account_id": {"key": "azureStorageAccountId", "type": "str"},
+        "datastores": {"key": "datastores", "type": "[str]"},
+        "validation_errors": {"key": "validationErrors", "type": "[HealthError]"},
+        "last_rpo_calculated_time": {"key": "lastRpoCalculatedTime", "type": "iso-8601"},
+        "last_update_received_time": {"key": "lastUpdateReceivedTime", "type": "iso-8601"},
+        "replica_id": {"key": "replicaId", "type": "str"},
+        "os_version": {"key": "osVersion", "type": "str"},
+        "is_additional_stats_available": {"key": "isAdditionalStatsAvailable", "type": "bool"},
+        "total_data_transferred": {"key": "totalDataTransferred", "type": "long"},
+        "total_progress_health": {"key": "totalProgressHealth", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageReplicationDetails, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.active_site_type = kwargs.get('active_site_type', None)
-        self.source_vm_cpu_count = kwargs.get('source_vm_cpu_count', None)
-        self.source_vm_ram_size_in_mb = kwargs.get('source_vm_ram_size_in_mb', None)
-        self.os_details = kwargs.get('os_details', None)
-        self.protection_stage = kwargs.get('protection_stage', None)
-        self.vm_id = kwargs.get('vm_id', None)
-        self.vm_protection_state = kwargs.get('vm_protection_state', None)
-        self.vm_protection_state_description = kwargs.get('vm_protection_state_description', None)
-        self.resync_details = kwargs.get('resync_details', None)
-        self.retention_window_start = kwargs.get('retention_window_start', None)
-        self.retention_window_end = kwargs.get('retention_window_end', None)
-        self.compressed_data_rate_in_mb = kwargs.get('compressed_data_rate_in_mb', None)
-        self.uncompressed_data_rate_in_mb = kwargs.get('uncompressed_data_rate_in_mb', None)
-        self.rpo_in_seconds = kwargs.get('rpo_in_seconds', None)
-        self.protected_disks = kwargs.get('protected_disks', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.last_heartbeat = kwargs.get('last_heartbeat', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
-        self.master_target_id = kwargs.get('master_target_id', None)
-        self.consistency_points = kwargs.get('consistency_points', None)
-        self.disk_resized = kwargs.get('disk_resized', None)
-        self.reboot_after_update_status = kwargs.get('reboot_after_update_status', None)
-        self.multi_vm_group_id = kwargs.get('multi_vm_group_id', None)
-        self.multi_vm_group_name = kwargs.get('multi_vm_group_name', None)
-        self.multi_vm_sync_status = kwargs.get('multi_vm_sync_status', None)
-        self.agent_details = kwargs.get('agent_details', None)
-        self.v_center_infrastructure_id = kwargs.get('v_center_infrastructure_id', None)
-        self.infrastructure_vm_id = kwargs.get('infrastructure_vm_id', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.discovery_type = kwargs.get('discovery_type', None)
-        self.azure_storage_account_id = kwargs.get('azure_storage_account_id', None)
-        self.datastores = kwargs.get('datastores', None)
-        self.validation_errors = kwargs.get('validation_errors', None)
-        self.last_rpo_calculated_time = kwargs.get('last_rpo_calculated_time', None)
-        self.last_update_received_time = kwargs.get('last_update_received_time', None)
-        self.replica_id = kwargs.get('replica_id', None)
-        self.os_version = kwargs.get('os_version', None)
-        self.is_additional_stats_available = kwargs.get('is_additional_stats_available', None)
-        self.total_data_transferred = kwargs.get('total_data_transferred', None)
-        self.total_progress_health = kwargs.get('total_progress_health', None)
+        self.instance_type = "InMage"  # type: str
+        self.active_site_type = kwargs.get("active_site_type", None)
+        self.source_vm_cpu_count = kwargs.get("source_vm_cpu_count", None)
+        self.source_vm_ram_size_in_mb = kwargs.get("source_vm_ram_size_in_mb", None)
+        self.os_details = kwargs.get("os_details", None)
+        self.protection_stage = kwargs.get("protection_stage", None)
+        self.vm_id = kwargs.get("vm_id", None)
+        self.vm_protection_state = kwargs.get("vm_protection_state", None)
+        self.vm_protection_state_description = kwargs.get("vm_protection_state_description", None)
+        self.resync_details = kwargs.get("resync_details", None)
+        self.retention_window_start = kwargs.get("retention_window_start", None)
+        self.retention_window_end = kwargs.get("retention_window_end", None)
+        self.compressed_data_rate_in_mb = kwargs.get("compressed_data_rate_in_mb", None)
+        self.uncompressed_data_rate_in_mb = kwargs.get("uncompressed_data_rate_in_mb", None)
+        self.rpo_in_seconds = kwargs.get("rpo_in_seconds", None)
+        self.protected_disks = kwargs.get("protected_disks", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.last_heartbeat = kwargs.get("last_heartbeat", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
+        self.master_target_id = kwargs.get("master_target_id", None)
+        self.consistency_points = kwargs.get("consistency_points", None)
+        self.disk_resized = kwargs.get("disk_resized", None)
+        self.reboot_after_update_status = kwargs.get("reboot_after_update_status", None)
+        self.multi_vm_group_id = kwargs.get("multi_vm_group_id", None)
+        self.multi_vm_group_name = kwargs.get("multi_vm_group_name", None)
+        self.multi_vm_sync_status = kwargs.get("multi_vm_sync_status", None)
+        self.agent_details = kwargs.get("agent_details", None)
+        self.v_center_infrastructure_id = kwargs.get("v_center_infrastructure_id", None)
+        self.infrastructure_vm_id = kwargs.get("infrastructure_vm_id", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.discovery_type = kwargs.get("discovery_type", None)
+        self.azure_storage_account_id = kwargs.get("azure_storage_account_id", None)
+        self.datastores = kwargs.get("datastores", None)
+        self.validation_errors = kwargs.get("validation_errors", None)
+        self.last_rpo_calculated_time = kwargs.get("last_rpo_calculated_time", None)
+        self.last_update_received_time = kwargs.get("last_update_received_time", None)
+        self.replica_id = kwargs.get("replica_id", None)
+        self.os_version = kwargs.get("os_version", None)
+        self.is_additional_stats_available = kwargs.get("is_additional_stats_available", None)
+        self.total_data_transferred = kwargs.get("total_data_transferred", None)
+        self.total_progress_health = kwargs.get("total_progress_health", None)
 
 
 class InMageReprotectInput(ReverseReplicationProviderSpecificInput):
@@ -11729,39 +11217,36 @@ class InMageReprotectInput(ReverseReplicationProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'master_target_id': {'required': True},
-        'process_server_id': {'required': True},
-        'retention_drive': {'required': True},
-        'profile_id': {'required': True},
+        "instance_type": {"required": True},
+        "master_target_id": {"required": True},
+        "process_server_id": {"required": True},
+        "retention_drive": {"required": True},
+        "profile_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'master_target_id': {'key': 'masterTargetId', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'retention_drive': {'key': 'retentionDrive', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'datastore_name': {'key': 'datastoreName', 'type': 'str'},
-        'disk_exclusion_input': {'key': 'diskExclusionInput', 'type': 'InMageDiskExclusionInput'},
-        'profile_id': {'key': 'profileId', 'type': 'str'},
-        'disks_to_include': {'key': 'disksToInclude', 'type': '[str]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "master_target_id": {"key": "masterTargetId", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "retention_drive": {"key": "retentionDrive", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "datastore_name": {"key": "datastoreName", "type": "str"},
+        "disk_exclusion_input": {"key": "diskExclusionInput", "type": "InMageDiskExclusionInput"},
+        "profile_id": {"key": "profileId", "type": "str"},
+        "disks_to_include": {"key": "disksToInclude", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageReprotectInput, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.master_target_id = kwargs['master_target_id']
-        self.process_server_id = kwargs['process_server_id']
-        self.retention_drive = kwargs['retention_drive']
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
-        self.datastore_name = kwargs.get('datastore_name', None)
-        self.disk_exclusion_input = kwargs.get('disk_exclusion_input', None)
-        self.profile_id = kwargs['profile_id']
-        self.disks_to_include = kwargs.get('disks_to_include', None)
+        self.instance_type = "InMage"  # type: str
+        self.master_target_id = kwargs["master_target_id"]
+        self.process_server_id = kwargs["process_server_id"]
+        self.retention_drive = kwargs["retention_drive"]
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
+        self.datastore_name = kwargs.get("datastore_name", None)
+        self.disk_exclusion_input = kwargs.get("disk_exclusion_input", None)
+        self.profile_id = kwargs["profile_id"]
+        self.disks_to_include = kwargs.get("disks_to_include", None)
 
 
 class InMageTestFailoverInput(TestFailoverProviderSpecificInput):
@@ -11783,23 +11268,20 @@ class InMageTestFailoverInput(TestFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageTestFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.recovery_point_type = kwargs.get('recovery_point_type', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "InMage"  # type: str
+        self.recovery_point_type = kwargs.get("recovery_point_type", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class InMageUnplannedFailoverInput(UnplannedFailoverProviderSpecificInput):
@@ -11821,23 +11303,20 @@ class InMageUnplannedFailoverInput(UnplannedFailoverProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageUnplannedFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.recovery_point_type = kwargs.get('recovery_point_type', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
+        self.instance_type = "InMage"  # type: str
+        self.recovery_point_type = kwargs.get("recovery_point_type", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
 
 
 class InMageVolumeExclusionOptions(msrest.serialization.Model):
@@ -11853,17 +11332,14 @@ class InMageVolumeExclusionOptions(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'volume_label': {'key': 'volumeLabel', 'type': 'str'},
-        'only_exclude_if_single_volume': {'key': 'onlyExcludeIfSingleVolume', 'type': 'str'},
+        "volume_label": {"key": "volumeLabel", "type": "str"},
+        "only_exclude_if_single_volume": {"key": "onlyExcludeIfSingleVolume", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InMageVolumeExclusionOptions, self).__init__(**kwargs)
-        self.volume_label = kwargs.get('volume_label', None)
-        self.only_exclude_if_single_volume = kwargs.get('only_exclude_if_single_volume', None)
+        self.volume_label = kwargs.get("volume_label", None)
+        self.only_exclude_if_single_volume = kwargs.get("only_exclude_if_single_volume", None)
 
 
 class InnerHealthError(msrest.serialization.Model):
@@ -11902,41 +11378,38 @@ class InnerHealthError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error_source': {'key': 'errorSource', 'type': 'str'},
-        'error_type': {'key': 'errorType', 'type': 'str'},
-        'error_level': {'key': 'errorLevel', 'type': 'str'},
-        'error_category': {'key': 'errorCategory', 'type': 'str'},
-        'error_code': {'key': 'errorCode', 'type': 'str'},
-        'summary_message': {'key': 'summaryMessage', 'type': 'str'},
-        'error_message': {'key': 'errorMessage', 'type': 'str'},
-        'possible_causes': {'key': 'possibleCauses', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
-        'creation_time_utc': {'key': 'creationTimeUtc', 'type': 'iso-8601'},
-        'recovery_provider_error_message': {'key': 'recoveryProviderErrorMessage', 'type': 'str'},
-        'entity_id': {'key': 'entityId', 'type': 'str'},
-        'error_id': {'key': 'errorId', 'type': 'str'},
-        'customer_resolvability': {'key': 'customerResolvability', 'type': 'str'},
+        "error_source": {"key": "errorSource", "type": "str"},
+        "error_type": {"key": "errorType", "type": "str"},
+        "error_level": {"key": "errorLevel", "type": "str"},
+        "error_category": {"key": "errorCategory", "type": "str"},
+        "error_code": {"key": "errorCode", "type": "str"},
+        "summary_message": {"key": "summaryMessage", "type": "str"},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "possible_causes": {"key": "possibleCauses", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
+        "creation_time_utc": {"key": "creationTimeUtc", "type": "iso-8601"},
+        "recovery_provider_error_message": {"key": "recoveryProviderErrorMessage", "type": "str"},
+        "entity_id": {"key": "entityId", "type": "str"},
+        "error_id": {"key": "errorId", "type": "str"},
+        "customer_resolvability": {"key": "customerResolvability", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InnerHealthError, self).__init__(**kwargs)
-        self.error_source = kwargs.get('error_source', None)
-        self.error_type = kwargs.get('error_type', None)
-        self.error_level = kwargs.get('error_level', None)
-        self.error_category = kwargs.get('error_category', None)
-        self.error_code = kwargs.get('error_code', None)
-        self.summary_message = kwargs.get('summary_message', None)
-        self.error_message = kwargs.get('error_message', None)
-        self.possible_causes = kwargs.get('possible_causes', None)
-        self.recommended_action = kwargs.get('recommended_action', None)
-        self.creation_time_utc = kwargs.get('creation_time_utc', None)
-        self.recovery_provider_error_message = kwargs.get('recovery_provider_error_message', None)
-        self.entity_id = kwargs.get('entity_id', None)
-        self.error_id = kwargs.get('error_id', None)
-        self.customer_resolvability = kwargs.get('customer_resolvability', None)
+        self.error_source = kwargs.get("error_source", None)
+        self.error_type = kwargs.get("error_type", None)
+        self.error_level = kwargs.get("error_level", None)
+        self.error_category = kwargs.get("error_category", None)
+        self.error_code = kwargs.get("error_code", None)
+        self.summary_message = kwargs.get("summary_message", None)
+        self.error_message = kwargs.get("error_message", None)
+        self.possible_causes = kwargs.get("possible_causes", None)
+        self.recommended_action = kwargs.get("recommended_action", None)
+        self.creation_time_utc = kwargs.get("creation_time_utc", None)
+        self.recovery_provider_error_message = kwargs.get("recovery_provider_error_message", None)
+        self.entity_id = kwargs.get("entity_id", None)
+        self.error_id = kwargs.get("error_id", None)
+        self.customer_resolvability = kwargs.get("customer_resolvability", None)
 
 
 class InputEndpoint(msrest.serialization.Model):
@@ -11953,21 +11426,18 @@ class InputEndpoint(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'endpoint_name': {'key': 'endpointName', 'type': 'str'},
-        'private_port': {'key': 'privatePort', 'type': 'int'},
-        'public_port': {'key': 'publicPort', 'type': 'int'},
-        'protocol': {'key': 'protocol', 'type': 'str'},
+        "endpoint_name": {"key": "endpointName", "type": "str"},
+        "private_port": {"key": "privatePort", "type": "int"},
+        "public_port": {"key": "publicPort", "type": "int"},
+        "protocol": {"key": "protocol", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InputEndpoint, self).__init__(**kwargs)
-        self.endpoint_name = kwargs.get('endpoint_name', None)
-        self.private_port = kwargs.get('private_port', None)
-        self.public_port = kwargs.get('public_port', None)
-        self.protocol = kwargs.get('protocol', None)
+        self.endpoint_name = kwargs.get("endpoint_name", None)
+        self.private_port = kwargs.get("private_port", None)
+        self.public_port = kwargs.get("public_port", None)
+        self.protocol = kwargs.get("protocol", None)
 
 
 class IPConfigDetails(msrest.serialization.Model):
@@ -12006,43 +11476,40 @@ class IPConfigDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'is_primary': {'key': 'isPrimary', 'type': 'bool'},
-        'subnet_name': {'key': 'subnetName', 'type': 'str'},
-        'static_ip_address': {'key': 'staticIPAddress', 'type': 'str'},
-        'ip_address_type': {'key': 'ipAddressType', 'type': 'str'},
-        'is_seleted_for_failover': {'key': 'isSeletedForFailover', 'type': 'bool'},
-        'recovery_subnet_name': {'key': 'recoverySubnetName', 'type': 'str'},
-        'recovery_static_ip_address': {'key': 'recoveryStaticIPAddress', 'type': 'str'},
-        'recovery_ip_address_type': {'key': 'recoveryIPAddressType', 'type': 'str'},
-        'recovery_public_ip_address_id': {'key': 'recoveryPublicIPAddressId', 'type': 'str'},
-        'recovery_lb_backend_address_pool_ids': {'key': 'recoveryLBBackendAddressPoolIds', 'type': '[str]'},
-        'tfo_subnet_name': {'key': 'tfoSubnetName', 'type': 'str'},
-        'tfo_static_ip_address': {'key': 'tfoStaticIPAddress', 'type': 'str'},
-        'tfo_public_ip_address_id': {'key': 'tfoPublicIPAddressId', 'type': 'str'},
-        'tfo_lb_backend_address_pool_ids': {'key': 'tfoLBBackendAddressPoolIds', 'type': '[str]'},
+        "name": {"key": "name", "type": "str"},
+        "is_primary": {"key": "isPrimary", "type": "bool"},
+        "subnet_name": {"key": "subnetName", "type": "str"},
+        "static_ip_address": {"key": "staticIPAddress", "type": "str"},
+        "ip_address_type": {"key": "ipAddressType", "type": "str"},
+        "is_seleted_for_failover": {"key": "isSeletedForFailover", "type": "bool"},
+        "recovery_subnet_name": {"key": "recoverySubnetName", "type": "str"},
+        "recovery_static_ip_address": {"key": "recoveryStaticIPAddress", "type": "str"},
+        "recovery_ip_address_type": {"key": "recoveryIPAddressType", "type": "str"},
+        "recovery_public_ip_address_id": {"key": "recoveryPublicIPAddressId", "type": "str"},
+        "recovery_lb_backend_address_pool_ids": {"key": "recoveryLBBackendAddressPoolIds", "type": "[str]"},
+        "tfo_subnet_name": {"key": "tfoSubnetName", "type": "str"},
+        "tfo_static_ip_address": {"key": "tfoStaticIPAddress", "type": "str"},
+        "tfo_public_ip_address_id": {"key": "tfoPublicIPAddressId", "type": "str"},
+        "tfo_lb_backend_address_pool_ids": {"key": "tfoLBBackendAddressPoolIds", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(IPConfigDetails, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.is_primary = kwargs.get('is_primary', None)
-        self.subnet_name = kwargs.get('subnet_name', None)
-        self.static_ip_address = kwargs.get('static_ip_address', None)
-        self.ip_address_type = kwargs.get('ip_address_type', None)
-        self.is_seleted_for_failover = kwargs.get('is_seleted_for_failover', None)
-        self.recovery_subnet_name = kwargs.get('recovery_subnet_name', None)
-        self.recovery_static_ip_address = kwargs.get('recovery_static_ip_address', None)
-        self.recovery_ip_address_type = kwargs.get('recovery_ip_address_type', None)
-        self.recovery_public_ip_address_id = kwargs.get('recovery_public_ip_address_id', None)
-        self.recovery_lb_backend_address_pool_ids = kwargs.get('recovery_lb_backend_address_pool_ids', None)
-        self.tfo_subnet_name = kwargs.get('tfo_subnet_name', None)
-        self.tfo_static_ip_address = kwargs.get('tfo_static_ip_address', None)
-        self.tfo_public_ip_address_id = kwargs.get('tfo_public_ip_address_id', None)
-        self.tfo_lb_backend_address_pool_ids = kwargs.get('tfo_lb_backend_address_pool_ids', None)
+        self.name = kwargs.get("name", None)
+        self.is_primary = kwargs.get("is_primary", None)
+        self.subnet_name = kwargs.get("subnet_name", None)
+        self.static_ip_address = kwargs.get("static_ip_address", None)
+        self.ip_address_type = kwargs.get("ip_address_type", None)
+        self.is_seleted_for_failover = kwargs.get("is_seleted_for_failover", None)
+        self.recovery_subnet_name = kwargs.get("recovery_subnet_name", None)
+        self.recovery_static_ip_address = kwargs.get("recovery_static_ip_address", None)
+        self.recovery_ip_address_type = kwargs.get("recovery_ip_address_type", None)
+        self.recovery_public_ip_address_id = kwargs.get("recovery_public_ip_address_id", None)
+        self.recovery_lb_backend_address_pool_ids = kwargs.get("recovery_lb_backend_address_pool_ids", None)
+        self.tfo_subnet_name = kwargs.get("tfo_subnet_name", None)
+        self.tfo_static_ip_address = kwargs.get("tfo_static_ip_address", None)
+        self.tfo_public_ip_address_id = kwargs.get("tfo_public_ip_address_id", None)
+        self.tfo_lb_backend_address_pool_ids = kwargs.get("tfo_lb_backend_address_pool_ids", None)
 
 
 class IPConfigInputDetails(msrest.serialization.Model):
@@ -12073,35 +11540,32 @@ class IPConfigInputDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'ip_config_name': {'key': 'ipConfigName', 'type': 'str'},
-        'is_primary': {'key': 'isPrimary', 'type': 'bool'},
-        'is_seleted_for_failover': {'key': 'isSeletedForFailover', 'type': 'bool'},
-        'recovery_subnet_name': {'key': 'recoverySubnetName', 'type': 'str'},
-        'recovery_static_ip_address': {'key': 'recoveryStaticIPAddress', 'type': 'str'},
-        'recovery_public_ip_address_id': {'key': 'recoveryPublicIPAddressId', 'type': 'str'},
-        'recovery_lb_backend_address_pool_ids': {'key': 'recoveryLBBackendAddressPoolIds', 'type': '[str]'},
-        'tfo_subnet_name': {'key': 'tfoSubnetName', 'type': 'str'},
-        'tfo_static_ip_address': {'key': 'tfoStaticIPAddress', 'type': 'str'},
-        'tfo_public_ip_address_id': {'key': 'tfoPublicIPAddressId', 'type': 'str'},
-        'tfo_lb_backend_address_pool_ids': {'key': 'tfoLBBackendAddressPoolIds', 'type': '[str]'},
+        "ip_config_name": {"key": "ipConfigName", "type": "str"},
+        "is_primary": {"key": "isPrimary", "type": "bool"},
+        "is_seleted_for_failover": {"key": "isSeletedForFailover", "type": "bool"},
+        "recovery_subnet_name": {"key": "recoverySubnetName", "type": "str"},
+        "recovery_static_ip_address": {"key": "recoveryStaticIPAddress", "type": "str"},
+        "recovery_public_ip_address_id": {"key": "recoveryPublicIPAddressId", "type": "str"},
+        "recovery_lb_backend_address_pool_ids": {"key": "recoveryLBBackendAddressPoolIds", "type": "[str]"},
+        "tfo_subnet_name": {"key": "tfoSubnetName", "type": "str"},
+        "tfo_static_ip_address": {"key": "tfoStaticIPAddress", "type": "str"},
+        "tfo_public_ip_address_id": {"key": "tfoPublicIPAddressId", "type": "str"},
+        "tfo_lb_backend_address_pool_ids": {"key": "tfoLBBackendAddressPoolIds", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(IPConfigInputDetails, self).__init__(**kwargs)
-        self.ip_config_name = kwargs.get('ip_config_name', None)
-        self.is_primary = kwargs.get('is_primary', None)
-        self.is_seleted_for_failover = kwargs.get('is_seleted_for_failover', None)
-        self.recovery_subnet_name = kwargs.get('recovery_subnet_name', None)
-        self.recovery_static_ip_address = kwargs.get('recovery_static_ip_address', None)
-        self.recovery_public_ip_address_id = kwargs.get('recovery_public_ip_address_id', None)
-        self.recovery_lb_backend_address_pool_ids = kwargs.get('recovery_lb_backend_address_pool_ids', None)
-        self.tfo_subnet_name = kwargs.get('tfo_subnet_name', None)
-        self.tfo_static_ip_address = kwargs.get('tfo_static_ip_address', None)
-        self.tfo_public_ip_address_id = kwargs.get('tfo_public_ip_address_id', None)
-        self.tfo_lb_backend_address_pool_ids = kwargs.get('tfo_lb_backend_address_pool_ids', None)
+        self.ip_config_name = kwargs.get("ip_config_name", None)
+        self.is_primary = kwargs.get("is_primary", None)
+        self.is_seleted_for_failover = kwargs.get("is_seleted_for_failover", None)
+        self.recovery_subnet_name = kwargs.get("recovery_subnet_name", None)
+        self.recovery_static_ip_address = kwargs.get("recovery_static_ip_address", None)
+        self.recovery_public_ip_address_id = kwargs.get("recovery_public_ip_address_id", None)
+        self.recovery_lb_backend_address_pool_ids = kwargs.get("recovery_lb_backend_address_pool_ids", None)
+        self.tfo_subnet_name = kwargs.get("tfo_subnet_name", None)
+        self.tfo_static_ip_address = kwargs.get("tfo_static_ip_address", None)
+        self.tfo_public_ip_address_id = kwargs.get("tfo_public_ip_address_id", None)
+        self.tfo_lb_backend_address_pool_ids = kwargs.get("tfo_lb_backend_address_pool_ids", None)
 
 
 class Job(Resource):
@@ -12122,25 +11586,22 @@ class Job(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'JobProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "JobProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Job, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class JobCollection(msrest.serialization.Model):
@@ -12153,17 +11614,14 @@ class JobCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Job]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Job]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class JobEntity(msrest.serialization.Model):
@@ -12184,25 +11642,22 @@ class JobEntity(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'job_id': {'key': 'jobId', 'type': 'str'},
-        'job_friendly_name': {'key': 'jobFriendlyName', 'type': 'str'},
-        'target_object_id': {'key': 'targetObjectId', 'type': 'str'},
-        'target_object_name': {'key': 'targetObjectName', 'type': 'str'},
-        'target_instance_type': {'key': 'targetInstanceType', 'type': 'str'},
-        'job_scenario_name': {'key': 'jobScenarioName', 'type': 'str'},
+        "job_id": {"key": "jobId", "type": "str"},
+        "job_friendly_name": {"key": "jobFriendlyName", "type": "str"},
+        "target_object_id": {"key": "targetObjectId", "type": "str"},
+        "target_object_name": {"key": "targetObjectName", "type": "str"},
+        "target_instance_type": {"key": "targetInstanceType", "type": "str"},
+        "job_scenario_name": {"key": "jobScenarioName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobEntity, self).__init__(**kwargs)
-        self.job_id = kwargs.get('job_id', None)
-        self.job_friendly_name = kwargs.get('job_friendly_name', None)
-        self.target_object_id = kwargs.get('target_object_id', None)
-        self.target_object_name = kwargs.get('target_object_name', None)
-        self.target_instance_type = kwargs.get('target_instance_type', None)
-        self.job_scenario_name = kwargs.get('job_scenario_name', None)
+        self.job_id = kwargs.get("job_id", None)
+        self.job_friendly_name = kwargs.get("job_friendly_name", None)
+        self.target_object_id = kwargs.get("target_object_id", None)
+        self.target_object_name = kwargs.get("target_object_name", None)
+        self.target_instance_type = kwargs.get("target_instance_type", None)
+        self.job_scenario_name = kwargs.get("job_scenario_name", None)
 
 
 class JobErrorDetails(msrest.serialization.Model):
@@ -12221,23 +11676,20 @@ class JobErrorDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'service_error_details': {'key': 'serviceErrorDetails', 'type': 'ServiceError'},
-        'provider_error_details': {'key': 'providerErrorDetails', 'type': 'ProviderError'},
-        'error_level': {'key': 'errorLevel', 'type': 'str'},
-        'creation_time': {'key': 'creationTime', 'type': 'iso-8601'},
-        'task_id': {'key': 'taskId', 'type': 'str'},
+        "service_error_details": {"key": "serviceErrorDetails", "type": "ServiceError"},
+        "provider_error_details": {"key": "providerErrorDetails", "type": "ProviderError"},
+        "error_level": {"key": "errorLevel", "type": "str"},
+        "creation_time": {"key": "creationTime", "type": "iso-8601"},
+        "task_id": {"key": "taskId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobErrorDetails, self).__init__(**kwargs)
-        self.service_error_details = kwargs.get('service_error_details', None)
-        self.provider_error_details = kwargs.get('provider_error_details', None)
-        self.error_level = kwargs.get('error_level', None)
-        self.creation_time = kwargs.get('creation_time', None)
-        self.task_id = kwargs.get('task_id', None)
+        self.service_error_details = kwargs.get("service_error_details", None)
+        self.provider_error_details = kwargs.get("provider_error_details", None)
+        self.error_level = kwargs.get("error_level", None)
+        self.creation_time = kwargs.get("creation_time", None)
+        self.task_id = kwargs.get("task_id", None)
 
 
 class JobProperties(msrest.serialization.Model):
@@ -12277,41 +11729,38 @@ class JobProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'activity_id': {'key': 'activityId', 'type': 'str'},
-        'scenario_name': {'key': 'scenarioName', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'state': {'key': 'state', 'type': 'str'},
-        'state_description': {'key': 'stateDescription', 'type': 'str'},
-        'tasks': {'key': 'tasks', 'type': '[ASRTask]'},
-        'errors': {'key': 'errors', 'type': '[JobErrorDetails]'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
-        'end_time': {'key': 'endTime', 'type': 'iso-8601'},
-        'allowed_actions': {'key': 'allowedActions', 'type': '[str]'},
-        'target_object_id': {'key': 'targetObjectId', 'type': 'str'},
-        'target_object_name': {'key': 'targetObjectName', 'type': 'str'},
-        'target_instance_type': {'key': 'targetInstanceType', 'type': 'str'},
-        'custom_details': {'key': 'customDetails', 'type': 'JobDetails'},
+        "activity_id": {"key": "activityId", "type": "str"},
+        "scenario_name": {"key": "scenarioName", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "state": {"key": "state", "type": "str"},
+        "state_description": {"key": "stateDescription", "type": "str"},
+        "tasks": {"key": "tasks", "type": "[ASRTask]"},
+        "errors": {"key": "errors", "type": "[JobErrorDetails]"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
+        "end_time": {"key": "endTime", "type": "iso-8601"},
+        "allowed_actions": {"key": "allowedActions", "type": "[str]"},
+        "target_object_id": {"key": "targetObjectId", "type": "str"},
+        "target_object_name": {"key": "targetObjectName", "type": "str"},
+        "target_instance_type": {"key": "targetInstanceType", "type": "str"},
+        "custom_details": {"key": "customDetails", "type": "JobDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobProperties, self).__init__(**kwargs)
-        self.activity_id = kwargs.get('activity_id', None)
-        self.scenario_name = kwargs.get('scenario_name', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.state = kwargs.get('state', None)
-        self.state_description = kwargs.get('state_description', None)
-        self.tasks = kwargs.get('tasks', None)
-        self.errors = kwargs.get('errors', None)
-        self.start_time = kwargs.get('start_time', None)
-        self.end_time = kwargs.get('end_time', None)
-        self.allowed_actions = kwargs.get('allowed_actions', None)
-        self.target_object_id = kwargs.get('target_object_id', None)
-        self.target_object_name = kwargs.get('target_object_name', None)
-        self.target_instance_type = kwargs.get('target_instance_type', None)
-        self.custom_details = kwargs.get('custom_details', None)
+        self.activity_id = kwargs.get("activity_id", None)
+        self.scenario_name = kwargs.get("scenario_name", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.state = kwargs.get("state", None)
+        self.state_description = kwargs.get("state_description", None)
+        self.tasks = kwargs.get("tasks", None)
+        self.errors = kwargs.get("errors", None)
+        self.start_time = kwargs.get("start_time", None)
+        self.end_time = kwargs.get("end_time", None)
+        self.allowed_actions = kwargs.get("allowed_actions", None)
+        self.target_object_id = kwargs.get("target_object_id", None)
+        self.target_object_name = kwargs.get("target_object_name", None)
+        self.target_instance_type = kwargs.get("target_instance_type", None)
+        self.custom_details = kwargs.get("custom_details", None)
 
 
 class JobQueryParameter(msrest.serialization.Model):
@@ -12338,29 +11787,26 @@ class JobQueryParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'start_time': {'key': 'startTime', 'type': 'str'},
-        'end_time': {'key': 'endTime', 'type': 'str'},
-        'fabric_id': {'key': 'fabricId', 'type': 'str'},
-        'affected_object_types': {'key': 'affectedObjectTypes', 'type': 'str'},
-        'job_status': {'key': 'jobStatus', 'type': 'str'},
-        'job_output_type': {'key': 'jobOutputType', 'type': 'str'},
-        'job_name': {'key': 'jobName', 'type': 'str'},
-        'timezone_offset': {'key': 'timezoneOffset', 'type': 'float'},
+        "start_time": {"key": "startTime", "type": "str"},
+        "end_time": {"key": "endTime", "type": "str"},
+        "fabric_id": {"key": "fabricId", "type": "str"},
+        "affected_object_types": {"key": "affectedObjectTypes", "type": "str"},
+        "job_status": {"key": "jobStatus", "type": "str"},
+        "job_output_type": {"key": "jobOutputType", "type": "str"},
+        "job_name": {"key": "jobName", "type": "str"},
+        "timezone_offset": {"key": "timezoneOffset", "type": "float"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobQueryParameter, self).__init__(**kwargs)
-        self.start_time = kwargs.get('start_time', None)
-        self.end_time = kwargs.get('end_time', None)
-        self.fabric_id = kwargs.get('fabric_id', None)
-        self.affected_object_types = kwargs.get('affected_object_types', None)
-        self.job_status = kwargs.get('job_status', None)
-        self.job_output_type = kwargs.get('job_output_type', None)
-        self.job_name = kwargs.get('job_name', None)
-        self.timezone_offset = kwargs.get('timezone_offset', None)
+        self.start_time = kwargs.get("start_time", None)
+        self.end_time = kwargs.get("end_time", None)
+        self.fabric_id = kwargs.get("fabric_id", None)
+        self.affected_object_types = kwargs.get("affected_object_types", None)
+        self.job_status = kwargs.get("job_status", None)
+        self.job_output_type = kwargs.get("job_output_type", None)
+        self.job_name = kwargs.get("job_name", None)
+        self.timezone_offset = kwargs.get("timezone_offset", None)
 
 
 class JobStatusEventDetails(EventSpecificDetails):
@@ -12382,27 +11828,24 @@ class JobStatusEventDetails(EventSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'job_id': {'key': 'jobId', 'type': 'str'},
-        'job_friendly_name': {'key': 'jobFriendlyName', 'type': 'str'},
-        'job_status': {'key': 'jobStatus', 'type': 'str'},
-        'affected_object_type': {'key': 'affectedObjectType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "job_id": {"key": "jobId", "type": "str"},
+        "job_friendly_name": {"key": "jobFriendlyName", "type": "str"},
+        "job_status": {"key": "jobStatus", "type": "str"},
+        "affected_object_type": {"key": "affectedObjectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobStatusEventDetails, self).__init__(**kwargs)
-        self.instance_type = 'JobStatus'  # type: str
-        self.job_id = kwargs.get('job_id', None)
-        self.job_friendly_name = kwargs.get('job_friendly_name', None)
-        self.job_status = kwargs.get('job_status', None)
-        self.affected_object_type = kwargs.get('affected_object_type', None)
+        self.instance_type = "JobStatus"  # type: str
+        self.job_id = kwargs.get("job_id", None)
+        self.job_friendly_name = kwargs.get("job_friendly_name", None)
+        self.job_status = kwargs.get("job_status", None)
+        self.affected_object_type = kwargs.get("affected_object_type", None)
 
 
 class KeyEncryptionKeyInfo(msrest.serialization.Model):
@@ -12415,17 +11858,14 @@ class KeyEncryptionKeyInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'key_identifier': {'key': 'keyIdentifier', 'type': 'str'},
-        'key_vault_resource_arm_id': {'key': 'keyVaultResourceArmId', 'type': 'str'},
+        "key_identifier": {"key": "keyIdentifier", "type": "str"},
+        "key_vault_resource_arm_id": {"key": "keyVaultResourceArmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(KeyEncryptionKeyInfo, self).__init__(**kwargs)
-        self.key_identifier = kwargs.get('key_identifier', None)
-        self.key_vault_resource_arm_id = kwargs.get('key_vault_resource_arm_id', None)
+        self.key_identifier = kwargs.get("key_identifier", None)
+        self.key_vault_resource_arm_id = kwargs.get("key_vault_resource_arm_id", None)
 
 
 class LogicalNetwork(Resource):
@@ -12446,25 +11886,22 @@ class LogicalNetwork(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'LogicalNetworkProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "LogicalNetworkProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LogicalNetwork, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class LogicalNetworkCollection(msrest.serialization.Model):
@@ -12477,17 +11914,14 @@ class LogicalNetworkCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[LogicalNetwork]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[LogicalNetwork]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LogicalNetworkCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class LogicalNetworkProperties(msrest.serialization.Model):
@@ -12507,21 +11941,18 @@ class LogicalNetworkProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'network_virtualization_status': {'key': 'networkVirtualizationStatus', 'type': 'str'},
-        'logical_network_usage': {'key': 'logicalNetworkUsage', 'type': 'str'},
-        'logical_network_definitions_status': {'key': 'logicalNetworkDefinitionsStatus', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "network_virtualization_status": {"key": "networkVirtualizationStatus", "type": "str"},
+        "logical_network_usage": {"key": "logicalNetworkUsage", "type": "str"},
+        "logical_network_definitions_status": {"key": "logicalNetworkDefinitionsStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LogicalNetworkProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.network_virtualization_status = kwargs.get('network_virtualization_status', None)
-        self.logical_network_usage = kwargs.get('logical_network_usage', None)
-        self.logical_network_definitions_status = kwargs.get('logical_network_definitions_status', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.network_virtualization_status = kwargs.get("network_virtualization_status", None)
+        self.logical_network_usage = kwargs.get("logical_network_usage", None)
+        self.logical_network_definitions_status = kwargs.get("logical_network_definitions_status", None)
 
 
 class ManualActionTaskDetails(TaskTypeDetails):
@@ -12540,25 +11971,22 @@ class ManualActionTaskDetails(TaskTypeDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'instructions': {'key': 'instructions', 'type': 'str'},
-        'observation': {'key': 'observation', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "instructions": {"key": "instructions", "type": "str"},
+        "observation": {"key": "observation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ManualActionTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'ManualActionTaskDetails'  # type: str
-        self.name = kwargs.get('name', None)
-        self.instructions = kwargs.get('instructions', None)
-        self.observation = kwargs.get('observation', None)
+        self.instance_type = "ManualActionTaskDetails"  # type: str
+        self.name = kwargs.get("name", None)
+        self.instructions = kwargs.get("instructions", None)
+        self.observation = kwargs.get("observation", None)
 
 
 class MarsAgentDetails(msrest.serialization.Model):
@@ -12588,33 +12016,30 @@ class MarsAgentDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'fabric_object_id': {'readonly': True},
-        'fqdn': {'readonly': True},
-        'version': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "fabric_object_id": {"readonly": True},
+        "fqdn": {"readonly": True},
+        "version": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MarsAgentDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -12670,49 +12095,46 @@ class MasterTargetServer(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'agent_version': {'key': 'agentVersion', 'type': 'str'},
-        'last_heartbeat': {'key': 'lastHeartbeat', 'type': 'iso-8601'},
-        'version_status': {'key': 'versionStatus', 'type': 'str'},
-        'retention_volumes': {'key': 'retentionVolumes', 'type': '[RetentionVolume]'},
-        'data_stores': {'key': 'dataStores', 'type': '[DataStore]'},
-        'validation_errors': {'key': 'validationErrors', 'type': '[HealthError]'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
-        'disk_count': {'key': 'diskCount', 'type': 'int'},
-        'os_version': {'key': 'osVersion', 'type': 'str'},
-        'agent_expiry_date': {'key': 'agentExpiryDate', 'type': 'iso-8601'},
-        'mars_agent_version': {'key': 'marsAgentVersion', 'type': 'str'},
-        'mars_agent_expiry_date': {'key': 'marsAgentExpiryDate', 'type': 'iso-8601'},
-        'agent_version_details': {'key': 'agentVersionDetails', 'type': 'VersionDetails'},
-        'mars_agent_version_details': {'key': 'marsAgentVersionDetails', 'type': 'VersionDetails'},
+        "id": {"key": "id", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "agent_version": {"key": "agentVersion", "type": "str"},
+        "last_heartbeat": {"key": "lastHeartbeat", "type": "iso-8601"},
+        "version_status": {"key": "versionStatus", "type": "str"},
+        "retention_volumes": {"key": "retentionVolumes", "type": "[RetentionVolume]"},
+        "data_stores": {"key": "dataStores", "type": "[DataStore]"},
+        "validation_errors": {"key": "validationErrors", "type": "[HealthError]"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
+        "disk_count": {"key": "diskCount", "type": "int"},
+        "os_version": {"key": "osVersion", "type": "str"},
+        "agent_expiry_date": {"key": "agentExpiryDate", "type": "iso-8601"},
+        "mars_agent_version": {"key": "marsAgentVersion", "type": "str"},
+        "mars_agent_expiry_date": {"key": "marsAgentExpiryDate", "type": "iso-8601"},
+        "agent_version_details": {"key": "agentVersionDetails", "type": "VersionDetails"},
+        "mars_agent_version_details": {"key": "marsAgentVersionDetails", "type": "VersionDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MasterTargetServer, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.name = kwargs.get('name', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.last_heartbeat = kwargs.get('last_heartbeat', None)
-        self.version_status = kwargs.get('version_status', None)
-        self.retention_volumes = kwargs.get('retention_volumes', None)
-        self.data_stores = kwargs.get('data_stores', None)
-        self.validation_errors = kwargs.get('validation_errors', None)
-        self.health_errors = kwargs.get('health_errors', None)
-        self.disk_count = kwargs.get('disk_count', None)
-        self.os_version = kwargs.get('os_version', None)
-        self.agent_expiry_date = kwargs.get('agent_expiry_date', None)
-        self.mars_agent_version = kwargs.get('mars_agent_version', None)
-        self.mars_agent_expiry_date = kwargs.get('mars_agent_expiry_date', None)
-        self.agent_version_details = kwargs.get('agent_version_details', None)
-        self.mars_agent_version_details = kwargs.get('mars_agent_version_details', None)
+        self.id = kwargs.get("id", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.name = kwargs.get("name", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.last_heartbeat = kwargs.get("last_heartbeat", None)
+        self.version_status = kwargs.get("version_status", None)
+        self.retention_volumes = kwargs.get("retention_volumes", None)
+        self.data_stores = kwargs.get("data_stores", None)
+        self.validation_errors = kwargs.get("validation_errors", None)
+        self.health_errors = kwargs.get("health_errors", None)
+        self.disk_count = kwargs.get("disk_count", None)
+        self.os_version = kwargs.get("os_version", None)
+        self.agent_expiry_date = kwargs.get("agent_expiry_date", None)
+        self.mars_agent_version = kwargs.get("mars_agent_version", None)
+        self.mars_agent_expiry_date = kwargs.get("mars_agent_expiry_date", None)
+        self.agent_version_details = kwargs.get("agent_version_details", None)
+        self.mars_agent_version_details = kwargs.get("mars_agent_version_details", None)
 
 
 class MigrateInput(msrest.serialization.Model):
@@ -12725,19 +12147,16 @@ class MigrateInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'MigrateInputProperties'},
+        "properties": {"key": "properties", "type": "MigrateInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrateInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class MigrateInputProperties(msrest.serialization.Model):
@@ -12751,19 +12170,16 @@ class MigrateInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider_specific_details': {'required': True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'MigrateProviderSpecificInput'},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "MigrateProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrateInputProperties, self).__init__(**kwargs)
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class MigrateProviderSpecificInput(msrest.serialization.Model):
@@ -12779,21 +12195,16 @@ class MigrateProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'VMwareCbt': 'VMwareCbtMigrateInput'}
-    }
+    _subtype_map = {"instance_type": {"VMwareCbt": "VMwareCbtMigrateInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrateProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -12816,25 +12227,22 @@ class MigrationItem(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'MigrationItemProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "MigrationItemProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationItem, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class MigrationItemCollection(msrest.serialization.Model):
@@ -12847,17 +12255,14 @@ class MigrationItemCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[MigrationItem]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[MigrationItem]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationItemCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class MigrationItemProperties(msrest.serialization.Model):
@@ -12908,44 +12313,41 @@ class MigrationItemProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'machine_name': {'readonly': True},
-        'policy_id': {'readonly': True},
-        'policy_friendly_name': {'readonly': True},
-        'migration_state': {'readonly': True},
-        'migration_state_description': {'readonly': True},
-        'last_test_migration_time': {'readonly': True},
-        'last_test_migration_status': {'readonly': True},
-        'test_migrate_state': {'readonly': True},
-        'test_migrate_state_description': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
-        'allowed_operations': {'readonly': True},
-        'current_job': {'readonly': True},
-        'event_correlation_id': {'readonly': True},
+        "machine_name": {"readonly": True},
+        "policy_id": {"readonly": True},
+        "policy_friendly_name": {"readonly": True},
+        "migration_state": {"readonly": True},
+        "migration_state_description": {"readonly": True},
+        "last_test_migration_time": {"readonly": True},
+        "last_test_migration_status": {"readonly": True},
+        "test_migrate_state": {"readonly": True},
+        "test_migrate_state_description": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
+        "allowed_operations": {"readonly": True},
+        "current_job": {"readonly": True},
+        "event_correlation_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'machine_name': {'key': 'machineName', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'policy_friendly_name': {'key': 'policyFriendlyName', 'type': 'str'},
-        'migration_state': {'key': 'migrationState', 'type': 'str'},
-        'migration_state_description': {'key': 'migrationStateDescription', 'type': 'str'},
-        'last_test_migration_time': {'key': 'lastTestMigrationTime', 'type': 'iso-8601'},
-        'last_test_migration_status': {'key': 'lastTestMigrationStatus', 'type': 'str'},
-        'test_migrate_state': {'key': 'testMigrateState', 'type': 'str'},
-        'test_migrate_state_description': {'key': 'testMigrateStateDescription', 'type': 'str'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
-        'allowed_operations': {'key': 'allowedOperations', 'type': '[str]'},
-        'current_job': {'key': 'currentJob', 'type': 'CurrentJobDetails'},
-        'event_correlation_id': {'key': 'eventCorrelationId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'MigrationProviderSpecificSettings'},
+        "machine_name": {"key": "machineName", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "policy_friendly_name": {"key": "policyFriendlyName", "type": "str"},
+        "migration_state": {"key": "migrationState", "type": "str"},
+        "migration_state_description": {"key": "migrationStateDescription", "type": "str"},
+        "last_test_migration_time": {"key": "lastTestMigrationTime", "type": "iso-8601"},
+        "last_test_migration_status": {"key": "lastTestMigrationStatus", "type": "str"},
+        "test_migrate_state": {"key": "testMigrateState", "type": "str"},
+        "test_migrate_state_description": {"key": "testMigrateStateDescription", "type": "str"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
+        "allowed_operations": {"key": "allowedOperations", "type": "[str]"},
+        "current_job": {"key": "currentJob", "type": "CurrentJobDetails"},
+        "event_correlation_id": {"key": "eventCorrelationId", "type": "str"},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "MigrationProviderSpecificSettings"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationItemProperties, self).__init__(**kwargs)
         self.machine_name = None
         self.policy_id = None
@@ -12961,7 +12363,7 @@ class MigrationItemProperties(msrest.serialization.Model):
         self.allowed_operations = None
         self.current_job = None
         self.event_correlation_id = None
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class MigrationItemsQueryParameter(msrest.serialization.Model):
@@ -12976,19 +12378,16 @@ class MigrationItemsQueryParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'source_fabric_name': {'key': 'sourceFabricName', 'type': 'str'},
-        'source_container_name': {'key': 'sourceContainerName', 'type': 'str'},
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "source_fabric_name": {"key": "sourceFabricName", "type": "str"},
+        "source_container_name": {"key": "sourceContainerName", "type": "str"},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationItemsQueryParameter, self).__init__(**kwargs)
-        self.source_fabric_name = kwargs.get('source_fabric_name', None)
-        self.source_container_name = kwargs.get('source_container_name', None)
-        self.instance_type = kwargs.get('instance_type', None)
+        self.source_fabric_name = kwargs.get("source_fabric_name", None)
+        self.source_container_name = kwargs.get("source_container_name", None)
+        self.instance_type = kwargs.get("instance_type", None)
 
 
 class MigrationProviderSpecificSettings(msrest.serialization.Model):
@@ -13004,21 +12403,16 @@ class MigrationProviderSpecificSettings(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'VMwareCbt': 'VMwareCbtMigrationDetails'}
-    }
+    _subtype_map = {"instance_type": {"VMwareCbt": "VMwareCbtMigrationDetails"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationProviderSpecificSettings, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -13042,25 +12436,22 @@ class MigrationRecoveryPoint(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'MigrationRecoveryPointProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "MigrationRecoveryPointProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationRecoveryPoint, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class MigrationRecoveryPointCollection(msrest.serialization.Model):
@@ -13073,17 +12464,14 @@ class MigrationRecoveryPointCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[MigrationRecoveryPoint]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[MigrationRecoveryPoint]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationRecoveryPointCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class MigrationRecoveryPointProperties(msrest.serialization.Model):
@@ -13100,19 +12488,16 @@ class MigrationRecoveryPointProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'recovery_point_time': {'readonly': True},
-        'recovery_point_type': {'readonly': True},
+        "recovery_point_time": {"readonly": True},
+        "recovery_point_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'recovery_point_time': {'key': 'recoveryPointTime', 'type': 'iso-8601'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
+        "recovery_point_time": {"key": "recoveryPointTime", "type": "iso-8601"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MigrationRecoveryPointProperties, self).__init__(**kwargs)
         self.recovery_point_time = None
         self.recovery_point_type = None
@@ -13130,19 +12515,16 @@ class MobilityServiceUpdate(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'version': {'key': 'version', 'type': 'str'},
-        'reboot_status': {'key': 'rebootStatus', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
+        "version": {"key": "version", "type": "str"},
+        "reboot_status": {"key": "rebootStatus", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MobilityServiceUpdate, self).__init__(**kwargs)
-        self.version = kwargs.get('version', None)
-        self.reboot_status = kwargs.get('reboot_status', None)
-        self.os_type = kwargs.get('os_type', None)
+        self.version = kwargs.get("version", None)
+        self.reboot_status = kwargs.get("reboot_status", None)
+        self.os_type = kwargs.get("os_type", None)
 
 
 class Network(Resource):
@@ -13163,25 +12545,22 @@ class Network(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'NetworkProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "NetworkProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Network, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class NetworkCollection(msrest.serialization.Model):
@@ -13194,17 +12573,14 @@ class NetworkCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Network]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Network]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class NetworkMapping(Resource):
@@ -13225,25 +12601,22 @@ class NetworkMapping(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'NetworkMappingProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "NetworkMappingProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkMapping, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class NetworkMappingCollection(msrest.serialization.Model):
@@ -13256,17 +12629,14 @@ class NetworkMappingCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[NetworkMapping]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[NetworkMapping]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkMappingCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class NetworkMappingProperties(msrest.serialization.Model):
@@ -13294,31 +12664,28 @@ class NetworkMappingProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'state': {'key': 'state', 'type': 'str'},
-        'primary_network_friendly_name': {'key': 'primaryNetworkFriendlyName', 'type': 'str'},
-        'primary_network_id': {'key': 'primaryNetworkId', 'type': 'str'},
-        'primary_fabric_friendly_name': {'key': 'primaryFabricFriendlyName', 'type': 'str'},
-        'recovery_network_friendly_name': {'key': 'recoveryNetworkFriendlyName', 'type': 'str'},
-        'recovery_network_id': {'key': 'recoveryNetworkId', 'type': 'str'},
-        'recovery_fabric_arm_id': {'key': 'recoveryFabricArmId', 'type': 'str'},
-        'recovery_fabric_friendly_name': {'key': 'recoveryFabricFriendlyName', 'type': 'str'},
-        'fabric_specific_settings': {'key': 'fabricSpecificSettings', 'type': 'NetworkMappingFabricSpecificSettings'},
+        "state": {"key": "state", "type": "str"},
+        "primary_network_friendly_name": {"key": "primaryNetworkFriendlyName", "type": "str"},
+        "primary_network_id": {"key": "primaryNetworkId", "type": "str"},
+        "primary_fabric_friendly_name": {"key": "primaryFabricFriendlyName", "type": "str"},
+        "recovery_network_friendly_name": {"key": "recoveryNetworkFriendlyName", "type": "str"},
+        "recovery_network_id": {"key": "recoveryNetworkId", "type": "str"},
+        "recovery_fabric_arm_id": {"key": "recoveryFabricArmId", "type": "str"},
+        "recovery_fabric_friendly_name": {"key": "recoveryFabricFriendlyName", "type": "str"},
+        "fabric_specific_settings": {"key": "fabricSpecificSettings", "type": "NetworkMappingFabricSpecificSettings"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkMappingProperties, self).__init__(**kwargs)
-        self.state = kwargs.get('state', None)
-        self.primary_network_friendly_name = kwargs.get('primary_network_friendly_name', None)
-        self.primary_network_id = kwargs.get('primary_network_id', None)
-        self.primary_fabric_friendly_name = kwargs.get('primary_fabric_friendly_name', None)
-        self.recovery_network_friendly_name = kwargs.get('recovery_network_friendly_name', None)
-        self.recovery_network_id = kwargs.get('recovery_network_id', None)
-        self.recovery_fabric_arm_id = kwargs.get('recovery_fabric_arm_id', None)
-        self.recovery_fabric_friendly_name = kwargs.get('recovery_fabric_friendly_name', None)
-        self.fabric_specific_settings = kwargs.get('fabric_specific_settings', None)
+        self.state = kwargs.get("state", None)
+        self.primary_network_friendly_name = kwargs.get("primary_network_friendly_name", None)
+        self.primary_network_id = kwargs.get("primary_network_id", None)
+        self.primary_fabric_friendly_name = kwargs.get("primary_fabric_friendly_name", None)
+        self.recovery_network_friendly_name = kwargs.get("recovery_network_friendly_name", None)
+        self.recovery_network_id = kwargs.get("recovery_network_id", None)
+        self.recovery_fabric_arm_id = kwargs.get("recovery_fabric_arm_id", None)
+        self.recovery_fabric_friendly_name = kwargs.get("recovery_fabric_friendly_name", None)
+        self.fabric_specific_settings = kwargs.get("fabric_specific_settings", None)
 
 
 class NetworkProperties(msrest.serialization.Model):
@@ -13335,21 +12702,18 @@ class NetworkProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'fabric_type': {'key': 'fabricType', 'type': 'str'},
-        'subnets': {'key': 'subnets', 'type': '[Subnet]'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'network_type': {'key': 'networkType', 'type': 'str'},
+        "fabric_type": {"key": "fabricType", "type": "str"},
+        "subnets": {"key": "subnets", "type": "[Subnet]"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "network_type": {"key": "networkType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkProperties, self).__init__(**kwargs)
-        self.fabric_type = kwargs.get('fabric_type', None)
-        self.subnets = kwargs.get('subnets', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.network_type = kwargs.get('network_type', None)
+        self.fabric_type = kwargs.get("fabric_type", None)
+        self.subnets = kwargs.get("subnets", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.network_type = kwargs.get("network_type", None)
 
 
 class NewProtectionProfile(ProtectionProfileCustomDetails):
@@ -13376,31 +12740,28 @@ class NewProtectionProfile(ProtectionProfileCustomDetails):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'policy_name': {'required': True},
-        'multi_vm_sync_status': {'required': True},
+        "resource_type": {"required": True},
+        "policy_name": {"required": True},
+        "multi_vm_sync_status": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'policy_name': {'key': 'policyName', 'type': 'str'},
-        'recovery_point_history': {'key': 'recoveryPointHistory', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'multi_vm_sync_status': {'key': 'multiVmSyncStatus', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "policy_name": {"key": "policyName", "type": "str"},
+        "recovery_point_history": {"key": "recoveryPointHistory", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "multi_vm_sync_status": {"key": "multiVmSyncStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NewProtectionProfile, self).__init__(**kwargs)
-        self.resource_type = 'New'  # type: str
-        self.policy_name = kwargs['policy_name']
-        self.recovery_point_history = kwargs.get('recovery_point_history', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.multi_vm_sync_status = kwargs['multi_vm_sync_status']
+        self.resource_type = "New"  # type: str
+        self.policy_name = kwargs["policy_name"]
+        self.recovery_point_history = kwargs.get("recovery_point_history", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.multi_vm_sync_status = kwargs["multi_vm_sync_status"]
 
 
 class NewRecoveryVirtualNetwork(RecoveryVirtualNetworkCustomDetails):
@@ -13419,23 +12780,25 @@ class NewRecoveryVirtualNetwork(RecoveryVirtualNetworkCustomDetails):
     """
 
     _validation = {
-        'resource_type': {'required': True},
+        "resource_type": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'recovery_virtual_network_resource_group_name': {'key': 'recoveryVirtualNetworkResourceGroupName', 'type': 'str'},
-        'recovery_virtual_network_name': {'key': 'recoveryVirtualNetworkName', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "recovery_virtual_network_resource_group_name": {
+            "key": "recoveryVirtualNetworkResourceGroupName",
+            "type": "str",
+        },
+        "recovery_virtual_network_name": {"key": "recoveryVirtualNetworkName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NewRecoveryVirtualNetwork, self).__init__(**kwargs)
-        self.resource_type = 'New'  # type: str
-        self.recovery_virtual_network_resource_group_name = kwargs.get('recovery_virtual_network_resource_group_name', None)
-        self.recovery_virtual_network_name = kwargs.get('recovery_virtual_network_name', None)
+        self.resource_type = "New"  # type: str
+        self.recovery_virtual_network_resource_group_name = kwargs.get(
+            "recovery_virtual_network_resource_group_name", None
+        )
+        self.recovery_virtual_network_name = kwargs.get("recovery_virtual_network_name", None)
 
 
 class OperationsDiscovery(msrest.serialization.Model):
@@ -13465,21 +12828,18 @@ class OperationsDiscovery(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'Display'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'object'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "Display"},
+        "origin": {"key": "origin", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationsDiscovery, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display = kwargs.get('display', None)
-        self.origin = kwargs.get('origin', None)
-        self.properties = kwargs.get('properties', None)
+        self.name = kwargs.get("name", None)
+        self.display = kwargs.get("display", None)
+        self.origin = kwargs.get("origin", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class OperationsDiscoveryCollection(msrest.serialization.Model):
@@ -13492,17 +12852,14 @@ class OperationsDiscoveryCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[OperationsDiscovery]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[OperationsDiscovery]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationsDiscoveryCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class OSDetails(msrest.serialization.Model):
@@ -13523,25 +12880,22 @@ class OSDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'product_type': {'key': 'productType', 'type': 'str'},
-        'os_edition': {'key': 'osEdition', 'type': 'str'},
-        'o_s_version': {'key': 'oSVersion', 'type': 'str'},
-        'o_s_major_version': {'key': 'oSMajorVersion', 'type': 'str'},
-        'o_s_minor_version': {'key': 'oSMinorVersion', 'type': 'str'},
+        "os_type": {"key": "osType", "type": "str"},
+        "product_type": {"key": "productType", "type": "str"},
+        "os_edition": {"key": "osEdition", "type": "str"},
+        "o_s_version": {"key": "oSVersion", "type": "str"},
+        "o_s_major_version": {"key": "oSMajorVersion", "type": "str"},
+        "o_s_minor_version": {"key": "oSMinorVersion", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OSDetails, self).__init__(**kwargs)
-        self.os_type = kwargs.get('os_type', None)
-        self.product_type = kwargs.get('product_type', None)
-        self.os_edition = kwargs.get('os_edition', None)
-        self.o_s_version = kwargs.get('o_s_version', None)
-        self.o_s_major_version = kwargs.get('o_s_major_version', None)
-        self.o_s_minor_version = kwargs.get('o_s_minor_version', None)
+        self.os_type = kwargs.get("os_type", None)
+        self.product_type = kwargs.get("product_type", None)
+        self.os_edition = kwargs.get("os_edition", None)
+        self.o_s_version = kwargs.get("o_s_version", None)
+        self.o_s_major_version = kwargs.get("o_s_major_version", None)
+        self.o_s_minor_version = kwargs.get("o_s_minor_version", None)
 
 
 class OSDiskDetails(msrest.serialization.Model):
@@ -13556,19 +12910,16 @@ class OSDiskDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'os_vhd_id': {'key': 'osVhdId', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'vhd_name': {'key': 'vhdName', 'type': 'str'},
+        "os_vhd_id": {"key": "osVhdId", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "vhd_name": {"key": "vhdName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OSDiskDetails, self).__init__(**kwargs)
-        self.os_vhd_id = kwargs.get('os_vhd_id', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.vhd_name = kwargs.get('vhd_name', None)
+        self.os_vhd_id = kwargs.get("os_vhd_id", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.vhd_name = kwargs.get("vhd_name", None)
 
 
 class OSVersionWrapper(msrest.serialization.Model):
@@ -13581,17 +12932,14 @@ class OSVersionWrapper(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'version': {'key': 'version', 'type': 'str'},
-        'service_pack': {'key': 'servicePack', 'type': 'str'},
+        "version": {"key": "version", "type": "str"},
+        "service_pack": {"key": "servicePack", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OSVersionWrapper, self).__init__(**kwargs)
-        self.version = kwargs.get('version', None)
-        self.service_pack = kwargs.get('service_pack', None)
+        self.version = kwargs.get("version", None)
+        self.service_pack = kwargs.get("service_pack", None)
 
 
 class PlannedFailoverInput(msrest.serialization.Model):
@@ -13603,15 +12951,12 @@ class PlannedFailoverInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'PlannedFailoverInputProperties'},
+        "properties": {"key": "properties", "type": "PlannedFailoverInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PlannedFailoverInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class PlannedFailoverInputProperties(msrest.serialization.Model):
@@ -13625,17 +12970,17 @@ class PlannedFailoverInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'failover_direction': {'key': 'failoverDirection', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'PlannedFailoverProviderSpecificFailoverInput'},
+        "failover_direction": {"key": "failoverDirection", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "PlannedFailoverProviderSpecificFailoverInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PlannedFailoverInputProperties, self).__init__(**kwargs)
-        self.failover_direction = kwargs.get('failover_direction', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.failover_direction = kwargs.get("failover_direction", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class Policy(Resource):
@@ -13656,25 +13001,22 @@ class Policy(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'PolicyProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "PolicyProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Policy, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class PolicyCollection(msrest.serialization.Model):
@@ -13687,17 +13029,14 @@ class PolicyCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Policy]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Policy]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class PolicyProperties(msrest.serialization.Model):
@@ -13711,17 +13050,14 @@ class PolicyProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'PolicyProviderSpecificDetails'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "PolicyProviderSpecificDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class ProcessServer(msrest.serialization.Model):
@@ -13808,88 +13144,85 @@ class ProcessServer(msrest.serialization.Model):
     """
 
     _validation = {
-        'health': {'readonly': True},
-        'ps_stats_refresh_time': {'readonly': True},
-        'throughput_upload_pending_data_in_bytes': {'readonly': True},
-        'throughput_in_m_bps': {'readonly': True},
-        'throughput_in_bytes': {'readonly': True},
-        'throughput_status': {'readonly': True},
-        'mars_communication_status': {'readonly': True},
-        'mars_registration_status': {'readonly': True},
+        "health": {"readonly": True},
+        "ps_stats_refresh_time": {"readonly": True},
+        "throughput_upload_pending_data_in_bytes": {"readonly": True},
+        "throughput_in_m_bps": {"readonly": True},
+        "throughput_in_bytes": {"readonly": True},
+        "throughput_status": {"readonly": True},
+        "mars_communication_status": {"readonly": True},
+        "mars_registration_status": {"readonly": True},
     }
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'agent_version': {'key': 'agentVersion', 'type': 'str'},
-        'last_heartbeat': {'key': 'lastHeartbeat', 'type': 'iso-8601'},
-        'version_status': {'key': 'versionStatus', 'type': 'str'},
-        'mobility_service_updates': {'key': 'mobilityServiceUpdates', 'type': '[MobilityServiceUpdate]'},
-        'host_id': {'key': 'hostId', 'type': 'str'},
-        'machine_count': {'key': 'machineCount', 'type': 'str'},
-        'replication_pair_count': {'key': 'replicationPairCount', 'type': 'str'},
-        'system_load': {'key': 'systemLoad', 'type': 'str'},
-        'system_load_status': {'key': 'systemLoadStatus', 'type': 'str'},
-        'cpu_load': {'key': 'cpuLoad', 'type': 'str'},
-        'cpu_load_status': {'key': 'cpuLoadStatus', 'type': 'str'},
-        'total_memory_in_bytes': {'key': 'totalMemoryInBytes', 'type': 'long'},
-        'available_memory_in_bytes': {'key': 'availableMemoryInBytes', 'type': 'long'},
-        'memory_usage_status': {'key': 'memoryUsageStatus', 'type': 'str'},
-        'total_space_in_bytes': {'key': 'totalSpaceInBytes', 'type': 'long'},
-        'available_space_in_bytes': {'key': 'availableSpaceInBytes', 'type': 'long'},
-        'space_usage_status': {'key': 'spaceUsageStatus', 'type': 'str'},
-        'ps_service_status': {'key': 'psServiceStatus', 'type': 'str'},
-        'ssl_cert_expiry_date': {'key': 'sslCertExpiryDate', 'type': 'iso-8601'},
-        'ssl_cert_expiry_remaining_days': {'key': 'sslCertExpiryRemainingDays', 'type': 'int'},
-        'os_version': {'key': 'osVersion', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
-        'agent_expiry_date': {'key': 'agentExpiryDate', 'type': 'iso-8601'},
-        'agent_version_details': {'key': 'agentVersionDetails', 'type': 'VersionDetails'},
-        'health': {'key': 'health', 'type': 'str'},
-        'ps_stats_refresh_time': {'key': 'psStatsRefreshTime', 'type': 'iso-8601'},
-        'throughput_upload_pending_data_in_bytes': {'key': 'throughputUploadPendingDataInBytes', 'type': 'long'},
-        'throughput_in_m_bps': {'key': 'throughputInMBps', 'type': 'long'},
-        'throughput_in_bytes': {'key': 'throughputInBytes', 'type': 'long'},
-        'throughput_status': {'key': 'throughputStatus', 'type': 'str'},
-        'mars_communication_status': {'key': 'marsCommunicationStatus', 'type': 'str'},
-        'mars_registration_status': {'key': 'marsRegistrationStatus', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "agent_version": {"key": "agentVersion", "type": "str"},
+        "last_heartbeat": {"key": "lastHeartbeat", "type": "iso-8601"},
+        "version_status": {"key": "versionStatus", "type": "str"},
+        "mobility_service_updates": {"key": "mobilityServiceUpdates", "type": "[MobilityServiceUpdate]"},
+        "host_id": {"key": "hostId", "type": "str"},
+        "machine_count": {"key": "machineCount", "type": "str"},
+        "replication_pair_count": {"key": "replicationPairCount", "type": "str"},
+        "system_load": {"key": "systemLoad", "type": "str"},
+        "system_load_status": {"key": "systemLoadStatus", "type": "str"},
+        "cpu_load": {"key": "cpuLoad", "type": "str"},
+        "cpu_load_status": {"key": "cpuLoadStatus", "type": "str"},
+        "total_memory_in_bytes": {"key": "totalMemoryInBytes", "type": "long"},
+        "available_memory_in_bytes": {"key": "availableMemoryInBytes", "type": "long"},
+        "memory_usage_status": {"key": "memoryUsageStatus", "type": "str"},
+        "total_space_in_bytes": {"key": "totalSpaceInBytes", "type": "long"},
+        "available_space_in_bytes": {"key": "availableSpaceInBytes", "type": "long"},
+        "space_usage_status": {"key": "spaceUsageStatus", "type": "str"},
+        "ps_service_status": {"key": "psServiceStatus", "type": "str"},
+        "ssl_cert_expiry_date": {"key": "sslCertExpiryDate", "type": "iso-8601"},
+        "ssl_cert_expiry_remaining_days": {"key": "sslCertExpiryRemainingDays", "type": "int"},
+        "os_version": {"key": "osVersion", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
+        "agent_expiry_date": {"key": "agentExpiryDate", "type": "iso-8601"},
+        "agent_version_details": {"key": "agentVersionDetails", "type": "VersionDetails"},
+        "health": {"key": "health", "type": "str"},
+        "ps_stats_refresh_time": {"key": "psStatsRefreshTime", "type": "iso-8601"},
+        "throughput_upload_pending_data_in_bytes": {"key": "throughputUploadPendingDataInBytes", "type": "long"},
+        "throughput_in_m_bps": {"key": "throughputInMBps", "type": "long"},
+        "throughput_in_bytes": {"key": "throughputInBytes", "type": "long"},
+        "throughput_status": {"key": "throughputStatus", "type": "str"},
+        "mars_communication_status": {"key": "marsCommunicationStatus", "type": "str"},
+        "mars_registration_status": {"key": "marsRegistrationStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProcessServer, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.id = kwargs.get('id', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.last_heartbeat = kwargs.get('last_heartbeat', None)
-        self.version_status = kwargs.get('version_status', None)
-        self.mobility_service_updates = kwargs.get('mobility_service_updates', None)
-        self.host_id = kwargs.get('host_id', None)
-        self.machine_count = kwargs.get('machine_count', None)
-        self.replication_pair_count = kwargs.get('replication_pair_count', None)
-        self.system_load = kwargs.get('system_load', None)
-        self.system_load_status = kwargs.get('system_load_status', None)
-        self.cpu_load = kwargs.get('cpu_load', None)
-        self.cpu_load_status = kwargs.get('cpu_load_status', None)
-        self.total_memory_in_bytes = kwargs.get('total_memory_in_bytes', None)
-        self.available_memory_in_bytes = kwargs.get('available_memory_in_bytes', None)
-        self.memory_usage_status = kwargs.get('memory_usage_status', None)
-        self.total_space_in_bytes = kwargs.get('total_space_in_bytes', None)
-        self.available_space_in_bytes = kwargs.get('available_space_in_bytes', None)
-        self.space_usage_status = kwargs.get('space_usage_status', None)
-        self.ps_service_status = kwargs.get('ps_service_status', None)
-        self.ssl_cert_expiry_date = kwargs.get('ssl_cert_expiry_date', None)
-        self.ssl_cert_expiry_remaining_days = kwargs.get('ssl_cert_expiry_remaining_days', None)
-        self.os_version = kwargs.get('os_version', None)
-        self.health_errors = kwargs.get('health_errors', None)
-        self.agent_expiry_date = kwargs.get('agent_expiry_date', None)
-        self.agent_version_details = kwargs.get('agent_version_details', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.id = kwargs.get("id", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.last_heartbeat = kwargs.get("last_heartbeat", None)
+        self.version_status = kwargs.get("version_status", None)
+        self.mobility_service_updates = kwargs.get("mobility_service_updates", None)
+        self.host_id = kwargs.get("host_id", None)
+        self.machine_count = kwargs.get("machine_count", None)
+        self.replication_pair_count = kwargs.get("replication_pair_count", None)
+        self.system_load = kwargs.get("system_load", None)
+        self.system_load_status = kwargs.get("system_load_status", None)
+        self.cpu_load = kwargs.get("cpu_load", None)
+        self.cpu_load_status = kwargs.get("cpu_load_status", None)
+        self.total_memory_in_bytes = kwargs.get("total_memory_in_bytes", None)
+        self.available_memory_in_bytes = kwargs.get("available_memory_in_bytes", None)
+        self.memory_usage_status = kwargs.get("memory_usage_status", None)
+        self.total_space_in_bytes = kwargs.get("total_space_in_bytes", None)
+        self.available_space_in_bytes = kwargs.get("available_space_in_bytes", None)
+        self.space_usage_status = kwargs.get("space_usage_status", None)
+        self.ps_service_status = kwargs.get("ps_service_status", None)
+        self.ssl_cert_expiry_date = kwargs.get("ssl_cert_expiry_date", None)
+        self.ssl_cert_expiry_remaining_days = kwargs.get("ssl_cert_expiry_remaining_days", None)
+        self.os_version = kwargs.get("os_version", None)
+        self.health_errors = kwargs.get("health_errors", None)
+        self.agent_expiry_date = kwargs.get("agent_expiry_date", None)
+        self.agent_version_details = kwargs.get("agent_version_details", None)
         self.health = None
         self.ps_stats_refresh_time = None
         self.throughput_upload_pending_data_in_bytes = None
@@ -13979,73 +13312,70 @@ class ProcessServerDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'fabric_object_id': {'readonly': True},
-        'fqdn': {'readonly': True},
-        'ip_addresses': {'readonly': True},
-        'version': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'total_memory_in_bytes': {'readonly': True},
-        'available_memory_in_bytes': {'readonly': True},
-        'used_memory_in_bytes': {'readonly': True},
-        'memory_usage_percentage': {'readonly': True},
-        'total_space_in_bytes': {'readonly': True},
-        'available_space_in_bytes': {'readonly': True},
-        'used_space_in_bytes': {'readonly': True},
-        'free_space_percentage': {'readonly': True},
-        'throughput_upload_pending_data_in_bytes': {'readonly': True},
-        'throughput_in_bytes': {'readonly': True},
-        'processor_usage_percentage': {'readonly': True},
-        'throughput_status': {'readonly': True},
-        'system_load': {'readonly': True},
-        'system_load_status': {'readonly': True},
-        'disk_usage_status': {'readonly': True},
-        'memory_usage_status': {'readonly': True},
-        'processor_usage_status': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
-        'protected_item_count': {'readonly': True},
-        'historic_health': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "fabric_object_id": {"readonly": True},
+        "fqdn": {"readonly": True},
+        "ip_addresses": {"readonly": True},
+        "version": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "total_memory_in_bytes": {"readonly": True},
+        "available_memory_in_bytes": {"readonly": True},
+        "used_memory_in_bytes": {"readonly": True},
+        "memory_usage_percentage": {"readonly": True},
+        "total_space_in_bytes": {"readonly": True},
+        "available_space_in_bytes": {"readonly": True},
+        "used_space_in_bytes": {"readonly": True},
+        "free_space_percentage": {"readonly": True},
+        "throughput_upload_pending_data_in_bytes": {"readonly": True},
+        "throughput_in_bytes": {"readonly": True},
+        "processor_usage_percentage": {"readonly": True},
+        "throughput_status": {"readonly": True},
+        "system_load": {"readonly": True},
+        "system_load_status": {"readonly": True},
+        "disk_usage_status": {"readonly": True},
+        "memory_usage_status": {"readonly": True},
+        "processor_usage_status": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
+        "protected_item_count": {"readonly": True},
+        "historic_health": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'ip_addresses': {'key': 'ipAddresses', 'type': '[str]'},
-        'version': {'key': 'version', 'type': 'str'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'total_memory_in_bytes': {'key': 'totalMemoryInBytes', 'type': 'long'},
-        'available_memory_in_bytes': {'key': 'availableMemoryInBytes', 'type': 'long'},
-        'used_memory_in_bytes': {'key': 'usedMemoryInBytes', 'type': 'long'},
-        'memory_usage_percentage': {'key': 'memoryUsagePercentage', 'type': 'float'},
-        'total_space_in_bytes': {'key': 'totalSpaceInBytes', 'type': 'long'},
-        'available_space_in_bytes': {'key': 'availableSpaceInBytes', 'type': 'long'},
-        'used_space_in_bytes': {'key': 'usedSpaceInBytes', 'type': 'long'},
-        'free_space_percentage': {'key': 'freeSpacePercentage', 'type': 'float'},
-        'throughput_upload_pending_data_in_bytes': {'key': 'throughputUploadPendingDataInBytes', 'type': 'long'},
-        'throughput_in_bytes': {'key': 'throughputInBytes', 'type': 'long'},
-        'processor_usage_percentage': {'key': 'processorUsagePercentage', 'type': 'float'},
-        'throughput_status': {'key': 'throughputStatus', 'type': 'str'},
-        'system_load': {'key': 'systemLoad', 'type': 'long'},
-        'system_load_status': {'key': 'systemLoadStatus', 'type': 'str'},
-        'disk_usage_status': {'key': 'diskUsageStatus', 'type': 'str'},
-        'memory_usage_status': {'key': 'memoryUsageStatus', 'type': 'str'},
-        'processor_usage_status': {'key': 'processorUsageStatus', 'type': 'str'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
-        'protected_item_count': {'key': 'protectedItemCount', 'type': 'int'},
-        'historic_health': {'key': 'historicHealth', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "ip_addresses": {"key": "ipAddresses", "type": "[str]"},
+        "version": {"key": "version", "type": "str"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "total_memory_in_bytes": {"key": "totalMemoryInBytes", "type": "long"},
+        "available_memory_in_bytes": {"key": "availableMemoryInBytes", "type": "long"},
+        "used_memory_in_bytes": {"key": "usedMemoryInBytes", "type": "long"},
+        "memory_usage_percentage": {"key": "memoryUsagePercentage", "type": "float"},
+        "total_space_in_bytes": {"key": "totalSpaceInBytes", "type": "long"},
+        "available_space_in_bytes": {"key": "availableSpaceInBytes", "type": "long"},
+        "used_space_in_bytes": {"key": "usedSpaceInBytes", "type": "long"},
+        "free_space_percentage": {"key": "freeSpacePercentage", "type": "float"},
+        "throughput_upload_pending_data_in_bytes": {"key": "throughputUploadPendingDataInBytes", "type": "long"},
+        "throughput_in_bytes": {"key": "throughputInBytes", "type": "long"},
+        "processor_usage_percentage": {"key": "processorUsagePercentage", "type": "float"},
+        "throughput_status": {"key": "throughputStatus", "type": "str"},
+        "system_load": {"key": "systemLoad", "type": "long"},
+        "system_load_status": {"key": "systemLoadStatus", "type": "str"},
+        "disk_usage_status": {"key": "diskUsageStatus", "type": "str"},
+        "memory_usage_status": {"key": "memoryUsageStatus", "type": "str"},
+        "processor_usage_status": {"key": "processorUsageStatus", "type": "str"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
+        "protected_item_count": {"key": "protectedItemCount", "type": "int"},
+        "historic_health": {"key": "historicHealth", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProcessServerDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -14096,25 +13426,22 @@ class ProtectableItem(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'ProtectableItemProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ProtectableItemProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectableItem, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ProtectableItemCollection(msrest.serialization.Model):
@@ -14127,17 +13454,14 @@ class ProtectableItemCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ProtectableItem]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ProtectableItem]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectableItemCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ProtectableItemProperties(msrest.serialization.Model):
@@ -14161,27 +13485,24 @@ class ProtectableItemProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'protection_status': {'key': 'protectionStatus', 'type': 'str'},
-        'replication_protected_item_id': {'key': 'replicationProtectedItemId', 'type': 'str'},
-        'recovery_services_provider_id': {'key': 'recoveryServicesProviderId', 'type': 'str'},
-        'protection_readiness_errors': {'key': 'protectionReadinessErrors', 'type': '[str]'},
-        'supported_replication_providers': {'key': 'supportedReplicationProviders', 'type': '[str]'},
-        'custom_details': {'key': 'customDetails', 'type': 'ConfigurationSettings'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "protection_status": {"key": "protectionStatus", "type": "str"},
+        "replication_protected_item_id": {"key": "replicationProtectedItemId", "type": "str"},
+        "recovery_services_provider_id": {"key": "recoveryServicesProviderId", "type": "str"},
+        "protection_readiness_errors": {"key": "protectionReadinessErrors", "type": "[str]"},
+        "supported_replication_providers": {"key": "supportedReplicationProviders", "type": "[str]"},
+        "custom_details": {"key": "customDetails", "type": "ConfigurationSettings"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectableItemProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.protection_status = kwargs.get('protection_status', None)
-        self.replication_protected_item_id = kwargs.get('replication_protected_item_id', None)
-        self.recovery_services_provider_id = kwargs.get('recovery_services_provider_id', None)
-        self.protection_readiness_errors = kwargs.get('protection_readiness_errors', None)
-        self.supported_replication_providers = kwargs.get('supported_replication_providers', None)
-        self.custom_details = kwargs.get('custom_details', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.protection_status = kwargs.get("protection_status", None)
+        self.replication_protected_item_id = kwargs.get("replication_protected_item_id", None)
+        self.recovery_services_provider_id = kwargs.get("recovery_services_provider_id", None)
+        self.protection_readiness_errors = kwargs.get("protection_readiness_errors", None)
+        self.supported_replication_providers = kwargs.get("supported_replication_providers", None)
+        self.custom_details = kwargs.get("custom_details", None)
 
 
 class ProtectableItemQueryParameter(msrest.serialization.Model):
@@ -14192,15 +13513,12 @@ class ProtectableItemQueryParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'state': {'key': 'state', 'type': 'str'},
+        "state": {"key": "state", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectableItemQueryParameter, self).__init__(**kwargs)
-        self.state = kwargs.get('state', None)
+        self.state = kwargs.get("state", None)
 
 
 class ProtectedItemsQueryParameter(msrest.serialization.Model):
@@ -14227,29 +13545,26 @@ class ProtectedItemsQueryParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'source_fabric_name': {'key': 'sourceFabricName', 'type': 'str'},
-        'recovery_plan_name': {'key': 'recoveryPlanName', 'type': 'str'},
-        'source_fabric_location': {'key': 'sourceFabricLocation', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'v_center_name': {'key': 'vCenterName', 'type': 'str'},
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'multi_vm_group_create_option': {'key': 'multiVmGroupCreateOption', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
+        "source_fabric_name": {"key": "sourceFabricName", "type": "str"},
+        "recovery_plan_name": {"key": "recoveryPlanName", "type": "str"},
+        "source_fabric_location": {"key": "sourceFabricLocation", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "v_center_name": {"key": "vCenterName", "type": "str"},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "multi_vm_group_create_option": {"key": "multiVmGroupCreateOption", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectedItemsQueryParameter, self).__init__(**kwargs)
-        self.source_fabric_name = kwargs.get('source_fabric_name', None)
-        self.recovery_plan_name = kwargs.get('recovery_plan_name', None)
-        self.source_fabric_location = kwargs.get('source_fabric_location', None)
-        self.fabric_object_id = kwargs.get('fabric_object_id', None)
-        self.v_center_name = kwargs.get('v_center_name', None)
-        self.instance_type = kwargs.get('instance_type', None)
-        self.multi_vm_group_create_option = kwargs.get('multi_vm_group_create_option', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
+        self.source_fabric_name = kwargs.get("source_fabric_name", None)
+        self.recovery_plan_name = kwargs.get("recovery_plan_name", None)
+        self.source_fabric_location = kwargs.get("source_fabric_location", None)
+        self.fabric_object_id = kwargs.get("fabric_object_id", None)
+        self.v_center_name = kwargs.get("v_center_name", None)
+        self.instance_type = kwargs.get("instance_type", None)
+        self.multi_vm_group_create_option = kwargs.get("multi_vm_group_create_option", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
 
 
 class ProtectionContainer(Resource):
@@ -14270,25 +13585,22 @@ class ProtectionContainer(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'ProtectionContainerProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ProtectionContainerProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainer, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ProtectionContainerCollection(msrest.serialization.Model):
@@ -14301,17 +13613,14 @@ class ProtectionContainerCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ProtectionContainer]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ProtectionContainer]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainerCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ProtectionContainerFabricSpecificDetails(msrest.serialization.Model):
@@ -14324,17 +13633,14 @@ class ProtectionContainerFabricSpecificDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'readonly': True},
+        "instance_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainerFabricSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None
 
@@ -14358,25 +13664,22 @@ class ProtectionContainerMapping(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'ProtectionContainerMappingProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ProtectionContainerMappingProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainerMapping, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ProtectionContainerMappingCollection(msrest.serialization.Model):
@@ -14389,17 +13692,14 @@ class ProtectionContainerMappingCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ProtectionContainerMapping]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ProtectionContainerMapping]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainerMappingCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ProtectionContainerMappingProperties(msrest.serialization.Model):
@@ -14431,35 +13731,35 @@ class ProtectionContainerMappingProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'target_protection_container_id': {'key': 'targetProtectionContainerId', 'type': 'str'},
-        'target_protection_container_friendly_name': {'key': 'targetProtectionContainerFriendlyName', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'ProtectionContainerMappingProviderSpecificDetails'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_error_details': {'key': 'healthErrorDetails', 'type': '[HealthError]'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'state': {'key': 'state', 'type': 'str'},
-        'source_protection_container_friendly_name': {'key': 'sourceProtectionContainerFriendlyName', 'type': 'str'},
-        'source_fabric_friendly_name': {'key': 'sourceFabricFriendlyName', 'type': 'str'},
-        'target_fabric_friendly_name': {'key': 'targetFabricFriendlyName', 'type': 'str'},
-        'policy_friendly_name': {'key': 'policyFriendlyName', 'type': 'str'},
+        "target_protection_container_id": {"key": "targetProtectionContainerId", "type": "str"},
+        "target_protection_container_friendly_name": {"key": "targetProtectionContainerFriendlyName", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "ProtectionContainerMappingProviderSpecificDetails",
+        },
+        "health": {"key": "health", "type": "str"},
+        "health_error_details": {"key": "healthErrorDetails", "type": "[HealthError]"},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "state": {"key": "state", "type": "str"},
+        "source_protection_container_friendly_name": {"key": "sourceProtectionContainerFriendlyName", "type": "str"},
+        "source_fabric_friendly_name": {"key": "sourceFabricFriendlyName", "type": "str"},
+        "target_fabric_friendly_name": {"key": "targetFabricFriendlyName", "type": "str"},
+        "policy_friendly_name": {"key": "policyFriendlyName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainerMappingProperties, self).__init__(**kwargs)
-        self.target_protection_container_id = kwargs.get('target_protection_container_id', None)
-        self.target_protection_container_friendly_name = kwargs.get('target_protection_container_friendly_name', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
-        self.health = kwargs.get('health', None)
-        self.health_error_details = kwargs.get('health_error_details', None)
-        self.policy_id = kwargs.get('policy_id', None)
-        self.state = kwargs.get('state', None)
-        self.source_protection_container_friendly_name = kwargs.get('source_protection_container_friendly_name', None)
-        self.source_fabric_friendly_name = kwargs.get('source_fabric_friendly_name', None)
-        self.target_fabric_friendly_name = kwargs.get('target_fabric_friendly_name', None)
-        self.policy_friendly_name = kwargs.get('policy_friendly_name', None)
+        self.target_protection_container_id = kwargs.get("target_protection_container_id", None)
+        self.target_protection_container_friendly_name = kwargs.get("target_protection_container_friendly_name", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
+        self.health = kwargs.get("health", None)
+        self.health_error_details = kwargs.get("health_error_details", None)
+        self.policy_id = kwargs.get("policy_id", None)
+        self.state = kwargs.get("state", None)
+        self.source_protection_container_friendly_name = kwargs.get("source_protection_container_friendly_name", None)
+        self.source_fabric_friendly_name = kwargs.get("source_fabric_friendly_name", None)
+        self.target_fabric_friendly_name = kwargs.get("target_fabric_friendly_name", None)
+        self.policy_friendly_name = kwargs.get("policy_friendly_name", None)
 
 
 class ProtectionContainerProperties(msrest.serialization.Model):
@@ -14483,27 +13783,24 @@ class ProtectionContainerProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'fabric_friendly_name': {'key': 'fabricFriendlyName', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'fabric_type': {'key': 'fabricType', 'type': 'str'},
-        'protected_item_count': {'key': 'protectedItemCount', 'type': 'int'},
-        'pairing_status': {'key': 'pairingStatus', 'type': 'str'},
-        'role': {'key': 'role', 'type': 'str'},
-        'fabric_specific_details': {'key': 'fabricSpecificDetails', 'type': 'ProtectionContainerFabricSpecificDetails'},
+        "fabric_friendly_name": {"key": "fabricFriendlyName", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "fabric_type": {"key": "fabricType", "type": "str"},
+        "protected_item_count": {"key": "protectedItemCount", "type": "int"},
+        "pairing_status": {"key": "pairingStatus", "type": "str"},
+        "role": {"key": "role", "type": "str"},
+        "fabric_specific_details": {"key": "fabricSpecificDetails", "type": "ProtectionContainerFabricSpecificDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionContainerProperties, self).__init__(**kwargs)
-        self.fabric_friendly_name = kwargs.get('fabric_friendly_name', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.fabric_type = kwargs.get('fabric_type', None)
-        self.protected_item_count = kwargs.get('protected_item_count', None)
-        self.pairing_status = kwargs.get('pairing_status', None)
-        self.role = kwargs.get('role', None)
-        self.fabric_specific_details = kwargs.get('fabric_specific_details', None)
+        self.fabric_friendly_name = kwargs.get("fabric_friendly_name", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.fabric_type = kwargs.get("fabric_type", None)
+        self.protected_item_count = kwargs.get("protected_item_count", None)
+        self.pairing_status = kwargs.get("pairing_status", None)
+        self.role = kwargs.get("role", None)
+        self.fabric_specific_details = kwargs.get("fabric_specific_details", None)
 
 
 class ProviderError(msrest.serialization.Model):
@@ -14522,23 +13819,20 @@ class ProviderError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error_code': {'key': 'errorCode', 'type': 'int'},
-        'error_message': {'key': 'errorMessage', 'type': 'str'},
-        'error_id': {'key': 'errorId', 'type': 'str'},
-        'possible_causes': {'key': 'possibleCauses', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
+        "error_code": {"key": "errorCode", "type": "int"},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "error_id": {"key": "errorId", "type": "str"},
+        "possible_causes": {"key": "possibleCauses", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProviderError, self).__init__(**kwargs)
-        self.error_code = kwargs.get('error_code', None)
-        self.error_message = kwargs.get('error_message', None)
-        self.error_id = kwargs.get('error_id', None)
-        self.possible_causes = kwargs.get('possible_causes', None)
-        self.recommended_action = kwargs.get('recommended_action', None)
+        self.error_code = kwargs.get("error_code", None)
+        self.error_message = kwargs.get("error_message", None)
+        self.error_id = kwargs.get("error_id", None)
+        self.possible_causes = kwargs.get("possible_causes", None)
+        self.recommended_action = kwargs.get("recommended_action", None)
 
 
 class PushInstallerDetails(msrest.serialization.Model):
@@ -14568,33 +13862,30 @@ class PushInstallerDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'fabric_object_id': {'readonly': True},
-        'fqdn': {'readonly': True},
-        'version': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "fabric_object_id": {"readonly": True},
+        "fqdn": {"readonly": True},
+        "version": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PushInstallerDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -14636,35 +13927,32 @@ class RcmProxyDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'fabric_object_id': {'readonly': True},
-        'fqdn': {'readonly': True},
-        'client_authentication_type': {'readonly': True},
-        'version': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "fabric_object_id": {"readonly": True},
+        "fqdn": {"readonly": True},
+        "client_authentication_type": {"readonly": True},
+        "version": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'client_authentication_type': {'key': 'clientAuthenticationType', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "client_authentication_type": {"key": "clientAuthenticationType", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RcmProxyDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -14696,25 +13984,22 @@ class RecoveryPlan(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'RecoveryPlanProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "RecoveryPlanProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlan, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class RecoveryPlanProviderSpecificDetails(msrest.serialization.Model):
@@ -14730,21 +14015,16 @@ class RecoveryPlanProviderSpecificDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'RecoveryPlanA2ADetails'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "RecoveryPlanA2ADetails"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanProviderSpecificDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -14763,23 +14043,20 @@ class RecoveryPlanA2ADetails(RecoveryPlanProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_zone': {'key': 'primaryZone', 'type': 'str'},
-        'recovery_zone': {'key': 'recoveryZone', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_zone": {"key": "primaryZone", "type": "str"},
+        "recovery_zone": {"key": "recoveryZone", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanA2ADetails, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.primary_zone = kwargs.get('primary_zone', None)
-        self.recovery_zone = kwargs.get('recovery_zone', None)
+        self.instance_type = "A2A"  # type: str
+        self.primary_zone = kwargs.get("primary_zone", None)
+        self.recovery_zone = kwargs.get("recovery_zone", None)
 
 
 class RecoveryPlanProviderSpecificFailoverInput(msrest.serialization.Model):
@@ -14795,21 +14072,26 @@ class RecoveryPlanProviderSpecificFailoverInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'A2A': 'RecoveryPlanA2AFailoverInput', 'HyperVReplicaAzure': 'RecoveryPlanHyperVReplicaAzureFailoverInput', 'HyperVReplicaAzureFailback': 'RecoveryPlanHyperVReplicaAzureFailbackInput', 'InMage': 'RecoveryPlanInMageFailoverInput', 'InMageAzureV2': 'RecoveryPlanInMageAzureV2FailoverInput', 'InMageRcm': 'RecoveryPlanInMageRcmFailoverInput', 'InMageRcmFailback': 'RecoveryPlanInMageRcmFailbackFailoverInput'}
+        "instance_type": {
+            "A2A": "RecoveryPlanA2AFailoverInput",
+            "HyperVReplicaAzure": "RecoveryPlanHyperVReplicaAzureFailoverInput",
+            "HyperVReplicaAzureFailback": "RecoveryPlanHyperVReplicaAzureFailbackInput",
+            "InMage": "RecoveryPlanInMageFailoverInput",
+            "InMageAzureV2": "RecoveryPlanInMageAzureV2FailoverInput",
+            "InMageRcm": "RecoveryPlanInMageRcmFailoverInput",
+            "InMageRcmFailback": "RecoveryPlanInMageRcmFailbackFailoverInput",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanProviderSpecificFailoverInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -14836,26 +14118,23 @@ class RecoveryPlanA2AFailoverInput(RecoveryPlanProviderSpecificFailoverInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_type': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'cloud_service_creation_option': {'key': 'cloudServiceCreationOption', 'type': 'str'},
-        'multi_vm_sync_point_option': {'key': 'multiVmSyncPointOption', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "cloud_service_creation_option": {"key": "cloudServiceCreationOption", "type": "str"},
+        "multi_vm_sync_point_option": {"key": "multiVmSyncPointOption", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanA2AFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.recovery_point_type = kwargs['recovery_point_type']
-        self.cloud_service_creation_option = kwargs.get('cloud_service_creation_option', None)
-        self.multi_vm_sync_point_option = kwargs.get('multi_vm_sync_point_option', None)
+        self.instance_type = "A2A"  # type: str
+        self.recovery_point_type = kwargs["recovery_point_type"]
+        self.cloud_service_creation_option = kwargs.get("cloud_service_creation_option", None)
+        self.multi_vm_sync_point_option = kwargs.get("multi_vm_sync_point_option", None)
 
 
 class RecoveryPlanProviderSpecificInput(msrest.serialization.Model):
@@ -14871,21 +14150,16 @@ class RecoveryPlanProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'A2A': 'RecoveryPlanA2AInput'}
-    }
+    _subtype_map = {"instance_type": {"A2A": "RecoveryPlanA2AInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -14904,23 +14178,20 @@ class RecoveryPlanA2AInput(RecoveryPlanProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_zone': {'key': 'primaryZone', 'type': 'str'},
-        'recovery_zone': {'key': 'recoveryZone', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_zone": {"key": "primaryZone", "type": "str"},
+        "recovery_zone": {"key": "recoveryZone", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanA2AInput, self).__init__(**kwargs)
-        self.instance_type = 'A2A'  # type: str
-        self.primary_zone = kwargs.get('primary_zone', None)
-        self.recovery_zone = kwargs.get('recovery_zone', None)
+        self.instance_type = "A2A"  # type: str
+        self.primary_zone = kwargs.get("primary_zone", None)
+        self.recovery_zone = kwargs.get("recovery_zone", None)
 
 
 class RecoveryPlanAction(msrest.serialization.Model):
@@ -14941,28 +14212,25 @@ class RecoveryPlanAction(msrest.serialization.Model):
     """
 
     _validation = {
-        'action_name': {'required': True},
-        'failover_types': {'required': True},
-        'failover_directions': {'required': True},
-        'custom_details': {'required': True},
+        "action_name": {"required": True},
+        "failover_types": {"required": True},
+        "failover_directions": {"required": True},
+        "custom_details": {"required": True},
     }
 
     _attribute_map = {
-        'action_name': {'key': 'actionName', 'type': 'str'},
-        'failover_types': {'key': 'failoverTypes', 'type': '[str]'},
-        'failover_directions': {'key': 'failoverDirections', 'type': '[str]'},
-        'custom_details': {'key': 'customDetails', 'type': 'RecoveryPlanActionDetails'},
+        "action_name": {"key": "actionName", "type": "str"},
+        "failover_types": {"key": "failoverTypes", "type": "[str]"},
+        "failover_directions": {"key": "failoverDirections", "type": "[str]"},
+        "custom_details": {"key": "customDetails", "type": "RecoveryPlanActionDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanAction, self).__init__(**kwargs)
-        self.action_name = kwargs['action_name']
-        self.failover_types = kwargs['failover_types']
-        self.failover_directions = kwargs['failover_directions']
-        self.custom_details = kwargs['custom_details']
+        self.action_name = kwargs["action_name"]
+        self.failover_types = kwargs["failover_types"]
+        self.failover_directions = kwargs["failover_directions"]
+        self.custom_details = kwargs["custom_details"]
 
 
 class RecoveryPlanActionDetails(msrest.serialization.Model):
@@ -14979,21 +14247,22 @@ class RecoveryPlanActionDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
     _subtype_map = {
-        'instance_type': {'AutomationRunbookActionDetails': 'RecoveryPlanAutomationRunbookActionDetails', 'ManualActionDetails': 'RecoveryPlanManualActionDetails', 'ScriptActionDetails': 'RecoveryPlanScriptActionDetails'}
+        "instance_type": {
+            "AutomationRunbookActionDetails": "RecoveryPlanAutomationRunbookActionDetails",
+            "ManualActionDetails": "RecoveryPlanManualActionDetails",
+            "ScriptActionDetails": "RecoveryPlanScriptActionDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanActionDetails, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -15017,26 +14286,23 @@ class RecoveryPlanAutomationRunbookActionDetails(RecoveryPlanActionDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'fabric_location': {'required': True},
+        "instance_type": {"required": True},
+        "fabric_location": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'runbook_id': {'key': 'runbookId', 'type': 'str'},
-        'timeout': {'key': 'timeout', 'type': 'str'},
-        'fabric_location': {'key': 'fabricLocation', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "runbook_id": {"key": "runbookId", "type": "str"},
+        "timeout": {"key": "timeout", "type": "str"},
+        "fabric_location": {"key": "fabricLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanAutomationRunbookActionDetails, self).__init__(**kwargs)
-        self.instance_type = 'AutomationRunbookActionDetails'  # type: str
-        self.runbook_id = kwargs.get('runbook_id', None)
-        self.timeout = kwargs.get('timeout', None)
-        self.fabric_location = kwargs['fabric_location']
+        self.instance_type = "AutomationRunbookActionDetails"  # type: str
+        self.runbook_id = kwargs.get("runbook_id", None)
+        self.timeout = kwargs.get("timeout", None)
+        self.fabric_location = kwargs["fabric_location"]
 
 
 class RecoveryPlanCollection(msrest.serialization.Model):
@@ -15049,17 +14315,14 @@ class RecoveryPlanCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RecoveryPlan]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RecoveryPlan]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RecoveryPlanGroup(msrest.serialization.Model):
@@ -15082,25 +14345,22 @@ class RecoveryPlanGroup(msrest.serialization.Model):
     """
 
     _validation = {
-        'group_type': {'required': True},
+        "group_type": {"required": True},
     }
 
     _attribute_map = {
-        'group_type': {'key': 'groupType', 'type': 'str'},
-        'replication_protected_items': {'key': 'replicationProtectedItems', 'type': '[RecoveryPlanProtectedItem]'},
-        'start_group_actions': {'key': 'startGroupActions', 'type': '[RecoveryPlanAction]'},
-        'end_group_actions': {'key': 'endGroupActions', 'type': '[RecoveryPlanAction]'},
+        "group_type": {"key": "groupType", "type": "str"},
+        "replication_protected_items": {"key": "replicationProtectedItems", "type": "[RecoveryPlanProtectedItem]"},
+        "start_group_actions": {"key": "startGroupActions", "type": "[RecoveryPlanAction]"},
+        "end_group_actions": {"key": "endGroupActions", "type": "[RecoveryPlanAction]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanGroup, self).__init__(**kwargs)
-        self.group_type = kwargs['group_type']
-        self.replication_protected_items = kwargs.get('replication_protected_items', None)
-        self.start_group_actions = kwargs.get('start_group_actions', None)
-        self.end_group_actions = kwargs.get('end_group_actions', None)
+        self.group_type = kwargs["group_type"]
+        self.replication_protected_items = kwargs.get("replication_protected_items", None)
+        self.start_group_actions = kwargs.get("start_group_actions", None)
+        self.end_group_actions = kwargs.get("end_group_actions", None)
 
 
 class RecoveryPlanGroupTaskDetails(GroupTaskDetails):
@@ -15124,30 +14384,25 @@ class RecoveryPlanGroupTaskDetails(GroupTaskDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'child_tasks': {'key': 'childTasks', 'type': '[ASRTask]'},
-        'name': {'key': 'name', 'type': 'str'},
-        'group_id': {'key': 'groupId', 'type': 'str'},
-        'rp_group_type': {'key': 'rpGroupType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "child_tasks": {"key": "childTasks", "type": "[ASRTask]"},
+        "name": {"key": "name", "type": "str"},
+        "group_id": {"key": "groupId", "type": "str"},
+        "rp_group_type": {"key": "rpGroupType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'RecoveryPlanShutdownGroupTaskDetails': 'RecoveryPlanShutdownGroupTaskDetails'}
-    }
+    _subtype_map = {"instance_type": {"RecoveryPlanShutdownGroupTaskDetails": "RecoveryPlanShutdownGroupTaskDetails"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanGroupTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'RecoveryPlanGroupTaskDetails'  # type: str
-        self.name = kwargs.get('name', None)
-        self.group_id = kwargs.get('group_id', None)
-        self.rp_group_type = kwargs.get('rp_group_type', None)
+        self.instance_type = "RecoveryPlanGroupTaskDetails"  # type: str
+        self.name = kwargs.get("name", None)
+        self.group_id = kwargs.get("group_id", None)
+        self.rp_group_type = kwargs.get("rp_group_type", None)
 
 
 class RecoveryPlanHyperVReplicaAzureFailbackInput(RecoveryPlanProviderSpecificFailoverInput):
@@ -15167,25 +14422,22 @@ class RecoveryPlanHyperVReplicaAzureFailbackInput(RecoveryPlanProviderSpecificFa
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'data_sync_option': {'required': True},
-        'recovery_vm_creation_option': {'required': True},
+        "instance_type": {"required": True},
+        "data_sync_option": {"required": True},
+        "recovery_vm_creation_option": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'data_sync_option': {'key': 'dataSyncOption', 'type': 'str'},
-        'recovery_vm_creation_option': {'key': 'recoveryVmCreationOption', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "data_sync_option": {"key": "dataSyncOption", "type": "str"},
+        "recovery_vm_creation_option": {"key": "recoveryVmCreationOption", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanHyperVReplicaAzureFailbackInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzureFailback'  # type: str
-        self.data_sync_option = kwargs['data_sync_option']
-        self.recovery_vm_creation_option = kwargs['recovery_vm_creation_option']
+        self.instance_type = "HyperVReplicaAzureFailback"  # type: str
+        self.data_sync_option = kwargs["data_sync_option"]
+        self.recovery_vm_creation_option = kwargs["recovery_vm_creation_option"]
 
 
 class RecoveryPlanHyperVReplicaAzureFailoverInput(RecoveryPlanProviderSpecificFailoverInput):
@@ -15206,25 +14458,22 @@ class RecoveryPlanHyperVReplicaAzureFailoverInput(RecoveryPlanProviderSpecificFa
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'primary_kek_certificate_pfx': {'key': 'primaryKekCertificatePfx', 'type': 'str'},
-        'secondary_kek_certificate_pfx': {'key': 'secondaryKekCertificatePfx', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "primary_kek_certificate_pfx": {"key": "primaryKekCertificatePfx", "type": "str"},
+        "secondary_kek_certificate_pfx": {"key": "secondaryKekCertificatePfx", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanHyperVReplicaAzureFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'HyperVReplicaAzure'  # type: str
-        self.primary_kek_certificate_pfx = kwargs.get('primary_kek_certificate_pfx', None)
-        self.secondary_kek_certificate_pfx = kwargs.get('secondary_kek_certificate_pfx', None)
-        self.recovery_point_type = kwargs.get('recovery_point_type', None)
+        self.instance_type = "HyperVReplicaAzure"  # type: str
+        self.primary_kek_certificate_pfx = kwargs.get("primary_kek_certificate_pfx", None)
+        self.secondary_kek_certificate_pfx = kwargs.get("secondary_kek_certificate_pfx", None)
+        self.recovery_point_type = kwargs.get("recovery_point_type", None)
 
 
 class RecoveryPlanInMageAzureV2FailoverInput(RecoveryPlanProviderSpecificFailoverInput):
@@ -15244,24 +14493,21 @@ class RecoveryPlanInMageAzureV2FailoverInput(RecoveryPlanProviderSpecificFailove
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_type': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'use_multi_vm_sync_point': {'key': 'useMultiVmSyncPoint', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "use_multi_vm_sync_point": {"key": "useMultiVmSyncPoint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanInMageAzureV2FailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageAzureV2'  # type: str
-        self.recovery_point_type = kwargs['recovery_point_type']
-        self.use_multi_vm_sync_point = kwargs.get('use_multi_vm_sync_point', None)
+        self.instance_type = "InMageAzureV2"  # type: str
+        self.recovery_point_type = kwargs["recovery_point_type"]
+        self.use_multi_vm_sync_point = kwargs.get("use_multi_vm_sync_point", None)
 
 
 class RecoveryPlanInMageFailoverInput(RecoveryPlanProviderSpecificFailoverInput):
@@ -15278,22 +14524,19 @@ class RecoveryPlanInMageFailoverInput(RecoveryPlanProviderSpecificFailoverInput)
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_type': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanInMageFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMage'  # type: str
-        self.recovery_point_type = kwargs['recovery_point_type']
+        self.instance_type = "InMage"  # type: str
+        self.recovery_point_type = kwargs["recovery_point_type"]
 
 
 class RecoveryPlanInMageRcmFailbackFailoverInput(RecoveryPlanProviderSpecificFailoverInput):
@@ -15313,24 +14556,21 @@ class RecoveryPlanInMageRcmFailbackFailoverInput(RecoveryPlanProviderSpecificFai
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_type': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'use_multi_vm_sync_point': {'key': 'useMultiVmSyncPoint', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "use_multi_vm_sync_point": {"key": "useMultiVmSyncPoint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanInMageRcmFailbackFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcmFailback'  # type: str
-        self.recovery_point_type = kwargs['recovery_point_type']
-        self.use_multi_vm_sync_point = kwargs.get('use_multi_vm_sync_point', None)
+        self.instance_type = "InMageRcmFailback"  # type: str
+        self.recovery_point_type = kwargs["recovery_point_type"]
+        self.use_multi_vm_sync_point = kwargs.get("use_multi_vm_sync_point", None)
 
 
 class RecoveryPlanInMageRcmFailoverInput(RecoveryPlanProviderSpecificFailoverInput):
@@ -15350,24 +14590,21 @@ class RecoveryPlanInMageRcmFailoverInput(RecoveryPlanProviderSpecificFailoverInp
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_type': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'use_multi_vm_sync_point': {'key': 'useMultiVmSyncPoint', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "use_multi_vm_sync_point": {"key": "useMultiVmSyncPoint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanInMageRcmFailoverInput, self).__init__(**kwargs)
-        self.instance_type = 'InMageRcm'  # type: str
-        self.recovery_point_type = kwargs['recovery_point_type']
-        self.use_multi_vm_sync_point = kwargs.get('use_multi_vm_sync_point', None)
+        self.instance_type = "InMageRcm"  # type: str
+        self.recovery_point_type = kwargs["recovery_point_type"]
+        self.use_multi_vm_sync_point = kwargs.get("use_multi_vm_sync_point", None)
 
 
 class RecoveryPlanManualActionDetails(RecoveryPlanActionDetails):
@@ -15383,21 +14620,18 @@ class RecoveryPlanManualActionDetails(RecoveryPlanActionDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanManualActionDetails, self).__init__(**kwargs)
-        self.instance_type = 'ManualActionDetails'  # type: str
-        self.description = kwargs.get('description', None)
+        self.instance_type = "ManualActionDetails"  # type: str
+        self.description = kwargs.get("description", None)
 
 
 class RecoveryPlanPlannedFailoverInput(msrest.serialization.Model):
@@ -15411,19 +14645,16 @@ class RecoveryPlanPlannedFailoverInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'RecoveryPlanPlannedFailoverInputProperties'},
+        "properties": {"key": "properties", "type": "RecoveryPlanPlannedFailoverInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanPlannedFailoverInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class RecoveryPlanPlannedFailoverInputProperties(msrest.serialization.Model):
@@ -15441,21 +14672,21 @@ class RecoveryPlanPlannedFailoverInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'failover_direction': {'required': True},
+        "failover_direction": {"required": True},
     }
 
     _attribute_map = {
-        'failover_direction': {'key': 'failoverDirection', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': '[RecoveryPlanProviderSpecificFailoverInput]'},
+        "failover_direction": {"key": "failoverDirection", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "[RecoveryPlanProviderSpecificFailoverInput]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanPlannedFailoverInputProperties, self).__init__(**kwargs)
-        self.failover_direction = kwargs['failover_direction']
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.failover_direction = kwargs["failover_direction"]
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class RecoveryPlanProperties(msrest.serialization.Model):
@@ -15497,45 +14728,45 @@ class RecoveryPlanProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'primary_fabric_id': {'key': 'primaryFabricId', 'type': 'str'},
-        'primary_fabric_friendly_name': {'key': 'primaryFabricFriendlyName', 'type': 'str'},
-        'recovery_fabric_id': {'key': 'recoveryFabricId', 'type': 'str'},
-        'recovery_fabric_friendly_name': {'key': 'recoveryFabricFriendlyName', 'type': 'str'},
-        'failover_deployment_model': {'key': 'failoverDeploymentModel', 'type': 'str'},
-        'replication_providers': {'key': 'replicationProviders', 'type': '[str]'},
-        'allowed_operations': {'key': 'allowedOperations', 'type': '[str]'},
-        'last_planned_failover_time': {'key': 'lastPlannedFailoverTime', 'type': 'iso-8601'},
-        'last_unplanned_failover_time': {'key': 'lastUnplannedFailoverTime', 'type': 'iso-8601'},
-        'last_test_failover_time': {'key': 'lastTestFailoverTime', 'type': 'iso-8601'},
-        'current_scenario': {'key': 'currentScenario', 'type': 'CurrentScenarioDetails'},
-        'current_scenario_status': {'key': 'currentScenarioStatus', 'type': 'str'},
-        'current_scenario_status_description': {'key': 'currentScenarioStatusDescription', 'type': 'str'},
-        'groups': {'key': 'groups', 'type': '[RecoveryPlanGroup]'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': '[RecoveryPlanProviderSpecificDetails]'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "primary_fabric_id": {"key": "primaryFabricId", "type": "str"},
+        "primary_fabric_friendly_name": {"key": "primaryFabricFriendlyName", "type": "str"},
+        "recovery_fabric_id": {"key": "recoveryFabricId", "type": "str"},
+        "recovery_fabric_friendly_name": {"key": "recoveryFabricFriendlyName", "type": "str"},
+        "failover_deployment_model": {"key": "failoverDeploymentModel", "type": "str"},
+        "replication_providers": {"key": "replicationProviders", "type": "[str]"},
+        "allowed_operations": {"key": "allowedOperations", "type": "[str]"},
+        "last_planned_failover_time": {"key": "lastPlannedFailoverTime", "type": "iso-8601"},
+        "last_unplanned_failover_time": {"key": "lastUnplannedFailoverTime", "type": "iso-8601"},
+        "last_test_failover_time": {"key": "lastTestFailoverTime", "type": "iso-8601"},
+        "current_scenario": {"key": "currentScenario", "type": "CurrentScenarioDetails"},
+        "current_scenario_status": {"key": "currentScenarioStatus", "type": "str"},
+        "current_scenario_status_description": {"key": "currentScenarioStatusDescription", "type": "str"},
+        "groups": {"key": "groups", "type": "[RecoveryPlanGroup]"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "[RecoveryPlanProviderSpecificDetails]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.primary_fabric_id = kwargs.get('primary_fabric_id', None)
-        self.primary_fabric_friendly_name = kwargs.get('primary_fabric_friendly_name', None)
-        self.recovery_fabric_id = kwargs.get('recovery_fabric_id', None)
-        self.recovery_fabric_friendly_name = kwargs.get('recovery_fabric_friendly_name', None)
-        self.failover_deployment_model = kwargs.get('failover_deployment_model', None)
-        self.replication_providers = kwargs.get('replication_providers', None)
-        self.allowed_operations = kwargs.get('allowed_operations', None)
-        self.last_planned_failover_time = kwargs.get('last_planned_failover_time', None)
-        self.last_unplanned_failover_time = kwargs.get('last_unplanned_failover_time', None)
-        self.last_test_failover_time = kwargs.get('last_test_failover_time', None)
-        self.current_scenario = kwargs.get('current_scenario', None)
-        self.current_scenario_status = kwargs.get('current_scenario_status', None)
-        self.current_scenario_status_description = kwargs.get('current_scenario_status_description', None)
-        self.groups = kwargs.get('groups', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.primary_fabric_id = kwargs.get("primary_fabric_id", None)
+        self.primary_fabric_friendly_name = kwargs.get("primary_fabric_friendly_name", None)
+        self.recovery_fabric_id = kwargs.get("recovery_fabric_id", None)
+        self.recovery_fabric_friendly_name = kwargs.get("recovery_fabric_friendly_name", None)
+        self.failover_deployment_model = kwargs.get("failover_deployment_model", None)
+        self.replication_providers = kwargs.get("replication_providers", None)
+        self.allowed_operations = kwargs.get("allowed_operations", None)
+        self.last_planned_failover_time = kwargs.get("last_planned_failover_time", None)
+        self.last_unplanned_failover_time = kwargs.get("last_unplanned_failover_time", None)
+        self.last_test_failover_time = kwargs.get("last_test_failover_time", None)
+        self.current_scenario = kwargs.get("current_scenario", None)
+        self.current_scenario_status = kwargs.get("current_scenario_status", None)
+        self.current_scenario_status_description = kwargs.get("current_scenario_status_description", None)
+        self.groups = kwargs.get("groups", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class RecoveryPlanProtectedItem(msrest.serialization.Model):
@@ -15548,17 +14779,14 @@ class RecoveryPlanProtectedItem(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'virtual_machine_id': {'key': 'virtualMachineId', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "virtual_machine_id": {"key": "virtualMachineId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanProtectedItem, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.virtual_machine_id = kwargs.get('virtual_machine_id', None)
+        self.id = kwargs.get("id", None)
+        self.virtual_machine_id = kwargs.get("virtual_machine_id", None)
 
 
 class RecoveryPlanScriptActionDetails(RecoveryPlanActionDetails):
@@ -15580,27 +14808,24 @@ class RecoveryPlanScriptActionDetails(RecoveryPlanActionDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'path': {'required': True},
-        'fabric_location': {'required': True},
+        "instance_type": {"required": True},
+        "path": {"required": True},
+        "fabric_location": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'path': {'key': 'path', 'type': 'str'},
-        'timeout': {'key': 'timeout', 'type': 'str'},
-        'fabric_location': {'key': 'fabricLocation', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "path": {"key": "path", "type": "str"},
+        "timeout": {"key": "timeout", "type": "str"},
+        "fabric_location": {"key": "fabricLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanScriptActionDetails, self).__init__(**kwargs)
-        self.instance_type = 'ScriptActionDetails'  # type: str
-        self.path = kwargs['path']
-        self.timeout = kwargs.get('timeout', None)
-        self.fabric_location = kwargs['fabric_location']
+        self.instance_type = "ScriptActionDetails"  # type: str
+        self.path = kwargs["path"]
+        self.timeout = kwargs.get("timeout", None)
+        self.fabric_location = kwargs["fabric_location"]
 
 
 class RecoveryPlanShutdownGroupTaskDetails(RecoveryPlanGroupTaskDetails):
@@ -15621,23 +14846,20 @@ class RecoveryPlanShutdownGroupTaskDetails(RecoveryPlanGroupTaskDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'child_tasks': {'key': 'childTasks', 'type': '[ASRTask]'},
-        'name': {'key': 'name', 'type': 'str'},
-        'group_id': {'key': 'groupId', 'type': 'str'},
-        'rp_group_type': {'key': 'rpGroupType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "child_tasks": {"key": "childTasks", "type": "[ASRTask]"},
+        "name": {"key": "name", "type": "str"},
+        "group_id": {"key": "groupId", "type": "str"},
+        "rp_group_type": {"key": "rpGroupType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanShutdownGroupTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'RecoveryPlanShutdownGroupTaskDetails'  # type: str
+        self.instance_type = "RecoveryPlanShutdownGroupTaskDetails"  # type: str
 
 
 class RecoveryPlanTestFailoverCleanupInput(msrest.serialization.Model):
@@ -15651,19 +14873,16 @@ class RecoveryPlanTestFailoverCleanupInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'RecoveryPlanTestFailoverCleanupInputProperties'},
+        "properties": {"key": "properties", "type": "RecoveryPlanTestFailoverCleanupInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanTestFailoverCleanupInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class RecoveryPlanTestFailoverCleanupInputProperties(msrest.serialization.Model):
@@ -15674,19 +14893,16 @@ class RecoveryPlanTestFailoverCleanupInputProperties(msrest.serialization.Model)
     """
 
     _validation = {
-        'comments': {'max_length': 1024, 'min_length': 0},
+        "comments": {"max_length": 1024, "min_length": 0},
     }
 
     _attribute_map = {
-        'comments': {'key': 'comments', 'type': 'str'},
+        "comments": {"key": "comments", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanTestFailoverCleanupInputProperties, self).__init__(**kwargs)
-        self.comments = kwargs.get('comments', None)
+        self.comments = kwargs.get("comments", None)
 
 
 class RecoveryPlanTestFailoverInput(msrest.serialization.Model):
@@ -15700,19 +14916,16 @@ class RecoveryPlanTestFailoverInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'RecoveryPlanTestFailoverInputProperties'},
+        "properties": {"key": "properties", "type": "RecoveryPlanTestFailoverInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanTestFailoverInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class RecoveryPlanTestFailoverInputProperties(msrest.serialization.Model):
@@ -15734,26 +14947,26 @@ class RecoveryPlanTestFailoverInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'failover_direction': {'required': True},
-        'network_type': {'required': True},
+        "failover_direction": {"required": True},
+        "network_type": {"required": True},
     }
 
     _attribute_map = {
-        'failover_direction': {'key': 'failoverDirection', 'type': 'str'},
-        'network_type': {'key': 'networkType', 'type': 'str'},
-        'network_id': {'key': 'networkId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': '[RecoveryPlanProviderSpecificFailoverInput]'},
+        "failover_direction": {"key": "failoverDirection", "type": "str"},
+        "network_type": {"key": "networkType", "type": "str"},
+        "network_id": {"key": "networkId", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "[RecoveryPlanProviderSpecificFailoverInput]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanTestFailoverInputProperties, self).__init__(**kwargs)
-        self.failover_direction = kwargs['failover_direction']
-        self.network_type = kwargs['network_type']
-        self.network_id = kwargs.get('network_id', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.failover_direction = kwargs["failover_direction"]
+        self.network_type = kwargs["network_type"]
+        self.network_id = kwargs.get("network_id", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class RecoveryPlanUnplannedFailoverInput(msrest.serialization.Model):
@@ -15767,19 +14980,16 @@ class RecoveryPlanUnplannedFailoverInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'RecoveryPlanUnplannedFailoverInputProperties'},
+        "properties": {"key": "properties", "type": "RecoveryPlanUnplannedFailoverInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanUnplannedFailoverInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class RecoveryPlanUnplannedFailoverInputProperties(msrest.serialization.Model):
@@ -15801,24 +15011,24 @@ class RecoveryPlanUnplannedFailoverInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'failover_direction': {'required': True},
-        'source_site_operations': {'required': True},
+        "failover_direction": {"required": True},
+        "source_site_operations": {"required": True},
     }
 
     _attribute_map = {
-        'failover_direction': {'key': 'failoverDirection', 'type': 'str'},
-        'source_site_operations': {'key': 'sourceSiteOperations', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': '[RecoveryPlanProviderSpecificFailoverInput]'},
+        "failover_direction": {"key": "failoverDirection", "type": "str"},
+        "source_site_operations": {"key": "sourceSiteOperations", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "[RecoveryPlanProviderSpecificFailoverInput]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPlanUnplannedFailoverInputProperties, self).__init__(**kwargs)
-        self.failover_direction = kwargs['failover_direction']
-        self.source_site_operations = kwargs['source_site_operations']
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.failover_direction = kwargs["failover_direction"]
+        self.source_site_operations = kwargs["source_site_operations"]
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class RecoveryPoint(Resource):
@@ -15839,25 +15049,22 @@ class RecoveryPoint(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'RecoveryPointProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "RecoveryPointProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPoint, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class RecoveryPointCollection(msrest.serialization.Model):
@@ -15870,17 +15077,14 @@ class RecoveryPointCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RecoveryPoint]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RecoveryPoint]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPointCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RecoveryPointProperties(msrest.serialization.Model):
@@ -15896,19 +15100,16 @@ class RecoveryPointProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'recovery_point_time': {'key': 'recoveryPointTime', 'type': 'iso-8601'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'ProviderSpecificRecoveryPointDetails'},
+        "recovery_point_time": {"key": "recoveryPointTime", "type": "iso-8601"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "ProviderSpecificRecoveryPointDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPointProperties, self).__init__(**kwargs)
-        self.recovery_point_time = kwargs.get('recovery_point_time', None)
-        self.recovery_point_type = kwargs.get('recovery_point_type', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.recovery_point_time = kwargs.get("recovery_point_time", None)
+        self.recovery_point_type = kwargs.get("recovery_point_type", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class RecoveryServicesProvider(Resource):
@@ -15930,25 +15131,22 @@ class RecoveryServicesProvider(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'RecoveryServicesProviderProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "RecoveryServicesProviderProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryServicesProvider, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class RecoveryServicesProviderCollection(msrest.serialization.Model):
@@ -15961,17 +15159,14 @@ class RecoveryServicesProviderCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RecoveryServicesProvider]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RecoveryServicesProvider]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryServicesProviderCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RecoveryServicesProviderProperties(msrest.serialization.Model):
@@ -16024,53 +15219,53 @@ class RecoveryServicesProviderProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'fabric_type': {'key': 'fabricType', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'provider_version': {'key': 'providerVersion', 'type': 'str'},
-        'server_version': {'key': 'serverVersion', 'type': 'str'},
-        'provider_version_state': {'key': 'providerVersionState', 'type': 'str'},
-        'provider_version_expiry_date': {'key': 'providerVersionExpiryDate', 'type': 'iso-8601'},
-        'fabric_friendly_name': {'key': 'fabricFriendlyName', 'type': 'str'},
-        'last_heart_beat': {'key': 'lastHeartBeat', 'type': 'iso-8601'},
-        'connection_status': {'key': 'connectionStatus', 'type': 'str'},
-        'protected_item_count': {'key': 'protectedItemCount', 'type': 'int'},
-        'allowed_scenarios': {'key': 'allowedScenarios', 'type': '[str]'},
-        'health_error_details': {'key': 'healthErrorDetails', 'type': '[HealthError]'},
-        'dra_identifier': {'key': 'draIdentifier', 'type': 'str'},
-        'machine_id': {'key': 'machineId', 'type': 'str'},
-        'machine_name': {'key': 'machineName', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'authentication_identity_details': {'key': 'authenticationIdentityDetails', 'type': 'IdentityProviderDetails'},
-        'resource_access_identity_details': {'key': 'resourceAccessIdentityDetails', 'type': 'IdentityProviderDetails'},
-        'data_plane_authentication_identity_details': {'key': 'dataPlaneAuthenticationIdentityDetails', 'type': 'IdentityProviderDetails'},
-        'provider_version_details': {'key': 'providerVersionDetails', 'type': 'VersionDetails'},
+        "fabric_type": {"key": "fabricType", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "provider_version": {"key": "providerVersion", "type": "str"},
+        "server_version": {"key": "serverVersion", "type": "str"},
+        "provider_version_state": {"key": "providerVersionState", "type": "str"},
+        "provider_version_expiry_date": {"key": "providerVersionExpiryDate", "type": "iso-8601"},
+        "fabric_friendly_name": {"key": "fabricFriendlyName", "type": "str"},
+        "last_heart_beat": {"key": "lastHeartBeat", "type": "iso-8601"},
+        "connection_status": {"key": "connectionStatus", "type": "str"},
+        "protected_item_count": {"key": "protectedItemCount", "type": "int"},
+        "allowed_scenarios": {"key": "allowedScenarios", "type": "[str]"},
+        "health_error_details": {"key": "healthErrorDetails", "type": "[HealthError]"},
+        "dra_identifier": {"key": "draIdentifier", "type": "str"},
+        "machine_id": {"key": "machineId", "type": "str"},
+        "machine_name": {"key": "machineName", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "authentication_identity_details": {"key": "authenticationIdentityDetails", "type": "IdentityProviderDetails"},
+        "resource_access_identity_details": {"key": "resourceAccessIdentityDetails", "type": "IdentityProviderDetails"},
+        "data_plane_authentication_identity_details": {
+            "key": "dataPlaneAuthenticationIdentityDetails",
+            "type": "IdentityProviderDetails",
+        },
+        "provider_version_details": {"key": "providerVersionDetails", "type": "VersionDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryServicesProviderProperties, self).__init__(**kwargs)
-        self.fabric_type = kwargs.get('fabric_type', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.provider_version = kwargs.get('provider_version', None)
-        self.server_version = kwargs.get('server_version', None)
-        self.provider_version_state = kwargs.get('provider_version_state', None)
-        self.provider_version_expiry_date = kwargs.get('provider_version_expiry_date', None)
-        self.fabric_friendly_name = kwargs.get('fabric_friendly_name', None)
-        self.last_heart_beat = kwargs.get('last_heart_beat', None)
-        self.connection_status = kwargs.get('connection_status', None)
-        self.protected_item_count = kwargs.get('protected_item_count', None)
-        self.allowed_scenarios = kwargs.get('allowed_scenarios', None)
-        self.health_error_details = kwargs.get('health_error_details', None)
-        self.dra_identifier = kwargs.get('dra_identifier', None)
-        self.machine_id = kwargs.get('machine_id', None)
-        self.machine_name = kwargs.get('machine_name', None)
-        self.bios_id = kwargs.get('bios_id', None)
-        self.authentication_identity_details = kwargs.get('authentication_identity_details', None)
-        self.resource_access_identity_details = kwargs.get('resource_access_identity_details', None)
-        self.data_plane_authentication_identity_details = kwargs.get('data_plane_authentication_identity_details', None)
-        self.provider_version_details = kwargs.get('provider_version_details', None)
+        self.fabric_type = kwargs.get("fabric_type", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.provider_version = kwargs.get("provider_version", None)
+        self.server_version = kwargs.get("server_version", None)
+        self.provider_version_state = kwargs.get("provider_version_state", None)
+        self.provider_version_expiry_date = kwargs.get("provider_version_expiry_date", None)
+        self.fabric_friendly_name = kwargs.get("fabric_friendly_name", None)
+        self.last_heart_beat = kwargs.get("last_heart_beat", None)
+        self.connection_status = kwargs.get("connection_status", None)
+        self.protected_item_count = kwargs.get("protected_item_count", None)
+        self.allowed_scenarios = kwargs.get("allowed_scenarios", None)
+        self.health_error_details = kwargs.get("health_error_details", None)
+        self.dra_identifier = kwargs.get("dra_identifier", None)
+        self.machine_id = kwargs.get("machine_id", None)
+        self.machine_name = kwargs.get("machine_name", None)
+        self.bios_id = kwargs.get("bios_id", None)
+        self.authentication_identity_details = kwargs.get("authentication_identity_details", None)
+        self.resource_access_identity_details = kwargs.get("resource_access_identity_details", None)
+        self.data_plane_authentication_identity_details = kwargs.get("data_plane_authentication_identity_details", None)
+        self.provider_version_details = kwargs.get("provider_version_details", None)
 
 
 class RemoveDisksInput(msrest.serialization.Model):
@@ -16081,15 +15276,12 @@ class RemoveDisksInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'RemoveDisksInputProperties'},
+        "properties": {"key": "properties", "type": "RemoveDisksInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RemoveDisksInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class RemoveDisksInputProperties(msrest.serialization.Model):
@@ -16103,15 +15295,12 @@ class RemoveDisksInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'RemoveDisksProviderSpecificInput'},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "RemoveDisksProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RemoveDisksInputProperties, self).__init__(**kwargs)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class RemoveProtectionContainerMappingInput(msrest.serialization.Model):
@@ -16123,15 +15312,12 @@ class RemoveProtectionContainerMappingInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'RemoveProtectionContainerMappingInputProperties'},
+        "properties": {"key": "properties", "type": "RemoveProtectionContainerMappingInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RemoveProtectionContainerMappingInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class RemoveProtectionContainerMappingInputProperties(msrest.serialization.Model):
@@ -16143,15 +15329,15 @@ class RemoveProtectionContainerMappingInputProperties(msrest.serialization.Model
     """
 
     _attribute_map = {
-        'provider_specific_input': {'key': 'providerSpecificInput', 'type': 'ReplicationProviderContainerUnmappingInput'},
+        "provider_specific_input": {
+            "key": "providerSpecificInput",
+            "type": "ReplicationProviderContainerUnmappingInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RemoveProtectionContainerMappingInputProperties, self).__init__(**kwargs)
-        self.provider_specific_input = kwargs.get('provider_specific_input', None)
+        self.provider_specific_input = kwargs.get("provider_specific_input", None)
 
 
 class RenewCertificateInput(msrest.serialization.Model):
@@ -16163,15 +15349,12 @@ class RenewCertificateInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'RenewCertificateInputProperties'},
+        "properties": {"key": "properties", "type": "RenewCertificateInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RenewCertificateInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class RenewCertificateInputProperties(msrest.serialization.Model):
@@ -16182,15 +15365,12 @@ class RenewCertificateInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'renew_certificate_type': {'key': 'renewCertificateType', 'type': 'str'},
+        "renew_certificate_type": {"key": "renewCertificateType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RenewCertificateInputProperties, self).__init__(**kwargs)
-        self.renew_certificate_type = kwargs.get('renew_certificate_type', None)
+        self.renew_certificate_type = kwargs.get("renew_certificate_type", None)
 
 
 class ReplicationAgentDetails(msrest.serialization.Model):
@@ -16220,33 +15400,30 @@ class ReplicationAgentDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'fabric_object_id': {'readonly': True},
-        'fqdn': {'readonly': True},
-        'version': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "fabric_object_id": {"readonly": True},
+        "fqdn": {"readonly": True},
+        "version": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationAgentDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -16276,23 +15453,20 @@ class ReplicationEligibilityResults(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'id': {'readonly': True},
-        'properties': {'readonly': True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "id": {"readonly": True},
+        "properties": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'ReplicationEligibilityResultsProperties'},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "properties": {"key": "properties", "type": "ReplicationEligibilityResultsProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationEligibilityResults, self).__init__(**kwargs)
         self.name = None
         self.type = None
@@ -16309,15 +15483,12 @@ class ReplicationEligibilityResultsCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ReplicationEligibilityResults]'},
+        "value": {"key": "value", "type": "[ReplicationEligibilityResults]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationEligibilityResultsCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class ReplicationEligibilityResultsErrorInfo(msrest.serialization.Model):
@@ -16338,26 +15509,23 @@ class ReplicationEligibilityResultsErrorInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'status': {'readonly': True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'possible_causes': {'key': 'possibleCauses', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "possible_causes": {"key": "possibleCauses", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationEligibilityResultsErrorInfo, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
-        self.possible_causes = kwargs.get('possible_causes', None)
-        self.recommended_action = kwargs.get('recommended_action', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
+        self.possible_causes = kwargs.get("possible_causes", None)
+        self.recommended_action = kwargs.get("recommended_action", None)
         self.status = None
 
 
@@ -16374,21 +15542,18 @@ class ReplicationEligibilityResultsProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'client_request_id': {'readonly': True},
+        "client_request_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'client_request_id': {'key': 'clientRequestId', 'type': 'str'},
-        'errors': {'key': 'errors', 'type': '[ReplicationEligibilityResultsErrorInfo]'},
+        "client_request_id": {"key": "clientRequestId", "type": "str"},
+        "errors": {"key": "errors", "type": "[ReplicationEligibilityResultsErrorInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationEligibilityResultsProperties, self).__init__(**kwargs)
         self.client_request_id = None
-        self.errors = kwargs.get('errors', None)
+        self.errors = kwargs.get("errors", None)
 
 
 class ReplicationGroupDetails(ConfigurationSettings):
@@ -16402,19 +15567,16 @@ class ReplicationGroupDetails(ConfigurationSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationGroupDetails, self).__init__(**kwargs)
-        self.instance_type = 'ReplicationGroupDetails'  # type: str
+        self.instance_type = "ReplicationGroupDetails"  # type: str
 
 
 class ReplicationProtectedItem(Resource):
@@ -16436,25 +15598,22 @@ class ReplicationProtectedItem(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'ReplicationProtectedItemProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ReplicationProtectedItemProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProtectedItem, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ReplicationProtectedItemCollection(msrest.serialization.Model):
@@ -16467,17 +15626,14 @@ class ReplicationProtectedItemCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ReplicationProtectedItem]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ReplicationProtectedItem]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProtectedItemCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ReplicationProtectedItemProperties(msrest.serialization.Model):
@@ -16547,69 +15703,71 @@ class ReplicationProtectedItemProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'protected_item_type': {'key': 'protectedItemType', 'type': 'str'},
-        'protectable_item_id': {'key': 'protectableItemId', 'type': 'str'},
-        'recovery_services_provider_id': {'key': 'recoveryServicesProviderId', 'type': 'str'},
-        'primary_fabric_friendly_name': {'key': 'primaryFabricFriendlyName', 'type': 'str'},
-        'primary_fabric_provider': {'key': 'primaryFabricProvider', 'type': 'str'},
-        'recovery_fabric_friendly_name': {'key': 'recoveryFabricFriendlyName', 'type': 'str'},
-        'recovery_fabric_id': {'key': 'recoveryFabricId', 'type': 'str'},
-        'primary_protection_container_friendly_name': {'key': 'primaryProtectionContainerFriendlyName', 'type': 'str'},
-        'recovery_protection_container_friendly_name': {'key': 'recoveryProtectionContainerFriendlyName', 'type': 'str'},
-        'protection_state': {'key': 'protectionState', 'type': 'str'},
-        'protection_state_description': {'key': 'protectionStateDescription', 'type': 'str'},
-        'active_location': {'key': 'activeLocation', 'type': 'str'},
-        'test_failover_state': {'key': 'testFailoverState', 'type': 'str'},
-        'test_failover_state_description': {'key': 'testFailoverStateDescription', 'type': 'str'},
-        'allowed_operations': {'key': 'allowedOperations', 'type': '[str]'},
-        'replication_health': {'key': 'replicationHealth', 'type': 'str'},
-        'failover_health': {'key': 'failoverHealth', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'policy_friendly_name': {'key': 'policyFriendlyName', 'type': 'str'},
-        'last_successful_failover_time': {'key': 'lastSuccessfulFailoverTime', 'type': 'iso-8601'},
-        'last_successful_test_failover_time': {'key': 'lastSuccessfulTestFailoverTime', 'type': 'iso-8601'},
-        'current_scenario': {'key': 'currentScenario', 'type': 'CurrentScenarioDetails'},
-        'failover_recovery_point_id': {'key': 'failoverRecoveryPointId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'ReplicationProviderSpecificSettings'},
-        'recovery_container_id': {'key': 'recoveryContainerId', 'type': 'str'},
-        'event_correlation_id': {'key': 'eventCorrelationId', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "protected_item_type": {"key": "protectedItemType", "type": "str"},
+        "protectable_item_id": {"key": "protectableItemId", "type": "str"},
+        "recovery_services_provider_id": {"key": "recoveryServicesProviderId", "type": "str"},
+        "primary_fabric_friendly_name": {"key": "primaryFabricFriendlyName", "type": "str"},
+        "primary_fabric_provider": {"key": "primaryFabricProvider", "type": "str"},
+        "recovery_fabric_friendly_name": {"key": "recoveryFabricFriendlyName", "type": "str"},
+        "recovery_fabric_id": {"key": "recoveryFabricId", "type": "str"},
+        "primary_protection_container_friendly_name": {"key": "primaryProtectionContainerFriendlyName", "type": "str"},
+        "recovery_protection_container_friendly_name": {
+            "key": "recoveryProtectionContainerFriendlyName",
+            "type": "str",
+        },
+        "protection_state": {"key": "protectionState", "type": "str"},
+        "protection_state_description": {"key": "protectionStateDescription", "type": "str"},
+        "active_location": {"key": "activeLocation", "type": "str"},
+        "test_failover_state": {"key": "testFailoverState", "type": "str"},
+        "test_failover_state_description": {"key": "testFailoverStateDescription", "type": "str"},
+        "allowed_operations": {"key": "allowedOperations", "type": "[str]"},
+        "replication_health": {"key": "replicationHealth", "type": "str"},
+        "failover_health": {"key": "failoverHealth", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "policy_friendly_name": {"key": "policyFriendlyName", "type": "str"},
+        "last_successful_failover_time": {"key": "lastSuccessfulFailoverTime", "type": "iso-8601"},
+        "last_successful_test_failover_time": {"key": "lastSuccessfulTestFailoverTime", "type": "iso-8601"},
+        "current_scenario": {"key": "currentScenario", "type": "CurrentScenarioDetails"},
+        "failover_recovery_point_id": {"key": "failoverRecoveryPointId", "type": "str"},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "ReplicationProviderSpecificSettings"},
+        "recovery_container_id": {"key": "recoveryContainerId", "type": "str"},
+        "event_correlation_id": {"key": "eventCorrelationId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProtectedItemProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.protected_item_type = kwargs.get('protected_item_type', None)
-        self.protectable_item_id = kwargs.get('protectable_item_id', None)
-        self.recovery_services_provider_id = kwargs.get('recovery_services_provider_id', None)
-        self.primary_fabric_friendly_name = kwargs.get('primary_fabric_friendly_name', None)
-        self.primary_fabric_provider = kwargs.get('primary_fabric_provider', None)
-        self.recovery_fabric_friendly_name = kwargs.get('recovery_fabric_friendly_name', None)
-        self.recovery_fabric_id = kwargs.get('recovery_fabric_id', None)
-        self.primary_protection_container_friendly_name = kwargs.get('primary_protection_container_friendly_name', None)
-        self.recovery_protection_container_friendly_name = kwargs.get('recovery_protection_container_friendly_name', None)
-        self.protection_state = kwargs.get('protection_state', None)
-        self.protection_state_description = kwargs.get('protection_state_description', None)
-        self.active_location = kwargs.get('active_location', None)
-        self.test_failover_state = kwargs.get('test_failover_state', None)
-        self.test_failover_state_description = kwargs.get('test_failover_state_description', None)
-        self.allowed_operations = kwargs.get('allowed_operations', None)
-        self.replication_health = kwargs.get('replication_health', None)
-        self.failover_health = kwargs.get('failover_health', None)
-        self.health_errors = kwargs.get('health_errors', None)
-        self.policy_id = kwargs.get('policy_id', None)
-        self.policy_friendly_name = kwargs.get('policy_friendly_name', None)
-        self.last_successful_failover_time = kwargs.get('last_successful_failover_time', None)
-        self.last_successful_test_failover_time = kwargs.get('last_successful_test_failover_time', None)
-        self.current_scenario = kwargs.get('current_scenario', None)
-        self.failover_recovery_point_id = kwargs.get('failover_recovery_point_id', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
-        self.recovery_container_id = kwargs.get('recovery_container_id', None)
-        self.event_correlation_id = kwargs.get('event_correlation_id', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.protected_item_type = kwargs.get("protected_item_type", None)
+        self.protectable_item_id = kwargs.get("protectable_item_id", None)
+        self.recovery_services_provider_id = kwargs.get("recovery_services_provider_id", None)
+        self.primary_fabric_friendly_name = kwargs.get("primary_fabric_friendly_name", None)
+        self.primary_fabric_provider = kwargs.get("primary_fabric_provider", None)
+        self.recovery_fabric_friendly_name = kwargs.get("recovery_fabric_friendly_name", None)
+        self.recovery_fabric_id = kwargs.get("recovery_fabric_id", None)
+        self.primary_protection_container_friendly_name = kwargs.get("primary_protection_container_friendly_name", None)
+        self.recovery_protection_container_friendly_name = kwargs.get(
+            "recovery_protection_container_friendly_name", None
+        )
+        self.protection_state = kwargs.get("protection_state", None)
+        self.protection_state_description = kwargs.get("protection_state_description", None)
+        self.active_location = kwargs.get("active_location", None)
+        self.test_failover_state = kwargs.get("test_failover_state", None)
+        self.test_failover_state_description = kwargs.get("test_failover_state_description", None)
+        self.allowed_operations = kwargs.get("allowed_operations", None)
+        self.replication_health = kwargs.get("replication_health", None)
+        self.failover_health = kwargs.get("failover_health", None)
+        self.health_errors = kwargs.get("health_errors", None)
+        self.policy_id = kwargs.get("policy_id", None)
+        self.policy_friendly_name = kwargs.get("policy_friendly_name", None)
+        self.last_successful_failover_time = kwargs.get("last_successful_failover_time", None)
+        self.last_successful_test_failover_time = kwargs.get("last_successful_test_failover_time", None)
+        self.current_scenario = kwargs.get("current_scenario", None)
+        self.failover_recovery_point_id = kwargs.get("failover_recovery_point_id", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
+        self.recovery_container_id = kwargs.get("recovery_container_id", None)
+        self.event_correlation_id = kwargs.get("event_correlation_id", None)
 
 
 class ReplicationProtectionIntent(Resource):
@@ -16631,25 +15789,22 @@ class ReplicationProtectionIntent(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'ReplicationProtectionIntentProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ReplicationProtectionIntentProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProtectionIntent, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ReplicationProtectionIntentCollection(msrest.serialization.Model):
@@ -16662,17 +15817,14 @@ class ReplicationProtectionIntentCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ReplicationProtectionIntent]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ReplicationProtectionIntent]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProtectionIntentCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ReplicationProtectionIntentProperties(msrest.serialization.Model):
@@ -16696,32 +15848,32 @@ class ReplicationProtectionIntentProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'job_id': {'readonly': True},
-        'job_state': {'readonly': True},
-        'is_active': {'readonly': True},
-        'creation_time_utc': {'readonly': True},
+        "job_id": {"readonly": True},
+        "job_state": {"readonly": True},
+        "is_active": {"readonly": True},
+        "creation_time_utc": {"readonly": True},
     }
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'job_id': {'key': 'jobId', 'type': 'str'},
-        'job_state': {'key': 'jobState', 'type': 'str'},
-        'is_active': {'key': 'isActive', 'type': 'bool'},
-        'creation_time_utc': {'key': 'creationTimeUTC', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'ReplicationProtectionIntentProviderSpecificSettings'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "job_id": {"key": "jobId", "type": "str"},
+        "job_state": {"key": "jobState", "type": "str"},
+        "is_active": {"key": "isActive", "type": "bool"},
+        "creation_time_utc": {"key": "creationTimeUTC", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "ReplicationProtectionIntentProviderSpecificSettings",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProtectionIntentProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
         self.job_id = None
         self.job_state = None
         self.is_active = None
         self.creation_time_utc = None
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class ReplicationProviderContainerUnmappingInput(msrest.serialization.Model):
@@ -16732,15 +15884,12 @@ class ReplicationProviderContainerUnmappingInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReplicationProviderContainerUnmappingInput, self).__init__(**kwargs)
-        self.instance_type = kwargs.get('instance_type', None)
+        self.instance_type = kwargs.get("instance_type", None)
 
 
 class ReprotectAgentDetails(msrest.serialization.Model):
@@ -16778,41 +15927,38 @@ class ReprotectAgentDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'bios_id': {'readonly': True},
-        'fabric_object_id': {'readonly': True},
-        'fqdn': {'readonly': True},
-        'version': {'readonly': True},
-        'last_heartbeat_utc': {'readonly': True},
-        'health': {'readonly': True},
-        'health_errors': {'readonly': True},
-        'protected_item_count': {'readonly': True},
-        'accessible_datastores': {'readonly': True},
-        'vcenter_id': {'readonly': True},
-        'last_discovery_in_utc': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "bios_id": {"readonly": True},
+        "fabric_object_id": {"readonly": True},
+        "fqdn": {"readonly": True},
+        "version": {"readonly": True},
+        "last_heartbeat_utc": {"readonly": True},
+        "health": {"readonly": True},
+        "health_errors": {"readonly": True},
+        "protected_item_count": {"readonly": True},
+        "accessible_datastores": {"readonly": True},
+        "vcenter_id": {"readonly": True},
+        "last_discovery_in_utc": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'bios_id': {'key': 'biosId', 'type': 'str'},
-        'fabric_object_id': {'key': 'fabricObjectId', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
-        'last_heartbeat_utc': {'key': 'lastHeartbeatUtc', 'type': 'iso-8601'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
-        'protected_item_count': {'key': 'protectedItemCount', 'type': 'int'},
-        'accessible_datastores': {'key': 'accessibleDatastores', 'type': '[str]'},
-        'vcenter_id': {'key': 'vcenterId', 'type': 'str'},
-        'last_discovery_in_utc': {'key': 'lastDiscoveryInUtc', 'type': 'iso-8601'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "bios_id": {"key": "biosId", "type": "str"},
+        "fabric_object_id": {"key": "fabricObjectId", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "last_heartbeat_utc": {"key": "lastHeartbeatUtc", "type": "iso-8601"},
+        "health": {"key": "health", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
+        "protected_item_count": {"key": "protectedItemCount", "type": "int"},
+        "accessible_datastores": {"key": "accessibleDatastores", "type": "[str]"},
+        "vcenter_id": {"key": "vcenterId", "type": "str"},
+        "last_discovery_in_utc": {"key": "lastDiscoveryInUtc", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReprotectAgentDetails, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -16837,15 +15983,12 @@ class ResolveHealthError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'health_error_id': {'key': 'healthErrorId', 'type': 'str'},
+        "health_error_id": {"key": "healthErrorId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResolveHealthError, self).__init__(**kwargs)
-        self.health_error_id = kwargs.get('health_error_id', None)
+        self.health_error_id = kwargs.get("health_error_id", None)
 
 
 class ResolveHealthInput(msrest.serialization.Model):
@@ -16856,15 +15999,12 @@ class ResolveHealthInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'ResolveHealthInputProperties'},
+        "properties": {"key": "properties", "type": "ResolveHealthInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResolveHealthInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ResolveHealthInputProperties(msrest.serialization.Model):
@@ -16875,15 +16015,12 @@ class ResolveHealthInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'health_errors': {'key': 'healthErrors', 'type': '[ResolveHealthError]'},
+        "health_errors": {"key": "healthErrors", "type": "[ResolveHealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResolveHealthInputProperties, self).__init__(**kwargs)
-        self.health_errors = kwargs.get('health_errors', None)
+        self.health_errors = kwargs.get("health_errors", None)
 
 
 class ResourceHealthSummary(msrest.serialization.Model):
@@ -16898,19 +16035,16 @@ class ResourceHealthSummary(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'resource_count': {'key': 'resourceCount', 'type': 'int'},
-        'issues': {'key': 'issues', 'type': '[HealthErrorSummary]'},
-        'categorized_resource_counts': {'key': 'categorizedResourceCounts', 'type': '{int}'},
+        "resource_count": {"key": "resourceCount", "type": "int"},
+        "issues": {"key": "issues", "type": "[HealthErrorSummary]"},
+        "categorized_resource_counts": {"key": "categorizedResourceCounts", "type": "{int}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceHealthSummary, self).__init__(**kwargs)
-        self.resource_count = kwargs.get('resource_count', None)
-        self.issues = kwargs.get('issues', None)
-        self.categorized_resource_counts = kwargs.get('categorized_resource_counts', None)
+        self.resource_count = kwargs.get("resource_count", None)
+        self.issues = kwargs.get("issues", None)
+        self.categorized_resource_counts = kwargs.get("categorized_resource_counts", None)
 
 
 class ResumeJobParams(msrest.serialization.Model):
@@ -16921,15 +16055,12 @@ class ResumeJobParams(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'ResumeJobParamsProperties'},
+        "properties": {"key": "properties", "type": "ResumeJobParamsProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResumeJobParams, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ResumeJobParamsProperties(msrest.serialization.Model):
@@ -16940,15 +16071,12 @@ class ResumeJobParamsProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'comments': {'key': 'comments', 'type': 'str'},
+        "comments": {"key": "comments", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResumeJobParamsProperties, self).__init__(**kwargs)
-        self.comments = kwargs.get('comments', None)
+        self.comments = kwargs.get("comments", None)
 
 
 class ResyncInput(msrest.serialization.Model):
@@ -16961,19 +16089,16 @@ class ResyncInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'ResyncInputProperties'},
+        "properties": {"key": "properties", "type": "ResyncInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResyncInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class ResyncInputProperties(msrest.serialization.Model):
@@ -16987,19 +16112,16 @@ class ResyncInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider_specific_details': {'required': True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'ResyncProviderSpecificInput'},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "ResyncProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResyncInputProperties, self).__init__(**kwargs)
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class ResyncProviderSpecificInput(msrest.serialization.Model):
@@ -17015,21 +16137,16 @@ class ResyncProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'VMwareCbt': 'VMwareCbtResyncInput'}
-    }
+    _subtype_map = {"instance_type": {"VMwareCbt": "VMwareCbtResyncInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResyncProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -17048,21 +16165,18 @@ class RetentionVolume(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'volume_name': {'key': 'volumeName', 'type': 'str'},
-        'capacity_in_bytes': {'key': 'capacityInBytes', 'type': 'long'},
-        'free_space_in_bytes': {'key': 'freeSpaceInBytes', 'type': 'long'},
-        'threshold_percentage': {'key': 'thresholdPercentage', 'type': 'int'},
+        "volume_name": {"key": "volumeName", "type": "str"},
+        "capacity_in_bytes": {"key": "capacityInBytes", "type": "long"},
+        "free_space_in_bytes": {"key": "freeSpaceInBytes", "type": "long"},
+        "threshold_percentage": {"key": "thresholdPercentage", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RetentionVolume, self).__init__(**kwargs)
-        self.volume_name = kwargs.get('volume_name', None)
-        self.capacity_in_bytes = kwargs.get('capacity_in_bytes', None)
-        self.free_space_in_bytes = kwargs.get('free_space_in_bytes', None)
-        self.threshold_percentage = kwargs.get('threshold_percentage', None)
+        self.volume_name = kwargs.get("volume_name", None)
+        self.capacity_in_bytes = kwargs.get("capacity_in_bytes", None)
+        self.free_space_in_bytes = kwargs.get("free_space_in_bytes", None)
+        self.threshold_percentage = kwargs.get("threshold_percentage", None)
 
 
 class ReverseReplicationInput(msrest.serialization.Model):
@@ -17074,15 +16188,12 @@ class ReverseReplicationInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'ReverseReplicationInputProperties'},
+        "properties": {"key": "properties", "type": "ReverseReplicationInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReverseReplicationInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ReverseReplicationInputProperties(msrest.serialization.Model):
@@ -17096,17 +16207,17 @@ class ReverseReplicationInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'failover_direction': {'key': 'failoverDirection', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'ReverseReplicationProviderSpecificInput'},
+        "failover_direction": {"key": "failoverDirection", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "ReverseReplicationProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ReverseReplicationInputProperties, self).__init__(**kwargs)
-        self.failover_direction = kwargs.get('failover_direction', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.failover_direction = kwargs.get("failover_direction", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class RoleAssignment(msrest.serialization.Model):
@@ -17125,23 +16236,20 @@ class RoleAssignment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'scope': {'key': 'scope', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'role_definition_id': {'key': 'roleDefinitionId', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "scope": {"key": "scope", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignment, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
-        self.scope = kwargs.get('scope', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
+        self.scope = kwargs.get("scope", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
 
 
 class RunAsAccount(msrest.serialization.Model):
@@ -17154,17 +16262,14 @@ class RunAsAccount(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'account_id': {'key': 'accountId', 'type': 'str'},
-        'account_name': {'key': 'accountName', 'type': 'str'},
+        "account_id": {"key": "accountId", "type": "str"},
+        "account_name": {"key": "accountName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RunAsAccount, self).__init__(**kwargs)
-        self.account_id = kwargs.get('account_id', None)
-        self.account_name = kwargs.get('account_name', None)
+        self.account_id = kwargs.get("account_id", None)
+        self.account_name = kwargs.get("account_name", None)
 
 
 class ScriptActionTaskDetails(TaskTypeDetails):
@@ -17185,27 +16290,24 @@ class ScriptActionTaskDetails(TaskTypeDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'path': {'key': 'path', 'type': 'str'},
-        'output': {'key': 'output', 'type': 'str'},
-        'is_primary_side_script': {'key': 'isPrimarySideScript', 'type': 'bool'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "path": {"key": "path", "type": "str"},
+        "output": {"key": "output", "type": "str"},
+        "is_primary_side_script": {"key": "isPrimarySideScript", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScriptActionTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'ScriptActionTaskDetails'  # type: str
-        self.name = kwargs.get('name', None)
-        self.path = kwargs.get('path', None)
-        self.output = kwargs.get('output', None)
-        self.is_primary_side_script = kwargs.get('is_primary_side_script', None)
+        self.instance_type = "ScriptActionTaskDetails"  # type: str
+        self.name = kwargs.get("name", None)
+        self.path = kwargs.get("path", None)
+        self.output = kwargs.get("output", None)
+        self.is_primary_side_script = kwargs.get("is_primary_side_script", None)
 
 
 class ServiceError(msrest.serialization.Model):
@@ -17224,23 +16326,20 @@ class ServiceError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'possible_causes': {'key': 'possibleCauses', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
-        'activity_id': {'key': 'activityId', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "possible_causes": {"key": "possibleCauses", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
+        "activity_id": {"key": "activityId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceError, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
-        self.possible_causes = kwargs.get('possible_causes', None)
-        self.recommended_action = kwargs.get('recommended_action', None)
-        self.activity_id = kwargs.get('activity_id', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
+        self.possible_causes = kwargs.get("possible_causes", None)
+        self.recommended_action = kwargs.get("recommended_action", None)
+        self.activity_id = kwargs.get("activity_id", None)
 
 
 class StorageClassification(Resource):
@@ -17262,25 +16361,22 @@ class StorageClassification(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'StorageClassificationProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "StorageClassificationProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageClassification, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class StorageClassificationCollection(msrest.serialization.Model):
@@ -17293,17 +16389,14 @@ class StorageClassificationCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[StorageClassification]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[StorageClassification]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageClassificationCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class StorageClassificationMapping(Resource):
@@ -17325,25 +16418,22 @@ class StorageClassificationMapping(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'StorageClassificationMappingProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "StorageClassificationMappingProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageClassificationMapping, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class StorageClassificationMappingCollection(msrest.serialization.Model):
@@ -17356,17 +16446,14 @@ class StorageClassificationMappingCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[StorageClassificationMapping]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[StorageClassificationMapping]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageClassificationMappingCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class StorageClassificationMappingInput(msrest.serialization.Model):
@@ -17377,15 +16464,12 @@ class StorageClassificationMappingInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'StorageMappingInputProperties'},
+        "properties": {"key": "properties", "type": "StorageMappingInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageClassificationMappingInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class StorageClassificationMappingProperties(msrest.serialization.Model):
@@ -17396,15 +16480,12 @@ class StorageClassificationMappingProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'target_storage_classification_id': {'key': 'targetStorageClassificationId', 'type': 'str'},
+        "target_storage_classification_id": {"key": "targetStorageClassificationId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageClassificationMappingProperties, self).__init__(**kwargs)
-        self.target_storage_classification_id = kwargs.get('target_storage_classification_id', None)
+        self.target_storage_classification_id = kwargs.get("target_storage_classification_id", None)
 
 
 class StorageClassificationProperties(msrest.serialization.Model):
@@ -17415,15 +16496,12 @@ class StorageClassificationProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageClassificationProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
 
 
 class StorageMappingInputProperties(msrest.serialization.Model):
@@ -17434,15 +16512,12 @@ class StorageMappingInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'target_storage_classification_id': {'key': 'targetStorageClassificationId', 'type': 'str'},
+        "target_storage_classification_id": {"key": "targetStorageClassificationId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageMappingInputProperties, self).__init__(**kwargs)
-        self.target_storage_classification_id = kwargs.get('target_storage_classification_id', None)
+        self.target_storage_classification_id = kwargs.get("target_storage_classification_id", None)
 
 
 class Subnet(msrest.serialization.Model):
@@ -17457,19 +16532,16 @@ class Subnet(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'address_list': {'key': 'addressList', 'type': '[str]'},
+        "name": {"key": "name", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "address_list": {"key": "addressList", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Subnet, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.address_list = kwargs.get('address_list', None)
+        self.name = kwargs.get("name", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.address_list = kwargs.get("address_list", None)
 
 
 class SupportedOperatingSystems(Resource):
@@ -17490,25 +16562,22 @@ class SupportedOperatingSystems(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'SupportedOSProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "SupportedOSProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SupportedOperatingSystems, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class SupportedOSDetails(msrest.serialization.Model):
@@ -17523,19 +16592,16 @@ class SupportedOSDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'os_name': {'key': 'osName', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'os_versions': {'key': 'osVersions', 'type': '[OSVersionWrapper]'},
+        "os_name": {"key": "osName", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "os_versions": {"key": "osVersions", "type": "[OSVersionWrapper]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SupportedOSDetails, self).__init__(**kwargs)
-        self.os_name = kwargs.get('os_name', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.os_versions = kwargs.get('os_versions', None)
+        self.os_name = kwargs.get("os_name", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.os_versions = kwargs.get("os_versions", None)
 
 
 class SupportedOSProperties(msrest.serialization.Model):
@@ -17547,15 +16613,12 @@ class SupportedOSProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'supported_os_list': {'key': 'supportedOsList', 'type': '[SupportedOSProperty]'},
+        "supported_os_list": {"key": "supportedOsList", "type": "[SupportedOSProperty]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SupportedOSProperties, self).__init__(**kwargs)
-        self.supported_os_list = kwargs.get('supported_os_list', None)
+        self.supported_os_list = kwargs.get("supported_os_list", None)
 
 
 class SupportedOSProperty(msrest.serialization.Model):
@@ -17568,17 +16631,14 @@ class SupportedOSProperty(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'supported_os': {'key': 'supportedOs', 'type': '[SupportedOSDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "supported_os": {"key": "supportedOs", "type": "[SupportedOSDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SupportedOSProperty, self).__init__(**kwargs)
-        self.instance_type = kwargs.get('instance_type', None)
-        self.supported_os = kwargs.get('supported_os', None)
+        self.instance_type = kwargs.get("instance_type", None)
+        self.supported_os = kwargs.get("supported_os", None)
 
 
 class SwitchProtectionInput(msrest.serialization.Model):
@@ -17590,15 +16650,12 @@ class SwitchProtectionInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'SwitchProtectionInputProperties'},
+        "properties": {"key": "properties", "type": "SwitchProtectionInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SwitchProtectionInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class SwitchProtectionInputProperties(msrest.serialization.Model):
@@ -17612,17 +16669,17 @@ class SwitchProtectionInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'replication_protected_item_name': {'key': 'replicationProtectedItemName', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'SwitchProtectionProviderSpecificInput'},
+        "replication_protected_item_name": {"key": "replicationProtectedItemName", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "SwitchProtectionProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SwitchProtectionInputProperties, self).__init__(**kwargs)
-        self.replication_protected_item_name = kwargs.get('replication_protected_item_name', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.replication_protected_item_name = kwargs.get("replication_protected_item_name", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class SwitchProtectionJobDetails(JobDetails):
@@ -17641,22 +16698,19 @@ class SwitchProtectionJobDetails(JobDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'affected_object_details': {'key': 'affectedObjectDetails', 'type': '{str}'},
-        'new_replication_protected_item_id': {'key': 'newReplicationProtectedItemId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "affected_object_details": {"key": "affectedObjectDetails", "type": "{str}"},
+        "new_replication_protected_item_id": {"key": "newReplicationProtectedItemId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SwitchProtectionJobDetails, self).__init__(**kwargs)
-        self.instance_type = 'SwitchProtectionJobDetails'  # type: str
-        self.new_replication_protected_item_id = kwargs.get('new_replication_protected_item_id', None)
+        self.instance_type = "SwitchProtectionJobDetails"  # type: str
+        self.new_replication_protected_item_id = kwargs.get("new_replication_protected_item_id", None)
 
 
 class TargetComputeSize(msrest.serialization.Model):
@@ -17673,21 +16727,18 @@ class TargetComputeSize(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'TargetComputeSizeProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "properties": {"key": "properties", "type": "TargetComputeSizeProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TargetComputeSize, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
-        self.type = kwargs.get('type', None)
-        self.properties = kwargs.get('properties', None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
+        self.type = kwargs.get("type", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class TargetComputeSizeCollection(msrest.serialization.Model):
@@ -17700,17 +16751,14 @@ class TargetComputeSizeCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[TargetComputeSize]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[TargetComputeSize]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TargetComputeSizeCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class TargetComputeSizeProperties(msrest.serialization.Model):
@@ -17743,37 +16791,34 @@ class TargetComputeSizeProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'v_cpus_available': {'readonly': True},
+        "v_cpus_available": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'cpu_cores_count': {'key': 'cpuCoresCount', 'type': 'int'},
-        'v_cpus_available': {'key': 'vCPUsAvailable', 'type': 'int'},
-        'memory_in_gb': {'key': 'memoryInGB', 'type': 'float'},
-        'max_data_disk_count': {'key': 'maxDataDiskCount', 'type': 'int'},
-        'max_nics_count': {'key': 'maxNicsCount', 'type': 'int'},
-        'errors': {'key': 'errors', 'type': '[ComputeSizeErrorDetails]'},
-        'high_iops_supported': {'key': 'highIopsSupported', 'type': 'str'},
-        'hyper_v_generations': {'key': 'hyperVGenerations', 'type': '[str]'},
+        "name": {"key": "name", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "cpu_cores_count": {"key": "cpuCoresCount", "type": "int"},
+        "v_cpus_available": {"key": "vCPUsAvailable", "type": "int"},
+        "memory_in_gb": {"key": "memoryInGB", "type": "float"},
+        "max_data_disk_count": {"key": "maxDataDiskCount", "type": "int"},
+        "max_nics_count": {"key": "maxNicsCount", "type": "int"},
+        "errors": {"key": "errors", "type": "[ComputeSizeErrorDetails]"},
+        "high_iops_supported": {"key": "highIopsSupported", "type": "str"},
+        "hyper_v_generations": {"key": "hyperVGenerations", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TargetComputeSizeProperties, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.cpu_cores_count = kwargs.get('cpu_cores_count', None)
+        self.name = kwargs.get("name", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.cpu_cores_count = kwargs.get("cpu_cores_count", None)
         self.v_cpus_available = None
-        self.memory_in_gb = kwargs.get('memory_in_gb', None)
-        self.max_data_disk_count = kwargs.get('max_data_disk_count', None)
-        self.max_nics_count = kwargs.get('max_nics_count', None)
-        self.errors = kwargs.get('errors', None)
-        self.high_iops_supported = kwargs.get('high_iops_supported', None)
-        self.hyper_v_generations = kwargs.get('hyper_v_generations', None)
+        self.memory_in_gb = kwargs.get("memory_in_gb", None)
+        self.max_data_disk_count = kwargs.get("max_data_disk_count", None)
+        self.max_nics_count = kwargs.get("max_nics_count", None)
+        self.errors = kwargs.get("errors", None)
+        self.high_iops_supported = kwargs.get("high_iops_supported", None)
+        self.hyper_v_generations = kwargs.get("hyper_v_generations", None)
 
 
 class TestFailoverCleanupInput(msrest.serialization.Model):
@@ -17787,19 +16832,16 @@ class TestFailoverCleanupInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'TestFailoverCleanupInputProperties'},
+        "properties": {"key": "properties", "type": "TestFailoverCleanupInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestFailoverCleanupInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class TestFailoverCleanupInputProperties(msrest.serialization.Model):
@@ -17810,19 +16852,16 @@ class TestFailoverCleanupInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'comments': {'max_length': 1024, 'min_length': 0},
+        "comments": {"max_length": 1024, "min_length": 0},
     }
 
     _attribute_map = {
-        'comments': {'key': 'comments', 'type': 'str'},
+        "comments": {"key": "comments", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestFailoverCleanupInputProperties, self).__init__(**kwargs)
-        self.comments = kwargs.get('comments', None)
+        self.comments = kwargs.get("comments", None)
 
 
 class TestFailoverInput(msrest.serialization.Model):
@@ -17835,19 +16874,16 @@ class TestFailoverInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'TestFailoverInputProperties'},
+        "properties": {"key": "properties", "type": "TestFailoverInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestFailoverInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class TestFailoverInputProperties(msrest.serialization.Model):
@@ -17865,21 +16901,18 @@ class TestFailoverInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'failover_direction': {'key': 'failoverDirection', 'type': 'str'},
-        'network_type': {'key': 'networkType', 'type': 'str'},
-        'network_id': {'key': 'networkId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'TestFailoverProviderSpecificInput'},
+        "failover_direction": {"key": "failoverDirection", "type": "str"},
+        "network_type": {"key": "networkType", "type": "str"},
+        "network_id": {"key": "networkId", "type": "str"},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "TestFailoverProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestFailoverInputProperties, self).__init__(**kwargs)
-        self.failover_direction = kwargs.get('failover_direction', None)
-        self.network_type = kwargs.get('network_type', None)
-        self.network_id = kwargs.get('network_id', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.failover_direction = kwargs.get("failover_direction", None)
+        self.network_type = kwargs.get("network_type", None)
+        self.network_id = kwargs.get("network_id", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class TestFailoverJobDetails(JobDetails):
@@ -17909,32 +16942,29 @@ class TestFailoverJobDetails(JobDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'affected_object_details': {'key': 'affectedObjectDetails', 'type': '{str}'},
-        'test_failover_status': {'key': 'testFailoverStatus', 'type': 'str'},
-        'comments': {'key': 'comments', 'type': 'str'},
-        'network_name': {'key': 'networkName', 'type': 'str'},
-        'network_friendly_name': {'key': 'networkFriendlyName', 'type': 'str'},
-        'network_type': {'key': 'networkType', 'type': 'str'},
-        'protected_item_details': {'key': 'protectedItemDetails', 'type': '[FailoverReplicationProtectedItemDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "affected_object_details": {"key": "affectedObjectDetails", "type": "{str}"},
+        "test_failover_status": {"key": "testFailoverStatus", "type": "str"},
+        "comments": {"key": "comments", "type": "str"},
+        "network_name": {"key": "networkName", "type": "str"},
+        "network_friendly_name": {"key": "networkFriendlyName", "type": "str"},
+        "network_type": {"key": "networkType", "type": "str"},
+        "protected_item_details": {"key": "protectedItemDetails", "type": "[FailoverReplicationProtectedItemDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestFailoverJobDetails, self).__init__(**kwargs)
-        self.instance_type = 'TestFailoverJobDetails'  # type: str
-        self.test_failover_status = kwargs.get('test_failover_status', None)
-        self.comments = kwargs.get('comments', None)
-        self.network_name = kwargs.get('network_name', None)
-        self.network_friendly_name = kwargs.get('network_friendly_name', None)
-        self.network_type = kwargs.get('network_type', None)
-        self.protected_item_details = kwargs.get('protected_item_details', None)
+        self.instance_type = "TestFailoverJobDetails"  # type: str
+        self.test_failover_status = kwargs.get("test_failover_status", None)
+        self.comments = kwargs.get("comments", None)
+        self.network_name = kwargs.get("network_name", None)
+        self.network_friendly_name = kwargs.get("network_friendly_name", None)
+        self.network_type = kwargs.get("network_type", None)
+        self.protected_item_details = kwargs.get("protected_item_details", None)
 
 
 class TestMigrateCleanupInput(msrest.serialization.Model):
@@ -17948,19 +16978,16 @@ class TestMigrateCleanupInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'TestMigrateCleanupInputProperties'},
+        "properties": {"key": "properties", "type": "TestMigrateCleanupInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestMigrateCleanupInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class TestMigrateCleanupInputProperties(msrest.serialization.Model):
@@ -17971,19 +16998,16 @@ class TestMigrateCleanupInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'comments': {'max_length': 1024, 'min_length': 0},
+        "comments": {"max_length": 1024, "min_length": 0},
     }
 
     _attribute_map = {
-        'comments': {'key': 'comments', 'type': 'str'},
+        "comments": {"key": "comments", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestMigrateCleanupInputProperties, self).__init__(**kwargs)
-        self.comments = kwargs.get('comments', None)
+        self.comments = kwargs.get("comments", None)
 
 
 class TestMigrateInput(msrest.serialization.Model):
@@ -17996,19 +17020,16 @@ class TestMigrateInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'TestMigrateInputProperties'},
+        "properties": {"key": "properties", "type": "TestMigrateInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestMigrateInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class TestMigrateInputProperties(msrest.serialization.Model):
@@ -18022,19 +17043,16 @@ class TestMigrateInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider_specific_details': {'required': True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'TestMigrateProviderSpecificInput'},
+        "provider_specific_details": {"key": "providerSpecificDetails", "type": "TestMigrateProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestMigrateInputProperties, self).__init__(**kwargs)
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class TestMigrateProviderSpecificInput(msrest.serialization.Model):
@@ -18050,21 +17068,16 @@ class TestMigrateProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'VMwareCbt': 'VMwareCbtTestMigrateInput'}
-    }
+    _subtype_map = {"instance_type": {"VMwareCbt": "VMwareCbtTestMigrateInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TestMigrateProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -18080,19 +17093,16 @@ class UnplannedFailoverInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UnplannedFailoverInputProperties'},
+        "properties": {"key": "properties", "type": "UnplannedFailoverInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnplannedFailoverInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class UnplannedFailoverInputProperties(msrest.serialization.Model):
@@ -18108,19 +17118,19 @@ class UnplannedFailoverInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'failover_direction': {'key': 'failoverDirection', 'type': 'str'},
-        'source_site_operations': {'key': 'sourceSiteOperations', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'UnplannedFailoverProviderSpecificInput'},
+        "failover_direction": {"key": "failoverDirection", "type": "str"},
+        "source_site_operations": {"key": "sourceSiteOperations", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "UnplannedFailoverProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnplannedFailoverInputProperties, self).__init__(**kwargs)
-        self.failover_direction = kwargs.get('failover_direction', None)
-        self.source_site_operations = kwargs.get('source_site_operations', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.failover_direction = kwargs.get("failover_direction", None)
+        self.source_site_operations = kwargs.get("source_site_operations", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class UpdateApplianceForReplicationProtectedItemInput(msrest.serialization.Model):
@@ -18134,19 +17144,16 @@ class UpdateApplianceForReplicationProtectedItemInput(msrest.serialization.Model
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateApplianceForReplicationProtectedItemInputProperties'},
+        "properties": {"key": "properties", "type": "UpdateApplianceForReplicationProtectedItemInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateApplianceForReplicationProtectedItemInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class UpdateApplianceForReplicationProtectedItemInputProperties(msrest.serialization.Model):
@@ -18163,22 +17170,22 @@ class UpdateApplianceForReplicationProtectedItemInputProperties(msrest.serializa
     """
 
     _validation = {
-        'target_appliance_id': {'required': True},
-        'provider_specific_details': {'required': True},
+        "target_appliance_id": {"required": True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'target_appliance_id': {'key': 'targetApplianceId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'UpdateApplianceForReplicationProtectedItemProviderSpecificInput'},
+        "target_appliance_id": {"key": "targetApplianceId", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "UpdateApplianceForReplicationProtectedItemProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateApplianceForReplicationProtectedItemInputProperties, self).__init__(**kwargs)
-        self.target_appliance_id = kwargs['target_appliance_id']
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.target_appliance_id = kwargs["target_appliance_id"]
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class UpdateDiskInput(msrest.serialization.Model):
@@ -18193,21 +17200,18 @@ class UpdateDiskInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'required': True},
+        "disk_id": {"required": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'target_disk_name': {'key': 'targetDiskName', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "target_disk_name": {"key": "targetDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateDiskInput, self).__init__(**kwargs)
-        self.disk_id = kwargs['disk_id']
-        self.target_disk_name = kwargs.get('target_disk_name', None)
+        self.disk_id = kwargs["disk_id"]
+        self.target_disk_name = kwargs.get("target_disk_name", None)
 
 
 class UpdateMigrationItemInput(msrest.serialization.Model):
@@ -18219,15 +17223,12 @@ class UpdateMigrationItemInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateMigrationItemInputProperties'},
+        "properties": {"key": "properties", "type": "UpdateMigrationItemInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateMigrationItemInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdateMigrationItemInputProperties(msrest.serialization.Model):
@@ -18242,19 +17243,19 @@ class UpdateMigrationItemInputProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provider_specific_details': {'required': True},
+        "provider_specific_details": {"required": True},
     }
 
     _attribute_map = {
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'UpdateMigrationItemProviderSpecificInput'},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "UpdateMigrationItemProviderSpecificInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateMigrationItemInputProperties, self).__init__(**kwargs)
-        self.provider_specific_details = kwargs['provider_specific_details']
+        self.provider_specific_details = kwargs["provider_specific_details"]
 
 
 class UpdateMigrationItemProviderSpecificInput(msrest.serialization.Model):
@@ -18270,21 +17271,16 @@ class UpdateMigrationItemProviderSpecificInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    _subtype_map = {
-        'instance_type': {'VMwareCbt': 'VMwareCbtUpdateMigrationItemInput'}
-    }
+    _subtype_map = {"instance_type": {"VMwareCbt": "VMwareCbtUpdateMigrationItemInput"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateMigrationItemProviderSpecificInput, self).__init__(**kwargs)
         self.instance_type = None  # type: Optional[str]
 
@@ -18298,15 +17294,12 @@ class UpdateMobilityServiceRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateMobilityServiceRequestProperties'},
+        "properties": {"key": "properties", "type": "UpdateMobilityServiceRequestProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateMobilityServiceRequest, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdateMobilityServiceRequestProperties(msrest.serialization.Model):
@@ -18317,15 +17310,12 @@ class UpdateMobilityServiceRequestProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateMobilityServiceRequestProperties, self).__init__(**kwargs)
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
 
 
 class UpdateNetworkMappingInput(msrest.serialization.Model):
@@ -18337,15 +17327,12 @@ class UpdateNetworkMappingInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateNetworkMappingInputProperties'},
+        "properties": {"key": "properties", "type": "UpdateNetworkMappingInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateNetworkMappingInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdateNetworkMappingInputProperties(msrest.serialization.Model):
@@ -18361,19 +17348,16 @@ class UpdateNetworkMappingInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'recovery_fabric_name': {'key': 'recoveryFabricName', 'type': 'str'},
-        'recovery_network_id': {'key': 'recoveryNetworkId', 'type': 'str'},
-        'fabric_specific_details': {'key': 'fabricSpecificDetails', 'type': 'FabricSpecificUpdateNetworkMappingInput'},
+        "recovery_fabric_name": {"key": "recoveryFabricName", "type": "str"},
+        "recovery_network_id": {"key": "recoveryNetworkId", "type": "str"},
+        "fabric_specific_details": {"key": "fabricSpecificDetails", "type": "FabricSpecificUpdateNetworkMappingInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateNetworkMappingInputProperties, self).__init__(**kwargs)
-        self.recovery_fabric_name = kwargs.get('recovery_fabric_name', None)
-        self.recovery_network_id = kwargs.get('recovery_network_id', None)
-        self.fabric_specific_details = kwargs.get('fabric_specific_details', None)
+        self.recovery_fabric_name = kwargs.get("recovery_fabric_name", None)
+        self.recovery_network_id = kwargs.get("recovery_network_id", None)
+        self.fabric_specific_details = kwargs.get("fabric_specific_details", None)
 
 
 class UpdatePolicyInput(msrest.serialization.Model):
@@ -18384,15 +17368,12 @@ class UpdatePolicyInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdatePolicyInputProperties'},
+        "properties": {"key": "properties", "type": "UpdatePolicyInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdatePolicyInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdatePolicyInputProperties(msrest.serialization.Model):
@@ -18404,15 +17385,12 @@ class UpdatePolicyInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'replication_provider_settings': {'key': 'replicationProviderSettings', 'type': 'PolicyProviderSpecificInput'},
+        "replication_provider_settings": {"key": "replicationProviderSettings", "type": "PolicyProviderSpecificInput"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdatePolicyInputProperties, self).__init__(**kwargs)
-        self.replication_provider_settings = kwargs.get('replication_provider_settings', None)
+        self.replication_provider_settings = kwargs.get("replication_provider_settings", None)
 
 
 class UpdateProtectionContainerMappingInput(msrest.serialization.Model):
@@ -18424,15 +17402,12 @@ class UpdateProtectionContainerMappingInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateProtectionContainerMappingInputProperties'},
+        "properties": {"key": "properties", "type": "UpdateProtectionContainerMappingInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateProtectionContainerMappingInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdateProtectionContainerMappingInputProperties(msrest.serialization.Model):
@@ -18445,15 +17420,15 @@ class UpdateProtectionContainerMappingInputProperties(msrest.serialization.Model
     """
 
     _attribute_map = {
-        'provider_specific_input': {'key': 'providerSpecificInput', 'type': 'ReplicationProviderSpecificUpdateContainerMappingInput'},
+        "provider_specific_input": {
+            "key": "providerSpecificInput",
+            "type": "ReplicationProviderSpecificUpdateContainerMappingInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateProtectionContainerMappingInputProperties, self).__init__(**kwargs)
-        self.provider_specific_input = kwargs.get('provider_specific_input', None)
+        self.provider_specific_input = kwargs.get("provider_specific_input", None)
 
 
 class UpdateRecoveryPlanInput(msrest.serialization.Model):
@@ -18465,15 +17440,12 @@ class UpdateRecoveryPlanInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateRecoveryPlanInputProperties'},
+        "properties": {"key": "properties", "type": "UpdateRecoveryPlanInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateRecoveryPlanInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdateRecoveryPlanInputProperties(msrest.serialization.Model):
@@ -18484,15 +17456,12 @@ class UpdateRecoveryPlanInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'groups': {'key': 'groups', 'type': '[RecoveryPlanGroup]'},
+        "groups": {"key": "groups", "type": "[RecoveryPlanGroup]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateRecoveryPlanInputProperties, self).__init__(**kwargs)
-        self.groups = kwargs.get('groups', None)
+        self.groups = kwargs.get("groups", None)
 
 
 class UpdateReplicationProtectedItemInput(msrest.serialization.Model):
@@ -18504,15 +17473,12 @@ class UpdateReplicationProtectedItemInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateReplicationProtectedItemInputProperties'},
+        "properties": {"key": "properties", "type": "UpdateReplicationProtectedItemInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateReplicationProtectedItemInput, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdateReplicationProtectedItemInputProperties(msrest.serialization.Model):
@@ -18546,33 +17512,33 @@ class UpdateReplicationProtectedItemInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'recovery_azure_vm_name': {'key': 'recoveryAzureVMName', 'type': 'str'},
-        'recovery_azure_vm_size': {'key': 'recoveryAzureVMSize', 'type': 'str'},
-        'selected_recovery_azure_network_id': {'key': 'selectedRecoveryAzureNetworkId', 'type': 'str'},
-        'selected_tfo_azure_network_id': {'key': 'selectedTfoAzureNetworkId', 'type': 'str'},
-        'selected_source_nic_id': {'key': 'selectedSourceNicId', 'type': 'str'},
-        'enable_rdp_on_target_option': {'key': 'enableRdpOnTargetOption', 'type': 'str'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMNicInputDetails]'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'recovery_availability_set_id': {'key': 'recoveryAvailabilitySetId', 'type': 'str'},
-        'provider_specific_details': {'key': 'providerSpecificDetails', 'type': 'UpdateReplicationProtectedItemProviderInput'},
+        "recovery_azure_vm_name": {"key": "recoveryAzureVMName", "type": "str"},
+        "recovery_azure_vm_size": {"key": "recoveryAzureVMSize", "type": "str"},
+        "selected_recovery_azure_network_id": {"key": "selectedRecoveryAzureNetworkId", "type": "str"},
+        "selected_tfo_azure_network_id": {"key": "selectedTfoAzureNetworkId", "type": "str"},
+        "selected_source_nic_id": {"key": "selectedSourceNicId", "type": "str"},
+        "enable_rdp_on_target_option": {"key": "enableRdpOnTargetOption", "type": "str"},
+        "vm_nics": {"key": "vmNics", "type": "[VMNicInputDetails]"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "recovery_availability_set_id": {"key": "recoveryAvailabilitySetId", "type": "str"},
+        "provider_specific_details": {
+            "key": "providerSpecificDetails",
+            "type": "UpdateReplicationProtectedItemProviderInput",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateReplicationProtectedItemInputProperties, self).__init__(**kwargs)
-        self.recovery_azure_vm_name = kwargs.get('recovery_azure_vm_name', None)
-        self.recovery_azure_vm_size = kwargs.get('recovery_azure_vm_size', None)
-        self.selected_recovery_azure_network_id = kwargs.get('selected_recovery_azure_network_id', None)
-        self.selected_tfo_azure_network_id = kwargs.get('selected_tfo_azure_network_id', None)
-        self.selected_source_nic_id = kwargs.get('selected_source_nic_id', None)
-        self.enable_rdp_on_target_option = kwargs.get('enable_rdp_on_target_option', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.license_type = kwargs.get('license_type', None)
-        self.recovery_availability_set_id = kwargs.get('recovery_availability_set_id', None)
-        self.provider_specific_details = kwargs.get('provider_specific_details', None)
+        self.recovery_azure_vm_name = kwargs.get("recovery_azure_vm_name", None)
+        self.recovery_azure_vm_size = kwargs.get("recovery_azure_vm_size", None)
+        self.selected_recovery_azure_network_id = kwargs.get("selected_recovery_azure_network_id", None)
+        self.selected_tfo_azure_network_id = kwargs.get("selected_tfo_azure_network_id", None)
+        self.selected_source_nic_id = kwargs.get("selected_source_nic_id", None)
+        self.enable_rdp_on_target_option = kwargs.get("enable_rdp_on_target_option", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.license_type = kwargs.get("license_type", None)
+        self.recovery_availability_set_id = kwargs.get("recovery_availability_set_id", None)
+        self.provider_specific_details = kwargs.get("provider_specific_details", None)
 
 
 class UpdateVCenterRequest(msrest.serialization.Model):
@@ -18584,15 +17550,12 @@ class UpdateVCenterRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UpdateVCenterRequestProperties'},
+        "properties": {"key": "properties", "type": "UpdateVCenterRequestProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateVCenterRequest, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UpdateVCenterRequestProperties(msrest.serialization.Model):
@@ -18611,23 +17574,20 @@ class UpdateVCenterRequestProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'port': {'key': 'port', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "port": {"key": "port", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateVCenterRequestProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
-        self.port = kwargs.get('port', None)
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
+        self.port = kwargs.get("port", None)
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
 
 
 class VaultHealthDetails(Resource):
@@ -18648,25 +17608,22 @@ class VaultHealthDetails(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'VaultHealthProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "VaultHealthProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VaultHealthDetails, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class VaultHealthProperties(msrest.serialization.Model):
@@ -18685,21 +17642,18 @@ class VaultHealthProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'vault_errors': {'key': 'vaultErrors', 'type': '[HealthError]'},
-        'protected_items_health': {'key': 'protectedItemsHealth', 'type': 'ResourceHealthSummary'},
-        'fabrics_health': {'key': 'fabricsHealth', 'type': 'ResourceHealthSummary'},
-        'containers_health': {'key': 'containersHealth', 'type': 'ResourceHealthSummary'},
+        "vault_errors": {"key": "vaultErrors", "type": "[HealthError]"},
+        "protected_items_health": {"key": "protectedItemsHealth", "type": "ResourceHealthSummary"},
+        "fabrics_health": {"key": "fabricsHealth", "type": "ResourceHealthSummary"},
+        "containers_health": {"key": "containersHealth", "type": "ResourceHealthSummary"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VaultHealthProperties, self).__init__(**kwargs)
-        self.vault_errors = kwargs.get('vault_errors', None)
-        self.protected_items_health = kwargs.get('protected_items_health', None)
-        self.fabrics_health = kwargs.get('fabrics_health', None)
-        self.containers_health = kwargs.get('containers_health', None)
+        self.vault_errors = kwargs.get("vault_errors", None)
+        self.protected_items_health = kwargs.get("protected_items_health", None)
+        self.fabrics_health = kwargs.get("fabrics_health", None)
+        self.containers_health = kwargs.get("containers_health", None)
 
 
 class VaultSetting(Resource):
@@ -18720,25 +17674,22 @@ class VaultSetting(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'VaultSettingProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "VaultSettingProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VaultSetting, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class VaultSettingCollection(msrest.serialization.Model):
@@ -18751,17 +17702,14 @@ class VaultSettingCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[VaultSetting]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[VaultSetting]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VaultSettingCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class VaultSettingCreationInput(msrest.serialization.Model):
@@ -18775,19 +17723,16 @@ class VaultSettingCreationInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'properties': {'required': True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'VaultSettingCreationInputProperties'},
+        "properties": {"key": "properties", "type": "VaultSettingCreationInputProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VaultSettingCreationInput, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class VaultSettingCreationInputProperties(msrest.serialization.Model):
@@ -18800,17 +17745,14 @@ class VaultSettingCreationInputProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'migration_solution_id': {'key': 'migrationSolutionId', 'type': 'str'},
-        'vmware_to_azure_provider_type': {'key': 'vmwareToAzureProviderType', 'type': 'str'},
+        "migration_solution_id": {"key": "migrationSolutionId", "type": "str"},
+        "vmware_to_azure_provider_type": {"key": "vmwareToAzureProviderType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VaultSettingCreationInputProperties, self).__init__(**kwargs)
-        self.migration_solution_id = kwargs.get('migration_solution_id', None)
-        self.vmware_to_azure_provider_type = kwargs.get('vmware_to_azure_provider_type', None)
+        self.migration_solution_id = kwargs.get("migration_solution_id", None)
+        self.vmware_to_azure_provider_type = kwargs.get("vmware_to_azure_provider_type", None)
 
 
 class VaultSettingProperties(msrest.serialization.Model):
@@ -18823,17 +17765,14 @@ class VaultSettingProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'migration_solution_id': {'key': 'migrationSolutionId', 'type': 'str'},
-        'vmware_to_azure_provider_type': {'key': 'vmwareToAzureProviderType', 'type': 'str'},
+        "migration_solution_id": {"key": "migrationSolutionId", "type": "str"},
+        "vmware_to_azure_provider_type": {"key": "vmwareToAzureProviderType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VaultSettingProperties, self).__init__(**kwargs)
-        self.migration_solution_id = kwargs.get('migration_solution_id', None)
-        self.vmware_to_azure_provider_type = kwargs.get('vmware_to_azure_provider_type', None)
+        self.migration_solution_id = kwargs.get("migration_solution_id", None)
+        self.vmware_to_azure_provider_type = kwargs.get("vmware_to_azure_provider_type", None)
 
 
 class VCenter(Resource):
@@ -18854,25 +17793,22 @@ class VCenter(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'VCenterProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "VCenterProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VCenter, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class VCenterCollection(msrest.serialization.Model):
@@ -18885,17 +17821,14 @@ class VCenterCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[VCenter]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[VCenter]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VCenterCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class VCenterProperties(msrest.serialization.Model):
@@ -18926,35 +17859,32 @@ class VCenterProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'internal_id': {'key': 'internalId', 'type': 'str'},
-        'last_heartbeat': {'key': 'lastHeartbeat', 'type': 'iso-8601'},
-        'discovery_status': {'key': 'discoveryStatus', 'type': 'str'},
-        'process_server_id': {'key': 'processServerId', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'infrastructure_id': {'key': 'infrastructureId', 'type': 'str'},
-        'port': {'key': 'port', 'type': 'str'},
-        'run_as_account_id': {'key': 'runAsAccountId', 'type': 'str'},
-        'fabric_arm_resource_name': {'key': 'fabricArmResourceName', 'type': 'str'},
-        'health_errors': {'key': 'healthErrors', 'type': '[HealthError]'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "internal_id": {"key": "internalId", "type": "str"},
+        "last_heartbeat": {"key": "lastHeartbeat", "type": "iso-8601"},
+        "discovery_status": {"key": "discoveryStatus", "type": "str"},
+        "process_server_id": {"key": "processServerId", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "infrastructure_id": {"key": "infrastructureId", "type": "str"},
+        "port": {"key": "port", "type": "str"},
+        "run_as_account_id": {"key": "runAsAccountId", "type": "str"},
+        "fabric_arm_resource_name": {"key": "fabricArmResourceName", "type": "str"},
+        "health_errors": {"key": "healthErrors", "type": "[HealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VCenterProperties, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.internal_id = kwargs.get('internal_id', None)
-        self.last_heartbeat = kwargs.get('last_heartbeat', None)
-        self.discovery_status = kwargs.get('discovery_status', None)
-        self.process_server_id = kwargs.get('process_server_id', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.infrastructure_id = kwargs.get('infrastructure_id', None)
-        self.port = kwargs.get('port', None)
-        self.run_as_account_id = kwargs.get('run_as_account_id', None)
-        self.fabric_arm_resource_name = kwargs.get('fabric_arm_resource_name', None)
-        self.health_errors = kwargs.get('health_errors', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.internal_id = kwargs.get("internal_id", None)
+        self.last_heartbeat = kwargs.get("last_heartbeat", None)
+        self.discovery_status = kwargs.get("discovery_status", None)
+        self.process_server_id = kwargs.get("process_server_id", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.infrastructure_id = kwargs.get("infrastructure_id", None)
+        self.port = kwargs.get("port", None)
+        self.run_as_account_id = kwargs.get("run_as_account_id", None)
+        self.fabric_arm_resource_name = kwargs.get("fabric_arm_resource_name", None)
+        self.health_errors = kwargs.get("health_errors", None)
 
 
 class VersionDetails(msrest.serialization.Model):
@@ -18970,19 +17900,16 @@ class VersionDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'version': {'key': 'version', 'type': 'str'},
-        'expiry_date': {'key': 'expiryDate', 'type': 'iso-8601'},
-        'status': {'key': 'status', 'type': 'str'},
+        "version": {"key": "version", "type": "str"},
+        "expiry_date": {"key": "expiryDate", "type": "iso-8601"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VersionDetails, self).__init__(**kwargs)
-        self.version = kwargs.get('version', None)
-        self.expiry_date = kwargs.get('expiry_date', None)
-        self.status = kwargs.get('status', None)
+        self.version = kwargs.get("version", None)
+        self.expiry_date = kwargs.get("expiry_date", None)
+        self.status = kwargs.get("status", None)
 
 
 class VirtualMachineTaskDetails(JobTaskDetails):
@@ -19001,24 +17928,21 @@ class VirtualMachineTaskDetails(JobTaskDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'job_task': {'key': 'jobTask', 'type': 'JobEntity'},
-        'skipped_reason': {'key': 'skippedReason', 'type': 'str'},
-        'skipped_reason_string': {'key': 'skippedReasonString', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "job_task": {"key": "jobTask", "type": "JobEntity"},
+        "skipped_reason": {"key": "skippedReason", "type": "str"},
+        "skipped_reason_string": {"key": "skippedReasonString", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VirtualMachineTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'VirtualMachineTaskDetails'  # type: str
-        self.skipped_reason = kwargs.get('skipped_reason', None)
-        self.skipped_reason_string = kwargs.get('skipped_reason_string', None)
+        self.instance_type = "VirtualMachineTaskDetails"  # type: str
+        self.skipped_reason = kwargs.get("skipped_reason", None)
+        self.skipped_reason_string = kwargs.get("skipped_reason_string", None)
 
 
 class VmmDetails(FabricSpecificDetails):
@@ -19032,19 +17956,16 @@ class VmmDetails(FabricSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMM'  # type: str
+        self.instance_type = "VMM"  # type: str
 
 
 class VmmToAzureCreateNetworkMappingInput(FabricSpecificCreateNetworkMappingInput):
@@ -19057,19 +17978,16 @@ class VmmToAzureCreateNetworkMappingInput(FabricSpecificCreateNetworkMappingInpu
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmToAzureCreateNetworkMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'VmmToAzure'  # type: str
+        self.instance_type = "VmmToAzure"  # type: str
 
 
 class VmmToAzureNetworkMappingSettings(NetworkMappingFabricSpecificSettings):
@@ -19082,19 +18000,16 @@ class VmmToAzureNetworkMappingSettings(NetworkMappingFabricSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmToAzureNetworkMappingSettings, self).__init__(**kwargs)
-        self.instance_type = 'VmmToAzure'  # type: str
+        self.instance_type = "VmmToAzure"  # type: str
 
 
 class VmmToAzureUpdateNetworkMappingInput(FabricSpecificUpdateNetworkMappingInput):
@@ -19107,19 +18022,16 @@ class VmmToAzureUpdateNetworkMappingInput(FabricSpecificUpdateNetworkMappingInpu
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmToAzureUpdateNetworkMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'VmmToAzure'  # type: str
+        self.instance_type = "VmmToAzure"  # type: str
 
 
 class VmmToVmmCreateNetworkMappingInput(FabricSpecificCreateNetworkMappingInput):
@@ -19132,19 +18044,16 @@ class VmmToVmmCreateNetworkMappingInput(FabricSpecificCreateNetworkMappingInput)
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmToVmmCreateNetworkMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'VmmToVmm'  # type: str
+        self.instance_type = "VmmToVmm"  # type: str
 
 
 class VmmToVmmNetworkMappingSettings(NetworkMappingFabricSpecificSettings):
@@ -19157,19 +18066,16 @@ class VmmToVmmNetworkMappingSettings(NetworkMappingFabricSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmToVmmNetworkMappingSettings, self).__init__(**kwargs)
-        self.instance_type = 'VmmToVmm'  # type: str
+        self.instance_type = "VmmToVmm"  # type: str
 
 
 class VmmToVmmUpdateNetworkMappingInput(FabricSpecificUpdateNetworkMappingInput):
@@ -19182,19 +18088,16 @@ class VmmToVmmUpdateNetworkMappingInput(FabricSpecificUpdateNetworkMappingInput)
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmToVmmUpdateNetworkMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'VmmToVmm'  # type: str
+        self.instance_type = "VmmToVmm"  # type: str
 
 
 class VmmVirtualMachineDetails(HyperVVirtualMachineDetails):
@@ -19229,26 +18132,23 @@ class VmmVirtualMachineDetails(HyperVVirtualMachineDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'source_item_id': {'key': 'sourceItemId', 'type': 'str'},
-        'generation': {'key': 'generation', 'type': 'str'},
-        'os_details': {'key': 'osDetails', 'type': 'OSDetails'},
-        'disk_details': {'key': 'diskDetails', 'type': '[DiskDetails]'},
-        'has_physical_disk': {'key': 'hasPhysicalDisk', 'type': 'str'},
-        'has_fibre_channel_adapter': {'key': 'hasFibreChannelAdapter', 'type': 'str'},
-        'has_shared_vhd': {'key': 'hasSharedVhd', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "source_item_id": {"key": "sourceItemId", "type": "str"},
+        "generation": {"key": "generation", "type": "str"},
+        "os_details": {"key": "osDetails", "type": "OSDetails"},
+        "disk_details": {"key": "diskDetails", "type": "[DiskDetails]"},
+        "has_physical_disk": {"key": "hasPhysicalDisk", "type": "str"},
+        "has_fibre_channel_adapter": {"key": "hasFibreChannelAdapter", "type": "str"},
+        "has_shared_vhd": {"key": "hasSharedVhd", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmmVirtualMachineDetails, self).__init__(**kwargs)
-        self.instance_type = 'VmmVirtualMachine'  # type: str
+        self.instance_type = "VmmVirtualMachine"  # type: str
 
 
 class VMNicDetails(msrest.serialization.Model):
@@ -19301,51 +18201,48 @@ class VMNicDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'nic_id': {'key': 'nicId', 'type': 'str'},
-        'replica_nic_id': {'key': 'replicaNicId', 'type': 'str'},
-        'source_nic_arm_id': {'key': 'sourceNicArmId', 'type': 'str'},
-        'v_m_network_name': {'key': 'vMNetworkName', 'type': 'str'},
-        'recovery_vm_network_id': {'key': 'recoveryVMNetworkId', 'type': 'str'},
-        'ip_configs': {'key': 'ipConfigs', 'type': '[IPConfigDetails]'},
-        'selection_type': {'key': 'selectionType', 'type': 'str'},
-        'recovery_network_security_group_id': {'key': 'recoveryNetworkSecurityGroupId', 'type': 'str'},
-        'enable_accelerated_networking_on_recovery': {'key': 'enableAcceleratedNetworkingOnRecovery', 'type': 'bool'},
-        'tfo_vm_network_id': {'key': 'tfoVMNetworkId', 'type': 'str'},
-        'tfo_network_security_group_id': {'key': 'tfoNetworkSecurityGroupId', 'type': 'str'},
-        'enable_accelerated_networking_on_tfo': {'key': 'enableAcceleratedNetworkingOnTfo', 'type': 'bool'},
-        'recovery_nic_name': {'key': 'recoveryNicName', 'type': 'str'},
-        'recovery_nic_resource_group_name': {'key': 'recoveryNicResourceGroupName', 'type': 'str'},
-        'reuse_existing_nic': {'key': 'reuseExistingNic', 'type': 'bool'},
-        'tfo_recovery_nic_name': {'key': 'tfoRecoveryNicName', 'type': 'str'},
-        'tfo_recovery_nic_resource_group_name': {'key': 'tfoRecoveryNicResourceGroupName', 'type': 'str'},
-        'tfo_reuse_existing_nic': {'key': 'tfoReuseExistingNic', 'type': 'bool'},
-        'target_nic_name': {'key': 'targetNicName', 'type': 'str'},
+        "nic_id": {"key": "nicId", "type": "str"},
+        "replica_nic_id": {"key": "replicaNicId", "type": "str"},
+        "source_nic_arm_id": {"key": "sourceNicArmId", "type": "str"},
+        "v_m_network_name": {"key": "vMNetworkName", "type": "str"},
+        "recovery_vm_network_id": {"key": "recoveryVMNetworkId", "type": "str"},
+        "ip_configs": {"key": "ipConfigs", "type": "[IPConfigDetails]"},
+        "selection_type": {"key": "selectionType", "type": "str"},
+        "recovery_network_security_group_id": {"key": "recoveryNetworkSecurityGroupId", "type": "str"},
+        "enable_accelerated_networking_on_recovery": {"key": "enableAcceleratedNetworkingOnRecovery", "type": "bool"},
+        "tfo_vm_network_id": {"key": "tfoVMNetworkId", "type": "str"},
+        "tfo_network_security_group_id": {"key": "tfoNetworkSecurityGroupId", "type": "str"},
+        "enable_accelerated_networking_on_tfo": {"key": "enableAcceleratedNetworkingOnTfo", "type": "bool"},
+        "recovery_nic_name": {"key": "recoveryNicName", "type": "str"},
+        "recovery_nic_resource_group_name": {"key": "recoveryNicResourceGroupName", "type": "str"},
+        "reuse_existing_nic": {"key": "reuseExistingNic", "type": "bool"},
+        "tfo_recovery_nic_name": {"key": "tfoRecoveryNicName", "type": "str"},
+        "tfo_recovery_nic_resource_group_name": {"key": "tfoRecoveryNicResourceGroupName", "type": "str"},
+        "tfo_reuse_existing_nic": {"key": "tfoReuseExistingNic", "type": "bool"},
+        "target_nic_name": {"key": "targetNicName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMNicDetails, self).__init__(**kwargs)
-        self.nic_id = kwargs.get('nic_id', None)
-        self.replica_nic_id = kwargs.get('replica_nic_id', None)
-        self.source_nic_arm_id = kwargs.get('source_nic_arm_id', None)
-        self.v_m_network_name = kwargs.get('v_m_network_name', None)
-        self.recovery_vm_network_id = kwargs.get('recovery_vm_network_id', None)
-        self.ip_configs = kwargs.get('ip_configs', None)
-        self.selection_type = kwargs.get('selection_type', None)
-        self.recovery_network_security_group_id = kwargs.get('recovery_network_security_group_id', None)
-        self.enable_accelerated_networking_on_recovery = kwargs.get('enable_accelerated_networking_on_recovery', None)
-        self.tfo_vm_network_id = kwargs.get('tfo_vm_network_id', None)
-        self.tfo_network_security_group_id = kwargs.get('tfo_network_security_group_id', None)
-        self.enable_accelerated_networking_on_tfo = kwargs.get('enable_accelerated_networking_on_tfo', None)
-        self.recovery_nic_name = kwargs.get('recovery_nic_name', None)
-        self.recovery_nic_resource_group_name = kwargs.get('recovery_nic_resource_group_name', None)
-        self.reuse_existing_nic = kwargs.get('reuse_existing_nic', False)
-        self.tfo_recovery_nic_name = kwargs.get('tfo_recovery_nic_name', None)
-        self.tfo_recovery_nic_resource_group_name = kwargs.get('tfo_recovery_nic_resource_group_name', None)
-        self.tfo_reuse_existing_nic = kwargs.get('tfo_reuse_existing_nic', False)
-        self.target_nic_name = kwargs.get('target_nic_name', None)
+        self.nic_id = kwargs.get("nic_id", None)
+        self.replica_nic_id = kwargs.get("replica_nic_id", None)
+        self.source_nic_arm_id = kwargs.get("source_nic_arm_id", None)
+        self.v_m_network_name = kwargs.get("v_m_network_name", None)
+        self.recovery_vm_network_id = kwargs.get("recovery_vm_network_id", None)
+        self.ip_configs = kwargs.get("ip_configs", None)
+        self.selection_type = kwargs.get("selection_type", None)
+        self.recovery_network_security_group_id = kwargs.get("recovery_network_security_group_id", None)
+        self.enable_accelerated_networking_on_recovery = kwargs.get("enable_accelerated_networking_on_recovery", None)
+        self.tfo_vm_network_id = kwargs.get("tfo_vm_network_id", None)
+        self.tfo_network_security_group_id = kwargs.get("tfo_network_security_group_id", None)
+        self.enable_accelerated_networking_on_tfo = kwargs.get("enable_accelerated_networking_on_tfo", None)
+        self.recovery_nic_name = kwargs.get("recovery_nic_name", None)
+        self.recovery_nic_resource_group_name = kwargs.get("recovery_nic_resource_group_name", None)
+        self.reuse_existing_nic = kwargs.get("reuse_existing_nic", False)
+        self.tfo_recovery_nic_name = kwargs.get("tfo_recovery_nic_name", None)
+        self.tfo_recovery_nic_resource_group_name = kwargs.get("tfo_recovery_nic_resource_group_name", None)
+        self.tfo_reuse_existing_nic = kwargs.get("tfo_reuse_existing_nic", False)
+        self.target_nic_name = kwargs.get("target_nic_name", None)
 
 
 class VMNicInputDetails(msrest.serialization.Model):
@@ -19388,41 +18285,38 @@ class VMNicInputDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'nic_id': {'key': 'nicId', 'type': 'str'},
-        'ip_configs': {'key': 'ipConfigs', 'type': '[IPConfigInputDetails]'},
-        'selection_type': {'key': 'selectionType', 'type': 'str'},
-        'recovery_network_security_group_id': {'key': 'recoveryNetworkSecurityGroupId', 'type': 'str'},
-        'enable_accelerated_networking_on_recovery': {'key': 'enableAcceleratedNetworkingOnRecovery', 'type': 'bool'},
-        'tfo_network_security_group_id': {'key': 'tfoNetworkSecurityGroupId', 'type': 'str'},
-        'enable_accelerated_networking_on_tfo': {'key': 'enableAcceleratedNetworkingOnTfo', 'type': 'bool'},
-        'recovery_nic_name': {'key': 'recoveryNicName', 'type': 'str'},
-        'recovery_nic_resource_group_name': {'key': 'recoveryNicResourceGroupName', 'type': 'str'},
-        'reuse_existing_nic': {'key': 'reuseExistingNic', 'type': 'bool'},
-        'tfo_nic_name': {'key': 'tfoNicName', 'type': 'str'},
-        'tfo_nic_resource_group_name': {'key': 'tfoNicResourceGroupName', 'type': 'str'},
-        'tfo_reuse_existing_nic': {'key': 'tfoReuseExistingNic', 'type': 'bool'},
-        'target_nic_name': {'key': 'targetNicName', 'type': 'str'},
+        "nic_id": {"key": "nicId", "type": "str"},
+        "ip_configs": {"key": "ipConfigs", "type": "[IPConfigInputDetails]"},
+        "selection_type": {"key": "selectionType", "type": "str"},
+        "recovery_network_security_group_id": {"key": "recoveryNetworkSecurityGroupId", "type": "str"},
+        "enable_accelerated_networking_on_recovery": {"key": "enableAcceleratedNetworkingOnRecovery", "type": "bool"},
+        "tfo_network_security_group_id": {"key": "tfoNetworkSecurityGroupId", "type": "str"},
+        "enable_accelerated_networking_on_tfo": {"key": "enableAcceleratedNetworkingOnTfo", "type": "bool"},
+        "recovery_nic_name": {"key": "recoveryNicName", "type": "str"},
+        "recovery_nic_resource_group_name": {"key": "recoveryNicResourceGroupName", "type": "str"},
+        "reuse_existing_nic": {"key": "reuseExistingNic", "type": "bool"},
+        "tfo_nic_name": {"key": "tfoNicName", "type": "str"},
+        "tfo_nic_resource_group_name": {"key": "tfoNicResourceGroupName", "type": "str"},
+        "tfo_reuse_existing_nic": {"key": "tfoReuseExistingNic", "type": "bool"},
+        "target_nic_name": {"key": "targetNicName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMNicInputDetails, self).__init__(**kwargs)
-        self.nic_id = kwargs.get('nic_id', None)
-        self.ip_configs = kwargs.get('ip_configs', None)
-        self.selection_type = kwargs.get('selection_type', None)
-        self.recovery_network_security_group_id = kwargs.get('recovery_network_security_group_id', None)
-        self.enable_accelerated_networking_on_recovery = kwargs.get('enable_accelerated_networking_on_recovery', None)
-        self.tfo_network_security_group_id = kwargs.get('tfo_network_security_group_id', None)
-        self.enable_accelerated_networking_on_tfo = kwargs.get('enable_accelerated_networking_on_tfo', None)
-        self.recovery_nic_name = kwargs.get('recovery_nic_name', None)
-        self.recovery_nic_resource_group_name = kwargs.get('recovery_nic_resource_group_name', None)
-        self.reuse_existing_nic = kwargs.get('reuse_existing_nic', None)
-        self.tfo_nic_name = kwargs.get('tfo_nic_name', None)
-        self.tfo_nic_resource_group_name = kwargs.get('tfo_nic_resource_group_name', None)
-        self.tfo_reuse_existing_nic = kwargs.get('tfo_reuse_existing_nic', None)
-        self.target_nic_name = kwargs.get('target_nic_name', None)
+        self.nic_id = kwargs.get("nic_id", None)
+        self.ip_configs = kwargs.get("ip_configs", None)
+        self.selection_type = kwargs.get("selection_type", None)
+        self.recovery_network_security_group_id = kwargs.get("recovery_network_security_group_id", None)
+        self.enable_accelerated_networking_on_recovery = kwargs.get("enable_accelerated_networking_on_recovery", None)
+        self.tfo_network_security_group_id = kwargs.get("tfo_network_security_group_id", None)
+        self.enable_accelerated_networking_on_tfo = kwargs.get("enable_accelerated_networking_on_tfo", None)
+        self.recovery_nic_name = kwargs.get("recovery_nic_name", None)
+        self.recovery_nic_resource_group_name = kwargs.get("recovery_nic_resource_group_name", None)
+        self.reuse_existing_nic = kwargs.get("reuse_existing_nic", None)
+        self.tfo_nic_name = kwargs.get("tfo_nic_name", None)
+        self.tfo_nic_resource_group_name = kwargs.get("tfo_nic_resource_group_name", None)
+        self.tfo_reuse_existing_nic = kwargs.get("tfo_reuse_existing_nic", None)
+        self.target_nic_name = kwargs.get("target_nic_name", None)
 
 
 class VmNicUpdatesTaskDetails(TaskTypeDetails):
@@ -19441,25 +18335,22 @@ class VmNicUpdatesTaskDetails(TaskTypeDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vm_id': {'key': 'vmId', 'type': 'str'},
-        'nic_id': {'key': 'nicId', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vm_id": {"key": "vmId", "type": "str"},
+        "nic_id": {"key": "nicId", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmNicUpdatesTaskDetails, self).__init__(**kwargs)
-        self.instance_type = 'VmNicUpdatesTaskDetails'  # type: str
-        self.vm_id = kwargs.get('vm_id', None)
-        self.nic_id = kwargs.get('nic_id', None)
-        self.name = kwargs.get('name', None)
+        self.instance_type = "VmNicUpdatesTaskDetails"  # type: str
+        self.vm_id = kwargs.get("vm_id", None)
+        self.nic_id = kwargs.get("nic_id", None)
+        self.name = kwargs.get("name", None)
 
 
 class VMwareCbtContainerCreationInput(ReplicationProviderSpecificContainerCreationInput):
@@ -19472,19 +18363,16 @@ class VMwareCbtContainerCreationInput(ReplicationProviderSpecificContainerCreati
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtContainerCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
+        self.instance_type = "VMwareCbt"  # type: str
 
 
 class VMwareCbtContainerMappingInput(ReplicationProviderSpecificContainerMappingInput):
@@ -19510,37 +18398,34 @@ class VMwareCbtContainerMappingInput(ReplicationProviderSpecificContainerMapping
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'key_vault_id': {'required': True},
-        'key_vault_uri': {'required': True},
-        'storage_account_id': {'required': True},
-        'storage_account_sas_secret_name': {'required': True},
-        'service_bus_connection_string_secret_name': {'required': True},
-        'target_location': {'required': True},
+        "instance_type": {"required": True},
+        "key_vault_id": {"required": True},
+        "key_vault_uri": {"required": True},
+        "storage_account_id": {"required": True},
+        "storage_account_sas_secret_name": {"required": True},
+        "service_bus_connection_string_secret_name": {"required": True},
+        "target_location": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'key_vault_id': {'key': 'keyVaultId', 'type': 'str'},
-        'key_vault_uri': {'key': 'keyVaultUri', 'type': 'str'},
-        'storage_account_id': {'key': 'storageAccountId', 'type': 'str'},
-        'storage_account_sas_secret_name': {'key': 'storageAccountSasSecretName', 'type': 'str'},
-        'service_bus_connection_string_secret_name': {'key': 'serviceBusConnectionStringSecretName', 'type': 'str'},
-        'target_location': {'key': 'targetLocation', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "key_vault_id": {"key": "keyVaultId", "type": "str"},
+        "key_vault_uri": {"key": "keyVaultUri", "type": "str"},
+        "storage_account_id": {"key": "storageAccountId", "type": "str"},
+        "storage_account_sas_secret_name": {"key": "storageAccountSasSecretName", "type": "str"},
+        "service_bus_connection_string_secret_name": {"key": "serviceBusConnectionStringSecretName", "type": "str"},
+        "target_location": {"key": "targetLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtContainerMappingInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.key_vault_id = kwargs['key_vault_id']
-        self.key_vault_uri = kwargs['key_vault_uri']
-        self.storage_account_id = kwargs['storage_account_id']
-        self.storage_account_sas_secret_name = kwargs['storage_account_sas_secret_name']
-        self.service_bus_connection_string_secret_name = kwargs['service_bus_connection_string_secret_name']
-        self.target_location = kwargs['target_location']
+        self.instance_type = "VMwareCbt"  # type: str
+        self.key_vault_id = kwargs["key_vault_id"]
+        self.key_vault_uri = kwargs["key_vault_uri"]
+        self.storage_account_id = kwargs["storage_account_id"]
+        self.storage_account_sas_secret_name = kwargs["storage_account_sas_secret_name"]
+        self.service_bus_connection_string_secret_name = kwargs["service_bus_connection_string_secret_name"]
+        self.target_location = kwargs["target_location"]
 
 
 class VMwareCbtDiskInput(msrest.serialization.Model):
@@ -19565,32 +18450,29 @@ class VMwareCbtDiskInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'required': True},
-        'is_os_disk': {'required': True},
-        'log_storage_account_id': {'required': True},
-        'log_storage_account_sas_secret_name': {'required': True},
+        "disk_id": {"required": True},
+        "is_os_disk": {"required": True},
+        "log_storage_account_id": {"required": True},
+        "log_storage_account_sas_secret_name": {"required": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'is_os_disk': {'key': 'isOSDisk', 'type': 'str'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'log_storage_account_sas_secret_name': {'key': 'logStorageAccountSasSecretName', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "is_os_disk": {"key": "isOSDisk", "type": "str"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "log_storage_account_sas_secret_name": {"key": "logStorageAccountSasSecretName", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtDiskInput, self).__init__(**kwargs)
-        self.disk_id = kwargs['disk_id']
-        self.disk_type = kwargs.get('disk_type', None)
-        self.is_os_disk = kwargs['is_os_disk']
-        self.log_storage_account_id = kwargs['log_storage_account_id']
-        self.log_storage_account_sas_secret_name = kwargs['log_storage_account_sas_secret_name']
-        self.disk_encryption_set_id = kwargs.get('disk_encryption_set_id', None)
+        self.disk_id = kwargs["disk_id"]
+        self.disk_type = kwargs.get("disk_type", None)
+        self.is_os_disk = kwargs["is_os_disk"]
+        self.log_storage_account_id = kwargs["log_storage_account_id"]
+        self.log_storage_account_sas_secret_name = kwargs["log_storage_account_sas_secret_name"]
+        self.disk_encryption_set_id = kwargs.get("disk_encryption_set_id", None)
 
 
 class VMwareCbtEnableMigrationInput(EnableMigrationProviderSpecificInput):
@@ -19648,65 +18530,62 @@ class VMwareCbtEnableMigrationInput(EnableMigrationProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'vmware_machine_id': {'required': True},
-        'disks_to_include': {'required': True},
-        'data_mover_run_as_account_id': {'required': True},
-        'snapshot_run_as_account_id': {'required': True},
-        'target_resource_group_id': {'required': True},
-        'target_network_id': {'required': True},
+        "instance_type": {"required": True},
+        "vmware_machine_id": {"required": True},
+        "disks_to_include": {"required": True},
+        "data_mover_run_as_account_id": {"required": True},
+        "snapshot_run_as_account_id": {"required": True},
+        "target_resource_group_id": {"required": True},
+        "target_network_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vmware_machine_id': {'key': 'vmwareMachineId', 'type': 'str'},
-        'disks_to_include': {'key': 'disksToInclude', 'type': '[VMwareCbtDiskInput]'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'data_mover_run_as_account_id': {'key': 'dataMoverRunAsAccountId', 'type': 'str'},
-        'snapshot_run_as_account_id': {'key': 'snapshotRunAsAccountId', 'type': 'str'},
-        'target_vm_name': {'key': 'targetVmName', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'target_resource_group_id': {'key': 'targetResourceGroupId', 'type': 'str'},
-        'target_network_id': {'key': 'targetNetworkId', 'type': 'str'},
-        'target_subnet_name': {'key': 'targetSubnetName', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_boot_diagnostics_storage_account_id': {'key': 'targetBootDiagnosticsStorageAccountId', 'type': 'str'},
-        'perform_auto_resync': {'key': 'performAutoResync', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'seed_disk_tags': {'key': 'seedDiskTags', 'type': '{str}'},
-        'target_disk_tags': {'key': 'targetDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vmware_machine_id": {"key": "vmwareMachineId", "type": "str"},
+        "disks_to_include": {"key": "disksToInclude", "type": "[VMwareCbtDiskInput]"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "data_mover_run_as_account_id": {"key": "dataMoverRunAsAccountId", "type": "str"},
+        "snapshot_run_as_account_id": {"key": "snapshotRunAsAccountId", "type": "str"},
+        "target_vm_name": {"key": "targetVmName", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "target_resource_group_id": {"key": "targetResourceGroupId", "type": "str"},
+        "target_network_id": {"key": "targetNetworkId", "type": "str"},
+        "target_subnet_name": {"key": "targetSubnetName", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_boot_diagnostics_storage_account_id": {"key": "targetBootDiagnosticsStorageAccountId", "type": "str"},
+        "perform_auto_resync": {"key": "performAutoResync", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "seed_disk_tags": {"key": "seedDiskTags", "type": "{str}"},
+        "target_disk_tags": {"key": "targetDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtEnableMigrationInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.vmware_machine_id = kwargs['vmware_machine_id']
-        self.disks_to_include = kwargs['disks_to_include']
-        self.license_type = kwargs.get('license_type', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
-        self.data_mover_run_as_account_id = kwargs['data_mover_run_as_account_id']
-        self.snapshot_run_as_account_id = kwargs['snapshot_run_as_account_id']
-        self.target_vm_name = kwargs.get('target_vm_name', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.target_resource_group_id = kwargs['target_resource_group_id']
-        self.target_network_id = kwargs['target_network_id']
-        self.target_subnet_name = kwargs.get('target_subnet_name', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_boot_diagnostics_storage_account_id = kwargs.get('target_boot_diagnostics_storage_account_id', None)
-        self.perform_auto_resync = kwargs.get('perform_auto_resync', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.seed_disk_tags = kwargs.get('seed_disk_tags', None)
-        self.target_disk_tags = kwargs.get('target_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
+        self.instance_type = "VMwareCbt"  # type: str
+        self.vmware_machine_id = kwargs["vmware_machine_id"]
+        self.disks_to_include = kwargs["disks_to_include"]
+        self.license_type = kwargs.get("license_type", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
+        self.data_mover_run_as_account_id = kwargs["data_mover_run_as_account_id"]
+        self.snapshot_run_as_account_id = kwargs["snapshot_run_as_account_id"]
+        self.target_vm_name = kwargs.get("target_vm_name", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.target_resource_group_id = kwargs["target_resource_group_id"]
+        self.target_network_id = kwargs["target_network_id"]
+        self.target_subnet_name = kwargs.get("target_subnet_name", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_boot_diagnostics_storage_account_id = kwargs.get("target_boot_diagnostics_storage_account_id", None)
+        self.perform_auto_resync = kwargs.get("perform_auto_resync", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.seed_disk_tags = kwargs.get("seed_disk_tags", None)
+        self.target_disk_tags = kwargs.get("target_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
 
 
 class VMwareCbtEventDetails(EventProviderSpecificDetails):
@@ -19724,21 +18603,18 @@ class VMwareCbtEventDetails(EventProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'migration_item_name': {'readonly': True},
+        "instance_type": {"required": True},
+        "migration_item_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'migration_item_name': {'key': 'migrationItemName', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "migration_item_name": {"key": "migrationItemName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtEventDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
+        self.instance_type = "VMwareCbt"  # type: str
         self.migration_item_name = None
 
 
@@ -19754,22 +18630,19 @@ class VMwareCbtMigrateInput(MigrateProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'perform_shutdown': {'required': True},
+        "instance_type": {"required": True},
+        "perform_shutdown": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'perform_shutdown': {'key': 'performShutdown', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "perform_shutdown": {"key": "performShutdown", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtMigrateInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.perform_shutdown = kwargs['perform_shutdown']
+        self.instance_type = "VMwareCbt"  # type: str
+        self.perform_shutdown = kwargs["perform_shutdown"]
 
 
 class VMwareCbtMigrationDetails(MigrationProviderSpecificSettings):
@@ -19855,91 +18728,88 @@ class VMwareCbtMigrationDetails(MigrationProviderSpecificSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'vmware_machine_id': {'readonly': True},
-        'os_type': {'readonly': True},
-        'firmware_type': {'readonly': True},
-        'target_generation': {'readonly': True},
-        'data_mover_run_as_account_id': {'readonly': True},
-        'snapshot_run_as_account_id': {'readonly': True},
-        'target_location': {'readonly': True},
-        'migration_recovery_point_id': {'readonly': True},
-        'last_recovery_point_received': {'readonly': True},
-        'last_recovery_point_id': {'readonly': True},
-        'initial_seeding_progress_percentage': {'readonly': True},
-        'migration_progress_percentage': {'readonly': True},
-        'resync_progress_percentage': {'readonly': True},
-        'initial_seeding_retry_count': {'readonly': True},
-        'resync_retry_count': {'readonly': True},
-        'resync_required': {'readonly': True},
-        'resync_state': {'readonly': True},
+        "instance_type": {"required": True},
+        "vmware_machine_id": {"readonly": True},
+        "os_type": {"readonly": True},
+        "firmware_type": {"readonly": True},
+        "target_generation": {"readonly": True},
+        "data_mover_run_as_account_id": {"readonly": True},
+        "snapshot_run_as_account_id": {"readonly": True},
+        "target_location": {"readonly": True},
+        "migration_recovery_point_id": {"readonly": True},
+        "last_recovery_point_received": {"readonly": True},
+        "last_recovery_point_id": {"readonly": True},
+        "initial_seeding_progress_percentage": {"readonly": True},
+        "migration_progress_percentage": {"readonly": True},
+        "resync_progress_percentage": {"readonly": True},
+        "initial_seeding_retry_count": {"readonly": True},
+        "resync_retry_count": {"readonly": True},
+        "resync_required": {"readonly": True},
+        "resync_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vmware_machine_id': {'key': 'vmwareMachineId', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'firmware_type': {'key': 'firmwareType', 'type': 'str'},
-        'target_generation': {'key': 'targetGeneration', 'type': 'str'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'data_mover_run_as_account_id': {'key': 'dataMoverRunAsAccountId', 'type': 'str'},
-        'snapshot_run_as_account_id': {'key': 'snapshotRunAsAccountId', 'type': 'str'},
-        'target_vm_name': {'key': 'targetVmName', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'target_location': {'key': 'targetLocation', 'type': 'str'},
-        'target_resource_group_id': {'key': 'targetResourceGroupId', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_boot_diagnostics_storage_account_id': {'key': 'targetBootDiagnosticsStorageAccountId', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'protected_disks': {'key': 'protectedDisks', 'type': '[VMwareCbtProtectedDiskDetails]'},
-        'target_network_id': {'key': 'targetNetworkId', 'type': 'str'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMwareCbtNicDetails]'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
-        'migration_recovery_point_id': {'key': 'migrationRecoveryPointId', 'type': 'str'},
-        'last_recovery_point_received': {'key': 'lastRecoveryPointReceived', 'type': 'iso-8601'},
-        'last_recovery_point_id': {'key': 'lastRecoveryPointId', 'type': 'str'},
-        'initial_seeding_progress_percentage': {'key': 'initialSeedingProgressPercentage', 'type': 'int'},
-        'migration_progress_percentage': {'key': 'migrationProgressPercentage', 'type': 'int'},
-        'resync_progress_percentage': {'key': 'resyncProgressPercentage', 'type': 'int'},
-        'initial_seeding_retry_count': {'key': 'initialSeedingRetryCount', 'type': 'long'},
-        'resync_retry_count': {'key': 'resyncRetryCount', 'type': 'long'},
-        'resync_required': {'key': 'resyncRequired', 'type': 'str'},
-        'resync_state': {'key': 'resyncState', 'type': 'str'},
-        'perform_auto_resync': {'key': 'performAutoResync', 'type': 'str'},
-        'seed_disk_tags': {'key': 'seedDiskTags', 'type': '{str}'},
-        'target_disk_tags': {'key': 'targetDiskTags', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vmware_machine_id": {"key": "vmwareMachineId", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "firmware_type": {"key": "firmwareType", "type": "str"},
+        "target_generation": {"key": "targetGeneration", "type": "str"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "data_mover_run_as_account_id": {"key": "dataMoverRunAsAccountId", "type": "str"},
+        "snapshot_run_as_account_id": {"key": "snapshotRunAsAccountId", "type": "str"},
+        "target_vm_name": {"key": "targetVmName", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "target_location": {"key": "targetLocation", "type": "str"},
+        "target_resource_group_id": {"key": "targetResourceGroupId", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_boot_diagnostics_storage_account_id": {"key": "targetBootDiagnosticsStorageAccountId", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "protected_disks": {"key": "protectedDisks", "type": "[VMwareCbtProtectedDiskDetails]"},
+        "target_network_id": {"key": "targetNetworkId", "type": "str"},
+        "vm_nics": {"key": "vmNics", "type": "[VMwareCbtNicDetails]"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
+        "migration_recovery_point_id": {"key": "migrationRecoveryPointId", "type": "str"},
+        "last_recovery_point_received": {"key": "lastRecoveryPointReceived", "type": "iso-8601"},
+        "last_recovery_point_id": {"key": "lastRecoveryPointId", "type": "str"},
+        "initial_seeding_progress_percentage": {"key": "initialSeedingProgressPercentage", "type": "int"},
+        "migration_progress_percentage": {"key": "migrationProgressPercentage", "type": "int"},
+        "resync_progress_percentage": {"key": "resyncProgressPercentage", "type": "int"},
+        "initial_seeding_retry_count": {"key": "initialSeedingRetryCount", "type": "long"},
+        "resync_retry_count": {"key": "resyncRetryCount", "type": "long"},
+        "resync_required": {"key": "resyncRequired", "type": "str"},
+        "resync_state": {"key": "resyncState", "type": "str"},
+        "perform_auto_resync": {"key": "performAutoResync", "type": "str"},
+        "seed_disk_tags": {"key": "seedDiskTags", "type": "{str}"},
+        "target_disk_tags": {"key": "targetDiskTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtMigrationDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
+        self.instance_type = "VMwareCbt"  # type: str
         self.vmware_machine_id = None
         self.os_type = None
         self.firmware_type = None
         self.target_generation = None
-        self.license_type = kwargs.get('license_type', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
+        self.license_type = kwargs.get("license_type", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
         self.data_mover_run_as_account_id = None
         self.snapshot_run_as_account_id = None
-        self.target_vm_name = kwargs.get('target_vm_name', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
+        self.target_vm_name = kwargs.get("target_vm_name", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
         self.target_location = None
-        self.target_resource_group_id = kwargs.get('target_resource_group_id', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_boot_diagnostics_storage_account_id = kwargs.get('target_boot_diagnostics_storage_account_id', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.protected_disks = kwargs.get('protected_disks', None)
-        self.target_network_id = kwargs.get('target_network_id', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
+        self.target_resource_group_id = kwargs.get("target_resource_group_id", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_boot_diagnostics_storage_account_id = kwargs.get("target_boot_diagnostics_storage_account_id", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.protected_disks = kwargs.get("protected_disks", None)
+        self.target_network_id = kwargs.get("target_network_id", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
         self.migration_recovery_point_id = None
         self.last_recovery_point_received = None
         self.last_recovery_point_id = None
@@ -19950,9 +18820,9 @@ class VMwareCbtMigrationDetails(MigrationProviderSpecificSettings):
         self.resync_retry_count = None
         self.resync_required = None
         self.resync_state = None
-        self.perform_auto_resync = kwargs.get('perform_auto_resync', None)
-        self.seed_disk_tags = kwargs.get('seed_disk_tags', None)
-        self.target_disk_tags = kwargs.get('target_disk_tags', None)
+        self.perform_auto_resync = kwargs.get("perform_auto_resync", None)
+        self.seed_disk_tags = kwargs.get("seed_disk_tags", None)
+        self.target_disk_tags = kwargs.get("target_disk_tags", None)
 
 
 class VMwareCbtNicDetails(msrest.serialization.Model):
@@ -19988,40 +18858,37 @@ class VMwareCbtNicDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'nic_id': {'readonly': True},
-        'source_ip_address': {'readonly': True},
-        'source_ip_address_type': {'readonly': True},
-        'source_network_id': {'readonly': True},
+        "nic_id": {"readonly": True},
+        "source_ip_address": {"readonly": True},
+        "source_ip_address_type": {"readonly": True},
+        "source_network_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'nic_id': {'key': 'nicId', 'type': 'str'},
-        'is_primary_nic': {'key': 'isPrimaryNic', 'type': 'str'},
-        'source_ip_address': {'key': 'sourceIPAddress', 'type': 'str'},
-        'source_ip_address_type': {'key': 'sourceIPAddressType', 'type': 'str'},
-        'source_network_id': {'key': 'sourceNetworkId', 'type': 'str'},
-        'target_ip_address': {'key': 'targetIPAddress', 'type': 'str'},
-        'target_ip_address_type': {'key': 'targetIPAddressType', 'type': 'str'},
-        'target_subnet_name': {'key': 'targetSubnetName', 'type': 'str'},
-        'target_nic_name': {'key': 'targetNicName', 'type': 'str'},
-        'is_selected_for_migration': {'key': 'isSelectedForMigration', 'type': 'str'},
+        "nic_id": {"key": "nicId", "type": "str"},
+        "is_primary_nic": {"key": "isPrimaryNic", "type": "str"},
+        "source_ip_address": {"key": "sourceIPAddress", "type": "str"},
+        "source_ip_address_type": {"key": "sourceIPAddressType", "type": "str"},
+        "source_network_id": {"key": "sourceNetworkId", "type": "str"},
+        "target_ip_address": {"key": "targetIPAddress", "type": "str"},
+        "target_ip_address_type": {"key": "targetIPAddressType", "type": "str"},
+        "target_subnet_name": {"key": "targetSubnetName", "type": "str"},
+        "target_nic_name": {"key": "targetNicName", "type": "str"},
+        "is_selected_for_migration": {"key": "isSelectedForMigration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtNicDetails, self).__init__(**kwargs)
         self.nic_id = None
-        self.is_primary_nic = kwargs.get('is_primary_nic', None)
+        self.is_primary_nic = kwargs.get("is_primary_nic", None)
         self.source_ip_address = None
         self.source_ip_address_type = None
         self.source_network_id = None
-        self.target_ip_address = kwargs.get('target_ip_address', None)
-        self.target_ip_address_type = kwargs.get('target_ip_address_type', None)
-        self.target_subnet_name = kwargs.get('target_subnet_name', None)
-        self.target_nic_name = kwargs.get('target_nic_name', None)
-        self.is_selected_for_migration = kwargs.get('is_selected_for_migration', None)
+        self.target_ip_address = kwargs.get("target_ip_address", None)
+        self.target_ip_address_type = kwargs.get("target_ip_address_type", None)
+        self.target_subnet_name = kwargs.get("target_subnet_name", None)
+        self.target_nic_name = kwargs.get("target_nic_name", None)
+        self.is_selected_for_migration = kwargs.get("is_selected_for_migration", None)
 
 
 class VMwareCbtNicInput(msrest.serialization.Model):
@@ -20045,30 +18912,27 @@ class VMwareCbtNicInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'nic_id': {'required': True},
-        'is_primary_nic': {'required': True},
+        "nic_id": {"required": True},
+        "is_primary_nic": {"required": True},
     }
 
     _attribute_map = {
-        'nic_id': {'key': 'nicId', 'type': 'str'},
-        'is_primary_nic': {'key': 'isPrimaryNic', 'type': 'str'},
-        'target_subnet_name': {'key': 'targetSubnetName', 'type': 'str'},
-        'target_static_ip_address': {'key': 'targetStaticIPAddress', 'type': 'str'},
-        'is_selected_for_migration': {'key': 'isSelectedForMigration', 'type': 'str'},
-        'target_nic_name': {'key': 'targetNicName', 'type': 'str'},
+        "nic_id": {"key": "nicId", "type": "str"},
+        "is_primary_nic": {"key": "isPrimaryNic", "type": "str"},
+        "target_subnet_name": {"key": "targetSubnetName", "type": "str"},
+        "target_static_ip_address": {"key": "targetStaticIPAddress", "type": "str"},
+        "is_selected_for_migration": {"key": "isSelectedForMigration", "type": "str"},
+        "target_nic_name": {"key": "targetNicName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtNicInput, self).__init__(**kwargs)
-        self.nic_id = kwargs['nic_id']
-        self.is_primary_nic = kwargs['is_primary_nic']
-        self.target_subnet_name = kwargs.get('target_subnet_name', None)
-        self.target_static_ip_address = kwargs.get('target_static_ip_address', None)
-        self.is_selected_for_migration = kwargs.get('is_selected_for_migration', None)
-        self.target_nic_name = kwargs.get('target_nic_name', None)
+        self.nic_id = kwargs["nic_id"]
+        self.is_primary_nic = kwargs["is_primary_nic"]
+        self.target_subnet_name = kwargs.get("target_subnet_name", None)
+        self.target_static_ip_address = kwargs.get("target_static_ip_address", None)
+        self.is_selected_for_migration = kwargs.get("is_selected_for_migration", None)
+        self.target_nic_name = kwargs.get("target_nic_name", None)
 
 
 class VMwareCbtPolicyCreationInput(PolicyProviderSpecificInput):
@@ -20089,25 +18953,22 @@ class VMwareCbtPolicyCreationInput(PolicyProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_history_in_minutes': {'key': 'recoveryPointHistoryInMinutes', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_history_in_minutes": {"key": "recoveryPointHistoryInMinutes", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtPolicyCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.recovery_point_history_in_minutes = kwargs.get('recovery_point_history_in_minutes', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
+        self.instance_type = "VMwareCbt"  # type: str
+        self.recovery_point_history_in_minutes = kwargs.get("recovery_point_history_in_minutes", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
 
 
 class VmwareCbtPolicyDetails(PolicyProviderSpecificDetails):
@@ -20129,25 +18990,22 @@ class VmwareCbtPolicyDetails(PolicyProviderSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_history_in_minutes': {'key': 'recoveryPointHistoryInMinutes', 'type': 'int'},
-        'app_consistent_frequency_in_minutes': {'key': 'appConsistentFrequencyInMinutes', 'type': 'int'},
-        'crash_consistent_frequency_in_minutes': {'key': 'crashConsistentFrequencyInMinutes', 'type': 'int'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_history_in_minutes": {"key": "recoveryPointHistoryInMinutes", "type": "int"},
+        "app_consistent_frequency_in_minutes": {"key": "appConsistentFrequencyInMinutes", "type": "int"},
+        "crash_consistent_frequency_in_minutes": {"key": "crashConsistentFrequencyInMinutes", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VmwareCbtPolicyDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.recovery_point_history_in_minutes = kwargs.get('recovery_point_history_in_minutes', None)
-        self.app_consistent_frequency_in_minutes = kwargs.get('app_consistent_frequency_in_minutes', None)
-        self.crash_consistent_frequency_in_minutes = kwargs.get('crash_consistent_frequency_in_minutes', None)
+        self.instance_type = "VMwareCbt"  # type: str
+        self.recovery_point_history_in_minutes = kwargs.get("recovery_point_history_in_minutes", None)
+        self.app_consistent_frequency_in_minutes = kwargs.get("app_consistent_frequency_in_minutes", None)
+        self.crash_consistent_frequency_in_minutes = kwargs.get("crash_consistent_frequency_in_minutes", None)
 
 
 class VMwareCbtProtectedDiskDetails(msrest.serialization.Model):
@@ -20184,41 +19042,38 @@ class VMwareCbtProtectedDiskDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'readonly': True},
-        'disk_name': {'readonly': True},
-        'disk_path': {'readonly': True},
-        'is_os_disk': {'readonly': True},
-        'capacity_in_bytes': {'readonly': True},
-        'log_storage_account_id': {'readonly': True},
-        'log_storage_account_sas_secret_name': {'readonly': True},
-        'disk_encryption_set_id': {'readonly': True},
-        'seed_managed_disk_id': {'readonly': True},
-        'target_managed_disk_id': {'readonly': True},
+        "disk_id": {"readonly": True},
+        "disk_name": {"readonly": True},
+        "disk_path": {"readonly": True},
+        "is_os_disk": {"readonly": True},
+        "capacity_in_bytes": {"readonly": True},
+        "log_storage_account_id": {"readonly": True},
+        "log_storage_account_sas_secret_name": {"readonly": True},
+        "disk_encryption_set_id": {"readonly": True},
+        "seed_managed_disk_id": {"readonly": True},
+        "target_managed_disk_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
-        'disk_path': {'key': 'diskPath', 'type': 'str'},
-        'is_os_disk': {'key': 'isOSDisk', 'type': 'str'},
-        'capacity_in_bytes': {'key': 'capacityInBytes', 'type': 'long'},
-        'log_storage_account_id': {'key': 'logStorageAccountId', 'type': 'str'},
-        'log_storage_account_sas_secret_name': {'key': 'logStorageAccountSasSecretName', 'type': 'str'},
-        'disk_encryption_set_id': {'key': 'diskEncryptionSetId', 'type': 'str'},
-        'seed_managed_disk_id': {'key': 'seedManagedDiskId', 'type': 'str'},
-        'target_managed_disk_id': {'key': 'targetManagedDiskId', 'type': 'str'},
-        'target_disk_name': {'key': 'targetDiskName', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
+        "disk_path": {"key": "diskPath", "type": "str"},
+        "is_os_disk": {"key": "isOSDisk", "type": "str"},
+        "capacity_in_bytes": {"key": "capacityInBytes", "type": "long"},
+        "log_storage_account_id": {"key": "logStorageAccountId", "type": "str"},
+        "log_storage_account_sas_secret_name": {"key": "logStorageAccountSasSecretName", "type": "str"},
+        "disk_encryption_set_id": {"key": "diskEncryptionSetId", "type": "str"},
+        "seed_managed_disk_id": {"key": "seedManagedDiskId", "type": "str"},
+        "target_managed_disk_id": {"key": "targetManagedDiskId", "type": "str"},
+        "target_disk_name": {"key": "targetDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtProtectedDiskDetails, self).__init__(**kwargs)
         self.disk_id = None
         self.disk_name = None
-        self.disk_type = kwargs.get('disk_type', None)
+        self.disk_type = kwargs.get("disk_type", None)
         self.disk_path = None
         self.is_os_disk = None
         self.capacity_in_bytes = None
@@ -20227,7 +19082,7 @@ class VMwareCbtProtectedDiskDetails(msrest.serialization.Model):
         self.disk_encryption_set_id = None
         self.seed_managed_disk_id = None
         self.target_managed_disk_id = None
-        self.target_disk_name = kwargs.get('target_disk_name', None)
+        self.target_disk_name = kwargs.get("target_disk_name", None)
 
 
 class VMwareCbtProtectionContainerMappingDetails(ProtectionContainerMappingProviderSpecificDetails):
@@ -20256,31 +19111,28 @@ class VMwareCbtProtectionContainerMappingDetails(ProtectionContainerMappingProvi
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'key_vault_id': {'readonly': True},
-        'key_vault_uri': {'readonly': True},
-        'storage_account_id': {'readonly': True},
-        'storage_account_sas_secret_name': {'readonly': True},
-        'service_bus_connection_string_secret_name': {'readonly': True},
-        'target_location': {'readonly': True},
+        "instance_type": {"required": True},
+        "key_vault_id": {"readonly": True},
+        "key_vault_uri": {"readonly": True},
+        "storage_account_id": {"readonly": True},
+        "storage_account_sas_secret_name": {"readonly": True},
+        "service_bus_connection_string_secret_name": {"readonly": True},
+        "target_location": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'key_vault_id': {'key': 'keyVaultId', 'type': 'str'},
-        'key_vault_uri': {'key': 'keyVaultUri', 'type': 'str'},
-        'storage_account_id': {'key': 'storageAccountId', 'type': 'str'},
-        'storage_account_sas_secret_name': {'key': 'storageAccountSasSecretName', 'type': 'str'},
-        'service_bus_connection_string_secret_name': {'key': 'serviceBusConnectionStringSecretName', 'type': 'str'},
-        'target_location': {'key': 'targetLocation', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "key_vault_id": {"key": "keyVaultId", "type": "str"},
+        "key_vault_uri": {"key": "keyVaultUri", "type": "str"},
+        "storage_account_id": {"key": "storageAccountId", "type": "str"},
+        "storage_account_sas_secret_name": {"key": "storageAccountSasSecretName", "type": "str"},
+        "service_bus_connection_string_secret_name": {"key": "serviceBusConnectionStringSecretName", "type": "str"},
+        "target_location": {"key": "targetLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtProtectionContainerMappingDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
+        self.instance_type = "VMwareCbt"  # type: str
         self.key_vault_id = None
         self.key_vault_uri = None
         self.storage_account_id = None
@@ -20301,22 +19153,19 @@ class VMwareCbtResyncInput(ResyncProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'skip_cbt_reset': {'required': True},
+        "instance_type": {"required": True},
+        "skip_cbt_reset": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'skip_cbt_reset': {'key': 'skipCbtReset', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "skip_cbt_reset": {"key": "skipCbtReset", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtResyncInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.skip_cbt_reset = kwargs['skip_cbt_reset']
+        self.instance_type = "VMwareCbt"  # type: str
+        self.skip_cbt_reset = kwargs["skip_cbt_reset"]
 
 
 class VMwareCbtTestMigrateInput(TestMigrateProviderSpecificInput):
@@ -20333,25 +19182,22 @@ class VMwareCbtTestMigrateInput(TestMigrateProviderSpecificInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'recovery_point_id': {'required': True},
-        'network_id': {'required': True},
+        "instance_type": {"required": True},
+        "recovery_point_id": {"required": True},
+        "network_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'network_id': {'key': 'networkId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "network_id": {"key": "networkId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtTestMigrateInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.recovery_point_id = kwargs['recovery_point_id']
-        self.network_id = kwargs['network_id']
+        self.instance_type = "VMwareCbt"  # type: str
+        self.recovery_point_id = kwargs["recovery_point_id"]
+        self.network_id = kwargs["network_id"]
 
 
 class VMwareCbtUpdateDiskInput(msrest.serialization.Model):
@@ -20366,21 +19212,18 @@ class VMwareCbtUpdateDiskInput(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_id': {'required': True},
+        "disk_id": {"required": True},
     }
 
     _attribute_map = {
-        'disk_id': {'key': 'diskId', 'type': 'str'},
-        'target_disk_name': {'key': 'targetDiskName', 'type': 'str'},
+        "disk_id": {"key": "diskId", "type": "str"},
+        "target_disk_name": {"key": "targetDiskName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtUpdateDiskInput, self).__init__(**kwargs)
-        self.disk_id = kwargs['disk_id']
-        self.target_disk_name = kwargs.get('target_disk_name', None)
+        self.disk_id = kwargs["disk_id"]
+        self.target_disk_name = kwargs.get("target_disk_name", None)
 
 
 class VMwareCbtUpdateMigrationItemInput(UpdateMigrationItemProviderSpecificInput):
@@ -20429,51 +19272,48 @@ class VMwareCbtUpdateMigrationItemInput(UpdateMigrationItemProviderSpecificInput
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'target_vm_name': {'key': 'targetVmName', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'target_resource_group_id': {'key': 'targetResourceGroupId', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_proximity_placement_group_id': {'key': 'targetProximityPlacementGroupId', 'type': 'str'},
-        'target_boot_diagnostics_storage_account_id': {'key': 'targetBootDiagnosticsStorageAccountId', 'type': 'str'},
-        'target_network_id': {'key': 'targetNetworkId', 'type': 'str'},
-        'vm_nics': {'key': 'vmNics', 'type': '[VMwareCbtNicInput]'},
-        'vm_disks': {'key': 'vmDisks', 'type': '[VMwareCbtUpdateDiskInput]'},
-        'license_type': {'key': 'licenseType', 'type': 'str'},
-        'sql_server_license_type': {'key': 'sqlServerLicenseType', 'type': 'str'},
-        'perform_auto_resync': {'key': 'performAutoResync', 'type': 'str'},
-        'target_vm_tags': {'key': 'targetVmTags', 'type': '{str}'},
-        'target_disk_tags': {'key': 'targetDiskTags', 'type': '{str}'},
-        'target_nic_tags': {'key': 'targetNicTags', 'type': '{str}'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "target_vm_name": {"key": "targetVmName", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "target_resource_group_id": {"key": "targetResourceGroupId", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_proximity_placement_group_id": {"key": "targetProximityPlacementGroupId", "type": "str"},
+        "target_boot_diagnostics_storage_account_id": {"key": "targetBootDiagnosticsStorageAccountId", "type": "str"},
+        "target_network_id": {"key": "targetNetworkId", "type": "str"},
+        "vm_nics": {"key": "vmNics", "type": "[VMwareCbtNicInput]"},
+        "vm_disks": {"key": "vmDisks", "type": "[VMwareCbtUpdateDiskInput]"},
+        "license_type": {"key": "licenseType", "type": "str"},
+        "sql_server_license_type": {"key": "sqlServerLicenseType", "type": "str"},
+        "perform_auto_resync": {"key": "performAutoResync", "type": "str"},
+        "target_vm_tags": {"key": "targetVmTags", "type": "{str}"},
+        "target_disk_tags": {"key": "targetDiskTags", "type": "{str}"},
+        "target_nic_tags": {"key": "targetNicTags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareCbtUpdateMigrationItemInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareCbt'  # type: str
-        self.target_vm_name = kwargs.get('target_vm_name', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.target_resource_group_id = kwargs.get('target_resource_group_id', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_proximity_placement_group_id = kwargs.get('target_proximity_placement_group_id', None)
-        self.target_boot_diagnostics_storage_account_id = kwargs.get('target_boot_diagnostics_storage_account_id', None)
-        self.target_network_id = kwargs.get('target_network_id', None)
-        self.vm_nics = kwargs.get('vm_nics', None)
-        self.vm_disks = kwargs.get('vm_disks', None)
-        self.license_type = kwargs.get('license_type', None)
-        self.sql_server_license_type = kwargs.get('sql_server_license_type', None)
-        self.perform_auto_resync = kwargs.get('perform_auto_resync', None)
-        self.target_vm_tags = kwargs.get('target_vm_tags', None)
-        self.target_disk_tags = kwargs.get('target_disk_tags', None)
-        self.target_nic_tags = kwargs.get('target_nic_tags', None)
+        self.instance_type = "VMwareCbt"  # type: str
+        self.target_vm_name = kwargs.get("target_vm_name", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.target_resource_group_id = kwargs.get("target_resource_group_id", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_proximity_placement_group_id = kwargs.get("target_proximity_placement_group_id", None)
+        self.target_boot_diagnostics_storage_account_id = kwargs.get("target_boot_diagnostics_storage_account_id", None)
+        self.target_network_id = kwargs.get("target_network_id", None)
+        self.vm_nics = kwargs.get("vm_nics", None)
+        self.vm_disks = kwargs.get("vm_disks", None)
+        self.license_type = kwargs.get("license_type", None)
+        self.sql_server_license_type = kwargs.get("sql_server_license_type", None)
+        self.perform_auto_resync = kwargs.get("perform_auto_resync", None)
+        self.target_vm_tags = kwargs.get("target_vm_tags", None)
+        self.target_disk_tags = kwargs.get("target_disk_tags", None)
+        self.target_nic_tags = kwargs.get("target_nic_tags", None)
 
 
 class VMwareDetails(FabricSpecificDetails):
@@ -20552,83 +19392,80 @@ class VMwareDetails(FabricSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'process_servers': {'key': 'processServers', 'type': '[ProcessServer]'},
-        'master_target_servers': {'key': 'masterTargetServers', 'type': '[MasterTargetServer]'},
-        'run_as_accounts': {'key': 'runAsAccounts', 'type': '[RunAsAccount]'},
-        'replication_pair_count': {'key': 'replicationPairCount', 'type': 'str'},
-        'process_server_count': {'key': 'processServerCount', 'type': 'str'},
-        'agent_count': {'key': 'agentCount', 'type': 'str'},
-        'protected_servers': {'key': 'protectedServers', 'type': 'str'},
-        'system_load': {'key': 'systemLoad', 'type': 'str'},
-        'system_load_status': {'key': 'systemLoadStatus', 'type': 'str'},
-        'cpu_load': {'key': 'cpuLoad', 'type': 'str'},
-        'cpu_load_status': {'key': 'cpuLoadStatus', 'type': 'str'},
-        'total_memory_in_bytes': {'key': 'totalMemoryInBytes', 'type': 'long'},
-        'available_memory_in_bytes': {'key': 'availableMemoryInBytes', 'type': 'long'},
-        'memory_usage_status': {'key': 'memoryUsageStatus', 'type': 'str'},
-        'total_space_in_bytes': {'key': 'totalSpaceInBytes', 'type': 'long'},
-        'available_space_in_bytes': {'key': 'availableSpaceInBytes', 'type': 'long'},
-        'space_usage_status': {'key': 'spaceUsageStatus', 'type': 'str'},
-        'web_load': {'key': 'webLoad', 'type': 'str'},
-        'web_load_status': {'key': 'webLoadStatus', 'type': 'str'},
-        'database_server_load': {'key': 'databaseServerLoad', 'type': 'str'},
-        'database_server_load_status': {'key': 'databaseServerLoadStatus', 'type': 'str'},
-        'cs_service_status': {'key': 'csServiceStatus', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'agent_version': {'key': 'agentVersion', 'type': 'str'},
-        'host_name': {'key': 'hostName', 'type': 'str'},
-        'last_heartbeat': {'key': 'lastHeartbeat', 'type': 'iso-8601'},
-        'version_status': {'key': 'versionStatus', 'type': 'str'},
-        'ssl_cert_expiry_date': {'key': 'sslCertExpiryDate', 'type': 'iso-8601'},
-        'ssl_cert_expiry_remaining_days': {'key': 'sslCertExpiryRemainingDays', 'type': 'int'},
-        'ps_template_version': {'key': 'psTemplateVersion', 'type': 'str'},
-        'agent_expiry_date': {'key': 'agentExpiryDate', 'type': 'iso-8601'},
-        'agent_version_details': {'key': 'agentVersionDetails', 'type': 'VersionDetails'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "process_servers": {"key": "processServers", "type": "[ProcessServer]"},
+        "master_target_servers": {"key": "masterTargetServers", "type": "[MasterTargetServer]"},
+        "run_as_accounts": {"key": "runAsAccounts", "type": "[RunAsAccount]"},
+        "replication_pair_count": {"key": "replicationPairCount", "type": "str"},
+        "process_server_count": {"key": "processServerCount", "type": "str"},
+        "agent_count": {"key": "agentCount", "type": "str"},
+        "protected_servers": {"key": "protectedServers", "type": "str"},
+        "system_load": {"key": "systemLoad", "type": "str"},
+        "system_load_status": {"key": "systemLoadStatus", "type": "str"},
+        "cpu_load": {"key": "cpuLoad", "type": "str"},
+        "cpu_load_status": {"key": "cpuLoadStatus", "type": "str"},
+        "total_memory_in_bytes": {"key": "totalMemoryInBytes", "type": "long"},
+        "available_memory_in_bytes": {"key": "availableMemoryInBytes", "type": "long"},
+        "memory_usage_status": {"key": "memoryUsageStatus", "type": "str"},
+        "total_space_in_bytes": {"key": "totalSpaceInBytes", "type": "long"},
+        "available_space_in_bytes": {"key": "availableSpaceInBytes", "type": "long"},
+        "space_usage_status": {"key": "spaceUsageStatus", "type": "str"},
+        "web_load": {"key": "webLoad", "type": "str"},
+        "web_load_status": {"key": "webLoadStatus", "type": "str"},
+        "database_server_load": {"key": "databaseServerLoad", "type": "str"},
+        "database_server_load_status": {"key": "databaseServerLoadStatus", "type": "str"},
+        "cs_service_status": {"key": "csServiceStatus", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "agent_version": {"key": "agentVersion", "type": "str"},
+        "host_name": {"key": "hostName", "type": "str"},
+        "last_heartbeat": {"key": "lastHeartbeat", "type": "iso-8601"},
+        "version_status": {"key": "versionStatus", "type": "str"},
+        "ssl_cert_expiry_date": {"key": "sslCertExpiryDate", "type": "iso-8601"},
+        "ssl_cert_expiry_remaining_days": {"key": "sslCertExpiryRemainingDays", "type": "int"},
+        "ps_template_version": {"key": "psTemplateVersion", "type": "str"},
+        "agent_expiry_date": {"key": "agentExpiryDate", "type": "iso-8601"},
+        "agent_version_details": {"key": "agentVersionDetails", "type": "VersionDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMware'  # type: str
-        self.process_servers = kwargs.get('process_servers', None)
-        self.master_target_servers = kwargs.get('master_target_servers', None)
-        self.run_as_accounts = kwargs.get('run_as_accounts', None)
-        self.replication_pair_count = kwargs.get('replication_pair_count', None)
-        self.process_server_count = kwargs.get('process_server_count', None)
-        self.agent_count = kwargs.get('agent_count', None)
-        self.protected_servers = kwargs.get('protected_servers', None)
-        self.system_load = kwargs.get('system_load', None)
-        self.system_load_status = kwargs.get('system_load_status', None)
-        self.cpu_load = kwargs.get('cpu_load', None)
-        self.cpu_load_status = kwargs.get('cpu_load_status', None)
-        self.total_memory_in_bytes = kwargs.get('total_memory_in_bytes', None)
-        self.available_memory_in_bytes = kwargs.get('available_memory_in_bytes', None)
-        self.memory_usage_status = kwargs.get('memory_usage_status', None)
-        self.total_space_in_bytes = kwargs.get('total_space_in_bytes', None)
-        self.available_space_in_bytes = kwargs.get('available_space_in_bytes', None)
-        self.space_usage_status = kwargs.get('space_usage_status', None)
-        self.web_load = kwargs.get('web_load', None)
-        self.web_load_status = kwargs.get('web_load_status', None)
-        self.database_server_load = kwargs.get('database_server_load', None)
-        self.database_server_load_status = kwargs.get('database_server_load_status', None)
-        self.cs_service_status = kwargs.get('cs_service_status', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.host_name = kwargs.get('host_name', None)
-        self.last_heartbeat = kwargs.get('last_heartbeat', None)
-        self.version_status = kwargs.get('version_status', None)
-        self.ssl_cert_expiry_date = kwargs.get('ssl_cert_expiry_date', None)
-        self.ssl_cert_expiry_remaining_days = kwargs.get('ssl_cert_expiry_remaining_days', None)
-        self.ps_template_version = kwargs.get('ps_template_version', None)
-        self.agent_expiry_date = kwargs.get('agent_expiry_date', None)
-        self.agent_version_details = kwargs.get('agent_version_details', None)
+        self.instance_type = "VMware"  # type: str
+        self.process_servers = kwargs.get("process_servers", None)
+        self.master_target_servers = kwargs.get("master_target_servers", None)
+        self.run_as_accounts = kwargs.get("run_as_accounts", None)
+        self.replication_pair_count = kwargs.get("replication_pair_count", None)
+        self.process_server_count = kwargs.get("process_server_count", None)
+        self.agent_count = kwargs.get("agent_count", None)
+        self.protected_servers = kwargs.get("protected_servers", None)
+        self.system_load = kwargs.get("system_load", None)
+        self.system_load_status = kwargs.get("system_load_status", None)
+        self.cpu_load = kwargs.get("cpu_load", None)
+        self.cpu_load_status = kwargs.get("cpu_load_status", None)
+        self.total_memory_in_bytes = kwargs.get("total_memory_in_bytes", None)
+        self.available_memory_in_bytes = kwargs.get("available_memory_in_bytes", None)
+        self.memory_usage_status = kwargs.get("memory_usage_status", None)
+        self.total_space_in_bytes = kwargs.get("total_space_in_bytes", None)
+        self.available_space_in_bytes = kwargs.get("available_space_in_bytes", None)
+        self.space_usage_status = kwargs.get("space_usage_status", None)
+        self.web_load = kwargs.get("web_load", None)
+        self.web_load_status = kwargs.get("web_load_status", None)
+        self.database_server_load = kwargs.get("database_server_load", None)
+        self.database_server_load_status = kwargs.get("database_server_load_status", None)
+        self.cs_service_status = kwargs.get("cs_service_status", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.host_name = kwargs.get("host_name", None)
+        self.last_heartbeat = kwargs.get("last_heartbeat", None)
+        self.version_status = kwargs.get("version_status", None)
+        self.ssl_cert_expiry_date = kwargs.get("ssl_cert_expiry_date", None)
+        self.ssl_cert_expiry_remaining_days = kwargs.get("ssl_cert_expiry_remaining_days", None)
+        self.ps_template_version = kwargs.get("ps_template_version", None)
+        self.agent_expiry_date = kwargs.get("agent_expiry_date", None)
+        self.agent_version_details = kwargs.get("agent_version_details", None)
 
 
 class VMwareV2FabricCreationInput(FabricSpecificCreationInput):
@@ -20647,26 +19484,23 @@ class VMwareV2FabricCreationInput(FabricSpecificCreationInput):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'migration_solution_id': {'required': True},
+        "instance_type": {"required": True},
+        "migration_solution_id": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vmware_site_id': {'key': 'vmwareSiteId', 'type': 'str'},
-        'physical_site_id': {'key': 'physicalSiteId', 'type': 'str'},
-        'migration_solution_id': {'key': 'migrationSolutionId', 'type': 'str'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vmware_site_id": {"key": "vmwareSiteId", "type": "str"},
+        "physical_site_id": {"key": "physicalSiteId", "type": "str"},
+        "migration_solution_id": {"key": "migrationSolutionId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareV2FabricCreationInput, self).__init__(**kwargs)
-        self.instance_type = 'VMwareV2'  # type: str
-        self.vmware_site_id = kwargs.get('vmware_site_id', None)
-        self.physical_site_id = kwargs.get('physical_site_id', None)
-        self.migration_solution_id = kwargs['migration_solution_id']
+        self.instance_type = "VMwareV2"  # type: str
+        self.vmware_site_id = kwargs.get("vmware_site_id", None)
+        self.physical_site_id = kwargs.get("physical_site_id", None)
+        self.migration_solution_id = kwargs["migration_solution_id"]
 
 
 class VMwareV2FabricSpecificDetails(FabricSpecificDetails):
@@ -20697,33 +19531,30 @@ class VMwareV2FabricSpecificDetails(FabricSpecificDetails):
     """
 
     _validation = {
-        'instance_type': {'required': True},
-        'vmware_site_id': {'readonly': True},
-        'physical_site_id': {'readonly': True},
-        'migration_solution_id': {'readonly': True},
-        'service_endpoint': {'readonly': True},
-        'service_resource_id': {'readonly': True},
-        'service_container_id': {'readonly': True},
-        'process_servers': {'readonly': True},
+        "instance_type": {"required": True},
+        "vmware_site_id": {"readonly": True},
+        "physical_site_id": {"readonly": True},
+        "migration_solution_id": {"readonly": True},
+        "service_endpoint": {"readonly": True},
+        "service_resource_id": {"readonly": True},
+        "service_container_id": {"readonly": True},
+        "process_servers": {"readonly": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'vmware_site_id': {'key': 'vmwareSiteId', 'type': 'str'},
-        'physical_site_id': {'key': 'physicalSiteId', 'type': 'str'},
-        'migration_solution_id': {'key': 'migrationSolutionId', 'type': 'str'},
-        'service_endpoint': {'key': 'serviceEndpoint', 'type': 'str'},
-        'service_resource_id': {'key': 'serviceResourceId', 'type': 'str'},
-        'service_container_id': {'key': 'serviceContainerId', 'type': 'str'},
-        'process_servers': {'key': 'processServers', 'type': '[ProcessServerDetails]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "vmware_site_id": {"key": "vmwareSiteId", "type": "str"},
+        "physical_site_id": {"key": "physicalSiteId", "type": "str"},
+        "migration_solution_id": {"key": "migrationSolutionId", "type": "str"},
+        "service_endpoint": {"key": "serviceEndpoint", "type": "str"},
+        "service_resource_id": {"key": "serviceResourceId", "type": "str"},
+        "service_container_id": {"key": "serviceContainerId", "type": "str"},
+        "process_servers": {"key": "processServers", "type": "[ProcessServerDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareV2FabricSpecificDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMwareV2'  # type: str
+        self.instance_type = "VMwareV2"  # type: str
         self.vmware_site_id = None
         self.physical_site_id = None
         self.migration_solution_id = None
@@ -20766,36 +19597,33 @@ class VMwareVirtualMachineDetails(ConfigurationSettings):
     """
 
     _validation = {
-        'instance_type': {'required': True},
+        "instance_type": {"required": True},
     }
 
     _attribute_map = {
-        'instance_type': {'key': 'instanceType', 'type': 'str'},
-        'agent_generated_id': {'key': 'agentGeneratedId', 'type': 'str'},
-        'agent_installed': {'key': 'agentInstalled', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'agent_version': {'key': 'agentVersion', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'powered_on': {'key': 'poweredOn', 'type': 'str'},
-        'v_center_infrastructure_id': {'key': 'vCenterInfrastructureId', 'type': 'str'},
-        'discovery_type': {'key': 'discoveryType', 'type': 'str'},
-        'disk_details': {'key': 'diskDetails', 'type': '[InMageDiskDetails]'},
-        'validation_errors': {'key': 'validationErrors', 'type': '[HealthError]'},
+        "instance_type": {"key": "instanceType", "type": "str"},
+        "agent_generated_id": {"key": "agentGeneratedId", "type": "str"},
+        "agent_installed": {"key": "agentInstalled", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "agent_version": {"key": "agentVersion", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "powered_on": {"key": "poweredOn", "type": "str"},
+        "v_center_infrastructure_id": {"key": "vCenterInfrastructureId", "type": "str"},
+        "discovery_type": {"key": "discoveryType", "type": "str"},
+        "disk_details": {"key": "diskDetails", "type": "[InMageDiskDetails]"},
+        "validation_errors": {"key": "validationErrors", "type": "[HealthError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VMwareVirtualMachineDetails, self).__init__(**kwargs)
-        self.instance_type = 'VMwareVirtualMachine'  # type: str
-        self.agent_generated_id = kwargs.get('agent_generated_id', None)
-        self.agent_installed = kwargs.get('agent_installed', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.powered_on = kwargs.get('powered_on', None)
-        self.v_center_infrastructure_id = kwargs.get('v_center_infrastructure_id', None)
-        self.discovery_type = kwargs.get('discovery_type', None)
-        self.disk_details = kwargs.get('disk_details', None)
-        self.validation_errors = kwargs.get('validation_errors', None)
+        self.instance_type = "VMwareVirtualMachine"  # type: str
+        self.agent_generated_id = kwargs.get("agent_generated_id", None)
+        self.agent_installed = kwargs.get("agent_installed", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.powered_on = kwargs.get("powered_on", None)
+        self.v_center_infrastructure_id = kwargs.get("v_center_infrastructure_id", None)
+        self.discovery_type = kwargs.get("discovery_type", None)
+        self.disk_details = kwargs.get("disk_details", None)
+        self.validation_errors = kwargs.get("validation_errors", None)

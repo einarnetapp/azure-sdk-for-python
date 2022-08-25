@@ -26,20 +26,20 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._target_compute_sizes_operations import build_list_by_replication_protected_items_request
+from ...operations._replication_appliances_operations import build_list_request
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class TargetComputeSizesOperations:
+class ReplicationAppliancesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.recoveryservicessiterecovery.aio.SiteRecoveryManagementClient`'s
-        :attr:`target_compute_sizes` attribute.
+        :attr:`replication_appliances` attribute.
     """
 
     models = _models
@@ -52,30 +52,25 @@ class TargetComputeSizesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_by_replication_protected_items(
-        self, fabric_name: str, protection_container_name: str, replicated_protected_item_name: str, **kwargs: Any
-    ) -> AsyncIterable["_models.TargetComputeSize"]:
-        """Gets the list of target compute sizes for the replication protected item.
+    def list(self, filter: Optional[str] = None, **kwargs: Any) -> AsyncIterable["_models.ReplicationAppliance"]:
+        """Gets the list of appliances.
 
-        Lists the available target compute sizes for a replication protected item.
+        Gets the list of Azure Site Recovery appliances for the vault.
 
-        :param fabric_name: Fabric name. Required.
-        :type fabric_name: str
-        :param protection_container_name: protection container name. Required.
-        :type protection_container_name: str
-        :param replicated_protected_item_name: Replication protected item name. Required.
-        :type replicated_protected_item_name: str
+        :param filter: OData filter options. Default value is None.
+        :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either TargetComputeSize or the result of cls(response)
+        :return: An iterator like instance of either ReplicationAppliance or the result of
+         cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.TargetComputeSize]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.ReplicationAppliance]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.TargetComputeSizeCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ApplianceCollection]
 
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
@@ -83,15 +78,13 @@ class TargetComputeSizesOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_list_by_replication_protected_items_request(
-                    fabric_name=fabric_name,
-                    protection_container_name=protection_container_name,
-                    replicated_protected_item_name=replicated_protected_item_name,
+                request = build_list_request(
                     resource_name=self._config.resource_name,
                     resource_group_name=self._config.resource_group_name,
                     subscription_id=self._config.subscription_id,
+                    filter=filter,
                     api_version=api_version,
-                    template_url=self.list_by_replication_protected_items.metadata["url"],
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -110,7 +103,7 @@ class TargetComputeSizesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("TargetComputeSizeCollection", pipeline_response)
+            deserialized = self._deserialize("ApplianceCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -132,4 +125,4 @@ class TargetComputeSizesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_replication_protected_items.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectedItems/{replicatedProtectedItemName}/targetComputeSizes"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances"}  # type: ignore
