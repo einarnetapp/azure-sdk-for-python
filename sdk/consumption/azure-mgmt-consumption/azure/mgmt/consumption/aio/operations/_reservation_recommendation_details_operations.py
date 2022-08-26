@@ -8,7 +8,13 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Optional, TypeVar, Union
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -19,8 +25,10 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._reservation_recommendation_details_operations import build_get_request
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class ReservationRecommendationDetailsOperations:
     """
@@ -41,7 +49,6 @@ class ReservationRecommendationDetailsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace_async
     async def get(
         self,
@@ -60,46 +67,45 @@ class ReservationRecommendationDetailsOperations:
          '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope,
          /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
-         for billingProfile scope.
+         for billingProfile scope. Required.
         :type resource_scope: str
-        :param scope: Scope of the reservation.
+        :param scope: Scope of the reservation. Known values are: "Single" and "Shared". Required.
         :type scope: str or ~azure.mgmt.consumption.models.Scope
-        :param region: Used to select the region the recommendation should be generated for.
+        :param region: Used to select the region the recommendation should be generated for. Required.
         :type region: str
-        :param term: Specify length of reservation recommendation term.
+        :param term: Specify length of reservation recommendation term. Known values are: "P1Y" and
+         "P3Y". Required.
         :type term: str or ~azure.mgmt.consumption.models.Term
         :param look_back_period: Filter the time period on which reservation recommendation results are
-         based.
+         based. Known values are: "Last7Days", "Last30Days", and "Last60Days". Required.
         :type look_back_period: str or ~azure.mgmt.consumption.models.LookBackPeriod
         :param product: Filter the products for which reservation recommendation results are generated.
          Examples: Standard_DS1_v2 (for VM), Premium_SSD_Managed_Disks_P30 (for Managed Disks).
+         Required.
         :type product: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ReservationRecommendationDetailsModel, or the result of cls(response)
+        :return: ReservationRecommendationDetailsModel or None or the result of cls(response)
         :rtype: ~azure.mgmt.consumption.models.ReservationRecommendationDetailsModel or None
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.ReservationRecommendationDetailsModel]]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.ReservationRecommendationDetailsModel]]
 
-        
         request = build_get_request(
             resource_scope=resource_scope,
-            api_version=api_version,
             scope=scope,
             region=region,
             term=term,
             look_back_period=look_back_period,
             product=product,
-            template_url=self.get.metadata['url'],
+            api_version=api_version,
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -107,10 +113,9 @@ class ReservationRecommendationDetailsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
+
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 204]:
@@ -120,12 +125,11 @@ class ReservationRecommendationDetailsOperations:
 
         deserialized = None
         if response.status_code == 200:
-            deserialized = self._deserialize('ReservationRecommendationDetailsModel', pipeline_response)
+            deserialized = self._deserialize("ReservationRecommendationDetailsModel", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendationDetails"}  # type: ignore
-
+    get.metadata = {"url": "/{resourceScope}/providers/Microsoft.Consumption/reservationRecommendationDetails"}  # type: ignore
