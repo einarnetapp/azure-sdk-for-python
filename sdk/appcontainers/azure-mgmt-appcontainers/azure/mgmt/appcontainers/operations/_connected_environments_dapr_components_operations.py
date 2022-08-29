@@ -35,8 +35,8 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_by_container_app_request(
-    resource_group_name: str, container_app_name: str, subscription_id: str, **kwargs: Any
+def build_list_request(
+    resource_group_name: str, connected_environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -47,14 +47,14 @@ def build_list_by_container_app_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -69,7 +69,7 @@ def build_list_by_container_app_request(
 
 
 def build_get_request(
-    resource_group_name: str, container_app_name: str, auth_config_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connected_environment_name: str, component_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -80,15 +80,15 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-        "authConfigName": _SERIALIZER.url("auth_config_name", auth_config_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
+        "componentName": _SERIALIZER.url("component_name", component_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -103,7 +103,7 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, container_app_name: str, auth_config_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connected_environment_name: str, component_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -115,15 +115,15 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-        "authConfigName": _SERIALIZER.url("auth_config_name", auth_config_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
+        "componentName": _SERIALIZER.url("component_name", component_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -140,7 +140,7 @@ def build_create_or_update_request(
 
 
 def build_delete_request(
-    resource_group_name: str, container_app_name: str, auth_config_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connected_environment_name: str, component_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -151,15 +151,15 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-        "authConfigName": _SERIALIZER.url("auth_config_name", auth_config_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
+        "componentName": _SERIALIZER.url("component_name", component_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -173,14 +173,48 @@ def build_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class ContainerAppsAuthConfigsOperations:
+def build_list_secrets_request(
+    resource_group_name: str, connected_environment_name: str, component_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
+        "componentName": _SERIALIZER.url("component_name", component_name, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+class ConnectedEnvironmentsDaprComponentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.appcontainers.ContainerAppsAPIClient`'s
-        :attr:`container_apps_auth_configs` attribute.
+        :attr:`connected_environments_dapr_components` attribute.
     """
 
     models = _models
@@ -193,28 +227,28 @@ class ContainerAppsAuthConfigsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_by_container_app(
-        self, resource_group_name: str, container_app_name: str, **kwargs: Any
-    ) -> Iterable["_models.AuthConfig"]:
-        """Get the Container App AuthConfigs in a given resource group.
+    def list(
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
+    ) -> Iterable["_models.DaprComponent"]:
+        """Get the Dapr Components for a connected environment.
 
-        Get the Container App AuthConfigs in a given resource group.
+        Get the Dapr Components for a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either AuthConfig or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.appcontainers.models.AuthConfig]
+        :return: An iterator like instance of either DaprComponent or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.appcontainers.models.DaprComponent]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AuthConfigCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponentsCollection]
 
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
@@ -222,12 +256,12 @@ class ContainerAppsAuthConfigsOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_list_by_container_app_request(
+                request = build_list_request(
                     resource_group_name=resource_group_name,
-                    container_app_name=container_app_name,
+                    connected_environment_name=connected_environment_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.list_by_container_app.metadata["url"],
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -246,7 +280,7 @@ class ContainerAppsAuthConfigsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("AuthConfigCollection", pipeline_response)
+            deserialized = self._deserialize("DaprComponentsCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -269,26 +303,26 @@ class ContainerAppsAuthConfigsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_container_app.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents"}  # type: ignore
 
     @distributed_trace
     def get(
-        self, resource_group_name: str, container_app_name: str, auth_config_name: str, **kwargs: Any
-    ) -> _models.AuthConfig:
-        """Get a AuthConfig of a Container App.
+        self, resource_group_name: str, connected_environment_name: str, component_name: str, **kwargs: Any
+    ) -> _models.DaprComponent:
+        """Get a dapr component.
 
-        Get a AuthConfig of a Container App.
+        Get a dapr component.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param auth_config_name: Name of the Container App AuthConfig. Required.
-        :type auth_config_name: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AuthConfig or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.AuthConfig
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -298,12 +332,12 @@ class ContainerAppsAuthConfigsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AuthConfig]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponent]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            auth_config_name=auth_config_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -324,45 +358,45 @@ class ContainerAppsAuthConfigsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AuthConfig", pipeline_response)
+        deserialized = self._deserialize("DaprComponent", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
     @overload
     def create_or_update(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        auth_config_name: str,
-        auth_config_envelope: _models.AuthConfig,
+        connected_environment_name: str,
+        component_name: str,
+        dapr_component_envelope: _models.DaprComponent,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.AuthConfig:
-        """Create or update the AuthConfig for a Container App.
+    ) -> _models.DaprComponent:
+        """Creates or updates a Dapr Component.
 
-        Create or update the AuthConfig for a Container App.
+        Creates or updates a Dapr Component in a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param auth_config_name: Name of the Container App AuthConfig. Required.
-        :type auth_config_name: str
-        :param auth_config_envelope: Properties used to create a Container App AuthConfig. Required.
-        :type auth_config_envelope: ~azure.mgmt.appcontainers.models.AuthConfig
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
+        :param dapr_component_envelope: Configuration details of the Dapr Component. Required.
+        :type dapr_component_envelope: ~azure.mgmt.appcontainers.models.DaprComponent
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AuthConfig or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.AuthConfig
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -370,32 +404,32 @@ class ContainerAppsAuthConfigsOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        auth_config_name: str,
-        auth_config_envelope: IO,
+        connected_environment_name: str,
+        component_name: str,
+        dapr_component_envelope: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.AuthConfig:
-        """Create or update the AuthConfig for a Container App.
+    ) -> _models.DaprComponent:
+        """Creates or updates a Dapr Component.
 
-        Create or update the AuthConfig for a Container App.
+        Creates or updates a Dapr Component in a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param auth_config_name: Name of the Container App AuthConfig. Required.
-        :type auth_config_name: str
-        :param auth_config_envelope: Properties used to create a Container App AuthConfig. Required.
-        :type auth_config_envelope: IO
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
+        :param dapr_component_envelope: Configuration details of the Dapr Component. Required.
+        :type dapr_component_envelope: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AuthConfig or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.AuthConfig
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -403,31 +437,31 @@ class ContainerAppsAuthConfigsOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        auth_config_name: str,
-        auth_config_envelope: Union[_models.AuthConfig, IO],
+        connected_environment_name: str,
+        component_name: str,
+        dapr_component_envelope: Union[_models.DaprComponent, IO],
         **kwargs: Any
-    ) -> _models.AuthConfig:
-        """Create or update the AuthConfig for a Container App.
+    ) -> _models.DaprComponent:
+        """Creates or updates a Dapr Component.
 
-        Create or update the AuthConfig for a Container App.
+        Creates or updates a Dapr Component in a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param auth_config_name: Name of the Container App AuthConfig. Required.
-        :type auth_config_name: str
-        :param auth_config_envelope: Properties used to create a Container App AuthConfig. Is either a
-         model type or a IO type. Required.
-        :type auth_config_envelope: ~azure.mgmt.appcontainers.models.AuthConfig or IO
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
+        :param dapr_component_envelope: Configuration details of the Dapr Component. Is either a model
+         type or a IO type. Required.
+        :type dapr_component_envelope: ~azure.mgmt.appcontainers.models.DaprComponent or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AuthConfig or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.AuthConfig
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -438,20 +472,20 @@ class ContainerAppsAuthConfigsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AuthConfig]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponent]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(auth_config_envelope, (IO, bytes)):
-            _content = auth_config_envelope
+        if isinstance(dapr_component_envelope, (IO, bytes)):
+            _content = dapr_component_envelope
         else:
-            _json = self._serialize.body(auth_config_envelope, "AuthConfig")
+            _json = self._serialize.body(dapr_component_envelope, "DaprComponent")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            auth_config_name=auth_config_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -475,30 +509,30 @@ class ContainerAppsAuthConfigsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AuthConfig", pipeline_response)
+        deserialized = self._deserialize("DaprComponent", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, container_app_name: str, auth_config_name: str, **kwargs: Any
+        self, resource_group_name: str, connected_environment_name: str, component_name: str, **kwargs: Any
     ) -> None:
-        """Delete a Container App AuthConfig.
+        """Delete a Dapr Component.
 
-        Delete a Container App AuthConfig.
+        Delete a Dapr Component from a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param auth_config_name: Name of the Container App AuthConfig. Required.
-        :type auth_config_name: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -515,8 +549,8 @@ class ContainerAppsAuthConfigsOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            auth_config_name=auth_config_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -540,4 +574,66 @@ class ContainerAppsAuthConfigsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/authConfigs/{authConfigName}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
+
+    @distributed_trace
+    def list_secrets(
+        self, resource_group_name: str, connected_environment_name: str, component_name: str, **kwargs: Any
+    ) -> _models.DaprSecretsCollection:
+        """List secrets for a dapr component.
+
+        List secrets for a dapr component.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: DaprSecretsCollection or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.DaprSecretsCollection
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprSecretsCollection]
+
+        request = build_list_secrets_request(
+            resource_group_name=resource_group_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.list_secrets.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("DaprSecretsCollection", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    list_secrets.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets"}  # type: ignore
