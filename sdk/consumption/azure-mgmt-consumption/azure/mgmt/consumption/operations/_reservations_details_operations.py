@@ -7,10 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
+from urllib.parse import parse_qs, urljoin, urlparse
 
-from msrest import Serializer
-
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    map_error,
+)
 from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
@@ -20,85 +25,73 @@ from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
+from .._serialization import Serializer
 from .._vendor import _convert_request, _format_url_section
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_list_by_reservation_order_request(
-    reservation_order_id: str,
-    *,
-    filter: str,
-    **kwargs: Any
-) -> HttpRequest:
+
+def build_list_by_reservation_order_request(reservation_order_id: str, *, filter: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails")  # pylint: disable=line-too-long
+    _url = kwargs.pop(
+        "template_url",
+        "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "reservationOrderId": _SERIALIZER.url("reservation_order_id", reservation_order_id, 'str'),
+        "reservationOrderId": _SERIALIZER.url("reservation_order_id", reservation_order_id, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_list_by_reservation_order_and_reservation_request(
-    reservation_order_id: str,
-    reservation_id: str,
-    *,
-    filter: str,
-    **kwargs: Any
+    reservation_order_id: str, reservation_id: str, *, filter: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationDetails")  # pylint: disable=line-too-long
+    _url = kwargs.pop(
+        "template_url",
+        "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationDetails",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "reservationOrderId": _SERIALIZER.url("reservation_order_id", reservation_order_id, 'str'),
-        "reservationId": _SERIALIZER.url("reservation_id", reservation_id, 'str'),
+        "reservationOrderId": _SERIALIZER.url("reservation_order_id", reservation_order_id, "str"),
+        "reservationId": _SERIALIZER.url("reservation_id", reservation_id, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+    _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_list_request(
@@ -114,40 +107,35 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-10-01"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop("template_url", "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails")
     path_format_arguments = {
-        "resourceScope": _SERIALIZER.url("resource_scope", resource_scope, 'str', skip_quote=True),
+        "resourceScope": _SERIALIZER.url("resource_scope", resource_scope, "str", skip_quote=True),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     if start_date is not None:
-        _params['startDate'] = _SERIALIZER.query("start_date", start_date, 'str')
+        _params["startDate"] = _SERIALIZER.query("start_date", start_date, "str")
     if end_date is not None:
-        _params['endDate'] = _SERIALIZER.query("end_date", end_date, 'str')
+        _params["endDate"] = _SERIALIZER.query("end_date", end_date, "str")
     if filter is not None:
-        _params['$filter'] = _SERIALIZER.query("filter", filter, 'str')
+        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
     if reservation_id is not None:
-        _params['reservationId'] = _SERIALIZER.query("reservation_id", reservation_id, 'str')
+        _params["reservationId"] = _SERIALIZER.query("reservation_id", reservation_id, "str")
     if reservation_order_id is not None:
-        _params['reservationOrderId'] = _SERIALIZER.query("reservation_order_id", reservation_order_id, 'str')
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+        _params["reservationOrderId"] = _SERIALIZER.query("reservation_order_id", reservation_order_id, "str")
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
 
 class ReservationsDetailsOperations:
     """
@@ -168,46 +156,41 @@ class ReservationsDetailsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
     def list_by_reservation_order(
-        self,
-        reservation_order_id: str,
-        filter: str,
-        **kwargs: Any
-    ) -> Iterable[_models.ReservationDetailsListResult]:
-        """Lists the reservations details for provided date range.
+        self, reservation_order_id: str, filter: str, **kwargs: Any
+    ) -> Iterable["_models.ReservationDetail"]:
+        """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
+        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
+        API call should be made with smaller date ranges.
 
-        :param reservation_order_id: Order Id of the reservation.
+        :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
         :param filter: Filter reservation details by date range. The properties/UsageDate for start
-         date and end date. The filter supports 'le' and  'ge'.
+         date and end date. The filter supports 'le' and  'ge'. Required.
         :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ReservationDetailsListResult or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationDetailsListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either ReservationDetail or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationDetail]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReservationDetailsListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ReservationDetailsListResult]
 
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_by_reservation_order_request(
                     reservation_order_id=reservation_order_id,
-                    api_version=api_version,
                     filter=filter,
-                    template_url=self.list_by_reservation_order.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list_by_reservation_order.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -215,15 +198,11 @@ class ReservationsDetailsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_by_reservation_order_request(
-                    reservation_order_id=reservation_order_id,
-                    api_version=api_version,
-                    filter=filter,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                # make call to next link with the client's api-version
+                _parsed_next_link = urlparse(next_link)
+                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -239,10 +218,8 @@ class ReservationsDetailsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -253,55 +230,48 @@ class ReservationsDetailsOperations:
 
             return pipeline_response
 
+        return ItemPaged(get_next, extract_data)
 
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list_by_reservation_order.metadata = {'url': "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails"}  # type: ignore
+    list_by_reservation_order.metadata = {"url": "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails"}  # type: ignore
 
     @distributed_trace
     def list_by_reservation_order_and_reservation(
-        self,
-        reservation_order_id: str,
-        reservation_id: str,
-        filter: str,
-        **kwargs: Any
-    ) -> Iterable[_models.ReservationDetailsListResult]:
-        """Lists the reservations details for provided date range.
+        self, reservation_order_id: str, reservation_id: str, filter: str, **kwargs: Any
+    ) -> Iterable["_models.ReservationDetail"]:
+        """Lists the reservations details for provided date range. Note: ARM has a payload size limit of
+        12MB, so currently callers get 502 when the response size exceeds the ARM limit. In such cases,
+        API call should be made with smaller date ranges.
 
-        :param reservation_order_id: Order Id of the reservation.
+        :param reservation_order_id: Order Id of the reservation. Required.
         :type reservation_order_id: str
-        :param reservation_id: Id of the reservation.
+        :param reservation_id: Id of the reservation. Required.
         :type reservation_id: str
         :param filter: Filter reservation details by date range. The properties/UsageDate for start
-         date and end date. The filter supports 'le' and  'ge'.
+         date and end date. The filter supports 'le' and  'ge'. Required.
         :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ReservationDetailsListResult or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationDetailsListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either ReservationDetail or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationDetail]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReservationDetailsListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ReservationDetailsListResult]
 
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_by_reservation_order_and_reservation_request(
                     reservation_order_id=reservation_order_id,
                     reservation_id=reservation_id,
-                    api_version=api_version,
                     filter=filter,
-                    template_url=self.list_by_reservation_order_and_reservation.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list_by_reservation_order_and_reservation.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -309,16 +279,11 @@ class ReservationsDetailsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_by_reservation_order_and_reservation_request(
-                    reservation_order_id=reservation_order_id,
-                    reservation_id=reservation_id,
-                    api_version=api_version,
-                    filter=filter,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                # make call to next link with the client's api-version
+                _parsed_next_link = urlparse(next_link)
+                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -334,10 +299,8 @@ class ReservationsDetailsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -348,11 +311,9 @@ class ReservationsDetailsOperations:
 
             return pipeline_response
 
+        return ItemPaged(get_next, extract_data)
 
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list_by_reservation_order_and_reservation.metadata = {'url': "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationDetails"}  # type: ignore
+    list_by_reservation_order_and_reservation.metadata = {"url": "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.Consumption/reservationDetails"}  # type: ignore
 
     @distributed_trace
     def list(
@@ -364,14 +325,16 @@ class ReservationsDetailsOperations:
         reservation_id: Optional[str] = None,
         reservation_order_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Iterable[_models.ReservationDetailsListResult]:
-        """Lists the reservations details for the defined scope and provided date range.
+    ) -> Iterable["_models.ReservationDetail"]:
+        """Lists the reservations details for the defined scope and provided date range. Note: ARM has a
+        payload size limit of 12MB, so currently callers get 502 when the response size exceeds the ARM
+        limit. In such cases, API call should be made with smaller date ranges.
 
         :param resource_scope: The scope associated with reservations details operations. This includes
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope
          (legacy), and
          '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'
-         for BillingProfile scope (modern).
+         for BillingProfile scope (modern). Required.
         :type resource_scope: str
         :param start_date: Start date. Only applicable when querying with billing profile. Default
          value is None.
@@ -390,34 +353,31 @@ class ReservationsDetailsOperations:
          Filter to a specific reservation order. Default value is None.
         :type reservation_order_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ReservationDetailsListResult or the result of
-         cls(response)
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationDetailsListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either ReservationDetail or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.consumption.models.ReservationDetail]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-10-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.ReservationDetailsListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ReservationDetailsListResult]
 
-        error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
-        }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     resource_scope=resource_scope,
-                    api_version=api_version,
                     start_date=start_date,
                     end_date=end_date,
                     filter=filter,
                     reservation_id=reservation_id,
                     reservation_order_id=reservation_order_id,
-                    template_url=self.list.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -425,19 +385,11 @@ class ReservationsDetailsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_request(
-                    resource_scope=resource_scope,
-                    api_version=api_version,
-                    start_date=start_date,
-                    end_date=end_date,
-                    filter=filter,
-                    reservation_id=reservation_id,
-                    reservation_order_id=reservation_order_id,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                # make call to next link with the client's api-version
+                _parsed_next_link = urlparse(next_link)
+                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -453,10 +405,8 @@ class ReservationsDetailsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -467,8 +417,6 @@ class ReservationsDetailsOperations:
 
             return pipeline_response
 
+        return ItemPaged(get_next, extract_data)
 
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails"}  # type: ignore
+    list.metadata = {"url": "/{resourceScope}/providers/Microsoft.Consumption/reservationDetails"}  # type: ignore
