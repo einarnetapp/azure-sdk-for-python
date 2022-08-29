@@ -45,7 +45,7 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.App/managedEnvironments")
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.App/connectedEnvironments")
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
@@ -71,7 +71,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -92,7 +92,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
 
 
 def build_get_request(
-    resource_group_name: str, environment_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connected_environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -103,14 +103,14 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}",
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -125,7 +125,7 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, environment_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connected_environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -137,14 +137,14 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}",
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -161,7 +161,7 @@ def build_create_or_update_request(
 
 
 def build_delete_request(
-    resource_group_name: str, environment_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connected_environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -172,14 +172,14 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}",
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -194,7 +194,40 @@ def build_delete_request(
 
 
 def build_update_request(
-    resource_group_name: str, environment_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connected_environment_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_check_name_availability_request(
+    resource_group_name: str, connected_environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -206,14 +239,14 @@ def build_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/checkNameAvailability",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
+        "connectedEnvironmentName": _SERIALIZER.url("connected_environment_name", connected_environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -226,17 +259,17 @@ def build_update_request(
         _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class ManagedEnvironmentsOperations:
+class ConnectedEnvironmentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.ContainerAppsAPIClient`'s
-        :attr:`managed_environments` attribute.
+        :attr:`connected_environments` attribute.
     """
 
     models = _models
@@ -249,21 +282,22 @@ class ManagedEnvironmentsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.ManagedEnvironment"]:
-        """Get all Environments for a subscription.
+    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.ConnectedEnvironment"]:
+        """Get all connectedEnvironments for a subscription.
 
-        Get all Managed Environments for a subscription.
+        Get all connectedEnvironments for a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ManagedEnvironment or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.ManagedEnvironment]
+        :return: An iterator like instance of either ConnectedEnvironment or the result of
+         cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagedEnvironmentsCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironmentCollection]
 
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
@@ -293,7 +327,7 @@ class ManagedEnvironmentsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("ManagedEnvironmentsCollection", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironmentCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -316,27 +350,28 @@ class ManagedEnvironmentsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.App/managedEnvironments"}  # type: ignore
+    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.App/connectedEnvironments"}  # type: ignore
 
     @distributed_trace
-    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> Iterable["_models.ManagedEnvironment"]:
-        """Get all the Environments in a resource group.
-
-        Get all the Managed Environments in a resource group.
+    def list_by_resource_group(
+        self, resource_group_name: str, **kwargs: Any
+    ) -> Iterable["_models.ConnectedEnvironment"]:
+        """Get all connectedEnvironments in a resource group.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ManagedEnvironment or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.ManagedEnvironment]
+        :return: An iterator like instance of either ConnectedEnvironment or the result of
+         cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagedEnvironmentsCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironmentCollection]
 
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
@@ -367,7 +402,7 @@ class ManagedEnvironmentsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("ManagedEnvironmentsCollection", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironmentCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -390,22 +425,22 @@ class ManagedEnvironmentsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments"}  # type: ignore
+    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments"}  # type: ignore
 
     @distributed_trace
-    def get(self, resource_group_name: str, environment_name: str, **kwargs: Any) -> _models.ManagedEnvironment:
-        """Get the properties of a Managed Environment.
-
-        Get the properties of a Managed Environment used to host container apps.
+    def get(
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
+    ) -> _models.ConnectedEnvironment:
+        """Get the properties of an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ManagedEnvironment or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ManagedEnvironment
+        :return: ConnectedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironment
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -415,11 +450,11 @@ class ManagedEnvironmentsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagedEnvironment]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -440,22 +475,22 @@ class ManagedEnvironmentsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("ManagedEnvironment", pipeline_response)
+        deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     def _create_or_update_initial(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: Union[_models.ManagedEnvironment, IO],
+        connected_environment_name: str,
+        environment_envelope: Union[_models.ConnectedEnvironment, IO],
         **kwargs: Any
-    ) -> _models.ManagedEnvironment:
+    ) -> _models.ConnectedEnvironment:
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -464,7 +499,7 @@ class ManagedEnvironmentsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagedEnvironment]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
 
         content_type = content_type or "application/json"
         _json = None
@@ -472,11 +507,11 @@ class ManagedEnvironmentsOperations:
         if isinstance(environment_envelope, (IO, bytes)):
             _content = environment_envelope
         else:
-            _json = self._serialize.body(environment_envelope, "ManagedEnvironment")
+            _json = self._serialize.body(environment_envelope, "ConnectedEnvironment")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -501,39 +536,37 @@ class ManagedEnvironmentsOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("ManagedEnvironment", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("ManagedEnvironment", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     @overload
     def begin_create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: _models.ManagedEnvironment,
+        connected_environment_name: str,
+        environment_envelope: _models.ConnectedEnvironment,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.ManagedEnvironment]:
-        """Creates or updates a Managed Environment.
-
-        Creates or updates a Managed Environment used to host container apps.
+    ) -> LROPoller[_models.ConnectedEnvironment]:
+        """Creates or updates an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment. Required.
-        :type environment_envelope: ~azure.mgmt.app.models.ManagedEnvironment
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Required.
+        :type environment_envelope: ~azure.mgmt.app.models.ConnectedEnvironment
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -545,9 +578,9 @@ class ManagedEnvironmentsOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either ManagedEnvironment or the result of
+        :return: An instance of LROPoller that returns either ConnectedEnvironment or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.app.models.ManagedEnvironment]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -555,22 +588,20 @@ class ManagedEnvironmentsOperations:
     def begin_create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
+        connected_environment_name: str,
         environment_envelope: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.ManagedEnvironment]:
-        """Creates or updates a Managed Environment.
-
-        Creates or updates a Managed Environment used to host container apps.
+    ) -> LROPoller[_models.ConnectedEnvironment]:
+        """Creates or updates an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment. Required.
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Required.
         :type environment_envelope: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -583,9 +614,9 @@ class ManagedEnvironmentsOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either ManagedEnvironment or the result of
+        :return: An instance of LROPoller that returns either ConnectedEnvironment or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.app.models.ManagedEnvironment]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -593,22 +624,20 @@ class ManagedEnvironmentsOperations:
     def begin_create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: Union[_models.ManagedEnvironment, IO],
+        connected_environment_name: str,
+        environment_envelope: Union[_models.ConnectedEnvironment, IO],
         **kwargs: Any
-    ) -> LROPoller[_models.ManagedEnvironment]:
-        """Creates or updates a Managed Environment.
-
-        Creates or updates a Managed Environment used to host container apps.
+    ) -> LROPoller[_models.ConnectedEnvironment]:
+        """Creates or updates an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment. Is either a model type
-         or a IO type. Required.
-        :type environment_envelope: ~azure.mgmt.app.models.ManagedEnvironment or IO
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Is either a
+         model type or a IO type. Required.
+        :type environment_envelope: ~azure.mgmt.app.models.ConnectedEnvironment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -620,9 +649,9 @@ class ManagedEnvironmentsOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either ManagedEnvironment or the result of
+        :return: An instance of LROPoller that returns either ConnectedEnvironment or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.app.models.ManagedEnvironment]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -630,14 +659,14 @@ class ManagedEnvironmentsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagedEnvironment]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
             raw_result = self._create_or_update_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                environment_name=environment_name,
+                connected_environment_name=connected_environment_name,
                 environment_envelope=environment_envelope,
                 api_version=api_version,
                 content_type=content_type,
@@ -649,7 +678,7 @@ class ManagedEnvironmentsOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("ManagedEnvironment", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -669,10 +698,10 @@ class ManagedEnvironmentsOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, environment_name: str, **kwargs: Any
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
     ) -> None:
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
@@ -685,7 +714,7 @@ class ManagedEnvironmentsOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -709,19 +738,19 @@ class ManagedEnvironmentsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     @distributed_trace
-    def begin_delete(self, resource_group_name: str, environment_name: str, **kwargs: Any) -> LROPoller[None]:
-        """Delete a Managed Environment.
+    def begin_delete(self, resource_group_name: str, connected_environment_name: str, **kwargs: Any) -> LROPoller[None]:
+        """Delete an connectedEnvironment.
 
-        Delete a Managed Environment if it does not have any container apps.
+        Delete an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -745,7 +774,7 @@ class ManagedEnvironmentsOperations:
         if cont_token is None:
             raw_result = self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                environment_name=environment_name,
+                connected_environment_name=connected_environment_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -773,42 +802,41 @@ class ManagedEnvironmentsOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
-    def _update_initial(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_group_name: str,
-        environment_name: str,
-        environment_envelope: Union[_models.ManagedEnvironment, IO],
-        **kwargs: Any
-    ) -> None:
+    @distributed_trace
+    def update(
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
+    ) -> _models.ConnectedEnvironment:
+        """Update connected Environment's properties.
+
+        Patches a Managed Environment. Only patching of tags is supported currently.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ConnectedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
 
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(environment_envelope, (IO, bytes)):
-            _content = environment_envelope
-        else:
-            _json = self._serialize.body(environment_envelope, "ManagedEnvironment")
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
 
         request = build_update_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self._update_initial.metadata["url"],
+            template_url=self.update.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -821,165 +849,160 @@ class ManagedEnvironmentsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [202]:
+        if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if cls:
-            return cls(pipeline_response, None, {})
+        deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
 
-    _update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     @overload
-    def begin_update(
+    def check_name_availability(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: _models.ManagedEnvironment,
+        connected_environment_name: str,
+        check_name_availability_request: _models.CheckNameAvailabilityRequest,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[None]:
-        """Update Managed Environment's properties.
+    ) -> _models.CheckNameAvailabilityResponse:
+        """Checks the resource connectedEnvironmentName availability.
 
-        Patches a Managed Environment using JSON Merge Patch.
+        Checks if resource connectedEnvironmentName is available.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment. Required.
-        :type environment_envelope: ~azure.mgmt.app.models.ManagedEnvironment
+        :param connected_environment_name: Name of the Managed Environment. Required.
+        :type connected_environment_name: str
+        :param check_name_availability_request: The check connectedEnvironmentName availability
+         request. Required.
+        :type check_name_availability_request: ~azure.mgmt.app.models.CheckNameAvailabilityRequest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[None]
+        :return: CheckNameAvailabilityResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.CheckNameAvailabilityResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    def begin_update(
+    def check_name_availability(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: IO,
+        connected_environment_name: str,
+        check_name_availability_request: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[None]:
-        """Update Managed Environment's properties.
+    ) -> _models.CheckNameAvailabilityResponse:
+        """Checks the resource connectedEnvironmentName availability.
 
-        Patches a Managed Environment using JSON Merge Patch.
+        Checks if resource connectedEnvironmentName is available.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment. Required.
-        :type environment_envelope: IO
+        :param connected_environment_name: Name of the Managed Environment. Required.
+        :type connected_environment_name: str
+        :param check_name_availability_request: The check connectedEnvironmentName availability
+         request. Required.
+        :type check_name_availability_request: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[None]
+        :return: CheckNameAvailabilityResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.CheckNameAvailabilityResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace
-    def begin_update(
+    def check_name_availability(
         self,
         resource_group_name: str,
-        environment_name: str,
-        environment_envelope: Union[_models.ManagedEnvironment, IO],
+        connected_environment_name: str,
+        check_name_availability_request: Union[_models.CheckNameAvailabilityRequest, IO],
         **kwargs: Any
-    ) -> LROPoller[None]:
-        """Update Managed Environment's properties.
+    ) -> _models.CheckNameAvailabilityResponse:
+        """Checks the resource connectedEnvironmentName availability.
 
-        Patches a Managed Environment using JSON Merge Patch.
+        Checks if resource connectedEnvironmentName is available.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Environment. Required.
-        :type environment_name: str
-        :param environment_envelope: Configuration details of the Environment. Is either a model type
-         or a IO type. Required.
-        :type environment_envelope: ~azure.mgmt.app.models.ManagedEnvironment or IO
+        :param connected_environment_name: Name of the Managed Environment. Required.
+        :type connected_environment_name: str
+        :param check_name_availability_request: The check connectedEnvironmentName availability
+         request. Is either a model type or a IO type. Required.
+        :type check_name_availability_request: ~azure.mgmt.app.models.CheckNameAvailabilityRequest or
+         IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[None]
+        :return: CheckNameAvailabilityResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.CheckNameAvailabilityResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
-        if cont_token is None:
-            raw_result = self._update_initial(  # type: ignore
-                resource_group_name=resource_group_name,
-                environment_name=environment_name,
-                environment_envelope=environment_envelope,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CheckNameAvailabilityResponse]
 
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})
-
-        if polling is True:
-            polling_method = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))  # type: PollingMethod
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(check_name_availability_request, (IO, bytes)):
+            _content = check_name_availability_request
         else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+            _json = self._serialize.body(check_name_availability_request, "CheckNameAvailabilityRequest")
 
-    begin_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"}  # type: ignore
+        request = build_check_name_availability_request(
+            resource_group_name=resource_group_name,
+            connected_environment_name=connected_environment_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.check_name_availability.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("CheckNameAvailabilityResponse", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    check_name_availability.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/checkNameAvailability"}  # type: ignore
