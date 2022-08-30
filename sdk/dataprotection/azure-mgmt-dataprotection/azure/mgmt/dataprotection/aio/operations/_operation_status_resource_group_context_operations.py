@@ -24,20 +24,20 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._backup_vault_operation_results_operations import build_get_request
+from ...operations._operation_status_resource_group_context_operations import build_get_request
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class BackupVaultOperationResultsOperations:
+class OperationStatusResourceGroupContextOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.dataprotection.aio.DataProtectionClient`'s
-        :attr:`backup_vault_operation_results` attribute.
+        :attr:`operation_status_resource_group_context` attribute.
     """
 
     models = _models
@@ -50,21 +50,19 @@ class BackupVaultOperationResultsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def get(
-        self, resource_group_name: str, vault_name: str, operation_id: str, **kwargs: Any
-    ) -> Optional[_models.BackupVaultResource]:
-        """get.
+    async def get(self, resource_group_name: str, operation_id: str, **kwargs: Any) -> _models.OperationResource:
+        """Gets the operation status for an operation over a ResourceGroup's context.
+
+        Gets the operation status for an operation over a ResourceGroup's context.
 
         :param resource_group_name: The name of the resource group where the backup vault is present.
          Required.
         :type resource_group_name: str
-        :param vault_name: The name of the backup vault. Required.
-        :type vault_name: str
         :param operation_id: Required.
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: BackupVaultResource or None or the result of cls(response)
-        :rtype: ~azure.mgmt.dataprotection.models.BackupVaultResource or None
+        :return: OperationResource or the result of cls(response)
+        :rtype: ~azure.mgmt.dataprotection.models.OperationResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -74,11 +72,10 @@ class BackupVaultOperationResultsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.BackupVaultResource]]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationResource]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            vault_name=vault_name,
             operation_id=operation_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
@@ -95,25 +92,15 @@ class BackupVaultOperationResultsOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 202]:
+        if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = None
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = self._deserialize("BackupVaultResource", pipeline_response)
-
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Azure-AsyncOperation"] = self._deserialize(
-                "str", response.headers.get("Azure-AsyncOperation")
-            )
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+        deserialized = self._deserialize("OperationResource", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/operationResults/{operationId}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/operationStatus/{operationId}"}  # type: ignore

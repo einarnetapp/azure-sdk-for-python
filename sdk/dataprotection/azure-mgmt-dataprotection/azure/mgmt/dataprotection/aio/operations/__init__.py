@@ -9,6 +9,8 @@
 from ._backup_vaults_operations import BackupVaultsOperations
 from ._operation_result_operations import OperationResultOperations
 from ._operation_status_operations import OperationStatusOperations
+from ._operation_status_backup_vault_context_operations import OperationStatusBackupVaultContextOperations
+from ._operation_status_resource_group_context_operations import OperationStatusResourceGroupContextOperations
 from ._backup_vault_operation_results_operations import BackupVaultOperationResultsOperations
 from ._data_protection_operations import DataProtectionOperations
 from ._data_protection_operations_operations import DataProtectionOperationsOperations
@@ -21,19 +23,27 @@ from ._export_jobs_operations import ExportJobsOperations
 from ._export_jobs_operation_result_operations import ExportJobsOperationResultOperations
 from ._resource_guards_operations import ResourceGuardsOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
+
 __all__ = [
-    'BackupVaultsOperations',
-    'OperationResultOperations',
-    'OperationStatusOperations',
-    'BackupVaultOperationResultsOperations',
-    'DataProtectionOperations',
-    'DataProtectionOperationsOperations',
-    'BackupPoliciesOperations',
-    'BackupInstancesOperations',
-    'RecoveryPointsOperations',
-    'JobsOperations',
-    'RestorableTimeRangesOperations',
-    'ExportJobsOperations',
-    'ExportJobsOperationResultOperations',
-    'ResourceGuardsOperations',
+    "BackupVaultsOperations",
+    "OperationResultOperations",
+    "OperationStatusOperations",
+    "OperationStatusBackupVaultContextOperations",
+    "OperationStatusResourceGroupContextOperations",
+    "BackupVaultOperationResultsOperations",
+    "DataProtectionOperations",
+    "DataProtectionOperationsOperations",
+    "BackupPoliciesOperations",
+    "BackupInstancesOperations",
+    "RecoveryPointsOperations",
+    "JobsOperations",
+    "RestorableTimeRangesOperations",
+    "ExportJobsOperations",
+    "ExportJobsOperationResultOperations",
+    "ResourceGuardsOperations",
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
