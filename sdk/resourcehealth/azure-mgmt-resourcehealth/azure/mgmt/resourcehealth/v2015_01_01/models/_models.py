@@ -26,23 +26,20 @@ class AvailabilityStatus(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'AvailabilityStatusProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "AvailabilityStatusProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailabilityStatus, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
-        self.type = kwargs.get('type', None)
-        self.location = kwargs.get('location', None)
-        self.properties = kwargs.get('properties', None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
+        self.type = kwargs.get("type", None)
+        self.location = kwargs.get("location", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class AvailabilityStatusListResult(msrest.serialization.Model):
@@ -58,21 +55,18 @@ class AvailabilityStatusListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'required': True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[AvailabilityStatus]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[AvailabilityStatus]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailabilityStatusListResult, self).__init__(**kwargs)
-        self.value = kwargs['value']
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs["value"]
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AvailabilityStatusProperties(msrest.serialization.Model):
@@ -122,39 +116,39 @@ class AvailabilityStatusProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'availability_state': {'key': 'availabilityState', 'type': 'str'},
-        'summary': {'key': 'summary', 'type': 'str'},
-        'detailed_status': {'key': 'detailedStatus', 'type': 'str'},
-        'reason_type': {'key': 'reasonType', 'type': 'str'},
-        'root_cause_attribution_time': {'key': 'rootCauseAttributionTime', 'type': 'iso-8601'},
-        'resolution_eta': {'key': 'resolutionETA', 'type': 'iso-8601'},
-        'occured_time': {'key': 'occuredTime', 'type': 'iso-8601'},
-        'reason_chronicity': {'key': 'reasonChronicity', 'type': 'str'},
-        'reported_time': {'key': 'reportedTime', 'type': 'iso-8601'},
-        'is_arm_resource': {'key': 'isArmResource', 'type': 'bool'},
-        'recently_resolved_state': {'key': 'recentlyResolvedState', 'type': 'AvailabilityStatusPropertiesRecentlyResolvedState'},
-        'recommended_actions': {'key': 'recommendedActions', 'type': '[RecommendedAction]'},
-        'service_impacting_events': {'key': 'serviceImpactingEvents', 'type': '[ServiceImpactingEvent]'},
+        "availability_state": {"key": "availabilityState", "type": "str"},
+        "summary": {"key": "summary", "type": "str"},
+        "detailed_status": {"key": "detailedStatus", "type": "str"},
+        "reason_type": {"key": "reasonType", "type": "str"},
+        "root_cause_attribution_time": {"key": "rootCauseAttributionTime", "type": "iso-8601"},
+        "resolution_eta": {"key": "resolutionETA", "type": "iso-8601"},
+        "occured_time": {"key": "occuredTime", "type": "iso-8601"},
+        "reason_chronicity": {"key": "reasonChronicity", "type": "str"},
+        "reported_time": {"key": "reportedTime", "type": "iso-8601"},
+        "is_arm_resource": {"key": "isArmResource", "type": "bool"},
+        "recently_resolved_state": {
+            "key": "recentlyResolvedState",
+            "type": "AvailabilityStatusPropertiesRecentlyResolvedState",
+        },
+        "recommended_actions": {"key": "recommendedActions", "type": "[RecommendedAction]"},
+        "service_impacting_events": {"key": "serviceImpactingEvents", "type": "[ServiceImpactingEvent]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailabilityStatusProperties, self).__init__(**kwargs)
-        self.availability_state = kwargs.get('availability_state', None)
-        self.summary = kwargs.get('summary', None)
-        self.detailed_status = kwargs.get('detailed_status', None)
-        self.reason_type = kwargs.get('reason_type', None)
-        self.root_cause_attribution_time = kwargs.get('root_cause_attribution_time', None)
-        self.resolution_eta = kwargs.get('resolution_eta', None)
-        self.occured_time = kwargs.get('occured_time', None)
-        self.reason_chronicity = kwargs.get('reason_chronicity', None)
-        self.reported_time = kwargs.get('reported_time', None)
-        self.is_arm_resource = kwargs.get('is_arm_resource', None)
-        self.recently_resolved_state = kwargs.get('recently_resolved_state', None)
-        self.recommended_actions = kwargs.get('recommended_actions', None)
-        self.service_impacting_events = kwargs.get('service_impacting_events', None)
+        self.availability_state = kwargs.get("availability_state", None)
+        self.summary = kwargs.get("summary", None)
+        self.detailed_status = kwargs.get("detailed_status", None)
+        self.reason_type = kwargs.get("reason_type", None)
+        self.root_cause_attribution_time = kwargs.get("root_cause_attribution_time", None)
+        self.resolution_eta = kwargs.get("resolution_eta", None)
+        self.occured_time = kwargs.get("occured_time", None)
+        self.reason_chronicity = kwargs.get("reason_chronicity", None)
+        self.reported_time = kwargs.get("reported_time", None)
+        self.is_arm_resource = kwargs.get("is_arm_resource", None)
+        self.recently_resolved_state = kwargs.get("recently_resolved_state", None)
+        self.recommended_actions = kwargs.get("recommended_actions", None)
+        self.service_impacting_events = kwargs.get("service_impacting_events", None)
 
 
 class AvailabilityStatusPropertiesRecentlyResolvedState(msrest.serialization.Model):
@@ -170,19 +164,16 @@ class AvailabilityStatusPropertiesRecentlyResolvedState(msrest.serialization.Mod
     """
 
     _attribute_map = {
-        'unavailable_occurred_time': {'key': 'unavailableOccurredTime', 'type': 'iso-8601'},
-        'resolved_time': {'key': 'resolvedTime', 'type': 'iso-8601'},
-        'unavailability_summary': {'key': 'unavailabilitySummary', 'type': 'str'},
+        "unavailable_occurred_time": {"key": "unavailableOccurredTime", "type": "iso-8601"},
+        "resolved_time": {"key": "resolvedTime", "type": "iso-8601"},
+        "unavailability_summary": {"key": "unavailabilitySummary", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailabilityStatusPropertiesRecentlyResolvedState, self).__init__(**kwargs)
-        self.unavailable_occurred_time = kwargs.get('unavailable_occurred_time', None)
-        self.resolved_time = kwargs.get('resolved_time', None)
-        self.unavailability_summary = kwargs.get('unavailability_summary', None)
+        self.unavailable_occurred_time = kwargs.get("unavailable_occurred_time", None)
+        self.resolved_time = kwargs.get("resolved_time", None)
+        self.unavailability_summary = kwargs.get("unavailability_summary", None)
 
 
 class ErrorResponse(msrest.serialization.Model):
@@ -199,21 +190,18 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'details': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "details": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'details': {'key': 'details', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "details": {"key": "details", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -230,17 +218,14 @@ class Operation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'OperationDisplay'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "OperationDisplay"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Operation, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display = kwargs.get('display', None)
+        self.name = kwargs.get("name", None)
+        self.display = kwargs.get("display", None)
 
 
 class OperationDisplay(msrest.serialization.Model):
@@ -257,21 +242,18 @@ class OperationDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplay, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class OperationListResult(msrest.serialization.Model):
@@ -284,19 +266,16 @@ class OperationListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'required': True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
+        "value": {"key": "value", "type": "[Operation]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationListResult, self).__init__(**kwargs)
-        self.value = kwargs['value']
+        self.value = kwargs["value"]
 
 
 class RecommendedAction(msrest.serialization.Model):
@@ -312,19 +291,16 @@ class RecommendedAction(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'action': {'key': 'action', 'type': 'str'},
-        'action_url': {'key': 'actionUrl', 'type': 'str'},
-        'action_url_text': {'key': 'actionUrlText', 'type': 'str'},
+        "action": {"key": "action", "type": "str"},
+        "action_url": {"key": "actionUrl", "type": "str"},
+        "action_url_text": {"key": "actionUrlText", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecommendedAction, self).__init__(**kwargs)
-        self.action = kwargs.get('action', None)
-        self.action_url = kwargs.get('action_url', None)
-        self.action_url_text = kwargs.get('action_url_text', None)
+        self.action = kwargs.get("action", None)
+        self.action_url = kwargs.get("action_url", None)
+        self.action_url_text = kwargs.get("action_url_text", None)
 
 
 class ServiceImpactingEvent(msrest.serialization.Model):
@@ -344,23 +320,20 @@ class ServiceImpactingEvent(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'event_start_time': {'key': 'eventStartTime', 'type': 'iso-8601'},
-        'event_status_last_modified_time': {'key': 'eventStatusLastModifiedTime', 'type': 'iso-8601'},
-        'correlation_id': {'key': 'correlationId', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'ServiceImpactingEventStatus'},
-        'incident_properties': {'key': 'incidentProperties', 'type': 'ServiceImpactingEventIncidentProperties'},
+        "event_start_time": {"key": "eventStartTime", "type": "iso-8601"},
+        "event_status_last_modified_time": {"key": "eventStatusLastModifiedTime", "type": "iso-8601"},
+        "correlation_id": {"key": "correlationId", "type": "str"},
+        "status": {"key": "status", "type": "ServiceImpactingEventStatus"},
+        "incident_properties": {"key": "incidentProperties", "type": "ServiceImpactingEventIncidentProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceImpactingEvent, self).__init__(**kwargs)
-        self.event_start_time = kwargs.get('event_start_time', None)
-        self.event_status_last_modified_time = kwargs.get('event_status_last_modified_time', None)
-        self.correlation_id = kwargs.get('correlation_id', None)
-        self.status = kwargs.get('status', None)
-        self.incident_properties = kwargs.get('incident_properties', None)
+        self.event_start_time = kwargs.get("event_start_time", None)
+        self.event_status_last_modified_time = kwargs.get("event_status_last_modified_time", None)
+        self.correlation_id = kwargs.get("correlation_id", None)
+        self.status = kwargs.get("status", None)
+        self.incident_properties = kwargs.get("incident_properties", None)
 
 
 class ServiceImpactingEventIncidentProperties(msrest.serialization.Model):
@@ -377,21 +350,18 @@ class ServiceImpactingEventIncidentProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'title': {'key': 'title', 'type': 'str'},
-        'service': {'key': 'service', 'type': 'str'},
-        'region': {'key': 'region', 'type': 'str'},
-        'incident_type': {'key': 'incidentType', 'type': 'str'},
+        "title": {"key": "title", "type": "str"},
+        "service": {"key": "service", "type": "str"},
+        "region": {"key": "region", "type": "str"},
+        "incident_type": {"key": "incidentType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceImpactingEventIncidentProperties, self).__init__(**kwargs)
-        self.title = kwargs.get('title', None)
-        self.service = kwargs.get('service', None)
-        self.region = kwargs.get('region', None)
-        self.incident_type = kwargs.get('incident_type', None)
+        self.title = kwargs.get("title", None)
+        self.service = kwargs.get("service", None)
+        self.region = kwargs.get("region", None)
+        self.incident_type = kwargs.get("incident_type", None)
 
 
 class ServiceImpactingEventStatus(msrest.serialization.Model):
@@ -402,12 +372,9 @@ class ServiceImpactingEventStatus(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': 'str'},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceImpactingEventStatus, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
