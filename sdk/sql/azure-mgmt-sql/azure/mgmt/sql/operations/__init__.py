@@ -24,7 +24,9 @@ from ._database_recommended_actions_operations import DatabaseRecommendedActions
 from ._database_schemas_operations import DatabaseSchemasOperations
 from ._database_security_alert_policies_operations import DatabaseSecurityAlertPoliciesOperations
 from ._database_tables_operations import DatabaseTablesOperations
-from ._database_vulnerability_assessment_rule_baselines_operations import DatabaseVulnerabilityAssessmentRuleBaselinesOperations
+from ._database_vulnerability_assessment_rule_baselines_operations import (
+    DatabaseVulnerabilityAssessmentRuleBaselinesOperations,
+)
 from ._database_vulnerability_assessments_operations import DatabaseVulnerabilityAssessmentsOperations
 from ._database_vulnerability_assessment_scans_operations import DatabaseVulnerabilityAssessmentScansOperations
 from ._data_warehouse_user_activities_operations import DataWarehouseUserActivitiesOperations
@@ -58,20 +60,32 @@ from ._managed_database_security_alert_policies_operations import ManagedDatabas
 from ._managed_database_security_events_operations import ManagedDatabaseSecurityEventsOperations
 from ._managed_database_tables_operations import ManagedDatabaseTablesOperations
 from ._managed_database_transparent_data_encryption_operations import ManagedDatabaseTransparentDataEncryptionOperations
-from ._managed_database_vulnerability_assessment_rule_baselines_operations import ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations
+from ._managed_database_vulnerability_assessment_rule_baselines_operations import (
+    ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations,
+)
 from ._managed_database_vulnerability_assessments_operations import ManagedDatabaseVulnerabilityAssessmentsOperations
-from ._managed_database_vulnerability_assessment_scans_operations import ManagedDatabaseVulnerabilityAssessmentScansOperations
+from ._managed_database_vulnerability_assessment_scans_operations import (
+    ManagedDatabaseVulnerabilityAssessmentScansOperations,
+)
 from ._managed_instance_administrators_operations import ManagedInstanceAdministratorsOperations
-from ._managed_instance_azure_ad_only_authentications_operations import ManagedInstanceAzureADOnlyAuthenticationsOperations
+from ._managed_instance_azure_ad_only_authentications_operations import (
+    ManagedInstanceAzureADOnlyAuthenticationsOperations,
+)
 from ._managed_instance_encryption_protectors_operations import ManagedInstanceEncryptionProtectorsOperations
 from ._managed_instance_keys_operations import ManagedInstanceKeysOperations
-from ._managed_instance_long_term_retention_policies_operations import ManagedInstanceLongTermRetentionPoliciesOperations
+from ._managed_instance_long_term_retention_policies_operations import (
+    ManagedInstanceLongTermRetentionPoliciesOperations,
+)
 from ._managed_instance_operations_operations import ManagedInstanceOperationsOperations
-from ._managed_instance_private_endpoint_connections_operations import ManagedInstancePrivateEndpointConnectionsOperations
+from ._managed_instance_private_endpoint_connections_operations import (
+    ManagedInstancePrivateEndpointConnectionsOperations,
+)
 from ._managed_instance_private_link_resources_operations import ManagedInstancePrivateLinkResourcesOperations
 from ._managed_instance_tde_certificates_operations import ManagedInstanceTdeCertificatesOperations
 from ._managed_instance_vulnerability_assessments_operations import ManagedInstanceVulnerabilityAssessmentsOperations
-from ._managed_restorable_dropped_database_backup_short_term_retention_policies_operations import ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations
+from ._managed_restorable_dropped_database_backup_short_term_retention_policies_operations import (
+    ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations,
+)
 from ._managed_server_security_alert_policies_operations import ManagedServerSecurityAlertPoliciesOperations
 from ._operations import Operations
 from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations
@@ -121,7 +135,9 @@ from ._ipv6_firewall_rules_operations import IPv6FirewallRulesOperations
 from ._endpoint_certificates_operations import EndpointCertificatesOperations
 from ._replication_links_operations import ReplicationLinksOperations
 from ._managed_database_sensitivity_labels_operations import ManagedDatabaseSensitivityLabelsOperations
-from ._managed_database_recommended_sensitivity_labels_operations import ManagedDatabaseRecommendedSensitivityLabelsOperations
+from ._managed_database_recommended_sensitivity_labels_operations import (
+    ManagedDatabaseRecommendedSensitivityLabelsOperations,
+)
 from ._sensitivity_labels_operations import SensitivityLabelsOperations
 from ._recommended_sensitivity_labels_operations import RecommendedSensitivityLabelsOperations
 from ._server_blob_auditing_policies_operations import ServerBlobAuditingPoliciesOperations
@@ -131,136 +147,151 @@ from ._extended_server_blob_auditing_policies_operations import ExtendedServerBl
 from ._database_advanced_threat_protection_settings_operations import DatabaseAdvancedThreatProtectionSettingsOperations
 from ._server_advanced_threat_protection_settings_operations import ServerAdvancedThreatProtectionSettingsOperations
 from ._managed_server_dns_aliases_operations import ManagedServerDnsAliasesOperations
+from ._managed_database_advanced_threat_protection_settings_operations import (
+    ManagedDatabaseAdvancedThreatProtectionSettingsOperations,
+)
+from ._managed_instance_advanced_threat_protection_settings_operations import (
+    ManagedInstanceAdvancedThreatProtectionSettingsOperations,
+)
+from ._managed_database_move_operations_operations import ManagedDatabaseMoveOperationsOperations
+from ._synapse_link_workspaces_operations import SynapseLinkWorkspacesOperations
+from ._managed_instance_dtcs_operations import ManagedInstanceDtcsOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
+
 __all__ = [
-    'RecoverableDatabasesOperations',
-    'DataMaskingPoliciesOperations',
-    'DataMaskingRulesOperations',
-    'GeoBackupPoliciesOperations',
-    'DatabasesOperations',
-    'ElasticPoolsOperations',
-    'ServerCommunicationLinksOperations',
-    'ServiceObjectivesOperations',
-    'ElasticPoolActivitiesOperations',
-    'ElasticPoolDatabaseActivitiesOperations',
-    'ServerUsagesOperations',
-    'DatabaseAdvisorsOperations',
-    'DatabaseAutomaticTuningOperations',
-    'DatabaseColumnsOperations',
-    'DatabaseRecommendedActionsOperations',
-    'DatabaseSchemasOperations',
-    'DatabaseSecurityAlertPoliciesOperations',
-    'DatabaseTablesOperations',
-    'DatabaseVulnerabilityAssessmentRuleBaselinesOperations',
-    'DatabaseVulnerabilityAssessmentsOperations',
-    'DatabaseVulnerabilityAssessmentScansOperations',
-    'DataWarehouseUserActivitiesOperations',
-    'DeletedServersOperations',
-    'ElasticPoolOperationsOperations',
-    'EncryptionProtectorsOperations',
-    'FailoverGroupsOperations',
-    'FirewallRulesOperations',
-    'InstanceFailoverGroupsOperations',
-    'InstancePoolsOperations',
-    'JobAgentsOperations',
-    'JobCredentialsOperations',
-    'JobExecutionsOperations',
-    'JobsOperations',
-    'JobStepExecutionsOperations',
-    'JobStepsOperations',
-    'JobTargetExecutionsOperations',
-    'JobTargetGroupsOperations',
-    'JobVersionsOperations',
-    'CapabilitiesOperations',
-    'LongTermRetentionPoliciesOperations',
-    'MaintenanceWindowOptionsOperations',
-    'MaintenanceWindowsOperations',
-    'ManagedBackupShortTermRetentionPoliciesOperations',
-    'ManagedDatabaseColumnsOperations',
-    'ManagedDatabaseQueriesOperations',
-    'ManagedDatabaseRestoreDetailsOperations',
-    'ManagedDatabasesOperations',
-    'ManagedDatabaseSchemasOperations',
-    'ManagedDatabaseSecurityAlertPoliciesOperations',
-    'ManagedDatabaseSecurityEventsOperations',
-    'ManagedDatabaseTablesOperations',
-    'ManagedDatabaseTransparentDataEncryptionOperations',
-    'ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations',
-    'ManagedDatabaseVulnerabilityAssessmentsOperations',
-    'ManagedDatabaseVulnerabilityAssessmentScansOperations',
-    'ManagedInstanceAdministratorsOperations',
-    'ManagedInstanceAzureADOnlyAuthenticationsOperations',
-    'ManagedInstanceEncryptionProtectorsOperations',
-    'ManagedInstanceKeysOperations',
-    'ManagedInstanceLongTermRetentionPoliciesOperations',
-    'ManagedInstanceOperationsOperations',
-    'ManagedInstancePrivateEndpointConnectionsOperations',
-    'ManagedInstancePrivateLinkResourcesOperations',
-    'ManagedInstanceTdeCertificatesOperations',
-    'ManagedInstanceVulnerabilityAssessmentsOperations',
-    'ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations',
-    'ManagedServerSecurityAlertPoliciesOperations',
-    'Operations',
-    'PrivateEndpointConnectionsOperations',
-    'PrivateLinkResourcesOperations',
-    'RecoverableManagedDatabasesOperations',
-    'RestorePointsOperations',
-    'ServerAdvisorsOperations',
-    'ServerAutomaticTuningOperations',
-    'ServerAzureADAdministratorsOperations',
-    'ServerAzureADOnlyAuthenticationsOperations',
-    'ServerDevOpsAuditSettingsOperations',
-    'ServerDnsAliasesOperations',
-    'ServerKeysOperations',
-    'ServerOperationsOperations',
-    'ServerSecurityAlertPoliciesOperations',
-    'ServerTrustGroupsOperations',
-    'ServerVulnerabilityAssessmentsOperations',
-    'SqlAgentOperations',
-    'SubscriptionUsagesOperations',
-    'SyncAgentsOperations',
-    'SyncGroupsOperations',
-    'SyncMembersOperations',
-    'TdeCertificatesOperations',
-    'TimeZonesOperations',
-    'VirtualClustersOperations',
-    'VirtualNetworkRulesOperations',
-    'WorkloadClassifiersOperations',
-    'WorkloadGroupsOperations',
-    'TransparentDataEncryptionsOperations',
-    'BackupShortTermRetentionPoliciesOperations',
-    'DatabaseExtensionsOperations',
-    'DatabaseOperationsOperations',
-    'DatabaseUsagesOperations',
-    'LedgerDigestUploadsOperations',
-    'OutboundFirewallRulesOperations',
-    'ServersOperations',
-    'UsagesOperations',
-    'LongTermRetentionBackupsOperations',
-    'LongTermRetentionManagedInstanceBackupsOperations',
-    'ManagedInstancesOperations',
-    'RestorableDroppedDatabasesOperations',
-    'RestorableDroppedManagedDatabasesOperations',
-    'ServerConnectionPoliciesOperations',
-    'DistributedAvailabilityGroupsOperations',
-    'ServerTrustCertificatesOperations',
-    'IPv6FirewallRulesOperations',
-    'EndpointCertificatesOperations',
-    'ReplicationLinksOperations',
-    'ManagedDatabaseSensitivityLabelsOperations',
-    'ManagedDatabaseRecommendedSensitivityLabelsOperations',
-    'SensitivityLabelsOperations',
-    'RecommendedSensitivityLabelsOperations',
-    'ServerBlobAuditingPoliciesOperations',
-    'DatabaseBlobAuditingPoliciesOperations',
-    'ExtendedDatabaseBlobAuditingPoliciesOperations',
-    'ExtendedServerBlobAuditingPoliciesOperations',
-    'DatabaseAdvancedThreatProtectionSettingsOperations',
-    'ServerAdvancedThreatProtectionSettingsOperations',
-    'ManagedServerDnsAliasesOperations',
+    "RecoverableDatabasesOperations",
+    "DataMaskingPoliciesOperations",
+    "DataMaskingRulesOperations",
+    "GeoBackupPoliciesOperations",
+    "DatabasesOperations",
+    "ElasticPoolsOperations",
+    "ServerCommunicationLinksOperations",
+    "ServiceObjectivesOperations",
+    "ElasticPoolActivitiesOperations",
+    "ElasticPoolDatabaseActivitiesOperations",
+    "ServerUsagesOperations",
+    "DatabaseAdvisorsOperations",
+    "DatabaseAutomaticTuningOperations",
+    "DatabaseColumnsOperations",
+    "DatabaseRecommendedActionsOperations",
+    "DatabaseSchemasOperations",
+    "DatabaseSecurityAlertPoliciesOperations",
+    "DatabaseTablesOperations",
+    "DatabaseVulnerabilityAssessmentRuleBaselinesOperations",
+    "DatabaseVulnerabilityAssessmentsOperations",
+    "DatabaseVulnerabilityAssessmentScansOperations",
+    "DataWarehouseUserActivitiesOperations",
+    "DeletedServersOperations",
+    "ElasticPoolOperationsOperations",
+    "EncryptionProtectorsOperations",
+    "FailoverGroupsOperations",
+    "FirewallRulesOperations",
+    "InstanceFailoverGroupsOperations",
+    "InstancePoolsOperations",
+    "JobAgentsOperations",
+    "JobCredentialsOperations",
+    "JobExecutionsOperations",
+    "JobsOperations",
+    "JobStepExecutionsOperations",
+    "JobStepsOperations",
+    "JobTargetExecutionsOperations",
+    "JobTargetGroupsOperations",
+    "JobVersionsOperations",
+    "CapabilitiesOperations",
+    "LongTermRetentionPoliciesOperations",
+    "MaintenanceWindowOptionsOperations",
+    "MaintenanceWindowsOperations",
+    "ManagedBackupShortTermRetentionPoliciesOperations",
+    "ManagedDatabaseColumnsOperations",
+    "ManagedDatabaseQueriesOperations",
+    "ManagedDatabaseRestoreDetailsOperations",
+    "ManagedDatabasesOperations",
+    "ManagedDatabaseSchemasOperations",
+    "ManagedDatabaseSecurityAlertPoliciesOperations",
+    "ManagedDatabaseSecurityEventsOperations",
+    "ManagedDatabaseTablesOperations",
+    "ManagedDatabaseTransparentDataEncryptionOperations",
+    "ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations",
+    "ManagedDatabaseVulnerabilityAssessmentsOperations",
+    "ManagedDatabaseVulnerabilityAssessmentScansOperations",
+    "ManagedInstanceAdministratorsOperations",
+    "ManagedInstanceAzureADOnlyAuthenticationsOperations",
+    "ManagedInstanceEncryptionProtectorsOperations",
+    "ManagedInstanceKeysOperations",
+    "ManagedInstanceLongTermRetentionPoliciesOperations",
+    "ManagedInstanceOperationsOperations",
+    "ManagedInstancePrivateEndpointConnectionsOperations",
+    "ManagedInstancePrivateLinkResourcesOperations",
+    "ManagedInstanceTdeCertificatesOperations",
+    "ManagedInstanceVulnerabilityAssessmentsOperations",
+    "ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations",
+    "ManagedServerSecurityAlertPoliciesOperations",
+    "Operations",
+    "PrivateEndpointConnectionsOperations",
+    "PrivateLinkResourcesOperations",
+    "RecoverableManagedDatabasesOperations",
+    "RestorePointsOperations",
+    "ServerAdvisorsOperations",
+    "ServerAutomaticTuningOperations",
+    "ServerAzureADAdministratorsOperations",
+    "ServerAzureADOnlyAuthenticationsOperations",
+    "ServerDevOpsAuditSettingsOperations",
+    "ServerDnsAliasesOperations",
+    "ServerKeysOperations",
+    "ServerOperationsOperations",
+    "ServerSecurityAlertPoliciesOperations",
+    "ServerTrustGroupsOperations",
+    "ServerVulnerabilityAssessmentsOperations",
+    "SqlAgentOperations",
+    "SubscriptionUsagesOperations",
+    "SyncAgentsOperations",
+    "SyncGroupsOperations",
+    "SyncMembersOperations",
+    "TdeCertificatesOperations",
+    "TimeZonesOperations",
+    "VirtualClustersOperations",
+    "VirtualNetworkRulesOperations",
+    "WorkloadClassifiersOperations",
+    "WorkloadGroupsOperations",
+    "TransparentDataEncryptionsOperations",
+    "BackupShortTermRetentionPoliciesOperations",
+    "DatabaseExtensionsOperations",
+    "DatabaseOperationsOperations",
+    "DatabaseUsagesOperations",
+    "LedgerDigestUploadsOperations",
+    "OutboundFirewallRulesOperations",
+    "ServersOperations",
+    "UsagesOperations",
+    "LongTermRetentionBackupsOperations",
+    "LongTermRetentionManagedInstanceBackupsOperations",
+    "ManagedInstancesOperations",
+    "RestorableDroppedDatabasesOperations",
+    "RestorableDroppedManagedDatabasesOperations",
+    "ServerConnectionPoliciesOperations",
+    "DistributedAvailabilityGroupsOperations",
+    "ServerTrustCertificatesOperations",
+    "IPv6FirewallRulesOperations",
+    "EndpointCertificatesOperations",
+    "ReplicationLinksOperations",
+    "ManagedDatabaseSensitivityLabelsOperations",
+    "ManagedDatabaseRecommendedSensitivityLabelsOperations",
+    "SensitivityLabelsOperations",
+    "RecommendedSensitivityLabelsOperations",
+    "ServerBlobAuditingPoliciesOperations",
+    "DatabaseBlobAuditingPoliciesOperations",
+    "ExtendedDatabaseBlobAuditingPoliciesOperations",
+    "ExtendedServerBlobAuditingPoliciesOperations",
+    "DatabaseAdvancedThreatProtectionSettingsOperations",
+    "ServerAdvancedThreatProtectionSettingsOperations",
+    "ManagedServerDnsAliasesOperations",
+    "ManagedDatabaseAdvancedThreatProtectionSettingsOperations",
+    "ManagedInstanceAdvancedThreatProtectionSettingsOperations",
+    "ManagedDatabaseMoveOperationsOperations",
+    "SynapseLinkWorkspacesOperations",
+    "ManagedInstanceDtcsOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
