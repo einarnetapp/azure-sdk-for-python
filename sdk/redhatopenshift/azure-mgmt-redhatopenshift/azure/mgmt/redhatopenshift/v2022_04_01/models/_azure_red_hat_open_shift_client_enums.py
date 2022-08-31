@@ -7,36 +7,34 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of identity that created the resource.
-    """
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of identity that created the resource."""
 
     USER = "User"
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class EncryptionAtHost(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """EncryptionAtHost represents encryption at host state
-    """
+
+class EncryptionAtHost(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """EncryptionAtHost represents encryption at host state."""
 
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class FipsValidatedModules(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """FipsValidatedModules determines if FIPS is used.
-    """
+
+class FipsValidatedModules(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """FipsValidatedModules determines if FIPS is used."""
 
     DISABLED = "Disabled"
     ENABLED = "Enabled"
 
-class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """ProvisioningState represents a provisioning state.
-    """
+
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ProvisioningState represents a provisioning state."""
 
     ADMIN_UPDATING = "AdminUpdating"
     CREATING = "Creating"
@@ -45,9 +43,9 @@ class ProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SUCCEEDED = "Succeeded"
     UPDATING = "Updating"
 
-class Visibility(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Visibility represents visibility.
-    """
+
+class Visibility(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Visibility represents visibility."""
 
     PRIVATE = "Private"
     PUBLIC = "Public"
