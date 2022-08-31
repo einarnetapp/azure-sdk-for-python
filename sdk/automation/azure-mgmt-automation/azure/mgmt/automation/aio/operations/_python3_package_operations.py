@@ -26,7 +26,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._source_control_operations import (
+from ...operations._python3_package_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
@@ -39,14 +39,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class SourceControlOperations:
+class Python3PackageOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.automation.aio.AutomationClient`'s
-        :attr:`source_control` attribute.
+        :attr:`python3_package` attribute.
     """
 
     models = _models
@@ -58,34 +58,147 @@ class SourceControlOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    @overload
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        automation_account_name: str,
-        source_control_name: str,
-        parameters: _models.SourceControlCreateOrUpdateParameters,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.SourceControl:
-        """Create a source control.
+    @distributed_trace_async
+    async def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, automation_account_name: str, package_name: str, **kwargs: Any
+    ) -> None:
+        """Delete the python 3 package by name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param source_control_name: The source control name. Required.
-        :type source_control_name: str
-        :param parameters: The parameters supplied to the create or update source control operation.
-         Required.
-        :type parameters: ~azure.mgmt.automation.models.SourceControlCreateOrUpdateParameters
+        :param package_name: The python package name. Required.
+        :type package_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+
+        request = build_delete_request(
+            resource_group_name=resource_group_name,
+            automation_account_name=automation_account_name,
+            package_name=package_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.delete.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
+
+    @distributed_trace_async
+    async def get(
+        self, resource_group_name: str, automation_account_name: str, package_name: str, **kwargs: Any
+    ) -> _models.Module:
+        """Retrieve the python 3 package identified by package name.
+
+        :param resource_group_name: Name of an Azure Resource group. Required.
+        :type resource_group_name: str
+        :param automation_account_name: The name of the automation account. Required.
+        :type automation_account_name: str
+        :param package_name: The python package name. Required.
+        :type package_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Module]
+
+        request = build_get_request(
+            resource_group_name=resource_group_name,
+            automation_account_name=automation_account_name,
+            package_name=package_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.get.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("Module", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
+
+    @overload
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        automation_account_name: str,
+        package_name: str,
+        parameters: _models.PythonPackageCreateParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.Module:
+        """Create or Update the python 3 package identified by package name.
+
+        :param resource_group_name: Name of an Azure Resource group. Required.
+        :type resource_group_name: str
+        :param automation_account_name: The name of the automation account. Required.
+        :type automation_account_name: str
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The create or update parameters for python package. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageCreateParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.SourceControl
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -94,29 +207,28 @@ class SourceControlOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        source_control_name: str,
+        package_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.SourceControl:
-        """Create a source control.
+    ) -> _models.Module:
+        """Create or Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param source_control_name: The source control name. Required.
-        :type source_control_name: str
-        :param parameters: The parameters supplied to the create or update source control operation.
-         Required.
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The create or update parameters for python package. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.SourceControl
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -125,27 +237,27 @@ class SourceControlOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        source_control_name: str,
-        parameters: Union[_models.SourceControlCreateOrUpdateParameters, IO],
+        package_name: str,
+        parameters: Union[_models.PythonPackageCreateParameters, IO],
         **kwargs: Any
-    ) -> _models.SourceControl:
-        """Create a source control.
+    ) -> _models.Module:
+        """Create or Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param source_control_name: The source control name. Required.
-        :type source_control_name: str
-        :param parameters: The parameters supplied to the create or update source control operation. Is
-         either a model type or a IO type. Required.
-        :type parameters: ~azure.mgmt.automation.models.SourceControlCreateOrUpdateParameters or IO
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The create or update parameters for python package. Is either a model type
+         or a IO type. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageCreateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.SourceControl
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -156,7 +268,7 @@ class SourceControlOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SourceControl]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Module]
 
         content_type = content_type or "application/json"
         _json = None
@@ -164,12 +276,12 @@ class SourceControlOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "SourceControlCreateOrUpdateParameters")
+            _json = self._serialize.body(parameters, "PythonPackageCreateParameters")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
-            source_control_name=source_control_name,
+            package_name=package_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -194,45 +306,45 @@ class SourceControlOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("SourceControl", pipeline_response)
+            deserialized = self._deserialize("Module", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("SourceControl", pipeline_response)
+            deserialized = self._deserialize("Module", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
 
     @overload
     async def update(
         self,
         resource_group_name: str,
         automation_account_name: str,
-        source_control_name: str,
-        parameters: _models.SourceControlUpdateParameters,
+        package_name: str,
+        parameters: _models.PythonPackageUpdateParameters,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.SourceControl:
-        """Update a source control.
+    ) -> _models.Module:
+        """Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param source_control_name: The source control name. Required.
-        :type source_control_name: str
-        :param parameters: The parameters supplied to the update source control operation. Required.
-        :type parameters: ~azure.mgmt.automation.models.SourceControlUpdateParameters
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The update parameters for python package. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageUpdateParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.SourceControl
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -241,28 +353,28 @@ class SourceControlOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        source_control_name: str,
+        package_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.SourceControl:
-        """Update a source control.
+    ) -> _models.Module:
+        """Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param source_control_name: The source control name. Required.
-        :type source_control_name: str
-        :param parameters: The parameters supplied to the update source control operation. Required.
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The update parameters for python package. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.SourceControl
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -271,27 +383,27 @@ class SourceControlOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        source_control_name: str,
-        parameters: Union[_models.SourceControlUpdateParameters, IO],
+        package_name: str,
+        parameters: Union[_models.PythonPackageUpdateParameters, IO],
         **kwargs: Any
-    ) -> _models.SourceControl:
-        """Update a source control.
+    ) -> _models.Module:
+        """Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param source_control_name: The source control name. Required.
-        :type source_control_name: str
-        :param parameters: The parameters supplied to the update source control operation. Is either a
-         model type or a IO type. Required.
-        :type parameters: ~azure.mgmt.automation.models.SourceControlUpdateParameters or IO
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The update parameters for python package. Is either a model type or a IO
+         type. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.SourceControl
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
@@ -302,7 +414,7 @@ class SourceControlOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SourceControl]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Module]
 
         content_type = content_type or "application/json"
         _json = None
@@ -310,12 +422,12 @@ class SourceControlOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "SourceControlUpdateParameters")
+            _json = self._serialize.body(parameters, "PythonPackageUpdateParameters")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
-            source_control_name=source_control_name,
+            package_name=package_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -339,151 +451,35 @@ class SourceControlOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("SourceControl", pipeline_response)
+        deserialized = self._deserialize("Module", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}"}  # type: ignore
-
-    @distributed_trace_async
-    async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, automation_account_name: str, source_control_name: str, **kwargs: Any
-    ) -> None:
-        """Delete the source control.
-
-        :param resource_group_name: Name of an Azure Resource group. Required.
-        :type resource_group_name: str
-        :param automation_account_name: The name of the automation account. Required.
-        :type automation_account_name: str
-        :param source_control_name: The name of source control. Required.
-        :type source_control_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-
-        request = build_delete_request(
-            resource_group_name=resource_group_name,
-            automation_account_name=automation_account_name,
-            source_control_name=source_control_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.delete.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}"}  # type: ignore
-
-    @distributed_trace_async
-    async def get(
-        self, resource_group_name: str, automation_account_name: str, source_control_name: str, **kwargs: Any
-    ) -> _models.SourceControl:
-        """Retrieve the source control identified by source control name.
-
-        :param resource_group_name: Name of an Azure Resource group. Required.
-        :type resource_group_name: str
-        :param automation_account_name: The name of the automation account. Required.
-        :type automation_account_name: str
-        :param source_control_name: The name of source control. Required.
-        :type source_control_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SourceControl or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.SourceControl
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SourceControl]
-
-        request = build_get_request(
-            resource_group_name=resource_group_name,
-            automation_account_name=automation_account_name,
-            source_control_name=source_control_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.get.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("SourceControl", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls/{sourceControlName}"}  # type: ignore
+    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
 
     @distributed_trace
     def list_by_automation_account(
-        self, resource_group_name: str, automation_account_name: str, filter: Optional[str] = None, **kwargs: Any
-    ) -> AsyncIterable["_models.SourceControl"]:
-        """Retrieve a list of source controls.
+        self, resource_group_name: str, automation_account_name: str, **kwargs: Any
+    ) -> AsyncIterable["_models.Module"]:
+        """Retrieve a list of python 3 packages.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param filter: The filter to apply on the operation. Default value is None.
-        :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SourceControl or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.automation.models.SourceControl]
+        :return: An iterator like instance of either Module or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.automation.models.Module]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SourceControlListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ModuleListResult]
 
         error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop("error_map", {}) or {})
@@ -495,7 +491,6 @@ class SourceControlOperations:
                     resource_group_name=resource_group_name,
                     automation_account_name=automation_account_name,
                     subscription_id=self._config.subscription_id,
-                    filter=filter,
                     api_version=api_version,
                     template_url=self.list_by_automation_account.metadata["url"],
                     headers=_headers,
@@ -512,7 +507,7 @@ class SourceControlOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("SourceControlListResult", pipeline_response)
+            deserialized = self._deserialize("ModuleListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -535,4 +530,4 @@ class SourceControlOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_automation_account.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/sourceControls"}  # type: ignore
+    list_by_automation_account.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages"}  # type: ignore
