@@ -14,12 +14,18 @@ from ._web_pub_sub_private_endpoint_connections_operations import WebPubSubPriva
 from ._web_pub_sub_private_link_resources_operations import WebPubSubPrivateLinkResourcesOperations
 from ._web_pub_sub_shared_private_link_resources_operations import WebPubSubSharedPrivateLinkResourcesOperations
 
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
+
 __all__ = [
-    'Operations',
-    'WebPubSubOperations',
-    'UsagesOperations',
-    'WebPubSubHubsOperations',
-    'WebPubSubPrivateEndpointConnectionsOperations',
-    'WebPubSubPrivateLinkResourcesOperations',
-    'WebPubSubSharedPrivateLinkResourcesOperations',
+    "Operations",
+    "WebPubSubOperations",
+    "UsagesOperations",
+    "WebPubSubHubsOperations",
+    "WebPubSubPrivateEndpointConnectionsOperations",
+    "WebPubSubPrivateLinkResourcesOperations",
+    "WebPubSubSharedPrivateLinkResourcesOperations",
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
