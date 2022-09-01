@@ -18,15 +18,12 @@ class CustomProfile(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'metadata_configuration_path': {'key': 'metadataConfigurationPath', 'type': 'str'},
+        "metadata_configuration_path": {"key": "metadataConfigurationPath", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomProfile, self).__init__(**kwargs)
-        self.metadata_configuration_path = kwargs.get('metadata_configuration_path', None)
+        self.metadata_configuration_path = kwargs.get("metadata_configuration_path", None)
 
 
 class DataDisk(msrest.serialization.Model):
@@ -43,19 +40,16 @@ class DataDisk(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'create_option': {'key': 'createOption', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'disk_size_gb': {'key': 'diskSizeGB', 'type': 'int'},
+        "create_option": {"key": "createOption", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "disk_size_gb": {"key": "diskSizeGB", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataDisk, self).__init__(**kwargs)
-        self.create_option = kwargs.get('create_option', None)
-        self.name = kwargs.get('name', None)
-        self.disk_size_gb = kwargs.get('disk_size_gb', None)
+        self.create_option = kwargs.get("create_option", None)
+        self.name = kwargs.get("name", None)
+        self.disk_size_gb = kwargs.get("disk_size_gb", None)
 
 
 class Resource(msrest.serialization.Model):
@@ -74,21 +68,18 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -117,27 +108,24 @@ class TrackedResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TrackedResource, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.location = kwargs['location']
+        self.tags = kwargs.get("tags", None)
+        self.location = kwargs["location"]
 
 
 class Device(TrackedResource):
@@ -178,40 +166,37 @@ class Device(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
-        'system_data': {'readonly': True},
-        'status': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'network_functions': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
+        "system_data": {"readonly": True},
+        "status": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "network_functions": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'device_type': {'key': 'properties.deviceType', 'type': 'str'},
-        'azure_stack_edge': {'key': 'properties.azureStackEdge', 'type': 'SubResource'},
-        'network_functions': {'key': 'properties.networkFunctions', 'type': '[SubResource]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "status": {"key": "properties.status", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "device_type": {"key": "properties.deviceType", "type": "str"},
+        "azure_stack_edge": {"key": "properties.azureStackEdge", "type": "SubResource"},
+        "network_functions": {"key": "properties.networkFunctions", "type": "[SubResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Device, self).__init__(**kwargs)
         self.system_data = None
         self.status = None
         self.provisioning_state = None
         self.device_type = None  # type: Optional[str]
-        self.azure_stack_edge = kwargs.get('azure_stack_edge', None)
+        self.azure_stack_edge = kwargs.get("azure_stack_edge", None)
         self.network_functions = None
 
 
@@ -227,20 +212,17 @@ class DeviceListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Device]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Device]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DeviceListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -271,33 +253,28 @@ class DevicePropertiesFormat(msrest.serialization.Model):
     """
 
     _validation = {
-        'status': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'device_type': {'required': True},
-        'network_functions': {'readonly': True},
+        "status": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "device_type": {"required": True},
+        "network_functions": {"readonly": True},
     }
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'device_type': {'key': 'deviceType', 'type': 'str'},
-        'azure_stack_edge': {'key': 'azureStackEdge', 'type': 'SubResource'},
-        'network_functions': {'key': 'networkFunctions', 'type': '[SubResource]'},
+        "status": {"key": "status", "type": "str"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "device_type": {"key": "deviceType", "type": "str"},
+        "azure_stack_edge": {"key": "azureStackEdge", "type": "SubResource"},
+        "network_functions": {"key": "networkFunctions", "type": "[SubResource]"},
     }
 
-    _subtype_map = {
-        'device_type': {}
-    }
+    _subtype_map = {"device_type": {}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DevicePropertiesFormat, self).__init__(**kwargs)
         self.status = None
         self.provisioning_state = None
         self.device_type = None  # type: Optional[str]
-        self.azure_stack_edge = kwargs.get('azure_stack_edge', None)
+        self.azure_stack_edge = kwargs.get("azure_stack_edge", None)
         self.network_functions = None
 
 
@@ -311,17 +288,14 @@ class DeviceRegistrationKey(msrest.serialization.Model):
     """
 
     _validation = {
-        'registration_key': {'readonly': True},
+        "registration_key": {"readonly": True},
     }
 
     _attribute_map = {
-        'registration_key': {'key': 'registrationKey', 'type': 'str'},
+        "registration_key": {"key": "registrationKey", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DeviceRegistrationKey, self).__init__(**kwargs)
         self.registration_key = None
 
@@ -338,19 +312,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -374,25 +345,22 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -409,15 +377,12 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class ImageReference(msrest.serialization.Model):
@@ -441,23 +406,20 @@ class ImageReference(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'offer': {'key': 'offer', 'type': 'str'},
-        'sku': {'key': 'sku', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
-        'exact_version': {'key': 'exactVersion', 'type': 'str'},
+        "publisher": {"key": "publisher", "type": "str"},
+        "offer": {"key": "offer", "type": "str"},
+        "sku": {"key": "sku", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "exact_version": {"key": "exactVersion", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ImageReference, self).__init__(**kwargs)
-        self.publisher = kwargs.get('publisher', None)
-        self.offer = kwargs.get('offer', None)
-        self.sku = kwargs.get('sku', None)
-        self.version = kwargs.get('version', None)
-        self.exact_version = kwargs.get('exact_version', None)
+        self.publisher = kwargs.get("publisher", None)
+        self.offer = kwargs.get("offer", None)
+        self.sku = kwargs.get("sku", None)
+        self.version = kwargs.get("version", None)
+        self.exact_version = kwargs.get("exact_version", None)
 
 
 class LinuxConfiguration(msrest.serialization.Model):
@@ -468,15 +430,12 @@ class LinuxConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'ssh': {'key': 'ssh', 'type': 'SshConfiguration'},
+        "ssh": {"key": "ssh", "type": "SshConfiguration"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LinuxConfiguration, self).__init__(**kwargs)
-        self.ssh = kwargs.get('ssh', None)
+        self.ssh = kwargs.get("ssh", None)
 
 
 class NetworkFunction(TrackedResource):
@@ -535,57 +494,60 @@ class NetworkFunction(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'sku_type': {'readonly': True},
-        'service_key': {'readonly': True},
-        'vendor_provisioning_state': {'readonly': True},
-        'managed_application': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "sku_type": {"readonly": True},
+        "service_key": {"readonly": True},
+        "vendor_provisioning_state": {"readonly": True},
+        "managed_application": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'device': {'key': 'properties.device', 'type': 'SubResource'},
-        'sku_name': {'key': 'properties.skuName', 'type': 'str'},
-        'sku_type': {'key': 'properties.skuType', 'type': 'str'},
-        'vendor_name': {'key': 'properties.vendorName', 'type': 'str'},
-        'service_key': {'key': 'properties.serviceKey', 'type': 'str'},
-        'vendor_provisioning_state': {'key': 'properties.vendorProvisioningState', 'type': 'str'},
-        'managed_application': {'key': 'properties.managedApplication', 'type': 'SubResource'},
-        'managed_application_parameters': {'key': 'properties.managedApplicationParameters', 'type': 'object'},
-        'network_function_container_configurations': {'key': 'properties.networkFunctionContainerConfigurations', 'type': 'object'},
-        'network_function_user_configurations': {'key': 'properties.networkFunctionUserConfigurations', 'type': '[NetworkFunctionUserConfiguration]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "device": {"key": "properties.device", "type": "SubResource"},
+        "sku_name": {"key": "properties.skuName", "type": "str"},
+        "sku_type": {"key": "properties.skuType", "type": "str"},
+        "vendor_name": {"key": "properties.vendorName", "type": "str"},
+        "service_key": {"key": "properties.serviceKey", "type": "str"},
+        "vendor_provisioning_state": {"key": "properties.vendorProvisioningState", "type": "str"},
+        "managed_application": {"key": "properties.managedApplication", "type": "SubResource"},
+        "managed_application_parameters": {"key": "properties.managedApplicationParameters", "type": "object"},
+        "network_function_container_configurations": {
+            "key": "properties.networkFunctionContainerConfigurations",
+            "type": "object",
+        },
+        "network_function_user_configurations": {
+            "key": "properties.networkFunctionUserConfigurations",
+            "type": "[NetworkFunctionUserConfiguration]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunction, self).__init__(**kwargs)
-        self.etag = kwargs.get('etag', None)
+        self.etag = kwargs.get("etag", None)
         self.system_data = None
         self.provisioning_state = None
-        self.device = kwargs.get('device', None)
-        self.sku_name = kwargs.get('sku_name', None)
+        self.device = kwargs.get("device", None)
+        self.sku_name = kwargs.get("sku_name", None)
         self.sku_type = None
-        self.vendor_name = kwargs.get('vendor_name', None)
+        self.vendor_name = kwargs.get("vendor_name", None)
         self.service_key = None
         self.vendor_provisioning_state = None
         self.managed_application = None
-        self.managed_application_parameters = kwargs.get('managed_application_parameters', None)
-        self.network_function_container_configurations = kwargs.get('network_function_container_configurations', None)
-        self.network_function_user_configurations = kwargs.get('network_function_user_configurations', None)
+        self.managed_application_parameters = kwargs.get("managed_application_parameters", None)
+        self.network_function_container_configurations = kwargs.get("network_function_container_configurations", None)
+        self.network_function_user_configurations = kwargs.get("network_function_user_configurations", None)
 
 
 class NetworkFunctionListResult(msrest.serialization.Model):
@@ -600,20 +562,17 @@ class NetworkFunctionListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[NetworkFunction]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[NetworkFunction]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -652,31 +611,28 @@ class NetworkFunctionRoleConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'role_name': {'key': 'roleName', 'type': 'str'},
-        'role_type': {'key': 'roleType', 'type': 'str'},
-        'virtual_machine_size': {'key': 'virtualMachineSize', 'type': 'str'},
-        'os_profile': {'key': 'osProfile', 'type': 'OsProfile'},
-        'user_data_template': {'key': 'userDataTemplate', 'type': 'object'},
-        'user_data_parameters': {'key': 'userDataParameters', 'type': 'object'},
-        'network_interfaces': {'key': 'networkInterfaces', 'type': '[NetworkInterface]'},
-        'storage_profile': {'key': 'storageProfile', 'type': 'StorageProfile'},
-        'custom_profile': {'key': 'customProfile', 'type': 'CustomProfile'},
+        "role_name": {"key": "roleName", "type": "str"},
+        "role_type": {"key": "roleType", "type": "str"},
+        "virtual_machine_size": {"key": "virtualMachineSize", "type": "str"},
+        "os_profile": {"key": "osProfile", "type": "OsProfile"},
+        "user_data_template": {"key": "userDataTemplate", "type": "object"},
+        "user_data_parameters": {"key": "userDataParameters", "type": "object"},
+        "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterface]"},
+        "storage_profile": {"key": "storageProfile", "type": "StorageProfile"},
+        "custom_profile": {"key": "customProfile", "type": "CustomProfile"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionRoleConfiguration, self).__init__(**kwargs)
-        self.role_name = kwargs.get('role_name', None)
-        self.role_type = kwargs.get('role_type', None)
-        self.virtual_machine_size = kwargs.get('virtual_machine_size', None)
-        self.os_profile = kwargs.get('os_profile', None)
-        self.user_data_template = kwargs.get('user_data_template', None)
-        self.user_data_parameters = kwargs.get('user_data_parameters', None)
-        self.network_interfaces = kwargs.get('network_interfaces', None)
-        self.storage_profile = kwargs.get('storage_profile', None)
-        self.custom_profile = kwargs.get('custom_profile', None)
+        self.role_name = kwargs.get("role_name", None)
+        self.role_type = kwargs.get("role_type", None)
+        self.virtual_machine_size = kwargs.get("virtual_machine_size", None)
+        self.os_profile = kwargs.get("os_profile", None)
+        self.user_data_template = kwargs.get("user_data_template", None)
+        self.user_data_parameters = kwargs.get("user_data_parameters", None)
+        self.network_interfaces = kwargs.get("network_interfaces", None)
+        self.storage_profile = kwargs.get("storage_profile", None)
+        self.custom_profile = kwargs.get("custom_profile", None)
 
 
 class NetworkFunctionRoleInstanceListResult(msrest.serialization.Model):
@@ -691,19 +647,16 @@ class NetworkFunctionRoleInstanceListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
-        'next_link': {'readonly': True},
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleInstance]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleInstance]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionRoleInstanceListResult, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -724,22 +677,19 @@ class NetworkFunctionSkuDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'sku_type': {'key': 'skuType', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[NetworkFunctionSkuRoleDetails]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "sku_type": {"key": "skuType", "type": "str"},
+        "value": {"key": "value", "type": "[NetworkFunctionSkuRoleDetails]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionSkuDetails, self).__init__(**kwargs)
-        self.sku_type = kwargs.get('sku_type', None)
-        self.value = kwargs.get('value', None)
+        self.sku_type = kwargs.get("sku_type", None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -755,20 +705,17 @@ class NetworkFunctionSkuListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SkuOverview]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[SkuOverview]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionSkuListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -786,21 +733,18 @@ class NetworkFunctionSkuRoleDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'role_name': {'key': 'roleName', 'type': 'str'},
-        'user_data_template': {'key': 'userDataTemplate', 'type': 'object'},
-        'user_data_parameters': {'key': 'userDataParameters', 'type': 'object'},
-        'network_interfaces': {'key': 'networkInterfaces', 'type': '[NetworkInterface]'},
+        "role_name": {"key": "roleName", "type": "str"},
+        "user_data_template": {"key": "userDataTemplate", "type": "object"},
+        "user_data_parameters": {"key": "userDataParameters", "type": "object"},
+        "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterface]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionSkuRoleDetails, self).__init__(**kwargs)
-        self.role_name = kwargs.get('role_name', None)
-        self.user_data_template = kwargs.get('user_data_template', None)
-        self.user_data_parameters = kwargs.get('user_data_parameters', None)
-        self.network_interfaces = kwargs.get('network_interfaces', None)
+        self.role_name = kwargs.get("role_name", None)
+        self.user_data_template = kwargs.get("user_data_template", None)
+        self.user_data_parameters = kwargs.get("user_data_parameters", None)
+        self.network_interfaces = kwargs.get("network_interfaces", None)
 
 
 class NetworkFunctionTemplate(msrest.serialization.Model):
@@ -812,15 +756,15 @@ class NetworkFunctionTemplate(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'network_function_role_configurations': {'key': 'networkFunctionRoleConfigurations', 'type': '[NetworkFunctionRoleConfiguration]'},
+        "network_function_role_configurations": {
+            "key": "networkFunctionRoleConfigurations",
+            "type": "[NetworkFunctionRoleConfiguration]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionTemplate, self).__init__(**kwargs)
-        self.network_function_role_configurations = kwargs.get('network_function_role_configurations', None)
+        self.network_function_role_configurations = kwargs.get("network_function_role_configurations", None)
 
 
 class NetworkFunctionUserConfiguration(msrest.serialization.Model):
@@ -838,21 +782,18 @@ class NetworkFunctionUserConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'role_name': {'key': 'roleName', 'type': 'str'},
-        'user_data_parameters': {'key': 'userDataParameters', 'type': 'object'},
-        'network_interfaces': {'key': 'networkInterfaces', 'type': '[NetworkInterface]'},
-        'os_profile': {'key': 'osProfile', 'type': 'NetworkFunctionUserConfigurationOsProfile'},
+        "role_name": {"key": "roleName", "type": "str"},
+        "user_data_parameters": {"key": "userDataParameters", "type": "object"},
+        "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterface]"},
+        "os_profile": {"key": "osProfile", "type": "NetworkFunctionUserConfigurationOsProfile"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionUserConfiguration, self).__init__(**kwargs)
-        self.role_name = kwargs.get('role_name', None)
-        self.user_data_parameters = kwargs.get('user_data_parameters', None)
-        self.network_interfaces = kwargs.get('network_interfaces', None)
-        self.os_profile = kwargs.get('os_profile', None)
+        self.role_name = kwargs.get("role_name", None)
+        self.user_data_parameters = kwargs.get("user_data_parameters", None)
+        self.network_interfaces = kwargs.get("network_interfaces", None)
+        self.os_profile = kwargs.get("os_profile", None)
 
 
 class NetworkFunctionUserConfigurationOsProfile(msrest.serialization.Model):
@@ -872,15 +813,12 @@ class NetworkFunctionUserConfigurationOsProfile(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'custom_data': {'key': 'customData', 'type': 'str'},
+        "custom_data": {"key": "customData", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionUserConfigurationOsProfile, self).__init__(**kwargs)
-        self.custom_data = kwargs.get('custom_data', None)
+        self.custom_data = kwargs.get("custom_data", None)
 
 
 class NetworkFunctionVendor(msrest.serialization.Model):
@@ -893,17 +831,14 @@ class NetworkFunctionVendor(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'vendor_name': {'key': 'properties.vendorName', 'type': 'str'},
-        'sku_list': {'key': 'properties.skuList', 'type': '[SkuOverview]'},
+        "vendor_name": {"key": "properties.vendorName", "type": "str"},
+        "sku_list": {"key": "properties.skuList", "type": "[SkuOverview]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionVendor, self).__init__(**kwargs)
-        self.vendor_name = kwargs.get('vendor_name', None)
-        self.sku_list = kwargs.get('sku_list', None)
+        self.vendor_name = kwargs.get("vendor_name", None)
+        self.sku_list = kwargs.get("sku_list", None)
 
 
 class NetworkFunctionVendorConfiguration(msrest.serialization.Model):
@@ -922,25 +857,22 @@ class NetworkFunctionVendorConfiguration(msrest.serialization.Model):
     """
 
     _validation = {
-        'user_data_parameters': {'readonly': True},
+        "user_data_parameters": {"readonly": True},
     }
 
     _attribute_map = {
-        'role_name': {'key': 'roleName', 'type': 'str'},
-        'os_profile': {'key': 'osProfile', 'type': 'OsProfile'},
-        'user_data_parameters': {'key': 'userDataParameters', 'type': 'object'},
-        'network_interfaces': {'key': 'networkInterfaces', 'type': '[NetworkInterface]'},
+        "role_name": {"key": "roleName", "type": "str"},
+        "os_profile": {"key": "osProfile", "type": "OsProfile"},
+        "user_data_parameters": {"key": "userDataParameters", "type": "object"},
+        "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterface]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionVendorConfiguration, self).__init__(**kwargs)
-        self.role_name = kwargs.get('role_name', None)
-        self.os_profile = kwargs.get('os_profile', None)
+        self.role_name = kwargs.get("role_name", None)
+        self.os_profile = kwargs.get("os_profile", None)
         self.user_data_parameters = None
-        self.network_interfaces = kwargs.get('network_interfaces', None)
+        self.network_interfaces = kwargs.get("network_interfaces", None)
 
 
 class NetworkFunctionVendorListResult(msrest.serialization.Model):
@@ -955,20 +887,17 @@ class NetworkFunctionVendorListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[NetworkFunctionVendor]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[NetworkFunctionVendor]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkFunctionVendorListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -988,21 +917,18 @@ class NetworkInterface(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'network_interface_name': {'key': 'networkInterfaceName', 'type': 'str'},
-        'mac_address': {'key': 'macAddress', 'type': 'str'},
-        'ip_configurations': {'key': 'ipConfigurations', 'type': '[NetworkInterfaceIPConfiguration]'},
-        'vm_switch_type': {'key': 'vmSwitchType', 'type': 'str'},
+        "network_interface_name": {"key": "networkInterfaceName", "type": "str"},
+        "mac_address": {"key": "macAddress", "type": "str"},
+        "ip_configurations": {"key": "ipConfigurations", "type": "[NetworkInterfaceIPConfiguration]"},
+        "vm_switch_type": {"key": "vmSwitchType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkInterface, self).__init__(**kwargs)
-        self.network_interface_name = kwargs.get('network_interface_name', None)
-        self.mac_address = kwargs.get('mac_address', None)
-        self.ip_configurations = kwargs.get('ip_configurations', None)
-        self.vm_switch_type = kwargs.get('vm_switch_type', None)
+        self.network_interface_name = kwargs.get("network_interface_name", None)
+        self.mac_address = kwargs.get("mac_address", None)
+        self.ip_configurations = kwargs.get("ip_configurations", None)
+        self.vm_switch_type = kwargs.get("vm_switch_type", None)
 
 
 class NetworkInterfaceIPConfiguration(msrest.serialization.Model):
@@ -1024,25 +950,22 @@ class NetworkInterfaceIPConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'ip_allocation_method': {'key': 'ipAllocationMethod', 'type': 'str'},
-        'ip_address': {'key': 'ipAddress', 'type': 'str'},
-        'subnet': {'key': 'subnet', 'type': 'str'},
-        'gateway': {'key': 'gateway', 'type': 'str'},
-        'ip_version': {'key': 'ipVersion', 'type': 'str'},
-        'dns_servers': {'key': 'dnsServers', 'type': '[str]'},
+        "ip_allocation_method": {"key": "ipAllocationMethod", "type": "str"},
+        "ip_address": {"key": "ipAddress", "type": "str"},
+        "subnet": {"key": "subnet", "type": "str"},
+        "gateway": {"key": "gateway", "type": "str"},
+        "ip_version": {"key": "ipVersion", "type": "str"},
+        "dns_servers": {"key": "dnsServers", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkInterfaceIPConfiguration, self).__init__(**kwargs)
-        self.ip_allocation_method = kwargs.get('ip_allocation_method', None)
-        self.ip_address = kwargs.get('ip_address', None)
-        self.subnet = kwargs.get('subnet', None)
-        self.gateway = kwargs.get('gateway', None)
-        self.ip_version = kwargs.get('ip_version', None)
-        self.dns_servers = kwargs.get('dns_servers', None)
+        self.ip_allocation_method = kwargs.get("ip_allocation_method", None)
+        self.ip_address = kwargs.get("ip_address", None)
+        self.subnet = kwargs.get("subnet", None)
+        self.gateway = kwargs.get("gateway", None)
+        self.ip_version = kwargs.get("ip_version", None)
+        self.dns_servers = kwargs.get("dns_servers", None)
 
 
 class Operation(msrest.serialization.Model):
@@ -1057,19 +980,16 @@ class Operation(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'display': {'readonly': True},
+        "name": {"readonly": True},
+        "display": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'OperationDisplay'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "OperationDisplay"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Operation, self).__init__(**kwargs)
         self.name = None
         self.display = None
@@ -1090,21 +1010,18 @@ class OperationDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplay, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class OperationList(msrest.serialization.Model):
@@ -1119,19 +1036,16 @@ class OperationList(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
-        'next_link': {'readonly': True},
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Operation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationList, self).__init__(**kwargs)
         self.value = None
         self.next_link = None
@@ -1153,21 +1067,18 @@ class OsDisk(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'vhd': {'key': 'vhd', 'type': 'VirtualHardDisk'},
-        'disk_size_gb': {'key': 'diskSizeGB', 'type': 'int'},
+        "os_type": {"key": "osType", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "vhd": {"key": "vhd", "type": "VirtualHardDisk"},
+        "disk_size_gb": {"key": "diskSizeGB", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OsDisk, self).__init__(**kwargs)
-        self.os_type = kwargs.get('os_type', None)
-        self.name = kwargs.get('name', None)
-        self.vhd = kwargs.get('vhd', None)
-        self.disk_size_gb = kwargs.get('disk_size_gb', None)
+        self.os_type = kwargs.get("os_type", None)
+        self.name = kwargs.get("name", None)
+        self.vhd = kwargs.get("vhd", None)
+        self.disk_size_gb = kwargs.get("disk_size_gb", None)
 
 
 class OsProfile(msrest.serialization.Model):
@@ -1212,21 +1123,18 @@ class OsProfile(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'admin_username': {'key': 'adminUsername', 'type': 'str'},
-        'linux_configuration': {'key': 'linuxConfiguration', 'type': 'LinuxConfiguration'},
-        'custom_data': {'key': 'customData', 'type': 'str'},
-        'custom_data_required': {'key': 'customDataRequired', 'type': 'bool'},
+        "admin_username": {"key": "adminUsername", "type": "str"},
+        "linux_configuration": {"key": "linuxConfiguration", "type": "LinuxConfiguration"},
+        "custom_data": {"key": "customData", "type": "str"},
+        "custom_data_required": {"key": "customDataRequired", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OsProfile, self).__init__(**kwargs)
-        self.admin_username = kwargs.get('admin_username', None)
-        self.linux_configuration = kwargs.get('linux_configuration', None)
-        self.custom_data = kwargs.get('custom_data', None)
-        self.custom_data_required = kwargs.get('custom_data_required', True)
+        self.admin_username = kwargs.get("admin_username", None)
+        self.linux_configuration = kwargs.get("linux_configuration", None)
+        self.custom_data = kwargs.get("custom_data", None)
+        self.custom_data_required = kwargs.get("custom_data_required", True)
 
 
 class PreviewSubscription(msrest.serialization.Model):
@@ -1249,25 +1157,22 @@ class PreviewSubscription(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'id': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "name": {"readonly": True},
+        "id": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PreviewSubscription, self).__init__(**kwargs)
         self.name = None
         self.id = None
@@ -1288,20 +1193,17 @@ class PreviewSubscriptionsList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PreviewSubscription]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[PreviewSubscription]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PreviewSubscriptionsList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1321,21 +1223,18 @@ class ProxyResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProxyResource, self).__init__(**kwargs)
 
 
@@ -1361,30 +1260,27 @@ class RoleInstance(msrest.serialization.Model):
     """
 
     _validation = {
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'operational_state': {'key': 'properties.operationalState', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "operational_state": {"key": "properties.operationalState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleInstance, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.id = kwargs.get('id', None)
-        self.type = kwargs.get('type', None)
+        self.name = kwargs.get("name", None)
+        self.id = kwargs.get("id", None)
+        self.type = kwargs.get("type", None)
         self.system_data = None
         self.provisioning_state = None
-        self.operational_state = kwargs.get('operational_state', None)
+        self.operational_state = kwargs.get("operational_state", None)
 
 
 class SkuOverview(msrest.serialization.Model):
@@ -1398,17 +1294,14 @@ class SkuOverview(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'sku_name': {'key': 'skuName', 'type': 'str'},
-        'sku_type': {'key': 'skuType', 'type': 'str'},
+        "sku_name": {"key": "skuName", "type": "str"},
+        "sku_type": {"key": "skuType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SkuOverview, self).__init__(**kwargs)
-        self.sku_name = kwargs.get('sku_name', None)
-        self.sku_type = kwargs.get('sku_type', None)
+        self.sku_name = kwargs.get("sku_name", None)
+        self.sku_type = kwargs.get("sku_type", None)
 
 
 class SshConfiguration(msrest.serialization.Model):
@@ -1419,15 +1312,12 @@ class SshConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'public_keys': {'key': 'publicKeys', 'type': '[SshPublicKey]'},
+        "public_keys": {"key": "publicKeys", "type": "[SshPublicKey]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SshConfiguration, self).__init__(**kwargs)
-        self.public_keys = kwargs.get('public_keys', None)
+        self.public_keys = kwargs.get("public_keys", None)
 
 
 class SshPublicKey(msrest.serialization.Model):
@@ -1445,17 +1335,14 @@ class SshPublicKey(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'path': {'key': 'path', 'type': 'str'},
-        'key_data': {'key': 'keyData', 'type': 'str'},
+        "path": {"key": "path", "type": "str"},
+        "key_data": {"key": "keyData", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SshPublicKey, self).__init__(**kwargs)
-        self.path = kwargs.get('path', None)
-        self.key_data = kwargs.get('key_data', None)
+        self.path = kwargs.get("path", None)
+        self.key_data = kwargs.get("key_data", None)
 
 
 class StorageProfile(msrest.serialization.Model):
@@ -1472,19 +1359,16 @@ class StorageProfile(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'image_reference': {'key': 'imageReference', 'type': 'ImageReference'},
-        'os_disk': {'key': 'osDisk', 'type': 'OsDisk'},
-        'data_disks': {'key': 'dataDisks', 'type': '[DataDisk]'},
+        "image_reference": {"key": "imageReference", "type": "ImageReference"},
+        "os_disk": {"key": "osDisk", "type": "OsDisk"},
+        "data_disks": {"key": "dataDisks", "type": "[DataDisk]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageProfile, self).__init__(**kwargs)
-        self.image_reference = kwargs.get('image_reference', None)
-        self.os_disk = kwargs.get('os_disk', None)
-        self.data_disks = kwargs.get('data_disks', None)
+        self.image_reference = kwargs.get("image_reference", None)
+        self.os_disk = kwargs.get("os_disk", None)
+        self.data_disks = kwargs.get("data_disks", None)
 
 
 class SubResource(msrest.serialization.Model):
@@ -1495,15 +1379,12 @@ class SubResource(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubResource, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
+        self.id = kwargs.get("id", None)
 
 
 class SystemData(msrest.serialization.Model):
@@ -1526,25 +1407,22 @@ class SystemData(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'created_by': {'key': 'createdBy', 'type': 'str'},
-        'created_by_type': {'key': 'createdByType', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
-        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
-        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SystemData, self).__init__(**kwargs)
-        self.created_by = kwargs.get('created_by', None)
-        self.created_by_type = kwargs.get('created_by_type', None)
-        self.created_at = kwargs.get('created_at', None)
-        self.last_modified_by = kwargs.get('last_modified_by', None)
-        self.last_modified_by_type = kwargs.get('last_modified_by_type', None)
-        self.last_modified_at = kwargs.get('last_modified_at', None)
+        self.created_by = kwargs.get("created_by", None)
+        self.created_by_type = kwargs.get("created_by_type", None)
+        self.created_at = kwargs.get("created_at", None)
+        self.last_modified_by = kwargs.get("last_modified_by", None)
+        self.last_modified_by_type = kwargs.get("last_modified_by_type", None)
+        self.last_modified_at = kwargs.get("last_modified_at", None)
 
 
 class TagsObject(msrest.serialization.Model):
@@ -1555,15 +1433,12 @@ class TagsObject(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
+        "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TagsObject, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
+        self.tags = kwargs.get("tags", None)
 
 
 class Vendor(ProxyResource):
@@ -1589,27 +1464,24 @@ class Vendor(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'skus': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "skus": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'skus': {'key': 'properties.skus', 'type': '[SubResource]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "skus": {"key": "properties.skus", "type": "[SubResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Vendor, self).__init__(**kwargs)
         self.system_data = None
         self.provisioning_state = None
@@ -1628,20 +1500,17 @@ class VendorListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Vendor]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Vendor]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VendorListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1681,38 +1550,38 @@ class VendorNetworkFunction(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'sku_name': {'readonly': True},
-        'sku_type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "sku_name": {"readonly": True},
+        "sku_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'vendor_provisioning_state': {'key': 'properties.vendorProvisioningState', 'type': 'str'},
-        'sku_name': {'key': 'properties.skuName', 'type': 'str'},
-        'sku_type': {'key': 'properties.skuType', 'type': 'str'},
-        'network_function_vendor_configurations': {'key': 'properties.networkFunctionVendorConfigurations', 'type': '[NetworkFunctionVendorConfiguration]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "vendor_provisioning_state": {"key": "properties.vendorProvisioningState", "type": "str"},
+        "sku_name": {"key": "properties.skuName", "type": "str"},
+        "sku_type": {"key": "properties.skuType", "type": "str"},
+        "network_function_vendor_configurations": {
+            "key": "properties.networkFunctionVendorConfigurations",
+            "type": "[NetworkFunctionVendorConfiguration]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VendorNetworkFunction, self).__init__(**kwargs)
         self.system_data = None
         self.provisioning_state = None
-        self.vendor_provisioning_state = kwargs.get('vendor_provisioning_state', None)
+        self.vendor_provisioning_state = kwargs.get("vendor_provisioning_state", None)
         self.sku_name = None
         self.sku_type = None
-        self.network_function_vendor_configurations = kwargs.get('network_function_vendor_configurations', None)
+        self.network_function_vendor_configurations = kwargs.get("network_function_vendor_configurations", None)
 
 
 class VendorNetworkFunctionListResult(msrest.serialization.Model):
@@ -1727,20 +1596,17 @@ class VendorNetworkFunctionListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[VendorNetworkFunction]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[VendorNetworkFunction]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VendorNetworkFunctionListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1786,42 +1652,39 @@ class VendorSku(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'sku_type': {'key': 'properties.skuType', 'type': 'str'},
-        'deployment_mode': {'key': 'properties.deploymentMode', 'type': 'str'},
-        'network_function_type': {'key': 'properties.networkFunctionType', 'type': 'str'},
-        'preview': {'key': 'properties.preview', 'type': 'bool'},
-        'managed_application_parameters': {'key': 'properties.managedApplicationParameters', 'type': 'object'},
-        'managed_application_template': {'key': 'properties.managedApplicationTemplate', 'type': 'object'},
-        'network_function_template': {'key': 'properties.networkFunctionTemplate', 'type': 'NetworkFunctionTemplate'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "sku_type": {"key": "properties.skuType", "type": "str"},
+        "deployment_mode": {"key": "properties.deploymentMode", "type": "str"},
+        "network_function_type": {"key": "properties.networkFunctionType", "type": "str"},
+        "preview": {"key": "properties.preview", "type": "bool"},
+        "managed_application_parameters": {"key": "properties.managedApplicationParameters", "type": "object"},
+        "managed_application_template": {"key": "properties.managedApplicationTemplate", "type": "object"},
+        "network_function_template": {"key": "properties.networkFunctionTemplate", "type": "NetworkFunctionTemplate"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VendorSku, self).__init__(**kwargs)
         self.system_data = None
         self.provisioning_state = None
-        self.sku_type = kwargs.get('sku_type', None)
-        self.deployment_mode = kwargs.get('deployment_mode', None)
-        self.network_function_type = kwargs.get('network_function_type', None)
-        self.preview = kwargs.get('preview', None)
-        self.managed_application_parameters = kwargs.get('managed_application_parameters', None)
-        self.managed_application_template = kwargs.get('managed_application_template', None)
-        self.network_function_template = kwargs.get('network_function_template', None)
+        self.sku_type = kwargs.get("sku_type", None)
+        self.deployment_mode = kwargs.get("deployment_mode", None)
+        self.network_function_type = kwargs.get("network_function_type", None)
+        self.preview = kwargs.get("preview", None)
+        self.managed_application_parameters = kwargs.get("managed_application_parameters", None)
+        self.managed_application_template = kwargs.get("managed_application_template", None)
+        self.network_function_template = kwargs.get("network_function_template", None)
 
 
 class VendorSkuListResult(msrest.serialization.Model):
@@ -1836,20 +1699,17 @@ class VendorSkuListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[VendorSku]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[VendorSku]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VendorSkuListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -1861,12 +1721,9 @@ class VirtualHardDisk(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'uri': {'key': 'uri', 'type': 'str'},
+        "uri": {"key": "uri", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VirtualHardDisk, self).__init__(**kwargs)
-        self.uri = kwargs.get('uri', None)
+        self.uri = kwargs.get("uri", None)
