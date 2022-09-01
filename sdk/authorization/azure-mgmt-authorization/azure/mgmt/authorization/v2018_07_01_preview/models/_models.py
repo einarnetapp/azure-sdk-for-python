@@ -43,41 +43,38 @@ class DenyAssignment(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'deny_assignment_name': {'key': 'properties.denyAssignmentName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'permissions': {'key': 'properties.permissions', 'type': '[DenyAssignmentPermission]'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'do_not_apply_to_child_scopes': {'key': 'properties.doNotApplyToChildScopes', 'type': 'bool'},
-        'principals': {'key': 'properties.principals', 'type': '[Principal]'},
-        'exclude_principals': {'key': 'properties.excludePrincipals', 'type': '[Principal]'},
-        'is_system_protected': {'key': 'properties.isSystemProtected', 'type': 'bool'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "deny_assignment_name": {"key": "properties.denyAssignmentName", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "permissions": {"key": "properties.permissions", "type": "[DenyAssignmentPermission]"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "do_not_apply_to_child_scopes": {"key": "properties.doNotApplyToChildScopes", "type": "bool"},
+        "principals": {"key": "properties.principals", "type": "[Principal]"},
+        "exclude_principals": {"key": "properties.excludePrincipals", "type": "[Principal]"},
+        "is_system_protected": {"key": "properties.isSystemProtected", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DenyAssignment, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.deny_assignment_name = kwargs.get('deny_assignment_name', None)
-        self.description = kwargs.get('description', None)
-        self.permissions = kwargs.get('permissions', None)
-        self.scope = kwargs.get('scope', None)
-        self.do_not_apply_to_child_scopes = kwargs.get('do_not_apply_to_child_scopes', None)
-        self.principals = kwargs.get('principals', None)
-        self.exclude_principals = kwargs.get('exclude_principals', None)
-        self.is_system_protected = kwargs.get('is_system_protected', None)
+        self.deny_assignment_name = kwargs.get("deny_assignment_name", None)
+        self.description = kwargs.get("description", None)
+        self.permissions = kwargs.get("permissions", None)
+        self.scope = kwargs.get("scope", None)
+        self.do_not_apply_to_child_scopes = kwargs.get("do_not_apply_to_child_scopes", None)
+        self.principals = kwargs.get("principals", None)
+        self.exclude_principals = kwargs.get("exclude_principals", None)
+        self.is_system_protected = kwargs.get("is_system_protected", None)
 
 
 class DenyAssignmentFilter(msrest.serialization.Model):
@@ -94,19 +91,16 @@ class DenyAssignmentFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'deny_assignment_name': {'key': 'denyAssignmentName', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'gdpr_export_principal_id': {'key': 'gdprExportPrincipalId', 'type': 'str'},
+        "deny_assignment_name": {"key": "denyAssignmentName", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "gdpr_export_principal_id": {"key": "gdprExportPrincipalId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DenyAssignmentFilter, self).__init__(**kwargs)
-        self.deny_assignment_name = kwargs.get('deny_assignment_name', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.gdpr_export_principal_id = kwargs.get('gdpr_export_principal_id', None)
+        self.deny_assignment_name = kwargs.get("deny_assignment_name", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.gdpr_export_principal_id = kwargs.get("gdpr_export_principal_id", None)
 
 
 class DenyAssignmentListResult(msrest.serialization.Model):
@@ -119,17 +113,14 @@ class DenyAssignmentListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[DenyAssignment]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[DenyAssignment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DenyAssignmentListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class DenyAssignmentPermission(msrest.serialization.Model):
@@ -147,21 +138,18 @@ class DenyAssignmentPermission(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'actions': {'key': 'actions', 'type': '[str]'},
-        'not_actions': {'key': 'notActions', 'type': '[str]'},
-        'data_actions': {'key': 'dataActions', 'type': '[str]'},
-        'not_data_actions': {'key': 'notDataActions', 'type': '[str]'},
+        "actions": {"key": "actions", "type": "[str]"},
+        "not_actions": {"key": "notActions", "type": "[str]"},
+        "data_actions": {"key": "dataActions", "type": "[str]"},
+        "not_data_actions": {"key": "notDataActions", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DenyAssignmentPermission, self).__init__(**kwargs)
-        self.actions = kwargs.get('actions', None)
-        self.not_actions = kwargs.get('not_actions', None)
-        self.data_actions = kwargs.get('data_actions', None)
-        self.not_data_actions = kwargs.get('not_data_actions', None)
+        self.actions = kwargs.get("actions", None)
+        self.not_actions = kwargs.get("not_actions", None)
+        self.data_actions = kwargs.get("data_actions", None)
+        self.not_data_actions = kwargs.get("not_data_actions", None)
 
 
 class ErrorAdditionalInfo(msrest.serialization.Model):
@@ -176,19 +164,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -213,25 +198,22 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -248,15 +230,12 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class Principal(msrest.serialization.Model):
@@ -273,18 +252,15 @@ class Principal(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'email': {'key': 'email', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "email": {"key": "email", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Principal, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.type = kwargs.get('type', None)
-        self.email = kwargs.get('email', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.type = kwargs.get("type", None)
+        self.email = kwargs.get("email", None)

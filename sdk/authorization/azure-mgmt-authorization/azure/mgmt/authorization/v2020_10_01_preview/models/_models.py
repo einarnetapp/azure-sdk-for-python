@@ -28,23 +28,20 @@ class ApprovalSettings(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'is_approval_required': {'key': 'isApprovalRequired', 'type': 'bool'},
-        'is_approval_required_for_extension': {'key': 'isApprovalRequiredForExtension', 'type': 'bool'},
-        'is_requestor_justification_required': {'key': 'isRequestorJustificationRequired', 'type': 'bool'},
-        'approval_mode': {'key': 'approvalMode', 'type': 'str'},
-        'approval_stages': {'key': 'approvalStages', 'type': '[ApprovalStage]'},
+        "is_approval_required": {"key": "isApprovalRequired", "type": "bool"},
+        "is_approval_required_for_extension": {"key": "isApprovalRequiredForExtension", "type": "bool"},
+        "is_requestor_justification_required": {"key": "isRequestorJustificationRequired", "type": "bool"},
+        "approval_mode": {"key": "approvalMode", "type": "str"},
+        "approval_stages": {"key": "approvalStages", "type": "[ApprovalStage]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApprovalSettings, self).__init__(**kwargs)
-        self.is_approval_required = kwargs.get('is_approval_required', None)
-        self.is_approval_required_for_extension = kwargs.get('is_approval_required_for_extension', None)
-        self.is_requestor_justification_required = kwargs.get('is_requestor_justification_required', None)
-        self.approval_mode = kwargs.get('approval_mode', None)
-        self.approval_stages = kwargs.get('approval_stages', None)
+        self.is_approval_required = kwargs.get("is_approval_required", None)
+        self.is_approval_required_for_extension = kwargs.get("is_approval_required_for_extension", None)
+        self.is_requestor_justification_required = kwargs.get("is_requestor_justification_required", None)
+        self.approval_mode = kwargs.get("approval_mode", None)
+        self.approval_stages = kwargs.get("approval_stages", None)
 
 
 class ApprovalStage(msrest.serialization.Model):
@@ -68,25 +65,22 @@ class ApprovalStage(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'approval_stage_time_out_in_days': {'key': 'approvalStageTimeOutInDays', 'type': 'int'},
-        'is_approver_justification_required': {'key': 'isApproverJustificationRequired', 'type': 'bool'},
-        'escalation_time_in_minutes': {'key': 'escalationTimeInMinutes', 'type': 'int'},
-        'primary_approvers': {'key': 'primaryApprovers', 'type': '[UserSet]'},
-        'is_escalation_enabled': {'key': 'isEscalationEnabled', 'type': 'bool'},
-        'escalation_approvers': {'key': 'escalationApprovers', 'type': '[UserSet]'},
+        "approval_stage_time_out_in_days": {"key": "approvalStageTimeOutInDays", "type": "int"},
+        "is_approver_justification_required": {"key": "isApproverJustificationRequired", "type": "bool"},
+        "escalation_time_in_minutes": {"key": "escalationTimeInMinutes", "type": "int"},
+        "primary_approvers": {"key": "primaryApprovers", "type": "[UserSet]"},
+        "is_escalation_enabled": {"key": "isEscalationEnabled", "type": "bool"},
+        "escalation_approvers": {"key": "escalationApprovers", "type": "[UserSet]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApprovalStage, self).__init__(**kwargs)
-        self.approval_stage_time_out_in_days = kwargs.get('approval_stage_time_out_in_days', None)
-        self.is_approver_justification_required = kwargs.get('is_approver_justification_required', None)
-        self.escalation_time_in_minutes = kwargs.get('escalation_time_in_minutes', None)
-        self.primary_approvers = kwargs.get('primary_approvers', None)
-        self.is_escalation_enabled = kwargs.get('is_escalation_enabled', None)
-        self.escalation_approvers = kwargs.get('escalation_approvers', None)
+        self.approval_stage_time_out_in_days = kwargs.get("approval_stage_time_out_in_days", None)
+        self.is_approver_justification_required = kwargs.get("is_approver_justification_required", None)
+        self.escalation_time_in_minutes = kwargs.get("escalation_time_in_minutes", None)
+        self.primary_approvers = kwargs.get("primary_approvers", None)
+        self.is_escalation_enabled = kwargs.get("is_escalation_enabled", None)
+        self.escalation_approvers = kwargs.get("escalation_approvers", None)
 
 
 class CloudErrorBody(msrest.serialization.Model):
@@ -101,17 +95,14 @@ class CloudErrorBody(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudErrorBody, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
 
 
 class EligibleChildResource(msrest.serialization.Model):
@@ -128,21 +119,18 @@ class EligibleChildResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EligibleChildResource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -159,17 +147,14 @@ class EligibleChildResourcesListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[EligibleChildResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[EligibleChildResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EligibleChildResourcesListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ErrorAdditionalInfo(msrest.serialization.Model):
@@ -184,19 +169,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -221,25 +203,22 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -256,15 +235,12 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class ExpandedProperties(msrest.serialization.Model):
@@ -281,19 +257,16 @@ class ExpandedProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'scope': {'key': 'scope', 'type': 'ExpandedPropertiesScope'},
-        'role_definition': {'key': 'roleDefinition', 'type': 'ExpandedPropertiesRoleDefinition'},
-        'principal': {'key': 'principal', 'type': 'ExpandedPropertiesPrincipal'},
+        "scope": {"key": "scope", "type": "ExpandedPropertiesScope"},
+        "role_definition": {"key": "roleDefinition", "type": "ExpandedPropertiesRoleDefinition"},
+        "principal": {"key": "principal", "type": "ExpandedPropertiesPrincipal"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExpandedProperties, self).__init__(**kwargs)
-        self.scope = kwargs.get('scope', None)
-        self.role_definition = kwargs.get('role_definition', None)
-        self.principal = kwargs.get('principal', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition = kwargs.get("role_definition", None)
+        self.principal = kwargs.get("principal", None)
 
 
 class ExpandedPropertiesPrincipal(msrest.serialization.Model):
@@ -310,21 +283,18 @@ class ExpandedPropertiesPrincipal(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'email': {'key': 'email', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "email": {"key": "email", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExpandedPropertiesPrincipal, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.email = kwargs.get('email', None)
-        self.type = kwargs.get('type', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.email = kwargs.get("email", None)
+        self.type = kwargs.get("type", None)
 
 
 class ExpandedPropertiesRoleDefinition(msrest.serialization.Model):
@@ -339,19 +309,16 @@ class ExpandedPropertiesRoleDefinition(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExpandedPropertiesRoleDefinition, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.type = kwargs.get('type', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.type = kwargs.get("type", None)
 
 
 class ExpandedPropertiesScope(msrest.serialization.Model):
@@ -366,19 +333,16 @@ class ExpandedPropertiesScope(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExpandedPropertiesScope, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.type = kwargs.get('type', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.type = kwargs.get("type", None)
 
 
 class Permission(msrest.serialization.Model):
@@ -395,21 +359,18 @@ class Permission(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'actions': {'key': 'actions', 'type': '[str]'},
-        'not_actions': {'key': 'notActions', 'type': '[str]'},
-        'data_actions': {'key': 'dataActions', 'type': '[str]'},
-        'not_data_actions': {'key': 'notDataActions', 'type': '[str]'},
+        "actions": {"key": "actions", "type": "[str]"},
+        "not_actions": {"key": "notActions", "type": "[str]"},
+        "data_actions": {"key": "dataActions", "type": "[str]"},
+        "not_data_actions": {"key": "notDataActions", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Permission, self).__init__(**kwargs)
-        self.actions = kwargs.get('actions', None)
-        self.not_actions = kwargs.get('not_actions', None)
-        self.data_actions = kwargs.get('data_actions', None)
-        self.not_data_actions = kwargs.get('not_data_actions', None)
+        self.actions = kwargs.get("actions", None)
+        self.not_actions = kwargs.get("not_actions", None)
+        self.data_actions = kwargs.get("data_actions", None)
+        self.not_data_actions = kwargs.get("not_data_actions", None)
 
 
 class PolicyAssignmentProperties(msrest.serialization.Model):
@@ -427,19 +388,16 @@ class PolicyAssignmentProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'scope': {'key': 'scope', 'type': 'PolicyAssignmentPropertiesScope'},
-        'role_definition': {'key': 'roleDefinition', 'type': 'PolicyAssignmentPropertiesRoleDefinition'},
-        'policy': {'key': 'policy', 'type': 'PolicyAssignmentPropertiesPolicy'},
+        "scope": {"key": "scope", "type": "PolicyAssignmentPropertiesScope"},
+        "role_definition": {"key": "roleDefinition", "type": "PolicyAssignmentPropertiesRoleDefinition"},
+        "policy": {"key": "policy", "type": "PolicyAssignmentPropertiesPolicy"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyAssignmentProperties, self).__init__(**kwargs)
-        self.scope = kwargs.get('scope', None)
-        self.role_definition = kwargs.get('role_definition', None)
-        self.policy = kwargs.get('policy', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition = kwargs.get("role_definition", None)
+        self.policy = kwargs.get("policy", None)
 
 
 class PolicyAssignmentPropertiesPolicy(msrest.serialization.Model):
@@ -456,23 +414,20 @@ class PolicyAssignmentPropertiesPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_modified_by': {'readonly': True},
+        "last_modified_by": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'Principal'},
-        'last_modified_date_time': {'key': 'lastModifiedDateTime', 'type': 'iso-8601'},
+        "id": {"key": "id", "type": "str"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "Principal"},
+        "last_modified_date_time": {"key": "lastModifiedDateTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyAssignmentPropertiesPolicy, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
+        self.id = kwargs.get("id", None)
         self.last_modified_by = None
-        self.last_modified_date_time = kwargs.get('last_modified_date_time', None)
+        self.last_modified_date_time = kwargs.get("last_modified_date_time", None)
 
 
 class PolicyAssignmentPropertiesRoleDefinition(msrest.serialization.Model):
@@ -487,19 +442,16 @@ class PolicyAssignmentPropertiesRoleDefinition(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyAssignmentPropertiesRoleDefinition, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.type = kwargs.get('type', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.type = kwargs.get("type", None)
 
 
 class PolicyAssignmentPropertiesScope(msrest.serialization.Model):
@@ -514,19 +466,16 @@ class PolicyAssignmentPropertiesScope(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyAssignmentPropertiesScope, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.type = kwargs.get('type', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.type = kwargs.get("type", None)
 
 
 class PolicyProperties(msrest.serialization.Model):
@@ -539,17 +488,14 @@ class PolicyProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'scope': {'readonly': True},
+        "scope": {"readonly": True},
     }
 
     _attribute_map = {
-        'scope': {'key': 'scope', 'type': 'PolicyPropertiesScope'},
+        "scope": {"key": "scope", "type": "PolicyPropertiesScope"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyProperties, self).__init__(**kwargs)
         self.scope = None
 
@@ -566,19 +512,16 @@ class PolicyPropertiesScope(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyPropertiesScope, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.type = kwargs.get('type', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.type = kwargs.get("type", None)
 
 
 class Principal(msrest.serialization.Model):
@@ -595,21 +538,18 @@ class Principal(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'email': {'key': 'email', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "email": {"key": "email", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Principal, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.type = kwargs.get('type', None)
-        self.email = kwargs.get('email', None)
+        self.id = kwargs.get("id", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.type = kwargs.get("type", None)
+        self.email = kwargs.get("email", None)
 
 
 class RoleAssignment(msrest.serialization.Model):
@@ -654,54 +594,54 @@ class RoleAssignment(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'scope': {'readonly': True},
-        'created_on': {'readonly': True},
-        'updated_on': {'readonly': True},
-        'created_by': {'readonly': True},
-        'updated_by': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "scope": {"readonly": True},
+        "created_on": {"readonly": True},
+        "updated_on": {"readonly": True},
+        "created_by": {"readonly": True},
+        "updated_by": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'updated_on': {'key': 'properties.updatedOn', 'type': 'iso-8601'},
-        'created_by': {'key': 'properties.createdBy', 'type': 'str'},
-        'updated_by': {'key': 'properties.updatedBy', 'type': 'str'},
-        'delegated_managed_identity_resource_id': {'key': 'properties.delegatedManagedIdentityResourceId', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "updated_on": {"key": "properties.updatedOn", "type": "iso-8601"},
+        "created_by": {"key": "properties.createdBy", "type": "str"},
+        "updated_by": {"key": "properties.updatedBy", "type": "str"},
+        "delegated_managed_identity_resource_id": {
+            "key": "properties.delegatedManagedIdentityResourceId",
+            "type": "str",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignment, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
         self.scope = None
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.principal_type = kwargs.get('principal_type', None)
-        self.description = kwargs.get('description', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.principal_type = kwargs.get("principal_type", None)
+        self.description = kwargs.get("description", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
         self.created_on = None
         self.updated_on = None
         self.created_by = None
         self.updated_by = None
-        self.delegated_managed_identity_resource_id = kwargs.get('delegated_managed_identity_resource_id', None)
+        self.delegated_managed_identity_resource_id = kwargs.get("delegated_managed_identity_resource_id", None)
 
 
 class RoleAssignmentCreateParameters(msrest.serialization.Model):
@@ -742,47 +682,47 @@ class RoleAssignmentCreateParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'scope': {'readonly': True},
-        'role_definition_id': {'required': True},
-        'principal_id': {'required': True},
-        'created_on': {'readonly': True},
-        'updated_on': {'readonly': True},
-        'created_by': {'readonly': True},
-        'updated_by': {'readonly': True},
+        "scope": {"readonly": True},
+        "role_definition_id": {"required": True},
+        "principal_id": {"required": True},
+        "created_on": {"readonly": True},
+        "updated_on": {"readonly": True},
+        "created_by": {"readonly": True},
+        "updated_by": {"readonly": True},
     }
 
     _attribute_map = {
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'updated_on': {'key': 'properties.updatedOn', 'type': 'iso-8601'},
-        'created_by': {'key': 'properties.createdBy', 'type': 'str'},
-        'updated_by': {'key': 'properties.updatedBy', 'type': 'str'},
-        'delegated_managed_identity_resource_id': {'key': 'properties.delegatedManagedIdentityResourceId', 'type': 'str'},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "updated_on": {"key": "properties.updatedOn", "type": "iso-8601"},
+        "created_by": {"key": "properties.createdBy", "type": "str"},
+        "updated_by": {"key": "properties.updatedBy", "type": "str"},
+        "delegated_managed_identity_resource_id": {
+            "key": "properties.delegatedManagedIdentityResourceId",
+            "type": "str",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentCreateParameters, self).__init__(**kwargs)
         self.scope = None
-        self.role_definition_id = kwargs['role_definition_id']
-        self.principal_id = kwargs['principal_id']
-        self.principal_type = kwargs.get('principal_type', None)
-        self.description = kwargs.get('description', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
+        self.role_definition_id = kwargs["role_definition_id"]
+        self.principal_id = kwargs["principal_id"]
+        self.principal_type = kwargs.get("principal_type", None)
+        self.description = kwargs.get("description", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
         self.created_on = None
         self.updated_on = None
         self.created_by = None
         self.updated_by = None
-        self.delegated_managed_identity_resource_id = kwargs.get('delegated_managed_identity_resource_id', None)
+        self.delegated_managed_identity_resource_id = kwargs.get("delegated_managed_identity_resource_id", None)
 
 
 class RoleAssignmentFilter(msrest.serialization.Model):
@@ -793,15 +733,12 @@ class RoleAssignmentFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
+        self.principal_id = kwargs.get("principal_id", None)
 
 
 class RoleAssignmentListResult(msrest.serialization.Model):
@@ -816,20 +753,17 @@ class RoleAssignmentListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignment]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -894,57 +828,54 @@ class RoleAssignmentSchedule(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'role_assignment_schedule_request_id': {'key': 'properties.roleAssignmentScheduleRequestId', 'type': 'str'},
-        'linked_role_eligibility_schedule_id': {'key': 'properties.linkedRoleEligibilityScheduleId', 'type': 'str'},
-        'assignment_type': {'key': 'properties.assignmentType', 'type': 'str'},
-        'member_type': {'key': 'properties.memberType', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'start_date_time': {'key': 'properties.startDateTime', 'type': 'iso-8601'},
-        'end_date_time': {'key': 'properties.endDateTime', 'type': 'iso-8601'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'updated_on': {'key': 'properties.updatedOn', 'type': 'iso-8601'},
-        'expanded_properties': {'key': 'properties.expandedProperties', 'type': 'ExpandedProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "role_assignment_schedule_request_id": {"key": "properties.roleAssignmentScheduleRequestId", "type": "str"},
+        "linked_role_eligibility_schedule_id": {"key": "properties.linkedRoleEligibilityScheduleId", "type": "str"},
+        "assignment_type": {"key": "properties.assignmentType", "type": "str"},
+        "member_type": {"key": "properties.memberType", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "start_date_time": {"key": "properties.startDateTime", "type": "iso-8601"},
+        "end_date_time": {"key": "properties.endDateTime", "type": "iso-8601"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "updated_on": {"key": "properties.updatedOn", "type": "iso-8601"},
+        "expanded_properties": {"key": "properties.expandedProperties", "type": "ExpandedProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentSchedule, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.principal_type = kwargs.get('principal_type', None)
-        self.role_assignment_schedule_request_id = kwargs.get('role_assignment_schedule_request_id', None)
-        self.linked_role_eligibility_schedule_id = kwargs.get('linked_role_eligibility_schedule_id', None)
-        self.assignment_type = kwargs.get('assignment_type', None)
-        self.member_type = kwargs.get('member_type', None)
-        self.status = kwargs.get('status', None)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
-        self.created_on = kwargs.get('created_on', None)
-        self.updated_on = kwargs.get('updated_on', None)
-        self.expanded_properties = kwargs.get('expanded_properties', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.principal_type = kwargs.get("principal_type", None)
+        self.role_assignment_schedule_request_id = kwargs.get("role_assignment_schedule_request_id", None)
+        self.linked_role_eligibility_schedule_id = kwargs.get("linked_role_eligibility_schedule_id", None)
+        self.assignment_type = kwargs.get("assignment_type", None)
+        self.member_type = kwargs.get("member_type", None)
+        self.status = kwargs.get("status", None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
+        self.created_on = kwargs.get("created_on", None)
+        self.updated_on = kwargs.get("updated_on", None)
+        self.expanded_properties = kwargs.get("expanded_properties", None)
 
 
 class RoleAssignmentScheduleFilter(msrest.serialization.Model):
@@ -959,19 +890,16 @@ class RoleAssignmentScheduleFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'role_definition_id': {'key': 'roleDefinitionId', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.status = kwargs.get('status', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.status = kwargs.get("status", None)
 
 
 class RoleAssignmentScheduleInstance(msrest.serialization.Model):
@@ -1036,59 +964,61 @@ class RoleAssignmentScheduleInstance(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'role_assignment_schedule_id': {'key': 'properties.roleAssignmentScheduleId', 'type': 'str'},
-        'origin_role_assignment_id': {'key': 'properties.originRoleAssignmentId', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'start_date_time': {'key': 'properties.startDateTime', 'type': 'iso-8601'},
-        'end_date_time': {'key': 'properties.endDateTime', 'type': 'iso-8601'},
-        'linked_role_eligibility_schedule_id': {'key': 'properties.linkedRoleEligibilityScheduleId', 'type': 'str'},
-        'linked_role_eligibility_schedule_instance_id': {'key': 'properties.linkedRoleEligibilityScheduleInstanceId', 'type': 'str'},
-        'assignment_type': {'key': 'properties.assignmentType', 'type': 'str'},
-        'member_type': {'key': 'properties.memberType', 'type': 'str'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'expanded_properties': {'key': 'properties.expandedProperties', 'type': 'ExpandedProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "role_assignment_schedule_id": {"key": "properties.roleAssignmentScheduleId", "type": "str"},
+        "origin_role_assignment_id": {"key": "properties.originRoleAssignmentId", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "start_date_time": {"key": "properties.startDateTime", "type": "iso-8601"},
+        "end_date_time": {"key": "properties.endDateTime", "type": "iso-8601"},
+        "linked_role_eligibility_schedule_id": {"key": "properties.linkedRoleEligibilityScheduleId", "type": "str"},
+        "linked_role_eligibility_schedule_instance_id": {
+            "key": "properties.linkedRoleEligibilityScheduleInstanceId",
+            "type": "str",
+        },
+        "assignment_type": {"key": "properties.assignmentType", "type": "str"},
+        "member_type": {"key": "properties.memberType", "type": "str"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "expanded_properties": {"key": "properties.expandedProperties", "type": "ExpandedProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleInstance, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.principal_type = kwargs.get('principal_type', None)
-        self.role_assignment_schedule_id = kwargs.get('role_assignment_schedule_id', None)
-        self.origin_role_assignment_id = kwargs.get('origin_role_assignment_id', None)
-        self.status = kwargs.get('status', None)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
-        self.linked_role_eligibility_schedule_id = kwargs.get('linked_role_eligibility_schedule_id', None)
-        self.linked_role_eligibility_schedule_instance_id = kwargs.get('linked_role_eligibility_schedule_instance_id', None)
-        self.assignment_type = kwargs.get('assignment_type', None)
-        self.member_type = kwargs.get('member_type', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
-        self.created_on = kwargs.get('created_on', None)
-        self.expanded_properties = kwargs.get('expanded_properties', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.principal_type = kwargs.get("principal_type", None)
+        self.role_assignment_schedule_id = kwargs.get("role_assignment_schedule_id", None)
+        self.origin_role_assignment_id = kwargs.get("origin_role_assignment_id", None)
+        self.status = kwargs.get("status", None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
+        self.linked_role_eligibility_schedule_id = kwargs.get("linked_role_eligibility_schedule_id", None)
+        self.linked_role_eligibility_schedule_instance_id = kwargs.get(
+            "linked_role_eligibility_schedule_instance_id", None
+        )
+        self.assignment_type = kwargs.get("assignment_type", None)
+        self.member_type = kwargs.get("member_type", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
+        self.created_on = kwargs.get("created_on", None)
+        self.expanded_properties = kwargs.get("expanded_properties", None)
 
 
 class RoleAssignmentScheduleInstanceFilter(msrest.serialization.Model):
@@ -1107,21 +1037,18 @@ class RoleAssignmentScheduleInstanceFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'role_definition_id': {'key': 'roleDefinitionId', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'role_assignment_schedule_id': {'key': 'roleAssignmentScheduleId', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "role_assignment_schedule_id": {"key": "roleAssignmentScheduleId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleInstanceFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.status = kwargs.get('status', None)
-        self.role_assignment_schedule_id = kwargs.get('role_assignment_schedule_id', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.status = kwargs.get("status", None)
+        self.role_assignment_schedule_id = kwargs.get("role_assignment_schedule_id", None)
 
 
 class RoleAssignmentScheduleInstanceListResult(msrest.serialization.Model):
@@ -1135,17 +1062,14 @@ class RoleAssignmentScheduleInstanceListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignmentScheduleInstance]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignmentScheduleInstance]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleInstanceListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleAssignmentScheduleListResult(msrest.serialization.Model):
@@ -1158,17 +1082,14 @@ class RoleAssignmentScheduleListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignmentSchedule]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignmentSchedule]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleAssignmentScheduleRequest(msrest.serialization.Model):
@@ -1239,65 +1160,70 @@ class RoleAssignmentScheduleRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'scope': {'readonly': True},
-        'principal_type': {'readonly': True},
-        'status': {'readonly': True},
-        'approval_id': {'readonly': True},
-        'created_on': {'readonly': True},
-        'requestor_id': {'readonly': True},
-        'expanded_properties': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "scope": {"readonly": True},
+        "principal_type": {"readonly": True},
+        "status": {"readonly": True},
+        "approval_id": {"readonly": True},
+        "created_on": {"readonly": True},
+        "requestor_id": {"readonly": True},
+        "expanded_properties": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'request_type': {'key': 'properties.requestType', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'approval_id': {'key': 'properties.approvalId', 'type': 'str'},
-        'target_role_assignment_schedule_id': {'key': 'properties.targetRoleAssignmentScheduleId', 'type': 'str'},
-        'target_role_assignment_schedule_instance_id': {'key': 'properties.targetRoleAssignmentScheduleInstanceId', 'type': 'str'},
-        'schedule_info': {'key': 'properties.scheduleInfo', 'type': 'RoleAssignmentScheduleRequestPropertiesScheduleInfo'},
-        'linked_role_eligibility_schedule_id': {'key': 'properties.linkedRoleEligibilityScheduleId', 'type': 'str'},
-        'justification': {'key': 'properties.justification', 'type': 'str'},
-        'ticket_info': {'key': 'properties.ticketInfo', 'type': 'RoleAssignmentScheduleRequestPropertiesTicketInfo'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'requestor_id': {'key': 'properties.requestorId', 'type': 'str'},
-        'expanded_properties': {'key': 'properties.expandedProperties', 'type': 'ExpandedProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "request_type": {"key": "properties.requestType", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "approval_id": {"key": "properties.approvalId", "type": "str"},
+        "target_role_assignment_schedule_id": {"key": "properties.targetRoleAssignmentScheduleId", "type": "str"},
+        "target_role_assignment_schedule_instance_id": {
+            "key": "properties.targetRoleAssignmentScheduleInstanceId",
+            "type": "str",
+        },
+        "schedule_info": {
+            "key": "properties.scheduleInfo",
+            "type": "RoleAssignmentScheduleRequestPropertiesScheduleInfo",
+        },
+        "linked_role_eligibility_schedule_id": {"key": "properties.linkedRoleEligibilityScheduleId", "type": "str"},
+        "justification": {"key": "properties.justification", "type": "str"},
+        "ticket_info": {"key": "properties.ticketInfo", "type": "RoleAssignmentScheduleRequestPropertiesTicketInfo"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "requestor_id": {"key": "properties.requestorId", "type": "str"},
+        "expanded_properties": {"key": "properties.expandedProperties", "type": "ExpandedProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleRequest, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
         self.scope = None
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
         self.principal_type = None
-        self.request_type = kwargs.get('request_type', None)
+        self.request_type = kwargs.get("request_type", None)
         self.status = None
         self.approval_id = None
-        self.target_role_assignment_schedule_id = kwargs.get('target_role_assignment_schedule_id', None)
-        self.target_role_assignment_schedule_instance_id = kwargs.get('target_role_assignment_schedule_instance_id', None)
-        self.schedule_info = kwargs.get('schedule_info', None)
-        self.linked_role_eligibility_schedule_id = kwargs.get('linked_role_eligibility_schedule_id', None)
-        self.justification = kwargs.get('justification', None)
-        self.ticket_info = kwargs.get('ticket_info', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
+        self.target_role_assignment_schedule_id = kwargs.get("target_role_assignment_schedule_id", None)
+        self.target_role_assignment_schedule_instance_id = kwargs.get(
+            "target_role_assignment_schedule_instance_id", None
+        )
+        self.schedule_info = kwargs.get("schedule_info", None)
+        self.linked_role_eligibility_schedule_id = kwargs.get("linked_role_eligibility_schedule_id", None)
+        self.justification = kwargs.get("justification", None)
+        self.ticket_info = kwargs.get("ticket_info", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
         self.created_on = None
         self.requestor_id = None
         self.expanded_properties = None
@@ -1317,21 +1243,18 @@ class RoleAssignmentScheduleRequestFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'role_definition_id': {'key': 'roleDefinitionId', 'type': 'str'},
-        'requestor_id': {'key': 'requestorId', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
+        "requestor_id": {"key": "requestorId", "type": "str"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleRequestFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.requestor_id = kwargs.get('requestor_id', None)
-        self.status = kwargs.get('status', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.requestor_id = kwargs.get("requestor_id", None)
+        self.status = kwargs.get("status", None)
 
 
 class RoleAssignmentScheduleRequestListResult(msrest.serialization.Model):
@@ -1345,17 +1268,14 @@ class RoleAssignmentScheduleRequestListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignmentScheduleRequest]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignmentScheduleRequest]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleRequestListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleAssignmentScheduleRequestPropertiesScheduleInfo(msrest.serialization.Model):
@@ -1369,17 +1289,14 @@ class RoleAssignmentScheduleRequestPropertiesScheduleInfo(msrest.serialization.M
     """
 
     _attribute_map = {
-        'start_date_time': {'key': 'startDateTime', 'type': 'iso-8601'},
-        'expiration': {'key': 'expiration', 'type': 'RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration'},
+        "start_date_time": {"key": "startDateTime", "type": "iso-8601"},
+        "expiration": {"key": "expiration", "type": "RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleRequestPropertiesScheduleInfo, self).__init__(**kwargs)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.expiration = kwargs.get('expiration', None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.expiration = kwargs.get("expiration", None)
 
 
 class RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration(msrest.serialization.Model):
@@ -1395,19 +1312,16 @@ class RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration(msrest.seria
     """
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'end_date_time': {'key': 'endDateTime', 'type': 'iso-8601'},
-        'duration': {'key': 'duration', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "end_date_time": {"key": "endDateTime", "type": "iso-8601"},
+        "duration": {"key": "duration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleRequestPropertiesScheduleInfoExpiration, self).__init__(**kwargs)
-        self.type = kwargs.get('type', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
-        self.duration = kwargs.get('duration', None)
+        self.type = kwargs.get("type", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
+        self.duration = kwargs.get("duration", None)
 
 
 class RoleAssignmentScheduleRequestPropertiesTicketInfo(msrest.serialization.Model):
@@ -1420,17 +1334,14 @@ class RoleAssignmentScheduleRequestPropertiesTicketInfo(msrest.serialization.Mod
     """
 
     _attribute_map = {
-        'ticket_number': {'key': 'ticketNumber', 'type': 'str'},
-        'ticket_system': {'key': 'ticketSystem', 'type': 'str'},
+        "ticket_number": {"key": "ticketNumber", "type": "str"},
+        "ticket_system": {"key": "ticketSystem", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentScheduleRequestPropertiesTicketInfo, self).__init__(**kwargs)
-        self.ticket_number = kwargs.get('ticket_number', None)
-        self.ticket_system = kwargs.get('ticket_system', None)
+        self.ticket_number = kwargs.get("ticket_number", None)
+        self.ticket_system = kwargs.get("ticket_system", None)
 
 
 class RoleEligibilitySchedule(msrest.serialization.Model):
@@ -1487,53 +1398,50 @@ class RoleEligibilitySchedule(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'role_eligibility_schedule_request_id': {'key': 'properties.roleEligibilityScheduleRequestId', 'type': 'str'},
-        'member_type': {'key': 'properties.memberType', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'start_date_time': {'key': 'properties.startDateTime', 'type': 'iso-8601'},
-        'end_date_time': {'key': 'properties.endDateTime', 'type': 'iso-8601'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'updated_on': {'key': 'properties.updatedOn', 'type': 'iso-8601'},
-        'expanded_properties': {'key': 'properties.expandedProperties', 'type': 'ExpandedProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "role_eligibility_schedule_request_id": {"key": "properties.roleEligibilityScheduleRequestId", "type": "str"},
+        "member_type": {"key": "properties.memberType", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "start_date_time": {"key": "properties.startDateTime", "type": "iso-8601"},
+        "end_date_time": {"key": "properties.endDateTime", "type": "iso-8601"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "updated_on": {"key": "properties.updatedOn", "type": "iso-8601"},
+        "expanded_properties": {"key": "properties.expandedProperties", "type": "ExpandedProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilitySchedule, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.principal_type = kwargs.get('principal_type', None)
-        self.role_eligibility_schedule_request_id = kwargs.get('role_eligibility_schedule_request_id', None)
-        self.member_type = kwargs.get('member_type', None)
-        self.status = kwargs.get('status', None)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
-        self.created_on = kwargs.get('created_on', None)
-        self.updated_on = kwargs.get('updated_on', None)
-        self.expanded_properties = kwargs.get('expanded_properties', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.principal_type = kwargs.get("principal_type", None)
+        self.role_eligibility_schedule_request_id = kwargs.get("role_eligibility_schedule_request_id", None)
+        self.member_type = kwargs.get("member_type", None)
+        self.status = kwargs.get("status", None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
+        self.created_on = kwargs.get("created_on", None)
+        self.updated_on = kwargs.get("updated_on", None)
+        self.expanded_properties = kwargs.get("expanded_properties", None)
 
 
 class RoleEligibilityScheduleFilter(msrest.serialization.Model):
@@ -1548,19 +1456,16 @@ class RoleEligibilityScheduleFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'role_definition_id': {'key': 'roleDefinitionId', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.status = kwargs.get('status', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.status = kwargs.get("status", None)
 
 
 class RoleEligibilityScheduleInstance(msrest.serialization.Model):
@@ -1614,51 +1519,48 @@ class RoleEligibilityScheduleInstance(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'role_eligibility_schedule_id': {'key': 'properties.roleEligibilityScheduleId', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'start_date_time': {'key': 'properties.startDateTime', 'type': 'iso-8601'},
-        'end_date_time': {'key': 'properties.endDateTime', 'type': 'iso-8601'},
-        'member_type': {'key': 'properties.memberType', 'type': 'str'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'expanded_properties': {'key': 'properties.expandedProperties', 'type': 'ExpandedProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "role_eligibility_schedule_id": {"key": "properties.roleEligibilityScheduleId", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "start_date_time": {"key": "properties.startDateTime", "type": "iso-8601"},
+        "end_date_time": {"key": "properties.endDateTime", "type": "iso-8601"},
+        "member_type": {"key": "properties.memberType", "type": "str"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "expanded_properties": {"key": "properties.expandedProperties", "type": "ExpandedProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleInstance, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.principal_type = kwargs.get('principal_type', None)
-        self.role_eligibility_schedule_id = kwargs.get('role_eligibility_schedule_id', None)
-        self.status = kwargs.get('status', None)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
-        self.member_type = kwargs.get('member_type', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
-        self.created_on = kwargs.get('created_on', None)
-        self.expanded_properties = kwargs.get('expanded_properties', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.principal_type = kwargs.get("principal_type", None)
+        self.role_eligibility_schedule_id = kwargs.get("role_eligibility_schedule_id", None)
+        self.status = kwargs.get("status", None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
+        self.member_type = kwargs.get("member_type", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
+        self.created_on = kwargs.get("created_on", None)
+        self.expanded_properties = kwargs.get("expanded_properties", None)
 
 
 class RoleEligibilityScheduleInstanceFilter(msrest.serialization.Model):
@@ -1677,21 +1579,18 @@ class RoleEligibilityScheduleInstanceFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'role_definition_id': {'key': 'roleDefinitionId', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'role_eligibility_schedule_id': {'key': 'roleEligibilityScheduleId', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "role_eligibility_schedule_id": {"key": "roleEligibilityScheduleId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleInstanceFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.status = kwargs.get('status', None)
-        self.role_eligibility_schedule_id = kwargs.get('role_eligibility_schedule_id', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.status = kwargs.get("status", None)
+        self.role_eligibility_schedule_id = kwargs.get("role_eligibility_schedule_id", None)
 
 
 class RoleEligibilityScheduleInstanceListResult(msrest.serialization.Model):
@@ -1705,17 +1604,14 @@ class RoleEligibilityScheduleInstanceListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleEligibilityScheduleInstance]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleEligibilityScheduleInstance]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleInstanceListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleEligibilityScheduleListResult(msrest.serialization.Model):
@@ -1728,17 +1624,14 @@ class RoleEligibilityScheduleListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleEligibilitySchedule]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleEligibilitySchedule]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleEligibilityScheduleRequest(msrest.serialization.Model):
@@ -1806,63 +1699,68 @@ class RoleEligibilityScheduleRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'scope': {'readonly': True},
-        'principal_type': {'readonly': True},
-        'status': {'readonly': True},
-        'approval_id': {'readonly': True},
-        'created_on': {'readonly': True},
-        'requestor_id': {'readonly': True},
-        'expanded_properties': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "scope": {"readonly": True},
+        "principal_type": {"readonly": True},
+        "status": {"readonly": True},
+        "approval_id": {"readonly": True},
+        "created_on": {"readonly": True},
+        "requestor_id": {"readonly": True},
+        "expanded_properties": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'principal_type': {'key': 'properties.principalType', 'type': 'str'},
-        'request_type': {'key': 'properties.requestType', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'approval_id': {'key': 'properties.approvalId', 'type': 'str'},
-        'schedule_info': {'key': 'properties.scheduleInfo', 'type': 'RoleEligibilityScheduleRequestPropertiesScheduleInfo'},
-        'target_role_eligibility_schedule_id': {'key': 'properties.targetRoleEligibilityScheduleId', 'type': 'str'},
-        'target_role_eligibility_schedule_instance_id': {'key': 'properties.targetRoleEligibilityScheduleInstanceId', 'type': 'str'},
-        'justification': {'key': 'properties.justification', 'type': 'str'},
-        'ticket_info': {'key': 'properties.ticketInfo', 'type': 'RoleEligibilityScheduleRequestPropertiesTicketInfo'},
-        'condition': {'key': 'properties.condition', 'type': 'str'},
-        'condition_version': {'key': 'properties.conditionVersion', 'type': 'str'},
-        'created_on': {'key': 'properties.createdOn', 'type': 'iso-8601'},
-        'requestor_id': {'key': 'properties.requestorId', 'type': 'str'},
-        'expanded_properties': {'key': 'properties.expandedProperties', 'type': 'ExpandedProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "principal_type": {"key": "properties.principalType", "type": "str"},
+        "request_type": {"key": "properties.requestType", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "approval_id": {"key": "properties.approvalId", "type": "str"},
+        "schedule_info": {
+            "key": "properties.scheduleInfo",
+            "type": "RoleEligibilityScheduleRequestPropertiesScheduleInfo",
+        },
+        "target_role_eligibility_schedule_id": {"key": "properties.targetRoleEligibilityScheduleId", "type": "str"},
+        "target_role_eligibility_schedule_instance_id": {
+            "key": "properties.targetRoleEligibilityScheduleInstanceId",
+            "type": "str",
+        },
+        "justification": {"key": "properties.justification", "type": "str"},
+        "ticket_info": {"key": "properties.ticketInfo", "type": "RoleEligibilityScheduleRequestPropertiesTicketInfo"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "requestor_id": {"key": "properties.requestorId", "type": "str"},
+        "expanded_properties": {"key": "properties.expandedProperties", "type": "ExpandedProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleRequest, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
         self.scope = None
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
         self.principal_type = None
-        self.request_type = kwargs.get('request_type', None)
+        self.request_type = kwargs.get("request_type", None)
         self.status = None
         self.approval_id = None
-        self.schedule_info = kwargs.get('schedule_info', None)
-        self.target_role_eligibility_schedule_id = kwargs.get('target_role_eligibility_schedule_id', None)
-        self.target_role_eligibility_schedule_instance_id = kwargs.get('target_role_eligibility_schedule_instance_id', None)
-        self.justification = kwargs.get('justification', None)
-        self.ticket_info = kwargs.get('ticket_info', None)
-        self.condition = kwargs.get('condition', None)
-        self.condition_version = kwargs.get('condition_version', None)
+        self.schedule_info = kwargs.get("schedule_info", None)
+        self.target_role_eligibility_schedule_id = kwargs.get("target_role_eligibility_schedule_id", None)
+        self.target_role_eligibility_schedule_instance_id = kwargs.get(
+            "target_role_eligibility_schedule_instance_id", None
+        )
+        self.justification = kwargs.get("justification", None)
+        self.ticket_info = kwargs.get("ticket_info", None)
+        self.condition = kwargs.get("condition", None)
+        self.condition_version = kwargs.get("condition_version", None)
         self.created_on = None
         self.requestor_id = None
         self.expanded_properties = None
@@ -1882,21 +1780,18 @@ class RoleEligibilityScheduleRequestFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'role_definition_id': {'key': 'roleDefinitionId', 'type': 'str'},
-        'requestor_id': {'key': 'requestorId', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "role_definition_id": {"key": "roleDefinitionId", "type": "str"},
+        "requestor_id": {"key": "requestorId", "type": "str"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleRequestFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.requestor_id = kwargs.get('requestor_id', None)
-        self.status = kwargs.get('status', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.requestor_id = kwargs.get("requestor_id", None)
+        self.status = kwargs.get("status", None)
 
 
 class RoleEligibilityScheduleRequestListResult(msrest.serialization.Model):
@@ -1910,17 +1805,14 @@ class RoleEligibilityScheduleRequestListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleEligibilityScheduleRequest]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleEligibilityScheduleRequest]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleRequestListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleEligibilityScheduleRequestPropertiesScheduleInfo(msrest.serialization.Model):
@@ -1934,17 +1826,14 @@ class RoleEligibilityScheduleRequestPropertiesScheduleInfo(msrest.serialization.
     """
 
     _attribute_map = {
-        'start_date_time': {'key': 'startDateTime', 'type': 'iso-8601'},
-        'expiration': {'key': 'expiration', 'type': 'RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration'},
+        "start_date_time": {"key": "startDateTime", "type": "iso-8601"},
+        "expiration": {"key": "expiration", "type": "RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleRequestPropertiesScheduleInfo, self).__init__(**kwargs)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.expiration = kwargs.get('expiration', None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.expiration = kwargs.get("expiration", None)
 
 
 class RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration(msrest.serialization.Model):
@@ -1960,19 +1849,16 @@ class RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration(msrest.seri
     """
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'end_date_time': {'key': 'endDateTime', 'type': 'iso-8601'},
-        'duration': {'key': 'duration', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "end_date_time": {"key": "endDateTime", "type": "iso-8601"},
+        "duration": {"key": "duration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleRequestPropertiesScheduleInfoExpiration, self).__init__(**kwargs)
-        self.type = kwargs.get('type', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
-        self.duration = kwargs.get('duration', None)
+        self.type = kwargs.get("type", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
+        self.duration = kwargs.get("duration", None)
 
 
 class RoleEligibilityScheduleRequestPropertiesTicketInfo(msrest.serialization.Model):
@@ -1985,17 +1871,14 @@ class RoleEligibilityScheduleRequestPropertiesTicketInfo(msrest.serialization.Mo
     """
 
     _attribute_map = {
-        'ticket_number': {'key': 'ticketNumber', 'type': 'str'},
-        'ticket_system': {'key': 'ticketSystem', 'type': 'str'},
+        "ticket_number": {"key": "ticketNumber", "type": "str"},
+        "ticket_system": {"key": "ticketSystem", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleEligibilityScheduleRequestPropertiesTicketInfo, self).__init__(**kwargs)
-        self.ticket_number = kwargs.get('ticket_number', None)
-        self.ticket_system = kwargs.get('ticket_system', None)
+        self.ticket_number = kwargs.get("ticket_number", None)
+        self.ticket_system = kwargs.get("ticket_system", None)
 
 
 class RoleManagementPolicy(msrest.serialization.Model):
@@ -2033,45 +1916,42 @@ class RoleManagementPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'last_modified_by': {'readonly': True},
-        'last_modified_date_time': {'readonly': True},
-        'effective_rules': {'readonly': True},
-        'policy_properties': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "last_modified_by": {"readonly": True},
+        "last_modified_date_time": {"readonly": True},
+        "effective_rules": {"readonly": True},
+        "policy_properties": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'is_organization_default': {'key': 'properties.isOrganizationDefault', 'type': 'bool'},
-        'last_modified_by': {'key': 'properties.lastModifiedBy', 'type': 'Principal'},
-        'last_modified_date_time': {'key': 'properties.lastModifiedDateTime', 'type': 'iso-8601'},
-        'rules': {'key': 'properties.rules', 'type': '[RoleManagementPolicyRule]'},
-        'effective_rules': {'key': 'properties.effectiveRules', 'type': '[RoleManagementPolicyRule]'},
-        'policy_properties': {'key': 'properties.policyProperties', 'type': 'PolicyProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "is_organization_default": {"key": "properties.isOrganizationDefault", "type": "bool"},
+        "last_modified_by": {"key": "properties.lastModifiedBy", "type": "Principal"},
+        "last_modified_date_time": {"key": "properties.lastModifiedDateTime", "type": "iso-8601"},
+        "rules": {"key": "properties.rules", "type": "[RoleManagementPolicyRule]"},
+        "effective_rules": {"key": "properties.effectiveRules", "type": "[RoleManagementPolicyRule]"},
+        "policy_properties": {"key": "properties.policyProperties", "type": "PolicyProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicy, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.description = kwargs.get('description', None)
-        self.is_organization_default = kwargs.get('is_organization_default', None)
+        self.scope = kwargs.get("scope", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.description = kwargs.get("description", None)
+        self.is_organization_default = kwargs.get("is_organization_default", None)
         self.last_modified_by = None
         self.last_modified_date_time = None
-        self.rules = kwargs.get('rules', None)
+        self.rules = kwargs.get("rules", None)
         self.effective_rules = None
         self.policy_properties = None
 
@@ -2098,27 +1978,30 @@ class RoleManagementPolicyRule(msrest.serialization.Model):
     """
 
     _validation = {
-        'rule_type': {'required': True},
+        "rule_type": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'rule_type': {'key': 'ruleType', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'RoleManagementPolicyRuleTarget'},
+        "id": {"key": "id", "type": "str"},
+        "rule_type": {"key": "ruleType", "type": "str"},
+        "target": {"key": "target", "type": "RoleManagementPolicyRuleTarget"},
     }
 
     _subtype_map = {
-        'rule_type': {'RoleManagementPolicyApprovalRule': 'RoleManagementPolicyApprovalRule', 'RoleManagementPolicyAuthenticationContextRule': 'RoleManagementPolicyAuthenticationContextRule', 'RoleManagementPolicyEnablementRule': 'RoleManagementPolicyEnablementRule', 'RoleManagementPolicyExpirationRule': 'RoleManagementPolicyExpirationRule', 'RoleManagementPolicyNotificationRule': 'RoleManagementPolicyNotificationRule'}
+        "rule_type": {
+            "RoleManagementPolicyApprovalRule": "RoleManagementPolicyApprovalRule",
+            "RoleManagementPolicyAuthenticationContextRule": "RoleManagementPolicyAuthenticationContextRule",
+            "RoleManagementPolicyEnablementRule": "RoleManagementPolicyEnablementRule",
+            "RoleManagementPolicyExpirationRule": "RoleManagementPolicyExpirationRule",
+            "RoleManagementPolicyNotificationRule": "RoleManagementPolicyNotificationRule",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyRule, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
+        self.id = kwargs.get("id", None)
         self.rule_type = None  # type: Optional[str]
-        self.target = kwargs.get('target', None)
+        self.target = kwargs.get("target", None)
 
 
 class RoleManagementPolicyApprovalRule(RoleManagementPolicyRule):
@@ -2142,23 +2025,20 @@ class RoleManagementPolicyApprovalRule(RoleManagementPolicyRule):
     """
 
     _validation = {
-        'rule_type': {'required': True},
+        "rule_type": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'rule_type': {'key': 'ruleType', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'RoleManagementPolicyRuleTarget'},
-        'setting': {'key': 'setting', 'type': 'ApprovalSettings'},
+        "id": {"key": "id", "type": "str"},
+        "rule_type": {"key": "ruleType", "type": "str"},
+        "target": {"key": "target", "type": "RoleManagementPolicyRuleTarget"},
+        "setting": {"key": "setting", "type": "ApprovalSettings"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyApprovalRule, self).__init__(**kwargs)
-        self.rule_type = 'RoleManagementPolicyApprovalRule'  # type: str
-        self.setting = kwargs.get('setting', None)
+        self.rule_type = "RoleManagementPolicyApprovalRule"  # type: str
+        self.setting = kwargs.get("setting", None)
 
 
 class RoleManagementPolicyAssignment(msrest.serialization.Model):
@@ -2184,33 +2064,33 @@ class RoleManagementPolicyAssignment(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'policy_assignment_properties': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "policy_assignment_properties": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'policy_id': {'key': 'properties.policyId', 'type': 'str'},
-        'policy_assignment_properties': {'key': 'properties.policyAssignmentProperties', 'type': 'PolicyAssignmentProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "policy_id": {"key": "properties.policyId", "type": "str"},
+        "policy_assignment_properties": {
+            "key": "properties.policyAssignmentProperties",
+            "type": "PolicyAssignmentProperties",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyAssignment, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.policy_id = kwargs.get('policy_id', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.policy_id = kwargs.get("policy_id", None)
         self.policy_assignment_properties = None
 
 
@@ -2225,17 +2105,14 @@ class RoleManagementPolicyAssignmentListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleManagementPolicyAssignment]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleManagementPolicyAssignment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyAssignmentListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleManagementPolicyAuthenticationContextRule(RoleManagementPolicyRule):
@@ -2261,25 +2138,22 @@ class RoleManagementPolicyAuthenticationContextRule(RoleManagementPolicyRule):
     """
 
     _validation = {
-        'rule_type': {'required': True},
+        "rule_type": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'rule_type': {'key': 'ruleType', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'RoleManagementPolicyRuleTarget'},
-        'is_enabled': {'key': 'isEnabled', 'type': 'bool'},
-        'claim_value': {'key': 'claimValue', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "rule_type": {"key": "ruleType", "type": "str"},
+        "target": {"key": "target", "type": "RoleManagementPolicyRuleTarget"},
+        "is_enabled": {"key": "isEnabled", "type": "bool"},
+        "claim_value": {"key": "claimValue", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyAuthenticationContextRule, self).__init__(**kwargs)
-        self.rule_type = 'RoleManagementPolicyAuthenticationContextRule'  # type: str
-        self.is_enabled = kwargs.get('is_enabled', None)
-        self.claim_value = kwargs.get('claim_value', None)
+        self.rule_type = "RoleManagementPolicyAuthenticationContextRule"  # type: str
+        self.is_enabled = kwargs.get("is_enabled", None)
+        self.claim_value = kwargs.get("claim_value", None)
 
 
 class RoleManagementPolicyEnablementRule(RoleManagementPolicyRule):
@@ -2304,23 +2178,20 @@ class RoleManagementPolicyEnablementRule(RoleManagementPolicyRule):
     """
 
     _validation = {
-        'rule_type': {'required': True},
+        "rule_type": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'rule_type': {'key': 'ruleType', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'RoleManagementPolicyRuleTarget'},
-        'enabled_rules': {'key': 'enabledRules', 'type': '[str]'},
+        "id": {"key": "id", "type": "str"},
+        "rule_type": {"key": "ruleType", "type": "str"},
+        "target": {"key": "target", "type": "RoleManagementPolicyRuleTarget"},
+        "enabled_rules": {"key": "enabledRules", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyEnablementRule, self).__init__(**kwargs)
-        self.rule_type = 'RoleManagementPolicyEnablementRule'  # type: str
-        self.enabled_rules = kwargs.get('enabled_rules', None)
+        self.rule_type = "RoleManagementPolicyEnablementRule"  # type: str
+        self.enabled_rules = kwargs.get("enabled_rules", None)
 
 
 class RoleManagementPolicyExpirationRule(RoleManagementPolicyRule):
@@ -2346,25 +2217,22 @@ class RoleManagementPolicyExpirationRule(RoleManagementPolicyRule):
     """
 
     _validation = {
-        'rule_type': {'required': True},
+        "rule_type": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'rule_type': {'key': 'ruleType', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'RoleManagementPolicyRuleTarget'},
-        'is_expiration_required': {'key': 'isExpirationRequired', 'type': 'bool'},
-        'maximum_duration': {'key': 'maximumDuration', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "rule_type": {"key": "ruleType", "type": "str"},
+        "target": {"key": "target", "type": "RoleManagementPolicyRuleTarget"},
+        "is_expiration_required": {"key": "isExpirationRequired", "type": "bool"},
+        "maximum_duration": {"key": "maximumDuration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyExpirationRule, self).__init__(**kwargs)
-        self.rule_type = 'RoleManagementPolicyExpirationRule'  # type: str
-        self.is_expiration_required = kwargs.get('is_expiration_required', None)
-        self.maximum_duration = kwargs.get('maximum_duration', None)
+        self.rule_type = "RoleManagementPolicyExpirationRule"  # type: str
+        self.is_expiration_required = kwargs.get("is_expiration_required", None)
+        self.maximum_duration = kwargs.get("maximum_duration", None)
 
 
 class RoleManagementPolicyListResult(msrest.serialization.Model):
@@ -2377,17 +2245,14 @@ class RoleManagementPolicyListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleManagementPolicy]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleManagementPolicy]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleManagementPolicyNotificationRule(RoleManagementPolicyRule):
@@ -2424,31 +2289,28 @@ class RoleManagementPolicyNotificationRule(RoleManagementPolicyRule):
     """
 
     _validation = {
-        'rule_type': {'required': True},
+        "rule_type": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'rule_type': {'key': 'ruleType', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'RoleManagementPolicyRuleTarget'},
-        'notification_type': {'key': 'notificationType', 'type': 'str'},
-        'notification_level': {'key': 'notificationLevel', 'type': 'str'},
-        'recipient_type': {'key': 'recipientType', 'type': 'str'},
-        'notification_recipients': {'key': 'notificationRecipients', 'type': '[str]'},
-        'is_default_recipients_enabled': {'key': 'isDefaultRecipientsEnabled', 'type': 'bool'},
+        "id": {"key": "id", "type": "str"},
+        "rule_type": {"key": "ruleType", "type": "str"},
+        "target": {"key": "target", "type": "RoleManagementPolicyRuleTarget"},
+        "notification_type": {"key": "notificationType", "type": "str"},
+        "notification_level": {"key": "notificationLevel", "type": "str"},
+        "recipient_type": {"key": "recipientType", "type": "str"},
+        "notification_recipients": {"key": "notificationRecipients", "type": "[str]"},
+        "is_default_recipients_enabled": {"key": "isDefaultRecipientsEnabled", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyNotificationRule, self).__init__(**kwargs)
-        self.rule_type = 'RoleManagementPolicyNotificationRule'  # type: str
-        self.notification_type = kwargs.get('notification_type', None)
-        self.notification_level = kwargs.get('notification_level', None)
-        self.recipient_type = kwargs.get('recipient_type', None)
-        self.notification_recipients = kwargs.get('notification_recipients', None)
-        self.is_default_recipients_enabled = kwargs.get('is_default_recipients_enabled', None)
+        self.rule_type = "RoleManagementPolicyNotificationRule"  # type: str
+        self.notification_type = kwargs.get("notification_type", None)
+        self.notification_level = kwargs.get("notification_level", None)
+        self.recipient_type = kwargs.get("recipient_type", None)
+        self.notification_recipients = kwargs.get("notification_recipients", None)
+        self.is_default_recipients_enabled = kwargs.get("is_default_recipients_enabled", None)
 
 
 class RoleManagementPolicyRuleTarget(msrest.serialization.Model):
@@ -2469,25 +2331,22 @@ class RoleManagementPolicyRuleTarget(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'caller': {'key': 'caller', 'type': 'str'},
-        'operations': {'key': 'operations', 'type': '[str]'},
-        'level': {'key': 'level', 'type': 'str'},
-        'target_objects': {'key': 'targetObjects', 'type': '[str]'},
-        'inheritable_settings': {'key': 'inheritableSettings', 'type': '[str]'},
-        'enforced_settings': {'key': 'enforcedSettings', 'type': '[str]'},
+        "caller": {"key": "caller", "type": "str"},
+        "operations": {"key": "operations", "type": "[str]"},
+        "level": {"key": "level", "type": "str"},
+        "target_objects": {"key": "targetObjects", "type": "[str]"},
+        "inheritable_settings": {"key": "inheritableSettings", "type": "[str]"},
+        "enforced_settings": {"key": "enforcedSettings", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleManagementPolicyRuleTarget, self).__init__(**kwargs)
-        self.caller = kwargs.get('caller', None)
-        self.operations = kwargs.get('operations', None)
-        self.level = kwargs.get('level', None)
-        self.target_objects = kwargs.get('target_objects', None)
-        self.inheritable_settings = kwargs.get('inheritable_settings', None)
-        self.enforced_settings = kwargs.get('enforced_settings', None)
+        self.caller = kwargs.get("caller", None)
+        self.operations = kwargs.get("operations", None)
+        self.level = kwargs.get("level", None)
+        self.target_objects = kwargs.get("target_objects", None)
+        self.inheritable_settings = kwargs.get("inheritable_settings", None)
+        self.enforced_settings = kwargs.get("enforced_settings", None)
 
 
 class UserSet(msrest.serialization.Model):
@@ -2504,21 +2363,18 @@ class UserSet(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'user_type': {'key': 'userType', 'type': 'str'},
-        'is_backup': {'key': 'isBackup', 'type': 'bool'},
-        'id': {'key': 'id', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "user_type": {"key": "userType", "type": "str"},
+        "is_backup": {"key": "isBackup", "type": "bool"},
+        "id": {"key": "id", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserSet, self).__init__(**kwargs)
-        self.user_type = kwargs.get('user_type', None)
-        self.is_backup = kwargs.get('is_backup', None)
-        self.id = kwargs.get('id', None)
-        self.description = kwargs.get('description', None)
+        self.user_type = kwargs.get("user_type", None)
+        self.is_backup = kwargs.get("is_backup", None)
+        self.id = kwargs.get("id", None)
+        self.description = kwargs.get("description", None)
 
 
 class ValidationResponse(msrest.serialization.Model):
@@ -2534,21 +2390,18 @@ class ValidationResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'is_valid': {'readonly': True},
+        "is_valid": {"readonly": True},
     }
 
     _attribute_map = {
-        'is_valid': {'key': 'isValid', 'type': 'bool'},
-        'error_info': {'key': 'errorInfo', 'type': 'ValidationResponseErrorInfo'},
+        "is_valid": {"key": "isValid", "type": "bool"},
+        "error_info": {"key": "errorInfo", "type": "ValidationResponseErrorInfo"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidationResponse, self).__init__(**kwargs)
         self.is_valid = None
-        self.error_info = kwargs.get('error_info', None)
+        self.error_info = kwargs.get("error_info", None)
 
 
 class ValidationResponseErrorInfo(msrest.serialization.Model):
@@ -2563,19 +2416,16 @@ class ValidationResponseErrorInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidationResponseErrorInfo, self).__init__(**kwargs)
         self.code = None
         self.message = None

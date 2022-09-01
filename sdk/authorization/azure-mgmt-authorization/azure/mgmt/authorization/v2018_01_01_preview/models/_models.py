@@ -22,19 +22,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -59,25 +56,22 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorDetail, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -94,15 +88,12 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorResponse, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class Permission(msrest.serialization.Model):
@@ -119,21 +110,18 @@ class Permission(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'actions': {'key': 'actions', 'type': '[str]'},
-        'not_actions': {'key': 'notActions', 'type': '[str]'},
-        'data_actions': {'key': 'dataActions', 'type': '[str]'},
-        'not_data_actions': {'key': 'notDataActions', 'type': '[str]'},
+        "actions": {"key": "actions", "type": "[str]"},
+        "not_actions": {"key": "notActions", "type": "[str]"},
+        "data_actions": {"key": "dataActions", "type": "[str]"},
+        "not_data_actions": {"key": "notDataActions", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Permission, self).__init__(**kwargs)
-        self.actions = kwargs.get('actions', None)
-        self.not_actions = kwargs.get('not_actions', None)
-        self.data_actions = kwargs.get('data_actions', None)
-        self.not_data_actions = kwargs.get('not_data_actions', None)
+        self.actions = kwargs.get("actions", None)
+        self.not_actions = kwargs.get("not_actions", None)
+        self.data_actions = kwargs.get("data_actions", None)
+        self.not_data_actions = kwargs.get("not_data_actions", None)
 
 
 class PermissionGetResult(msrest.serialization.Model):
@@ -146,17 +134,14 @@ class PermissionGetResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Permission]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Permission]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PermissionGetResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ProviderOperation(msrest.serialization.Model):
@@ -177,25 +162,22 @@ class ProviderOperation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'object'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "origin": {"key": "origin", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProviderOperation, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.description = kwargs.get('description', None)
-        self.origin = kwargs.get('origin', None)
-        self.properties = kwargs.get('properties', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
+        self.name = kwargs.get("name", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.description = kwargs.get("description", None)
+        self.origin = kwargs.get("origin", None)
+        self.properties = kwargs.get("properties", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
 
 
 class ProviderOperationsMetadata(msrest.serialization.Model):
@@ -216,25 +198,22 @@ class ProviderOperationsMetadata(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'resource_types': {'key': 'resourceTypes', 'type': '[ResourceType]'},
-        'operations': {'key': 'operations', 'type': '[ProviderOperation]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "resource_types": {"key": "resourceTypes", "type": "[ResourceType]"},
+        "operations": {"key": "operations", "type": "[ProviderOperation]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProviderOperationsMetadata, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
-        self.type = kwargs.get('type', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.resource_types = kwargs.get('resource_types', None)
-        self.operations = kwargs.get('operations', None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
+        self.type = kwargs.get("type", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.resource_types = kwargs.get("resource_types", None)
+        self.operations = kwargs.get("operations", None)
 
 
 class ProviderOperationsMetadataListResult(msrest.serialization.Model):
@@ -248,17 +227,14 @@ class ProviderOperationsMetadataListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ProviderOperationsMetadata]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ProviderOperationsMetadata]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProviderOperationsMetadataListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ResourceType(msrest.serialization.Model):
@@ -273,19 +249,16 @@ class ResourceType(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'operations': {'key': 'operations', 'type': '[ProviderOperation]'},
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "operations": {"key": "operations", "type": "[ProviderOperation]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceType, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.operations = kwargs.get('operations', None)
+        self.name = kwargs.get("name", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.operations = kwargs.get("operations", None)
 
 
 class RoleAssignment(msrest.serialization.Model):
@@ -310,33 +283,30 @@ class RoleAssignment(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'scope': {'key': 'properties.scope', 'type': 'str'},
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'can_delegate': {'key': 'properties.canDelegate', 'type': 'bool'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "scope": {"key": "properties.scope", "type": "str"},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "can_delegate": {"key": "properties.canDelegate", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignment, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.scope = kwargs.get('scope', None)
-        self.role_definition_id = kwargs.get('role_definition_id', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.can_delegate = kwargs.get('can_delegate', None)
+        self.scope = kwargs.get("scope", None)
+        self.role_definition_id = kwargs.get("role_definition_id", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.can_delegate = kwargs.get("can_delegate", None)
 
 
 class RoleAssignmentCreateParameters(msrest.serialization.Model):
@@ -354,24 +324,21 @@ class RoleAssignmentCreateParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'role_definition_id': {'required': True},
-        'principal_id': {'required': True},
+        "role_definition_id": {"required": True},
+        "principal_id": {"required": True},
     }
 
     _attribute_map = {
-        'role_definition_id': {'key': 'properties.roleDefinitionId', 'type': 'str'},
-        'principal_id': {'key': 'properties.principalId', 'type': 'str'},
-        'can_delegate': {'key': 'properties.canDelegate', 'type': 'bool'},
+        "role_definition_id": {"key": "properties.roleDefinitionId", "type": "str"},
+        "principal_id": {"key": "properties.principalId", "type": "str"},
+        "can_delegate": {"key": "properties.canDelegate", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentCreateParameters, self).__init__(**kwargs)
-        self.role_definition_id = kwargs['role_definition_id']
-        self.principal_id = kwargs['principal_id']
-        self.can_delegate = kwargs.get('can_delegate', None)
+        self.role_definition_id = kwargs["role_definition_id"]
+        self.principal_id = kwargs["principal_id"]
+        self.can_delegate = kwargs.get("can_delegate", None)
 
 
 class RoleAssignmentFilter(msrest.serialization.Model):
@@ -384,17 +351,14 @@ class RoleAssignmentFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'can_delegate': {'key': 'canDelegate', 'type': 'bool'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "can_delegate": {"key": "canDelegate", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentFilter, self).__init__(**kwargs)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.can_delegate = kwargs.get('can_delegate', None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.can_delegate = kwargs.get("can_delegate", None)
 
 
 class RoleAssignmentListResult(msrest.serialization.Model):
@@ -407,17 +371,14 @@ class RoleAssignmentListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleAssignment]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleAssignment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleAssignmentListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class RoleDefinition(msrest.serialization.Model):
@@ -444,35 +405,32 @@ class RoleDefinition(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'role_name': {'key': 'properties.roleName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'role_type': {'key': 'properties.type', 'type': 'str'},
-        'permissions': {'key': 'properties.permissions', 'type': '[Permission]'},
-        'assignable_scopes': {'key': 'properties.assignableScopes', 'type': '[str]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "role_name": {"key": "properties.roleName", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "role_type": {"key": "properties.type", "type": "str"},
+        "permissions": {"key": "properties.permissions", "type": "[Permission]"},
+        "assignable_scopes": {"key": "properties.assignableScopes", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleDefinition, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.role_name = kwargs.get('role_name', None)
-        self.description = kwargs.get('description', None)
-        self.role_type = kwargs.get('role_type', None)
-        self.permissions = kwargs.get('permissions', None)
-        self.assignable_scopes = kwargs.get('assignable_scopes', None)
+        self.role_name = kwargs.get("role_name", None)
+        self.description = kwargs.get("description", None)
+        self.role_type = kwargs.get("role_type", None)
+        self.permissions = kwargs.get("permissions", None)
+        self.assignable_scopes = kwargs.get("assignable_scopes", None)
 
 
 class RoleDefinitionFilter(msrest.serialization.Model):
@@ -485,17 +443,14 @@ class RoleDefinitionFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'role_name': {'key': 'roleName', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "role_name": {"key": "roleName", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleDefinitionFilter, self).__init__(**kwargs)
-        self.role_name = kwargs.get('role_name', None)
-        self.type = kwargs.get('type', None)
+        self.role_name = kwargs.get("role_name", None)
+        self.type = kwargs.get("type", None)
 
 
 class RoleDefinitionListResult(msrest.serialization.Model):
@@ -508,14 +463,11 @@ class RoleDefinitionListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RoleDefinition]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[RoleDefinition]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RoleDefinitionListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
