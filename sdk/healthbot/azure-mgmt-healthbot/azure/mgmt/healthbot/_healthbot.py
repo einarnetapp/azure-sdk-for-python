@@ -47,7 +47,7 @@ class Healthbot(object):
     ):
         # type: (...) -> None
         if not base_url:
-            base_url = 'https://management.azure.com'
+            base_url = "https://management.azure.com"
         self._config = HealthbotConfiguration(credential, subscription_id, **kwargs)
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
@@ -55,10 +55,8 @@ class Healthbot(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.bots = BotsOperations(
-            self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(
-            self._client, self._config, self._serialize, self._deserialize)
+        self.bots = BotsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
 
     def close(self):
         # type: () -> None
