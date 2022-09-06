@@ -39,7 +39,7 @@ class FarmBeatsExtensionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.agrifood.aio.AgriFoodMgmtClient`'s
+        :class:`~azure.mgmt.agrifood.aio.AzureAgriFoodRPService`'s
         :attr:`farm_beats_extensions` attribute.
     """
 
