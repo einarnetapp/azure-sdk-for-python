@@ -34,54 +34,58 @@ from ._models_py3 import SystemAssignedServiceIdentity
 from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
 
-
-from ._iot_central_client_enums import (
-    AppSku,
-    AppState,
-    CreatedByType,
-    NetworkAction,
-    PrivateEndpointConnectionProvisioningState,
-    PrivateEndpointServiceConnectionStatus,
-    ProvisioningState,
-    PublicNetworkAccess,
-    SystemAssignedServiceIdentityType,
-)
+from ._iot_central_client_enums import AppSku
+from ._iot_central_client_enums import AppState
+from ._iot_central_client_enums import CreatedByType
+from ._iot_central_client_enums import IpRuleAction
+from ._iot_central_client_enums import NetworkAction
+from ._iot_central_client_enums import PrivateEndpointConnectionProvisioningState
+from ._iot_central_client_enums import PrivateEndpointServiceConnectionStatus
+from ._iot_central_client_enums import ProvisioningState
+from ._iot_central_client_enums import PublicNetworkAccess
+from ._iot_central_client_enums import SystemAssignedServiceIdentityType
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    'App',
-    'AppAvailabilityInfo',
-    'AppListResult',
-    'AppPatch',
-    'AppSkuInfo',
-    'AppTemplate',
-    'AppTemplateLocations',
-    'AppTemplatesResult',
-    'ErrorAdditionalInfo',
-    'ErrorDetail',
-    'ErrorResponse',
-    'NetworkRuleSetIpRule',
-    'NetworkRuleSets',
-    'Operation',
-    'OperationDisplay',
-    'OperationInputs',
-    'OperationListResult',
-    'PrivateEndpoint',
-    'PrivateEndpointConnection',
-    'PrivateEndpointConnectionListResult',
-    'PrivateLinkResource',
-    'PrivateLinkResourceListResult',
-    'PrivateLinkServiceConnectionState',
-    'Resource',
-    'SystemAssignedServiceIdentity',
-    'SystemData',
-    'TrackedResource',
-    'AppSku',
-    'AppState',
-    'CreatedByType',
-    'NetworkAction',
-    'PrivateEndpointConnectionProvisioningState',
-    'PrivateEndpointServiceConnectionStatus',
-    'ProvisioningState',
-    'PublicNetworkAccess',
-    'SystemAssignedServiceIdentityType',
+    "App",
+    "AppAvailabilityInfo",
+    "AppListResult",
+    "AppPatch",
+    "AppSkuInfo",
+    "AppTemplate",
+    "AppTemplateLocations",
+    "AppTemplatesResult",
+    "ErrorAdditionalInfo",
+    "ErrorDetail",
+    "ErrorResponse",
+    "NetworkRuleSetIpRule",
+    "NetworkRuleSets",
+    "Operation",
+    "OperationDisplay",
+    "OperationInputs",
+    "OperationListResult",
+    "PrivateEndpoint",
+    "PrivateEndpointConnection",
+    "PrivateEndpointConnectionListResult",
+    "PrivateLinkResource",
+    "PrivateLinkResourceListResult",
+    "PrivateLinkServiceConnectionState",
+    "Resource",
+    "SystemAssignedServiceIdentity",
+    "SystemData",
+    "TrackedResource",
+    "AppSku",
+    "AppState",
+    "CreatedByType",
+    "IpRuleAction",
+    "NetworkAction",
+    "PrivateEndpointConnectionProvisioningState",
+    "PrivateEndpointServiceConnectionStatus",
+    "ProvisioningState",
+    "PublicNetworkAccess",
+    "SystemAssignedServiceIdentityType",
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
