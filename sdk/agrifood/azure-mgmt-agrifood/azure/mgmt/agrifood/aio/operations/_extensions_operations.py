@@ -15,6 +15,7 @@ from azure.core.exceptions import (
     HttpResponseError,
     ResourceExistsError,
     ResourceNotFoundError,
+    ResourceNotModifiedError,
     map_error,
 )
 from azure.core.pipeline import PipelineResponse
@@ -45,7 +46,7 @@ class ExtensionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.agrifood.aio.AgriFoodMgmtClient`'s
+        :class:`~azure.mgmt.agrifood.aio.AzureAgriFoodRPService`'s
         :attr:`extensions` attribute.
     """
 
@@ -60,23 +61,28 @@ class ExtensionsOperations:
 
     @distributed_trace_async
     async def create(
-        self, resource_group_name: str, farm_beats_resource_name: str, extension_id: str, **kwargs: Any
+        self, extension_id: str, farm_beats_resource_name: str, resource_group_name: str, **kwargs: Any
     ) -> _models.Extension:
         """Install extension.
 
+        :param extension_id: Id of extension resource. Required.
+        :type extension_id: str
+        :param farm_beats_resource_name: FarmBeats resource name. Required.
+        :type farm_beats_resource_name: str
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param extension_id: Id of extension resource. Required.
-        :type extension_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Extension or the result of cls(response)
         :rtype: ~azure.mgmt.agrifood.models.Extension
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -86,9 +92,9 @@ class ExtensionsOperations:
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.Extension]
 
         request = build_create_request(
-            resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
             extension_id=extension_id,
+            farm_beats_resource_name=farm_beats_resource_name,
+            resource_group_name=resource_group_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.create.metadata["url"],
@@ -120,23 +126,28 @@ class ExtensionsOperations:
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, farm_beats_resource_name: str, extension_id: str, **kwargs: Any
+        self, extension_id: str, farm_beats_resource_name: str, resource_group_name: str, **kwargs: Any
     ) -> _models.Extension:
         """Get installed extension details by extension id.
 
+        :param extension_id: Id of extension resource. Required.
+        :type extension_id: str
+        :param farm_beats_resource_name: FarmBeats resource name. Required.
+        :type farm_beats_resource_name: str
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param extension_id: Id of extension resource. Required.
-        :type extension_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Extension or the result of cls(response)
         :rtype: ~azure.mgmt.agrifood.models.Extension
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -146,9 +157,9 @@ class ExtensionsOperations:
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.Extension]
 
         request = build_get_request(
-            resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
             extension_id=extension_id,
+            farm_beats_resource_name=farm_beats_resource_name,
+            resource_group_name=resource_group_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -180,23 +191,28 @@ class ExtensionsOperations:
 
     @distributed_trace_async
     async def update(
-        self, resource_group_name: str, farm_beats_resource_name: str, extension_id: str, **kwargs: Any
+        self, extension_id: str, farm_beats_resource_name: str, resource_group_name: str, **kwargs: Any
     ) -> _models.Extension:
         """Upgrade to latest extension.
 
+        :param extension_id: Id of extension resource. Required.
+        :type extension_id: str
+        :param farm_beats_resource_name: FarmBeats resource name. Required.
+        :type farm_beats_resource_name: str
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param extension_id: Id of extension resource. Required.
-        :type extension_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Extension or the result of cls(response)
         :rtype: ~azure.mgmt.agrifood.models.Extension
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -206,9 +222,9 @@ class ExtensionsOperations:
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.Extension]
 
         request = build_update_request(
-            resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
             extension_id=extension_id,
+            farm_beats_resource_name=farm_beats_resource_name,
+            resource_group_name=resource_group_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.update.metadata["url"],
@@ -240,23 +256,28 @@ class ExtensionsOperations:
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, farm_beats_resource_name: str, extension_id: str, **kwargs: Any
+        self, extension_id: str, farm_beats_resource_name: str, resource_group_name: str, **kwargs: Any
     ) -> None:
         """Uninstall extension.
 
+        :param extension_id: Id of extension resource. Required.
+        :type extension_id: str
+        :param farm_beats_resource_name: FarmBeats resource name. Required.
+        :type farm_beats_resource_name: str
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param farm_beats_resource_name: FarmBeats resource name. Required.
-        :type farm_beats_resource_name: str
-        :param extension_id: Id of extension resource. Required.
-        :type extension_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -266,9 +287,9 @@ class ExtensionsOperations:
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_delete_request(
-            resource_group_name=resource_group_name,
-            farm_beats_resource_name=farm_beats_resource_name,
             extension_id=extension_id,
+            farm_beats_resource_name=farm_beats_resource_name,
+            resource_group_name=resource_group_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -332,7 +353,12 @@ class ExtensionsOperations:
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ExtensionListResponse]
 
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         def prepare_request(next_link=None):
