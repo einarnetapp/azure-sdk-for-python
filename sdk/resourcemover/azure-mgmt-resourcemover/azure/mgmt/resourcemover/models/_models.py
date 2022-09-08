@@ -23,21 +23,18 @@ class AffectedMoveResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'source_id': {'readonly': True},
-        'move_resources': {'readonly': True},
+        "id": {"readonly": True},
+        "source_id": {"readonly": True},
+        "move_resources": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'source_id': {'key': 'sourceId', 'type': 'str'},
-        'move_resources': {'key': 'moveResources', 'type': '[AffectedMoveResource]'},
+        "id": {"key": "id", "type": "str"},
+        "source_id": {"key": "sourceId", "type": "str"},
+        "move_resources": {"key": "moveResources", "type": "[AffectedMoveResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AffectedMoveResource, self).__init__(**kwargs)
         self.id = None
         self.source_id = None
@@ -53,15 +50,12 @@ class AutomaticResolutionProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'move_resource_id': {'key': 'moveResourceId', 'type': 'str'},
+        "move_resource_id": {"key": "moveResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AutomaticResolutionProperties, self).__init__(**kwargs)
-        self.move_resource_id = kwargs.get('move_resource_id', None)
+        self.move_resource_id = kwargs.get("move_resource_id", None)
 
 
 class ResourceSettings(msrest.serialization.Model):
@@ -80,26 +74,37 @@ class ResourceSettings(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
     }
 
     _subtype_map = {
-        'resource_type': {'Microsoft.Compute/availabilitySets': 'AvailabilitySetResourceSettings', 'Microsoft.Compute/diskEncryptionSets': 'DiskEncryptionSetResourceSettings', 'Microsoft.Compute/virtualMachines': 'VirtualMachineResourceSettings', 'Microsoft.KeyVault/vaults': 'KeyVaultResourceSettings', 'Microsoft.Network/loadBalancers': 'LoadBalancerResourceSettings', 'Microsoft.Network/networkInterfaces': 'NetworkInterfaceResourceSettings', 'Microsoft.Network/networkSecurityGroups': 'NetworkSecurityGroupResourceSettings', 'Microsoft.Network/publicIPAddresses': 'PublicIPAddressResourceSettings', 'Microsoft.Network/virtualNetworks': 'VirtualNetworkResourceSettings', 'Microsoft.Sql/servers': 'SqlServerResourceSettings', 'Microsoft.Sql/servers/databases': 'SqlDatabaseResourceSettings', 'Microsoft.Sql/servers/elasticPools': 'SqlElasticPoolResourceSettings', 'resourceGroups': 'ResourceGroupResourceSettings'}
+        "resource_type": {
+            "Microsoft.Compute/availabilitySets": "AvailabilitySetResourceSettings",
+            "Microsoft.Compute/diskEncryptionSets": "DiskEncryptionSetResourceSettings",
+            "Microsoft.Compute/virtualMachines": "VirtualMachineResourceSettings",
+            "Microsoft.KeyVault/vaults": "KeyVaultResourceSettings",
+            "Microsoft.Network/loadBalancers": "LoadBalancerResourceSettings",
+            "Microsoft.Network/networkInterfaces": "NetworkInterfaceResourceSettings",
+            "Microsoft.Network/networkSecurityGroups": "NetworkSecurityGroupResourceSettings",
+            "Microsoft.Network/publicIPAddresses": "PublicIPAddressResourceSettings",
+            "Microsoft.Network/virtualNetworks": "VirtualNetworkResourceSettings",
+            "Microsoft.Sql/servers": "SqlServerResourceSettings",
+            "Microsoft.Sql/servers/databases": "SqlDatabaseResourceSettings",
+            "Microsoft.Sql/servers/elasticPools": "SqlElasticPoolResourceSettings",
+            "resourceGroups": "ResourceGroupResourceSettings",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceSettings, self).__init__(**kwargs)
         self.resource_type = None  # type: Optional[str]
-        self.target_resource_name = kwargs['target_resource_name']
+        self.target_resource_name = kwargs["target_resource_name"]
 
 
 class AvailabilitySetResourceSettings(ResourceSettings):
@@ -119,27 +124,24 @@ class AvailabilitySetResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
-        'fault_domain': {'minimum': 1},
-        'update_domain': {'maximum': 20, 'minimum': 1},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
+        "fault_domain": {"minimum": 1},
+        "update_domain": {"maximum": 20, "minimum": 1},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'fault_domain': {'key': 'faultDomain', 'type': 'int'},
-        'update_domain': {'key': 'updateDomain', 'type': 'int'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "fault_domain": {"key": "faultDomain", "type": "int"},
+        "update_domain": {"key": "updateDomain", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailabilitySetResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Compute/availabilitySets'  # type: str
-        self.fault_domain = kwargs.get('fault_domain', None)
-        self.update_domain = kwargs.get('update_domain', None)
+        self.resource_type = "Microsoft.Compute/availabilitySets"  # type: str
+        self.fault_domain = kwargs.get("fault_domain", None)
+        self.update_domain = kwargs.get("update_domain", None)
 
 
 class AzureResourceReference(msrest.serialization.Model):
@@ -153,19 +155,16 @@ class AzureResourceReference(msrest.serialization.Model):
     """
 
     _validation = {
-        'source_arm_resource_id': {'required': True},
+        "source_arm_resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'source_arm_resource_id': {'key': 'sourceArmResourceId', 'type': 'str'},
+        "source_arm_resource_id": {"key": "sourceArmResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureResourceReference, self).__init__(**kwargs)
-        self.source_arm_resource_id = kwargs['source_arm_resource_id']
+        self.source_arm_resource_id = kwargs["source_arm_resource_id"]
 
 
 class BulkRemoveRequest(msrest.serialization.Model):
@@ -183,19 +182,16 @@ class BulkRemoveRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'validate_only': {'key': 'validateOnly', 'type': 'bool'},
-        'move_resources': {'key': 'moveResources', 'type': '[str]'},
-        'move_resource_input_type': {'key': 'moveResourceInputType', 'type': 'str'},
+        "validate_only": {"key": "validateOnly", "type": "bool"},
+        "move_resources": {"key": "moveResources", "type": "[str]"},
+        "move_resource_input_type": {"key": "moveResourceInputType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BulkRemoveRequest, self).__init__(**kwargs)
-        self.validate_only = kwargs.get('validate_only', None)
-        self.move_resources = kwargs.get('move_resources', None)
-        self.move_resource_input_type = kwargs.get('move_resource_input_type', None)
+        self.validate_only = kwargs.get("validate_only", None)
+        self.move_resources = kwargs.get("move_resources", None)
+        self.move_resource_input_type = kwargs.get("move_resource_input_type", None)
 
 
 class CloudErrorBody(msrest.serialization.Model):
@@ -215,21 +211,18 @@ class CloudErrorBody(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[CloudErrorBody]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[CloudErrorBody]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudErrorBody, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
-        self.target = kwargs.get('target', None)
-        self.details = kwargs.get('details', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
+        self.target = kwargs.get("target", None)
+        self.details = kwargs.get("details", None)
 
 
 class CommitRequest(msrest.serialization.Model):
@@ -249,23 +242,20 @@ class CommitRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'move_resources': {'required': True},
+        "move_resources": {"required": True},
     }
 
     _attribute_map = {
-        'validate_only': {'key': 'validateOnly', 'type': 'bool'},
-        'move_resources': {'key': 'moveResources', 'type': '[str]'},
-        'move_resource_input_type': {'key': 'moveResourceInputType', 'type': 'str'},
+        "validate_only": {"key": "validateOnly", "type": "bool"},
+        "move_resources": {"key": "moveResources", "type": "[str]"},
+        "move_resource_input_type": {"key": "moveResourceInputType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CommitRequest, self).__init__(**kwargs)
-        self.validate_only = kwargs.get('validate_only', None)
-        self.move_resources = kwargs['move_resources']
-        self.move_resource_input_type = kwargs.get('move_resource_input_type', None)
+        self.validate_only = kwargs.get("validate_only", None)
+        self.move_resources = kwargs["move_resources"]
+        self.move_resource_input_type = kwargs.get("move_resource_input_type", None)
 
 
 class DiscardRequest(msrest.serialization.Model):
@@ -285,23 +275,20 @@ class DiscardRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'move_resources': {'required': True},
+        "move_resources": {"required": True},
     }
 
     _attribute_map = {
-        'validate_only': {'key': 'validateOnly', 'type': 'bool'},
-        'move_resources': {'key': 'moveResources', 'type': '[str]'},
-        'move_resource_input_type': {'key': 'moveResourceInputType', 'type': 'str'},
+        "validate_only": {"key": "validateOnly", "type": "bool"},
+        "move_resources": {"key": "moveResources", "type": "[str]"},
+        "move_resource_input_type": {"key": "moveResourceInputType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiscardRequest, self).__init__(**kwargs)
-        self.validate_only = kwargs.get('validate_only', None)
-        self.move_resources = kwargs['move_resources']
-        self.move_resource_input_type = kwargs.get('move_resource_input_type', None)
+        self.validate_only = kwargs.get("validate_only", None)
+        self.move_resources = kwargs["move_resources"]
+        self.move_resource_input_type = kwargs.get("move_resource_input_type", None)
 
 
 class DiskEncryptionSetResourceSettings(ResourceSettings):
@@ -317,82 +304,76 @@ class DiskEncryptionSetResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskEncryptionSetResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Compute/diskEncryptionSets'  # type: str
+        self.resource_type = "Microsoft.Compute/diskEncryptionSets"  # type: str
 
 
 class Display(msrest.serialization.Model):
     """Contains the localized display information for this particular operation / action. These
-value will be used by several clients for
-(1) custom role definitions for RBAC;
-(2) complex query filters for the event service; and
-(3) audit history / records for management operations.
+    value will be used by several clients for
+    (1) custom role definitions for RBAC;
+    (2) complex query filters for the event service; and
+    (3) audit history / records for management operations.
 
-    :param provider: Gets or sets the provider.
-     The localized friendly form of the resource provider name – it is expected to also
-     include the publisher/company responsible.
-     It should use Title Casing and begin with "Microsoft" for 1st party services.
-     e.g. "Microsoft Monitoring Insights" or "Microsoft Compute.".
-    :type provider: str
-    :param resource: Gets or sets the resource.
-     The localized friendly form of the resource related to this action/operation – it
-     should match the public documentation for the resource provider.
-     It should use Title Casing.
-     This value should be unique for a particular URL type (e.g. nested types should *not*
-     reuse their parent’s display.resource field)
-     e.g. "Virtual Machines" or "Scheduler Job Collections", or "Virtual Machine VM Sizes"
-     or "Scheduler Jobs".
-    :type resource: str
-    :param operation: Gets or sets the operation.
-     The localized friendly name for the operation, as it should be shown to the user.
-     It should be concise (to fit in drop downs) but clear (i.e. self-documenting).
-     It should use Title Casing.
-     Prescriptive guidance: Read Create or Update Delete 'ActionName'.
-    :type operation: str
-    :param description: Gets or sets the description.
-     The localized friendly description for the operation, as it should be shown to the
-     user.
-     It should be thorough, yet concise – it will be used in tool tips and detailed views.
-     Prescriptive guidance for namespace:
-     Read any 'display.provider'  resource
-     Create or Update any  'display.provider'  resource
-     Delete any  'display.provider'  resource
-     Perform any other action on any  'display.provider'  resource
-     Prescriptive guidance for namespace:
-     Read any 'display.resource' Create or Update any  'display.resource' Delete any
-      'display.resource' 'ActionName' any 'display.resources'.
-    :type description: str
+        :param provider: Gets or sets the provider.
+         The localized friendly form of the resource provider name – it is expected to also
+         include the publisher/company responsible.
+         It should use Title Casing and begin with "Microsoft" for 1st party services.
+         e.g. "Microsoft Monitoring Insights" or "Microsoft Compute.".
+        :type provider: str
+        :param resource: Gets or sets the resource.
+         The localized friendly form of the resource related to this action/operation – it
+         should match the public documentation for the resource provider.
+         It should use Title Casing.
+         This value should be unique for a particular URL type (e.g. nested types should *not*
+         reuse their parent’s display.resource field)
+         e.g. "Virtual Machines" or "Scheduler Job Collections", or "Virtual Machine VM Sizes"
+         or "Scheduler Jobs".
+        :type resource: str
+        :param operation: Gets or sets the operation.
+         The localized friendly name for the operation, as it should be shown to the user.
+         It should be concise (to fit in drop downs) but clear (i.e. self-documenting).
+         It should use Title Casing.
+         Prescriptive guidance: Read Create or Update Delete 'ActionName'.
+        :type operation: str
+        :param description: Gets or sets the description.
+         The localized friendly description for the operation, as it should be shown to the
+         user.
+         It should be thorough, yet concise – it will be used in tool tips and detailed views.
+         Prescriptive guidance for namespace:
+         Read any 'display.provider'  resource
+         Create or Update any  'display.provider'  resource
+         Delete any  'display.provider'  resource
+         Perform any other action on any  'display.provider'  resource
+         Prescriptive guidance for namespace:
+         Read any 'display.resource' Create or Update any  'display.resource' Delete any
+          'display.resource' 'ActionName' any 'display.resources'.
+        :type description: str
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Display, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class Identity(msrest.serialization.Model):
@@ -408,19 +389,16 @@ class Identity(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Identity, self).__init__(**kwargs)
-        self.type = kwargs.get('type', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.tenant_id = kwargs.get('tenant_id', None)
+        self.type = kwargs.get("type", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.tenant_id = kwargs.get("tenant_id", None)
 
 
 class JobStatus(msrest.serialization.Model):
@@ -435,19 +413,16 @@ class JobStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'job_name': {'readonly': True},
-        'job_progress': {'readonly': True},
+        "job_name": {"readonly": True},
+        "job_progress": {"readonly": True},
     }
 
     _attribute_map = {
-        'job_name': {'key': 'jobName', 'type': 'str'},
-        'job_progress': {'key': 'jobProgress', 'type': 'str'},
+        "job_name": {"key": "jobName", "type": "str"},
+        "job_progress": {"key": "jobProgress", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobStatus, self).__init__(**kwargs)
         self.job_name = None
         self.job_progress = None
@@ -466,21 +441,18 @@ class KeyVaultResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(KeyVaultResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.KeyVault/vaults'  # type: str
+        self.resource_type = "Microsoft.KeyVault/vaults"  # type: str
 
 
 class LBBackendAddressPoolResourceSettings(msrest.serialization.Model):
@@ -491,15 +463,12 @@ class LBBackendAddressPoolResourceSettings(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LBBackendAddressPoolResourceSettings, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
+        self.name = kwargs.get("name", None)
 
 
 class LBFrontendIPConfigurationResourceSettings(msrest.serialization.Model):
@@ -520,23 +489,20 @@ class LBFrontendIPConfigurationResourceSettings(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'private_ip_address': {'key': 'privateIpAddress', 'type': 'str'},
-        'private_ip_allocation_method': {'key': 'privateIpAllocationMethod', 'type': 'str'},
-        'subnet': {'key': 'subnet', 'type': 'SubnetReference'},
-        'zones': {'key': 'zones', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "private_ip_address": {"key": "privateIpAddress", "type": "str"},
+        "private_ip_allocation_method": {"key": "privateIpAllocationMethod", "type": "str"},
+        "subnet": {"key": "subnet", "type": "SubnetReference"},
+        "zones": {"key": "zones", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LBFrontendIPConfigurationResourceSettings, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.private_ip_address = kwargs.get('private_ip_address', None)
-        self.private_ip_allocation_method = kwargs.get('private_ip_allocation_method', None)
-        self.subnet = kwargs.get('subnet', None)
-        self.zones = kwargs.get('zones', None)
+        self.name = kwargs.get("name", None)
+        self.private_ip_address = kwargs.get("private_ip_address", None)
+        self.private_ip_allocation_method = kwargs.get("private_ip_allocation_method", None)
+        self.subnet = kwargs.get("subnet", None)
+        self.zones = kwargs.get("zones", None)
 
 
 class ProxyResourceReference(AzureResourceReference):
@@ -552,20 +518,17 @@ class ProxyResourceReference(AzureResourceReference):
     """
 
     _validation = {
-        'source_arm_resource_id': {'required': True},
+        "source_arm_resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'source_arm_resource_id': {'key': 'sourceArmResourceId', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "source_arm_resource_id": {"key": "sourceArmResourceId", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProxyResourceReference, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
+        self.name = kwargs.get("name", None)
 
 
 class LoadBalancerBackendAddressPoolReference(ProxyResourceReference):
@@ -581,18 +544,15 @@ class LoadBalancerBackendAddressPoolReference(ProxyResourceReference):
     """
 
     _validation = {
-        'source_arm_resource_id': {'required': True},
+        "source_arm_resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'source_arm_resource_id': {'key': 'sourceArmResourceId', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "source_arm_resource_id": {"key": "sourceArmResourceId", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LoadBalancerBackendAddressPoolReference, self).__init__(**kwargs)
 
 
@@ -609,18 +569,15 @@ class LoadBalancerNatRuleReference(ProxyResourceReference):
     """
 
     _validation = {
-        'source_arm_resource_id': {'required': True},
+        "source_arm_resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'source_arm_resource_id': {'key': 'sourceArmResourceId', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "source_arm_resource_id": {"key": "sourceArmResourceId", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LoadBalancerNatRuleReference, self).__init__(**kwargs)
 
 
@@ -650,29 +607,29 @@ class LoadBalancerResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'sku': {'key': 'sku', 'type': 'str'},
-        'frontend_ip_configurations': {'key': 'frontendIPConfigurations', 'type': '[LBFrontendIPConfigurationResourceSettings]'},
-        'backend_address_pools': {'key': 'backendAddressPools', 'type': '[LBBackendAddressPoolResourceSettings]'},
-        'zones': {'key': 'zones', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "sku": {"key": "sku", "type": "str"},
+        "frontend_ip_configurations": {
+            "key": "frontendIPConfigurations",
+            "type": "[LBFrontendIPConfigurationResourceSettings]",
+        },
+        "backend_address_pools": {"key": "backendAddressPools", "type": "[LBBackendAddressPoolResourceSettings]"},
+        "zones": {"key": "zones", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LoadBalancerResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Network/loadBalancers'  # type: str
-        self.sku = kwargs.get('sku', None)
-        self.frontend_ip_configurations = kwargs.get('frontend_ip_configurations', None)
-        self.backend_address_pools = kwargs.get('backend_address_pools', None)
-        self.zones = kwargs.get('zones', None)
+        self.resource_type = "Microsoft.Network/loadBalancers"  # type: str
+        self.sku = kwargs.get("sku", None)
+        self.frontend_ip_configurations = kwargs.get("frontend_ip_configurations", None)
+        self.backend_address_pools = kwargs.get("backend_address_pools", None)
+        self.zones = kwargs.get("zones", None)
 
 
 class ManualResolutionProperties(msrest.serialization.Model):
@@ -684,15 +641,12 @@ class ManualResolutionProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'target_id': {'key': 'targetId', 'type': 'str'},
+        "target_id": {"key": "targetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ManualResolutionProperties, self).__init__(**kwargs)
-        self.target_id = kwargs.get('target_id', None)
+        self.target_id = kwargs.get("target_id", None)
 
 
 class MoveCollection(msrest.serialization.Model):
@@ -719,36 +673,33 @@ class MoveCollection(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'identity': {'key': 'identity', 'type': 'Identity'},
-        'properties': {'key': 'properties', 'type': 'MoveCollectionProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "identity": {"key": "identity", "type": "Identity"},
+        "properties": {"key": "properties", "type": "MoveCollectionProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveCollection, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
         self.etag = None
-        self.tags = kwargs.get('tags', None)
-        self.location = kwargs.get('location', None)
-        self.identity = kwargs.get('identity', None)
-        self.properties = kwargs.get('properties', None)
+        self.tags = kwargs.get("tags", None)
+        self.location = kwargs.get("location", None)
+        self.identity = kwargs.get("identity", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class MoveCollectionProperties(msrest.serialization.Model):
@@ -770,26 +721,23 @@ class MoveCollectionProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'source_region': {'required': True},
-        'target_region': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'errors': {'readonly': True},
+        "source_region": {"required": True},
+        "target_region": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'source_region': {'key': 'sourceRegion', 'type': 'str'},
-        'target_region': {'key': 'targetRegion', 'type': 'str'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'errors': {'key': 'errors', 'type': 'MoveCollectionPropertiesErrors'},
+        "source_region": {"key": "sourceRegion", "type": "str"},
+        "target_region": {"key": "targetRegion", "type": "str"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "errors": {"key": "errors", "type": "MoveCollectionPropertiesErrors"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveCollectionProperties, self).__init__(**kwargs)
-        self.source_region = kwargs['source_region']
-        self.target_region = kwargs['target_region']
+        self.source_region = kwargs["source_region"]
+        self.target_region = kwargs["target_region"]
         self.provisioning_state = None
         self.errors = None
 
@@ -802,15 +750,12 @@ class MoveResourceError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'MoveResourceErrorBody'},
+        "properties": {"key": "properties", "type": "MoveResourceErrorBody"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceError, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class MoveCollectionPropertiesErrors(MoveResourceError):
@@ -821,13 +766,10 @@ class MoveCollectionPropertiesErrors(MoveResourceError):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'MoveResourceErrorBody'},
+        "properties": {"key": "properties", "type": "MoveResourceErrorBody"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveCollectionPropertiesErrors, self).__init__(**kwargs)
 
 
@@ -841,17 +783,14 @@ class MoveCollectionResultList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[MoveCollection]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[MoveCollection]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveCollectionResultList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class MoveErrorInfo(msrest.serialization.Model):
@@ -864,17 +803,14 @@ class MoveErrorInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'move_resources': {'readonly': True},
+        "move_resources": {"readonly": True},
     }
 
     _attribute_map = {
-        'move_resources': {'key': 'moveResources', 'type': '[AffectedMoveResource]'},
+        "move_resources": {"key": "moveResources", "type": "[AffectedMoveResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveErrorInfo, self).__init__(**kwargs)
         self.move_resources = None
 
@@ -895,27 +831,24 @@ class MoveResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'MoveResourceProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "properties": {"key": "properties", "type": "MoveResourceProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResource, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class MoveResourceCollection(msrest.serialization.Model):
@@ -935,24 +868,21 @@ class MoveResourceCollection(msrest.serialization.Model):
     """
 
     _validation = {
-        'total_count': {'readonly': True},
+        "total_count": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[MoveResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'summary_collection': {'key': 'summaryCollection', 'type': 'SummaryCollection'},
-        'total_count': {'key': 'totalCount', 'type': 'long'},
+        "value": {"key": "value", "type": "[MoveResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "summary_collection": {"key": "summaryCollection", "type": "SummaryCollection"},
+        "total_count": {"key": "totalCount", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
-        self.summary_collection = kwargs.get('summary_collection', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
+        self.summary_collection = kwargs.get("summary_collection", None)
         self.total_count = None
 
 
@@ -978,27 +908,24 @@ class MoveResourceDependency(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'resolution_status': {'key': 'resolutionStatus', 'type': 'str'},
-        'resolution_type': {'key': 'resolutionType', 'type': 'str'},
-        'dependency_type': {'key': 'dependencyType', 'type': 'str'},
-        'manual_resolution': {'key': 'manualResolution', 'type': 'ManualResolutionProperties'},
-        'automatic_resolution': {'key': 'automaticResolution', 'type': 'AutomaticResolutionProperties'},
-        'is_optional': {'key': 'isOptional', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "resolution_status": {"key": "resolutionStatus", "type": "str"},
+        "resolution_type": {"key": "resolutionType", "type": "str"},
+        "dependency_type": {"key": "dependencyType", "type": "str"},
+        "manual_resolution": {"key": "manualResolution", "type": "ManualResolutionProperties"},
+        "automatic_resolution": {"key": "automaticResolution", "type": "AutomaticResolutionProperties"},
+        "is_optional": {"key": "isOptional", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceDependency, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.resolution_status = kwargs.get('resolution_status', None)
-        self.resolution_type = kwargs.get('resolution_type', None)
-        self.dependency_type = kwargs.get('dependency_type', None)
-        self.manual_resolution = kwargs.get('manual_resolution', None)
-        self.automatic_resolution = kwargs.get('automatic_resolution', None)
-        self.is_optional = kwargs.get('is_optional', None)
+        self.id = kwargs.get("id", None)
+        self.resolution_status = kwargs.get("resolution_status", None)
+        self.resolution_type = kwargs.get("resolution_type", None)
+        self.dependency_type = kwargs.get("dependency_type", None)
+        self.manual_resolution = kwargs.get("manual_resolution", None)
+        self.automatic_resolution = kwargs.get("automatic_resolution", None)
+        self.is_optional = kwargs.get("is_optional", None)
 
 
 class MoveResourceDependencyOverride(msrest.serialization.Model):
@@ -1013,17 +940,14 @@ class MoveResourceDependencyOverride(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'target_id': {'key': 'targetId', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "target_id": {"key": "targetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceDependencyOverride, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.target_id = kwargs.get('target_id', None)
+        self.id = kwargs.get("id", None)
+        self.target_id = kwargs.get("target_id", None)
 
 
 class MoveResourceErrorBody(msrest.serialization.Model):
@@ -1045,23 +969,20 @@ class MoveResourceErrorBody(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[MoveResourceErrorBody]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[MoveResourceErrorBody]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceErrorBody, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -1077,15 +998,12 @@ class MoveResourceFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'MoveResourceFilterProperties'},
+        "properties": {"key": "properties", "type": "MoveResourceFilterProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceFilter, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class MoveResourceFilterProperties(msrest.serialization.Model):
@@ -1096,15 +1014,12 @@ class MoveResourceFilterProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceFilterProperties, self).__init__(**kwargs)
-        self.provisioning_state = kwargs.get('provisioning_state', None)
+        self.provisioning_state = kwargs.get("provisioning_state", None)
 
 
 class MoveResourceProperties(msrest.serialization.Model):
@@ -1142,44 +1057,41 @@ class MoveResourceProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provisioning_state': {'readonly': True},
-        'source_id': {'required': True},
-        'target_id': {'readonly': True},
-        'source_resource_settings': {'readonly': True},
-        'move_status': {'readonly': True},
-        'depends_on': {'readonly': True},
-        'is_resolve_required': {'readonly': True},
-        'errors': {'readonly': True},
+        "provisioning_state": {"readonly": True},
+        "source_id": {"required": True},
+        "target_id": {"readonly": True},
+        "source_resource_settings": {"readonly": True},
+        "move_status": {"readonly": True},
+        "depends_on": {"readonly": True},
+        "is_resolve_required": {"readonly": True},
+        "errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'source_id': {'key': 'sourceId', 'type': 'str'},
-        'target_id': {'key': 'targetId', 'type': 'str'},
-        'existing_target_id': {'key': 'existingTargetId', 'type': 'str'},
-        'resource_settings': {'key': 'resourceSettings', 'type': 'ResourceSettings'},
-        'source_resource_settings': {'key': 'sourceResourceSettings', 'type': 'ResourceSettings'},
-        'move_status': {'key': 'moveStatus', 'type': 'MoveResourcePropertiesMoveStatus'},
-        'depends_on': {'key': 'dependsOn', 'type': '[MoveResourceDependency]'},
-        'depends_on_overrides': {'key': 'dependsOnOverrides', 'type': '[MoveResourceDependencyOverride]'},
-        'is_resolve_required': {'key': 'isResolveRequired', 'type': 'bool'},
-        'errors': {'key': 'errors', 'type': 'MoveResourcePropertiesErrors'},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "source_id": {"key": "sourceId", "type": "str"},
+        "target_id": {"key": "targetId", "type": "str"},
+        "existing_target_id": {"key": "existingTargetId", "type": "str"},
+        "resource_settings": {"key": "resourceSettings", "type": "ResourceSettings"},
+        "source_resource_settings": {"key": "sourceResourceSettings", "type": "ResourceSettings"},
+        "move_status": {"key": "moveStatus", "type": "MoveResourcePropertiesMoveStatus"},
+        "depends_on": {"key": "dependsOn", "type": "[MoveResourceDependency]"},
+        "depends_on_overrides": {"key": "dependsOnOverrides", "type": "[MoveResourceDependencyOverride]"},
+        "is_resolve_required": {"key": "isResolveRequired", "type": "bool"},
+        "errors": {"key": "errors", "type": "MoveResourcePropertiesErrors"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceProperties, self).__init__(**kwargs)
         self.provisioning_state = None
-        self.source_id = kwargs['source_id']
+        self.source_id = kwargs["source_id"]
         self.target_id = None
-        self.existing_target_id = kwargs.get('existing_target_id', None)
-        self.resource_settings = kwargs.get('resource_settings', None)
+        self.existing_target_id = kwargs.get("existing_target_id", None)
+        self.resource_settings = kwargs.get("resource_settings", None)
         self.source_resource_settings = None
         self.move_status = None
         self.depends_on = None
-        self.depends_on_overrides = kwargs.get('depends_on_overrides', None)
+        self.depends_on_overrides = kwargs.get("depends_on_overrides", None)
         self.is_resolve_required = None
         self.errors = None
 
@@ -1192,13 +1104,10 @@ class MoveResourcePropertiesErrors(MoveResourceError):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'MoveResourceErrorBody'},
+        "properties": {"key": "properties", "type": "MoveResourceErrorBody"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourcePropertiesErrors, self).__init__(**kwargs)
 
 
@@ -1220,23 +1129,20 @@ class MoveResourceStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'move_state': {'readonly': True},
+        "move_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'move_state': {'key': 'moveState', 'type': 'str'},
-        'job_status': {'key': 'jobStatus', 'type': 'JobStatus'},
-        'errors': {'key': 'errors', 'type': 'MoveResourceError'},
+        "move_state": {"key": "moveState", "type": "str"},
+        "job_status": {"key": "jobStatus", "type": "JobStatus"},
+        "errors": {"key": "errors", "type": "MoveResourceError"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourceStatus, self).__init__(**kwargs)
         self.move_state = None
-        self.job_status = kwargs.get('job_status', None)
-        self.errors = kwargs.get('errors', None)
+        self.job_status = kwargs.get("job_status", None)
+        self.errors = kwargs.get("errors", None)
 
 
 class MoveResourcePropertiesMoveStatus(MoveResourceStatus):
@@ -1257,19 +1163,16 @@ class MoveResourcePropertiesMoveStatus(MoveResourceStatus):
     """
 
     _validation = {
-        'move_state': {'readonly': True},
+        "move_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'move_state': {'key': 'moveState', 'type': 'str'},
-        'job_status': {'key': 'jobStatus', 'type': 'JobStatus'},
-        'errors': {'key': 'errors', 'type': 'MoveResourceError'},
+        "move_state": {"key": "moveState", "type": "str"},
+        "job_status": {"key": "jobStatus", "type": "JobStatus"},
+        "errors": {"key": "errors", "type": "MoveResourceError"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(MoveResourcePropertiesMoveStatus, self).__init__(**kwargs)
 
 
@@ -1292,25 +1195,22 @@ class NetworkInterfaceResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'ip_configurations': {'key': 'ipConfigurations', 'type': '[NicIpConfigurationResourceSettings]'},
-        'enable_accelerated_networking': {'key': 'enableAcceleratedNetworking', 'type': 'bool'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "ip_configurations": {"key": "ipConfigurations", "type": "[NicIpConfigurationResourceSettings]"},
+        "enable_accelerated_networking": {"key": "enableAcceleratedNetworking", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkInterfaceResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Network/networkInterfaces'  # type: str
-        self.ip_configurations = kwargs.get('ip_configurations', None)
-        self.enable_accelerated_networking = kwargs.get('enable_accelerated_networking', None)
+        self.resource_type = "Microsoft.Network/networkInterfaces"  # type: str
+        self.ip_configurations = kwargs.get("ip_configurations", None)
+        self.enable_accelerated_networking = kwargs.get("enable_accelerated_networking", None)
 
 
 class NetworkSecurityGroupResourceSettings(ResourceSettings):
@@ -1328,23 +1228,20 @@ class NetworkSecurityGroupResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'security_rules': {'key': 'securityRules', 'type': '[NsgSecurityRule]'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "security_rules": {"key": "securityRules", "type": "[NsgSecurityRule]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkSecurityGroupResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Network/networkSecurityGroups'  # type: str
-        self.security_rules = kwargs.get('security_rules', None)
+        self.resource_type = "Microsoft.Network/networkSecurityGroups"  # type: str
+        self.security_rules = kwargs.get("security_rules", None)
 
 
 class NicIpConfigurationResourceSettings(msrest.serialization.Model):
@@ -1373,29 +1270,29 @@ class NicIpConfigurationResourceSettings(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'private_ip_address': {'key': 'privateIpAddress', 'type': 'str'},
-        'private_ip_allocation_method': {'key': 'privateIpAllocationMethod', 'type': 'str'},
-        'subnet': {'key': 'subnet', 'type': 'SubnetReference'},
-        'primary': {'key': 'primary', 'type': 'bool'},
-        'load_balancer_backend_address_pools': {'key': 'loadBalancerBackendAddressPools', 'type': '[LoadBalancerBackendAddressPoolReference]'},
-        'load_balancer_nat_rules': {'key': 'loadBalancerNatRules', 'type': '[LoadBalancerNatRuleReference]'},
-        'public_ip': {'key': 'publicIp', 'type': 'PublicIpReference'},
+        "name": {"key": "name", "type": "str"},
+        "private_ip_address": {"key": "privateIpAddress", "type": "str"},
+        "private_ip_allocation_method": {"key": "privateIpAllocationMethod", "type": "str"},
+        "subnet": {"key": "subnet", "type": "SubnetReference"},
+        "primary": {"key": "primary", "type": "bool"},
+        "load_balancer_backend_address_pools": {
+            "key": "loadBalancerBackendAddressPools",
+            "type": "[LoadBalancerBackendAddressPoolReference]",
+        },
+        "load_balancer_nat_rules": {"key": "loadBalancerNatRules", "type": "[LoadBalancerNatRuleReference]"},
+        "public_ip": {"key": "publicIp", "type": "PublicIpReference"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NicIpConfigurationResourceSettings, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.private_ip_address = kwargs.get('private_ip_address', None)
-        self.private_ip_allocation_method = kwargs.get('private_ip_allocation_method', None)
-        self.subnet = kwargs.get('subnet', None)
-        self.primary = kwargs.get('primary', None)
-        self.load_balancer_backend_address_pools = kwargs.get('load_balancer_backend_address_pools', None)
-        self.load_balancer_nat_rules = kwargs.get('load_balancer_nat_rules', None)
-        self.public_ip = kwargs.get('public_ip', None)
+        self.name = kwargs.get("name", None)
+        self.private_ip_address = kwargs.get("private_ip_address", None)
+        self.private_ip_allocation_method = kwargs.get("private_ip_allocation_method", None)
+        self.subnet = kwargs.get("subnet", None)
+        self.primary = kwargs.get("primary", None)
+        self.load_balancer_backend_address_pools = kwargs.get("load_balancer_backend_address_pools", None)
+        self.load_balancer_nat_rules = kwargs.get("load_balancer_nat_rules", None)
+        self.public_ip = kwargs.get("public_ip", None)
 
 
 class NsgReference(AzureResourceReference):
@@ -1409,17 +1306,14 @@ class NsgReference(AzureResourceReference):
     """
 
     _validation = {
-        'source_arm_resource_id': {'required': True},
+        "source_arm_resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'source_arm_resource_id': {'key': 'sourceArmResourceId', 'type': 'str'},
+        "source_arm_resource_id": {"key": "sourceArmResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NsgReference, self).__init__(**kwargs)
 
 
@@ -1456,40 +1350,37 @@ class NsgSecurityRule(msrest.serialization.Model):
      rule, specifies where network traffic originates from.
     :type source_address_prefix: str
     :param source_port_range: Gets or sets Source Port or Range. Integer or range between 0 and
-    
-    
+
+
      #. A “*” can also be used to match all ports.
     :type source_port_range: str
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'access': {'key': 'access', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'destination_address_prefix': {'key': 'destinationAddressPrefix', 'type': 'str'},
-        'destination_port_range': {'key': 'destinationPortRange', 'type': 'str'},
-        'direction': {'key': 'direction', 'type': 'str'},
-        'priority': {'key': 'priority', 'type': 'int'},
-        'protocol': {'key': 'protocol', 'type': 'str'},
-        'source_address_prefix': {'key': 'sourceAddressPrefix', 'type': 'str'},
-        'source_port_range': {'key': 'sourcePortRange', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "access": {"key": "access", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "destination_address_prefix": {"key": "destinationAddressPrefix", "type": "str"},
+        "destination_port_range": {"key": "destinationPortRange", "type": "str"},
+        "direction": {"key": "direction", "type": "str"},
+        "priority": {"key": "priority", "type": "int"},
+        "protocol": {"key": "protocol", "type": "str"},
+        "source_address_prefix": {"key": "sourceAddressPrefix", "type": "str"},
+        "source_port_range": {"key": "sourcePortRange", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NsgSecurityRule, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.access = kwargs.get('access', None)
-        self.description = kwargs.get('description', None)
-        self.destination_address_prefix = kwargs.get('destination_address_prefix', None)
-        self.destination_port_range = kwargs.get('destination_port_range', None)
-        self.direction = kwargs.get('direction', None)
-        self.priority = kwargs.get('priority', None)
-        self.protocol = kwargs.get('protocol', None)
-        self.source_address_prefix = kwargs.get('source_address_prefix', None)
-        self.source_port_range = kwargs.get('source_port_range', None)
+        self.name = kwargs.get("name", None)
+        self.access = kwargs.get("access", None)
+        self.description = kwargs.get("description", None)
+        self.destination_address_prefix = kwargs.get("destination_address_prefix", None)
+        self.destination_port_range = kwargs.get("destination_port_range", None)
+        self.direction = kwargs.get("direction", None)
+        self.priority = kwargs.get("priority", None)
+        self.protocol = kwargs.get("protocol", None)
+        self.source_address_prefix = kwargs.get("source_address_prefix", None)
+        self.source_port_range = kwargs.get("source_port_range", None)
 
 
 class OperationErrorAdditionalInfo(msrest.serialization.Model):
@@ -1504,19 +1395,16 @@ class OperationErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'MoveErrorInfo'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "MoveErrorInfo"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationErrorAdditionalInfo, self).__init__(**kwargs)
         self.type = None
         self.info = None
@@ -1529,8 +1417,8 @@ class OperationsDiscovery(msrest.serialization.Model):
      The name of the operation being performed on this particular object. It should
      match the action name that appears in RBAC / the event service.
      Examples of operations include:
-    
-    
+
+
      * Microsoft.Compute/virtualMachine/capture/action
      * Microsoft.Compute/virtualMachine/restart/action
      * Microsoft.Compute/virtualMachine/write
@@ -1569,23 +1457,20 @@ class OperationsDiscovery(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'display': {'key': 'display', 'type': 'Display'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'object'},
+        "name": {"key": "name", "type": "str"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "display": {"key": "display", "type": "Display"},
+        "origin": {"key": "origin", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationsDiscovery, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
-        self.display = kwargs.get('display', None)
-        self.origin = kwargs.get('origin', None)
-        self.properties = kwargs.get('properties', None)
+        self.name = kwargs.get("name", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
+        self.display = kwargs.get("display", None)
+        self.origin = kwargs.get("origin", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class OperationsDiscoveryCollection(msrest.serialization.Model):
@@ -1598,17 +1483,14 @@ class OperationsDiscoveryCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[OperationsDiscovery]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[OperationsDiscovery]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationsDiscoveryCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class OperationStatus(msrest.serialization.Model):
@@ -1634,29 +1516,26 @@ class OperationStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'status': {'readonly': True},
-        'start_time': {'readonly': True},
-        'end_time': {'readonly': True},
-        'error': {'readonly': True},
-        'properties': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "status": {"readonly": True},
+        "start_time": {"readonly": True},
+        "end_time": {"readonly": True},
+        "error": {"readonly": True},
+        "properties": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'str'},
-        'end_time': {'key': 'endTime', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'OperationStatusError'},
-        'properties': {'key': 'properties', 'type': 'object'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "start_time": {"key": "startTime", "type": "str"},
+        "end_time": {"key": "endTime", "type": "str"},
+        "error": {"key": "error", "type": "OperationStatusError"},
+        "properties": {"key": "properties", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationStatus, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -1683,23 +1562,20 @@ class OperationStatusError(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[OperationStatusError]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[OperationErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "details": {"key": "details", "type": "[OperationStatusError]"},
+        "additional_info": {"key": "additionalInfo", "type": "[OperationErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationStatusError, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -1724,23 +1600,20 @@ class PrepareRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'move_resources': {'required': True},
+        "move_resources": {"required": True},
     }
 
     _attribute_map = {
-        'validate_only': {'key': 'validateOnly', 'type': 'bool'},
-        'move_resources': {'key': 'moveResources', 'type': '[str]'},
-        'move_resource_input_type': {'key': 'moveResourceInputType', 'type': 'str'},
+        "validate_only": {"key": "validateOnly", "type": "bool"},
+        "move_resources": {"key": "moveResources", "type": "[str]"},
+        "move_resource_input_type": {"key": "moveResourceInputType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrepareRequest, self).__init__(**kwargs)
-        self.validate_only = kwargs.get('validate_only', None)
-        self.move_resources = kwargs['move_resources']
-        self.move_resource_input_type = kwargs.get('move_resource_input_type', None)
+        self.validate_only = kwargs.get("validate_only", None)
+        self.move_resources = kwargs["move_resources"]
+        self.move_resource_input_type = kwargs.get("move_resource_input_type", None)
 
 
 class PublicIPAddressResourceSettings(ResourceSettings):
@@ -1766,31 +1639,28 @@ class PublicIPAddressResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'domain_name_label': {'key': 'domainNameLabel', 'type': 'str'},
-        'fqdn': {'key': 'fqdn', 'type': 'str'},
-        'public_ip_allocation_method': {'key': 'publicIpAllocationMethod', 'type': 'str'},
-        'sku': {'key': 'sku', 'type': 'str'},
-        'zones': {'key': 'zones', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "domain_name_label": {"key": "domainNameLabel", "type": "str"},
+        "fqdn": {"key": "fqdn", "type": "str"},
+        "public_ip_allocation_method": {"key": "publicIpAllocationMethod", "type": "str"},
+        "sku": {"key": "sku", "type": "str"},
+        "zones": {"key": "zones", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PublicIPAddressResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Network/publicIPAddresses'  # type: str
-        self.domain_name_label = kwargs.get('domain_name_label', None)
-        self.fqdn = kwargs.get('fqdn', None)
-        self.public_ip_allocation_method = kwargs.get('public_ip_allocation_method', None)
-        self.sku = kwargs.get('sku', None)
-        self.zones = kwargs.get('zones', None)
+        self.resource_type = "Microsoft.Network/publicIPAddresses"  # type: str
+        self.domain_name_label = kwargs.get("domain_name_label", None)
+        self.fqdn = kwargs.get("fqdn", None)
+        self.public_ip_allocation_method = kwargs.get("public_ip_allocation_method", None)
+        self.sku = kwargs.get("sku", None)
+        self.zones = kwargs.get("zones", None)
 
 
 class PublicIpReference(AzureResourceReference):
@@ -1804,17 +1674,14 @@ class PublicIpReference(AzureResourceReference):
     """
 
     _validation = {
-        'source_arm_resource_id': {'required': True},
+        "source_arm_resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'source_arm_resource_id': {'key': 'sourceArmResourceId', 'type': 'str'},
+        "source_arm_resource_id": {"key": "sourceArmResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PublicIpReference, self).__init__(**kwargs)
 
 
@@ -1827,15 +1694,12 @@ class RequiredForResourcesCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'source_ids': {'key': 'sourceIds', 'type': '[str]'},
+        "source_ids": {"key": "sourceIds", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RequiredForResourcesCollection, self).__init__(**kwargs)
-        self.source_ids = kwargs.get('source_ids', None)
+        self.source_ids = kwargs.get("source_ids", None)
 
 
 class ResourceGroupResourceSettings(ResourceSettings):
@@ -1851,21 +1715,18 @@ class ResourceGroupResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceGroupResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'resourceGroups'  # type: str
+        self.resource_type = "resourceGroups"  # type: str
 
 
 class ResourceMoveRequest(msrest.serialization.Model):
@@ -1885,23 +1746,20 @@ class ResourceMoveRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'move_resources': {'required': True},
+        "move_resources": {"required": True},
     }
 
     _attribute_map = {
-        'validate_only': {'key': 'validateOnly', 'type': 'bool'},
-        'move_resources': {'key': 'moveResources', 'type': '[str]'},
-        'move_resource_input_type': {'key': 'moveResourceInputType', 'type': 'str'},
+        "validate_only": {"key": "validateOnly", "type": "bool"},
+        "move_resources": {"key": "moveResources", "type": "[str]"},
+        "move_resource_input_type": {"key": "moveResourceInputType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceMoveRequest, self).__init__(**kwargs)
-        self.validate_only = kwargs.get('validate_only', None)
-        self.move_resources = kwargs['move_resources']
-        self.move_resource_input_type = kwargs.get('move_resource_input_type', None)
+        self.validate_only = kwargs.get("validate_only", None)
+        self.move_resources = kwargs["move_resources"]
+        self.move_resource_input_type = kwargs.get("move_resource_input_type", None)
 
 
 class SqlDatabaseResourceSettings(ResourceSettings):
@@ -1920,23 +1778,20 @@ class SqlDatabaseResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'zone_redundant': {'key': 'zoneRedundant', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "zone_redundant": {"key": "zoneRedundant", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SqlDatabaseResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Sql/servers/databases'  # type: str
-        self.zone_redundant = kwargs.get('zone_redundant', None)
+        self.resource_type = "Microsoft.Sql/servers/databases"  # type: str
+        self.zone_redundant = kwargs.get("zone_redundant", None)
 
 
 class SqlElasticPoolResourceSettings(ResourceSettings):
@@ -1955,23 +1810,20 @@ class SqlElasticPoolResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'zone_redundant': {'key': 'zoneRedundant', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "zone_redundant": {"key": "zoneRedundant", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SqlElasticPoolResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Sql/servers/elasticPools'  # type: str
-        self.zone_redundant = kwargs.get('zone_redundant', None)
+        self.resource_type = "Microsoft.Sql/servers/elasticPools"  # type: str
+        self.zone_redundant = kwargs.get("zone_redundant", None)
 
 
 class SqlServerResourceSettings(ResourceSettings):
@@ -1987,21 +1839,18 @@ class SqlServerResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SqlServerResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Sql/servers'  # type: str
+        self.resource_type = "Microsoft.Sql/servers"  # type: str
 
 
 class SubnetReference(ProxyResourceReference):
@@ -2017,18 +1866,15 @@ class SubnetReference(ProxyResourceReference):
     """
 
     _validation = {
-        'source_arm_resource_id': {'required': True},
+        "source_arm_resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'source_arm_resource_id': {'key': 'sourceArmResourceId', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "source_arm_resource_id": {"key": "sourceArmResourceId", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubnetReference, self).__init__(**kwargs)
 
 
@@ -2044,19 +1890,16 @@ class SubnetResourceSettings(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'address_prefix': {'key': 'addressPrefix', 'type': 'str'},
-        'network_security_group': {'key': 'networkSecurityGroup', 'type': 'NsgReference'},
+        "name": {"key": "name", "type": "str"},
+        "address_prefix": {"key": "addressPrefix", "type": "str"},
+        "network_security_group": {"key": "networkSecurityGroup", "type": "NsgReference"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubnetResourceSettings, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.address_prefix = kwargs.get('address_prefix', None)
-        self.network_security_group = kwargs.get('network_security_group', None)
+        self.name = kwargs.get("name", None)
+        self.address_prefix = kwargs.get("address_prefix", None)
+        self.network_security_group = kwargs.get("network_security_group", None)
 
 
 class Summary(msrest.serialization.Model):
@@ -2069,17 +1912,14 @@ class Summary(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'count': {'key': 'count', 'type': 'int'},
-        'item': {'key': 'item', 'type': 'str'},
+        "count": {"key": "count", "type": "int"},
+        "item": {"key": "item", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Summary, self).__init__(**kwargs)
-        self.count = kwargs.get('count', None)
-        self.item = kwargs.get('item', None)
+        self.count = kwargs.get("count", None)
+        self.item = kwargs.get("item", None)
 
 
 class SummaryCollection(msrest.serialization.Model):
@@ -2092,17 +1932,14 @@ class SummaryCollection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'field_name': {'key': 'fieldName', 'type': 'str'},
-        'summary': {'key': 'summary', 'type': '[Summary]'},
+        "field_name": {"key": "fieldName", "type": "str"},
+        "summary": {"key": "summary", "type": "[Summary]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SummaryCollection, self).__init__(**kwargs)
-        self.field_name = kwargs.get('field_name', None)
-        self.summary = kwargs.get('summary', None)
+        self.field_name = kwargs.get("field_name", None)
+        self.summary = kwargs.get("summary", None)
 
 
 class UnresolvedDependenciesFilter(msrest.serialization.Model):
@@ -2113,15 +1950,12 @@ class UnresolvedDependenciesFilter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'UnresolvedDependenciesFilterProperties'},
+        "properties": {"key": "properties", "type": "UnresolvedDependenciesFilterProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnresolvedDependenciesFilter, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class UnresolvedDependenciesFilterProperties(msrest.serialization.Model):
@@ -2132,15 +1966,12 @@ class UnresolvedDependenciesFilterProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'count': {'key': 'count', 'type': 'int'},
+        "count": {"key": "count", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnresolvedDependenciesFilterProperties, self).__init__(**kwargs)
-        self.count = kwargs.get('count', None)
+        self.count = kwargs.get("count", None)
 
 
 class UnresolvedDependency(msrest.serialization.Model):
@@ -2153,17 +1984,14 @@ class UnresolvedDependency(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'count': {'key': 'count', 'type': 'int'},
-        'id': {'key': 'id', 'type': 'str'},
+        "count": {"key": "count", "type": "int"},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnresolvedDependency, self).__init__(**kwargs)
-        self.count = kwargs.get('count', None)
-        self.id = kwargs.get('id', None)
+        self.count = kwargs.get("count", None)
+        self.id = kwargs.get("id", None)
 
 
 class UnresolvedDependencyCollection(msrest.serialization.Model):
@@ -2183,24 +2011,21 @@ class UnresolvedDependencyCollection(msrest.serialization.Model):
     """
 
     _validation = {
-        'summary_collection': {'readonly': True},
-        'total_count': {'readonly': True},
+        "summary_collection": {"readonly": True},
+        "total_count": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[UnresolvedDependency]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'summary_collection': {'key': 'summaryCollection', 'type': 'SummaryCollection'},
-        'total_count': {'key': 'totalCount', 'type': 'long'},
+        "value": {"key": "value", "type": "[UnresolvedDependency]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "summary_collection": {"key": "summaryCollection", "type": "SummaryCollection"},
+        "total_count": {"key": "totalCount", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnresolvedDependencyCollection, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
         self.summary_collection = None
         self.total_count = None
 
@@ -2215,17 +2040,14 @@ class UpdateMoveCollectionRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'identity', 'type': 'Identity'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "Identity"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateMoveCollectionRequest, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.identity = kwargs.get('identity', None)
+        self.tags = kwargs.get("tags", None)
+        self.identity = kwargs.get("identity", None)
 
 
 class VirtualMachineResourceSettings(ResourceSettings):
@@ -2250,27 +2072,24 @@ class VirtualMachineResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'target_availability_zone': {'key': 'targetAvailabilityZone', 'type': 'str'},
-        'target_vm_size': {'key': 'targetVmSize', 'type': 'str'},
-        'target_availability_set_id': {'key': 'targetAvailabilitySetId', 'type': 'str'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "target_availability_zone": {"key": "targetAvailabilityZone", "type": "str"},
+        "target_vm_size": {"key": "targetVmSize", "type": "str"},
+        "target_availability_set_id": {"key": "targetAvailabilitySetId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VirtualMachineResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Compute/virtualMachines'  # type: str
-        self.target_availability_zone = kwargs.get('target_availability_zone', None)
-        self.target_vm_size = kwargs.get('target_vm_size', None)
-        self.target_availability_set_id = kwargs.get('target_availability_set_id', None)
+        self.resource_type = "Microsoft.Compute/virtualMachines"  # type: str
+        self.target_availability_zone = kwargs.get("target_availability_zone", None)
+        self.target_vm_size = kwargs.get("target_vm_size", None)
+        self.target_availability_set_id = kwargs.get("target_availability_set_id", None)
 
 
 class VirtualNetworkResourceSettings(ResourceSettings):
@@ -2297,26 +2116,23 @@ class VirtualNetworkResourceSettings(ResourceSettings):
     """
 
     _validation = {
-        'resource_type': {'required': True},
-        'target_resource_name': {'required': True},
+        "resource_type": {"required": True},
+        "target_resource_name": {"required": True},
     }
 
     _attribute_map = {
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'target_resource_name': {'key': 'targetResourceName', 'type': 'str'},
-        'enable_ddos_protection': {'key': 'enableDdosProtection', 'type': 'bool'},
-        'address_space': {'key': 'addressSpace', 'type': '[str]'},
-        'dns_servers': {'key': 'dnsServers', 'type': '[str]'},
-        'subnets': {'key': 'subnets', 'type': '[SubnetResourceSettings]'},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "target_resource_name": {"key": "targetResourceName", "type": "str"},
+        "enable_ddos_protection": {"key": "enableDdosProtection", "type": "bool"},
+        "address_space": {"key": "addressSpace", "type": "[str]"},
+        "dns_servers": {"key": "dnsServers", "type": "[str]"},
+        "subnets": {"key": "subnets", "type": "[SubnetResourceSettings]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VirtualNetworkResourceSettings, self).__init__(**kwargs)
-        self.resource_type = 'Microsoft.Network/virtualNetworks'  # type: str
-        self.enable_ddos_protection = kwargs.get('enable_ddos_protection', None)
-        self.address_space = kwargs.get('address_space', None)
-        self.dns_servers = kwargs.get('dns_servers', None)
-        self.subnets = kwargs.get('subnets', None)
+        self.resource_type = "Microsoft.Network/virtualNetworks"  # type: str
+        self.enable_ddos_protection = kwargs.get("enable_ddos_protection", None)
+        self.address_space = kwargs.get("address_space", None)
+        self.dns_servers = kwargs.get("dns_servers", None)
+        self.subnets = kwargs.get("subnets", None)
