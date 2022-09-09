@@ -7,49 +7,58 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AccessMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Access mode for storage
-    """
+class AccessMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Access mode for storage."""
 
     READ_ONLY = "ReadOnly"
     READ_WRITE = "ReadWrite"
 
-class ActiveRevisionsMode(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """ActiveRevisionsMode controls how active revisions are handled for the Container app:
-    
-    
-    .. raw:: html
-    
-       <list><item>Multiple: multiple revisions can be active. If no value if provided, this is the
-    default</item><item>Single: Only one revision can be active at a time. Revision weights can not
-    be used in this mode</item></list>
+
+class Action(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Allow or Deny rules to determine for incoming IP. Note: Rules can only consist of ALL Allow or
+    ALL Deny.
     """
 
-    MULTIPLE = "multiple"
-    SINGLE = "single"
+    ALLOW = "Allow"
+    DENY = "Deny"
 
-class AppProtocol(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+class ActiveRevisionsMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ActiveRevisionsMode controls how active revisions are handled for the Container app:
+
+
+    .. raw:: html
+
+       <list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one
+    revision can be active at a time. Revision weights can not be used in this mode. If no value if
+    provided, this is the default.</item></list>.
+    """
+
+    MULTIPLE = "Multiple"
+    SINGLE = "Single"
+
+
+class AppProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Tells Dapr which protocol your application is using. Valid options are http and grpc. Default
-    is http
+    is http.
     """
 
     HTTP = "http"
     GRPC = "grpc"
 
-class BindingType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Custom Domain binding type.
-    """
+
+class BindingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Custom Domain binding type."""
 
     DISABLED = "Disabled"
     SNI_ENABLED = "SniEnabled"
 
-class CertificateProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Provisioning state of the certificate.
-    """
+
+class CertificateProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Provisioning state of the certificate."""
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
@@ -57,42 +66,63 @@ class CertificateProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, 
     DELETE_FAILED = "DeleteFailed"
     PENDING = "Pending"
 
-class ContainerAppProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Provisioning state of the Container App.
-    """
+
+class CheckNameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The reason why the given name is not available."""
+
+    INVALID = "Invalid"
+    ALREADY_EXISTS = "AlreadyExists"
+
+
+class ConnectedEnvironmentProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Provisioning state of the Kubernetes Environment."""
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
+    WAITING = "Waiting"
+    INITIALIZATION_IN_PROGRESS = "InitializationInProgress"
+    INFRASTRUCTURE_SETUP_IN_PROGRESS = "InfrastructureSetupInProgress"
+    INFRASTRUCTURE_SETUP_COMPLETE = "InfrastructureSetupComplete"
+    SCHEDULED_FOR_DELETE = "ScheduledForDelete"
+
+
+class ContainerAppProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Provisioning state of the Container App."""
 
     IN_PROGRESS = "InProgress"
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
     CANCELED = "Canceled"
+    DELETING = "Deleting"
 
-class CookieExpirationConvention(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The convention used when determining the session cookie's expiration.
-    """
+
+class CookieExpirationConvention(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The convention used when determining the session cookie's expiration."""
 
     FIXED_TIME = "FixedTime"
     IDENTITY_PROVIDER_DERIVED = "IdentityProviderDerived"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of identity that created the resource.
-    """
+
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of identity that created the resource."""
 
     USER = "User"
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class DnsVerificationTestResult(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """DNS verification test result.
-    """
+
+class DnsVerificationTestResult(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """DNS verification test result."""
 
     PASSED = "Passed"
     FAILED = "Failed"
     SKIPPED = "Skipped"
 
-class EnvironmentProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Provisioning state of the Environment.
-    """
+
+class EnvironmentProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Provisioning state of the Environment."""
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
@@ -105,23 +135,49 @@ class EnvironmentProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, 
     UPGRADE_REQUESTED = "UpgradeRequested"
     UPGRADE_FAILED = "UpgradeFailed"
 
-class ForwardProxyConvention(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The convention used to determine the url of the request made.
-    """
+
+class ExtendedLocationTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of extendedLocation."""
+
+    CUSTOM_LOCATION = "CustomLocation"
+
+
+class ForwardProxyConvention(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The convention used to determine the url of the request made."""
 
     NO_PROXY = "NoProxy"
     STANDARD = "Standard"
     CUSTOM = "Custom"
 
-class IngressTransportMethod(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Ingress transport protocol
-    """
+
+class IngressTransportMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Ingress transport protocol."""
 
     AUTO = "auto"
     HTTP = "http"
     HTTP2 = "http2"
+    TCP = "tcp"
 
-class ManagedServiceIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+class LogLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default
+    is info.
+    """
+
+    INFO = "info"
+    DEBUG = "debug"
+    WARN = "warn"
+    ERROR = "error"
+
+
+class ManagedEnvironmentOutBoundType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Outbound type for the cluster."""
+
+    LOAD_BALANCER = "LoadBalancer"
+    USER_DEFINED_ROUTING = "UserDefinedRouting"
+
+
+class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of managed service identity (where both SystemAssigned and UserAssigned types are
     allowed).
     """
@@ -131,17 +187,17 @@ class ManagedServiceIdentityType(with_metaclass(CaseInsensitiveEnumMeta, str, En
     USER_ASSIGNED = "UserAssigned"
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
-class RevisionHealthState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Current health State of the revision
-    """
+
+class RevisionHealthState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Current health State of the revision."""
 
     HEALTHY = "Healthy"
     UNHEALTHY = "Unhealthy"
     NONE = "None"
 
-class RevisionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Current provisioning State of the revision
-    """
+
+class RevisionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Current provisioning State of the revision."""
 
     PROVISIONING = "Provisioning"
     PROVISIONED = "Provisioned"
@@ -149,33 +205,49 @@ class RevisionProvisioningState(with_metaclass(CaseInsensitiveEnumMeta, str, Enu
     DEPROVISIONING = "Deprovisioning"
     DEPROVISIONED = "Deprovisioned"
 
-class SourceControlOperationState(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Current provisioning State of the operation
-    """
+
+class Scheme(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Scheme to use for connecting to the host. Defaults to HTTP."""
+
+    HTTP = "HTTP"
+    HTTPS = "HTTPS"
+
+
+class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Name of the Sku."""
+
+    #: Consumption SKU of Managed Environment.
+    CONSUMPTION = "Consumption"
+    #: Premium SKU of Managed Environment.
+    PREMIUM = "Premium"
+
+
+class SourceControlOperationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Current provisioning State of the operation."""
 
     IN_PROGRESS = "InProgress"
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
     CANCELED = "Canceled"
 
-class StorageType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Storage type for the volume. If not provided, use EmptyDir.
-    """
+
+class StorageType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Storage type for the volume. If not provided, use EmptyDir."""
 
     AZURE_FILE = "AzureFile"
     EMPTY_DIR = "EmptyDir"
 
-class Type(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of probe.
-    """
 
-    LIVENESS = "liveness"
-    READINESS = "readiness"
-    STARTUP = "startup"
+class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of probe."""
 
-class UnauthenticatedClientActionV2(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The action to take when an unauthenticated client attempts to access the app.
-    """
+    LIVENESS = "Liveness"
+    READINESS = "Readiness"
+    STARTUP = "Startup"
+
+
+class UnauthenticatedClientActionV2(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The action to take when an unauthenticated client attempts to access the app."""
 
     REDIRECT_TO_LOGIN_PAGE = "RedirectToLoginPage"
     ALLOW_ANONYMOUS = "AllowAnonymous"
