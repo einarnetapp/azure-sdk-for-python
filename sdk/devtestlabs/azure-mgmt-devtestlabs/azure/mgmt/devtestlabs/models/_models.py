@@ -27,29 +27,26 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.location = kwargs.get('location', None)
-        self.tags = kwargs.get('tags', None)
+        self.location = kwargs.get("location", None)
+        self.tags = kwargs.get("tags", None)
 
 
 class ApplicableSchedule(Resource):
@@ -76,28 +73,25 @@ class ApplicableSchedule(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'lab_vms_shutdown': {'key': 'properties.labVmsShutdown', 'type': 'Schedule'},
-        'lab_vms_startup': {'key': 'properties.labVmsStartup', 'type': 'Schedule'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "lab_vms_shutdown": {"key": "properties.labVmsShutdown", "type": "Schedule"},
+        "lab_vms_startup": {"key": "properties.labVmsStartup", "type": "Schedule"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicableSchedule, self).__init__(**kwargs)
-        self.lab_vms_shutdown = kwargs.get('lab_vms_shutdown', None)
-        self.lab_vms_startup = kwargs.get('lab_vms_startup', None)
+        self.lab_vms_shutdown = kwargs.get("lab_vms_shutdown", None)
+        self.lab_vms_startup = kwargs.get("lab_vms_startup", None)
 
 
 class UpdateResource(msrest.serialization.Model):
@@ -108,15 +102,12 @@ class UpdateResource(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
+        "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateResource, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
+        self.tags = kwargs.get("tags", None)
 
 
 class ApplicableScheduleFragment(UpdateResource):
@@ -133,18 +124,15 @@ class ApplicableScheduleFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'lab_vms_shutdown': {'key': 'properties.labVmsShutdown', 'type': 'ScheduleFragment'},
-        'lab_vms_startup': {'key': 'properties.labVmsStartup', 'type': 'ScheduleFragment'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "lab_vms_shutdown": {"key": "properties.labVmsShutdown", "type": "ScheduleFragment"},
+        "lab_vms_startup": {"key": "properties.labVmsStartup", "type": "ScheduleFragment"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicableScheduleFragment, self).__init__(**kwargs)
-        self.lab_vms_shutdown = kwargs.get('lab_vms_shutdown', None)
-        self.lab_vms_startup = kwargs.get('lab_vms_startup', None)
+        self.lab_vms_shutdown = kwargs.get("lab_vms_shutdown", None)
+        self.lab_vms_startup = kwargs.get("lab_vms_startup", None)
 
 
 class ApplyArtifactsRequest(msrest.serialization.Model):
@@ -155,15 +143,12 @@ class ApplyArtifactsRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'artifacts': {'key': 'artifacts', 'type': '[ArtifactInstallProperties]'},
+        "artifacts": {"key": "artifacts", "type": "[ArtifactInstallProperties]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplyArtifactsRequest, self).__init__(**kwargs)
-        self.artifacts = kwargs.get('artifacts', None)
+        self.artifacts = kwargs.get("artifacts", None)
 
 
 class ArmTemplate(Resource):
@@ -202,39 +187,39 @@ class ArmTemplate(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'display_name': {'readonly': True},
-        'description': {'readonly': True},
-        'publisher': {'readonly': True},
-        'icon': {'readonly': True},
-        'contents': {'readonly': True},
-        'created_date': {'readonly': True},
-        'parameters_value_files_info': {'readonly': True},
-        'enabled': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "display_name": {"readonly": True},
+        "description": {"readonly": True},
+        "publisher": {"readonly": True},
+        "icon": {"readonly": True},
+        "contents": {"readonly": True},
+        "created_date": {"readonly": True},
+        "parameters_value_files_info": {"readonly": True},
+        "enabled": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'publisher': {'key': 'properties.publisher', 'type': 'str'},
-        'icon': {'key': 'properties.icon', 'type': 'str'},
-        'contents': {'key': 'properties.contents', 'type': 'object'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'parameters_value_files_info': {'key': 'properties.parametersValueFilesInfo', 'type': '[ParametersValueFileInfo]'},
-        'enabled': {'key': 'properties.enabled', 'type': 'bool'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "publisher": {"key": "properties.publisher", "type": "str"},
+        "icon": {"key": "properties.icon", "type": "str"},
+        "contents": {"key": "properties.contents", "type": "object"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "parameters_value_files_info": {
+            "key": "properties.parametersValueFilesInfo",
+            "type": "[ParametersValueFileInfo]",
+        },
+        "enabled": {"key": "properties.enabled", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmTemplate, self).__init__(**kwargs)
         self.display_name = None
         self.description = None
@@ -256,17 +241,14 @@ class ArmTemplateInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'template': {'key': 'template', 'type': 'object'},
-        'parameters': {'key': 'parameters', 'type': 'object'},
+        "template": {"key": "template", "type": "object"},
+        "parameters": {"key": "parameters", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmTemplateInfo, self).__init__(**kwargs)
-        self.template = kwargs.get('template', None)
-        self.parameters = kwargs.get('parameters', None)
+        self.template = kwargs.get("template", None)
+        self.parameters = kwargs.get("parameters", None)
 
 
 class ArmTemplateList(msrest.serialization.Model):
@@ -279,17 +261,14 @@ class ArmTemplateList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ArmTemplate]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ArmTemplate]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmTemplateList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ArmTemplateParameterProperties(msrest.serialization.Model):
@@ -302,17 +281,14 @@ class ArmTemplateParameterProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmTemplateParameterProperties, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.value = kwargs.get('value', None)
+        self.name = kwargs.get("name", None)
+        self.value = kwargs.get("value", None)
 
 
 class ArmTemplateParameterPropertiesFragment(msrest.serialization.Model):
@@ -325,17 +301,14 @@ class ArmTemplateParameterPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmTemplateParameterPropertiesFragment, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.value = kwargs.get('value', None)
+        self.name = kwargs.get("name", None)
+        self.value = kwargs.get("value", None)
 
 
 class Artifact(Resource):
@@ -372,39 +345,36 @@ class Artifact(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'title': {'readonly': True},
-        'description': {'readonly': True},
-        'publisher': {'readonly': True},
-        'file_path': {'readonly': True},
-        'icon': {'readonly': True},
-        'target_os_type': {'readonly': True},
-        'parameters': {'readonly': True},
-        'created_date': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "title": {"readonly": True},
+        "description": {"readonly": True},
+        "publisher": {"readonly": True},
+        "file_path": {"readonly": True},
+        "icon": {"readonly": True},
+        "target_os_type": {"readonly": True},
+        "parameters": {"readonly": True},
+        "created_date": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'title': {'key': 'properties.title', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'publisher': {'key': 'properties.publisher', 'type': 'str'},
-        'file_path': {'key': 'properties.filePath', 'type': 'str'},
-        'icon': {'key': 'properties.icon', 'type': 'str'},
-        'target_os_type': {'key': 'properties.targetOsType', 'type': 'str'},
-        'parameters': {'key': 'properties.parameters', 'type': 'object'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "title": {"key": "properties.title", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "publisher": {"key": "properties.publisher", "type": "str"},
+        "file_path": {"key": "properties.filePath", "type": "str"},
+        "icon": {"key": "properties.icon", "type": "str"},
+        "target_os_type": {"key": "properties.targetOsType", "type": "str"},
+        "parameters": {"key": "properties.parameters", "type": "object"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Artifact, self).__init__(**kwargs)
         self.title = None
         self.description = None
@@ -428,19 +398,16 @@ class ArtifactDeploymentStatusProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'deployment_status': {'key': 'deploymentStatus', 'type': 'str'},
-        'artifacts_applied': {'key': 'artifactsApplied', 'type': 'int'},
-        'total_artifacts': {'key': 'totalArtifacts', 'type': 'int'},
+        "deployment_status": {"key": "deploymentStatus", "type": "str"},
+        "artifacts_applied": {"key": "artifactsApplied", "type": "int"},
+        "total_artifacts": {"key": "totalArtifacts", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactDeploymentStatusProperties, self).__init__(**kwargs)
-        self.deployment_status = kwargs.get('deployment_status', None)
-        self.artifacts_applied = kwargs.get('artifacts_applied', None)
-        self.total_artifacts = kwargs.get('total_artifacts', None)
+        self.deployment_status = kwargs.get("deployment_status", None)
+        self.artifacts_applied = kwargs.get("artifacts_applied", None)
+        self.total_artifacts = kwargs.get("total_artifacts", None)
 
 
 class ArtifactDeploymentStatusPropertiesFragment(msrest.serialization.Model):
@@ -455,19 +422,16 @@ class ArtifactDeploymentStatusPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'deployment_status': {'key': 'deploymentStatus', 'type': 'str'},
-        'artifacts_applied': {'key': 'artifactsApplied', 'type': 'int'},
-        'total_artifacts': {'key': 'totalArtifacts', 'type': 'int'},
+        "deployment_status": {"key": "deploymentStatus", "type": "str"},
+        "artifacts_applied": {"key": "artifactsApplied", "type": "int"},
+        "total_artifacts": {"key": "totalArtifacts", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactDeploymentStatusPropertiesFragment, self).__init__(**kwargs)
-        self.deployment_status = kwargs.get('deployment_status', None)
-        self.artifacts_applied = kwargs.get('artifacts_applied', None)
-        self.total_artifacts = kwargs.get('total_artifacts', None)
+        self.deployment_status = kwargs.get("deployment_status", None)
+        self.artifacts_applied = kwargs.get("artifacts_applied", None)
+        self.total_artifacts = kwargs.get("total_artifacts", None)
 
 
 class ArtifactInstallProperties(msrest.serialization.Model):
@@ -490,27 +454,24 @@ class ArtifactInstallProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'artifact_id': {'key': 'artifactId', 'type': 'str'},
-        'artifact_title': {'key': 'artifactTitle', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '[ArtifactParameterProperties]'},
-        'status': {'key': 'status', 'type': 'str'},
-        'deployment_status_message': {'key': 'deploymentStatusMessage', 'type': 'str'},
-        'vm_extension_status_message': {'key': 'vmExtensionStatusMessage', 'type': 'str'},
-        'install_time': {'key': 'installTime', 'type': 'iso-8601'},
+        "artifact_id": {"key": "artifactId", "type": "str"},
+        "artifact_title": {"key": "artifactTitle", "type": "str"},
+        "parameters": {"key": "parameters", "type": "[ArtifactParameterProperties]"},
+        "status": {"key": "status", "type": "str"},
+        "deployment_status_message": {"key": "deploymentStatusMessage", "type": "str"},
+        "vm_extension_status_message": {"key": "vmExtensionStatusMessage", "type": "str"},
+        "install_time": {"key": "installTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactInstallProperties, self).__init__(**kwargs)
-        self.artifact_id = kwargs.get('artifact_id', None)
-        self.artifact_title = kwargs.get('artifact_title', None)
-        self.parameters = kwargs.get('parameters', None)
-        self.status = kwargs.get('status', None)
-        self.deployment_status_message = kwargs.get('deployment_status_message', None)
-        self.vm_extension_status_message = kwargs.get('vm_extension_status_message', None)
-        self.install_time = kwargs.get('install_time', None)
+        self.artifact_id = kwargs.get("artifact_id", None)
+        self.artifact_title = kwargs.get("artifact_title", None)
+        self.parameters = kwargs.get("parameters", None)
+        self.status = kwargs.get("status", None)
+        self.deployment_status_message = kwargs.get("deployment_status_message", None)
+        self.vm_extension_status_message = kwargs.get("vm_extension_status_message", None)
+        self.install_time = kwargs.get("install_time", None)
 
 
 class ArtifactInstallPropertiesFragment(msrest.serialization.Model):
@@ -533,27 +494,24 @@ class ArtifactInstallPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'artifact_id': {'key': 'artifactId', 'type': 'str'},
-        'artifact_title': {'key': 'artifactTitle', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '[ArtifactParameterPropertiesFragment]'},
-        'status': {'key': 'status', 'type': 'str'},
-        'deployment_status_message': {'key': 'deploymentStatusMessage', 'type': 'str'},
-        'vm_extension_status_message': {'key': 'vmExtensionStatusMessage', 'type': 'str'},
-        'install_time': {'key': 'installTime', 'type': 'iso-8601'},
+        "artifact_id": {"key": "artifactId", "type": "str"},
+        "artifact_title": {"key": "artifactTitle", "type": "str"},
+        "parameters": {"key": "parameters", "type": "[ArtifactParameterPropertiesFragment]"},
+        "status": {"key": "status", "type": "str"},
+        "deployment_status_message": {"key": "deploymentStatusMessage", "type": "str"},
+        "vm_extension_status_message": {"key": "vmExtensionStatusMessage", "type": "str"},
+        "install_time": {"key": "installTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactInstallPropertiesFragment, self).__init__(**kwargs)
-        self.artifact_id = kwargs.get('artifact_id', None)
-        self.artifact_title = kwargs.get('artifact_title', None)
-        self.parameters = kwargs.get('parameters', None)
-        self.status = kwargs.get('status', None)
-        self.deployment_status_message = kwargs.get('deployment_status_message', None)
-        self.vm_extension_status_message = kwargs.get('vm_extension_status_message', None)
-        self.install_time = kwargs.get('install_time', None)
+        self.artifact_id = kwargs.get("artifact_id", None)
+        self.artifact_title = kwargs.get("artifact_title", None)
+        self.parameters = kwargs.get("parameters", None)
+        self.status = kwargs.get("status", None)
+        self.deployment_status_message = kwargs.get("deployment_status_message", None)
+        self.vm_extension_status_message = kwargs.get("vm_extension_status_message", None)
+        self.install_time = kwargs.get("install_time", None)
 
 
 class ArtifactList(msrest.serialization.Model):
@@ -566,17 +524,14 @@ class ArtifactList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Artifact]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Artifact]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ArtifactParameterProperties(msrest.serialization.Model):
@@ -589,17 +544,14 @@ class ArtifactParameterProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactParameterProperties, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.value = kwargs.get('value', None)
+        self.name = kwargs.get("name", None)
+        self.value = kwargs.get("value", None)
 
 
 class ArtifactParameterPropertiesFragment(msrest.serialization.Model):
@@ -612,17 +564,14 @@ class ArtifactParameterPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactParameterPropertiesFragment, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.value = kwargs.get('value', None)
+        self.name = kwargs.get("name", None)
+        self.value = kwargs.get("value", None)
 
 
 class ArtifactSource(Resource):
@@ -666,46 +615,43 @@ class ArtifactSource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'created_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "created_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'uri': {'key': 'properties.uri', 'type': 'str'},
-        'source_type': {'key': 'properties.sourceType', 'type': 'str'},
-        'folder_path': {'key': 'properties.folderPath', 'type': 'str'},
-        'arm_template_folder_path': {'key': 'properties.armTemplateFolderPath', 'type': 'str'},
-        'branch_ref': {'key': 'properties.branchRef', 'type': 'str'},
-        'security_token': {'key': 'properties.securityToken', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "uri": {"key": "properties.uri", "type": "str"},
+        "source_type": {"key": "properties.sourceType", "type": "str"},
+        "folder_path": {"key": "properties.folderPath", "type": "str"},
+        "arm_template_folder_path": {"key": "properties.armTemplateFolderPath", "type": "str"},
+        "branch_ref": {"key": "properties.branchRef", "type": "str"},
+        "security_token": {"key": "properties.securityToken", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactSource, self).__init__(**kwargs)
-        self.display_name = kwargs.get('display_name', None)
-        self.uri = kwargs.get('uri', None)
-        self.source_type = kwargs.get('source_type', None)
-        self.folder_path = kwargs.get('folder_path', None)
-        self.arm_template_folder_path = kwargs.get('arm_template_folder_path', None)
-        self.branch_ref = kwargs.get('branch_ref', None)
-        self.security_token = kwargs.get('security_token', None)
-        self.status = kwargs.get('status', None)
+        self.display_name = kwargs.get("display_name", None)
+        self.uri = kwargs.get("uri", None)
+        self.source_type = kwargs.get("source_type", None)
+        self.folder_path = kwargs.get("folder_path", None)
+        self.arm_template_folder_path = kwargs.get("arm_template_folder_path", None)
+        self.branch_ref = kwargs.get("branch_ref", None)
+        self.security_token = kwargs.get("security_token", None)
+        self.status = kwargs.get("status", None)
         self.created_date = None
         self.provisioning_state = None
         self.unique_identifier = None
@@ -736,30 +682,27 @@ class ArtifactSourceFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'display_name': {'key': 'properties.displayName', 'type': 'str'},
-        'uri': {'key': 'properties.uri', 'type': 'str'},
-        'source_type': {'key': 'properties.sourceType', 'type': 'str'},
-        'folder_path': {'key': 'properties.folderPath', 'type': 'str'},
-        'arm_template_folder_path': {'key': 'properties.armTemplateFolderPath', 'type': 'str'},
-        'branch_ref': {'key': 'properties.branchRef', 'type': 'str'},
-        'security_token': {'key': 'properties.securityToken', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "display_name": {"key": "properties.displayName", "type": "str"},
+        "uri": {"key": "properties.uri", "type": "str"},
+        "source_type": {"key": "properties.sourceType", "type": "str"},
+        "folder_path": {"key": "properties.folderPath", "type": "str"},
+        "arm_template_folder_path": {"key": "properties.armTemplateFolderPath", "type": "str"},
+        "branch_ref": {"key": "properties.branchRef", "type": "str"},
+        "security_token": {"key": "properties.securityToken", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactSourceFragment, self).__init__(**kwargs)
-        self.display_name = kwargs.get('display_name', None)
-        self.uri = kwargs.get('uri', None)
-        self.source_type = kwargs.get('source_type', None)
-        self.folder_path = kwargs.get('folder_path', None)
-        self.arm_template_folder_path = kwargs.get('arm_template_folder_path', None)
-        self.branch_ref = kwargs.get('branch_ref', None)
-        self.security_token = kwargs.get('security_token', None)
-        self.status = kwargs.get('status', None)
+        self.display_name = kwargs.get("display_name", None)
+        self.uri = kwargs.get("uri", None)
+        self.source_type = kwargs.get("source_type", None)
+        self.folder_path = kwargs.get("folder_path", None)
+        self.arm_template_folder_path = kwargs.get("arm_template_folder_path", None)
+        self.branch_ref = kwargs.get("branch_ref", None)
+        self.security_token = kwargs.get("security_token", None)
+        self.status = kwargs.get("status", None)
 
 
 class ArtifactSourceList(msrest.serialization.Model):
@@ -772,17 +715,14 @@ class ArtifactSourceList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ArtifactSource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ArtifactSource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArtifactSourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AttachDiskProperties(msrest.serialization.Model):
@@ -794,15 +734,12 @@ class AttachDiskProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'leased_by_lab_vm_id': {'key': 'leasedByLabVmId', 'type': 'str'},
+        "leased_by_lab_vm_id": {"key": "leasedByLabVmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AttachDiskProperties, self).__init__(**kwargs)
-        self.leased_by_lab_vm_id = kwargs.get('leased_by_lab_vm_id', None)
+        self.leased_by_lab_vm_id = kwargs.get("leased_by_lab_vm_id", None)
 
 
 class AttachNewDataDiskOptions(msrest.serialization.Model):
@@ -818,19 +755,16 @@ class AttachNewDataDiskOptions(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_size_gi_b': {'key': 'diskSizeGiB', 'type': 'int'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
+        "disk_size_gi_b": {"key": "diskSizeGiB", "type": "int"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AttachNewDataDiskOptions, self).__init__(**kwargs)
-        self.disk_size_gi_b = kwargs.get('disk_size_gi_b', None)
-        self.disk_name = kwargs.get('disk_name', None)
-        self.disk_type = kwargs.get('disk_type', None)
+        self.disk_size_gi_b = kwargs.get("disk_size_gi_b", None)
+        self.disk_name = kwargs.get("disk_name", None)
+        self.disk_type = kwargs.get("disk_type", None)
 
 
 class AttachNewDataDiskOptionsFragment(msrest.serialization.Model):
@@ -846,19 +780,16 @@ class AttachNewDataDiskOptionsFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'disk_size_gi_b': {'key': 'diskSizeGiB', 'type': 'int'},
-        'disk_name': {'key': 'diskName', 'type': 'str'},
-        'disk_type': {'key': 'diskType', 'type': 'str'},
+        "disk_size_gi_b": {"key": "diskSizeGiB", "type": "int"},
+        "disk_name": {"key": "diskName", "type": "str"},
+        "disk_type": {"key": "diskType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AttachNewDataDiskOptionsFragment, self).__init__(**kwargs)
-        self.disk_size_gi_b = kwargs.get('disk_size_gi_b', None)
-        self.disk_name = kwargs.get('disk_name', None)
-        self.disk_type = kwargs.get('disk_type', None)
+        self.disk_size_gi_b = kwargs.get("disk_size_gi_b", None)
+        self.disk_name = kwargs.get("disk_name", None)
+        self.disk_type = kwargs.get("disk_type", None)
 
 
 class BulkCreationParameters(msrest.serialization.Model):
@@ -869,15 +800,12 @@ class BulkCreationParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'instance_count': {'key': 'instanceCount', 'type': 'int'},
+        "instance_count": {"key": "instanceCount", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BulkCreationParameters, self).__init__(**kwargs)
-        self.instance_count = kwargs.get('instance_count', None)
+        self.instance_count = kwargs.get("instance_count", None)
 
 
 class BulkCreationParametersFragment(msrest.serialization.Model):
@@ -888,15 +816,12 @@ class BulkCreationParametersFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'instance_count': {'key': 'instanceCount', 'type': 'int'},
+        "instance_count": {"key": "instanceCount", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BulkCreationParametersFragment, self).__init__(**kwargs)
-        self.instance_count = kwargs.get('instance_count', None)
+        self.instance_count = kwargs.get("instance_count", None)
 
 
 class CloudErrorBody(msrest.serialization.Model):
@@ -913,21 +838,18 @@ class CloudErrorBody(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[CloudErrorBody]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[CloudErrorBody]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudErrorBody, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
-        self.target = kwargs.get('target', None)
-        self.details = kwargs.get('details', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
+        self.target = kwargs.get("target", None)
+        self.details = kwargs.get("details", None)
 
 
 class ComputeDataDisk(msrest.serialization.Model):
@@ -945,21 +867,18 @@ class ComputeDataDisk(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'disk_uri': {'key': 'diskUri', 'type': 'str'},
-        'managed_disk_id': {'key': 'managedDiskId', 'type': 'str'},
-        'disk_size_gi_b': {'key': 'diskSizeGiB', 'type': 'int'},
+        "name": {"key": "name", "type": "str"},
+        "disk_uri": {"key": "diskUri", "type": "str"},
+        "managed_disk_id": {"key": "managedDiskId", "type": "str"},
+        "disk_size_gi_b": {"key": "diskSizeGiB", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ComputeDataDisk, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.disk_uri = kwargs.get('disk_uri', None)
-        self.managed_disk_id = kwargs.get('managed_disk_id', None)
-        self.disk_size_gi_b = kwargs.get('disk_size_gi_b', None)
+        self.name = kwargs.get("name", None)
+        self.disk_uri = kwargs.get("disk_uri", None)
+        self.managed_disk_id = kwargs.get("managed_disk_id", None)
+        self.disk_size_gi_b = kwargs.get("disk_size_gi_b", None)
 
 
 class ComputeDataDiskFragment(msrest.serialization.Model):
@@ -977,21 +896,18 @@ class ComputeDataDiskFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'disk_uri': {'key': 'diskUri', 'type': 'str'},
-        'managed_disk_id': {'key': 'managedDiskId', 'type': 'str'},
-        'disk_size_gi_b': {'key': 'diskSizeGiB', 'type': 'int'},
+        "name": {"key": "name", "type": "str"},
+        "disk_uri": {"key": "diskUri", "type": "str"},
+        "managed_disk_id": {"key": "managedDiskId", "type": "str"},
+        "disk_size_gi_b": {"key": "diskSizeGiB", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ComputeDataDiskFragment, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.disk_uri = kwargs.get('disk_uri', None)
-        self.managed_disk_id = kwargs.get('managed_disk_id', None)
-        self.disk_size_gi_b = kwargs.get('disk_size_gi_b', None)
+        self.name = kwargs.get("name", None)
+        self.disk_uri = kwargs.get("disk_uri", None)
+        self.managed_disk_id = kwargs.get("managed_disk_id", None)
+        self.disk_size_gi_b = kwargs.get("disk_size_gi_b", None)
 
 
 class ComputeVmInstanceViewStatus(msrest.serialization.Model):
@@ -1006,19 +922,16 @@ class ComputeVmInstanceViewStatus(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'display_status': {'key': 'displayStatus', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "display_status": {"key": "displayStatus", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ComputeVmInstanceViewStatus, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.display_status = kwargs.get('display_status', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.display_status = kwargs.get("display_status", None)
+        self.message = kwargs.get("message", None)
 
 
 class ComputeVmInstanceViewStatusFragment(msrest.serialization.Model):
@@ -1033,19 +946,16 @@ class ComputeVmInstanceViewStatusFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'display_status': {'key': 'displayStatus', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "display_status": {"key": "displayStatus", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ComputeVmInstanceViewStatusFragment, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.display_status = kwargs.get('display_status', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.display_status = kwargs.get("display_status", None)
+        self.message = kwargs.get("message", None)
 
 
 class ComputeVmProperties(msrest.serialization.Model):
@@ -1068,27 +978,24 @@ class ComputeVmProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'statuses': {'key': 'statuses', 'type': '[ComputeVmInstanceViewStatus]'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'vm_size': {'key': 'vmSize', 'type': 'str'},
-        'network_interface_id': {'key': 'networkInterfaceId', 'type': 'str'},
-        'os_disk_id': {'key': 'osDiskId', 'type': 'str'},
-        'data_disk_ids': {'key': 'dataDiskIds', 'type': '[str]'},
-        'data_disks': {'key': 'dataDisks', 'type': '[ComputeDataDisk]'},
+        "statuses": {"key": "statuses", "type": "[ComputeVmInstanceViewStatus]"},
+        "os_type": {"key": "osType", "type": "str"},
+        "vm_size": {"key": "vmSize", "type": "str"},
+        "network_interface_id": {"key": "networkInterfaceId", "type": "str"},
+        "os_disk_id": {"key": "osDiskId", "type": "str"},
+        "data_disk_ids": {"key": "dataDiskIds", "type": "[str]"},
+        "data_disks": {"key": "dataDisks", "type": "[ComputeDataDisk]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ComputeVmProperties, self).__init__(**kwargs)
-        self.statuses = kwargs.get('statuses', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.vm_size = kwargs.get('vm_size', None)
-        self.network_interface_id = kwargs.get('network_interface_id', None)
-        self.os_disk_id = kwargs.get('os_disk_id', None)
-        self.data_disk_ids = kwargs.get('data_disk_ids', None)
-        self.data_disks = kwargs.get('data_disks', None)
+        self.statuses = kwargs.get("statuses", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.vm_size = kwargs.get("vm_size", None)
+        self.network_interface_id = kwargs.get("network_interface_id", None)
+        self.os_disk_id = kwargs.get("os_disk_id", None)
+        self.data_disk_ids = kwargs.get("data_disk_ids", None)
+        self.data_disks = kwargs.get("data_disks", None)
 
 
 class ComputeVmPropertiesFragment(msrest.serialization.Model):
@@ -1111,27 +1018,24 @@ class ComputeVmPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'statuses': {'key': 'statuses', 'type': '[ComputeVmInstanceViewStatusFragment]'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'vm_size': {'key': 'vmSize', 'type': 'str'},
-        'network_interface_id': {'key': 'networkInterfaceId', 'type': 'str'},
-        'os_disk_id': {'key': 'osDiskId', 'type': 'str'},
-        'data_disk_ids': {'key': 'dataDiskIds', 'type': '[str]'},
-        'data_disks': {'key': 'dataDisks', 'type': '[ComputeDataDiskFragment]'},
+        "statuses": {"key": "statuses", "type": "[ComputeVmInstanceViewStatusFragment]"},
+        "os_type": {"key": "osType", "type": "str"},
+        "vm_size": {"key": "vmSize", "type": "str"},
+        "network_interface_id": {"key": "networkInterfaceId", "type": "str"},
+        "os_disk_id": {"key": "osDiskId", "type": "str"},
+        "data_disk_ids": {"key": "dataDiskIds", "type": "[str]"},
+        "data_disks": {"key": "dataDisks", "type": "[ComputeDataDiskFragment]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ComputeVmPropertiesFragment, self).__init__(**kwargs)
-        self.statuses = kwargs.get('statuses', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.vm_size = kwargs.get('vm_size', None)
-        self.network_interface_id = kwargs.get('network_interface_id', None)
-        self.os_disk_id = kwargs.get('os_disk_id', None)
-        self.data_disk_ids = kwargs.get('data_disk_ids', None)
-        self.data_disks = kwargs.get('data_disks', None)
+        self.statuses = kwargs.get("statuses", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.vm_size = kwargs.get("vm_size", None)
+        self.network_interface_id = kwargs.get("network_interface_id", None)
+        self.os_disk_id = kwargs.get("os_disk_id", None)
+        self.data_disk_ids = kwargs.get("data_disk_ids", None)
+        self.data_disks = kwargs.get("data_disks", None)
 
 
 class CostThresholdProperties(msrest.serialization.Model):
@@ -1154,23 +1058,20 @@ class CostThresholdProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'threshold_id': {'key': 'thresholdId', 'type': 'str'},
-        'percentage_threshold': {'key': 'percentageThreshold', 'type': 'PercentageCostThresholdProperties'},
-        'display_on_chart': {'key': 'displayOnChart', 'type': 'str'},
-        'send_notification_when_exceeded': {'key': 'sendNotificationWhenExceeded', 'type': 'str'},
-        'notification_sent': {'key': 'notificationSent', 'type': 'str'},
+        "threshold_id": {"key": "thresholdId", "type": "str"},
+        "percentage_threshold": {"key": "percentageThreshold", "type": "PercentageCostThresholdProperties"},
+        "display_on_chart": {"key": "displayOnChart", "type": "str"},
+        "send_notification_when_exceeded": {"key": "sendNotificationWhenExceeded", "type": "str"},
+        "notification_sent": {"key": "notificationSent", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CostThresholdProperties, self).__init__(**kwargs)
-        self.threshold_id = kwargs.get('threshold_id', None)
-        self.percentage_threshold = kwargs.get('percentage_threshold', None)
-        self.display_on_chart = kwargs.get('display_on_chart', None)
-        self.send_notification_when_exceeded = kwargs.get('send_notification_when_exceeded', None)
-        self.notification_sent = kwargs.get('notification_sent', None)
+        self.threshold_id = kwargs.get("threshold_id", None)
+        self.percentage_threshold = kwargs.get("percentage_threshold", None)
+        self.display_on_chart = kwargs.get("display_on_chart", None)
+        self.send_notification_when_exceeded = kwargs.get("send_notification_when_exceeded", None)
+        self.notification_sent = kwargs.get("notification_sent", None)
 
 
 class CustomImage(Resource):
@@ -1217,49 +1118,46 @@ class CustomImage(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'creation_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "creation_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'vm': {'key': 'properties.vm', 'type': 'CustomImagePropertiesFromVm'},
-        'vhd': {'key': 'properties.vhd', 'type': 'CustomImagePropertiesCustom'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'author': {'key': 'properties.author', 'type': 'str'},
-        'creation_date': {'key': 'properties.creationDate', 'type': 'iso-8601'},
-        'managed_image_id': {'key': 'properties.managedImageId', 'type': 'str'},
-        'managed_snapshot_id': {'key': 'properties.managedSnapshotId', 'type': 'str'},
-        'data_disk_storage_info': {'key': 'properties.dataDiskStorageInfo', 'type': '[DataDiskStorageTypeInfo]'},
-        'custom_image_plan': {'key': 'properties.customImagePlan', 'type': 'CustomImagePropertiesFromPlan'},
-        'is_plan_authorized': {'key': 'properties.isPlanAuthorized', 'type': 'bool'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "vm": {"key": "properties.vm", "type": "CustomImagePropertiesFromVm"},
+        "vhd": {"key": "properties.vhd", "type": "CustomImagePropertiesCustom"},
+        "description": {"key": "properties.description", "type": "str"},
+        "author": {"key": "properties.author", "type": "str"},
+        "creation_date": {"key": "properties.creationDate", "type": "iso-8601"},
+        "managed_image_id": {"key": "properties.managedImageId", "type": "str"},
+        "managed_snapshot_id": {"key": "properties.managedSnapshotId", "type": "str"},
+        "data_disk_storage_info": {"key": "properties.dataDiskStorageInfo", "type": "[DataDiskStorageTypeInfo]"},
+        "custom_image_plan": {"key": "properties.customImagePlan", "type": "CustomImagePropertiesFromPlan"},
+        "is_plan_authorized": {"key": "properties.isPlanAuthorized", "type": "bool"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImage, self).__init__(**kwargs)
-        self.vm = kwargs.get('vm', None)
-        self.vhd = kwargs.get('vhd', None)
-        self.description = kwargs.get('description', None)
-        self.author = kwargs.get('author', None)
+        self.vm = kwargs.get("vm", None)
+        self.vhd = kwargs.get("vhd", None)
+        self.description = kwargs.get("description", None)
+        self.author = kwargs.get("author", None)
         self.creation_date = None
-        self.managed_image_id = kwargs.get('managed_image_id', None)
-        self.managed_snapshot_id = kwargs.get('managed_snapshot_id', None)
-        self.data_disk_storage_info = kwargs.get('data_disk_storage_info', None)
-        self.custom_image_plan = kwargs.get('custom_image_plan', None)
-        self.is_plan_authorized = kwargs.get('is_plan_authorized', None)
+        self.managed_image_id = kwargs.get("managed_image_id", None)
+        self.managed_snapshot_id = kwargs.get("managed_snapshot_id", None)
+        self.data_disk_storage_info = kwargs.get("data_disk_storage_info", None)
+        self.custom_image_plan = kwargs.get("custom_image_plan", None)
+        self.is_plan_authorized = kwargs.get("is_plan_authorized", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -1293,32 +1191,32 @@ class CustomImageFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'vm': {'key': 'properties.vm', 'type': 'CustomImagePropertiesFromVmFragment'},
-        'vhd': {'key': 'properties.vhd', 'type': 'CustomImagePropertiesCustomFragment'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'author': {'key': 'properties.author', 'type': 'str'},
-        'managed_image_id': {'key': 'properties.managedImageId', 'type': 'str'},
-        'managed_snapshot_id': {'key': 'properties.managedSnapshotId', 'type': 'str'},
-        'data_disk_storage_info': {'key': 'properties.dataDiskStorageInfo', 'type': '[DataDiskStorageTypeInfoFragment]'},
-        'custom_image_plan': {'key': 'properties.customImagePlan', 'type': 'CustomImagePropertiesFromPlanFragment'},
-        'is_plan_authorized': {'key': 'properties.isPlanAuthorized', 'type': 'bool'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "vm": {"key": "properties.vm", "type": "CustomImagePropertiesFromVmFragment"},
+        "vhd": {"key": "properties.vhd", "type": "CustomImagePropertiesCustomFragment"},
+        "description": {"key": "properties.description", "type": "str"},
+        "author": {"key": "properties.author", "type": "str"},
+        "managed_image_id": {"key": "properties.managedImageId", "type": "str"},
+        "managed_snapshot_id": {"key": "properties.managedSnapshotId", "type": "str"},
+        "data_disk_storage_info": {
+            "key": "properties.dataDiskStorageInfo",
+            "type": "[DataDiskStorageTypeInfoFragment]",
+        },
+        "custom_image_plan": {"key": "properties.customImagePlan", "type": "CustomImagePropertiesFromPlanFragment"},
+        "is_plan_authorized": {"key": "properties.isPlanAuthorized", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImageFragment, self).__init__(**kwargs)
-        self.vm = kwargs.get('vm', None)
-        self.vhd = kwargs.get('vhd', None)
-        self.description = kwargs.get('description', None)
-        self.author = kwargs.get('author', None)
-        self.managed_image_id = kwargs.get('managed_image_id', None)
-        self.managed_snapshot_id = kwargs.get('managed_snapshot_id', None)
-        self.data_disk_storage_info = kwargs.get('data_disk_storage_info', None)
-        self.custom_image_plan = kwargs.get('custom_image_plan', None)
-        self.is_plan_authorized = kwargs.get('is_plan_authorized', None)
+        self.vm = kwargs.get("vm", None)
+        self.vhd = kwargs.get("vhd", None)
+        self.description = kwargs.get("description", None)
+        self.author = kwargs.get("author", None)
+        self.managed_image_id = kwargs.get("managed_image_id", None)
+        self.managed_snapshot_id = kwargs.get("managed_snapshot_id", None)
+        self.data_disk_storage_info = kwargs.get("data_disk_storage_info", None)
+        self.custom_image_plan = kwargs.get("custom_image_plan", None)
+        self.is_plan_authorized = kwargs.get("is_plan_authorized", None)
 
 
 class CustomImageList(msrest.serialization.Model):
@@ -1331,17 +1229,14 @@ class CustomImageList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[CustomImage]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[CustomImage]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImageList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class CustomImagePropertiesCustom(msrest.serialization.Model):
@@ -1359,23 +1254,20 @@ class CustomImagePropertiesCustom(msrest.serialization.Model):
     """
 
     _validation = {
-        'os_type': {'required': True},
+        "os_type": {"required": True},
     }
 
     _attribute_map = {
-        'image_name': {'key': 'imageName', 'type': 'str'},
-        'sys_prep': {'key': 'sysPrep', 'type': 'bool'},
-        'os_type': {'key': 'osType', 'type': 'str'},
+        "image_name": {"key": "imageName", "type": "str"},
+        "sys_prep": {"key": "sysPrep", "type": "bool"},
+        "os_type": {"key": "osType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImagePropertiesCustom, self).__init__(**kwargs)
-        self.image_name = kwargs.get('image_name', None)
-        self.sys_prep = kwargs.get('sys_prep', None)
-        self.os_type = kwargs['os_type']
+        self.image_name = kwargs.get("image_name", None)
+        self.sys_prep = kwargs.get("sys_prep", None)
+        self.os_type = kwargs["os_type"]
 
 
 class CustomImagePropertiesCustomFragment(msrest.serialization.Model):
@@ -1391,19 +1283,16 @@ class CustomImagePropertiesCustomFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'image_name': {'key': 'imageName', 'type': 'str'},
-        'sys_prep': {'key': 'sysPrep', 'type': 'bool'},
-        'os_type': {'key': 'osType', 'type': 'str'},
+        "image_name": {"key": "imageName", "type": "str"},
+        "sys_prep": {"key": "sysPrep", "type": "bool"},
+        "os_type": {"key": "osType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImagePropertiesCustomFragment, self).__init__(**kwargs)
-        self.image_name = kwargs.get('image_name', None)
-        self.sys_prep = kwargs.get('sys_prep', None)
-        self.os_type = kwargs.get('os_type', None)
+        self.image_name = kwargs.get("image_name", None)
+        self.sys_prep = kwargs.get("sys_prep", None)
+        self.os_type = kwargs.get("os_type", None)
 
 
 class CustomImagePropertiesFromPlan(msrest.serialization.Model):
@@ -1420,19 +1309,16 @@ class CustomImagePropertiesFromPlan(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'offer': {'key': 'offer', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "publisher": {"key": "publisher", "type": "str"},
+        "offer": {"key": "offer", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImagePropertiesFromPlan, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.publisher = kwargs.get('publisher', None)
-        self.offer = kwargs.get('offer', None)
+        self.id = kwargs.get("id", None)
+        self.publisher = kwargs.get("publisher", None)
+        self.offer = kwargs.get("offer", None)
 
 
 class CustomImagePropertiesFromPlanFragment(msrest.serialization.Model):
@@ -1449,19 +1335,16 @@ class CustomImagePropertiesFromPlanFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'offer': {'key': 'offer', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "publisher": {"key": "publisher", "type": "str"},
+        "offer": {"key": "offer", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImagePropertiesFromPlanFragment, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.publisher = kwargs.get('publisher', None)
-        self.offer = kwargs.get('offer', None)
+        self.id = kwargs.get("id", None)
+        self.publisher = kwargs.get("publisher", None)
+        self.offer = kwargs.get("offer", None)
 
 
 class CustomImagePropertiesFromVm(msrest.serialization.Model):
@@ -1476,19 +1359,16 @@ class CustomImagePropertiesFromVm(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'source_vm_id': {'key': 'sourceVmId', 'type': 'str'},
-        'windows_os_info': {'key': 'windowsOsInfo', 'type': 'WindowsOsInfo'},
-        'linux_os_info': {'key': 'linuxOsInfo', 'type': 'LinuxOsInfo'},
+        "source_vm_id": {"key": "sourceVmId", "type": "str"},
+        "windows_os_info": {"key": "windowsOsInfo", "type": "WindowsOsInfo"},
+        "linux_os_info": {"key": "linuxOsInfo", "type": "LinuxOsInfo"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImagePropertiesFromVm, self).__init__(**kwargs)
-        self.source_vm_id = kwargs.get('source_vm_id', None)
-        self.windows_os_info = kwargs.get('windows_os_info', None)
-        self.linux_os_info = kwargs.get('linux_os_info', None)
+        self.source_vm_id = kwargs.get("source_vm_id", None)
+        self.windows_os_info = kwargs.get("windows_os_info", None)
+        self.linux_os_info = kwargs.get("linux_os_info", None)
 
 
 class CustomImagePropertiesFromVmFragment(msrest.serialization.Model):
@@ -1503,19 +1383,16 @@ class CustomImagePropertiesFromVmFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'source_vm_id': {'key': 'sourceVmId', 'type': 'str'},
-        'windows_os_info': {'key': 'windowsOsInfo', 'type': 'WindowsOsInfoFragment'},
-        'linux_os_info': {'key': 'linuxOsInfo', 'type': 'LinuxOsInfoFragment'},
+        "source_vm_id": {"key": "sourceVmId", "type": "str"},
+        "windows_os_info": {"key": "windowsOsInfo", "type": "WindowsOsInfoFragment"},
+        "linux_os_info": {"key": "linuxOsInfo", "type": "LinuxOsInfoFragment"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomImagePropertiesFromVmFragment, self).__init__(**kwargs)
-        self.source_vm_id = kwargs.get('source_vm_id', None)
-        self.windows_os_info = kwargs.get('windows_os_info', None)
-        self.linux_os_info = kwargs.get('linux_os_info', None)
+        self.source_vm_id = kwargs.get("source_vm_id", None)
+        self.windows_os_info = kwargs.get("windows_os_info", None)
+        self.linux_os_info = kwargs.get("linux_os_info", None)
 
 
 class DataDiskProperties(msrest.serialization.Model):
@@ -1532,19 +1409,16 @@ class DataDiskProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'attach_new_data_disk_options': {'key': 'attachNewDataDiskOptions', 'type': 'AttachNewDataDiskOptions'},
-        'existing_lab_disk_id': {'key': 'existingLabDiskId', 'type': 'str'},
-        'host_caching': {'key': 'hostCaching', 'type': 'str'},
+        "attach_new_data_disk_options": {"key": "attachNewDataDiskOptions", "type": "AttachNewDataDiskOptions"},
+        "existing_lab_disk_id": {"key": "existingLabDiskId", "type": "str"},
+        "host_caching": {"key": "hostCaching", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataDiskProperties, self).__init__(**kwargs)
-        self.attach_new_data_disk_options = kwargs.get('attach_new_data_disk_options', None)
-        self.existing_lab_disk_id = kwargs.get('existing_lab_disk_id', None)
-        self.host_caching = kwargs.get('host_caching', None)
+        self.attach_new_data_disk_options = kwargs.get("attach_new_data_disk_options", None)
+        self.existing_lab_disk_id = kwargs.get("existing_lab_disk_id", None)
+        self.host_caching = kwargs.get("host_caching", None)
 
 
 class DataDiskPropertiesFragment(msrest.serialization.Model):
@@ -1562,19 +1436,16 @@ class DataDiskPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'attach_new_data_disk_options': {'key': 'attachNewDataDiskOptions', 'type': 'AttachNewDataDiskOptionsFragment'},
-        'existing_lab_disk_id': {'key': 'existingLabDiskId', 'type': 'str'},
-        'host_caching': {'key': 'hostCaching', 'type': 'str'},
+        "attach_new_data_disk_options": {"key": "attachNewDataDiskOptions", "type": "AttachNewDataDiskOptionsFragment"},
+        "existing_lab_disk_id": {"key": "existingLabDiskId", "type": "str"},
+        "host_caching": {"key": "hostCaching", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataDiskPropertiesFragment, self).__init__(**kwargs)
-        self.attach_new_data_disk_options = kwargs.get('attach_new_data_disk_options', None)
-        self.existing_lab_disk_id = kwargs.get('existing_lab_disk_id', None)
-        self.host_caching = kwargs.get('host_caching', None)
+        self.attach_new_data_disk_options = kwargs.get("attach_new_data_disk_options", None)
+        self.existing_lab_disk_id = kwargs.get("existing_lab_disk_id", None)
+        self.host_caching = kwargs.get("host_caching", None)
 
 
 class DataDiskStorageTypeInfo(msrest.serialization.Model):
@@ -1588,17 +1459,14 @@ class DataDiskStorageTypeInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'lun': {'key': 'lun', 'type': 'str'},
-        'storage_type': {'key': 'storageType', 'type': 'str'},
+        "lun": {"key": "lun", "type": "str"},
+        "storage_type": {"key": "storageType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataDiskStorageTypeInfo, self).__init__(**kwargs)
-        self.lun = kwargs.get('lun', None)
-        self.storage_type = kwargs.get('storage_type', None)
+        self.lun = kwargs.get("lun", None)
+        self.storage_type = kwargs.get("storage_type", None)
 
 
 class DataDiskStorageTypeInfoFragment(msrest.serialization.Model):
@@ -1612,17 +1480,14 @@ class DataDiskStorageTypeInfoFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'lun': {'key': 'lun', 'type': 'str'},
-        'storage_type': {'key': 'storageType', 'type': 'str'},
+        "lun": {"key": "lun", "type": "str"},
+        "storage_type": {"key": "storageType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataDiskStorageTypeInfoFragment, self).__init__(**kwargs)
-        self.lun = kwargs.get('lun', None)
-        self.storage_type = kwargs.get('storage_type', None)
+        self.lun = kwargs.get("lun", None)
+        self.storage_type = kwargs.get("storage_type", None)
 
 
 class DayDetails(msrest.serialization.Model):
@@ -1633,15 +1498,12 @@ class DayDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'time': {'key': 'time', 'type': 'str'},
+        "time": {"key": "time", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DayDetails, self).__init__(**kwargs)
-        self.time = kwargs.get('time', None)
+        self.time = kwargs.get("time", None)
 
 
 class DayDetailsFragment(msrest.serialization.Model):
@@ -1652,15 +1514,12 @@ class DayDetailsFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'time': {'key': 'time', 'type': 'str'},
+        "time": {"key": "time", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DayDetailsFragment, self).__init__(**kwargs)
-        self.time = kwargs.get('time', None)
+        self.time = kwargs.get("time", None)
 
 
 class DetachDataDiskProperties(msrest.serialization.Model):
@@ -1671,15 +1530,12 @@ class DetachDataDiskProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'existing_lab_disk_id': {'key': 'existingLabDiskId', 'type': 'str'},
+        "existing_lab_disk_id": {"key": "existingLabDiskId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DetachDataDiskProperties, self).__init__(**kwargs)
-        self.existing_lab_disk_id = kwargs.get('existing_lab_disk_id', None)
+        self.existing_lab_disk_id = kwargs.get("existing_lab_disk_id", None)
 
 
 class DetachDiskProperties(msrest.serialization.Model):
@@ -1690,15 +1546,12 @@ class DetachDiskProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'leased_by_lab_vm_id': {'key': 'leasedByLabVmId', 'type': 'str'},
+        "leased_by_lab_vm_id": {"key": "leasedByLabVmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DetachDiskProperties, self).__init__(**kwargs)
-        self.leased_by_lab_vm_id = kwargs.get('leased_by_lab_vm_id', None)
+        self.leased_by_lab_vm_id = kwargs.get("leased_by_lab_vm_id", None)
 
 
 class Disk(Resource):
@@ -1741,45 +1594,42 @@ class Disk(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'created_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "created_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'disk_type': {'key': 'properties.diskType', 'type': 'str'},
-        'disk_size_gi_b': {'key': 'properties.diskSizeGiB', 'type': 'int'},
-        'leased_by_lab_vm_id': {'key': 'properties.leasedByLabVmId', 'type': 'str'},
-        'disk_blob_name': {'key': 'properties.diskBlobName', 'type': 'str'},
-        'disk_uri': {'key': 'properties.diskUri', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'host_caching': {'key': 'properties.hostCaching', 'type': 'str'},
-        'managed_disk_id': {'key': 'properties.managedDiskId', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "disk_type": {"key": "properties.diskType", "type": "str"},
+        "disk_size_gi_b": {"key": "properties.diskSizeGiB", "type": "int"},
+        "leased_by_lab_vm_id": {"key": "properties.leasedByLabVmId", "type": "str"},
+        "disk_blob_name": {"key": "properties.diskBlobName", "type": "str"},
+        "disk_uri": {"key": "properties.diskUri", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "host_caching": {"key": "properties.hostCaching", "type": "str"},
+        "managed_disk_id": {"key": "properties.managedDiskId", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Disk, self).__init__(**kwargs)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.disk_size_gi_b = kwargs.get('disk_size_gi_b', None)
-        self.leased_by_lab_vm_id = kwargs.get('leased_by_lab_vm_id', None)
-        self.disk_blob_name = kwargs.get('disk_blob_name', None)
-        self.disk_uri = kwargs.get('disk_uri', None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.disk_size_gi_b = kwargs.get("disk_size_gi_b", None)
+        self.leased_by_lab_vm_id = kwargs.get("leased_by_lab_vm_id", None)
+        self.disk_blob_name = kwargs.get("disk_blob_name", None)
+        self.disk_uri = kwargs.get("disk_uri", None)
         self.created_date = None
-        self.host_caching = kwargs.get('host_caching', None)
-        self.managed_disk_id = kwargs.get('managed_disk_id', None)
+        self.host_caching = kwargs.get("host_caching", None)
+        self.managed_disk_id = kwargs.get("managed_disk_id", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -1808,28 +1658,25 @@ class DiskFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'disk_type': {'key': 'properties.diskType', 'type': 'str'},
-        'disk_size_gi_b': {'key': 'properties.diskSizeGiB', 'type': 'int'},
-        'leased_by_lab_vm_id': {'key': 'properties.leasedByLabVmId', 'type': 'str'},
-        'disk_blob_name': {'key': 'properties.diskBlobName', 'type': 'str'},
-        'disk_uri': {'key': 'properties.diskUri', 'type': 'str'},
-        'host_caching': {'key': 'properties.hostCaching', 'type': 'str'},
-        'managed_disk_id': {'key': 'properties.managedDiskId', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "disk_type": {"key": "properties.diskType", "type": "str"},
+        "disk_size_gi_b": {"key": "properties.diskSizeGiB", "type": "int"},
+        "leased_by_lab_vm_id": {"key": "properties.leasedByLabVmId", "type": "str"},
+        "disk_blob_name": {"key": "properties.diskBlobName", "type": "str"},
+        "disk_uri": {"key": "properties.diskUri", "type": "str"},
+        "host_caching": {"key": "properties.hostCaching", "type": "str"},
+        "managed_disk_id": {"key": "properties.managedDiskId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskFragment, self).__init__(**kwargs)
-        self.disk_type = kwargs.get('disk_type', None)
-        self.disk_size_gi_b = kwargs.get('disk_size_gi_b', None)
-        self.leased_by_lab_vm_id = kwargs.get('leased_by_lab_vm_id', None)
-        self.disk_blob_name = kwargs.get('disk_blob_name', None)
-        self.disk_uri = kwargs.get('disk_uri', None)
-        self.host_caching = kwargs.get('host_caching', None)
-        self.managed_disk_id = kwargs.get('managed_disk_id', None)
+        self.disk_type = kwargs.get("disk_type", None)
+        self.disk_size_gi_b = kwargs.get("disk_size_gi_b", None)
+        self.leased_by_lab_vm_id = kwargs.get("leased_by_lab_vm_id", None)
+        self.disk_blob_name = kwargs.get("disk_blob_name", None)
+        self.disk_uri = kwargs.get("disk_uri", None)
+        self.host_caching = kwargs.get("host_caching", None)
+        self.managed_disk_id = kwargs.get("managed_disk_id", None)
 
 
 class DiskList(msrest.serialization.Model):
@@ -1842,17 +1689,14 @@ class DiskList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Disk]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Disk]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class DtlEnvironment(Resource):
@@ -1887,36 +1731,33 @@ class DtlEnvironment(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'resource_group_id': {'readonly': True},
-        'created_by_user': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "resource_group_id": {"readonly": True},
+        "created_by_user": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'deployment_properties': {'key': 'properties.deploymentProperties', 'type': 'EnvironmentDeploymentProperties'},
-        'arm_template_display_name': {'key': 'properties.armTemplateDisplayName', 'type': 'str'},
-        'resource_group_id': {'key': 'properties.resourceGroupId', 'type': 'str'},
-        'created_by_user': {'key': 'properties.createdByUser', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "deployment_properties": {"key": "properties.deploymentProperties", "type": "EnvironmentDeploymentProperties"},
+        "arm_template_display_name": {"key": "properties.armTemplateDisplayName", "type": "str"},
+        "resource_group_id": {"key": "properties.resourceGroupId", "type": "str"},
+        "created_by_user": {"key": "properties.createdByUser", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DtlEnvironment, self).__init__(**kwargs)
-        self.deployment_properties = kwargs.get('deployment_properties', None)
-        self.arm_template_display_name = kwargs.get('arm_template_display_name', None)
+        self.deployment_properties = kwargs.get("deployment_properties", None)
+        self.arm_template_display_name = kwargs.get("arm_template_display_name", None)
         self.resource_group_id = None
         self.created_by_user = None
         self.provisioning_state = None
@@ -1937,18 +1778,18 @@ class DtlEnvironmentFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'deployment_properties': {'key': 'properties.deploymentProperties', 'type': 'EnvironmentDeploymentPropertiesFragment'},
-        'arm_template_display_name': {'key': 'properties.armTemplateDisplayName', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "deployment_properties": {
+            "key": "properties.deploymentProperties",
+            "type": "EnvironmentDeploymentPropertiesFragment",
+        },
+        "arm_template_display_name": {"key": "properties.armTemplateDisplayName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DtlEnvironmentFragment, self).__init__(**kwargs)
-        self.deployment_properties = kwargs.get('deployment_properties', None)
-        self.arm_template_display_name = kwargs.get('arm_template_display_name', None)
+        self.deployment_properties = kwargs.get("deployment_properties", None)
+        self.arm_template_display_name = kwargs.get("arm_template_display_name", None)
 
 
 class DtlEnvironmentList(msrest.serialization.Model):
@@ -1961,17 +1802,14 @@ class DtlEnvironmentList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[DtlEnvironment]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[DtlEnvironment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DtlEnvironmentList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class EnvironmentDeploymentProperties(msrest.serialization.Model):
@@ -1984,17 +1822,14 @@ class EnvironmentDeploymentProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'arm_template_id': {'key': 'armTemplateId', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '[ArmTemplateParameterProperties]'},
+        "arm_template_id": {"key": "armTemplateId", "type": "str"},
+        "parameters": {"key": "parameters", "type": "[ArmTemplateParameterProperties]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnvironmentDeploymentProperties, self).__init__(**kwargs)
-        self.arm_template_id = kwargs.get('arm_template_id', None)
-        self.parameters = kwargs.get('parameters', None)
+        self.arm_template_id = kwargs.get("arm_template_id", None)
+        self.parameters = kwargs.get("parameters", None)
 
 
 class EnvironmentDeploymentPropertiesFragment(msrest.serialization.Model):
@@ -2007,17 +1842,14 @@ class EnvironmentDeploymentPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'arm_template_id': {'key': 'armTemplateId', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '[ArmTemplateParameterPropertiesFragment]'},
+        "arm_template_id": {"key": "armTemplateId", "type": "str"},
+        "parameters": {"key": "parameters", "type": "[ArmTemplateParameterPropertiesFragment]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EnvironmentDeploymentPropertiesFragment, self).__init__(**kwargs)
-        self.arm_template_id = kwargs.get('arm_template_id', None)
-        self.parameters = kwargs.get('parameters', None)
+        self.arm_template_id = kwargs.get("arm_template_id", None)
+        self.parameters = kwargs.get("parameters", None)
 
 
 class EvaluatePoliciesProperties(msrest.serialization.Model):
@@ -2034,21 +1866,18 @@ class EvaluatePoliciesProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'fact_name': {'key': 'factName', 'type': 'str'},
-        'fact_data': {'key': 'factData', 'type': 'str'},
-        'value_offset': {'key': 'valueOffset', 'type': 'str'},
-        'user_object_id': {'key': 'userObjectId', 'type': 'str'},
+        "fact_name": {"key": "factName", "type": "str"},
+        "fact_data": {"key": "factData", "type": "str"},
+        "value_offset": {"key": "valueOffset", "type": "str"},
+        "user_object_id": {"key": "userObjectId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EvaluatePoliciesProperties, self).__init__(**kwargs)
-        self.fact_name = kwargs.get('fact_name', None)
-        self.fact_data = kwargs.get('fact_data', None)
-        self.value_offset = kwargs.get('value_offset', None)
-        self.user_object_id = kwargs.get('user_object_id', None)
+        self.fact_name = kwargs.get("fact_name", None)
+        self.fact_data = kwargs.get("fact_data", None)
+        self.value_offset = kwargs.get("value_offset", None)
+        self.user_object_id = kwargs.get("user_object_id", None)
 
 
 class EvaluatePoliciesRequest(msrest.serialization.Model):
@@ -2059,15 +1888,12 @@ class EvaluatePoliciesRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'policies': {'key': 'policies', 'type': '[EvaluatePoliciesProperties]'},
+        "policies": {"key": "policies", "type": "[EvaluatePoliciesProperties]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EvaluatePoliciesRequest, self).__init__(**kwargs)
-        self.policies = kwargs.get('policies', None)
+        self.policies = kwargs.get("policies", None)
 
 
 class EvaluatePoliciesResponse(msrest.serialization.Model):
@@ -2078,15 +1904,12 @@ class EvaluatePoliciesResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'results': {'key': 'results', 'type': '[PolicySetResult]'},
+        "results": {"key": "results", "type": "[PolicySetResult]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EvaluatePoliciesResponse, self).__init__(**kwargs)
-        self.results = kwargs.get('results', None)
+        self.results = kwargs.get("results", None)
 
 
 class Event(msrest.serialization.Model):
@@ -2098,15 +1921,12 @@ class Event(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'event_name': {'key': 'eventName', 'type': 'str'},
+        "event_name": {"key": "eventName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Event, self).__init__(**kwargs)
-        self.event_name = kwargs.get('event_name', None)
+        self.event_name = kwargs.get("event_name", None)
 
 
 class EventFragment(msrest.serialization.Model):
@@ -2118,15 +1938,12 @@ class EventFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'event_name': {'key': 'eventName', 'type': 'str'},
+        "event_name": {"key": "eventName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EventFragment, self).__init__(**kwargs)
-        self.event_name = kwargs.get('event_name', None)
+        self.event_name = kwargs.get("event_name", None)
 
 
 class ExportResourceUsageParameters(msrest.serialization.Model):
@@ -2141,17 +1958,14 @@ class ExportResourceUsageParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'blob_storage_absolute_sas_uri': {'key': 'blobStorageAbsoluteSasUri', 'type': 'str'},
-        'usage_start_date': {'key': 'usageStartDate', 'type': 'iso-8601'},
+        "blob_storage_absolute_sas_uri": {"key": "blobStorageAbsoluteSasUri", "type": "str"},
+        "usage_start_date": {"key": "usageStartDate", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExportResourceUsageParameters, self).__init__(**kwargs)
-        self.blob_storage_absolute_sas_uri = kwargs.get('blob_storage_absolute_sas_uri', None)
-        self.usage_start_date = kwargs.get('usage_start_date', None)
+        self.blob_storage_absolute_sas_uri = kwargs.get("blob_storage_absolute_sas_uri", None)
+        self.usage_start_date = kwargs.get("usage_start_date", None)
 
 
 class ExternalSubnet(msrest.serialization.Model):
@@ -2164,17 +1978,14 @@ class ExternalSubnet(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExternalSubnet, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
 
 
 class ExternalSubnetFragment(msrest.serialization.Model):
@@ -2187,17 +1998,14 @@ class ExternalSubnetFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExternalSubnetFragment, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
 
 
 class Formula(Resource):
@@ -2234,41 +2042,38 @@ class Formula(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'creation_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "creation_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'author': {'key': 'properties.author', 'type': 'str'},
-        'os_type': {'key': 'properties.osType', 'type': 'str'},
-        'creation_date': {'key': 'properties.creationDate', 'type': 'iso-8601'},
-        'formula_content': {'key': 'properties.formulaContent', 'type': 'LabVirtualMachineCreationParameter'},
-        'vm': {'key': 'properties.vm', 'type': 'FormulaPropertiesFromVm'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "author": {"key": "properties.author", "type": "str"},
+        "os_type": {"key": "properties.osType", "type": "str"},
+        "creation_date": {"key": "properties.creationDate", "type": "iso-8601"},
+        "formula_content": {"key": "properties.formulaContent", "type": "LabVirtualMachineCreationParameter"},
+        "vm": {"key": "properties.vm", "type": "FormulaPropertiesFromVm"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Formula, self).__init__(**kwargs)
-        self.description = kwargs.get('description', None)
-        self.author = kwargs.get('author', None)
-        self.os_type = kwargs.get('os_type', None)
+        self.description = kwargs.get("description", None)
+        self.author = kwargs.get("author", None)
+        self.os_type = kwargs.get("os_type", None)
         self.creation_date = None
-        self.formula_content = kwargs.get('formula_content', None)
-        self.vm = kwargs.get('vm', None)
+        self.formula_content = kwargs.get("formula_content", None)
+        self.vm = kwargs.get("vm", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -2292,24 +2097,21 @@ class FormulaFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'author': {'key': 'properties.author', 'type': 'str'},
-        'os_type': {'key': 'properties.osType', 'type': 'str'},
-        'formula_content': {'key': 'properties.formulaContent', 'type': 'LabVirtualMachineCreationParameterFragment'},
-        'vm': {'key': 'properties.vm', 'type': 'FormulaPropertiesFromVmFragment'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "author": {"key": "properties.author", "type": "str"},
+        "os_type": {"key": "properties.osType", "type": "str"},
+        "formula_content": {"key": "properties.formulaContent", "type": "LabVirtualMachineCreationParameterFragment"},
+        "vm": {"key": "properties.vm", "type": "FormulaPropertiesFromVmFragment"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FormulaFragment, self).__init__(**kwargs)
-        self.description = kwargs.get('description', None)
-        self.author = kwargs.get('author', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.formula_content = kwargs.get('formula_content', None)
-        self.vm = kwargs.get('vm', None)
+        self.description = kwargs.get("description", None)
+        self.author = kwargs.get("author", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.formula_content = kwargs.get("formula_content", None)
+        self.vm = kwargs.get("vm", None)
 
 
 class FormulaList(msrest.serialization.Model):
@@ -2322,17 +2124,14 @@ class FormulaList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Formula]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Formula]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FormulaList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class FormulaPropertiesFromVm(msrest.serialization.Model):
@@ -2343,15 +2142,12 @@ class FormulaPropertiesFromVm(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'lab_vm_id': {'key': 'labVmId', 'type': 'str'},
+        "lab_vm_id": {"key": "labVmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FormulaPropertiesFromVm, self).__init__(**kwargs)
-        self.lab_vm_id = kwargs.get('lab_vm_id', None)
+        self.lab_vm_id = kwargs.get("lab_vm_id", None)
 
 
 class FormulaPropertiesFromVmFragment(msrest.serialization.Model):
@@ -2362,15 +2158,12 @@ class FormulaPropertiesFromVmFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'lab_vm_id': {'key': 'labVmId', 'type': 'str'},
+        "lab_vm_id": {"key": "labVmId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FormulaPropertiesFromVmFragment, self).__init__(**kwargs)
-        self.lab_vm_id = kwargs.get('lab_vm_id', None)
+        self.lab_vm_id = kwargs.get("lab_vm_id", None)
 
 
 class GalleryImage(Resource):
@@ -2408,41 +2201,38 @@ class GalleryImage(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'created_date': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "created_date": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'author': {'key': 'properties.author', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'image_reference': {'key': 'properties.imageReference', 'type': 'GalleryImageReference'},
-        'icon': {'key': 'properties.icon', 'type': 'str'},
-        'enabled': {'key': 'properties.enabled', 'type': 'bool'},
-        'plan_id': {'key': 'properties.planId', 'type': 'str'},
-        'is_plan_authorized': {'key': 'properties.isPlanAuthorized', 'type': 'bool'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "author": {"key": "properties.author", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "description": {"key": "properties.description", "type": "str"},
+        "image_reference": {"key": "properties.imageReference", "type": "GalleryImageReference"},
+        "icon": {"key": "properties.icon", "type": "str"},
+        "enabled": {"key": "properties.enabled", "type": "bool"},
+        "plan_id": {"key": "properties.planId", "type": "str"},
+        "is_plan_authorized": {"key": "properties.isPlanAuthorized", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GalleryImage, self).__init__(**kwargs)
-        self.author = kwargs.get('author', None)
+        self.author = kwargs.get("author", None)
         self.created_date = None
-        self.description = kwargs.get('description', None)
-        self.image_reference = kwargs.get('image_reference', None)
-        self.icon = kwargs.get('icon', None)
-        self.enabled = kwargs.get('enabled', None)
-        self.plan_id = kwargs.get('plan_id', None)
-        self.is_plan_authorized = kwargs.get('is_plan_authorized', None)
+        self.description = kwargs.get("description", None)
+        self.image_reference = kwargs.get("image_reference", None)
+        self.icon = kwargs.get("icon", None)
+        self.enabled = kwargs.get("enabled", None)
+        self.plan_id = kwargs.get("plan_id", None)
+        self.is_plan_authorized = kwargs.get("is_plan_authorized", None)
 
 
 class GalleryImageList(msrest.serialization.Model):
@@ -2455,17 +2245,14 @@ class GalleryImageList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[GalleryImage]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[GalleryImage]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GalleryImageList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class GalleryImageReference(msrest.serialization.Model):
@@ -2484,23 +2271,20 @@ class GalleryImageReference(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'offer': {'key': 'offer', 'type': 'str'},
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'sku': {'key': 'sku', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
+        "offer": {"key": "offer", "type": "str"},
+        "publisher": {"key": "publisher", "type": "str"},
+        "sku": {"key": "sku", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "version": {"key": "version", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GalleryImageReference, self).__init__(**kwargs)
-        self.offer = kwargs.get('offer', None)
-        self.publisher = kwargs.get('publisher', None)
-        self.sku = kwargs.get('sku', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.version = kwargs.get('version', None)
+        self.offer = kwargs.get("offer", None)
+        self.publisher = kwargs.get("publisher", None)
+        self.sku = kwargs.get("sku", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.version = kwargs.get("version", None)
 
 
 class GalleryImageReferenceFragment(msrest.serialization.Model):
@@ -2519,23 +2303,20 @@ class GalleryImageReferenceFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'offer': {'key': 'offer', 'type': 'str'},
-        'publisher': {'key': 'publisher', 'type': 'str'},
-        'sku': {'key': 'sku', 'type': 'str'},
-        'os_type': {'key': 'osType', 'type': 'str'},
-        'version': {'key': 'version', 'type': 'str'},
+        "offer": {"key": "offer", "type": "str"},
+        "publisher": {"key": "publisher", "type": "str"},
+        "sku": {"key": "sku", "type": "str"},
+        "os_type": {"key": "osType", "type": "str"},
+        "version": {"key": "version", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GalleryImageReferenceFragment, self).__init__(**kwargs)
-        self.offer = kwargs.get('offer', None)
-        self.publisher = kwargs.get('publisher', None)
-        self.sku = kwargs.get('sku', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.version = kwargs.get('version', None)
+        self.offer = kwargs.get("offer", None)
+        self.publisher = kwargs.get("publisher", None)
+        self.sku = kwargs.get("sku", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.version = kwargs.get("version", None)
 
 
 class GenerateArmTemplateRequest(msrest.serialization.Model):
@@ -2554,21 +2335,18 @@ class GenerateArmTemplateRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'virtual_machine_name': {'key': 'virtualMachineName', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '[ParameterInfo]'},
-        'location': {'key': 'location', 'type': 'str'},
-        'file_upload_options': {'key': 'fileUploadOptions', 'type': 'str'},
+        "virtual_machine_name": {"key": "virtualMachineName", "type": "str"},
+        "parameters": {"key": "parameters", "type": "[ParameterInfo]"},
+        "location": {"key": "location", "type": "str"},
+        "file_upload_options": {"key": "fileUploadOptions", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GenerateArmTemplateRequest, self).__init__(**kwargs)
-        self.virtual_machine_name = kwargs.get('virtual_machine_name', None)
-        self.parameters = kwargs.get('parameters', None)
-        self.location = kwargs.get('location', None)
-        self.file_upload_options = kwargs.get('file_upload_options', None)
+        self.virtual_machine_name = kwargs.get("virtual_machine_name", None)
+        self.parameters = kwargs.get("parameters", None)
+        self.location = kwargs.get("location", None)
+        self.file_upload_options = kwargs.get("file_upload_options", None)
 
 
 class GenerateUploadUriParameter(msrest.serialization.Model):
@@ -2579,15 +2357,12 @@ class GenerateUploadUriParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'blob_name': {'key': 'blobName', 'type': 'str'},
+        "blob_name": {"key": "blobName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GenerateUploadUriParameter, self).__init__(**kwargs)
-        self.blob_name = kwargs.get('blob_name', None)
+        self.blob_name = kwargs.get("blob_name", None)
 
 
 class GenerateUploadUriResponse(msrest.serialization.Model):
@@ -2598,15 +2373,12 @@ class GenerateUploadUriResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'upload_uri': {'key': 'uploadUri', 'type': 'str'},
+        "upload_uri": {"key": "uploadUri", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(GenerateUploadUriResponse, self).__init__(**kwargs)
-        self.upload_uri = kwargs.get('upload_uri', None)
+        self.upload_uri = kwargs.get("upload_uri", None)
 
 
 class HourDetails(msrest.serialization.Model):
@@ -2617,15 +2389,12 @@ class HourDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'minute': {'key': 'minute', 'type': 'int'},
+        "minute": {"key": "minute", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HourDetails, self).__init__(**kwargs)
-        self.minute = kwargs.get('minute', None)
+        self.minute = kwargs.get("minute", None)
 
 
 class HourDetailsFragment(msrest.serialization.Model):
@@ -2636,15 +2405,12 @@ class HourDetailsFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'minute': {'key': 'minute', 'type': 'int'},
+        "minute": {"key": "minute", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HourDetailsFragment, self).__init__(**kwargs)
-        self.minute = kwargs.get('minute', None)
+        self.minute = kwargs.get("minute", None)
 
 
 class IdentityProperties(msrest.serialization.Model):
@@ -2661,21 +2427,18 @@ class IdentityProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'client_secret_url': {'key': 'clientSecretUrl', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "client_secret_url": {"key": "clientSecretUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(IdentityProperties, self).__init__(**kwargs)
-        self.type = kwargs.get('type', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.tenant_id = kwargs.get('tenant_id', None)
-        self.client_secret_url = kwargs.get('client_secret_url', None)
+        self.type = kwargs.get("type", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.tenant_id = kwargs.get("tenant_id", None)
+        self.client_secret_url = kwargs.get("client_secret_url", None)
 
 
 class ImportLabVirtualMachineRequest(msrest.serialization.Model):
@@ -2690,17 +2453,14 @@ class ImportLabVirtualMachineRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'source_virtual_machine_resource_id': {'key': 'sourceVirtualMachineResourceId', 'type': 'str'},
-        'destination_virtual_machine_name': {'key': 'destinationVirtualMachineName', 'type': 'str'},
+        "source_virtual_machine_resource_id": {"key": "sourceVirtualMachineResourceId", "type": "str"},
+        "destination_virtual_machine_name": {"key": "destinationVirtualMachineName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ImportLabVirtualMachineRequest, self).__init__(**kwargs)
-        self.source_virtual_machine_resource_id = kwargs.get('source_virtual_machine_resource_id', None)
-        self.destination_virtual_machine_name = kwargs.get('destination_virtual_machine_name', None)
+        self.source_virtual_machine_resource_id = kwargs.get("source_virtual_machine_resource_id", None)
+        self.destination_virtual_machine_name = kwargs.get("destination_virtual_machine_name", None)
 
 
 class InboundNatRule(msrest.serialization.Model):
@@ -2717,19 +2477,16 @@ class InboundNatRule(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'transport_protocol': {'key': 'transportProtocol', 'type': 'str'},
-        'frontend_port': {'key': 'frontendPort', 'type': 'int'},
-        'backend_port': {'key': 'backendPort', 'type': 'int'},
+        "transport_protocol": {"key": "transportProtocol", "type": "str"},
+        "frontend_port": {"key": "frontendPort", "type": "int"},
+        "backend_port": {"key": "backendPort", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InboundNatRule, self).__init__(**kwargs)
-        self.transport_protocol = kwargs.get('transport_protocol', None)
-        self.frontend_port = kwargs.get('frontend_port', None)
-        self.backend_port = kwargs.get('backend_port', None)
+        self.transport_protocol = kwargs.get("transport_protocol", None)
+        self.frontend_port = kwargs.get("frontend_port", None)
+        self.backend_port = kwargs.get("backend_port", None)
 
 
 class InboundNatRuleFragment(msrest.serialization.Model):
@@ -2746,19 +2503,16 @@ class InboundNatRuleFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'transport_protocol': {'key': 'transportProtocol', 'type': 'str'},
-        'frontend_port': {'key': 'frontendPort', 'type': 'int'},
-        'backend_port': {'key': 'backendPort', 'type': 'int'},
+        "transport_protocol": {"key": "transportProtocol", "type": "str"},
+        "frontend_port": {"key": "frontendPort", "type": "int"},
+        "backend_port": {"key": "backendPort", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InboundNatRuleFragment, self).__init__(**kwargs)
-        self.transport_protocol = kwargs.get('transport_protocol', None)
-        self.frontend_port = kwargs.get('frontend_port', None)
-        self.backend_port = kwargs.get('backend_port', None)
+        self.transport_protocol = kwargs.get("transport_protocol", None)
+        self.frontend_port = kwargs.get("frontend_port", None)
+        self.backend_port = kwargs.get("backend_port", None)
 
 
 class Lab(Resource):
@@ -2830,74 +2584,77 @@ class Lab(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'default_storage_account': {'readonly': True},
-        'default_premium_storage_account': {'readonly': True},
-        'artifacts_storage_account': {'readonly': True},
-        'premium_data_disk_storage_account': {'readonly': True},
-        'vault_name': {'readonly': True},
-        'created_date': {'readonly': True},
-        'vm_creation_resource_group': {'readonly': True},
-        'public_ip_id': {'readonly': True},
-        'load_balancer_id': {'readonly': True},
-        'network_security_group_id': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "default_storage_account": {"readonly": True},
+        "default_premium_storage_account": {"readonly": True},
+        "artifacts_storage_account": {"readonly": True},
+        "premium_data_disk_storage_account": {"readonly": True},
+        "vault_name": {"readonly": True},
+        "created_date": {"readonly": True},
+        "vm_creation_resource_group": {"readonly": True},
+        "public_ip_id": {"readonly": True},
+        "load_balancer_id": {"readonly": True},
+        "network_security_group_id": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'default_storage_account': {'key': 'properties.defaultStorageAccount', 'type': 'str'},
-        'default_premium_storage_account': {'key': 'properties.defaultPremiumStorageAccount', 'type': 'str'},
-        'artifacts_storage_account': {'key': 'properties.artifactsStorageAccount', 'type': 'str'},
-        'premium_data_disk_storage_account': {'key': 'properties.premiumDataDiskStorageAccount', 'type': 'str'},
-        'vault_name': {'key': 'properties.vaultName', 'type': 'str'},
-        'lab_storage_type': {'key': 'properties.labStorageType', 'type': 'str'},
-        'mandatory_artifacts_resource_ids_linux': {'key': 'properties.mandatoryArtifactsResourceIdsLinux', 'type': '[str]'},
-        'mandatory_artifacts_resource_ids_windows': {'key': 'properties.mandatoryArtifactsResourceIdsWindows', 'type': '[str]'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'premium_data_disks': {'key': 'properties.premiumDataDisks', 'type': 'str'},
-        'environment_permission': {'key': 'properties.environmentPermission', 'type': 'str'},
-        'announcement': {'key': 'properties.announcement', 'type': 'LabAnnouncementProperties'},
-        'support': {'key': 'properties.support', 'type': 'LabSupportProperties'},
-        'vm_creation_resource_group': {'key': 'properties.vmCreationResourceGroup', 'type': 'str'},
-        'public_ip_id': {'key': 'properties.publicIpId', 'type': 'str'},
-        'load_balancer_id': {'key': 'properties.loadBalancerId', 'type': 'str'},
-        'network_security_group_id': {'key': 'properties.networkSecurityGroupId', 'type': 'str'},
-        'extended_properties': {'key': 'properties.extendedProperties', 'type': '{str}'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "default_storage_account": {"key": "properties.defaultStorageAccount", "type": "str"},
+        "default_premium_storage_account": {"key": "properties.defaultPremiumStorageAccount", "type": "str"},
+        "artifacts_storage_account": {"key": "properties.artifactsStorageAccount", "type": "str"},
+        "premium_data_disk_storage_account": {"key": "properties.premiumDataDiskStorageAccount", "type": "str"},
+        "vault_name": {"key": "properties.vaultName", "type": "str"},
+        "lab_storage_type": {"key": "properties.labStorageType", "type": "str"},
+        "mandatory_artifacts_resource_ids_linux": {
+            "key": "properties.mandatoryArtifactsResourceIdsLinux",
+            "type": "[str]",
+        },
+        "mandatory_artifacts_resource_ids_windows": {
+            "key": "properties.mandatoryArtifactsResourceIdsWindows",
+            "type": "[str]",
+        },
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "premium_data_disks": {"key": "properties.premiumDataDisks", "type": "str"},
+        "environment_permission": {"key": "properties.environmentPermission", "type": "str"},
+        "announcement": {"key": "properties.announcement", "type": "LabAnnouncementProperties"},
+        "support": {"key": "properties.support", "type": "LabSupportProperties"},
+        "vm_creation_resource_group": {"key": "properties.vmCreationResourceGroup", "type": "str"},
+        "public_ip_id": {"key": "properties.publicIpId", "type": "str"},
+        "load_balancer_id": {"key": "properties.loadBalancerId", "type": "str"},
+        "network_security_group_id": {"key": "properties.networkSecurityGroupId", "type": "str"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Lab, self).__init__(**kwargs)
         self.default_storage_account = None
         self.default_premium_storage_account = None
         self.artifacts_storage_account = None
         self.premium_data_disk_storage_account = None
         self.vault_name = None
-        self.lab_storage_type = kwargs.get('lab_storage_type', None)
-        self.mandatory_artifacts_resource_ids_linux = kwargs.get('mandatory_artifacts_resource_ids_linux', None)
-        self.mandatory_artifacts_resource_ids_windows = kwargs.get('mandatory_artifacts_resource_ids_windows', None)
+        self.lab_storage_type = kwargs.get("lab_storage_type", None)
+        self.mandatory_artifacts_resource_ids_linux = kwargs.get("mandatory_artifacts_resource_ids_linux", None)
+        self.mandatory_artifacts_resource_ids_windows = kwargs.get("mandatory_artifacts_resource_ids_windows", None)
         self.created_date = None
-        self.premium_data_disks = kwargs.get('premium_data_disks', None)
-        self.environment_permission = kwargs.get('environment_permission', None)
-        self.announcement = kwargs.get('announcement', None)
-        self.support = kwargs.get('support', None)
+        self.premium_data_disks = kwargs.get("premium_data_disks", None)
+        self.environment_permission = kwargs.get("environment_permission", None)
+        self.announcement = kwargs.get("announcement", None)
+        self.support = kwargs.get("support", None)
         self.vm_creation_resource_group = None
         self.public_ip_id = None
         self.load_balancer_id = None
         self.network_security_group_id = None
-        self.extended_properties = kwargs.get('extended_properties', None)
+        self.extended_properties = kwargs.get("extended_properties", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -2926,30 +2683,27 @@ class LabAnnouncementProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'title': {'key': 'title', 'type': 'str'},
-        'markdown': {'key': 'markdown', 'type': 'str'},
-        'enabled': {'key': 'enabled', 'type': 'str'},
-        'expiration_date': {'key': 'expirationDate', 'type': 'iso-8601'},
-        'expired': {'key': 'expired', 'type': 'bool'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'uniqueIdentifier', 'type': 'str'},
+        "title": {"key": "title", "type": "str"},
+        "markdown": {"key": "markdown", "type": "str"},
+        "enabled": {"key": "enabled", "type": "str"},
+        "expiration_date": {"key": "expirationDate", "type": "iso-8601"},
+        "expired": {"key": "expired", "type": "bool"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "unique_identifier": {"key": "uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabAnnouncementProperties, self).__init__(**kwargs)
-        self.title = kwargs.get('title', None)
-        self.markdown = kwargs.get('markdown', None)
-        self.enabled = kwargs.get('enabled', None)
-        self.expiration_date = kwargs.get('expiration_date', None)
-        self.expired = kwargs.get('expired', None)
+        self.title = kwargs.get("title", None)
+        self.markdown = kwargs.get("markdown", None)
+        self.enabled = kwargs.get("enabled", None)
+        self.expiration_date = kwargs.get("expiration_date", None)
+        self.expired = kwargs.get("expired", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -2972,23 +2726,20 @@ class LabAnnouncementPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'title': {'key': 'title', 'type': 'str'},
-        'markdown': {'key': 'markdown', 'type': 'str'},
-        'enabled': {'key': 'enabled', 'type': 'str'},
-        'expiration_date': {'key': 'expirationDate', 'type': 'iso-8601'},
-        'expired': {'key': 'expired', 'type': 'bool'},
+        "title": {"key": "title", "type": "str"},
+        "markdown": {"key": "markdown", "type": "str"},
+        "enabled": {"key": "enabled", "type": "str"},
+        "expiration_date": {"key": "expirationDate", "type": "iso-8601"},
+        "expired": {"key": "expired", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabAnnouncementPropertiesFragment, self).__init__(**kwargs)
-        self.title = kwargs.get('title', None)
-        self.markdown = kwargs.get('markdown', None)
-        self.enabled = kwargs.get('enabled', None)
-        self.expiration_date = kwargs.get('expiration_date', None)
-        self.expired = kwargs.get('expired', None)
+        self.title = kwargs.get("title", None)
+        self.markdown = kwargs.get("markdown", None)
+        self.enabled = kwargs.get("enabled", None)
+        self.expiration_date = kwargs.get("expiration_date", None)
+        self.expired = kwargs.get("expired", None)
 
 
 class LabCost(Resource):
@@ -3029,47 +2780,44 @@ class LabCost(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'lab_cost_summary': {'readonly': True},
-        'lab_cost_details': {'readonly': True},
-        'resource_costs': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "lab_cost_summary": {"readonly": True},
+        "lab_cost_details": {"readonly": True},
+        "resource_costs": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'target_cost': {'key': 'properties.targetCost', 'type': 'TargetCostProperties'},
-        'lab_cost_summary': {'key': 'properties.labCostSummary', 'type': 'LabCostSummaryProperties'},
-        'lab_cost_details': {'key': 'properties.labCostDetails', 'type': '[LabCostDetailsProperties]'},
-        'resource_costs': {'key': 'properties.resourceCosts', 'type': '[LabResourceCostProperties]'},
-        'currency_code': {'key': 'properties.currencyCode', 'type': 'str'},
-        'start_date_time': {'key': 'properties.startDateTime', 'type': 'iso-8601'},
-        'end_date_time': {'key': 'properties.endDateTime', 'type': 'iso-8601'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "target_cost": {"key": "properties.targetCost", "type": "TargetCostProperties"},
+        "lab_cost_summary": {"key": "properties.labCostSummary", "type": "LabCostSummaryProperties"},
+        "lab_cost_details": {"key": "properties.labCostDetails", "type": "[LabCostDetailsProperties]"},
+        "resource_costs": {"key": "properties.resourceCosts", "type": "[LabResourceCostProperties]"},
+        "currency_code": {"key": "properties.currencyCode", "type": "str"},
+        "start_date_time": {"key": "properties.startDateTime", "type": "iso-8601"},
+        "end_date_time": {"key": "properties.endDateTime", "type": "iso-8601"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabCost, self).__init__(**kwargs)
-        self.target_cost = kwargs.get('target_cost', None)
+        self.target_cost = kwargs.get("target_cost", None)
         self.lab_cost_summary = None
         self.lab_cost_details = None
         self.resource_costs = None
-        self.currency_code = kwargs.get('currency_code', None)
-        self.start_date_time = kwargs.get('start_date_time', None)
-        self.end_date_time = kwargs.get('end_date_time', None)
-        self.created_date = kwargs.get('created_date', None)
+        self.currency_code = kwargs.get("currency_code", None)
+        self.start_date_time = kwargs.get("start_date_time", None)
+        self.end_date_time = kwargs.get("end_date_time", None)
+        self.created_date = kwargs.get("created_date", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -3087,19 +2835,16 @@ class LabCostDetailsProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'date': {'key': 'date', 'type': 'iso-8601'},
-        'cost': {'key': 'cost', 'type': 'float'},
-        'cost_type': {'key': 'costType', 'type': 'str'},
+        "date": {"key": "date", "type": "iso-8601"},
+        "cost": {"key": "cost", "type": "float"},
+        "cost_type": {"key": "costType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabCostDetailsProperties, self).__init__(**kwargs)
-        self.date = kwargs.get('date', None)
-        self.cost = kwargs.get('cost', None)
-        self.cost_type = kwargs.get('cost_type', None)
+        self.date = kwargs.get("date", None)
+        self.cost = kwargs.get("cost", None)
+        self.cost_type = kwargs.get("cost_type", None)
 
 
 class LabCostSummaryProperties(msrest.serialization.Model):
@@ -3110,15 +2855,12 @@ class LabCostSummaryProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'estimated_lab_cost': {'key': 'estimatedLabCost', 'type': 'float'},
+        "estimated_lab_cost": {"key": "estimatedLabCost", "type": "float"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabCostSummaryProperties, self).__init__(**kwargs)
-        self.estimated_lab_cost = kwargs.get('estimated_lab_cost', None)
+        self.estimated_lab_cost = kwargs.get("estimated_lab_cost", None)
 
 
 class LabFragment(UpdateResource):
@@ -3154,30 +2896,33 @@ class LabFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'lab_storage_type': {'key': 'properties.labStorageType', 'type': 'str'},
-        'mandatory_artifacts_resource_ids_linux': {'key': 'properties.mandatoryArtifactsResourceIdsLinux', 'type': '[str]'},
-        'mandatory_artifacts_resource_ids_windows': {'key': 'properties.mandatoryArtifactsResourceIdsWindows', 'type': '[str]'},
-        'premium_data_disks': {'key': 'properties.premiumDataDisks', 'type': 'str'},
-        'environment_permission': {'key': 'properties.environmentPermission', 'type': 'str'},
-        'announcement': {'key': 'properties.announcement', 'type': 'LabAnnouncementPropertiesFragment'},
-        'support': {'key': 'properties.support', 'type': 'LabSupportPropertiesFragment'},
-        'extended_properties': {'key': 'properties.extendedProperties', 'type': '{str}'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "lab_storage_type": {"key": "properties.labStorageType", "type": "str"},
+        "mandatory_artifacts_resource_ids_linux": {
+            "key": "properties.mandatoryArtifactsResourceIdsLinux",
+            "type": "[str]",
+        },
+        "mandatory_artifacts_resource_ids_windows": {
+            "key": "properties.mandatoryArtifactsResourceIdsWindows",
+            "type": "[str]",
+        },
+        "premium_data_disks": {"key": "properties.premiumDataDisks", "type": "str"},
+        "environment_permission": {"key": "properties.environmentPermission", "type": "str"},
+        "announcement": {"key": "properties.announcement", "type": "LabAnnouncementPropertiesFragment"},
+        "support": {"key": "properties.support", "type": "LabSupportPropertiesFragment"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabFragment, self).__init__(**kwargs)
-        self.lab_storage_type = kwargs.get('lab_storage_type', None)
-        self.mandatory_artifacts_resource_ids_linux = kwargs.get('mandatory_artifacts_resource_ids_linux', None)
-        self.mandatory_artifacts_resource_ids_windows = kwargs.get('mandatory_artifacts_resource_ids_windows', None)
-        self.premium_data_disks = kwargs.get('premium_data_disks', None)
-        self.environment_permission = kwargs.get('environment_permission', None)
-        self.announcement = kwargs.get('announcement', None)
-        self.support = kwargs.get('support', None)
-        self.extended_properties = kwargs.get('extended_properties', None)
+        self.lab_storage_type = kwargs.get("lab_storage_type", None)
+        self.mandatory_artifacts_resource_ids_linux = kwargs.get("mandatory_artifacts_resource_ids_linux", None)
+        self.mandatory_artifacts_resource_ids_windows = kwargs.get("mandatory_artifacts_resource_ids_windows", None)
+        self.premium_data_disks = kwargs.get("premium_data_disks", None)
+        self.environment_permission = kwargs.get("environment_permission", None)
+        self.announcement = kwargs.get("announcement", None)
+        self.support = kwargs.get("support", None)
+        self.extended_properties = kwargs.get("extended_properties", None)
 
 
 class LabList(msrest.serialization.Model):
@@ -3190,17 +2935,14 @@ class LabList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Lab]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Lab]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class LabResourceCostProperties(msrest.serialization.Model):
@@ -3227,31 +2969,28 @@ class LabResourceCostProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'resourcename': {'key': 'resourcename', 'type': 'str'},
-        'resource_u_id': {'key': 'resourceUId', 'type': 'str'},
-        'resource_cost': {'key': 'resourceCost', 'type': 'float'},
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'resource_owner': {'key': 'resourceOwner', 'type': 'str'},
-        'resource_pricing_tier': {'key': 'resourcePricingTier', 'type': 'str'},
-        'resource_status': {'key': 'resourceStatus', 'type': 'str'},
-        'resource_id': {'key': 'resourceId', 'type': 'str'},
-        'external_resource_id': {'key': 'externalResourceId', 'type': 'str'},
+        "resourcename": {"key": "resourcename", "type": "str"},
+        "resource_u_id": {"key": "resourceUId", "type": "str"},
+        "resource_cost": {"key": "resourceCost", "type": "float"},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "resource_owner": {"key": "resourceOwner", "type": "str"},
+        "resource_pricing_tier": {"key": "resourcePricingTier", "type": "str"},
+        "resource_status": {"key": "resourceStatus", "type": "str"},
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "external_resource_id": {"key": "externalResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabResourceCostProperties, self).__init__(**kwargs)
-        self.resourcename = kwargs.get('resourcename', None)
-        self.resource_u_id = kwargs.get('resource_u_id', None)
-        self.resource_cost = kwargs.get('resource_cost', None)
-        self.resource_type = kwargs.get('resource_type', None)
-        self.resource_owner = kwargs.get('resource_owner', None)
-        self.resource_pricing_tier = kwargs.get('resource_pricing_tier', None)
-        self.resource_status = kwargs.get('resource_status', None)
-        self.resource_id = kwargs.get('resource_id', None)
-        self.external_resource_id = kwargs.get('external_resource_id', None)
+        self.resourcename = kwargs.get("resourcename", None)
+        self.resource_u_id = kwargs.get("resource_u_id", None)
+        self.resource_cost = kwargs.get("resource_cost", None)
+        self.resource_type = kwargs.get("resource_type", None)
+        self.resource_owner = kwargs.get("resource_owner", None)
+        self.resource_pricing_tier = kwargs.get("resource_pricing_tier", None)
+        self.resource_status = kwargs.get("resource_status", None)
+        self.resource_id = kwargs.get("resource_id", None)
+        self.external_resource_id = kwargs.get("external_resource_id", None)
 
 
 class LabSupportProperties(msrest.serialization.Model):
@@ -3266,17 +3005,14 @@ class LabSupportProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'enabled': {'key': 'enabled', 'type': 'str'},
-        'markdown': {'key': 'markdown', 'type': 'str'},
+        "enabled": {"key": "enabled", "type": "str"},
+        "markdown": {"key": "markdown", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabSupportProperties, self).__init__(**kwargs)
-        self.enabled = kwargs.get('enabled', None)
-        self.markdown = kwargs.get('markdown', None)
+        self.enabled = kwargs.get("enabled", None)
+        self.markdown = kwargs.get("markdown", None)
 
 
 class LabSupportPropertiesFragment(msrest.serialization.Model):
@@ -3291,17 +3027,14 @@ class LabSupportPropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'enabled': {'key': 'enabled', 'type': 'str'},
-        'markdown': {'key': 'markdown', 'type': 'str'},
+        "enabled": {"key": "enabled", "type": "str"},
+        "markdown": {"key": "markdown", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabSupportPropertiesFragment, self).__init__(**kwargs)
-        self.enabled = kwargs.get('enabled', None)
-        self.markdown = kwargs.get('markdown', None)
+        self.enabled = kwargs.get("enabled", None)
+        self.markdown = kwargs.get("markdown", None)
 
 
 class LabVhd(msrest.serialization.Model):
@@ -3312,15 +3045,12 @@ class LabVhd(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabVhd, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
+        self.id = kwargs.get("id", None)
 
 
 class LabVhdList(msrest.serialization.Model):
@@ -3333,17 +3063,14 @@ class LabVhdList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[LabVhd]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[LabVhd]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabVhdList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class LabVirtualMachine(Resource):
@@ -3443,96 +3170,96 @@ class LabVirtualMachine(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'compute_vm': {'readonly': True},
-        'applicable_schedule': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "compute_vm": {"readonly": True},
+        "applicable_schedule": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'notes': {'key': 'properties.notes', 'type': 'str'},
-        'owner_object_id': {'key': 'properties.ownerObjectId', 'type': 'str'},
-        'owner_user_principal_name': {'key': 'properties.ownerUserPrincipalName', 'type': 'str'},
-        'created_by_user_id': {'key': 'properties.createdByUserId', 'type': 'str'},
-        'created_by_user': {'key': 'properties.createdByUser', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'compute_id': {'key': 'properties.computeId', 'type': 'str'},
-        'custom_image_id': {'key': 'properties.customImageId', 'type': 'str'},
-        'os_type': {'key': 'properties.osType', 'type': 'str'},
-        'size': {'key': 'properties.size', 'type': 'str'},
-        'user_name': {'key': 'properties.userName', 'type': 'str'},
-        'password': {'key': 'properties.password', 'type': 'str'},
-        'ssh_key': {'key': 'properties.sshKey', 'type': 'str'},
-        'is_authentication_with_ssh_key': {'key': 'properties.isAuthenticationWithSshKey', 'type': 'bool'},
-        'fqdn': {'key': 'properties.fqdn', 'type': 'str'},
-        'lab_subnet_name': {'key': 'properties.labSubnetName', 'type': 'str'},
-        'lab_virtual_network_id': {'key': 'properties.labVirtualNetworkId', 'type': 'str'},
-        'disallow_public_ip_address': {'key': 'properties.disallowPublicIpAddress', 'type': 'bool'},
-        'artifacts': {'key': 'properties.artifacts', 'type': '[ArtifactInstallProperties]'},
-        'artifact_deployment_status': {'key': 'properties.artifactDeploymentStatus', 'type': 'ArtifactDeploymentStatusProperties'},
-        'gallery_image_reference': {'key': 'properties.galleryImageReference', 'type': 'GalleryImageReference'},
-        'plan_id': {'key': 'properties.planId', 'type': 'str'},
-        'compute_vm': {'key': 'properties.computeVm', 'type': 'ComputeVmProperties'},
-        'network_interface': {'key': 'properties.networkInterface', 'type': 'NetworkInterfaceProperties'},
-        'applicable_schedule': {'key': 'properties.applicableSchedule', 'type': 'ApplicableSchedule'},
-        'expiration_date': {'key': 'properties.expirationDate', 'type': 'iso-8601'},
-        'allow_claim': {'key': 'properties.allowClaim', 'type': 'bool'},
-        'storage_type': {'key': 'properties.storageType', 'type': 'str'},
-        'virtual_machine_creation_source': {'key': 'properties.virtualMachineCreationSource', 'type': 'str'},
-        'environment_id': {'key': 'properties.environmentId', 'type': 'str'},
-        'data_disk_parameters': {'key': 'properties.dataDiskParameters', 'type': '[DataDiskProperties]'},
-        'schedule_parameters': {'key': 'properties.scheduleParameters', 'type': '[ScheduleCreationParameter]'},
-        'last_known_power_state': {'key': 'properties.lastKnownPowerState', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "notes": {"key": "properties.notes", "type": "str"},
+        "owner_object_id": {"key": "properties.ownerObjectId", "type": "str"},
+        "owner_user_principal_name": {"key": "properties.ownerUserPrincipalName", "type": "str"},
+        "created_by_user_id": {"key": "properties.createdByUserId", "type": "str"},
+        "created_by_user": {"key": "properties.createdByUser", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "compute_id": {"key": "properties.computeId", "type": "str"},
+        "custom_image_id": {"key": "properties.customImageId", "type": "str"},
+        "os_type": {"key": "properties.osType", "type": "str"},
+        "size": {"key": "properties.size", "type": "str"},
+        "user_name": {"key": "properties.userName", "type": "str"},
+        "password": {"key": "properties.password", "type": "str"},
+        "ssh_key": {"key": "properties.sshKey", "type": "str"},
+        "is_authentication_with_ssh_key": {"key": "properties.isAuthenticationWithSshKey", "type": "bool"},
+        "fqdn": {"key": "properties.fqdn", "type": "str"},
+        "lab_subnet_name": {"key": "properties.labSubnetName", "type": "str"},
+        "lab_virtual_network_id": {"key": "properties.labVirtualNetworkId", "type": "str"},
+        "disallow_public_ip_address": {"key": "properties.disallowPublicIpAddress", "type": "bool"},
+        "artifacts": {"key": "properties.artifacts", "type": "[ArtifactInstallProperties]"},
+        "artifact_deployment_status": {
+            "key": "properties.artifactDeploymentStatus",
+            "type": "ArtifactDeploymentStatusProperties",
+        },
+        "gallery_image_reference": {"key": "properties.galleryImageReference", "type": "GalleryImageReference"},
+        "plan_id": {"key": "properties.planId", "type": "str"},
+        "compute_vm": {"key": "properties.computeVm", "type": "ComputeVmProperties"},
+        "network_interface": {"key": "properties.networkInterface", "type": "NetworkInterfaceProperties"},
+        "applicable_schedule": {"key": "properties.applicableSchedule", "type": "ApplicableSchedule"},
+        "expiration_date": {"key": "properties.expirationDate", "type": "iso-8601"},
+        "allow_claim": {"key": "properties.allowClaim", "type": "bool"},
+        "storage_type": {"key": "properties.storageType", "type": "str"},
+        "virtual_machine_creation_source": {"key": "properties.virtualMachineCreationSource", "type": "str"},
+        "environment_id": {"key": "properties.environmentId", "type": "str"},
+        "data_disk_parameters": {"key": "properties.dataDiskParameters", "type": "[DataDiskProperties]"},
+        "schedule_parameters": {"key": "properties.scheduleParameters", "type": "[ScheduleCreationParameter]"},
+        "last_known_power_state": {"key": "properties.lastKnownPowerState", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabVirtualMachine, self).__init__(**kwargs)
-        self.notes = kwargs.get('notes', None)
-        self.owner_object_id = kwargs.get('owner_object_id', None)
-        self.owner_user_principal_name = kwargs.get('owner_user_principal_name', None)
-        self.created_by_user_id = kwargs.get('created_by_user_id', None)
-        self.created_by_user = kwargs.get('created_by_user', None)
-        self.created_date = kwargs.get('created_date', None)
-        self.compute_id = kwargs.get('compute_id', None)
-        self.custom_image_id = kwargs.get('custom_image_id', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.size = kwargs.get('size', None)
-        self.user_name = kwargs.get('user_name', None)
-        self.password = kwargs.get('password', None)
-        self.ssh_key = kwargs.get('ssh_key', None)
-        self.is_authentication_with_ssh_key = kwargs.get('is_authentication_with_ssh_key', None)
-        self.fqdn = kwargs.get('fqdn', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.lab_virtual_network_id = kwargs.get('lab_virtual_network_id', None)
-        self.disallow_public_ip_address = kwargs.get('disallow_public_ip_address', None)
-        self.artifacts = kwargs.get('artifacts', None)
-        self.artifact_deployment_status = kwargs.get('artifact_deployment_status', None)
-        self.gallery_image_reference = kwargs.get('gallery_image_reference', None)
-        self.plan_id = kwargs.get('plan_id', None)
+        self.notes = kwargs.get("notes", None)
+        self.owner_object_id = kwargs.get("owner_object_id", None)
+        self.owner_user_principal_name = kwargs.get("owner_user_principal_name", None)
+        self.created_by_user_id = kwargs.get("created_by_user_id", None)
+        self.created_by_user = kwargs.get("created_by_user", None)
+        self.created_date = kwargs.get("created_date", None)
+        self.compute_id = kwargs.get("compute_id", None)
+        self.custom_image_id = kwargs.get("custom_image_id", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.size = kwargs.get("size", None)
+        self.user_name = kwargs.get("user_name", None)
+        self.password = kwargs.get("password", None)
+        self.ssh_key = kwargs.get("ssh_key", None)
+        self.is_authentication_with_ssh_key = kwargs.get("is_authentication_with_ssh_key", None)
+        self.fqdn = kwargs.get("fqdn", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.lab_virtual_network_id = kwargs.get("lab_virtual_network_id", None)
+        self.disallow_public_ip_address = kwargs.get("disallow_public_ip_address", None)
+        self.artifacts = kwargs.get("artifacts", None)
+        self.artifact_deployment_status = kwargs.get("artifact_deployment_status", None)
+        self.gallery_image_reference = kwargs.get("gallery_image_reference", None)
+        self.plan_id = kwargs.get("plan_id", None)
         self.compute_vm = None
-        self.network_interface = kwargs.get('network_interface', None)
+        self.network_interface = kwargs.get("network_interface", None)
         self.applicable_schedule = None
-        self.expiration_date = kwargs.get('expiration_date', None)
-        self.allow_claim = kwargs.get('allow_claim', None)
-        self.storage_type = kwargs.get('storage_type', None)
-        self.virtual_machine_creation_source = kwargs.get('virtual_machine_creation_source', None)
-        self.environment_id = kwargs.get('environment_id', None)
-        self.data_disk_parameters = kwargs.get('data_disk_parameters', None)
-        self.schedule_parameters = kwargs.get('schedule_parameters', None)
-        self.last_known_power_state = kwargs.get('last_known_power_state', None)
+        self.expiration_date = kwargs.get("expiration_date", None)
+        self.allow_claim = kwargs.get("allow_claim", None)
+        self.storage_type = kwargs.get("storage_type", None)
+        self.virtual_machine_creation_source = kwargs.get("virtual_machine_creation_source", None)
+        self.environment_id = kwargs.get("environment_id", None)
+        self.data_disk_parameters = kwargs.get("data_disk_parameters", None)
+        self.schedule_parameters = kwargs.get("schedule_parameters", None)
+        self.last_known_power_state = kwargs.get("last_known_power_state", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -3622,83 +3349,83 @@ class LabVirtualMachineCreationParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'bulk_creation_parameters': {'key': 'properties.bulkCreationParameters', 'type': 'BulkCreationParameters'},
-        'notes': {'key': 'properties.notes', 'type': 'str'},
-        'owner_object_id': {'key': 'properties.ownerObjectId', 'type': 'str'},
-        'owner_user_principal_name': {'key': 'properties.ownerUserPrincipalName', 'type': 'str'},
-        'created_by_user_id': {'key': 'properties.createdByUserId', 'type': 'str'},
-        'created_by_user': {'key': 'properties.createdByUser', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'compute_id': {'key': 'properties.computeId', 'type': 'str'},
-        'custom_image_id': {'key': 'properties.customImageId', 'type': 'str'},
-        'os_type': {'key': 'properties.osType', 'type': 'str'},
-        'size': {'key': 'properties.size', 'type': 'str'},
-        'user_name': {'key': 'properties.userName', 'type': 'str'},
-        'password': {'key': 'properties.password', 'type': 'str'},
-        'ssh_key': {'key': 'properties.sshKey', 'type': 'str'},
-        'is_authentication_with_ssh_key': {'key': 'properties.isAuthenticationWithSshKey', 'type': 'bool'},
-        'fqdn': {'key': 'properties.fqdn', 'type': 'str'},
-        'lab_subnet_name': {'key': 'properties.labSubnetName', 'type': 'str'},
-        'lab_virtual_network_id': {'key': 'properties.labVirtualNetworkId', 'type': 'str'},
-        'disallow_public_ip_address': {'key': 'properties.disallowPublicIpAddress', 'type': 'bool'},
-        'artifacts': {'key': 'properties.artifacts', 'type': '[ArtifactInstallProperties]'},
-        'artifact_deployment_status': {'key': 'properties.artifactDeploymentStatus', 'type': 'ArtifactDeploymentStatusProperties'},
-        'gallery_image_reference': {'key': 'properties.galleryImageReference', 'type': 'GalleryImageReference'},
-        'plan_id': {'key': 'properties.planId', 'type': 'str'},
-        'network_interface': {'key': 'properties.networkInterface', 'type': 'NetworkInterfaceProperties'},
-        'expiration_date': {'key': 'properties.expirationDate', 'type': 'iso-8601'},
-        'allow_claim': {'key': 'properties.allowClaim', 'type': 'bool'},
-        'storage_type': {'key': 'properties.storageType', 'type': 'str'},
-        'virtual_machine_creation_source': {'key': 'properties.virtualMachineCreationSource', 'type': 'str'},
-        'environment_id': {'key': 'properties.environmentId', 'type': 'str'},
-        'data_disk_parameters': {'key': 'properties.dataDiskParameters', 'type': '[DataDiskProperties]'},
-        'schedule_parameters': {'key': 'properties.scheduleParameters', 'type': '[ScheduleCreationParameter]'},
-        'last_known_power_state': {'key': 'properties.lastKnownPowerState', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "bulk_creation_parameters": {"key": "properties.bulkCreationParameters", "type": "BulkCreationParameters"},
+        "notes": {"key": "properties.notes", "type": "str"},
+        "owner_object_id": {"key": "properties.ownerObjectId", "type": "str"},
+        "owner_user_principal_name": {"key": "properties.ownerUserPrincipalName", "type": "str"},
+        "created_by_user_id": {"key": "properties.createdByUserId", "type": "str"},
+        "created_by_user": {"key": "properties.createdByUser", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "compute_id": {"key": "properties.computeId", "type": "str"},
+        "custom_image_id": {"key": "properties.customImageId", "type": "str"},
+        "os_type": {"key": "properties.osType", "type": "str"},
+        "size": {"key": "properties.size", "type": "str"},
+        "user_name": {"key": "properties.userName", "type": "str"},
+        "password": {"key": "properties.password", "type": "str"},
+        "ssh_key": {"key": "properties.sshKey", "type": "str"},
+        "is_authentication_with_ssh_key": {"key": "properties.isAuthenticationWithSshKey", "type": "bool"},
+        "fqdn": {"key": "properties.fqdn", "type": "str"},
+        "lab_subnet_name": {"key": "properties.labSubnetName", "type": "str"},
+        "lab_virtual_network_id": {"key": "properties.labVirtualNetworkId", "type": "str"},
+        "disallow_public_ip_address": {"key": "properties.disallowPublicIpAddress", "type": "bool"},
+        "artifacts": {"key": "properties.artifacts", "type": "[ArtifactInstallProperties]"},
+        "artifact_deployment_status": {
+            "key": "properties.artifactDeploymentStatus",
+            "type": "ArtifactDeploymentStatusProperties",
+        },
+        "gallery_image_reference": {"key": "properties.galleryImageReference", "type": "GalleryImageReference"},
+        "plan_id": {"key": "properties.planId", "type": "str"},
+        "network_interface": {"key": "properties.networkInterface", "type": "NetworkInterfaceProperties"},
+        "expiration_date": {"key": "properties.expirationDate", "type": "iso-8601"},
+        "allow_claim": {"key": "properties.allowClaim", "type": "bool"},
+        "storage_type": {"key": "properties.storageType", "type": "str"},
+        "virtual_machine_creation_source": {"key": "properties.virtualMachineCreationSource", "type": "str"},
+        "environment_id": {"key": "properties.environmentId", "type": "str"},
+        "data_disk_parameters": {"key": "properties.dataDiskParameters", "type": "[DataDiskProperties]"},
+        "schedule_parameters": {"key": "properties.scheduleParameters", "type": "[ScheduleCreationParameter]"},
+        "last_known_power_state": {"key": "properties.lastKnownPowerState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabVirtualMachineCreationParameter, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.location = kwargs.get('location', None)
-        self.tags = kwargs.get('tags', None)
-        self.bulk_creation_parameters = kwargs.get('bulk_creation_parameters', None)
-        self.notes = kwargs.get('notes', None)
-        self.owner_object_id = kwargs.get('owner_object_id', None)
-        self.owner_user_principal_name = kwargs.get('owner_user_principal_name', None)
-        self.created_by_user_id = kwargs.get('created_by_user_id', None)
-        self.created_by_user = kwargs.get('created_by_user', None)
-        self.created_date = kwargs.get('created_date', None)
-        self.compute_id = kwargs.get('compute_id', None)
-        self.custom_image_id = kwargs.get('custom_image_id', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.size = kwargs.get('size', None)
-        self.user_name = kwargs.get('user_name', None)
-        self.password = kwargs.get('password', None)
-        self.ssh_key = kwargs.get('ssh_key', None)
-        self.is_authentication_with_ssh_key = kwargs.get('is_authentication_with_ssh_key', None)
-        self.fqdn = kwargs.get('fqdn', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.lab_virtual_network_id = kwargs.get('lab_virtual_network_id', None)
-        self.disallow_public_ip_address = kwargs.get('disallow_public_ip_address', None)
-        self.artifacts = kwargs.get('artifacts', None)
-        self.artifact_deployment_status = kwargs.get('artifact_deployment_status', None)
-        self.gallery_image_reference = kwargs.get('gallery_image_reference', None)
-        self.plan_id = kwargs.get('plan_id', None)
-        self.network_interface = kwargs.get('network_interface', None)
-        self.expiration_date = kwargs.get('expiration_date', None)
-        self.allow_claim = kwargs.get('allow_claim', None)
-        self.storage_type = kwargs.get('storage_type', None)
-        self.virtual_machine_creation_source = kwargs.get('virtual_machine_creation_source', None)
-        self.environment_id = kwargs.get('environment_id', None)
-        self.data_disk_parameters = kwargs.get('data_disk_parameters', None)
-        self.schedule_parameters = kwargs.get('schedule_parameters', None)
-        self.last_known_power_state = kwargs.get('last_known_power_state', None)
+        self.name = kwargs.get("name", None)
+        self.location = kwargs.get("location", None)
+        self.tags = kwargs.get("tags", None)
+        self.bulk_creation_parameters = kwargs.get("bulk_creation_parameters", None)
+        self.notes = kwargs.get("notes", None)
+        self.owner_object_id = kwargs.get("owner_object_id", None)
+        self.owner_user_principal_name = kwargs.get("owner_user_principal_name", None)
+        self.created_by_user_id = kwargs.get("created_by_user_id", None)
+        self.created_by_user = kwargs.get("created_by_user", None)
+        self.created_date = kwargs.get("created_date", None)
+        self.compute_id = kwargs.get("compute_id", None)
+        self.custom_image_id = kwargs.get("custom_image_id", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.size = kwargs.get("size", None)
+        self.user_name = kwargs.get("user_name", None)
+        self.password = kwargs.get("password", None)
+        self.ssh_key = kwargs.get("ssh_key", None)
+        self.is_authentication_with_ssh_key = kwargs.get("is_authentication_with_ssh_key", None)
+        self.fqdn = kwargs.get("fqdn", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.lab_virtual_network_id = kwargs.get("lab_virtual_network_id", None)
+        self.disallow_public_ip_address = kwargs.get("disallow_public_ip_address", None)
+        self.artifacts = kwargs.get("artifacts", None)
+        self.artifact_deployment_status = kwargs.get("artifact_deployment_status", None)
+        self.gallery_image_reference = kwargs.get("gallery_image_reference", None)
+        self.plan_id = kwargs.get("plan_id", None)
+        self.network_interface = kwargs.get("network_interface", None)
+        self.expiration_date = kwargs.get("expiration_date", None)
+        self.allow_claim = kwargs.get("allow_claim", None)
+        self.storage_type = kwargs.get("storage_type", None)
+        self.virtual_machine_creation_source = kwargs.get("virtual_machine_creation_source", None)
+        self.environment_id = kwargs.get("environment_id", None)
+        self.data_disk_parameters = kwargs.get("data_disk_parameters", None)
+        self.schedule_parameters = kwargs.get("schedule_parameters", None)
+        self.last_known_power_state = kwargs.get("last_known_power_state", None)
 
 
 class LabVirtualMachineCreationParameterFragment(msrest.serialization.Model):
@@ -3787,83 +3514,86 @@ class LabVirtualMachineCreationParameterFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'bulk_creation_parameters': {'key': 'properties.bulkCreationParameters', 'type': 'BulkCreationParametersFragment'},
-        'notes': {'key': 'properties.notes', 'type': 'str'},
-        'owner_object_id': {'key': 'properties.ownerObjectId', 'type': 'str'},
-        'owner_user_principal_name': {'key': 'properties.ownerUserPrincipalName', 'type': 'str'},
-        'created_by_user_id': {'key': 'properties.createdByUserId', 'type': 'str'},
-        'created_by_user': {'key': 'properties.createdByUser', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'compute_id': {'key': 'properties.computeId', 'type': 'str'},
-        'custom_image_id': {'key': 'properties.customImageId', 'type': 'str'},
-        'os_type': {'key': 'properties.osType', 'type': 'str'},
-        'size': {'key': 'properties.size', 'type': 'str'},
-        'user_name': {'key': 'properties.userName', 'type': 'str'},
-        'password': {'key': 'properties.password', 'type': 'str'},
-        'ssh_key': {'key': 'properties.sshKey', 'type': 'str'},
-        'is_authentication_with_ssh_key': {'key': 'properties.isAuthenticationWithSshKey', 'type': 'bool'},
-        'fqdn': {'key': 'properties.fqdn', 'type': 'str'},
-        'lab_subnet_name': {'key': 'properties.labSubnetName', 'type': 'str'},
-        'lab_virtual_network_id': {'key': 'properties.labVirtualNetworkId', 'type': 'str'},
-        'disallow_public_ip_address': {'key': 'properties.disallowPublicIpAddress', 'type': 'bool'},
-        'artifacts': {'key': 'properties.artifacts', 'type': '[ArtifactInstallPropertiesFragment]'},
-        'artifact_deployment_status': {'key': 'properties.artifactDeploymentStatus', 'type': 'ArtifactDeploymentStatusPropertiesFragment'},
-        'gallery_image_reference': {'key': 'properties.galleryImageReference', 'type': 'GalleryImageReferenceFragment'},
-        'plan_id': {'key': 'properties.planId', 'type': 'str'},
-        'network_interface': {'key': 'properties.networkInterface', 'type': 'NetworkInterfacePropertiesFragment'},
-        'expiration_date': {'key': 'properties.expirationDate', 'type': 'iso-8601'},
-        'allow_claim': {'key': 'properties.allowClaim', 'type': 'bool'},
-        'storage_type': {'key': 'properties.storageType', 'type': 'str'},
-        'virtual_machine_creation_source': {'key': 'properties.virtualMachineCreationSource', 'type': 'str'},
-        'environment_id': {'key': 'properties.environmentId', 'type': 'str'},
-        'data_disk_parameters': {'key': 'properties.dataDiskParameters', 'type': '[DataDiskPropertiesFragment]'},
-        'schedule_parameters': {'key': 'properties.scheduleParameters', 'type': '[ScheduleCreationParameterFragment]'},
-        'last_known_power_state': {'key': 'properties.lastKnownPowerState', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "bulk_creation_parameters": {
+            "key": "properties.bulkCreationParameters",
+            "type": "BulkCreationParametersFragment",
+        },
+        "notes": {"key": "properties.notes", "type": "str"},
+        "owner_object_id": {"key": "properties.ownerObjectId", "type": "str"},
+        "owner_user_principal_name": {"key": "properties.ownerUserPrincipalName", "type": "str"},
+        "created_by_user_id": {"key": "properties.createdByUserId", "type": "str"},
+        "created_by_user": {"key": "properties.createdByUser", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "compute_id": {"key": "properties.computeId", "type": "str"},
+        "custom_image_id": {"key": "properties.customImageId", "type": "str"},
+        "os_type": {"key": "properties.osType", "type": "str"},
+        "size": {"key": "properties.size", "type": "str"},
+        "user_name": {"key": "properties.userName", "type": "str"},
+        "password": {"key": "properties.password", "type": "str"},
+        "ssh_key": {"key": "properties.sshKey", "type": "str"},
+        "is_authentication_with_ssh_key": {"key": "properties.isAuthenticationWithSshKey", "type": "bool"},
+        "fqdn": {"key": "properties.fqdn", "type": "str"},
+        "lab_subnet_name": {"key": "properties.labSubnetName", "type": "str"},
+        "lab_virtual_network_id": {"key": "properties.labVirtualNetworkId", "type": "str"},
+        "disallow_public_ip_address": {"key": "properties.disallowPublicIpAddress", "type": "bool"},
+        "artifacts": {"key": "properties.artifacts", "type": "[ArtifactInstallPropertiesFragment]"},
+        "artifact_deployment_status": {
+            "key": "properties.artifactDeploymentStatus",
+            "type": "ArtifactDeploymentStatusPropertiesFragment",
+        },
+        "gallery_image_reference": {"key": "properties.galleryImageReference", "type": "GalleryImageReferenceFragment"},
+        "plan_id": {"key": "properties.planId", "type": "str"},
+        "network_interface": {"key": "properties.networkInterface", "type": "NetworkInterfacePropertiesFragment"},
+        "expiration_date": {"key": "properties.expirationDate", "type": "iso-8601"},
+        "allow_claim": {"key": "properties.allowClaim", "type": "bool"},
+        "storage_type": {"key": "properties.storageType", "type": "str"},
+        "virtual_machine_creation_source": {"key": "properties.virtualMachineCreationSource", "type": "str"},
+        "environment_id": {"key": "properties.environmentId", "type": "str"},
+        "data_disk_parameters": {"key": "properties.dataDiskParameters", "type": "[DataDiskPropertiesFragment]"},
+        "schedule_parameters": {"key": "properties.scheduleParameters", "type": "[ScheduleCreationParameterFragment]"},
+        "last_known_power_state": {"key": "properties.lastKnownPowerState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabVirtualMachineCreationParameterFragment, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.location = kwargs.get('location', None)
-        self.tags = kwargs.get('tags', None)
-        self.bulk_creation_parameters = kwargs.get('bulk_creation_parameters', None)
-        self.notes = kwargs.get('notes', None)
-        self.owner_object_id = kwargs.get('owner_object_id', None)
-        self.owner_user_principal_name = kwargs.get('owner_user_principal_name', None)
-        self.created_by_user_id = kwargs.get('created_by_user_id', None)
-        self.created_by_user = kwargs.get('created_by_user', None)
-        self.created_date = kwargs.get('created_date', None)
-        self.compute_id = kwargs.get('compute_id', None)
-        self.custom_image_id = kwargs.get('custom_image_id', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.size = kwargs.get('size', None)
-        self.user_name = kwargs.get('user_name', None)
-        self.password = kwargs.get('password', None)
-        self.ssh_key = kwargs.get('ssh_key', None)
-        self.is_authentication_with_ssh_key = kwargs.get('is_authentication_with_ssh_key', None)
-        self.fqdn = kwargs.get('fqdn', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.lab_virtual_network_id = kwargs.get('lab_virtual_network_id', None)
-        self.disallow_public_ip_address = kwargs.get('disallow_public_ip_address', None)
-        self.artifacts = kwargs.get('artifacts', None)
-        self.artifact_deployment_status = kwargs.get('artifact_deployment_status', None)
-        self.gallery_image_reference = kwargs.get('gallery_image_reference', None)
-        self.plan_id = kwargs.get('plan_id', None)
-        self.network_interface = kwargs.get('network_interface', None)
-        self.expiration_date = kwargs.get('expiration_date', None)
-        self.allow_claim = kwargs.get('allow_claim', None)
-        self.storage_type = kwargs.get('storage_type', None)
-        self.virtual_machine_creation_source = kwargs.get('virtual_machine_creation_source', None)
-        self.environment_id = kwargs.get('environment_id', None)
-        self.data_disk_parameters = kwargs.get('data_disk_parameters', None)
-        self.schedule_parameters = kwargs.get('schedule_parameters', None)
-        self.last_known_power_state = kwargs.get('last_known_power_state', None)
+        self.name = kwargs.get("name", None)
+        self.location = kwargs.get("location", None)
+        self.tags = kwargs.get("tags", None)
+        self.bulk_creation_parameters = kwargs.get("bulk_creation_parameters", None)
+        self.notes = kwargs.get("notes", None)
+        self.owner_object_id = kwargs.get("owner_object_id", None)
+        self.owner_user_principal_name = kwargs.get("owner_user_principal_name", None)
+        self.created_by_user_id = kwargs.get("created_by_user_id", None)
+        self.created_by_user = kwargs.get("created_by_user", None)
+        self.created_date = kwargs.get("created_date", None)
+        self.compute_id = kwargs.get("compute_id", None)
+        self.custom_image_id = kwargs.get("custom_image_id", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.size = kwargs.get("size", None)
+        self.user_name = kwargs.get("user_name", None)
+        self.password = kwargs.get("password", None)
+        self.ssh_key = kwargs.get("ssh_key", None)
+        self.is_authentication_with_ssh_key = kwargs.get("is_authentication_with_ssh_key", None)
+        self.fqdn = kwargs.get("fqdn", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.lab_virtual_network_id = kwargs.get("lab_virtual_network_id", None)
+        self.disallow_public_ip_address = kwargs.get("disallow_public_ip_address", None)
+        self.artifacts = kwargs.get("artifacts", None)
+        self.artifact_deployment_status = kwargs.get("artifact_deployment_status", None)
+        self.gallery_image_reference = kwargs.get("gallery_image_reference", None)
+        self.plan_id = kwargs.get("plan_id", None)
+        self.network_interface = kwargs.get("network_interface", None)
+        self.expiration_date = kwargs.get("expiration_date", None)
+        self.allow_claim = kwargs.get("allow_claim", None)
+        self.storage_type = kwargs.get("storage_type", None)
+        self.virtual_machine_creation_source = kwargs.get("virtual_machine_creation_source", None)
+        self.environment_id = kwargs.get("environment_id", None)
+        self.data_disk_parameters = kwargs.get("data_disk_parameters", None)
+        self.schedule_parameters = kwargs.get("schedule_parameters", None)
+        self.last_known_power_state = kwargs.get("last_known_power_state", None)
 
 
 class LabVirtualMachineFragment(UpdateResource):
@@ -3946,76 +3676,76 @@ class LabVirtualMachineFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'notes': {'key': 'properties.notes', 'type': 'str'},
-        'owner_object_id': {'key': 'properties.ownerObjectId', 'type': 'str'},
-        'owner_user_principal_name': {'key': 'properties.ownerUserPrincipalName', 'type': 'str'},
-        'created_by_user_id': {'key': 'properties.createdByUserId', 'type': 'str'},
-        'created_by_user': {'key': 'properties.createdByUser', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'compute_id': {'key': 'properties.computeId', 'type': 'str'},
-        'custom_image_id': {'key': 'properties.customImageId', 'type': 'str'},
-        'os_type': {'key': 'properties.osType', 'type': 'str'},
-        'size': {'key': 'properties.size', 'type': 'str'},
-        'user_name': {'key': 'properties.userName', 'type': 'str'},
-        'password': {'key': 'properties.password', 'type': 'str'},
-        'ssh_key': {'key': 'properties.sshKey', 'type': 'str'},
-        'is_authentication_with_ssh_key': {'key': 'properties.isAuthenticationWithSshKey', 'type': 'bool'},
-        'fqdn': {'key': 'properties.fqdn', 'type': 'str'},
-        'lab_subnet_name': {'key': 'properties.labSubnetName', 'type': 'str'},
-        'lab_virtual_network_id': {'key': 'properties.labVirtualNetworkId', 'type': 'str'},
-        'disallow_public_ip_address': {'key': 'properties.disallowPublicIpAddress', 'type': 'bool'},
-        'artifacts': {'key': 'properties.artifacts', 'type': '[ArtifactInstallPropertiesFragment]'},
-        'artifact_deployment_status': {'key': 'properties.artifactDeploymentStatus', 'type': 'ArtifactDeploymentStatusPropertiesFragment'},
-        'gallery_image_reference': {'key': 'properties.galleryImageReference', 'type': 'GalleryImageReferenceFragment'},
-        'plan_id': {'key': 'properties.planId', 'type': 'str'},
-        'network_interface': {'key': 'properties.networkInterface', 'type': 'NetworkInterfacePropertiesFragment'},
-        'expiration_date': {'key': 'properties.expirationDate', 'type': 'iso-8601'},
-        'allow_claim': {'key': 'properties.allowClaim', 'type': 'bool'},
-        'storage_type': {'key': 'properties.storageType', 'type': 'str'},
-        'virtual_machine_creation_source': {'key': 'properties.virtualMachineCreationSource', 'type': 'str'},
-        'environment_id': {'key': 'properties.environmentId', 'type': 'str'},
-        'data_disk_parameters': {'key': 'properties.dataDiskParameters', 'type': '[DataDiskPropertiesFragment]'},
-        'schedule_parameters': {'key': 'properties.scheduleParameters', 'type': '[ScheduleCreationParameterFragment]'},
-        'last_known_power_state': {'key': 'properties.lastKnownPowerState', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "notes": {"key": "properties.notes", "type": "str"},
+        "owner_object_id": {"key": "properties.ownerObjectId", "type": "str"},
+        "owner_user_principal_name": {"key": "properties.ownerUserPrincipalName", "type": "str"},
+        "created_by_user_id": {"key": "properties.createdByUserId", "type": "str"},
+        "created_by_user": {"key": "properties.createdByUser", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "compute_id": {"key": "properties.computeId", "type": "str"},
+        "custom_image_id": {"key": "properties.customImageId", "type": "str"},
+        "os_type": {"key": "properties.osType", "type": "str"},
+        "size": {"key": "properties.size", "type": "str"},
+        "user_name": {"key": "properties.userName", "type": "str"},
+        "password": {"key": "properties.password", "type": "str"},
+        "ssh_key": {"key": "properties.sshKey", "type": "str"},
+        "is_authentication_with_ssh_key": {"key": "properties.isAuthenticationWithSshKey", "type": "bool"},
+        "fqdn": {"key": "properties.fqdn", "type": "str"},
+        "lab_subnet_name": {"key": "properties.labSubnetName", "type": "str"},
+        "lab_virtual_network_id": {"key": "properties.labVirtualNetworkId", "type": "str"},
+        "disallow_public_ip_address": {"key": "properties.disallowPublicIpAddress", "type": "bool"},
+        "artifacts": {"key": "properties.artifacts", "type": "[ArtifactInstallPropertiesFragment]"},
+        "artifact_deployment_status": {
+            "key": "properties.artifactDeploymentStatus",
+            "type": "ArtifactDeploymentStatusPropertiesFragment",
+        },
+        "gallery_image_reference": {"key": "properties.galleryImageReference", "type": "GalleryImageReferenceFragment"},
+        "plan_id": {"key": "properties.planId", "type": "str"},
+        "network_interface": {"key": "properties.networkInterface", "type": "NetworkInterfacePropertiesFragment"},
+        "expiration_date": {"key": "properties.expirationDate", "type": "iso-8601"},
+        "allow_claim": {"key": "properties.allowClaim", "type": "bool"},
+        "storage_type": {"key": "properties.storageType", "type": "str"},
+        "virtual_machine_creation_source": {"key": "properties.virtualMachineCreationSource", "type": "str"},
+        "environment_id": {"key": "properties.environmentId", "type": "str"},
+        "data_disk_parameters": {"key": "properties.dataDiskParameters", "type": "[DataDiskPropertiesFragment]"},
+        "schedule_parameters": {"key": "properties.scheduleParameters", "type": "[ScheduleCreationParameterFragment]"},
+        "last_known_power_state": {"key": "properties.lastKnownPowerState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabVirtualMachineFragment, self).__init__(**kwargs)
-        self.notes = kwargs.get('notes', None)
-        self.owner_object_id = kwargs.get('owner_object_id', None)
-        self.owner_user_principal_name = kwargs.get('owner_user_principal_name', None)
-        self.created_by_user_id = kwargs.get('created_by_user_id', None)
-        self.created_by_user = kwargs.get('created_by_user', None)
-        self.created_date = kwargs.get('created_date', None)
-        self.compute_id = kwargs.get('compute_id', None)
-        self.custom_image_id = kwargs.get('custom_image_id', None)
-        self.os_type = kwargs.get('os_type', None)
-        self.size = kwargs.get('size', None)
-        self.user_name = kwargs.get('user_name', None)
-        self.password = kwargs.get('password', None)
-        self.ssh_key = kwargs.get('ssh_key', None)
-        self.is_authentication_with_ssh_key = kwargs.get('is_authentication_with_ssh_key', None)
-        self.fqdn = kwargs.get('fqdn', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.lab_virtual_network_id = kwargs.get('lab_virtual_network_id', None)
-        self.disallow_public_ip_address = kwargs.get('disallow_public_ip_address', None)
-        self.artifacts = kwargs.get('artifacts', None)
-        self.artifact_deployment_status = kwargs.get('artifact_deployment_status', None)
-        self.gallery_image_reference = kwargs.get('gallery_image_reference', None)
-        self.plan_id = kwargs.get('plan_id', None)
-        self.network_interface = kwargs.get('network_interface', None)
-        self.expiration_date = kwargs.get('expiration_date', None)
-        self.allow_claim = kwargs.get('allow_claim', None)
-        self.storage_type = kwargs.get('storage_type', None)
-        self.virtual_machine_creation_source = kwargs.get('virtual_machine_creation_source', None)
-        self.environment_id = kwargs.get('environment_id', None)
-        self.data_disk_parameters = kwargs.get('data_disk_parameters', None)
-        self.schedule_parameters = kwargs.get('schedule_parameters', None)
-        self.last_known_power_state = kwargs.get('last_known_power_state', None)
+        self.notes = kwargs.get("notes", None)
+        self.owner_object_id = kwargs.get("owner_object_id", None)
+        self.owner_user_principal_name = kwargs.get("owner_user_principal_name", None)
+        self.created_by_user_id = kwargs.get("created_by_user_id", None)
+        self.created_by_user = kwargs.get("created_by_user", None)
+        self.created_date = kwargs.get("created_date", None)
+        self.compute_id = kwargs.get("compute_id", None)
+        self.custom_image_id = kwargs.get("custom_image_id", None)
+        self.os_type = kwargs.get("os_type", None)
+        self.size = kwargs.get("size", None)
+        self.user_name = kwargs.get("user_name", None)
+        self.password = kwargs.get("password", None)
+        self.ssh_key = kwargs.get("ssh_key", None)
+        self.is_authentication_with_ssh_key = kwargs.get("is_authentication_with_ssh_key", None)
+        self.fqdn = kwargs.get("fqdn", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.lab_virtual_network_id = kwargs.get("lab_virtual_network_id", None)
+        self.disallow_public_ip_address = kwargs.get("disallow_public_ip_address", None)
+        self.artifacts = kwargs.get("artifacts", None)
+        self.artifact_deployment_status = kwargs.get("artifact_deployment_status", None)
+        self.gallery_image_reference = kwargs.get("gallery_image_reference", None)
+        self.plan_id = kwargs.get("plan_id", None)
+        self.network_interface = kwargs.get("network_interface", None)
+        self.expiration_date = kwargs.get("expiration_date", None)
+        self.allow_claim = kwargs.get("allow_claim", None)
+        self.storage_type = kwargs.get("storage_type", None)
+        self.virtual_machine_creation_source = kwargs.get("virtual_machine_creation_source", None)
+        self.environment_id = kwargs.get("environment_id", None)
+        self.data_disk_parameters = kwargs.get("data_disk_parameters", None)
+        self.schedule_parameters = kwargs.get("schedule_parameters", None)
+        self.last_known_power_state = kwargs.get("last_known_power_state", None)
 
 
 class LabVirtualMachineList(msrest.serialization.Model):
@@ -4028,17 +3758,14 @@ class LabVirtualMachineList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[LabVirtualMachine]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[LabVirtualMachine]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LabVirtualMachineList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class LinuxOsInfo(msrest.serialization.Model):
@@ -4051,15 +3778,12 @@ class LinuxOsInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'linux_os_state': {'key': 'linuxOsState', 'type': 'str'},
+        "linux_os_state": {"key": "linuxOsState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LinuxOsInfo, self).__init__(**kwargs)
-        self.linux_os_state = kwargs.get('linux_os_state', None)
+        self.linux_os_state = kwargs.get("linux_os_state", None)
 
 
 class LinuxOsInfoFragment(msrest.serialization.Model):
@@ -4072,15 +3796,12 @@ class LinuxOsInfoFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'linux_os_state': {'key': 'linuxOsState', 'type': 'str'},
+        "linux_os_state": {"key": "linuxOsState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(LinuxOsInfoFragment, self).__init__(**kwargs)
-        self.linux_os_state = kwargs.get('linux_os_state', None)
+        self.linux_os_state = kwargs.get("linux_os_state", None)
 
 
 class NetworkInterfaceProperties(msrest.serialization.Model):
@@ -4111,31 +3832,31 @@ class NetworkInterfaceProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'virtual_network_id': {'key': 'virtualNetworkId', 'type': 'str'},
-        'subnet_id': {'key': 'subnetId', 'type': 'str'},
-        'public_ip_address_id': {'key': 'publicIpAddressId', 'type': 'str'},
-        'public_ip_address': {'key': 'publicIpAddress', 'type': 'str'},
-        'private_ip_address': {'key': 'privateIpAddress', 'type': 'str'},
-        'dns_name': {'key': 'dnsName', 'type': 'str'},
-        'rdp_authority': {'key': 'rdpAuthority', 'type': 'str'},
-        'ssh_authority': {'key': 'sshAuthority', 'type': 'str'},
-        'shared_public_ip_address_configuration': {'key': 'sharedPublicIpAddressConfiguration', 'type': 'SharedPublicIpAddressConfiguration'},
+        "virtual_network_id": {"key": "virtualNetworkId", "type": "str"},
+        "subnet_id": {"key": "subnetId", "type": "str"},
+        "public_ip_address_id": {"key": "publicIpAddressId", "type": "str"},
+        "public_ip_address": {"key": "publicIpAddress", "type": "str"},
+        "private_ip_address": {"key": "privateIpAddress", "type": "str"},
+        "dns_name": {"key": "dnsName", "type": "str"},
+        "rdp_authority": {"key": "rdpAuthority", "type": "str"},
+        "ssh_authority": {"key": "sshAuthority", "type": "str"},
+        "shared_public_ip_address_configuration": {
+            "key": "sharedPublicIpAddressConfiguration",
+            "type": "SharedPublicIpAddressConfiguration",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkInterfaceProperties, self).__init__(**kwargs)
-        self.virtual_network_id = kwargs.get('virtual_network_id', None)
-        self.subnet_id = kwargs.get('subnet_id', None)
-        self.public_ip_address_id = kwargs.get('public_ip_address_id', None)
-        self.public_ip_address = kwargs.get('public_ip_address', None)
-        self.private_ip_address = kwargs.get('private_ip_address', None)
-        self.dns_name = kwargs.get('dns_name', None)
-        self.rdp_authority = kwargs.get('rdp_authority', None)
-        self.ssh_authority = kwargs.get('ssh_authority', None)
-        self.shared_public_ip_address_configuration = kwargs.get('shared_public_ip_address_configuration', None)
+        self.virtual_network_id = kwargs.get("virtual_network_id", None)
+        self.subnet_id = kwargs.get("subnet_id", None)
+        self.public_ip_address_id = kwargs.get("public_ip_address_id", None)
+        self.public_ip_address = kwargs.get("public_ip_address", None)
+        self.private_ip_address = kwargs.get("private_ip_address", None)
+        self.dns_name = kwargs.get("dns_name", None)
+        self.rdp_authority = kwargs.get("rdp_authority", None)
+        self.ssh_authority = kwargs.get("ssh_authority", None)
+        self.shared_public_ip_address_configuration = kwargs.get("shared_public_ip_address_configuration", None)
 
 
 class NetworkInterfacePropertiesFragment(msrest.serialization.Model):
@@ -4166,31 +3887,31 @@ class NetworkInterfacePropertiesFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'virtual_network_id': {'key': 'virtualNetworkId', 'type': 'str'},
-        'subnet_id': {'key': 'subnetId', 'type': 'str'},
-        'public_ip_address_id': {'key': 'publicIpAddressId', 'type': 'str'},
-        'public_ip_address': {'key': 'publicIpAddress', 'type': 'str'},
-        'private_ip_address': {'key': 'privateIpAddress', 'type': 'str'},
-        'dns_name': {'key': 'dnsName', 'type': 'str'},
-        'rdp_authority': {'key': 'rdpAuthority', 'type': 'str'},
-        'ssh_authority': {'key': 'sshAuthority', 'type': 'str'},
-        'shared_public_ip_address_configuration': {'key': 'sharedPublicIpAddressConfiguration', 'type': 'SharedPublicIpAddressConfigurationFragment'},
+        "virtual_network_id": {"key": "virtualNetworkId", "type": "str"},
+        "subnet_id": {"key": "subnetId", "type": "str"},
+        "public_ip_address_id": {"key": "publicIpAddressId", "type": "str"},
+        "public_ip_address": {"key": "publicIpAddress", "type": "str"},
+        "private_ip_address": {"key": "privateIpAddress", "type": "str"},
+        "dns_name": {"key": "dnsName", "type": "str"},
+        "rdp_authority": {"key": "rdpAuthority", "type": "str"},
+        "ssh_authority": {"key": "sshAuthority", "type": "str"},
+        "shared_public_ip_address_configuration": {
+            "key": "sharedPublicIpAddressConfiguration",
+            "type": "SharedPublicIpAddressConfigurationFragment",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NetworkInterfacePropertiesFragment, self).__init__(**kwargs)
-        self.virtual_network_id = kwargs.get('virtual_network_id', None)
-        self.subnet_id = kwargs.get('subnet_id', None)
-        self.public_ip_address_id = kwargs.get('public_ip_address_id', None)
-        self.public_ip_address = kwargs.get('public_ip_address', None)
-        self.private_ip_address = kwargs.get('private_ip_address', None)
-        self.dns_name = kwargs.get('dns_name', None)
-        self.rdp_authority = kwargs.get('rdp_authority', None)
-        self.ssh_authority = kwargs.get('ssh_authority', None)
-        self.shared_public_ip_address_configuration = kwargs.get('shared_public_ip_address_configuration', None)
+        self.virtual_network_id = kwargs.get("virtual_network_id", None)
+        self.subnet_id = kwargs.get("subnet_id", None)
+        self.public_ip_address_id = kwargs.get("public_ip_address_id", None)
+        self.public_ip_address = kwargs.get("public_ip_address", None)
+        self.private_ip_address = kwargs.get("private_ip_address", None)
+        self.dns_name = kwargs.get("dns_name", None)
+        self.rdp_authority = kwargs.get("rdp_authority", None)
+        self.ssh_authority = kwargs.get("ssh_authority", None)
+        self.shared_public_ip_address_configuration = kwargs.get("shared_public_ip_address_configuration", None)
 
 
 class NotificationChannel(Resource):
@@ -4229,40 +3950,37 @@ class NotificationChannel(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'created_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "created_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'web_hook_url': {'key': 'properties.webHookUrl', 'type': 'str'},
-        'email_recipient': {'key': 'properties.emailRecipient', 'type': 'str'},
-        'notification_locale': {'key': 'properties.notificationLocale', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'events': {'key': 'properties.events', 'type': '[Event]'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "web_hook_url": {"key": "properties.webHookUrl", "type": "str"},
+        "email_recipient": {"key": "properties.emailRecipient", "type": "str"},
+        "notification_locale": {"key": "properties.notificationLocale", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "events": {"key": "properties.events", "type": "[Event]"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationChannel, self).__init__(**kwargs)
-        self.web_hook_url = kwargs.get('web_hook_url', None)
-        self.email_recipient = kwargs.get('email_recipient', None)
-        self.notification_locale = kwargs.get('notification_locale', None)
-        self.description = kwargs.get('description', None)
-        self.events = kwargs.get('events', None)
+        self.web_hook_url = kwargs.get("web_hook_url", None)
+        self.email_recipient = kwargs.get("email_recipient", None)
+        self.notification_locale = kwargs.get("notification_locale", None)
+        self.description = kwargs.get("description", None)
+        self.events = kwargs.get("events", None)
         self.created_date = None
         self.provisioning_state = None
         self.unique_identifier = None
@@ -4288,24 +4006,21 @@ class NotificationChannelFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'web_hook_url': {'key': 'properties.webHookUrl', 'type': 'str'},
-        'email_recipient': {'key': 'properties.emailRecipient', 'type': 'str'},
-        'notification_locale': {'key': 'properties.notificationLocale', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'events': {'key': 'properties.events', 'type': '[EventFragment]'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "web_hook_url": {"key": "properties.webHookUrl", "type": "str"},
+        "email_recipient": {"key": "properties.emailRecipient", "type": "str"},
+        "notification_locale": {"key": "properties.notificationLocale", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
+        "events": {"key": "properties.events", "type": "[EventFragment]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationChannelFragment, self).__init__(**kwargs)
-        self.web_hook_url = kwargs.get('web_hook_url', None)
-        self.email_recipient = kwargs.get('email_recipient', None)
-        self.notification_locale = kwargs.get('notification_locale', None)
-        self.description = kwargs.get('description', None)
-        self.events = kwargs.get('events', None)
+        self.web_hook_url = kwargs.get("web_hook_url", None)
+        self.email_recipient = kwargs.get("email_recipient", None)
+        self.notification_locale = kwargs.get("notification_locale", None)
+        self.description = kwargs.get("description", None)
+        self.events = kwargs.get("events", None)
 
 
 class NotificationChannelList(msrest.serialization.Model):
@@ -4318,17 +4033,14 @@ class NotificationChannelList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[NotificationChannel]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[NotificationChannel]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationChannelList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class NotificationSettings(msrest.serialization.Model):
@@ -4350,23 +4062,20 @@ class NotificationSettings(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-        'time_in_minutes': {'key': 'timeInMinutes', 'type': 'int'},
-        'webhook_url': {'key': 'webhookUrl', 'type': 'str'},
-        'email_recipient': {'key': 'emailRecipient', 'type': 'str'},
-        'notification_locale': {'key': 'notificationLocale', 'type': 'str'},
+        "status": {"key": "status", "type": "str"},
+        "time_in_minutes": {"key": "timeInMinutes", "type": "int"},
+        "webhook_url": {"key": "webhookUrl", "type": "str"},
+        "email_recipient": {"key": "emailRecipient", "type": "str"},
+        "notification_locale": {"key": "notificationLocale", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationSettings, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.time_in_minutes = kwargs.get('time_in_minutes', None)
-        self.webhook_url = kwargs.get('webhook_url', None)
-        self.email_recipient = kwargs.get('email_recipient', None)
-        self.notification_locale = kwargs.get('notification_locale', None)
+        self.status = kwargs.get("status", None)
+        self.time_in_minutes = kwargs.get("time_in_minutes", None)
+        self.webhook_url = kwargs.get("webhook_url", None)
+        self.email_recipient = kwargs.get("email_recipient", None)
+        self.notification_locale = kwargs.get("notification_locale", None)
 
 
 class NotificationSettingsFragment(msrest.serialization.Model):
@@ -4388,23 +4097,20 @@ class NotificationSettingsFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-        'time_in_minutes': {'key': 'timeInMinutes', 'type': 'int'},
-        'webhook_url': {'key': 'webhookUrl', 'type': 'str'},
-        'email_recipient': {'key': 'emailRecipient', 'type': 'str'},
-        'notification_locale': {'key': 'notificationLocale', 'type': 'str'},
+        "status": {"key": "status", "type": "str"},
+        "time_in_minutes": {"key": "timeInMinutes", "type": "int"},
+        "webhook_url": {"key": "webhookUrl", "type": "str"},
+        "email_recipient": {"key": "emailRecipient", "type": "str"},
+        "notification_locale": {"key": "notificationLocale", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationSettingsFragment, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.time_in_minutes = kwargs.get('time_in_minutes', None)
-        self.webhook_url = kwargs.get('webhook_url', None)
-        self.email_recipient = kwargs.get('email_recipient', None)
-        self.notification_locale = kwargs.get('notification_locale', None)
+        self.status = kwargs.get("status", None)
+        self.time_in_minutes = kwargs.get("time_in_minutes", None)
+        self.webhook_url = kwargs.get("webhook_url", None)
+        self.email_recipient = kwargs.get("email_recipient", None)
+        self.notification_locale = kwargs.get("notification_locale", None)
 
 
 class NotifyParameters(msrest.serialization.Model):
@@ -4418,17 +4124,14 @@ class NotifyParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'event_name': {'key': 'eventName', 'type': 'str'},
-        'json_payload': {'key': 'jsonPayload', 'type': 'str'},
+        "event_name": {"key": "eventName", "type": "str"},
+        "json_payload": {"key": "jsonPayload", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotifyParameters, self).__init__(**kwargs)
-        self.event_name = kwargs.get('event_name', None)
-        self.json_payload = kwargs.get('json_payload', None)
+        self.event_name = kwargs.get("event_name", None)
+        self.json_payload = kwargs.get("json_payload", None)
 
 
 class OperationError(msrest.serialization.Model):
@@ -4441,17 +4144,14 @@ class OperationError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationError, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
 
 
 class OperationMetadata(msrest.serialization.Model):
@@ -4464,17 +4164,14 @@ class OperationMetadata(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'OperationMetadataDisplay'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "OperationMetadataDisplay"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationMetadata, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display = kwargs.get('display', None)
+        self.name = kwargs.get("name", None)
+        self.display = kwargs.get("display", None)
 
 
 class OperationMetadataDisplay(msrest.serialization.Model):
@@ -4491,21 +4188,18 @@ class OperationMetadataDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationMetadataDisplay, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class OperationResult(msrest.serialization.Model):
@@ -4529,19 +4223,16 @@ class OperationResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-        'status_code': {'key': 'statusCode', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'OperationError'},
+        "status": {"key": "status", "type": "str"},
+        "status_code": {"key": "statusCode", "type": "str"},
+        "error": {"key": "error", "type": "OperationError"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationResult, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.status_code = kwargs.get('status_code', None)
-        self.error = kwargs.get('error', None)
+        self.status = kwargs.get("status", None)
+        self.status_code = kwargs.get("status_code", None)
+        self.error = kwargs.get("error", None)
 
 
 class ParameterInfo(msrest.serialization.Model):
@@ -4554,17 +4245,14 @@ class ParameterInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ParameterInfo, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.value = kwargs.get('value', None)
+        self.name = kwargs.get("name", None)
+        self.value = kwargs.get("value", None)
 
 
 class ParametersValueFileInfo(msrest.serialization.Model):
@@ -4577,17 +4265,14 @@ class ParametersValueFileInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'file_name': {'key': 'fileName', 'type': 'str'},
-        'parameters_value_info': {'key': 'parametersValueInfo', 'type': 'object'},
+        "file_name": {"key": "fileName", "type": "str"},
+        "parameters_value_info": {"key": "parametersValueInfo", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ParametersValueFileInfo, self).__init__(**kwargs)
-        self.file_name = kwargs.get('file_name', None)
-        self.parameters_value_info = kwargs.get('parameters_value_info', None)
+        self.file_name = kwargs.get("file_name", None)
+        self.parameters_value_info = kwargs.get("parameters_value_info", None)
 
 
 class PercentageCostThresholdProperties(msrest.serialization.Model):
@@ -4598,15 +4283,12 @@ class PercentageCostThresholdProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'threshold_value': {'key': 'thresholdValue', 'type': 'float'},
+        "threshold_value": {"key": "thresholdValue", "type": "float"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PercentageCostThresholdProperties, self).__init__(**kwargs)
-        self.threshold_value = kwargs.get('threshold_value', None)
+        self.threshold_value = kwargs.get("threshold_value", None)
 
 
 class Policy(Resource):
@@ -4650,42 +4332,39 @@ class Policy(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'created_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "created_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'fact_name': {'key': 'properties.factName', 'type': 'str'},
-        'fact_data': {'key': 'properties.factData', 'type': 'str'},
-        'threshold': {'key': 'properties.threshold', 'type': 'str'},
-        'evaluator_type': {'key': 'properties.evaluatorType', 'type': 'str'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "fact_name": {"key": "properties.factName", "type": "str"},
+        "fact_data": {"key": "properties.factData", "type": "str"},
+        "threshold": {"key": "properties.threshold", "type": "str"},
+        "evaluator_type": {"key": "properties.evaluatorType", "type": "str"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Policy, self).__init__(**kwargs)
-        self.description = kwargs.get('description', None)
-        self.status = kwargs.get('status', None)
-        self.fact_name = kwargs.get('fact_name', None)
-        self.fact_data = kwargs.get('fact_data', None)
-        self.threshold = kwargs.get('threshold', None)
-        self.evaluator_type = kwargs.get('evaluator_type', None)
+        self.description = kwargs.get("description", None)
+        self.status = kwargs.get("status", None)
+        self.fact_name = kwargs.get("fact_name", None)
+        self.fact_data = kwargs.get("fact_data", None)
+        self.threshold = kwargs.get("threshold", None)
+        self.evaluator_type = kwargs.get("evaluator_type", None)
         self.created_date = None
         self.provisioning_state = None
         self.unique_identifier = None
@@ -4716,26 +4395,23 @@ class PolicyFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'fact_name': {'key': 'properties.factName', 'type': 'str'},
-        'fact_data': {'key': 'properties.factData', 'type': 'str'},
-        'threshold': {'key': 'properties.threshold', 'type': 'str'},
-        'evaluator_type': {'key': 'properties.evaluatorType', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "description": {"key": "properties.description", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "fact_name": {"key": "properties.factName", "type": "str"},
+        "fact_data": {"key": "properties.factData", "type": "str"},
+        "threshold": {"key": "properties.threshold", "type": "str"},
+        "evaluator_type": {"key": "properties.evaluatorType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyFragment, self).__init__(**kwargs)
-        self.description = kwargs.get('description', None)
-        self.status = kwargs.get('status', None)
-        self.fact_name = kwargs.get('fact_name', None)
-        self.fact_data = kwargs.get('fact_data', None)
-        self.threshold = kwargs.get('threshold', None)
-        self.evaluator_type = kwargs.get('evaluator_type', None)
+        self.description = kwargs.get("description", None)
+        self.status = kwargs.get("status", None)
+        self.fact_name = kwargs.get("fact_name", None)
+        self.fact_data = kwargs.get("fact_data", None)
+        self.threshold = kwargs.get("threshold", None)
+        self.evaluator_type = kwargs.get("evaluator_type", None)
 
 
 class PolicyList(msrest.serialization.Model):
@@ -4748,17 +4424,14 @@ class PolicyList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Policy]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Policy]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class PolicySetResult(msrest.serialization.Model):
@@ -4772,17 +4445,14 @@ class PolicySetResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'has_error': {'key': 'hasError', 'type': 'bool'},
-        'policy_violations': {'key': 'policyViolations', 'type': '[PolicyViolation]'},
+        "has_error": {"key": "hasError", "type": "bool"},
+        "policy_violations": {"key": "policyViolations", "type": "[PolicyViolation]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicySetResult, self).__init__(**kwargs)
-        self.has_error = kwargs.get('has_error', None)
-        self.policy_violations = kwargs.get('policy_violations', None)
+        self.has_error = kwargs.get("has_error", None)
+        self.policy_violations = kwargs.get("policy_violations", None)
 
 
 class PolicyViolation(msrest.serialization.Model):
@@ -4795,17 +4465,14 @@ class PolicyViolation(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyViolation, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
 
 
 class Port(msrest.serialization.Model):
@@ -4818,17 +4485,14 @@ class Port(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'transport_protocol': {'key': 'transportProtocol', 'type': 'str'},
-        'backend_port': {'key': 'backendPort', 'type': 'int'},
+        "transport_protocol": {"key": "transportProtocol", "type": "str"},
+        "backend_port": {"key": "backendPort", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Port, self).__init__(**kwargs)
-        self.transport_protocol = kwargs.get('transport_protocol', None)
-        self.backend_port = kwargs.get('backend_port', None)
+        self.transport_protocol = kwargs.get("transport_protocol", None)
+        self.backend_port = kwargs.get("backend_port", None)
 
 
 class PortFragment(msrest.serialization.Model):
@@ -4841,17 +4505,14 @@ class PortFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'transport_protocol': {'key': 'transportProtocol', 'type': 'str'},
-        'backend_port': {'key': 'backendPort', 'type': 'int'},
+        "transport_protocol": {"key": "transportProtocol", "type": "str"},
+        "backend_port": {"key": "backendPort", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PortFragment, self).__init__(**kwargs)
-        self.transport_protocol = kwargs.get('transport_protocol', None)
-        self.backend_port = kwargs.get('backend_port', None)
+        self.transport_protocol = kwargs.get("transport_protocol", None)
+        self.backend_port = kwargs.get("backend_port", None)
 
 
 class ProviderOperationResult(msrest.serialization.Model):
@@ -4866,20 +4527,17 @@ class ProviderOperationResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[OperationMetadata]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[OperationMetadata]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProviderOperationResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -4891,15 +4549,12 @@ class RdpConnection(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'contents': {'key': 'contents', 'type': 'str'},
+        "contents": {"key": "contents", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RdpConnection, self).__init__(**kwargs)
-        self.contents = kwargs.get('contents', None)
+        self.contents = kwargs.get("contents", None)
 
 
 class ResizeLabVirtualMachineProperties(msrest.serialization.Model):
@@ -4910,15 +4565,12 @@ class ResizeLabVirtualMachineProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'size': {'key': 'size', 'type': 'str'},
+        "size": {"key": "size", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResizeLabVirtualMachineProperties, self).__init__(**kwargs)
-        self.size = kwargs.get('size', None)
+        self.size = kwargs.get("size", None)
 
 
 class RetargetScheduleProperties(msrest.serialization.Model):
@@ -4933,17 +4585,14 @@ class RetargetScheduleProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'current_resource_id': {'key': 'currentResourceId', 'type': 'str'},
-        'target_resource_id': {'key': 'targetResourceId', 'type': 'str'},
+        "current_resource_id": {"key": "currentResourceId", "type": "str"},
+        "target_resource_id": {"key": "targetResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RetargetScheduleProperties, self).__init__(**kwargs)
-        self.current_resource_id = kwargs.get('current_resource_id', None)
-        self.target_resource_id = kwargs.get('target_resource_id', None)
+        self.current_resource_id = kwargs.get("current_resource_id", None)
+        self.target_resource_id = kwargs.get("target_resource_id", None)
 
 
 class Schedule(Resource):
@@ -4990,47 +4639,44 @@ class Schedule(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'created_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "created_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'task_type': {'key': 'properties.taskType', 'type': 'str'},
-        'weekly_recurrence': {'key': 'properties.weeklyRecurrence', 'type': 'WeekDetails'},
-        'daily_recurrence': {'key': 'properties.dailyRecurrence', 'type': 'DayDetails'},
-        'hourly_recurrence': {'key': 'properties.hourlyRecurrence', 'type': 'HourDetails'},
-        'time_zone_id': {'key': 'properties.timeZoneId', 'type': 'str'},
-        'notification_settings': {'key': 'properties.notificationSettings', 'type': 'NotificationSettings'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'target_resource_id': {'key': 'properties.targetResourceId', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "status": {"key": "properties.status", "type": "str"},
+        "task_type": {"key": "properties.taskType", "type": "str"},
+        "weekly_recurrence": {"key": "properties.weeklyRecurrence", "type": "WeekDetails"},
+        "daily_recurrence": {"key": "properties.dailyRecurrence", "type": "DayDetails"},
+        "hourly_recurrence": {"key": "properties.hourlyRecurrence", "type": "HourDetails"},
+        "time_zone_id": {"key": "properties.timeZoneId", "type": "str"},
+        "notification_settings": {"key": "properties.notificationSettings", "type": "NotificationSettings"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "target_resource_id": {"key": "properties.targetResourceId", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Schedule, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.task_type = kwargs.get('task_type', None)
-        self.weekly_recurrence = kwargs.get('weekly_recurrence', None)
-        self.daily_recurrence = kwargs.get('daily_recurrence', None)
-        self.hourly_recurrence = kwargs.get('hourly_recurrence', None)
-        self.time_zone_id = kwargs.get('time_zone_id', None)
-        self.notification_settings = kwargs.get('notification_settings', None)
+        self.status = kwargs.get("status", None)
+        self.task_type = kwargs.get("task_type", None)
+        self.weekly_recurrence = kwargs.get("weekly_recurrence", None)
+        self.daily_recurrence = kwargs.get("daily_recurrence", None)
+        self.hourly_recurrence = kwargs.get("hourly_recurrence", None)
+        self.time_zone_id = kwargs.get("time_zone_id", None)
+        self.notification_settings = kwargs.get("notification_settings", None)
         self.created_date = None
-        self.target_resource_id = kwargs.get('target_resource_id', None)
+        self.target_resource_id = kwargs.get("target_resource_id", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -5067,35 +4713,32 @@ class ScheduleCreationParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'task_type': {'key': 'properties.taskType', 'type': 'str'},
-        'weekly_recurrence': {'key': 'properties.weeklyRecurrence', 'type': 'WeekDetails'},
-        'daily_recurrence': {'key': 'properties.dailyRecurrence', 'type': 'DayDetails'},
-        'hourly_recurrence': {'key': 'properties.hourlyRecurrence', 'type': 'HourDetails'},
-        'time_zone_id': {'key': 'properties.timeZoneId', 'type': 'str'},
-        'notification_settings': {'key': 'properties.notificationSettings', 'type': 'NotificationSettings'},
-        'target_resource_id': {'key': 'properties.targetResourceId', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "status": {"key": "properties.status", "type": "str"},
+        "task_type": {"key": "properties.taskType", "type": "str"},
+        "weekly_recurrence": {"key": "properties.weeklyRecurrence", "type": "WeekDetails"},
+        "daily_recurrence": {"key": "properties.dailyRecurrence", "type": "DayDetails"},
+        "hourly_recurrence": {"key": "properties.hourlyRecurrence", "type": "HourDetails"},
+        "time_zone_id": {"key": "properties.timeZoneId", "type": "str"},
+        "notification_settings": {"key": "properties.notificationSettings", "type": "NotificationSettings"},
+        "target_resource_id": {"key": "properties.targetResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleCreationParameter, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.location = kwargs.get('location', None)
-        self.tags = kwargs.get('tags', None)
-        self.status = kwargs.get('status', None)
-        self.task_type = kwargs.get('task_type', None)
-        self.weekly_recurrence = kwargs.get('weekly_recurrence', None)
-        self.daily_recurrence = kwargs.get('daily_recurrence', None)
-        self.hourly_recurrence = kwargs.get('hourly_recurrence', None)
-        self.time_zone_id = kwargs.get('time_zone_id', None)
-        self.notification_settings = kwargs.get('notification_settings', None)
-        self.target_resource_id = kwargs.get('target_resource_id', None)
+        self.name = kwargs.get("name", None)
+        self.location = kwargs.get("location", None)
+        self.tags = kwargs.get("tags", None)
+        self.status = kwargs.get("status", None)
+        self.task_type = kwargs.get("task_type", None)
+        self.weekly_recurrence = kwargs.get("weekly_recurrence", None)
+        self.daily_recurrence = kwargs.get("daily_recurrence", None)
+        self.hourly_recurrence = kwargs.get("hourly_recurrence", None)
+        self.time_zone_id = kwargs.get("time_zone_id", None)
+        self.notification_settings = kwargs.get("notification_settings", None)
+        self.target_resource_id = kwargs.get("target_resource_id", None)
 
 
 class ScheduleCreationParameterFragment(msrest.serialization.Model):
@@ -5130,35 +4773,32 @@ class ScheduleCreationParameterFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'task_type': {'key': 'properties.taskType', 'type': 'str'},
-        'weekly_recurrence': {'key': 'properties.weeklyRecurrence', 'type': 'WeekDetailsFragment'},
-        'daily_recurrence': {'key': 'properties.dailyRecurrence', 'type': 'DayDetailsFragment'},
-        'hourly_recurrence': {'key': 'properties.hourlyRecurrence', 'type': 'HourDetailsFragment'},
-        'time_zone_id': {'key': 'properties.timeZoneId', 'type': 'str'},
-        'notification_settings': {'key': 'properties.notificationSettings', 'type': 'NotificationSettingsFragment'},
-        'target_resource_id': {'key': 'properties.targetResourceId', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "status": {"key": "properties.status", "type": "str"},
+        "task_type": {"key": "properties.taskType", "type": "str"},
+        "weekly_recurrence": {"key": "properties.weeklyRecurrence", "type": "WeekDetailsFragment"},
+        "daily_recurrence": {"key": "properties.dailyRecurrence", "type": "DayDetailsFragment"},
+        "hourly_recurrence": {"key": "properties.hourlyRecurrence", "type": "HourDetailsFragment"},
+        "time_zone_id": {"key": "properties.timeZoneId", "type": "str"},
+        "notification_settings": {"key": "properties.notificationSettings", "type": "NotificationSettingsFragment"},
+        "target_resource_id": {"key": "properties.targetResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleCreationParameterFragment, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.location = kwargs.get('location', None)
-        self.tags = kwargs.get('tags', None)
-        self.status = kwargs.get('status', None)
-        self.task_type = kwargs.get('task_type', None)
-        self.weekly_recurrence = kwargs.get('weekly_recurrence', None)
-        self.daily_recurrence = kwargs.get('daily_recurrence', None)
-        self.hourly_recurrence = kwargs.get('hourly_recurrence', None)
-        self.time_zone_id = kwargs.get('time_zone_id', None)
-        self.notification_settings = kwargs.get('notification_settings', None)
-        self.target_resource_id = kwargs.get('target_resource_id', None)
+        self.name = kwargs.get("name", None)
+        self.location = kwargs.get("location", None)
+        self.tags = kwargs.get("tags", None)
+        self.status = kwargs.get("status", None)
+        self.task_type = kwargs.get("task_type", None)
+        self.weekly_recurrence = kwargs.get("weekly_recurrence", None)
+        self.daily_recurrence = kwargs.get("daily_recurrence", None)
+        self.hourly_recurrence = kwargs.get("hourly_recurrence", None)
+        self.time_zone_id = kwargs.get("time_zone_id", None)
+        self.notification_settings = kwargs.get("notification_settings", None)
+        self.target_resource_id = kwargs.get("target_resource_id", None)
 
 
 class ScheduleFragment(UpdateResource):
@@ -5189,30 +4829,27 @@ class ScheduleFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'task_type': {'key': 'properties.taskType', 'type': 'str'},
-        'weekly_recurrence': {'key': 'properties.weeklyRecurrence', 'type': 'WeekDetailsFragment'},
-        'daily_recurrence': {'key': 'properties.dailyRecurrence', 'type': 'DayDetailsFragment'},
-        'hourly_recurrence': {'key': 'properties.hourlyRecurrence', 'type': 'HourDetailsFragment'},
-        'time_zone_id': {'key': 'properties.timeZoneId', 'type': 'str'},
-        'notification_settings': {'key': 'properties.notificationSettings', 'type': 'NotificationSettingsFragment'},
-        'target_resource_id': {'key': 'properties.targetResourceId', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "status": {"key": "properties.status", "type": "str"},
+        "task_type": {"key": "properties.taskType", "type": "str"},
+        "weekly_recurrence": {"key": "properties.weeklyRecurrence", "type": "WeekDetailsFragment"},
+        "daily_recurrence": {"key": "properties.dailyRecurrence", "type": "DayDetailsFragment"},
+        "hourly_recurrence": {"key": "properties.hourlyRecurrence", "type": "HourDetailsFragment"},
+        "time_zone_id": {"key": "properties.timeZoneId", "type": "str"},
+        "notification_settings": {"key": "properties.notificationSettings", "type": "NotificationSettingsFragment"},
+        "target_resource_id": {"key": "properties.targetResourceId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleFragment, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.task_type = kwargs.get('task_type', None)
-        self.weekly_recurrence = kwargs.get('weekly_recurrence', None)
-        self.daily_recurrence = kwargs.get('daily_recurrence', None)
-        self.hourly_recurrence = kwargs.get('hourly_recurrence', None)
-        self.time_zone_id = kwargs.get('time_zone_id', None)
-        self.notification_settings = kwargs.get('notification_settings', None)
-        self.target_resource_id = kwargs.get('target_resource_id', None)
+        self.status = kwargs.get("status", None)
+        self.task_type = kwargs.get("task_type", None)
+        self.weekly_recurrence = kwargs.get("weekly_recurrence", None)
+        self.daily_recurrence = kwargs.get("daily_recurrence", None)
+        self.hourly_recurrence = kwargs.get("hourly_recurrence", None)
+        self.time_zone_id = kwargs.get("time_zone_id", None)
+        self.notification_settings = kwargs.get("notification_settings", None)
+        self.target_resource_id = kwargs.get("target_resource_id", None)
 
 
 class ScheduleList(msrest.serialization.Model):
@@ -5225,17 +4862,14 @@ class ScheduleList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Schedule]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Schedule]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class Secret(Resource):
@@ -5262,30 +4896,27 @@ class Secret(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'value': {'key': 'properties.value', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "value": {"key": "properties.value", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Secret, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.provisioning_state = None
         self.unique_identifier = None
 
@@ -5300,16 +4931,13 @@ class SecretFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'value': {'key': 'properties.value', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "value": {"key": "properties.value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SecretFragment, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class SecretList(msrest.serialization.Model):
@@ -5322,17 +4950,14 @@ class SecretList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Secret]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Secret]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SecretList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ServiceFabric(Resource):
@@ -5364,34 +4989,31 @@ class ServiceFabric(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'applicable_schedule': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "applicable_schedule": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'external_service_fabric_id': {'key': 'properties.externalServiceFabricId', 'type': 'str'},
-        'environment_id': {'key': 'properties.environmentId', 'type': 'str'},
-        'applicable_schedule': {'key': 'properties.applicableSchedule', 'type': 'ApplicableSchedule'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "external_service_fabric_id": {"key": "properties.externalServiceFabricId", "type": "str"},
+        "environment_id": {"key": "properties.environmentId", "type": "str"},
+        "applicable_schedule": {"key": "properties.applicableSchedule", "type": "ApplicableSchedule"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceFabric, self).__init__(**kwargs)
-        self.external_service_fabric_id = kwargs.get('external_service_fabric_id', None)
-        self.environment_id = kwargs.get('environment_id', None)
+        self.external_service_fabric_id = kwargs.get("external_service_fabric_id", None)
+        self.environment_id = kwargs.get("environment_id", None)
         self.applicable_schedule = None
         self.provisioning_state = None
         self.unique_identifier = None
@@ -5410,18 +5032,15 @@ class ServiceFabricFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'external_service_fabric_id': {'key': 'properties.externalServiceFabricId', 'type': 'str'},
-        'environment_id': {'key': 'properties.environmentId', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "external_service_fabric_id": {"key": "properties.externalServiceFabricId", "type": "str"},
+        "environment_id": {"key": "properties.environmentId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceFabricFragment, self).__init__(**kwargs)
-        self.external_service_fabric_id = kwargs.get('external_service_fabric_id', None)
-        self.environment_id = kwargs.get('environment_id', None)
+        self.external_service_fabric_id = kwargs.get("external_service_fabric_id", None)
+        self.environment_id = kwargs.get("environment_id", None)
 
 
 class ServiceFabricList(msrest.serialization.Model):
@@ -5434,17 +5053,14 @@ class ServiceFabricList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ServiceFabric]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ServiceFabric]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceFabricList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ServiceRunner(Resource):
@@ -5467,26 +5083,23 @@ class ServiceRunner(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'identity', 'type': 'IdentityProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "IdentityProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceRunner, self).__init__(**kwargs)
-        self.identity = kwargs.get('identity', None)
+        self.identity = kwargs.get("identity", None)
 
 
 class SharedPublicIpAddressConfiguration(msrest.serialization.Model):
@@ -5497,15 +5110,12 @@ class SharedPublicIpAddressConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'inbound_nat_rules': {'key': 'inboundNatRules', 'type': '[InboundNatRule]'},
+        "inbound_nat_rules": {"key": "inboundNatRules", "type": "[InboundNatRule]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SharedPublicIpAddressConfiguration, self).__init__(**kwargs)
-        self.inbound_nat_rules = kwargs.get('inbound_nat_rules', None)
+        self.inbound_nat_rules = kwargs.get("inbound_nat_rules", None)
 
 
 class SharedPublicIpAddressConfigurationFragment(msrest.serialization.Model):
@@ -5516,15 +5126,12 @@ class SharedPublicIpAddressConfigurationFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'inbound_nat_rules': {'key': 'inboundNatRules', 'type': '[InboundNatRuleFragment]'},
+        "inbound_nat_rules": {"key": "inboundNatRules", "type": "[InboundNatRuleFragment]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SharedPublicIpAddressConfigurationFragment, self).__init__(**kwargs)
-        self.inbound_nat_rules = kwargs.get('inbound_nat_rules', None)
+        self.inbound_nat_rules = kwargs.get("inbound_nat_rules", None)
 
 
 class ShutdownNotificationContent(msrest.serialization.Model):
@@ -5559,39 +5166,36 @@ class ShutdownNotificationContent(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'skip_url': {'key': 'skipUrl', 'type': 'str'},
-        'delay_url60': {'key': 'delayUrl60', 'type': 'str'},
-        'delay_url120': {'key': 'delayUrl120', 'type': 'str'},
-        'vm_name': {'key': 'vmName', 'type': 'str'},
-        'guid': {'key': 'guid', 'type': 'str'},
-        'owner': {'key': 'owner', 'type': 'str'},
-        'vm_url': {'key': 'vmUrl', 'type': 'str'},
-        'minutes_until_shutdown': {'key': 'minutesUntilShutdown', 'type': 'str'},
-        'event_type': {'key': 'eventType', 'type': 'str'},
-        'text': {'key': 'text', 'type': 'str'},
-        'subscription_id': {'key': 'subscriptionId', 'type': 'str'},
-        'resource_group_name': {'key': 'resourceGroupName', 'type': 'str'},
-        'lab_name': {'key': 'labName', 'type': 'str'},
+        "skip_url": {"key": "skipUrl", "type": "str"},
+        "delay_url60": {"key": "delayUrl60", "type": "str"},
+        "delay_url120": {"key": "delayUrl120", "type": "str"},
+        "vm_name": {"key": "vmName", "type": "str"},
+        "guid": {"key": "guid", "type": "str"},
+        "owner": {"key": "owner", "type": "str"},
+        "vm_url": {"key": "vmUrl", "type": "str"},
+        "minutes_until_shutdown": {"key": "minutesUntilShutdown", "type": "str"},
+        "event_type": {"key": "eventType", "type": "str"},
+        "text": {"key": "text", "type": "str"},
+        "subscription_id": {"key": "subscriptionId", "type": "str"},
+        "resource_group_name": {"key": "resourceGroupName", "type": "str"},
+        "lab_name": {"key": "labName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ShutdownNotificationContent, self).__init__(**kwargs)
-        self.skip_url = kwargs.get('skip_url', None)
-        self.delay_url60 = kwargs.get('delay_url60', None)
-        self.delay_url120 = kwargs.get('delay_url120', None)
-        self.vm_name = kwargs.get('vm_name', None)
-        self.guid = kwargs.get('guid', None)
-        self.owner = kwargs.get('owner', None)
-        self.vm_url = kwargs.get('vm_url', None)
-        self.minutes_until_shutdown = kwargs.get('minutes_until_shutdown', None)
-        self.event_type = kwargs.get('event_type', None)
-        self.text = kwargs.get('text', None)
-        self.subscription_id = kwargs.get('subscription_id', None)
-        self.resource_group_name = kwargs.get('resource_group_name', None)
-        self.lab_name = kwargs.get('lab_name', None)
+        self.skip_url = kwargs.get("skip_url", None)
+        self.delay_url60 = kwargs.get("delay_url60", None)
+        self.delay_url120 = kwargs.get("delay_url120", None)
+        self.vm_name = kwargs.get("vm_name", None)
+        self.guid = kwargs.get("guid", None)
+        self.owner = kwargs.get("owner", None)
+        self.vm_url = kwargs.get("vm_url", None)
+        self.minutes_until_shutdown = kwargs.get("minutes_until_shutdown", None)
+        self.event_type = kwargs.get("event_type", None)
+        self.text = kwargs.get("text", None)
+        self.subscription_id = kwargs.get("subscription_id", None)
+        self.resource_group_name = kwargs.get("resource_group_name", None)
+        self.lab_name = kwargs.get("lab_name", None)
 
 
 class Subnet(msrest.serialization.Model):
@@ -5607,19 +5211,16 @@ class Subnet(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'resource_id': {'key': 'resourceId', 'type': 'str'},
-        'lab_subnet_name': {'key': 'labSubnetName', 'type': 'str'},
-        'allow_public_ip': {'key': 'allowPublicIp', 'type': 'str'},
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "lab_subnet_name": {"key": "labSubnetName", "type": "str"},
+        "allow_public_ip": {"key": "allowPublicIp", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Subnet, self).__init__(**kwargs)
-        self.resource_id = kwargs.get('resource_id', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.allow_public_ip = kwargs.get('allow_public_ip', None)
+        self.resource_id = kwargs.get("resource_id", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.allow_public_ip = kwargs.get("allow_public_ip", None)
 
 
 class SubnetFragment(msrest.serialization.Model):
@@ -5635,19 +5236,16 @@ class SubnetFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'resource_id': {'key': 'resourceId', 'type': 'str'},
-        'lab_subnet_name': {'key': 'labSubnetName', 'type': 'str'},
-        'allow_public_ip': {'key': 'allowPublicIp', 'type': 'str'},
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "lab_subnet_name": {"key": "labSubnetName", "type": "str"},
+        "allow_public_ip": {"key": "allowPublicIp", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubnetFragment, self).__init__(**kwargs)
-        self.resource_id = kwargs.get('resource_id', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.allow_public_ip = kwargs.get('allow_public_ip', None)
+        self.resource_id = kwargs.get("resource_id", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.allow_public_ip = kwargs.get("allow_public_ip", None)
 
 
 class SubnetOverride(msrest.serialization.Model):
@@ -5674,25 +5272,25 @@ class SubnetOverride(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'resource_id': {'key': 'resourceId', 'type': 'str'},
-        'lab_subnet_name': {'key': 'labSubnetName', 'type': 'str'},
-        'use_in_vm_creation_permission': {'key': 'useInVmCreationPermission', 'type': 'str'},
-        'use_public_ip_address_permission': {'key': 'usePublicIpAddressPermission', 'type': 'str'},
-        'shared_public_ip_address_configuration': {'key': 'sharedPublicIpAddressConfiguration', 'type': 'SubnetSharedPublicIpAddressConfiguration'},
-        'virtual_network_pool_name': {'key': 'virtualNetworkPoolName', 'type': 'str'},
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "lab_subnet_name": {"key": "labSubnetName", "type": "str"},
+        "use_in_vm_creation_permission": {"key": "useInVmCreationPermission", "type": "str"},
+        "use_public_ip_address_permission": {"key": "usePublicIpAddressPermission", "type": "str"},
+        "shared_public_ip_address_configuration": {
+            "key": "sharedPublicIpAddressConfiguration",
+            "type": "SubnetSharedPublicIpAddressConfiguration",
+        },
+        "virtual_network_pool_name": {"key": "virtualNetworkPoolName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubnetOverride, self).__init__(**kwargs)
-        self.resource_id = kwargs.get('resource_id', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.use_in_vm_creation_permission = kwargs.get('use_in_vm_creation_permission', None)
-        self.use_public_ip_address_permission = kwargs.get('use_public_ip_address_permission', None)
-        self.shared_public_ip_address_configuration = kwargs.get('shared_public_ip_address_configuration', None)
-        self.virtual_network_pool_name = kwargs.get('virtual_network_pool_name', None)
+        self.resource_id = kwargs.get("resource_id", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.use_in_vm_creation_permission = kwargs.get("use_in_vm_creation_permission", None)
+        self.use_public_ip_address_permission = kwargs.get("use_public_ip_address_permission", None)
+        self.shared_public_ip_address_configuration = kwargs.get("shared_public_ip_address_configuration", None)
+        self.virtual_network_pool_name = kwargs.get("virtual_network_pool_name", None)
 
 
 class SubnetOverrideFragment(msrest.serialization.Model):
@@ -5719,25 +5317,25 @@ class SubnetOverrideFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'resource_id': {'key': 'resourceId', 'type': 'str'},
-        'lab_subnet_name': {'key': 'labSubnetName', 'type': 'str'},
-        'use_in_vm_creation_permission': {'key': 'useInVmCreationPermission', 'type': 'str'},
-        'use_public_ip_address_permission': {'key': 'usePublicIpAddressPermission', 'type': 'str'},
-        'shared_public_ip_address_configuration': {'key': 'sharedPublicIpAddressConfiguration', 'type': 'SubnetSharedPublicIpAddressConfigurationFragment'},
-        'virtual_network_pool_name': {'key': 'virtualNetworkPoolName', 'type': 'str'},
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "lab_subnet_name": {"key": "labSubnetName", "type": "str"},
+        "use_in_vm_creation_permission": {"key": "useInVmCreationPermission", "type": "str"},
+        "use_public_ip_address_permission": {"key": "usePublicIpAddressPermission", "type": "str"},
+        "shared_public_ip_address_configuration": {
+            "key": "sharedPublicIpAddressConfiguration",
+            "type": "SubnetSharedPublicIpAddressConfigurationFragment",
+        },
+        "virtual_network_pool_name": {"key": "virtualNetworkPoolName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubnetOverrideFragment, self).__init__(**kwargs)
-        self.resource_id = kwargs.get('resource_id', None)
-        self.lab_subnet_name = kwargs.get('lab_subnet_name', None)
-        self.use_in_vm_creation_permission = kwargs.get('use_in_vm_creation_permission', None)
-        self.use_public_ip_address_permission = kwargs.get('use_public_ip_address_permission', None)
-        self.shared_public_ip_address_configuration = kwargs.get('shared_public_ip_address_configuration', None)
-        self.virtual_network_pool_name = kwargs.get('virtual_network_pool_name', None)
+        self.resource_id = kwargs.get("resource_id", None)
+        self.lab_subnet_name = kwargs.get("lab_subnet_name", None)
+        self.use_in_vm_creation_permission = kwargs.get("use_in_vm_creation_permission", None)
+        self.use_public_ip_address_permission = kwargs.get("use_public_ip_address_permission", None)
+        self.shared_public_ip_address_configuration = kwargs.get("shared_public_ip_address_configuration", None)
+        self.virtual_network_pool_name = kwargs.get("virtual_network_pool_name", None)
 
 
 class SubnetSharedPublicIpAddressConfiguration(msrest.serialization.Model):
@@ -5748,15 +5346,12 @@ class SubnetSharedPublicIpAddressConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'allowed_ports': {'key': 'allowedPorts', 'type': '[Port]'},
+        "allowed_ports": {"key": "allowedPorts", "type": "[Port]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubnetSharedPublicIpAddressConfiguration, self).__init__(**kwargs)
-        self.allowed_ports = kwargs.get('allowed_ports', None)
+        self.allowed_ports = kwargs.get("allowed_ports", None)
 
 
 class SubnetSharedPublicIpAddressConfigurationFragment(msrest.serialization.Model):
@@ -5767,15 +5362,12 @@ class SubnetSharedPublicIpAddressConfigurationFragment(msrest.serialization.Mode
     """
 
     _attribute_map = {
-        'allowed_ports': {'key': 'allowedPorts', 'type': '[PortFragment]'},
+        "allowed_ports": {"key": "allowedPorts", "type": "[PortFragment]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubnetSharedPublicIpAddressConfigurationFragment, self).__init__(**kwargs)
-        self.allowed_ports = kwargs.get('allowed_ports', None)
+        self.allowed_ports = kwargs.get("allowed_ports", None)
 
 
 class TargetCostProperties(msrest.serialization.Model):
@@ -5796,25 +5388,22 @@ class TargetCostProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'int'},
-        'cost_thresholds': {'key': 'costThresholds', 'type': '[CostThresholdProperties]'},
-        'cycle_start_date_time': {'key': 'cycleStartDateTime', 'type': 'iso-8601'},
-        'cycle_end_date_time': {'key': 'cycleEndDateTime', 'type': 'iso-8601'},
-        'cycle_type': {'key': 'cycleType', 'type': 'str'},
+        "status": {"key": "status", "type": "str"},
+        "target": {"key": "target", "type": "int"},
+        "cost_thresholds": {"key": "costThresholds", "type": "[CostThresholdProperties]"},
+        "cycle_start_date_time": {"key": "cycleStartDateTime", "type": "iso-8601"},
+        "cycle_end_date_time": {"key": "cycleEndDateTime", "type": "iso-8601"},
+        "cycle_type": {"key": "cycleType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TargetCostProperties, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.target = kwargs.get('target', None)
-        self.cost_thresholds = kwargs.get('cost_thresholds', None)
-        self.cycle_start_date_time = kwargs.get('cycle_start_date_time', None)
-        self.cycle_end_date_time = kwargs.get('cycle_end_date_time', None)
-        self.cycle_type = kwargs.get('cycle_type', None)
+        self.status = kwargs.get("status", None)
+        self.target = kwargs.get("target", None)
+        self.cost_thresholds = kwargs.get("cost_thresholds", None)
+        self.cycle_start_date_time = kwargs.get("cycle_start_date_time", None)
+        self.cycle_end_date_time = kwargs.get("cycle_end_date_time", None)
+        self.cycle_type = kwargs.get("cycle_type", None)
 
 
 class User(Resource):
@@ -5845,34 +5434,31 @@ class User(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'created_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "created_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'properties.identity', 'type': 'UserIdentity'},
-        'secret_store': {'key': 'properties.secretStore', 'type': 'UserSecretStore'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "properties.identity", "type": "UserIdentity"},
+        "secret_store": {"key": "properties.secretStore", "type": "UserSecretStore"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
-        self.identity = kwargs.get('identity', None)
-        self.secret_store = kwargs.get('secret_store', None)
+        self.identity = kwargs.get("identity", None)
+        self.secret_store = kwargs.get("secret_store", None)
         self.created_date = None
         self.provisioning_state = None
         self.unique_identifier = None
@@ -5890,18 +5476,15 @@ class UserFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'identity': {'key': 'properties.identity', 'type': 'UserIdentityFragment'},
-        'secret_store': {'key': 'properties.secretStore', 'type': 'UserSecretStoreFragment'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "properties.identity", "type": "UserIdentityFragment"},
+        "secret_store": {"key": "properties.secretStore", "type": "UserSecretStoreFragment"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserFragment, self).__init__(**kwargs)
-        self.identity = kwargs.get('identity', None)
-        self.secret_store = kwargs.get('secret_store', None)
+        self.identity = kwargs.get("identity", None)
+        self.secret_store = kwargs.get("secret_store", None)
 
 
 class UserIdentity(msrest.serialization.Model):
@@ -5922,23 +5505,20 @@ class UserIdentity(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_name': {'key': 'principalName', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'object_id': {'key': 'objectId', 'type': 'str'},
-        'app_id': {'key': 'appId', 'type': 'str'},
+        "principal_name": {"key": "principalName", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "object_id": {"key": "objectId", "type": "str"},
+        "app_id": {"key": "appId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserIdentity, self).__init__(**kwargs)
-        self.principal_name = kwargs.get('principal_name', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.tenant_id = kwargs.get('tenant_id', None)
-        self.object_id = kwargs.get('object_id', None)
-        self.app_id = kwargs.get('app_id', None)
+        self.principal_name = kwargs.get("principal_name", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.tenant_id = kwargs.get("tenant_id", None)
+        self.object_id = kwargs.get("object_id", None)
+        self.app_id = kwargs.get("app_id", None)
 
 
 class UserIdentityFragment(msrest.serialization.Model):
@@ -5959,23 +5539,20 @@ class UserIdentityFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'principal_name': {'key': 'principalName', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'object_id': {'key': 'objectId', 'type': 'str'},
-        'app_id': {'key': 'appId', 'type': 'str'},
+        "principal_name": {"key": "principalName", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "object_id": {"key": "objectId", "type": "str"},
+        "app_id": {"key": "appId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserIdentityFragment, self).__init__(**kwargs)
-        self.principal_name = kwargs.get('principal_name', None)
-        self.principal_id = kwargs.get('principal_id', None)
-        self.tenant_id = kwargs.get('tenant_id', None)
-        self.object_id = kwargs.get('object_id', None)
-        self.app_id = kwargs.get('app_id', None)
+        self.principal_name = kwargs.get("principal_name", None)
+        self.principal_id = kwargs.get("principal_id", None)
+        self.tenant_id = kwargs.get("tenant_id", None)
+        self.object_id = kwargs.get("object_id", None)
+        self.app_id = kwargs.get("app_id", None)
 
 
 class UserList(msrest.serialization.Model):
@@ -5988,17 +5565,14 @@ class UserList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[User]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[User]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class UserSecretStore(msrest.serialization.Model):
@@ -6011,17 +5585,14 @@ class UserSecretStore(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'key_vault_uri': {'key': 'keyVaultUri', 'type': 'str'},
-        'key_vault_id': {'key': 'keyVaultId', 'type': 'str'},
+        "key_vault_uri": {"key": "keyVaultUri", "type": "str"},
+        "key_vault_id": {"key": "keyVaultId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserSecretStore, self).__init__(**kwargs)
-        self.key_vault_uri = kwargs.get('key_vault_uri', None)
-        self.key_vault_id = kwargs.get('key_vault_id', None)
+        self.key_vault_uri = kwargs.get("key_vault_uri", None)
+        self.key_vault_id = kwargs.get("key_vault_id", None)
 
 
 class UserSecretStoreFragment(msrest.serialization.Model):
@@ -6034,17 +5605,14 @@ class UserSecretStoreFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'key_vault_uri': {'key': 'keyVaultUri', 'type': 'str'},
-        'key_vault_id': {'key': 'keyVaultId', 'type': 'str'},
+        "key_vault_uri": {"key": "keyVaultUri", "type": "str"},
+        "key_vault_id": {"key": "keyVaultId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserSecretStoreFragment, self).__init__(**kwargs)
-        self.key_vault_uri = kwargs.get('key_vault_uri', None)
-        self.key_vault_id = kwargs.get('key_vault_id', None)
+        self.key_vault_uri = kwargs.get("key_vault_uri", None)
+        self.key_vault_id = kwargs.get("key_vault_id", None)
 
 
 class VirtualNetwork(Resource):
@@ -6082,41 +5650,38 @@ class VirtualNetwork(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'external_subnets': {'readonly': True},
-        'created_date': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'unique_identifier': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "external_subnets": {"readonly": True},
+        "created_date": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "unique_identifier": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'allowed_subnets': {'key': 'properties.allowedSubnets', 'type': '[Subnet]'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'external_provider_resource_id': {'key': 'properties.externalProviderResourceId', 'type': 'str'},
-        'external_subnets': {'key': 'properties.externalSubnets', 'type': '[ExternalSubnet]'},
-        'subnet_overrides': {'key': 'properties.subnetOverrides', 'type': '[SubnetOverride]'},
-        'created_date': {'key': 'properties.createdDate', 'type': 'iso-8601'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'unique_identifier': {'key': 'properties.uniqueIdentifier', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "allowed_subnets": {"key": "properties.allowedSubnets", "type": "[Subnet]"},
+        "description": {"key": "properties.description", "type": "str"},
+        "external_provider_resource_id": {"key": "properties.externalProviderResourceId", "type": "str"},
+        "external_subnets": {"key": "properties.externalSubnets", "type": "[ExternalSubnet]"},
+        "subnet_overrides": {"key": "properties.subnetOverrides", "type": "[SubnetOverride]"},
+        "created_date": {"key": "properties.createdDate", "type": "iso-8601"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "unique_identifier": {"key": "properties.uniqueIdentifier", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VirtualNetwork, self).__init__(**kwargs)
-        self.allowed_subnets = kwargs.get('allowed_subnets', None)
-        self.description = kwargs.get('description', None)
-        self.external_provider_resource_id = kwargs.get('external_provider_resource_id', None)
+        self.allowed_subnets = kwargs.get("allowed_subnets", None)
+        self.description = kwargs.get("description", None)
+        self.external_provider_resource_id = kwargs.get("external_provider_resource_id", None)
         self.external_subnets = None
-        self.subnet_overrides = kwargs.get('subnet_overrides', None)
+        self.subnet_overrides = kwargs.get("subnet_overrides", None)
         self.created_date = None
         self.provisioning_state = None
         self.unique_identifier = None
@@ -6139,22 +5704,19 @@ class VirtualNetworkFragment(UpdateResource):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'allowed_subnets': {'key': 'properties.allowedSubnets', 'type': '[SubnetFragment]'},
-        'description': {'key': 'properties.description', 'type': 'str'},
-        'external_provider_resource_id': {'key': 'properties.externalProviderResourceId', 'type': 'str'},
-        'subnet_overrides': {'key': 'properties.subnetOverrides', 'type': '[SubnetOverrideFragment]'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "allowed_subnets": {"key": "properties.allowedSubnets", "type": "[SubnetFragment]"},
+        "description": {"key": "properties.description", "type": "str"},
+        "external_provider_resource_id": {"key": "properties.externalProviderResourceId", "type": "str"},
+        "subnet_overrides": {"key": "properties.subnetOverrides", "type": "[SubnetOverrideFragment]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VirtualNetworkFragment, self).__init__(**kwargs)
-        self.allowed_subnets = kwargs.get('allowed_subnets', None)
-        self.description = kwargs.get('description', None)
-        self.external_provider_resource_id = kwargs.get('external_provider_resource_id', None)
-        self.subnet_overrides = kwargs.get('subnet_overrides', None)
+        self.allowed_subnets = kwargs.get("allowed_subnets", None)
+        self.description = kwargs.get("description", None)
+        self.external_provider_resource_id = kwargs.get("external_provider_resource_id", None)
+        self.subnet_overrides = kwargs.get("subnet_overrides", None)
 
 
 class VirtualNetworkList(msrest.serialization.Model):
@@ -6167,17 +5729,14 @@ class VirtualNetworkList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[VirtualNetwork]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[VirtualNetwork]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(VirtualNetworkList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class WeekDetails(msrest.serialization.Model):
@@ -6191,17 +5750,14 @@ class WeekDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'weekdays': {'key': 'weekdays', 'type': '[str]'},
-        'time': {'key': 'time', 'type': 'str'},
+        "weekdays": {"key": "weekdays", "type": "[str]"},
+        "time": {"key": "time", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(WeekDetails, self).__init__(**kwargs)
-        self.weekdays = kwargs.get('weekdays', None)
-        self.time = kwargs.get('time', None)
+        self.weekdays = kwargs.get("weekdays", None)
+        self.time = kwargs.get("time", None)
 
 
 class WeekDetailsFragment(msrest.serialization.Model):
@@ -6215,17 +5771,14 @@ class WeekDetailsFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'weekdays': {'key': 'weekdays', 'type': '[str]'},
-        'time': {'key': 'time', 'type': 'str'},
+        "weekdays": {"key": "weekdays", "type": "[str]"},
+        "time": {"key": "time", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(WeekDetailsFragment, self).__init__(**kwargs)
-        self.weekdays = kwargs.get('weekdays', None)
-        self.time = kwargs.get('time', None)
+        self.weekdays = kwargs.get("weekdays", None)
+        self.time = kwargs.get("time", None)
 
 
 class WindowsOsInfo(msrest.serialization.Model):
@@ -6238,15 +5791,12 @@ class WindowsOsInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'windows_os_state': {'key': 'windowsOsState', 'type': 'str'},
+        "windows_os_state": {"key": "windowsOsState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(WindowsOsInfo, self).__init__(**kwargs)
-        self.windows_os_state = kwargs.get('windows_os_state', None)
+        self.windows_os_state = kwargs.get("windows_os_state", None)
 
 
 class WindowsOsInfoFragment(msrest.serialization.Model):
@@ -6259,12 +5809,9 @@ class WindowsOsInfoFragment(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'windows_os_state': {'key': 'windowsOsState', 'type': 'str'},
+        "windows_os_state": {"key": "windowsOsState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(WindowsOsInfoFragment, self).__init__(**kwargs)
-        self.windows_os_state = kwargs.get('windows_os_state', None)
+        self.windows_os_state = kwargs.get("windows_os_state", None)
