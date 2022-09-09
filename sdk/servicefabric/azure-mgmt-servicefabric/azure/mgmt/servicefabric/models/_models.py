@@ -24,17 +24,20 @@ class ApplicationDeltaHealthPolicy(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'default_service_type_delta_health_policy': {'key': 'defaultServiceTypeDeltaHealthPolicy', 'type': 'ServiceTypeDeltaHealthPolicy'},
-        'service_type_delta_health_policies': {'key': 'serviceTypeDeltaHealthPolicies', 'type': '{ServiceTypeDeltaHealthPolicy}'},
+        "default_service_type_delta_health_policy": {
+            "key": "defaultServiceTypeDeltaHealthPolicy",
+            "type": "ServiceTypeDeltaHealthPolicy",
+        },
+        "service_type_delta_health_policies": {
+            "key": "serviceTypeDeltaHealthPolicies",
+            "type": "{ServiceTypeDeltaHealthPolicy}",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationDeltaHealthPolicy, self).__init__(**kwargs)
-        self.default_service_type_delta_health_policy = kwargs.get('default_service_type_delta_health_policy', None)
-        self.service_type_delta_health_policies = kwargs.get('service_type_delta_health_policies', None)
+        self.default_service_type_delta_health_policy = kwargs.get("default_service_type_delta_health_policy", None)
+        self.service_type_delta_health_policies = kwargs.get("service_type_delta_health_policies", None)
 
 
 class ApplicationHealthPolicy(msrest.serialization.Model):
@@ -51,17 +54,17 @@ class ApplicationHealthPolicy(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'default_service_type_health_policy': {'key': 'defaultServiceTypeHealthPolicy', 'type': 'ServiceTypeHealthPolicy'},
-        'service_type_health_policies': {'key': 'serviceTypeHealthPolicies', 'type': '{ServiceTypeHealthPolicy}'},
+        "default_service_type_health_policy": {
+            "key": "defaultServiceTypeHealthPolicy",
+            "type": "ServiceTypeHealthPolicy",
+        },
+        "service_type_health_policies": {"key": "serviceTypeHealthPolicies", "type": "{ServiceTypeHealthPolicy}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationHealthPolicy, self).__init__(**kwargs)
-        self.default_service_type_health_policy = kwargs.get('default_service_type_health_policy', None)
-        self.service_type_health_policies = kwargs.get('service_type_health_policies', None)
+        self.default_service_type_health_policy = kwargs.get("default_service_type_health_policy", None)
+        self.service_type_health_policies = kwargs.get("service_type_health_policies", None)
 
 
 class ApplicationMetricDescription(msrest.serialization.Model):
@@ -97,21 +100,18 @@ class ApplicationMetricDescription(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'maximum_capacity': {'key': 'maximumCapacity', 'type': 'long'},
-        'reservation_capacity': {'key': 'reservationCapacity', 'type': 'long'},
-        'total_application_capacity': {'key': 'totalApplicationCapacity', 'type': 'long'},
+        "name": {"key": "name", "type": "str"},
+        "maximum_capacity": {"key": "maximumCapacity", "type": "long"},
+        "reservation_capacity": {"key": "reservationCapacity", "type": "long"},
+        "total_application_capacity": {"key": "totalApplicationCapacity", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationMetricDescription, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.maximum_capacity = kwargs.get('maximum_capacity', None)
-        self.reservation_capacity = kwargs.get('reservation_capacity', None)
-        self.total_application_capacity = kwargs.get('total_application_capacity', None)
+        self.name = kwargs.get("name", None)
+        self.maximum_capacity = kwargs.get("maximum_capacity", None)
+        self.reservation_capacity = kwargs.get("reservation_capacity", None)
+        self.total_application_capacity = kwargs.get("total_application_capacity", None)
 
 
 class ProxyResource(msrest.serialization.Model):
@@ -137,33 +137,30 @@ class ProxyResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProxyResource, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.location = kwargs.get('location', None)
-        self.tags = kwargs.get('tags', None)
+        self.location = kwargs.get("location", None)
+        self.tags = kwargs.get("tags", None)
         self.etag = None
         self.system_data = None
 
@@ -224,53 +221,50 @@ class ApplicationResource(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'minimum_nodes': {'minimum': 0},
-        'maximum_nodes': {'minimum': 0},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "minimum_nodes": {"minimum": 0},
+        "maximum_nodes": {"minimum": 0},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'identity': {'key': 'identity', 'type': 'ManagedIdentity'},
-        'type_version': {'key': 'properties.typeVersion', 'type': 'str'},
-        'parameters': {'key': 'properties.parameters', 'type': '{str}'},
-        'upgrade_policy': {'key': 'properties.upgradePolicy', 'type': 'ApplicationUpgradePolicy'},
-        'minimum_nodes': {'key': 'properties.minimumNodes', 'type': 'long'},
-        'maximum_nodes': {'key': 'properties.maximumNodes', 'type': 'long'},
-        'remove_application_capacity': {'key': 'properties.removeApplicationCapacity', 'type': 'bool'},
-        'metrics': {'key': 'properties.metrics', 'type': '[ApplicationMetricDescription]'},
-        'managed_identities': {'key': 'properties.managedIdentities', 'type': '[ApplicationUserAssignedIdentity]'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'type_name': {'key': 'properties.typeName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "identity": {"key": "identity", "type": "ManagedIdentity"},
+        "type_version": {"key": "properties.typeVersion", "type": "str"},
+        "parameters": {"key": "properties.parameters", "type": "{str}"},
+        "upgrade_policy": {"key": "properties.upgradePolicy", "type": "ApplicationUpgradePolicy"},
+        "minimum_nodes": {"key": "properties.minimumNodes", "type": "long"},
+        "maximum_nodes": {"key": "properties.maximumNodes", "type": "long"},
+        "remove_application_capacity": {"key": "properties.removeApplicationCapacity", "type": "bool"},
+        "metrics": {"key": "properties.metrics", "type": "[ApplicationMetricDescription]"},
+        "managed_identities": {"key": "properties.managedIdentities", "type": "[ApplicationUserAssignedIdentity]"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "type_name": {"key": "properties.typeName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationResource, self).__init__(**kwargs)
-        self.identity = kwargs.get('identity', None)
-        self.type_version = kwargs.get('type_version', None)
-        self.parameters = kwargs.get('parameters', None)
-        self.upgrade_policy = kwargs.get('upgrade_policy', None)
-        self.minimum_nodes = kwargs.get('minimum_nodes', None)
-        self.maximum_nodes = kwargs.get('maximum_nodes', 0)
-        self.remove_application_capacity = kwargs.get('remove_application_capacity', None)
-        self.metrics = kwargs.get('metrics', None)
-        self.managed_identities = kwargs.get('managed_identities', None)
+        self.identity = kwargs.get("identity", None)
+        self.type_version = kwargs.get("type_version", None)
+        self.parameters = kwargs.get("parameters", None)
+        self.upgrade_policy = kwargs.get("upgrade_policy", None)
+        self.minimum_nodes = kwargs.get("minimum_nodes", None)
+        self.maximum_nodes = kwargs.get("maximum_nodes", 0)
+        self.remove_application_capacity = kwargs.get("remove_application_capacity", None)
+        self.metrics = kwargs.get("metrics", None)
+        self.managed_identities = kwargs.get("managed_identities", None)
         self.provisioning_state = None
-        self.type_name = kwargs.get('type_name', None)
+        self.type_name = kwargs.get("type_name", None)
 
 
 class ApplicationResourceList(msrest.serialization.Model):
@@ -285,20 +279,17 @@ class ApplicationResourceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ApplicationResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ApplicationResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -334,34 +325,31 @@ class ApplicationResourceUpdateProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'minimum_nodes': {'minimum': 0},
-        'maximum_nodes': {'minimum': 0},
+        "minimum_nodes": {"minimum": 0},
+        "maximum_nodes": {"minimum": 0},
     }
 
     _attribute_map = {
-        'type_version': {'key': 'typeVersion', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '{str}'},
-        'upgrade_policy': {'key': 'upgradePolicy', 'type': 'ApplicationUpgradePolicy'},
-        'minimum_nodes': {'key': 'minimumNodes', 'type': 'long'},
-        'maximum_nodes': {'key': 'maximumNodes', 'type': 'long'},
-        'remove_application_capacity': {'key': 'removeApplicationCapacity', 'type': 'bool'},
-        'metrics': {'key': 'metrics', 'type': '[ApplicationMetricDescription]'},
-        'managed_identities': {'key': 'managedIdentities', 'type': '[ApplicationUserAssignedIdentity]'},
+        "type_version": {"key": "typeVersion", "type": "str"},
+        "parameters": {"key": "parameters", "type": "{str}"},
+        "upgrade_policy": {"key": "upgradePolicy", "type": "ApplicationUpgradePolicy"},
+        "minimum_nodes": {"key": "minimumNodes", "type": "long"},
+        "maximum_nodes": {"key": "maximumNodes", "type": "long"},
+        "remove_application_capacity": {"key": "removeApplicationCapacity", "type": "bool"},
+        "metrics": {"key": "metrics", "type": "[ApplicationMetricDescription]"},
+        "managed_identities": {"key": "managedIdentities", "type": "[ApplicationUserAssignedIdentity]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationResourceUpdateProperties, self).__init__(**kwargs)
-        self.type_version = kwargs.get('type_version', None)
-        self.parameters = kwargs.get('parameters', None)
-        self.upgrade_policy = kwargs.get('upgrade_policy', None)
-        self.minimum_nodes = kwargs.get('minimum_nodes', None)
-        self.maximum_nodes = kwargs.get('maximum_nodes', 0)
-        self.remove_application_capacity = kwargs.get('remove_application_capacity', None)
-        self.metrics = kwargs.get('metrics', None)
-        self.managed_identities = kwargs.get('managed_identities', None)
+        self.type_version = kwargs.get("type_version", None)
+        self.parameters = kwargs.get("parameters", None)
+        self.upgrade_policy = kwargs.get("upgrade_policy", None)
+        self.minimum_nodes = kwargs.get("minimum_nodes", None)
+        self.maximum_nodes = kwargs.get("maximum_nodes", 0)
+        self.remove_application_capacity = kwargs.get("remove_application_capacity", None)
+        self.metrics = kwargs.get("metrics", None)
+        self.managed_identities = kwargs.get("managed_identities", None)
 
 
 class ApplicationResourceProperties(ApplicationResourceUpdateProperties):
@@ -403,31 +391,28 @@ class ApplicationResourceProperties(ApplicationResourceUpdateProperties):
     """
 
     _validation = {
-        'minimum_nodes': {'minimum': 0},
-        'maximum_nodes': {'minimum': 0},
-        'provisioning_state': {'readonly': True},
+        "minimum_nodes": {"minimum": 0},
+        "maximum_nodes": {"minimum": 0},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'type_version': {'key': 'typeVersion', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '{str}'},
-        'upgrade_policy': {'key': 'upgradePolicy', 'type': 'ApplicationUpgradePolicy'},
-        'minimum_nodes': {'key': 'minimumNodes', 'type': 'long'},
-        'maximum_nodes': {'key': 'maximumNodes', 'type': 'long'},
-        'remove_application_capacity': {'key': 'removeApplicationCapacity', 'type': 'bool'},
-        'metrics': {'key': 'metrics', 'type': '[ApplicationMetricDescription]'},
-        'managed_identities': {'key': 'managedIdentities', 'type': '[ApplicationUserAssignedIdentity]'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'type_name': {'key': 'typeName', 'type': 'str'},
+        "type_version": {"key": "typeVersion", "type": "str"},
+        "parameters": {"key": "parameters", "type": "{str}"},
+        "upgrade_policy": {"key": "upgradePolicy", "type": "ApplicationUpgradePolicy"},
+        "minimum_nodes": {"key": "minimumNodes", "type": "long"},
+        "maximum_nodes": {"key": "maximumNodes", "type": "long"},
+        "remove_application_capacity": {"key": "removeApplicationCapacity", "type": "bool"},
+        "metrics": {"key": "metrics", "type": "[ApplicationMetricDescription]"},
+        "managed_identities": {"key": "managedIdentities", "type": "[ApplicationUserAssignedIdentity]"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "type_name": {"key": "typeName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationResourceProperties, self).__init__(**kwargs)
         self.provisioning_state = None
-        self.type_name = kwargs.get('type_name', None)
+        self.type_name = kwargs.get("type_name", None)
 
 
 class ApplicationResourceUpdate(ProxyResource):
@@ -479,46 +464,43 @@ class ApplicationResourceUpdate(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'minimum_nodes': {'minimum': 0},
-        'maximum_nodes': {'minimum': 0},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "minimum_nodes": {"minimum": 0},
+        "maximum_nodes": {"minimum": 0},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'type_version': {'key': 'properties.typeVersion', 'type': 'str'},
-        'parameters': {'key': 'properties.parameters', 'type': '{str}'},
-        'upgrade_policy': {'key': 'properties.upgradePolicy', 'type': 'ApplicationUpgradePolicy'},
-        'minimum_nodes': {'key': 'properties.minimumNodes', 'type': 'long'},
-        'maximum_nodes': {'key': 'properties.maximumNodes', 'type': 'long'},
-        'remove_application_capacity': {'key': 'properties.removeApplicationCapacity', 'type': 'bool'},
-        'metrics': {'key': 'properties.metrics', 'type': '[ApplicationMetricDescription]'},
-        'managed_identities': {'key': 'properties.managedIdentities', 'type': '[ApplicationUserAssignedIdentity]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "type_version": {"key": "properties.typeVersion", "type": "str"},
+        "parameters": {"key": "properties.parameters", "type": "{str}"},
+        "upgrade_policy": {"key": "properties.upgradePolicy", "type": "ApplicationUpgradePolicy"},
+        "minimum_nodes": {"key": "properties.minimumNodes", "type": "long"},
+        "maximum_nodes": {"key": "properties.maximumNodes", "type": "long"},
+        "remove_application_capacity": {"key": "properties.removeApplicationCapacity", "type": "bool"},
+        "metrics": {"key": "properties.metrics", "type": "[ApplicationMetricDescription]"},
+        "managed_identities": {"key": "properties.managedIdentities", "type": "[ApplicationUserAssignedIdentity]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationResourceUpdate, self).__init__(**kwargs)
-        self.type_version = kwargs.get('type_version', None)
-        self.parameters = kwargs.get('parameters', None)
-        self.upgrade_policy = kwargs.get('upgrade_policy', None)
-        self.minimum_nodes = kwargs.get('minimum_nodes', None)
-        self.maximum_nodes = kwargs.get('maximum_nodes', 0)
-        self.remove_application_capacity = kwargs.get('remove_application_capacity', None)
-        self.metrics = kwargs.get('metrics', None)
-        self.managed_identities = kwargs.get('managed_identities', None)
+        self.type_version = kwargs.get("type_version", None)
+        self.parameters = kwargs.get("parameters", None)
+        self.upgrade_policy = kwargs.get("upgrade_policy", None)
+        self.minimum_nodes = kwargs.get("minimum_nodes", None)
+        self.maximum_nodes = kwargs.get("maximum_nodes", 0)
+        self.remove_application_capacity = kwargs.get("remove_application_capacity", None)
+        self.metrics = kwargs.get("metrics", None)
+        self.managed_identities = kwargs.get("managed_identities", None)
 
 
 class ApplicationTypeResource(ProxyResource):
@@ -547,29 +529,26 @@ class ApplicationTypeResource(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationTypeResource, self).__init__(**kwargs)
         self.provisioning_state = None
 
@@ -586,20 +565,17 @@ class ApplicationTypeResourceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ApplicationTypeResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ApplicationTypeResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationTypeResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -634,35 +610,32 @@ class ApplicationTypeVersionResource(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'default_parameter_list': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "default_parameter_list": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'app_package_url': {'key': 'properties.appPackageUrl', 'type': 'str'},
-        'default_parameter_list': {'key': 'properties.defaultParameterList', 'type': '{str}'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "app_package_url": {"key": "properties.appPackageUrl", "type": "str"},
+        "default_parameter_list": {"key": "properties.defaultParameterList", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationTypeVersionResource, self).__init__(**kwargs)
         self.provisioning_state = None
-        self.app_package_url = kwargs.get('app_package_url', None)
+        self.app_package_url = kwargs.get("app_package_url", None)
         self.default_parameter_list = None
 
 
@@ -679,20 +652,17 @@ class ApplicationTypeVersionResourceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ApplicationTypeVersionResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ApplicationTypeVersionResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationTypeVersionResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -707,19 +677,16 @@ class ApplicationTypeVersionsCleanupPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'max_unused_versions_to_keep': {'required': True, 'minimum': 0},
+        "max_unused_versions_to_keep": {"required": True, "minimum": 0},
     }
 
     _attribute_map = {
-        'max_unused_versions_to_keep': {'key': 'maxUnusedVersionsToKeep', 'type': 'long'},
+        "max_unused_versions_to_keep": {"key": "maxUnusedVersionsToKeep", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationTypeVersionsCleanupPolicy, self).__init__(**kwargs)
-        self.max_unused_versions_to_keep = kwargs['max_unused_versions_to_keep']
+        self.max_unused_versions_to_keep = kwargs["max_unused_versions_to_keep"]
 
 
 class ApplicationUpgradePolicy(msrest.serialization.Model):
@@ -752,25 +719,25 @@ class ApplicationUpgradePolicy(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'upgrade_replica_set_check_timeout': {'key': 'upgradeReplicaSetCheckTimeout', 'type': 'str'},
-        'force_restart': {'key': 'forceRestart', 'type': 'bool'},
-        'rolling_upgrade_monitoring_policy': {'key': 'rollingUpgradeMonitoringPolicy', 'type': 'ArmRollingUpgradeMonitoringPolicy'},
-        'application_health_policy': {'key': 'applicationHealthPolicy', 'type': 'ArmApplicationHealthPolicy'},
-        'upgrade_mode': {'key': 'upgradeMode', 'type': 'str'},
-        'recreate_application': {'key': 'recreateApplication', 'type': 'bool'},
+        "upgrade_replica_set_check_timeout": {"key": "upgradeReplicaSetCheckTimeout", "type": "str"},
+        "force_restart": {"key": "forceRestart", "type": "bool"},
+        "rolling_upgrade_monitoring_policy": {
+            "key": "rollingUpgradeMonitoringPolicy",
+            "type": "ArmRollingUpgradeMonitoringPolicy",
+        },
+        "application_health_policy": {"key": "applicationHealthPolicy", "type": "ArmApplicationHealthPolicy"},
+        "upgrade_mode": {"key": "upgradeMode", "type": "str"},
+        "recreate_application": {"key": "recreateApplication", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationUpgradePolicy, self).__init__(**kwargs)
-        self.upgrade_replica_set_check_timeout = kwargs.get('upgrade_replica_set_check_timeout', None)
-        self.force_restart = kwargs.get('force_restart', False)
-        self.rolling_upgrade_monitoring_policy = kwargs.get('rolling_upgrade_monitoring_policy', None)
-        self.application_health_policy = kwargs.get('application_health_policy', None)
-        self.upgrade_mode = kwargs.get('upgrade_mode', "Monitored")
-        self.recreate_application = kwargs.get('recreate_application', None)
+        self.upgrade_replica_set_check_timeout = kwargs.get("upgrade_replica_set_check_timeout", None)
+        self.force_restart = kwargs.get("force_restart", False)
+        self.rolling_upgrade_monitoring_policy = kwargs.get("rolling_upgrade_monitoring_policy", None)
+        self.application_health_policy = kwargs.get("application_health_policy", None)
+        self.upgrade_mode = kwargs.get("upgrade_mode", "Monitored")
+        self.recreate_application = kwargs.get("recreate_application", None)
 
 
 class ApplicationUserAssignedIdentity(msrest.serialization.Model):
@@ -785,22 +752,19 @@ class ApplicationUserAssignedIdentity(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
-        'principal_id': {'required': True},
+        "name": {"required": True},
+        "principal_id": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'principal_id': {'key': 'principalId', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "principal_id": {"key": "principalId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplicationUserAssignedIdentity, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.principal_id = kwargs['principal_id']
+        self.name = kwargs["name"]
+        self.principal_id = kwargs["principal_id"]
 
 
 class ArmApplicationHealthPolicy(msrest.serialization.Model):
@@ -829,21 +793,24 @@ class ArmApplicationHealthPolicy(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'consider_warning_as_error': {'key': 'considerWarningAsError', 'type': 'bool'},
-        'max_percent_unhealthy_deployed_applications': {'key': 'maxPercentUnhealthyDeployedApplications', 'type': 'int'},
-        'default_service_type_health_policy': {'key': 'defaultServiceTypeHealthPolicy', 'type': 'ArmServiceTypeHealthPolicy'},
-        'service_type_health_policy_map': {'key': 'serviceTypeHealthPolicyMap', 'type': '{ArmServiceTypeHealthPolicy}'},
+        "consider_warning_as_error": {"key": "considerWarningAsError", "type": "bool"},
+        "max_percent_unhealthy_deployed_applications": {
+            "key": "maxPercentUnhealthyDeployedApplications",
+            "type": "int",
+        },
+        "default_service_type_health_policy": {
+            "key": "defaultServiceTypeHealthPolicy",
+            "type": "ArmServiceTypeHealthPolicy",
+        },
+        "service_type_health_policy_map": {"key": "serviceTypeHealthPolicyMap", "type": "{ArmServiceTypeHealthPolicy}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmApplicationHealthPolicy, self).__init__(**kwargs)
-        self.consider_warning_as_error = kwargs.get('consider_warning_as_error', False)
-        self.max_percent_unhealthy_deployed_applications = kwargs.get('max_percent_unhealthy_deployed_applications', 0)
-        self.default_service_type_health_policy = kwargs.get('default_service_type_health_policy', None)
-        self.service_type_health_policy_map = kwargs.get('service_type_health_policy_map', None)
+        self.consider_warning_as_error = kwargs.get("consider_warning_as_error", False)
+        self.max_percent_unhealthy_deployed_applications = kwargs.get("max_percent_unhealthy_deployed_applications", 0)
+        self.default_service_type_health_policy = kwargs.get("default_service_type_health_policy", None)
+        self.service_type_health_policy_map = kwargs.get("service_type_health_policy_map", None)
 
 
 class ArmRollingUpgradeMonitoringPolicy(msrest.serialization.Model):
@@ -880,25 +847,22 @@ class ArmRollingUpgradeMonitoringPolicy(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'failure_action': {'key': 'failureAction', 'type': 'str'},
-        'health_check_wait_duration': {'key': 'healthCheckWaitDuration', 'type': 'str'},
-        'health_check_stable_duration': {'key': 'healthCheckStableDuration', 'type': 'str'},
-        'health_check_retry_timeout': {'key': 'healthCheckRetryTimeout', 'type': 'str'},
-        'upgrade_timeout': {'key': 'upgradeTimeout', 'type': 'str'},
-        'upgrade_domain_timeout': {'key': 'upgradeDomainTimeout', 'type': 'str'},
+        "failure_action": {"key": "failureAction", "type": "str"},
+        "health_check_wait_duration": {"key": "healthCheckWaitDuration", "type": "str"},
+        "health_check_stable_duration": {"key": "healthCheckStableDuration", "type": "str"},
+        "health_check_retry_timeout": {"key": "healthCheckRetryTimeout", "type": "str"},
+        "upgrade_timeout": {"key": "upgradeTimeout", "type": "str"},
+        "upgrade_domain_timeout": {"key": "upgradeDomainTimeout", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmRollingUpgradeMonitoringPolicy, self).__init__(**kwargs)
-        self.failure_action = kwargs.get('failure_action', None)
-        self.health_check_wait_duration = kwargs.get('health_check_wait_duration', "0")
-        self.health_check_stable_duration = kwargs.get('health_check_stable_duration', "PT0H2M0S")
-        self.health_check_retry_timeout = kwargs.get('health_check_retry_timeout', "PT0H10M0S")
-        self.upgrade_timeout = kwargs.get('upgrade_timeout', "P10675199DT02H48M05.4775807S")
-        self.upgrade_domain_timeout = kwargs.get('upgrade_domain_timeout', "P10675199DT02H48M05.4775807S")
+        self.failure_action = kwargs.get("failure_action", None)
+        self.health_check_wait_duration = kwargs.get("health_check_wait_duration", "0")
+        self.health_check_stable_duration = kwargs.get("health_check_stable_duration", "PT0H2M0S")
+        self.health_check_retry_timeout = kwargs.get("health_check_retry_timeout", "PT0H10M0S")
+        self.upgrade_timeout = kwargs.get("upgrade_timeout", "P10675199DT02H48M05.4775807S")
+        self.upgrade_domain_timeout = kwargs.get("upgrade_domain_timeout", "P10675199DT02H48M05.4775807S")
 
 
 class ArmServiceTypeHealthPolicy(msrest.serialization.Model):
@@ -916,25 +880,32 @@ class ArmServiceTypeHealthPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'max_percent_unhealthy_services': {'maximum': 100, 'minimum': 0},
-        'max_percent_unhealthy_partitions_per_service': {'maximum': 100, 'minimum': 0},
-        'max_percent_unhealthy_replicas_per_partition': {'maximum': 100, 'minimum': 0},
+        "max_percent_unhealthy_services": {"maximum": 100, "minimum": 0},
+        "max_percent_unhealthy_partitions_per_service": {"maximum": 100, "minimum": 0},
+        "max_percent_unhealthy_replicas_per_partition": {"maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'max_percent_unhealthy_services': {'key': 'maxPercentUnhealthyServices', 'type': 'int'},
-        'max_percent_unhealthy_partitions_per_service': {'key': 'maxPercentUnhealthyPartitionsPerService', 'type': 'int'},
-        'max_percent_unhealthy_replicas_per_partition': {'key': 'maxPercentUnhealthyReplicasPerPartition', 'type': 'int'},
+        "max_percent_unhealthy_services": {"key": "maxPercentUnhealthyServices", "type": "int"},
+        "max_percent_unhealthy_partitions_per_service": {
+            "key": "maxPercentUnhealthyPartitionsPerService",
+            "type": "int",
+        },
+        "max_percent_unhealthy_replicas_per_partition": {
+            "key": "maxPercentUnhealthyReplicasPerPartition",
+            "type": "int",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmServiceTypeHealthPolicy, self).__init__(**kwargs)
-        self.max_percent_unhealthy_services = kwargs.get('max_percent_unhealthy_services', 0)
-        self.max_percent_unhealthy_partitions_per_service = kwargs.get('max_percent_unhealthy_partitions_per_service', 0)
-        self.max_percent_unhealthy_replicas_per_partition = kwargs.get('max_percent_unhealthy_replicas_per_partition', 0)
+        self.max_percent_unhealthy_services = kwargs.get("max_percent_unhealthy_services", 0)
+        self.max_percent_unhealthy_partitions_per_service = kwargs.get(
+            "max_percent_unhealthy_partitions_per_service", 0
+        )
+        self.max_percent_unhealthy_replicas_per_partition = kwargs.get(
+            "max_percent_unhealthy_replicas_per_partition", 0
+        )
 
 
 class AvailableOperationDisplay(msrest.serialization.Model):
@@ -951,21 +922,18 @@ class AvailableOperationDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailableOperationDisplay, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class AzureActiveDirectory(msrest.serialization.Model):
@@ -980,19 +948,16 @@ class AzureActiveDirectory(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'cluster_application': {'key': 'clusterApplication', 'type': 'str'},
-        'client_application': {'key': 'clientApplication', 'type': 'str'},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "cluster_application": {"key": "clusterApplication", "type": "str"},
+        "client_application": {"key": "clientApplication", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureActiveDirectory, self).__init__(**kwargs)
-        self.tenant_id = kwargs.get('tenant_id', None)
-        self.cluster_application = kwargs.get('cluster_application', None)
-        self.client_application = kwargs.get('client_application', None)
+        self.tenant_id = kwargs.get("tenant_id", None)
+        self.cluster_application = kwargs.get("cluster_application", None)
+        self.client_application = kwargs.get("client_application", None)
 
 
 class CertificateDescription(msrest.serialization.Model):
@@ -1011,23 +976,20 @@ class CertificateDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'thumbprint': {'required': True},
+        "thumbprint": {"required": True},
     }
 
     _attribute_map = {
-        'thumbprint': {'key': 'thumbprint', 'type': 'str'},
-        'thumbprint_secondary': {'key': 'thumbprintSecondary', 'type': 'str'},
-        'x509_store_name': {'key': 'x509StoreName', 'type': 'str'},
+        "thumbprint": {"key": "thumbprint", "type": "str"},
+        "thumbprint_secondary": {"key": "thumbprintSecondary", "type": "str"},
+        "x509_store_name": {"key": "x509StoreName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CertificateDescription, self).__init__(**kwargs)
-        self.thumbprint = kwargs['thumbprint']
-        self.thumbprint_secondary = kwargs.get('thumbprint_secondary', None)
-        self.x509_store_name = kwargs.get('x509_store_name', None)
+        self.thumbprint = kwargs["thumbprint"]
+        self.thumbprint_secondary = kwargs.get("thumbprint_secondary", None)
+        self.x509_store_name = kwargs.get("x509_store_name", None)
 
 
 class ClientCertificateCommonName(msrest.serialization.Model):
@@ -1046,25 +1008,22 @@ class ClientCertificateCommonName(msrest.serialization.Model):
     """
 
     _validation = {
-        'is_admin': {'required': True},
-        'certificate_common_name': {'required': True},
-        'certificate_issuer_thumbprint': {'required': True},
+        "is_admin": {"required": True},
+        "certificate_common_name": {"required": True},
+        "certificate_issuer_thumbprint": {"required": True},
     }
 
     _attribute_map = {
-        'is_admin': {'key': 'isAdmin', 'type': 'bool'},
-        'certificate_common_name': {'key': 'certificateCommonName', 'type': 'str'},
-        'certificate_issuer_thumbprint': {'key': 'certificateIssuerThumbprint', 'type': 'str'},
+        "is_admin": {"key": "isAdmin", "type": "bool"},
+        "certificate_common_name": {"key": "certificateCommonName", "type": "str"},
+        "certificate_issuer_thumbprint": {"key": "certificateIssuerThumbprint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientCertificateCommonName, self).__init__(**kwargs)
-        self.is_admin = kwargs['is_admin']
-        self.certificate_common_name = kwargs['certificate_common_name']
-        self.certificate_issuer_thumbprint = kwargs['certificate_issuer_thumbprint']
+        self.is_admin = kwargs["is_admin"]
+        self.certificate_common_name = kwargs["certificate_common_name"]
+        self.certificate_issuer_thumbprint = kwargs["certificate_issuer_thumbprint"]
 
 
 class ClientCertificateThumbprint(msrest.serialization.Model):
@@ -1080,22 +1039,19 @@ class ClientCertificateThumbprint(msrest.serialization.Model):
     """
 
     _validation = {
-        'is_admin': {'required': True},
-        'certificate_thumbprint': {'required': True},
+        "is_admin": {"required": True},
+        "certificate_thumbprint": {"required": True},
     }
 
     _attribute_map = {
-        'is_admin': {'key': 'isAdmin', 'type': 'bool'},
-        'certificate_thumbprint': {'key': 'certificateThumbprint', 'type': 'str'},
+        "is_admin": {"key": "isAdmin", "type": "bool"},
+        "certificate_thumbprint": {"key": "certificateThumbprint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientCertificateThumbprint, self).__init__(**kwargs)
-        self.is_admin = kwargs['is_admin']
-        self.certificate_thumbprint = kwargs['certificate_thumbprint']
+        self.is_admin = kwargs["is_admin"]
+        self.certificate_thumbprint = kwargs["certificate_thumbprint"]
 
 
 class Resource(msrest.serialization.Model):
@@ -1122,34 +1078,31 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
-        self.location = kwargs['location']
-        self.tags = kwargs.get('tags', None)
+        self.location = kwargs["location"]
+        self.tags = kwargs.get("tags", None)
         self.etag = None
         self.system_data = None
 
@@ -1209,8 +1162,8 @@ class Cluster(Resource):
     :ivar cluster_id: A service generated unique identifier for the cluster resource.
     :vartype cluster_id: str
     :ivar cluster_state: The current state of the cluster.
-    
-    
+
+
      * WaitingForNodes - Indicates that the cluster resource is created and the resource provider
      is waiting for Service Fabric VM extension to boot up and report to it.
      * Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster
@@ -1253,8 +1206,8 @@ class Cluster(Resource):
     :param reliability_level: The reliability level sets the replica set size of system services.
      Learn about `ReliabilityLevel
      <https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity>`_.
-    
-    
+
+
      * None - Run the System services with a target replica set count of 1. This should only be
      used for test clusters.
      * Bronze - Run the System services with a target replica set count of 3. This should only be
@@ -1308,98 +1261,113 @@ class Cluster(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'available_cluster_versions': {'readonly': True},
-        'cluster_endpoint': {'readonly': True},
-        'cluster_id': {'readonly': True},
-        'cluster_state': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "available_cluster_versions": {"readonly": True},
+        "cluster_endpoint": {"readonly": True},
+        "cluster_id": {"readonly": True},
+        "cluster_state": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'add_on_features': {'key': 'properties.addOnFeatures', 'type': '[str]'},
-        'available_cluster_versions': {'key': 'properties.availableClusterVersions', 'type': '[ClusterVersionDetails]'},
-        'azure_active_directory': {'key': 'properties.azureActiveDirectory', 'type': 'AzureActiveDirectory'},
-        'certificate': {'key': 'properties.certificate', 'type': 'CertificateDescription'},
-        'certificate_common_names': {'key': 'properties.certificateCommonNames', 'type': 'ServerCertificateCommonNames'},
-        'client_certificate_common_names': {'key': 'properties.clientCertificateCommonNames', 'type': '[ClientCertificateCommonName]'},
-        'client_certificate_thumbprints': {'key': 'properties.clientCertificateThumbprints', 'type': '[ClientCertificateThumbprint]'},
-        'cluster_code_version': {'key': 'properties.clusterCodeVersion', 'type': 'str'},
-        'cluster_endpoint': {'key': 'properties.clusterEndpoint', 'type': 'str'},
-        'cluster_id': {'key': 'properties.clusterId', 'type': 'str'},
-        'cluster_state': {'key': 'properties.clusterState', 'type': 'str'},
-        'diagnostics_storage_account_config': {'key': 'properties.diagnosticsStorageAccountConfig', 'type': 'DiagnosticsStorageAccountConfig'},
-        'event_store_service_enabled': {'key': 'properties.eventStoreServiceEnabled', 'type': 'bool'},
-        'fabric_settings': {'key': 'properties.fabricSettings', 'type': '[SettingsSectionDescription]'},
-        'management_endpoint': {'key': 'properties.managementEndpoint', 'type': 'str'},
-        'node_types': {'key': 'properties.nodeTypes', 'type': '[NodeTypeDescription]'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'reliability_level': {'key': 'properties.reliabilityLevel', 'type': 'str'},
-        'reverse_proxy_certificate': {'key': 'properties.reverseProxyCertificate', 'type': 'CertificateDescription'},
-        'reverse_proxy_certificate_common_names': {'key': 'properties.reverseProxyCertificateCommonNames', 'type': 'ServerCertificateCommonNames'},
-        'upgrade_description': {'key': 'properties.upgradeDescription', 'type': 'ClusterUpgradePolicy'},
-        'upgrade_mode': {'key': 'properties.upgradeMode', 'type': 'str'},
-        'application_type_versions_cleanup_policy': {'key': 'properties.applicationTypeVersionsCleanupPolicy', 'type': 'ApplicationTypeVersionsCleanupPolicy'},
-        'vm_image': {'key': 'properties.vmImage', 'type': 'str'},
-        'sf_zonal_upgrade_mode': {'key': 'properties.sfZonalUpgradeMode', 'type': 'str'},
-        'vmss_zonal_upgrade_mode': {'key': 'properties.vmssZonalUpgradeMode', 'type': 'str'},
-        'infrastructure_service_manager': {'key': 'properties.infrastructureServiceManager', 'type': 'bool'},
-        'upgrade_wave': {'key': 'properties.upgradeWave', 'type': 'str'},
-        'upgrade_pause_start_timestamp_utc': {'key': 'properties.upgradePauseStartTimestampUtc', 'type': 'iso-8601'},
-        'upgrade_pause_end_timestamp_utc': {'key': 'properties.upgradePauseEndTimestampUtc', 'type': 'iso-8601'},
-        'wave_upgrade_paused': {'key': 'properties.waveUpgradePaused', 'type': 'bool'},
-        'notifications': {'key': 'properties.notifications', 'type': '[Notification]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "add_on_features": {"key": "properties.addOnFeatures", "type": "[str]"},
+        "available_cluster_versions": {"key": "properties.availableClusterVersions", "type": "[ClusterVersionDetails]"},
+        "azure_active_directory": {"key": "properties.azureActiveDirectory", "type": "AzureActiveDirectory"},
+        "certificate": {"key": "properties.certificate", "type": "CertificateDescription"},
+        "certificate_common_names": {
+            "key": "properties.certificateCommonNames",
+            "type": "ServerCertificateCommonNames",
+        },
+        "client_certificate_common_names": {
+            "key": "properties.clientCertificateCommonNames",
+            "type": "[ClientCertificateCommonName]",
+        },
+        "client_certificate_thumbprints": {
+            "key": "properties.clientCertificateThumbprints",
+            "type": "[ClientCertificateThumbprint]",
+        },
+        "cluster_code_version": {"key": "properties.clusterCodeVersion", "type": "str"},
+        "cluster_endpoint": {"key": "properties.clusterEndpoint", "type": "str"},
+        "cluster_id": {"key": "properties.clusterId", "type": "str"},
+        "cluster_state": {"key": "properties.clusterState", "type": "str"},
+        "diagnostics_storage_account_config": {
+            "key": "properties.diagnosticsStorageAccountConfig",
+            "type": "DiagnosticsStorageAccountConfig",
+        },
+        "event_store_service_enabled": {"key": "properties.eventStoreServiceEnabled", "type": "bool"},
+        "fabric_settings": {"key": "properties.fabricSettings", "type": "[SettingsSectionDescription]"},
+        "management_endpoint": {"key": "properties.managementEndpoint", "type": "str"},
+        "node_types": {"key": "properties.nodeTypes", "type": "[NodeTypeDescription]"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "reliability_level": {"key": "properties.reliabilityLevel", "type": "str"},
+        "reverse_proxy_certificate": {"key": "properties.reverseProxyCertificate", "type": "CertificateDescription"},
+        "reverse_proxy_certificate_common_names": {
+            "key": "properties.reverseProxyCertificateCommonNames",
+            "type": "ServerCertificateCommonNames",
+        },
+        "upgrade_description": {"key": "properties.upgradeDescription", "type": "ClusterUpgradePolicy"},
+        "upgrade_mode": {"key": "properties.upgradeMode", "type": "str"},
+        "application_type_versions_cleanup_policy": {
+            "key": "properties.applicationTypeVersionsCleanupPolicy",
+            "type": "ApplicationTypeVersionsCleanupPolicy",
+        },
+        "vm_image": {"key": "properties.vmImage", "type": "str"},
+        "sf_zonal_upgrade_mode": {"key": "properties.sfZonalUpgradeMode", "type": "str"},
+        "vmss_zonal_upgrade_mode": {"key": "properties.vmssZonalUpgradeMode", "type": "str"},
+        "infrastructure_service_manager": {"key": "properties.infrastructureServiceManager", "type": "bool"},
+        "upgrade_wave": {"key": "properties.upgradeWave", "type": "str"},
+        "upgrade_pause_start_timestamp_utc": {"key": "properties.upgradePauseStartTimestampUtc", "type": "iso-8601"},
+        "upgrade_pause_end_timestamp_utc": {"key": "properties.upgradePauseEndTimestampUtc", "type": "iso-8601"},
+        "wave_upgrade_paused": {"key": "properties.waveUpgradePaused", "type": "bool"},
+        "notifications": {"key": "properties.notifications", "type": "[Notification]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Cluster, self).__init__(**kwargs)
-        self.add_on_features = kwargs.get('add_on_features', None)
+        self.add_on_features = kwargs.get("add_on_features", None)
         self.available_cluster_versions = None
-        self.azure_active_directory = kwargs.get('azure_active_directory', None)
-        self.certificate = kwargs.get('certificate', None)
-        self.certificate_common_names = kwargs.get('certificate_common_names', None)
-        self.client_certificate_common_names = kwargs.get('client_certificate_common_names', None)
-        self.client_certificate_thumbprints = kwargs.get('client_certificate_thumbprints', None)
-        self.cluster_code_version = kwargs.get('cluster_code_version', None)
+        self.azure_active_directory = kwargs.get("azure_active_directory", None)
+        self.certificate = kwargs.get("certificate", None)
+        self.certificate_common_names = kwargs.get("certificate_common_names", None)
+        self.client_certificate_common_names = kwargs.get("client_certificate_common_names", None)
+        self.client_certificate_thumbprints = kwargs.get("client_certificate_thumbprints", None)
+        self.cluster_code_version = kwargs.get("cluster_code_version", None)
         self.cluster_endpoint = None
         self.cluster_id = None
         self.cluster_state = None
-        self.diagnostics_storage_account_config = kwargs.get('diagnostics_storage_account_config', None)
-        self.event_store_service_enabled = kwargs.get('event_store_service_enabled', None)
-        self.fabric_settings = kwargs.get('fabric_settings', None)
-        self.management_endpoint = kwargs.get('management_endpoint', None)
-        self.node_types = kwargs.get('node_types', None)
+        self.diagnostics_storage_account_config = kwargs.get("diagnostics_storage_account_config", None)
+        self.event_store_service_enabled = kwargs.get("event_store_service_enabled", None)
+        self.fabric_settings = kwargs.get("fabric_settings", None)
+        self.management_endpoint = kwargs.get("management_endpoint", None)
+        self.node_types = kwargs.get("node_types", None)
         self.provisioning_state = None
-        self.reliability_level = kwargs.get('reliability_level', None)
-        self.reverse_proxy_certificate = kwargs.get('reverse_proxy_certificate', None)
-        self.reverse_proxy_certificate_common_names = kwargs.get('reverse_proxy_certificate_common_names', None)
-        self.upgrade_description = kwargs.get('upgrade_description', None)
-        self.upgrade_mode = kwargs.get('upgrade_mode', "Automatic")
-        self.application_type_versions_cleanup_policy = kwargs.get('application_type_versions_cleanup_policy', None)
-        self.vm_image = kwargs.get('vm_image', None)
-        self.sf_zonal_upgrade_mode = kwargs.get('sf_zonal_upgrade_mode', None)
-        self.vmss_zonal_upgrade_mode = kwargs.get('vmss_zonal_upgrade_mode', None)
-        self.infrastructure_service_manager = kwargs.get('infrastructure_service_manager', None)
-        self.upgrade_wave = kwargs.get('upgrade_wave', None)
-        self.upgrade_pause_start_timestamp_utc = kwargs.get('upgrade_pause_start_timestamp_utc', None)
-        self.upgrade_pause_end_timestamp_utc = kwargs.get('upgrade_pause_end_timestamp_utc', None)
-        self.wave_upgrade_paused = kwargs.get('wave_upgrade_paused', None)
-        self.notifications = kwargs.get('notifications', None)
+        self.reliability_level = kwargs.get("reliability_level", None)
+        self.reverse_proxy_certificate = kwargs.get("reverse_proxy_certificate", None)
+        self.reverse_proxy_certificate_common_names = kwargs.get("reverse_proxy_certificate_common_names", None)
+        self.upgrade_description = kwargs.get("upgrade_description", None)
+        self.upgrade_mode = kwargs.get("upgrade_mode", "Automatic")
+        self.application_type_versions_cleanup_policy = kwargs.get("application_type_versions_cleanup_policy", None)
+        self.vm_image = kwargs.get("vm_image", None)
+        self.sf_zonal_upgrade_mode = kwargs.get("sf_zonal_upgrade_mode", None)
+        self.vmss_zonal_upgrade_mode = kwargs.get("vmss_zonal_upgrade_mode", None)
+        self.infrastructure_service_manager = kwargs.get("infrastructure_service_manager", None)
+        self.upgrade_wave = kwargs.get("upgrade_wave", None)
+        self.upgrade_pause_start_timestamp_utc = kwargs.get("upgrade_pause_start_timestamp_utc", None)
+        self.upgrade_pause_end_timestamp_utc = kwargs.get("upgrade_pause_end_timestamp_utc", None)
+        self.wave_upgrade_paused = kwargs.get("wave_upgrade_paused", None)
+        self.notifications = kwargs.get("notifications", None)
 
 
 class ClusterCodeVersionsListResult(msrest.serialization.Model):
@@ -1412,17 +1380,14 @@ class ClusterCodeVersionsListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ClusterCodeVersionsResult]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ClusterCodeVersionsResult]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterCodeVersionsListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ClusterCodeVersionsResult(msrest.serialization.Model):
@@ -1444,25 +1409,22 @@ class ClusterCodeVersionsResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'code_version': {'key': 'properties.codeVersion', 'type': 'str'},
-        'support_expiry_utc': {'key': 'properties.supportExpiryUtc', 'type': 'str'},
-        'environment': {'key': 'properties.environment', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "code_version": {"key": "properties.codeVersion", "type": "str"},
+        "support_expiry_utc": {"key": "properties.supportExpiryUtc", "type": "str"},
+        "environment": {"key": "properties.environment", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterCodeVersionsResult, self).__init__(**kwargs)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
-        self.type = kwargs.get('type', None)
-        self.code_version = kwargs.get('code_version', None)
-        self.support_expiry_utc = kwargs.get('support_expiry_utc', None)
-        self.environment = kwargs.get('environment', None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
+        self.type = kwargs.get("type", None)
+        self.code_version = kwargs.get("code_version", None)
+        self.support_expiry_utc = kwargs.get("support_expiry_utc", None)
+        self.environment = kwargs.get("environment", None)
 
 
 class ClusterHealthPolicy(msrest.serialization.Model):
@@ -1470,7 +1432,7 @@ class ClusterHealthPolicy(msrest.serialization.Model):
 
     :param max_percent_unhealthy_nodes: The maximum allowed percentage of unhealthy nodes before
      reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.
-    
+
      The percentage represents the maximum tolerated percentage of nodes that can be unhealthy
      before the cluster is considered in error.
      If the percentage is respected but there is at least one unhealthy node, the health is
@@ -1479,14 +1441,14 @@ class ClusterHealthPolicy(msrest.serialization.Model):
      of nodes in the cluster.
      The computation rounds up to tolerate one failure on small numbers of nodes. Default
      percentage is zero.
-    
+
      In large clusters, some nodes will always be down or out for repairs, so this percentage
      should be configured to tolerate that.
     :type max_percent_unhealthy_nodes: int
     :param max_percent_unhealthy_applications: The maximum allowed percentage of unhealthy
      applications before reporting an error. For example, to allow 10% of applications to be
      unhealthy, this value would be 10.
-    
+
      The percentage represents the maximum tolerated percentage of applications that can be
      unhealthy before the cluster is considered in error.
      If the percentage is respected but there is at least one unhealthy application, the health is
@@ -1504,24 +1466,21 @@ class ClusterHealthPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'max_percent_unhealthy_nodes': {'maximum': 100, 'minimum': 0},
-        'max_percent_unhealthy_applications': {'maximum': 100, 'minimum': 0},
+        "max_percent_unhealthy_nodes": {"maximum": 100, "minimum": 0},
+        "max_percent_unhealthy_applications": {"maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'max_percent_unhealthy_nodes': {'key': 'maxPercentUnhealthyNodes', 'type': 'int'},
-        'max_percent_unhealthy_applications': {'key': 'maxPercentUnhealthyApplications', 'type': 'int'},
-        'application_health_policies': {'key': 'applicationHealthPolicies', 'type': '{ApplicationHealthPolicy}'},
+        "max_percent_unhealthy_nodes": {"key": "maxPercentUnhealthyNodes", "type": "int"},
+        "max_percent_unhealthy_applications": {"key": "maxPercentUnhealthyApplications", "type": "int"},
+        "application_health_policies": {"key": "applicationHealthPolicies", "type": "{ApplicationHealthPolicy}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterHealthPolicy, self).__init__(**kwargs)
-        self.max_percent_unhealthy_nodes = kwargs.get('max_percent_unhealthy_nodes', 0)
-        self.max_percent_unhealthy_applications = kwargs.get('max_percent_unhealthy_applications', 0)
-        self.application_health_policies = kwargs.get('application_health_policies', None)
+        self.max_percent_unhealthy_nodes = kwargs.get("max_percent_unhealthy_nodes", 0)
+        self.max_percent_unhealthy_applications = kwargs.get("max_percent_unhealthy_applications", 0)
+        self.application_health_policies = kwargs.get("application_health_policies", None)
 
 
 class ClusterListResult(msrest.serialization.Model):
@@ -1534,17 +1493,14 @@ class ClusterListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Cluster]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Cluster]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ClusterUpdateParameters(msrest.serialization.Model):
@@ -1585,8 +1541,8 @@ class ClusterUpdateParameters(msrest.serialization.Model):
     :param reliability_level: The reliability level sets the replica set size of system services.
      Learn about `ReliabilityLevel
      <https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity>`_.
-    
-    
+
+
      * None - Run the System services with a target replica set count of 1. This should only be
      used for test clusters.
      * Bronze - Run the System services with a target replica set count of 3. This should only be
@@ -1633,59 +1589,68 @@ class ClusterUpdateParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'add_on_features': {'key': 'properties.addOnFeatures', 'type': '[str]'},
-        'certificate': {'key': 'properties.certificate', 'type': 'CertificateDescription'},
-        'certificate_common_names': {'key': 'properties.certificateCommonNames', 'type': 'ServerCertificateCommonNames'},
-        'client_certificate_common_names': {'key': 'properties.clientCertificateCommonNames', 'type': '[ClientCertificateCommonName]'},
-        'client_certificate_thumbprints': {'key': 'properties.clientCertificateThumbprints', 'type': '[ClientCertificateThumbprint]'},
-        'cluster_code_version': {'key': 'properties.clusterCodeVersion', 'type': 'str'},
-        'event_store_service_enabled': {'key': 'properties.eventStoreServiceEnabled', 'type': 'bool'},
-        'fabric_settings': {'key': 'properties.fabricSettings', 'type': '[SettingsSectionDescription]'},
-        'node_types': {'key': 'properties.nodeTypes', 'type': '[NodeTypeDescription]'},
-        'reliability_level': {'key': 'properties.reliabilityLevel', 'type': 'str'},
-        'reverse_proxy_certificate': {'key': 'properties.reverseProxyCertificate', 'type': 'CertificateDescription'},
-        'upgrade_description': {'key': 'properties.upgradeDescription', 'type': 'ClusterUpgradePolicy'},
-        'application_type_versions_cleanup_policy': {'key': 'properties.applicationTypeVersionsCleanupPolicy', 'type': 'ApplicationTypeVersionsCleanupPolicy'},
-        'upgrade_mode': {'key': 'properties.upgradeMode', 'type': 'str'},
-        'sf_zonal_upgrade_mode': {'key': 'properties.sfZonalUpgradeMode', 'type': 'str'},
-        'vmss_zonal_upgrade_mode': {'key': 'properties.vmssZonalUpgradeMode', 'type': 'str'},
-        'infrastructure_service_manager': {'key': 'properties.infrastructureServiceManager', 'type': 'bool'},
-        'upgrade_wave': {'key': 'properties.upgradeWave', 'type': 'str'},
-        'upgrade_pause_start_timestamp_utc': {'key': 'properties.upgradePauseStartTimestampUtc', 'type': 'iso-8601'},
-        'upgrade_pause_end_timestamp_utc': {'key': 'properties.upgradePauseEndTimestampUtc', 'type': 'iso-8601'},
-        'wave_upgrade_paused': {'key': 'properties.waveUpgradePaused', 'type': 'bool'},
-        'notifications': {'key': 'properties.notifications', 'type': '[Notification]'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "add_on_features": {"key": "properties.addOnFeatures", "type": "[str]"},
+        "certificate": {"key": "properties.certificate", "type": "CertificateDescription"},
+        "certificate_common_names": {
+            "key": "properties.certificateCommonNames",
+            "type": "ServerCertificateCommonNames",
+        },
+        "client_certificate_common_names": {
+            "key": "properties.clientCertificateCommonNames",
+            "type": "[ClientCertificateCommonName]",
+        },
+        "client_certificate_thumbprints": {
+            "key": "properties.clientCertificateThumbprints",
+            "type": "[ClientCertificateThumbprint]",
+        },
+        "cluster_code_version": {"key": "properties.clusterCodeVersion", "type": "str"},
+        "event_store_service_enabled": {"key": "properties.eventStoreServiceEnabled", "type": "bool"},
+        "fabric_settings": {"key": "properties.fabricSettings", "type": "[SettingsSectionDescription]"},
+        "node_types": {"key": "properties.nodeTypes", "type": "[NodeTypeDescription]"},
+        "reliability_level": {"key": "properties.reliabilityLevel", "type": "str"},
+        "reverse_proxy_certificate": {"key": "properties.reverseProxyCertificate", "type": "CertificateDescription"},
+        "upgrade_description": {"key": "properties.upgradeDescription", "type": "ClusterUpgradePolicy"},
+        "application_type_versions_cleanup_policy": {
+            "key": "properties.applicationTypeVersionsCleanupPolicy",
+            "type": "ApplicationTypeVersionsCleanupPolicy",
+        },
+        "upgrade_mode": {"key": "properties.upgradeMode", "type": "str"},
+        "sf_zonal_upgrade_mode": {"key": "properties.sfZonalUpgradeMode", "type": "str"},
+        "vmss_zonal_upgrade_mode": {"key": "properties.vmssZonalUpgradeMode", "type": "str"},
+        "infrastructure_service_manager": {"key": "properties.infrastructureServiceManager", "type": "bool"},
+        "upgrade_wave": {"key": "properties.upgradeWave", "type": "str"},
+        "upgrade_pause_start_timestamp_utc": {"key": "properties.upgradePauseStartTimestampUtc", "type": "iso-8601"},
+        "upgrade_pause_end_timestamp_utc": {"key": "properties.upgradePauseEndTimestampUtc", "type": "iso-8601"},
+        "wave_upgrade_paused": {"key": "properties.waveUpgradePaused", "type": "bool"},
+        "notifications": {"key": "properties.notifications", "type": "[Notification]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterUpdateParameters, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.add_on_features = kwargs.get('add_on_features', None)
-        self.certificate = kwargs.get('certificate', None)
-        self.certificate_common_names = kwargs.get('certificate_common_names', None)
-        self.client_certificate_common_names = kwargs.get('client_certificate_common_names', None)
-        self.client_certificate_thumbprints = kwargs.get('client_certificate_thumbprints', None)
-        self.cluster_code_version = kwargs.get('cluster_code_version', None)
-        self.event_store_service_enabled = kwargs.get('event_store_service_enabled', None)
-        self.fabric_settings = kwargs.get('fabric_settings', None)
-        self.node_types = kwargs.get('node_types', None)
-        self.reliability_level = kwargs.get('reliability_level', None)
-        self.reverse_proxy_certificate = kwargs.get('reverse_proxy_certificate', None)
-        self.upgrade_description = kwargs.get('upgrade_description', None)
-        self.application_type_versions_cleanup_policy = kwargs.get('application_type_versions_cleanup_policy', None)
-        self.upgrade_mode = kwargs.get('upgrade_mode', "Automatic")
-        self.sf_zonal_upgrade_mode = kwargs.get('sf_zonal_upgrade_mode', None)
-        self.vmss_zonal_upgrade_mode = kwargs.get('vmss_zonal_upgrade_mode', None)
-        self.infrastructure_service_manager = kwargs.get('infrastructure_service_manager', None)
-        self.upgrade_wave = kwargs.get('upgrade_wave', None)
-        self.upgrade_pause_start_timestamp_utc = kwargs.get('upgrade_pause_start_timestamp_utc', None)
-        self.upgrade_pause_end_timestamp_utc = kwargs.get('upgrade_pause_end_timestamp_utc', None)
-        self.wave_upgrade_paused = kwargs.get('wave_upgrade_paused', None)
-        self.notifications = kwargs.get('notifications', None)
+        self.tags = kwargs.get("tags", None)
+        self.add_on_features = kwargs.get("add_on_features", None)
+        self.certificate = kwargs.get("certificate", None)
+        self.certificate_common_names = kwargs.get("certificate_common_names", None)
+        self.client_certificate_common_names = kwargs.get("client_certificate_common_names", None)
+        self.client_certificate_thumbprints = kwargs.get("client_certificate_thumbprints", None)
+        self.cluster_code_version = kwargs.get("cluster_code_version", None)
+        self.event_store_service_enabled = kwargs.get("event_store_service_enabled", None)
+        self.fabric_settings = kwargs.get("fabric_settings", None)
+        self.node_types = kwargs.get("node_types", None)
+        self.reliability_level = kwargs.get("reliability_level", None)
+        self.reverse_proxy_certificate = kwargs.get("reverse_proxy_certificate", None)
+        self.upgrade_description = kwargs.get("upgrade_description", None)
+        self.application_type_versions_cleanup_policy = kwargs.get("application_type_versions_cleanup_policy", None)
+        self.upgrade_mode = kwargs.get("upgrade_mode", "Automatic")
+        self.sf_zonal_upgrade_mode = kwargs.get("sf_zonal_upgrade_mode", None)
+        self.vmss_zonal_upgrade_mode = kwargs.get("vmss_zonal_upgrade_mode", None)
+        self.infrastructure_service_manager = kwargs.get("infrastructure_service_manager", None)
+        self.upgrade_wave = kwargs.get("upgrade_wave", None)
+        self.upgrade_pause_start_timestamp_utc = kwargs.get("upgrade_pause_start_timestamp_utc", None)
+        self.upgrade_pause_end_timestamp_utc = kwargs.get("upgrade_pause_end_timestamp_utc", None)
+        self.wave_upgrade_paused = kwargs.get("wave_upgrade_paused", None)
+        self.notifications = kwargs.get("notifications", None)
 
 
 class ClusterUpgradeDeltaHealthPolicy(msrest.serialization.Model):
@@ -1722,27 +1687,32 @@ class ClusterUpgradeDeltaHealthPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'max_percent_delta_unhealthy_nodes': {'required': True, 'maximum': 100, 'minimum': 0},
-        'max_percent_upgrade_domain_delta_unhealthy_nodes': {'required': True, 'maximum': 100, 'minimum': 0},
-        'max_percent_delta_unhealthy_applications': {'required': True, 'maximum': 100, 'minimum': 0},
+        "max_percent_delta_unhealthy_nodes": {"required": True, "maximum": 100, "minimum": 0},
+        "max_percent_upgrade_domain_delta_unhealthy_nodes": {"required": True, "maximum": 100, "minimum": 0},
+        "max_percent_delta_unhealthy_applications": {"required": True, "maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'max_percent_delta_unhealthy_nodes': {'key': 'maxPercentDeltaUnhealthyNodes', 'type': 'int'},
-        'max_percent_upgrade_domain_delta_unhealthy_nodes': {'key': 'maxPercentUpgradeDomainDeltaUnhealthyNodes', 'type': 'int'},
-        'max_percent_delta_unhealthy_applications': {'key': 'maxPercentDeltaUnhealthyApplications', 'type': 'int'},
-        'application_delta_health_policies': {'key': 'applicationDeltaHealthPolicies', 'type': '{ApplicationDeltaHealthPolicy}'},
+        "max_percent_delta_unhealthy_nodes": {"key": "maxPercentDeltaUnhealthyNodes", "type": "int"},
+        "max_percent_upgrade_domain_delta_unhealthy_nodes": {
+            "key": "maxPercentUpgradeDomainDeltaUnhealthyNodes",
+            "type": "int",
+        },
+        "max_percent_delta_unhealthy_applications": {"key": "maxPercentDeltaUnhealthyApplications", "type": "int"},
+        "application_delta_health_policies": {
+            "key": "applicationDeltaHealthPolicies",
+            "type": "{ApplicationDeltaHealthPolicy}",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterUpgradeDeltaHealthPolicy, self).__init__(**kwargs)
-        self.max_percent_delta_unhealthy_nodes = kwargs['max_percent_delta_unhealthy_nodes']
-        self.max_percent_upgrade_domain_delta_unhealthy_nodes = kwargs['max_percent_upgrade_domain_delta_unhealthy_nodes']
-        self.max_percent_delta_unhealthy_applications = kwargs['max_percent_delta_unhealthy_applications']
-        self.application_delta_health_policies = kwargs.get('application_delta_health_policies', None)
+        self.max_percent_delta_unhealthy_nodes = kwargs["max_percent_delta_unhealthy_nodes"]
+        self.max_percent_upgrade_domain_delta_unhealthy_nodes = kwargs[
+            "max_percent_upgrade_domain_delta_unhealthy_nodes"
+        ]
+        self.max_percent_delta_unhealthy_applications = kwargs["max_percent_delta_unhealthy_applications"]
+        self.application_delta_health_policies = kwargs.get("application_delta_health_policies", None)
 
 
 class ClusterUpgradePolicy(msrest.serialization.Model):
@@ -1785,41 +1755,38 @@ class ClusterUpgradePolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'upgrade_replica_set_check_timeout': {'required': True},
-        'health_check_wait_duration': {'required': True},
-        'health_check_stable_duration': {'required': True},
-        'health_check_retry_timeout': {'required': True},
-        'upgrade_timeout': {'required': True},
-        'upgrade_domain_timeout': {'required': True},
-        'health_policy': {'required': True},
+        "upgrade_replica_set_check_timeout": {"required": True},
+        "health_check_wait_duration": {"required": True},
+        "health_check_stable_duration": {"required": True},
+        "health_check_retry_timeout": {"required": True},
+        "upgrade_timeout": {"required": True},
+        "upgrade_domain_timeout": {"required": True},
+        "health_policy": {"required": True},
     }
 
     _attribute_map = {
-        'force_restart': {'key': 'forceRestart', 'type': 'bool'},
-        'upgrade_replica_set_check_timeout': {'key': 'upgradeReplicaSetCheckTimeout', 'type': 'str'},
-        'health_check_wait_duration': {'key': 'healthCheckWaitDuration', 'type': 'str'},
-        'health_check_stable_duration': {'key': 'healthCheckStableDuration', 'type': 'str'},
-        'health_check_retry_timeout': {'key': 'healthCheckRetryTimeout', 'type': 'str'},
-        'upgrade_timeout': {'key': 'upgradeTimeout', 'type': 'str'},
-        'upgrade_domain_timeout': {'key': 'upgradeDomainTimeout', 'type': 'str'},
-        'health_policy': {'key': 'healthPolicy', 'type': 'ClusterHealthPolicy'},
-        'delta_health_policy': {'key': 'deltaHealthPolicy', 'type': 'ClusterUpgradeDeltaHealthPolicy'},
+        "force_restart": {"key": "forceRestart", "type": "bool"},
+        "upgrade_replica_set_check_timeout": {"key": "upgradeReplicaSetCheckTimeout", "type": "str"},
+        "health_check_wait_duration": {"key": "healthCheckWaitDuration", "type": "str"},
+        "health_check_stable_duration": {"key": "healthCheckStableDuration", "type": "str"},
+        "health_check_retry_timeout": {"key": "healthCheckRetryTimeout", "type": "str"},
+        "upgrade_timeout": {"key": "upgradeTimeout", "type": "str"},
+        "upgrade_domain_timeout": {"key": "upgradeDomainTimeout", "type": "str"},
+        "health_policy": {"key": "healthPolicy", "type": "ClusterHealthPolicy"},
+        "delta_health_policy": {"key": "deltaHealthPolicy", "type": "ClusterUpgradeDeltaHealthPolicy"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterUpgradePolicy, self).__init__(**kwargs)
-        self.force_restart = kwargs.get('force_restart', None)
-        self.upgrade_replica_set_check_timeout = kwargs['upgrade_replica_set_check_timeout']
-        self.health_check_wait_duration = kwargs['health_check_wait_duration']
-        self.health_check_stable_duration = kwargs['health_check_stable_duration']
-        self.health_check_retry_timeout = kwargs['health_check_retry_timeout']
-        self.upgrade_timeout = kwargs['upgrade_timeout']
-        self.upgrade_domain_timeout = kwargs['upgrade_domain_timeout']
-        self.health_policy = kwargs['health_policy']
-        self.delta_health_policy = kwargs.get('delta_health_policy', None)
+        self.force_restart = kwargs.get("force_restart", None)
+        self.upgrade_replica_set_check_timeout = kwargs["upgrade_replica_set_check_timeout"]
+        self.health_check_wait_duration = kwargs["health_check_wait_duration"]
+        self.health_check_stable_duration = kwargs["health_check_stable_duration"]
+        self.health_check_retry_timeout = kwargs["health_check_retry_timeout"]
+        self.upgrade_timeout = kwargs["upgrade_timeout"]
+        self.upgrade_domain_timeout = kwargs["upgrade_domain_timeout"]
+        self.health_policy = kwargs["health_policy"]
+        self.delta_health_policy = kwargs.get("delta_health_policy", None)
 
 
 class ClusterVersionDetails(msrest.serialization.Model):
@@ -1835,19 +1802,16 @@ class ClusterVersionDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code_version': {'key': 'codeVersion', 'type': 'str'},
-        'support_expiry_utc': {'key': 'supportExpiryUtc', 'type': 'str'},
-        'environment': {'key': 'environment', 'type': 'str'},
+        "code_version": {"key": "codeVersion", "type": "str"},
+        "support_expiry_utc": {"key": "supportExpiryUtc", "type": "str"},
+        "environment": {"key": "environment", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClusterVersionDetails, self).__init__(**kwargs)
-        self.code_version = kwargs.get('code_version', None)
-        self.support_expiry_utc = kwargs.get('support_expiry_utc', None)
-        self.environment = kwargs.get('environment', None)
+        self.code_version = kwargs.get("code_version", None)
+        self.support_expiry_utc = kwargs.get("support_expiry_utc", None)
+        self.environment = kwargs.get("environment", None)
 
 
 class DiagnosticsStorageAccountConfig(msrest.serialization.Model):
@@ -1871,33 +1835,30 @@ class DiagnosticsStorageAccountConfig(msrest.serialization.Model):
     """
 
     _validation = {
-        'storage_account_name': {'required': True},
-        'protected_account_key_name': {'required': True},
-        'blob_endpoint': {'required': True},
-        'queue_endpoint': {'required': True},
-        'table_endpoint': {'required': True},
+        "storage_account_name": {"required": True},
+        "protected_account_key_name": {"required": True},
+        "blob_endpoint": {"required": True},
+        "queue_endpoint": {"required": True},
+        "table_endpoint": {"required": True},
     }
 
     _attribute_map = {
-        'storage_account_name': {'key': 'storageAccountName', 'type': 'str'},
-        'protected_account_key_name': {'key': 'protectedAccountKeyName', 'type': 'str'},
-        'protected_account_key_name2': {'key': 'protectedAccountKeyName2', 'type': 'str'},
-        'blob_endpoint': {'key': 'blobEndpoint', 'type': 'str'},
-        'queue_endpoint': {'key': 'queueEndpoint', 'type': 'str'},
-        'table_endpoint': {'key': 'tableEndpoint', 'type': 'str'},
+        "storage_account_name": {"key": "storageAccountName", "type": "str"},
+        "protected_account_key_name": {"key": "protectedAccountKeyName", "type": "str"},
+        "protected_account_key_name2": {"key": "protectedAccountKeyName2", "type": "str"},
+        "blob_endpoint": {"key": "blobEndpoint", "type": "str"},
+        "queue_endpoint": {"key": "queueEndpoint", "type": "str"},
+        "table_endpoint": {"key": "tableEndpoint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiagnosticsStorageAccountConfig, self).__init__(**kwargs)
-        self.storage_account_name = kwargs['storage_account_name']
-        self.protected_account_key_name = kwargs['protected_account_key_name']
-        self.protected_account_key_name2 = kwargs.get('protected_account_key_name2', None)
-        self.blob_endpoint = kwargs['blob_endpoint']
-        self.queue_endpoint = kwargs['queue_endpoint']
-        self.table_endpoint = kwargs['table_endpoint']
+        self.storage_account_name = kwargs["storage_account_name"]
+        self.protected_account_key_name = kwargs["protected_account_key_name"]
+        self.protected_account_key_name2 = kwargs.get("protected_account_key_name2", None)
+        self.blob_endpoint = kwargs["blob_endpoint"]
+        self.queue_endpoint = kwargs["queue_endpoint"]
+        self.table_endpoint = kwargs["table_endpoint"]
 
 
 class EndpointRangeDescription(msrest.serialization.Model):
@@ -1912,22 +1873,19 @@ class EndpointRangeDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'start_port': {'required': True},
-        'end_port': {'required': True},
+        "start_port": {"required": True},
+        "end_port": {"required": True},
     }
 
     _attribute_map = {
-        'start_port': {'key': 'startPort', 'type': 'int'},
-        'end_port': {'key': 'endPort', 'type': 'int'},
+        "start_port": {"key": "startPort", "type": "int"},
+        "end_port": {"key": "endPort", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(EndpointRangeDescription, self).__init__(**kwargs)
-        self.start_port = kwargs['start_port']
-        self.end_port = kwargs['end_port']
+        self.start_port = kwargs["start_port"]
+        self.end_port = kwargs["end_port"]
 
 
 class ErrorModel(msrest.serialization.Model):
@@ -1938,15 +1896,12 @@ class ErrorModel(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorModelError'},
+        "error": {"key": "error", "type": "ErrorModelError"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorModel, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
+        self.error = kwargs.get("error", None)
 
 
 class ErrorModelError(msrest.serialization.Model):
@@ -1959,17 +1914,14 @@ class ErrorModelError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorModelError, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
 
 
 class ManagedIdentity(msrest.serialization.Model):
@@ -1994,26 +1946,23 @@ class ManagedIdentity(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'tenant_id': {'readonly': True},
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'user_assigned_identities': {'key': 'userAssignedIdentities', 'type': '{UserAssignedIdentity}'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "user_assigned_identities": {"key": "userAssignedIdentities", "type": "{UserAssignedIdentity}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ManagedIdentity, self).__init__(**kwargs)
         self.principal_id = None
         self.tenant_id = None
-        self.type = kwargs.get('type', None)
-        self.user_assigned_identities = kwargs.get('user_assigned_identities', None)
+        self.type = kwargs.get("type", None)
+        self.user_assigned_identities = kwargs.get("user_assigned_identities", None)
 
 
 class PartitionSchemeDescription(msrest.serialization.Model):
@@ -2030,21 +1979,22 @@ class PartitionSchemeDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'partition_scheme': {'required': True},
+        "partition_scheme": {"required": True},
     }
 
     _attribute_map = {
-        'partition_scheme': {'key': 'partitionScheme', 'type': 'str'},
+        "partition_scheme": {"key": "partitionScheme", "type": "str"},
     }
 
     _subtype_map = {
-        'partition_scheme': {'Named': 'NamedPartitionSchemeDescription', 'Singleton': 'SingletonPartitionSchemeDescription', 'UniformInt64Range': 'UniformInt64RangePartitionSchemeDescription'}
+        "partition_scheme": {
+            "Named": "NamedPartitionSchemeDescription",
+            "Singleton": "SingletonPartitionSchemeDescription",
+            "UniformInt64Range": "UniformInt64RangePartitionSchemeDescription",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PartitionSchemeDescription, self).__init__(**kwargs)
         self.partition_scheme = None  # type: Optional[str]
 
@@ -2065,25 +2015,22 @@ class NamedPartitionSchemeDescription(PartitionSchemeDescription):
     """
 
     _validation = {
-        'partition_scheme': {'required': True},
-        'count': {'required': True},
-        'names': {'required': True},
+        "partition_scheme": {"required": True},
+        "count": {"required": True},
+        "names": {"required": True},
     }
 
     _attribute_map = {
-        'partition_scheme': {'key': 'partitionScheme', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
-        'names': {'key': 'names', 'type': '[str]'},
+        "partition_scheme": {"key": "partitionScheme", "type": "str"},
+        "count": {"key": "count", "type": "int"},
+        "names": {"key": "names", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NamedPartitionSchemeDescription, self).__init__(**kwargs)
-        self.partition_scheme = 'Named'  # type: str
-        self.count = kwargs['count']
-        self.names = kwargs['names']
+        self.partition_scheme = "Named"  # type: str
+        self.count = kwargs["count"]
+        self.names = kwargs["names"]
 
 
 class NodeTypeDescription(msrest.serialization.Model):
@@ -2105,8 +2052,8 @@ class NodeTypeDescription(msrest.serialization.Model):
     :type http_gateway_endpoint_port: int
     :param durability_level: The durability level of the node type. Learn about `DurabilityLevel
      <https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity>`_.
-    
-    
+
+
      * Bronze - No privileges. This is the default.
      * Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
      * Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold
@@ -2139,47 +2086,44 @@ class NodeTypeDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
-        'client_connection_endpoint_port': {'required': True},
-        'http_gateway_endpoint_port': {'required': True},
-        'is_primary': {'required': True},
-        'vm_instance_count': {'required': True, 'maximum': 2147483647, 'minimum': 0},
+        "name": {"required": True},
+        "client_connection_endpoint_port": {"required": True},
+        "http_gateway_endpoint_port": {"required": True},
+        "is_primary": {"required": True},
+        "vm_instance_count": {"required": True, "maximum": 2147483647, "minimum": 0},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'placement_properties': {'key': 'placementProperties', 'type': '{str}'},
-        'capacities': {'key': 'capacities', 'type': '{str}'},
-        'client_connection_endpoint_port': {'key': 'clientConnectionEndpointPort', 'type': 'int'},
-        'http_gateway_endpoint_port': {'key': 'httpGatewayEndpointPort', 'type': 'int'},
-        'durability_level': {'key': 'durabilityLevel', 'type': 'str'},
-        'application_ports': {'key': 'applicationPorts', 'type': 'EndpointRangeDescription'},
-        'ephemeral_ports': {'key': 'ephemeralPorts', 'type': 'EndpointRangeDescription'},
-        'is_primary': {'key': 'isPrimary', 'type': 'bool'},
-        'vm_instance_count': {'key': 'vmInstanceCount', 'type': 'int'},
-        'reverse_proxy_endpoint_port': {'key': 'reverseProxyEndpointPort', 'type': 'int'},
-        'is_stateless': {'key': 'isStateless', 'type': 'bool'},
-        'multiple_availability_zones': {'key': 'multipleAvailabilityZones', 'type': 'bool'},
+        "name": {"key": "name", "type": "str"},
+        "placement_properties": {"key": "placementProperties", "type": "{str}"},
+        "capacities": {"key": "capacities", "type": "{str}"},
+        "client_connection_endpoint_port": {"key": "clientConnectionEndpointPort", "type": "int"},
+        "http_gateway_endpoint_port": {"key": "httpGatewayEndpointPort", "type": "int"},
+        "durability_level": {"key": "durabilityLevel", "type": "str"},
+        "application_ports": {"key": "applicationPorts", "type": "EndpointRangeDescription"},
+        "ephemeral_ports": {"key": "ephemeralPorts", "type": "EndpointRangeDescription"},
+        "is_primary": {"key": "isPrimary", "type": "bool"},
+        "vm_instance_count": {"key": "vmInstanceCount", "type": "int"},
+        "reverse_proxy_endpoint_port": {"key": "reverseProxyEndpointPort", "type": "int"},
+        "is_stateless": {"key": "isStateless", "type": "bool"},
+        "multiple_availability_zones": {"key": "multipleAvailabilityZones", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NodeTypeDescription, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.placement_properties = kwargs.get('placement_properties', None)
-        self.capacities = kwargs.get('capacities', None)
-        self.client_connection_endpoint_port = kwargs['client_connection_endpoint_port']
-        self.http_gateway_endpoint_port = kwargs['http_gateway_endpoint_port']
-        self.durability_level = kwargs.get('durability_level', None)
-        self.application_ports = kwargs.get('application_ports', None)
-        self.ephemeral_ports = kwargs.get('ephemeral_ports', None)
-        self.is_primary = kwargs['is_primary']
-        self.vm_instance_count = kwargs['vm_instance_count']
-        self.reverse_proxy_endpoint_port = kwargs.get('reverse_proxy_endpoint_port', None)
-        self.is_stateless = kwargs.get('is_stateless', None)
-        self.multiple_availability_zones = kwargs.get('multiple_availability_zones', None)
+        self.name = kwargs["name"]
+        self.placement_properties = kwargs.get("placement_properties", None)
+        self.capacities = kwargs.get("capacities", None)
+        self.client_connection_endpoint_port = kwargs["client_connection_endpoint_port"]
+        self.http_gateway_endpoint_port = kwargs["http_gateway_endpoint_port"]
+        self.durability_level = kwargs.get("durability_level", None)
+        self.application_ports = kwargs.get("application_ports", None)
+        self.ephemeral_ports = kwargs.get("ephemeral_ports", None)
+        self.is_primary = kwargs["is_primary"]
+        self.vm_instance_count = kwargs["vm_instance_count"]
+        self.reverse_proxy_endpoint_port = kwargs.get("reverse_proxy_endpoint_port", None)
+        self.is_stateless = kwargs.get("is_stateless", None)
+        self.multiple_availability_zones = kwargs.get("multiple_availability_zones", None)
 
 
 class Notification(msrest.serialization.Model):
@@ -2200,28 +2144,25 @@ class Notification(msrest.serialization.Model):
     """
 
     _validation = {
-        'is_enabled': {'required': True},
-        'notification_category': {'required': True},
-        'notification_level': {'required': True},
-        'notification_targets': {'required': True},
+        "is_enabled": {"required": True},
+        "notification_category": {"required": True},
+        "notification_level": {"required": True},
+        "notification_targets": {"required": True},
     }
 
     _attribute_map = {
-        'is_enabled': {'key': 'isEnabled', 'type': 'bool'},
-        'notification_category': {'key': 'notificationCategory', 'type': 'str'},
-        'notification_level': {'key': 'notificationLevel', 'type': 'str'},
-        'notification_targets': {'key': 'notificationTargets', 'type': '[NotificationTarget]'},
+        "is_enabled": {"key": "isEnabled", "type": "bool"},
+        "notification_category": {"key": "notificationCategory", "type": "str"},
+        "notification_level": {"key": "notificationLevel", "type": "str"},
+        "notification_targets": {"key": "notificationTargets", "type": "[NotificationTarget]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Notification, self).__init__(**kwargs)
-        self.is_enabled = kwargs['is_enabled']
-        self.notification_category = kwargs['notification_category']
-        self.notification_level = kwargs['notification_level']
-        self.notification_targets = kwargs['notification_targets']
+        self.is_enabled = kwargs["is_enabled"]
+        self.notification_category = kwargs["notification_category"]
+        self.notification_level = kwargs["notification_level"]
+        self.notification_targets = kwargs["notification_targets"]
 
 
 class NotificationTarget(msrest.serialization.Model):
@@ -2238,22 +2179,19 @@ class NotificationTarget(msrest.serialization.Model):
     """
 
     _validation = {
-        'notification_channel': {'required': True},
-        'receivers': {'required': True},
+        "notification_channel": {"required": True},
+        "receivers": {"required": True},
     }
 
     _attribute_map = {
-        'notification_channel': {'key': 'notificationChannel', 'type': 'str'},
-        'receivers': {'key': 'receivers', 'type': '[str]'},
+        "notification_channel": {"key": "notificationChannel", "type": "str"},
+        "receivers": {"key": "receivers", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationTarget, self).__init__(**kwargs)
-        self.notification_channel = kwargs['notification_channel']
-        self.receivers = kwargs['receivers']
+        self.notification_channel = kwargs["notification_channel"]
+        self.receivers = kwargs["receivers"]
 
 
 class OperationListResult(msrest.serialization.Model):
@@ -2268,20 +2206,17 @@ class OperationListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[OperationResult]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[OperationResult]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -2301,23 +2236,20 @@ class OperationResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'display': {'key': 'display', 'type': 'AvailableOperationDisplay'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "display": {"key": "display", "type": "AvailableOperationDisplay"},
+        "origin": {"key": "origin", "type": "str"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationResult, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
-        self.display = kwargs.get('display', None)
-        self.origin = kwargs.get('origin', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.name = kwargs.get("name", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
+        self.display = kwargs.get("display", None)
+        self.origin = kwargs.get("origin", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class ServerCertificateCommonName(msrest.serialization.Model):
@@ -2333,22 +2265,19 @@ class ServerCertificateCommonName(msrest.serialization.Model):
     """
 
     _validation = {
-        'certificate_common_name': {'required': True},
-        'certificate_issuer_thumbprint': {'required': True},
+        "certificate_common_name": {"required": True},
+        "certificate_issuer_thumbprint": {"required": True},
     }
 
     _attribute_map = {
-        'certificate_common_name': {'key': 'certificateCommonName', 'type': 'str'},
-        'certificate_issuer_thumbprint': {'key': 'certificateIssuerThumbprint', 'type': 'str'},
+        "certificate_common_name": {"key": "certificateCommonName", "type": "str"},
+        "certificate_issuer_thumbprint": {"key": "certificateIssuerThumbprint", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerCertificateCommonName, self).__init__(**kwargs)
-        self.certificate_common_name = kwargs['certificate_common_name']
-        self.certificate_issuer_thumbprint = kwargs['certificate_issuer_thumbprint']
+        self.certificate_common_name = kwargs["certificate_common_name"]
+        self.certificate_issuer_thumbprint = kwargs["certificate_issuer_thumbprint"]
 
 
 class ServerCertificateCommonNames(msrest.serialization.Model):
@@ -2364,17 +2293,14 @@ class ServerCertificateCommonNames(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'common_names': {'key': 'commonNames', 'type': '[ServerCertificateCommonName]'},
-        'x509_store_name': {'key': 'x509StoreName', 'type': 'str'},
+        "common_names": {"key": "commonNames", "type": "[ServerCertificateCommonName]"},
+        "x509_store_name": {"key": "x509StoreName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerCertificateCommonNames, self).__init__(**kwargs)
-        self.common_names = kwargs.get('common_names', None)
-        self.x509_store_name = kwargs.get('x509_store_name', None)
+        self.common_names = kwargs.get("common_names", None)
+        self.x509_store_name = kwargs.get("x509_store_name", None)
 
 
 class ServiceCorrelationDescription(msrest.serialization.Model):
@@ -2392,22 +2318,19 @@ class ServiceCorrelationDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'scheme': {'required': True},
-        'service_name': {'required': True},
+        "scheme": {"required": True},
+        "service_name": {"required": True},
     }
 
     _attribute_map = {
-        'scheme': {'key': 'scheme', 'type': 'str'},
-        'service_name': {'key': 'serviceName', 'type': 'str'},
+        "scheme": {"key": "scheme", "type": "str"},
+        "service_name": {"key": "serviceName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceCorrelationDescription, self).__init__(**kwargs)
-        self.scheme = kwargs['scheme']
-        self.service_name = kwargs['service_name']
+        self.scheme = kwargs["scheme"]
+        self.service_name = kwargs["service_name"]
 
 
 class ServiceLoadMetricDescription(msrest.serialization.Model):
@@ -2434,27 +2357,24 @@ class ServiceLoadMetricDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
+        "name": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'weight': {'key': 'weight', 'type': 'str'},
-        'primary_default_load': {'key': 'primaryDefaultLoad', 'type': 'int'},
-        'secondary_default_load': {'key': 'secondaryDefaultLoad', 'type': 'int'},
-        'default_load': {'key': 'defaultLoad', 'type': 'int'},
+        "name": {"key": "name", "type": "str"},
+        "weight": {"key": "weight", "type": "str"},
+        "primary_default_load": {"key": "primaryDefaultLoad", "type": "int"},
+        "secondary_default_load": {"key": "secondaryDefaultLoad", "type": "int"},
+        "default_load": {"key": "defaultLoad", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceLoadMetricDescription, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.weight = kwargs.get('weight', None)
-        self.primary_default_load = kwargs.get('primary_default_load', None)
-        self.secondary_default_load = kwargs.get('secondary_default_load', None)
-        self.default_load = kwargs.get('default_load', None)
+        self.name = kwargs["name"]
+        self.weight = kwargs.get("weight", None)
+        self.primary_default_load = kwargs.get("primary_default_load", None)
+        self.secondary_default_load = kwargs.get("secondary_default_load", None)
+        self.default_load = kwargs.get("default_load", None)
 
 
 class ServicePlacementPolicyDescription(msrest.serialization.Model):
@@ -2473,21 +2393,16 @@ class ServicePlacementPolicyDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True},
+        "type": {"required": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
+        "type": {"key": "type", "type": "str"},
     }
 
-    _subtype_map = {
-        'type': {}
-    }
+    _subtype_map = {"type": {}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServicePlacementPolicyDescription, self).__init__(**kwargs)
         self.type = None  # type: Optional[str]
 
@@ -2550,51 +2465,51 @@ class ServiceResource(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'placement_constraints': {'key': 'properties.placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'properties.correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'properties.serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'properties.servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'properties.defaultMoveCost', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'service_kind': {'key': 'properties.serviceKind', 'type': 'str'},
-        'service_type_name': {'key': 'properties.serviceTypeName', 'type': 'str'},
-        'partition_description': {'key': 'properties.partitionDescription', 'type': 'PartitionSchemeDescription'},
-        'service_package_activation_mode': {'key': 'properties.servicePackageActivationMode', 'type': 'str'},
-        'service_dns_name': {'key': 'properties.serviceDnsName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "placement_constraints": {"key": "properties.placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "properties.correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "properties.serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "properties.servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "properties.defaultMoveCost", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "service_kind": {"key": "properties.serviceKind", "type": "str"},
+        "service_type_name": {"key": "properties.serviceTypeName", "type": "str"},
+        "partition_description": {"key": "properties.partitionDescription", "type": "PartitionSchemeDescription"},
+        "service_package_activation_mode": {"key": "properties.servicePackageActivationMode", "type": "str"},
+        "service_dns_name": {"key": "properties.serviceDnsName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceResource, self).__init__(**kwargs)
-        self.placement_constraints = kwargs.get('placement_constraints', None)
-        self.correlation_scheme = kwargs.get('correlation_scheme', None)
-        self.service_load_metrics = kwargs.get('service_load_metrics', None)
-        self.service_placement_policies = kwargs.get('service_placement_policies', None)
-        self.default_move_cost = kwargs.get('default_move_cost', None)
+        self.placement_constraints = kwargs.get("placement_constraints", None)
+        self.correlation_scheme = kwargs.get("correlation_scheme", None)
+        self.service_load_metrics = kwargs.get("service_load_metrics", None)
+        self.service_placement_policies = kwargs.get("service_placement_policies", None)
+        self.default_move_cost = kwargs.get("default_move_cost", None)
         self.provisioning_state = None
         self.service_kind = None  # type: Optional[str]
-        self.service_type_name = kwargs.get('service_type_name', None)
-        self.partition_description = kwargs.get('partition_description', None)
-        self.service_package_activation_mode = kwargs.get('service_package_activation_mode', None)
-        self.service_dns_name = kwargs.get('service_dns_name', None)
+        self.service_type_name = kwargs.get("service_type_name", None)
+        self.partition_description = kwargs.get("partition_description", None)
+        self.service_package_activation_mode = kwargs.get("service_package_activation_mode", None)
+        self.service_dns_name = kwargs.get("service_dns_name", None)
 
 
 class ServiceResourceList(msrest.serialization.Model):
@@ -2609,20 +2524,17 @@ class ServiceResourceList(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ServiceResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[ServiceResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
         self.next_link = None
 
 
@@ -2650,23 +2562,23 @@ class ServiceResourcePropertiesBase(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'placement_constraints': {'key': 'placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'defaultMoveCost', 'type': 'str'},
+        "placement_constraints": {"key": "placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "defaultMoveCost", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceResourcePropertiesBase, self).__init__(**kwargs)
-        self.placement_constraints = kwargs.get('placement_constraints', None)
-        self.correlation_scheme = kwargs.get('correlation_scheme', None)
-        self.service_load_metrics = kwargs.get('service_load_metrics', None)
-        self.service_placement_policies = kwargs.get('service_placement_policies', None)
-        self.default_move_cost = kwargs.get('default_move_cost', None)
+        self.placement_constraints = kwargs.get("placement_constraints", None)
+        self.correlation_scheme = kwargs.get("correlation_scheme", None)
+        self.service_load_metrics = kwargs.get("service_load_metrics", None)
+        self.service_placement_policies = kwargs.get("service_placement_policies", None)
+        self.default_move_cost = kwargs.get("default_move_cost", None)
 
 
 class ServiceResourceProperties(ServiceResourcePropertiesBase):
@@ -2717,39 +2629,39 @@ class ServiceResourceProperties(ServiceResourcePropertiesBase):
     """
 
     _validation = {
-        'provisioning_state': {'readonly': True},
-        'service_kind': {'required': True},
+        "provisioning_state": {"readonly": True},
+        "service_kind": {"required": True},
     }
 
     _attribute_map = {
-        'placement_constraints': {'key': 'placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'defaultMoveCost', 'type': 'str'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'service_kind': {'key': 'serviceKind', 'type': 'str'},
-        'service_type_name': {'key': 'serviceTypeName', 'type': 'str'},
-        'partition_description': {'key': 'partitionDescription', 'type': 'PartitionSchemeDescription'},
-        'service_package_activation_mode': {'key': 'servicePackageActivationMode', 'type': 'str'},
-        'service_dns_name': {'key': 'serviceDnsName', 'type': 'str'},
+        "placement_constraints": {"key": "placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "defaultMoveCost", "type": "str"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "service_kind": {"key": "serviceKind", "type": "str"},
+        "service_type_name": {"key": "serviceTypeName", "type": "str"},
+        "partition_description": {"key": "partitionDescription", "type": "PartitionSchemeDescription"},
+        "service_package_activation_mode": {"key": "servicePackageActivationMode", "type": "str"},
+        "service_dns_name": {"key": "serviceDnsName", "type": "str"},
     }
 
     _subtype_map = {
-        'service_kind': {'Stateful': 'StatefulServiceProperties', 'Stateless': 'StatelessServiceProperties'}
+        "service_kind": {"Stateful": "StatefulServiceProperties", "Stateless": "StatelessServiceProperties"}
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceResourceProperties, self).__init__(**kwargs)
         self.provisioning_state = None
-        self.service_kind = 'ServiceResourceProperties'  # type: str
-        self.service_type_name = kwargs.get('service_type_name', None)
-        self.partition_description = kwargs.get('partition_description', None)
-        self.service_package_activation_mode = kwargs.get('service_package_activation_mode', None)
-        self.service_dns_name = kwargs.get('service_dns_name', None)
+        self.service_kind = "ServiceResourceProperties"  # type: str
+        self.service_type_name = kwargs.get("service_type_name", None)
+        self.partition_description = kwargs.get("partition_description", None)
+        self.service_package_activation_mode = kwargs.get("service_package_activation_mode", None)
+        self.service_dns_name = kwargs.get("service_dns_name", None)
 
 
 class ServiceResourceUpdate(ProxyResource):
@@ -2796,39 +2708,39 @@ class ServiceResourceUpdate(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'etag': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'placement_constraints': {'key': 'properties.placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'properties.correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'properties.serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'properties.servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'properties.defaultMoveCost', 'type': 'str'},
-        'service_kind': {'key': 'properties.serviceKind', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "etag": {"key": "etag", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "placement_constraints": {"key": "properties.placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "properties.correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "properties.serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "properties.servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "properties.defaultMoveCost", "type": "str"},
+        "service_kind": {"key": "properties.serviceKind", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceResourceUpdate, self).__init__(**kwargs)
-        self.placement_constraints = kwargs.get('placement_constraints', None)
-        self.correlation_scheme = kwargs.get('correlation_scheme', None)
-        self.service_load_metrics = kwargs.get('service_load_metrics', None)
-        self.service_placement_policies = kwargs.get('service_placement_policies', None)
-        self.default_move_cost = kwargs.get('default_move_cost', None)
+        self.placement_constraints = kwargs.get("placement_constraints", None)
+        self.correlation_scheme = kwargs.get("correlation_scheme", None)
+        self.service_load_metrics = kwargs.get("service_load_metrics", None)
+        self.service_placement_policies = kwargs.get("service_placement_policies", None)
+        self.default_move_cost = kwargs.get("default_move_cost", None)
         self.service_kind = None  # type: Optional[str]
 
 
@@ -2864,28 +2776,28 @@ class ServiceResourceUpdateProperties(ServiceResourcePropertiesBase):
     """
 
     _validation = {
-        'service_kind': {'required': True},
+        "service_kind": {"required": True},
     }
 
     _attribute_map = {
-        'placement_constraints': {'key': 'placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'defaultMoveCost', 'type': 'str'},
-        'service_kind': {'key': 'serviceKind', 'type': 'str'},
+        "placement_constraints": {"key": "placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "defaultMoveCost", "type": "str"},
+        "service_kind": {"key": "serviceKind", "type": "str"},
     }
 
     _subtype_map = {
-        'service_kind': {'Stateful': 'StatefulServiceUpdateProperties', 'Stateless': 'StatelessServiceUpdateProperties'}
+        "service_kind": {"Stateful": "StatefulServiceUpdateProperties", "Stateless": "StatelessServiceUpdateProperties"}
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceResourceUpdateProperties, self).__init__(**kwargs)
-        self.service_kind = 'ServiceResourceUpdateProperties'  # type: str
+        self.service_kind = "ServiceResourceUpdateProperties"  # type: str
 
 
 class ServiceTypeDeltaHealthPolicy(msrest.serialization.Model):
@@ -2901,19 +2813,16 @@ class ServiceTypeDeltaHealthPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'max_percent_delta_unhealthy_services': {'maximum': 100, 'minimum': 0},
+        "max_percent_delta_unhealthy_services": {"maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'max_percent_delta_unhealthy_services': {'key': 'maxPercentDeltaUnhealthyServices', 'type': 'int'},
+        "max_percent_delta_unhealthy_services": {"key": "maxPercentDeltaUnhealthyServices", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceTypeDeltaHealthPolicy, self).__init__(**kwargs)
-        self.max_percent_delta_unhealthy_services = kwargs.get('max_percent_delta_unhealthy_services', 0)
+        self.max_percent_delta_unhealthy_services = kwargs.get("max_percent_delta_unhealthy_services", 0)
 
 
 class ServiceTypeHealthPolicy(msrest.serialization.Model):
@@ -2925,19 +2834,16 @@ class ServiceTypeHealthPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'max_percent_unhealthy_services': {'maximum': 100, 'minimum': 0},
+        "max_percent_unhealthy_services": {"maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'max_percent_unhealthy_services': {'key': 'maxPercentUnhealthyServices', 'type': 'int'},
+        "max_percent_unhealthy_services": {"key": "maxPercentUnhealthyServices", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServiceTypeHealthPolicy, self).__init__(**kwargs)
-        self.max_percent_unhealthy_services = kwargs.get('max_percent_unhealthy_services', 0)
+        self.max_percent_unhealthy_services = kwargs.get("max_percent_unhealthy_services", 0)
 
 
 class SettingsParameterDescription(msrest.serialization.Model):
@@ -2952,22 +2858,19 @@ class SettingsParameterDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
-        'value': {'required': True},
+        "name": {"required": True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'value': {'key': 'value', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SettingsParameterDescription, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.value = kwargs['value']
+        self.name = kwargs["name"]
+        self.value = kwargs["value"]
 
 
 class SettingsSectionDescription(msrest.serialization.Model):
@@ -2982,22 +2885,19 @@ class SettingsSectionDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
-        'parameters': {'required': True},
+        "name": {"required": True},
+        "parameters": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '[SettingsParameterDescription]'},
+        "name": {"key": "name", "type": "str"},
+        "parameters": {"key": "parameters", "type": "[SettingsParameterDescription]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SettingsSectionDescription, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.parameters = kwargs['parameters']
+        self.name = kwargs["name"]
+        self.parameters = kwargs["parameters"]
 
 
 class SingletonPartitionSchemeDescription(PartitionSchemeDescription):
@@ -3011,19 +2911,16 @@ class SingletonPartitionSchemeDescription(PartitionSchemeDescription):
     """
 
     _validation = {
-        'partition_scheme': {'required': True},
+        "partition_scheme": {"required": True},
     }
 
     _attribute_map = {
-        'partition_scheme': {'key': 'partitionScheme', 'type': 'str'},
+        "partition_scheme": {"key": "partitionScheme", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SingletonPartitionSchemeDescription, self).__init__(**kwargs)
-        self.partition_scheme = 'Singleton'  # type: str
+        self.partition_scheme = "Singleton"  # type: str
 
 
 class StatefulServiceProperties(ServiceResourceProperties):
@@ -3087,44 +2984,44 @@ class StatefulServiceProperties(ServiceResourceProperties):
     """
 
     _validation = {
-        'provisioning_state': {'readonly': True},
-        'service_kind': {'required': True},
-        'target_replica_set_size': {'minimum': 1},
-        'min_replica_set_size': {'minimum': 1},
+        "provisioning_state": {"readonly": True},
+        "service_kind": {"required": True},
+        "target_replica_set_size": {"minimum": 1},
+        "min_replica_set_size": {"minimum": 1},
     }
 
     _attribute_map = {
-        'placement_constraints': {'key': 'placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'defaultMoveCost', 'type': 'str'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'service_kind': {'key': 'serviceKind', 'type': 'str'},
-        'service_type_name': {'key': 'serviceTypeName', 'type': 'str'},
-        'partition_description': {'key': 'partitionDescription', 'type': 'PartitionSchemeDescription'},
-        'service_package_activation_mode': {'key': 'servicePackageActivationMode', 'type': 'str'},
-        'service_dns_name': {'key': 'serviceDnsName', 'type': 'str'},
-        'has_persisted_state': {'key': 'hasPersistedState', 'type': 'bool'},
-        'target_replica_set_size': {'key': 'targetReplicaSetSize', 'type': 'int'},
-        'min_replica_set_size': {'key': 'minReplicaSetSize', 'type': 'int'},
-        'replica_restart_wait_duration': {'key': 'replicaRestartWaitDuration', 'type': 'iso-8601'},
-        'quorum_loss_wait_duration': {'key': 'quorumLossWaitDuration', 'type': 'iso-8601'},
-        'stand_by_replica_keep_duration': {'key': 'standByReplicaKeepDuration', 'type': 'iso-8601'},
+        "placement_constraints": {"key": "placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "defaultMoveCost", "type": "str"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "service_kind": {"key": "serviceKind", "type": "str"},
+        "service_type_name": {"key": "serviceTypeName", "type": "str"},
+        "partition_description": {"key": "partitionDescription", "type": "PartitionSchemeDescription"},
+        "service_package_activation_mode": {"key": "servicePackageActivationMode", "type": "str"},
+        "service_dns_name": {"key": "serviceDnsName", "type": "str"},
+        "has_persisted_state": {"key": "hasPersistedState", "type": "bool"},
+        "target_replica_set_size": {"key": "targetReplicaSetSize", "type": "int"},
+        "min_replica_set_size": {"key": "minReplicaSetSize", "type": "int"},
+        "replica_restart_wait_duration": {"key": "replicaRestartWaitDuration", "type": "iso-8601"},
+        "quorum_loss_wait_duration": {"key": "quorumLossWaitDuration", "type": "iso-8601"},
+        "stand_by_replica_keep_duration": {"key": "standByReplicaKeepDuration", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StatefulServiceProperties, self).__init__(**kwargs)
-        self.service_kind = 'Stateful'  # type: str
-        self.has_persisted_state = kwargs.get('has_persisted_state', None)
-        self.target_replica_set_size = kwargs.get('target_replica_set_size', None)
-        self.min_replica_set_size = kwargs.get('min_replica_set_size', None)
-        self.replica_restart_wait_duration = kwargs.get('replica_restart_wait_duration', None)
-        self.quorum_loss_wait_duration = kwargs.get('quorum_loss_wait_duration', None)
-        self.stand_by_replica_keep_duration = kwargs.get('stand_by_replica_keep_duration', None)
+        self.service_kind = "Stateful"  # type: str
+        self.has_persisted_state = kwargs.get("has_persisted_state", None)
+        self.target_replica_set_size = kwargs.get("target_replica_set_size", None)
+        self.min_replica_set_size = kwargs.get("min_replica_set_size", None)
+        self.replica_restart_wait_duration = kwargs.get("replica_restart_wait_duration", None)
+        self.quorum_loss_wait_duration = kwargs.get("quorum_loss_wait_duration", None)
+        self.stand_by_replica_keep_duration = kwargs.get("stand_by_replica_keep_duration", None)
 
 
 class StatefulServiceUpdateProperties(ServiceResourceUpdateProperties):
@@ -3169,36 +3066,36 @@ class StatefulServiceUpdateProperties(ServiceResourceUpdateProperties):
     """
 
     _validation = {
-        'service_kind': {'required': True},
-        'target_replica_set_size': {'minimum': 1},
-        'min_replica_set_size': {'minimum': 1},
+        "service_kind": {"required": True},
+        "target_replica_set_size": {"minimum": 1},
+        "min_replica_set_size": {"minimum": 1},
     }
 
     _attribute_map = {
-        'placement_constraints': {'key': 'placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'defaultMoveCost', 'type': 'str'},
-        'service_kind': {'key': 'serviceKind', 'type': 'str'},
-        'target_replica_set_size': {'key': 'targetReplicaSetSize', 'type': 'int'},
-        'min_replica_set_size': {'key': 'minReplicaSetSize', 'type': 'int'},
-        'replica_restart_wait_duration': {'key': 'replicaRestartWaitDuration', 'type': 'iso-8601'},
-        'quorum_loss_wait_duration': {'key': 'quorumLossWaitDuration', 'type': 'iso-8601'},
-        'stand_by_replica_keep_duration': {'key': 'standByReplicaKeepDuration', 'type': 'iso-8601'},
+        "placement_constraints": {"key": "placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "defaultMoveCost", "type": "str"},
+        "service_kind": {"key": "serviceKind", "type": "str"},
+        "target_replica_set_size": {"key": "targetReplicaSetSize", "type": "int"},
+        "min_replica_set_size": {"key": "minReplicaSetSize", "type": "int"},
+        "replica_restart_wait_duration": {"key": "replicaRestartWaitDuration", "type": "iso-8601"},
+        "quorum_loss_wait_duration": {"key": "quorumLossWaitDuration", "type": "iso-8601"},
+        "stand_by_replica_keep_duration": {"key": "standByReplicaKeepDuration", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StatefulServiceUpdateProperties, self).__init__(**kwargs)
-        self.service_kind = 'Stateful'  # type: str
-        self.target_replica_set_size = kwargs.get('target_replica_set_size', None)
-        self.min_replica_set_size = kwargs.get('min_replica_set_size', None)
-        self.replica_restart_wait_duration = kwargs.get('replica_restart_wait_duration', None)
-        self.quorum_loss_wait_duration = kwargs.get('quorum_loss_wait_duration', None)
-        self.stand_by_replica_keep_duration = kwargs.get('stand_by_replica_keep_duration', None)
+        self.service_kind = "Stateful"  # type: str
+        self.target_replica_set_size = kwargs.get("target_replica_set_size", None)
+        self.min_replica_set_size = kwargs.get("min_replica_set_size", None)
+        self.replica_restart_wait_duration = kwargs.get("replica_restart_wait_duration", None)
+        self.quorum_loss_wait_duration = kwargs.get("quorum_loss_wait_duration", None)
+        self.stand_by_replica_keep_duration = kwargs.get("stand_by_replica_keep_duration", None)
 
 
 class StatelessServiceProperties(ServiceResourceProperties):
@@ -3256,35 +3153,35 @@ class StatelessServiceProperties(ServiceResourceProperties):
     """
 
     _validation = {
-        'provisioning_state': {'readonly': True},
-        'service_kind': {'required': True},
-        'instance_count': {'minimum': -1},
+        "provisioning_state": {"readonly": True},
+        "service_kind": {"required": True},
+        "instance_count": {"minimum": -1},
     }
 
     _attribute_map = {
-        'placement_constraints': {'key': 'placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'defaultMoveCost', 'type': 'str'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'service_kind': {'key': 'serviceKind', 'type': 'str'},
-        'service_type_name': {'key': 'serviceTypeName', 'type': 'str'},
-        'partition_description': {'key': 'partitionDescription', 'type': 'PartitionSchemeDescription'},
-        'service_package_activation_mode': {'key': 'servicePackageActivationMode', 'type': 'str'},
-        'service_dns_name': {'key': 'serviceDnsName', 'type': 'str'},
-        'instance_count': {'key': 'instanceCount', 'type': 'int'},
-        'instance_close_delay_duration': {'key': 'instanceCloseDelayDuration', 'type': 'str'},
+        "placement_constraints": {"key": "placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "defaultMoveCost", "type": "str"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "service_kind": {"key": "serviceKind", "type": "str"},
+        "service_type_name": {"key": "serviceTypeName", "type": "str"},
+        "partition_description": {"key": "partitionDescription", "type": "PartitionSchemeDescription"},
+        "service_package_activation_mode": {"key": "servicePackageActivationMode", "type": "str"},
+        "service_dns_name": {"key": "serviceDnsName", "type": "str"},
+        "instance_count": {"key": "instanceCount", "type": "int"},
+        "instance_close_delay_duration": {"key": "instanceCloseDelayDuration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StatelessServiceProperties, self).__init__(**kwargs)
-        self.service_kind = 'Stateless'  # type: str
-        self.instance_count = kwargs.get('instance_count', None)
-        self.instance_close_delay_duration = kwargs.get('instance_close_delay_duration', None)
+        self.service_kind = "Stateless"  # type: str
+        self.instance_count = kwargs.get("instance_count", None)
+        self.instance_close_delay_duration = kwargs.get("instance_close_delay_duration", None)
 
 
 class StatelessServiceUpdateProperties(ServiceResourceUpdateProperties):
@@ -3326,29 +3223,29 @@ class StatelessServiceUpdateProperties(ServiceResourceUpdateProperties):
     """
 
     _validation = {
-        'service_kind': {'required': True},
-        'instance_count': {'minimum': -1},
+        "service_kind": {"required": True},
+        "instance_count": {"minimum": -1},
     }
 
     _attribute_map = {
-        'placement_constraints': {'key': 'placementConstraints', 'type': 'str'},
-        'correlation_scheme': {'key': 'correlationScheme', 'type': '[ServiceCorrelationDescription]'},
-        'service_load_metrics': {'key': 'serviceLoadMetrics', 'type': '[ServiceLoadMetricDescription]'},
-        'service_placement_policies': {'key': 'servicePlacementPolicies', 'type': '[ServicePlacementPolicyDescription]'},
-        'default_move_cost': {'key': 'defaultMoveCost', 'type': 'str'},
-        'service_kind': {'key': 'serviceKind', 'type': 'str'},
-        'instance_count': {'key': 'instanceCount', 'type': 'int'},
-        'instance_close_delay_duration': {'key': 'instanceCloseDelayDuration', 'type': 'str'},
+        "placement_constraints": {"key": "placementConstraints", "type": "str"},
+        "correlation_scheme": {"key": "correlationScheme", "type": "[ServiceCorrelationDescription]"},
+        "service_load_metrics": {"key": "serviceLoadMetrics", "type": "[ServiceLoadMetricDescription]"},
+        "service_placement_policies": {
+            "key": "servicePlacementPolicies",
+            "type": "[ServicePlacementPolicyDescription]",
+        },
+        "default_move_cost": {"key": "defaultMoveCost", "type": "str"},
+        "service_kind": {"key": "serviceKind", "type": "str"},
+        "instance_count": {"key": "instanceCount", "type": "int"},
+        "instance_close_delay_duration": {"key": "instanceCloseDelayDuration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StatelessServiceUpdateProperties, self).__init__(**kwargs)
-        self.service_kind = 'Stateless'  # type: str
-        self.instance_count = kwargs.get('instance_count', None)
-        self.instance_close_delay_duration = kwargs.get('instance_close_delay_duration', None)
+        self.service_kind = "Stateless"  # type: str
+        self.instance_count = kwargs.get("instance_count", None)
+        self.instance_close_delay_duration = kwargs.get("instance_close_delay_duration", None)
 
 
 class SystemData(msrest.serialization.Model):
@@ -3369,25 +3266,22 @@ class SystemData(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'created_by': {'key': 'createdBy', 'type': 'str'},
-        'created_by_type': {'key': 'createdByType', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
-        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
-        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SystemData, self).__init__(**kwargs)
-        self.created_by = kwargs.get('created_by', None)
-        self.created_by_type = kwargs.get('created_by_type', None)
-        self.created_at = kwargs.get('created_at', None)
-        self.last_modified_by = kwargs.get('last_modified_by', None)
-        self.last_modified_by_type = kwargs.get('last_modified_by_type', None)
-        self.last_modified_at = kwargs.get('last_modified_at', None)
+        self.created_by = kwargs.get("created_by", None)
+        self.created_by_type = kwargs.get("created_by_type", None)
+        self.created_at = kwargs.get("created_at", None)
+        self.last_modified_by = kwargs.get("last_modified_by", None)
+        self.last_modified_by_type = kwargs.get("last_modified_by_type", None)
+        self.last_modified_at = kwargs.get("last_modified_at", None)
 
 
 class UniformInt64RangePartitionSchemeDescription(PartitionSchemeDescription):
@@ -3409,28 +3303,25 @@ class UniformInt64RangePartitionSchemeDescription(PartitionSchemeDescription):
     """
 
     _validation = {
-        'partition_scheme': {'required': True},
-        'count': {'required': True},
-        'low_key': {'required': True},
-        'high_key': {'required': True},
+        "partition_scheme": {"required": True},
+        "count": {"required": True},
+        "low_key": {"required": True},
+        "high_key": {"required": True},
     }
 
     _attribute_map = {
-        'partition_scheme': {'key': 'partitionScheme', 'type': 'str'},
-        'count': {'key': 'count', 'type': 'int'},
-        'low_key': {'key': 'lowKey', 'type': 'str'},
-        'high_key': {'key': 'highKey', 'type': 'str'},
+        "partition_scheme": {"key": "partitionScheme", "type": "str"},
+        "count": {"key": "count", "type": "int"},
+        "low_key": {"key": "lowKey", "type": "str"},
+        "high_key": {"key": "highKey", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UniformInt64RangePartitionSchemeDescription, self).__init__(**kwargs)
-        self.partition_scheme = 'UniformInt64Range'  # type: str
-        self.count = kwargs['count']
-        self.low_key = kwargs['low_key']
-        self.high_key = kwargs['high_key']
+        self.partition_scheme = "UniformInt64Range"  # type: str
+        self.count = kwargs["count"]
+        self.low_key = kwargs["low_key"]
+        self.high_key = kwargs["high_key"]
 
 
 class UpgradableVersionPathResult(msrest.serialization.Model):
@@ -3441,15 +3332,12 @@ class UpgradableVersionPathResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'supported_path': {'key': 'supportedPath', 'type': '[str]'},
+        "supported_path": {"key": "supportedPath", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpgradableVersionPathResult, self).__init__(**kwargs)
-        self.supported_path = kwargs.get('supported_path', None)
+        self.supported_path = kwargs.get("supported_path", None)
 
 
 class UpgradableVersionsDescription(msrest.serialization.Model):
@@ -3462,19 +3350,16 @@ class UpgradableVersionsDescription(msrest.serialization.Model):
     """
 
     _validation = {
-        'target_version': {'required': True},
+        "target_version": {"required": True},
     }
 
     _attribute_map = {
-        'target_version': {'key': 'targetVersion', 'type': 'str'},
+        "target_version": {"key": "targetVersion", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpgradableVersionsDescription, self).__init__(**kwargs)
-        self.target_version = kwargs['target_version']
+        self.target_version = kwargs["target_version"]
 
 
 class UserAssignedIdentity(msrest.serialization.Model):
@@ -3489,19 +3374,16 @@ class UserAssignedIdentity(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'client_id': {'readonly': True},
+        "principal_id": {"readonly": True},
+        "client_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'client_id': {'key': 'clientId', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "client_id": {"key": "clientId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserAssignedIdentity, self).__init__(**kwargs)
         self.principal_id = None
         self.client_id = None
