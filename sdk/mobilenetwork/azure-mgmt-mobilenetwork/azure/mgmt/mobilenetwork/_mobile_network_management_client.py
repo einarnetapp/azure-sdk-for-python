@@ -9,20 +9,34 @@
 from copy import deepcopy
 from typing import Any, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
-
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
 from . import models
 from ._configuration import MobileNetworkManagementClientConfiguration
-from .operations import AttachedDataNetworksOperations, DataNetworksOperations, MobileNetworksOperations, Operations, PacketCoreControlPlaneVersionsOperations, PacketCoreControlPlanesOperations, PacketCoreDataPlanesOperations, ServicesOperations, SimGroupsOperations, SimPoliciesOperations, SimsOperations, SitesOperations, SlicesOperations
+from ._serialization import Deserializer, Serializer
+from .operations import (
+    AttachedDataNetworksOperations,
+    DataNetworksOperations,
+    MobileNetworksOperations,
+    Operations,
+    PacketCoreControlPlaneVersionsOperations,
+    PacketCoreControlPlanesOperations,
+    PacketCoreDataPlanesOperations,
+    ServicesOperations,
+    SimGroupsOperations,
+    SimPoliciesOperations,
+    SimsOperations,
+    SitesOperations,
+    SlicesOperations,
+)
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class MobileNetworkManagementClient:    # pylint: disable=too-many-instance-attributes
+
+class MobileNetworkManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """The resources in this swagger specification will be used to manage attached data network
     resources in mobile network attached to a particular packet core instance.
 
@@ -56,9 +70,9 @@ class MobileNetworkManagementClient:    # pylint: disable=too-many-instance-attr
     :vartype sim_policies: azure.mgmt.mobilenetwork.operations.SimPoliciesOperations
     :ivar slices: SlicesOperations operations
     :vartype slices: azure.mgmt.mobilenetwork.operations.SlicesOperations
-    :param credential: Credential needed for the client to connect to Azure.
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The ID of the target subscription.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
@@ -76,7 +90,9 @@ class MobileNetworkManagementClient:    # pylint: disable=too-many-instance-attr
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = MobileNetworkManagementClientConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
+        self._config = MobileNetworkManagementClientConfiguration(
+            credential=credential, subscription_id=subscription_id, **kwargs
+        )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
@@ -86,24 +102,12 @@ class MobileNetworkManagementClient:    # pylint: disable=too-many-instance-attr
         self.attached_data_networks = AttachedDataNetworksOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.data_networks = DataNetworksOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.mobile_networks = MobileNetworksOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sites = SitesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sim_groups = SimGroupsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sims = SimsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.operations = Operations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.data_networks = DataNetworksOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.mobile_networks = MobileNetworksOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.sites = SitesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.sim_groups = SimGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.sims = SimsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.packet_core_control_planes = PacketCoreControlPlanesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -113,22 +117,11 @@ class MobileNetworkManagementClient:    # pylint: disable=too-many-instance-attr
         self.packet_core_data_planes = PacketCoreDataPlanesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.services = ServicesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sim_policies = SimPoliciesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.slices = SlicesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.sim_policies = SimPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.slices = SlicesOperations(self._client, self._config, self._serialize, self._deserialize)
 
-
-    def _send_request(
-        self,
-        request: HttpRequest,
-        **kwargs: Any
-    ) -> HttpResponse:
+    def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
 
         >>> from azure.core.rest import HttpRequest
@@ -137,7 +130,7 @@ class MobileNetworkManagementClient:    # pylint: disable=too-many-instance-attr
         >>> response = client._send_request(request)
         <HttpResponse: 200 OK>
 
-        For more information on this code flow, see https://aka.ms/azsdk/python/protocol/quickstart
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
 
         :param request: The network request you want to make. Required.
         :type request: ~azure.core.rest.HttpRequest

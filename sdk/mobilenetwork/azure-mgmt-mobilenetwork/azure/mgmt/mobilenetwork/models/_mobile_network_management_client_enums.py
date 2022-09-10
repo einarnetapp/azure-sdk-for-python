@@ -15,38 +15,39 @@ class BillingSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SKU gets added or an exiting SKU gets removed.
     """
 
-    #: Evaluation package plan.
+    #: Evaluation package plan
     EVALUATION_PACKAGE = "EvaluationPackage"
-    #: Flagship starter package plan.
+    #: Flagship starter package plan
     FLAGSHIP_STARTER_PACKAGE = "FlagshipStarterPackage"
-    #: Edge site 2Gbps plan.
+    #: Edge site 2Gbps plan
     EDGE_SITE2_GBPS = "EdgeSite2GBPS"
-    #: Edge site 3Gbps plan.
+    #: Edge site 3Gbps plan
     EDGE_SITE3_GBPS = "EdgeSite3GBPS"
-    #: Edge site 4Gbps plan.
+    #: Edge site 4Gbps plan
     EDGE_SITE4_GBPS = "EdgeSite4GBPS"
-    #: Medium package plan.
+    #: Medium package plan
     MEDIUM_PACKAGE = "MediumPackage"
-    #: Large package plan.
+    #: Large package plan
     LARGE_PACKAGE = "LargePackage"
 
-class CoreNetworkType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The core network technology generation (5G core or EPC / 4G core).
-    """
 
-    #: 5G core.
+class CoreNetworkType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The core network technology generation (5G core or EPC / 4G core)."""
+
+    #: 5G core
     FIVE_GC = "5GC"
-    #: EPC / 4G core.
+    #: EPC / 4G core
     EPC = "EPC"
 
+
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of identity that created the resource.
-    """
+    """The type of identity that created the resource."""
 
     USER = "User"
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
+
 
 class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of managed service identity (where both SystemAssigned and UserAssigned types are
@@ -58,25 +59,25 @@ class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     USER_ASSIGNED = "UserAssigned"
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
-class NaptEnabled(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Whether network address and port translation is enabled.
-    """
 
-    #: NAPT is enabled.
+class NaptEnabled(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Whether network address and port translation is enabled."""
+
+    #: NAPT is enabled
     ENABLED = "Enabled"
-    #: NAPT is disabled.
+    #: NAPT is disabled
     DISABLED = "Disabled"
 
+
 class PduSessionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """PDU session type (IPv4/IPv6).
-    """
+    """PDU session type (IPv4/IPv6)."""
 
     I_PV4 = "IPv4"
     I_PV6 = "IPv6"
 
+
 class PlatformType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The platform type where packet core is deployed. The contents of this enum can change.
-    """
+    """The platform type where packet core is deployed. The contents of this enum can change."""
 
     #: If this option is chosen, you must set one of "azureStackEdgeDevice", "connectedCluster" or
     #: "customLocation". If multiple are set then "customLocation" will take precedence over
@@ -86,27 +87,27 @@ class PlatformType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     #: multiple are set then "customLocation" will take precedence over "connectedCluster".
     BASE_VM = "BaseVM"
 
-class PreemptionCapability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Preemption capability.
-    """
 
-    #: Cannot preempt.
+class PreemptionCapability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Preemption capability."""
+
+    #: Cannot preempt
     NOT_PREEMPT = "NotPreempt"
-    #: May preempt.
+    #: May preempt
     MAY_PREEMPT = "MayPreempt"
 
-class PreemptionVulnerability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Preemption vulnerability.
-    """
 
-    #: Cannot be preempted.
+class PreemptionVulnerability(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Preemption vulnerability."""
+
+    #: Cannot be preempted
     NOT_PREEMPTABLE = "NotPreemptable"
-    #: May be preempted.
+    #: May be preempted
     PREEMPTABLE = "Preemptable"
 
+
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The current provisioning state.
-    """
+    """The current provisioning state."""
 
     UNKNOWN = "Unknown"
     SUCCEEDED = "Succeeded"
@@ -115,6 +116,7 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     FAILED = "Failed"
     CANCELED = "Canceled"
     DELETED = "Deleted"
+
 
 class RecommendedVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates whether this is the recommended version to use for new packet core control plane
@@ -126,9 +128,9 @@ class RecommendedVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     #: This is not the recommended version to use for new packet core control plane deployments.
     NOT_RECOMMENDED = "NotRecommended"
 
+
 class SdfDirection(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Service data flow direction.
-    """
+    """Service data flow direction."""
 
     #: Traffic flowing from the UE to the data network.
     UPLINK = "Uplink"
@@ -137,9 +139,9 @@ class SdfDirection(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     #: Traffic flowing both to and from the UE.
     BIDIRECTIONAL = "Bidirectional"
 
+
 class SimState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The state of the SIM resource.
-    """
+    """The state of the SIM resource."""
 
     #: The SIM is disabled because not all configuration required for enabling is present.
     DISABLED = "Disabled"
@@ -148,18 +150,18 @@ class SimState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     #: The SIM cannot be enabled because some of the associated configuration is invalid.
     INVALID = "Invalid"
 
+
 class TrafficControlPermission(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Traffic control permission.
-    """
+    """Traffic control permission."""
 
     #: Traffic matching this rule is allowed to flow.
     ENABLED = "Enabled"
     #: Traffic matching this rule is not allowed to flow.
     BLOCKED = "Blocked"
 
+
 class VersionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The state of this packet core control plane version.
-    """
+    """The state of this packet core control plane version."""
 
     #: The state of this version is unknown.
     UNKNOWN = "Unknown"

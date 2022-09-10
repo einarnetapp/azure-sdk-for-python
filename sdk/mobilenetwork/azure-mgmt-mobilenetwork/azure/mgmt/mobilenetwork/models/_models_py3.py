@@ -1,4 +1,5 @@
 # coding=utf-8
+# pylint: disable=too-many-lines
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7,80 +8,79 @@
 # --------------------------------------------------------------------------
 
 import datetime
+import sys
 from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
-from azure.core.exceptions import HttpResponseError
-import msrest.serialization
+from .. import _serialization
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    import __init__ as _models
+    from .. import models as _models
+if sys.version_info >= (3, 9):
+    from collections.abc import MutableMapping
+else:
+    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
-class Ambr(msrest.serialization.Model):
+class Ambr(_serialization.Model):
     """Aggregate maximum bit rate.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar uplink: Required. Uplink bit rate.
+    :ivar uplink: Uplink bit rate. Required.
     :vartype uplink: str
-    :ivar downlink: Required. Downlink bit rate.
+    :ivar downlink: Downlink bit rate. Required.
     :vartype downlink: str
     """
 
     _validation = {
-        'uplink': {'required': True, 'pattern': r'^\d+(\.\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$'},
-        'downlink': {'required': True, 'pattern': r'^\d+(\.\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$'},
+        "uplink": {"required": True, "pattern": r"^\d+(\.\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$"},
+        "downlink": {"required": True, "pattern": r"^\d+(\.\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$"},
     }
 
     _attribute_map = {
-        'uplink': {'key': 'uplink', 'type': 'str'},
-        'downlink': {'key': 'downlink', 'type': 'str'},
+        "uplink": {"key": "uplink", "type": "str"},
+        "downlink": {"key": "downlink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        uplink: str,
-        downlink: str,
-        **kwargs
-    ):
+    def __init__(self, *, uplink: str, downlink: str, **kwargs):
         """
-        :keyword uplink: Required. Uplink bit rate.
+        :keyword uplink: Uplink bit rate. Required.
         :paramtype uplink: str
-        :keyword downlink: Required. Downlink bit rate.
+        :keyword downlink: Downlink bit rate. Required.
         :paramtype downlink: str
         """
-        super(Ambr, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.uplink = uplink
         self.downlink = downlink
 
 
-class Arp(msrest.serialization.Model):
+class Arp(_serialization.Model):
     """Allocation and Retention Priority (ARP) parameters.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar priority_level: Required. ARP priority level.
+    :ivar priority_level: ARP priority level. Required.
     :vartype priority_level: int
-    :ivar preempt_cap: Required. ARP preemption capability. Known values are: "NotPreempt",
+    :ivar preempt_cap: ARP preemption capability. Required. Known values are: "NotPreempt" and
      "MayPreempt".
     :vartype preempt_cap: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
-    :ivar preempt_vuln: Required. ARP preemption vulnerability. Known values are: "NotPreemptable",
-     "Preemptable".
+    :ivar preempt_vuln: ARP preemption vulnerability. Required. Known values are: "NotPreemptable"
+     and "Preemptable".
     :vartype preempt_vuln: str or ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
     """
 
     _validation = {
-        'priority_level': {'required': True, 'maximum': 15, 'minimum': 1},
-        'preempt_cap': {'required': True},
-        'preempt_vuln': {'required': True},
+        "priority_level": {"required": True, "maximum": 15, "minimum": 1},
+        "preempt_cap": {"required": True},
+        "preempt_vuln": {"required": True},
     }
 
     _attribute_map = {
-        'priority_level': {'key': 'priorityLevel', 'type': 'int'},
-        'preempt_cap': {'key': 'preemptCap', 'type': 'str'},
-        'preempt_vuln': {'key': 'preemptVuln', 'type': 'str'},
+        "priority_level": {"key": "priorityLevel", "type": "int"},
+        "preempt_cap": {"key": "preemptCap", "type": "str"},
+        "preempt_vuln": {"key": "preemptVuln", "type": "str"},
     }
 
     def __init__(
@@ -92,22 +92,22 @@ class Arp(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword priority_level: Required. ARP priority level.
+        :keyword priority_level: ARP priority level. Required.
         :paramtype priority_level: int
-        :keyword preempt_cap: Required. ARP preemption capability. Known values are: "NotPreempt",
+        :keyword preempt_cap: ARP preemption capability. Required. Known values are: "NotPreempt" and
          "MayPreempt".
         :paramtype preempt_cap: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
-        :keyword preempt_vuln: Required. ARP preemption vulnerability. Known values are:
-         "NotPreemptable", "Preemptable".
+        :keyword preempt_vuln: ARP preemption vulnerability. Required. Known values are:
+         "NotPreemptable" and "Preemptable".
         :paramtype preempt_vuln: str or ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
         """
-        super(Arp, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.priority_level = priority_level
         self.preempt_cap = preempt_cap
         self.preempt_vuln = preempt_vuln
 
 
-class Resource(msrest.serialization.Model):
+class Resource(_serialization.Model):
     """Common fields that are returned in the response for all Azure Resource Manager resources.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -126,26 +126,22 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(Resource, self).__init__(**kwargs)
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
         self.id = None
         self.name = None
         self.type = None
@@ -170,48 +166,42 @@ class TrackedResource(Resource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        location: str,
-        tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
         """
-        super(TrackedResource, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.tags = tags
         self.location = location
 
 
-class AttachedDataNetwork(TrackedResource):
+class AttachedDataNetwork(TrackedResource):  # pylint: disable=too-many-instance-attributes
     """Attached data network resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -229,15 +219,16 @@ class AttachedDataNetwork(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the attached data network resource. Known
-     values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and
+     "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar user_plane_data_interface: Required. The user plane interface on the data network. For 5G
-     networks, this is the N6 interface. For 4G networks, this is the SGi interface.
+    :ivar user_plane_data_interface: The user plane interface on the data network. For 5G networks,
+     this is the N6 interface. For 4G networks, this is the SGi interface. Required.
     :vartype user_plane_data_interface: ~azure.mgmt.mobilenetwork.models.InterfaceProperties
     :ivar dns_addresses: The DNS servers to signal to UEs to use for this attached data network.
     :vartype dns_addresses: list[str]
@@ -264,31 +255,34 @@ class AttachedDataNetwork(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'user_plane_data_interface': {'required': True},
-        'dns_addresses': {'unique': True},
-        'user_equipment_address_pool_prefix': {'min_items': 1, 'unique': True},
-        'user_equipment_static_address_pool_prefix': {'min_items': 1, 'unique': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "user_plane_data_interface": {"required": True},
+        "dns_addresses": {"unique": True},
+        "user_equipment_address_pool_prefix": {"min_items": 1, "unique": True},
+        "user_equipment_static_address_pool_prefix": {"min_items": 1, "unique": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'user_plane_data_interface': {'key': 'properties.userPlaneDataInterface', 'type': 'InterfaceProperties'},
-        'dns_addresses': {'key': 'properties.dnsAddresses', 'type': '[str]'},
-        'napt_configuration': {'key': 'properties.naptConfiguration', 'type': 'NaptConfiguration'},
-        'user_equipment_address_pool_prefix': {'key': 'properties.userEquipmentAddressPoolPrefix', 'type': '[str]'},
-        'user_equipment_static_address_pool_prefix': {'key': 'properties.userEquipmentStaticAddressPoolPrefix', 'type': '[str]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "user_plane_data_interface": {"key": "properties.userPlaneDataInterface", "type": "InterfaceProperties"},
+        "dns_addresses": {"key": "properties.dnsAddresses", "type": "[str]"},
+        "napt_configuration": {"key": "properties.naptConfiguration", "type": "NaptConfiguration"},
+        "user_equipment_address_pool_prefix": {"key": "properties.userEquipmentAddressPoolPrefix", "type": "[str]"},
+        "user_equipment_static_address_pool_prefix": {
+            "key": "properties.userEquipmentStaticAddressPoolPrefix",
+            "type": "[str]",
+        },
     }
 
     def __init__(
@@ -304,12 +298,12 @@ class AttachedDataNetwork(TrackedResource):
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword user_plane_data_interface: Required. The user plane interface on the data network. For
-         5G networks, this is the N6 interface. For 4G networks, this is the SGi interface.
+        :keyword user_plane_data_interface: The user plane interface on the data network. For 5G
+         networks, this is the N6 interface. For 4G networks, this is the SGi interface. Required.
         :paramtype user_plane_data_interface: ~azure.mgmt.mobilenetwork.models.InterfaceProperties
         :keyword dns_addresses: The DNS servers to signal to UEs to use for this attached data network.
         :paramtype dns_addresses: list[str]
@@ -334,7 +328,7 @@ class AttachedDataNetwork(TrackedResource):
          be defined. If both are defined, they must be of the same size.
         :paramtype user_equipment_static_address_pool_prefix: list[str]
         """
-        super(AttachedDataNetwork, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.user_plane_data_interface = user_plane_data_interface
         self.dns_addresses = dns_addresses
@@ -343,7 +337,7 @@ class AttachedDataNetwork(TrackedResource):
         self.user_equipment_static_address_pool_prefix = user_equipment_static_address_pool_prefix
 
 
-class AttachedDataNetworkListResult(msrest.serialization.Model):
+class AttachedDataNetworkListResult(_serialization.Model):
     """Response for attached data network API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -355,150 +349,137 @@ class AttachedDataNetworkListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[AttachedDataNetwork]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[AttachedDataNetwork]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.AttachedDataNetwork"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.AttachedDataNetwork"]] = None, **kwargs):
         """
         :keyword value: A list of data networks in a resource group.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.AttachedDataNetwork]
         """
-        super(AttachedDataNetworkListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class AttachedDataNetworkResourceId(msrest.serialization.Model):
+class AttachedDataNetworkResourceId(_serialization.Model):
     """Reference to an attached data network resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Attached data network resource ID.
+    :ivar id: Attached data network resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][cC][oO][nN][tT][rR][oO][lL][pP][lL][aA][nN][eE][sS]/[^/?#]+/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][dD][aA][tT][aA][pP][lL][aA][nN][eE][sS]/[^/?#]+/[aA][tT][tT][aA][cC][hH][eE][dD][dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][cC][oO][nN][tT][rR][oO][lL][pP][lL][aA][nN][eE][sS]/[^/?#]+/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][dD][aA][tT][aA][pP][lL][aA][nN][eE][sS]/[^/?#]+/[aA][tT][tT][aA][cC][hH][eE][dD][dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Attached data network resource ID.
+        :keyword id: Attached data network resource ID. Required.
         :paramtype id: str
         """
-        super(AttachedDataNetworkResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class AzureStackEdgeDeviceResourceId(msrest.serialization.Model):
+class AzureStackEdgeDeviceResourceId(_serialization.Model):
     """Reference to an Azure Arc custom location resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Azure Stack Edge device resource ID.
+    :ivar id: Azure Stack Edge device resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[dD][aA][tT][aA][bB][oO][xX][eE][dD][gG][eE]/[dD][aA][tT][aA][bB][oO][xX][eE][dD][gG][eE][dD][eE][vV][iI][cC][eE][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[dD][aA][tT][aA][bB][oO][xX][eE][dD][gG][eE]/[dD][aA][tT][aA][bB][oO][xX][eE][dD][gG][eE][dD][eE][vV][iI][cC][eE][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Azure Stack Edge device resource ID.
+        :keyword id: Azure Stack Edge device resource ID. Required.
         :paramtype id: str
         """
-        super(AzureStackEdgeDeviceResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class ConnectedClusterResourceId(msrest.serialization.Model):
+class ConnectedClusterResourceId(_serialization.Model):
     """Reference to an Azure Arc custom location resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Azure Arc connected cluster resource ID.
+    :ivar id: Azure Arc connected cluster resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[kK][uU][bB][eE][rR][nN][eE][tT][eE][sS]/[cC][oO][nN][nN][eE][cC][tT][eE][dD][cC][lL][uU][sS][tT][eE][rR][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[kK][uU][bB][eE][rR][nN][eE][tT][eE][sS]/[cC][oO][nN][nN][eE][cC][tT][eE][dD][cC][lL][uU][sS][tT][eE][rR][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Azure Arc connected cluster resource ID.
+        :keyword id: Azure Arc connected cluster resource ID. Required.
         :paramtype id: str
         """
-        super(ConnectedClusterResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class CustomLocationResourceId(msrest.serialization.Model):
+class CustomLocationResourceId(_serialization.Model):
     """Reference to an Azure Arc custom location resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Azure Arc custom location resource ID.
+    :ivar id: Azure Arc custom location resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[eE][xX][tT][eE][nN][dD][eE][dD][lL][oO][cC][aA][tT][iI][oO][nN]/[cC][uU][sS][tT][oO][mM][lL][oO][cC][aA][tT][iI][oO][nN][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[eE][xX][tT][eE][nN][dD][eE][dD][lL][oO][cC][aA][tT][iI][oO][nN]/[cC][uU][sS][tT][oO][mM][lL][oO][cC][aA][tT][iI][oO][nN][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Azure Arc custom location resource ID.
+        :keyword id: Azure Arc custom location resource ID. Required.
         :paramtype id: str
         """
-        super(CustomLocationResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
@@ -520,68 +501,63 @@ class DataNetwork(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the data network resource. Known values
-     are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
     :ivar description: An optional description for this data network.
     :vartype description: str
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'description': {'key': 'properties.description', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "description": {"key": "properties.description", "type": "str"},
     }
 
     def __init__(
-        self,
-        *,
-        location: str,
-        tags: Optional[Dict[str, str]] = None,
-        description: Optional[str] = None,
-        **kwargs
+        self, *, location: str, tags: Optional[Dict[str, str]] = None, description: Optional[str] = None, **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
         :keyword description: An optional description for this data network.
         :paramtype description: str
         """
-        super(DataNetwork, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.description = description
 
 
-class DataNetworkConfiguration(msrest.serialization.Model):
+class DataNetworkConfiguration(_serialization.Model):
     """Settings controlling data network use.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar data_network: Required. A reference to the data network that these settings apply to.
+    :ivar data_network: A reference to the data network that these settings apply to. Required.
     :vartype data_network: ~azure.mgmt.mobilenetwork.models.DataNetworkResourceId
-    :ivar session_ambr: Required. Aggregate maximum bit rate across all non-GBR QoS flows of a
-     given PDU session. See 3GPP TS23.501 section 5.7.2.6 for a full description of the
-     Session-AMBR.
+    :ivar session_ambr: Aggregate maximum bit rate across all non-GBR QoS flows of a given PDU
+     session. See 3GPP TS23.501 section 5.7.2.6 for a full description of the Session-AMBR.
+     Required.
     :vartype session_ambr: ~azure.mgmt.mobilenetwork.models.Ambr
     :ivar five_qi: Default QoS Flow 5G QoS Indicator value. The 5QI identifies a specific QoS
      forwarding treatment to be provided to a flow. This must not be a standardized 5QI value
@@ -599,45 +575,45 @@ class DataNetworkConfiguration(msrest.serialization.Model):
     :ivar preemption_capability: Default QoS Flow preemption capability. The preemption capability
      of a QoS Flow controls whether it can preempt another QoS Flow with a lower priority level. See
      3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known values are:
-     "NotPreempt", "MayPreempt".
+     "NotPreempt" and "MayPreempt".
     :vartype preemption_capability: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
     :ivar preemption_vulnerability: Default QoS Flow preemption vulnerability. The preemption
      vulnerability of a QoS Flow controls whether it can be preempted by a QoS Flow with a higher
      priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.
-     Known values are: "NotPreemptable", "Preemptable".
+     Known values are: "NotPreemptable" and "Preemptable".
     :vartype preemption_vulnerability: str or
      ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
     :ivar default_session_type: The default PDU session type, which is used if the UE does not
-     request a specific session type. Known values are: "IPv4", "IPv6".
+     request a specific session type. Known values are: "IPv4" and "IPv6".
     :vartype default_session_type: str or ~azure.mgmt.mobilenetwork.models.PduSessionType
     :ivar additional_allowed_session_types: Allowed session types in addition to the default
      session type. Must not duplicate the default session type.
     :vartype additional_allowed_session_types: list[str or
      ~azure.mgmt.mobilenetwork.models.PduSessionType]
-    :ivar allowed_services: Required. List of services that can be used as part of this SIM policy.
-     The list must not contain duplicate items and must contain at least one item.
+    :ivar allowed_services: List of services that can be used as part of this SIM policy. The list
+     must not contain duplicate items and must contain at least one item. Required.
     :vartype allowed_services: list[~azure.mgmt.mobilenetwork.models.ServiceResourceId]
     """
 
     _validation = {
-        'data_network': {'required': True},
-        'session_ambr': {'required': True},
-        'five_qi': {'maximum': 127, 'minimum': 1},
-        'allocation_and_retention_priority_level': {'maximum': 15, 'minimum': 1},
-        'additional_allowed_session_types': {'max_items': 1, 'min_items': 0},
-        'allowed_services': {'required': True, 'min_items': 1, 'unique': True},
+        "data_network": {"required": True},
+        "session_ambr": {"required": True},
+        "five_qi": {"maximum": 127, "minimum": 1},
+        "allocation_and_retention_priority_level": {"maximum": 15, "minimum": 1},
+        "additional_allowed_session_types": {"max_items": 1, "min_items": 0},
+        "allowed_services": {"required": True, "min_items": 1, "unique": True},
     }
 
     _attribute_map = {
-        'data_network': {'key': 'dataNetwork', 'type': 'DataNetworkResourceId'},
-        'session_ambr': {'key': 'sessionAmbr', 'type': 'Ambr'},
-        'five_qi': {'key': '5qi', 'type': 'int'},
-        'allocation_and_retention_priority_level': {'key': 'allocationAndRetentionPriorityLevel', 'type': 'int'},
-        'preemption_capability': {'key': 'preemptionCapability', 'type': 'str'},
-        'preemption_vulnerability': {'key': 'preemptionVulnerability', 'type': 'str'},
-        'default_session_type': {'key': 'defaultSessionType', 'type': 'str'},
-        'additional_allowed_session_types': {'key': 'additionalAllowedSessionTypes', 'type': '[str]'},
-        'allowed_services': {'key': 'allowedServices', 'type': '[ServiceResourceId]'},
+        "data_network": {"key": "dataNetwork", "type": "DataNetworkResourceId"},
+        "session_ambr": {"key": "sessionAmbr", "type": "Ambr"},
+        "five_qi": {"key": "5qi", "type": "int"},
+        "allocation_and_retention_priority_level": {"key": "allocationAndRetentionPriorityLevel", "type": "int"},
+        "preemption_capability": {"key": "preemptionCapability", "type": "str"},
+        "preemption_vulnerability": {"key": "preemptionVulnerability", "type": "str"},
+        "default_session_type": {"key": "defaultSessionType", "type": "str"},
+        "additional_allowed_session_types": {"key": "additionalAllowedSessionTypes", "type": "[str]"},
+        "allowed_services": {"key": "allowedServices", "type": "[ServiceResourceId]"},
     }
 
     def __init__(
@@ -655,11 +631,11 @@ class DataNetworkConfiguration(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword data_network: Required. A reference to the data network that these settings apply to.
+        :keyword data_network: A reference to the data network that these settings apply to. Required.
         :paramtype data_network: ~azure.mgmt.mobilenetwork.models.DataNetworkResourceId
-        :keyword session_ambr: Required. Aggregate maximum bit rate across all non-GBR QoS flows of a
-         given PDU session. See 3GPP TS23.501 section 5.7.2.6 for a full description of the
-         Session-AMBR.
+        :keyword session_ambr: Aggregate maximum bit rate across all non-GBR QoS flows of a given PDU
+         session. See 3GPP TS23.501 section 5.7.2.6 for a full description of the Session-AMBR.
+         Required.
         :paramtype session_ambr: ~azure.mgmt.mobilenetwork.models.Ambr
         :keyword five_qi: Default QoS Flow 5G QoS Indicator value. The 5QI identifies a specific QoS
          forwarding treatment to be provided to a flow. This must not be a standardized 5QI value
@@ -677,26 +653,26 @@ class DataNetworkConfiguration(msrest.serialization.Model):
         :keyword preemption_capability: Default QoS Flow preemption capability. The preemption
          capability of a QoS Flow controls whether it can preempt another QoS Flow with a lower priority
          level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known
-         values are: "NotPreempt", "MayPreempt".
+         values are: "NotPreempt" and "MayPreempt".
         :paramtype preemption_capability: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
         :keyword preemption_vulnerability: Default QoS Flow preemption vulnerability. The preemption
          vulnerability of a QoS Flow controls whether it can be preempted by a QoS Flow with a higher
          priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.
-         Known values are: "NotPreemptable", "Preemptable".
+         Known values are: "NotPreemptable" and "Preemptable".
         :paramtype preemption_vulnerability: str or
          ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
         :keyword default_session_type: The default PDU session type, which is used if the UE does not
-         request a specific session type. Known values are: "IPv4", "IPv6".
+         request a specific session type. Known values are: "IPv4" and "IPv6".
         :paramtype default_session_type: str or ~azure.mgmt.mobilenetwork.models.PduSessionType
         :keyword additional_allowed_session_types: Allowed session types in addition to the default
          session type. Must not duplicate the default session type.
         :paramtype additional_allowed_session_types: list[str or
          ~azure.mgmt.mobilenetwork.models.PduSessionType]
-        :keyword allowed_services: Required. List of services that can be used as part of this SIM
-         policy. The list must not contain duplicate items and must contain at least one item.
+        :keyword allowed_services: List of services that can be used as part of this SIM policy. The
+         list must not contain duplicate items and must contain at least one item. Required.
         :paramtype allowed_services: list[~azure.mgmt.mobilenetwork.models.ServiceResourceId]
         """
-        super(DataNetworkConfiguration, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.data_network = data_network
         self.session_ambr = session_ambr
         self.five_qi = five_qi
@@ -708,7 +684,7 @@ class DataNetworkConfiguration(msrest.serialization.Model):
         self.allowed_services = allowed_services
 
 
-class DataNetworkListResult(msrest.serialization.Model):
+class DataNetworkListResult(_serialization.Model):
     """Response for data network API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -720,61 +696,54 @@ class DataNetworkListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[DataNetwork]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[DataNetwork]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.DataNetwork"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.DataNetwork"]] = None, **kwargs):
         """
         :keyword value: A list of data networks.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.DataNetwork]
         """
-        super(DataNetworkListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class DataNetworkResourceId(msrest.serialization.Model):
+class DataNetworkResourceId(_serialization.Model):
     """Reference to a data network resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Data network resource ID.
+    :ivar id: Data network resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[dD][aA][tT][aA][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Data network resource ID.
+        :keyword id: Data network resource ID. Required.
         :paramtype id: str
         """
-        super(DataNetworkResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class ErrorAdditionalInfo(msrest.serialization.Model):
+class ErrorAdditionalInfo(_serialization.Model):
     """The resource management error additional info.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -782,31 +751,27 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     :ivar type: The additional info type.
     :vartype type: str
     :ivar info: The additional info.
-    :vartype info: any
+    :vartype info: JSON
     """
 
     _validation = {
-        'type': {'readonly': True},
-        'info': {'readonly': True},
+        "type": {"readonly": True},
+        "info": {"readonly": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'info': {'key': 'info', 'type': 'object'},
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(ErrorAdditionalInfo, self).__init__(**kwargs)
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
         self.type = None
         self.info = None
 
 
-class ErrorDetail(msrest.serialization.Model):
+class ErrorDetail(_serialization.Model):
     """The error detail.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -824,28 +789,24 @@ class ErrorDetail(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
-        'details': {'readonly': True},
-        'additional_info': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[ErrorDetail]'},
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(ErrorDetail, self).__init__(**kwargs)
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
         self.code = None
         self.message = None
         self.target = None
@@ -853,7 +814,7 @@ class ErrorDetail(msrest.serialization.Model):
         self.additional_info = None
 
 
-class ErrorResponse(msrest.serialization.Model):
+class ErrorResponse(_serialization.Model):
     """Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
 
     :ivar error: The error object.
@@ -861,24 +822,19 @@ class ErrorResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'ErrorDetail'},
+        "error": {"key": "error", "type": "ErrorDetail"},
     }
 
-    def __init__(
-        self,
-        *,
-        error: Optional["_models.ErrorDetail"] = None,
-        **kwargs
-    ):
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs):
         """
         :keyword error: The error object.
         :paramtype error: ~azure.mgmt.mobilenetwork.models.ErrorDetail
         """
-        super(ErrorResponse, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.error = error
 
 
-class InterfaceProperties(msrest.serialization.Model):
+class InterfaceProperties(_serialization.Model):
     """Interface properties.
 
     :ivar name: The logical name for this interface. This should match one of the interfaces
@@ -893,16 +849,22 @@ class InterfaceProperties(msrest.serialization.Model):
     """
 
     _validation = {
-        'ipv4_address': {'pattern': r'^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$'},
-        'ipv4_subnet': {'pattern': r'^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$'},
-        'ipv4_gateway': {'pattern': r'^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$'},
+        "ipv4_address": {
+            "pattern": r"^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
+        },
+        "ipv4_subnet": {
+            "pattern": r"^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$"
+        },
+        "ipv4_gateway": {
+            "pattern": r"^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
+        },
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'ipv4_address': {'key': 'ipv4Address', 'type': 'str'},
-        'ipv4_subnet': {'key': 'ipv4Subnet', 'type': 'str'},
-        'ipv4_gateway': {'key': 'ipv4Gateway', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "ipv4_address": {"key": "ipv4Address", "type": "str"},
+        "ipv4_subnet": {"key": "ipv4Subnet", "type": "str"},
+        "ipv4_gateway": {"key": "ipv4Gateway", "type": "str"},
     }
 
     def __init__(
@@ -925,14 +887,14 @@ class InterfaceProperties(msrest.serialization.Model):
         :keyword ipv4_gateway: The default IPv4 gateway (router).
         :paramtype ipv4_gateway: str
         """
-        super(InterfaceProperties, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.name = name
         self.ipv4_address = ipv4_address
         self.ipv4_subnet = ipv4_subnet
         self.ipv4_gateway = ipv4_gateway
 
 
-class KeyVaultCertificate(msrest.serialization.Model):
+class KeyVaultCertificate(_serialization.Model):
     """An Azure key vault certificate.
 
     :ivar certificate_url: The certificate URL, unversioned. For example:
@@ -941,25 +903,20 @@ class KeyVaultCertificate(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'certificate_url': {'key': 'certificateUrl', 'type': 'str'},
+        "certificate_url": {"key": "certificateUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        certificate_url: Optional[str] = None,
-        **kwargs
-    ):
+    def __init__(self, *, certificate_url: Optional[str] = None, **kwargs):
         """
         :keyword certificate_url: The certificate URL, unversioned. For example:
          https://contosovault.vault.azure.net/certificates/ingress.
         :paramtype certificate_url: str
         """
-        super(KeyVaultCertificate, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.certificate_url = certificate_url
 
 
-class KeyVaultKey(msrest.serialization.Model):
+class KeyVaultKey(_serialization.Model):
     """An Azure key vault key.
 
     :ivar key_url: The key URL, unversioned. For example:
@@ -968,25 +925,20 @@ class KeyVaultKey(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'key_url': {'key': 'keyUrl', 'type': 'str'},
+        "key_url": {"key": "keyUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        key_url: Optional[str] = None,
-        **kwargs
-    ):
+    def __init__(self, *, key_url: Optional[str] = None, **kwargs):
         """
         :keyword key_url: The key URL, unversioned. For example:
          https://contosovault.vault.azure.net/keys/azureKey.
         :paramtype key_url: str
         """
-        super(KeyVaultKey, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.key_url = key_url
 
 
-class LocalDiagnosticsAccessConfiguration(msrest.serialization.Model):
+class LocalDiagnosticsAccessConfiguration(_serialization.Model):
     """The kubernetes ingress configuration to control access to packet core diagnostics over local APIs.
 
     :ivar https_server_certificate: The HTTPS server TLS certificate used to secure local access to
@@ -995,25 +947,20 @@ class LocalDiagnosticsAccessConfiguration(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'https_server_certificate': {'key': 'httpsServerCertificate', 'type': 'KeyVaultCertificate'},
+        "https_server_certificate": {"key": "httpsServerCertificate", "type": "KeyVaultCertificate"},
     }
 
-    def __init__(
-        self,
-        *,
-        https_server_certificate: Optional["_models.KeyVaultCertificate"] = None,
-        **kwargs
-    ):
+    def __init__(self, *, https_server_certificate: Optional["_models.KeyVaultCertificate"] = None, **kwargs):
         """
         :keyword https_server_certificate: The HTTPS server TLS certificate used to secure local access
          to diagnostics.
         :paramtype https_server_certificate: ~azure.mgmt.mobilenetwork.models.KeyVaultCertificate
         """
-        super(LocalDiagnosticsAccessConfiguration, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.https_server_certificate = https_server_certificate
 
 
-class ManagedServiceIdentity(msrest.serialization.Model):
+class ManagedServiceIdentity(_serialization.Model):
     """Managed service identity (system assigned and/or user assigned identities).
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1026,8 +973,8 @@ class ManagedServiceIdentity(msrest.serialization.Model):
     :ivar tenant_id: The tenant ID of the system assigned identity. This property will only be
      provided for a system assigned identity.
     :vartype tenant_id: str
-    :ivar type: Required. Type of managed service identity (where both SystemAssigned and
-     UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+    :ivar type: Type of managed service identity (where both SystemAssigned and UserAssigned types
+     are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
      "SystemAssigned,UserAssigned".
     :vartype type: str or ~azure.mgmt.mobilenetwork.models.ManagedServiceIdentityType
     :ivar user_assigned_identities: The set of user assigned identities associated with the
@@ -1039,16 +986,16 @@ class ManagedServiceIdentity(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'tenant_id': {'readonly': True},
-        'type': {'required': True},
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
+        "type": {"required": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'user_assigned_identities': {'key': 'userAssignedIdentities', 'type': '{UserAssignedIdentity}'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "user_assigned_identities": {"key": "userAssignedIdentities", "type": "{UserAssignedIdentity}"},
     }
 
     def __init__(
@@ -1059,8 +1006,8 @@ class ManagedServiceIdentity(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword type: Required. Type of managed service identity (where both SystemAssigned and
-         UserAssigned types are allowed). Known values are: "None", "SystemAssigned", "UserAssigned",
+        :keyword type: Type of managed service identity (where both SystemAssigned and UserAssigned
+         types are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
          "SystemAssigned,UserAssigned".
         :paramtype type: str or ~azure.mgmt.mobilenetwork.models.ManagedServiceIdentityType
         :keyword user_assigned_identities: The set of user assigned identities associated with the
@@ -1070,7 +1017,7 @@ class ManagedServiceIdentity(msrest.serialization.Model):
         :paramtype user_assigned_identities: dict[str,
          ~azure.mgmt.mobilenetwork.models.UserAssignedIdentity]
         """
-        super(ManagedServiceIdentity, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.principal_id = None
         self.tenant_id = None
         self.type = type
@@ -1095,43 +1042,46 @@ class MobileNetwork(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the mobile network resource. Known values
-     are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar public_land_mobile_network_identifier: Required. The unique public land mobile network
-     identifier for the network. This is made up of the mobile country code and mobile network code,
-     as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used
-     for testing and the values 999-99 and 999-999 can be used on internal private networks.
+    :ivar public_land_mobile_network_identifier: The unique public land mobile network identifier
+     for the network. This is made up of the mobile country code and mobile network code, as defined
+     in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing
+     and the values 999-99 and 999-999 can be used on internal private networks. Required.
     :vartype public_land_mobile_network_identifier: ~azure.mgmt.mobilenetwork.models.PlmnId
     :ivar service_key: The mobile network resource identifier.
     :vartype service_key: str
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'public_land_mobile_network_identifier': {'required': True},
-        'service_key': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "public_land_mobile_network_identifier": {"required": True},
+        "service_key": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'public_land_mobile_network_identifier': {'key': 'properties.publicLandMobileNetworkIdentifier', 'type': 'PlmnId'},
-        'service_key': {'key': 'properties.serviceKey', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "public_land_mobile_network_identifier": {
+            "key": "properties.publicLandMobileNetworkIdentifier",
+            "type": "PlmnId",
+        },
+        "service_key": {"key": "properties.serviceKey", "type": "str"},
     }
 
     def __init__(
@@ -1143,23 +1093,24 @@ class MobileNetwork(TrackedResource):
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword public_land_mobile_network_identifier: Required. The unique public land mobile network
+        :keyword public_land_mobile_network_identifier: The unique public land mobile network
          identifier for the network. This is made up of the mobile country code and mobile network code,
          as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used
          for testing and the values 999-99 and 999-999 can be used on internal private networks.
+         Required.
         :paramtype public_land_mobile_network_identifier: ~azure.mgmt.mobilenetwork.models.PlmnId
         """
-        super(MobileNetwork, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.public_land_mobile_network_identifier = public_land_mobile_network_identifier
         self.service_key = None
 
 
-class MobileNetworkListResult(msrest.serialization.Model):
+class MobileNetworkListResult(_serialization.Model):
     """Response for mobile networks API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1171,65 +1122,58 @@ class MobileNetworkListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[MobileNetwork]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[MobileNetwork]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.MobileNetwork"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.MobileNetwork"]] = None, **kwargs):
         """
         :keyword value: A list of mobile networks in a resource group.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.MobileNetwork]
         """
-        super(MobileNetworkListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class MobileNetworkResourceId(msrest.serialization.Model):
+class MobileNetworkResourceId(_serialization.Model):
     """Reference to a mobile network resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Mobile network resource ID.
+    :ivar id: Mobile network resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Mobile network resource ID.
+        :keyword id: Mobile network resource ID. Required.
         :paramtype id: str
         """
-        super(MobileNetworkResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class NaptConfiguration(msrest.serialization.Model):
+class NaptConfiguration(_serialization.Model):
     """The network address and port translation settings to use for the attached data network.
 
     :ivar enabled: Whether NAPT is enabled for connections to this attached data network. Known
-     values are: "Enabled", "Disabled". Default value: "Enabled".
+     values are: "Enabled" and "Disabled".
     :vartype enabled: str or ~azure.mgmt.mobilenetwork.models.NaptEnabled
     :ivar port_range: Range of port numbers to use as translated ports on each translated address.
      If not specified and NAPT is enabled, this range defaults to 1,024 - 49,999.
@@ -1250,30 +1194,30 @@ class NaptConfiguration(msrest.serialization.Model):
     """
 
     _validation = {
-        'pinhole_limits': {'maximum': 65536, 'minimum': 1},
+        "pinhole_limits": {"maximum": 65536, "minimum": 1},
     }
 
     _attribute_map = {
-        'enabled': {'key': 'enabled', 'type': 'str'},
-        'port_range': {'key': 'portRange', 'type': 'PortRange'},
-        'port_reuse_hold_time': {'key': 'portReuseHoldTime', 'type': 'PortReuseHoldTimes'},
-        'pinhole_limits': {'key': 'pinholeLimits', 'type': 'int'},
-        'pinhole_timeouts': {'key': 'pinholeTimeouts', 'type': 'PinholeTimeouts'},
+        "enabled": {"key": "enabled", "type": "str"},
+        "port_range": {"key": "portRange", "type": "PortRange"},
+        "port_reuse_hold_time": {"key": "portReuseHoldTime", "type": "PortReuseHoldTimes"},
+        "pinhole_limits": {"key": "pinholeLimits", "type": "int"},
+        "pinhole_timeouts": {"key": "pinholeTimeouts", "type": "PinholeTimeouts"},
     }
 
     def __init__(
         self,
         *,
-        enabled: Optional[Union[str, "_models.NaptEnabled"]] = "Enabled",
+        enabled: Union[str, "_models.NaptEnabled"] = "Enabled",
         port_range: Optional["_models.PortRange"] = None,
         port_reuse_hold_time: Optional["_models.PortReuseHoldTimes"] = None,
-        pinhole_limits: Optional[int] = 65536,
+        pinhole_limits: int = 65536,
         pinhole_timeouts: Optional["_models.PinholeTimeouts"] = None,
         **kwargs
     ):
         """
         :keyword enabled: Whether NAPT is enabled for connections to this attached data network. Known
-         values are: "Enabled", "Disabled". Default value: "Enabled".
+         values are: "Enabled" and "Disabled".
         :paramtype enabled: str or ~azure.mgmt.mobilenetwork.models.NaptEnabled
         :keyword port_range: Range of port numbers to use as translated ports on each translated
          address.
@@ -1293,7 +1237,7 @@ class NaptConfiguration(msrest.serialization.Model):
          be at least 1 second.
         :paramtype pinhole_timeouts: ~azure.mgmt.mobilenetwork.models.PinholeTimeouts
         """
-        super(NaptConfiguration, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.enabled = enabled
         self.port_range = port_range
         self.port_reuse_hold_time = port_reuse_hold_time
@@ -1301,7 +1245,7 @@ class NaptConfiguration(msrest.serialization.Model):
         self.pinhole_timeouts = pinhole_timeouts
 
 
-class Operation(msrest.serialization.Model):
+class Operation(_serialization.Model):
     """Object that describes a single Microsoft.MobileNetwork operation.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1315,33 +1259,28 @@ class Operation(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'display': {'readonly': True},
+        "name": {"readonly": True},
+        "display": {"readonly": True},
     }
 
     _attribute_map = {
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'OperationDisplay'},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "OperationDisplay"},
     }
 
-    def __init__(
-        self,
-        *,
-        is_data_action: Optional[bool] = None,
-        **kwargs
-    ):
+    def __init__(self, *, is_data_action: Optional[bool] = None, **kwargs):
         """
         :keyword is_data_action: Indicates whether the operation applies to data-plane.
         :paramtype is_data_action: bool
         """
-        super(Operation, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.is_data_action = is_data_action
         self.name = None
         self.display = None
 
 
-class OperationDisplay(msrest.serialization.Model):
+class OperationDisplay(_serialization.Model):
     """The object that represents the operation.
 
     :ivar provider: Service provider: Microsoft.MobileNetwork.
@@ -1356,10 +1295,10 @@ class OperationDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
     def __init__(
@@ -1382,14 +1321,14 @@ class OperationDisplay(msrest.serialization.Model):
         :keyword description: Description of the operation.
         :paramtype description: str
         """
-        super(OperationDisplay, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.provider = provider
         self.resource = resource
         self.operation = operation
         self.description = description
 
 
-class OperationList(msrest.serialization.Model):
+class OperationList(_serialization.Model):
     """List of the operations.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1401,27 +1340,23 @@ class OperationList(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
-        'next_link': {'readonly': True},
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Operation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(OperationList, self).__init__(**kwargs)
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
         self.value = None
         self.next_link = None
 
 
-class PacketCoreControlPlane(TrackedResource):
+class PacketCoreControlPlane(TrackedResource):  # pylint: disable=too-many-instance-attributes
     """Packet core control plane resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1439,33 +1374,32 @@ class PacketCoreControlPlane(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar identity: The identity used to retrieve the ingress certificate from Azure key vault.
     :vartype identity: ~azure.mgmt.mobilenetwork.models.ManagedServiceIdentity
     :ivar provisioning_state: The provisioning state of the packet core control plane resource.
-     Known values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled",
+     Known values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and
      "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar mobile_network: Required. Mobile network in which this packet core control plane is
-     deployed.
+    :ivar mobile_network: Mobile network in which this packet core control plane is deployed.
+     Required.
     :vartype mobile_network: ~azure.mgmt.mobilenetwork.models.MobileNetworkResourceId
     :ivar platform: The platform where the packet core is deployed.
     :vartype platform: ~azure.mgmt.mobilenetwork.models.PlatformConfiguration
     :ivar core_network_technology: The core network technology generation (5G core or EPC / 4G
-     core). Known values are: "5GC", "EPC".
+     core). Known values are: "5GC" and "EPC".
     :vartype core_network_technology: str or ~azure.mgmt.mobilenetwork.models.CoreNetworkType
     :ivar version: The version of the packet core software that is deployed.
     :vartype version: str
-    :ivar control_plane_access_interface: Required. The control plane interface on the access
-     network. For 5G networks, this is the N2 interface. For 4G networks, this is the S1-MME
-     interface.
+    :ivar control_plane_access_interface: The control plane interface on the access network. For 5G
+     networks, this is the N2 interface. For 4G networks, this is the S1-MME interface. Required.
     :vartype control_plane_access_interface: ~azure.mgmt.mobilenetwork.models.InterfaceProperties
-    :ivar sku: Required. The SKU defining the throughput and SIM allowances for this packet core
-     control plane deployment. Known values are: "EvaluationPackage", "FlagshipStarterPackage",
-     "EdgeSite2GBPS", "EdgeSite3GBPS", "EdgeSite4GBPS", "MediumPackage", "LargePackage".
+    :ivar sku: The SKU defining the throughput and SIM allowances for this packet core control
+     plane deployment. Required. Known values are: "EvaluationPackage", "FlagshipStarterPackage",
+     "EdgeSite2GBPS", "EdgeSite3GBPS", "EdgeSite4GBPS", "MediumPackage", and "LargePackage".
     :vartype sku: str or ~azure.mgmt.mobilenetwork.models.BillingSku
     :ivar local_diagnostics_access: The kubernetes ingress configuration to control access to
      packet core diagnostics over local APIs.
@@ -1473,38 +1407,44 @@ class PacketCoreControlPlane(TrackedResource):
      ~azure.mgmt.mobilenetwork.models.LocalDiagnosticsAccessConfiguration
     :ivar interop_settings: Settings to allow interoperability with third party components e.g.
      RANs and UEs.
-    :vartype interop_settings: any
+    :vartype interop_settings: JSON
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'mobile_network': {'required': True},
-        'control_plane_access_interface': {'required': True},
-        'sku': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "mobile_network": {"required": True},
+        "control_plane_access_interface": {"required": True},
+        "sku": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'identity': {'key': 'identity', 'type': 'ManagedServiceIdentity'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'mobile_network': {'key': 'properties.mobileNetwork', 'type': 'MobileNetworkResourceId'},
-        'platform': {'key': 'properties.platform', 'type': 'PlatformConfiguration'},
-        'core_network_technology': {'key': 'properties.coreNetworkTechnology', 'type': 'str'},
-        'version': {'key': 'properties.version', 'type': 'str'},
-        'control_plane_access_interface': {'key': 'properties.controlPlaneAccessInterface', 'type': 'InterfaceProperties'},
-        'sku': {'key': 'properties.sku', 'type': 'str'},
-        'local_diagnostics_access': {'key': 'properties.localDiagnosticsAccess', 'type': 'LocalDiagnosticsAccessConfiguration'},
-        'interop_settings': {'key': 'properties.interopSettings', 'type': 'object'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "identity": {"key": "identity", "type": "ManagedServiceIdentity"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "mobile_network": {"key": "properties.mobileNetwork", "type": "MobileNetworkResourceId"},
+        "platform": {"key": "properties.platform", "type": "PlatformConfiguration"},
+        "core_network_technology": {"key": "properties.coreNetworkTechnology", "type": "str"},
+        "version": {"key": "properties.version", "type": "str"},
+        "control_plane_access_interface": {
+            "key": "properties.controlPlaneAccessInterface",
+            "type": "InterfaceProperties",
+        },
+        "sku": {"key": "properties.sku", "type": "str"},
+        "local_diagnostics_access": {
+            "key": "properties.localDiagnosticsAccess",
+            "type": "LocalDiagnosticsAccessConfiguration",
+        },
+        "interop_settings": {"key": "properties.interopSettings", "type": "object"},
     }
 
     def __init__(
@@ -1520,33 +1460,32 @@ class PacketCoreControlPlane(TrackedResource):
         core_network_technology: Optional[Union[str, "_models.CoreNetworkType"]] = None,
         version: Optional[str] = None,
         local_diagnostics_access: Optional["_models.LocalDiagnosticsAccessConfiguration"] = None,
-        interop_settings: Optional[Any] = None,
+        interop_settings: Optional[JSON] = None,
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
         :keyword identity: The identity used to retrieve the ingress certificate from Azure key vault.
         :paramtype identity: ~azure.mgmt.mobilenetwork.models.ManagedServiceIdentity
-        :keyword mobile_network: Required. Mobile network in which this packet core control plane is
-         deployed.
+        :keyword mobile_network: Mobile network in which this packet core control plane is deployed.
+         Required.
         :paramtype mobile_network: ~azure.mgmt.mobilenetwork.models.MobileNetworkResourceId
         :keyword platform: The platform where the packet core is deployed.
         :paramtype platform: ~azure.mgmt.mobilenetwork.models.PlatformConfiguration
         :keyword core_network_technology: The core network technology generation (5G core or EPC / 4G
-         core). Known values are: "5GC", "EPC".
+         core). Known values are: "5GC" and "EPC".
         :paramtype core_network_technology: str or ~azure.mgmt.mobilenetwork.models.CoreNetworkType
         :keyword version: The version of the packet core software that is deployed.
         :paramtype version: str
-        :keyword control_plane_access_interface: Required. The control plane interface on the access
-         network. For 5G networks, this is the N2 interface. For 4G networks, this is the S1-MME
-         interface.
+        :keyword control_plane_access_interface: The control plane interface on the access network. For
+         5G networks, this is the N2 interface. For 4G networks, this is the S1-MME interface. Required.
         :paramtype control_plane_access_interface: ~azure.mgmt.mobilenetwork.models.InterfaceProperties
-        :keyword sku: Required. The SKU defining the throughput and SIM allowances for this packet core
-         control plane deployment. Known values are: "EvaluationPackage", "FlagshipStarterPackage",
-         "EdgeSite2GBPS", "EdgeSite3GBPS", "EdgeSite4GBPS", "MediumPackage", "LargePackage".
+        :keyword sku: The SKU defining the throughput and SIM allowances for this packet core control
+         plane deployment. Required. Known values are: "EvaluationPackage", "FlagshipStarterPackage",
+         "EdgeSite2GBPS", "EdgeSite3GBPS", "EdgeSite4GBPS", "MediumPackage", and "LargePackage".
         :paramtype sku: str or ~azure.mgmt.mobilenetwork.models.BillingSku
         :keyword local_diagnostics_access: The kubernetes ingress configuration to control access to
          packet core diagnostics over local APIs.
@@ -1554,9 +1493,9 @@ class PacketCoreControlPlane(TrackedResource):
          ~azure.mgmt.mobilenetwork.models.LocalDiagnosticsAccessConfiguration
         :keyword interop_settings: Settings to allow interoperability with third party components e.g.
          RANs and UEs.
-        :paramtype interop_settings: any
+        :paramtype interop_settings: JSON
         """
-        super(PacketCoreControlPlane, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.identity = identity
         self.provisioning_state = None
         self.mobile_network = mobile_network
@@ -1569,7 +1508,7 @@ class PacketCoreControlPlane(TrackedResource):
         self.interop_settings = interop_settings
 
 
-class PacketCoreControlPlaneListResult(msrest.serialization.Model):
+class PacketCoreControlPlaneListResult(_serialization.Model):
     """Response for packet core control planes API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1581,25 +1520,20 @@ class PacketCoreControlPlaneListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PacketCoreControlPlane]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[PacketCoreControlPlane]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.PacketCoreControlPlane"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.PacketCoreControlPlane"]] = None, **kwargs):
         """
         :keyword value: A list of packet core control planes in a resource group.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.PacketCoreControlPlane]
         """
-        super(PacketCoreControlPlaneListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
@@ -1623,26 +1557,22 @@ class ProxyResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(ProxyResource, self).__init__(**kwargs)
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
 
 
 class PacketCoreControlPlaneVersion(ProxyResource):
@@ -1663,32 +1593,32 @@ class PacketCoreControlPlaneVersion(ProxyResource):
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
     :ivar provisioning_state: The provisioning state of the packet core control plane version
      resource. Known values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed",
-     "Canceled", "Deleted".
+     "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
     :ivar version_state: The state of this packet core control plane version. Known values are:
-     "Unknown", "Preview", "Validating", "ValidationFailed", "Active", "Deprecated".
+     "Unknown", "Preview", "Validating", "ValidationFailed", "Active", and "Deprecated".
     :vartype version_state: str or ~azure.mgmt.mobilenetwork.models.VersionState
     :ivar recommended_version: Indicates whether this is the recommended version to use for new
-     packet core control plane deployments. Known values are: "Recommended", "NotRecommended".
+     packet core control plane deployments. Known values are: "Recommended" and "NotRecommended".
     :vartype recommended_version: str or ~azure.mgmt.mobilenetwork.models.RecommendedVersion
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'version_state': {'key': 'properties.versionState', 'type': 'str'},
-        'recommended_version': {'key': 'properties.recommendedVersion', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "version_state": {"key": "properties.versionState", "type": "str"},
+        "recommended_version": {"key": "properties.recommendedVersion", "type": "str"},
     }
 
     def __init__(
@@ -1700,19 +1630,19 @@ class PacketCoreControlPlaneVersion(ProxyResource):
     ):
         """
         :keyword version_state: The state of this packet core control plane version. Known values are:
-         "Unknown", "Preview", "Validating", "ValidationFailed", "Active", "Deprecated".
+         "Unknown", "Preview", "Validating", "ValidationFailed", "Active", and "Deprecated".
         :paramtype version_state: str or ~azure.mgmt.mobilenetwork.models.VersionState
         :keyword recommended_version: Indicates whether this is the recommended version to use for new
-         packet core control plane deployments. Known values are: "Recommended", "NotRecommended".
+         packet core control plane deployments. Known values are: "Recommended" and "NotRecommended".
         :paramtype recommended_version: str or ~azure.mgmt.mobilenetwork.models.RecommendedVersion
         """
-        super(PacketCoreControlPlaneVersion, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.provisioning_state = None
         self.version_state = version_state
         self.recommended_version = recommended_version
 
 
-class PacketCoreControlPlaneVersionListResult(msrest.serialization.Model):
+class PacketCoreControlPlaneVersionListResult(_serialization.Model):
     """Response for packet core control plane version API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1724,25 +1654,20 @@ class PacketCoreControlPlaneVersionListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PacketCoreControlPlaneVersion]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[PacketCoreControlPlaneVersion]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.PacketCoreControlPlaneVersion"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.PacketCoreControlPlaneVersion"]] = None, **kwargs):
         """
         :keyword value: A list of supported packet core control plane versions.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.PacketCoreControlPlaneVersion]
         """
-        super(PacketCoreControlPlaneVersionListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
@@ -1765,37 +1690,38 @@ class PacketCoreDataPlane(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the packet core data plane resource. Known
-     values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and
+     "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar user_plane_access_interface: Required. The user plane interface on the access network.
-     For 5G networks, this is the N3 interface. For 4G networks, this is the S1-U interface.
+    :ivar user_plane_access_interface: The user plane interface on the access network. For 5G
+     networks, this is the N3 interface. For 4G networks, this is the S1-U interface. Required.
     :vartype user_plane_access_interface: ~azure.mgmt.mobilenetwork.models.InterfaceProperties
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'user_plane_access_interface': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "user_plane_access_interface": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'user_plane_access_interface': {'key': 'properties.userPlaneAccessInterface', 'type': 'InterfaceProperties'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "user_plane_access_interface": {"key": "properties.userPlaneAccessInterface", "type": "InterfaceProperties"},
     }
 
     def __init__(
@@ -1807,20 +1733,20 @@ class PacketCoreDataPlane(TrackedResource):
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword user_plane_access_interface: Required. The user plane interface on the access network.
-         For 5G networks, this is the N3 interface. For 4G networks, this is the S1-U interface.
+        :keyword user_plane_access_interface: The user plane interface on the access network. For 5G
+         networks, this is the N3 interface. For 4G networks, this is the S1-U interface. Required.
         :paramtype user_plane_access_interface: ~azure.mgmt.mobilenetwork.models.InterfaceProperties
         """
-        super(PacketCoreDataPlane, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.user_plane_access_interface = user_plane_access_interface
 
 
-class PacketCoreDataPlaneListResult(msrest.serialization.Model):
+class PacketCoreDataPlaneListResult(_serialization.Model):
     """Response for packet core data planes API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1832,67 +1758,66 @@ class PacketCoreDataPlaneListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PacketCoreDataPlane]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[PacketCoreDataPlane]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.PacketCoreDataPlane"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.PacketCoreDataPlane"]] = None, **kwargs):
         """
         :keyword value: A list of packet core data planes in a resource group.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.PacketCoreDataPlane]
         """
-        super(PacketCoreDataPlaneListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class PccRuleConfiguration(msrest.serialization.Model):
+class PccRuleConfiguration(_serialization.Model):
     """Data flow policy rule configuration.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar rule_name: Required. The name of the rule. This must be unique within the parent service.
-     You must not use any of the following reserved strings - ``default``\ , ``requested`` or
-     ``service``.
+    :ivar rule_name: The name of the rule. This must be unique within the parent service. You must
+     not use any of the following reserved strings - ``default``\ , ``requested`` or ``service``.
+     Required.
     :vartype rule_name: str
-    :ivar rule_precedence: Required. A precedence value that is used to decide between data flow
-     policy rules when identifying the QoS values to use for a particular SIM. A lower value means a
-     higher priority. This value should be unique among all data flow policy rules configured in the
-     mobile network.
+    :ivar rule_precedence: A precedence value that is used to decide between data flow policy rules
+     when identifying the QoS values to use for a particular SIM. A lower value means a higher
+     priority. This value should be unique among all data flow policy rules configured in the mobile
+     network. Required.
     :vartype rule_precedence: int
     :ivar rule_qos_policy: The QoS policy to use for packets matching this rule. If this field is
      null then the parent service will define the QoS settings.
     :vartype rule_qos_policy: ~azure.mgmt.mobilenetwork.models.PccRuleQosPolicy
     :ivar traffic_control: Determines whether flows that match this data flow policy rule are
-     permitted. Known values are: "Enabled", "Blocked".
+     permitted. Known values are: "Enabled" and "Blocked".
     :vartype traffic_control: str or ~azure.mgmt.mobilenetwork.models.TrafficControlPermission
-    :ivar service_data_flow_templates: Required. The set of data flow templates to use for this
-     data flow policy rule.
+    :ivar service_data_flow_templates: The set of data flow templates to use for this data flow
+     policy rule. Required.
     :vartype service_data_flow_templates:
      list[~azure.mgmt.mobilenetwork.models.ServiceDataFlowTemplate]
     """
 
     _validation = {
-        'rule_name': {'required': True, 'max_length': 64, 'min_length': 0, 'pattern': r'^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$'},
-        'rule_precedence': {'required': True, 'maximum': 255, 'minimum': 0},
-        'service_data_flow_templates': {'required': True, 'min_items': 1, 'unique': True},
+        "rule_name": {
+            "required": True,
+            "max_length": 64,
+            "pattern": r"^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+        },
+        "rule_precedence": {"required": True, "maximum": 255, "minimum": 0},
+        "service_data_flow_templates": {"required": True, "min_items": 1, "unique": True},
     }
 
     _attribute_map = {
-        'rule_name': {'key': 'ruleName', 'type': 'str'},
-        'rule_precedence': {'key': 'rulePrecedence', 'type': 'int'},
-        'rule_qos_policy': {'key': 'ruleQosPolicy', 'type': 'PccRuleQosPolicy'},
-        'traffic_control': {'key': 'trafficControl', 'type': 'str'},
-        'service_data_flow_templates': {'key': 'serviceDataFlowTemplates', 'type': '[ServiceDataFlowTemplate]'},
+        "rule_name": {"key": "ruleName", "type": "str"},
+        "rule_precedence": {"key": "rulePrecedence", "type": "int"},
+        "rule_qos_policy": {"key": "ruleQosPolicy", "type": "PccRuleQosPolicy"},
+        "traffic_control": {"key": "trafficControl", "type": "str"},
+        "service_data_flow_templates": {"key": "serviceDataFlowTemplates", "type": "[ServiceDataFlowTemplate]"},
     }
 
     def __init__(
@@ -1906,27 +1831,27 @@ class PccRuleConfiguration(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword rule_name: Required. The name of the rule. This must be unique within the parent
-         service. You must not use any of the following reserved strings - ``default``\ , ``requested``
-         or ``service``.
+        :keyword rule_name: The name of the rule. This must be unique within the parent service. You
+         must not use any of the following reserved strings - ``default``\ , ``requested`` or
+         ``service``. Required.
         :paramtype rule_name: str
-        :keyword rule_precedence: Required. A precedence value that is used to decide between data flow
-         policy rules when identifying the QoS values to use for a particular SIM. A lower value means a
-         higher priority. This value should be unique among all data flow policy rules configured in the
-         mobile network.
+        :keyword rule_precedence: A precedence value that is used to decide between data flow policy
+         rules when identifying the QoS values to use for a particular SIM. A lower value means a higher
+         priority. This value should be unique among all data flow policy rules configured in the mobile
+         network. Required.
         :paramtype rule_precedence: int
         :keyword rule_qos_policy: The QoS policy to use for packets matching this rule. If this field
          is null then the parent service will define the QoS settings.
         :paramtype rule_qos_policy: ~azure.mgmt.mobilenetwork.models.PccRuleQosPolicy
         :keyword traffic_control: Determines whether flows that match this data flow policy rule are
-         permitted. Known values are: "Enabled", "Blocked".
+         permitted. Known values are: "Enabled" and "Blocked".
         :paramtype traffic_control: str or ~azure.mgmt.mobilenetwork.models.TrafficControlPermission
-        :keyword service_data_flow_templates: Required. The set of data flow templates to use for this
-         data flow policy rule.
+        :keyword service_data_flow_templates: The set of data flow templates to use for this data flow
+         policy rule. Required.
         :paramtype service_data_flow_templates:
          list[~azure.mgmt.mobilenetwork.models.ServiceDataFlowTemplate]
         """
-        super(PccRuleConfiguration, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.rule_name = rule_name
         self.rule_precedence = rule_precedence
         self.rule_qos_policy = rule_qos_policy
@@ -1934,7 +1859,7 @@ class PccRuleConfiguration(msrest.serialization.Model):
         self.service_data_flow_templates = service_data_flow_templates
 
 
-class QosPolicy(msrest.serialization.Model):
+class QosPolicy(_serialization.Model):
     """QoS policy.
 
     All required parameters must be populated in order to send to Azure.
@@ -1955,31 +1880,31 @@ class QosPolicy(msrest.serialization.Model):
     :ivar preemption_capability: QoS Flow preemption capability. The preemption capability of a QoS
      Flow controls whether it can preempt another QoS Flow with a lower priority level. See 3GPP
      TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known values are:
-     "NotPreempt", "MayPreempt".
+     "NotPreempt" and "MayPreempt".
     :vartype preemption_capability: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
     :ivar preemption_vulnerability: QoS Flow preemption vulnerability. The preemption vulnerability
      of a QoS Flow controls whether it can be preempted by a QoS Flow with a higher priority level.
      See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known values
-     are: "NotPreemptable", "Preemptable".
+     are: "NotPreemptable" and "Preemptable".
     :vartype preemption_vulnerability: str or
      ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
-    :ivar maximum_bit_rate: Required. The maximum bit rate (MBR) for all service data flows that
-     use this data flow policy rule or service.
+    :ivar maximum_bit_rate: The maximum bit rate (MBR) for all service data flows that use this
+     data flow policy rule or service. Required.
     :vartype maximum_bit_rate: ~azure.mgmt.mobilenetwork.models.Ambr
     """
 
     _validation = {
-        'five_qi': {'maximum': 127, 'minimum': 1},
-        'allocation_and_retention_priority_level': {'maximum': 15, 'minimum': 1},
-        'maximum_bit_rate': {'required': True},
+        "five_qi": {"maximum": 127, "minimum": 1},
+        "allocation_and_retention_priority_level": {"maximum": 15, "minimum": 1},
+        "maximum_bit_rate": {"required": True},
     }
 
     _attribute_map = {
-        'five_qi': {'key': '5qi', 'type': 'int'},
-        'allocation_and_retention_priority_level': {'key': 'allocationAndRetentionPriorityLevel', 'type': 'int'},
-        'preemption_capability': {'key': 'preemptionCapability', 'type': 'str'},
-        'preemption_vulnerability': {'key': 'preemptionVulnerability', 'type': 'str'},
-        'maximum_bit_rate': {'key': 'maximumBitRate', 'type': 'Ambr'},
+        "five_qi": {"key": "5qi", "type": "int"},
+        "allocation_and_retention_priority_level": {"key": "allocationAndRetentionPriorityLevel", "type": "int"},
+        "preemption_capability": {"key": "preemptionCapability", "type": "str"},
+        "preemption_vulnerability": {"key": "preemptionVulnerability", "type": "str"},
+        "maximum_bit_rate": {"key": "maximumBitRate", "type": "Ambr"},
     }
 
     def __init__(
@@ -2009,19 +1934,19 @@ class QosPolicy(msrest.serialization.Model):
         :keyword preemption_capability: QoS Flow preemption capability. The preemption capability of a
          QoS Flow controls whether it can preempt another QoS Flow with a lower priority level. See 3GPP
          TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known values are:
-         "NotPreempt", "MayPreempt".
+         "NotPreempt" and "MayPreempt".
         :paramtype preemption_capability: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
         :keyword preemption_vulnerability: QoS Flow preemption vulnerability. The preemption
          vulnerability of a QoS Flow controls whether it can be preempted by a QoS Flow with a higher
          priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.
-         Known values are: "NotPreemptable", "Preemptable".
+         Known values are: "NotPreemptable" and "Preemptable".
         :paramtype preemption_vulnerability: str or
          ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
-        :keyword maximum_bit_rate: Required. The maximum bit rate (MBR) for all service data flows that
-         use this data flow policy rule or service.
+        :keyword maximum_bit_rate: The maximum bit rate (MBR) for all service data flows that use this
+         data flow policy rule or service. Required.
         :paramtype maximum_bit_rate: ~azure.mgmt.mobilenetwork.models.Ambr
         """
-        super(QosPolicy, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.five_qi = five_qi
         self.allocation_and_retention_priority_level = allocation_and_retention_priority_level
         self.preemption_capability = preemption_capability
@@ -2050,16 +1975,16 @@ class PccRuleQosPolicy(QosPolicy):
     :ivar preemption_capability: QoS Flow preemption capability. The preemption capability of a QoS
      Flow controls whether it can preempt another QoS Flow with a lower priority level. See 3GPP
      TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known values are:
-     "NotPreempt", "MayPreempt".
+     "NotPreempt" and "MayPreempt".
     :vartype preemption_capability: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
     :ivar preemption_vulnerability: QoS Flow preemption vulnerability. The preemption vulnerability
      of a QoS Flow controls whether it can be preempted by a QoS Flow with a higher priority level.
      See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known values
-     are: "NotPreemptable", "Preemptable".
+     are: "NotPreemptable" and "Preemptable".
     :vartype preemption_vulnerability: str or
      ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
-    :ivar maximum_bit_rate: Required. The maximum bit rate (MBR) for all service data flows that
-     use this data flow policy rule or service.
+    :ivar maximum_bit_rate: The maximum bit rate (MBR) for all service data flows that use this
+     data flow policy rule or service. Required.
     :vartype maximum_bit_rate: ~azure.mgmt.mobilenetwork.models.Ambr
     :ivar guaranteed_bit_rate: The guaranteed bit rate (GBR) for all service data flows that use
      this data flow policy rule. This is an optional setting. If you do not provide a value, there
@@ -2068,18 +1993,18 @@ class PccRuleQosPolicy(QosPolicy):
     """
 
     _validation = {
-        'five_qi': {'maximum': 127, 'minimum': 1},
-        'allocation_and_retention_priority_level': {'maximum': 15, 'minimum': 1},
-        'maximum_bit_rate': {'required': True},
+        "five_qi": {"maximum": 127, "minimum": 1},
+        "allocation_and_retention_priority_level": {"maximum": 15, "minimum": 1},
+        "maximum_bit_rate": {"required": True},
     }
 
     _attribute_map = {
-        'five_qi': {'key': '5qi', 'type': 'int'},
-        'allocation_and_retention_priority_level': {'key': 'allocationAndRetentionPriorityLevel', 'type': 'int'},
-        'preemption_capability': {'key': 'preemptionCapability', 'type': 'str'},
-        'preemption_vulnerability': {'key': 'preemptionVulnerability', 'type': 'str'},
-        'maximum_bit_rate': {'key': 'maximumBitRate', 'type': 'Ambr'},
-        'guaranteed_bit_rate': {'key': 'guaranteedBitRate', 'type': 'Ambr'},
+        "five_qi": {"key": "5qi", "type": "int"},
+        "allocation_and_retention_priority_level": {"key": "allocationAndRetentionPriorityLevel", "type": "int"},
+        "preemption_capability": {"key": "preemptionCapability", "type": "str"},
+        "preemption_vulnerability": {"key": "preemptionVulnerability", "type": "str"},
+        "maximum_bit_rate": {"key": "maximumBitRate", "type": "Ambr"},
+        "guaranteed_bit_rate": {"key": "guaranteedBitRate", "type": "Ambr"},
     }
 
     def __init__(
@@ -2110,27 +2035,34 @@ class PccRuleQosPolicy(QosPolicy):
         :keyword preemption_capability: QoS Flow preemption capability. The preemption capability of a
          QoS Flow controls whether it can preempt another QoS Flow with a lower priority level. See 3GPP
          TS23.501 section 5.7.2.2 for a full description of the ARP parameters. Known values are:
-         "NotPreempt", "MayPreempt".
+         "NotPreempt" and "MayPreempt".
         :paramtype preemption_capability: str or ~azure.mgmt.mobilenetwork.models.PreemptionCapability
         :keyword preemption_vulnerability: QoS Flow preemption vulnerability. The preemption
          vulnerability of a QoS Flow controls whether it can be preempted by a QoS Flow with a higher
          priority level. See 3GPP TS23.501 section 5.7.2.2 for a full description of the ARP parameters.
-         Known values are: "NotPreemptable", "Preemptable".
+         Known values are: "NotPreemptable" and "Preemptable".
         :paramtype preemption_vulnerability: str or
          ~azure.mgmt.mobilenetwork.models.PreemptionVulnerability
-        :keyword maximum_bit_rate: Required. The maximum bit rate (MBR) for all service data flows that
-         use this data flow policy rule or service.
+        :keyword maximum_bit_rate: The maximum bit rate (MBR) for all service data flows that use this
+         data flow policy rule or service. Required.
         :paramtype maximum_bit_rate: ~azure.mgmt.mobilenetwork.models.Ambr
         :keyword guaranteed_bit_rate: The guaranteed bit rate (GBR) for all service data flows that use
          this data flow policy rule. This is an optional setting. If you do not provide a value, there
          will be no GBR set for the data flow policy rule that uses this QoS definition.
         :paramtype guaranteed_bit_rate: ~azure.mgmt.mobilenetwork.models.Ambr
         """
-        super(PccRuleQosPolicy, self).__init__(five_qi=five_qi, allocation_and_retention_priority_level=allocation_and_retention_priority_level, preemption_capability=preemption_capability, preemption_vulnerability=preemption_vulnerability, maximum_bit_rate=maximum_bit_rate, **kwargs)
+        super().__init__(
+            five_qi=five_qi,
+            allocation_and_retention_priority_level=allocation_and_retention_priority_level,
+            preemption_capability=preemption_capability,
+            preemption_vulnerability=preemption_vulnerability,
+            maximum_bit_rate=maximum_bit_rate,
+            **kwargs
+        )
         self.guaranteed_bit_rate = guaranteed_bit_rate
 
 
-class PinholeTimeouts(msrest.serialization.Model):
+class PinholeTimeouts(_serialization.Model):
     """Expiry times of inactive NAPT pinholes, in seconds. All timers must be at least 1 second.
 
     :ivar tcp: Pinhole timeout for TCP pinholes in seconds. Default for TCP is 2 hours 4 minutes,
@@ -2145,25 +2077,18 @@ class PinholeTimeouts(msrest.serialization.Model):
     """
 
     _validation = {
-        'tcp': {'minimum': 1},
-        'udp': {'minimum': 1},
-        'icmp': {'minimum': 1},
+        "tcp": {"minimum": 1},
+        "udp": {"minimum": 1},
+        "icmp": {"minimum": 1},
     }
 
     _attribute_map = {
-        'tcp': {'key': 'tcp', 'type': 'int'},
-        'udp': {'key': 'udp', 'type': 'int'},
-        'icmp': {'key': 'icmp', 'type': 'int'},
+        "tcp": {"key": "tcp", "type": "int"},
+        "udp": {"key": "udp", "type": "int"},
+        "icmp": {"key": "icmp", "type": "int"},
     }
 
-    def __init__(
-        self,
-        *,
-        tcp: Optional[int] = 180,
-        udp: Optional[int] = 30,
-        icmp: Optional[int] = 30,
-        **kwargs
-    ):
+    def __init__(self, *, tcp: int = 180, udp: int = 30, icmp: int = 30, **kwargs):
         """
         :keyword tcp: Pinhole timeout for TCP pinholes in seconds. Default for TCP is 2 hours 4
          minutes, as per RFC 5382 section 5.
@@ -2175,19 +2100,19 @@ class PinholeTimeouts(msrest.serialization.Model):
          seconds, as per RFC 5508 section 3.2.
         :paramtype icmp: int
         """
-        super(PinholeTimeouts, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.tcp = tcp
         self.udp = udp
         self.icmp = icmp
 
 
-class PlatformConfiguration(msrest.serialization.Model):
+class PlatformConfiguration(_serialization.Model):
     """The platform where the packet core is deployed.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar type: Required. The platform type where packet core is deployed. Known values are:
-     "AKS-HCI", "BaseVM".
+    :ivar type: The platform type where packet core is deployed. Required. Known values are:
+     "AKS-HCI" and "BaseVM".
     :vartype type: str or ~azure.mgmt.mobilenetwork.models.PlatformType
     :ivar azure_stack_edge_device: The Azure Stack Edge device where where the packet core is
      deployed. If the device is part of a fault tolerant pair, either device in the pair can be
@@ -2201,14 +2126,14 @@ class PlatformConfiguration(msrest.serialization.Model):
     """
 
     _validation = {
-        'type': {'required': True},
+        "type": {"required": True},
     }
 
     _attribute_map = {
-        'type': {'key': 'type', 'type': 'str'},
-        'azure_stack_edge_device': {'key': 'azureStackEdgeDevice', 'type': 'AzureStackEdgeDeviceResourceId'},
-        'connected_cluster': {'key': 'connectedCluster', 'type': 'ConnectedClusterResourceId'},
-        'custom_location': {'key': 'customLocation', 'type': 'CustomLocationResourceId'},
+        "type": {"key": "type", "type": "str"},
+        "azure_stack_edge_device": {"key": "azureStackEdgeDevice", "type": "AzureStackEdgeDeviceResourceId"},
+        "connected_cluster": {"key": "connectedCluster", "type": "ConnectedClusterResourceId"},
+        "custom_location": {"key": "customLocation", "type": "CustomLocationResourceId"},
     }
 
     def __init__(
@@ -2221,8 +2146,8 @@ class PlatformConfiguration(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword type: Required. The platform type where packet core is deployed. Known values are:
-         "AKS-HCI", "BaseVM".
+        :keyword type: The platform type where packet core is deployed. Required. Known values are:
+         "AKS-HCI" and "BaseVM".
         :paramtype type: str or ~azure.mgmt.mobilenetwork.models.PlatformType
         :keyword azure_stack_edge_device: The Azure Stack Edge device where where the packet core is
          deployed. If the device is part of a fault tolerant pair, either device in the pair can be
@@ -2234,92 +2159,80 @@ class PlatformConfiguration(msrest.serialization.Model):
         :keyword custom_location: Azure Arc custom location where the packet core is deployed.
         :paramtype custom_location: ~azure.mgmt.mobilenetwork.models.CustomLocationResourceId
         """
-        super(PlatformConfiguration, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.type = type
         self.azure_stack_edge_device = azure_stack_edge_device
         self.connected_cluster = connected_cluster
         self.custom_location = custom_location
 
 
-class PlmnId(msrest.serialization.Model):
+class PlmnId(_serialization.Model):
     """Public land mobile network (PLMN) ID.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar mcc: Required. Mobile country code (MCC).
+    :ivar mcc: Mobile country code (MCC). Required.
     :vartype mcc: str
-    :ivar mnc: Required. Mobile network code (MNC).
+    :ivar mnc: Mobile network code (MNC). Required.
     :vartype mnc: str
     """
 
     _validation = {
-        'mcc': {'required': True, 'pattern': r'^\d{3}$'},
-        'mnc': {'required': True, 'pattern': r'^\d{2,3}$'},
+        "mcc": {"required": True, "pattern": r"^\d{3}$"},
+        "mnc": {"required": True, "pattern": r"^\d{2,3}$"},
     }
 
     _attribute_map = {
-        'mcc': {'key': 'mcc', 'type': 'str'},
-        'mnc': {'key': 'mnc', 'type': 'str'},
+        "mcc": {"key": "mcc", "type": "str"},
+        "mnc": {"key": "mnc", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        mcc: str,
-        mnc: str,
-        **kwargs
-    ):
+    def __init__(self, *, mcc: str, mnc: str, **kwargs):
         """
-        :keyword mcc: Required. Mobile country code (MCC).
+        :keyword mcc: Mobile country code (MCC). Required.
         :paramtype mcc: str
-        :keyword mnc: Required. Mobile network code (MNC).
+        :keyword mnc: Mobile network code (MNC). Required.
         :paramtype mnc: str
         """
-        super(PlmnId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.mcc = mcc
         self.mnc = mnc
 
 
-class PortRange(msrest.serialization.Model):
+class PortRange(_serialization.Model):
     """Range of port numbers to use as translated ports on each translated address.
-If not specified and NAPT is enabled, this range defaults to 1,024 - 49,999.
-(Ports under 1,024 should not be used because these are special purpose ports reserved by IANA. Ports 50,000 and above are reserved for non-NAPT use.).
+    If not specified and NAPT is enabled, this range defaults to 1,024 - 49,999.
+    (Ports under 1,024 should not be used because these are special purpose ports reserved by IANA. Ports 50,000 and above are reserved for non-NAPT use.).
 
-    :ivar min_port: The minimum port number.
-    :vartype min_port: int
-    :ivar max_port: The maximum port number.
-    :vartype max_port: int
+        :ivar min_port: The minimum port number.
+        :vartype min_port: int
+        :ivar max_port: The maximum port number.
+        :vartype max_port: int
     """
 
     _validation = {
-        'min_port': {'maximum': 65535, 'minimum': 1024},
-        'max_port': {'maximum': 65535, 'minimum': 1024},
+        "min_port": {"maximum": 65535, "minimum": 1024},
+        "max_port": {"maximum": 65535, "minimum": 1024},
     }
 
     _attribute_map = {
-        'min_port': {'key': 'minPort', 'type': 'int'},
-        'max_port': {'key': 'maxPort', 'type': 'int'},
+        "min_port": {"key": "minPort", "type": "int"},
+        "max_port": {"key": "maxPort", "type": "int"},
     }
 
-    def __init__(
-        self,
-        *,
-        min_port: Optional[int] = 1024,
-        max_port: Optional[int] = 49999,
-        **kwargs
-    ):
+    def __init__(self, *, min_port: int = 1024, max_port: int = 49999, **kwargs):
         """
         :keyword min_port: The minimum port number.
         :paramtype min_port: int
         :keyword max_port: The maximum port number.
         :paramtype max_port: int
         """
-        super(PortRange, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.min_port = min_port
         self.max_port = max_port
 
 
-class PortReuseHoldTimes(msrest.serialization.Model):
+class PortReuseHoldTimes(_serialization.Model):
     """The minimum time (in seconds) that will pass before a port that was used by a closed pinhole can be recycled for use by another pinhole. All hold times must be minimum 1 second.
 
     :ivar tcp: Minimum time in seconds that will pass before a TCP port that was used by a closed
@@ -2331,22 +2244,16 @@ class PortReuseHoldTimes(msrest.serialization.Model):
     """
 
     _validation = {
-        'tcp': {'minimum': 1},
-        'udp': {'minimum': 1},
+        "tcp": {"minimum": 1},
+        "udp": {"minimum": 1},
     }
 
     _attribute_map = {
-        'tcp': {'key': 'tcp', 'type': 'int'},
-        'udp': {'key': 'udp', 'type': 'int'},
+        "tcp": {"key": "tcp", "type": "int"},
+        "udp": {"key": "udp", "type": "int"},
     }
 
-    def __init__(
-        self,
-        *,
-        tcp: Optional[int] = 120,
-        udp: Optional[int] = 60,
-        **kwargs
-    ):
+    def __init__(self, *, tcp: int = 120, udp: int = 60, **kwargs):
         """
         :keyword tcp: Minimum time in seconds that will pass before a TCP port that was used by a
          closed pinhole can be reused. Default for TCP is 2 minutes.
@@ -2355,7 +2262,7 @@ class PortReuseHoldTimes(msrest.serialization.Model):
          closed pinhole can be reused. Default for UDP is 1 minute.
         :paramtype udp: int
         """
-        super(PortReuseHoldTimes, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.tcp = tcp
         self.udp = udp
 
@@ -2378,47 +2285,47 @@ class Service(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the service resource. Known values are:
-     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar service_precedence: Required. A precedence value that is used to decide between services
-     when identifying the QoS values to use for a particular SIM. A lower value means a higher
-     priority. This value should be unique among all services configured in the mobile network.
+    :ivar service_precedence: A precedence value that is used to decide between services when
+     identifying the QoS values to use for a particular SIM. A lower value means a higher priority.
+     This value should be unique among all services configured in the mobile network. Required.
     :vartype service_precedence: int
     :ivar service_qos_policy: The QoS policy to use for packets matching this service. This can be
      overridden for particular flows using the ruleQosPolicy field in a PccRuleConfiguration. If
      this field is null then the UE's SIM policy will define the QoS settings.
     :vartype service_qos_policy: ~azure.mgmt.mobilenetwork.models.QosPolicy
-    :ivar pcc_rules: Required. The set of data flow policy rules that make up this service.
+    :ivar pcc_rules: The set of data flow policy rules that make up this service. Required.
     :vartype pcc_rules: list[~azure.mgmt.mobilenetwork.models.PccRuleConfiguration]
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'service_precedence': {'required': True, 'maximum': 255, 'minimum': 0},
-        'pcc_rules': {'required': True, 'min_items': 1, 'unique': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "service_precedence": {"required": True, "maximum": 255, "minimum": 0},
+        "pcc_rules": {"required": True, "min_items": 1, "unique": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'service_precedence': {'key': 'properties.servicePrecedence', 'type': 'int'},
-        'service_qos_policy': {'key': 'properties.serviceQosPolicy', 'type': 'QosPolicy'},
-        'pcc_rules': {'key': 'properties.pccRules', 'type': '[PccRuleConfiguration]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "service_precedence": {"key": "properties.servicePrecedence", "type": "int"},
+        "service_qos_policy": {"key": "properties.serviceQosPolicy", "type": "QosPolicy"},
+        "pcc_rules": {"key": "properties.pccRules", "type": "[PccRuleConfiguration]"},
     }
 
     def __init__(
@@ -2432,54 +2339,53 @@ class Service(TrackedResource):
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword service_precedence: Required. A precedence value that is used to decide between
-         services when identifying the QoS values to use for a particular SIM. A lower value means a
-         higher priority. This value should be unique among all services configured in the mobile
-         network.
+        :keyword service_precedence: A precedence value that is used to decide between services when
+         identifying the QoS values to use for a particular SIM. A lower value means a higher priority.
+         This value should be unique among all services configured in the mobile network. Required.
         :paramtype service_precedence: int
         :keyword service_qos_policy: The QoS policy to use for packets matching this service. This can
          be overridden for particular flows using the ruleQosPolicy field in a PccRuleConfiguration. If
          this field is null then the UE's SIM policy will define the QoS settings.
         :paramtype service_qos_policy: ~azure.mgmt.mobilenetwork.models.QosPolicy
-        :keyword pcc_rules: Required. The set of data flow policy rules that make up this service.
+        :keyword pcc_rules: The set of data flow policy rules that make up this service. Required.
         :paramtype pcc_rules: list[~azure.mgmt.mobilenetwork.models.PccRuleConfiguration]
         """
-        super(Service, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.service_precedence = service_precedence
         self.service_qos_policy = service_qos_policy
         self.pcc_rules = pcc_rules
 
 
-class ServiceDataFlowTemplate(msrest.serialization.Model):
+class ServiceDataFlowTemplate(_serialization.Model):
     """Data flow template.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar template_name: Required. The name of the data flow template. This must be unique within
-     the parent data flow policy rule. You must not use any of the following reserved strings -
-     ``default``\ , ``requested`` or ``service``.
+    :ivar template_name: The name of the data flow template. This must be unique within the parent
+     data flow policy rule. You must not use any of the following reserved strings - ``default``\ ,
+     ``requested`` or ``service``. Required.
     :vartype template_name: str
-    :ivar direction: Required. The direction of this flow. Known values are: "Uplink", "Downlink",
-     "Bidirectional".
+    :ivar direction: The direction of this flow. Required. Known values are: "Uplink", "Downlink",
+     and "Bidirectional".
     :vartype direction: str or ~azure.mgmt.mobilenetwork.models.SdfDirection
-    :ivar protocol: Required. A list of the allowed protocol(s) for this flow. If you want this
-     flow to be able to use any protocol within the internet protocol suite, use the value ``ip``.
-     If you only want to allow a selection of protocols, you must use the corresponding IANA
-     Assigned Internet Protocol Number for each protocol, as described in
+    :ivar protocol: A list of the allowed protocol(s) for this flow. If you want this flow to be
+     able to use any protocol within the internet protocol suite, use the value ``ip``. If you only
+     want to allow a selection of protocols, you must use the corresponding IANA Assigned Internet
+     Protocol Number for each protocol, as described in
      https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml. For example, for UDP,
      you must use 17. If you use the value ``ip`` then you must leave the field ``port``
-     unspecified.
+     unspecified. Required.
     :vartype protocol: list[str]
-    :ivar remote_ip_list: Required. The remote IP address(es) to which UEs will connect for this
-     flow. If you want to allow connections on any IP address, use the value ``any``. Otherwise, you
-     must provide each of the remote IP addresses to which the packet core instance will connect for
-     this flow. You must provide each IP address in CIDR notation, including the netmask (for
-     example, 192.0.2.54/24).
+    :ivar remote_ip_list: The remote IP address(es) to which UEs will connect for this flow. If you
+     want to allow connections on any IP address, use the value ``any``. Otherwise, you must provide
+     each of the remote IP addresses to which the packet core instance will connect for this flow.
+     You must provide each IP address in CIDR notation, including the netmask (for example,
+     192.0.2.54/24). Required.
     :vartype remote_ip_list: list[str]
     :ivar ports: The port(s) to which UEs will connect for this flow. You can specify zero or more
      ports or port ranges. If you specify one or more ports or port ranges then you must specify a
@@ -2490,19 +2396,23 @@ class ServiceDataFlowTemplate(msrest.serialization.Model):
     """
 
     _validation = {
-        'template_name': {'required': True, 'max_length': 64, 'min_length': 0, 'pattern': r'^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$'},
-        'direction': {'required': True},
-        'protocol': {'required': True, 'min_items': 1, 'unique': True},
-        'remote_ip_list': {'required': True, 'min_items': 1, 'unique': True},
-        'ports': {'unique': True},
+        "template_name": {
+            "required": True,
+            "max_length": 64,
+            "pattern": r"^(?!(default|requested|service)$)[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+        },
+        "direction": {"required": True},
+        "protocol": {"required": True, "min_items": 1, "unique": True},
+        "remote_ip_list": {"required": True, "min_items": 1, "unique": True},
+        "ports": {"unique": True},
     }
 
     _attribute_map = {
-        'template_name': {'key': 'templateName', 'type': 'str'},
-        'direction': {'key': 'direction', 'type': 'str'},
-        'protocol': {'key': 'protocol', 'type': '[str]'},
-        'remote_ip_list': {'key': 'remoteIpList', 'type': '[str]'},
-        'ports': {'key': 'ports', 'type': '[str]'},
+        "template_name": {"key": "templateName", "type": "str"},
+        "direction": {"key": "direction", "type": "str"},
+        "protocol": {"key": "protocol", "type": "[str]"},
+        "remote_ip_list": {"key": "remoteIpList", "type": "[str]"},
+        "ports": {"key": "ports", "type": "[str]"},
     }
 
     def __init__(
@@ -2516,26 +2426,26 @@ class ServiceDataFlowTemplate(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword template_name: Required. The name of the data flow template. This must be unique
-         within the parent data flow policy rule. You must not use any of the following reserved strings
-         - ``default``\ , ``requested`` or ``service``.
+        :keyword template_name: The name of the data flow template. This must be unique within the
+         parent data flow policy rule. You must not use any of the following reserved strings -
+         ``default``\ , ``requested`` or ``service``. Required.
         :paramtype template_name: str
-        :keyword direction: Required. The direction of this flow. Known values are: "Uplink",
-         "Downlink", "Bidirectional".
+        :keyword direction: The direction of this flow. Required. Known values are: "Uplink",
+         "Downlink", and "Bidirectional".
         :paramtype direction: str or ~azure.mgmt.mobilenetwork.models.SdfDirection
-        :keyword protocol: Required. A list of the allowed protocol(s) for this flow. If you want this
-         flow to be able to use any protocol within the internet protocol suite, use the value ``ip``.
-         If you only want to allow a selection of protocols, you must use the corresponding IANA
-         Assigned Internet Protocol Number for each protocol, as described in
+        :keyword protocol: A list of the allowed protocol(s) for this flow. If you want this flow to be
+         able to use any protocol within the internet protocol suite, use the value ``ip``. If you only
+         want to allow a selection of protocols, you must use the corresponding IANA Assigned Internet
+         Protocol Number for each protocol, as described in
          https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml. For example, for UDP,
          you must use 17. If you use the value ``ip`` then you must leave the field ``port``
-         unspecified.
+         unspecified. Required.
         :paramtype protocol: list[str]
-        :keyword remote_ip_list: Required. The remote IP address(es) to which UEs will connect for this
-         flow. If you want to allow connections on any IP address, use the value ``any``. Otherwise, you
-         must provide each of the remote IP addresses to which the packet core instance will connect for
-         this flow. You must provide each IP address in CIDR notation, including the netmask (for
-         example, 192.0.2.54/24).
+        :keyword remote_ip_list: The remote IP address(es) to which UEs will connect for this flow. If
+         you want to allow connections on any IP address, use the value ``any``. Otherwise, you must
+         provide each of the remote IP addresses to which the packet core instance will connect for this
+         flow. You must provide each IP address in CIDR notation, including the netmask (for example,
+         192.0.2.54/24). Required.
         :paramtype remote_ip_list: list[str]
         :keyword ports: The port(s) to which UEs will connect for this flow. You can specify zero or
          more ports or port ranges. If you specify one or more ports or port ranges then you must
@@ -2545,7 +2455,7 @@ class ServiceDataFlowTemplate(msrest.serialization.Model):
          ].
         :paramtype ports: list[str]
         """
-        super(ServiceDataFlowTemplate, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.template_name = template_name
         self.direction = direction
         self.protocol = protocol
@@ -2553,7 +2463,7 @@ class ServiceDataFlowTemplate(msrest.serialization.Model):
         self.ports = ports
 
 
-class ServiceListResult(msrest.serialization.Model):
+class ServiceListResult(_serialization.Model):
     """Response for services API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -2565,61 +2475,54 @@ class ServiceListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Service]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Service]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.Service"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.Service"]] = None, **kwargs):
         """
         :keyword value: A list of services.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.Service]
         """
-        super(ServiceListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class ServiceResourceId(msrest.serialization.Model):
+class ServiceResourceId(_serialization.Model):
     """Reference to a service resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Service resource ID.
+    :ivar id: Service resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][eE][rR][vV][iI][cC][eE][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][eE][rR][vV][iI][cC][eE][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Service resource ID.
+        :keyword id: Service resource ID. Required.
         :paramtype id: str
         """
-        super(ServiceResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class Sim(ProxyResource):
+class Sim(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """SIM resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -2638,13 +2541,13 @@ class Sim(ProxyResource):
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
     :ivar provisioning_state: The provisioning state of the SIM resource. Known values are:
-     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar sim_state: The state of the SIM resource. Known values are: "Disabled", "Enabled",
+    :ivar sim_state: The state of the SIM resource. Known values are: "Disabled", "Enabled", and
      "Invalid".
     :vartype sim_state: str or ~azure.mgmt.mobilenetwork.models.SimState
-    :ivar international_mobile_subscriber_identity: Required. The international mobile subscriber
-     identity (IMSI) for the SIM.
+    :ivar international_mobile_subscriber_identity: The international mobile subscriber identity
+     (IMSI) for the SIM. Required.
     :vartype international_mobile_subscriber_identity: str
     :ivar integrated_circuit_card_identifier: The integrated circuit card ID (ICCID) for the SIM.
     :vartype integrated_circuit_card_identifier: str
@@ -2664,33 +2567,36 @@ class Sim(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'sim_state': {'readonly': True},
-        'international_mobile_subscriber_identity': {'required': True, 'pattern': r'^[0-9]{5,15}$'},
-        'integrated_circuit_card_identifier': {'pattern': r'^89[0-9]{17,18}$'},
-        'authentication_key': {'pattern': r'^[0-9a-fA-F]{32}$'},
-        'operator_key_code': {'pattern': r'^[0-9a-fA-F]{32}$'},
-        'static_ip_configuration': {'min_items': 1, 'unique': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "sim_state": {"readonly": True},
+        "international_mobile_subscriber_identity": {"required": True, "pattern": r"^[0-9]{5,15}$"},
+        "integrated_circuit_card_identifier": {"pattern": r"^89[0-9]{17,18}$"},
+        "authentication_key": {"pattern": r"^[0-9a-fA-F]{32}$"},
+        "operator_key_code": {"pattern": r"^[0-9a-fA-F]{32}$"},
+        "static_ip_configuration": {"min_items": 1, "unique": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'sim_state': {'key': 'properties.simState', 'type': 'str'},
-        'international_mobile_subscriber_identity': {'key': 'properties.internationalMobileSubscriberIdentity', 'type': 'str'},
-        'integrated_circuit_card_identifier': {'key': 'properties.integratedCircuitCardIdentifier', 'type': 'str'},
-        'authentication_key': {'key': 'properties.authenticationKey', 'type': 'str'},
-        'operator_key_code': {'key': 'properties.operatorKeyCode', 'type': 'str'},
-        'device_type': {'key': 'properties.deviceType', 'type': 'str'},
-        'sim_policy': {'key': 'properties.simPolicy', 'type': 'SimPolicyResourceId'},
-        'static_ip_configuration': {'key': 'properties.staticIpConfiguration', 'type': '[SimStaticIpProperties]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "sim_state": {"key": "properties.simState", "type": "str"},
+        "international_mobile_subscriber_identity": {
+            "key": "properties.internationalMobileSubscriberIdentity",
+            "type": "str",
+        },
+        "integrated_circuit_card_identifier": {"key": "properties.integratedCircuitCardIdentifier", "type": "str"},
+        "authentication_key": {"key": "properties.authenticationKey", "type": "str"},
+        "operator_key_code": {"key": "properties.operatorKeyCode", "type": "str"},
+        "device_type": {"key": "properties.deviceType", "type": "str"},
+        "sim_policy": {"key": "properties.simPolicy", "type": "SimPolicyResourceId"},
+        "static_ip_configuration": {"key": "properties.staticIpConfiguration", "type": "[SimStaticIpProperties]"},
     }
 
     def __init__(
@@ -2706,8 +2612,8 @@ class Sim(ProxyResource):
         **kwargs
     ):
         """
-        :keyword international_mobile_subscriber_identity: Required. The international mobile
-         subscriber identity (IMSI) for the SIM.
+        :keyword international_mobile_subscriber_identity: The international mobile subscriber identity
+         (IMSI) for the SIM. Required.
         :paramtype international_mobile_subscriber_identity: str
         :keyword integrated_circuit_card_identifier: The integrated circuit card ID (ICCID) for the
          SIM.
@@ -2727,7 +2633,7 @@ class Sim(ProxyResource):
         :paramtype static_ip_configuration:
          list[~azure.mgmt.mobilenetwork.models.SimStaticIpProperties]
         """
-        super(Sim, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.provisioning_state = None
         self.sim_state = None
         self.international_mobile_subscriber_identity = international_mobile_subscriber_identity
@@ -2757,14 +2663,14 @@ class SimGroup(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar identity: The identity used to retrieve the encryption key from Azure key vault.
     :vartype identity: ~azure.mgmt.mobilenetwork.models.ManagedServiceIdentity
     :ivar provisioning_state: The provisioning state of the SIM group resource. Known values are:
-     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
     :ivar encryption_key: A key to encrypt the SIM data that belongs to this SIM group.
     :vartype encryption_key: ~azure.mgmt.mobilenetwork.models.KeyVaultKey
@@ -2773,25 +2679,25 @@ class SimGroup(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'identity': {'key': 'identity', 'type': 'ManagedServiceIdentity'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'encryption_key': {'key': 'properties.encryptionKey', 'type': 'KeyVaultKey'},
-        'mobile_network': {'key': 'properties.mobileNetwork', 'type': 'MobileNetworkResourceId'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "identity": {"key": "identity", "type": "ManagedServiceIdentity"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "encryption_key": {"key": "properties.encryptionKey", "type": "KeyVaultKey"},
+        "mobile_network": {"key": "properties.mobileNetwork", "type": "MobileNetworkResourceId"},
     }
 
     def __init__(
@@ -2805,9 +2711,9 @@ class SimGroup(TrackedResource):
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
         :keyword identity: The identity used to retrieve the encryption key from Azure key vault.
         :paramtype identity: ~azure.mgmt.mobilenetwork.models.ManagedServiceIdentity
@@ -2816,14 +2722,14 @@ class SimGroup(TrackedResource):
         :keyword mobile_network: Mobile network that this SIM belongs to.
         :paramtype mobile_network: ~azure.mgmt.mobilenetwork.models.MobileNetworkResourceId
         """
-        super(SimGroup, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.identity = identity
         self.provisioning_state = None
         self.encryption_key = encryption_key
         self.mobile_network = mobile_network
 
 
-class SimGroupListResult(msrest.serialization.Model):
+class SimGroupListResult(_serialization.Model):
     """Response for list SIM groups API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -2835,61 +2741,54 @@ class SimGroupListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SimGroup]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[SimGroup]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.SimGroup"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.SimGroup"]] = None, **kwargs):
         """
         :keyword value: A list of SIM groups in a resource group.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.SimGroup]
         """
-        super(SimGroupListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class SimGroupResourceId(msrest.serialization.Model):
+class SimGroupResourceId(_serialization.Model):
     """Reference to a SIM group resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. SIM group resource ID.
+    :ivar id: SIM group resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][iI][mM][gG][rR][oO][uU][pP][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][iI][mM][gG][rR][oO][uU][pP][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. SIM group resource ID.
+        :keyword id: SIM group resource ID. Required.
         :paramtype id: str
         """
-        super(SimGroupResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class SimIdListResult(msrest.serialization.Model):
+class SimIdListResult(_serialization.Model):
     """Response for list SIM IDs API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -2901,30 +2800,25 @@ class SimIdListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SubResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[SubResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.SubResource"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.SubResource"]] = None, **kwargs):
         """
         :keyword value: A list of SIM IDs.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.SubResource]
         """
-        super(SimIdListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class SimListResult(msrest.serialization.Model):
+class SimListResult(_serialization.Model):
     """Response for list SIMs API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -2936,30 +2830,25 @@ class SimListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Sim]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Sim]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.Sim"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.Sim"]] = None, **kwargs):
         """
         :keyword value: A list of SIMs in a resource group.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.Sim]
         """
-        super(SimListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class SimPolicy(TrackedResource):
+class SimPolicy(TrackedResource):  # pylint: disable=too-many-instance-attributes
     """SIM policy resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -2977,19 +2866,18 @@ class SimPolicy(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the SIM policy resource. Known values are:
-     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar ue_ambr: Required. Aggregate maximum bit rate across all non-GBR QoS flows of all PDU
-     sessions of a given UE. See 3GPP TS23.501 section 5.7.2.6 for a full description of the
-     UE-AMBR.
+    :ivar ue_ambr: Aggregate maximum bit rate across all non-GBR QoS flows of all PDU sessions of a
+     given UE. See 3GPP TS23.501 section 5.7.2.6 for a full description of the UE-AMBR. Required.
     :vartype ue_ambr: ~azure.mgmt.mobilenetwork.models.Ambr
-    :ivar default_slice: Required. The default slice to use if the UE does not explicitly specify
-     it. This slice must exist in the ``sliceConfigurations`` map.
+    :ivar default_slice: The default slice to use if the UE does not explicitly specify it. This
+     slice must exist in the ``sliceConfigurations`` map. Required.
     :vartype default_slice: ~azure.mgmt.mobilenetwork.models.SliceResourceId
     :ivar rfsp_index: RAT/Frequency Selection Priority Index, defined in 3GPP TS 36.413. This is an
      optional setting and by default is unspecified.
@@ -2997,38 +2885,38 @@ class SimPolicy(TrackedResource):
     :ivar registration_timer: Interval for the UE periodic registration update procedure, in
      seconds.
     :vartype registration_timer: int
-    :ivar slice_configurations: Required. The allowed slices and the settings to use for them. The
-     list must not contain duplicate items and must contain at least one item.
+    :ivar slice_configurations: The allowed slices and the settings to use for them. The list must
+     not contain duplicate items and must contain at least one item. Required.
     :vartype slice_configurations: list[~azure.mgmt.mobilenetwork.models.SliceConfiguration]
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'ue_ambr': {'required': True},
-        'default_slice': {'required': True},
-        'rfsp_index': {'maximum': 256, 'minimum': 1},
-        'registration_timer': {'minimum': 30},
-        'slice_configurations': {'required': True, 'min_items': 1, 'unique': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "ue_ambr": {"required": True},
+        "default_slice": {"required": True},
+        "rfsp_index": {"maximum": 256, "minimum": 1},
+        "registration_timer": {"minimum": 30},
+        "slice_configurations": {"required": True, "min_items": 1, "unique": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'ue_ambr': {'key': 'properties.ueAmbr', 'type': 'Ambr'},
-        'default_slice': {'key': 'properties.defaultSlice', 'type': 'SliceResourceId'},
-        'rfsp_index': {'key': 'properties.rfspIndex', 'type': 'int'},
-        'registration_timer': {'key': 'properties.registrationTimer', 'type': 'int'},
-        'slice_configurations': {'key': 'properties.sliceConfigurations', 'type': '[SliceConfiguration]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "ue_ambr": {"key": "properties.ueAmbr", "type": "Ambr"},
+        "default_slice": {"key": "properties.defaultSlice", "type": "SliceResourceId"},
+        "rfsp_index": {"key": "properties.rfspIndex", "type": "int"},
+        "registration_timer": {"key": "properties.registrationTimer", "type": "int"},
+        "slice_configurations": {"key": "properties.sliceConfigurations", "type": "[SliceConfiguration]"},
     }
 
     def __init__(
@@ -3040,20 +2928,20 @@ class SimPolicy(TrackedResource):
         slice_configurations: List["_models.SliceConfiguration"],
         tags: Optional[Dict[str, str]] = None,
         rfsp_index: Optional[int] = None,
-        registration_timer: Optional[int] = 3240,
+        registration_timer: int = 3240,
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword ue_ambr: Required. Aggregate maximum bit rate across all non-GBR QoS flows of all PDU
-         sessions of a given UE. See 3GPP TS23.501 section 5.7.2.6 for a full description of the
-         UE-AMBR.
+        :keyword ue_ambr: Aggregate maximum bit rate across all non-GBR QoS flows of all PDU sessions
+         of a given UE. See 3GPP TS23.501 section 5.7.2.6 for a full description of the UE-AMBR.
+         Required.
         :paramtype ue_ambr: ~azure.mgmt.mobilenetwork.models.Ambr
-        :keyword default_slice: Required. The default slice to use if the UE does not explicitly
-         specify it. This slice must exist in the ``sliceConfigurations`` map.
+        :keyword default_slice: The default slice to use if the UE does not explicitly specify it. This
+         slice must exist in the ``sliceConfigurations`` map. Required.
         :paramtype default_slice: ~azure.mgmt.mobilenetwork.models.SliceResourceId
         :keyword rfsp_index: RAT/Frequency Selection Priority Index, defined in 3GPP TS 36.413. This is
          an optional setting and by default is unspecified.
@@ -3061,11 +2949,11 @@ class SimPolicy(TrackedResource):
         :keyword registration_timer: Interval for the UE periodic registration update procedure, in
          seconds.
         :paramtype registration_timer: int
-        :keyword slice_configurations: Required. The allowed slices and the settings to use for them.
-         The list must not contain duplicate items and must contain at least one item.
+        :keyword slice_configurations: The allowed slices and the settings to use for them. The list
+         must not contain duplicate items and must contain at least one item. Required.
         :paramtype slice_configurations: list[~azure.mgmt.mobilenetwork.models.SliceConfiguration]
         """
-        super(SimPolicy, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.ue_ambr = ue_ambr
         self.default_slice = default_slice
@@ -3074,7 +2962,7 @@ class SimPolicy(TrackedResource):
         self.slice_configurations = slice_configurations
 
 
-class SimPolicyListResult(msrest.serialization.Model):
+class SimPolicyListResult(_serialization.Model):
     """Response for SIM policies API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3086,61 +2974,54 @@ class SimPolicyListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SimPolicy]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[SimPolicy]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.SimPolicy"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.SimPolicy"]] = None, **kwargs):
         """
         :keyword value: A list of SIM policies.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.SimPolicy]
         """
-        super(SimPolicyListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class SimPolicyResourceId(msrest.serialization.Model):
+class SimPolicyResourceId(_serialization.Model):
     """Reference to a SIM policy resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. SIM policy resource ID.
+    :ivar id: SIM policy resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][iI][mM][pP][oO][lL][iI][cC][iI][eE][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][iI][mM][pP][oO][lL][iI][cC][iI][eE][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. SIM policy resource ID.
+        :keyword id: SIM policy resource ID. Required.
         :paramtype id: str
         """
-        super(SimPolicyResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class SimStaticIpProperties(msrest.serialization.Model):
+class SimStaticIpProperties(_serialization.Model):
     """Static IP configuration for a SIM, scoped to a particular attached data network and slice.
 
     :ivar attached_data_network: The attached data network on which the static IP address will be
@@ -3155,9 +3036,9 @@ class SimStaticIpProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'attached_data_network': {'key': 'attachedDataNetwork', 'type': 'AttachedDataNetworkResourceId'},
-        'slice': {'key': 'slice', 'type': 'SliceResourceId'},
-        'static_ip': {'key': 'staticIp', 'type': 'SimStaticIpPropertiesStaticIp'},
+        "attached_data_network": {"key": "attachedDataNetwork", "type": "AttachedDataNetworkResourceId"},
+        "slice": {"key": "slice", "type": "SliceResourceId"},
+        "static_ip": {"key": "staticIp", "type": "SimStaticIpPropertiesStaticIp"},
     }
 
     def __init__(
@@ -3181,13 +3062,13 @@ class SimStaticIpProperties(msrest.serialization.Model):
          scope.
         :paramtype static_ip: ~azure.mgmt.mobilenetwork.models.SimStaticIpPropertiesStaticIp
         """
-        super(SimStaticIpProperties, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.attached_data_network = attached_data_network
         self.slice = slice
         self.static_ip = static_ip
 
 
-class SimStaticIpPropertiesStaticIp(msrest.serialization.Model):
+class SimStaticIpPropertiesStaticIp(_serialization.Model):
     """The static IP configuration for the SIM to use at the defined network scope.
 
     :ivar ipv4_address: The IPv4 address assigned to the SIM at this network scope. This address
@@ -3196,25 +3077,22 @@ class SimStaticIpPropertiesStaticIp(msrest.serialization.Model):
     """
 
     _validation = {
-        'ipv4_address': {'pattern': r'^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$'},
+        "ipv4_address": {
+            "pattern": r"^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
+        },
     }
 
     _attribute_map = {
-        'ipv4_address': {'key': 'ipv4Address', 'type': 'str'},
+        "ipv4_address": {"key": "ipv4Address", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        ipv4_address: Optional[str] = None,
-        **kwargs
-    ):
+    def __init__(self, *, ipv4_address: Optional[str] = None, **kwargs):
         """
         :keyword ipv4_address: The IPv4 address assigned to the SIM at this network scope. This address
          must be in the userEquipmentStaticAddressPoolPrefix defined in the attached data network.
         :paramtype ipv4_address: str
         """
-        super(SimStaticIpPropertiesStaticIp, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.ipv4_address = ipv4_address
 
 
@@ -3236,12 +3114,12 @@ class Site(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the site resource. Known values are:
-     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
     :ivar network_functions: An array of IDs of the network functions deployed on the site,
      maintained by the user.
@@ -3249,23 +3127,23 @@ class Site(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'network_functions': {'key': 'properties.networkFunctions', 'type': '[SubResource]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "network_functions": {"key": "properties.networkFunctions", "type": "[SubResource]"},
     }
 
     def __init__(
@@ -3277,20 +3155,20 @@ class Site(TrackedResource):
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
         :keyword network_functions: An array of IDs of the network functions deployed on the site,
          maintained by the user.
         :paramtype network_functions: list[~azure.mgmt.mobilenetwork.models.SubResource]
         """
-        super(Site, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.network_functions = network_functions
 
 
-class SiteListResult(msrest.serialization.Model):
+class SiteListResult(_serialization.Model):
     """Response for sites API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3302,25 +3180,20 @@ class SiteListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Site]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Site]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.Site"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.Site"]] = None, **kwargs):
         """
         :keyword value: A list of sites in a mobile network.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.Site]
         """
-        super(SiteListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
@@ -3343,40 +3216,40 @@ class Slice(TrackedResource):
     :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
      information.
     :vartype system_data: ~azure.mgmt.mobilenetwork.models.SystemData
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
-    :ivar location: Required. The geo-location where the resource lives.
+    :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar provisioning_state: The provisioning state of the network slice resource. Known values
-     are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", "Deleted".
+     are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed", "Canceled", and "Deleted".
     :vartype provisioning_state: str or ~azure.mgmt.mobilenetwork.models.ProvisioningState
-    :ivar snssai: Required. Single-network slice selection assistance information (S-NSSAI). Unique
-     at the scope of a mobile network.
+    :ivar snssai: Single-network slice selection assistance information (S-NSSAI). Unique at the
+     scope of a mobile network. Required.
     :vartype snssai: ~azure.mgmt.mobilenetwork.models.Snssai
     :ivar description: An optional description for this network slice.
     :vartype description: str
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'location': {'required': True},
-        'provisioning_state': {'readonly': True},
-        'snssai': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "provisioning_state": {"readonly": True},
+        "snssai": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'snssai': {'key': 'properties.snssai', 'type': 'Snssai'},
-        'description': {'key': 'properties.description', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "snssai": {"key": "properties.snssai", "type": "Snssai"},
+        "description": {"key": "properties.description", "type": "str"},
     }
 
     def __init__(
@@ -3389,49 +3262,49 @@ class Slice(TrackedResource):
         **kwargs
     ):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
-        :keyword location: Required. The geo-location where the resource lives.
+        :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
-        :keyword snssai: Required. Single-network slice selection assistance information (S-NSSAI).
-         Unique at the scope of a mobile network.
+        :keyword snssai: Single-network slice selection assistance information (S-NSSAI). Unique at the
+         scope of a mobile network. Required.
         :paramtype snssai: ~azure.mgmt.mobilenetwork.models.Snssai
         :keyword description: An optional description for this network slice.
         :paramtype description: str
         """
-        super(Slice, self).__init__(tags=tags, location=location, **kwargs)
+        super().__init__(tags=tags, location=location, **kwargs)
         self.provisioning_state = None
         self.snssai = snssai
         self.description = description
 
 
-class SliceConfiguration(msrest.serialization.Model):
+class SliceConfiguration(_serialization.Model):
     """Per-slice settings.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar slice: Required. A reference to the slice that these settings apply to.
+    :ivar slice: A reference to the slice that these settings apply to. Required.
     :vartype slice: ~azure.mgmt.mobilenetwork.models.SliceResourceId
-    :ivar default_data_network: Required. The default data network to use if the UE does not
-     explicitly specify it. Configuration for this object must exist in the
-     ``dataNetworkConfigurations`` map.
+    :ivar default_data_network: The default data network to use if the UE does not explicitly
+     specify it. Configuration for this object must exist in the ``dataNetworkConfigurations`` map.
+     Required.
     :vartype default_data_network: ~azure.mgmt.mobilenetwork.models.DataNetworkResourceId
-    :ivar data_network_configurations: Required. The allowed data networks and the settings to use
-     for them. The list must not contain duplicate items and must contain at least one item.
+    :ivar data_network_configurations: The allowed data networks and the settings to use for them.
+     The list must not contain duplicate items and must contain at least one item. Required.
     :vartype data_network_configurations:
      list[~azure.mgmt.mobilenetwork.models.DataNetworkConfiguration]
     """
 
     _validation = {
-        'slice': {'required': True},
-        'default_data_network': {'required': True},
-        'data_network_configurations': {'required': True, 'min_items': 1, 'unique': True},
+        "slice": {"required": True},
+        "default_data_network": {"required": True},
+        "data_network_configurations": {"required": True, "min_items": 1, "unique": True},
     }
 
     _attribute_map = {
-        'slice': {'key': 'slice', 'type': 'SliceResourceId'},
-        'default_data_network': {'key': 'defaultDataNetwork', 'type': 'DataNetworkResourceId'},
-        'data_network_configurations': {'key': 'dataNetworkConfigurations', 'type': '[DataNetworkConfiguration]'},
+        "slice": {"key": "slice", "type": "SliceResourceId"},
+        "default_data_network": {"key": "defaultDataNetwork", "type": "DataNetworkResourceId"},
+        "data_network_configurations": {"key": "dataNetworkConfigurations", "type": "[DataNetworkConfiguration]"},
     }
 
     def __init__(
@@ -3443,24 +3316,24 @@ class SliceConfiguration(msrest.serialization.Model):
         **kwargs
     ):
         """
-        :keyword slice: Required. A reference to the slice that these settings apply to.
+        :keyword slice: A reference to the slice that these settings apply to. Required.
         :paramtype slice: ~azure.mgmt.mobilenetwork.models.SliceResourceId
-        :keyword default_data_network: Required. The default data network to use if the UE does not
-         explicitly specify it. Configuration for this object must exist in the
-         ``dataNetworkConfigurations`` map.
+        :keyword default_data_network: The default data network to use if the UE does not explicitly
+         specify it. Configuration for this object must exist in the ``dataNetworkConfigurations`` map.
+         Required.
         :paramtype default_data_network: ~azure.mgmt.mobilenetwork.models.DataNetworkResourceId
-        :keyword data_network_configurations: Required. The allowed data networks and the settings to
-         use for them. The list must not contain duplicate items and must contain at least one item.
+        :keyword data_network_configurations: The allowed data networks and the settings to use for
+         them. The list must not contain duplicate items and must contain at least one item. Required.
         :paramtype data_network_configurations:
          list[~azure.mgmt.mobilenetwork.models.DataNetworkConfiguration]
         """
-        super(SliceConfiguration, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.slice = slice
         self.default_data_network = default_data_network
         self.data_network_configurations = data_network_configurations
 
 
-class SliceListResult(msrest.serialization.Model):
+class SliceListResult(_serialization.Model):
     """Response for network slice API service call.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3472,156 +3345,138 @@ class SliceListResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'next_link': {'readonly': True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Slice]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Slice]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        value: Optional[List["_models.Slice"]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, value: Optional[List["_models.Slice"]] = None, **kwargs):
         """
         :keyword value: A list of network slices in a mobile network.
         :paramtype value: list[~azure.mgmt.mobilenetwork.models.Slice]
         """
-        super(SliceListResult, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.value = value
         self.next_link = None
 
 
-class SliceResourceId(msrest.serialization.Model):
+class SliceResourceId(_serialization.Model):
     """Reference to a slice resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Slice resource ID.
+    :ivar id: Slice resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True, 'pattern': r'^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][lL][iI][cC][eE][sS]/[^/?#]+$'},
+        "id": {
+            "required": True,
+            "pattern": r"^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[sS][lL][iI][cC][eE][sS]/[^/?#]+$",
+        },
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Slice resource ID.
+        :keyword id: Slice resource ID. Required.
         :paramtype id: str
         """
-        super(SliceResourceId, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class Snssai(msrest.serialization.Model):
+class Snssai(_serialization.Model):
     """Single-network slice selection assistance information (S-NSSAI).
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar sst: Required. Slice/service type (SST).
+    :ivar sst: Slice/service type (SST). Required.
     :vartype sst: int
     :ivar sd: Slice differentiator (SD).
     :vartype sd: str
     """
 
     _validation = {
-        'sst': {'required': True, 'maximum': 255, 'minimum': 0},
-        'sd': {'pattern': r'^[A-Fa-f0-9]{6}$'},
+        "sst": {"required": True, "maximum": 255, "minimum": 0},
+        "sd": {"pattern": r"^[A-Fa-f0-9]{6}$"},
     }
 
     _attribute_map = {
-        'sst': {'key': 'sst', 'type': 'int'},
-        'sd': {'key': 'sd', 'type': 'str'},
+        "sst": {"key": "sst", "type": "int"},
+        "sd": {"key": "sd", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        sst: int,
-        sd: Optional[str] = None,
-        **kwargs
-    ):
+    def __init__(self, *, sst: int, sd: Optional[str] = None, **kwargs):
         """
-        :keyword sst: Required. Slice/service type (SST).
+        :keyword sst: Slice/service type (SST). Required.
         :paramtype sst: int
         :keyword sd: Slice differentiator (SD).
         :paramtype sd: str
         """
-        super(Snssai, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.sst = sst
         self.sd = sd
 
 
-class SubResource(msrest.serialization.Model):
+class SubResource(_serialization.Model):
     """Reference to another sub resource.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar id: Required. Resource ID.
+    :ivar id: Resource ID. Required.
     :vartype id: str
     """
 
     _validation = {
-        'id': {'required': True},
+        "id": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        id: str,
-        **kwargs
-    ):
+    def __init__(self, *, id: str, **kwargs):  # pylint: disable=redefined-builtin
         """
-        :keyword id: Required. Resource ID.
+        :keyword id: Resource ID. Required.
         :paramtype id: str
         """
-        super(SubResource, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.id = id
 
 
-class SystemData(msrest.serialization.Model):
+class SystemData(_serialization.Model):
     """Metadata pertaining to creation and last modification of the resource.
 
     :ivar created_by: The identity that created the resource.
     :vartype created_by: str
     :ivar created_by_type: The type of identity that created the resource. Known values are:
-     "User", "Application", "ManagedIdentity", "Key".
+     "User", "Application", "ManagedIdentity", and "Key".
     :vartype created_by_type: str or ~azure.mgmt.mobilenetwork.models.CreatedByType
     :ivar created_at: The timestamp of resource creation (UTC).
     :vartype created_at: ~datetime.datetime
     :ivar last_modified_by: The identity that last modified the resource.
     :vartype last_modified_by: str
     :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
-     are: "User", "Application", "ManagedIdentity", "Key".
+     are: "User", "Application", "ManagedIdentity", and "Key".
     :vartype last_modified_by_type: str or ~azure.mgmt.mobilenetwork.models.CreatedByType
     :ivar last_modified_at: The timestamp of resource last modification (UTC).
     :vartype last_modified_at: ~datetime.datetime
     """
 
     _attribute_map = {
-        'created_by': {'key': 'createdBy', 'type': 'str'},
-        'created_by_type': {'key': 'createdByType', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
-        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
-        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
     }
 
     def __init__(
@@ -3639,19 +3494,19 @@ class SystemData(msrest.serialization.Model):
         :keyword created_by: The identity that created the resource.
         :paramtype created_by: str
         :keyword created_by_type: The type of identity that created the resource. Known values are:
-         "User", "Application", "ManagedIdentity", "Key".
+         "User", "Application", "ManagedIdentity", and "Key".
         :paramtype created_by_type: str or ~azure.mgmt.mobilenetwork.models.CreatedByType
         :keyword created_at: The timestamp of resource creation (UTC).
         :paramtype created_at: ~datetime.datetime
         :keyword last_modified_by: The identity that last modified the resource.
         :paramtype last_modified_by: str
         :keyword last_modified_by_type: The type of identity that last modified the resource. Known
-         values are: "User", "Application", "ManagedIdentity", "Key".
+         values are: "User", "Application", "ManagedIdentity", and "Key".
         :paramtype last_modified_by_type: str or ~azure.mgmt.mobilenetwork.models.CreatedByType
         :keyword last_modified_at: The timestamp of resource last modification (UTC).
         :paramtype last_modified_at: ~datetime.datetime
         """
-        super(SystemData, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.created_by = created_by
         self.created_by_type = created_by_type
         self.created_at = created_at
@@ -3660,32 +3515,27 @@ class SystemData(msrest.serialization.Model):
         self.last_modified_at = last_modified_at
 
 
-class TagsObject(msrest.serialization.Model):
+class TagsObject(_serialization.Model):
     """Tags object for patch operations.
 
-    :ivar tags: A set of tags. Resource tags.
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
+        "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        *,
-        tags: Optional[Dict[str, str]] = None,
-        **kwargs
-    ):
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
         """
-        :keyword tags: A set of tags. Resource tags.
+        :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
         """
-        super(TagsObject, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.tags = tags
 
 
-class UserAssignedIdentity(msrest.serialization.Model):
+class UserAssignedIdentity(_serialization.Model):
     """User assigned identity properties.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3697,21 +3547,17 @@ class UserAssignedIdentity(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'client_id': {'readonly': True},
+        "principal_id": {"readonly": True},
+        "client_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'client_id': {'key': 'clientId', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "client_id": {"key": "clientId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
-        """
-        """
-        super(UserAssignedIdentity, self).__init__(**kwargs)
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
         self.principal_id = None
         self.client_id = None
