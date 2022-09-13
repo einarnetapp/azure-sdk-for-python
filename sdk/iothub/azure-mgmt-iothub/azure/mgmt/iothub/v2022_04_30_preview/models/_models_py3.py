@@ -2727,7 +2727,7 @@ class RootCertificateProperties(_serialization.Model):
 
     _attribute_map = {
         "enable_root_certificate_v2": {"key": "enableRootCertificateV2", "type": "bool"},
-        "last_updated_time_utc": {"key": "lastUpdatedTimeUtc", "type": "iso-8601"},
+        "last_updated_time_utc": {"key": "lastUpdatedTimeUtc", "type": "rfc-1123"},
     }
 
     def __init__(self, *, enable_root_certificate_v2: Optional[bool] = None, **kwargs):
