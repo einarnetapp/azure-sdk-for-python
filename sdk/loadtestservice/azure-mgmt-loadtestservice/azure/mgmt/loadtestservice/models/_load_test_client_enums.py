@@ -9,6 +9,7 @@
 from enum import Enum, EnumMeta
 from six import with_metaclass
 
+
 class _CaseInsensitiveEnumMeta(EnumMeta):
     def __getitem__(self, name):
         return super().__getitem__(name.upper())
@@ -27,19 +28,19 @@ class _CaseInsensitiveEnumMeta(EnumMeta):
 
 
 class ActionType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
-    """
+    """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs."""
 
     INTERNAL = "Internal"
 
+
 class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of identity that created the resource.
-    """
+    """The type of identity that created the resource."""
 
     USER = "User"
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
+
 
 class Origin(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     """The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit
@@ -50,18 +51,18 @@ class Origin(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     SYSTEM = "system"
     USER_SYSTEM = "user,system"
 
+
 class ResourceState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """Load Test resources provisioning states.
-    """
+    """Load Test resources provisioning states."""
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
     CANCELED = "Canceled"
     DELETED = "Deleted"
 
+
 class SystemAssignedServiceIdentityType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """Type of managed service identity (either system assigned, or none).
-    """
+    """Type of managed service identity (either system assigned, or none)."""
 
     NONE = "None"
     SYSTEM_ASSIGNED = "SystemAssigned"
