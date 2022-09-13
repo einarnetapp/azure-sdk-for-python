@@ -9,20 +9,151 @@
 from copy import deepcopy
 from typing import Any, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
-
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
 from . import models
 from ._configuration import SqlManagementClientConfiguration
-from .operations import BackupShortTermRetentionPoliciesOperations, CapabilitiesOperations, DataMaskingPoliciesOperations, DataMaskingRulesOperations, DataWarehouseUserActivitiesOperations, DatabaseAdvancedThreatProtectionSettingsOperations, DatabaseAdvisorsOperations, DatabaseAutomaticTuningOperations, DatabaseBlobAuditingPoliciesOperations, DatabaseColumnsOperations, DatabaseExtensionsOperations, DatabaseOperationsOperations, DatabaseRecommendedActionsOperations, DatabaseSchemasOperations, DatabaseSecurityAlertPoliciesOperations, DatabaseTablesOperations, DatabaseUsagesOperations, DatabaseVulnerabilityAssessmentRuleBaselinesOperations, DatabaseVulnerabilityAssessmentScansOperations, DatabaseVulnerabilityAssessmentsOperations, DatabasesOperations, DeletedServersOperations, DistributedAvailabilityGroupsOperations, ElasticPoolActivitiesOperations, ElasticPoolDatabaseActivitiesOperations, ElasticPoolOperationsOperations, ElasticPoolsOperations, EncryptionProtectorsOperations, EndpointCertificatesOperations, ExtendedDatabaseBlobAuditingPoliciesOperations, ExtendedServerBlobAuditingPoliciesOperations, FailoverGroupsOperations, FirewallRulesOperations, GeoBackupPoliciesOperations, IPv6FirewallRulesOperations, InstanceFailoverGroupsOperations, InstancePoolsOperations, JobAgentsOperations, JobCredentialsOperations, JobExecutionsOperations, JobStepExecutionsOperations, JobStepsOperations, JobTargetExecutionsOperations, JobTargetGroupsOperations, JobVersionsOperations, JobsOperations, LedgerDigestUploadsOperations, LongTermRetentionBackupsOperations, LongTermRetentionManagedInstanceBackupsOperations, LongTermRetentionPoliciesOperations, MaintenanceWindowOptionsOperations, MaintenanceWindowsOperations, ManagedBackupShortTermRetentionPoliciesOperations, ManagedDatabaseColumnsOperations, ManagedDatabaseQueriesOperations, ManagedDatabaseRecommendedSensitivityLabelsOperations, ManagedDatabaseRestoreDetailsOperations, ManagedDatabaseSchemasOperations, ManagedDatabaseSecurityAlertPoliciesOperations, ManagedDatabaseSecurityEventsOperations, ManagedDatabaseSensitivityLabelsOperations, ManagedDatabaseTablesOperations, ManagedDatabaseTransparentDataEncryptionOperations, ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations, ManagedDatabaseVulnerabilityAssessmentScansOperations, ManagedDatabaseVulnerabilityAssessmentsOperations, ManagedDatabasesOperations, ManagedInstanceAdministratorsOperations, ManagedInstanceAzureADOnlyAuthenticationsOperations, ManagedInstanceEncryptionProtectorsOperations, ManagedInstanceKeysOperations, ManagedInstanceLongTermRetentionPoliciesOperations, ManagedInstanceOperationsOperations, ManagedInstancePrivateEndpointConnectionsOperations, ManagedInstancePrivateLinkResourcesOperations, ManagedInstanceTdeCertificatesOperations, ManagedInstanceVulnerabilityAssessmentsOperations, ManagedInstancesOperations, ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations, ManagedServerDnsAliasesOperations, ManagedServerSecurityAlertPoliciesOperations, Operations, OutboundFirewallRulesOperations, PrivateEndpointConnectionsOperations, PrivateLinkResourcesOperations, RecommendedSensitivityLabelsOperations, RecoverableDatabasesOperations, RecoverableManagedDatabasesOperations, ReplicationLinksOperations, RestorableDroppedDatabasesOperations, RestorableDroppedManagedDatabasesOperations, RestorePointsOperations, SensitivityLabelsOperations, ServerAdvancedThreatProtectionSettingsOperations, ServerAdvisorsOperations, ServerAutomaticTuningOperations, ServerAzureADAdministratorsOperations, ServerAzureADOnlyAuthenticationsOperations, ServerBlobAuditingPoliciesOperations, ServerCommunicationLinksOperations, ServerConnectionPoliciesOperations, ServerDevOpsAuditSettingsOperations, ServerDnsAliasesOperations, ServerKeysOperations, ServerOperationsOperations, ServerSecurityAlertPoliciesOperations, ServerTrustCertificatesOperations, ServerTrustGroupsOperations, ServerUsagesOperations, ServerVulnerabilityAssessmentsOperations, ServersOperations, ServiceObjectivesOperations, SqlAgentOperations, SubscriptionUsagesOperations, SyncAgentsOperations, SyncGroupsOperations, SyncMembersOperations, TdeCertificatesOperations, TimeZonesOperations, TransparentDataEncryptionsOperations, UsagesOperations, VirtualClustersOperations, VirtualNetworkRulesOperations, WorkloadClassifiersOperations, WorkloadGroupsOperations
+from ._serialization import Deserializer, Serializer
+from .operations import (
+    BackupShortTermRetentionPoliciesOperations,
+    CapabilitiesOperations,
+    DataMaskingPoliciesOperations,
+    DataMaskingRulesOperations,
+    DataWarehouseUserActivitiesOperations,
+    DatabaseAdvancedThreatProtectionSettingsOperations,
+    DatabaseAdvisorsOperations,
+    DatabaseAutomaticTuningOperations,
+    DatabaseBlobAuditingPoliciesOperations,
+    DatabaseColumnsOperations,
+    DatabaseExtensionsOperations,
+    DatabaseOperationsOperations,
+    DatabaseRecommendedActionsOperations,
+    DatabaseSchemasOperations,
+    DatabaseSecurityAlertPoliciesOperations,
+    DatabaseTablesOperations,
+    DatabaseUsagesOperations,
+    DatabaseVulnerabilityAssessmentRuleBaselinesOperations,
+    DatabaseVulnerabilityAssessmentScansOperations,
+    DatabaseVulnerabilityAssessmentsOperations,
+    DatabasesOperations,
+    DeletedServersOperations,
+    DistributedAvailabilityGroupsOperations,
+    ElasticPoolActivitiesOperations,
+    ElasticPoolDatabaseActivitiesOperations,
+    ElasticPoolOperationsOperations,
+    ElasticPoolsOperations,
+    EncryptionProtectorsOperations,
+    EndpointCertificatesOperations,
+    ExtendedDatabaseBlobAuditingPoliciesOperations,
+    ExtendedServerBlobAuditingPoliciesOperations,
+    FailoverGroupsOperations,
+    FirewallRulesOperations,
+    GeoBackupPoliciesOperations,
+    IPv6FirewallRulesOperations,
+    InstanceFailoverGroupsOperations,
+    InstancePoolsOperations,
+    JobAgentsOperations,
+    JobCredentialsOperations,
+    JobExecutionsOperations,
+    JobStepExecutionsOperations,
+    JobStepsOperations,
+    JobTargetExecutionsOperations,
+    JobTargetGroupsOperations,
+    JobVersionsOperations,
+    JobsOperations,
+    LedgerDigestUploadsOperations,
+    LongTermRetentionBackupsOperations,
+    LongTermRetentionManagedInstanceBackupsOperations,
+    LongTermRetentionPoliciesOperations,
+    MaintenanceWindowOptionsOperations,
+    MaintenanceWindowsOperations,
+    ManagedBackupShortTermRetentionPoliciesOperations,
+    ManagedDatabaseAdvancedThreatProtectionSettingsOperations,
+    ManagedDatabaseColumnsOperations,
+    ManagedDatabaseMoveOperationsOperations,
+    ManagedDatabaseQueriesOperations,
+    ManagedDatabaseRecommendedSensitivityLabelsOperations,
+    ManagedDatabaseRestoreDetailsOperations,
+    ManagedDatabaseSchemasOperations,
+    ManagedDatabaseSecurityAlertPoliciesOperations,
+    ManagedDatabaseSecurityEventsOperations,
+    ManagedDatabaseSensitivityLabelsOperations,
+    ManagedDatabaseTablesOperations,
+    ManagedDatabaseTransparentDataEncryptionOperations,
+    ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations,
+    ManagedDatabaseVulnerabilityAssessmentScansOperations,
+    ManagedDatabaseVulnerabilityAssessmentsOperations,
+    ManagedDatabasesOperations,
+    ManagedInstanceAdministratorsOperations,
+    ManagedInstanceAdvancedThreatProtectionSettingsOperations,
+    ManagedInstanceAzureADOnlyAuthenticationsOperations,
+    ManagedInstanceDtcsOperations,
+    ManagedInstanceEncryptionProtectorsOperations,
+    ManagedInstanceKeysOperations,
+    ManagedInstanceLongTermRetentionPoliciesOperations,
+    ManagedInstanceOperationsOperations,
+    ManagedInstancePrivateEndpointConnectionsOperations,
+    ManagedInstancePrivateLinkResourcesOperations,
+    ManagedInstanceTdeCertificatesOperations,
+    ManagedInstanceVulnerabilityAssessmentsOperations,
+    ManagedInstancesOperations,
+    ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations,
+    ManagedServerDnsAliasesOperations,
+    ManagedServerSecurityAlertPoliciesOperations,
+    Operations,
+    OutboundFirewallRulesOperations,
+    PrivateEndpointConnectionsOperations,
+    PrivateLinkResourcesOperations,
+    RecommendedSensitivityLabelsOperations,
+    RecoverableDatabasesOperations,
+    RecoverableManagedDatabasesOperations,
+    ReplicationLinksOperations,
+    RestorableDroppedDatabasesOperations,
+    RestorableDroppedManagedDatabasesOperations,
+    RestorePointsOperations,
+    SensitivityLabelsOperations,
+    ServerAdvancedThreatProtectionSettingsOperations,
+    ServerAdvisorsOperations,
+    ServerAutomaticTuningOperations,
+    ServerAzureADAdministratorsOperations,
+    ServerAzureADOnlyAuthenticationsOperations,
+    ServerBlobAuditingPoliciesOperations,
+    ServerCommunicationLinksOperations,
+    ServerConnectionPoliciesOperations,
+    ServerDevOpsAuditSettingsOperations,
+    ServerDnsAliasesOperations,
+    ServerKeysOperations,
+    ServerOperationsOperations,
+    ServerSecurityAlertPoliciesOperations,
+    ServerTrustCertificatesOperations,
+    ServerTrustGroupsOperations,
+    ServerUsagesOperations,
+    ServerVulnerabilityAssessmentsOperations,
+    ServersOperations,
+    ServiceObjectivesOperations,
+    SqlAgentOperations,
+    SubscriptionUsagesOperations,
+    SynapseLinkWorkspacesOperations,
+    SyncAgentsOperations,
+    SyncGroupsOperations,
+    SyncMembersOperations,
+    TdeCertificatesOperations,
+    TimeZonesOperations,
+    TransparentDataEncryptionsOperations,
+    UsagesOperations,
+    VirtualClustersOperations,
+    VirtualNetworkRulesOperations,
+    WorkloadClassifiersOperations,
+    WorkloadGroupsOperations,
+)
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
+
+class SqlManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """The Azure SQL Database management API provides a RESTful set of web services that interact with
     Azure SQL Database services to manage your databases. The API enables you to create, retrieve,
     update, and delete databases.
@@ -260,8 +391,6 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
     :vartype tde_certificates: azure.mgmt.sql.operations.TdeCertificatesOperations
     :ivar time_zones: TimeZonesOperations operations
     :vartype time_zones: azure.mgmt.sql.operations.TimeZonesOperations
-    :ivar virtual_clusters: VirtualClustersOperations operations
-    :vartype virtual_clusters: azure.mgmt.sql.operations.VirtualClustersOperations
     :ivar virtual_network_rules: VirtualNetworkRulesOperations operations
     :vartype virtual_network_rules: azure.mgmt.sql.operations.VirtualNetworkRulesOperations
     :ivar workload_classifiers: WorkloadClassifiersOperations operations
@@ -357,9 +486,26 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
     :ivar managed_server_dns_aliases: ManagedServerDnsAliasesOperations operations
     :vartype managed_server_dns_aliases:
      azure.mgmt.sql.operations.ManagedServerDnsAliasesOperations
-    :param credential: Credential needed for the client to connect to Azure.
+    :ivar managed_database_advanced_threat_protection_settings:
+     ManagedDatabaseAdvancedThreatProtectionSettingsOperations operations
+    :vartype managed_database_advanced_threat_protection_settings:
+     azure.mgmt.sql.operations.ManagedDatabaseAdvancedThreatProtectionSettingsOperations
+    :ivar managed_instance_advanced_threat_protection_settings:
+     ManagedInstanceAdvancedThreatProtectionSettingsOperations operations
+    :vartype managed_instance_advanced_threat_protection_settings:
+     azure.mgmt.sql.operations.ManagedInstanceAdvancedThreatProtectionSettingsOperations
+    :ivar managed_database_move_operations: ManagedDatabaseMoveOperationsOperations operations
+    :vartype managed_database_move_operations:
+     azure.mgmt.sql.operations.ManagedDatabaseMoveOperationsOperations
+    :ivar synapse_link_workspaces: SynapseLinkWorkspacesOperations operations
+    :vartype synapse_link_workspaces: azure.mgmt.sql.operations.SynapseLinkWorkspacesOperations
+    :ivar managed_instance_dtcs: ManagedInstanceDtcsOperations operations
+    :vartype managed_instance_dtcs: azure.mgmt.sql.operations.ManagedInstanceDtcsOperations
+    :ivar virtual_clusters: VirtualClustersOperations operations
+    :vartype virtual_clusters: azure.mgmt.sql.operations.VirtualClustersOperations
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The subscription ID that identifies an Azure subscription.
+    :param subscription_id: The subscription ID that identifies an Azure subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
@@ -374,7 +520,9 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = SqlManagementClientConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
+        self._config = SqlManagementClientConfiguration(
+            credential=credential, subscription_id=subscription_id, **kwargs
+        )
         self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
@@ -393,12 +541,8 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.geo_backup_policies = GeoBackupPoliciesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.databases = DatabasesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.elastic_pools = ElasticPoolsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.databases = DatabasesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.elastic_pools = ElasticPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.server_communication_links = ServerCommunicationLinksOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -411,9 +555,7 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.elastic_pool_database_activities = ElasticPoolDatabaseActivitiesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.server_usages = ServerUsagesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.server_usages = ServerUsagesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.database_advisors = DatabaseAdvisorsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -432,9 +574,7 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.database_security_alert_policies = DatabaseSecurityAlertPoliciesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.database_tables = DatabaseTablesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.database_tables = DatabaseTablesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.database_vulnerability_assessment_rule_baselines = DatabaseVulnerabilityAssessmentRuleBaselinesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -447,57 +587,35 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.data_warehouse_user_activities = DataWarehouseUserActivitiesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.deleted_servers = DeletedServersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.deleted_servers = DeletedServersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.elastic_pool_operations = ElasticPoolOperationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.encryption_protectors = EncryptionProtectorsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.failover_groups = FailoverGroupsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.firewall_rules = FirewallRulesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.failover_groups = FailoverGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.firewall_rules = FirewallRulesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.instance_failover_groups = InstanceFailoverGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.instance_pools = InstancePoolsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.job_agents = JobAgentsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.job_credentials = JobCredentialsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.job_executions = JobExecutionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.jobs = JobsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.instance_pools = InstancePoolsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.job_agents = JobAgentsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.job_credentials = JobCredentialsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.job_executions = JobExecutionsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.jobs = JobsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.job_step_executions = JobStepExecutionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.job_steps = JobStepsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.job_steps = JobStepsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.job_target_executions = JobTargetExecutionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.job_target_groups = JobTargetGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.job_versions = JobVersionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.capabilities = CapabilitiesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.job_versions = JobVersionsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.capabilities = CapabilitiesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.long_term_retention_policies = LongTermRetentionPoliciesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -537,8 +655,10 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.managed_database_transparent_data_encryption = ManagedDatabaseTransparentDataEncryptionOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_database_vulnerability_assessment_rule_baselines = ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations(
-            self._client, self._config, self._serialize, self._deserialize
+        self.managed_database_vulnerability_assessment_rule_baselines = (
+            ManagedDatabaseVulnerabilityAssessmentRuleBaselinesOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
         )
         self.managed_database_vulnerability_assessments = ManagedDatabaseVulnerabilityAssessmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -576,15 +696,15 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.managed_instance_vulnerability_assessments = ManagedInstanceVulnerabilityAssessmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_restorable_dropped_database_backup_short_term_retention_policies = ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations(
-            self._client, self._config, self._serialize, self._deserialize
+        self.managed_restorable_dropped_database_backup_short_term_retention_policies = (
+            ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
         )
         self.managed_server_security_alert_policies = ManagedServerSecurityAlertPoliciesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.operations = Operations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -594,12 +714,8 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.recoverable_managed_databases = RecoverableManagedDatabasesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.restore_points = RestorePointsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.server_advisors = ServerAdvisorsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.restore_points = RestorePointsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.server_advisors = ServerAdvisorsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.server_automatic_tuning = ServerAutomaticTuningOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -615,9 +731,7 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.server_dns_aliases = ServerDnsAliasesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.server_keys = ServerKeysOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.server_keys = ServerKeysOperations(self._client, self._config, self._serialize, self._deserialize)
         self.server_operations = ServerOperationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -630,39 +744,24 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.server_vulnerability_assessments = ServerVulnerabilityAssessmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.sql_agent = SqlAgentOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.sql_agent = SqlAgentOperations(self._client, self._config, self._serialize, self._deserialize)
         self.subscription_usages = SubscriptionUsagesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.sync_agents = SyncAgentsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sync_groups = SyncGroupsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sync_members = SyncMembersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.sync_agents = SyncAgentsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.sync_groups = SyncGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.sync_members = SyncMembersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.tde_certificates = TdeCertificatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.time_zones = TimeZonesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.virtual_clusters = VirtualClustersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.time_zones = TimeZonesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.virtual_network_rules = VirtualNetworkRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.workload_classifiers = WorkloadClassifiersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.workload_groups = WorkloadGroupsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.workload_groups = WorkloadGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.transparent_data_encryptions = TransparentDataEncryptionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -675,21 +774,15 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.database_operations = DatabaseOperationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.database_usages = DatabaseUsagesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.database_usages = DatabaseUsagesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.ledger_digest_uploads = LedgerDigestUploadsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.outbound_firewall_rules = OutboundFirewallRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.servers = ServersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.usages = UsagesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.servers = ServersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.long_term_retention_backups = LongTermRetentionBackupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -756,13 +849,30 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         self.managed_server_dns_aliases = ManagedServerDnsAliasesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.managed_database_advanced_threat_protection_settings = (
+            ManagedDatabaseAdvancedThreatProtectionSettingsOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
+        self.managed_instance_advanced_threat_protection_settings = (
+            ManagedInstanceAdvancedThreatProtectionSettingsOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
+        self.managed_database_move_operations = ManagedDatabaseMoveOperationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.synapse_link_workspaces = SynapseLinkWorkspacesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.managed_instance_dtcs = ManagedInstanceDtcsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_clusters = VirtualClustersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
-
-    def _send_request(
-        self,
-        request: HttpRequest,
-        **kwargs: Any
-    ) -> HttpResponse:
+    def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
 
         >>> from azure.core.rest import HttpRequest
@@ -771,7 +881,7 @@ class SqlManagementClient:    # pylint: disable=too-many-instance-attributes
         >>> response = client._send_request(request)
         <HttpResponse: 200 OK>
 
-        For more information on this code flow, see https://aka.ms/azsdk/python/protocol/quickstart
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
 
         :param request: The network request you want to make. Required.
         :type request: ~azure.core.rest.HttpRequest
