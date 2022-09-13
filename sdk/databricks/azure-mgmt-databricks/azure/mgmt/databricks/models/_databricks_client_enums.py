@@ -6,28 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from enum import Enum, EnumMeta
-from six import with_metaclass
+from enum import Enum
+from azure.core import CaseInsensitiveEnumMeta
 
 
-class _CaseInsensitiveEnumMeta(EnumMeta):
-    def __getitem__(self, name):
-        return super().__getitem__(name.upper())
-
-    def __getattr__(cls, name):
-        """Return the enum member matching `name`
-        We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
-        properties for enum members (which live in the class' __dict__) and
-        enum members themselves.
-        """
-        try:
-            return cls._member_map_[name.upper()]
-        except KeyError:
-            raise AttributeError(name)
-
-
-class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource."""
 
     USER = "User"
@@ -36,7 +19,7 @@ class CreatedByType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     KEY = "Key"
 
 
-class CustomParameterType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class CustomParameterType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning status of the workspace."""
 
     BOOL = "Bool"
@@ -44,22 +27,29 @@ class CustomParameterType(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     STRING = "String"
 
 
-class EncryptionKeySource(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault"""
+class EncryptionKeySource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault."""
 
     MICROSOFT_KEYVAULT = "Microsoft.Keyvault"
 
 
-class KeySource(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class IdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The identity type."""
+
+    NONE = "None"
+    SYSTEM_ASSIGNED = "SystemAssigned"
+
+
+class KeySource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The encryption keySource (provider). Possible values (case-insensitive):  Default,
-    Microsoft.Keyvault
+    Microsoft.Keyvault.
     """
 
     DEFAULT = "Default"
     MICROSOFT_KEYVAULT = "Microsoft.Keyvault"
 
 
-class PeeringProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PeeringProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The current provisioning state."""
 
     SUCCEEDED = "Succeeded"
@@ -68,7 +58,7 @@ class PeeringProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enu
     FAILED = "Failed"
 
 
-class PeeringState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PeeringState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the virtual network peering."""
 
     INITIATED = "Initiated"
@@ -76,7 +66,7 @@ class PeeringState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     DISCONNECTED = "Disconnected"
 
 
-class PrivateEndpointConnectionProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The current provisioning state."""
 
     SUCCEEDED = "Succeeded"
@@ -86,8 +76,8 @@ class PrivateEndpointConnectionProvisioningState(with_metaclass(_CaseInsensitive
     FAILED = "Failed"
 
 
-class PrivateLinkServiceConnectionStatus(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """The status of a private endpoint connection"""
+class PrivateLinkServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The status of a private endpoint connection."""
 
     PENDING = "Pending"
     APPROVED = "Approved"
@@ -95,7 +85,7 @@ class PrivateLinkServiceConnectionStatus(with_metaclass(_CaseInsensitiveEnumMeta
     DISCONNECTED = "Disconnected"
 
 
-class ProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning status of the workspace."""
 
     ACCEPTED = "Accepted"
@@ -111,7 +101,7 @@ class ProvisioningState(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     UPDATING = "Updating"
 
 
-class PublicNetworkAccess(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The network access type for accessing workspace. Set value to disabled to access workspace only
     via private link.
     """
@@ -120,7 +110,7 @@ class PublicNetworkAccess(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
     DISABLED = "Disabled"
 
 
-class RequiredNsgRules(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class RequiredNsgRules(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets or sets a value indicating whether data plane (clusters) to control plane communication
     happen over private endpoint. Supported values are 'AllRules' and 'NoAzureDatabricksRules'.
     'NoAzureServiceRules' value is for internal use only.
