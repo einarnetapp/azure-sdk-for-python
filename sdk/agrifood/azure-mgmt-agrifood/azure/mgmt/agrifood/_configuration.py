@@ -19,8 +19,8 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class AgriFoodMgmtClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
-    """Configuration for AgriFoodMgmtClient.
+class AzureAgriFoodRPServiceConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for AzureAgriFoodRPService.
 
     Note that all parameters used to create this instance are saved as instance
     attributes.
@@ -29,14 +29,14 @@ class AgriFoodMgmtClientConfiguration(Configuration):  # pylint: disable=too-man
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2021-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2020-05-12-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
-        super(AgriFoodMgmtClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2021-09-01-preview")  # type: str
+        super(AzureAgriFoodRPServiceConfiguration, self).__init__(**kwargs)
+        api_version = kwargs.pop("api_version", "2020-05-12-preview")  # type: str
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
