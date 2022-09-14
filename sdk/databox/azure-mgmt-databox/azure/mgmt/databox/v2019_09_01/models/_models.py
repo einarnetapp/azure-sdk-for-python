@@ -27,23 +27,20 @@ class AccountCredentialDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'account_name': {'readonly': True},
-        'data_destination_type': {'readonly': True},
-        'account_connection_string': {'readonly': True},
-        'share_credential_details': {'readonly': True},
+        "account_name": {"readonly": True},
+        "data_destination_type": {"readonly": True},
+        "account_connection_string": {"readonly": True},
+        "share_credential_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'account_name': {'key': 'accountName', 'type': 'str'},
-        'data_destination_type': {'key': 'dataDestinationType', 'type': 'str'},
-        'account_connection_string': {'key': 'accountConnectionString', 'type': 'str'},
-        'share_credential_details': {'key': 'shareCredentialDetails', 'type': '[ShareCredentialDetails]'},
+        "account_name": {"key": "accountName", "type": "str"},
+        "data_destination_type": {"key": "dataDestinationType", "type": "str"},
+        "account_connection_string": {"key": "accountConnectionString", "type": "str"},
+        "share_credential_details": {"key": "shareCredentialDetails", "type": "[ShareCredentialDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AccountCredentialDetails, self).__init__(**kwargs)
         self.account_name = None
         self.data_destination_type = None
@@ -71,22 +68,19 @@ class AddressValidationOutput(msrest.serialization.Model):
     """
 
     _validation = {
-        'error': {'readonly': True},
-        'validation_status': {'readonly': True},
-        'alternate_addresses': {'readonly': True},
+        "error": {"readonly": True},
+        "validation_status": {"readonly": True},
+        "alternate_addresses": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'properties.validationType', 'type': 'str'},
-        'error': {'key': 'properties.error', 'type': 'Error'},
-        'validation_status': {'key': 'properties.validationStatus', 'type': 'str'},
-        'alternate_addresses': {'key': 'properties.alternateAddresses', 'type': '[ShippingAddress]'},
+        "validation_type": {"key": "properties.validationType", "type": "str"},
+        "error": {"key": "properties.error", "type": "Error"},
+        "validation_status": {"key": "properties.validationStatus", "type": "str"},
+        "alternate_addresses": {"key": "properties.alternateAddresses", "type": "[ShippingAddress]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddressValidationOutput, self).__init__(**kwargs)
         self.validation_type = None  # type: Optional[str]
         self.error = None
@@ -114,23 +108,27 @@ class ValidationInputResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'error': {'readonly': True},
+        "validation_type": {"required": True},
+        "error": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'Error'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "error": {"key": "error", "type": "Error"},
     }
 
     _subtype_map = {
-        'validation_type': {'ValidateAddress': 'AddressValidationProperties', 'ValidateCreateOrderLimit': 'CreateOrderLimitForSubscriptionValidationResponseProperties', 'ValidateDataDestinationDetails': 'DataDestinationDetailsValidationResponseProperties', 'ValidatePreferences': 'PreferencesValidationResponseProperties', 'ValidateSkuAvailability': 'SkuAvailabilityValidationResponseProperties', 'ValidateSubscriptionIsAllowedToCreateJob': 'SubscriptionIsAllowedToCreateJobValidationResponseProperties'}
+        "validation_type": {
+            "ValidateAddress": "AddressValidationProperties",
+            "ValidateCreateOrderLimit": "CreateOrderLimitForSubscriptionValidationResponseProperties",
+            "ValidateDataDestinationDetails": "DataDestinationDetailsValidationResponseProperties",
+            "ValidatePreferences": "PreferencesValidationResponseProperties",
+            "ValidateSkuAvailability": "SkuAvailabilityValidationResponseProperties",
+            "ValidateSubscriptionIsAllowedToCreateJob": "SubscriptionIsAllowedToCreateJobValidationResponseProperties",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidationInputResponse, self).__init__(**kwargs)
         self.validation_type = None  # type: Optional[str]
         self.error = None
@@ -158,25 +156,22 @@ class AddressValidationProperties(ValidationInputResponse):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'error': {'readonly': True},
-        'validation_status': {'readonly': True},
-        'alternate_addresses': {'readonly': True},
+        "validation_type": {"required": True},
+        "error": {"readonly": True},
+        "validation_status": {"readonly": True},
+        "alternate_addresses": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'Error'},
-        'validation_status': {'key': 'validationStatus', 'type': 'str'},
-        'alternate_addresses': {'key': 'alternateAddresses', 'type': '[ShippingAddress]'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "error": {"key": "error", "type": "Error"},
+        "validation_status": {"key": "validationStatus", "type": "str"},
+        "alternate_addresses": {"key": "alternateAddresses", "type": "[ShippingAddress]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AddressValidationProperties, self).__init__(**kwargs)
-        self.validation_type = 'ValidateAddress'  # type: str
+        self.validation_type = "ValidateAddress"  # type: str
         self.validation_status = None
         self.alternate_addresses = None
 
@@ -193,19 +188,16 @@ class ApplianceNetworkConfiguration(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'mac_address': {'readonly': True},
+        "name": {"readonly": True},
+        "mac_address": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'mac_address': {'key': 'macAddress', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "mac_address": {"key": "macAddress", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ApplianceNetworkConfiguration, self).__init__(**kwargs)
         self.name = None
         self.mac_address = None
@@ -225,21 +217,18 @@ class ArmBaseObject(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'id': {'readonly': True},
-        'type': {'readonly': True},
+        "name": {"readonly": True},
+        "id": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ArmBaseObject, self).__init__(**kwargs)
         self.name = None
         self.id = None
@@ -266,28 +255,25 @@ class AvailableSkuRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'transfer_type': {'required': True, 'constant': True},
-        'country': {'required': True},
-        'location': {'required': True},
+        "transfer_type": {"required": True, "constant": True},
+        "country": {"required": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'transfer_type': {'key': 'transferType', 'type': 'str'},
-        'country': {'key': 'country', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
-        'sku_names': {'key': 'skuNames', 'type': '[str]'},
+        "transfer_type": {"key": "transferType", "type": "str"},
+        "country": {"key": "country", "type": "str"},
+        "location": {"key": "location", "type": "str"},
+        "sku_names": {"key": "skuNames", "type": "[str]"},
     }
 
     transfer_type = "ImportToAzure"
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailableSkuRequest, self).__init__(**kwargs)
-        self.country = kwargs['country']
-        self.location = kwargs['location']
-        self.sku_names = kwargs.get('sku_names', None)
+        self.country = kwargs["country"]
+        self.location = kwargs["location"]
+        self.sku_names = kwargs.get("sku_names", None)
 
 
 class AvailableSkusResult(msrest.serialization.Model):
@@ -302,21 +288,18 @@ class AvailableSkusResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SkuInformation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[SkuInformation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AvailableSkusResult, self).__init__(**kwargs)
         self.value = None
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class CancellationReason(msrest.serialization.Model):
@@ -329,19 +312,16 @@ class CancellationReason(msrest.serialization.Model):
     """
 
     _validation = {
-        'reason': {'required': True},
+        "reason": {"required": True},
     }
 
     _attribute_map = {
-        'reason': {'key': 'reason', 'type': 'str'},
+        "reason": {"key": "reason", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CancellationReason, self).__init__(**kwargs)
-        self.reason = kwargs['reason']
+        self.reason = kwargs["reason"]
 
 
 class CloudError(msrest.serialization.Model):
@@ -360,26 +340,23 @@ class CloudError(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[CloudError]'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[CloudError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudError, self).__init__(**kwargs)
         self.code = None
         self.message = None
-        self.target = kwargs.get('target', None)
-        self.details = kwargs.get('details', None)
+        self.target = kwargs.get("target", None)
+        self.details = kwargs.get("details", None)
 
 
 class ContactDetails(msrest.serialization.Model):
@@ -402,31 +379,28 @@ class ContactDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'contact_name': {'required': True},
-        'phone': {'required': True},
-        'email_list': {'required': True},
+        "contact_name": {"required": True},
+        "phone": {"required": True},
+        "email_list": {"required": True},
     }
 
     _attribute_map = {
-        'contact_name': {'key': 'contactName', 'type': 'str'},
-        'phone': {'key': 'phone', 'type': 'str'},
-        'phone_extension': {'key': 'phoneExtension', 'type': 'str'},
-        'mobile': {'key': 'mobile', 'type': 'str'},
-        'email_list': {'key': 'emailList', 'type': '[str]'},
-        'notification_preference': {'key': 'notificationPreference', 'type': '[NotificationPreference]'},
+        "contact_name": {"key": "contactName", "type": "str"},
+        "phone": {"key": "phone", "type": "str"},
+        "phone_extension": {"key": "phoneExtension", "type": "str"},
+        "mobile": {"key": "mobile", "type": "str"},
+        "email_list": {"key": "emailList", "type": "[str]"},
+        "notification_preference": {"key": "notificationPreference", "type": "[NotificationPreference]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ContactDetails, self).__init__(**kwargs)
-        self.contact_name = kwargs['contact_name']
-        self.phone = kwargs['phone']
-        self.phone_extension = kwargs.get('phone_extension', None)
-        self.mobile = kwargs.get('mobile', None)
-        self.email_list = kwargs['email_list']
-        self.notification_preference = kwargs.get('notification_preference', None)
+        self.contact_name = kwargs["contact_name"]
+        self.phone = kwargs["phone"]
+        self.phone_extension = kwargs.get("phone_extension", None)
+        self.mobile = kwargs.get("mobile", None)
+        self.email_list = kwargs["email_list"]
+        self.notification_preference = kwargs.get("notification_preference", None)
 
 
 class CopyLogDetails(msrest.serialization.Model):
@@ -443,21 +417,22 @@ class CopyLogDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'copy_log_details_type': {'required': True},
+        "copy_log_details_type": {"required": True},
     }
 
     _attribute_map = {
-        'copy_log_details_type': {'key': 'copyLogDetailsType', 'type': 'str'},
+        "copy_log_details_type": {"key": "copyLogDetailsType", "type": "str"},
     }
 
     _subtype_map = {
-        'copy_log_details_type': {'DataBox': 'DataBoxAccountCopyLogDetails', 'DataBoxDisk': 'DataBoxDiskCopyLogDetails', 'DataBoxHeavy': 'DataBoxHeavyAccountCopyLogDetails'}
+        "copy_log_details_type": {
+            "DataBox": "DataBoxAccountCopyLogDetails",
+            "DataBoxDisk": "DataBoxDiskCopyLogDetails",
+            "DataBoxHeavy": "DataBoxHeavyAccountCopyLogDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CopyLogDetails, self).__init__(**kwargs)
         self.copy_log_details_type = None  # type: Optional[str]
 
@@ -496,37 +471,34 @@ class CopyProgress(msrest.serialization.Model):
     """
 
     _validation = {
-        'storage_account_name': {'readonly': True},
-        'data_destination_type': {'readonly': True},
-        'account_id': {'readonly': True},
-        'bytes_sent_to_cloud': {'readonly': True},
-        'total_bytes_to_process': {'readonly': True},
-        'files_processed': {'readonly': True},
-        'total_files_to_process': {'readonly': True},
-        'invalid_files_processed': {'readonly': True},
-        'invalid_file_bytes_uploaded': {'readonly': True},
-        'renamed_container_count': {'readonly': True},
-        'files_errored_out': {'readonly': True},
+        "storage_account_name": {"readonly": True},
+        "data_destination_type": {"readonly": True},
+        "account_id": {"readonly": True},
+        "bytes_sent_to_cloud": {"readonly": True},
+        "total_bytes_to_process": {"readonly": True},
+        "files_processed": {"readonly": True},
+        "total_files_to_process": {"readonly": True},
+        "invalid_files_processed": {"readonly": True},
+        "invalid_file_bytes_uploaded": {"readonly": True},
+        "renamed_container_count": {"readonly": True},
+        "files_errored_out": {"readonly": True},
     }
 
     _attribute_map = {
-        'storage_account_name': {'key': 'storageAccountName', 'type': 'str'},
-        'data_destination_type': {'key': 'dataDestinationType', 'type': 'str'},
-        'account_id': {'key': 'accountId', 'type': 'str'},
-        'bytes_sent_to_cloud': {'key': 'bytesSentToCloud', 'type': 'long'},
-        'total_bytes_to_process': {'key': 'totalBytesToProcess', 'type': 'long'},
-        'files_processed': {'key': 'filesProcessed', 'type': 'long'},
-        'total_files_to_process': {'key': 'totalFilesToProcess', 'type': 'long'},
-        'invalid_files_processed': {'key': 'invalidFilesProcessed', 'type': 'long'},
-        'invalid_file_bytes_uploaded': {'key': 'invalidFileBytesUploaded', 'type': 'long'},
-        'renamed_container_count': {'key': 'renamedContainerCount', 'type': 'long'},
-        'files_errored_out': {'key': 'filesErroredOut', 'type': 'long'},
+        "storage_account_name": {"key": "storageAccountName", "type": "str"},
+        "data_destination_type": {"key": "dataDestinationType", "type": "str"},
+        "account_id": {"key": "accountId", "type": "str"},
+        "bytes_sent_to_cloud": {"key": "bytesSentToCloud", "type": "long"},
+        "total_bytes_to_process": {"key": "totalBytesToProcess", "type": "long"},
+        "files_processed": {"key": "filesProcessed", "type": "long"},
+        "total_files_to_process": {"key": "totalFilesToProcess", "type": "long"},
+        "invalid_files_processed": {"key": "invalidFilesProcessed", "type": "long"},
+        "invalid_file_bytes_uploaded": {"key": "invalidFileBytesUploaded", "type": "long"},
+        "renamed_container_count": {"key": "renamedContainerCount", "type": "long"},
+        "files_errored_out": {"key": "filesErroredOut", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CopyProgress, self).__init__(**kwargs)
         self.storage_account_name = None
         self.data_destination_type = None
@@ -558,25 +530,20 @@ class ValidationRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'individual_request_details': {'required': True},
-        'validation_category': {'required': True},
+        "individual_request_details": {"required": True},
+        "validation_category": {"required": True},
     }
 
     _attribute_map = {
-        'individual_request_details': {'key': 'individualRequestDetails', 'type': '[ValidationInputRequest]'},
-        'validation_category': {'key': 'validationCategory', 'type': 'str'},
+        "individual_request_details": {"key": "individualRequestDetails", "type": "[ValidationInputRequest]"},
+        "validation_category": {"key": "validationCategory", "type": "str"},
     }
 
-    _subtype_map = {
-        'validation_category': {'JobCreationValidation': 'CreateJobValidations'}
-    }
+    _subtype_map = {"validation_category": {"JobCreationValidation": "CreateJobValidations"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidationRequest, self).__init__(**kwargs)
-        self.individual_request_details = kwargs['individual_request_details']
+        self.individual_request_details = kwargs["individual_request_details"]
         self.validation_category = None  # type: Optional[str]
 
 
@@ -594,21 +561,18 @@ class CreateJobValidations(ValidationRequest):
     """
 
     _validation = {
-        'individual_request_details': {'required': True},
-        'validation_category': {'required': True},
+        "individual_request_details": {"required": True},
+        "validation_category": {"required": True},
     }
 
     _attribute_map = {
-        'individual_request_details': {'key': 'individualRequestDetails', 'type': '[ValidationInputRequest]'},
-        'validation_category': {'key': 'validationCategory', 'type': 'str'},
+        "individual_request_details": {"key": "individualRequestDetails", "type": "[ValidationInputRequest]"},
+        "validation_category": {"key": "validationCategory", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateJobValidations, self).__init__(**kwargs)
-        self.validation_category = 'JobCreationValidation'  # type: str
+        self.validation_category = "JobCreationValidation"  # type: str
 
 
 class ValidationInputRequest(msrest.serialization.Model):
@@ -627,21 +591,25 @@ class ValidationInputRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'validation_type': {'required': True},
+        "validation_type": {"required": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
     }
 
     _subtype_map = {
-        'validation_type': {'ValidateAddress': 'ValidateAddress', 'ValidateCreateOrderLimit': 'CreateOrderLimitForSubscriptionValidationRequest', 'ValidateDataDestinationDetails': 'DataDestinationDetailsValidationRequest', 'ValidatePreferences': 'PreferencesValidationRequest', 'ValidateSkuAvailability': 'SkuAvailabilityValidationRequest', 'ValidateSubscriptionIsAllowedToCreateJob': 'SubscriptionIsAllowedToCreateJobValidationRequest'}
+        "validation_type": {
+            "ValidateAddress": "ValidateAddress",
+            "ValidateCreateOrderLimit": "CreateOrderLimitForSubscriptionValidationRequest",
+            "ValidateDataDestinationDetails": "DataDestinationDetailsValidationRequest",
+            "ValidatePreferences": "PreferencesValidationRequest",
+            "ValidateSkuAvailability": "SkuAvailabilityValidationRequest",
+            "ValidateSubscriptionIsAllowedToCreateJob": "SubscriptionIsAllowedToCreateJobValidationRequest",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidationInputRequest, self).__init__(**kwargs)
         self.validation_type = None  # type: Optional[str]
 
@@ -662,22 +630,19 @@ class CreateOrderLimitForSubscriptionValidationRequest(ValidationInputRequest):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'device_type': {'required': True},
+        "validation_type": {"required": True},
+        "device_type": {"required": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'device_type': {'key': 'deviceType', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "device_type": {"key": "deviceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateOrderLimitForSubscriptionValidationRequest, self).__init__(**kwargs)
-        self.validation_type = 'ValidateCreateOrderLimit'  # type: str
-        self.device_type = kwargs['device_type']
+        self.validation_type = "ValidateCreateOrderLimit"  # type: str
+        self.device_type = kwargs["device_type"]
 
 
 class CreateOrderLimitForSubscriptionValidationResponseProperties(ValidationInputResponse):
@@ -700,23 +665,20 @@ class CreateOrderLimitForSubscriptionValidationResponseProperties(ValidationInpu
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'error': {'readonly': True},
-        'status': {'readonly': True},
+        "validation_type": {"required": True},
+        "error": {"readonly": True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'Error'},
-        'status': {'key': 'status', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "error": {"key": "error", "type": "Error"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CreateOrderLimitForSubscriptionValidationResponseProperties, self).__init__(**kwargs)
-        self.validation_type = 'ValidateCreateOrderLimit'  # type: str
+        self.validation_type = "ValidateCreateOrderLimit"  # type: str
         self.status = None
 
 
@@ -737,23 +699,20 @@ class DataBoxAccountCopyLogDetails(CopyLogDetails):
     """
 
     _validation = {
-        'copy_log_details_type': {'required': True},
-        'account_name': {'readonly': True},
-        'copy_log_link': {'readonly': True},
+        "copy_log_details_type": {"required": True},
+        "account_name": {"readonly": True},
+        "copy_log_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'copy_log_details_type': {'key': 'copyLogDetailsType', 'type': 'str'},
-        'account_name': {'key': 'accountName', 'type': 'str'},
-        'copy_log_link': {'key': 'copyLogLink', 'type': 'str'},
+        "copy_log_details_type": {"key": "copyLogDetailsType", "type": "str"},
+        "account_name": {"key": "accountName", "type": "str"},
+        "copy_log_link": {"key": "copyLogLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxAccountCopyLogDetails, self).__init__(**kwargs)
-        self.copy_log_details_type = 'DataBox'  # type: str
+        self.copy_log_details_type = "DataBox"  # type: str
         self.account_name = None
         self.copy_log_link = None
 
@@ -777,25 +736,22 @@ class DataBoxDiskCopyLogDetails(CopyLogDetails):
     """
 
     _validation = {
-        'copy_log_details_type': {'required': True},
-        'disk_serial_number': {'readonly': True},
-        'error_log_link': {'readonly': True},
-        'verbose_log_link': {'readonly': True},
+        "copy_log_details_type": {"required": True},
+        "disk_serial_number": {"readonly": True},
+        "error_log_link": {"readonly": True},
+        "verbose_log_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'copy_log_details_type': {'key': 'copyLogDetailsType', 'type': 'str'},
-        'disk_serial_number': {'key': 'diskSerialNumber', 'type': 'str'},
-        'error_log_link': {'key': 'errorLogLink', 'type': 'str'},
-        'verbose_log_link': {'key': 'verboseLogLink', 'type': 'str'},
+        "copy_log_details_type": {"key": "copyLogDetailsType", "type": "str"},
+        "disk_serial_number": {"key": "diskSerialNumber", "type": "str"},
+        "error_log_link": {"key": "errorLogLink", "type": "str"},
+        "verbose_log_link": {"key": "verboseLogLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxDiskCopyLogDetails, self).__init__(**kwargs)
-        self.copy_log_details_type = 'DataBoxDisk'  # type: str
+        self.copy_log_details_type = "DataBoxDisk"  # type: str
         self.disk_serial_number = None
         self.error_log_link = None
         self.verbose_log_link = None
@@ -819,23 +775,20 @@ class DataBoxDiskCopyProgress(msrest.serialization.Model):
     """
 
     _validation = {
-        'serial_number': {'readonly': True},
-        'bytes_copied': {'readonly': True},
-        'percent_complete': {'readonly': True},
-        'status': {'readonly': True},
+        "serial_number": {"readonly": True},
+        "bytes_copied": {"readonly": True},
+        "percent_complete": {"readonly": True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'serial_number': {'key': 'serialNumber', 'type': 'str'},
-        'bytes_copied': {'key': 'bytesCopied', 'type': 'long'},
-        'percent_complete': {'key': 'percentComplete', 'type': 'int'},
-        'status': {'key': 'status', 'type': 'str'},
+        "serial_number": {"key": "serialNumber", "type": "str"},
+        "bytes_copied": {"key": "bytesCopied", "type": "long"},
+        "percent_complete": {"key": "percentComplete", "type": "int"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxDiskCopyProgress, self).__init__(**kwargs)
         self.serial_number = None
         self.bytes_copied = None
@@ -884,54 +837,55 @@ class JobDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'job_stages': {'readonly': True},
-        'contact_details': {'required': True},
-        'shipping_address': {'required': True},
-        'delivery_package': {'readonly': True},
-        'return_package': {'readonly': True},
-        'destination_account_details': {'required': True},
-        'error_details': {'readonly': True},
-        'job_details_type': {'required': True},
-        'copy_log_details': {'readonly': True},
-        'reverse_shipment_label_sas_key': {'readonly': True},
-        'chain_of_custody_sas_key': {'readonly': True},
+        "job_stages": {"readonly": True},
+        "contact_details": {"required": True},
+        "shipping_address": {"required": True},
+        "delivery_package": {"readonly": True},
+        "return_package": {"readonly": True},
+        "destination_account_details": {"required": True},
+        "error_details": {"readonly": True},
+        "job_details_type": {"required": True},
+        "copy_log_details": {"readonly": True},
+        "reverse_shipment_label_sas_key": {"readonly": True},
+        "chain_of_custody_sas_key": {"readonly": True},
     }
 
     _attribute_map = {
-        'expected_data_size_in_terabytes': {'key': 'expectedDataSizeInTerabytes', 'type': 'int'},
-        'job_stages': {'key': 'jobStages', 'type': '[JobStages]'},
-        'contact_details': {'key': 'contactDetails', 'type': 'ContactDetails'},
-        'shipping_address': {'key': 'shippingAddress', 'type': 'ShippingAddress'},
-        'delivery_package': {'key': 'deliveryPackage', 'type': 'PackageShippingDetails'},
-        'return_package': {'key': 'returnPackage', 'type': 'PackageShippingDetails'},
-        'destination_account_details': {'key': 'destinationAccountDetails', 'type': '[DestinationAccountDetails]'},
-        'error_details': {'key': 'errorDetails', 'type': '[JobErrorDetails]'},
-        'job_details_type': {'key': 'jobDetailsType', 'type': 'str'},
-        'preferences': {'key': 'preferences', 'type': 'Preferences'},
-        'copy_log_details': {'key': 'copyLogDetails', 'type': '[CopyLogDetails]'},
-        'reverse_shipment_label_sas_key': {'key': 'reverseShipmentLabelSasKey', 'type': 'str'},
-        'chain_of_custody_sas_key': {'key': 'chainOfCustodySasKey', 'type': 'str'},
+        "expected_data_size_in_terabytes": {"key": "expectedDataSizeInTerabytes", "type": "int"},
+        "job_stages": {"key": "jobStages", "type": "[JobStages]"},
+        "contact_details": {"key": "contactDetails", "type": "ContactDetails"},
+        "shipping_address": {"key": "shippingAddress", "type": "ShippingAddress"},
+        "delivery_package": {"key": "deliveryPackage", "type": "PackageShippingDetails"},
+        "return_package": {"key": "returnPackage", "type": "PackageShippingDetails"},
+        "destination_account_details": {"key": "destinationAccountDetails", "type": "[DestinationAccountDetails]"},
+        "error_details": {"key": "errorDetails", "type": "[JobErrorDetails]"},
+        "job_details_type": {"key": "jobDetailsType", "type": "str"},
+        "preferences": {"key": "preferences", "type": "Preferences"},
+        "copy_log_details": {"key": "copyLogDetails", "type": "[CopyLogDetails]"},
+        "reverse_shipment_label_sas_key": {"key": "reverseShipmentLabelSasKey", "type": "str"},
+        "chain_of_custody_sas_key": {"key": "chainOfCustodySasKey", "type": "str"},
     }
 
     _subtype_map = {
-        'job_details_type': {'DataBox': 'DataBoxJobDetails', 'DataBoxDisk': 'DataBoxDiskJobDetails', 'DataBoxHeavy': 'DataBoxHeavyJobDetails'}
+        "job_details_type": {
+            "DataBox": "DataBoxJobDetails",
+            "DataBoxDisk": "DataBoxDiskJobDetails",
+            "DataBoxHeavy": "DataBoxHeavyJobDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobDetails, self).__init__(**kwargs)
-        self.expected_data_size_in_terabytes = kwargs.get('expected_data_size_in_terabytes', None)
+        self.expected_data_size_in_terabytes = kwargs.get("expected_data_size_in_terabytes", None)
         self.job_stages = None
-        self.contact_details = kwargs['contact_details']
-        self.shipping_address = kwargs['shipping_address']
+        self.contact_details = kwargs["contact_details"]
+        self.shipping_address = kwargs["shipping_address"]
         self.delivery_package = None
         self.return_package = None
-        self.destination_account_details = kwargs['destination_account_details']
+        self.destination_account_details = kwargs["destination_account_details"]
         self.error_details = None
         self.job_details_type = None  # type: Optional[str]
-        self.preferences = kwargs.get('preferences', None)
+        self.preferences = kwargs.get("preferences", None)
         self.copy_log_details = None
         self.reverse_shipment_label_sas_key = None
         self.chain_of_custody_sas_key = None
@@ -986,51 +940,48 @@ class DataBoxDiskJobDetails(JobDetails):
     """
 
     _validation = {
-        'job_stages': {'readonly': True},
-        'contact_details': {'required': True},
-        'shipping_address': {'required': True},
-        'delivery_package': {'readonly': True},
-        'return_package': {'readonly': True},
-        'destination_account_details': {'required': True},
-        'error_details': {'readonly': True},
-        'job_details_type': {'required': True},
-        'copy_log_details': {'readonly': True},
-        'reverse_shipment_label_sas_key': {'readonly': True},
-        'chain_of_custody_sas_key': {'readonly': True},
-        'copy_progress': {'readonly': True},
-        'disks_and_size_details': {'readonly': True},
+        "job_stages": {"readonly": True},
+        "contact_details": {"required": True},
+        "shipping_address": {"required": True},
+        "delivery_package": {"readonly": True},
+        "return_package": {"readonly": True},
+        "destination_account_details": {"required": True},
+        "error_details": {"readonly": True},
+        "job_details_type": {"required": True},
+        "copy_log_details": {"readonly": True},
+        "reverse_shipment_label_sas_key": {"readonly": True},
+        "chain_of_custody_sas_key": {"readonly": True},
+        "copy_progress": {"readonly": True},
+        "disks_and_size_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'expected_data_size_in_terabytes': {'key': 'expectedDataSizeInTerabytes', 'type': 'int'},
-        'job_stages': {'key': 'jobStages', 'type': '[JobStages]'},
-        'contact_details': {'key': 'contactDetails', 'type': 'ContactDetails'},
-        'shipping_address': {'key': 'shippingAddress', 'type': 'ShippingAddress'},
-        'delivery_package': {'key': 'deliveryPackage', 'type': 'PackageShippingDetails'},
-        'return_package': {'key': 'returnPackage', 'type': 'PackageShippingDetails'},
-        'destination_account_details': {'key': 'destinationAccountDetails', 'type': '[DestinationAccountDetails]'},
-        'error_details': {'key': 'errorDetails', 'type': '[JobErrorDetails]'},
-        'job_details_type': {'key': 'jobDetailsType', 'type': 'str'},
-        'preferences': {'key': 'preferences', 'type': 'Preferences'},
-        'copy_log_details': {'key': 'copyLogDetails', 'type': '[CopyLogDetails]'},
-        'reverse_shipment_label_sas_key': {'key': 'reverseShipmentLabelSasKey', 'type': 'str'},
-        'chain_of_custody_sas_key': {'key': 'chainOfCustodySasKey', 'type': 'str'},
-        'preferred_disks': {'key': 'preferredDisks', 'type': '{int}'},
-        'copy_progress': {'key': 'copyProgress', 'type': '[DataBoxDiskCopyProgress]'},
-        'disks_and_size_details': {'key': 'disksAndSizeDetails', 'type': '{int}'},
-        'passkey': {'key': 'passkey', 'type': 'str'},
+        "expected_data_size_in_terabytes": {"key": "expectedDataSizeInTerabytes", "type": "int"},
+        "job_stages": {"key": "jobStages", "type": "[JobStages]"},
+        "contact_details": {"key": "contactDetails", "type": "ContactDetails"},
+        "shipping_address": {"key": "shippingAddress", "type": "ShippingAddress"},
+        "delivery_package": {"key": "deliveryPackage", "type": "PackageShippingDetails"},
+        "return_package": {"key": "returnPackage", "type": "PackageShippingDetails"},
+        "destination_account_details": {"key": "destinationAccountDetails", "type": "[DestinationAccountDetails]"},
+        "error_details": {"key": "errorDetails", "type": "[JobErrorDetails]"},
+        "job_details_type": {"key": "jobDetailsType", "type": "str"},
+        "preferences": {"key": "preferences", "type": "Preferences"},
+        "copy_log_details": {"key": "copyLogDetails", "type": "[CopyLogDetails]"},
+        "reverse_shipment_label_sas_key": {"key": "reverseShipmentLabelSasKey", "type": "str"},
+        "chain_of_custody_sas_key": {"key": "chainOfCustodySasKey", "type": "str"},
+        "preferred_disks": {"key": "preferredDisks", "type": "{int}"},
+        "copy_progress": {"key": "copyProgress", "type": "[DataBoxDiskCopyProgress]"},
+        "disks_and_size_details": {"key": "disksAndSizeDetails", "type": "{int}"},
+        "passkey": {"key": "passkey", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxDiskJobDetails, self).__init__(**kwargs)
-        self.job_details_type = 'DataBoxDisk'  # type: str
-        self.preferred_disks = kwargs.get('preferred_disks', None)
+        self.job_details_type = "DataBoxDisk"  # type: str
+        self.preferred_disks = kwargs.get("preferred_disks", None)
         self.copy_progress = None
         self.disks_and_size_details = None
-        self.passkey = kwargs.get('passkey', None)
+        self.passkey = kwargs.get("passkey", None)
 
 
 class JobSecrets(msrest.serialization.Model):
@@ -1049,25 +1000,26 @@ class JobSecrets(msrest.serialization.Model):
     """
 
     _validation = {
-        'job_secrets_type': {'required': True},
+        "job_secrets_type": {"required": True},
     }
 
     _attribute_map = {
-        'job_secrets_type': {'key': 'jobSecretsType', 'type': 'str'},
-        'dc_access_security_code': {'key': 'dcAccessSecurityCode', 'type': 'DcAccessSecurityCode'},
+        "job_secrets_type": {"key": "jobSecretsType", "type": "str"},
+        "dc_access_security_code": {"key": "dcAccessSecurityCode", "type": "DcAccessSecurityCode"},
     }
 
     _subtype_map = {
-        'job_secrets_type': {'DataBox': 'DataboxJobSecrets', 'DataBoxDisk': 'DataBoxDiskJobSecrets', 'DataBoxHeavy': 'DataBoxHeavyJobSecrets'}
+        "job_secrets_type": {
+            "DataBox": "DataboxJobSecrets",
+            "DataBoxDisk": "DataBoxDiskJobSecrets",
+            "DataBoxHeavy": "DataBoxHeavyJobSecrets",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobSecrets, self).__init__(**kwargs)
         self.job_secrets_type = None  # type: Optional[str]
-        self.dc_access_security_code = kwargs.get('dc_access_security_code', None)
+        self.dc_access_security_code = kwargs.get("dc_access_security_code", None)
 
 
 class DataBoxDiskJobSecrets(JobSecrets):
@@ -1091,26 +1043,23 @@ class DataBoxDiskJobSecrets(JobSecrets):
     """
 
     _validation = {
-        'job_secrets_type': {'required': True},
-        'disk_secrets': {'readonly': True},
-        'pass_key': {'readonly': True},
-        'is_passkey_user_defined': {'readonly': True},
+        "job_secrets_type": {"required": True},
+        "disk_secrets": {"readonly": True},
+        "pass_key": {"readonly": True},
+        "is_passkey_user_defined": {"readonly": True},
     }
 
     _attribute_map = {
-        'job_secrets_type': {'key': 'jobSecretsType', 'type': 'str'},
-        'dc_access_security_code': {'key': 'dcAccessSecurityCode', 'type': 'DcAccessSecurityCode'},
-        'disk_secrets': {'key': 'diskSecrets', 'type': '[DiskSecret]'},
-        'pass_key': {'key': 'passKey', 'type': 'str'},
-        'is_passkey_user_defined': {'key': 'isPasskeyUserDefined', 'type': 'bool'},
+        "job_secrets_type": {"key": "jobSecretsType", "type": "str"},
+        "dc_access_security_code": {"key": "dcAccessSecurityCode", "type": "DcAccessSecurityCode"},
+        "disk_secrets": {"key": "diskSecrets", "type": "[DiskSecret]"},
+        "pass_key": {"key": "passKey", "type": "str"},
+        "is_passkey_user_defined": {"key": "isPasskeyUserDefined", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxDiskJobSecrets, self).__init__(**kwargs)
-        self.job_secrets_type = 'DataBoxDisk'  # type: str
+        self.job_secrets_type = "DataBoxDisk"  # type: str
         self.disk_secrets = None
         self.pass_key = None
         self.is_passkey_user_defined = None
@@ -1133,23 +1082,20 @@ class DataBoxHeavyAccountCopyLogDetails(CopyLogDetails):
     """
 
     _validation = {
-        'copy_log_details_type': {'required': True},
-        'account_name': {'readonly': True},
-        'copy_log_link': {'readonly': True},
+        "copy_log_details_type": {"required": True},
+        "account_name": {"readonly": True},
+        "copy_log_link": {"readonly": True},
     }
 
     _attribute_map = {
-        'copy_log_details_type': {'key': 'copyLogDetailsType', 'type': 'str'},
-        'account_name': {'key': 'accountName', 'type': 'str'},
-        'copy_log_link': {'key': 'copyLogLink', 'type': '[str]'},
+        "copy_log_details_type": {"key": "copyLogDetailsType", "type": "str"},
+        "account_name": {"key": "accountName", "type": "str"},
+        "copy_log_link": {"key": "copyLogLink", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxHeavyAccountCopyLogDetails, self).__init__(**kwargs)
-        self.copy_log_details_type = 'DataBoxHeavy'  # type: str
+        self.copy_log_details_type = "DataBoxHeavy"  # type: str
         self.account_name = None
         self.copy_log_link = None
 
@@ -1196,46 +1142,43 @@ class DataBoxHeavyJobDetails(JobDetails):
     """
 
     _validation = {
-        'job_stages': {'readonly': True},
-        'contact_details': {'required': True},
-        'shipping_address': {'required': True},
-        'delivery_package': {'readonly': True},
-        'return_package': {'readonly': True},
-        'destination_account_details': {'required': True},
-        'error_details': {'readonly': True},
-        'job_details_type': {'required': True},
-        'copy_log_details': {'readonly': True},
-        'reverse_shipment_label_sas_key': {'readonly': True},
-        'chain_of_custody_sas_key': {'readonly': True},
-        'copy_progress': {'readonly': True},
+        "job_stages": {"readonly": True},
+        "contact_details": {"required": True},
+        "shipping_address": {"required": True},
+        "delivery_package": {"readonly": True},
+        "return_package": {"readonly": True},
+        "destination_account_details": {"required": True},
+        "error_details": {"readonly": True},
+        "job_details_type": {"required": True},
+        "copy_log_details": {"readonly": True},
+        "reverse_shipment_label_sas_key": {"readonly": True},
+        "chain_of_custody_sas_key": {"readonly": True},
+        "copy_progress": {"readonly": True},
     }
 
     _attribute_map = {
-        'expected_data_size_in_terabytes': {'key': 'expectedDataSizeInTerabytes', 'type': 'int'},
-        'job_stages': {'key': 'jobStages', 'type': '[JobStages]'},
-        'contact_details': {'key': 'contactDetails', 'type': 'ContactDetails'},
-        'shipping_address': {'key': 'shippingAddress', 'type': 'ShippingAddress'},
-        'delivery_package': {'key': 'deliveryPackage', 'type': 'PackageShippingDetails'},
-        'return_package': {'key': 'returnPackage', 'type': 'PackageShippingDetails'},
-        'destination_account_details': {'key': 'destinationAccountDetails', 'type': '[DestinationAccountDetails]'},
-        'error_details': {'key': 'errorDetails', 'type': '[JobErrorDetails]'},
-        'job_details_type': {'key': 'jobDetailsType', 'type': 'str'},
-        'preferences': {'key': 'preferences', 'type': 'Preferences'},
-        'copy_log_details': {'key': 'copyLogDetails', 'type': '[CopyLogDetails]'},
-        'reverse_shipment_label_sas_key': {'key': 'reverseShipmentLabelSasKey', 'type': 'str'},
-        'chain_of_custody_sas_key': {'key': 'chainOfCustodySasKey', 'type': 'str'},
-        'copy_progress': {'key': 'copyProgress', 'type': '[CopyProgress]'},
-        'device_password': {'key': 'devicePassword', 'type': 'str'},
+        "expected_data_size_in_terabytes": {"key": "expectedDataSizeInTerabytes", "type": "int"},
+        "job_stages": {"key": "jobStages", "type": "[JobStages]"},
+        "contact_details": {"key": "contactDetails", "type": "ContactDetails"},
+        "shipping_address": {"key": "shippingAddress", "type": "ShippingAddress"},
+        "delivery_package": {"key": "deliveryPackage", "type": "PackageShippingDetails"},
+        "return_package": {"key": "returnPackage", "type": "PackageShippingDetails"},
+        "destination_account_details": {"key": "destinationAccountDetails", "type": "[DestinationAccountDetails]"},
+        "error_details": {"key": "errorDetails", "type": "[JobErrorDetails]"},
+        "job_details_type": {"key": "jobDetailsType", "type": "str"},
+        "preferences": {"key": "preferences", "type": "Preferences"},
+        "copy_log_details": {"key": "copyLogDetails", "type": "[CopyLogDetails]"},
+        "reverse_shipment_label_sas_key": {"key": "reverseShipmentLabelSasKey", "type": "str"},
+        "chain_of_custody_sas_key": {"key": "chainOfCustodySasKey", "type": "str"},
+        "copy_progress": {"key": "copyProgress", "type": "[CopyProgress]"},
+        "device_password": {"key": "devicePassword", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxHeavyJobDetails, self).__init__(**kwargs)
-        self.job_details_type = 'DataBoxHeavy'  # type: str
+        self.job_details_type = "DataBoxHeavy"  # type: str
         self.copy_progress = None
-        self.device_password = kwargs.get('device_password', None)
+        self.device_password = kwargs.get("device_password", None)
 
 
 class DataBoxHeavyJobSecrets(JobSecrets):
@@ -1255,22 +1198,19 @@ class DataBoxHeavyJobSecrets(JobSecrets):
     """
 
     _validation = {
-        'job_secrets_type': {'required': True},
-        'cabinet_pod_secrets': {'readonly': True},
+        "job_secrets_type": {"required": True},
+        "cabinet_pod_secrets": {"readonly": True},
     }
 
     _attribute_map = {
-        'job_secrets_type': {'key': 'jobSecretsType', 'type': 'str'},
-        'dc_access_security_code': {'key': 'dcAccessSecurityCode', 'type': 'DcAccessSecurityCode'},
-        'cabinet_pod_secrets': {'key': 'cabinetPodSecrets', 'type': '[DataBoxHeavySecret]'},
+        "job_secrets_type": {"key": "jobSecretsType", "type": "str"},
+        "dc_access_security_code": {"key": "dcAccessSecurityCode", "type": "DcAccessSecurityCode"},
+        "cabinet_pod_secrets": {"key": "cabinetPodSecrets", "type": "[DataBoxHeavySecret]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxHeavyJobSecrets, self).__init__(**kwargs)
-        self.job_secrets_type = 'DataBoxHeavy'  # type: str
+        self.job_secrets_type = "DataBoxHeavy"  # type: str
         self.cabinet_pod_secrets = None
 
 
@@ -1293,25 +1233,22 @@ class DataBoxHeavySecret(msrest.serialization.Model):
     """
 
     _validation = {
-        'device_serial_number': {'readonly': True},
-        'device_password': {'readonly': True},
-        'network_configurations': {'readonly': True},
-        'encoded_validation_cert_pub_key': {'readonly': True},
-        'account_credential_details': {'readonly': True},
+        "device_serial_number": {"readonly": True},
+        "device_password": {"readonly": True},
+        "network_configurations": {"readonly": True},
+        "encoded_validation_cert_pub_key": {"readonly": True},
+        "account_credential_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'device_serial_number': {'key': 'deviceSerialNumber', 'type': 'str'},
-        'device_password': {'key': 'devicePassword', 'type': 'str'},
-        'network_configurations': {'key': 'networkConfigurations', 'type': '[ApplianceNetworkConfiguration]'},
-        'encoded_validation_cert_pub_key': {'key': 'encodedValidationCertPubKey', 'type': 'str'},
-        'account_credential_details': {'key': 'accountCredentialDetails', 'type': '[AccountCredentialDetails]'},
+        "device_serial_number": {"key": "deviceSerialNumber", "type": "str"},
+        "device_password": {"key": "devicePassword", "type": "str"},
+        "network_configurations": {"key": "networkConfigurations", "type": "[ApplianceNetworkConfiguration]"},
+        "encoded_validation_cert_pub_key": {"key": "encodedValidationCertPubKey", "type": "str"},
+        "account_credential_details": {"key": "accountCredentialDetails", "type": "[AccountCredentialDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxHeavySecret, self).__init__(**kwargs)
         self.device_serial_number = None
         self.device_password = None
@@ -1362,46 +1299,43 @@ class DataBoxJobDetails(JobDetails):
     """
 
     _validation = {
-        'job_stages': {'readonly': True},
-        'contact_details': {'required': True},
-        'shipping_address': {'required': True},
-        'delivery_package': {'readonly': True},
-        'return_package': {'readonly': True},
-        'destination_account_details': {'required': True},
-        'error_details': {'readonly': True},
-        'job_details_type': {'required': True},
-        'copy_log_details': {'readonly': True},
-        'reverse_shipment_label_sas_key': {'readonly': True},
-        'chain_of_custody_sas_key': {'readonly': True},
-        'copy_progress': {'readonly': True},
+        "job_stages": {"readonly": True},
+        "contact_details": {"required": True},
+        "shipping_address": {"required": True},
+        "delivery_package": {"readonly": True},
+        "return_package": {"readonly": True},
+        "destination_account_details": {"required": True},
+        "error_details": {"readonly": True},
+        "job_details_type": {"required": True},
+        "copy_log_details": {"readonly": True},
+        "reverse_shipment_label_sas_key": {"readonly": True},
+        "chain_of_custody_sas_key": {"readonly": True},
+        "copy_progress": {"readonly": True},
     }
 
     _attribute_map = {
-        'expected_data_size_in_terabytes': {'key': 'expectedDataSizeInTerabytes', 'type': 'int'},
-        'job_stages': {'key': 'jobStages', 'type': '[JobStages]'},
-        'contact_details': {'key': 'contactDetails', 'type': 'ContactDetails'},
-        'shipping_address': {'key': 'shippingAddress', 'type': 'ShippingAddress'},
-        'delivery_package': {'key': 'deliveryPackage', 'type': 'PackageShippingDetails'},
-        'return_package': {'key': 'returnPackage', 'type': 'PackageShippingDetails'},
-        'destination_account_details': {'key': 'destinationAccountDetails', 'type': '[DestinationAccountDetails]'},
-        'error_details': {'key': 'errorDetails', 'type': '[JobErrorDetails]'},
-        'job_details_type': {'key': 'jobDetailsType', 'type': 'str'},
-        'preferences': {'key': 'preferences', 'type': 'Preferences'},
-        'copy_log_details': {'key': 'copyLogDetails', 'type': '[CopyLogDetails]'},
-        'reverse_shipment_label_sas_key': {'key': 'reverseShipmentLabelSasKey', 'type': 'str'},
-        'chain_of_custody_sas_key': {'key': 'chainOfCustodySasKey', 'type': 'str'},
-        'copy_progress': {'key': 'copyProgress', 'type': '[CopyProgress]'},
-        'device_password': {'key': 'devicePassword', 'type': 'str'},
+        "expected_data_size_in_terabytes": {"key": "expectedDataSizeInTerabytes", "type": "int"},
+        "job_stages": {"key": "jobStages", "type": "[JobStages]"},
+        "contact_details": {"key": "contactDetails", "type": "ContactDetails"},
+        "shipping_address": {"key": "shippingAddress", "type": "ShippingAddress"},
+        "delivery_package": {"key": "deliveryPackage", "type": "PackageShippingDetails"},
+        "return_package": {"key": "returnPackage", "type": "PackageShippingDetails"},
+        "destination_account_details": {"key": "destinationAccountDetails", "type": "[DestinationAccountDetails]"},
+        "error_details": {"key": "errorDetails", "type": "[JobErrorDetails]"},
+        "job_details_type": {"key": "jobDetailsType", "type": "str"},
+        "preferences": {"key": "preferences", "type": "Preferences"},
+        "copy_log_details": {"key": "copyLogDetails", "type": "[CopyLogDetails]"},
+        "reverse_shipment_label_sas_key": {"key": "reverseShipmentLabelSasKey", "type": "str"},
+        "chain_of_custody_sas_key": {"key": "chainOfCustodySasKey", "type": "str"},
+        "copy_progress": {"key": "copyProgress", "type": "[CopyProgress]"},
+        "device_password": {"key": "devicePassword", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxJobDetails, self).__init__(**kwargs)
-        self.job_details_type = 'DataBox'  # type: str
+        self.job_details_type = "DataBox"  # type: str
         self.copy_progress = None
-        self.device_password = kwargs.get('device_password', None)
+        self.device_password = kwargs.get("device_password", None)
 
 
 class DataboxJobSecrets(JobSecrets):
@@ -1419,22 +1353,19 @@ class DataboxJobSecrets(JobSecrets):
     """
 
     _validation = {
-        'job_secrets_type': {'required': True},
+        "job_secrets_type": {"required": True},
     }
 
     _attribute_map = {
-        'job_secrets_type': {'key': 'jobSecretsType', 'type': 'str'},
-        'dc_access_security_code': {'key': 'dcAccessSecurityCode', 'type': 'DcAccessSecurityCode'},
-        'pod_secrets': {'key': 'podSecrets', 'type': '[DataBoxSecret]'},
+        "job_secrets_type": {"key": "jobSecretsType", "type": "str"},
+        "dc_access_security_code": {"key": "dcAccessSecurityCode", "type": "DcAccessSecurityCode"},
+        "pod_secrets": {"key": "podSecrets", "type": "[DataBoxSecret]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataboxJobSecrets, self).__init__(**kwargs)
-        self.job_secrets_type = 'DataBox'  # type: str
-        self.pod_secrets = kwargs.get('pod_secrets', None)
+        self.job_secrets_type = "DataBox"  # type: str
+        self.pod_secrets = kwargs.get("pod_secrets", None)
 
 
 class ScheduleAvailabilityRequest(msrest.serialization.Model):
@@ -1455,25 +1386,26 @@ class ScheduleAvailabilityRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'storage_location': {'required': True},
-        'sku_name': {'required': True},
+        "storage_location": {"required": True},
+        "sku_name": {"required": True},
     }
 
     _attribute_map = {
-        'storage_location': {'key': 'storageLocation', 'type': 'str'},
-        'sku_name': {'key': 'skuName', 'type': 'str'},
+        "storage_location": {"key": "storageLocation", "type": "str"},
+        "sku_name": {"key": "skuName", "type": "str"},
     }
 
     _subtype_map = {
-        'sku_name': {'DataBox': 'DataBoxScheduleAvailabilityRequest', 'DataBoxDisk': 'DiskScheduleAvailabilityRequest', 'DataBoxHeavy': 'HeavyScheduleAvailabilityRequest'}
+        "sku_name": {
+            "DataBox": "DataBoxScheduleAvailabilityRequest",
+            "DataBoxDisk": "DiskScheduleAvailabilityRequest",
+            "DataBoxHeavy": "HeavyScheduleAvailabilityRequest",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleAvailabilityRequest, self).__init__(**kwargs)
-        self.storage_location = kwargs['storage_location']
+        self.storage_location = kwargs["storage_location"]
         self.sku_name = None  # type: Optional[str]
 
 
@@ -1492,21 +1424,18 @@ class DataBoxScheduleAvailabilityRequest(ScheduleAvailabilityRequest):
     """
 
     _validation = {
-        'storage_location': {'required': True},
-        'sku_name': {'required': True},
+        "storage_location": {"required": True},
+        "sku_name": {"required": True},
     }
 
     _attribute_map = {
-        'storage_location': {'key': 'storageLocation', 'type': 'str'},
-        'sku_name': {'key': 'skuName', 'type': 'str'},
+        "storage_location": {"key": "storageLocation", "type": "str"},
+        "sku_name": {"key": "skuName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxScheduleAvailabilityRequest, self).__init__(**kwargs)
-        self.sku_name = 'DataBox'  # type: str
+        self.sku_name = "DataBox"  # type: str
 
 
 class DataBoxSecret(msrest.serialization.Model):
@@ -1528,25 +1457,22 @@ class DataBoxSecret(msrest.serialization.Model):
     """
 
     _validation = {
-        'device_serial_number': {'readonly': True},
-        'device_password': {'readonly': True},
-        'network_configurations': {'readonly': True},
-        'encoded_validation_cert_pub_key': {'readonly': True},
-        'account_credential_details': {'readonly': True},
+        "device_serial_number": {"readonly": True},
+        "device_password": {"readonly": True},
+        "network_configurations": {"readonly": True},
+        "encoded_validation_cert_pub_key": {"readonly": True},
+        "account_credential_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'device_serial_number': {'key': 'deviceSerialNumber', 'type': 'str'},
-        'device_password': {'key': 'devicePassword', 'type': 'str'},
-        'network_configurations': {'key': 'networkConfigurations', 'type': '[ApplianceNetworkConfiguration]'},
-        'encoded_validation_cert_pub_key': {'key': 'encodedValidationCertPubKey', 'type': 'str'},
-        'account_credential_details': {'key': 'accountCredentialDetails', 'type': '[AccountCredentialDetails]'},
+        "device_serial_number": {"key": "deviceSerialNumber", "type": "str"},
+        "device_password": {"key": "devicePassword", "type": "str"},
+        "network_configurations": {"key": "networkConfigurations", "type": "[ApplianceNetworkConfiguration]"},
+        "encoded_validation_cert_pub_key": {"key": "encodedValidationCertPubKey", "type": "str"},
+        "account_credential_details": {"key": "accountCredentialDetails", "type": "[AccountCredentialDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataBoxSecret, self).__init__(**kwargs)
         self.device_serial_number = None
         self.device_password = None
@@ -1572,25 +1498,22 @@ class DataDestinationDetailsValidationRequest(ValidationInputRequest):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'destination_account_details': {'required': True},
-        'location': {'required': True},
+        "validation_type": {"required": True},
+        "destination_account_details": {"required": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'destination_account_details': {'key': 'destinationAccountDetails', 'type': '[DestinationAccountDetails]'},
-        'location': {'key': 'location', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "destination_account_details": {"key": "destinationAccountDetails", "type": "[DestinationAccountDetails]"},
+        "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataDestinationDetailsValidationRequest, self).__init__(**kwargs)
-        self.validation_type = 'ValidateDataDestinationDetails'  # type: str
-        self.destination_account_details = kwargs['destination_account_details']
-        self.location = kwargs['location']
+        self.validation_type = "ValidateDataDestinationDetails"  # type: str
+        self.destination_account_details = kwargs["destination_account_details"]
+        self.location = kwargs["location"]
 
 
 class DataDestinationDetailsValidationResponseProperties(ValidationInputResponse):
@@ -1613,23 +1536,20 @@ class DataDestinationDetailsValidationResponseProperties(ValidationInputResponse
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'error': {'readonly': True},
-        'status': {'readonly': True},
+        "validation_type": {"required": True},
+        "error": {"readonly": True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'Error'},
-        'status': {'key': 'status', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "error": {"key": "error", "type": "Error"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataDestinationDetailsValidationResponseProperties, self).__init__(**kwargs)
-        self.validation_type = 'ValidateDataDestinationDetails'  # type: str
+        self.validation_type = "ValidateDataDestinationDetails"  # type: str
         self.status = None
 
 
@@ -1643,17 +1563,14 @@ class DcAccessSecurityCode(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'forward_dc_access_code': {'key': 'forwardDcAccessCode', 'type': 'str'},
-        'reverse_dc_access_code': {'key': 'reverseDcAccessCode', 'type': 'str'},
+        "forward_dc_access_code": {"key": "forwardDcAccessCode", "type": "str"},
+        "reverse_dc_access_code": {"key": "reverseDcAccessCode", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DcAccessSecurityCode, self).__init__(**kwargs)
-        self.forward_dc_access_code = kwargs.get('forward_dc_access_code', None)
-        self.reverse_dc_access_code = kwargs.get('reverse_dc_access_code', None)
+        self.forward_dc_access_code = kwargs.get("forward_dc_access_code", None)
+        self.reverse_dc_access_code = kwargs.get("reverse_dc_access_code", None)
 
 
 class DestinationAccountDetails(msrest.serialization.Model):
@@ -1674,27 +1591,27 @@ class DestinationAccountDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'data_destination_type': {'required': True},
+        "data_destination_type": {"required": True},
     }
 
     _attribute_map = {
-        'data_destination_type': {'key': 'dataDestinationType', 'type': 'str'},
-        'account_id': {'key': 'accountId', 'type': 'str'},
-        'share_password': {'key': 'sharePassword', 'type': 'str'},
+        "data_destination_type": {"key": "dataDestinationType", "type": "str"},
+        "account_id": {"key": "accountId", "type": "str"},
+        "share_password": {"key": "sharePassword", "type": "str"},
     }
 
     _subtype_map = {
-        'data_destination_type': {'ManagedDisk': 'DestinationManagedDiskDetails', 'StorageAccount': 'DestinationStorageAccountDetails'}
+        "data_destination_type": {
+            "ManagedDisk": "DestinationManagedDiskDetails",
+            "StorageAccount": "DestinationStorageAccountDetails",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DestinationAccountDetails, self).__init__(**kwargs)
         self.data_destination_type = None  # type: Optional[str]
-        self.account_id = kwargs.get('account_id', None)
-        self.share_password = kwargs.get('share_password', None)
+        self.account_id = kwargs.get("account_id", None)
+        self.share_password = kwargs.get("share_password", None)
 
 
 class DestinationManagedDiskDetails(DestinationAccountDetails):
@@ -1718,27 +1635,24 @@ class DestinationManagedDiskDetails(DestinationAccountDetails):
     """
 
     _validation = {
-        'data_destination_type': {'required': True},
-        'resource_group_id': {'required': True},
-        'staging_storage_account_id': {'required': True},
+        "data_destination_type": {"required": True},
+        "resource_group_id": {"required": True},
+        "staging_storage_account_id": {"required": True},
     }
 
     _attribute_map = {
-        'data_destination_type': {'key': 'dataDestinationType', 'type': 'str'},
-        'account_id': {'key': 'accountId', 'type': 'str'},
-        'share_password': {'key': 'sharePassword', 'type': 'str'},
-        'resource_group_id': {'key': 'resourceGroupId', 'type': 'str'},
-        'staging_storage_account_id': {'key': 'stagingStorageAccountId', 'type': 'str'},
+        "data_destination_type": {"key": "dataDestinationType", "type": "str"},
+        "account_id": {"key": "accountId", "type": "str"},
+        "share_password": {"key": "sharePassword", "type": "str"},
+        "resource_group_id": {"key": "resourceGroupId", "type": "str"},
+        "staging_storage_account_id": {"key": "stagingStorageAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DestinationManagedDiskDetails, self).__init__(**kwargs)
-        self.data_destination_type = 'ManagedDisk'  # type: str
-        self.resource_group_id = kwargs['resource_group_id']
-        self.staging_storage_account_id = kwargs['staging_storage_account_id']
+        self.data_destination_type = "ManagedDisk"  # type: str
+        self.resource_group_id = kwargs["resource_group_id"]
+        self.staging_storage_account_id = kwargs["staging_storage_account_id"]
 
 
 class DestinationStorageAccountDetails(DestinationAccountDetails):
@@ -1758,24 +1672,21 @@ class DestinationStorageAccountDetails(DestinationAccountDetails):
     """
 
     _validation = {
-        'data_destination_type': {'required': True},
-        'storage_account_id': {'required': True},
+        "data_destination_type": {"required": True},
+        "storage_account_id": {"required": True},
     }
 
     _attribute_map = {
-        'data_destination_type': {'key': 'dataDestinationType', 'type': 'str'},
-        'account_id': {'key': 'accountId', 'type': 'str'},
-        'share_password': {'key': 'sharePassword', 'type': 'str'},
-        'storage_account_id': {'key': 'storageAccountId', 'type': 'str'},
+        "data_destination_type": {"key": "dataDestinationType", "type": "str"},
+        "account_id": {"key": "accountId", "type": "str"},
+        "share_password": {"key": "sharePassword", "type": "str"},
+        "storage_account_id": {"key": "storageAccountId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DestinationStorageAccountDetails, self).__init__(**kwargs)
-        self.data_destination_type = 'StorageAccount'  # type: str
-        self.storage_account_id = kwargs['storage_account_id']
+        self.data_destination_type = "StorageAccount"  # type: str
+        self.storage_account_id = kwargs["storage_account_id"]
 
 
 class DestinationToServiceLocationMap(msrest.serialization.Model):
@@ -1790,19 +1701,16 @@ class DestinationToServiceLocationMap(msrest.serialization.Model):
     """
 
     _validation = {
-        'destination_location': {'readonly': True},
-        'service_location': {'readonly': True},
+        "destination_location": {"readonly": True},
+        "service_location": {"readonly": True},
     }
 
     _attribute_map = {
-        'destination_location': {'key': 'destinationLocation', 'type': 'str'},
-        'service_location': {'key': 'serviceLocation', 'type': 'str'},
+        "destination_location": {"key": "destinationLocation", "type": "str"},
+        "service_location": {"key": "serviceLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DestinationToServiceLocationMap, self).__init__(**kwargs)
         self.destination_location = None
         self.service_location = None
@@ -1826,24 +1734,21 @@ class DiskScheduleAvailabilityRequest(ScheduleAvailabilityRequest):
     """
 
     _validation = {
-        'storage_location': {'required': True},
-        'sku_name': {'required': True},
-        'expected_data_size_in_terabytes': {'required': True},
+        "storage_location": {"required": True},
+        "sku_name": {"required": True},
+        "expected_data_size_in_terabytes": {"required": True},
     }
 
     _attribute_map = {
-        'storage_location': {'key': 'storageLocation', 'type': 'str'},
-        'sku_name': {'key': 'skuName', 'type': 'str'},
-        'expected_data_size_in_terabytes': {'key': 'expectedDataSizeInTerabytes', 'type': 'int'},
+        "storage_location": {"key": "storageLocation", "type": "str"},
+        "sku_name": {"key": "skuName", "type": "str"},
+        "expected_data_size_in_terabytes": {"key": "expectedDataSizeInTerabytes", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskScheduleAvailabilityRequest, self).__init__(**kwargs)
-        self.sku_name = 'DataBoxDisk'  # type: str
-        self.expected_data_size_in_terabytes = kwargs['expected_data_size_in_terabytes']
+        self.sku_name = "DataBoxDisk"  # type: str
+        self.expected_data_size_in_terabytes = kwargs["expected_data_size_in_terabytes"]
 
 
 class DiskSecret(msrest.serialization.Model):
@@ -1859,19 +1764,16 @@ class DiskSecret(msrest.serialization.Model):
     """
 
     _validation = {
-        'disk_serial_number': {'readonly': True},
-        'bit_locker_key': {'readonly': True},
+        "disk_serial_number": {"readonly": True},
+        "bit_locker_key": {"readonly": True},
     }
 
     _attribute_map = {
-        'disk_serial_number': {'key': 'diskSerialNumber', 'type': 'str'},
-        'bit_locker_key': {'key': 'bitLockerKey', 'type': 'str'},
+        "disk_serial_number": {"key": "diskSerialNumber", "type": "str"},
+        "bit_locker_key": {"key": "bitLockerKey", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DiskSecret, self).__init__(**kwargs)
         self.disk_serial_number = None
         self.bit_locker_key = None
@@ -1889,19 +1791,16 @@ class Error(msrest.serialization.Model):
     """
 
     _validation = {
-        'code': {'readonly': True},
-        'message': {'readonly': True},
+        "code": {"readonly": True},
+        "message": {"readonly": True},
     }
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Error, self).__init__(**kwargs)
         self.code = None
         self.message = None
@@ -1922,21 +1821,18 @@ class HeavyScheduleAvailabilityRequest(ScheduleAvailabilityRequest):
     """
 
     _validation = {
-        'storage_location': {'required': True},
-        'sku_name': {'required': True},
+        "storage_location": {"required": True},
+        "sku_name": {"required": True},
     }
 
     _attribute_map = {
-        'storage_location': {'key': 'storageLocation', 'type': 'str'},
-        'sku_name': {'key': 'skuName', 'type': 'str'},
+        "storage_location": {"key": "storageLocation", "type": "str"},
+        "sku_name": {"key": "skuName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(HeavyScheduleAvailabilityRequest, self).__init__(**kwargs)
-        self.sku_name = 'DataBoxHeavy'  # type: str
+        self.sku_name = "DataBoxHeavy"  # type: str
 
 
 class JobDeliveryInfo(msrest.serialization.Model):
@@ -1947,15 +1843,12 @@ class JobDeliveryInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'scheduled_date_time': {'key': 'scheduledDateTime', 'type': 'iso-8601'},
+        "scheduled_date_time": {"key": "scheduledDateTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobDeliveryInfo, self).__init__(**kwargs)
-        self.scheduled_date_time = kwargs.get('scheduled_date_time', None)
+        self.scheduled_date_time = kwargs.get("scheduled_date_time", None)
 
 
 class JobErrorDetails(msrest.serialization.Model):
@@ -1974,23 +1867,20 @@ class JobErrorDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'error_message': {'readonly': True},
-        'error_code': {'readonly': True},
-        'recommended_action': {'readonly': True},
-        'exception_message': {'readonly': True},
+        "error_message": {"readonly": True},
+        "error_code": {"readonly": True},
+        "recommended_action": {"readonly": True},
+        "exception_message": {"readonly": True},
     }
 
     _attribute_map = {
-        'error_message': {'key': 'errorMessage', 'type': 'str'},
-        'error_code': {'key': 'errorCode', 'type': 'int'},
-        'recommended_action': {'key': 'recommendedAction', 'type': 'str'},
-        'exception_message': {'key': 'exceptionMessage', 'type': 'str'},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "error_code": {"key": "errorCode", "type": "int"},
+        "recommended_action": {"key": "recommendedAction", "type": "str"},
+        "exception_message": {"key": "exceptionMessage", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobErrorDetails, self).__init__(**kwargs)
         self.error_message = None
         self.error_code = None
@@ -2016,24 +1906,21 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'location': {'required': True},
-        'sku': {'required': True},
+        "location": {"required": True},
+        "sku": {"required": True},
     }
 
     _attribute_map = {
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'sku': {'key': 'sku', 'type': 'Sku'},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "sku": {"key": "sku", "type": "Sku"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
-        self.location = kwargs['location']
-        self.tags = kwargs.get('tags', None)
-        self.sku = kwargs['sku']
+        self.location = kwargs["location"]
+        self.tags = kwargs.get("tags", None)
+        self.sku = kwargs["sku"]
 
 
 class JobResource(Resource):
@@ -2089,45 +1976,42 @@ class JobResource(Resource):
     """
 
     _validation = {
-        'location': {'required': True},
-        'sku': {'required': True},
-        'name': {'readonly': True},
-        'id': {'readonly': True},
-        'type': {'readonly': True},
-        'is_cancellable': {'readonly': True},
-        'is_deletable': {'readonly': True},
-        'is_shipping_address_editable': {'readonly': True},
-        'status': {'readonly': True},
-        'start_time': {'readonly': True},
-        'error': {'readonly': True},
-        'cancellation_reason': {'readonly': True},
-        'is_cancellable_without_fee': {'readonly': True},
+        "location": {"required": True},
+        "sku": {"required": True},
+        "name": {"readonly": True},
+        "id": {"readonly": True},
+        "type": {"readonly": True},
+        "is_cancellable": {"readonly": True},
+        "is_deletable": {"readonly": True},
+        "is_shipping_address_editable": {"readonly": True},
+        "status": {"readonly": True},
+        "start_time": {"readonly": True},
+        "error": {"readonly": True},
+        "cancellation_reason": {"readonly": True},
+        "is_cancellable_without_fee": {"readonly": True},
     }
 
     _attribute_map = {
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'sku': {'key': 'sku', 'type': 'Sku'},
-        'name': {'key': 'name', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'is_cancellable': {'key': 'properties.isCancellable', 'type': 'bool'},
-        'is_deletable': {'key': 'properties.isDeletable', 'type': 'bool'},
-        'is_shipping_address_editable': {'key': 'properties.isShippingAddressEditable', 'type': 'bool'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'start_time': {'key': 'properties.startTime', 'type': 'iso-8601'},
-        'error': {'key': 'properties.error', 'type': 'Error'},
-        'details': {'key': 'properties.details', 'type': 'JobDetails'},
-        'cancellation_reason': {'key': 'properties.cancellationReason', 'type': 'str'},
-        'delivery_type': {'key': 'properties.deliveryType', 'type': 'str'},
-        'delivery_info': {'key': 'properties.deliveryInfo', 'type': 'JobDeliveryInfo'},
-        'is_cancellable_without_fee': {'key': 'properties.isCancellableWithoutFee', 'type': 'bool'},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "sku": {"key": "sku", "type": "Sku"},
+        "name": {"key": "name", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "is_cancellable": {"key": "properties.isCancellable", "type": "bool"},
+        "is_deletable": {"key": "properties.isDeletable", "type": "bool"},
+        "is_shipping_address_editable": {"key": "properties.isShippingAddressEditable", "type": "bool"},
+        "status": {"key": "properties.status", "type": "str"},
+        "start_time": {"key": "properties.startTime", "type": "iso-8601"},
+        "error": {"key": "properties.error", "type": "Error"},
+        "details": {"key": "properties.details", "type": "JobDetails"},
+        "cancellation_reason": {"key": "properties.cancellationReason", "type": "str"},
+        "delivery_type": {"key": "properties.deliveryType", "type": "str"},
+        "delivery_info": {"key": "properties.deliveryInfo", "type": "JobDeliveryInfo"},
+        "is_cancellable_without_fee": {"key": "properties.isCancellableWithoutFee", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobResource, self).__init__(**kwargs)
         self.name = None
         self.id = None
@@ -2138,10 +2022,10 @@ class JobResource(Resource):
         self.status = None
         self.start_time = None
         self.error = None
-        self.details = kwargs.get('details', None)
+        self.details = kwargs.get("details", None)
         self.cancellation_reason = None
-        self.delivery_type = kwargs.get('delivery_type', None)
-        self.delivery_info = kwargs.get('delivery_info', None)
+        self.delivery_type = kwargs.get("delivery_type", None)
+        self.delivery_info = kwargs.get("delivery_info", None)
         self.is_cancellable_without_fee = None
 
 
@@ -2155,17 +2039,14 @@ class JobResourceList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[JobResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[JobResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class JobResourceUpdateParameter(msrest.serialization.Model):
@@ -2181,19 +2062,19 @@ class JobResourceUpdateParameter(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'details': {'key': 'properties.details', 'type': 'UpdateJobDetails'},
-        'destination_account_details': {'key': 'properties.destinationAccountDetails', 'type': '[DestinationAccountDetails]'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "details": {"key": "properties.details", "type": "UpdateJobDetails"},
+        "destination_account_details": {
+            "key": "properties.destinationAccountDetails",
+            "type": "[DestinationAccountDetails]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobResourceUpdateParameter, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.details = kwargs.get('details', None)
-        self.destination_account_details = kwargs.get('destination_account_details', None)
+        self.tags = kwargs.get("tags", None)
+        self.details = kwargs.get("details", None)
+        self.destination_account_details = kwargs.get("destination_account_details", None)
 
 
 class JobStages(msrest.serialization.Model):
@@ -2221,27 +2102,24 @@ class JobStages(msrest.serialization.Model):
     """
 
     _validation = {
-        'stage_name': {'readonly': True},
-        'display_name': {'readonly': True},
-        'stage_status': {'readonly': True},
-        'stage_time': {'readonly': True},
-        'job_stage_details': {'readonly': True},
-        'error_details': {'readonly': True},
+        "stage_name": {"readonly": True},
+        "display_name": {"readonly": True},
+        "stage_status": {"readonly": True},
+        "stage_time": {"readonly": True},
+        "job_stage_details": {"readonly": True},
+        "error_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'stage_name': {'key': 'stageName', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'stage_status': {'key': 'stageStatus', 'type': 'str'},
-        'stage_time': {'key': 'stageTime', 'type': 'iso-8601'},
-        'job_stage_details': {'key': 'jobStageDetails', 'type': 'object'},
-        'error_details': {'key': 'errorDetails', 'type': '[JobErrorDetails]'},
+        "stage_name": {"key": "stageName", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "stage_status": {"key": "stageStatus", "type": "str"},
+        "stage_time": {"key": "stageTime", "type": "iso-8601"},
+        "job_stage_details": {"key": "jobStageDetails", "type": "object"},
+        "error_details": {"key": "errorDetails", "type": "[JobErrorDetails]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobStages, self).__init__(**kwargs)
         self.stage_name = None
         self.display_name = None
@@ -2264,22 +2142,19 @@ class NotificationPreference(msrest.serialization.Model):
     """
 
     _validation = {
-        'stage_name': {'required': True},
-        'send_notification': {'required': True},
+        "stage_name": {"required": True},
+        "send_notification": {"required": True},
     }
 
     _attribute_map = {
-        'stage_name': {'key': 'stageName', 'type': 'str'},
-        'send_notification': {'key': 'sendNotification', 'type': 'bool'},
+        "stage_name": {"key": "stageName", "type": "str"},
+        "send_notification": {"key": "sendNotification", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(NotificationPreference, self).__init__(**kwargs)
-        self.stage_name = kwargs['stage_name']
-        self.send_notification = kwargs['send_notification']
+        self.stage_name = kwargs["stage_name"]
+        self.send_notification = kwargs["send_notification"]
 
 
 class Operation(msrest.serialization.Model):
@@ -2299,23 +2174,20 @@ class Operation(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'display': {'readonly': True},
-        'properties': {'readonly': True},
-        'origin': {'readonly': True},
+        "name": {"readonly": True},
+        "display": {"readonly": True},
+        "properties": {"readonly": True},
+        "origin": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'OperationDisplay'},
-        'properties': {'key': 'properties', 'type': 'object'},
-        'origin': {'key': 'origin', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "OperationDisplay"},
+        "properties": {"key": "properties", "type": "object"},
+        "origin": {"key": "origin", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Operation, self).__init__(**kwargs)
         self.name = None
         self.display = None
@@ -2337,21 +2209,18 @@ class OperationDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplay, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class OperationList(msrest.serialization.Model):
@@ -2366,21 +2235,18 @@ class OperationList(msrest.serialization.Model):
     """
 
     _validation = {
-        'value': {'readonly': True},
+        "value": {"readonly": True},
     }
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Operation]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[Operation]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationList, self).__init__(**kwargs)
         self.value = None
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class PackageShippingDetails(msrest.serialization.Model):
@@ -2397,21 +2263,18 @@ class PackageShippingDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'carrier_name': {'readonly': True},
-        'tracking_id': {'readonly': True},
-        'tracking_url': {'readonly': True},
+        "carrier_name": {"readonly": True},
+        "tracking_id": {"readonly": True},
+        "tracking_url": {"readonly": True},
     }
 
     _attribute_map = {
-        'carrier_name': {'key': 'carrierName', 'type': 'str'},
-        'tracking_id': {'key': 'trackingId', 'type': 'str'},
-        'tracking_url': {'key': 'trackingUrl', 'type': 'str'},
+        "carrier_name": {"key": "carrierName", "type": "str"},
+        "tracking_id": {"key": "trackingId", "type": "str"},
+        "tracking_url": {"key": "trackingUrl", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PackageShippingDetails, self).__init__(**kwargs)
         self.carrier_name = None
         self.tracking_id = None
@@ -2428,17 +2291,14 @@ class Preferences(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'preferred_data_center_region': {'key': 'preferredDataCenterRegion', 'type': '[str]'},
-        'transport_preferences': {'key': 'transportPreferences', 'type': 'TransportPreferences'},
+        "preferred_data_center_region": {"key": "preferredDataCenterRegion", "type": "[str]"},
+        "transport_preferences": {"key": "transportPreferences", "type": "TransportPreferences"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Preferences, self).__init__(**kwargs)
-        self.preferred_data_center_region = kwargs.get('preferred_data_center_region', None)
-        self.transport_preferences = kwargs.get('transport_preferences', None)
+        self.preferred_data_center_region = kwargs.get("preferred_data_center_region", None)
+        self.transport_preferences = kwargs.get("transport_preferences", None)
 
 
 class PreferencesValidationRequest(ValidationInputRequest):
@@ -2459,24 +2319,21 @@ class PreferencesValidationRequest(ValidationInputRequest):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'device_type': {'required': True},
+        "validation_type": {"required": True},
+        "device_type": {"required": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'preference': {'key': 'preference', 'type': 'Preferences'},
-        'device_type': {'key': 'deviceType', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "preference": {"key": "preference", "type": "Preferences"},
+        "device_type": {"key": "deviceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PreferencesValidationRequest, self).__init__(**kwargs)
-        self.validation_type = 'ValidatePreferences'  # type: str
-        self.preference = kwargs.get('preference', None)
-        self.device_type = kwargs['device_type']
+        self.validation_type = "ValidatePreferences"  # type: str
+        self.preference = kwargs.get("preference", None)
+        self.device_type = kwargs["device_type"]
 
 
 class PreferencesValidationResponseProperties(ValidationInputResponse):
@@ -2499,23 +2356,20 @@ class PreferencesValidationResponseProperties(ValidationInputResponse):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'error': {'readonly': True},
-        'status': {'readonly': True},
+        "validation_type": {"required": True},
+        "error": {"readonly": True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'Error'},
-        'status': {'key': 'status', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "error": {"key": "error", "type": "Error"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PreferencesValidationResponseProperties, self).__init__(**kwargs)
-        self.validation_type = 'ValidatePreferences'  # type: str
+        self.validation_type = "ValidatePreferences"  # type: str
         self.status = None
 
 
@@ -2531,17 +2385,17 @@ class RegionConfigurationRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'schedule_availability_request': {'key': 'scheduleAvailabilityRequest', 'type': 'ScheduleAvailabilityRequest'},
-        'transport_availability_request': {'key': 'transportAvailabilityRequest', 'type': 'TransportAvailabilityRequest'},
+        "schedule_availability_request": {"key": "scheduleAvailabilityRequest", "type": "ScheduleAvailabilityRequest"},
+        "transport_availability_request": {
+            "key": "transportAvailabilityRequest",
+            "type": "TransportAvailabilityRequest",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RegionConfigurationRequest, self).__init__(**kwargs)
-        self.schedule_availability_request = kwargs.get('schedule_availability_request', None)
-        self.transport_availability_request = kwargs.get('transport_availability_request', None)
+        self.schedule_availability_request = kwargs.get("schedule_availability_request", None)
+        self.transport_availability_request = kwargs.get("transport_availability_request", None)
 
 
 class RegionConfigurationResponse(msrest.serialization.Model):
@@ -2558,19 +2412,22 @@ class RegionConfigurationResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'schedule_availability_response': {'readonly': True},
-        'transport_availability_response': {'readonly': True},
+        "schedule_availability_response": {"readonly": True},
+        "transport_availability_response": {"readonly": True},
     }
 
     _attribute_map = {
-        'schedule_availability_response': {'key': 'scheduleAvailabilityResponse', 'type': 'ScheduleAvailabilityResponse'},
-        'transport_availability_response': {'key': 'transportAvailabilityResponse', 'type': 'TransportAvailabilityResponse'},
+        "schedule_availability_response": {
+            "key": "scheduleAvailabilityResponse",
+            "type": "ScheduleAvailabilityResponse",
+        },
+        "transport_availability_response": {
+            "key": "transportAvailabilityResponse",
+            "type": "TransportAvailabilityResponse",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RegionConfigurationResponse, self).__init__(**kwargs)
         self.schedule_availability_response = None
         self.transport_availability_response = None
@@ -2586,17 +2443,14 @@ class ScheduleAvailabilityResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'available_dates': {'readonly': True},
+        "available_dates": {"readonly": True},
     }
 
     _attribute_map = {
-        'available_dates': {'key': 'availableDates', 'type': '[iso-8601]'},
+        "available_dates": {"key": "availableDates", "type": "[iso-8601]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleAvailabilityResponse, self).__init__(**kwargs)
         self.available_dates = None
 
@@ -2620,25 +2474,22 @@ class ShareCredentialDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'share_name': {'readonly': True},
-        'share_type': {'readonly': True},
-        'user_name': {'readonly': True},
-        'password': {'readonly': True},
-        'supported_access_protocols': {'readonly': True},
+        "share_name": {"readonly": True},
+        "share_type": {"readonly": True},
+        "user_name": {"readonly": True},
+        "password": {"readonly": True},
+        "supported_access_protocols": {"readonly": True},
     }
 
     _attribute_map = {
-        'share_name': {'key': 'shareName', 'type': 'str'},
-        'share_type': {'key': 'shareType', 'type': 'str'},
-        'user_name': {'key': 'userName', 'type': 'str'},
-        'password': {'key': 'password', 'type': 'str'},
-        'supported_access_protocols': {'key': 'supportedAccessProtocols', 'type': '[str]'},
+        "share_name": {"key": "shareName", "type": "str"},
+        "share_type": {"key": "shareType", "type": "str"},
+        "user_name": {"key": "userName", "type": "str"},
+        "password": {"key": "password", "type": "str"},
+        "supported_access_protocols": {"key": "supportedAccessProtocols", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ShareCredentialDetails, self).__init__(**kwargs)
         self.share_name = None
         self.share_type = None
@@ -2663,25 +2514,22 @@ class ShipmentPickUpRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'start_time': {'required': True},
-        'end_time': {'required': True},
-        'shipment_location': {'required': True},
+        "start_time": {"required": True},
+        "end_time": {"required": True},
+        "shipment_location": {"required": True},
     }
 
     _attribute_map = {
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
-        'end_time': {'key': 'endTime', 'type': 'iso-8601'},
-        'shipment_location': {'key': 'shipmentLocation', 'type': 'str'},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
+        "end_time": {"key": "endTime", "type": "iso-8601"},
+        "shipment_location": {"key": "shipmentLocation", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ShipmentPickUpRequest, self).__init__(**kwargs)
-        self.start_time = kwargs['start_time']
-        self.end_time = kwargs['end_time']
-        self.shipment_location = kwargs['shipment_location']
+        self.start_time = kwargs["start_time"]
+        self.end_time = kwargs["end_time"]
+        self.shipment_location = kwargs["shipment_location"]
 
 
 class ShipmentPickUpResponse(msrest.serialization.Model):
@@ -2697,19 +2545,16 @@ class ShipmentPickUpResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'confirmation_number': {'readonly': True},
-        'ready_by_time': {'readonly': True},
+        "confirmation_number": {"readonly": True},
+        "ready_by_time": {"readonly": True},
     }
 
     _attribute_map = {
-        'confirmation_number': {'key': 'confirmationNumber', 'type': 'str'},
-        'ready_by_time': {'key': 'readyByTime', 'type': 'iso-8601'},
+        "confirmation_number": {"key": "confirmationNumber", "type": "str"},
+        "ready_by_time": {"key": "readyByTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ShipmentPickUpResponse, self).__init__(**kwargs)
         self.confirmation_number = None
         self.ready_by_time = None
@@ -2744,39 +2589,36 @@ class ShippingAddress(msrest.serialization.Model):
     """
 
     _validation = {
-        'street_address1': {'required': True},
-        'country': {'required': True},
-        'postal_code': {'required': True},
+        "street_address1": {"required": True},
+        "country": {"required": True},
+        "postal_code": {"required": True},
     }
 
     _attribute_map = {
-        'street_address1': {'key': 'streetAddress1', 'type': 'str'},
-        'street_address2': {'key': 'streetAddress2', 'type': 'str'},
-        'street_address3': {'key': 'streetAddress3', 'type': 'str'},
-        'city': {'key': 'city', 'type': 'str'},
-        'state_or_province': {'key': 'stateOrProvince', 'type': 'str'},
-        'country': {'key': 'country', 'type': 'str'},
-        'postal_code': {'key': 'postalCode', 'type': 'str'},
-        'zip_extended_code': {'key': 'zipExtendedCode', 'type': 'str'},
-        'company_name': {'key': 'companyName', 'type': 'str'},
-        'address_type': {'key': 'addressType', 'type': 'str'},
+        "street_address1": {"key": "streetAddress1", "type": "str"},
+        "street_address2": {"key": "streetAddress2", "type": "str"},
+        "street_address3": {"key": "streetAddress3", "type": "str"},
+        "city": {"key": "city", "type": "str"},
+        "state_or_province": {"key": "stateOrProvince", "type": "str"},
+        "country": {"key": "country", "type": "str"},
+        "postal_code": {"key": "postalCode", "type": "str"},
+        "zip_extended_code": {"key": "zipExtendedCode", "type": "str"},
+        "company_name": {"key": "companyName", "type": "str"},
+        "address_type": {"key": "addressType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ShippingAddress, self).__init__(**kwargs)
-        self.street_address1 = kwargs['street_address1']
-        self.street_address2 = kwargs.get('street_address2', None)
-        self.street_address3 = kwargs.get('street_address3', None)
-        self.city = kwargs.get('city', None)
-        self.state_or_province = kwargs.get('state_or_province', None)
-        self.country = kwargs['country']
-        self.postal_code = kwargs['postal_code']
-        self.zip_extended_code = kwargs.get('zip_extended_code', None)
-        self.company_name = kwargs.get('company_name', None)
-        self.address_type = kwargs.get('address_type', None)
+        self.street_address1 = kwargs["street_address1"]
+        self.street_address2 = kwargs.get("street_address2", None)
+        self.street_address3 = kwargs.get("street_address3", None)
+        self.city = kwargs.get("city", None)
+        self.state_or_province = kwargs.get("state_or_province", None)
+        self.country = kwargs["country"]
+        self.postal_code = kwargs["postal_code"]
+        self.zip_extended_code = kwargs.get("zip_extended_code", None)
+        self.company_name = kwargs.get("company_name", None)
+        self.address_type = kwargs.get("address_type", None)
 
 
 class Sku(msrest.serialization.Model):
@@ -2794,23 +2636,20 @@ class Sku(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
+        "name": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'family': {'key': 'family', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "family": {"key": "family", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Sku, self).__init__(**kwargs)
-        self.name = kwargs['name']
-        self.display_name = kwargs.get('display_name', None)
-        self.family = kwargs.get('family', None)
+        self.name = kwargs["name"]
+        self.display_name = kwargs.get("display_name", None)
+        self.family = kwargs.get("family", None)
 
 
 class SkuAvailabilityValidationRequest(ValidationInputRequest):
@@ -2839,32 +2678,29 @@ class SkuAvailabilityValidationRequest(ValidationInputRequest):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'device_type': {'required': True},
-        'transfer_type': {'required': True, 'constant': True},
-        'country': {'required': True},
-        'location': {'required': True},
+        "validation_type": {"required": True},
+        "device_type": {"required": True},
+        "transfer_type": {"required": True, "constant": True},
+        "country": {"required": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'device_type': {'key': 'deviceType', 'type': 'str'},
-        'transfer_type': {'key': 'transferType', 'type': 'str'},
-        'country': {'key': 'country', 'type': 'str'},
-        'location': {'key': 'location', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "device_type": {"key": "deviceType", "type": "str"},
+        "transfer_type": {"key": "transferType", "type": "str"},
+        "country": {"key": "country", "type": "str"},
+        "location": {"key": "location", "type": "str"},
     }
 
     transfer_type = "ImportToAzure"
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SkuAvailabilityValidationRequest, self).__init__(**kwargs)
-        self.validation_type = 'ValidateSkuAvailability'  # type: str
-        self.device_type = kwargs['device_type']
-        self.country = kwargs['country']
-        self.location = kwargs['location']
+        self.validation_type = "ValidateSkuAvailability"  # type: str
+        self.device_type = kwargs["device_type"]
+        self.country = kwargs["country"]
+        self.location = kwargs["location"]
 
 
 class SkuAvailabilityValidationResponseProperties(ValidationInputResponse):
@@ -2887,23 +2723,20 @@ class SkuAvailabilityValidationResponseProperties(ValidationInputResponse):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'error': {'readonly': True},
-        'status': {'readonly': True},
+        "validation_type": {"required": True},
+        "error": {"readonly": True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'Error'},
-        'status': {'key': 'status', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "error": {"key": "error", "type": "Error"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SkuAvailabilityValidationResponseProperties, self).__init__(**kwargs)
-        self.validation_type = 'ValidateSkuAvailability'  # type: str
+        self.validation_type = "ValidateSkuAvailability"  # type: str
         self.status = None
 
 
@@ -2919,19 +2752,16 @@ class SkuCapacity(msrest.serialization.Model):
     """
 
     _validation = {
-        'usable': {'readonly': True},
-        'maximum': {'readonly': True},
+        "usable": {"readonly": True},
+        "maximum": {"readonly": True},
     }
 
     _attribute_map = {
-        'usable': {'key': 'usable', 'type': 'str'},
-        'maximum': {'key': 'maximum', 'type': 'str'},
+        "usable": {"key": "usable", "type": "str"},
+        "maximum": {"key": "maximum", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SkuCapacity, self).__init__(**kwargs)
         self.usable = None
         self.maximum = None
@@ -2949,19 +2779,16 @@ class SkuCost(msrest.serialization.Model):
     """
 
     _validation = {
-        'meter_id': {'readonly': True},
-        'meter_type': {'readonly': True},
+        "meter_id": {"readonly": True},
+        "meter_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'meter_id': {'key': 'meterId', 'type': 'str'},
-        'meter_type': {'key': 'meterType', 'type': 'str'},
+        "meter_id": {"key": "meterId", "type": "str"},
+        "meter_type": {"key": "meterType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SkuCost, self).__init__(**kwargs)
         self.meter_id = None
         self.meter_type = None
@@ -2995,33 +2822,33 @@ class SkuInformation(msrest.serialization.Model):
     """
 
     _validation = {
-        'sku': {'readonly': True},
-        'enabled': {'readonly': True},
-        'destination_to_service_location_map': {'readonly': True},
-        'capacity': {'readonly': True},
-        'costs': {'readonly': True},
-        'api_versions': {'readonly': True},
-        'disabled_reason': {'readonly': True},
-        'disabled_reason_message': {'readonly': True},
-        'required_feature': {'readonly': True},
+        "sku": {"readonly": True},
+        "enabled": {"readonly": True},
+        "destination_to_service_location_map": {"readonly": True},
+        "capacity": {"readonly": True},
+        "costs": {"readonly": True},
+        "api_versions": {"readonly": True},
+        "disabled_reason": {"readonly": True},
+        "disabled_reason_message": {"readonly": True},
+        "required_feature": {"readonly": True},
     }
 
     _attribute_map = {
-        'sku': {'key': 'sku', 'type': 'Sku'},
-        'enabled': {'key': 'enabled', 'type': 'bool'},
-        'destination_to_service_location_map': {'key': 'properties.destinationToServiceLocationMap', 'type': '[DestinationToServiceLocationMap]'},
-        'capacity': {'key': 'properties.capacity', 'type': 'SkuCapacity'},
-        'costs': {'key': 'properties.costs', 'type': '[SkuCost]'},
-        'api_versions': {'key': 'properties.apiVersions', 'type': '[str]'},
-        'disabled_reason': {'key': 'properties.disabledReason', 'type': 'str'},
-        'disabled_reason_message': {'key': 'properties.disabledReasonMessage', 'type': 'str'},
-        'required_feature': {'key': 'properties.requiredFeature', 'type': 'str'},
+        "sku": {"key": "sku", "type": "Sku"},
+        "enabled": {"key": "enabled", "type": "bool"},
+        "destination_to_service_location_map": {
+            "key": "properties.destinationToServiceLocationMap",
+            "type": "[DestinationToServiceLocationMap]",
+        },
+        "capacity": {"key": "properties.capacity", "type": "SkuCapacity"},
+        "costs": {"key": "properties.costs", "type": "[SkuCost]"},
+        "api_versions": {"key": "properties.apiVersions", "type": "[str]"},
+        "disabled_reason": {"key": "properties.disabledReason", "type": "str"},
+        "disabled_reason_message": {"key": "properties.disabledReasonMessage", "type": "str"},
+        "required_feature": {"key": "properties.requiredFeature", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SkuInformation, self).__init__(**kwargs)
         self.sku = None
         self.enabled = None
@@ -3047,19 +2874,16 @@ class SubscriptionIsAllowedToCreateJobValidationRequest(ValidationInputRequest):
     """
 
     _validation = {
-        'validation_type': {'required': True},
+        "validation_type": {"required": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubscriptionIsAllowedToCreateJobValidationRequest, self).__init__(**kwargs)
-        self.validation_type = 'ValidateSubscriptionIsAllowedToCreateJob'  # type: str
+        self.validation_type = "ValidateSubscriptionIsAllowedToCreateJob"  # type: str
 
 
 class SubscriptionIsAllowedToCreateJobValidationResponseProperties(ValidationInputResponse):
@@ -3082,23 +2906,20 @@ class SubscriptionIsAllowedToCreateJobValidationResponseProperties(ValidationInp
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'error': {'readonly': True},
-        'status': {'readonly': True},
+        "validation_type": {"required": True},
+        "error": {"readonly": True},
+        "status": {"readonly": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'error': {'key': 'error', 'type': 'Error'},
-        'status': {'key': 'status', 'type': 'str'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "error": {"key": "error", "type": "Error"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubscriptionIsAllowedToCreateJobValidationResponseProperties, self).__init__(**kwargs)
-        self.validation_type = 'ValidateSubscriptionIsAllowedToCreateJob'  # type: str
+        self.validation_type = "ValidateSubscriptionIsAllowedToCreateJob"  # type: str
         self.status = None
 
 
@@ -3113,17 +2934,14 @@ class TransportAvailabilityDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'shipment_type': {'readonly': True},
+        "shipment_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'shipment_type': {'key': 'shipmentType', 'type': 'str'},
+        "shipment_type": {"key": "shipmentType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TransportAvailabilityDetails, self).__init__(**kwargs)
         self.shipment_type = None
 
@@ -3137,15 +2955,12 @@ class TransportAvailabilityRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'sku_name': {'key': 'skuName', 'type': 'str'},
+        "sku_name": {"key": "skuName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TransportAvailabilityRequest, self).__init__(**kwargs)
-        self.sku_name = kwargs.get('sku_name', None)
+        self.sku_name = kwargs.get("sku_name", None)
 
 
 class TransportAvailabilityResponse(msrest.serialization.Model):
@@ -3159,17 +2974,17 @@ class TransportAvailabilityResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'transport_availability_details': {'readonly': True},
+        "transport_availability_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'transport_availability_details': {'key': 'transportAvailabilityDetails', 'type': '[TransportAvailabilityDetails]'},
+        "transport_availability_details": {
+            "key": "transportAvailabilityDetails",
+            "type": "[TransportAvailabilityDetails]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TransportAvailabilityResponse, self).__init__(**kwargs)
         self.transport_availability_details = None
 
@@ -3185,19 +3000,16 @@ class TransportPreferences(msrest.serialization.Model):
     """
 
     _validation = {
-        'preferred_shipment_type': {'required': True},
+        "preferred_shipment_type": {"required": True},
     }
 
     _attribute_map = {
-        'preferred_shipment_type': {'key': 'preferredShipmentType', 'type': 'str'},
+        "preferred_shipment_type": {"key": "preferredShipmentType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TransportPreferences, self).__init__(**kwargs)
-        self.preferred_shipment_type = kwargs['preferred_shipment_type']
+        self.preferred_shipment_type = kwargs["preferred_shipment_type"]
 
 
 class UnencryptedCredentials(msrest.serialization.Model):
@@ -3212,19 +3024,16 @@ class UnencryptedCredentials(msrest.serialization.Model):
     """
 
     _validation = {
-        'job_name': {'readonly': True},
-        'job_secrets': {'readonly': True},
+        "job_name": {"readonly": True},
+        "job_secrets": {"readonly": True},
     }
 
     _attribute_map = {
-        'job_name': {'key': 'jobName', 'type': 'str'},
-        'job_secrets': {'key': 'jobSecrets', 'type': 'JobSecrets'},
+        "job_name": {"key": "jobName", "type": "str"},
+        "job_secrets": {"key": "jobSecrets", "type": "JobSecrets"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnencryptedCredentials, self).__init__(**kwargs)
         self.job_name = None
         self.job_secrets = None
@@ -3240,17 +3049,14 @@ class UnencryptedCredentialsList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[UnencryptedCredentials]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[UnencryptedCredentials]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UnencryptedCredentialsList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class UpdateJobDetails(msrest.serialization.Model):
@@ -3263,17 +3069,14 @@ class UpdateJobDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'contact_details': {'key': 'contactDetails', 'type': 'ContactDetails'},
-        'shipping_address': {'key': 'shippingAddress', 'type': 'ShippingAddress'},
+        "contact_details": {"key": "contactDetails", "type": "ContactDetails"},
+        "shipping_address": {"key": "shippingAddress", "type": "ShippingAddress"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UpdateJobDetails, self).__init__(**kwargs)
-        self.contact_details = kwargs.get('contact_details', None)
-        self.shipping_address = kwargs.get('shipping_address', None)
+        self.contact_details = kwargs.get("contact_details", None)
+        self.shipping_address = kwargs.get("shipping_address", None)
 
 
 class ValidateAddress(ValidationInputRequest):
@@ -3296,27 +3099,24 @@ class ValidateAddress(ValidationInputRequest):
     """
 
     _validation = {
-        'validation_type': {'required': True},
-        'shipping_address': {'required': True},
-        'device_type': {'required': True},
+        "validation_type": {"required": True},
+        "shipping_address": {"required": True},
+        "device_type": {"required": True},
     }
 
     _attribute_map = {
-        'validation_type': {'key': 'validationType', 'type': 'str'},
-        'shipping_address': {'key': 'shippingAddress', 'type': 'ShippingAddress'},
-        'device_type': {'key': 'deviceType', 'type': 'str'},
-        'transport_preferences': {'key': 'transportPreferences', 'type': 'TransportPreferences'},
+        "validation_type": {"key": "validationType", "type": "str"},
+        "shipping_address": {"key": "shippingAddress", "type": "ShippingAddress"},
+        "device_type": {"key": "deviceType", "type": "str"},
+        "transport_preferences": {"key": "transportPreferences", "type": "TransportPreferences"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidateAddress, self).__init__(**kwargs)
-        self.validation_type = 'ValidateAddress'  # type: str
-        self.shipping_address = kwargs['shipping_address']
-        self.device_type = kwargs['device_type']
-        self.transport_preferences = kwargs.get('transport_preferences', None)
+        self.validation_type = "ValidateAddress"  # type: str
+        self.shipping_address = kwargs["shipping_address"]
+        self.device_type = kwargs["device_type"]
+        self.transport_preferences = kwargs.get("transport_preferences", None)
 
 
 class ValidationResponse(msrest.serialization.Model):
@@ -3333,19 +3133,19 @@ class ValidationResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'status': {'readonly': True},
-        'individual_response_details': {'readonly': True},
+        "status": {"readonly": True},
+        "individual_response_details": {"readonly": True},
     }
 
     _attribute_map = {
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'individual_response_details': {'key': 'properties.individualResponseDetails', 'type': '[ValidationInputResponse]'},
+        "status": {"key": "properties.status", "type": "str"},
+        "individual_response_details": {
+            "key": "properties.individualResponseDetails",
+            "type": "[ValidationInputResponse]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidationResponse, self).__init__(**kwargs)
         self.status = None
         self.individual_response_details = None
