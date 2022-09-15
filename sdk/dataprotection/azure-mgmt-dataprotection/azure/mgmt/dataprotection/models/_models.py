@@ -25,25 +25,20 @@ class DeleteOption(msrest.serialization.Model):
     """
 
     _validation = {
-        'duration': {'required': True},
-        'object_type': {'required': True},
+        "duration": {"required": True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'duration': {'key': 'duration', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "duration": {"key": "duration", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'AbsoluteDeleteOption': 'AbsoluteDeleteOption'}
-    }
+    _subtype_map = {"object_type": {"AbsoluteDeleteOption": "AbsoluteDeleteOption"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DeleteOption, self).__init__(**kwargs)
-        self.duration = kwargs['duration']
+        self.duration = kwargs["duration"]
         self.object_type = None  # type: Optional[str]
 
 
@@ -60,21 +55,18 @@ class AbsoluteDeleteOption(DeleteOption):
     """
 
     _validation = {
-        'duration': {'required': True},
-        'object_type': {'required': True},
+        "duration": {"required": True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'duration': {'key': 'duration', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "duration": {"key": "duration", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AbsoluteDeleteOption, self).__init__(**kwargs)
-        self.object_type = 'AbsoluteDeleteOption'  # type: str
+        self.object_type = "AbsoluteDeleteOption"  # type: str
 
 
 class AdHocBackupRuleOptions(msrest.serialization.Model):
@@ -89,22 +81,19 @@ class AdHocBackupRuleOptions(msrest.serialization.Model):
     """
 
     _validation = {
-        'rule_name': {'required': True},
-        'trigger_option': {'required': True},
+        "rule_name": {"required": True},
+        "trigger_option": {"required": True},
     }
 
     _attribute_map = {
-        'rule_name': {'key': 'ruleName', 'type': 'str'},
-        'trigger_option': {'key': 'triggerOption', 'type': 'AdhocBackupTriggerOption'},
+        "rule_name": {"key": "ruleName", "type": "str"},
+        "trigger_option": {"key": "triggerOption", "type": "AdhocBackupTriggerOption"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AdHocBackupRuleOptions, self).__init__(**kwargs)
-        self.rule_name = kwargs['rule_name']
-        self.trigger_option = kwargs['trigger_option']
+        self.rule_name = kwargs["rule_name"]
+        self.trigger_option = kwargs["trigger_option"]
 
 
 class AdhocBackupTriggerOption(msrest.serialization.Model):
@@ -115,15 +104,12 @@ class AdhocBackupTriggerOption(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'retention_tag_override': {'key': 'retentionTagOverride', 'type': 'str'},
+        "retention_tag_override": {"key": "retentionTagOverride", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AdhocBackupTriggerOption, self).__init__(**kwargs)
-        self.retention_tag_override = kwargs.get('retention_tag_override', None)
+        self.retention_tag_override = kwargs.get("retention_tag_override", None)
 
 
 class AdhocBasedTaggingCriteria(msrest.serialization.Model):
@@ -134,15 +120,12 @@ class AdhocBasedTaggingCriteria(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tag_info': {'key': 'tagInfo', 'type': 'RetentionTag'},
+        "tag_info": {"key": "tagInfo", "type": "RetentionTag"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AdhocBasedTaggingCriteria, self).__init__(**kwargs)
-        self.tag_info = kwargs.get('tag_info', None)
+        self.tag_info = kwargs.get("tag_info", None)
 
 
 class TriggerContext(msrest.serialization.Model):
@@ -159,21 +142,21 @@ class TriggerContext(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
     _subtype_map = {
-        'object_type': {'AdhocBasedTriggerContext': 'AdhocBasedTriggerContext', 'ScheduleBasedTriggerContext': 'ScheduleBasedTriggerContext'}
+        "object_type": {
+            "AdhocBasedTriggerContext": "AdhocBasedTriggerContext",
+            "ScheduleBasedTriggerContext": "ScheduleBasedTriggerContext",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TriggerContext, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -191,22 +174,19 @@ class AdhocBasedTriggerContext(TriggerContext):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'tagging_criteria': {'required': True},
+        "object_type": {"required": True},
+        "tagging_criteria": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'tagging_criteria': {'key': 'taggingCriteria', 'type': 'AdhocBasedTaggingCriteria'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "tagging_criteria": {"key": "taggingCriteria", "type": "AdhocBasedTaggingCriteria"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AdhocBasedTriggerContext, self).__init__(**kwargs)
-        self.object_type = 'AdhocBasedTriggerContext'  # type: str
-        self.tagging_criteria = kwargs['tagging_criteria']
+        self.object_type = "AdhocBasedTriggerContext"  # type: str
+        self.tagging_criteria = kwargs["tagging_criteria"]
 
 
 class AuthCredentials(msrest.serialization.Model):
@@ -223,21 +203,16 @@ class AuthCredentials(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'SecretStoreBasedAuthCredentials': 'SecretStoreBasedAuthCredentials'}
-    }
+    _subtype_map = {"object_type": {"SecretStoreBasedAuthCredentials": "SecretStoreBasedAuthCredentials"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AuthCredentials, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -255,21 +230,16 @@ class AzureBackupRecoveryPoint(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'AzureBackupDiscreteRecoveryPoint': 'AzureBackupDiscreteRecoveryPoint'}
-    }
+    _subtype_map = {"object_type": {"AzureBackupDiscreteRecoveryPoint": "AzureBackupDiscreteRecoveryPoint"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRecoveryPoint, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -303,38 +273,38 @@ class AzureBackupDiscreteRecoveryPoint(AzureBackupRecoveryPoint):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'recovery_point_time': {'required': True},
+        "object_type": {"required": True},
+        "recovery_point_time": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'recovery_point_data_stores_details': {'key': 'recoveryPointDataStoresDetails', 'type': '[RecoveryPointDataStoreDetails]'},
-        'recovery_point_time': {'key': 'recoveryPointTime', 'type': 'iso-8601'},
-        'policy_name': {'key': 'policyName', 'type': 'str'},
-        'policy_version': {'key': 'policyVersion', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'recovery_point_type': {'key': 'recoveryPointType', 'type': 'str'},
-        'retention_tag_name': {'key': 'retentionTagName', 'type': 'str'},
-        'retention_tag_version': {'key': 'retentionTagVersion', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "recovery_point_data_stores_details": {
+            "key": "recoveryPointDataStoresDetails",
+            "type": "[RecoveryPointDataStoreDetails]",
+        },
+        "recovery_point_time": {"key": "recoveryPointTime", "type": "iso-8601"},
+        "policy_name": {"key": "policyName", "type": "str"},
+        "policy_version": {"key": "policyVersion", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "recovery_point_type": {"key": "recoveryPointType", "type": "str"},
+        "retention_tag_name": {"key": "retentionTagName", "type": "str"},
+        "retention_tag_version": {"key": "retentionTagVersion", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupDiscreteRecoveryPoint, self).__init__(**kwargs)
-        self.object_type = 'AzureBackupDiscreteRecoveryPoint'  # type: str
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.recovery_point_data_stores_details = kwargs.get('recovery_point_data_stores_details', None)
-        self.recovery_point_time = kwargs['recovery_point_time']
-        self.policy_name = kwargs.get('policy_name', None)
-        self.policy_version = kwargs.get('policy_version', None)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
-        self.recovery_point_type = kwargs.get('recovery_point_type', None)
-        self.retention_tag_name = kwargs.get('retention_tag_name', None)
-        self.retention_tag_version = kwargs.get('retention_tag_version', None)
+        self.object_type = "AzureBackupDiscreteRecoveryPoint"  # type: str
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.recovery_point_data_stores_details = kwargs.get("recovery_point_data_stores_details", None)
+        self.recovery_point_time = kwargs["recovery_point_time"]
+        self.policy_name = kwargs.get("policy_name", None)
+        self.policy_version = kwargs.get("policy_version", None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
+        self.recovery_point_type = kwargs.get("recovery_point_type", None)
+        self.retention_tag_name = kwargs.get("retention_tag_name", None)
+        self.retention_tag_version = kwargs.get("retention_tag_version", None)
 
 
 class AzureBackupFindRestorableTimeRangesRequest(msrest.serialization.Model):
@@ -353,23 +323,20 @@ class AzureBackupFindRestorableTimeRangesRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'source_data_store_type': {'required': True},
+        "source_data_store_type": {"required": True},
     }
 
     _attribute_map = {
-        'source_data_store_type': {'key': 'sourceDataStoreType', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'str'},
-        'end_time': {'key': 'endTime', 'type': 'str'},
+        "source_data_store_type": {"key": "sourceDataStoreType", "type": "str"},
+        "start_time": {"key": "startTime", "type": "str"},
+        "end_time": {"key": "endTime", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupFindRestorableTimeRangesRequest, self).__init__(**kwargs)
-        self.source_data_store_type = kwargs['source_data_store_type']
-        self.start_time = kwargs.get('start_time', None)
-        self.end_time = kwargs.get('end_time', None)
+        self.source_data_store_type = kwargs["source_data_store_type"]
+        self.start_time = kwargs.get("start_time", None)
+        self.end_time = kwargs.get("end_time", None)
 
 
 class DppWorkerRequest(msrest.serialization.Model):
@@ -393,27 +360,24 @@ class DppWorkerRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'subscription_id': {'key': 'subscriptionId', 'type': 'str'},
-        'uri': {'key': 'uri', 'type': 'str'},
-        'headers': {'key': 'headers', 'type': '{[str]}'},
-        'supported_group_versions': {'key': 'supportedGroupVersions', 'type': '[str]'},
-        'culture_info': {'key': 'cultureInfo', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '{str}'},
-        'http_method': {'key': 'httpMethod', 'type': 'str'},
+        "subscription_id": {"key": "subscriptionId", "type": "str"},
+        "uri": {"key": "uri", "type": "str"},
+        "headers": {"key": "headers", "type": "{[str]}"},
+        "supported_group_versions": {"key": "supportedGroupVersions", "type": "[str]"},
+        "culture_info": {"key": "cultureInfo", "type": "str"},
+        "parameters": {"key": "parameters", "type": "{str}"},
+        "http_method": {"key": "httpMethod", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppWorkerRequest, self).__init__(**kwargs)
-        self.subscription_id = kwargs.get('subscription_id', None)
-        self.uri = kwargs.get('uri', None)
-        self.headers = kwargs.get('headers', None)
-        self.supported_group_versions = kwargs.get('supported_group_versions', None)
-        self.culture_info = kwargs.get('culture_info', None)
-        self.parameters = kwargs.get('parameters', None)
-        self.http_method = kwargs.get('http_method', None)
+        self.subscription_id = kwargs.get("subscription_id", None)
+        self.uri = kwargs.get("uri", None)
+        self.headers = kwargs.get("headers", None)
+        self.supported_group_versions = kwargs.get("supported_group_versions", None)
+        self.culture_info = kwargs.get("culture_info", None)
+        self.parameters = kwargs.get("parameters", None)
+        self.http_method = kwargs.get("http_method", None)
 
 
 class AzureBackupFindRestorableTimeRangesRequestResource(DppWorkerRequest):
@@ -439,22 +403,19 @@ class AzureBackupFindRestorableTimeRangesRequestResource(DppWorkerRequest):
     """
 
     _attribute_map = {
-        'subscription_id': {'key': 'subscriptionId', 'type': 'str'},
-        'uri': {'key': 'uri', 'type': 'str'},
-        'headers': {'key': 'headers', 'type': '{[str]}'},
-        'supported_group_versions': {'key': 'supportedGroupVersions', 'type': '[str]'},
-        'culture_info': {'key': 'cultureInfo', 'type': 'str'},
-        'parameters': {'key': 'parameters', 'type': '{str}'},
-        'http_method': {'key': 'httpMethod', 'type': 'str'},
-        'content': {'key': 'content', 'type': 'AzureBackupFindRestorableTimeRangesRequest'},
+        "subscription_id": {"key": "subscriptionId", "type": "str"},
+        "uri": {"key": "uri", "type": "str"},
+        "headers": {"key": "headers", "type": "{[str]}"},
+        "supported_group_versions": {"key": "supportedGroupVersions", "type": "[str]"},
+        "culture_info": {"key": "cultureInfo", "type": "str"},
+        "parameters": {"key": "parameters", "type": "{str}"},
+        "http_method": {"key": "httpMethod", "type": "str"},
+        "content": {"key": "content", "type": "AzureBackupFindRestorableTimeRangesRequest"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupFindRestorableTimeRangesRequestResource, self).__init__(**kwargs)
-        self.content = kwargs.get('content', None)
+        self.content = kwargs.get("content", None)
 
 
 class AzureBackupFindRestorableTimeRangesResponse(msrest.serialization.Model):
@@ -467,17 +428,14 @@ class AzureBackupFindRestorableTimeRangesResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'restorable_time_ranges': {'key': 'restorableTimeRanges', 'type': '[RestorableTimeRange]'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "restorable_time_ranges": {"key": "restorableTimeRanges", "type": "[RestorableTimeRange]"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupFindRestorableTimeRangesResponse, self).__init__(**kwargs)
-        self.restorable_time_ranges = kwargs.get('restorable_time_ranges', None)
-        self.object_type = kwargs.get('object_type', None)
+        self.restorable_time_ranges = kwargs.get("restorable_time_ranges", None)
+        self.object_type = kwargs.get("object_type", None)
 
 
 class DppResource(msrest.serialization.Model):
@@ -497,23 +455,20 @@ class DppResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppResource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -540,26 +495,23 @@ class AzureBackupFindRestorableTimeRangesResponseResource(DppResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'properties': {'key': 'properties', 'type': 'AzureBackupFindRestorableTimeRangesResponse'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "AzureBackupFindRestorableTimeRangesResponse"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupFindRestorableTimeRangesResponseResource, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class AzureBackupJob(msrest.serialization.Model):
@@ -637,101 +589,98 @@ class AzureBackupJob(msrest.serialization.Model):
     """
 
     _validation = {
-        'activity_id': {'required': True},
-        'backup_instance_friendly_name': {'required': True},
-        'backup_instance_id': {'readonly': True},
-        'data_source_id': {'required': True},
-        'data_source_location': {'required': True},
-        'data_source_name': {'required': True},
-        'data_source_type': {'required': True},
-        'end_time': {'readonly': True},
-        'error_details': {'readonly': True},
-        'extended_info': {'readonly': True},
-        'is_user_triggered': {'required': True},
-        'operation': {'required': True},
-        'operation_category': {'required': True},
-        'policy_id': {'readonly': True},
-        'policy_name': {'readonly': True},
-        'progress_enabled': {'required': True},
-        'progress_url': {'readonly': True},
-        'restore_type': {'readonly': True},
-        'source_resource_group': {'required': True},
-        'source_subscription_id': {'required': True},
-        'start_time': {'required': True},
-        'status': {'required': True},
-        'subscription_id': {'required': True},
-        'supported_actions': {'required': True},
-        'vault_name': {'required': True},
+        "activity_id": {"required": True},
+        "backup_instance_friendly_name": {"required": True},
+        "backup_instance_id": {"readonly": True},
+        "data_source_id": {"required": True},
+        "data_source_location": {"required": True},
+        "data_source_name": {"required": True},
+        "data_source_type": {"required": True},
+        "end_time": {"readonly": True},
+        "error_details": {"readonly": True},
+        "extended_info": {"readonly": True},
+        "is_user_triggered": {"required": True},
+        "operation": {"required": True},
+        "operation_category": {"required": True},
+        "policy_id": {"readonly": True},
+        "policy_name": {"readonly": True},
+        "progress_enabled": {"required": True},
+        "progress_url": {"readonly": True},
+        "restore_type": {"readonly": True},
+        "source_resource_group": {"required": True},
+        "source_subscription_id": {"required": True},
+        "start_time": {"required": True},
+        "status": {"required": True},
+        "subscription_id": {"required": True},
+        "supported_actions": {"required": True},
+        "vault_name": {"required": True},
     }
 
     _attribute_map = {
-        'activity_id': {'key': 'activityID', 'type': 'str'},
-        'backup_instance_friendly_name': {'key': 'backupInstanceFriendlyName', 'type': 'str'},
-        'backup_instance_id': {'key': 'backupInstanceId', 'type': 'str'},
-        'data_source_id': {'key': 'dataSourceId', 'type': 'str'},
-        'data_source_location': {'key': 'dataSourceLocation', 'type': 'str'},
-        'data_source_name': {'key': 'dataSourceName', 'type': 'str'},
-        'data_source_set_name': {'key': 'dataSourceSetName', 'type': 'str'},
-        'data_source_type': {'key': 'dataSourceType', 'type': 'str'},
-        'duration': {'key': 'duration', 'type': 'str'},
-        'end_time': {'key': 'endTime', 'type': 'iso-8601'},
-        'error_details': {'key': 'errorDetails', 'type': '[UserFacingError]'},
-        'extended_info': {'key': 'extendedInfo', 'type': 'JobExtendedInfo'},
-        'is_user_triggered': {'key': 'isUserTriggered', 'type': 'bool'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'operation_category': {'key': 'operationCategory', 'type': 'str'},
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'policy_name': {'key': 'policyName', 'type': 'str'},
-        'progress_enabled': {'key': 'progressEnabled', 'type': 'bool'},
-        'progress_url': {'key': 'progressUrl', 'type': 'str'},
-        'restore_type': {'key': 'restoreType', 'type': 'str'},
-        'source_resource_group': {'key': 'sourceResourceGroup', 'type': 'str'},
-        'source_subscription_id': {'key': 'sourceSubscriptionID', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
-        'status': {'key': 'status', 'type': 'str'},
-        'subscription_id': {'key': 'subscriptionId', 'type': 'str'},
-        'supported_actions': {'key': 'supportedActions', 'type': '[str]'},
-        'vault_name': {'key': 'vaultName', 'type': 'str'},
-        'etag': {'key': 'etag', 'type': 'str'},
-        'source_data_store_name': {'key': 'sourceDataStoreName', 'type': 'str'},
-        'destination_data_store_name': {'key': 'destinationDataStoreName', 'type': 'str'},
+        "activity_id": {"key": "activityID", "type": "str"},
+        "backup_instance_friendly_name": {"key": "backupInstanceFriendlyName", "type": "str"},
+        "backup_instance_id": {"key": "backupInstanceId", "type": "str"},
+        "data_source_id": {"key": "dataSourceId", "type": "str"},
+        "data_source_location": {"key": "dataSourceLocation", "type": "str"},
+        "data_source_name": {"key": "dataSourceName", "type": "str"},
+        "data_source_set_name": {"key": "dataSourceSetName", "type": "str"},
+        "data_source_type": {"key": "dataSourceType", "type": "str"},
+        "duration": {"key": "duration", "type": "str"},
+        "end_time": {"key": "endTime", "type": "iso-8601"},
+        "error_details": {"key": "errorDetails", "type": "[UserFacingError]"},
+        "extended_info": {"key": "extendedInfo", "type": "JobExtendedInfo"},
+        "is_user_triggered": {"key": "isUserTriggered", "type": "bool"},
+        "operation": {"key": "operation", "type": "str"},
+        "operation_category": {"key": "operationCategory", "type": "str"},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "policy_name": {"key": "policyName", "type": "str"},
+        "progress_enabled": {"key": "progressEnabled", "type": "bool"},
+        "progress_url": {"key": "progressUrl", "type": "str"},
+        "restore_type": {"key": "restoreType", "type": "str"},
+        "source_resource_group": {"key": "sourceResourceGroup", "type": "str"},
+        "source_subscription_id": {"key": "sourceSubscriptionID", "type": "str"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
+        "status": {"key": "status", "type": "str"},
+        "subscription_id": {"key": "subscriptionId", "type": "str"},
+        "supported_actions": {"key": "supportedActions", "type": "[str]"},
+        "vault_name": {"key": "vaultName", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "source_data_store_name": {"key": "sourceDataStoreName", "type": "str"},
+        "destination_data_store_name": {"key": "destinationDataStoreName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupJob, self).__init__(**kwargs)
-        self.activity_id = kwargs['activity_id']
-        self.backup_instance_friendly_name = kwargs['backup_instance_friendly_name']
+        self.activity_id = kwargs["activity_id"]
+        self.backup_instance_friendly_name = kwargs["backup_instance_friendly_name"]
         self.backup_instance_id = None
-        self.data_source_id = kwargs['data_source_id']
-        self.data_source_location = kwargs['data_source_location']
-        self.data_source_name = kwargs['data_source_name']
-        self.data_source_set_name = kwargs.get('data_source_set_name', None)
-        self.data_source_type = kwargs['data_source_type']
-        self.duration = kwargs.get('duration', None)
+        self.data_source_id = kwargs["data_source_id"]
+        self.data_source_location = kwargs["data_source_location"]
+        self.data_source_name = kwargs["data_source_name"]
+        self.data_source_set_name = kwargs.get("data_source_set_name", None)
+        self.data_source_type = kwargs["data_source_type"]
+        self.duration = kwargs.get("duration", None)
         self.end_time = None
         self.error_details = None
         self.extended_info = None
-        self.is_user_triggered = kwargs['is_user_triggered']
-        self.operation = kwargs['operation']
-        self.operation_category = kwargs['operation_category']
+        self.is_user_triggered = kwargs["is_user_triggered"]
+        self.operation = kwargs["operation"]
+        self.operation_category = kwargs["operation_category"]
         self.policy_id = None
         self.policy_name = None
-        self.progress_enabled = kwargs['progress_enabled']
+        self.progress_enabled = kwargs["progress_enabled"]
         self.progress_url = None
         self.restore_type = None
-        self.source_resource_group = kwargs['source_resource_group']
-        self.source_subscription_id = kwargs['source_subscription_id']
-        self.start_time = kwargs['start_time']
-        self.status = kwargs['status']
-        self.subscription_id = kwargs['subscription_id']
-        self.supported_actions = kwargs['supported_actions']
-        self.vault_name = kwargs['vault_name']
-        self.etag = kwargs.get('etag', None)
-        self.source_data_store_name = kwargs.get('source_data_store_name', None)
-        self.destination_data_store_name = kwargs.get('destination_data_store_name', None)
+        self.source_resource_group = kwargs["source_resource_group"]
+        self.source_subscription_id = kwargs["source_subscription_id"]
+        self.start_time = kwargs["start_time"]
+        self.status = kwargs["status"]
+        self.subscription_id = kwargs["subscription_id"]
+        self.supported_actions = kwargs["supported_actions"]
+        self.vault_name = kwargs["vault_name"]
+        self.etag = kwargs.get("etag", None)
+        self.source_data_store_name = kwargs.get("source_data_store_name", None)
+        self.destination_data_store_name = kwargs.get("destination_data_store_name", None)
 
 
 class AzureBackupJobResource(DppResource):
@@ -753,26 +702,23 @@ class AzureBackupJobResource(DppResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'properties': {'key': 'properties', 'type': 'AzureBackupJob'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "AzureBackupJob"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupJobResource, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class DppResourceList(msrest.serialization.Model):
@@ -784,15 +730,12 @@ class DppResourceList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppResourceList, self).__init__(**kwargs)
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class AzureBackupJobResourceList(DppResourceList):
@@ -806,16 +749,13 @@ class AzureBackupJobResourceList(DppResourceList):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[AzureBackupJobResource]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[AzureBackupJobResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupJobResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class BackupParameters(msrest.serialization.Model):
@@ -832,21 +772,16 @@ class BackupParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'AzureBackupParams': 'AzureBackupParams'}
-    }
+    _subtype_map = {"object_type": {"AzureBackupParams": "AzureBackupParams"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupParameters, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -864,22 +799,19 @@ class AzureBackupParams(BackupParameters):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'backup_type': {'required': True},
+        "object_type": {"required": True},
+        "backup_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'backup_type': {'key': 'backupType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "backup_type": {"key": "backupType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupParams, self).__init__(**kwargs)
-        self.object_type = 'AzureBackupParams'  # type: str
-        self.backup_type = kwargs['backup_type']
+        self.object_type = "AzureBackupParams"  # type: str
+        self.backup_type = kwargs["backup_type"]
 
 
 class AzureBackupRestoreRequest(msrest.serialization.Model):
@@ -900,29 +832,29 @@ class AzureBackupRestoreRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'restore_target_info': {'required': True},
-        'source_data_store_type': {'required': True},
+        "object_type": {"required": True},
+        "restore_target_info": {"required": True},
+        "source_data_store_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'restore_target_info': {'key': 'restoreTargetInfo', 'type': 'RestoreTargetInfoBase'},
-        'source_data_store_type': {'key': 'sourceDataStoreType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "restore_target_info": {"key": "restoreTargetInfo", "type": "RestoreTargetInfoBase"},
+        "source_data_store_type": {"key": "sourceDataStoreType", "type": "str"},
     }
 
     _subtype_map = {
-        'object_type': {'AzureBackupRecoveryPointBasedRestoreRequest': 'AzureBackupRecoveryPointBasedRestoreRequest', 'AzureBackupRecoveryTimeBasedRestoreRequest': 'AzureBackupRecoveryTimeBasedRestoreRequest'}
+        "object_type": {
+            "AzureBackupRecoveryPointBasedRestoreRequest": "AzureBackupRecoveryPointBasedRestoreRequest",
+            "AzureBackupRecoveryTimeBasedRestoreRequest": "AzureBackupRecoveryTimeBasedRestoreRequest",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRestoreRequest, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
-        self.restore_target_info = kwargs['restore_target_info']
-        self.source_data_store_type = kwargs['source_data_store_type']
+        self.restore_target_info = kwargs["restore_target_info"]
+        self.source_data_store_type = kwargs["source_data_store_type"]
 
 
 class AzureBackupRecoveryPointBasedRestoreRequest(AzureBackupRestoreRequest):
@@ -945,30 +877,27 @@ class AzureBackupRecoveryPointBasedRestoreRequest(AzureBackupRestoreRequest):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'restore_target_info': {'required': True},
-        'source_data_store_type': {'required': True},
-        'recovery_point_id': {'required': True},
+        "object_type": {"required": True},
+        "restore_target_info": {"required": True},
+        "source_data_store_type": {"required": True},
+        "recovery_point_id": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'restore_target_info': {'key': 'restoreTargetInfo', 'type': 'RestoreTargetInfoBase'},
-        'source_data_store_type': {'key': 'sourceDataStoreType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "restore_target_info": {"key": "restoreTargetInfo", "type": "RestoreTargetInfoBase"},
+        "source_data_store_type": {"key": "sourceDataStoreType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
     }
 
     _subtype_map = {
-        'object_type': {'AzureBackupRestoreWithRehydrationRequest': 'AzureBackupRestoreWithRehydrationRequest'}
+        "object_type": {"AzureBackupRestoreWithRehydrationRequest": "AzureBackupRestoreWithRehydrationRequest"}
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRecoveryPointBasedRestoreRequest, self).__init__(**kwargs)
-        self.object_type = 'AzureBackupRecoveryPointBasedRestoreRequest'  # type: str
-        self.recovery_point_id = kwargs['recovery_point_id']
+        self.object_type = "AzureBackupRecoveryPointBasedRestoreRequest"  # type: str
+        self.recovery_point_id = kwargs["recovery_point_id"]
 
 
 class AzureBackupRecoveryPointResource(DppResource):
@@ -990,26 +919,23 @@ class AzureBackupRecoveryPointResource(DppResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'properties': {'key': 'properties', 'type': 'AzureBackupRecoveryPoint'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "AzureBackupRecoveryPoint"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRecoveryPointResource, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class AzureBackupRecoveryPointResourceList(DppResourceList):
@@ -1023,16 +949,13 @@ class AzureBackupRecoveryPointResourceList(DppResourceList):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[AzureBackupRecoveryPointResource]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[AzureBackupRecoveryPointResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRecoveryPointResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class AzureBackupRecoveryTimeBasedRestoreRequest(AzureBackupRestoreRequest):
@@ -1053,26 +976,23 @@ class AzureBackupRecoveryTimeBasedRestoreRequest(AzureBackupRestoreRequest):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'restore_target_info': {'required': True},
-        'source_data_store_type': {'required': True},
-        'recovery_point_time': {'required': True},
+        "object_type": {"required": True},
+        "restore_target_info": {"required": True},
+        "source_data_store_type": {"required": True},
+        "recovery_point_time": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'restore_target_info': {'key': 'restoreTargetInfo', 'type': 'RestoreTargetInfoBase'},
-        'source_data_store_type': {'key': 'sourceDataStoreType', 'type': 'str'},
-        'recovery_point_time': {'key': 'recoveryPointTime', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "restore_target_info": {"key": "restoreTargetInfo", "type": "RestoreTargetInfoBase"},
+        "source_data_store_type": {"key": "sourceDataStoreType", "type": "str"},
+        "recovery_point_time": {"key": "recoveryPointTime", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRecoveryTimeBasedRestoreRequest, self).__init__(**kwargs)
-        self.object_type = 'AzureBackupRecoveryTimeBasedRestoreRequest'  # type: str
-        self.recovery_point_time = kwargs['recovery_point_time']
+        self.object_type = "AzureBackupRecoveryTimeBasedRestoreRequest"  # type: str
+        self.recovery_point_time = kwargs["recovery_point_time"]
 
 
 class AzureBackupRehydrationRequest(msrest.serialization.Model):
@@ -1091,24 +1011,21 @@ class AzureBackupRehydrationRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'recovery_point_id': {'required': True},
-        'rehydration_retention_duration': {'required': True},
+        "recovery_point_id": {"required": True},
+        "rehydration_retention_duration": {"required": True},
     }
 
     _attribute_map = {
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'rehydration_priority': {'key': 'rehydrationPriority', 'type': 'str'},
-        'rehydration_retention_duration': {'key': 'rehydrationRetentionDuration', 'type': 'str'},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "rehydration_priority": {"key": "rehydrationPriority", "type": "str"},
+        "rehydration_retention_duration": {"key": "rehydrationRetentionDuration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRehydrationRequest, self).__init__(**kwargs)
-        self.recovery_point_id = kwargs['recovery_point_id']
-        self.rehydration_priority = kwargs.get('rehydration_priority', None)
-        self.rehydration_retention_duration = kwargs['rehydration_retention_duration']
+        self.recovery_point_id = kwargs["recovery_point_id"]
+        self.rehydration_priority = kwargs.get("rehydration_priority", None)
+        self.rehydration_retention_duration = kwargs["rehydration_retention_duration"]
 
 
 class AzureBackupRestoreWithRehydrationRequest(AzureBackupRecoveryPointBasedRestoreRequest):
@@ -1134,31 +1051,28 @@ class AzureBackupRestoreWithRehydrationRequest(AzureBackupRecoveryPointBasedRest
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'restore_target_info': {'required': True},
-        'source_data_store_type': {'required': True},
-        'recovery_point_id': {'required': True},
-        'rehydration_priority': {'required': True},
-        'rehydration_retention_duration': {'required': True},
+        "object_type": {"required": True},
+        "restore_target_info": {"required": True},
+        "source_data_store_type": {"required": True},
+        "recovery_point_id": {"required": True},
+        "rehydration_priority": {"required": True},
+        "rehydration_retention_duration": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'restore_target_info': {'key': 'restoreTargetInfo', 'type': 'RestoreTargetInfoBase'},
-        'source_data_store_type': {'key': 'sourceDataStoreType', 'type': 'str'},
-        'recovery_point_id': {'key': 'recoveryPointId', 'type': 'str'},
-        'rehydration_priority': {'key': 'rehydrationPriority', 'type': 'str'},
-        'rehydration_retention_duration': {'key': 'rehydrationRetentionDuration', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "restore_target_info": {"key": "restoreTargetInfo", "type": "RestoreTargetInfoBase"},
+        "source_data_store_type": {"key": "sourceDataStoreType", "type": "str"},
+        "recovery_point_id": {"key": "recoveryPointId", "type": "str"},
+        "rehydration_priority": {"key": "rehydrationPriority", "type": "str"},
+        "rehydration_retention_duration": {"key": "rehydrationRetentionDuration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRestoreWithRehydrationRequest, self).__init__(**kwargs)
-        self.object_type = 'AzureBackupRestoreWithRehydrationRequest'  # type: str
-        self.rehydration_priority = kwargs['rehydration_priority']
-        self.rehydration_retention_duration = kwargs['rehydration_retention_duration']
+        self.object_type = "AzureBackupRestoreWithRehydrationRequest"  # type: str
+        self.rehydration_priority = kwargs["rehydration_priority"]
+        self.rehydration_retention_duration = kwargs["rehydration_retention_duration"]
 
 
 class BasePolicyRule(msrest.serialization.Model):
@@ -1176,25 +1090,20 @@ class BasePolicyRule(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
-        'object_type': {'required': True},
+        "name": {"required": True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'AzureBackupRule': 'AzureBackupRule', 'AzureRetentionRule': 'AzureRetentionRule'}
-    }
+    _subtype_map = {"object_type": {"AzureBackupRule": "AzureBackupRule", "AzureRetentionRule": "AzureRetentionRule"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BasePolicyRule, self).__init__(**kwargs)
-        self.name = kwargs['name']
+        self.name = kwargs["name"]
         self.object_type = None  # type: Optional[str]
 
 
@@ -1216,29 +1125,26 @@ class AzureBackupRule(BasePolicyRule):
     """
 
     _validation = {
-        'name': {'required': True},
-        'object_type': {'required': True},
-        'data_store': {'required': True},
-        'trigger': {'required': True},
+        "name": {"required": True},
+        "object_type": {"required": True},
+        "data_store": {"required": True},
+        "trigger": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'backup_parameters': {'key': 'backupParameters', 'type': 'BackupParameters'},
-        'data_store': {'key': 'dataStore', 'type': 'DataStoreInfoBase'},
-        'trigger': {'key': 'trigger', 'type': 'TriggerContext'},
+        "name": {"key": "name", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
+        "backup_parameters": {"key": "backupParameters", "type": "BackupParameters"},
+        "data_store": {"key": "dataStore", "type": "DataStoreInfoBase"},
+        "trigger": {"key": "trigger", "type": "TriggerContext"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureBackupRule, self).__init__(**kwargs)
-        self.object_type = 'AzureBackupRule'  # type: str
-        self.backup_parameters = kwargs.get('backup_parameters', None)
-        self.data_store = kwargs['data_store']
-        self.trigger = kwargs['trigger']
+        self.object_type = "AzureBackupRule"  # type: str
+        self.backup_parameters = kwargs.get("backup_parameters", None)
+        self.data_store = kwargs["data_store"]
+        self.trigger = kwargs["trigger"]
 
 
 class DataStoreParameters(msrest.serialization.Model):
@@ -1258,26 +1164,21 @@ class DataStoreParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'data_store_type': {'required': True},
+        "object_type": {"required": True},
+        "data_store_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'data_store_type': {'key': 'dataStoreType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "data_store_type": {"key": "dataStoreType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'AzureOperationalStoreParameters': 'AzureOperationalStoreParameters'}
-    }
+    _subtype_map = {"object_type": {"AzureOperationalStoreParameters": "AzureOperationalStoreParameters"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataStoreParameters, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
-        self.data_store_type = kwargs['data_store_type']
+        self.data_store_type = kwargs["data_store_type"]
 
 
 class AzureOperationalStoreParameters(DataStoreParameters):
@@ -1296,23 +1197,20 @@ class AzureOperationalStoreParameters(DataStoreParameters):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'data_store_type': {'required': True},
+        "object_type": {"required": True},
+        "data_store_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'data_store_type': {'key': 'dataStoreType', 'type': 'str'},
-        'resource_group_id': {'key': 'resourceGroupId', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "data_store_type": {"key": "dataStoreType", "type": "str"},
+        "resource_group_id": {"key": "resourceGroupId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureOperationalStoreParameters, self).__init__(**kwargs)
-        self.object_type = 'AzureOperationalStoreParameters'  # type: str
-        self.resource_group_id = kwargs.get('resource_group_id', None)
+        self.object_type = "AzureOperationalStoreParameters"  # type: str
+        self.resource_group_id = kwargs.get("resource_group_id", None)
 
 
 class AzureRetentionRule(BasePolicyRule):
@@ -1331,26 +1229,23 @@ class AzureRetentionRule(BasePolicyRule):
     """
 
     _validation = {
-        'name': {'required': True},
-        'object_type': {'required': True},
-        'lifecycles': {'required': True},
+        "name": {"required": True},
+        "object_type": {"required": True},
+        "lifecycles": {"required": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'is_default': {'key': 'isDefault', 'type': 'bool'},
-        'lifecycles': {'key': 'lifecycles', 'type': '[SourceLifeCycle]'},
+        "name": {"key": "name", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
+        "is_default": {"key": "isDefault", "type": "bool"},
+        "lifecycles": {"key": "lifecycles", "type": "[SourceLifeCycle]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(AzureRetentionRule, self).__init__(**kwargs)
-        self.object_type = 'AzureRetentionRule'  # type: str
-        self.is_default = kwargs.get('is_default', None)
-        self.lifecycles = kwargs['lifecycles']
+        self.object_type = "AzureRetentionRule"  # type: str
+        self.is_default = kwargs.get("is_default", None)
+        self.lifecycles = kwargs["lifecycles"]
 
 
 class BackupCriteria(msrest.serialization.Model):
@@ -1367,21 +1262,16 @@ class BackupCriteria(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'ScheduleBasedBackupCriteria': 'ScheduleBasedBackupCriteria'}
-    }
+    _subtype_map = {"object_type": {"ScheduleBasedBackupCriteria": "ScheduleBasedBackupCriteria"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupCriteria, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -1423,43 +1313,40 @@ class BackupInstance(msrest.serialization.Model):
     """
 
     _validation = {
-        'data_source_info': {'required': True},
-        'policy_info': {'required': True},
-        'protection_status': {'readonly': True},
-        'current_protection_state': {'readonly': True},
-        'protection_error_details': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'object_type': {'required': True},
+        "data_source_info": {"required": True},
+        "policy_info": {"required": True},
+        "protection_status": {"readonly": True},
+        "current_protection_state": {"readonly": True},
+        "protection_error_details": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'friendly_name': {'key': 'friendlyName', 'type': 'str'},
-        'data_source_info': {'key': 'dataSourceInfo', 'type': 'Datasource'},
-        'data_source_set_info': {'key': 'dataSourceSetInfo', 'type': 'DatasourceSet'},
-        'policy_info': {'key': 'policyInfo', 'type': 'PolicyInfo'},
-        'protection_status': {'key': 'protectionStatus', 'type': 'ProtectionStatusDetails'},
-        'current_protection_state': {'key': 'currentProtectionState', 'type': 'str'},
-        'protection_error_details': {'key': 'protectionErrorDetails', 'type': 'UserFacingError'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'datasource_auth_credentials': {'key': 'datasourceAuthCredentials', 'type': 'AuthCredentials'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "friendly_name": {"key": "friendlyName", "type": "str"},
+        "data_source_info": {"key": "dataSourceInfo", "type": "Datasource"},
+        "data_source_set_info": {"key": "dataSourceSetInfo", "type": "DatasourceSet"},
+        "policy_info": {"key": "policyInfo", "type": "PolicyInfo"},
+        "protection_status": {"key": "protectionStatus", "type": "ProtectionStatusDetails"},
+        "current_protection_state": {"key": "currentProtectionState", "type": "str"},
+        "protection_error_details": {"key": "protectionErrorDetails", "type": "UserFacingError"},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "datasource_auth_credentials": {"key": "datasourceAuthCredentials", "type": "AuthCredentials"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupInstance, self).__init__(**kwargs)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.data_source_info = kwargs['data_source_info']
-        self.data_source_set_info = kwargs.get('data_source_set_info', None)
-        self.policy_info = kwargs['policy_info']
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.data_source_info = kwargs["data_source_info"]
+        self.data_source_set_info = kwargs.get("data_source_set_info", None)
+        self.policy_info = kwargs["policy_info"]
         self.protection_status = None
         self.current_protection_state = None
         self.protection_error_details = None
         self.provisioning_state = None
-        self.datasource_auth_credentials = kwargs.get('datasource_auth_credentials', None)
-        self.object_type = kwargs['object_type']
+        self.datasource_auth_credentials = kwargs.get("datasource_auth_credentials", None)
+        self.object_type = kwargs["object_type"]
 
 
 class BackupInstanceResource(DppResource):
@@ -1481,26 +1368,23 @@ class BackupInstanceResource(DppResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'properties': {'key': 'properties', 'type': 'BackupInstance'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "BackupInstance"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupInstanceResource, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class BackupInstanceResourceList(DppResourceList):
@@ -1514,16 +1398,13 @@ class BackupInstanceResourceList(DppResourceList):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[BackupInstanceResource]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[BackupInstanceResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupInstanceResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class BaseBackupPolicy(msrest.serialization.Model):
@@ -1541,25 +1422,20 @@ class BaseBackupPolicy(msrest.serialization.Model):
     """
 
     _validation = {
-        'datasource_types': {'required': True},
-        'object_type': {'required': True},
+        "datasource_types": {"required": True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'datasource_types': {'key': 'datasourceTypes', 'type': '[str]'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "datasource_types": {"key": "datasourceTypes", "type": "[str]"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'BackupPolicy': 'BackupPolicy'}
-    }
+    _subtype_map = {"object_type": {"BackupPolicy": "BackupPolicy"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BaseBackupPolicy, self).__init__(**kwargs)
-        self.datasource_types = kwargs['datasource_types']
+        self.datasource_types = kwargs["datasource_types"]
         self.object_type = None  # type: Optional[str]
 
 
@@ -1578,24 +1454,21 @@ class BackupPolicy(BaseBackupPolicy):
     """
 
     _validation = {
-        'datasource_types': {'required': True},
-        'object_type': {'required': True},
-        'policy_rules': {'required': True},
+        "datasource_types": {"required": True},
+        "object_type": {"required": True},
+        "policy_rules": {"required": True},
     }
 
     _attribute_map = {
-        'datasource_types': {'key': 'datasourceTypes', 'type': '[str]'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'policy_rules': {'key': 'policyRules', 'type': '[BasePolicyRule]'},
+        "datasource_types": {"key": "datasourceTypes", "type": "[str]"},
+        "object_type": {"key": "objectType", "type": "str"},
+        "policy_rules": {"key": "policyRules", "type": "[BasePolicyRule]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupPolicy, self).__init__(**kwargs)
-        self.object_type = 'BackupPolicy'  # type: str
-        self.policy_rules = kwargs['policy_rules']
+        self.object_type = "BackupPolicy"  # type: str
+        self.policy_rules = kwargs["policy_rules"]
 
 
 class BackupSchedule(msrest.serialization.Model):
@@ -1610,21 +1483,18 @@ class BackupSchedule(msrest.serialization.Model):
     """
 
     _validation = {
-        'repeating_time_intervals': {'required': True},
+        "repeating_time_intervals": {"required": True},
     }
 
     _attribute_map = {
-        'repeating_time_intervals': {'key': 'repeatingTimeIntervals', 'type': '[str]'},
-        'time_zone': {'key': 'timeZone', 'type': 'str'},
+        "repeating_time_intervals": {"key": "repeatingTimeIntervals", "type": "[str]"},
+        "time_zone": {"key": "timeZone", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupSchedule, self).__init__(**kwargs)
-        self.repeating_time_intervals = kwargs['repeating_time_intervals']
-        self.time_zone = kwargs.get('time_zone', None)
+        self.repeating_time_intervals = kwargs["repeating_time_intervals"]
+        self.time_zone = kwargs.get("time_zone", None)
 
 
 class BackupVault(msrest.serialization.Model):
@@ -1648,28 +1518,25 @@ class BackupVault(msrest.serialization.Model):
     """
 
     _validation = {
-        'provisioning_state': {'readonly': True},
-        'resource_move_state': {'readonly': True},
-        'resource_move_details': {'readonly': True},
-        'storage_settings': {'required': True},
+        "provisioning_state": {"readonly": True},
+        "resource_move_state": {"readonly": True},
+        "resource_move_details": {"readonly": True},
+        "storage_settings": {"required": True},
     }
 
     _attribute_map = {
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'resource_move_state': {'key': 'resourceMoveState', 'type': 'str'},
-        'resource_move_details': {'key': 'resourceMoveDetails', 'type': 'ResourceMoveDetails'},
-        'storage_settings': {'key': 'storageSettings', 'type': '[StorageSetting]'},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "resource_move_state": {"key": "resourceMoveState", "type": "str"},
+        "resource_move_details": {"key": "resourceMoveDetails", "type": "ResourceMoveDetails"},
+        "storage_settings": {"key": "storageSettings", "type": "[StorageSetting]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupVault, self).__init__(**kwargs)
         self.provisioning_state = None
         self.resource_move_state = None
         self.resource_move_details = None
-        self.storage_settings = kwargs['storage_settings']
+        self.storage_settings = kwargs["storage_settings"]
 
 
 class DppTrackedResource(msrest.serialization.Model):
@@ -1697,34 +1564,31 @@ class DppTrackedResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'e_tag': {'key': 'eTag', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'identity': {'key': 'identity', 'type': 'DppIdentityDetails'},
-        'location': {'key': 'location', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
+        "e_tag": {"key": "eTag", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "identity": {"key": "identity", "type": "DppIdentityDetails"},
+        "location": {"key": "location", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppTrackedResource, self).__init__(**kwargs)
-        self.e_tag = kwargs.get('e_tag', None)
+        self.e_tag = kwargs.get("e_tag", None)
         self.id = None
-        self.identity = kwargs.get('identity', None)
-        self.location = kwargs.get('location', None)
+        self.identity = kwargs.get("identity", None)
+        self.location = kwargs.get("location", None)
         self.name = None
-        self.tags = kwargs.get('tags', None)
+        self.tags = kwargs.get("tags", None)
         self.type = None
         self.system_data = None
 
@@ -1758,31 +1622,28 @@ class BackupVaultResource(DppTrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
-        'properties': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "properties": {"required": True},
     }
 
     _attribute_map = {
-        'e_tag': {'key': 'eTag', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'identity': {'key': 'identity', 'type': 'DppIdentityDetails'},
-        'location': {'key': 'location', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'properties': {'key': 'properties', 'type': 'BackupVault'},
+        "e_tag": {"key": "eTag", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "identity": {"key": "identity", "type": "DppIdentityDetails"},
+        "location": {"key": "location", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "BackupVault"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupVaultResource, self).__init__(**kwargs)
-        self.properties = kwargs['properties']
+        self.properties = kwargs["properties"]
 
 
 class BackupVaultResourceList(DppResourceList):
@@ -1796,16 +1657,13 @@ class BackupVaultResourceList(DppResourceList):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[BackupVaultResource]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[BackupVaultResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupVaultResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class BaseBackupPolicyResource(DppResource):
@@ -1827,26 +1685,23 @@ class BaseBackupPolicyResource(DppResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'properties': {'key': 'properties', 'type': 'BaseBackupPolicy'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "BaseBackupPolicy"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BaseBackupPolicyResource, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class BaseBackupPolicyResourceList(DppResourceList):
@@ -1860,16 +1715,13 @@ class BaseBackupPolicyResourceList(DppResourceList):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[BaseBackupPolicyResource]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[BaseBackupPolicyResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BaseBackupPolicyResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class CheckNameAvailabilityRequest(msrest.serialization.Model):
@@ -1882,17 +1734,14 @@ class CheckNameAvailabilityRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CheckNameAvailabilityRequest, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.type = kwargs.get('type', None)
+        self.name = kwargs.get("name", None)
+        self.type = kwargs.get("type", None)
 
 
 class CheckNameAvailabilityResult(msrest.serialization.Model):
@@ -1907,19 +1756,16 @@ class CheckNameAvailabilityResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'message': {'key': 'message', 'type': 'str'},
-        'name_available': {'key': 'nameAvailable', 'type': 'bool'},
-        'reason': {'key': 'reason', 'type': 'str'},
+        "message": {"key": "message", "type": "str"},
+        "name_available": {"key": "nameAvailable", "type": "bool"},
+        "reason": {"key": "reason", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CheckNameAvailabilityResult, self).__init__(**kwargs)
-        self.message = kwargs.get('message', None)
-        self.name_available = kwargs.get('name_available', None)
-        self.reason = kwargs.get('reason', None)
+        self.message = kwargs.get("message", None)
+        self.name_available = kwargs.get("name_available", None)
+        self.reason = kwargs.get("reason", None)
 
 
 class ClientDiscoveryDisplay(msrest.serialization.Model):
@@ -1936,21 +1782,18 @@ class ClientDiscoveryDisplay(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'description': {'key': 'description', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
+        "description": {"key": "description", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientDiscoveryDisplay, self).__init__(**kwargs)
-        self.description = kwargs.get('description', None)
-        self.operation = kwargs.get('operation', None)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
+        self.description = kwargs.get("description", None)
+        self.operation = kwargs.get("operation", None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
 
 
 class ClientDiscoveryForLogSpecification(msrest.serialization.Model):
@@ -1965,19 +1808,16 @@ class ClientDiscoveryForLogSpecification(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'blob_duration': {'key': 'blobDuration', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+        "blob_duration": {"key": "blobDuration", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "name": {"key": "name", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientDiscoveryForLogSpecification, self).__init__(**kwargs)
-        self.blob_duration = kwargs.get('blob_duration', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.name = kwargs.get('name', None)
+        self.blob_duration = kwargs.get("blob_duration", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.name = kwargs.get("name", None)
 
 
 class ClientDiscoveryForProperties(msrest.serialization.Model):
@@ -1989,15 +1829,12 @@ class ClientDiscoveryForProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'service_specification': {'key': 'serviceSpecification', 'type': 'ClientDiscoveryForServiceSpecification'},
+        "service_specification": {"key": "serviceSpecification", "type": "ClientDiscoveryForServiceSpecification"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientDiscoveryForProperties, self).__init__(**kwargs)
-        self.service_specification = kwargs.get('service_specification', None)
+        self.service_specification = kwargs.get("service_specification", None)
 
 
 class ClientDiscoveryForServiceSpecification(msrest.serialization.Model):
@@ -2009,15 +1846,12 @@ class ClientDiscoveryForServiceSpecification(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'log_specifications': {'key': 'logSpecifications', 'type': '[ClientDiscoveryForLogSpecification]'},
+        "log_specifications": {"key": "logSpecifications", "type": "[ClientDiscoveryForLogSpecification]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientDiscoveryForServiceSpecification, self).__init__(**kwargs)
-        self.log_specifications = kwargs.get('log_specifications', None)
+        self.log_specifications = kwargs.get("log_specifications", None)
 
 
 class ClientDiscoveryResponse(msrest.serialization.Model):
@@ -2030,17 +1864,14 @@ class ClientDiscoveryResponse(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[ClientDiscoveryValueForSingleApi]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[ClientDiscoveryValueForSingleApi]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientDiscoveryResponse, self).__init__(**kwargs)
-        self.next_link = kwargs.get('next_link', None)
-        self.value = kwargs.get('value', None)
+        self.next_link = kwargs.get("next_link", None)
+        self.value = kwargs.get("value", None)
 
 
 class ClientDiscoveryValueForSingleApi(msrest.serialization.Model):
@@ -2060,23 +1891,20 @@ class ClientDiscoveryValueForSingleApi(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'display': {'key': 'display', 'type': 'ClientDiscoveryDisplay'},
-        'name': {'key': 'name', 'type': 'str'},
-        'is_data_action': {'key': 'isDataAction', 'type': 'bool'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'ClientDiscoveryForProperties'},
+        "display": {"key": "display", "type": "ClientDiscoveryDisplay"},
+        "name": {"key": "name", "type": "str"},
+        "is_data_action": {"key": "isDataAction", "type": "bool"},
+        "origin": {"key": "origin", "type": "str"},
+        "properties": {"key": "properties", "type": "ClientDiscoveryForProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ClientDiscoveryValueForSingleApi, self).__init__(**kwargs)
-        self.display = kwargs.get('display', None)
-        self.name = kwargs.get('name', None)
-        self.is_data_action = kwargs.get('is_data_action', None)
-        self.origin = kwargs.get('origin', None)
-        self.properties = kwargs.get('properties', None)
+        self.display = kwargs.get("display", None)
+        self.name = kwargs.get("name", None)
+        self.is_data_action = kwargs.get("is_data_action", None)
+        self.origin = kwargs.get("origin", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class CopyOption(msrest.serialization.Model):
@@ -2093,21 +1921,22 @@ class CopyOption(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
     _subtype_map = {
-        'object_type': {'CopyOnExpiryOption': 'CopyOnExpiryOption', 'CustomCopyOption': 'CustomCopyOption', 'ImmediateCopyOption': 'ImmediateCopyOption'}
+        "object_type": {
+            "CopyOnExpiryOption": "CopyOnExpiryOption",
+            "CustomCopyOption": "CustomCopyOption",
+            "ImmediateCopyOption": "ImmediateCopyOption",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CopyOption, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -2123,19 +1952,16 @@ class CopyOnExpiryOption(CopyOption):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CopyOnExpiryOption, self).__init__(**kwargs)
-        self.object_type = 'CopyOnExpiryOption'  # type: str
+        self.object_type = "CopyOnExpiryOption"  # type: str
 
 
 class CustomCopyOption(CopyOption):
@@ -2151,21 +1977,18 @@ class CustomCopyOption(CopyOption):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'duration': {'key': 'duration', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "duration": {"key": "duration", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CustomCopyOption, self).__init__(**kwargs)
-        self.object_type = 'CustomCopyOption'  # type: str
-        self.duration = kwargs.get('duration', None)
+        self.object_type = "CustomCopyOption"  # type: str
+        self.duration = kwargs.get("duration", None)
 
 
 class Datasource(msrest.serialization.Model):
@@ -2191,31 +2014,28 @@ class Datasource(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_id': {'required': True},
+        "resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'datasource_type': {'key': 'datasourceType', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'resource_id': {'key': 'resourceID', 'type': 'str'},
-        'resource_location': {'key': 'resourceLocation', 'type': 'str'},
-        'resource_name': {'key': 'resourceName', 'type': 'str'},
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'resource_uri': {'key': 'resourceUri', 'type': 'str'},
+        "datasource_type": {"key": "datasourceType", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
+        "resource_id": {"key": "resourceID", "type": "str"},
+        "resource_location": {"key": "resourceLocation", "type": "str"},
+        "resource_name": {"key": "resourceName", "type": "str"},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "resource_uri": {"key": "resourceUri", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Datasource, self).__init__(**kwargs)
-        self.datasource_type = kwargs.get('datasource_type', None)
-        self.object_type = kwargs.get('object_type', None)
-        self.resource_id = kwargs['resource_id']
-        self.resource_location = kwargs.get('resource_location', None)
-        self.resource_name = kwargs.get('resource_name', None)
-        self.resource_type = kwargs.get('resource_type', None)
-        self.resource_uri = kwargs.get('resource_uri', None)
+        self.datasource_type = kwargs.get("datasource_type", None)
+        self.object_type = kwargs.get("object_type", None)
+        self.resource_id = kwargs["resource_id"]
+        self.resource_location = kwargs.get("resource_location", None)
+        self.resource_name = kwargs.get("resource_name", None)
+        self.resource_type = kwargs.get("resource_type", None)
+        self.resource_uri = kwargs.get("resource_uri", None)
 
 
 class DatasourceSet(msrest.serialization.Model):
@@ -2241,31 +2061,28 @@ class DatasourceSet(msrest.serialization.Model):
     """
 
     _validation = {
-        'resource_id': {'required': True},
+        "resource_id": {"required": True},
     }
 
     _attribute_map = {
-        'datasource_type': {'key': 'datasourceType', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'resource_id': {'key': 'resourceID', 'type': 'str'},
-        'resource_location': {'key': 'resourceLocation', 'type': 'str'},
-        'resource_name': {'key': 'resourceName', 'type': 'str'},
-        'resource_type': {'key': 'resourceType', 'type': 'str'},
-        'resource_uri': {'key': 'resourceUri', 'type': 'str'},
+        "datasource_type": {"key": "datasourceType", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
+        "resource_id": {"key": "resourceID", "type": "str"},
+        "resource_location": {"key": "resourceLocation", "type": "str"},
+        "resource_name": {"key": "resourceName", "type": "str"},
+        "resource_type": {"key": "resourceType", "type": "str"},
+        "resource_uri": {"key": "resourceUri", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DatasourceSet, self).__init__(**kwargs)
-        self.datasource_type = kwargs.get('datasource_type', None)
-        self.object_type = kwargs.get('object_type', None)
-        self.resource_id = kwargs['resource_id']
-        self.resource_location = kwargs.get('resource_location', None)
-        self.resource_name = kwargs.get('resource_name', None)
-        self.resource_type = kwargs.get('resource_type', None)
-        self.resource_uri = kwargs.get('resource_uri', None)
+        self.datasource_type = kwargs.get("datasource_type", None)
+        self.object_type = kwargs.get("object_type", None)
+        self.resource_id = kwargs["resource_id"]
+        self.resource_location = kwargs.get("resource_location", None)
+        self.resource_name = kwargs.get("resource_name", None)
+        self.resource_type = kwargs.get("resource_type", None)
+        self.resource_uri = kwargs.get("resource_uri", None)
 
 
 class DataStoreInfoBase(msrest.serialization.Model):
@@ -2282,22 +2099,19 @@ class DataStoreInfoBase(msrest.serialization.Model):
     """
 
     _validation = {
-        'data_store_type': {'required': True},
-        'object_type': {'required': True},
+        "data_store_type": {"required": True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'data_store_type': {'key': 'dataStoreType', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "data_store_type": {"key": "dataStoreType", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DataStoreInfoBase, self).__init__(**kwargs)
-        self.data_store_type = kwargs['data_store_type']
-        self.object_type = kwargs['object_type']
+        self.data_store_type = kwargs["data_store_type"]
+        self.object_type = kwargs["object_type"]
 
 
 class Day(msrest.serialization.Model):
@@ -2310,17 +2124,14 @@ class Day(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'date': {'key': 'date', 'type': 'int'},
-        'is_last': {'key': 'isLast', 'type': 'bool'},
+        "date": {"key": "date", "type": "int"},
+        "is_last": {"key": "isLast", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Day, self).__init__(**kwargs)
-        self.date = kwargs.get('date', None)
-        self.is_last = kwargs.get('is_last', None)
+        self.date = kwargs.get("date", None)
+        self.is_last = kwargs.get("is_last", None)
 
 
 class DppBaseResource(msrest.serialization.Model):
@@ -2338,21 +2149,18 @@ class DppBaseResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppBaseResource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -2370,17 +2178,14 @@ class DppBaseResourceList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[DppBaseResource]'},
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "value": {"key": "value", "type": "[DppBaseResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppBaseResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
-        self.next_link = kwargs.get('next_link', None)
+        self.value = kwargs.get("value", None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class DppIdentityDetails(msrest.serialization.Model):
@@ -2399,24 +2204,21 @@ class DppIdentityDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'principal_id': {'readonly': True},
-        'tenant_id': {'readonly': True},
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
     }
 
     _attribute_map = {
-        'principal_id': {'key': 'principalId', 'type': 'str'},
-        'tenant_id': {'key': 'tenantId', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppIdentityDetails, self).__init__(**kwargs)
         self.principal_id = None
         self.tenant_id = None
-        self.type = kwargs.get('type', None)
+        self.type = kwargs.get("type", None)
 
 
 class DppTrackedResourceList(msrest.serialization.Model):
@@ -2428,15 +2230,12 @@ class DppTrackedResourceList(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(DppTrackedResourceList, self).__init__(**kwargs)
-        self.next_link = kwargs.get('next_link', None)
+        self.next_link = kwargs.get("next_link", None)
 
 
 class Error(msrest.serialization.Model):
@@ -2457,25 +2256,22 @@ class Error(msrest.serialization.Model):
     """
 
     _validation = {
-        'additional_info': {'readonly': True},
-        'code': {'readonly': True},
-        'details': {'readonly': True},
-        'message': {'readonly': True},
-        'target': {'readonly': True},
+        "additional_info": {"readonly": True},
+        "code": {"readonly": True},
+        "details": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
     }
 
     _attribute_map = {
-        'additional_info': {'key': 'additionalInfo', 'type': '[ErrorAdditionalInfo]'},
-        'code': {'key': 'code', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[Error]'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
+        "code": {"key": "code", "type": "str"},
+        "details": {"key": "details", "type": "[Error]"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Error, self).__init__(**kwargs)
         self.additional_info = None
         self.code = None
@@ -2496,19 +2292,16 @@ class ErrorAdditionalInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'info': {'readonly': True},
-        'type': {'readonly': True},
+        "info": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'info': {'key': 'info', 'type': 'object'},
-        'type': {'key': 'type', 'type': 'str'},
+        "info": {"key": "info", "type": "object"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ErrorAdditionalInfo, self).__init__(**kwargs)
         self.info = None
         self.type = None
@@ -2530,23 +2323,20 @@ class ExportJobsResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'blob_url': {'readonly': True},
-        'blob_sas_key': {'readonly': True},
-        'excel_file_blob_url': {'readonly': True},
-        'excel_file_blob_sas_key': {'readonly': True},
+        "blob_url": {"readonly": True},
+        "blob_sas_key": {"readonly": True},
+        "excel_file_blob_url": {"readonly": True},
+        "excel_file_blob_sas_key": {"readonly": True},
     }
 
     _attribute_map = {
-        'blob_url': {'key': 'blobUrl', 'type': 'str'},
-        'blob_sas_key': {'key': 'blobSasKey', 'type': 'str'},
-        'excel_file_blob_url': {'key': 'excelFileBlobUrl', 'type': 'str'},
-        'excel_file_blob_sas_key': {'key': 'excelFileBlobSasKey', 'type': 'str'},
+        "blob_url": {"key": "blobUrl", "type": "str"},
+        "blob_sas_key": {"key": "blobSasKey", "type": "str"},
+        "excel_file_blob_url": {"key": "excelFileBlobUrl", "type": "str"},
+        "excel_file_blob_sas_key": {"key": "excelFileBlobSasKey", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ExportJobsResult, self).__init__(**kwargs)
         self.blob_url = None
         self.blob_sas_key = None
@@ -2568,21 +2358,16 @@ class FeatureValidationRequestBase(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'FeatureValidationRequest': 'FeatureValidationRequest'}
-    }
+    _subtype_map = {"object_type": {"FeatureValidationRequest": "FeatureValidationRequest"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FeatureValidationRequestBase, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -2603,23 +2388,20 @@ class FeatureValidationRequest(FeatureValidationRequestBase):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'feature_type': {'key': 'featureType', 'type': 'str'},
-        'feature_name': {'key': 'featureName', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "feature_type": {"key": "featureType", "type": "str"},
+        "feature_name": {"key": "featureName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FeatureValidationRequest, self).__init__(**kwargs)
-        self.object_type = 'FeatureValidationRequest'  # type: str
-        self.feature_type = kwargs.get('feature_type', None)
-        self.feature_name = kwargs.get('feature_name', None)
+        self.object_type = "FeatureValidationRequest"  # type: str
+        self.feature_type = kwargs.get("feature_type", None)
+        self.feature_name = kwargs.get("feature_name", None)
 
 
 class FeatureValidationResponseBase(msrest.serialization.Model):
@@ -2636,21 +2418,16 @@ class FeatureValidationResponseBase(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'FeatureValidationResponse': 'FeatureValidationResponse'}
-    }
+    _subtype_map = {"object_type": {"FeatureValidationResponse": "FeatureValidationResponse"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FeatureValidationResponseBase, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -2671,23 +2448,20 @@ class FeatureValidationResponse(FeatureValidationResponseBase):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'feature_type': {'key': 'featureType', 'type': 'str'},
-        'features': {'key': 'features', 'type': '[SupportedFeature]'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "feature_type": {"key": "featureType", "type": "str"},
+        "features": {"key": "features", "type": "[SupportedFeature]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FeatureValidationResponse, self).__init__(**kwargs)
-        self.object_type = 'FeatureValidationResponse'  # type: str
-        self.feature_type = kwargs.get('feature_type', None)
-        self.features = kwargs.get('features', None)
+        self.object_type = "FeatureValidationResponse"  # type: str
+        self.feature_type = kwargs.get("feature_type", None)
+        self.features = kwargs.get("features", None)
 
 
 class ImmediateCopyOption(CopyOption):
@@ -2701,19 +2475,16 @@ class ImmediateCopyOption(CopyOption):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ImmediateCopyOption, self).__init__(**kwargs)
-        self.object_type = 'ImmediateCopyOption'  # type: str
+        self.object_type = "ImmediateCopyOption"  # type: str
 
 
 class InnerError(msrest.serialization.Model):
@@ -2729,19 +2500,16 @@ class InnerError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'additional_info': {'key': 'additionalInfo', 'type': '{str}'},
-        'code': {'key': 'code', 'type': 'str'},
-        'embedded_inner_error': {'key': 'embeddedInnerError', 'type': 'InnerError'},
+        "additional_info": {"key": "additionalInfo", "type": "{str}"},
+        "code": {"key": "code", "type": "str"},
+        "embedded_inner_error": {"key": "embeddedInnerError", "type": "InnerError"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(InnerError, self).__init__(**kwargs)
-        self.additional_info = kwargs.get('additional_info', None)
-        self.code = kwargs.get('code', None)
-        self.embedded_inner_error = kwargs.get('embedded_inner_error', None)
+        self.additional_info = kwargs.get("additional_info", None)
+        self.code = kwargs.get("code", None)
+        self.embedded_inner_error = kwargs.get("embedded_inner_error", None)
 
 
 class ItemLevelRestoreCriteria(msrest.serialization.Model):
@@ -2758,21 +2526,16 @@ class ItemLevelRestoreCriteria(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'RangeBasedItemLevelRestoreCriteria': 'RangeBasedItemLevelRestoreCriteria'}
-    }
+    _subtype_map = {"object_type": {"RangeBasedItemLevelRestoreCriteria": "RangeBasedItemLevelRestoreCriteria"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ItemLevelRestoreCriteria, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -2795,28 +2558,29 @@ class RestoreTargetInfoBase(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'recovery_option': {'required': True},
+        "object_type": {"required": True},
+        "recovery_option": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'recovery_option': {'key': 'recoveryOption', 'type': 'str'},
-        'restore_location': {'key': 'restoreLocation', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "recovery_option": {"key": "recoveryOption", "type": "str"},
+        "restore_location": {"key": "restoreLocation", "type": "str"},
     }
 
     _subtype_map = {
-        'object_type': {'ItemLevelRestoreTargetInfo': 'ItemLevelRestoreTargetInfo', 'RestoreFilesTargetInfo': 'RestoreFilesTargetInfo', 'RestoreTargetInfo': 'RestoreTargetInfo'}
+        "object_type": {
+            "ItemLevelRestoreTargetInfo": "ItemLevelRestoreTargetInfo",
+            "RestoreFilesTargetInfo": "RestoreFilesTargetInfo",
+            "RestoreTargetInfo": "RestoreTargetInfo",
+        }
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RestoreTargetInfoBase, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
-        self.recovery_option = kwargs['recovery_option']
-        self.restore_location = kwargs.get('restore_location', None)
+        self.recovery_option = kwargs["recovery_option"]
+        self.restore_location = kwargs.get("restore_location", None)
 
 
 class ItemLevelRestoreTargetInfo(RestoreTargetInfoBase):
@@ -2843,32 +2607,29 @@ class ItemLevelRestoreTargetInfo(RestoreTargetInfoBase):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'recovery_option': {'required': True},
-        'restore_criteria': {'required': True},
-        'datasource_info': {'required': True},
+        "object_type": {"required": True},
+        "recovery_option": {"required": True},
+        "restore_criteria": {"required": True},
+        "datasource_info": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'recovery_option': {'key': 'recoveryOption', 'type': 'str'},
-        'restore_location': {'key': 'restoreLocation', 'type': 'str'},
-        'restore_criteria': {'key': 'restoreCriteria', 'type': '[ItemLevelRestoreCriteria]'},
-        'datasource_info': {'key': 'datasourceInfo', 'type': 'Datasource'},
-        'datasource_set_info': {'key': 'datasourceSetInfo', 'type': 'DatasourceSet'},
-        'datasource_auth_credentials': {'key': 'datasourceAuthCredentials', 'type': 'AuthCredentials'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "recovery_option": {"key": "recoveryOption", "type": "str"},
+        "restore_location": {"key": "restoreLocation", "type": "str"},
+        "restore_criteria": {"key": "restoreCriteria", "type": "[ItemLevelRestoreCriteria]"},
+        "datasource_info": {"key": "datasourceInfo", "type": "Datasource"},
+        "datasource_set_info": {"key": "datasourceSetInfo", "type": "DatasourceSet"},
+        "datasource_auth_credentials": {"key": "datasourceAuthCredentials", "type": "AuthCredentials"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ItemLevelRestoreTargetInfo, self).__init__(**kwargs)
-        self.object_type = 'ItemLevelRestoreTargetInfo'  # type: str
-        self.restore_criteria = kwargs['restore_criteria']
-        self.datasource_info = kwargs['datasource_info']
-        self.datasource_set_info = kwargs.get('datasource_set_info', None)
-        self.datasource_auth_credentials = kwargs.get('datasource_auth_credentials', None)
+        self.object_type = "ItemLevelRestoreTargetInfo"  # type: str
+        self.restore_criteria = kwargs["restore_criteria"]
+        self.datasource_info = kwargs["datasource_info"]
+        self.datasource_set_info = kwargs.get("datasource_set_info", None)
+        self.datasource_auth_credentials = kwargs.get("datasource_auth_credentials", None)
 
 
 class JobExtendedInfo(msrest.serialization.Model):
@@ -2893,30 +2654,27 @@ class JobExtendedInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'backup_instance_state': {'readonly': True},
-        'data_transferred_in_bytes': {'readonly': True},
-        'recovery_destination': {'readonly': True},
-        'source_recover_point': {'readonly': True},
-        'sub_tasks': {'readonly': True},
-        'target_recover_point': {'readonly': True},
+        "backup_instance_state": {"readonly": True},
+        "data_transferred_in_bytes": {"readonly": True},
+        "recovery_destination": {"readonly": True},
+        "source_recover_point": {"readonly": True},
+        "sub_tasks": {"readonly": True},
+        "target_recover_point": {"readonly": True},
     }
 
     _attribute_map = {
-        'additional_details': {'key': 'additionalDetails', 'type': '{str}'},
-        'backup_instance_state': {'key': 'backupInstanceState', 'type': 'str'},
-        'data_transferred_in_bytes': {'key': 'dataTransferredInBytes', 'type': 'float'},
-        'recovery_destination': {'key': 'recoveryDestination', 'type': 'str'},
-        'source_recover_point': {'key': 'sourceRecoverPoint', 'type': 'RestoreJobRecoveryPointDetails'},
-        'sub_tasks': {'key': 'subTasks', 'type': '[JobSubTask]'},
-        'target_recover_point': {'key': 'targetRecoverPoint', 'type': 'RestoreJobRecoveryPointDetails'},
+        "additional_details": {"key": "additionalDetails", "type": "{str}"},
+        "backup_instance_state": {"key": "backupInstanceState", "type": "str"},
+        "data_transferred_in_bytes": {"key": "dataTransferredInBytes", "type": "float"},
+        "recovery_destination": {"key": "recoveryDestination", "type": "str"},
+        "source_recover_point": {"key": "sourceRecoverPoint", "type": "RestoreJobRecoveryPointDetails"},
+        "sub_tasks": {"key": "subTasks", "type": "[JobSubTask]"},
+        "target_recover_point": {"key": "targetRecoverPoint", "type": "RestoreJobRecoveryPointDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobExtendedInfo, self).__init__(**kwargs)
-        self.additional_details = kwargs.get('additional_details', None)
+        self.additional_details = kwargs.get("additional_details", None)
         self.backup_instance_state = None
         self.data_transferred_in_bytes = None
         self.recovery_destination = None
@@ -2945,30 +2703,27 @@ class JobSubTask(msrest.serialization.Model):
     """
 
     _validation = {
-        'task_id': {'required': True},
-        'task_name': {'required': True},
-        'task_progress': {'readonly': True},
-        'task_status': {'required': True},
+        "task_id": {"required": True},
+        "task_name": {"required": True},
+        "task_progress": {"readonly": True},
+        "task_status": {"required": True},
     }
 
     _attribute_map = {
-        'additional_details': {'key': 'additionalDetails', 'type': '{str}'},
-        'task_id': {'key': 'taskId', 'type': 'int'},
-        'task_name': {'key': 'taskName', 'type': 'str'},
-        'task_progress': {'key': 'taskProgress', 'type': 'str'},
-        'task_status': {'key': 'taskStatus', 'type': 'str'},
+        "additional_details": {"key": "additionalDetails", "type": "{str}"},
+        "task_id": {"key": "taskId", "type": "int"},
+        "task_name": {"key": "taskName", "type": "str"},
+        "task_progress": {"key": "taskProgress", "type": "str"},
+        "task_status": {"key": "taskStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(JobSubTask, self).__init__(**kwargs)
-        self.additional_details = kwargs.get('additional_details', None)
-        self.task_id = kwargs['task_id']
-        self.task_name = kwargs['task_name']
+        self.additional_details = kwargs.get("additional_details", None)
+        self.task_id = kwargs["task_id"]
+        self.task_name = kwargs["task_name"]
         self.task_progress = None
-        self.task_status = kwargs['task_status']
+        self.task_status = kwargs["task_status"]
 
 
 class OperationExtendedInfo(msrest.serialization.Model):
@@ -2985,21 +2740,16 @@ class OperationExtendedInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    _subtype_map = {
-        'object_type': {'OperationJobExtendedInfo': 'OperationJobExtendedInfo'}
-    }
+    _subtype_map = {"object_type": {"OperationJobExtendedInfo": "OperationJobExtendedInfo"}}
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationExtendedInfo, self).__init__(**kwargs)
         self.object_type = None  # type: Optional[str]
 
@@ -3017,21 +2767,18 @@ class OperationJobExtendedInfo(OperationExtendedInfo):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'job_id': {'key': 'jobId', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "job_id": {"key": "jobId", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationJobExtendedInfo, self).__init__(**kwargs)
-        self.object_type = 'OperationJobExtendedInfo'  # type: str
-        self.job_id = kwargs.get('job_id', None)
+        self.object_type = "OperationJobExtendedInfo"  # type: str
+        self.job_id = kwargs.get("job_id", None)
 
 
 class OperationResource(msrest.serialization.Model):
@@ -3058,27 +2805,24 @@ class OperationResource(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'end_time': {'key': 'endTime', 'type': 'iso-8601'},
-        'error': {'key': 'error', 'type': 'Error'},
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'OperationExtendedInfo'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
-        'status': {'key': 'status', 'type': 'str'},
+        "end_time": {"key": "endTime", "type": "iso-8601"},
+        "error": {"key": "error", "type": "Error"},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "properties": {"key": "properties", "type": "OperationExtendedInfo"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationResource, self).__init__(**kwargs)
-        self.end_time = kwargs.get('end_time', None)
-        self.error = kwargs.get('error', None)
-        self.id = kwargs.get('id', None)
-        self.name = kwargs.get('name', None)
-        self.properties = kwargs.get('properties', None)
-        self.start_time = kwargs.get('start_time', None)
-        self.status = kwargs.get('status', None)
+        self.end_time = kwargs.get("end_time", None)
+        self.error = kwargs.get("error", None)
+        self.id = kwargs.get("id", None)
+        self.name = kwargs.get("name", None)
+        self.properties = kwargs.get("properties", None)
+        self.start_time = kwargs.get("start_time", None)
+        self.status = kwargs.get("status", None)
 
 
 class PatchResourceRequestInput(msrest.serialization.Model):
@@ -3091,17 +2835,14 @@ class PatchResourceRequestInput(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'identity': {'key': 'identity', 'type': 'DppIdentityDetails'},
-        'tags': {'key': 'tags', 'type': '{str}'},
+        "identity": {"key": "identity", "type": "DppIdentityDetails"},
+        "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PatchResourceRequestInput, self).__init__(**kwargs)
-        self.identity = kwargs.get('identity', None)
-        self.tags = kwargs.get('tags', None)
+        self.identity = kwargs.get("identity", None)
+        self.tags = kwargs.get("tags", None)
 
 
 class PolicyInfo(msrest.serialization.Model):
@@ -3120,24 +2861,21 @@ class PolicyInfo(msrest.serialization.Model):
     """
 
     _validation = {
-        'policy_id': {'required': True},
-        'policy_version': {'readonly': True},
+        "policy_id": {"required": True},
+        "policy_version": {"readonly": True},
     }
 
     _attribute_map = {
-        'policy_id': {'key': 'policyId', 'type': 'str'},
-        'policy_version': {'key': 'policyVersion', 'type': 'str'},
-        'policy_parameters': {'key': 'policyParameters', 'type': 'PolicyParameters'},
+        "policy_id": {"key": "policyId", "type": "str"},
+        "policy_version": {"key": "policyVersion", "type": "str"},
+        "policy_parameters": {"key": "policyParameters", "type": "PolicyParameters"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyInfo, self).__init__(**kwargs)
-        self.policy_id = kwargs['policy_id']
+        self.policy_id = kwargs["policy_id"]
         self.policy_version = None
-        self.policy_parameters = kwargs.get('policy_parameters', None)
+        self.policy_parameters = kwargs.get("policy_parameters", None)
 
 
 class PolicyParameters(msrest.serialization.Model):
@@ -3148,15 +2886,12 @@ class PolicyParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'data_store_parameters_list': {'key': 'dataStoreParametersList', 'type': '[DataStoreParameters]'},
+        "data_store_parameters_list": {"key": "dataStoreParametersList", "type": "[DataStoreParameters]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PolicyParameters, self).__init__(**kwargs)
-        self.data_store_parameters_list = kwargs.get('data_store_parameters_list', None)
+        self.data_store_parameters_list = kwargs.get("data_store_parameters_list", None)
 
 
 class ProtectionStatusDetails(msrest.serialization.Model):
@@ -3171,17 +2906,14 @@ class ProtectionStatusDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error_details': {'key': 'errorDetails', 'type': 'UserFacingError'},
-        'status': {'key': 'status', 'type': 'str'},
+        "error_details": {"key": "errorDetails", "type": "UserFacingError"},
+        "status": {"key": "status", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProtectionStatusDetails, self).__init__(**kwargs)
-        self.error_details = kwargs.get('error_details', None)
-        self.status = kwargs.get('status', None)
+        self.error_details = kwargs.get("error_details", None)
+        self.status = kwargs.get("status", None)
 
 
 class RangeBasedItemLevelRestoreCriteria(ItemLevelRestoreCriteria):
@@ -3199,23 +2931,20 @@ class RangeBasedItemLevelRestoreCriteria(ItemLevelRestoreCriteria):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'min_matching_value': {'key': 'minMatchingValue', 'type': 'str'},
-        'max_matching_value': {'key': 'maxMatchingValue', 'type': 'str'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "min_matching_value": {"key": "minMatchingValue", "type": "str"},
+        "max_matching_value": {"key": "maxMatchingValue", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RangeBasedItemLevelRestoreCriteria, self).__init__(**kwargs)
-        self.object_type = 'RangeBasedItemLevelRestoreCriteria'  # type: str
-        self.min_matching_value = kwargs.get('min_matching_value', None)
-        self.max_matching_value = kwargs.get('max_matching_value', None)
+        self.object_type = "RangeBasedItemLevelRestoreCriteria"  # type: str
+        self.min_matching_value = kwargs.get("min_matching_value", None)
+        self.max_matching_value = kwargs.get("max_matching_value", None)
 
 
 class RecoveryPointDataStoreDetails(msrest.serialization.Model):
@@ -3245,34 +2974,31 @@ class RecoveryPointDataStoreDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'rehydration_expiry_time': {'readonly': True},
-        'rehydration_status': {'readonly': True},
+        "rehydration_expiry_time": {"readonly": True},
+        "rehydration_status": {"readonly": True},
     }
 
     _attribute_map = {
-        'creation_time': {'key': 'creationTime', 'type': 'iso-8601'},
-        'expiry_time': {'key': 'expiryTime', 'type': 'iso-8601'},
-        'id': {'key': 'id', 'type': 'str'},
-        'meta_data': {'key': 'metaData', 'type': 'str'},
-        'state': {'key': 'state', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'visible': {'key': 'visible', 'type': 'bool'},
-        'rehydration_expiry_time': {'key': 'rehydrationExpiryTime', 'type': 'iso-8601'},
-        'rehydration_status': {'key': 'rehydrationStatus', 'type': 'str'},
+        "creation_time": {"key": "creationTime", "type": "iso-8601"},
+        "expiry_time": {"key": "expiryTime", "type": "iso-8601"},
+        "id": {"key": "id", "type": "str"},
+        "meta_data": {"key": "metaData", "type": "str"},
+        "state": {"key": "state", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "visible": {"key": "visible", "type": "bool"},
+        "rehydration_expiry_time": {"key": "rehydrationExpiryTime", "type": "iso-8601"},
+        "rehydration_status": {"key": "rehydrationStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPointDataStoreDetails, self).__init__(**kwargs)
-        self.creation_time = kwargs.get('creation_time', None)
-        self.expiry_time = kwargs.get('expiry_time', None)
-        self.id = kwargs.get('id', None)
-        self.meta_data = kwargs.get('meta_data', None)
-        self.state = kwargs.get('state', None)
-        self.type = kwargs.get('type', None)
-        self.visible = kwargs.get('visible', None)
+        self.creation_time = kwargs.get("creation_time", None)
+        self.expiry_time = kwargs.get("expiry_time", None)
+        self.id = kwargs.get("id", None)
+        self.meta_data = kwargs.get("meta_data", None)
+        self.state = kwargs.get("state", None)
+        self.type = kwargs.get("type", None)
+        self.visible = kwargs.get("visible", None)
         self.rehydration_expiry_time = None
         self.rehydration_status = None
 
@@ -3295,25 +3021,22 @@ class RecoveryPointsFilters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'restore_point_data_store_id': {'key': 'restorePointDataStoreId', 'type': 'str'},
-        'is_visible': {'key': 'isVisible', 'type': 'bool'},
-        'start_date': {'key': 'startDate', 'type': 'str'},
-        'end_date': {'key': 'endDate', 'type': 'str'},
-        'extended_info': {'key': 'extendedInfo', 'type': 'bool'},
-        'restore_point_state': {'key': 'restorePointState', 'type': 'str'},
+        "restore_point_data_store_id": {"key": "restorePointDataStoreId", "type": "str"},
+        "is_visible": {"key": "isVisible", "type": "bool"},
+        "start_date": {"key": "startDate", "type": "str"},
+        "end_date": {"key": "endDate", "type": "str"},
+        "extended_info": {"key": "extendedInfo", "type": "bool"},
+        "restore_point_state": {"key": "restorePointState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecoveryPointsFilters, self).__init__(**kwargs)
-        self.restore_point_data_store_id = kwargs.get('restore_point_data_store_id', None)
-        self.is_visible = kwargs.get('is_visible', None)
-        self.start_date = kwargs.get('start_date', None)
-        self.end_date = kwargs.get('end_date', None)
-        self.extended_info = kwargs.get('extended_info', None)
-        self.restore_point_state = kwargs.get('restore_point_state', None)
+        self.restore_point_data_store_id = kwargs.get("restore_point_data_store_id", None)
+        self.is_visible = kwargs.get("is_visible", None)
+        self.start_date = kwargs.get("start_date", None)
+        self.end_date = kwargs.get("end_date", None)
+        self.extended_info = kwargs.get("extended_info", None)
+        self.restore_point_state = kwargs.get("restore_point_state", None)
 
 
 class ResourceGuard(msrest.serialization.Model):
@@ -3338,25 +3061,22 @@ class ResourceGuard(msrest.serialization.Model):
     """
 
     _validation = {
-        'provisioning_state': {'readonly': True},
-        'allow_auto_approvals': {'readonly': True},
-        'resource_guard_operations': {'readonly': True},
-        'vault_critical_operation_exclusion_list': {'readonly': True},
-        'description': {'readonly': True},
+        "provisioning_state": {"readonly": True},
+        "allow_auto_approvals": {"readonly": True},
+        "resource_guard_operations": {"readonly": True},
+        "vault_critical_operation_exclusion_list": {"readonly": True},
+        "description": {"readonly": True},
     }
 
     _attribute_map = {
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'allow_auto_approvals': {'key': 'allowAutoApprovals', 'type': 'bool'},
-        'resource_guard_operations': {'key': 'resourceGuardOperations', 'type': '[ResourceGuardOperation]'},
-        'vault_critical_operation_exclusion_list': {'key': 'vaultCriticalOperationExclusionList', 'type': '[str]'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "allow_auto_approvals": {"key": "allowAutoApprovals", "type": "bool"},
+        "resource_guard_operations": {"key": "resourceGuardOperations", "type": "[ResourceGuardOperation]"},
+        "vault_critical_operation_exclusion_list": {"key": "vaultCriticalOperationExclusionList", "type": "[str]"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceGuard, self).__init__(**kwargs)
         self.provisioning_state = None
         self.allow_auto_approvals = None
@@ -3377,19 +3097,16 @@ class ResourceGuardOperation(msrest.serialization.Model):
     """
 
     _validation = {
-        'vault_critical_operation': {'readonly': True},
-        'request_resource_type': {'readonly': True},
+        "vault_critical_operation": {"readonly": True},
+        "request_resource_type": {"readonly": True},
     }
 
     _attribute_map = {
-        'vault_critical_operation': {'key': 'vaultCriticalOperation', 'type': 'str'},
-        'request_resource_type': {'key': 'requestResourceType', 'type': 'str'},
+        "vault_critical_operation": {"key": "vaultCriticalOperation", "type": "str"},
+        "request_resource_type": {"key": "requestResourceType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceGuardOperation, self).__init__(**kwargs)
         self.vault_critical_operation = None
         self.request_resource_type = None
@@ -3422,30 +3139,27 @@ class ResourceGuardResource(DppTrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'system_data': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
-        'e_tag': {'key': 'eTag', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'identity': {'key': 'identity', 'type': 'DppIdentityDetails'},
-        'location': {'key': 'location', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'type': {'key': 'type', 'type': 'str'},
-        'system_data': {'key': 'systemData', 'type': 'SystemData'},
-        'properties': {'key': 'properties', 'type': 'ResourceGuard'},
+        "e_tag": {"key": "eTag", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "identity": {"key": "identity", "type": "DppIdentityDetails"},
+        "location": {"key": "location", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "ResourceGuard"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceGuardResource, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class ResourceGuardResourceList(DppTrackedResourceList):
@@ -3459,16 +3173,13 @@ class ResourceGuardResourceList(DppTrackedResourceList):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[ResourceGuardResource]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[ResourceGuardResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceGuardResourceList, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class ResourceMoveDetails(msrest.serialization.Model):
@@ -3490,23 +3201,20 @@ class ResourceMoveDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'operation_id': {'key': 'operationId', 'type': 'str'},
-        'start_time_utc': {'key': 'startTimeUtc', 'type': 'str'},
-        'completion_time_utc': {'key': 'completionTimeUtc', 'type': 'str'},
-        'source_resource_path': {'key': 'sourceResourcePath', 'type': 'str'},
-        'target_resource_path': {'key': 'targetResourcePath', 'type': 'str'},
+        "operation_id": {"key": "operationId", "type": "str"},
+        "start_time_utc": {"key": "startTimeUtc", "type": "str"},
+        "completion_time_utc": {"key": "completionTimeUtc", "type": "str"},
+        "source_resource_path": {"key": "sourceResourcePath", "type": "str"},
+        "target_resource_path": {"key": "targetResourcePath", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourceMoveDetails, self).__init__(**kwargs)
-        self.operation_id = kwargs.get('operation_id', None)
-        self.start_time_utc = kwargs.get('start_time_utc', None)
-        self.completion_time_utc = kwargs.get('completion_time_utc', None)
-        self.source_resource_path = kwargs.get('source_resource_path', None)
-        self.target_resource_path = kwargs.get('target_resource_path', None)
+        self.operation_id = kwargs.get("operation_id", None)
+        self.start_time_utc = kwargs.get("start_time_utc", None)
+        self.completion_time_utc = kwargs.get("completion_time_utc", None)
+        self.source_resource_path = kwargs.get("source_resource_path", None)
+        self.target_resource_path = kwargs.get("target_resource_path", None)
 
 
 class RestorableTimeRange(msrest.serialization.Model):
@@ -3523,24 +3231,21 @@ class RestorableTimeRange(msrest.serialization.Model):
     """
 
     _validation = {
-        'start_time': {'required': True},
-        'end_time': {'required': True},
+        "start_time": {"required": True},
+        "end_time": {"required": True},
     }
 
     _attribute_map = {
-        'start_time': {'key': 'startTime', 'type': 'str'},
-        'end_time': {'key': 'endTime', 'type': 'str'},
-        'object_type': {'key': 'objectType', 'type': 'str'},
+        "start_time": {"key": "startTime", "type": "str"},
+        "end_time": {"key": "endTime", "type": "str"},
+        "object_type": {"key": "objectType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RestorableTimeRange, self).__init__(**kwargs)
-        self.start_time = kwargs['start_time']
-        self.end_time = kwargs['end_time']
-        self.object_type = kwargs.get('object_type', None)
+        self.start_time = kwargs["start_time"]
+        self.end_time = kwargs["end_time"]
+        self.object_type = kwargs.get("object_type", None)
 
 
 class RestoreFilesTargetInfo(RestoreTargetInfoBase):
@@ -3561,25 +3266,22 @@ class RestoreFilesTargetInfo(RestoreTargetInfoBase):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'recovery_option': {'required': True},
-        'target_details': {'required': True},
+        "object_type": {"required": True},
+        "recovery_option": {"required": True},
+        "target_details": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'recovery_option': {'key': 'recoveryOption', 'type': 'str'},
-        'restore_location': {'key': 'restoreLocation', 'type': 'str'},
-        'target_details': {'key': 'targetDetails', 'type': 'TargetDetails'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "recovery_option": {"key": "recoveryOption", "type": "str"},
+        "restore_location": {"key": "restoreLocation", "type": "str"},
+        "target_details": {"key": "targetDetails", "type": "TargetDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RestoreFilesTargetInfo, self).__init__(**kwargs)
-        self.object_type = 'RestoreFilesTargetInfo'  # type: str
-        self.target_details = kwargs['target_details']
+        self.object_type = "RestoreFilesTargetInfo"  # type: str
+        self.target_details = kwargs["target_details"]
 
 
 class RestoreJobRecoveryPointDetails(msrest.serialization.Model):
@@ -3592,17 +3294,14 @@ class RestoreJobRecoveryPointDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'recovery_point_id': {'key': 'recoveryPointID', 'type': 'str'},
-        'recovery_point_time': {'key': 'recoveryPointTime', 'type': 'iso-8601'},
+        "recovery_point_id": {"key": "recoveryPointID", "type": "str"},
+        "recovery_point_time": {"key": "recoveryPointTime", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RestoreJobRecoveryPointDetails, self).__init__(**kwargs)
-        self.recovery_point_id = kwargs.get('recovery_point_id', None)
-        self.recovery_point_time = kwargs.get('recovery_point_time', None)
+        self.recovery_point_id = kwargs.get("recovery_point_id", None)
+        self.recovery_point_time = kwargs.get("recovery_point_time", None)
 
 
 class RestoreTargetInfo(RestoreTargetInfoBase):
@@ -3627,29 +3326,26 @@ class RestoreTargetInfo(RestoreTargetInfoBase):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'recovery_option': {'required': True},
-        'datasource_info': {'required': True},
+        "object_type": {"required": True},
+        "recovery_option": {"required": True},
+        "datasource_info": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'recovery_option': {'key': 'recoveryOption', 'type': 'str'},
-        'restore_location': {'key': 'restoreLocation', 'type': 'str'},
-        'datasource_info': {'key': 'datasourceInfo', 'type': 'Datasource'},
-        'datasource_set_info': {'key': 'datasourceSetInfo', 'type': 'DatasourceSet'},
-        'datasource_auth_credentials': {'key': 'datasourceAuthCredentials', 'type': 'AuthCredentials'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "recovery_option": {"key": "recoveryOption", "type": "str"},
+        "restore_location": {"key": "restoreLocation", "type": "str"},
+        "datasource_info": {"key": "datasourceInfo", "type": "Datasource"},
+        "datasource_set_info": {"key": "datasourceSetInfo", "type": "DatasourceSet"},
+        "datasource_auth_credentials": {"key": "datasourceAuthCredentials", "type": "AuthCredentials"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RestoreTargetInfo, self).__init__(**kwargs)
-        self.object_type = 'RestoreTargetInfo'  # type: str
-        self.datasource_info = kwargs['datasource_info']
-        self.datasource_set_info = kwargs.get('datasource_set_info', None)
-        self.datasource_auth_credentials = kwargs.get('datasource_auth_credentials', None)
+        self.object_type = "RestoreTargetInfo"  # type: str
+        self.datasource_info = kwargs["datasource_info"]
+        self.datasource_set_info = kwargs.get("datasource_set_info", None)
+        self.datasource_auth_credentials = kwargs.get("datasource_auth_credentials", None)
 
 
 class RetentionTag(msrest.serialization.Model):
@@ -3668,25 +3364,22 @@ class RetentionTag(msrest.serialization.Model):
     """
 
     _validation = {
-        'e_tag': {'readonly': True},
-        'id': {'readonly': True},
-        'tag_name': {'required': True},
+        "e_tag": {"readonly": True},
+        "id": {"readonly": True},
+        "tag_name": {"required": True},
     }
 
     _attribute_map = {
-        'e_tag': {'key': 'eTag', 'type': 'str'},
-        'id': {'key': 'id', 'type': 'str'},
-        'tag_name': {'key': 'tagName', 'type': 'str'},
+        "e_tag": {"key": "eTag", "type": "str"},
+        "id": {"key": "id", "type": "str"},
+        "tag_name": {"key": "tagName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RetentionTag, self).__init__(**kwargs)
         self.e_tag = None
         self.id = None
-        self.tag_name = kwargs['tag_name']
+        self.tag_name = kwargs["tag_name"]
 
 
 class ScheduleBasedBackupCriteria(BackupCriteria):
@@ -3714,31 +3407,28 @@ class ScheduleBasedBackupCriteria(BackupCriteria):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'absolute_criteria': {'key': 'absoluteCriteria', 'type': '[str]'},
-        'days_of_month': {'key': 'daysOfMonth', 'type': '[Day]'},
-        'days_of_the_week': {'key': 'daysOfTheWeek', 'type': '[str]'},
-        'months_of_year': {'key': 'monthsOfYear', 'type': '[str]'},
-        'schedule_times': {'key': 'scheduleTimes', 'type': '[iso-8601]'},
-        'weeks_of_the_month': {'key': 'weeksOfTheMonth', 'type': '[str]'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "absolute_criteria": {"key": "absoluteCriteria", "type": "[str]"},
+        "days_of_month": {"key": "daysOfMonth", "type": "[Day]"},
+        "days_of_the_week": {"key": "daysOfTheWeek", "type": "[str]"},
+        "months_of_year": {"key": "monthsOfYear", "type": "[str]"},
+        "schedule_times": {"key": "scheduleTimes", "type": "[iso-8601]"},
+        "weeks_of_the_month": {"key": "weeksOfTheMonth", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleBasedBackupCriteria, self).__init__(**kwargs)
-        self.object_type = 'ScheduleBasedBackupCriteria'  # type: str
-        self.absolute_criteria = kwargs.get('absolute_criteria', None)
-        self.days_of_month = kwargs.get('days_of_month', None)
-        self.days_of_the_week = kwargs.get('days_of_the_week', None)
-        self.months_of_year = kwargs.get('months_of_year', None)
-        self.schedule_times = kwargs.get('schedule_times', None)
-        self.weeks_of_the_month = kwargs.get('weeks_of_the_month', None)
+        self.object_type = "ScheduleBasedBackupCriteria"  # type: str
+        self.absolute_criteria = kwargs.get("absolute_criteria", None)
+        self.days_of_month = kwargs.get("days_of_month", None)
+        self.days_of_the_week = kwargs.get("days_of_the_week", None)
+        self.months_of_year = kwargs.get("months_of_year", None)
+        self.schedule_times = kwargs.get("schedule_times", None)
+        self.weeks_of_the_month = kwargs.get("weeks_of_the_month", None)
 
 
 class ScheduleBasedTriggerContext(TriggerContext):
@@ -3756,25 +3446,22 @@ class ScheduleBasedTriggerContext(TriggerContext):
     """
 
     _validation = {
-        'object_type': {'required': True},
-        'schedule': {'required': True},
-        'tagging_criteria': {'required': True},
+        "object_type": {"required": True},
+        "schedule": {"required": True},
+        "tagging_criteria": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'schedule': {'key': 'schedule', 'type': 'BackupSchedule'},
-        'tagging_criteria': {'key': 'taggingCriteria', 'type': '[TaggingCriteria]'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "schedule": {"key": "schedule", "type": "BackupSchedule"},
+        "tagging_criteria": {"key": "taggingCriteria", "type": "[TaggingCriteria]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ScheduleBasedTriggerContext, self).__init__(**kwargs)
-        self.object_type = 'ScheduleBasedTriggerContext'  # type: str
-        self.schedule = kwargs['schedule']
-        self.tagging_criteria = kwargs['tagging_criteria']
+        self.object_type = "ScheduleBasedTriggerContext"  # type: str
+        self.schedule = kwargs["schedule"]
+        self.tagging_criteria = kwargs["tagging_criteria"]
 
 
 class SecretStoreBasedAuthCredentials(AuthCredentials):
@@ -3790,21 +3477,18 @@ class SecretStoreBasedAuthCredentials(AuthCredentials):
     """
 
     _validation = {
-        'object_type': {'required': True},
+        "object_type": {"required": True},
     }
 
     _attribute_map = {
-        'object_type': {'key': 'objectType', 'type': 'str'},
-        'secret_store_resource': {'key': 'secretStoreResource', 'type': 'SecretStoreResource'},
+        "object_type": {"key": "objectType", "type": "str"},
+        "secret_store_resource": {"key": "secretStoreResource", "type": "SecretStoreResource"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SecretStoreBasedAuthCredentials, self).__init__(**kwargs)
-        self.object_type = 'SecretStoreBasedAuthCredentials'  # type: str
-        self.secret_store_resource = kwargs.get('secret_store_resource', None)
+        self.object_type = "SecretStoreBasedAuthCredentials"  # type: str
+        self.secret_store_resource = kwargs.get("secret_store_resource", None)
 
 
 class SecretStoreResource(msrest.serialization.Model):
@@ -3820,21 +3504,18 @@ class SecretStoreResource(msrest.serialization.Model):
     """
 
     _validation = {
-        'secret_store_type': {'required': True},
+        "secret_store_type": {"required": True},
     }
 
     _attribute_map = {
-        'uri': {'key': 'uri', 'type': 'str'},
-        'secret_store_type': {'key': 'secretStoreType', 'type': 'str'},
+        "uri": {"key": "uri", "type": "str"},
+        "secret_store_type": {"key": "secretStoreType", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SecretStoreResource, self).__init__(**kwargs)
-        self.uri = kwargs.get('uri', None)
-        self.secret_store_type = kwargs['secret_store_type']
+        self.uri = kwargs.get("uri", None)
+        self.secret_store_type = kwargs["secret_store_type"]
 
 
 class SourceLifeCycle(msrest.serialization.Model):
@@ -3852,24 +3533,21 @@ class SourceLifeCycle(msrest.serialization.Model):
     """
 
     _validation = {
-        'delete_after': {'required': True},
-        'source_data_store': {'required': True},
+        "delete_after": {"required": True},
+        "source_data_store": {"required": True},
     }
 
     _attribute_map = {
-        'delete_after': {'key': 'deleteAfter', 'type': 'DeleteOption'},
-        'source_data_store': {'key': 'sourceDataStore', 'type': 'DataStoreInfoBase'},
-        'target_data_store_copy_settings': {'key': 'targetDataStoreCopySettings', 'type': '[TargetCopySetting]'},
+        "delete_after": {"key": "deleteAfter", "type": "DeleteOption"},
+        "source_data_store": {"key": "sourceDataStore", "type": "DataStoreInfoBase"},
+        "target_data_store_copy_settings": {"key": "targetDataStoreCopySettings", "type": "[TargetCopySetting]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SourceLifeCycle, self).__init__(**kwargs)
-        self.delete_after = kwargs['delete_after']
-        self.source_data_store = kwargs['source_data_store']
-        self.target_data_store_copy_settings = kwargs.get('target_data_store_copy_settings', None)
+        self.delete_after = kwargs["delete_after"]
+        self.source_data_store = kwargs["source_data_store"]
+        self.target_data_store_copy_settings = kwargs.get("target_data_store_copy_settings", None)
 
 
 class StorageSetting(msrest.serialization.Model):
@@ -3884,17 +3562,14 @@ class StorageSetting(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'datastore_type': {'key': 'datastoreType', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "datastore_type": {"key": "datastoreType", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSetting, self).__init__(**kwargs)
-        self.datastore_type = kwargs.get('datastore_type', None)
-        self.type = kwargs.get('type', None)
+        self.datastore_type = kwargs.get("datastore_type", None)
+        self.type = kwargs.get("type", None)
 
 
 class SupportedFeature(msrest.serialization.Model):
@@ -3910,19 +3585,16 @@ class SupportedFeature(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'feature_name': {'key': 'featureName', 'type': 'str'},
-        'support_status': {'key': 'supportStatus', 'type': 'str'},
-        'exposure_controlled_features': {'key': 'exposureControlledFeatures', 'type': '[str]'},
+        "feature_name": {"key": "featureName", "type": "str"},
+        "support_status": {"key": "supportStatus", "type": "str"},
+        "exposure_controlled_features": {"key": "exposureControlledFeatures", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SupportedFeature, self).__init__(**kwargs)
-        self.feature_name = kwargs.get('feature_name', None)
-        self.support_status = kwargs.get('support_status', None)
-        self.exposure_controlled_features = kwargs.get('exposure_controlled_features', None)
+        self.feature_name = kwargs.get("feature_name", None)
+        self.support_status = kwargs.get("support_status", None)
+        self.exposure_controlled_features = kwargs.get("exposure_controlled_features", None)
 
 
 class SystemData(msrest.serialization.Model):
@@ -3945,25 +3617,22 @@ class SystemData(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'created_by': {'key': 'createdBy', 'type': 'str'},
-        'created_by_type': {'key': 'createdByType', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'iso-8601'},
-        'last_modified_by': {'key': 'lastModifiedBy', 'type': 'str'},
-        'last_modified_by_type': {'key': 'lastModifiedByType', 'type': 'str'},
-        'last_modified_at': {'key': 'lastModifiedAt', 'type': 'iso-8601'},
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SystemData, self).__init__(**kwargs)
-        self.created_by = kwargs.get('created_by', None)
-        self.created_by_type = kwargs.get('created_by_type', None)
-        self.created_at = kwargs.get('created_at', None)
-        self.last_modified_by = kwargs.get('last_modified_by', None)
-        self.last_modified_by_type = kwargs.get('last_modified_by_type', None)
-        self.last_modified_at = kwargs.get('last_modified_at', None)
+        self.created_by = kwargs.get("created_by", None)
+        self.created_by_type = kwargs.get("created_by_type", None)
+        self.created_at = kwargs.get("created_at", None)
+        self.last_modified_by = kwargs.get("last_modified_by", None)
+        self.last_modified_by_type = kwargs.get("last_modified_by_type", None)
+        self.last_modified_at = kwargs.get("last_modified_at", None)
 
 
 class TaggingCriteria(msrest.serialization.Model):
@@ -3982,27 +3651,24 @@ class TaggingCriteria(msrest.serialization.Model):
     """
 
     _validation = {
-        'is_default': {'required': True},
-        'tagging_priority': {'required': True},
-        'tag_info': {'required': True},
+        "is_default": {"required": True},
+        "tagging_priority": {"required": True},
+        "tag_info": {"required": True},
     }
 
     _attribute_map = {
-        'criteria': {'key': 'criteria', 'type': '[BackupCriteria]'},
-        'is_default': {'key': 'isDefault', 'type': 'bool'},
-        'tagging_priority': {'key': 'taggingPriority', 'type': 'long'},
-        'tag_info': {'key': 'tagInfo', 'type': 'RetentionTag'},
+        "criteria": {"key": "criteria", "type": "[BackupCriteria]"},
+        "is_default": {"key": "isDefault", "type": "bool"},
+        "tagging_priority": {"key": "taggingPriority", "type": "long"},
+        "tag_info": {"key": "tagInfo", "type": "RetentionTag"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TaggingCriteria, self).__init__(**kwargs)
-        self.criteria = kwargs.get('criteria', None)
-        self.is_default = kwargs['is_default']
-        self.tagging_priority = kwargs['tagging_priority']
-        self.tag_info = kwargs['tag_info']
+        self.criteria = kwargs.get("criteria", None)
+        self.is_default = kwargs["is_default"]
+        self.tagging_priority = kwargs["tagging_priority"]
+        self.tag_info = kwargs["tag_info"]
 
 
 class TargetCopySetting(msrest.serialization.Model):
@@ -4017,22 +3683,19 @@ class TargetCopySetting(msrest.serialization.Model):
     """
 
     _validation = {
-        'copy_after': {'required': True},
-        'data_store': {'required': True},
+        "copy_after": {"required": True},
+        "data_store": {"required": True},
     }
 
     _attribute_map = {
-        'copy_after': {'key': 'copyAfter', 'type': 'CopyOption'},
-        'data_store': {'key': 'dataStore', 'type': 'DataStoreInfoBase'},
+        "copy_after": {"key": "copyAfter", "type": "CopyOption"},
+        "data_store": {"key": "dataStore", "type": "DataStoreInfoBase"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TargetCopySetting, self).__init__(**kwargs)
-        self.copy_after = kwargs['copy_after']
-        self.data_store = kwargs['data_store']
+        self.copy_after = kwargs["copy_after"]
+        self.data_store = kwargs["data_store"]
 
 
 class TargetDetails(msrest.serialization.Model):
@@ -4057,25 +3720,22 @@ class TargetDetails(msrest.serialization.Model):
     """
 
     _validation = {
-        'file_prefix': {'required': True},
-        'restore_target_location_type': {'required': True},
-        'url': {'required': True},
+        "file_prefix": {"required": True},
+        "restore_target_location_type": {"required": True},
+        "url": {"required": True},
     }
 
     _attribute_map = {
-        'file_prefix': {'key': 'filePrefix', 'type': 'str'},
-        'restore_target_location_type': {'key': 'restoreTargetLocationType', 'type': 'str'},
-        'url': {'key': 'url', 'type': 'str'},
+        "file_prefix": {"key": "filePrefix", "type": "str"},
+        "restore_target_location_type": {"key": "restoreTargetLocationType", "type": "str"},
+        "url": {"key": "url", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TargetDetails, self).__init__(**kwargs)
-        self.file_prefix = kwargs['file_prefix']
-        self.restore_target_location_type = kwargs['restore_target_location_type']
-        self.url = kwargs['url']
+        self.file_prefix = kwargs["file_prefix"]
+        self.restore_target_location_type = kwargs["restore_target_location_type"]
+        self.url = kwargs["url"]
 
 
 class TriggerBackupRequest(msrest.serialization.Model):
@@ -4089,19 +3749,16 @@ class TriggerBackupRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'backup_rule_options': {'required': True},
+        "backup_rule_options": {"required": True},
     }
 
     _attribute_map = {
-        'backup_rule_options': {'key': 'backupRuleOptions', 'type': 'AdHocBackupRuleOptions'},
+        "backup_rule_options": {"key": "backupRuleOptions", "type": "AdHocBackupRuleOptions"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TriggerBackupRequest, self).__init__(**kwargs)
-        self.backup_rule_options = kwargs['backup_rule_options']
+        self.backup_rule_options = kwargs["backup_rule_options"]
 
 
 class UserFacingError(msrest.serialization.Model):
@@ -4128,31 +3785,28 @@ class UserFacingError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'details': {'key': 'details', 'type': '[UserFacingError]'},
-        'inner_error': {'key': 'innerError', 'type': 'InnerError'},
-        'is_retryable': {'key': 'isRetryable', 'type': 'bool'},
-        'is_user_error': {'key': 'isUserError', 'type': 'bool'},
-        'properties': {'key': 'properties', 'type': '{str}'},
-        'message': {'key': 'message', 'type': 'str'},
-        'recommended_action': {'key': 'recommendedAction', 'type': '[str]'},
-        'target': {'key': 'target', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "details": {"key": "details", "type": "[UserFacingError]"},
+        "inner_error": {"key": "innerError", "type": "InnerError"},
+        "is_retryable": {"key": "isRetryable", "type": "bool"},
+        "is_user_error": {"key": "isUserError", "type": "bool"},
+        "properties": {"key": "properties", "type": "{str}"},
+        "message": {"key": "message", "type": "str"},
+        "recommended_action": {"key": "recommendedAction", "type": "[str]"},
+        "target": {"key": "target", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(UserFacingError, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.details = kwargs.get('details', None)
-        self.inner_error = kwargs.get('inner_error', None)
-        self.is_retryable = kwargs.get('is_retryable', None)
-        self.is_user_error = kwargs.get('is_user_error', None)
-        self.properties = kwargs.get('properties', None)
-        self.message = kwargs.get('message', None)
-        self.recommended_action = kwargs.get('recommended_action', None)
-        self.target = kwargs.get('target', None)
+        self.code = kwargs.get("code", None)
+        self.details = kwargs.get("details", None)
+        self.inner_error = kwargs.get("inner_error", None)
+        self.is_retryable = kwargs.get("is_retryable", None)
+        self.is_user_error = kwargs.get("is_user_error", None)
+        self.properties = kwargs.get("properties", None)
+        self.message = kwargs.get("message", None)
+        self.recommended_action = kwargs.get("recommended_action", None)
+        self.target = kwargs.get("target", None)
 
 
 class ValidateForBackupRequest(msrest.serialization.Model):
@@ -4165,19 +3819,16 @@ class ValidateForBackupRequest(msrest.serialization.Model):
     """
 
     _validation = {
-        'backup_instance': {'required': True},
+        "backup_instance": {"required": True},
     }
 
     _attribute_map = {
-        'backup_instance': {'key': 'backupInstance', 'type': 'BackupInstance'},
+        "backup_instance": {"key": "backupInstance", "type": "BackupInstance"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidateForBackupRequest, self).__init__(**kwargs)
-        self.backup_instance = kwargs['backup_instance']
+        self.backup_instance = kwargs["backup_instance"]
 
 
 class ValidateRestoreRequestObject(msrest.serialization.Model):
@@ -4190,16 +3841,13 @@ class ValidateRestoreRequestObject(msrest.serialization.Model):
     """
 
     _validation = {
-        'restore_request_object': {'required': True},
+        "restore_request_object": {"required": True},
     }
 
     _attribute_map = {
-        'restore_request_object': {'key': 'restoreRequestObject', 'type': 'AzureBackupRestoreRequest'},
+        "restore_request_object": {"key": "restoreRequestObject", "type": "AzureBackupRestoreRequest"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ValidateRestoreRequestObject, self).__init__(**kwargs)
-        self.restore_request_object = kwargs['restore_request_object']
+        self.restore_request_object = kwargs["restore_request_object"]
