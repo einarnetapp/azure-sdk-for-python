@@ -18,15 +18,12 @@ class BackupRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'azure_file_share': {'key': 'azureFileShare', 'type': 'str'},
+        "azure_file_share": {"key": "azureFileShare", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(BackupRequest, self).__init__(**kwargs)
-        self.azure_file_share = kwargs.get('azure_file_share', None)
+        self.azure_file_share = kwargs.get("azure_file_share", None)
 
 
 class CheckNameAvailabilityParameters(msrest.serialization.Model):
@@ -45,23 +42,20 @@ class CheckNameAvailabilityParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'required': True},
-        'type': {'required': True, 'constant': True},
+        "name": {"required": True},
+        "type": {"required": True, "constant": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
     type = "Microsoft.StorageSync/storageSyncServices"
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CheckNameAvailabilityParameters, self).__init__(**kwargs)
-        self.name = kwargs['name']
+        self.name = kwargs["name"]
 
 
 class CheckNameAvailabilityResult(msrest.serialization.Model):
@@ -82,21 +76,18 @@ class CheckNameAvailabilityResult(msrest.serialization.Model):
     """
 
     _validation = {
-        'name_available': {'readonly': True},
-        'reason': {'readonly': True},
-        'message': {'readonly': True},
+        "name_available": {"readonly": True},
+        "reason": {"readonly": True},
+        "message": {"readonly": True},
     }
 
     _attribute_map = {
-        'name_available': {'key': 'nameAvailable', 'type': 'bool'},
-        'reason': {'key': 'reason', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
+        "name_available": {"key": "nameAvailable", "type": "bool"},
+        "reason": {"key": "reason", "type": "str"},
+        "message": {"key": "message", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CheckNameAvailabilityResult, self).__init__(**kwargs)
         self.name_available = None
         self.reason = None
@@ -119,21 +110,18 @@ class Resource(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Resource, self).__init__(**kwargs)
         self.id = None
         self.name = None
@@ -156,21 +144,18 @@ class ProxyResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ProxyResource, self).__init__(**kwargs)
 
 
@@ -208,41 +193,38 @@ class CloudEndpoint(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'backup_enabled': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "backup_enabled": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'storage_account_resource_id': {'key': 'properties.storageAccountResourceId', 'type': 'str'},
-        'azure_file_share_name': {'key': 'properties.azureFileShareName', 'type': 'str'},
-        'storage_account_tenant_id': {'key': 'properties.storageAccountTenantId', 'type': 'str'},
-        'partnership_id': {'key': 'properties.partnershipId', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'backup_enabled': {'key': 'properties.backupEnabled', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'last_workflow_id': {'key': 'properties.lastWorkflowId', 'type': 'str'},
-        'last_operation_name': {'key': 'properties.lastOperationName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "storage_account_resource_id": {"key": "properties.storageAccountResourceId", "type": "str"},
+        "azure_file_share_name": {"key": "properties.azureFileShareName", "type": "str"},
+        "storage_account_tenant_id": {"key": "properties.storageAccountTenantId", "type": "str"},
+        "partnership_id": {"key": "properties.partnershipId", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "backup_enabled": {"key": "properties.backupEnabled", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "last_workflow_id": {"key": "properties.lastWorkflowId", "type": "str"},
+        "last_operation_name": {"key": "properties.lastOperationName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudEndpoint, self).__init__(**kwargs)
-        self.storage_account_resource_id = kwargs.get('storage_account_resource_id', None)
-        self.azure_file_share_name = kwargs.get('azure_file_share_name', None)
-        self.storage_account_tenant_id = kwargs.get('storage_account_tenant_id', None)
-        self.partnership_id = kwargs.get('partnership_id', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.storage_account_resource_id = kwargs.get("storage_account_resource_id", None)
+        self.azure_file_share_name = kwargs.get("azure_file_share_name", None)
+        self.storage_account_tenant_id = kwargs.get("storage_account_tenant_id", None)
+        self.partnership_id = kwargs.get("partnership_id", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
         self.backup_enabled = None
-        self.provisioning_state = kwargs.get('provisioning_state', None)
-        self.last_workflow_id = kwargs.get('last_workflow_id', None)
-        self.last_operation_name = kwargs.get('last_operation_name', None)
+        self.provisioning_state = kwargs.get("provisioning_state", None)
+        self.last_workflow_id = kwargs.get("last_workflow_id", None)
+        self.last_operation_name = kwargs.get("last_operation_name", None)
 
 
 class CloudEndpointArray(msrest.serialization.Model):
@@ -253,15 +235,12 @@ class CloudEndpointArray(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[CloudEndpoint]'},
+        "value": {"key": "value", "type": "[CloudEndpoint]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudEndpointArray, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class CloudEndpointCreateParameters(ProxyResource):
@@ -288,30 +267,27 @@ class CloudEndpointCreateParameters(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'storage_account_resource_id': {'key': 'properties.storageAccountResourceId', 'type': 'str'},
-        'azure_file_share_name': {'key': 'properties.azureFileShareName', 'type': 'str'},
-        'storage_account_tenant_id': {'key': 'properties.storageAccountTenantId', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "storage_account_resource_id": {"key": "properties.storageAccountResourceId", "type": "str"},
+        "azure_file_share_name": {"key": "properties.azureFileShareName", "type": "str"},
+        "storage_account_tenant_id": {"key": "properties.storageAccountTenantId", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudEndpointCreateParameters, self).__init__(**kwargs)
-        self.storage_account_resource_id = kwargs.get('storage_account_resource_id', None)
-        self.azure_file_share_name = kwargs.get('azure_file_share_name', None)
-        self.storage_account_tenant_id = kwargs.get('storage_account_tenant_id', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.storage_account_resource_id = kwargs.get("storage_account_resource_id", None)
+        self.azure_file_share_name = kwargs.get("azure_file_share_name", None)
+        self.storage_account_tenant_id = kwargs.get("storage_account_tenant_id", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
 
 
 class CloudTieringCachePerformance(msrest.serialization.Model):
@@ -331,23 +307,20 @@ class CloudTieringCachePerformance(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_updated_timestamp': {'readonly': True},
-        'cache_hit_bytes': {'readonly': True, 'minimum': 0},
-        'cache_miss_bytes': {'readonly': True, 'minimum': 0},
-        'cache_hit_bytes_percent': {'readonly': True, 'maximum': 100, 'minimum': 0},
+        "last_updated_timestamp": {"readonly": True},
+        "cache_hit_bytes": {"readonly": True, "minimum": 0},
+        "cache_miss_bytes": {"readonly": True, "minimum": 0},
+        "cache_hit_bytes_percent": {"readonly": True, "maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'cache_hit_bytes': {'key': 'cacheHitBytes', 'type': 'long'},
-        'cache_miss_bytes': {'key': 'cacheMissBytes', 'type': 'long'},
-        'cache_hit_bytes_percent': {'key': 'cacheHitBytesPercent', 'type': 'int'},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "cache_hit_bytes": {"key": "cacheHitBytes", "type": "long"},
+        "cache_miss_bytes": {"key": "cacheMissBytes", "type": "long"},
+        "cache_hit_bytes_percent": {"key": "cacheHitBytesPercent", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudTieringCachePerformance, self).__init__(**kwargs)
         self.last_updated_timestamp = None
         self.cache_hit_bytes = None
@@ -367,19 +340,19 @@ class CloudTieringDatePolicyStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_updated_timestamp': {'readonly': True},
-        'tiered_files_most_recent_access_timestamp': {'readonly': True},
+        "last_updated_timestamp": {"readonly": True},
+        "tiered_files_most_recent_access_timestamp": {"readonly": True},
     }
 
     _attribute_map = {
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'tiered_files_most_recent_access_timestamp': {'key': 'tieredFilesMostRecentAccessTimestamp', 'type': 'iso-8601'},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "tiered_files_most_recent_access_timestamp": {
+            "key": "tieredFilesMostRecentAccessTimestamp",
+            "type": "iso-8601",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudTieringDatePolicyStatus, self).__init__(**kwargs)
         self.last_updated_timestamp = None
         self.tiered_files_most_recent_access_timestamp = None
@@ -399,21 +372,18 @@ class CloudTieringFilesNotTiering(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_updated_timestamp': {'readonly': True},
-        'total_file_count': {'readonly': True, 'minimum': 0},
-        'errors': {'readonly': True},
+        "last_updated_timestamp": {"readonly": True},
+        "total_file_count": {"readonly": True, "minimum": 0},
+        "errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'total_file_count': {'key': 'totalFileCount', 'type': 'long'},
-        'errors': {'key': 'errors', 'type': '[FilesNotTieringError]'},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "total_file_count": {"key": "totalFileCount", "type": "long"},
+        "errors": {"key": "errors", "type": "[FilesNotTieringError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudTieringFilesNotTiering, self).__init__(**kwargs)
         self.last_updated_timestamp = None
         self.total_file_count = None
@@ -440,27 +410,24 @@ class CloudTieringSpaceSavings(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_updated_timestamp': {'readonly': True},
-        'volume_size_bytes': {'readonly': True, 'minimum': 0},
-        'total_size_cloud_bytes': {'readonly': True, 'minimum': 0},
-        'cached_size_bytes': {'readonly': True, 'minimum': 0},
-        'space_savings_percent': {'readonly': True, 'maximum': 100, 'minimum': 0},
-        'space_savings_bytes': {'readonly': True, 'minimum': 0},
+        "last_updated_timestamp": {"readonly": True},
+        "volume_size_bytes": {"readonly": True, "minimum": 0},
+        "total_size_cloud_bytes": {"readonly": True, "minimum": 0},
+        "cached_size_bytes": {"readonly": True, "minimum": 0},
+        "space_savings_percent": {"readonly": True, "maximum": 100, "minimum": 0},
+        "space_savings_bytes": {"readonly": True, "minimum": 0},
     }
 
     _attribute_map = {
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'volume_size_bytes': {'key': 'volumeSizeBytes', 'type': 'long'},
-        'total_size_cloud_bytes': {'key': 'totalSizeCloudBytes', 'type': 'long'},
-        'cached_size_bytes': {'key': 'cachedSizeBytes', 'type': 'long'},
-        'space_savings_percent': {'key': 'spaceSavingsPercent', 'type': 'int'},
-        'space_savings_bytes': {'key': 'spaceSavingsBytes', 'type': 'long'},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "volume_size_bytes": {"key": "volumeSizeBytes", "type": "long"},
+        "total_size_cloud_bytes": {"key": "totalSizeCloudBytes", "type": "long"},
+        "cached_size_bytes": {"key": "cachedSizeBytes", "type": "long"},
+        "space_savings_percent": {"key": "spaceSavingsPercent", "type": "int"},
+        "space_savings_bytes": {"key": "spaceSavingsBytes", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudTieringSpaceSavings, self).__init__(**kwargs)
         self.last_updated_timestamp = None
         self.volume_size_bytes = None
@@ -485,21 +452,18 @@ class CloudTieringVolumeFreeSpacePolicyStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_updated_timestamp': {'readonly': True},
-        'effective_volume_free_space_policy': {'readonly': True, 'maximum': 100, 'minimum': 0},
-        'current_volume_free_space_percent': {'readonly': True, 'maximum': 100, 'minimum': 0},
+        "last_updated_timestamp": {"readonly": True},
+        "effective_volume_free_space_policy": {"readonly": True, "maximum": 100, "minimum": 0},
+        "current_volume_free_space_percent": {"readonly": True, "maximum": 100, "minimum": 0},
     }
 
     _attribute_map = {
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'effective_volume_free_space_policy': {'key': 'effectiveVolumeFreeSpacePolicy', 'type': 'int'},
-        'current_volume_free_space_percent': {'key': 'currentVolumeFreeSpacePercent', 'type': 'int'},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "effective_volume_free_space_policy": {"key": "effectiveVolumeFreeSpacePolicy", "type": "int"},
+        "current_volume_free_space_percent": {"key": "currentVolumeFreeSpacePercent", "type": "int"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(CloudTieringVolumeFreeSpacePolicyStatus, self).__init__(**kwargs)
         self.last_updated_timestamp = None
         self.effective_volume_free_space_policy = None
@@ -518,19 +482,16 @@ class FilesNotTieringError(msrest.serialization.Model):
     """
 
     _validation = {
-        'error_code': {'readonly': True},
-        'file_count': {'readonly': True, 'minimum': 0},
+        "error_code": {"readonly": True},
+        "file_count": {"readonly": True, "minimum": 0},
     }
 
     _attribute_map = {
-        'error_code': {'key': 'errorCode', 'type': 'int'},
-        'file_count': {'key': 'fileCount', 'type': 'long'},
+        "error_code": {"key": "errorCode", "type": "int"},
+        "file_count": {"key": "fileCount", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(FilesNotTieringError, self).__init__(**kwargs)
         self.error_code = None
         self.file_count = None
@@ -550,21 +511,18 @@ class OperationDisplayInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'description': {'key': 'description', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
+        "description": {"key": "description", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplayInfo, self).__init__(**kwargs)
-        self.description = kwargs.get('description', None)
-        self.operation = kwargs.get('operation', None)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
+        self.description = kwargs.get("description", None)
+        self.operation = kwargs.get("operation", None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
 
 
 class OperationDisplayResource(msrest.serialization.Model):
@@ -581,21 +539,18 @@ class OperationDisplayResource(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'provider': {'key': 'provider', 'type': 'str'},
-        'resource': {'key': 'resource', 'type': 'str'},
-        'operation': {'key': 'operation', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
+        "provider": {"key": "provider", "type": "str"},
+        "resource": {"key": "resource", "type": "str"},
+        "operation": {"key": "operation", "type": "str"},
+        "description": {"key": "description", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationDisplayResource, self).__init__(**kwargs)
-        self.provider = kwargs.get('provider', None)
-        self.resource = kwargs.get('resource', None)
-        self.operation = kwargs.get('operation', None)
-        self.description = kwargs.get('description', None)
+        self.provider = kwargs.get("provider", None)
+        self.resource = kwargs.get("resource", None)
+        self.operation = kwargs.get("operation", None)
+        self.description = kwargs.get("description", None)
 
 
 class OperationEntity(msrest.serialization.Model):
@@ -612,21 +567,18 @@ class OperationEntity(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display': {'key': 'display', 'type': 'OperationDisplayInfo'},
-        'origin': {'key': 'origin', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'OperationProperties'},
+        "name": {"key": "name", "type": "str"},
+        "display": {"key": "display", "type": "OperationDisplayInfo"},
+        "origin": {"key": "origin", "type": "str"},
+        "properties": {"key": "properties", "type": "OperationProperties"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationEntity, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display = kwargs.get('display', None)
-        self.origin = kwargs.get('origin', None)
-        self.properties = kwargs.get('properties', None)
+        self.name = kwargs.get("name", None)
+        self.display = kwargs.get("display", None)
+        self.origin = kwargs.get("origin", None)
+        self.properties = kwargs.get("properties", None)
 
 
 class OperationEntityListResult(msrest.serialization.Model):
@@ -639,17 +591,14 @@ class OperationEntityListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'next_link': {'key': 'nextLink', 'type': 'str'},
-        'value': {'key': 'value', 'type': '[OperationEntity]'},
+        "next_link": {"key": "nextLink", "type": "str"},
+        "value": {"key": "value", "type": "[OperationEntity]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationEntityListResult, self).__init__(**kwargs)
-        self.next_link = kwargs.get('next_link', None)
-        self.value = kwargs.get('value', None)
+        self.next_link = kwargs.get("next_link", None)
+        self.value = kwargs.get("value", None)
 
 
 class OperationProperties(msrest.serialization.Model):
@@ -661,15 +610,12 @@ class OperationProperties(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'service_specification': {'key': 'serviceSpecification', 'type': 'OperationResourceServiceSpecification'},
+        "service_specification": {"key": "serviceSpecification", "type": "OperationResourceServiceSpecification"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationProperties, self).__init__(**kwargs)
-        self.service_specification = kwargs.get('service_specification', None)
+        self.service_specification = kwargs.get("service_specification", None)
 
 
 class OperationResourceMetricSpecification(msrest.serialization.Model):
@@ -693,27 +639,24 @@ class OperationResourceMetricSpecification(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'display_description': {'key': 'displayDescription', 'type': 'str'},
-        'unit': {'key': 'unit', 'type': 'str'},
-        'aggregation_type': {'key': 'aggregationType', 'type': 'str'},
-        'fill_gap_with_zero': {'key': 'fillGapWithZero', 'type': 'bool'},
-        'dimensions': {'key': 'dimensions', 'type': '[OperationResourceMetricSpecificationDimension]'},
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "display_description": {"key": "displayDescription", "type": "str"},
+        "unit": {"key": "unit", "type": "str"},
+        "aggregation_type": {"key": "aggregationType", "type": "str"},
+        "fill_gap_with_zero": {"key": "fillGapWithZero", "type": "bool"},
+        "dimensions": {"key": "dimensions", "type": "[OperationResourceMetricSpecificationDimension]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationResourceMetricSpecification, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.display_description = kwargs.get('display_description', None)
-        self.unit = kwargs.get('unit', None)
-        self.aggregation_type = kwargs.get('aggregation_type', None)
-        self.fill_gap_with_zero = kwargs.get('fill_gap_with_zero', None)
-        self.dimensions = kwargs.get('dimensions', None)
+        self.name = kwargs.get("name", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.display_description = kwargs.get("display_description", None)
+        self.unit = kwargs.get("unit", None)
+        self.aggregation_type = kwargs.get("aggregation_type", None)
+        self.fill_gap_with_zero = kwargs.get("fill_gap_with_zero", None)
+        self.dimensions = kwargs.get("dimensions", None)
 
 
 class OperationResourceMetricSpecificationDimension(msrest.serialization.Model):
@@ -728,19 +671,16 @@ class OperationResourceMetricSpecificationDimension(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'display_name': {'key': 'displayName', 'type': 'str'},
-        'to_be_exported_for_shoebox': {'key': 'toBeExportedForShoebox', 'type': 'bool'},
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+        "to_be_exported_for_shoebox": {"key": "toBeExportedForShoebox", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationResourceMetricSpecificationDimension, self).__init__(**kwargs)
-        self.name = kwargs.get('name', None)
-        self.display_name = kwargs.get('display_name', None)
-        self.to_be_exported_for_shoebox = kwargs.get('to_be_exported_for_shoebox', None)
+        self.name = kwargs.get("name", None)
+        self.display_name = kwargs.get("display_name", None)
+        self.to_be_exported_for_shoebox = kwargs.get("to_be_exported_for_shoebox", None)
 
 
 class OperationResourceServiceSpecification(msrest.serialization.Model):
@@ -752,15 +692,12 @@ class OperationResourceServiceSpecification(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'metric_specifications': {'key': 'metricSpecifications', 'type': '[OperationResourceMetricSpecification]'},
+        "metric_specifications": {"key": "metricSpecifications", "type": "[OperationResourceMetricSpecification]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationResourceServiceSpecification, self).__init__(**kwargs)
-        self.metric_specifications = kwargs.get('metric_specifications', None)
+        self.metric_specifications = kwargs.get("metric_specifications", None)
 
 
 class OperationStatus(msrest.serialization.Model):
@@ -781,25 +718,22 @@ class OperationStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'name': {'readonly': True},
-        'status': {'readonly': True},
-        'start_time': {'readonly': True},
-        'end_time': {'readonly': True},
-        'error': {'readonly': True},
+        "name": {"readonly": True},
+        "status": {"readonly": True},
+        "start_time": {"readonly": True},
+        "end_time": {"readonly": True},
+        "error": {"readonly": True},
     }
 
     _attribute_map = {
-        'name': {'key': 'name', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'start_time': {'key': 'startTime', 'type': 'iso-8601'},
-        'end_time': {'key': 'endTime', 'type': 'iso-8601'},
-        'error': {'key': 'error', 'type': 'StorageSyncApiError'},
+        "name": {"key": "name", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "start_time": {"key": "startTime", "type": "iso-8601"},
+        "end_time": {"key": "endTime", "type": "iso-8601"},
+        "error": {"key": "error", "type": "StorageSyncApiError"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(OperationStatus, self).__init__(**kwargs)
         self.name = None
         self.status = None
@@ -818,17 +752,14 @@ class PostBackupResponse(msrest.serialization.Model):
     """
 
     _validation = {
-        'cloud_endpoint_name': {'readonly': True},
+        "cloud_endpoint_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'cloud_endpoint_name': {'key': 'backupMetadata.cloudEndpointName', 'type': 'str'},
+        "cloud_endpoint_name": {"key": "backupMetadata.cloudEndpointName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PostBackupResponse, self).__init__(**kwargs)
         self.cloud_endpoint_name = None
 
@@ -855,29 +786,26 @@ class PostRestoreRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'partition': {'key': 'partition', 'type': 'str'},
-        'replica_group': {'key': 'replicaGroup', 'type': 'str'},
-        'request_id': {'key': 'requestId', 'type': 'str'},
-        'azure_file_share_uri': {'key': 'azureFileShareUri', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'source_azure_file_share_uri': {'key': 'sourceAzureFileShareUri', 'type': 'str'},
-        'failed_file_list': {'key': 'failedFileList', 'type': 'str'},
-        'restore_file_spec': {'key': 'restoreFileSpec', 'type': '[RestoreFileSpec]'},
+        "partition": {"key": "partition", "type": "str"},
+        "replica_group": {"key": "replicaGroup", "type": "str"},
+        "request_id": {"key": "requestId", "type": "str"},
+        "azure_file_share_uri": {"key": "azureFileShareUri", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "source_azure_file_share_uri": {"key": "sourceAzureFileShareUri", "type": "str"},
+        "failed_file_list": {"key": "failedFileList", "type": "str"},
+        "restore_file_spec": {"key": "restoreFileSpec", "type": "[RestoreFileSpec]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PostRestoreRequest, self).__init__(**kwargs)
-        self.partition = kwargs.get('partition', None)
-        self.replica_group = kwargs.get('replica_group', None)
-        self.request_id = kwargs.get('request_id', None)
-        self.azure_file_share_uri = kwargs.get('azure_file_share_uri', None)
-        self.status = kwargs.get('status', None)
-        self.source_azure_file_share_uri = kwargs.get('source_azure_file_share_uri', None)
-        self.failed_file_list = kwargs.get('failed_file_list', None)
-        self.restore_file_spec = kwargs.get('restore_file_spec', None)
+        self.partition = kwargs.get("partition", None)
+        self.replica_group = kwargs.get("replica_group", None)
+        self.request_id = kwargs.get("request_id", None)
+        self.azure_file_share_uri = kwargs.get("azure_file_share_uri", None)
+        self.status = kwargs.get("status", None)
+        self.source_azure_file_share_uri = kwargs.get("source_azure_file_share_uri", None)
+        self.failed_file_list = kwargs.get("failed_file_list", None)
+        self.restore_file_spec = kwargs.get("restore_file_spec", None)
 
 
 class PreRestoreRequest(msrest.serialization.Model):
@@ -905,31 +833,33 @@ class PreRestoreRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'partition': {'key': 'partition', 'type': 'str'},
-        'replica_group': {'key': 'replicaGroup', 'type': 'str'},
-        'request_id': {'key': 'requestId', 'type': 'str'},
-        'azure_file_share_uri': {'key': 'azureFileShareUri', 'type': 'str'},
-        'status': {'key': 'status', 'type': 'str'},
-        'source_azure_file_share_uri': {'key': 'sourceAzureFileShareUri', 'type': 'str'},
-        'backup_metadata_property_bag': {'key': 'backupMetadataPropertyBag', 'type': 'str'},
-        'restore_file_spec': {'key': 'restoreFileSpec', 'type': '[RestoreFileSpec]'},
-        'pause_wait_for_sync_drain_time_period_in_seconds': {'key': 'pauseWaitForSyncDrainTimePeriodInSeconds', 'type': 'int'},
+        "partition": {"key": "partition", "type": "str"},
+        "replica_group": {"key": "replicaGroup", "type": "str"},
+        "request_id": {"key": "requestId", "type": "str"},
+        "azure_file_share_uri": {"key": "azureFileShareUri", "type": "str"},
+        "status": {"key": "status", "type": "str"},
+        "source_azure_file_share_uri": {"key": "sourceAzureFileShareUri", "type": "str"},
+        "backup_metadata_property_bag": {"key": "backupMetadataPropertyBag", "type": "str"},
+        "restore_file_spec": {"key": "restoreFileSpec", "type": "[RestoreFileSpec]"},
+        "pause_wait_for_sync_drain_time_period_in_seconds": {
+            "key": "pauseWaitForSyncDrainTimePeriodInSeconds",
+            "type": "int",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PreRestoreRequest, self).__init__(**kwargs)
-        self.partition = kwargs.get('partition', None)
-        self.replica_group = kwargs.get('replica_group', None)
-        self.request_id = kwargs.get('request_id', None)
-        self.azure_file_share_uri = kwargs.get('azure_file_share_uri', None)
-        self.status = kwargs.get('status', None)
-        self.source_azure_file_share_uri = kwargs.get('source_azure_file_share_uri', None)
-        self.backup_metadata_property_bag = kwargs.get('backup_metadata_property_bag', None)
-        self.restore_file_spec = kwargs.get('restore_file_spec', None)
-        self.pause_wait_for_sync_drain_time_period_in_seconds = kwargs.get('pause_wait_for_sync_drain_time_period_in_seconds', None)
+        self.partition = kwargs.get("partition", None)
+        self.replica_group = kwargs.get("replica_group", None)
+        self.request_id = kwargs.get("request_id", None)
+        self.azure_file_share_uri = kwargs.get("azure_file_share_uri", None)
+        self.status = kwargs.get("status", None)
+        self.source_azure_file_share_uri = kwargs.get("source_azure_file_share_uri", None)
+        self.backup_metadata_property_bag = kwargs.get("backup_metadata_property_bag", None)
+        self.restore_file_spec = kwargs.get("restore_file_spec", None)
+        self.pause_wait_for_sync_drain_time_period_in_seconds = kwargs.get(
+            "pause_wait_for_sync_drain_time_period_in_seconds", None
+        )
 
 
 class PrivateEndpoint(msrest.serialization.Model):
@@ -942,17 +872,14 @@ class PrivateEndpoint(msrest.serialization.Model):
     """
 
     _validation = {
-        'id': {'readonly': True},
+        "id": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateEndpoint, self).__init__(**kwargs)
         self.id = None
 
@@ -983,28 +910,28 @@ class PrivateEndpointConnection(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'provisioning_state': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "provisioning_state": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'private_endpoint': {'key': 'properties.privateEndpoint', 'type': 'PrivateEndpoint'},
-        'private_link_service_connection_state': {'key': 'properties.privateLinkServiceConnectionState', 'type': 'PrivateLinkServiceConnectionState'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "private_endpoint": {"key": "properties.privateEndpoint", "type": "PrivateEndpoint"},
+        "private_link_service_connection_state": {
+            "key": "properties.privateLinkServiceConnectionState",
+            "type": "PrivateLinkServiceConnectionState",
+        },
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateEndpointConnection, self).__init__(**kwargs)
-        self.private_endpoint = kwargs.get('private_endpoint', None)
-        self.private_link_service_connection_state = kwargs.get('private_link_service_connection_state', None)
+        self.private_endpoint = kwargs.get("private_endpoint", None)
+        self.private_link_service_connection_state = kwargs.get("private_link_service_connection_state", None)
         self.provisioning_state = None
 
 
@@ -1016,15 +943,12 @@ class PrivateEndpointConnectionListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PrivateEndpointConnection]'},
+        "value": {"key": "value", "type": "[PrivateEndpointConnection]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateEndpointConnectionListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class PrivateLinkResource(Resource):
@@ -1049,30 +973,27 @@ class PrivateLinkResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'group_id': {'readonly': True},
-        'required_members': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "group_id": {"readonly": True},
+        "required_members": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'group_id': {'key': 'properties.groupId', 'type': 'str'},
-        'required_members': {'key': 'properties.requiredMembers', 'type': '[str]'},
-        'required_zone_names': {'key': 'properties.requiredZoneNames', 'type': '[str]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "group_id": {"key": "properties.groupId", "type": "str"},
+        "required_members": {"key": "properties.requiredMembers", "type": "[str]"},
+        "required_zone_names": {"key": "properties.requiredZoneNames", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateLinkResource, self).__init__(**kwargs)
         self.group_id = None
         self.required_members = None
-        self.required_zone_names = kwargs.get('required_zone_names', None)
+        self.required_zone_names = kwargs.get("required_zone_names", None)
 
 
 class PrivateLinkResourceListResult(msrest.serialization.Model):
@@ -1083,15 +1004,12 @@ class PrivateLinkResourceListResult(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[PrivateLinkResource]'},
+        "value": {"key": "value", "type": "[PrivateLinkResource]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateLinkResourceListResult, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class PrivateLinkServiceConnectionState(msrest.serialization.Model):
@@ -1108,19 +1026,16 @@ class PrivateLinkServiceConnectionState(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-        'description': {'key': 'description', 'type': 'str'},
-        'actions_required': {'key': 'actionsRequired', 'type': 'str'},
+        "status": {"key": "status", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "actions_required": {"key": "actionsRequired", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(PrivateLinkServiceConnectionState, self).__init__(**kwargs)
-        self.status = kwargs.get('status', None)
-        self.description = kwargs.get('description', None)
-        self.actions_required = kwargs.get('actions_required', None)
+        self.status = kwargs.get("status", None)
+        self.description = kwargs.get("description", None)
+        self.actions_required = kwargs.get("actions_required", None)
 
 
 class RecallActionParameters(msrest.serialization.Model):
@@ -1133,17 +1048,14 @@ class RecallActionParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'pattern': {'key': 'pattern', 'type': 'str'},
-        'recall_path': {'key': 'recallPath', 'type': 'str'},
+        "pattern": {"key": "pattern", "type": "str"},
+        "recall_path": {"key": "recallPath", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RecallActionParameters, self).__init__(**kwargs)
-        self.pattern = kwargs.get('pattern', None)
-        self.recall_path = kwargs.get('recall_path', None)
+        self.pattern = kwargs.get("pattern", None)
+        self.recall_path = kwargs.get("recall_path", None)
 
 
 class RegisteredServer(ProxyResource):
@@ -1210,79 +1122,76 @@ class RegisteredServer(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'agent_version_status': {'readonly': True},
-        'agent_version_expiration_date': {'readonly': True},
-        'server_management_error_code': {'readonly': True},
-        'last_heart_beat': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'storage_sync_service_uid': {'readonly': True},
-        'last_workflow_id': {'readonly': True},
-        'last_operation_name': {'readonly': True},
-        'discovery_endpoint_uri': {'readonly': True},
-        'resource_location': {'readonly': True},
-        'service_location': {'readonly': True},
-        'management_endpoint_uri': {'readonly': True},
-        'monitoring_endpoint_uri': {'readonly': True},
-        'monitoring_configuration': {'readonly': True},
-        'server_name': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "agent_version_status": {"readonly": True},
+        "agent_version_expiration_date": {"readonly": True},
+        "server_management_error_code": {"readonly": True},
+        "last_heart_beat": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "storage_sync_service_uid": {"readonly": True},
+        "last_workflow_id": {"readonly": True},
+        "last_operation_name": {"readonly": True},
+        "discovery_endpoint_uri": {"readonly": True},
+        "resource_location": {"readonly": True},
+        "service_location": {"readonly": True},
+        "management_endpoint_uri": {"readonly": True},
+        "monitoring_endpoint_uri": {"readonly": True},
+        "monitoring_configuration": {"readonly": True},
+        "server_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'server_certificate': {'key': 'properties.serverCertificate', 'type': 'str'},
-        'agent_version': {'key': 'properties.agentVersion', 'type': 'str'},
-        'agent_version_status': {'key': 'properties.agentVersionStatus', 'type': 'str'},
-        'agent_version_expiration_date': {'key': 'properties.agentVersionExpirationDate', 'type': 'iso-8601'},
-        'server_os_version': {'key': 'properties.serverOSVersion', 'type': 'str'},
-        'server_management_error_code': {'key': 'properties.serverManagementErrorCode', 'type': 'int'},
-        'last_heart_beat': {'key': 'properties.lastHeartBeat', 'type': 'iso-8601'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'server_role': {'key': 'properties.serverRole', 'type': 'str'},
-        'cluster_id': {'key': 'properties.clusterId', 'type': 'str'},
-        'cluster_name': {'key': 'properties.clusterName', 'type': 'str'},
-        'server_id': {'key': 'properties.serverId', 'type': 'str'},
-        'storage_sync_service_uid': {'key': 'properties.storageSyncServiceUid', 'type': 'str'},
-        'last_workflow_id': {'key': 'properties.lastWorkflowId', 'type': 'str'},
-        'last_operation_name': {'key': 'properties.lastOperationName', 'type': 'str'},
-        'discovery_endpoint_uri': {'key': 'properties.discoveryEndpointUri', 'type': 'str'},
-        'resource_location': {'key': 'properties.resourceLocation', 'type': 'str'},
-        'service_location': {'key': 'properties.serviceLocation', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'management_endpoint_uri': {'key': 'properties.managementEndpointUri', 'type': 'str'},
-        'monitoring_endpoint_uri': {'key': 'properties.monitoringEndpointUri', 'type': 'str'},
-        'monitoring_configuration': {'key': 'properties.monitoringConfiguration', 'type': 'str'},
-        'server_name': {'key': 'properties.serverName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "server_certificate": {"key": "properties.serverCertificate", "type": "str"},
+        "agent_version": {"key": "properties.agentVersion", "type": "str"},
+        "agent_version_status": {"key": "properties.agentVersionStatus", "type": "str"},
+        "agent_version_expiration_date": {"key": "properties.agentVersionExpirationDate", "type": "iso-8601"},
+        "server_os_version": {"key": "properties.serverOSVersion", "type": "str"},
+        "server_management_error_code": {"key": "properties.serverManagementErrorCode", "type": "int"},
+        "last_heart_beat": {"key": "properties.lastHeartBeat", "type": "iso-8601"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "server_role": {"key": "properties.serverRole", "type": "str"},
+        "cluster_id": {"key": "properties.clusterId", "type": "str"},
+        "cluster_name": {"key": "properties.clusterName", "type": "str"},
+        "server_id": {"key": "properties.serverId", "type": "str"},
+        "storage_sync_service_uid": {"key": "properties.storageSyncServiceUid", "type": "str"},
+        "last_workflow_id": {"key": "properties.lastWorkflowId", "type": "str"},
+        "last_operation_name": {"key": "properties.lastOperationName", "type": "str"},
+        "discovery_endpoint_uri": {"key": "properties.discoveryEndpointUri", "type": "str"},
+        "resource_location": {"key": "properties.resourceLocation", "type": "str"},
+        "service_location": {"key": "properties.serviceLocation", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "management_endpoint_uri": {"key": "properties.managementEndpointUri", "type": "str"},
+        "monitoring_endpoint_uri": {"key": "properties.monitoringEndpointUri", "type": "str"},
+        "monitoring_configuration": {"key": "properties.monitoringConfiguration", "type": "str"},
+        "server_name": {"key": "properties.serverName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RegisteredServer, self).__init__(**kwargs)
-        self.server_certificate = kwargs.get('server_certificate', None)
-        self.agent_version = kwargs.get('agent_version', None)
+        self.server_certificate = kwargs.get("server_certificate", None)
+        self.agent_version = kwargs.get("agent_version", None)
         self.agent_version_status = None
         self.agent_version_expiration_date = None
-        self.server_os_version = kwargs.get('server_os_version', None)
+        self.server_os_version = kwargs.get("server_os_version", None)
         self.server_management_error_code = None
         self.last_heart_beat = None
         self.provisioning_state = None
-        self.server_role = kwargs.get('server_role', None)
-        self.cluster_id = kwargs.get('cluster_id', None)
-        self.cluster_name = kwargs.get('cluster_name', None)
-        self.server_id = kwargs.get('server_id', None)
+        self.server_role = kwargs.get("server_role", None)
+        self.cluster_id = kwargs.get("cluster_id", None)
+        self.cluster_name = kwargs.get("cluster_name", None)
+        self.server_id = kwargs.get("server_id", None)
         self.storage_sync_service_uid = None
         self.last_workflow_id = None
         self.last_operation_name = None
         self.discovery_endpoint_uri = None
         self.resource_location = None
         self.service_location = None
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.friendly_name = kwargs.get("friendly_name", None)
         self.management_endpoint_uri = None
         self.monitoring_endpoint_uri = None
         self.monitoring_configuration = None
@@ -1297,15 +1206,12 @@ class RegisteredServerArray(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[RegisteredServer]'},
+        "value": {"key": "value", "type": "[RegisteredServer]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RegisteredServerArray, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class RegisteredServerCreateParameters(ProxyResource):
@@ -1342,40 +1248,37 @@ class RegisteredServerCreateParameters(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'server_certificate': {'key': 'properties.serverCertificate', 'type': 'str'},
-        'agent_version': {'key': 'properties.agentVersion', 'type': 'str'},
-        'server_os_version': {'key': 'properties.serverOSVersion', 'type': 'str'},
-        'last_heart_beat': {'key': 'properties.lastHeartBeat', 'type': 'str'},
-        'server_role': {'key': 'properties.serverRole', 'type': 'str'},
-        'cluster_id': {'key': 'properties.clusterId', 'type': 'str'},
-        'cluster_name': {'key': 'properties.clusterName', 'type': 'str'},
-        'server_id': {'key': 'properties.serverId', 'type': 'str'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "server_certificate": {"key": "properties.serverCertificate", "type": "str"},
+        "agent_version": {"key": "properties.agentVersion", "type": "str"},
+        "server_os_version": {"key": "properties.serverOSVersion", "type": "str"},
+        "last_heart_beat": {"key": "properties.lastHeartBeat", "type": "str"},
+        "server_role": {"key": "properties.serverRole", "type": "str"},
+        "cluster_id": {"key": "properties.clusterId", "type": "str"},
+        "cluster_name": {"key": "properties.clusterName", "type": "str"},
+        "server_id": {"key": "properties.serverId", "type": "str"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RegisteredServerCreateParameters, self).__init__(**kwargs)
-        self.server_certificate = kwargs.get('server_certificate', None)
-        self.agent_version = kwargs.get('agent_version', None)
-        self.server_os_version = kwargs.get('server_os_version', None)
-        self.last_heart_beat = kwargs.get('last_heart_beat', None)
-        self.server_role = kwargs.get('server_role', None)
-        self.cluster_id = kwargs.get('cluster_id', None)
-        self.cluster_name = kwargs.get('cluster_name', None)
-        self.server_id = kwargs.get('server_id', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
+        self.server_certificate = kwargs.get("server_certificate", None)
+        self.agent_version = kwargs.get("agent_version", None)
+        self.server_os_version = kwargs.get("server_os_version", None)
+        self.last_heart_beat = kwargs.get("last_heart_beat", None)
+        self.server_role = kwargs.get("server_role", None)
+        self.cluster_id = kwargs.get("cluster_id", None)
+        self.cluster_name = kwargs.get("cluster_name", None)
+        self.server_id = kwargs.get("server_id", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
 
 
 class ResourcesMoveInfo(msrest.serialization.Model):
@@ -1388,17 +1291,14 @@ class ResourcesMoveInfo(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'target_resource_group': {'key': 'targetResourceGroup', 'type': 'str'},
-        'resources': {'key': 'resources', 'type': '[str]'},
+        "target_resource_group": {"key": "targetResourceGroup", "type": "str"},
+        "resources": {"key": "resources", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ResourcesMoveInfo, self).__init__(**kwargs)
-        self.target_resource_group = kwargs.get('target_resource_group', None)
-        self.resources = kwargs.get('resources', None)
+        self.target_resource_group = kwargs.get("target_resource_group", None)
+        self.resources = kwargs.get("resources", None)
 
 
 class RestoreFileSpec(msrest.serialization.Model):
@@ -1411,17 +1311,14 @@ class RestoreFileSpec(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'path': {'key': 'path', 'type': 'str'},
-        'isdir': {'key': 'isdir', 'type': 'bool'},
+        "path": {"key": "path", "type": "str"},
+        "isdir": {"key": "isdir", "type": "bool"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(RestoreFileSpec, self).__init__(**kwargs)
-        self.path = kwargs.get('path', None)
-        self.isdir = kwargs.get('isdir', None)
+        self.path = kwargs.get("path", None)
+        self.isdir = kwargs.get("isdir", None)
 
 
 class ServerEndpoint(ProxyResource):
@@ -1484,70 +1381,73 @@ class ServerEndpoint(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'volume_free_space_percent': {'maximum': 100, 'minimum': 0},
-        'tier_files_older_than_days': {'maximum': 2147483647, 'minimum': 0},
-        'provisioning_state': {'readonly': True},
-        'last_workflow_id': {'readonly': True},
-        'last_operation_name': {'readonly': True},
-        'sync_status': {'readonly': True},
-        'offline_data_transfer_storage_account_resource_id': {'readonly': True},
-        'offline_data_transfer_storage_account_tenant_id': {'readonly': True},
-        'cloud_tiering_status': {'readonly': True},
-        'recall_status': {'readonly': True},
-        'server_name': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "volume_free_space_percent": {"maximum": 100, "minimum": 0},
+        "tier_files_older_than_days": {"maximum": 2147483647, "minimum": 0},
+        "provisioning_state": {"readonly": True},
+        "last_workflow_id": {"readonly": True},
+        "last_operation_name": {"readonly": True},
+        "sync_status": {"readonly": True},
+        "offline_data_transfer_storage_account_resource_id": {"readonly": True},
+        "offline_data_transfer_storage_account_tenant_id": {"readonly": True},
+        "cloud_tiering_status": {"readonly": True},
+        "recall_status": {"readonly": True},
+        "server_name": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'server_local_path': {'key': 'properties.serverLocalPath', 'type': 'str'},
-        'cloud_tiering': {'key': 'properties.cloudTiering', 'type': 'str'},
-        'volume_free_space_percent': {'key': 'properties.volumeFreeSpacePercent', 'type': 'int'},
-        'tier_files_older_than_days': {'key': 'properties.tierFilesOlderThanDays', 'type': 'int'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'server_resource_id': {'key': 'properties.serverResourceId', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'last_workflow_id': {'key': 'properties.lastWorkflowId', 'type': 'str'},
-        'last_operation_name': {'key': 'properties.lastOperationName', 'type': 'str'},
-        'sync_status': {'key': 'properties.syncStatus', 'type': 'ServerEndpointSyncStatus'},
-        'offline_data_transfer': {'key': 'properties.offlineDataTransfer', 'type': 'str'},
-        'offline_data_transfer_storage_account_resource_id': {'key': 'properties.offlineDataTransferStorageAccountResourceId', 'type': 'str'},
-        'offline_data_transfer_storage_account_tenant_id': {'key': 'properties.offlineDataTransferStorageAccountTenantId', 'type': 'str'},
-        'offline_data_transfer_share_name': {'key': 'properties.offlineDataTransferShareName', 'type': 'str'},
-        'cloud_tiering_status': {'key': 'properties.cloudTieringStatus', 'type': 'ServerEndpointCloudTieringStatus'},
-        'recall_status': {'key': 'properties.recallStatus', 'type': 'ServerEndpointRecallStatus'},
-        'initial_download_policy': {'key': 'properties.initialDownloadPolicy', 'type': 'str'},
-        'local_cache_mode': {'key': 'properties.localCacheMode', 'type': 'str'},
-        'server_name': {'key': 'properties.serverName', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "server_local_path": {"key": "properties.serverLocalPath", "type": "str"},
+        "cloud_tiering": {"key": "properties.cloudTiering", "type": "str"},
+        "volume_free_space_percent": {"key": "properties.volumeFreeSpacePercent", "type": "int"},
+        "tier_files_older_than_days": {"key": "properties.tierFilesOlderThanDays", "type": "int"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "server_resource_id": {"key": "properties.serverResourceId", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "last_workflow_id": {"key": "properties.lastWorkflowId", "type": "str"},
+        "last_operation_name": {"key": "properties.lastOperationName", "type": "str"},
+        "sync_status": {"key": "properties.syncStatus", "type": "ServerEndpointSyncStatus"},
+        "offline_data_transfer": {"key": "properties.offlineDataTransfer", "type": "str"},
+        "offline_data_transfer_storage_account_resource_id": {
+            "key": "properties.offlineDataTransferStorageAccountResourceId",
+            "type": "str",
+        },
+        "offline_data_transfer_storage_account_tenant_id": {
+            "key": "properties.offlineDataTransferStorageAccountTenantId",
+            "type": "str",
+        },
+        "offline_data_transfer_share_name": {"key": "properties.offlineDataTransferShareName", "type": "str"},
+        "cloud_tiering_status": {"key": "properties.cloudTieringStatus", "type": "ServerEndpointCloudTieringStatus"},
+        "recall_status": {"key": "properties.recallStatus", "type": "ServerEndpointRecallStatus"},
+        "initial_download_policy": {"key": "properties.initialDownloadPolicy", "type": "str"},
+        "local_cache_mode": {"key": "properties.localCacheMode", "type": "str"},
+        "server_name": {"key": "properties.serverName", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpoint, self).__init__(**kwargs)
-        self.server_local_path = kwargs.get('server_local_path', None)
-        self.cloud_tiering = kwargs.get('cloud_tiering', None)
-        self.volume_free_space_percent = kwargs.get('volume_free_space_percent', None)
-        self.tier_files_older_than_days = kwargs.get('tier_files_older_than_days', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.server_resource_id = kwargs.get('server_resource_id', None)
+        self.server_local_path = kwargs.get("server_local_path", None)
+        self.cloud_tiering = kwargs.get("cloud_tiering", None)
+        self.volume_free_space_percent = kwargs.get("volume_free_space_percent", None)
+        self.tier_files_older_than_days = kwargs.get("tier_files_older_than_days", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.server_resource_id = kwargs.get("server_resource_id", None)
         self.provisioning_state = None
         self.last_workflow_id = None
         self.last_operation_name = None
         self.sync_status = None
-        self.offline_data_transfer = kwargs.get('offline_data_transfer', None)
+        self.offline_data_transfer = kwargs.get("offline_data_transfer", None)
         self.offline_data_transfer_storage_account_resource_id = None
         self.offline_data_transfer_storage_account_tenant_id = None
-        self.offline_data_transfer_share_name = kwargs.get('offline_data_transfer_share_name', None)
+        self.offline_data_transfer_share_name = kwargs.get("offline_data_transfer_share_name", None)
         self.cloud_tiering_status = None
         self.recall_status = None
-        self.initial_download_policy = kwargs.get('initial_download_policy', None)
-        self.local_cache_mode = kwargs.get('local_cache_mode', None)
+        self.initial_download_policy = kwargs.get("initial_download_policy", None)
+        self.local_cache_mode = kwargs.get("local_cache_mode", None)
         self.server_name = None
 
 
@@ -1559,15 +1459,12 @@ class ServerEndpointArray(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[ServerEndpoint]'},
+        "value": {"key": "value", "type": "[ServerEndpoint]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointArray, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class ServerEndpointBackgroundDataDownloadActivity(msrest.serialization.Model):
@@ -1584,21 +1481,18 @@ class ServerEndpointBackgroundDataDownloadActivity(msrest.serialization.Model):
     """
 
     _validation = {
-        'timestamp': {'readonly': True},
-        'percent_progress': {'readonly': True, 'maximum': 100, 'minimum': 0},
-        'downloaded_bytes': {'readonly': True, 'minimum': 0},
+        "timestamp": {"readonly": True},
+        "percent_progress": {"readonly": True, "maximum": 100, "minimum": 0},
+        "downloaded_bytes": {"readonly": True, "minimum": 0},
     }
 
     _attribute_map = {
-        'timestamp': {'key': 'timestamp', 'type': 'iso-8601'},
-        'percent_progress': {'key': 'percentProgress', 'type': 'int'},
-        'downloaded_bytes': {'key': 'downloadedBytes', 'type': 'long'},
+        "timestamp": {"key": "timestamp", "type": "iso-8601"},
+        "percent_progress": {"key": "percentProgress", "type": "int"},
+        "downloaded_bytes": {"key": "downloadedBytes", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointBackgroundDataDownloadActivity, self).__init__(**kwargs)
         self.timestamp = None
         self.percent_progress = None
@@ -1636,35 +1530,35 @@ class ServerEndpointCloudTieringStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_updated_timestamp': {'readonly': True},
-        'health': {'readonly': True},
-        'health_last_updated_timestamp': {'readonly': True},
-        'last_cloud_tiering_result': {'readonly': True},
-        'last_success_timestamp': {'readonly': True},
-        'space_savings': {'readonly': True},
-        'cache_performance': {'readonly': True},
-        'files_not_tiering': {'readonly': True},
-        'volume_free_space_policy_status': {'readonly': True},
-        'date_policy_status': {'readonly': True},
+        "last_updated_timestamp": {"readonly": True},
+        "health": {"readonly": True},
+        "health_last_updated_timestamp": {"readonly": True},
+        "last_cloud_tiering_result": {"readonly": True},
+        "last_success_timestamp": {"readonly": True},
+        "space_savings": {"readonly": True},
+        "cache_performance": {"readonly": True},
+        "files_not_tiering": {"readonly": True},
+        "volume_free_space_policy_status": {"readonly": True},
+        "date_policy_status": {"readonly": True},
     }
 
     _attribute_map = {
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'health': {'key': 'health', 'type': 'str'},
-        'health_last_updated_timestamp': {'key': 'healthLastUpdatedTimestamp', 'type': 'iso-8601'},
-        'last_cloud_tiering_result': {'key': 'lastCloudTieringResult', 'type': 'int'},
-        'last_success_timestamp': {'key': 'lastSuccessTimestamp', 'type': 'iso-8601'},
-        'space_savings': {'key': 'spaceSavings', 'type': 'CloudTieringSpaceSavings'},
-        'cache_performance': {'key': 'cachePerformance', 'type': 'CloudTieringCachePerformance'},
-        'files_not_tiering': {'key': 'filesNotTiering', 'type': 'CloudTieringFilesNotTiering'},
-        'volume_free_space_policy_status': {'key': 'volumeFreeSpacePolicyStatus', 'type': 'CloudTieringVolumeFreeSpacePolicyStatus'},
-        'date_policy_status': {'key': 'datePolicyStatus', 'type': 'CloudTieringDatePolicyStatus'},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "health": {"key": "health", "type": "str"},
+        "health_last_updated_timestamp": {"key": "healthLastUpdatedTimestamp", "type": "iso-8601"},
+        "last_cloud_tiering_result": {"key": "lastCloudTieringResult", "type": "int"},
+        "last_success_timestamp": {"key": "lastSuccessTimestamp", "type": "iso-8601"},
+        "space_savings": {"key": "spaceSavings", "type": "CloudTieringSpaceSavings"},
+        "cache_performance": {"key": "cachePerformance", "type": "CloudTieringCachePerformance"},
+        "files_not_tiering": {"key": "filesNotTiering", "type": "CloudTieringFilesNotTiering"},
+        "volume_free_space_policy_status": {
+            "key": "volumeFreeSpacePolicyStatus",
+            "type": "CloudTieringVolumeFreeSpacePolicyStatus",
+        },
+        "date_policy_status": {"key": "datePolicyStatus", "type": "CloudTieringDatePolicyStatus"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointCloudTieringStatus, self).__init__(**kwargs)
         self.last_updated_timestamp = None
         self.health = None
@@ -1718,44 +1612,41 @@ class ServerEndpointCreateParameters(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'volume_free_space_percent': {'maximum': 100, 'minimum': 0},
-        'tier_files_older_than_days': {'maximum': 2147483647, 'minimum': 0},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "volume_free_space_percent": {"maximum": 100, "minimum": 0},
+        "tier_files_older_than_days": {"maximum": 2147483647, "minimum": 0},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'server_local_path': {'key': 'properties.serverLocalPath', 'type': 'str'},
-        'cloud_tiering': {'key': 'properties.cloudTiering', 'type': 'str'},
-        'volume_free_space_percent': {'key': 'properties.volumeFreeSpacePercent', 'type': 'int'},
-        'tier_files_older_than_days': {'key': 'properties.tierFilesOlderThanDays', 'type': 'int'},
-        'friendly_name': {'key': 'properties.friendlyName', 'type': 'str'},
-        'server_resource_id': {'key': 'properties.serverResourceId', 'type': 'str'},
-        'offline_data_transfer': {'key': 'properties.offlineDataTransfer', 'type': 'str'},
-        'offline_data_transfer_share_name': {'key': 'properties.offlineDataTransferShareName', 'type': 'str'},
-        'initial_download_policy': {'key': 'properties.initialDownloadPolicy', 'type': 'str'},
-        'local_cache_mode': {'key': 'properties.localCacheMode', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "server_local_path": {"key": "properties.serverLocalPath", "type": "str"},
+        "cloud_tiering": {"key": "properties.cloudTiering", "type": "str"},
+        "volume_free_space_percent": {"key": "properties.volumeFreeSpacePercent", "type": "int"},
+        "tier_files_older_than_days": {"key": "properties.tierFilesOlderThanDays", "type": "int"},
+        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "server_resource_id": {"key": "properties.serverResourceId", "type": "str"},
+        "offline_data_transfer": {"key": "properties.offlineDataTransfer", "type": "str"},
+        "offline_data_transfer_share_name": {"key": "properties.offlineDataTransferShareName", "type": "str"},
+        "initial_download_policy": {"key": "properties.initialDownloadPolicy", "type": "str"},
+        "local_cache_mode": {"key": "properties.localCacheMode", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointCreateParameters, self).__init__(**kwargs)
-        self.server_local_path = kwargs.get('server_local_path', None)
-        self.cloud_tiering = kwargs.get('cloud_tiering', None)
-        self.volume_free_space_percent = kwargs.get('volume_free_space_percent', None)
-        self.tier_files_older_than_days = kwargs.get('tier_files_older_than_days', None)
-        self.friendly_name = kwargs.get('friendly_name', None)
-        self.server_resource_id = kwargs.get('server_resource_id', None)
-        self.offline_data_transfer = kwargs.get('offline_data_transfer', None)
-        self.offline_data_transfer_share_name = kwargs.get('offline_data_transfer_share_name', None)
-        self.initial_download_policy = kwargs.get('initial_download_policy', None)
-        self.local_cache_mode = kwargs.get('local_cache_mode', None)
+        self.server_local_path = kwargs.get("server_local_path", None)
+        self.cloud_tiering = kwargs.get("cloud_tiering", None)
+        self.volume_free_space_percent = kwargs.get("volume_free_space_percent", None)
+        self.tier_files_older_than_days = kwargs.get("tier_files_older_than_days", None)
+        self.friendly_name = kwargs.get("friendly_name", None)
+        self.server_resource_id = kwargs.get("server_resource_id", None)
+        self.offline_data_transfer = kwargs.get("offline_data_transfer", None)
+        self.offline_data_transfer_share_name = kwargs.get("offline_data_transfer_share_name", None)
+        self.initial_download_policy = kwargs.get("initial_download_policy", None)
+        self.local_cache_mode = kwargs.get("local_cache_mode", None)
 
 
 class ServerEndpointFilesNotSyncingError(msrest.serialization.Model):
@@ -1772,21 +1663,18 @@ class ServerEndpointFilesNotSyncingError(msrest.serialization.Model):
     """
 
     _validation = {
-        'error_code': {'readonly': True},
-        'persistent_count': {'readonly': True, 'minimum': 0},
-        'transient_count': {'readonly': True, 'minimum': 0},
+        "error_code": {"readonly": True},
+        "persistent_count": {"readonly": True, "minimum": 0},
+        "transient_count": {"readonly": True, "minimum": 0},
     }
 
     _attribute_map = {
-        'error_code': {'key': 'errorCode', 'type': 'int'},
-        'persistent_count': {'key': 'persistentCount', 'type': 'long'},
-        'transient_count': {'key': 'transientCount', 'type': 'long'},
+        "error_code": {"key": "errorCode", "type": "int"},
+        "persistent_count": {"key": "persistentCount", "type": "long"},
+        "transient_count": {"key": "transientCount", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointFilesNotSyncingError, self).__init__(**kwargs)
         self.error_code = None
         self.persistent_count = None
@@ -1805,19 +1693,16 @@ class ServerEndpointRecallError(msrest.serialization.Model):
     """
 
     _validation = {
-        'error_code': {'readonly': True},
-        'count': {'readonly': True, 'minimum': 0},
+        "error_code": {"readonly": True},
+        "count": {"readonly": True, "minimum": 0},
     }
 
     _attribute_map = {
-        'error_code': {'key': 'errorCode', 'type': 'int'},
-        'count': {'key': 'count', 'type': 'long'},
+        "error_code": {"key": "errorCode", "type": "int"},
+        "count": {"key": "count", "type": "long"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointRecallError, self).__init__(**kwargs)
         self.error_code = None
         self.count = None
@@ -1837,21 +1722,18 @@ class ServerEndpointRecallStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_updated_timestamp': {'readonly': True},
-        'total_recall_errors_count': {'readonly': True, 'minimum': 0},
-        'recall_errors': {'readonly': True},
+        "last_updated_timestamp": {"readonly": True},
+        "total_recall_errors_count": {"readonly": True, "minimum": 0},
+        "recall_errors": {"readonly": True},
     }
 
     _attribute_map = {
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'total_recall_errors_count': {'key': 'totalRecallErrorsCount', 'type': 'long'},
-        'recall_errors': {'key': 'recallErrors', 'type': '[ServerEndpointRecallError]'},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "total_recall_errors_count": {"key": "totalRecallErrorsCount", "type": "long"},
+        "recall_errors": {"key": "recallErrors", "type": "[ServerEndpointRecallError]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointRecallStatus, self).__init__(**kwargs)
         self.last_updated_timestamp = None
         self.total_recall_errors_count = None
@@ -1881,29 +1763,26 @@ class ServerEndpointSyncActivityStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'timestamp': {'readonly': True},
-        'per_item_error_count': {'readonly': True, 'minimum': 0},
-        'applied_item_count': {'readonly': True, 'minimum': 0},
-        'total_item_count': {'readonly': True, 'minimum': 0},
-        'applied_bytes': {'readonly': True, 'minimum': 0},
-        'total_bytes': {'readonly': True, 'minimum': 0},
-        'sync_mode': {'readonly': True},
+        "timestamp": {"readonly": True},
+        "per_item_error_count": {"readonly": True, "minimum": 0},
+        "applied_item_count": {"readonly": True, "minimum": 0},
+        "total_item_count": {"readonly": True, "minimum": 0},
+        "applied_bytes": {"readonly": True, "minimum": 0},
+        "total_bytes": {"readonly": True, "minimum": 0},
+        "sync_mode": {"readonly": True},
     }
 
     _attribute_map = {
-        'timestamp': {'key': 'timestamp', 'type': 'iso-8601'},
-        'per_item_error_count': {'key': 'perItemErrorCount', 'type': 'long'},
-        'applied_item_count': {'key': 'appliedItemCount', 'type': 'long'},
-        'total_item_count': {'key': 'totalItemCount', 'type': 'long'},
-        'applied_bytes': {'key': 'appliedBytes', 'type': 'long'},
-        'total_bytes': {'key': 'totalBytes', 'type': 'long'},
-        'sync_mode': {'key': 'syncMode', 'type': 'str'},
+        "timestamp": {"key": "timestamp", "type": "iso-8601"},
+        "per_item_error_count": {"key": "perItemErrorCount", "type": "long"},
+        "applied_item_count": {"key": "appliedItemCount", "type": "long"},
+        "total_item_count": {"key": "totalItemCount", "type": "long"},
+        "applied_bytes": {"key": "appliedBytes", "type": "long"},
+        "total_bytes": {"key": "totalBytes", "type": "long"},
+        "sync_mode": {"key": "syncMode", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointSyncActivityStatus, self).__init__(**kwargs)
         self.timestamp = None
         self.per_item_error_count = None
@@ -1940,31 +1819,28 @@ class ServerEndpointSyncSessionStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'last_sync_result': {'readonly': True},
-        'last_sync_timestamp': {'readonly': True},
-        'last_sync_success_timestamp': {'readonly': True},
-        'last_sync_per_item_error_count': {'readonly': True, 'minimum': 0},
-        'persistent_files_not_syncing_count': {'readonly': True, 'minimum': 0},
-        'transient_files_not_syncing_count': {'readonly': True, 'minimum': 0},
-        'files_not_syncing_errors': {'readonly': True},
-        'last_sync_mode': {'readonly': True},
+        "last_sync_result": {"readonly": True},
+        "last_sync_timestamp": {"readonly": True},
+        "last_sync_success_timestamp": {"readonly": True},
+        "last_sync_per_item_error_count": {"readonly": True, "minimum": 0},
+        "persistent_files_not_syncing_count": {"readonly": True, "minimum": 0},
+        "transient_files_not_syncing_count": {"readonly": True, "minimum": 0},
+        "files_not_syncing_errors": {"readonly": True},
+        "last_sync_mode": {"readonly": True},
     }
 
     _attribute_map = {
-        'last_sync_result': {'key': 'lastSyncResult', 'type': 'int'},
-        'last_sync_timestamp': {'key': 'lastSyncTimestamp', 'type': 'iso-8601'},
-        'last_sync_success_timestamp': {'key': 'lastSyncSuccessTimestamp', 'type': 'iso-8601'},
-        'last_sync_per_item_error_count': {'key': 'lastSyncPerItemErrorCount', 'type': 'long'},
-        'persistent_files_not_syncing_count': {'key': 'persistentFilesNotSyncingCount', 'type': 'long'},
-        'transient_files_not_syncing_count': {'key': 'transientFilesNotSyncingCount', 'type': 'long'},
-        'files_not_syncing_errors': {'key': 'filesNotSyncingErrors', 'type': '[ServerEndpointFilesNotSyncingError]'},
-        'last_sync_mode': {'key': 'lastSyncMode', 'type': 'str'},
+        "last_sync_result": {"key": "lastSyncResult", "type": "int"},
+        "last_sync_timestamp": {"key": "lastSyncTimestamp", "type": "iso-8601"},
+        "last_sync_success_timestamp": {"key": "lastSyncSuccessTimestamp", "type": "iso-8601"},
+        "last_sync_per_item_error_count": {"key": "lastSyncPerItemErrorCount", "type": "long"},
+        "persistent_files_not_syncing_count": {"key": "persistentFilesNotSyncingCount", "type": "long"},
+        "transient_files_not_syncing_count": {"key": "transientFilesNotSyncingCount", "type": "long"},
+        "files_not_syncing_errors": {"key": "filesNotSyncingErrors", "type": "[ServerEndpointFilesNotSyncingError]"},
+        "last_sync_mode": {"key": "lastSyncMode", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointSyncSessionStatus, self).__init__(**kwargs)
         self.last_sync_result = None
         self.last_sync_timestamp = None
@@ -2016,39 +1892,39 @@ class ServerEndpointSyncStatus(msrest.serialization.Model):
     """
 
     _validation = {
-        'download_health': {'readonly': True},
-        'upload_health': {'readonly': True},
-        'combined_health': {'readonly': True},
-        'sync_activity': {'readonly': True},
-        'total_persistent_files_not_syncing_count': {'readonly': True, 'minimum': 0},
-        'last_updated_timestamp': {'readonly': True},
-        'upload_status': {'readonly': True},
-        'download_status': {'readonly': True},
-        'upload_activity': {'readonly': True},
-        'download_activity': {'readonly': True},
-        'offline_data_transfer_status': {'readonly': True},
-        'background_data_download_activity': {'readonly': True},
+        "download_health": {"readonly": True},
+        "upload_health": {"readonly": True},
+        "combined_health": {"readonly": True},
+        "sync_activity": {"readonly": True},
+        "total_persistent_files_not_syncing_count": {"readonly": True, "minimum": 0},
+        "last_updated_timestamp": {"readonly": True},
+        "upload_status": {"readonly": True},
+        "download_status": {"readonly": True},
+        "upload_activity": {"readonly": True},
+        "download_activity": {"readonly": True},
+        "offline_data_transfer_status": {"readonly": True},
+        "background_data_download_activity": {"readonly": True},
     }
 
     _attribute_map = {
-        'download_health': {'key': 'downloadHealth', 'type': 'str'},
-        'upload_health': {'key': 'uploadHealth', 'type': 'str'},
-        'combined_health': {'key': 'combinedHealth', 'type': 'str'},
-        'sync_activity': {'key': 'syncActivity', 'type': 'str'},
-        'total_persistent_files_not_syncing_count': {'key': 'totalPersistentFilesNotSyncingCount', 'type': 'long'},
-        'last_updated_timestamp': {'key': 'lastUpdatedTimestamp', 'type': 'iso-8601'},
-        'upload_status': {'key': 'uploadStatus', 'type': 'ServerEndpointSyncSessionStatus'},
-        'download_status': {'key': 'downloadStatus', 'type': 'ServerEndpointSyncSessionStatus'},
-        'upload_activity': {'key': 'uploadActivity', 'type': 'ServerEndpointSyncActivityStatus'},
-        'download_activity': {'key': 'downloadActivity', 'type': 'ServerEndpointSyncActivityStatus'},
-        'offline_data_transfer_status': {'key': 'offlineDataTransferStatus', 'type': 'str'},
-        'background_data_download_activity': {'key': 'backgroundDataDownloadActivity', 'type': 'ServerEndpointBackgroundDataDownloadActivity'},
+        "download_health": {"key": "downloadHealth", "type": "str"},
+        "upload_health": {"key": "uploadHealth", "type": "str"},
+        "combined_health": {"key": "combinedHealth", "type": "str"},
+        "sync_activity": {"key": "syncActivity", "type": "str"},
+        "total_persistent_files_not_syncing_count": {"key": "totalPersistentFilesNotSyncingCount", "type": "long"},
+        "last_updated_timestamp": {"key": "lastUpdatedTimestamp", "type": "iso-8601"},
+        "upload_status": {"key": "uploadStatus", "type": "ServerEndpointSyncSessionStatus"},
+        "download_status": {"key": "downloadStatus", "type": "ServerEndpointSyncSessionStatus"},
+        "upload_activity": {"key": "uploadActivity", "type": "ServerEndpointSyncActivityStatus"},
+        "download_activity": {"key": "downloadActivity", "type": "ServerEndpointSyncActivityStatus"},
+        "offline_data_transfer_status": {"key": "offlineDataTransferStatus", "type": "str"},
+        "background_data_download_activity": {
+            "key": "backgroundDataDownloadActivity",
+            "type": "ServerEndpointBackgroundDataDownloadActivity",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointSyncStatus, self).__init__(**kwargs)
         self.download_health = None
         self.upload_health = None
@@ -2085,30 +1961,27 @@ class ServerEndpointUpdateParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'volume_free_space_percent': {'maximum': 100, 'minimum': 0},
-        'tier_files_older_than_days': {'maximum': 2147483647, 'minimum': 0},
+        "volume_free_space_percent": {"maximum": 100, "minimum": 0},
+        "tier_files_older_than_days": {"maximum": 2147483647, "minimum": 0},
     }
 
     _attribute_map = {
-        'cloud_tiering': {'key': 'properties.cloudTiering', 'type': 'str'},
-        'volume_free_space_percent': {'key': 'properties.volumeFreeSpacePercent', 'type': 'int'},
-        'tier_files_older_than_days': {'key': 'properties.tierFilesOlderThanDays', 'type': 'int'},
-        'offline_data_transfer': {'key': 'properties.offlineDataTransfer', 'type': 'str'},
-        'offline_data_transfer_share_name': {'key': 'properties.offlineDataTransferShareName', 'type': 'str'},
-        'local_cache_mode': {'key': 'properties.localCacheMode', 'type': 'str'},
+        "cloud_tiering": {"key": "properties.cloudTiering", "type": "str"},
+        "volume_free_space_percent": {"key": "properties.volumeFreeSpacePercent", "type": "int"},
+        "tier_files_older_than_days": {"key": "properties.tierFilesOlderThanDays", "type": "int"},
+        "offline_data_transfer": {"key": "properties.offlineDataTransfer", "type": "str"},
+        "offline_data_transfer_share_name": {"key": "properties.offlineDataTransferShareName", "type": "str"},
+        "local_cache_mode": {"key": "properties.localCacheMode", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(ServerEndpointUpdateParameters, self).__init__(**kwargs)
-        self.cloud_tiering = kwargs.get('cloud_tiering', None)
-        self.volume_free_space_percent = kwargs.get('volume_free_space_percent', None)
-        self.tier_files_older_than_days = kwargs.get('tier_files_older_than_days', None)
-        self.offline_data_transfer = kwargs.get('offline_data_transfer', None)
-        self.offline_data_transfer_share_name = kwargs.get('offline_data_transfer_share_name', None)
-        self.local_cache_mode = kwargs.get('local_cache_mode', None)
+        self.cloud_tiering = kwargs.get("cloud_tiering", None)
+        self.volume_free_space_percent = kwargs.get("volume_free_space_percent", None)
+        self.tier_files_older_than_days = kwargs.get("tier_files_older_than_days", None)
+        self.offline_data_transfer = kwargs.get("offline_data_transfer", None)
+        self.offline_data_transfer_share_name = kwargs.get("offline_data_transfer_share_name", None)
+        self.local_cache_mode = kwargs.get("local_cache_mode", None)
 
 
 class StorageSyncApiError(msrest.serialization.Model):
@@ -2127,23 +2000,20 @@ class StorageSyncApiError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'details': {'key': 'details', 'type': 'StorageSyncErrorDetails'},
-        'inner_error': {'key': 'innerError', 'type': 'StorageSyncInnerErrorDetails'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "StorageSyncErrorDetails"},
+        "inner_error": {"key": "innerError", "type": "StorageSyncInnerErrorDetails"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncApiError, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
-        self.target = kwargs.get('target', None)
-        self.details = kwargs.get('details', None)
-        self.inner_error = kwargs.get('inner_error', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
+        self.target = kwargs.get("target", None)
+        self.details = kwargs.get("details", None)
+        self.inner_error = kwargs.get("inner_error", None)
 
 
 class StorageSyncError(msrest.serialization.Model):
@@ -2156,17 +2026,14 @@ class StorageSyncError(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'error': {'key': 'error', 'type': 'StorageSyncApiError'},
-        'innererror': {'key': 'innererror', 'type': 'StorageSyncApiError'},
+        "error": {"key": "error", "type": "StorageSyncApiError"},
+        "innererror": {"key": "innererror", "type": "StorageSyncApiError"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncError, self).__init__(**kwargs)
-        self.error = kwargs.get('error', None)
-        self.innererror = kwargs.get('innererror', None)
+        self.error = kwargs.get("error", None)
+        self.innererror = kwargs.get("innererror", None)
 
 
 class StorageSyncErrorDetails(msrest.serialization.Model):
@@ -2191,29 +2058,26 @@ class StorageSyncErrorDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'code': {'key': 'code', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'target': {'key': 'target', 'type': 'str'},
-        'request_uri': {'key': 'requestUri', 'type': 'str'},
-        'exception_type': {'key': 'exceptionType', 'type': 'str'},
-        'http_method': {'key': 'httpMethod', 'type': 'str'},
-        'hashed_message': {'key': 'hashedMessage', 'type': 'str'},
-        'http_error_code': {'key': 'httpErrorCode', 'type': 'str'},
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "request_uri": {"key": "requestUri", "type": "str"},
+        "exception_type": {"key": "exceptionType", "type": "str"},
+        "http_method": {"key": "httpMethod", "type": "str"},
+        "hashed_message": {"key": "hashedMessage", "type": "str"},
+        "http_error_code": {"key": "httpErrorCode", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncErrorDetails, self).__init__(**kwargs)
-        self.code = kwargs.get('code', None)
-        self.message = kwargs.get('message', None)
-        self.target = kwargs.get('target', None)
-        self.request_uri = kwargs.get('request_uri', None)
-        self.exception_type = kwargs.get('exception_type', None)
-        self.http_method = kwargs.get('http_method', None)
-        self.hashed_message = kwargs.get('hashed_message', None)
-        self.http_error_code = kwargs.get('http_error_code', None)
+        self.code = kwargs.get("code", None)
+        self.message = kwargs.get("message", None)
+        self.target = kwargs.get("target", None)
+        self.request_uri = kwargs.get("request_uri", None)
+        self.exception_type = kwargs.get("exception_type", None)
+        self.http_method = kwargs.get("http_method", None)
+        self.hashed_message = kwargs.get("hashed_message", None)
+        self.http_error_code = kwargs.get("http_error_code", None)
 
 
 class StorageSyncInnerErrorDetails(msrest.serialization.Model):
@@ -2230,21 +2094,18 @@ class StorageSyncInnerErrorDetails(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'call_stack': {'key': 'callStack', 'type': 'str'},
-        'message': {'key': 'message', 'type': 'str'},
-        'inner_exception': {'key': 'innerException', 'type': 'str'},
-        'inner_exception_call_stack': {'key': 'innerExceptionCallStack', 'type': 'str'},
+        "call_stack": {"key": "callStack", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "inner_exception": {"key": "innerException", "type": "str"},
+        "inner_exception_call_stack": {"key": "innerExceptionCallStack", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncInnerErrorDetails, self).__init__(**kwargs)
-        self.call_stack = kwargs.get('call_stack', None)
-        self.message = kwargs.get('message', None)
-        self.inner_exception = kwargs.get('inner_exception', None)
-        self.inner_exception_call_stack = kwargs.get('inner_exception_call_stack', None)
+        self.call_stack = kwargs.get("call_stack", None)
+        self.message = kwargs.get("message", None)
+        self.inner_exception = kwargs.get("inner_exception", None)
+        self.inner_exception_call_stack = kwargs.get("inner_exception_call_stack", None)
 
 
 class TrackedResource(Resource):
@@ -2269,27 +2130,24 @@ class TrackedResource(Resource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TrackedResource, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.location = kwargs['location']
+        self.tags = kwargs.get("tags", None)
+        self.location = kwargs["location"]
 
 
 class StorageSyncService(TrackedResource):
@@ -2331,39 +2189,39 @@ class StorageSyncService(TrackedResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'location': {'required': True},
-        'storage_sync_service_status': {'readonly': True},
-        'storage_sync_service_uid': {'readonly': True},
-        'provisioning_state': {'readonly': True},
-        'last_workflow_id': {'readonly': True},
-        'last_operation_name': {'readonly': True},
-        'private_endpoint_connections': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "location": {"required": True},
+        "storage_sync_service_status": {"readonly": True},
+        "storage_sync_service_uid": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+        "last_workflow_id": {"readonly": True},
+        "last_operation_name": {"readonly": True},
+        "private_endpoint_connections": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'incoming_traffic_policy': {'key': 'properties.incomingTrafficPolicy', 'type': 'str'},
-        'storage_sync_service_status': {'key': 'properties.storageSyncServiceStatus', 'type': 'int'},
-        'storage_sync_service_uid': {'key': 'properties.storageSyncServiceUid', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'last_workflow_id': {'key': 'properties.lastWorkflowId', 'type': 'str'},
-        'last_operation_name': {'key': 'properties.lastOperationName', 'type': 'str'},
-        'private_endpoint_connections': {'key': 'properties.privateEndpointConnections', 'type': '[PrivateEndpointConnection]'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "incoming_traffic_policy": {"key": "properties.incomingTrafficPolicy", "type": "str"},
+        "storage_sync_service_status": {"key": "properties.storageSyncServiceStatus", "type": "int"},
+        "storage_sync_service_uid": {"key": "properties.storageSyncServiceUid", "type": "str"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "last_workflow_id": {"key": "properties.lastWorkflowId", "type": "str"},
+        "last_operation_name": {"key": "properties.lastOperationName", "type": "str"},
+        "private_endpoint_connections": {
+            "key": "properties.privateEndpointConnections",
+            "type": "[PrivateEndpointConnection]",
+        },
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncService, self).__init__(**kwargs)
-        self.incoming_traffic_policy = kwargs.get('incoming_traffic_policy', None)
+        self.incoming_traffic_policy = kwargs.get("incoming_traffic_policy", None)
         self.storage_sync_service_status = None
         self.storage_sync_service_uid = None
         self.provisioning_state = None
@@ -2380,15 +2238,12 @@ class StorageSyncServiceArray(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[StorageSyncService]'},
+        "value": {"key": "value", "type": "[StorageSyncService]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncServiceArray, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class StorageSyncServiceCreateParameters(msrest.serialization.Model):
@@ -2412,23 +2267,20 @@ class StorageSyncServiceCreateParameters(msrest.serialization.Model):
     """
 
     _validation = {
-        'location': {'required': True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
-        'location': {'key': 'location', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'incoming_traffic_policy': {'key': 'properties.incomingTrafficPolicy', 'type': 'str'},
+        "location": {"key": "location", "type": "str"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "incoming_traffic_policy": {"key": "properties.incomingTrafficPolicy", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncServiceCreateParameters, self).__init__(**kwargs)
-        self.location = kwargs['location']
-        self.tags = kwargs.get('tags', None)
-        self.incoming_traffic_policy = kwargs.get('incoming_traffic_policy', None)
+        self.location = kwargs["location"]
+        self.tags = kwargs.get("tags", None)
+        self.incoming_traffic_policy = kwargs.get("incoming_traffic_policy", None)
 
 
 class StorageSyncServiceUpdateParameters(msrest.serialization.Model):
@@ -2442,17 +2294,14 @@ class StorageSyncServiceUpdateParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'incoming_traffic_policy': {'key': 'properties.incomingTrafficPolicy', 'type': 'str'},
+        "tags": {"key": "tags", "type": "{str}"},
+        "incoming_traffic_policy": {"key": "properties.incomingTrafficPolicy", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(StorageSyncServiceUpdateParameters, self).__init__(**kwargs)
-        self.tags = kwargs.get('tags', None)
-        self.incoming_traffic_policy = kwargs.get('incoming_traffic_policy', None)
+        self.tags = kwargs.get("tags", None)
+        self.incoming_traffic_policy = kwargs.get("incoming_traffic_policy", None)
 
 
 class SubscriptionState(msrest.serialization.Model):
@@ -2470,23 +2319,20 @@ class SubscriptionState(msrest.serialization.Model):
     """
 
     _validation = {
-        'istransitioning': {'readonly': True},
+        "istransitioning": {"readonly": True},
     }
 
     _attribute_map = {
-        'state': {'key': 'state', 'type': 'str'},
-        'istransitioning': {'key': 'istransitioning', 'type': 'bool'},
-        'properties': {'key': 'properties', 'type': 'object'},
+        "state": {"key": "state", "type": "str"},
+        "istransitioning": {"key": "istransitioning", "type": "bool"},
+        "properties": {"key": "properties", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SubscriptionState, self).__init__(**kwargs)
-        self.state = kwargs.get('state', None)
+        self.state = kwargs.get("state", None)
         self.istransitioning = None
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class SyncGroup(ProxyResource):
@@ -2509,25 +2355,22 @@ class SyncGroup(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'unique_id': {'readonly': True},
-        'sync_group_status': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "unique_id": {"readonly": True},
+        "sync_group_status": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'unique_id': {'key': 'properties.uniqueId', 'type': 'str'},
-        'sync_group_status': {'key': 'properties.syncGroupStatus', 'type': 'str'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "unique_id": {"key": "properties.uniqueId", "type": "str"},
+        "sync_group_status": {"key": "properties.syncGroupStatus", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SyncGroup, self).__init__(**kwargs)
         self.unique_id = None
         self.sync_group_status = None
@@ -2541,15 +2384,12 @@ class SyncGroupArray(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[SyncGroup]'},
+        "value": {"key": "value", "type": "[SyncGroup]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SyncGroupArray, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
 
 
 class SyncGroupCreateParameters(ProxyResource):
@@ -2570,24 +2410,21 @@ class SyncGroupCreateParameters(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'properties': {'key': 'properties', 'type': 'object'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "properties": {"key": "properties", "type": "object"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(SyncGroupCreateParameters, self).__init__(**kwargs)
-        self.properties = kwargs.get('properties', None)
+        self.properties = kwargs.get("properties", None)
 
 
 class TriggerChangeDetectionParameters(msrest.serialization.Model):
@@ -2605,19 +2442,16 @@ class TriggerChangeDetectionParameters(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'directory_path': {'key': 'directoryPath', 'type': 'str'},
-        'change_detection_mode': {'key': 'changeDetectionMode', 'type': 'str'},
-        'paths': {'key': 'paths', 'type': '[str]'},
+        "directory_path": {"key": "directoryPath", "type": "str"},
+        "change_detection_mode": {"key": "changeDetectionMode", "type": "str"},
+        "paths": {"key": "paths", "type": "[str]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TriggerChangeDetectionParameters, self).__init__(**kwargs)
-        self.directory_path = kwargs.get('directory_path', None)
-        self.change_detection_mode = kwargs.get('change_detection_mode', None)
-        self.paths = kwargs.get('paths', None)
+        self.directory_path = kwargs.get("directory_path", None)
+        self.change_detection_mode = kwargs.get("change_detection_mode", None)
+        self.paths = kwargs.get("paths", None)
 
 
 class TriggerRolloverRequest(msrest.serialization.Model):
@@ -2628,15 +2462,12 @@ class TriggerRolloverRequest(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'server_certificate': {'key': 'serverCertificate', 'type': 'str'},
+        "server_certificate": {"key": "serverCertificate", "type": "str"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(TriggerRolloverRequest, self).__init__(**kwargs)
-        self.server_certificate = kwargs.get('server_certificate', None)
+        self.server_certificate = kwargs.get("server_certificate", None)
 
 
 class Workflow(ProxyResource):
@@ -2672,37 +2503,34 @@ class Workflow(ProxyResource):
     """
 
     _validation = {
-        'id': {'readonly': True},
-        'name': {'readonly': True},
-        'type': {'readonly': True},
-        'last_step_name': {'readonly': True},
-        'status': {'readonly': True},
-        'operation': {'readonly': True},
-        'steps': {'readonly': True},
-        'last_operation_id': {'readonly': True},
-        'command_name': {'readonly': True},
-        'created_timestamp': {'readonly': True},
-        'last_status_timestamp': {'readonly': True},
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "last_step_name": {"readonly": True},
+        "status": {"readonly": True},
+        "operation": {"readonly": True},
+        "steps": {"readonly": True},
+        "last_operation_id": {"readonly": True},
+        "command_name": {"readonly": True},
+        "created_timestamp": {"readonly": True},
+        "last_status_timestamp": {"readonly": True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'last_step_name': {'key': 'properties.lastStepName', 'type': 'str'},
-        'status': {'key': 'properties.status', 'type': 'str'},
-        'operation': {'key': 'properties.operation', 'type': 'str'},
-        'steps': {'key': 'properties.steps', 'type': 'str'},
-        'last_operation_id': {'key': 'properties.lastOperationId', 'type': 'str'},
-        'command_name': {'key': 'properties.commandName', 'type': 'str'},
-        'created_timestamp': {'key': 'properties.createdTimestamp', 'type': 'iso-8601'},
-        'last_status_timestamp': {'key': 'properties.lastStatusTimestamp', 'type': 'iso-8601'},
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "last_step_name": {"key": "properties.lastStepName", "type": "str"},
+        "status": {"key": "properties.status", "type": "str"},
+        "operation": {"key": "properties.operation", "type": "str"},
+        "steps": {"key": "properties.steps", "type": "str"},
+        "last_operation_id": {"key": "properties.lastOperationId", "type": "str"},
+        "command_name": {"key": "properties.commandName", "type": "str"},
+        "created_timestamp": {"key": "properties.createdTimestamp", "type": "iso-8601"},
+        "last_status_timestamp": {"key": "properties.lastStatusTimestamp", "type": "iso-8601"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(Workflow, self).__init__(**kwargs)
         self.last_step_name = None
         self.status = None
@@ -2722,12 +2550,9 @@ class WorkflowArray(msrest.serialization.Model):
     """
 
     _attribute_map = {
-        'value': {'key': 'value', 'type': '[Workflow]'},
+        "value": {"key": "value", "type": "[Workflow]"},
     }
 
-    def __init__(
-        self,
-        **kwargs
-    ):
+    def __init__(self, **kwargs):
         super(WorkflowArray, self).__init__(**kwargs)
-        self.value = kwargs.get('value', None)
+        self.value = kwargs.get("value", None)
