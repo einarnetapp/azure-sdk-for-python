@@ -28,26 +28,26 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._certificates_operations import (
+from ...operations._connected_environments_dapr_components_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
     build_list_request,
-    build_update_request,
+    build_list_secrets_request,
 )
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class CertificatesOperations:
+class ConnectedEnvironmentsDaprComponentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.aio.ContainerAppsAPIClient`'s
-        :attr:`certificates` attribute.
+        :attr:`connected_environments_dapr_components` attribute.
     """
 
     models = _models
@@ -61,27 +61,27 @@ class CertificatesOperations:
 
     @distributed_trace
     def list(
-        self, resource_group_name: str, environment_name: str, **kwargs: Any
-    ) -> AsyncIterable["_models.Certificate"]:
-        """Get the Certificates in a given managed environment.
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
+    ) -> AsyncIterable["_models.DaprComponent"]:
+        """Get the Dapr Components for a connected environment.
 
-        Get the Certificates in a given managed environment.
+        Get the Dapr Components for a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Certificate or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.Certificate]
+        :return: An iterator like instance of either DaprComponent or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.DaprComponent]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CertificateCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponentsCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -96,7 +96,7 @@ class CertificatesOperations:
 
                 request = build_list_request(
                     resource_group_name=resource_group_name,
-                    environment_name=environment_name,
+                    connected_environment_name=connected_environment_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
@@ -118,7 +118,7 @@ class CertificatesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("CertificateCollection", pipeline_response)
+            deserialized = self._deserialize("DaprComponentsCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -141,26 +141,26 @@ class CertificatesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents"}  # type: ignore
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, environment_name: str, certificate_name: str, **kwargs: Any
-    ) -> _models.Certificate:
-        """Get the specified Certificate.
+        self, resource_group_name: str, connected_environment_name: str, component_name: str, **kwargs: Any
+    ) -> _models.DaprComponent:
+        """Get a dapr component.
 
-        Get the specified Certificate.
+        Get a dapr component.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -175,12 +175,12 @@ class CertificatesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Certificate]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponent]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -201,45 +201,45 @@ class CertificatesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Certificate", pipeline_response)
+        deserialized = self._deserialize("DaprComponent", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
     @overload
     async def create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: Optional[_models.Certificate] = None,
+        connected_environment_name: str,
+        component_name: str,
+        dapr_component_envelope: _models.DaprComponent,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Create or Update a Certificate.
+    ) -> _models.DaprComponent:
+        """Creates or updates a Dapr Component.
 
-        Create or Update a Certificate.
+        Creates or updates a Dapr Component in a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
-        :param certificate_envelope: Certificate to be created or updated. Default value is None.
-        :type certificate_envelope: ~azure.mgmt.app.models.Certificate
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
+        :param dapr_component_envelope: Configuration details of the Dapr Component. Required.
+        :type dapr_component_envelope: ~azure.mgmt.app.models.DaprComponent
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -247,32 +247,32 @@ class CertificatesOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: Optional[IO] = None,
+        connected_environment_name: str,
+        component_name: str,
+        dapr_component_envelope: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Create or Update a Certificate.
+    ) -> _models.DaprComponent:
+        """Creates or updates a Dapr Component.
 
-        Create or Update a Certificate.
+        Creates or updates a Dapr Component in a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
-        :param certificate_envelope: Certificate to be created or updated. Default value is None.
-        :type certificate_envelope: IO
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
+        :param dapr_component_envelope: Configuration details of the Dapr Component. Required.
+        :type dapr_component_envelope: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -280,31 +280,31 @@ class CertificatesOperations:
     async def create_or_update(
         self,
         resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: Optional[Union[_models.Certificate, IO]] = None,
+        connected_environment_name: str,
+        component_name: str,
+        dapr_component_envelope: Union[_models.DaprComponent, IO],
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Create or Update a Certificate.
+    ) -> _models.DaprComponent:
+        """Creates or updates a Dapr Component.
 
-        Create or Update a Certificate.
+        Creates or updates a Dapr Component in a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
-        :param certificate_envelope: Certificate to be created or updated. Is either a model type or a
-         IO type. Default value is None.
-        :type certificate_envelope: ~azure.mgmt.app.models.Certificate or IO
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
+        :param dapr_component_envelope: Configuration details of the Dapr Component. Is either a model
+         type or a IO type. Required.
+        :type dapr_component_envelope: ~azure.mgmt.app.models.DaprComponent or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -320,23 +320,20 @@ class CertificatesOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Certificate]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponent]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(certificate_envelope, (IO, bytes)):
-            _content = certificate_envelope
+        if isinstance(dapr_component_envelope, (IO, bytes)):
+            _content = dapr_component_envelope
         else:
-            if certificate_envelope is not None:
-                _json = self._serialize.body(certificate_envelope, "Certificate")
-            else:
-                _json = None
+            _json = self._serialize.body(dapr_component_envelope, "DaprComponent")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -360,30 +357,30 @@ class CertificatesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Certificate", pipeline_response)
+        deserialized = self._deserialize("DaprComponent", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, environment_name: str, certificate_name: str, **kwargs: Any
+        self, resource_group_name: str, connected_environment_name: str, component_name: str, **kwargs: Any
     ) -> None:
-        """Deletes the specified Certificate.
+        """Delete a Dapr Component.
 
-        Deletes the specified Certificate.
+        Delete a Dapr Component from a connected environment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -405,8 +402,8 @@ class CertificatesOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -430,103 +427,26 @@ class CertificatesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
-
-    @overload
-    async def update(
-        self,
-        resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: _models.CertificatePatch,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Certificate:
-        """Update properties of a certificate.
-
-        Patches a certificate. Currently only patching of tags is supported.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
-        :param certificate_envelope: Properties of a certificate that need to be updated. Required.
-        :type certificate_envelope: ~azure.mgmt.app.models.CertificatePatch
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def update(
-        self,
-        resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Certificate:
-        """Update properties of a certificate.
-
-        Patches a certificate. Currently only patching of tags is supported.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
-        :param certificate_envelope: Properties of a certificate that need to be updated. Required.
-        :type certificate_envelope: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}"}  # type: ignore
 
     @distributed_trace_async
-    async def update(
-        self,
-        resource_group_name: str,
-        environment_name: str,
-        certificate_name: str,
-        certificate_envelope: Union[_models.CertificatePatch, IO],
-        **kwargs: Any
-    ) -> _models.Certificate:
-        """Update properties of a certificate.
+    async def list_secrets(
+        self, resource_group_name: str, connected_environment_name: str, component_name: str, **kwargs: Any
+    ) -> _models.DaprSecretsCollection:
+        """List secrets for a dapr component.
 
-        Patches a certificate. Currently only patching of tags is supported.
+        List secrets for a dapr component.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
-        :type environment_name: str
-        :param certificate_name: Name of the Certificate. Required.
-        :type certificate_name: str
-        :param certificate_envelope: Properties of a certificate that need to be updated. Is either a
-         model type or a IO type. Required.
-        :type certificate_envelope: ~azure.mgmt.app.models.CertificatePatch or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
+        :param connected_environment_name: Name of the connected environment. Required.
+        :type connected_environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Certificate
+        :return: DaprSecretsCollection or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.DaprSecretsCollection
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -537,31 +457,19 @@ class CertificatesOperations:
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Certificate]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprSecretsCollection]
 
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(certificate_envelope, (IO, bytes)):
-            _content = certificate_envelope
-        else:
-            _json = self._serialize.body(certificate_envelope, "CertificatePatch")
-
-        request = build_update_request(
+        request = build_list_secrets_request(
             resource_group_name=resource_group_name,
-            environment_name=environment_name,
-            certificate_name=certificate_name,
+            connected_environment_name=connected_environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.update.metadata["url"],
+            template_url=self.list_secrets.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -579,11 +487,11 @@ class CertificatesOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Certificate", pipeline_response)
+        deserialized = self._deserialize("DaprSecretsCollection", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/certificates/{certificateName}"}  # type: ignore
+    list_secrets.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets"}  # type: ignore
