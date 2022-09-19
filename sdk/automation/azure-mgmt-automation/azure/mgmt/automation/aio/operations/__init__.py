@@ -27,7 +27,6 @@ from ._certificate_operations import CertificateOperations
 from ._connection_operations import ConnectionOperations
 from ._connection_type_operations import ConnectionTypeOperations
 from ._credential_operations import CredentialOperations
-from ._hybrid_runbook_worker_group_operations import HybridRunbookWorkerGroupOperations
 from ._job_schedule_operations import JobScheduleOperations
 from ._linked_workspace_operations import LinkedWorkspaceOperations
 from ._activity_operations import ActivityOperations
@@ -51,56 +50,60 @@ from ._test_job_streams_operations import TestJobStreamsOperations
 from ._test_job_operations import TestJobOperations
 from ._webhook_operations import WebhookOperations
 from ._hybrid_runbook_workers_operations import HybridRunbookWorkersOperations
+from ._deleted_automation_accounts_operations import DeletedAutomationAccountsOperations
+from ._hybrid_runbook_worker_group_operations import HybridRunbookWorkerGroupOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
+
 __all__ = [
-    'PrivateEndpointConnectionsOperations',
-    'PrivateLinkResourcesOperations',
-    'Python2PackageOperations',
-    'AgentRegistrationInformationOperations',
-    'DscNodeOperations',
-    'NodeReportsOperations',
-    'DscNodeConfigurationOperations',
-    'DscCompilationJobOperations',
-    'DscCompilationJobStreamOperations',
-    'NodeCountInformationOperations',
-    'SourceControlOperations',
-    'SourceControlSyncJobOperations',
-    'SourceControlSyncJobStreamsOperations',
-    'AutomationAccountOperations',
-    'StatisticsOperations',
-    'UsagesOperations',
-    'KeysOperations',
-    'CertificateOperations',
-    'ConnectionOperations',
-    'ConnectionTypeOperations',
-    'CredentialOperations',
-    'HybridRunbookWorkerGroupOperations',
-    'JobScheduleOperations',
-    'LinkedWorkspaceOperations',
-    'ActivityOperations',
-    'ModuleOperations',
-    'ObjectDataTypesOperations',
-    'FieldsOperations',
-    'ScheduleOperations',
-    'VariableOperations',
-    'WatcherOperations',
-    'DscConfigurationOperations',
-    'JobOperations',
-    'JobStreamOperations',
-    'Operations',
-    'AutomationClientOperationsMixin',
-    'SoftwareUpdateConfigurationsOperations',
-    'SoftwareUpdateConfigurationRunsOperations',
-    'SoftwareUpdateConfigurationMachineRunsOperations',
-    'RunbookDraftOperations',
-    'RunbookOperations',
-    'TestJobStreamsOperations',
-    'TestJobOperations',
-    'WebhookOperations',
-    'HybridRunbookWorkersOperations',
+    "PrivateEndpointConnectionsOperations",
+    "PrivateLinkResourcesOperations",
+    "Python2PackageOperations",
+    "AgentRegistrationInformationOperations",
+    "DscNodeOperations",
+    "NodeReportsOperations",
+    "DscNodeConfigurationOperations",
+    "DscCompilationJobOperations",
+    "DscCompilationJobStreamOperations",
+    "NodeCountInformationOperations",
+    "SourceControlOperations",
+    "SourceControlSyncJobOperations",
+    "SourceControlSyncJobStreamsOperations",
+    "AutomationAccountOperations",
+    "StatisticsOperations",
+    "UsagesOperations",
+    "KeysOperations",
+    "CertificateOperations",
+    "ConnectionOperations",
+    "ConnectionTypeOperations",
+    "CredentialOperations",
+    "JobScheduleOperations",
+    "LinkedWorkspaceOperations",
+    "ActivityOperations",
+    "ModuleOperations",
+    "ObjectDataTypesOperations",
+    "FieldsOperations",
+    "ScheduleOperations",
+    "VariableOperations",
+    "WatcherOperations",
+    "DscConfigurationOperations",
+    "JobOperations",
+    "JobStreamOperations",
+    "Operations",
+    "AutomationClientOperationsMixin",
+    "SoftwareUpdateConfigurationsOperations",
+    "SoftwareUpdateConfigurationRunsOperations",
+    "SoftwareUpdateConfigurationMachineRunsOperations",
+    "RunbookDraftOperations",
+    "RunbookOperations",
+    "TestJobStreamsOperations",
+    "TestJobOperations",
+    "WebhookOperations",
+    "HybridRunbookWorkersOperations",
+    "DeletedAutomationAccountsOperations",
+    "HybridRunbookWorkerGroupOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

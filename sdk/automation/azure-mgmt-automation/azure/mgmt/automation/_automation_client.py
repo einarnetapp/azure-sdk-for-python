@@ -9,20 +9,69 @@
 from copy import deepcopy
 from typing import Any, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
-
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.mgmt.core import ARMPipelineClient
 
 from . import models
 from ._configuration import AutomationClientConfiguration
-from .operations import ActivityOperations, AgentRegistrationInformationOperations, AutomationAccountOperations, AutomationClientOperationsMixin, CertificateOperations, ConnectionOperations, ConnectionTypeOperations, CredentialOperations, DscCompilationJobOperations, DscCompilationJobStreamOperations, DscConfigurationOperations, DscNodeConfigurationOperations, DscNodeOperations, FieldsOperations, HybridRunbookWorkerGroupOperations, HybridRunbookWorkersOperations, JobOperations, JobScheduleOperations, JobStreamOperations, KeysOperations, LinkedWorkspaceOperations, ModuleOperations, NodeCountInformationOperations, NodeReportsOperations, ObjectDataTypesOperations, Operations, PrivateEndpointConnectionsOperations, PrivateLinkResourcesOperations, Python2PackageOperations, RunbookDraftOperations, RunbookOperations, ScheduleOperations, SoftwareUpdateConfigurationMachineRunsOperations, SoftwareUpdateConfigurationRunsOperations, SoftwareUpdateConfigurationsOperations, SourceControlOperations, SourceControlSyncJobOperations, SourceControlSyncJobStreamsOperations, StatisticsOperations, TestJobOperations, TestJobStreamsOperations, UsagesOperations, VariableOperations, WatcherOperations, WebhookOperations
+from ._serialization import Deserializer, Serializer
+from .operations import (
+    ActivityOperations,
+    AgentRegistrationInformationOperations,
+    AutomationAccountOperations,
+    AutomationClientOperationsMixin,
+    CertificateOperations,
+    ConnectionOperations,
+    ConnectionTypeOperations,
+    CredentialOperations,
+    DeletedAutomationAccountsOperations,
+    DscCompilationJobOperations,
+    DscCompilationJobStreamOperations,
+    DscConfigurationOperations,
+    DscNodeConfigurationOperations,
+    DscNodeOperations,
+    FieldsOperations,
+    HybridRunbookWorkerGroupOperations,
+    HybridRunbookWorkersOperations,
+    JobOperations,
+    JobScheduleOperations,
+    JobStreamOperations,
+    KeysOperations,
+    LinkedWorkspaceOperations,
+    ModuleOperations,
+    NodeCountInformationOperations,
+    NodeReportsOperations,
+    ObjectDataTypesOperations,
+    Operations,
+    PrivateEndpointConnectionsOperations,
+    PrivateLinkResourcesOperations,
+    Python2PackageOperations,
+    RunbookDraftOperations,
+    RunbookOperations,
+    ScheduleOperations,
+    SoftwareUpdateConfigurationMachineRunsOperations,
+    SoftwareUpdateConfigurationRunsOperations,
+    SoftwareUpdateConfigurationsOperations,
+    SourceControlOperations,
+    SourceControlSyncJobOperations,
+    SourceControlSyncJobStreamsOperations,
+    StatisticsOperations,
+    TestJobOperations,
+    TestJobStreamsOperations,
+    UsagesOperations,
+    VariableOperations,
+    WatcherOperations,
+    WebhookOperations,
+)
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from azure.core.credentials import TokenCredential
 
-class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=too-many-instance-attributes
+
+class AutomationClient(
+    AutomationClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """Automation Client.
 
     :ivar private_endpoint_connections: PrivateEndpointConnectionsOperations operations
@@ -75,9 +124,6 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
     :vartype connection_type: azure.mgmt.automation.operations.ConnectionTypeOperations
     :ivar credential: CredentialOperations operations
     :vartype credential: azure.mgmt.automation.operations.CredentialOperations
-    :ivar hybrid_runbook_worker_group: HybridRunbookWorkerGroupOperations operations
-    :vartype hybrid_runbook_worker_group:
-     azure.mgmt.automation.operations.HybridRunbookWorkerGroupOperations
     :ivar job_schedule: JobScheduleOperations operations
     :vartype job_schedule: azure.mgmt.automation.operations.JobScheduleOperations
     :ivar linked_workspace: LinkedWorkspaceOperations operations
@@ -127,10 +173,16 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
     :ivar hybrid_runbook_workers: HybridRunbookWorkersOperations operations
     :vartype hybrid_runbook_workers:
      azure.mgmt.automation.operations.HybridRunbookWorkersOperations
-    :param credential: Credential needed for the client to connect to Azure.
+    :ivar deleted_automation_accounts: DeletedAutomationAccountsOperations operations
+    :vartype deleted_automation_accounts:
+     azure.mgmt.automation.operations.DeletedAutomationAccountsOperations
+    :ivar hybrid_runbook_worker_group: HybridRunbookWorkerGroupOperations operations
+    :vartype hybrid_runbook_worker_group:
+     azure.mgmt.automation.operations.HybridRunbookWorkerGroupOperations
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: Gets subscription credentials which uniquely identify Microsoft Azure
-     subscription. The subscription ID forms part of the URI for every service call.
+     subscription. The subscription ID forms part of the URI for every service call. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
@@ -158,18 +210,12 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
         self.private_link_resources = PrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.python2_package = Python2PackageOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.python2_package = Python2PackageOperations(self._client, self._config, self._serialize, self._deserialize)
         self.agent_registration_information = AgentRegistrationInformationOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.dsc_node = DscNodeOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.node_reports = NodeReportsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.dsc_node = DscNodeOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.node_reports = NodeReportsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.dsc_node_configuration = DscNodeConfigurationOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -182,9 +228,7 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
         self.node_count_information = NodeCountInformationOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.source_control = SourceControlOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.source_control = SourceControlOperations(self._client, self._config, self._serialize, self._deserialize)
         self.source_control_sync_job = SourceControlSyncJobOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -194,69 +238,32 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
         self.automation_account = AutomationAccountOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.statistics = StatisticsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.usages = UsagesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.keys = KeysOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.certificate = CertificateOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.connection = ConnectionOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.connection_type = ConnectionTypeOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.credential = CredentialOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.hybrid_runbook_worker_group = HybridRunbookWorkerGroupOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.job_schedule = JobScheduleOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.statistics = StatisticsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.keys = KeysOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.certificate = CertificateOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.connection = ConnectionOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.connection_type = ConnectionTypeOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.credential = CredentialOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.job_schedule = JobScheduleOperations(self._client, self._config, self._serialize, self._deserialize)
         self.linked_workspace = LinkedWorkspaceOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.activity = ActivityOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.module = ModuleOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.activity = ActivityOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.module = ModuleOperations(self._client, self._config, self._serialize, self._deserialize)
         self.object_data_types = ObjectDataTypesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.fields = FieldsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.schedule = ScheduleOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.variable = VariableOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.watcher = WatcherOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.fields = FieldsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.schedule = ScheduleOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.variable = VariableOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.watcher = WatcherOperations(self._client, self._config, self._serialize, self._deserialize)
         self.dsc_configuration = DscConfigurationOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.job = JobOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.job_stream = JobStreamOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.operations = Operations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.job = JobOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.job_stream = JobStreamOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.software_update_configurations = SoftwareUpdateConfigurationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -266,31 +273,22 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
         self.software_update_configuration_machine_runs = SoftwareUpdateConfigurationMachineRunsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.runbook_draft = RunbookDraftOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.runbook = RunbookOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.test_job_streams = TestJobStreamsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.test_job = TestJobOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.webhook = WebhookOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.runbook_draft = RunbookDraftOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.runbook = RunbookOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.test_job_streams = TestJobStreamsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.test_job = TestJobOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.webhook = WebhookOperations(self._client, self._config, self._serialize, self._deserialize)
         self.hybrid_runbook_workers = HybridRunbookWorkersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.deleted_automation_accounts = DeletedAutomationAccountsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.hybrid_runbook_worker_group = HybridRunbookWorkerGroupOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
-
-    def _send_request(
-        self,
-        request: HttpRequest,
-        **kwargs: Any
-    ) -> HttpResponse:
+    def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
 
         >>> from azure.core.rest import HttpRequest
@@ -299,7 +297,7 @@ class AutomationClient(AutomationClientOperationsMixin):    # pylint: disable=to
         >>> response = client._send_request(request)
         <HttpResponse: 200 OK>
 
-        For more information on this code flow, see https://aka.ms/azsdk/python/protocol/quickstart
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
 
         :param request: The network request you want to make. Required.
         :type request: ~azure.core.rest.HttpRequest
