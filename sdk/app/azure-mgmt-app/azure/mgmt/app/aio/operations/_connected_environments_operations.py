@@ -30,15 +30,13 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._container_apps_operations import (
+from ...operations._connected_environments_operations import (
+    build_check_name_availability_request,
     build_create_or_update_request,
     build_delete_request,
-    build_get_auth_token_request,
     build_get_request,
     build_list_by_resource_group_request,
     build_list_by_subscription_request,
-    build_list_custom_host_name_analysis_request,
-    build_list_secrets_request,
     build_update_request,
 )
 
@@ -46,14 +44,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class ContainerAppsOperations:
+class ConnectedEnvironmentsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.aio.ContainerAppsAPIClient`'s
-        :attr:`container_apps` attribute.
+        :attr:`connected_environments` attribute.
     """
 
     models = _models
@@ -66,21 +64,22 @@ class ContainerAppsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_by_subscription(self, **kwargs: Any) -> AsyncIterable["_models.ContainerApp"]:
-        """Get the Container Apps in a given subscription.
+    def list_by_subscription(self, **kwargs: Any) -> AsyncIterable["_models.ConnectedEnvironment"]:
+        """Get all connectedEnvironments for a subscription.
 
-        Get the Container Apps in a given subscription.
+        Get all connectedEnvironments for a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ContainerApp or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ContainerApp]
+        :return: An iterator like instance of either ConnectedEnvironment or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ContainerAppCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironmentCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -115,7 +114,7 @@ class ContainerAppsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("ContainerAppCollection", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironmentCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -138,27 +137,28 @@ class ContainerAppsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.App/containerApps"}  # type: ignore
+    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.App/connectedEnvironments"}  # type: ignore
 
     @distributed_trace
-    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> AsyncIterable["_models.ContainerApp"]:
-        """Get the Container Apps in a given resource group.
-
-        Get the Container Apps in a given resource group.
+    def list_by_resource_group(
+        self, resource_group_name: str, **kwargs: Any
+    ) -> AsyncIterable["_models.ConnectedEnvironment"]:
+        """Get all connectedEnvironments in a resource group.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ContainerApp or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ContainerApp]
+        :return: An iterator like instance of either ConnectedEnvironment or the result of
+         cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ContainerAppCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironmentCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -194,7 +194,7 @@ class ContainerAppsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("ContainerAppCollection", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironmentCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -217,29 +217,29 @@ class ContainerAppsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps"}  # type: ignore
+    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments"}  # type: ignore
 
     @distributed_trace_async
-    async def get(self, resource_group_name: str, container_app_name: str, **kwargs: Any) -> _models.ContainerApp:
-        """Get the properties of a Container App.
-
-        Get the properties of a Container App.
+    async def get(
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
+    ) -> _models.ConnectedEnvironment:
+        """Get the properties of an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ContainerApp or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ContainerApp
+        :return: ConnectedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironment
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
             401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
             409: ResourceExistsError,
             304: ResourceNotModifiedError,
-            404: lambda response: ResourceNotFoundError(response=response, error_format=ARMErrorFormat),
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
@@ -247,11 +247,11 @@ class ContainerAppsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ContainerApp]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -272,22 +272,22 @@ class ContainerAppsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("ContainerApp", pipeline_response)
+        deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     async def _create_or_update_initial(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: Union[_models.ContainerApp, IO],
+        connected_environment_name: str,
+        environment_envelope: Union[_models.ConnectedEnvironment, IO],
         **kwargs: Any
-    ) -> _models.ContainerApp:
+    ) -> _models.ConnectedEnvironment:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -301,19 +301,19 @@ class ContainerAppsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ContainerApp]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(container_app_envelope, (IO, bytes)):
-            _content = container_app_envelope
+        if isinstance(environment_envelope, (IO, bytes)):
+            _content = environment_envelope
         else:
-            _json = self._serialize.body(container_app_envelope, "ContainerApp")
+            _json = self._serialize.body(environment_envelope, "ConnectedEnvironment")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -338,39 +338,37 @@ class ContainerAppsOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("ContainerApp", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("ContainerApp", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"}  # type: ignore
+    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     @overload
     async def begin_create_or_update(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: _models.ContainerApp,
+        connected_environment_name: str,
+        environment_envelope: _models.ConnectedEnvironment,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ContainerApp]:
-        """Create or update a Container App.
-
-        Create or update a Container App.
+    ) -> AsyncLROPoller[_models.ConnectedEnvironment]:
+        """Creates or updates an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param container_app_envelope: Properties used to create a container app. Required.
-        :type container_app_envelope: ~azure.mgmt.app.models.ContainerApp
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Required.
+        :type environment_envelope: ~azure.mgmt.app.models.ConnectedEnvironment
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -382,9 +380,9 @@ class ContainerAppsOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ContainerApp or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ContainerApp]
+        :return: An instance of AsyncLROPoller that returns either ConnectedEnvironment or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -392,23 +390,21 @@ class ContainerAppsOperations:
     async def begin_create_or_update(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: IO,
+        connected_environment_name: str,
+        environment_envelope: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ContainerApp]:
-        """Create or update a Container App.
-
-        Create or update a Container App.
+    ) -> AsyncLROPoller[_models.ConnectedEnvironment]:
+        """Creates or updates an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param container_app_envelope: Properties used to create a container app. Required.
-        :type container_app_envelope: IO
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Required.
+        :type environment_envelope: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -420,9 +416,9 @@ class ContainerAppsOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ContainerApp or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ContainerApp]
+        :return: An instance of AsyncLROPoller that returns either ConnectedEnvironment or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -430,22 +426,20 @@ class ContainerAppsOperations:
     async def begin_create_or_update(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: Union[_models.ContainerApp, IO],
+        connected_environment_name: str,
+        environment_envelope: Union[_models.ConnectedEnvironment, IO],
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.ContainerApp]:
-        """Create or update a Container App.
-
-        Create or update a Container App.
+    ) -> AsyncLROPoller[_models.ConnectedEnvironment]:
+        """Creates or updates an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param container_app_envelope: Properties used to create a container app. Is either a model
-         type or a IO type. Required.
-        :type container_app_envelope: ~azure.mgmt.app.models.ContainerApp or IO
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Is either a
+         model type or a IO type. Required.
+        :type environment_envelope: ~azure.mgmt.app.models.ConnectedEnvironment or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -457,9 +451,9 @@ class ContainerAppsOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either ContainerApp or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ContainerApp]
+        :return: An instance of AsyncLROPoller that returns either ConnectedEnvironment or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.app.models.ConnectedEnvironment]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -467,15 +461,15 @@ class ContainerAppsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ContainerApp]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
             raw_result = await self._create_or_update_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                container_app_name=container_app_name,
-                container_app_envelope=container_app_envelope,
+                connected_environment_name=connected_environment_name,
+                environment_envelope=environment_envelope,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -486,7 +480,7 @@ class ContainerAppsOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("ContainerApp", pipeline_response)
+            deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -506,10 +500,10 @@ class ContainerAppsOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"}  # type: ignore
+    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, container_app_name: str, **kwargs: Any
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -527,7 +521,7 @@ class ContainerAppsOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -551,21 +545,21 @@ class ContainerAppsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"}  # type: ignore
+    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
     @distributed_trace_async
     async def begin_delete(
-        self, resource_group_name: str, container_app_name: str, **kwargs: Any
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Delete a Container App.
+        """Delete an connectedEnvironment.
 
-        Delete a Container App.
+        Delete an connectedEnvironment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -589,7 +583,7 @@ class ContainerAppsOperations:
         if cont_token is None:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                container_app_name=container_app_name,
+                connected_environment_name=connected_environment_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -617,15 +611,163 @@ class ContainerAppsOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"}  # type: ignore
+    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
 
-    async def _update_initial(  # pylint: disable=inconsistent-return-statements
+    @distributed_trace_async
+    async def update(
+        self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
+    ) -> _models.ConnectedEnvironment:
+        """Update connected Environment's properties.
+
+        Patches a Managed Environment. Only patching of tags is supported currently.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ConnectedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ConnectedEnvironment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectedEnvironment]
+
+        request = build_update_request(
+            resource_group_name=resource_group_name,
+            connected_environment_name=connected_environment_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.update.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ConnectedEnvironment", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}"}  # type: ignore
+
+    @overload
+    async def check_name_availability(
         self,
         resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: Union[_models.ContainerApp, IO],
+        connected_environment_name: str,
+        check_name_availability_request: _models.CheckNameAvailabilityRequest,
+        *,
+        content_type: str = "application/json",
         **kwargs: Any
-    ) -> None:
+    ) -> _models.CheckNameAvailabilityResponse:
+        """Checks the resource connectedEnvironmentName availability.
+
+        Checks if resource connectedEnvironmentName is available.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the Managed Environment. Required.
+        :type connected_environment_name: str
+        :param check_name_availability_request: The check connectedEnvironmentName availability
+         request. Required.
+        :type check_name_availability_request: ~azure.mgmt.app.models.CheckNameAvailabilityRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: CheckNameAvailabilityResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.CheckNameAvailabilityResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def check_name_availability(
+        self,
+        resource_group_name: str,
+        connected_environment_name: str,
+        check_name_availability_request: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.CheckNameAvailabilityResponse:
+        """Checks the resource connectedEnvironmentName availability.
+
+        Checks if resource connectedEnvironmentName is available.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the Managed Environment. Required.
+        :type connected_environment_name: str
+        :param check_name_availability_request: The check connectedEnvironmentName availability
+         request. Required.
+        :type check_name_availability_request: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: CheckNameAvailabilityResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.CheckNameAvailabilityResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def check_name_availability(
+        self,
+        resource_group_name: str,
+        connected_environment_name: str,
+        check_name_availability_request: Union[_models.CheckNameAvailabilityRequest, IO],
+        **kwargs: Any
+    ) -> _models.CheckNameAvailabilityResponse:
+        """Checks the resource connectedEnvironmentName availability.
+
+        Checks if resource connectedEnvironmentName is available.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the Managed Environment. Required.
+        :type connected_environment_name: str
+        :param check_name_availability_request: The check connectedEnvironmentName availability
+         request. Is either a model type or a IO type. Required.
+        :type check_name_availability_request: ~azure.mgmt.app.models.CheckNameAvailabilityRequest or
+         IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: CheckNameAvailabilityResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.CheckNameAvailabilityResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -639,241 +781,25 @@ class ContainerAppsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CheckNameAvailabilityResponse]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(container_app_envelope, (IO, bytes)):
-            _content = container_app_envelope
+        if isinstance(check_name_availability_request, (IO, bytes)):
+            _content = check_name_availability_request
         else:
-            _json = self._serialize.body(container_app_envelope, "ContainerApp")
+            _json = self._serialize.body(check_name_availability_request, "CheckNameAvailabilityRequest")
 
-        request = build_update_request(
+        request = build_check_name_availability_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
+            connected_environment_name=connected_environment_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self._update_initial.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    _update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"}  # type: ignore
-
-    @overload
-    async def begin_update(
-        self,
-        resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: _models.ContainerApp,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[None]:
-        """Update properties of a Container App.
-
-        Patches a Container App using JSON Merge Patch.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param container_app_envelope: Properties of a Container App that need to be updated. Required.
-        :type container_app_envelope: ~azure.mgmt.app.models.ContainerApp
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_update(
-        self,
-        resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[None]:
-        """Update properties of a Container App.
-
-        Patches a Container App using JSON Merge Patch.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param container_app_envelope: Properties of a Container App that need to be updated. Required.
-        :type container_app_envelope: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def begin_update(
-        self,
-        resource_group_name: str,
-        container_app_name: str,
-        container_app_envelope: Union[_models.ContainerApp, IO],
-        **kwargs: Any
-    ) -> AsyncLROPoller[None]:
-        """Update properties of a Container App.
-
-        Patches a Container App using JSON Merge Patch.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param container_app_envelope: Properties of a Container App that need to be updated. Is either
-         a model type or a IO type. Required.
-        :type container_app_envelope: ~azure.mgmt.app.models.ContainerApp or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
-        if cont_token is None:
-            raw_result = await self._update_initial(  # type: ignore
-                resource_group_name=resource_group_name,
-                container_app_name=container_app_name,
-                container_app_envelope=container_app_envelope,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})
-
-        if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
-
-    begin_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}"}  # type: ignore
-
-    @distributed_trace_async
-    async def list_custom_host_name_analysis(
-        self, resource_group_name: str, container_app_name: str, custom_hostname: Optional[str] = None, **kwargs: Any
-    ) -> _models.CustomHostnameAnalysisResult:
-        """Analyzes a custom hostname for a Container App.
-
-        Analyzes a custom hostname for a Container App.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param custom_hostname: Custom hostname. Default value is None.
-        :type custom_hostname: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: CustomHostnameAnalysisResult or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.CustomHostnameAnalysisResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CustomHostnameAnalysisResult]
-
-        request = build_list_custom_host_name_analysis_request(
-            resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            subscription_id=self._config.subscription_id,
-            custom_hostname=custom_hostname,
-            api_version=api_version,
-            template_url=self.list_custom_host_name_analysis.metadata["url"],
+            template_url=self.check_name_availability.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -891,139 +817,11 @@ class ContainerAppsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("CustomHostnameAnalysisResult", pipeline_response)
+        deserialized = self._deserialize("CheckNameAvailabilityResponse", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list_custom_host_name_analysis.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/listCustomHostNameAnalysis"}  # type: ignore
-
-    @distributed_trace_async
-    async def list_secrets(
-        self, resource_group_name: str, container_app_name: str, **kwargs: Any
-    ) -> _models.SecretsCollection:
-        """List secrets for a container app.
-
-        List secrets for a container app.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SecretsCollection or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.SecretsCollection
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecretsCollection]
-
-        request = build_list_secrets_request(
-            resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.list_secrets.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("SecretsCollection", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    list_secrets.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/listSecrets"}  # type: ignore
-
-    @distributed_trace_async
-    async def get_auth_token(
-        self, resource_group_name: str, container_app_name: str, **kwargs: Any
-    ) -> _models.ContainerAppAuthToken:
-        """Get auth token for a container app.
-
-        Get auth token for a container app.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ContainerAppAuthToken or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.ContainerAppAuthToken
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-            404: lambda response: ResourceNotFoundError(response=response, error_format=ARMErrorFormat),
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ContainerAppAuthToken]
-
-        request = build_get_auth_token_request(
-            resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.get_auth_token.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("ContainerAppAuthToken", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get_auth_token.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/getAuthtoken"}  # type: ignore
+    check_name_availability.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/checkNameAvailability"}  # type: ignore
