@@ -1,11 +1,11 @@
 {
-  "autorest": "3.4.2",
+  "autorest": "3.8.4",
   "use": [
-    "@autorest/python@5.8.1",
-    "@autorest/modelerfour@4.19.2"
+    "@autorest/python@6.1.6",
+    "@autorest/modelerfour@4.23.5"
   ],
-  "commit": "fa3ba1acdd45ddad8950133befc5b0a6f1ee5163",
+  "commit": "5613b0681d5424423abcd91819a6007665d8a6fd",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "autorest_command": "autorest specification/databricks/resource-manager/readme.md --multiapi --python --python-mode=update --python-sdks-folder=/home/vsts/work/1/s/azure-sdk-for-python/sdk --track2 --use=@autorest/python@5.8.1 --use=@autorest/modelerfour@4.19.2 --version=3.4.2",
+  "autorest_command": "autorest specification/databricks/resource-manager/readme.md --python --python-sdks-folder=/mnt/vss/_work/1/s/azure-sdk-for-python/sdk --use=@autorest/python@6.1.6 --use=@autorest/modelerfour@4.23.5 --version=3.8.4 --version-tolerant=False",
   "readme": "specification/databricks/resource-manager/readme.md"
 }
