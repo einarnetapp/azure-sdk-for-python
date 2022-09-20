@@ -27,20 +27,20 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._operations import build_list_request
+from ...operations._available_workload_profiles_operations import build_get_request
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class Operations:
+class AvailableWorkloadProfilesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.aio.ContainerAppsAPIClient`'s
-        :attr:`operations` attribute.
+        :attr:`available_workload_profiles` attribute.
     """
 
     models = _models
@@ -53,19 +53,25 @@ class Operations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, **kwargs: Any) -> AsyncIterable["_models.OperationDetail"]:
-        """Lists all of the available RP operations.
+    def get(self, location: str, **kwargs: Any) -> AsyncIterable["_models.AvailableWorkloadProfile"]:
+        """Get available workload profiles by location.
 
+        Get all available workload profiles for a location.
+
+        :param location: The name of Azure region. Required.
+        :type location: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either OperationDetail or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.OperationDetail]
+        :return: An iterator like instance of either AvailableWorkloadProfile or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.app.models.AvailableWorkloadProfile]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AvailableOperations]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AvailableWorkloadProfilesCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -78,9 +84,11 @@ class Operations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_list_request(
+                request = build_get_request(
+                    location=location,
+                    subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.list.metadata["url"],
+                    template_url=self.get.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -99,7 +107,7 @@ class Operations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("AvailableOperations", pipeline_response)
+            deserialized = self._deserialize("AvailableWorkloadProfilesCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -115,11 +123,11 @@ class Operations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/providers/Microsoft.App/operations"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/availableManagedEnvironmentsWorkloadProfileTypes"}  # type: ignore
