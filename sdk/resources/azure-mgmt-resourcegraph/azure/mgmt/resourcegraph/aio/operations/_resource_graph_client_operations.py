@@ -7,13 +7,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import sys
-from typing import Any, Callable, Dict, IO, List, Optional, TypeVar, Union, overload
+from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, overload
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
     HttpResponseError,
     ResourceExistsError,
     ResourceNotFoundError,
+    ResourceNotModifiedError,
     map_error,
 )
 from azure.core.pipeline import PipelineResponse
@@ -25,12 +26,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._resource_graph_client_operations import (
-    build_resource_change_details_request,
-    build_resource_changes_request,
-    build_resources_history_request,
-    build_resources_request,
-)
+from ...operations._resource_graph_client_operations import build_resources_history_request, build_resources_request
 from .._vendor import MixinABC
 
 if sys.version_info >= (3, 9):
@@ -43,216 +39,6 @@ ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T
 
 
 class ResourceGraphClientOperationsMixin(MixinABC):
-    @overload
-    async def resource_changes(
-        self,
-        parameters: _models.ResourceChangesRequestParameters,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.ResourceChangeList:
-        """List changes to a resource for a given time interval.
-
-        :param parameters: the parameters for this request for changes. Required.
-        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangesRequestParameters
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ResourceChangeList or the result of cls(response)
-        :rtype: ~azure.mgmt.resourcegraph.models.ResourceChangeList
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def resource_changes(
-        self, parameters: IO, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.ResourceChangeList:
-        """List changes to a resource for a given time interval.
-
-        :param parameters: the parameters for this request for changes. Required.
-        :type parameters: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ResourceChangeList or the result of cls(response)
-        :rtype: ~azure.mgmt.resourcegraph.models.ResourceChangeList
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def resource_changes(
-        self, parameters: Union[_models.ResourceChangesRequestParameters, IO], **kwargs: Any
-    ) -> _models.ResourceChangeList:
-        """List changes to a resource for a given time interval.
-
-        :param parameters: the parameters for this request for changes. Is either a model type or a IO
-         type. Required.
-        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangesRequestParameters or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ResourceChangeList or the result of cls(response)
-        :rtype: ~azure.mgmt.resourcegraph.models.ResourceChangeList
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ResourceChangeList]
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(parameters, (IO, bytes)):
-            _content = parameters
-        else:
-            _json = self._serialize.body(parameters, "ResourceChangesRequestParameters")
-
-        request = build_resource_changes_request(
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.resource_changes.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("ResourceChangeList", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    resource_changes.metadata = {"url": "/providers/Microsoft.ResourceGraph/resourceChanges"}  # type: ignore
-
-    @overload
-    async def resource_change_details(
-        self,
-        parameters: _models.ResourceChangeDetailsRequestParameters,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> List[_models.ResourceChangeData]:
-        """Get resource change details.
-
-        :param parameters: The parameters for this request for resource change details. Required.
-        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangeDetailsRequestParameters
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ResourceChangeData or the result of cls(response)
-        :rtype: list[~azure.mgmt.resourcegraph.models.ResourceChangeData]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def resource_change_details(
-        self, parameters: IO, *, content_type: str = "application/json", **kwargs: Any
-    ) -> List[_models.ResourceChangeData]:
-        """Get resource change details.
-
-        :param parameters: The parameters for this request for resource change details. Required.
-        :type parameters: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ResourceChangeData or the result of cls(response)
-        :rtype: list[~azure.mgmt.resourcegraph.models.ResourceChangeData]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def resource_change_details(
-        self, parameters: Union[_models.ResourceChangeDetailsRequestParameters, IO], **kwargs: Any
-    ) -> List[_models.ResourceChangeData]:
-        """Get resource change details.
-
-        :param parameters: The parameters for this request for resource change details. Is either a
-         model type or a IO type. Required.
-        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangeDetailsRequestParameters or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ResourceChangeData or the result of cls(response)
-        :rtype: list[~azure.mgmt.resourcegraph.models.ResourceChangeData]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[List[_models.ResourceChangeData]]
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(parameters, (IO, bytes)):
-            _content = parameters
-        else:
-            _json = self._serialize.body(parameters, "ResourceChangeDetailsRequestParameters")
-
-        request = build_resource_change_details_request(
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.resource_change_details.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("[ResourceChangeData]", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    resource_change_details.metadata = {"url": "/providers/Microsoft.ResourceGraph/resourceChangeDetails"}  # type: ignore
-
     @overload
     async def resources(
         self, query: _models.QueryRequest, *, content_type: str = "application/json", **kwargs: Any
@@ -302,7 +88,12 @@ class ResourceGraphClientOperationsMixin(MixinABC):
         :rtype: ~azure.mgmt.resourcegraph.models.QueryResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -358,7 +149,7 @@ class ResourceGraphClientOperationsMixin(MixinABC):
     ) -> JSON:
         """List all snapshots of a resource for a given time interval.
 
-        :param request: Required.
+        :param request: Request specifying the query and its options. Required.
         :type request: ~azure.mgmt.resourcegraph.models.ResourcesHistoryRequest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -373,7 +164,7 @@ class ResourceGraphClientOperationsMixin(MixinABC):
     async def resources_history(self, request: IO, *, content_type: str = "application/json", **kwargs: Any) -> JSON:
         """List all snapshots of a resource for a given time interval.
 
-        :param request: Required.
+        :param request: Request specifying the query and its options. Required.
         :type request: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -388,7 +179,8 @@ class ResourceGraphClientOperationsMixin(MixinABC):
     async def resources_history(self, request: Union[_models.ResourcesHistoryRequest, IO], **kwargs: Any) -> JSON:
         """List all snapshots of a resource for a given time interval.
 
-        :param request: Is either a model type or a IO type. Required.
+        :param request: Request specifying the query and its options. Is either a model type or a IO
+         type. Required.
         :type request: ~azure.mgmt.resourcegraph.models.ResourcesHistoryRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
@@ -398,7 +190,12 @@ class ResourceGraphClientOperationsMixin(MixinABC):
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})

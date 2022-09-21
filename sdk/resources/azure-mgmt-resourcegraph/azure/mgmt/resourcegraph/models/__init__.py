@@ -22,25 +22,13 @@ from ._models_py3 import OperationListResult
 from ._models_py3 import QueryRequest
 from ._models_py3 import QueryRequestOptions
 from ._models_py3 import QueryResponse
-from ._models_py3 import ResourceChangeData
-from ._models_py3 import ResourceChangeDataAfterSnapshot
-from ._models_py3 import ResourceChangeDataBeforeSnapshot
-from ._models_py3 import ResourceChangeDetailsRequestParameters
-from ._models_py3 import ResourceChangeList
-from ._models_py3 import ResourceChangesRequestParameters
-from ._models_py3 import ResourceChangesRequestParametersInterval
-from ._models_py3 import ResourcePropertyChange
-from ._models_py3 import ResourceSnapshotData
 from ._models_py3 import ResourcesHistoryRequest
 from ._models_py3 import ResourcesHistoryRequestOptions
 from ._models_py3 import Table
 
-from ._resource_graph_client_enums import ChangeCategory
-from ._resource_graph_client_enums import ChangeType
+from ._resource_graph_client_enums import AuthorizationScopeFilter
 from ._resource_graph_client_enums import ColumnDataType
 from ._resource_graph_client_enums import FacetSortOrder
-from ._resource_graph_client_enums import PropertyChangeType
-from ._resource_graph_client_enums import ResourcesHistoryRequestOptionsResultFormat
 from ._resource_graph_client_enums import ResultFormat
 from ._resource_graph_client_enums import ResultTruncated
 from ._patch import __all__ as _patch_all
@@ -64,24 +52,12 @@ __all__ = [
     "QueryRequest",
     "QueryRequestOptions",
     "QueryResponse",
-    "ResourceChangeData",
-    "ResourceChangeDataAfterSnapshot",
-    "ResourceChangeDataBeforeSnapshot",
-    "ResourceChangeDetailsRequestParameters",
-    "ResourceChangeList",
-    "ResourceChangesRequestParameters",
-    "ResourceChangesRequestParametersInterval",
-    "ResourcePropertyChange",
-    "ResourceSnapshotData",
     "ResourcesHistoryRequest",
     "ResourcesHistoryRequestOptions",
     "Table",
-    "ChangeCategory",
-    "ChangeType",
+    "AuthorizationScopeFilter",
     "ColumnDataType",
     "FacetSortOrder",
-    "PropertyChangeType",
-    "ResourcesHistoryRequestOptionsResultFormat",
     "ResultFormat",
     "ResultTruncated",
 ]
