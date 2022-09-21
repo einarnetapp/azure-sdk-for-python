@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._models_py3 import ActionGroup
+from ._models_py3 import ActionGroupForActivityLogAlerts
 from ._models_py3 import ActionList
 from ._models_py3 import ActivityLogAlertResource
 from ._models_py3 import AlertRuleAllOfCondition
@@ -16,21 +16,21 @@ from ._models_py3 import AlertRuleList
 from ._models_py3 import AlertRulePatchObject
 from ._models_py3 import AzureResource
 from ._models_py3 import ErrorResponse
-
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
+
 __all__ = [
-    'ActionGroup',
-    'ActionList',
-    'ActivityLogAlertResource',
-    'AlertRuleAllOfCondition',
-    'AlertRuleAnyOfOrLeafCondition',
-    'AlertRuleLeafCondition',
-    'AlertRuleList',
-    'AlertRulePatchObject',
-    'AzureResource',
-    'ErrorResponse',
+    "ActionGroupForActivityLogAlerts",
+    "ActionList",
+    "ActivityLogAlertResource",
+    "AlertRuleAllOfCondition",
+    "AlertRuleAnyOfOrLeafCondition",
+    "AlertRuleLeafCondition",
+    "AlertRuleList",
+    "AlertRulePatchObject",
+    "AzureResource",
+    "ErrorResponse",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
