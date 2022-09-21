@@ -23,6 +23,7 @@ from ._models_py3 import AlertsMetaDataProperties
 from ._models_py3 import AlertsSummary
 from ._models_py3 import AlertsSummaryGroup
 from ._models_py3 import AlertsSummaryGroupItem
+from ._models_py3 import Comments
 from ._models_py3 import Condition
 from ._models_py3 import DailyRecurrence
 from ._models_py3 import ErrorResponse
@@ -96,6 +97,7 @@ __all__ = [
     "AlertsSummary",
     "AlertsSummaryGroup",
     "AlertsSummaryGroupItem",
+    "Comments",
     "Condition",
     "DailyRecurrence",
     "ErrorResponse",
