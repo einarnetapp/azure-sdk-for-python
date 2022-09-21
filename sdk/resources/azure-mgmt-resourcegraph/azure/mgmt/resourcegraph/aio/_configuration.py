@@ -27,14 +27,20 @@ class ResourceGraphClientConfiguration(Configuration):  # pylint: disable=too-ma
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
+    :keyword api_version: Api Version. Default value is "2021-06-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
+    :paramtype api_version: str
     """
 
     def __init__(self, credential: "AsyncTokenCredential", **kwargs: Any) -> None:
         super(ResourceGraphClientConfiguration, self).__init__(**kwargs)
+        api_version = kwargs.pop("api_version", "2021-06-01-preview")  # type: str
+
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
 
         self.credential = credential
+        self.api_version = api_version
         self.credential_scopes = kwargs.pop("credential_scopes", ["https://management.azure.com/.default"])
         kwargs.setdefault("sdk_moniker", "mgmt-resourcegraph/{}".format(VERSION))
         self._configure(**kwargs)
