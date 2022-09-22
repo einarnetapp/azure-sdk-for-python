@@ -71,7 +71,7 @@ def build_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_create_request(
+def build_create_or_update_request(
     resource_group_name: str, deployment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -313,7 +313,7 @@ class DeploymentsOperations:
 
     get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
 
-    def _create_initial(
+    def _create_or_update_initial(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -346,7 +346,7 @@ class DeploymentsOperations:
             else:
                 _json = None
 
-        request = build_create_request(
+        request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
@@ -354,7 +354,7 @@ class DeploymentsOperations:
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self._create_initial.metadata["url"],
+            template_url=self._create_or_update_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -385,10 +385,10 @@ class DeploymentsOperations:
 
         return deserialized
 
-    _create_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
+    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
 
     @overload
-    def begin_create(
+    def begin_create_or_update(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -426,7 +426,7 @@ class DeploymentsOperations:
         """
 
     @overload
-    def begin_create(
+    def begin_create_or_update(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -464,7 +464,7 @@ class DeploymentsOperations:
         """
 
     @distributed_trace
-    def begin_create(
+    def begin_create_or_update(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -508,7 +508,7 @@ class DeploymentsOperations:
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
-            raw_result = self._create_initial(  # type: ignore
+            raw_result = self._create_or_update_initial(  # type: ignore
                 resource_group_name=resource_group_name,
                 deployment_name=deployment_name,
                 body=body,
@@ -544,7 +544,7 @@ class DeploymentsOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
+    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
 
     def _update_initial(
         self,

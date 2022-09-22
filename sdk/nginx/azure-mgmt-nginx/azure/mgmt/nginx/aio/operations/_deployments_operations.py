@@ -31,7 +31,7 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._deployments_operations import (
-    build_create_request,
+    build_create_or_update_request,
     build_delete_request,
     build_get_request,
     build_list_by_resource_group_request,
@@ -126,7 +126,7 @@ class DeploymentsOperations:
 
     get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
 
-    async def _create_initial(
+    async def _create_or_update_initial(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -159,7 +159,7 @@ class DeploymentsOperations:
             else:
                 _json = None
 
-        request = build_create_request(
+        request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
@@ -167,7 +167,7 @@ class DeploymentsOperations:
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self._create_initial.metadata["url"],
+            template_url=self._create_or_update_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -198,10 +198,10 @@ class DeploymentsOperations:
 
         return deserialized
 
-    _create_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
+    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
 
     @overload
-    async def begin_create(
+    async def begin_create_or_update(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -239,7 +239,7 @@ class DeploymentsOperations:
         """
 
     @overload
-    async def begin_create(
+    async def begin_create_or_update(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -277,7 +277,7 @@ class DeploymentsOperations:
         """
 
     @distributed_trace_async
-    async def begin_create(
+    async def begin_create_or_update(
         self,
         resource_group_name: str,
         deployment_name: str,
@@ -321,7 +321,7 @@ class DeploymentsOperations:
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
-            raw_result = await self._create_initial(  # type: ignore
+            raw_result = await self._create_or_update_initial(  # type: ignore
                 resource_group_name=resource_group_name,
                 deployment_name=deployment_name,
                 body=body,
@@ -358,7 +358,7 @@ class DeploymentsOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
+    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}"}  # type: ignore
 
     async def _update_initial(
         self,
