@@ -34,7 +34,7 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_request(
+def build_stop8_a2431_bc39114_b709_a447_c12_f99_e3_bb4_request(
     resource_group_name: str, workspace_name: str, integration_runtime_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -46,7 +46,7 @@ def build_list_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/monitoringData",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/stop/8A2431BC39114B709A447C12F99E3BB4",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -65,17 +65,17 @@ def build_list_request(
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class IntegrationRuntimeMonitoringDataOperations:
+class GetOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.synapse.SynapseManagementClient`'s
-        :attr:`integration_runtime_monitoring_data` attribute.
+        :attr:`get` attribute.
     """
 
     models = _models
@@ -88,12 +88,10 @@ class IntegrationRuntimeMonitoringDataOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
+    def stop8_a2431_bc39114_b709_a447_c12_f99_e3_bb4(
         self, resource_group_name: str, workspace_name: str, integration_runtime_name: str, **kwargs: Any
-    ) -> _models.IntegrationRuntimeMonitoringData:
-        """Get integration runtime monitoring data.
-
-        Get monitoring data for an integration runtime.
+    ) -> _models.IntergrationruntimesOperationStatus:
+        """Integration runtime for 8A2431BC39114B709A447C12F99E3BB4.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -103,8 +101,8 @@ class IntegrationRuntimeMonitoringDataOperations:
         :param integration_runtime_name: Integration runtime name. Required.
         :type integration_runtime_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: IntegrationRuntimeMonitoringData or the result of cls(response)
-        :rtype: ~azure.mgmt.synapse.models.IntegrationRuntimeMonitoringData
+        :return: IntergrationruntimesOperationStatus or the result of cls(response)
+        :rtype: ~azure.mgmt.synapse.models.IntergrationruntimesOperationStatus
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -119,15 +117,15 @@ class IntegrationRuntimeMonitoringDataOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.IntegrationRuntimeMonitoringData]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.IntergrationruntimesOperationStatus]
 
-        request = build_list_request(
+        request = build_stop8_a2431_bc39114_b709_a447_c12_f99_e3_bb4_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             integration_runtime_name=integration_runtime_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.list.metadata["url"],
+            template_url=self.stop8_a2431_bc39114_b709_a447_c12_f99_e3_bb4.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -145,11 +143,11 @@ class IntegrationRuntimeMonitoringDataOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("IntegrationRuntimeMonitoringData", pipeline_response)
+        deserialized = self._deserialize("IntergrationruntimesOperationStatus", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/monitoringData"}  # type: ignore
+    stop8_a2431_bc39114_b709_a447_c12_f99_e3_bb4.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/integrationRuntimes/{integrationRuntimeName}/stop/8A2431BC39114B709A447C12F99E3BB4"}  # type: ignore
