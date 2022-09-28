@@ -6,9 +6,11 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import AggregateFunctionProperties
 from ._models_py3 import AvroSerialization
 from ._models_py3 import AzureDataLakeStoreOutputDataSource
 from ._models_py3 import AzureDataLakeStoreOutputDataSourceProperties
+from ._models_py3 import AzureFunctionOutputDataSource
 from ._models_py3 import AzureMachineLearningWebServiceFunctionBinding
 from ._models_py3 import AzureMachineLearningWebServiceFunctionRetrieveDefaultDefinitionParameters
 from ._models_py3 import AzureMachineLearningWebServiceInputColumn
@@ -51,6 +53,7 @@ from ._models_py3 import EventHubStreamInputDataSource
 from ._models_py3 import EventHubStreamInputDataSourceProperties
 from ._models_py3 import EventHubV2OutputDataSource
 from ._models_py3 import EventHubV2StreamInputDataSource
+from ._models_py3 import FileReferenceInputDataSource
 from ._models_py3 import Function
 from ._models_py3 import FunctionBinding
 from ._models_py3 import FunctionInput
@@ -58,6 +61,11 @@ from ._models_py3 import FunctionListResult
 from ._models_py3 import FunctionOutput
 from ._models_py3 import FunctionProperties
 from ._models_py3 import FunctionRetrieveDefaultDefinitionParameters
+from ._models_py3 import GatewayMessageBusOutputDataSource
+from ._models_py3 import GatewayMessageBusOutputDataSourceProperties
+from ._models_py3 import GatewayMessageBusSourceProperties
+from ._models_py3 import GatewayMessageBusStreamInputDataSource
+from ._models_py3 import GatewayMessageBusStreamInputDataSourceProperties
 from ._models_py3 import Identity
 from ._models_py3 import Input
 from ._models_py3 import InputListResult
@@ -107,141 +115,151 @@ from ._models_py3 import SubscriptionQuotasListResult
 from ._models_py3 import TrackedResource
 from ._models_py3 import Transformation
 
-
-from ._stream_analytics_management_client_enums import (
-    AuthenticationMode,
-    ClusterProvisioningState,
-    ClusterSkuName,
-    CompatibilityLevel,
-    CompressionType,
-    ContentStoragePolicy,
-    Encoding,
-    EventSerializationType,
-    EventsOutOfOrderPolicy,
-    JobState,
-    JobType,
-    JsonOutputSerializationFormat,
-    OutputErrorPolicy,
-    OutputStartMode,
-    RefreshType,
-    SkuName,
-)
+from ._stream_analytics_management_client_enums import AuthenticationMode
+from ._stream_analytics_management_client_enums import ClusterProvisioningState
+from ._stream_analytics_management_client_enums import ClusterSkuName
+from ._stream_analytics_management_client_enums import CompatibilityLevel
+from ._stream_analytics_management_client_enums import CompressionType
+from ._stream_analytics_management_client_enums import ContentStoragePolicy
+from ._stream_analytics_management_client_enums import Encoding
+from ._stream_analytics_management_client_enums import EventSerializationType
+from ._stream_analytics_management_client_enums import EventsOutOfOrderPolicy
+from ._stream_analytics_management_client_enums import JobState
+from ._stream_analytics_management_client_enums import JobType
+from ._stream_analytics_management_client_enums import JsonOutputSerializationFormat
+from ._stream_analytics_management_client_enums import OutputErrorPolicy
+from ._stream_analytics_management_client_enums import OutputStartMode
+from ._stream_analytics_management_client_enums import RefreshType
+from ._stream_analytics_management_client_enums import SkuName
+from ._patch import __all__ as _patch_all
+from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    'AvroSerialization',
-    'AzureDataLakeStoreOutputDataSource',
-    'AzureDataLakeStoreOutputDataSourceProperties',
-    'AzureMachineLearningWebServiceFunctionBinding',
-    'AzureMachineLearningWebServiceFunctionRetrieveDefaultDefinitionParameters',
-    'AzureMachineLearningWebServiceInputColumn',
-    'AzureMachineLearningWebServiceInputs',
-    'AzureMachineLearningWebServiceOutputColumn',
-    'AzureSqlDatabaseDataSourceProperties',
-    'AzureSqlDatabaseOutputDataSource',
-    'AzureSqlDatabaseOutputDataSourceProperties',
-    'AzureSqlReferenceInputDataSource',
-    'AzureSynapseDataSourceProperties',
-    'AzureSynapseOutputDataSource',
-    'AzureSynapseOutputDataSourceProperties',
-    'AzureTableOutputDataSource',
-    'BlobDataSourceProperties',
-    'BlobOutputDataSource',
-    'BlobOutputDataSourceProperties',
-    'BlobReferenceInputDataSource',
-    'BlobReferenceInputDataSourceProperties',
-    'BlobStreamInputDataSource',
-    'BlobStreamInputDataSourceProperties',
-    'Cluster',
-    'ClusterInfo',
-    'ClusterJob',
-    'ClusterJobListResult',
-    'ClusterListResult',
-    'ClusterSku',
-    'Compression',
-    'CsvSerialization',
-    'DiagnosticCondition',
-    'Diagnostics',
-    'DocumentDbOutputDataSource',
-    'Error',
-    'ErrorDetails',
-    'ErrorError',
-    'ErrorResponse',
-    'EventHubDataSourceProperties',
-    'EventHubOutputDataSource',
-    'EventHubOutputDataSourceProperties',
-    'EventHubStreamInputDataSource',
-    'EventHubStreamInputDataSourceProperties',
-    'EventHubV2OutputDataSource',
-    'EventHubV2StreamInputDataSource',
-    'Function',
-    'FunctionBinding',
-    'FunctionInput',
-    'FunctionListResult',
-    'FunctionOutput',
-    'FunctionProperties',
-    'FunctionRetrieveDefaultDefinitionParameters',
-    'Identity',
-    'Input',
-    'InputListResult',
-    'InputProperties',
-    'IoTHubStreamInputDataSource',
-    'JavaScriptFunctionBinding',
-    'JavaScriptFunctionRetrieveDefaultDefinitionParameters',
-    'JobStorageAccount',
-    'JsonSerialization',
-    'OAuthBasedDataSourceProperties',
-    'Operation',
-    'OperationDisplay',
-    'OperationListResult',
-    'Output',
-    'OutputDataSource',
-    'OutputListResult',
-    'ParquetSerialization',
-    'PowerBIOutputDataSource',
-    'PowerBIOutputDataSourceProperties',
-    'PrivateEndpoint',
-    'PrivateEndpointListResult',
-    'PrivateLinkConnectionState',
-    'PrivateLinkServiceConnection',
-    'ProxyResource',
-    'ReferenceInputDataSource',
-    'ReferenceInputProperties',
-    'Resource',
-    'ResourceTestStatus',
-    'ScalarFunctionProperties',
-    'ScaleStreamingJobParameters',
-    'Serialization',
-    'ServiceBusDataSourceProperties',
-    'ServiceBusQueueOutputDataSource',
-    'ServiceBusQueueOutputDataSourceProperties',
-    'ServiceBusTopicOutputDataSource',
-    'ServiceBusTopicOutputDataSourceProperties',
-    'Sku',
-    'StartStreamingJobParameters',
-    'StorageAccount',
-    'StreamInputDataSource',
-    'StreamInputProperties',
-    'StreamingJob',
-    'StreamingJobListResult',
-    'SubResource',
-    'SubscriptionQuota',
-    'SubscriptionQuotasListResult',
-    'TrackedResource',
-    'Transformation',
-    'AuthenticationMode',
-    'ClusterProvisioningState',
-    'ClusterSkuName',
-    'CompatibilityLevel',
-    'CompressionType',
-    'ContentStoragePolicy',
-    'Encoding',
-    'EventSerializationType',
-    'EventsOutOfOrderPolicy',
-    'JobState',
-    'JobType',
-    'JsonOutputSerializationFormat',
-    'OutputErrorPolicy',
-    'OutputStartMode',
-    'RefreshType',
-    'SkuName',
+    "AggregateFunctionProperties",
+    "AvroSerialization",
+    "AzureDataLakeStoreOutputDataSource",
+    "AzureDataLakeStoreOutputDataSourceProperties",
+    "AzureFunctionOutputDataSource",
+    "AzureMachineLearningWebServiceFunctionBinding",
+    "AzureMachineLearningWebServiceFunctionRetrieveDefaultDefinitionParameters",
+    "AzureMachineLearningWebServiceInputColumn",
+    "AzureMachineLearningWebServiceInputs",
+    "AzureMachineLearningWebServiceOutputColumn",
+    "AzureSqlDatabaseDataSourceProperties",
+    "AzureSqlDatabaseOutputDataSource",
+    "AzureSqlDatabaseOutputDataSourceProperties",
+    "AzureSqlReferenceInputDataSource",
+    "AzureSynapseDataSourceProperties",
+    "AzureSynapseOutputDataSource",
+    "AzureSynapseOutputDataSourceProperties",
+    "AzureTableOutputDataSource",
+    "BlobDataSourceProperties",
+    "BlobOutputDataSource",
+    "BlobOutputDataSourceProperties",
+    "BlobReferenceInputDataSource",
+    "BlobReferenceInputDataSourceProperties",
+    "BlobStreamInputDataSource",
+    "BlobStreamInputDataSourceProperties",
+    "Cluster",
+    "ClusterInfo",
+    "ClusterJob",
+    "ClusterJobListResult",
+    "ClusterListResult",
+    "ClusterSku",
+    "Compression",
+    "CsvSerialization",
+    "DiagnosticCondition",
+    "Diagnostics",
+    "DocumentDbOutputDataSource",
+    "Error",
+    "ErrorDetails",
+    "ErrorError",
+    "ErrorResponse",
+    "EventHubDataSourceProperties",
+    "EventHubOutputDataSource",
+    "EventHubOutputDataSourceProperties",
+    "EventHubStreamInputDataSource",
+    "EventHubStreamInputDataSourceProperties",
+    "EventHubV2OutputDataSource",
+    "EventHubV2StreamInputDataSource",
+    "FileReferenceInputDataSource",
+    "Function",
+    "FunctionBinding",
+    "FunctionInput",
+    "FunctionListResult",
+    "FunctionOutput",
+    "FunctionProperties",
+    "FunctionRetrieveDefaultDefinitionParameters",
+    "GatewayMessageBusOutputDataSource",
+    "GatewayMessageBusOutputDataSourceProperties",
+    "GatewayMessageBusSourceProperties",
+    "GatewayMessageBusStreamInputDataSource",
+    "GatewayMessageBusStreamInputDataSourceProperties",
+    "Identity",
+    "Input",
+    "InputListResult",
+    "InputProperties",
+    "IoTHubStreamInputDataSource",
+    "JavaScriptFunctionBinding",
+    "JavaScriptFunctionRetrieveDefaultDefinitionParameters",
+    "JobStorageAccount",
+    "JsonSerialization",
+    "OAuthBasedDataSourceProperties",
+    "Operation",
+    "OperationDisplay",
+    "OperationListResult",
+    "Output",
+    "OutputDataSource",
+    "OutputListResult",
+    "ParquetSerialization",
+    "PowerBIOutputDataSource",
+    "PowerBIOutputDataSourceProperties",
+    "PrivateEndpoint",
+    "PrivateEndpointListResult",
+    "PrivateLinkConnectionState",
+    "PrivateLinkServiceConnection",
+    "ProxyResource",
+    "ReferenceInputDataSource",
+    "ReferenceInputProperties",
+    "Resource",
+    "ResourceTestStatus",
+    "ScalarFunctionProperties",
+    "ScaleStreamingJobParameters",
+    "Serialization",
+    "ServiceBusDataSourceProperties",
+    "ServiceBusQueueOutputDataSource",
+    "ServiceBusQueueOutputDataSourceProperties",
+    "ServiceBusTopicOutputDataSource",
+    "ServiceBusTopicOutputDataSourceProperties",
+    "Sku",
+    "StartStreamingJobParameters",
+    "StorageAccount",
+    "StreamInputDataSource",
+    "StreamInputProperties",
+    "StreamingJob",
+    "StreamingJobListResult",
+    "SubResource",
+    "SubscriptionQuota",
+    "SubscriptionQuotasListResult",
+    "TrackedResource",
+    "Transformation",
+    "AuthenticationMode",
+    "ClusterProvisioningState",
+    "ClusterSkuName",
+    "CompatibilityLevel",
+    "CompressionType",
+    "ContentStoragePolicy",
+    "Encoding",
+    "EventSerializationType",
+    "EventsOutOfOrderPolicy",
+    "JobState",
+    "JobType",
+    "JsonOutputSerializationFormat",
+    "OutputErrorPolicy",
+    "OutputStartMode",
+    "RefreshType",
+    "SkuName",
 ]
+__all__.extend([p for p in _patch_all if p not in __all__])
+_patch_sdk()
