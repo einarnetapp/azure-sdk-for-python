@@ -1,0 +1,11 @@
+{
+  "autorest": "3.9.2",
+  "use": [
+    "@autorest/python@6.1.6",
+    "@autorest/modelerfour@4.24.3"
+  ],
+  "commit": "cc51d4bd2afc0a114a05662450109ec7e992989d",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
+  "autorest_command": "autorest specification/adp/resource-manager/readme.md --python --python-sdks-folder=/mnt/vss/_work/1/s/azure-sdk-for-python/sdk --use=@autorest/python@6.1.6 --use=@autorest/modelerfour@4.24.3 --version=3.9.2 --version-tolerant=False",
+  "readme": "specification/adp/resource-manager/readme.md"
+}
