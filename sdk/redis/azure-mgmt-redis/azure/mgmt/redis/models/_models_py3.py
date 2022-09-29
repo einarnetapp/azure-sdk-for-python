@@ -1079,7 +1079,8 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
     :vartype additional_properties: dict[str, any]
     :ivar rdb_backup_enabled: Specifies whether the rdb backup is enabled.
     :vartype rdb_backup_enabled: str
-    :ivar rdb_backup_frequency: Specifies the frequency for creating rdb backup.
+    :ivar rdb_backup_frequency: Specifies the frequency for creating rdb backup in minutes. Valid
+     values: (15, 30, 60, 360, 720, 1440).
     :vartype rdb_backup_frequency: str
     :ivar rdb_backup_max_snapshot_count: Specifies the maximum number of snapshots for rdb backup.
     :vartype rdb_backup_max_snapshot_count: str
@@ -1168,7 +1169,8 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
         :paramtype additional_properties: dict[str, any]
         :keyword rdb_backup_enabled: Specifies whether the rdb backup is enabled.
         :paramtype rdb_backup_enabled: str
-        :keyword rdb_backup_frequency: Specifies the frequency for creating rdb backup.
+        :keyword rdb_backup_frequency: Specifies the frequency for creating rdb backup in minutes.
+         Valid values: (15, 30, 60, 360, 720, 1440).
         :paramtype rdb_backup_frequency: str
         :keyword rdb_backup_max_snapshot_count: Specifies the maximum number of snapshots for rdb
          backup.
