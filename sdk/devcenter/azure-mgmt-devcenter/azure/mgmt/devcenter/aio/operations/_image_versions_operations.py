@@ -40,7 +40,7 @@ class ImageVersionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.aio.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.aio.DevCenter`'s
         :attr:`image_versions` attribute.
     """
 

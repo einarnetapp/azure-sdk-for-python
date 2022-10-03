@@ -46,7 +46,7 @@ class EnvironmentTypesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.aio.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.aio.DevCenter`'s
         :attr:`environment_types` attribute.
     """
 

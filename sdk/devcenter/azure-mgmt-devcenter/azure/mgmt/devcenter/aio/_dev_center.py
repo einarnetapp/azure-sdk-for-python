@@ -14,7 +14,7 @@ from azure.mgmt.core import AsyncARMPipelineClient
 
 from .. import models
 from .._serialization import Deserializer, Serializer
-from ._configuration import DevCenterClientConfiguration
+from ._configuration import DevCenterConfiguration
 from .operations import (
     AttachedNetworksOperations,
     CatalogsOperations,
@@ -41,7 +41,7 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class DevCenterClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class DevCenter:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """DevCenter Management API.
 
     :ivar dev_centers: DevCentersOperations operations
@@ -89,7 +89,7 @@ class DevCenterClient:  # pylint: disable=client-accepts-api-version-keyword,too
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-10-12-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -103,7 +103,7 @@ class DevCenterClient:  # pylint: disable=client-accepts-api-version-keyword,too
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = DevCenterClientConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
+        self._config = DevCenterConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
@@ -168,7 +168,7 @@ class DevCenterClient:  # pylint: disable=client-accepts-api-version-keyword,too
     async def close(self) -> None:
         await self._client.close()
 
-    async def __aenter__(self) -> "DevCenterClient":
+    async def __aenter__(self) -> "DevCenter":
         await self._client.__aenter__()
         return self
 

@@ -49,7 +49,7 @@ class CatalogsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.aio.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.aio.DevCenter`'s
         :attr:`catalogs` attribute.
     """
 
@@ -875,7 +875,8 @@ class CatalogsOperations:
 
         if polling is True:
             polling_method = cast(
-                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
             )  # type: AsyncPollingMethod
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())

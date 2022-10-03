@@ -273,6 +273,9 @@ class Catalog(Resource):
     :vartype ado_git: ~azure.mgmt.devcenter.models.GitCatalog
     :ivar provisioning_state: The provisioning state of the resource.
     :vartype provisioning_state: str
+    :ivar sync_state: The synchronization state of the catalog. Known values are: "Succeeded",
+     "InProgress", and "Failed".
+    :vartype sync_state: str or ~azure.mgmt.devcenter.models.CatalogSyncState
     :ivar last_sync_time: When the catalog was last synced.
     :vartype last_sync_time: ~datetime.datetime
     """
@@ -283,6 +286,7 @@ class Catalog(Resource):
         "type": {"readonly": True},
         "system_data": {"readonly": True},
         "provisioning_state": {"readonly": True},
+        "sync_state": {"readonly": True},
         "last_sync_time": {"readonly": True},
     }
 
@@ -294,6 +298,7 @@ class Catalog(Resource):
         "git_hub": {"key": "properties.gitHub", "type": "GitCatalog"},
         "ado_git": {"key": "properties.adoGit", "type": "GitCatalog"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "sync_state": {"key": "properties.syncState", "type": "str"},
         "last_sync_time": {"key": "properties.lastSyncTime", "type": "iso-8601"},
     }
 
@@ -314,6 +319,7 @@ class Catalog(Resource):
         self.git_hub = git_hub
         self.ado_git = ado_git
         self.provisioning_state = None
+        self.sync_state = None
         self.last_sync_time = None
 
 
@@ -388,12 +394,16 @@ class CatalogProperties(CatalogUpdateProperties):
     :vartype ado_git: ~azure.mgmt.devcenter.models.GitCatalog
     :ivar provisioning_state: The provisioning state of the resource.
     :vartype provisioning_state: str
+    :ivar sync_state: The synchronization state of the catalog. Known values are: "Succeeded",
+     "InProgress", and "Failed".
+    :vartype sync_state: str or ~azure.mgmt.devcenter.models.CatalogSyncState
     :ivar last_sync_time: When the catalog was last synced.
     :vartype last_sync_time: ~datetime.datetime
     """
 
     _validation = {
         "provisioning_state": {"readonly": True},
+        "sync_state": {"readonly": True},
         "last_sync_time": {"readonly": True},
     }
 
@@ -401,6 +411,7 @@ class CatalogProperties(CatalogUpdateProperties):
         "git_hub": {"key": "gitHub", "type": "GitCatalog"},
         "ado_git": {"key": "adoGit", "type": "GitCatalog"},
         "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "sync_state": {"key": "syncState", "type": "str"},
         "last_sync_time": {"key": "lastSyncTime", "type": "iso-8601"},
     }
 
@@ -419,6 +430,7 @@ class CatalogProperties(CatalogUpdateProperties):
         """
         super().__init__(git_hub=git_hub, ado_git=ado_git, **kwargs)
         self.provisioning_state = None
+        self.sync_state = None
         self.last_sync_time = None
 
 
@@ -2471,6 +2483,8 @@ class OperationStatus(_serialization.Model):
     :vartype name: str
     :ivar status: Provisioning state of the resource.
     :vartype status: str
+    :ivar resource_id: The id of the resource.
+    :vartype resource_id: str
     :ivar start_time: The start time of the operation.
     :vartype start_time: ~datetime.datetime
     :ivar end_time: The end time of the operation.
@@ -2487,6 +2501,7 @@ class OperationStatus(_serialization.Model):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "status": {"readonly": True},
+        "resource_id": {"readonly": True},
         "start_time": {"readonly": True},
         "end_time": {"readonly": True},
         "percent_complete": {"readonly": True, "maximum": 100, "minimum": 0},
@@ -2497,6 +2512,7 @@ class OperationStatus(_serialization.Model):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "status": {"key": "status", "type": "str"},
+        "resource_id": {"key": "resourceId", "type": "str"},
         "start_time": {"key": "startTime", "type": "iso-8601"},
         "end_time": {"key": "endTime", "type": "iso-8601"},
         "percent_complete": {"key": "percentComplete", "type": "float"},
@@ -2513,6 +2529,7 @@ class OperationStatus(_serialization.Model):
         self.id = None
         self.name = None
         self.status = None
+        self.resource_id = None
         self.start_time = None
         self.end_time = None
         self.percent_complete = None
