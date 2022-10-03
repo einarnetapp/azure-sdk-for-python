@@ -17,6 +17,32 @@ if TYPE_CHECKING:
     from .. import models as _models
 
 
+class ApiProperties(_serialization.Model):
+    """Api properties.
+
+    :ivar api_freshness_window_in_minutes: Interval in minutes for which the weather data for the
+     api needs to be refreshed.
+    :vartype api_freshness_window_in_minutes: int
+    """
+
+    _validation = {
+        "api_freshness_window_in_minutes": {"maximum": 10080, "minimum": 0},
+    }
+
+    _attribute_map = {
+        "api_freshness_window_in_minutes": {"key": "apiFreshnessWindowInMinutes", "type": "int"},
+    }
+
+    def __init__(self, *, api_freshness_window_in_minutes: Optional[int] = None, **kwargs):
+        """
+        :keyword api_freshness_window_in_minutes: Interval in minutes for which the weather data for
+         the api needs to be refreshed.
+        :paramtype api_freshness_window_in_minutes: int
+        """
+        super().__init__(**kwargs)
+        self.api_freshness_window_in_minutes = api_freshness_window_in_minutes
+
+
 class ArmAsyncOperation(_serialization.Model):
     """Arm async operation class.
     Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.
@@ -327,7 +353,7 @@ class ProxyResource(Resource):
         super().__init__(**kwargs)
 
 
-class Extension(ProxyResource):
+class Extension(ProxyResource):  # pylint: disable=too-many-instance-attributes
     """Extension resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -355,6 +381,8 @@ class Extension(ProxyResource):
     :vartype extension_auth_link: str
     :ivar extension_api_docs_link: Extension api docs link.
     :vartype extension_api_docs_link: str
+    :ivar additional_api_properties: Additional api properties.
+    :vartype additional_api_properties: dict[str, ~azure.mgmt.agrifood.models.ApiProperties]
     """
 
     _validation = {
@@ -368,6 +396,7 @@ class Extension(ProxyResource):
         "installed_extension_version": {"readonly": True, "pattern": r"^([1-9]|10).\d$"},
         "extension_auth_link": {"readonly": True},
         "extension_api_docs_link": {"readonly": True},
+        "additional_api_properties": {"readonly": True},
     }
 
     _attribute_map = {
@@ -381,6 +410,7 @@ class Extension(ProxyResource):
         "installed_extension_version": {"key": "properties.installedExtensionVersion", "type": "str"},
         "extension_auth_link": {"key": "properties.extensionAuthLink", "type": "str"},
         "extension_api_docs_link": {"key": "properties.extensionApiDocsLink", "type": "str"},
+        "additional_api_properties": {"key": "properties.additionalApiProperties", "type": "{ApiProperties}"},
     }
 
     def __init__(self, **kwargs):
@@ -392,6 +422,43 @@ class Extension(ProxyResource):
         self.installed_extension_version = None
         self.extension_auth_link = None
         self.extension_api_docs_link = None
+        self.additional_api_properties = None
+
+
+class ExtensionInstallationRequest(_serialization.Model):
+    """Extension Installation Request Body.
+
+    :ivar extension_version: Extension Version.
+    :vartype extension_version: str
+    :ivar additional_api_properties: Additional Api Properties.
+    :vartype additional_api_properties: dict[str, ~azure.mgmt.agrifood.models.ApiProperties]
+    """
+
+    _validation = {
+        "extension_version": {"max_length": 10, "min_length": 3},
+    }
+
+    _attribute_map = {
+        "extension_version": {"key": "extensionVersion", "type": "str"},
+        "additional_api_properties": {"key": "additionalApiProperties", "type": "{ApiProperties}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        extension_version: Optional[str] = None,
+        additional_api_properties: Optional[Dict[str, "_models.ApiProperties"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword extension_version: Extension Version.
+        :paramtype extension_version: str
+        :keyword additional_api_properties: Additional Api Properties.
+        :paramtype additional_api_properties: dict[str, ~azure.mgmt.agrifood.models.ApiProperties]
+        """
+        super().__init__(**kwargs)
+        self.extension_version = extension_version
+        self.additional_api_properties = additional_api_properties
 
 
 class ExtensionListResponse(_serialization.Model):
