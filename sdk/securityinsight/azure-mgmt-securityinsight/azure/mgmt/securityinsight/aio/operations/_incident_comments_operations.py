@@ -70,7 +70,7 @@ class IncidentCommentsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.IncidentComment"]:
-        """Gets all incident comments.
+        """Gets all comments for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -171,7 +171,7 @@ class IncidentCommentsOperations:
     async def get(
         self, resource_group_name: str, workspace_name: str, incident_id: str, incident_comment_id: str, **kwargs: Any
     ) -> _models.IncidentComment:
-        """Gets an incident comment.
+        """Gets a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -246,7 +246,7 @@ class IncidentCommentsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -280,7 +280,7 @@ class IncidentCommentsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -312,7 +312,7 @@ class IncidentCommentsOperations:
         incident_comment: Union[_models.IncidentComment, IO],
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -400,7 +400,7 @@ class IncidentCommentsOperations:
     async def delete(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, workspace_name: str, incident_id: str, incident_comment_id: str, **kwargs: Any
     ) -> None:
-        """Delete the incident comment.
+        """Deletes a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.

@@ -42,15 +42,15 @@ def build_list_request(
     subscription_id: str,
     *,
     filter: Optional[str] = None,
-    orderby: Optional[str] = None,
     top: Optional[int] = None,
     skip_token: Optional[str] = None,
+    orderby: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -72,12 +72,12 @@ def build_list_request(
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if filter is not None:
         _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
-    if orderby is not None:
-        _params["$orderby"] = _SERIALIZER.query("orderby", orderby, "str")
     if top is not None:
         _params["$top"] = _SERIALIZER.query("top", top, "int")
     if skip_token is not None:
         _params["$skipToken"] = _SERIALIZER.query("skip_token", skip_token, "str")
+    if orderby is not None:
+        _params["$orderby"] = _SERIALIZER.query("orderby", orderby, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -110,9 +110,9 @@ class ThreatIntelligenceIndicatorsOperations:
         resource_group_name: str,
         workspace_name: str,
         filter: Optional[str] = None,
-        orderby: Optional[str] = None,
         top: Optional[int] = None,
         skip_token: Optional[str] = None,
+        orderby: Optional[str] = None,
         **kwargs: Any
     ) -> Iterable["_models.ThreatIntelligenceInformation"]:
         """Get all threat intelligence indicators.
@@ -125,8 +125,6 @@ class ThreatIntelligenceIndicatorsOperations:
         :param filter: Filters the results, based on a Boolean condition. Optional. Default value is
          None.
         :type filter: str
-        :param orderby: Sorts the results. Optional. Default value is None.
-        :type orderby: str
         :param top: Returns only the first n results. Optional. Default value is None.
         :type top: int
         :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
@@ -134,6 +132,8 @@ class ThreatIntelligenceIndicatorsOperations:
          a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
          Default value is None.
         :type skip_token: str
+        :param orderby: Sorts the results. Optional. Default value is None.
+        :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ThreatIntelligenceInformation or the result of
          cls(response)
@@ -163,9 +163,9 @@ class ThreatIntelligenceIndicatorsOperations:
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
                     filter=filter,
-                    orderby=orderby,
                     top=top,
                     skip_token=skip_token,
+                    orderby=orderby,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,

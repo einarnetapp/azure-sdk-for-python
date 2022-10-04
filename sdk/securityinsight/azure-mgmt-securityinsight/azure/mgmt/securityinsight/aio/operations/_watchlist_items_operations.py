@@ -67,14 +67,14 @@ class WatchlistItemsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.WatchlistItem"]:
-        """Gets all watchlist Items.
+        """Get all watchlist Items.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
+        :param watchlist_alias: The watchlist alias. Required.
         :type watchlist_alias: str
         :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
          a previous response contains a nextLink element, the value of the nextLink element will include
@@ -158,16 +158,16 @@ class WatchlistItemsOperations:
     async def get(
         self, resource_group_name: str, workspace_name: str, watchlist_alias: str, watchlist_item_id: str, **kwargs: Any
     ) -> _models.WatchlistItem:
-        """Gets a watchlist, without its watchlist items.
+        """Get a watchlist item.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
+        :param watchlist_alias: The watchlist alias. Required.
         :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID). Required.
+        :param watchlist_item_id: The watchlist item id (GUID). Required.
         :type watchlist_item_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: WatchlistItem or the result of cls(response)
@@ -232,9 +232,9 @@ class WatchlistItemsOperations:
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
+        :param watchlist_alias: The watchlist alias. Required.
         :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID). Required.
+        :param watchlist_item_id: The watchlist item id (GUID). Required.
         :type watchlist_item_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
@@ -296,16 +296,16 @@ class WatchlistItemsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.WatchlistItem:
-        """Creates or updates a watchlist item.
+        """Create or update a watchlist item.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
+        :param watchlist_alias: The watchlist alias. Required.
         :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID). Required.
+        :param watchlist_item_id: The watchlist item id (GUID). Required.
         :type watchlist_item_id: str
         :param watchlist_item: The watchlist item. Required.
         :type watchlist_item: ~azure.mgmt.securityinsight.models.WatchlistItem
@@ -330,16 +330,16 @@ class WatchlistItemsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.WatchlistItem:
-        """Creates or updates a watchlist item.
+        """Create or update a watchlist item.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
+        :param watchlist_alias: The watchlist alias. Required.
         :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID). Required.
+        :param watchlist_item_id: The watchlist item id (GUID). Required.
         :type watchlist_item_id: str
         :param watchlist_item: The watchlist item. Required.
         :type watchlist_item: IO
@@ -362,16 +362,16 @@ class WatchlistItemsOperations:
         watchlist_item: Union[_models.WatchlistItem, IO],
         **kwargs: Any
     ) -> _models.WatchlistItem:
-        """Creates or updates a watchlist item.
+        """Create or update a watchlist item.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
+        :param watchlist_alias: The watchlist alias. Required.
         :type watchlist_alias: str
-        :param watchlist_item_id: Watchlist Item Id (GUID). Required.
+        :param watchlist_item_id: The watchlist item id (GUID). Required.
         :type watchlist_item_id: str
         :param watchlist_item: The watchlist item. Is either a model type or a IO type. Required.
         :type watchlist_item: ~azure.mgmt.securityinsight.models.WatchlistItem or IO

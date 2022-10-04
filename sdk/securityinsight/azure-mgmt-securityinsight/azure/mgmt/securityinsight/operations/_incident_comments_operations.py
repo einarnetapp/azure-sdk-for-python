@@ -51,7 +51,7 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -98,7 +98,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -138,7 +138,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -181,7 +181,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -241,7 +241,7 @@ class IncidentCommentsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> Iterable["_models.IncidentComment"]:
-        """Gets all incident comments.
+        """Gets all comments for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -341,7 +341,7 @@ class IncidentCommentsOperations:
     def get(
         self, resource_group_name: str, workspace_name: str, incident_id: str, incident_comment_id: str, **kwargs: Any
     ) -> _models.IncidentComment:
-        """Gets an incident comment.
+        """Gets a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -416,7 +416,7 @@ class IncidentCommentsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -450,7 +450,7 @@ class IncidentCommentsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -482,7 +482,7 @@ class IncidentCommentsOperations:
         incident_comment: Union[_models.IncidentComment, IO],
         **kwargs: Any
     ) -> _models.IncidentComment:
-        """Creates or updates the incident comment.
+        """Creates or updates a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -570,7 +570,7 @@ class IncidentCommentsOperations:
     def delete(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, workspace_name: str, incident_id: str, incident_comment_id: str, **kwargs: Any
     ) -> None:
-        """Delete the incident comment.
+        """Deletes a comment for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.

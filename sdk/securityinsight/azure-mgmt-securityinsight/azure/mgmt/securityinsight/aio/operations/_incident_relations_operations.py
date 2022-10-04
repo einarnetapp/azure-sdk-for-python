@@ -70,7 +70,7 @@ class IncidentRelationsOperations:
         skip_token: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.Relation"]:
-        """Gets all incident relations.
+        """Gets all relations for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -170,7 +170,7 @@ class IncidentRelationsOperations:
     async def get(
         self, resource_group_name: str, workspace_name: str, incident_id: str, relation_name: str, **kwargs: Any
     ) -> _models.Relation:
-        """Gets an incident relation.
+        """Gets a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -245,7 +245,7 @@ class IncidentRelationsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Relation:
-        """Creates or updates the incident relation.
+        """Creates or updates a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -279,7 +279,7 @@ class IncidentRelationsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Relation:
-        """Creates or updates the incident relation.
+        """Creates or updates a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -311,7 +311,7 @@ class IncidentRelationsOperations:
         relation: Union[_models.Relation, IO],
         **kwargs: Any
     ) -> _models.Relation:
-        """Creates or updates the incident relation.
+        """Creates or updates a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -399,7 +399,7 @@ class IncidentRelationsOperations:
     async def delete(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, workspace_name: str, incident_id: str, relation_name: str, **kwargs: Any
     ) -> None:
-        """Delete the incident relation.
+        """Deletes a relation for a given incident.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
