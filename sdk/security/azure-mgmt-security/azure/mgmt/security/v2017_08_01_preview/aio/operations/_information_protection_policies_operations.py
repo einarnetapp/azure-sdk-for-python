@@ -61,7 +61,7 @@ class InformationProtectionPoliciesOperations:
     async def get(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         **kwargs: Any
     ) -> _models.InformationProtectionPolicy:
         """Details of the information protection policy.
@@ -127,7 +127,7 @@ class InformationProtectionPoliciesOperations:
     async def create_or_update(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         information_protection_policy: _models.InformationProtectionPolicy,
         *,
         content_type: str = "application/json",
@@ -159,7 +159,7 @@ class InformationProtectionPoliciesOperations:
     async def create_or_update(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         information_protection_policy: IO,
         *,
         content_type: str = "application/json",
@@ -190,7 +190,7 @@ class InformationProtectionPoliciesOperations:
     async def create_or_update(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         information_protection_policy: Union[_models.InformationProtectionPolicy, IO],
         **kwargs: Any
     ) -> _models.InformationProtectionPolicy:

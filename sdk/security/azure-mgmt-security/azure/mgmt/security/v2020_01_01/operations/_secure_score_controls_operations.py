@@ -40,7 +40,7 @@ def build_list_by_secure_score_request(
     secure_score_name: str,
     subscription_id: str,
     *,
-    expand: Optional[Union[str, "_models.ExpandControlsEnum"]] = None,
+    expand: Optional[Union[str, _models.ExpandControlsEnum]] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -75,7 +75,7 @@ def build_list_by_secure_score_request(
 
 
 def build_list_request(
-    subscription_id: str, *, expand: Optional[Union[str, "_models.ExpandControlsEnum"]] = None, **kwargs: Any
+    subscription_id: str, *, expand: Optional[Union[str, _models.ExpandControlsEnum]] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -127,7 +127,7 @@ class SecureScoreControlsOperations:
 
     @distributed_trace
     def list_by_secure_score(
-        self, secure_score_name: str, expand: Optional[Union[str, "_models.ExpandControlsEnum"]] = None, **kwargs: Any
+        self, secure_score_name: str, expand: Optional[Union[str, _models.ExpandControlsEnum]] = None, **kwargs: Any
     ) -> Iterable["_models.SecureScoreControlDetails"]:
         """Get all security controls for a specific initiative within a scope.
 
@@ -210,7 +210,7 @@ class SecureScoreControlsOperations:
 
     @distributed_trace
     def list(
-        self, expand: Optional[Union[str, "_models.ExpandControlsEnum"]] = None, **kwargs: Any
+        self, expand: Optional[Union[str, _models.ExpandControlsEnum]] = None, **kwargs: Any
     ) -> Iterable["_models.SecureScoreControlDetails"]:
         """Get all security controls within a scope.
 

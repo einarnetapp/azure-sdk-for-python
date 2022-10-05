@@ -62,7 +62,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_get_request(setting_name: Union[str, "_models.Enum1"], subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_get_request(setting_name: Union[str, _models.Enum1], subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -91,7 +91,7 @@ def build_get_request(setting_name: Union[str, "_models.Enum1"], subscription_id
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_update_request(setting_name: Union[str, "_models.Enum1"], subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_update_request(setting_name: Union[str, _models.Enum1], subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -215,7 +215,7 @@ class SettingsOperations:
     list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings"}  # type: ignore
 
     @distributed_trace
-    def get(self, setting_name: Union[str, "_models.Enum1"], **kwargs: Any) -> _models.Setting:
+    def get(self, setting_name: Union[str, _models.Enum1], **kwargs: Any) -> _models.Setting:
         """Settings of different configurations in Microsoft Defender for Cloud.
 
         :param setting_name: The name of the setting. Known values are: "MCAS", "WDATP", and
@@ -273,7 +273,7 @@ class SettingsOperations:
     @overload
     def update(
         self,
-        setting_name: Union[str, "_models.Enum1"],
+        setting_name: Union[str, _models.Enum1],
         setting: _models.Setting,
         *,
         content_type: str = "application/json",
@@ -298,7 +298,7 @@ class SettingsOperations:
     @overload
     def update(
         self,
-        setting_name: Union[str, "_models.Enum1"],
+        setting_name: Union[str, _models.Enum1],
         setting: IO,
         *,
         content_type: str = "application/json",
@@ -322,7 +322,7 @@ class SettingsOperations:
 
     @distributed_trace
     def update(
-        self, setting_name: Union[str, "_models.Enum1"], setting: Union[_models.Setting, IO], **kwargs: Any
+        self, setting_name: Union[str, _models.Enum1], setting: Union[_models.Setting, IO], **kwargs: Any
     ) -> _models.Setting:
         """updating settings about different configurations in Microsoft Defender for Cloud.
 

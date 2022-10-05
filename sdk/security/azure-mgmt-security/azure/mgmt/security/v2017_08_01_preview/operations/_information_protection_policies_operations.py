@@ -37,7 +37,7 @@ _SERIALIZER.client_side_validation = False
 
 
 def build_get_request(
-    scope: str, information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"], **kwargs: Any
+    scope: str, information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName], **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -69,7 +69,7 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    scope: str, information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"], **kwargs: Any
+    scope: str, information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName], **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -150,7 +150,7 @@ class InformationProtectionPoliciesOperations:
     def get(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         **kwargs: Any
     ) -> _models.InformationProtectionPolicy:
         """Details of the information protection policy.
@@ -216,7 +216,7 @@ class InformationProtectionPoliciesOperations:
     def create_or_update(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         information_protection_policy: _models.InformationProtectionPolicy,
         *,
         content_type: str = "application/json",
@@ -248,7 +248,7 @@ class InformationProtectionPoliciesOperations:
     def create_or_update(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         information_protection_policy: IO,
         *,
         content_type: str = "application/json",
@@ -279,7 +279,7 @@ class InformationProtectionPoliciesOperations:
     def create_or_update(
         self,
         scope: str,
-        information_protection_policy_name: Union[str, "_models.InformationProtectionPolicyName"],
+        information_protection_policy_name: Union[str, _models.InformationProtectionPolicyName],
         information_protection_policy: Union[_models.InformationProtectionPolicy, IO],
         **kwargs: Any
     ) -> _models.InformationProtectionPolicy:

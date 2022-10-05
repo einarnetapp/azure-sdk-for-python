@@ -141,7 +141,7 @@ class AssessmentsOperations:
         self,
         resource_id: str,
         assessment_name: str,
-        expand: Optional[Union[str, "_models.ExpandEnum"]] = None,
+        expand: Optional[Union[str, _models.ExpandEnum]] = None,
         **kwargs: Any
     ) -> _models.SecurityAssessmentResponse:
         """Get a security assessment on your scanned resource.

@@ -95,7 +95,7 @@ def build_list_by_home_region_request(asc_location: str, subscription_id: str, *
 def build_get_request(
     resource_group_name: str,
     asc_location: str,
-    connection_type: Union[str, "_models.ConnectionType"],
+    connection_type: Union[str, _models.ConnectionType],
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -308,7 +308,7 @@ class AllowedConnectionsOperations:
         self,
         resource_group_name: str,
         asc_location: str,
-        connection_type: Union[str, "_models.ConnectionType"],
+        connection_type: Union[str, _models.ConnectionType],
         **kwargs: Any
     ) -> _models.AllowedConnectionsResource:
         """Gets the list of all possible traffic between resources for the subscription and location,

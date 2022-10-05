@@ -10,7 +10,14 @@ from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar
 from urllib.parse import parse_qs, urljoin, urlparse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, ResourceNotModifiedError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -20,9 +27,14 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._secure_score_control_definitions_operations import build_list_by_subscription_request, build_list_request
-T = TypeVar('T')
+from ...operations._secure_score_control_definitions_operations import (
+    build_list_by_subscription_request,
+    build_list_request,
+)
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class SecureScoreControlDefinitionsOperations:
     """
@@ -43,12 +55,8 @@ class SecureScoreControlDefinitionsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
-    def list(
-        self,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SecureScoreControlDefinitionItem"]:
+    def list(self, **kwargs: Any) -> AsyncIterable["_models.SecureScoreControlDefinitionItem"]:
         """List the available security controls, their assessments, and the max score.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -61,19 +69,23 @@ class SecureScoreControlDefinitionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecureScoreControlDefinitionList]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecureScoreControlDefinitionList]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     api_version=api_version,
-                    template_url=self.list.metadata['url'],
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -102,9 +114,7 @@ class SecureScoreControlDefinitionsOperations:
             request = prepare_request(next_link)
 
             pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -114,17 +124,12 @@ class SecureScoreControlDefinitionsOperations:
 
             return pipeline_response
 
+        return AsyncItemPaged(get_next, extract_data)
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/providers/Microsoft.Security/secureScoreControlDefinitions"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.Security/secureScoreControlDefinitions"}  # type: ignore
 
     @distributed_trace
-    def list_by_subscription(
-        self,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SecureScoreControlDefinitionItem"]:
+    def list_by_subscription(self, **kwargs: Any) -> AsyncIterable["_models.SecureScoreControlDefinitionItem"]:
         """For a specified subscription, list the available security controls, their assessments, and the
         max score.
 
@@ -138,20 +143,24 @@ class SecureScoreControlDefinitionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecureScoreControlDefinitionList]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecureScoreControlDefinitionList]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_by_subscription_request(
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.list_by_subscription.metadata['url'],
+                    template_url=self.list_by_subscription.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -180,9 +189,7 @@ class SecureScoreControlDefinitionsOperations:
             request = prepare_request(next_link)
 
             pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -192,8 +199,6 @@ class SecureScoreControlDefinitionsOperations:
 
             return pipeline_response
 
+        return AsyncItemPaged(get_next, extract_data)
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list_by_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlDefinitions"}  # type: ignore
+    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlDefinitions"}  # type: ignore

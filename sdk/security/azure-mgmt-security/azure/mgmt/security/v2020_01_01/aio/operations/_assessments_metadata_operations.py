@@ -10,7 +10,14 @@ from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Un
 from urllib.parse import parse_qs, urljoin, urlparse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, ResourceNotModifiedError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -21,9 +28,18 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._assessments_metadata_operations import build_create_in_subscription_request, build_delete_in_subscription_request, build_get_in_subscription_request, build_get_request, build_list_by_subscription_request, build_list_request
-T = TypeVar('T')
+from ...operations._assessments_metadata_operations import (
+    build_create_in_subscription_request,
+    build_delete_in_subscription_request,
+    build_get_in_subscription_request,
+    build_get_request,
+    build_list_by_subscription_request,
+    build_list_request,
+)
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class AssessmentsMetadataOperations:
     """
@@ -44,12 +60,8 @@ class AssessmentsMetadataOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
-    def list(
-        self,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SecurityAssessmentMetadata"]:
+    def list(self, **kwargs: Any) -> AsyncIterable["_models.SecurityAssessmentMetadata"]:
         """Get metadata information on all assessment types.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -62,19 +74,23 @@ class AssessmentsMetadataOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessmentMetadataList]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessmentMetadataList]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     api_version=api_version,
-                    template_url=self.list.metadata['url'],
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -103,9 +119,7 @@ class AssessmentsMetadataOperations:
             request = prepare_request(next_link)
 
             pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -115,18 +129,12 @@ class AssessmentsMetadataOperations:
 
             return pipeline_response
 
+        return AsyncItemPaged(get_next, extract_data)
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/providers/Microsoft.Security/assessmentMetadata"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.Security/assessmentMetadata"}  # type: ignore
 
     @distributed_trace_async
-    async def get(
-        self,
-        assessment_metadata_name: str,
-        **kwargs: Any
-    ) -> _models.SecurityAssessmentMetadata:
+    async def get(self, assessment_metadata_name: str, **kwargs: Any) -> _models.SecurityAssessmentMetadata:
         """Get metadata information on an assessment type.
 
         :param assessment_metadata_name: The Assessment Key - Unique key for the assessment type.
@@ -138,21 +146,23 @@ class AssessmentsMetadataOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessmentMetadata]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessmentMetadata]
 
-        
         request = build_get_request(
             assessment_metadata_name=assessment_metadata_name,
             api_version=api_version,
-            template_url=self.get.metadata['url'],
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -160,9 +170,7 @@ class AssessmentsMetadataOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -171,21 +179,17 @@ class AssessmentsMetadataOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SecurityAssessmentMetadata', pipeline_response)
+        deserialized = self._deserialize("SecurityAssessmentMetadata", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore
-
+    get.metadata = {"url": "/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore
 
     @distributed_trace
-    def list_by_subscription(
-        self,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SecurityAssessmentMetadata"]:
+    def list_by_subscription(self, **kwargs: Any) -> AsyncIterable["_models.SecurityAssessmentMetadata"]:
         """Get metadata information on all assessment types in a specific subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -198,20 +202,24 @@ class AssessmentsMetadataOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessmentMetadataList]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessmentMetadataList]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_by_subscription_request(
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.list_by_subscription.metadata['url'],
+                    template_url=self.list_by_subscription.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -240,9 +248,7 @@ class AssessmentsMetadataOperations:
             request = prepare_request(next_link)
 
             pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -252,17 +258,13 @@ class AssessmentsMetadataOperations:
 
             return pipeline_response
 
+        return AsyncItemPaged(get_next, extract_data)
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list_by_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata"}  # type: ignore
+    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata"}  # type: ignore
 
     @distributed_trace_async
     async def get_in_subscription(
-        self,
-        assessment_metadata_name: str,
-        **kwargs: Any
+        self, assessment_metadata_name: str, **kwargs: Any
     ) -> _models.SecurityAssessmentMetadata:
         """Get metadata information on an assessment type in a specific subscription.
 
@@ -275,22 +277,24 @@ class AssessmentsMetadataOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessmentMetadata]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessmentMetadata]
 
-        
         request = build_get_in_subscription_request(
             assessment_metadata_name=assessment_metadata_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get_in_subscription.metadata['url'],
+            template_url=self.get_in_subscription.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -298,9 +302,7 @@ class AssessmentsMetadataOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -309,15 +311,14 @@ class AssessmentsMetadataOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SecurityAssessmentMetadata', pipeline_response)
+        deserialized = self._deserialize("SecurityAssessmentMetadata", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_in_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore
-
+    get_in_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore
 
     @overload
     async def create_in_subscription(
@@ -369,7 +370,6 @@ class AssessmentsMetadataOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
-
     @distributed_trace_async
     async def create_in_subscription(
         self,
@@ -395,16 +395,19 @@ class AssessmentsMetadataOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessmentMetadata]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessmentMetadata]
 
         content_type = content_type or "application/json"
         _json = None
@@ -412,7 +415,7 @@ class AssessmentsMetadataOperations:
         if isinstance(assessment_metadata, (IO, bytes)):
             _content = assessment_metadata
         else:
-            _json = self._serialize.body(assessment_metadata, 'SecurityAssessmentMetadata')
+            _json = self._serialize.body(assessment_metadata, "SecurityAssessmentMetadata")
 
         request = build_create_in_subscription_request(
             assessment_metadata_name=assessment_metadata_name,
@@ -421,7 +424,7 @@ class AssessmentsMetadataOperations:
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self.create_in_subscription.metadata['url'],
+            template_url=self.create_in_subscription.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -429,9 +432,7 @@ class AssessmentsMetadataOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -440,21 +441,18 @@ class AssessmentsMetadataOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SecurityAssessmentMetadata', pipeline_response)
+        deserialized = self._deserialize("SecurityAssessmentMetadata", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_in_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore
-
+    create_in_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore
 
     @distributed_trace_async
     async def delete_in_subscription(  # pylint: disable=inconsistent-return-statements
-        self,
-        assessment_metadata_name: str,
-        **kwargs: Any
+        self, assessment_metadata_name: str, **kwargs: Any
     ) -> None:
         """Delete metadata information on an assessment type in a specific subscription, will cause the
         deletion of all the assessments of that type in that subscription.
@@ -468,22 +466,24 @@ class AssessmentsMetadataOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        
         request = build_delete_in_subscription_request(
             assessment_metadata_name=assessment_metadata_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.delete_in_subscription.metadata['url'],
+            template_url=self.delete_in_subscription.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -491,9 +491,7 @@ class AssessmentsMetadataOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -505,5 +503,4 @@ class AssessmentsMetadataOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete_in_subscription.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore
-
+    delete_in_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}"}  # type: ignore

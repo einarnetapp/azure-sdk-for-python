@@ -61,7 +61,7 @@ def build_list_request(scope: str, **kwargs: Any) -> HttpRequest:
 
 
 def build_get_request(
-    resource_id: str, assessment_name: str, *, expand: Optional[Union[str, "_models.ExpandEnum"]] = None, **kwargs: Any
+    resource_id: str, assessment_name: str, *, expand: Optional[Union[str, _models.ExpandEnum]] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -243,7 +243,7 @@ class AssessmentsOperations:
         self,
         resource_id: str,
         assessment_name: str,
-        expand: Optional[Union[str, "_models.ExpandEnum"]] = None,
+        expand: Optional[Union[str, _models.ExpandEnum]] = None,
         **kwargs: Any
     ) -> _models.SecurityAssessment:
         """Get a security assessment on your scanned resource.

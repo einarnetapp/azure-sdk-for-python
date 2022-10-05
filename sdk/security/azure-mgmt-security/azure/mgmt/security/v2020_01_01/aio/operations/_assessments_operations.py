@@ -10,7 +10,14 @@ from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Un
 from urllib.parse import parse_qs, urljoin, urlparse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, ResourceNotModifiedError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -21,9 +28,16 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._assessments_operations import build_create_or_update_request, build_delete_request, build_get_request, build_list_request
-T = TypeVar('T')
+from ...operations._assessments_operations import (
+    build_create_or_update_request,
+    build_delete_request,
+    build_get_request,
+    build_list_request,
+)
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class AssessmentsOperations:
     """
@@ -44,13 +58,8 @@ class AssessmentsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
-    def list(
-        self,
-        scope: str,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SecurityAssessment"]:
+    def list(self, scope: str, **kwargs: Any) -> AsyncIterable["_models.SecurityAssessment"]:
         """Get security assessments on all your scanned resources inside a scope.
 
         :param scope: Scope of the query, can be subscription
@@ -66,20 +75,24 @@ class AssessmentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessmentList]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessmentList]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     scope=scope,
                     api_version=api_version,
-                    template_url=self.list.metadata['url'],
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -108,9 +121,7 @@ class AssessmentsOperations:
             request = prepare_request(next_link)
 
             pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -120,18 +131,16 @@ class AssessmentsOperations:
 
             return pipeline_response
 
+        return AsyncItemPaged(get_next, extract_data)
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/{scope}/providers/Microsoft.Security/assessments"}  # type: ignore
+    list.metadata = {"url": "/{scope}/providers/Microsoft.Security/assessments"}  # type: ignore
 
     @distributed_trace_async
     async def get(
         self,
         resource_id: str,
         assessment_name: str,
-        expand: Optional[Union[str, "_models.ExpandEnum"]] = None,
+        expand: Optional[Union[str, _models.ExpandEnum]] = None,
         **kwargs: Any
     ) -> _models.SecurityAssessment:
         """Get a security assessment on your scanned resource.
@@ -149,23 +158,25 @@ class AssessmentsOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessment]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessment]
 
-        
         request = build_get_request(
             resource_id=resource_id,
             assessment_name=assessment_name,
             expand=expand,
             api_version=api_version,
-            template_url=self.get.metadata['url'],
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -173,9 +184,7 @@ class AssessmentsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -184,15 +193,14 @@ class AssessmentsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SecurityAssessment', pipeline_response)
+        deserialized = self._deserialize("SecurityAssessment", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}"}  # type: ignore
-
+    get.metadata = {"url": "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}"}  # type: ignore
 
     @overload
     async def create_or_update(
@@ -250,14 +258,9 @@ class AssessmentsOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
-
     @distributed_trace_async
     async def create_or_update(
-        self,
-        resource_id: str,
-        assessment_name: str,
-        assessment: Union[_models.SecurityAssessment, IO],
-        **kwargs: Any
+        self, resource_id: str, assessment_name: str, assessment: Union[_models.SecurityAssessment, IO], **kwargs: Any
     ) -> _models.SecurityAssessment:
         """Create a security assessment on your resource. An assessment metadata that describes this
         assessment must be predefined with the same name before inserting the assessment result.
@@ -278,16 +281,19 @@ class AssessmentsOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        content_type = kwargs.pop('content_type', _headers.pop('Content-Type', None))  # type: Optional[str]
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecurityAssessment]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityAssessment]
 
         content_type = content_type or "application/json"
         _json = None
@@ -295,7 +301,7 @@ class AssessmentsOperations:
         if isinstance(assessment, (IO, bytes)):
             _content = assessment
         else:
-            _json = self._serialize.body(assessment, 'SecurityAssessment')
+            _json = self._serialize.body(assessment, "SecurityAssessment")
 
         request = build_create_or_update_request(
             resource_id=resource_id,
@@ -304,7 +310,7 @@ class AssessmentsOperations:
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self.create_or_update.metadata['url'],
+            template_url=self.create_or_update.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -312,9 +318,7 @@ class AssessmentsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -324,25 +328,21 @@ class AssessmentsOperations:
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize('SecurityAssessment', pipeline_response)
+            deserialized = self._deserialize("SecurityAssessment", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize('SecurityAssessment', pipeline_response)
+            deserialized = self._deserialize("SecurityAssessment", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {'url': "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}"}  # type: ignore
-
+    create_or_update.metadata = {"url": "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}"}  # type: ignore
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self,
-        resource_id: str,
-        assessment_name: str,
-        **kwargs: Any
+        self, resource_id: str, assessment_name: str, **kwargs: Any
     ) -> None:
         """Delete a security assessment on your resource. An assessment metadata that describes this
         assessment must be predefined with the same name before inserting the assessment result.
@@ -357,22 +357,24 @@ class AssessmentsOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[None]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        
         request = build_delete_request(
             resource_id=resource_id,
             assessment_name=assessment_name,
             api_version=api_version,
-            template_url=self.delete.metadata['url'],
+            template_url=self.delete.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -380,9 +382,7 @@ class AssessmentsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -394,5 +394,4 @@ class AssessmentsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {'url': "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}"}  # type: ignore
-
+    delete.metadata = {"url": "/{resourceId}/providers/Microsoft.Security/assessments/{assessmentName}"}  # type: ignore

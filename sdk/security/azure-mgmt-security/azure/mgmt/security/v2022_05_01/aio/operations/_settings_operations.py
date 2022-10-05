@@ -127,7 +127,7 @@ class SettingsOperations:
     list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings"}  # type: ignore
 
     @distributed_trace_async
-    async def get(self, setting_name: Union[str, "_models.SettingName"], **kwargs: Any) -> _models.Setting:
+    async def get(self, setting_name: Union[str, _models.SettingName], **kwargs: Any) -> _models.Setting:
         """Settings of different configurations in Microsoft Defender for Cloud.
 
         :param setting_name: The name of the setting. Known values are: "MCAS", "WDATP",
@@ -185,7 +185,7 @@ class SettingsOperations:
     @overload
     async def update(
         self,
-        setting_name: Union[str, "_models.SettingName"],
+        setting_name: Union[str, _models.SettingName],
         setting: _models.Setting,
         *,
         content_type: str = "application/json",
@@ -210,7 +210,7 @@ class SettingsOperations:
     @overload
     async def update(
         self,
-        setting_name: Union[str, "_models.SettingName"],
+        setting_name: Union[str, _models.SettingName],
         setting: IO,
         *,
         content_type: str = "application/json",
@@ -234,7 +234,7 @@ class SettingsOperations:
 
     @distributed_trace_async
     async def update(
-        self, setting_name: Union[str, "_models.SettingName"], setting: Union[_models.Setting, IO], **kwargs: Any
+        self, setting_name: Union[str, _models.SettingName], setting: Union[_models.Setting, IO], **kwargs: Any
     ) -> _models.Setting:
         """updating settings about different configurations in Microsoft Defender for Cloud.
 

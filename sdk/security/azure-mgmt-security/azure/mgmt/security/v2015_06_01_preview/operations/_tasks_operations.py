@@ -133,7 +133,7 @@ def build_get_subscription_level_task_request(
 def build_update_subscription_level_task_state_request(
     asc_location: str,
     task_name: str,
-    task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+    task_update_action_type: Union[str, _models.TaskUpdateActionType],
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -245,7 +245,7 @@ def build_update_resource_group_level_task_state_request(
     resource_group_name: str,
     asc_location: str,
     task_name: str,
-    task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+    task_update_action_type: Union[str, _models.TaskUpdateActionType],
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -524,7 +524,7 @@ class TasksOperations:
         self,
         asc_location: str,
         task_name: str,
-        task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+        task_update_action_type: Union[str, _models.TaskUpdateActionType],
         **kwargs: Any
     ) -> None:
         """Recommended tasks that will help improve the security of the subscription proactively.
@@ -742,7 +742,7 @@ class TasksOperations:
         resource_group_name: str,
         asc_location: str,
         task_name: str,
-        task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+        task_update_action_type: Union[str, _models.TaskUpdateActionType],
         **kwargs: Any
     ) -> None:
         """Recommended tasks that will help improve the security of the subscription proactively.
