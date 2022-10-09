@@ -33,8 +33,6 @@ from ._models_py3 import ProxyResource
 from ._models_py3 import Resource
 from ._models_py3 import RestartParameter
 from ._models_py3 import Server
-from ._models_py3 import ServerBackup
-from ._models_py3 import ServerBackupListResult
 from ._models_py3 import ServerForUpdate
 from ._models_py3 import ServerListResult
 from ._models_py3 import ServerVersionCapability
@@ -48,82 +46,78 @@ from ._models_py3 import VcoreCapability
 from ._models_py3 import VirtualNetworkSubnetUsageParameter
 from ._models_py3 import VirtualNetworkSubnetUsageResult
 
-
-from ._postgre_sql_management_client_enums import (
-    ConfigurationDataType,
-    CreateMode,
-    CreateModeForUpdate,
-    CreatedByType,
-    FailoverMode,
-    GeoRedundantBackupEnum,
-    HighAvailabilityMode,
-    OperationOrigin,
-    Reason,
-    ServerHAState,
-    ServerPublicNetworkAccessState,
-    ServerState,
-    ServerVersion,
-    SkuTier,
-)
+from ._postgre_sql_management_client_enums import ConfigurationDataType
+from ._postgre_sql_management_client_enums import CreateMode
+from ._postgre_sql_management_client_enums import CreateModeForUpdate
+from ._postgre_sql_management_client_enums import CreatedByType
+from ._postgre_sql_management_client_enums import FailoverMode
+from ._postgre_sql_management_client_enums import GeoRedundantBackupEnum
+from ._postgre_sql_management_client_enums import HighAvailabilityMode
+from ._postgre_sql_management_client_enums import OperationOrigin
+from ._postgre_sql_management_client_enums import Reason
+from ._postgre_sql_management_client_enums import ServerHAState
+from ._postgre_sql_management_client_enums import ServerPublicNetworkAccessState
+from ._postgre_sql_management_client_enums import ServerState
+from ._postgre_sql_management_client_enums import ServerVersion
+from ._postgre_sql_management_client_enums import SkuTier
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
+
 __all__ = [
-    'Backup',
-    'CapabilitiesListResult',
-    'CapabilityProperties',
-    'Configuration',
-    'ConfigurationListResult',
-    'Database',
-    'DatabaseListResult',
-    'DelegatedSubnetUsage',
-    'ErrorAdditionalInfo',
-    'ErrorResponse',
-    'FirewallRule',
-    'FirewallRuleListResult',
-    'FlexibleServerEditionCapability',
-    'HighAvailability',
-    'HyperscaleNodeEditionCapability',
-    'MaintenanceWindow',
-    'NameAvailability',
-    'NameAvailabilityRequest',
-    'Network',
-    'NodeTypeCapability',
-    'Operation',
-    'OperationDisplay',
-    'OperationListResult',
-    'ProxyResource',
-    'Resource',
-    'RestartParameter',
-    'Server',
-    'ServerBackup',
-    'ServerBackupListResult',
-    'ServerForUpdate',
-    'ServerListResult',
-    'ServerVersionCapability',
-    'Sku',
-    'Storage',
-    'StorageEditionCapability',
-    'StorageMBCapability',
-    'SystemData',
-    'TrackedResource',
-    'VcoreCapability',
-    'VirtualNetworkSubnetUsageParameter',
-    'VirtualNetworkSubnetUsageResult',
-    'ConfigurationDataType',
-    'CreateMode',
-    'CreateModeForUpdate',
-    'CreatedByType',
-    'FailoverMode',
-    'GeoRedundantBackupEnum',
-    'HighAvailabilityMode',
-    'OperationOrigin',
-    'Reason',
-    'ServerHAState',
-    'ServerPublicNetworkAccessState',
-    'ServerState',
-    'ServerVersion',
-    'SkuTier',
+    "Backup",
+    "CapabilitiesListResult",
+    "CapabilityProperties",
+    "Configuration",
+    "ConfigurationListResult",
+    "Database",
+    "DatabaseListResult",
+    "DelegatedSubnetUsage",
+    "ErrorAdditionalInfo",
+    "ErrorResponse",
+    "FirewallRule",
+    "FirewallRuleListResult",
+    "FlexibleServerEditionCapability",
+    "HighAvailability",
+    "HyperscaleNodeEditionCapability",
+    "MaintenanceWindow",
+    "NameAvailability",
+    "NameAvailabilityRequest",
+    "Network",
+    "NodeTypeCapability",
+    "Operation",
+    "OperationDisplay",
+    "OperationListResult",
+    "ProxyResource",
+    "Resource",
+    "RestartParameter",
+    "Server",
+    "ServerForUpdate",
+    "ServerListResult",
+    "ServerVersionCapability",
+    "Sku",
+    "Storage",
+    "StorageEditionCapability",
+    "StorageMBCapability",
+    "SystemData",
+    "TrackedResource",
+    "VcoreCapability",
+    "VirtualNetworkSubnetUsageParameter",
+    "VirtualNetworkSubnetUsageResult",
+    "ConfigurationDataType",
+    "CreateMode",
+    "CreateModeForUpdate",
+    "CreatedByType",
+    "FailoverMode",
+    "GeoRedundantBackupEnum",
+    "HighAvailabilityMode",
+    "OperationOrigin",
+    "Reason",
+    "ServerHAState",
+    "ServerPublicNetworkAccessState",
+    "ServerState",
+    "ServerVersion",
+    "SkuTier",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
