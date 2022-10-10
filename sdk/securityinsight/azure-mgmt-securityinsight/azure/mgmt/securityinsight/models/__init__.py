@@ -45,11 +45,9 @@ from ._models_py3 import AnomalySecurityMLAnalyticsSettings
 from ._models_py3 import AnomalyTimelineItem
 from ._models_py3 import AutomationRule
 from ._models_py3 import AutomationRuleAction
-from ._models_py3 import AutomationRuleBooleanCondition
 from ._models_py3 import AutomationRuleCondition
 from ._models_py3 import AutomationRuleModifyPropertiesAction
 from ._models_py3 import AutomationRulePropertyArrayChangedValuesCondition
-from ._models_py3 import AutomationRulePropertyArrayValuesCondition
 from ._models_py3 import AutomationRulePropertyValuesChangedCondition
 from ._models_py3 import AutomationRulePropertyValuesCondition
 from ._models_py3 import AutomationRuleRunPlaybookAction
@@ -74,7 +72,6 @@ from ._models_py3 import BookmarkExpandResponse
 from ._models_py3 import BookmarkExpandResponseValue
 from ._models_py3 import BookmarkList
 from ._models_py3 import BookmarkTimelineItem
-from ._models_py3 import BooleanConditionProperties
 from ._models_py3 import ClientInfo
 from ._models_py3 import CloudApplicationEntity
 from ._models_py3 import CloudApplicationEntityProperties
@@ -95,6 +92,7 @@ from ._models_py3 import CodelessUiDataConnector
 from ._models_py3 import ConnectedEntity
 from ._models_py3 import ConnectivityCriteria
 from ._models_py3 import ConnectorInstructionModelBase
+from ._models_py3 import Content
 from ._models_py3 import ContentPathMap
 from ._models_py3 import CustomEntityQuery
 from ._models_py3 import Customs
@@ -158,9 +156,6 @@ from ._models_py3 import FileEntity
 from ._models_py3 import FileEntityProperties
 from ._models_py3 import FileHashEntity
 from ._models_py3 import FileHashEntityProperties
-from ._models_py3 import FileImport
-from ._models_py3 import FileImportList
-from ._models_py3 import FileMetadata
 from ._models_py3 import FusionAlertRule
 from ._models_py3 import FusionAlertRuleTemplate
 from ._models_py3 import FusionScenarioExclusionPattern
@@ -209,6 +204,7 @@ from ._models_py3 import InsightsTableResult
 from ._models_py3 import InsightsTableResultColumnsItem
 from ._models_py3 import InstructionSteps
 from ._models_py3 import InstructionStepsInstructionsItem
+from ._models_py3 import Instructions
 from ._models_py3 import IoTCheckRequirements
 from ._models_py3 import IoTDataConnector
 from ._models_py3 import IoTDataConnectorProperties
@@ -264,8 +260,6 @@ from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleProperties
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleTemplate
 from ._models_py3 import MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties
 from ._models_py3 import MtpCheckRequirements
-from ._models_py3 import NicEntity
-from ._models_py3 import NicEntityProperties
 from ._models_py3 import NrtAlertRule
 from ._models_py3 import NrtAlertRuleTemplate
 from ._models_py3 import NrtAlertRuleTemplateProperties
@@ -307,10 +301,13 @@ from ._models_py3 import PlaybookActionProperties
 from ._models_py3 import ProcessEntity
 from ._models_py3 import ProcessEntityProperties
 from ._models_py3 import PropertyArrayChangedConditionProperties
-from ._models_py3 import PropertyArrayConditionProperties
 from ._models_py3 import PropertyChangedConditionProperties
 from ._models_py3 import PropertyConditionProperties
 from ._models_py3 import QueryBasedAlertRuleTemplateProperties
+from ._models_py3 import Recommendation
+from ._models_py3 import RecommendationList
+from ._models_py3 import RecommendationPatch
+from ._models_py3 import RecommendedAction
 from ._models_py3 import RegistryKeyEntity
 from ._models_py3 import RegistryKeyEntityProperties
 from ._models_py3 import RegistryValueEntity
@@ -389,7 +386,6 @@ from ._models_py3 import Ueba
 from ._models_py3 import UrlEntity
 from ._models_py3 import UrlEntityProperties
 from ._models_py3 import UserInfo
-from ._models_py3 import ValidationError
 from ._models_py3 import Watchlist
 from ._models_py3 import WatchlistItem
 from ._models_py3 import WatchlistItemList
@@ -403,34 +399,31 @@ from ._security_insights_enums import AlertSeverity
 from ._security_insights_enums import AlertStatus
 from ._security_insights_enums import AntispamMailDirection
 from ._security_insights_enums import AttackTactic
-from ._security_insights_enums import AutomationRuleBooleanConditionSupportedOperator
 from ._security_insights_enums import AutomationRulePropertyArrayChangedConditionSupportedArrayType
 from ._security_insights_enums import AutomationRulePropertyArrayChangedConditionSupportedChangeType
-from ._security_insights_enums import AutomationRulePropertyArrayConditionSupportedArrayConditionType
-from ._security_insights_enums import AutomationRulePropertyArrayConditionSupportedArrayType
 from ._security_insights_enums import AutomationRulePropertyChangedConditionSupportedChangedType
 from ._security_insights_enums import AutomationRulePropertyChangedConditionSupportedPropertyType
 from ._security_insights_enums import AutomationRulePropertyConditionSupportedOperator
 from ._security_insights_enums import AutomationRulePropertyConditionSupportedProperty
+from ._security_insights_enums import Category
 from ._security_insights_enums import ConditionType
 from ._security_insights_enums import ConfidenceLevel
 from ._security_insights_enums import ConfidenceScoreStatus
 from ._security_insights_enums import ConnectAuthKind
 from ._security_insights_enums import ConnectivityType
 from ._security_insights_enums import ContentType
+from ._security_insights_enums import Context
 from ._security_insights_enums import CreatedByType
 from ._security_insights_enums import CustomEntityQueryKind
 from ._security_insights_enums import DataConnectorAuthorizationState
 from ._security_insights_enums import DataConnectorKind
 from ._security_insights_enums import DataConnectorLicenseState
 from ._security_insights_enums import DataTypeState
-from ._security_insights_enums import DeleteStatus
 from ._security_insights_enums import DeliveryAction
 from ._security_insights_enums import DeliveryLocation
 from ._security_insights_enums import DeploymentFetchStatus
 from ._security_insights_enums import DeploymentResult
 from ._security_insights_enums import DeploymentState
-from ._security_insights_enums import DeviceImportance
 from ._security_insights_enums import ElevationToken
 from ._security_insights_enums import EntityItemQueryKind
 from ._security_insights_enums import EntityKind
@@ -443,17 +436,13 @@ from ._security_insights_enums import EntityType
 from ._security_insights_enums import Enum13
 from ._security_insights_enums import Enum15
 from ._security_insights_enums import EventGroupingAggregationKind
-from ._security_insights_enums import FileFormat
 from ._security_insights_enums import FileHashAlgorithm
-from ._security_insights_enums import FileImportContentType
-from ._security_insights_enums import FileImportState
 from ._security_insights_enums import GetInsightsError
 from ._security_insights_enums import IncidentClassification
 from ._security_insights_enums import IncidentClassificationReason
 from ._security_insights_enums import IncidentLabelType
 from ._security_insights_enums import IncidentSeverity
 from ._security_insights_enums import IncidentStatus
-from ._security_insights_enums import IngestionMode
 from ._security_insights_enums import KillChainIntent
 from ._security_insights_enums import Kind
 from ._security_insights_enums import MatchingMethod
@@ -464,6 +453,7 @@ from ._security_insights_enums import OutputType
 from ._security_insights_enums import OwnerType
 from ._security_insights_enums import PermissionProviderScope
 from ._security_insights_enums import PollingFrequency
+from ._security_insights_enums import Priority
 from ._security_insights_enums import ProviderName
 from ._security_insights_enums import RegistryHive
 from ._security_insights_enums import RegistryValueKind
@@ -474,6 +464,7 @@ from ._security_insights_enums import SettingType
 from ._security_insights_enums import SettingsStatus
 from ._security_insights_enums import SourceKind
 from ._security_insights_enums import SourceType
+from ._security_insights_enums import State
 from ._security_insights_enums import SupportTier
 from ._security_insights_enums import TemplateStatus
 from ._security_insights_enums import ThreatIntelligenceResourceKindEnum
@@ -527,11 +518,9 @@ __all__ = [
     "AnomalyTimelineItem",
     "AutomationRule",
     "AutomationRuleAction",
-    "AutomationRuleBooleanCondition",
     "AutomationRuleCondition",
     "AutomationRuleModifyPropertiesAction",
     "AutomationRulePropertyArrayChangedValuesCondition",
-    "AutomationRulePropertyArrayValuesCondition",
     "AutomationRulePropertyValuesChangedCondition",
     "AutomationRulePropertyValuesCondition",
     "AutomationRuleRunPlaybookAction",
@@ -556,7 +545,6 @@ __all__ = [
     "BookmarkExpandResponseValue",
     "BookmarkList",
     "BookmarkTimelineItem",
-    "BooleanConditionProperties",
     "ClientInfo",
     "CloudApplicationEntity",
     "CloudApplicationEntityProperties",
@@ -577,6 +565,7 @@ __all__ = [
     "ConnectedEntity",
     "ConnectivityCriteria",
     "ConnectorInstructionModelBase",
+    "Content",
     "ContentPathMap",
     "CustomEntityQuery",
     "Customs",
@@ -640,9 +629,6 @@ __all__ = [
     "FileEntityProperties",
     "FileHashEntity",
     "FileHashEntityProperties",
-    "FileImport",
-    "FileImportList",
-    "FileMetadata",
     "FusionAlertRule",
     "FusionAlertRuleTemplate",
     "FusionScenarioExclusionPattern",
@@ -691,6 +677,7 @@ __all__ = [
     "InsightsTableResultColumnsItem",
     "InstructionSteps",
     "InstructionStepsInstructionsItem",
+    "Instructions",
     "IoTCheckRequirements",
     "IoTDataConnector",
     "IoTDataConnectorProperties",
@@ -746,8 +733,6 @@ __all__ = [
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate",
     "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
     "MtpCheckRequirements",
-    "NicEntity",
-    "NicEntityProperties",
     "NrtAlertRule",
     "NrtAlertRuleTemplate",
     "NrtAlertRuleTemplateProperties",
@@ -789,10 +774,13 @@ __all__ = [
     "ProcessEntity",
     "ProcessEntityProperties",
     "PropertyArrayChangedConditionProperties",
-    "PropertyArrayConditionProperties",
     "PropertyChangedConditionProperties",
     "PropertyConditionProperties",
     "QueryBasedAlertRuleTemplateProperties",
+    "Recommendation",
+    "RecommendationList",
+    "RecommendationPatch",
+    "RecommendedAction",
     "RegistryKeyEntity",
     "RegistryKeyEntityProperties",
     "RegistryValueEntity",
@@ -871,7 +859,6 @@ __all__ = [
     "UrlEntity",
     "UrlEntityProperties",
     "UserInfo",
-    "ValidationError",
     "Watchlist",
     "WatchlistItem",
     "WatchlistItemList",
@@ -884,34 +871,31 @@ __all__ = [
     "AlertStatus",
     "AntispamMailDirection",
     "AttackTactic",
-    "AutomationRuleBooleanConditionSupportedOperator",
     "AutomationRulePropertyArrayChangedConditionSupportedArrayType",
     "AutomationRulePropertyArrayChangedConditionSupportedChangeType",
-    "AutomationRulePropertyArrayConditionSupportedArrayConditionType",
-    "AutomationRulePropertyArrayConditionSupportedArrayType",
     "AutomationRulePropertyChangedConditionSupportedChangedType",
     "AutomationRulePropertyChangedConditionSupportedPropertyType",
     "AutomationRulePropertyConditionSupportedOperator",
     "AutomationRulePropertyConditionSupportedProperty",
+    "Category",
     "ConditionType",
     "ConfidenceLevel",
     "ConfidenceScoreStatus",
     "ConnectAuthKind",
     "ConnectivityType",
     "ContentType",
+    "Context",
     "CreatedByType",
     "CustomEntityQueryKind",
     "DataConnectorAuthorizationState",
     "DataConnectorKind",
     "DataConnectorLicenseState",
     "DataTypeState",
-    "DeleteStatus",
     "DeliveryAction",
     "DeliveryLocation",
     "DeploymentFetchStatus",
     "DeploymentResult",
     "DeploymentState",
-    "DeviceImportance",
     "ElevationToken",
     "EntityItemQueryKind",
     "EntityKind",
@@ -924,17 +908,13 @@ __all__ = [
     "Enum13",
     "Enum15",
     "EventGroupingAggregationKind",
-    "FileFormat",
     "FileHashAlgorithm",
-    "FileImportContentType",
-    "FileImportState",
     "GetInsightsError",
     "IncidentClassification",
     "IncidentClassificationReason",
     "IncidentLabelType",
     "IncidentSeverity",
     "IncidentStatus",
-    "IngestionMode",
     "KillChainIntent",
     "Kind",
     "MatchingMethod",
@@ -945,6 +925,7 @@ __all__ = [
     "OwnerType",
     "PermissionProviderScope",
     "PollingFrequency",
+    "Priority",
     "ProviderName",
     "RegistryHive",
     "RegistryValueKind",
@@ -955,6 +936,7 @@ __all__ = [
     "SettingsStatus",
     "SourceKind",
     "SourceType",
+    "State",
     "SupportTier",
     "TemplateStatus",
     "ThreatIntelligenceResourceKindEnum",

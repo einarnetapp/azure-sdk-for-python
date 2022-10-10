@@ -648,7 +648,7 @@ class Entity(Resource):
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
     AccountEntity, AzureResourceEntity, HuntingBookmark, CloudApplicationEntity, DnsEntity,
     FileEntity, FileHashEntity, HostEntity, IoTDeviceEntity, IpEntity, MailClusterEntity,
-    MailMessageEntity, MailboxEntity, MalwareEntity, NicEntity, ProcessEntity, RegistryKeyEntity,
+    MailMessageEntity, MailboxEntity, MalwareEntity, ProcessEntity, RegistryKeyEntity,
     RegistryValueEntity, SecurityAlert, SecurityGroupEntity, SubmissionMailEntity, UrlEntity
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -669,7 +669,7 @@ class Entity(Resource):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     """
 
@@ -705,7 +705,6 @@ class Entity(Resource):
             "MailMessage": "MailMessageEntity",
             "Mailbox": "MailboxEntity",
             "Malware": "MalwareEntity",
-            "Nic": "NicEntity",
             "Process": "ProcessEntity",
             "RegistryKey": "RegistryKeyEntity",
             "RegistryValue": "RegistryValueEntity",
@@ -743,7 +742,7 @@ class AccountEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -765,7 +764,7 @@ class AccountEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :vartype host_entity_id: str
     :ivar is_domain_joined: Determines whether this is a domain account.
     :vartype is_domain_joined: bool
-    :ivar nt_domain: The NetBIOS domain name as it appears in the alert format - domain/username.
+    :ivar nt_domain: The NetBIOS domain name as it appears in the alert format domain/username.
      Examples: NT AUTHORITY.
     :vartype nt_domain: str
     :ivar object_guid: The objectGUID attribute is a single-value attribute that is the unique
@@ -901,7 +900,7 @@ class AccountEntityProperties(EntityCommonProperties):  # pylint: disable=too-ma
     :vartype host_entity_id: str
     :ivar is_domain_joined: Determines whether this is a domain account.
     :vartype is_domain_joined: bool
-    :ivar nt_domain: The NetBIOS domain name as it appears in the alert format - domain/username.
+    :ivar nt_domain: The NetBIOS domain name as it appears in the alert format domain/username.
      Examples: NT AUTHORITY.
     :vartype nt_domain: str
     :ivar object_guid: The objectGUID attribute is a single-value attribute that is the unique
@@ -1320,8 +1319,8 @@ class ActivityCustomEntityQuery(CustomEntityQuery):  # pylint: disable=too-many-
     :ivar input_entity_type: The type of the query's source entity. Known values are: "Account",
      "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
      "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-     and "Nic".
+     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+     "SubmissionMail".
     :vartype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
     :ivar required_input_fields_sets: List of the fields of the source entity that are required to
      run the query.
@@ -1401,8 +1400,8 @@ class ActivityCustomEntityQuery(CustomEntityQuery):  # pylint: disable=too-many-
         :keyword input_entity_type: The type of the query's source entity. Known values are: "Account",
          "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
          "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-         and "Nic".
+         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+         "SubmissionMail".
         :paramtype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
         :keyword required_input_fields_sets: List of the fields of the source entity that are required
          to run the query.
@@ -1540,8 +1539,8 @@ class ActivityEntityQuery(EntityQuery):  # pylint: disable=too-many-instance-att
     :ivar input_entity_type: The type of the query's source entity. Known values are: "Account",
      "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
      "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-     and "Nic".
+     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+     "SubmissionMail".
     :vartype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
     :ivar required_input_fields_sets: List of the fields of the source entity that are required to
      run the query.
@@ -1621,8 +1620,8 @@ class ActivityEntityQuery(EntityQuery):  # pylint: disable=too-many-instance-att
         :keyword input_entity_type: The type of the query's source entity. Known values are: "Account",
          "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
          "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-         and "Nic".
+         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+         "SubmissionMail".
         :paramtype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
         :keyword required_input_fields_sets: List of the fields of the source entity that are required
          to run the query.
@@ -1732,8 +1731,8 @@ class ActivityEntityQueryTemplate(EntityQueryTemplate):  # pylint: disable=too-m
     :ivar input_entity_type: The type of the query's source entity. Known values are: "Account",
      "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
      "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-     and "Nic".
+     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+     "SubmissionMail".
     :vartype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
     :ivar required_input_fields_sets: List of the fields of the source entity that are required to
      run the query.
@@ -1797,8 +1796,8 @@ class ActivityEntityQueryTemplate(EntityQueryTemplate):  # pylint: disable=too-m
         :keyword input_entity_type: The type of the query's source entity. Known values are: "Account",
          "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
          "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-         and "Nic".
+         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+         "SubmissionMail".
         :paramtype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
         :keyword required_input_fields_sets: List of the fields of the source entity that are required
          to run the query.
@@ -3160,55 +3159,17 @@ class AutomationRuleAction(_serialization.Model):
         self.action_type = None  # type: Optional[str]
 
 
-class AutomationRuleBooleanCondition(_serialization.Model):
-    """AutomationRuleBooleanCondition.
-
-    :ivar operator: Known values are: "And" and "Or".
-    :vartype operator: str or
-     ~azure.mgmt.securityinsight.models.AutomationRuleBooleanConditionSupportedOperator
-    :ivar inner_conditions:
-    :vartype inner_conditions: list[~azure.mgmt.securityinsight.models.AutomationRuleCondition]
-    """
-
-    _validation = {
-        "inner_conditions": {"max_items": 10, "min_items": 2},
-    }
-
-    _attribute_map = {
-        "operator": {"key": "operator", "type": "str"},
-        "inner_conditions": {"key": "innerConditions", "type": "[AutomationRuleCondition]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        operator: Optional[Union[str, "_models.AutomationRuleBooleanConditionSupportedOperator"]] = None,
-        inner_conditions: Optional[List["_models.AutomationRuleCondition"]] = None,
-        **kwargs
-    ):
-        """
-        :keyword operator: Known values are: "And" and "Or".
-        :paramtype operator: str or
-         ~azure.mgmt.securityinsight.models.AutomationRuleBooleanConditionSupportedOperator
-        :keyword inner_conditions:
-        :paramtype inner_conditions: list[~azure.mgmt.securityinsight.models.AutomationRuleCondition]
-        """
-        super().__init__(**kwargs)
-        self.operator = operator
-        self.inner_conditions = inner_conditions
-
-
 class AutomationRuleCondition(_serialization.Model):
     """Describes an automation rule condition.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
-    BooleanConditionProperties, PropertyConditionProperties, PropertyArrayConditionProperties,
-    PropertyArrayChangedConditionProperties, PropertyChangedConditionProperties
+    PropertyConditionProperties, PropertyArrayChangedConditionProperties,
+    PropertyChangedConditionProperties
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar condition_type: Required. Known values are: "Property", "PropertyArray",
-     "PropertyChanged", "PropertyArrayChanged", and "Boolean".
+    :ivar condition_type: Required. Known values are: "Property", "PropertyChanged", and
+     "PropertyArrayChanged".
     :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
     """
 
@@ -3222,9 +3183,7 @@ class AutomationRuleCondition(_serialization.Model):
 
     _subtype_map = {
         "condition_type": {
-            "Boolean": "BooleanConditionProperties",
             "Property": "PropertyConditionProperties",
-            "PropertyArray": "PropertyArrayConditionProperties",
             "PropertyArrayChanged": "PropertyArrayChangedConditionProperties",
             "PropertyChanged": "PropertyChangedConditionProperties",
         }
@@ -3315,55 +3274,6 @@ class AutomationRulePropertyArrayChangedValuesCondition(_serialization.Model):
         self.change_type = change_type
 
 
-class AutomationRulePropertyArrayValuesCondition(_serialization.Model):
-    """AutomationRulePropertyArrayValuesCondition.
-
-    :ivar array_type: Known values are: "CustomDetails" and "CustomDetailValues".
-    :vartype array_type: str or
-     ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayConditionSupportedArrayType
-    :ivar array_condition_type: "AnyItem"
-    :vartype array_condition_type: str or
-     ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayConditionSupportedArrayConditionType
-    :ivar item_conditions:
-    :vartype item_conditions: list[~azure.mgmt.securityinsight.models.AutomationRuleCondition]
-    """
-
-    _validation = {
-        "item_conditions": {"max_items": 10, "min_items": 0},
-    }
-
-    _attribute_map = {
-        "array_type": {"key": "arrayType", "type": "str"},
-        "array_condition_type": {"key": "arrayConditionType", "type": "str"},
-        "item_conditions": {"key": "itemConditions", "type": "[AutomationRuleCondition]"},
-    }
-
-    def __init__(
-        self,
-        *,
-        array_type: Optional[Union[str, "_models.AutomationRulePropertyArrayConditionSupportedArrayType"]] = None,
-        array_condition_type: Optional[
-            Union[str, "_models.AutomationRulePropertyArrayConditionSupportedArrayConditionType"]
-        ] = None,
-        item_conditions: Optional[List["_models.AutomationRuleCondition"]] = None,
-        **kwargs
-    ):
-        """
-        :keyword array_type: Known values are: "CustomDetails" and "CustomDetailValues".
-        :paramtype array_type: str or
-         ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayConditionSupportedArrayType
-        :keyword array_condition_type: "AnyItem"
-        :paramtype array_condition_type: str or
-         ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayConditionSupportedArrayConditionType
-        :keyword item_conditions:
-        :paramtype item_conditions: list[~azure.mgmt.securityinsight.models.AutomationRuleCondition]
-        """
-        super().__init__(**kwargs)
-        self.array_type = array_type
-        self.array_condition_type = array_condition_type
-        self.item_conditions = item_conditions
-
-
 class AutomationRulePropertyValuesChangedCondition(_serialization.Model):
     """AutomationRulePropertyValuesChangedCondition.
 
@@ -3428,19 +3338,17 @@ class AutomationRulePropertyValuesCondition(_serialization.Model):
     :ivar property_name: The property to evaluate in an automation rule property condition. Known
      values are: "IncidentTitle", "IncidentDescription", "IncidentSeverity", "IncidentStatus",
      "IncidentRelatedAnalyticRuleIds", "IncidentTactics", "IncidentLabel", "IncidentProviderName",
-     "IncidentUpdatedBySource", "IncidentCustomDetailsKey", "IncidentCustomDetailsValue",
      "AccountAadTenantId", "AccountAadUserId", "AccountName", "AccountNTDomain", "AccountPUID",
      "AccountSid", "AccountObjectGuid", "AccountUPNSuffix", "AlertProductNames",
-     "AlertAnalyticRuleIds", "AzureResourceResourceId", "AzureResourceSubscriptionId",
-     "CloudApplicationAppId", "CloudApplicationAppName", "DNSDomainName", "FileDirectory",
-     "FileName", "FileHashValue", "HostAzureID", "HostName", "HostNetBiosName", "HostNTDomain",
-     "HostOSVersion", "IoTDeviceId", "IoTDeviceName", "IoTDeviceType", "IoTDeviceVendor",
-     "IoTDeviceModel", "IoTDeviceOperatingSystem", "IPAddress", "MailboxDisplayName",
-     "MailboxPrimaryAddress", "MailboxUPN", "MailMessageDeliveryAction",
-     "MailMessageDeliveryLocation", "MailMessageRecipient", "MailMessageSenderIP",
-     "MailMessageSubject", "MailMessageP1Sender", "MailMessageP2Sender", "MalwareCategory",
-     "MalwareName", "ProcessCommandLine", "ProcessId", "RegistryKey", "RegistryValueData", and
-     "Url".
+     "AzureResourceResourceId", "AzureResourceSubscriptionId", "CloudApplicationAppId",
+     "CloudApplicationAppName", "DNSDomainName", "FileDirectory", "FileName", "FileHashValue",
+     "HostAzureID", "HostName", "HostNetBiosName", "HostNTDomain", "HostOSVersion", "IoTDeviceId",
+     "IoTDeviceName", "IoTDeviceType", "IoTDeviceVendor", "IoTDeviceModel",
+     "IoTDeviceOperatingSystem", "IPAddress", "MailboxDisplayName", "MailboxPrimaryAddress",
+     "MailboxUPN", "MailMessageDeliveryAction", "MailMessageDeliveryLocation",
+     "MailMessageRecipient", "MailMessageSenderIP", "MailMessageSubject", "MailMessageP1Sender",
+     "MailMessageP2Sender", "MalwareCategory", "MalwareName", "ProcessCommandLine", "ProcessId",
+     "RegistryKey", "RegistryValueData", and "Url".
     :vartype property_name: str or
      ~azure.mgmt.securityinsight.models.AutomationRulePropertyConditionSupportedProperty
     :ivar operator: Known values are: "Equals", "NotEquals", "Contains", "NotContains",
@@ -3469,19 +3377,17 @@ class AutomationRulePropertyValuesCondition(_serialization.Model):
         :keyword property_name: The property to evaluate in an automation rule property condition.
          Known values are: "IncidentTitle", "IncidentDescription", "IncidentSeverity", "IncidentStatus",
          "IncidentRelatedAnalyticRuleIds", "IncidentTactics", "IncidentLabel", "IncidentProviderName",
-         "IncidentUpdatedBySource", "IncidentCustomDetailsKey", "IncidentCustomDetailsValue",
          "AccountAadTenantId", "AccountAadUserId", "AccountName", "AccountNTDomain", "AccountPUID",
          "AccountSid", "AccountObjectGuid", "AccountUPNSuffix", "AlertProductNames",
-         "AlertAnalyticRuleIds", "AzureResourceResourceId", "AzureResourceSubscriptionId",
-         "CloudApplicationAppId", "CloudApplicationAppName", "DNSDomainName", "FileDirectory",
-         "FileName", "FileHashValue", "HostAzureID", "HostName", "HostNetBiosName", "HostNTDomain",
-         "HostOSVersion", "IoTDeviceId", "IoTDeviceName", "IoTDeviceType", "IoTDeviceVendor",
-         "IoTDeviceModel", "IoTDeviceOperatingSystem", "IPAddress", "MailboxDisplayName",
-         "MailboxPrimaryAddress", "MailboxUPN", "MailMessageDeliveryAction",
-         "MailMessageDeliveryLocation", "MailMessageRecipient", "MailMessageSenderIP",
-         "MailMessageSubject", "MailMessageP1Sender", "MailMessageP2Sender", "MalwareCategory",
-         "MalwareName", "ProcessCommandLine", "ProcessId", "RegistryKey", "RegistryValueData", and
-         "Url".
+         "AzureResourceResourceId", "AzureResourceSubscriptionId", "CloudApplicationAppId",
+         "CloudApplicationAppName", "DNSDomainName", "FileDirectory", "FileName", "FileHashValue",
+         "HostAzureID", "HostName", "HostNetBiosName", "HostNTDomain", "HostOSVersion", "IoTDeviceId",
+         "IoTDeviceName", "IoTDeviceType", "IoTDeviceVendor", "IoTDeviceModel",
+         "IoTDeviceOperatingSystem", "IPAddress", "MailboxDisplayName", "MailboxPrimaryAddress",
+         "MailboxUPN", "MailMessageDeliveryAction", "MailMessageDeliveryLocation",
+         "MailMessageRecipient", "MailMessageSenderIP", "MailMessageSubject", "MailMessageP1Sender",
+         "MailMessageP2Sender", "MalwareCategory", "MalwareName", "ProcessCommandLine", "ProcessId",
+         "RegistryKey", "RegistryValueData", and "Url".
         :paramtype property_name: str or
          ~azure.mgmt.securityinsight.models.AutomationRulePropertyConditionSupportedProperty
         :keyword operator: Known values are: "Equals", "NotEquals", "Contains", "NotContains",
@@ -3574,7 +3480,7 @@ class AutomationRuleTriggeringLogic(_serialization.Model):
     :ivar expiration_time_utc: Determines when the automation rule should automatically expire and
      be disabled.
     :vartype expiration_time_utc: ~datetime.datetime
-    :ivar triggers_on: Required. Known values are: "Incidents" and "Alerts".
+    :ivar triggers_on: Required. "Incidents"
     :vartype triggers_on: str or ~azure.mgmt.securityinsight.models.TriggersOn
     :ivar triggers_when: Required. Known values are: "Created" and "Updated".
     :vartype triggers_when: str or ~azure.mgmt.securityinsight.models.TriggersWhen
@@ -3614,7 +3520,7 @@ class AutomationRuleTriggeringLogic(_serialization.Model):
         :keyword expiration_time_utc: Determines when the automation rule should automatically expire
          and be disabled.
         :paramtype expiration_time_utc: ~datetime.datetime
-        :keyword triggers_on: Required. Known values are: "Incidents" and "Alerts".
+        :keyword triggers_on: Required. "Incidents"
         :paramtype triggers_on: str or ~azure.mgmt.securityinsight.models.TriggersOn
         :keyword triggers_when: Required. Known values are: "Created" and "Updated".
         :paramtype triggers_when: str or ~azure.mgmt.securityinsight.models.TriggersWhen
@@ -4061,7 +3967,7 @@ class AzureResourceEntity(Entity):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -4565,39 +4471,6 @@ class BookmarkTimelineItem(EntityTimelineItem):
         self.labels = labels
 
 
-class BooleanConditionProperties(AutomationRuleCondition):
-    """Describes an automation rule condition that applies a boolean operator (e.g AND, OR) to conditions.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar condition_type: Required. Known values are: "Property", "PropertyArray",
-     "PropertyChanged", "PropertyArrayChanged", and "Boolean".
-    :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
-    :ivar condition_properties:
-    :vartype condition_properties:
-     ~azure.mgmt.securityinsight.models.AutomationRuleBooleanCondition
-    """
-
-    _validation = {
-        "condition_type": {"required": True},
-    }
-
-    _attribute_map = {
-        "condition_type": {"key": "conditionType", "type": "str"},
-        "condition_properties": {"key": "conditionProperties", "type": "AutomationRuleBooleanCondition"},
-    }
-
-    def __init__(self, *, condition_properties: Optional["_models.AutomationRuleBooleanCondition"] = None, **kwargs):
-        """
-        :keyword condition_properties:
-        :paramtype condition_properties:
-         ~azure.mgmt.securityinsight.models.AutomationRuleBooleanCondition
-        """
-        super().__init__(**kwargs)
-        self.condition_type = "Boolean"  # type: str
-        self.condition_properties = condition_properties
-
-
 class ClientInfo(_serialization.Model):
     """Information on the client (user or application) that made some action.
 
@@ -4665,7 +4538,7 @@ class CloudApplicationEntity(Entity):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -5922,6 +5795,39 @@ class ConnectorInstructionModelBase(_serialization.Model):
         self.type = type
 
 
+class Content(_serialization.Model):
+    """Content section of the recommendation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar title: Title of the content. Required.
+    :vartype title: str
+    :ivar description: Description of the content. Required.
+    :vartype description: str
+    """
+
+    _validation = {
+        "title": {"required": True},
+        "description": {"required": True},
+    }
+
+    _attribute_map = {
+        "title": {"key": "title", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+    }
+
+    def __init__(self, *, title: str, description: str, **kwargs):
+        """
+        :keyword title: Title of the content. Required.
+        :paramtype title: str
+        :keyword description: Description of the content. Required.
+        :paramtype description: str
+        """
+        super().__init__(**kwargs)
+        self.title = title
+        self.description = description
+
+
 class ContentPathMap(_serialization.Model):
     """The mapping of content type to a repo path.
 
@@ -6316,7 +6222,7 @@ class DnsEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -7620,7 +7526,7 @@ class EntityQueryItemProperties(_serialization.Model):
     :ivar input_entity_type: The type of the entity. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice", "SecurityAlert",
-     "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
     :ivar required_input_fields_sets: Data types for template.
     :vartype required_input_fields_sets: list[list[str]]
@@ -7651,7 +7557,7 @@ class EntityQueryItemProperties(_serialization.Model):
         :keyword input_entity_type: The type of the entity. Known values are: "Account", "Host",
          "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware", "Process",
          "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice", "SecurityAlert",
-         "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+         "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
         :paramtype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
         :keyword required_input_fields_sets: Data types for template.
         :paramtype required_input_fields_sets: list[list[str]]
@@ -7895,8 +7801,8 @@ class ExpansionEntityQuery(EntityQuery):  # pylint: disable=too-many-instance-at
     :ivar input_entity_type: The type of the query's source entity. Known values are: "Account",
      "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
      "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-     and "Nic".
+     "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+     "SubmissionMail".
     :vartype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
     :ivar input_fields: List of the fields of the source entity that are required to run the query.
     :vartype input_fields: list[str]
@@ -7951,8 +7857,8 @@ class ExpansionEntityQuery(EntityQuery):  # pylint: disable=too-many-instance-at
         :keyword input_entity_type: The type of the query's source entity. Known values are: "Account",
          "Host", "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware",
          "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice",
-         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail",
-         and "Nic".
+         "SecurityAlert", "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and
+         "SubmissionMail".
         :paramtype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
         :keyword input_fields: List of the fields of the source entity that are required to run the
          query.
@@ -7988,8 +7894,7 @@ class ExpansionResultAggregation(_serialization.Model):
     :ivar entity_kind: The kind of the aggregated entity. Required. Known values are: "Account",
      "Host", "File", "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip",
      "Malware", "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice",
-     "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and
-     "Nic".
+     "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype entity_kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     """
 
@@ -8025,8 +7930,7 @@ class ExpansionResultAggregation(_serialization.Model):
         :keyword entity_kind: The kind of the aggregated entity. Required. Known values are: "Account",
          "Host", "File", "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip",
          "Malware", "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice",
-         "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and
-         "Nic".
+         "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
         :paramtype entity_kind: str or ~azure.mgmt.securityinsight.models.EntityKind
         """
         super().__init__(**kwargs)
@@ -8159,7 +8063,7 @@ class FileEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -8286,7 +8190,7 @@ class FileHashEntity(Entity):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -8372,219 +8276,6 @@ class FileHashEntityProperties(EntityCommonProperties):
         super().__init__(**kwargs)
         self.algorithm = None
         self.hash_value = None
-
-
-class FileImport(Resource):  # pylint: disable=too-many-instance-attributes
-    """Represents a file import in Azure Security Insights.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
-     information.
-    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
-    :ivar ingestion_mode: Describes how to ingest the records in the file. Known values are:
-     "IngestOnlyIfAllAreValid", "IngestAnyValidRecords", and "Unspecified".
-    :vartype ingestion_mode: str or ~azure.mgmt.securityinsight.models.IngestionMode
-    :ivar content_type: The content type of this file. Known values are: "BasicIndicator",
-     "StixIndicator", and "Unspecified".
-    :vartype content_type: str or ~azure.mgmt.securityinsight.models.FileImportContentType
-    :ivar created_time_utc: The time the file was imported.
-    :vartype created_time_utc: ~datetime.datetime
-    :ivar error_file: Represents the error file (if the import was ingested with errors or failed
-     the validation).
-    :vartype error_file: ~azure.mgmt.securityinsight.models.FileMetadata
-    :ivar errors_preview: An ordered list of some of the errors that were encountered during
-     validation.
-    :vartype errors_preview: list[~azure.mgmt.securityinsight.models.ValidationError]
-    :ivar import_file: Represents the imported file.
-    :vartype import_file: ~azure.mgmt.securityinsight.models.FileMetadata
-    :ivar ingested_record_count: The number of records that have been successfully ingested.
-    :vartype ingested_record_count: int
-    :ivar source: The source for the data in the file.
-    :vartype source: str
-    :ivar state: The state of the file import. Known values are: "FatalError", "Ingested",
-     "IngestedWithErrors", "InProgress", "Invalid", "WaitingForUpload", and "Unspecified".
-    :vartype state: str or ~azure.mgmt.securityinsight.models.FileImportState
-    :ivar total_record_count: The number of records in the file.
-    :vartype total_record_count: int
-    :ivar valid_record_count: The number of records that have passed validation.
-    :vartype valid_record_count: int
-    :ivar files_valid_until_time_utc: The time the files associated with this import are deleted
-     from the storage account.
-    :vartype files_valid_until_time_utc: ~datetime.datetime
-    :ivar import_valid_until_time_utc: The time the file import record is soft deleted from the
-     database and history.
-    :vartype import_valid_until_time_utc: ~datetime.datetime
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "system_data": {"readonly": True},
-        "created_time_utc": {"readonly": True},
-        "error_file": {"readonly": True},
-        "errors_preview": {"readonly": True},
-        "ingested_record_count": {"readonly": True},
-        "state": {"readonly": True},
-        "total_record_count": {"readonly": True},
-        "valid_record_count": {"readonly": True},
-        "files_valid_until_time_utc": {"readonly": True},
-        "import_valid_until_time_utc": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "system_data": {"key": "systemData", "type": "SystemData"},
-        "ingestion_mode": {"key": "properties.ingestionMode", "type": "str"},
-        "content_type": {"key": "properties.contentType", "type": "str"},
-        "created_time_utc": {"key": "properties.createdTimeUTC", "type": "iso-8601"},
-        "error_file": {"key": "properties.errorFile", "type": "FileMetadata"},
-        "errors_preview": {"key": "properties.errorsPreview", "type": "[ValidationError]"},
-        "import_file": {"key": "properties.importFile", "type": "FileMetadata"},
-        "ingested_record_count": {"key": "properties.ingestedRecordCount", "type": "int"},
-        "source": {"key": "properties.source", "type": "str"},
-        "state": {"key": "properties.state", "type": "str"},
-        "total_record_count": {"key": "properties.totalRecordCount", "type": "int"},
-        "valid_record_count": {"key": "properties.validRecordCount", "type": "int"},
-        "files_valid_until_time_utc": {"key": "properties.filesValidUntilTimeUTC", "type": "iso-8601"},
-        "import_valid_until_time_utc": {"key": "properties.importValidUntilTimeUTC", "type": "iso-8601"},
-    }
-
-    def __init__(
-        self,
-        *,
-        ingestion_mode: Optional[Union[str, "_models.IngestionMode"]] = None,
-        content_type: Optional[Union[str, "_models.FileImportContentType"]] = None,
-        import_file: Optional["_models.FileMetadata"] = None,
-        source: Optional[str] = None,
-        **kwargs
-    ):
-        """
-        :keyword ingestion_mode: Describes how to ingest the records in the file. Known values are:
-         "IngestOnlyIfAllAreValid", "IngestAnyValidRecords", and "Unspecified".
-        :paramtype ingestion_mode: str or ~azure.mgmt.securityinsight.models.IngestionMode
-        :keyword content_type: The content type of this file. Known values are: "BasicIndicator",
-         "StixIndicator", and "Unspecified".
-        :paramtype content_type: str or ~azure.mgmt.securityinsight.models.FileImportContentType
-        :keyword import_file: Represents the imported file.
-        :paramtype import_file: ~azure.mgmt.securityinsight.models.FileMetadata
-        :keyword source: The source for the data in the file.
-        :paramtype source: str
-        """
-        super().__init__(**kwargs)
-        self.ingestion_mode = ingestion_mode
-        self.content_type = content_type
-        self.created_time_utc = None
-        self.error_file = None
-        self.errors_preview = None
-        self.import_file = import_file
-        self.ingested_record_count = None
-        self.source = source
-        self.state = None
-        self.total_record_count = None
-        self.valid_record_count = None
-        self.files_valid_until_time_utc = None
-        self.import_valid_until_time_utc = None
-
-
-class FileImportList(_serialization.Model):
-    """List all the file imports.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar next_link: URL to fetch the next set of file imports.
-    :vartype next_link: str
-    :ivar value: Array of file imports. Required.
-    :vartype value: list[~azure.mgmt.securityinsight.models.FileImport]
-    """
-
-    _validation = {
-        "next_link": {"readonly": True},
-        "value": {"required": True},
-    }
-
-    _attribute_map = {
-        "next_link": {"key": "nextLink", "type": "str"},
-        "value": {"key": "value", "type": "[FileImport]"},
-    }
-
-    def __init__(self, *, value: List["_models.FileImport"], **kwargs):
-        """
-        :keyword value: Array of file imports. Required.
-        :paramtype value: list[~azure.mgmt.securityinsight.models.FileImport]
-        """
-        super().__init__(**kwargs)
-        self.next_link = None
-        self.value = value
-
-
-class FileMetadata(_serialization.Model):
-    """Represents a file.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar file_format: The format of the file. Known values are: "CSV", "JSON", and "Unspecified".
-    :vartype file_format: str or ~azure.mgmt.securityinsight.models.FileFormat
-    :ivar file_name: The name of the file.
-    :vartype file_name: str
-    :ivar file_size: The size of the file.
-    :vartype file_size: int
-    :ivar file_content_uri: A URI with a valid SAS token to allow uploading / downloading the file.
-    :vartype file_content_uri: str
-    :ivar delete_status: Indicates whether the file was deleted from the storage account. Known
-     values are: "Deleted", "NotDeleted", and "Unspecified".
-    :vartype delete_status: str or ~azure.mgmt.securityinsight.models.DeleteStatus
-    """
-
-    _validation = {
-        "file_content_uri": {"readonly": True},
-        "delete_status": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "file_format": {"key": "fileFormat", "type": "str"},
-        "file_name": {"key": "fileName", "type": "str"},
-        "file_size": {"key": "fileSize", "type": "int"},
-        "file_content_uri": {"key": "fileContentUri", "type": "str"},
-        "delete_status": {"key": "deleteStatus", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        file_format: Optional[Union[str, "_models.FileFormat"]] = None,
-        file_name: Optional[str] = None,
-        file_size: Optional[int] = None,
-        **kwargs
-    ):
-        """
-        :keyword file_format: The format of the file. Known values are: "CSV", "JSON", and
-         "Unspecified".
-        :paramtype file_format: str or ~azure.mgmt.securityinsight.models.FileFormat
-        :keyword file_name: The name of the file.
-        :paramtype file_name: str
-        :keyword file_size: The size of the file.
-        :paramtype file_size: int
-        """
-        super().__init__(**kwargs)
-        self.file_format = file_format
-        self.file_name = file_name
-        self.file_size = file_size
-        self.file_content_uri = None
-        self.delete_status = None
 
 
 class FusionAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
@@ -9480,7 +9171,7 @@ class HostEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -9671,7 +9362,7 @@ class HuntingBookmark(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -10379,8 +10070,7 @@ class IncidentEntitiesResultsMetadata(_serialization.Model):
     :ivar entity_kind: The kind of the aggregated entity. Required. Known values are: "Account",
      "Host", "File", "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip",
      "Malware", "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice",
-     "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and
-     "Nic".
+     "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype entity_kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     """
 
@@ -10402,8 +10092,7 @@ class IncidentEntitiesResultsMetadata(_serialization.Model):
         :keyword entity_kind: The kind of the aggregated entity. Required. Known values are: "Account",
          "Host", "File", "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip",
          "Malware", "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice",
-         "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and
-         "Nic".
+         "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
         :paramtype entity_kind: str or ~azure.mgmt.securityinsight.models.EntityKind
         """
         super().__init__(**kwargs)
@@ -10720,7 +10409,7 @@ class InsightQueryItemProperties(EntityQueryItemProperties):  # pylint: disable=
     :ivar input_entity_type: The type of the entity. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice", "SecurityAlert",
-     "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
     :ivar required_input_fields_sets: Data types for template.
     :vartype required_input_fields_sets: list[list[str]]
@@ -10786,7 +10475,7 @@ class InsightQueryItemProperties(EntityQueryItemProperties):  # pylint: disable=
         :keyword input_entity_type: The type of the entity. Known values are: "Account", "Host",
          "File", "AzureResource", "CloudApplication", "DNS", "FileHash", "IP", "Malware", "Process",
          "RegistryKey", "RegistryValue", "SecurityGroup", "URL", "IoTDevice", "SecurityAlert",
-         "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+         "HuntingBookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
         :paramtype input_entity_type: str or ~azure.mgmt.securityinsight.models.EntityType
         :keyword required_input_fields_sets: Data types for template.
         :paramtype required_input_fields_sets: list[list[str]]
@@ -11125,6 +10814,54 @@ class InsightsTableResultColumnsItem(_serialization.Model):
         self.name = name
 
 
+class Instructions(_serialization.Model):
+    """Instructions section of a recommendation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar actions_to_be_performed: What actions should be taken to complete the recommendation.
+     Required.
+    :vartype actions_to_be_performed: str
+    :ivar recommendation_importance: Explains why the recommendation is important. Required.
+    :vartype recommendation_importance: str
+    :ivar how_to_perform_action_details: How should the user complete the recommendation.
+    :vartype how_to_perform_action_details: str
+    """
+
+    _validation = {
+        "actions_to_be_performed": {"required": True},
+        "recommendation_importance": {"required": True},
+    }
+
+    _attribute_map = {
+        "actions_to_be_performed": {"key": "actionsToBePerformed", "type": "str"},
+        "recommendation_importance": {"key": "recommendationImportance", "type": "str"},
+        "how_to_perform_action_details": {"key": "howToPerformActionDetails", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        actions_to_be_performed: str,
+        recommendation_importance: str,
+        how_to_perform_action_details: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword actions_to_be_performed: What actions should be taken to complete the recommendation.
+         Required.
+        :paramtype actions_to_be_performed: str
+        :keyword recommendation_importance: Explains why the recommendation is important. Required.
+        :paramtype recommendation_importance: str
+        :keyword how_to_perform_action_details: How should the user complete the recommendation.
+        :paramtype how_to_perform_action_details: str
+        """
+        super().__init__(**kwargs)
+        self.actions_to_be_performed = actions_to_be_performed
+        self.recommendation_importance = recommendation_importance
+        self.how_to_perform_action_details = how_to_perform_action_details
+
+
 class InstructionStepsInstructionsItem(ConnectorInstructionModelBase):
     """InstructionStepsInstructionsItem.
 
@@ -11320,7 +11057,7 @@ class IoTDeviceEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -11362,29 +11099,6 @@ class IoTDeviceEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :vartype threat_intelligence: list[~azure.mgmt.securityinsight.models.ThreatIntelligence]
     :ivar protocols: A list of protocols of the IoTDevice entity.
     :vartype protocols: list[str]
-    :ivar owners: A list of owners of the IoTDevice entity.
-    :vartype owners: list[str]
-    :ivar nic_entity_ids: A list of Nic entity ids of the IoTDevice entity.
-    :vartype nic_entity_ids: list[str]
-    :ivar site: The site of the device.
-    :vartype site: str
-    :ivar zone: The zone location of the device within a site.
-    :vartype zone: str
-    :ivar sensor: The sensor the device is monitored by.
-    :vartype sensor: str
-    :ivar device_sub_type: The subType of the device ('PLC', 'HMI', 'EWS', etc.).
-    :vartype device_sub_type: str
-    :ivar importance: Device importance, determines if the device classified as 'crown jewel'.
-     Known values are: "Unknown", "Low", "Normal", and "High".
-    :vartype importance: str or ~azure.mgmt.securityinsight.models.DeviceImportance
-    :ivar purdue_layer: The Purdue Layer of the device.
-    :vartype purdue_layer: str
-    :ivar is_authorized: Determines whether the device classified as authorized device.
-    :vartype is_authorized: bool
-    :ivar is_programming: Determines whether the device classified as programming device.
-    :vartype is_programming: bool
-    :ivar is_scanner: Is the device classified as a scanner device.
-    :vartype is_scanner: bool
     """
 
     _validation = {
@@ -11412,16 +11126,6 @@ class IoTDeviceEntity(Entity):  # pylint: disable=too-many-instance-attributes
         "ip_address_entity_id": {"readonly": True},
         "threat_intelligence": {"readonly": True},
         "protocols": {"readonly": True},
-        "owners": {"readonly": True},
-        "nic_entity_ids": {"readonly": True},
-        "site": {"readonly": True},
-        "zone": {"readonly": True},
-        "sensor": {"readonly": True},
-        "device_sub_type": {"readonly": True},
-        "purdue_layer": {"readonly": True},
-        "is_authorized": {"readonly": True},
-        "is_programming": {"readonly": True},
-        "is_scanner": {"readonly": True},
     }
 
     _attribute_map = {
@@ -11449,27 +11153,10 @@ class IoTDeviceEntity(Entity):  # pylint: disable=too-many-instance-attributes
         "ip_address_entity_id": {"key": "properties.ipAddressEntityId", "type": "str"},
         "threat_intelligence": {"key": "properties.threatIntelligence", "type": "[ThreatIntelligence]"},
         "protocols": {"key": "properties.protocols", "type": "[str]"},
-        "owners": {"key": "properties.owners", "type": "[str]"},
-        "nic_entity_ids": {"key": "properties.nicEntityIds", "type": "[str]"},
-        "site": {"key": "properties.site", "type": "str"},
-        "zone": {"key": "properties.zone", "type": "str"},
-        "sensor": {"key": "properties.sensor", "type": "str"},
-        "device_sub_type": {"key": "properties.deviceSubType", "type": "str"},
-        "importance": {"key": "properties.importance", "type": "str"},
-        "purdue_layer": {"key": "properties.purdueLayer", "type": "str"},
-        "is_authorized": {"key": "properties.isAuthorized", "type": "bool"},
-        "is_programming": {"key": "properties.isProgramming", "type": "bool"},
-        "is_scanner": {"key": "properties.isScanner", "type": "bool"},
     }
 
-    def __init__(  # pylint: disable=too-many-locals
-        self, *, importance: Optional[Union[str, "_models.DeviceImportance"]] = None, **kwargs
-    ):
-        """
-        :keyword importance: Device importance, determines if the device classified as 'crown jewel'.
-         Known values are: "Unknown", "Low", "Normal", and "High".
-        :paramtype importance: str or ~azure.mgmt.securityinsight.models.DeviceImportance
-        """
+    def __init__(self, **kwargs):  # pylint: disable=too-many-locals
+        """ """
         super().__init__(**kwargs)
         self.kind = "IoTDevice"  # type: str
         self.additional_data = None
@@ -11491,17 +11178,6 @@ class IoTDeviceEntity(Entity):  # pylint: disable=too-many-instance-attributes
         self.ip_address_entity_id = None
         self.threat_intelligence = None
         self.protocols = None
-        self.owners = None
-        self.nic_entity_ids = None
-        self.site = None
-        self.zone = None
-        self.sensor = None
-        self.device_sub_type = None
-        self.importance = importance
-        self.purdue_layer = None
-        self.is_authorized = None
-        self.is_programming = None
-        self.is_scanner = None
 
 
 class IoTDeviceEntityProperties(EntityCommonProperties):  # pylint: disable=too-many-instance-attributes
@@ -11549,29 +11225,6 @@ class IoTDeviceEntityProperties(EntityCommonProperties):  # pylint: disable=too-
     :vartype threat_intelligence: list[~azure.mgmt.securityinsight.models.ThreatIntelligence]
     :ivar protocols: A list of protocols of the IoTDevice entity.
     :vartype protocols: list[str]
-    :ivar owners: A list of owners of the IoTDevice entity.
-    :vartype owners: list[str]
-    :ivar nic_entity_ids: A list of Nic entity ids of the IoTDevice entity.
-    :vartype nic_entity_ids: list[str]
-    :ivar site: The site of the device.
-    :vartype site: str
-    :ivar zone: The zone location of the device within a site.
-    :vartype zone: str
-    :ivar sensor: The sensor the device is monitored by.
-    :vartype sensor: str
-    :ivar device_sub_type: The subType of the device ('PLC', 'HMI', 'EWS', etc.).
-    :vartype device_sub_type: str
-    :ivar importance: Device importance, determines if the device classified as 'crown jewel'.
-     Known values are: "Unknown", "Low", "Normal", and "High".
-    :vartype importance: str or ~azure.mgmt.securityinsight.models.DeviceImportance
-    :ivar purdue_layer: The Purdue Layer of the device.
-    :vartype purdue_layer: str
-    :ivar is_authorized: Determines whether the device classified as authorized device.
-    :vartype is_authorized: bool
-    :ivar is_programming: Determines whether the device classified as programming device.
-    :vartype is_programming: bool
-    :ivar is_scanner: Is the device classified as a scanner device.
-    :vartype is_scanner: bool
     """
 
     _validation = {
@@ -11594,16 +11247,6 @@ class IoTDeviceEntityProperties(EntityCommonProperties):  # pylint: disable=too-
         "ip_address_entity_id": {"readonly": True},
         "threat_intelligence": {"readonly": True},
         "protocols": {"readonly": True},
-        "owners": {"readonly": True},
-        "nic_entity_ids": {"readonly": True},
-        "site": {"readonly": True},
-        "zone": {"readonly": True},
-        "sensor": {"readonly": True},
-        "device_sub_type": {"readonly": True},
-        "purdue_layer": {"readonly": True},
-        "is_authorized": {"readonly": True},
-        "is_programming": {"readonly": True},
-        "is_scanner": {"readonly": True},
     }
 
     _attribute_map = {
@@ -11626,27 +11269,10 @@ class IoTDeviceEntityProperties(EntityCommonProperties):  # pylint: disable=too-
         "ip_address_entity_id": {"key": "ipAddressEntityId", "type": "str"},
         "threat_intelligence": {"key": "threatIntelligence", "type": "[ThreatIntelligence]"},
         "protocols": {"key": "protocols", "type": "[str]"},
-        "owners": {"key": "owners", "type": "[str]"},
-        "nic_entity_ids": {"key": "nicEntityIds", "type": "[str]"},
-        "site": {"key": "site", "type": "str"},
-        "zone": {"key": "zone", "type": "str"},
-        "sensor": {"key": "sensor", "type": "str"},
-        "device_sub_type": {"key": "deviceSubType", "type": "str"},
-        "importance": {"key": "importance", "type": "str"},
-        "purdue_layer": {"key": "purdueLayer", "type": "str"},
-        "is_authorized": {"key": "isAuthorized", "type": "bool"},
-        "is_programming": {"key": "isProgramming", "type": "bool"},
-        "is_scanner": {"key": "isScanner", "type": "bool"},
     }
 
-    def __init__(  # pylint: disable=too-many-locals
-        self, *, importance: Optional[Union[str, "_models.DeviceImportance"]] = None, **kwargs
-    ):
-        """
-        :keyword importance: Device importance, determines if the device classified as 'crown jewel'.
-         Known values are: "Unknown", "Low", "Normal", and "High".
-        :paramtype importance: str or ~azure.mgmt.securityinsight.models.DeviceImportance
-        """
+    def __init__(self, **kwargs):
+        """ """
         super().__init__(**kwargs)
         self.device_id = None
         self.device_name = None
@@ -11665,17 +11291,6 @@ class IoTDeviceEntityProperties(EntityCommonProperties):  # pylint: disable=too-
         self.ip_address_entity_id = None
         self.threat_intelligence = None
         self.protocols = None
-        self.owners = None
-        self.nic_entity_ids = None
-        self.site = None
-        self.zone = None
-        self.sensor = None
-        self.device_sub_type = None
-        self.importance = importance
-        self.purdue_layer = None
-        self.is_authorized = None
-        self.is_programming = None
-        self.is_scanner = None
 
 
 class IpEntity(Entity):
@@ -11699,7 +11314,7 @@ class IpEntity(Entity):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -11816,7 +11431,7 @@ class MailboxEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -11945,7 +11560,7 @@ class MailClusterEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -12184,7 +11799,7 @@ class MailMessageEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -12585,7 +12200,7 @@ class MalwareEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -12696,28 +12311,22 @@ class MalwareEntityProperties(EntityCommonProperties):
 class ManualTriggerRequestBody(_serialization.Model):
     """ManualTriggerRequestBody.
 
-    All required parameters must be populated in order to send to Azure.
-
     :ivar tenant_id:
     :vartype tenant_id: str
-    :ivar logic_apps_resource_id: Required.
+    :ivar logic_apps_resource_id:
     :vartype logic_apps_resource_id: str
     """
-
-    _validation = {
-        "logic_apps_resource_id": {"required": True},
-    }
 
     _attribute_map = {
         "tenant_id": {"key": "tenantId", "type": "str"},
         "logic_apps_resource_id": {"key": "logicAppsResourceId", "type": "str"},
     }
 
-    def __init__(self, *, logic_apps_resource_id: str, tenant_id: Optional[str] = None, **kwargs):
+    def __init__(self, *, tenant_id: Optional[str] = None, logic_apps_resource_id: Optional[str] = None, **kwargs):
         """
         :keyword tenant_id:
         :paramtype tenant_id: str
-        :keyword logic_apps_resource_id: Required.
+        :keyword logic_apps_resource_id:
         :paramtype logic_apps_resource_id: str
         """
         super().__init__(**kwargs)
@@ -15186,123 +14795,6 @@ class MTPDataConnectorProperties(DataConnectorTenantId):
         self.data_types = data_types
 
 
-class NicEntity(Entity):
-    """Represents an network interface entity.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
-     information.
-    :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
-    :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
-     "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
-     "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
-    :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
-    :ivar additional_data: A bag of custom fields that should be part of the entity and will be
-     presented to the user.
-    :vartype additional_data: dict[str, JSON]
-    :ivar friendly_name: The graph item display name which is a short humanly readable description
-     of the graph item instance. This property is optional and might be system generated.
-    :vartype friendly_name: str
-    :ivar mac_address: The MAC address of this network interface.
-    :vartype mac_address: str
-    :ivar ip_address_entity_id: The IP entity id of this network interface.
-    :vartype ip_address_entity_id: str
-    :ivar vlans: A list of VLANs of the network interface entity.
-    :vartype vlans: list[str]
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "system_data": {"readonly": True},
-        "kind": {"required": True},
-        "additional_data": {"readonly": True},
-        "friendly_name": {"readonly": True},
-        "mac_address": {"readonly": True},
-        "ip_address_entity_id": {"readonly": True},
-        "vlans": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "system_data": {"key": "systemData", "type": "SystemData"},
-        "kind": {"key": "kind", "type": "str"},
-        "additional_data": {"key": "properties.additionalData", "type": "{object}"},
-        "friendly_name": {"key": "properties.friendlyName", "type": "str"},
-        "mac_address": {"key": "properties.macAddress", "type": "str"},
-        "ip_address_entity_id": {"key": "properties.ipAddressEntityId", "type": "str"},
-        "vlans": {"key": "properties.vlans", "type": "[str]"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.kind = "Nic"  # type: str
-        self.additional_data = None
-        self.friendly_name = None
-        self.mac_address = None
-        self.ip_address_entity_id = None
-        self.vlans = None
-
-
-class NicEntityProperties(EntityCommonProperties):
-    """Nic entity property bag.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar additional_data: A bag of custom fields that should be part of the entity and will be
-     presented to the user.
-    :vartype additional_data: dict[str, JSON]
-    :ivar friendly_name: The graph item display name which is a short humanly readable description
-     of the graph item instance. This property is optional and might be system generated.
-    :vartype friendly_name: str
-    :ivar mac_address: The MAC address of this network interface.
-    :vartype mac_address: str
-    :ivar ip_address_entity_id: The IP entity id of this network interface.
-    :vartype ip_address_entity_id: str
-    :ivar vlans: A list of VLANs of the network interface entity.
-    :vartype vlans: list[str]
-    """
-
-    _validation = {
-        "additional_data": {"readonly": True},
-        "friendly_name": {"readonly": True},
-        "mac_address": {"readonly": True},
-        "ip_address_entity_id": {"readonly": True},
-        "vlans": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "additional_data": {"key": "additionalData", "type": "{object}"},
-        "friendly_name": {"key": "friendlyName", "type": "str"},
-        "mac_address": {"key": "macAddress", "type": "str"},
-        "ip_address_entity_id": {"key": "ipAddressEntityId", "type": "str"},
-        "vlans": {"key": "vlans", "type": "[str]"},
-    }
-
-    def __init__(self, **kwargs):
-        """ """
-        super().__init__(**kwargs)
-        self.mac_address = None
-        self.ip_address_entity_id = None
-        self.vlans = None
-
-
 class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
     """Represents NRT alert rule.
 
@@ -15365,8 +14857,6 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-    :ivar event_grouping_settings: The event grouping settings.
-    :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
     """
 
     _validation = {
@@ -15401,7 +14891,6 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         "custom_details": {"key": "properties.customDetails", "type": "{str}"},
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
-        "event_grouping_settings": {"key": "properties.eventGroupingSettings", "type": "EventGroupingSettings"},
     }
 
     def __init__(
@@ -15423,7 +14912,6 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
-        event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
         **kwargs
     ):
         """
@@ -15466,8 +14954,6 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-        :keyword event_grouping_settings: The event grouping settings.
-        :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
         """
         super().__init__(etag=etag, **kwargs)
         self.kind = "NRT"  # type: str
@@ -15487,7 +14973,6 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
-        self.event_grouping_settings = event_grouping_settings
 
 
 class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-instance-attributes
@@ -15548,8 +15033,6 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-    :ivar event_grouping_settings: The event grouping settings.
-    :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
     """
 
     _validation = {
@@ -15586,7 +15069,6 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         "custom_details": {"key": "properties.customDetails", "type": "{str}"},
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
-        "event_grouping_settings": {"key": "properties.eventGroupingSettings", "type": "EventGroupingSettings"},
     }
 
     def __init__(
@@ -15605,7 +15087,6 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
-        event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
         **kwargs
     ):
         """
@@ -15641,8 +15122,6 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-        :keyword event_grouping_settings: The event grouping settings.
-        :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
         """
         super().__init__(**kwargs)
         self.kind = "NRT"  # type: str
@@ -15661,7 +15140,6 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
-        self.event_grouping_settings = event_grouping_settings
 
 
 class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
@@ -15682,8 +15160,6 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-    :ivar event_grouping_settings: The event grouping settings.
-    :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
     """
 
     _attribute_map = {
@@ -15693,7 +15169,6 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         "custom_details": {"key": "customDetails", "type": "{str}"},
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
-        "event_grouping_settings": {"key": "eventGroupingSettings", "type": "EventGroupingSettings"},
     }
 
     def __init__(
@@ -15705,7 +15180,6 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
-        event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
         **kwargs
     ):
         """
@@ -15724,8 +15198,6 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-        :keyword event_grouping_settings: The event grouping settings.
-        :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
         """
         super().__init__(**kwargs)
         self.query = query
@@ -15734,7 +15206,6 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
-        self.event_grouping_settings = event_grouping_settings
 
 
 class NrtAlertRuleTemplateProperties(
@@ -15759,8 +15230,6 @@ class NrtAlertRuleTemplateProperties(
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-    :ivar event_grouping_settings: The event grouping settings.
-    :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
     :ivar alert_rules_created_by_template_count: the number of alert rules that were created by
      this template.
     :vartype alert_rules_created_by_template_count: int
@@ -15796,7 +15265,6 @@ class NrtAlertRuleTemplateProperties(
         "custom_details": {"key": "customDetails", "type": "{str}"},
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
-        "event_grouping_settings": {"key": "eventGroupingSettings", "type": "EventGroupingSettings"},
         "alert_rules_created_by_template_count": {"key": "alertRulesCreatedByTemplateCount", "type": "int"},
         "last_updated_date_utc": {"key": "lastUpdatedDateUTC", "type": "iso-8601"},
         "created_date_utc": {"key": "createdDateUTC", "type": "iso-8601"},
@@ -15817,7 +15285,6 @@ class NrtAlertRuleTemplateProperties(
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
-        event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
         alert_rules_created_by_template_count: Optional[int] = None,
         description: Optional[str] = None,
         display_name: Optional[str] = None,
@@ -15843,8 +15310,6 @@ class NrtAlertRuleTemplateProperties(
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
-        :keyword event_grouping_settings: The event grouping settings.
-        :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
         :keyword alert_rules_created_by_template_count: the number of alert rules that were created by
          this template.
         :paramtype alert_rules_created_by_template_count: int
@@ -15877,7 +15342,6 @@ class NrtAlertRuleTemplateProperties(
             custom_details=custom_details,
             entity_mappings=entity_mappings,
             alert_details_override=alert_details_override,
-            event_grouping_settings=event_grouping_settings,
             **kwargs
         )
         self.query = query
@@ -15886,7 +15350,6 @@ class NrtAlertRuleTemplateProperties(
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
-        self.event_grouping_settings = event_grouping_settings
         self.alert_rules_created_by_template_count = alert_rules_created_by_template_count
         self.last_updated_date_utc = None
         self.created_date_utc = None
@@ -17357,7 +16820,7 @@ class ProcessEntity(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -17526,8 +16989,8 @@ class PropertyArrayChangedConditionProperties(AutomationRuleCondition):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar condition_type: Required. Known values are: "Property", "PropertyArray",
-     "PropertyChanged", "PropertyArrayChanged", and "Boolean".
+    :ivar condition_type: Required. Known values are: "Property", "PropertyChanged", and
+     "PropertyArrayChanged".
     :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
     :ivar condition_properties:
     :vartype condition_properties:
@@ -17562,48 +17025,13 @@ class PropertyArrayChangedConditionProperties(AutomationRuleCondition):
         self.condition_properties = condition_properties
 
 
-class PropertyArrayConditionProperties(AutomationRuleCondition):
-    """Describes an automation rule condition that evaluates an array property's value.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar condition_type: Required. Known values are: "Property", "PropertyArray",
-     "PropertyChanged", "PropertyArrayChanged", and "Boolean".
-    :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
-    :ivar condition_properties:
-    :vartype condition_properties:
-     ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayValuesCondition
-    """
-
-    _validation = {
-        "condition_type": {"required": True},
-    }
-
-    _attribute_map = {
-        "condition_type": {"key": "conditionType", "type": "str"},
-        "condition_properties": {"key": "conditionProperties", "type": "AutomationRulePropertyArrayValuesCondition"},
-    }
-
-    def __init__(
-        self, *, condition_properties: Optional["_models.AutomationRulePropertyArrayValuesCondition"] = None, **kwargs
-    ):
-        """
-        :keyword condition_properties:
-        :paramtype condition_properties:
-         ~azure.mgmt.securityinsight.models.AutomationRulePropertyArrayValuesCondition
-        """
-        super().__init__(**kwargs)
-        self.condition_type = "PropertyArray"  # type: str
-        self.condition_properties = condition_properties
-
-
 class PropertyChangedConditionProperties(AutomationRuleCondition):
     """Describes an automation rule condition that evaluates a property's value change.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar condition_type: Required. Known values are: "Property", "PropertyArray",
-     "PropertyChanged", "PropertyArrayChanged", and "Boolean".
+    :ivar condition_type: Required. Known values are: "Property", "PropertyChanged", and
+     "PropertyArrayChanged".
     :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
     :ivar condition_properties:
     :vartype condition_properties:
@@ -17637,8 +17065,8 @@ class PropertyConditionProperties(AutomationRuleCondition):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar condition_type: Required. Known values are: "Property", "PropertyArray",
-     "PropertyChanged", "PropertyArrayChanged", and "Boolean".
+    :ivar condition_type: Required. Known values are: "Property", "PropertyChanged", and
+     "PropertyArrayChanged".
     :vartype condition_type: str or ~azure.mgmt.securityinsight.models.ConditionType
     :ivar condition_properties:
     :vartype condition_properties:
@@ -17667,6 +17095,286 @@ class PropertyConditionProperties(AutomationRuleCondition):
         self.condition_properties = condition_properties
 
 
+class Recommendation(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+    """Recommendation object.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: id of recommendation. Required.
+    :vartype id: str
+    :ivar instructions: Instructions of the recommendation. Required.
+    :vartype instructions: ~azure.mgmt.securityinsight.models.Instructions
+    :ivar content: Content of the recommendation.
+    :vartype content: ~azure.mgmt.securityinsight.models.Content
+    :ivar resource_id: Id of the resource this recommendation refers to.
+    :vartype resource_id: str
+    :ivar additional_properties: Collection of additional properties for the recommendation.
+    :vartype additional_properties: dict[str, str]
+    :ivar title: Title of the recommendation. Required.
+    :vartype title: str
+    :ivar description: Description of the recommendation. Required.
+    :vartype description: str
+    :ivar recommendation_type_title: Title of the recommendation type. Required.
+    :vartype recommendation_type_title: str
+    :ivar recommendation_type_id: Id of the recommendation type. Required.
+    :vartype recommendation_type_id: str
+    :ivar category: Category of the recommendation. Required. Known values are: "Onboarding",
+     "NewFeature", "SocEfficiency", "CostOptimization", and "Demo".
+    :vartype category: str or ~azure.mgmt.securityinsight.models.Category
+    :ivar context: Context of the recommendation. Required. Known values are: "Analytics",
+     "Incidents", "Overview", and "None".
+    :vartype context: str or ~azure.mgmt.securityinsight.models.Context
+    :ivar workspace_id: Id of the workspace this recommendation refers to. Required.
+    :vartype workspace_id: str
+    :ivar actions: List of actions to take for this recommendation. Required.
+    :vartype actions: list[~azure.mgmt.securityinsight.models.RecommendedAction]
+    :ivar state: State of the recommendation. Required. Known values are: "Active", "Disabled",
+     "CompletedByUser", "CompletedByAction", and "Hidden".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.State
+    :ivar priority: Priority of the recommendation. Required. Known values are: "Low", "Medium",
+     and "High".
+    :vartype priority: str or ~azure.mgmt.securityinsight.models.Priority
+    :ivar last_evaluated_time_utc: The time stamp (UTC) when the recommendation was last evaluated.
+     Required.
+    :vartype last_evaluated_time_utc: ~datetime.datetime
+    :ivar hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+     again.
+    :vartype hide_until_time_utc: ~datetime.datetime
+    :ivar display_until_time_utc: The timestamp (UTC) after which the recommendation should not be
+     displayed anymore.
+    :vartype display_until_time_utc: ~datetime.datetime
+    :ivar visible: Value indicating if the recommendation should be displayed or not.
+    :vartype visible: bool
+    """
+
+    _validation = {
+        "id": {"required": True},
+        "instructions": {"required": True},
+        "title": {"required": True},
+        "description": {"required": True},
+        "recommendation_type_title": {"required": True},
+        "recommendation_type_id": {"required": True},
+        "category": {"required": True},
+        "context": {"required": True},
+        "workspace_id": {"required": True},
+        "actions": {"required": True},
+        "state": {"required": True},
+        "priority": {"required": True},
+        "last_evaluated_time_utc": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "instructions": {"key": "instructions", "type": "Instructions"},
+        "content": {"key": "content", "type": "Content"},
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "additional_properties": {"key": "additionalProperties", "type": "{str}"},
+        "title": {"key": "title", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "recommendation_type_title": {"key": "recommendationTypeTitle", "type": "str"},
+        "recommendation_type_id": {"key": "recommendationTypeId", "type": "str"},
+        "category": {"key": "category", "type": "str"},
+        "context": {"key": "context", "type": "str"},
+        "workspace_id": {"key": "workspaceId", "type": "str"},
+        "actions": {"key": "actions", "type": "[RecommendedAction]"},
+        "state": {"key": "state", "type": "str"},
+        "priority": {"key": "priority", "type": "str"},
+        "last_evaluated_time_utc": {"key": "lastEvaluatedTimeUtc", "type": "iso-8601"},
+        "hide_until_time_utc": {"key": "hideUntilTimeUtc", "type": "iso-8601"},
+        "display_until_time_utc": {"key": "displayUntilTimeUtc", "type": "iso-8601"},
+        "visible": {"key": "visible", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        id: str,  # pylint: disable=redefined-builtin
+        instructions: "_models.Instructions",
+        title: str,
+        description: str,
+        recommendation_type_title: str,
+        recommendation_type_id: str,
+        category: Union[str, "_models.Category"],
+        context: Union[str, "_models.Context"],
+        workspace_id: str,
+        actions: List["_models.RecommendedAction"],
+        state: Union[str, "_models.State"],
+        priority: Union[str, "_models.Priority"],
+        last_evaluated_time_utc: datetime.datetime,
+        content: Optional["_models.Content"] = None,
+        resource_id: Optional[str] = None,
+        additional_properties: Optional[Dict[str, str]] = None,
+        hide_until_time_utc: Optional[datetime.datetime] = None,
+        display_until_time_utc: Optional[datetime.datetime] = None,
+        visible: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword id: id of recommendation. Required.
+        :paramtype id: str
+        :keyword instructions: Instructions of the recommendation. Required.
+        :paramtype instructions: ~azure.mgmt.securityinsight.models.Instructions
+        :keyword content: Content of the recommendation.
+        :paramtype content: ~azure.mgmt.securityinsight.models.Content
+        :keyword resource_id: Id of the resource this recommendation refers to.
+        :paramtype resource_id: str
+        :keyword additional_properties: Collection of additional properties for the recommendation.
+        :paramtype additional_properties: dict[str, str]
+        :keyword title: Title of the recommendation. Required.
+        :paramtype title: str
+        :keyword description: Description of the recommendation. Required.
+        :paramtype description: str
+        :keyword recommendation_type_title: Title of the recommendation type. Required.
+        :paramtype recommendation_type_title: str
+        :keyword recommendation_type_id: Id of the recommendation type. Required.
+        :paramtype recommendation_type_id: str
+        :keyword category: Category of the recommendation. Required. Known values are: "Onboarding",
+         "NewFeature", "SocEfficiency", "CostOptimization", and "Demo".
+        :paramtype category: str or ~azure.mgmt.securityinsight.models.Category
+        :keyword context: Context of the recommendation. Required. Known values are: "Analytics",
+         "Incidents", "Overview", and "None".
+        :paramtype context: str or ~azure.mgmt.securityinsight.models.Context
+        :keyword workspace_id: Id of the workspace this recommendation refers to. Required.
+        :paramtype workspace_id: str
+        :keyword actions: List of actions to take for this recommendation. Required.
+        :paramtype actions: list[~azure.mgmt.securityinsight.models.RecommendedAction]
+        :keyword state: State of the recommendation. Required. Known values are: "Active", "Disabled",
+         "CompletedByUser", "CompletedByAction", and "Hidden".
+        :paramtype state: str or ~azure.mgmt.securityinsight.models.State
+        :keyword priority: Priority of the recommendation. Required. Known values are: "Low", "Medium",
+         and "High".
+        :paramtype priority: str or ~azure.mgmt.securityinsight.models.Priority
+        :keyword last_evaluated_time_utc: The time stamp (UTC) when the recommendation was last
+         evaluated. Required.
+        :paramtype last_evaluated_time_utc: ~datetime.datetime
+        :keyword hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+         again.
+        :paramtype hide_until_time_utc: ~datetime.datetime
+        :keyword display_until_time_utc: The timestamp (UTC) after which the recommendation should not
+         be displayed anymore.
+        :paramtype display_until_time_utc: ~datetime.datetime
+        :keyword visible: Value indicating if the recommendation should be displayed or not.
+        :paramtype visible: bool
+        """
+        super().__init__(**kwargs)
+        self.id = id
+        self.instructions = instructions
+        self.content = content
+        self.resource_id = resource_id
+        self.additional_properties = additional_properties
+        self.title = title
+        self.description = description
+        self.recommendation_type_title = recommendation_type_title
+        self.recommendation_type_id = recommendation_type_id
+        self.category = category
+        self.context = context
+        self.workspace_id = workspace_id
+        self.actions = actions
+        self.state = state
+        self.priority = priority
+        self.last_evaluated_time_utc = last_evaluated_time_utc
+        self.hide_until_time_utc = hide_until_time_utc
+        self.display_until_time_utc = display_until_time_utc
+        self.visible = visible
+
+
+class RecommendationList(_serialization.Model):
+    """A list of recommendations.
+
+    :ivar value: An list of recommendations.
+    :vartype value: list[~azure.mgmt.securityinsight.models.Recommendation]
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[Recommendation]"},
+    }
+
+    def __init__(self, *, value: Optional[List["_models.Recommendation"]] = None, **kwargs):
+        """
+        :keyword value: An list of recommendations.
+        :paramtype value: list[~azure.mgmt.securityinsight.models.Recommendation]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+
+
+class RecommendationPatch(_serialization.Model):
+    """Recommendation Fields to update.
+
+    :ivar state: State of the recommendation. Known values are: "Active", "Disabled",
+     "CompletedByUser", "CompletedByAction", and "Hidden".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.State
+    :ivar hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+     again.
+    :vartype hide_until_time_utc: ~datetime.datetime
+    """
+
+    _attribute_map = {
+        "state": {"key": "state", "type": "str"},
+        "hide_until_time_utc": {"key": "hideUntilTimeUtc", "type": "iso-8601"},
+    }
+
+    def __init__(
+        self,
+        *,
+        state: Optional[Union[str, "_models.State"]] = None,
+        hide_until_time_utc: Optional[datetime.datetime] = None,
+        **kwargs
+    ):
+        """
+        :keyword state: State of the recommendation. Known values are: "Active", "Disabled",
+         "CompletedByUser", "CompletedByAction", and "Hidden".
+        :paramtype state: str or ~azure.mgmt.securityinsight.models.State
+        :keyword hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+         again.
+        :paramtype hide_until_time_utc: ~datetime.datetime
+        """
+        super().__init__(**kwargs)
+        self.state = state
+        self.hide_until_time_utc = hide_until_time_utc
+
+
+class RecommendedAction(_serialization.Model):
+    """What actions should be taken to complete the recommendation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar link_text: Text of the link to complete the action. Required.
+    :vartype link_text: str
+    :ivar link_url: The Link to complete the action. Required.
+    :vartype link_url: str
+    :ivar state: The state of the action. Known values are: "Low", "Medium", and "High".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.Priority
+    """
+
+    _validation = {
+        "link_text": {"required": True},
+        "link_url": {"required": True},
+    }
+
+    _attribute_map = {
+        "link_text": {"key": "linkText", "type": "str"},
+        "link_url": {"key": "linkUrl", "type": "str"},
+        "state": {"key": "state", "type": "str"},
+    }
+
+    def __init__(
+        self, *, link_text: str, link_url: str, state: Optional[Union[str, "_models.Priority"]] = None, **kwargs
+    ):
+        """
+        :keyword link_text: Text of the link to complete the action. Required.
+        :paramtype link_text: str
+        :keyword link_url: The Link to complete the action. Required.
+        :paramtype link_url: str
+        :keyword state: The state of the action. Known values are: "Low", "Medium", and "High".
+        :paramtype state: str or ~azure.mgmt.securityinsight.models.Priority
+        """
+        super().__init__(**kwargs)
+        self.link_text = link_text
+        self.link_url = link_url
+        self.state = state
+
+
 class RegistryKeyEntity(Entity):
     """Represents a registry key entity.
 
@@ -17688,7 +17396,7 @@ class RegistryKeyEntity(Entity):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -17801,7 +17509,7 @@ class RegistryValueEntity(Entity):  # pylint: disable=too-many-instance-attribut
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -18952,7 +18660,7 @@ class SecurityAlert(Entity):  # pylint: disable=too-many-instance-attributes
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -19459,7 +19167,7 @@ class SecurityGroupEntity(Entity):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -19891,7 +19599,7 @@ class SubmissionMailEntity(Entity):  # pylint: disable=too-many-instance-attribu
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -22466,7 +22174,7 @@ class UrlEntity(Entity):
     :ivar kind: The kind of the entity. Required. Known values are: "Account", "Host", "File",
      "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip", "Malware", "Process",
      "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice", "SecurityAlert",
-     "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and "Nic".
+     "Bookmark", "MailCluster", "MailMessage", "Mailbox", and "SubmissionMail".
     :vartype kind: str or ~azure.mgmt.securityinsight.models.EntityKind
     :ivar additional_data: A bag of custom fields that should be part of the entity and will be
      presented to the user.
@@ -22575,36 +22283,6 @@ class UserInfo(_serialization.Model):
         self.email = None
         self.name = None
         self.object_id = object_id
-
-
-class ValidationError(_serialization.Model):
-    """Describes an error encountered in the file during validation.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar record_index: The number of the record that has the error.
-    :vartype record_index: int
-    :ivar error_messages: A list of descriptions of the error.
-    :vartype error_messages: list[str]
-    """
-
-    _validation = {
-        "error_messages": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "record_index": {"key": "recordIndex", "type": "int"},
-        "error_messages": {"key": "errorMessages", "type": "[str]"},
-    }
-
-    def __init__(self, *, record_index: Optional[int] = None, **kwargs):
-        """
-        :keyword record_index: The number of the record that has the error.
-        :paramtype record_index: int
-        """
-        super().__init__(**kwargs)
-        self.record_index = record_index
-        self.error_messages = None
 
 
 class Watchlist(ResourceWithEtag):  # pylint: disable=too-many-instance-attributes

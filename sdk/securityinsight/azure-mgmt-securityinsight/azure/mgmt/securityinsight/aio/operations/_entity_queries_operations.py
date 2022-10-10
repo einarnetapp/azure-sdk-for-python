@@ -63,7 +63,7 @@ class EntityQueriesOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        kind: Optional[Union[str, "_models.Enum13"]] = None,
+        kind: Optional[Union[str, _models.Enum13]] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.EntityQuery"]:
         """Gets all entity queries.

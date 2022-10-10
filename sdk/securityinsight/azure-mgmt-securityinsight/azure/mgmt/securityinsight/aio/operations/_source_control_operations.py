@@ -54,7 +54,7 @@ class SourceControlOperations:
 
     @distributed_trace
     def list_repositories(
-        self, resource_group_name: str, workspace_name: str, repo_type: Union[str, "_models.RepoType"], **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, repo_type: Union[str, _models.RepoType], **kwargs: Any
     ) -> AsyncIterable["_models.Repo"]:
         """Gets a list of repositories metadata.
 

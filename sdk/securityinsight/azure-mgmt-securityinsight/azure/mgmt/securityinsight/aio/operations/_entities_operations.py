@@ -357,7 +357,7 @@ class EntitiesOperations:
         resource_group_name: str,
         workspace_name: str,
         entity_id: str,
-        kind: Union[str, "_models.EntityItemQueryKind"],
+        kind: Union[str, _models.EntityItemQueryKind],
         **kwargs: Any
     ) -> _models.GetQueriesResponse:
         """Get Insights and Activities for an entity.

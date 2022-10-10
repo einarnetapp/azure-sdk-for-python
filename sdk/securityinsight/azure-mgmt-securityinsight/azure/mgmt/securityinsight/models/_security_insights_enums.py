@@ -102,15 +102,6 @@ class AttackTactic(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     INHIBIT_RESPONSE_FUNCTION = "InhibitResponseFunction"
 
 
-class AutomationRuleBooleanConditionSupportedOperator(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """AutomationRuleBooleanConditionSupportedOperator."""
-
-    #: Evaluates as true if all the item conditions are evaluated as true
-    AND = "And"
-    #: Evaluates as true if at least one of the item conditions are evaluated as true
-    OR = "Or"
-
-
 class AutomationRulePropertyArrayChangedConditionSupportedArrayType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """AutomationRulePropertyArrayChangedConditionSupportedArrayType."""
 
@@ -129,22 +120,6 @@ class AutomationRulePropertyArrayChangedConditionSupportedChangeType(str, Enum, 
 
     #: Evaluate the condition on items added to the array
     ADDED = "Added"
-
-
-class AutomationRulePropertyArrayConditionSupportedArrayConditionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """AutomationRulePropertyArrayConditionSupportedArrayConditionType."""
-
-    #: Evaluate the condition as true if any item fulfills it
-    ANY_ITEM = "AnyItem"
-
-
-class AutomationRulePropertyArrayConditionSupportedArrayType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """AutomationRulePropertyArrayConditionSupportedArrayType."""
-
-    #: Evaluate the condition on the custom detail keys
-    CUSTOM_DETAILS = "CustomDetails"
-    #: Evaluate the condition on a custom detail's values
-    CUSTOM_DETAIL_VALUES = "CustomDetailValues"
 
 
 class AutomationRulePropertyChangedConditionSupportedChangedType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -207,12 +182,6 @@ class AutomationRulePropertyConditionSupportedProperty(str, Enum, metaclass=Case
     INCIDENT_LABEL = "IncidentLabel"
     #: The provider name of the incident
     INCIDENT_PROVIDER_NAME = "IncidentProviderName"
-    #: The update source of the incident
-    INCIDENT_UPDATED_BY_SOURCE = "IncidentUpdatedBySource"
-    #: The incident custom detail key
-    INCIDENT_CUSTOM_DETAILS_KEY = "IncidentCustomDetailsKey"
-    #: The incident custom detail value
-    INCIDENT_CUSTOM_DETAILS_VALUE = "IncidentCustomDetailsValue"
     #: The account Azure Active Directory tenant id
     ACCOUNT_AAD_TENANT_ID = "AccountAadTenantId"
     #: The account Azure Active Directory user id
@@ -231,8 +200,6 @@ class AutomationRulePropertyConditionSupportedProperty(str, Enum, metaclass=Case
     ACCOUNT_UPN_SUFFIX = "AccountUPNSuffix"
     #: The name of the product of the alert
     ALERT_PRODUCT_NAMES = "AlertProductNames"
-    #: The analytic rule ids of the alert
-    ALERT_ANALYTIC_RULE_IDS = "AlertAnalyticRuleIds"
     #: The Azure resource id
     AZURE_RESOURCE_RESOURCE_ID = "AzureResourceResourceId"
     #: The Azure resource subscription id
@@ -309,19 +276,30 @@ class AutomationRulePropertyConditionSupportedProperty(str, Enum, metaclass=Case
     URL = "Url"
 
 
+class Category(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Categories of recommendations."""
+
+    #: Onboarding recommendation.
+    ONBOARDING = "Onboarding"
+    #: New feature recommendation.
+    NEW_FEATURE = "NewFeature"
+    #: Soc Efficiency recommendation.
+    SOC_EFFICIENCY = "SocEfficiency"
+    #: Cost optimization recommendation.
+    COST_OPTIMIZATION = "CostOptimization"
+    #: Demo recommendation.
+    DEMO = "Demo"
+
+
 class ConditionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """ConditionType."""
 
     #: Evaluate an object property value
     PROPERTY = "Property"
-    #: Evaluate an object array property value
-    PROPERTY_ARRAY = "PropertyArray"
     #: Evaluate an object property changed value
     PROPERTY_CHANGED = "PropertyChanged"
     #: Evaluate an object array property changed value
     PROPERTY_ARRAY_CHANGED = "PropertyArrayChanged"
-    #: Apply a boolean operator (e.g AND, OR) to conditions
-    BOOLEAN = "Boolean"
 
 
 class ConfidenceLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -370,6 +348,19 @@ class ContentType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     ANALYTIC_RULE = "AnalyticRule"
     WORKBOOK = "Workbook"
+
+
+class Context(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Context of recommendation."""
+
+    #: Analytics context.
+    ANALYTICS = "Analytics"
+    #: Incidents context.
+    INCIDENTS = "Incidents"
+    #: Overview context.
+    OVERVIEW = "Overview"
+    #: No context.
+    NONE = "None"
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -432,17 +423,6 @@ class DataTypeState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
-
-
-class DeleteStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Indicates whether the file was deleted from the storage account."""
-
-    #: The file was deleted.
-    DELETED = "Deleted"
-    #: The file was not deleted.
-    NOT_DELETED = "NotDeleted"
-    #: Unspecified
-    UNSPECIFIED = "Unspecified"
 
 
 class DeliveryAction(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -508,19 +488,6 @@ class DeploymentState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CANCELING = "Canceling"
 
 
-class DeviceImportance(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Device importance, determines if the device classified as 'crown jewel'."""
-
-    #: Unknown - Default value
-    UNKNOWN = "Unknown"
-    #: Low
-    LOW = "Low"
-    #: Normal
-    NORMAL = "Normal"
-    #: High
-    HIGH = "High"
-
-
 class ElevationToken(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The elevation token associated with the process."""
 
@@ -584,8 +551,6 @@ class EntityKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MAILBOX = "Mailbox"
     #: Entity represents submission mail in the system.
     SUBMISSION_MAIL = "SubmissionMail"
-    #: Entity represents network interface in the system.
-    NIC = "Nic"
 
 
 class EntityMappingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -708,8 +673,6 @@ class EntityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MAILBOX = "Mailbox"
     #: Entity represents submission mail in the system.
     SUBMISSION_MAIL = "SubmissionMail"
-    #: Entity represents network interface in the system.
-    NIC = "Nic"
 
 
 class Enum13(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -732,17 +695,6 @@ class EventGroupingAggregationKind(str, Enum, metaclass=CaseInsensitiveEnumMeta)
     ALERT_PER_RESULT = "AlertPerResult"
 
 
-class FileFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The format of the file."""
-
-    #: A CSV file.
-    CSV = "CSV"
-    #: A JSON file.
-    JSON = "JSON"
-    #: A file of other format.
-    UNSPECIFIED = "Unspecified"
-
-
 class FileHashAlgorithm(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The hash algorithm type."""
 
@@ -756,37 +708,6 @@ class FileHashAlgorithm(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SHA256 = "SHA256"
     #: SHA256 Authenticode hash type
     SHA256_AC = "SHA256AC"
-
-
-class FileImportContentType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The content type of this file."""
-
-    #: File containing records with the core fields of an indicator, plus the observables to construct
-    #: the STIX pattern.
-    BASIC_INDICATOR = "BasicIndicator"
-    #: File containing STIX indicators.
-    STIX_INDICATOR = "StixIndicator"
-    #: File containing other records.
-    UNSPECIFIED = "Unspecified"
-
-
-class FileImportState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The state of the file import."""
-
-    #: A fatal error has occurred while ingesting the file.
-    FATAL_ERROR = "FatalError"
-    #: The file has been ingested.
-    INGESTED = "Ingested"
-    #: The file has been ingested with errors.
-    INGESTED_WITH_ERRORS = "IngestedWithErrors"
-    #: The file ingestion is in progress.
-    IN_PROGRESS = "InProgress"
-    #: The file is invalid.
-    INVALID = "Invalid"
-    #: Waiting for the file to be uploaded.
-    WAITING_FOR_UPLOAD = "WaitingForUpload"
-    #: Unspecified state.
-    UNSPECIFIED = "Unspecified"
 
 
 class GetInsightsError(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -852,17 +773,6 @@ class IncidentStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ACTIVE = "Active"
     #: A non-active incident
     CLOSED = "Closed"
-
-
-class IngestionMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Describes how to ingest the records in the file."""
-
-    #: No records should be ingested when invalid records are detected.
-    INGEST_ONLY_IF_ALL_ARE_VALID = "IngestOnlyIfAllAreValid"
-    #: Valid records should still be ingested when invalid records are detected.
-    INGEST_ANY_VALID_RECORDS = "IngestAnyValidRecords"
-    #: Unspecified
-    UNSPECIFIED = "Unspecified"
 
 
 class KillChainIntent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1047,6 +957,17 @@ class PollingFrequency(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ONCE_A_DAY = "OnceADay"
 
 
+class Priority(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Priority of recommendation."""
+
+    #: Low priority for recommendation.
+    LOW = "Low"
+    #: Medium priority for recommendation.
+    MEDIUM = "Medium"
+    #: High priority for recommendation.
+    HIGH = "High"
+
+
 class ProviderName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provider name."""
 
@@ -1161,6 +1082,21 @@ class SourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOTE_STORAGE = "Remote storage"
 
 
+class State(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """State of recommendation."""
+
+    #: Recommendation is active.
+    ACTIVE = "Active"
+    #: Recommendation is disabled.
+    DISABLED = "Disabled"
+    #: Recommendation has been completed by user.
+    COMPLETED_BY_USER = "CompletedByUser"
+    #: Recommendation has been completed by action.
+    COMPLETED_BY_ACTION = "CompletedByAction"
+    #: Recommendation is hidden.
+    HIDDEN = "Hidden"
+
+
 class SupportTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of support for content item."""
 
@@ -1209,8 +1145,6 @@ class TriggersOn(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     #: Trigger on Incidents
     INCIDENTS = "Incidents"
-    #: Trigger on Alerts
-    ALERTS = "Alerts"
 
 
 class TriggersWhen(str, Enum, metaclass=CaseInsensitiveEnumMeta):
