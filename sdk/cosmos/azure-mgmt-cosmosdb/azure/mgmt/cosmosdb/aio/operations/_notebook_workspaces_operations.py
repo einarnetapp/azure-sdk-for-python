@@ -150,7 +150,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> _models.NotebookWorkspace:
         """Gets the notebook workspace for a Cosmos DB account.
@@ -219,7 +219,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         notebook_create_update_parameters: Union[_models.NotebookWorkspaceCreateUpdateParameters, IO],
         **kwargs: Any
     ) -> _models.NotebookWorkspace:
@@ -287,7 +287,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         notebook_create_update_parameters: _models.NotebookWorkspaceCreateUpdateParameters,
         *,
         content_type: str = "application/json",
@@ -329,7 +329,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         notebook_create_update_parameters: IO,
         *,
         content_type: str = "application/json",
@@ -370,7 +370,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         notebook_create_update_parameters: Union[_models.NotebookWorkspaceCreateUpdateParameters, IO],
         **kwargs: Any
     ) -> AsyncLROPoller[_models.NotebookWorkspace]:
@@ -455,7 +455,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> None:
         error_map = {
@@ -506,7 +506,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> AsyncLROPoller[None]:
         """Deletes the notebook workspace for a Cosmos DB account.
@@ -578,7 +578,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> _models.NotebookWorkspaceConnectionInfoResult:
         """Retrieves the connection info for the notebook workspace.
@@ -647,7 +647,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> None:
         error_map = {
@@ -698,7 +698,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> AsyncLROPoller[None]:
         """Regenerates the auth token for the notebook workspace.
@@ -769,7 +769,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> None:
         error_map = {
@@ -820,7 +820,7 @@ class NotebookWorkspacesOperations:
         self,
         resource_group_name: str,
         account_name: str,
-        notebook_workspace_name: Union[str, "_models.NotebookWorkspaceName"],
+        notebook_workspace_name: Union[str, _models.NotebookWorkspaceName],
         **kwargs: Any
     ) -> AsyncLROPoller[None]:
         """Starts the notebook workspace.
