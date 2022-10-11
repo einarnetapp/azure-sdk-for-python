@@ -25,7 +25,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
 from .._serialization import Serializer
-from .._vendor import MixinABC, _convert_request
+from .._vendor import MixinABC, _convert_request, _format_url_section
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
@@ -34,15 +34,20 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_request(**kwargs: Any) -> HttpRequest:
+def build_status_request(operation_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/providers/Microsoft.Education/operations")
+    _url = kwargs.pop("template_url", "/providers/Microsoft.Education/operationStatus/{operationId}")
+    path_format_arguments = {
+        "operationId": _SERIALIZER.url("operation_id", operation_id, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -53,14 +58,14 @@ def build_list_request(**kwargs: Any) -> HttpRequest:
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class Operations:
+class OperationOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.education.EducationManagementClient`'s
-        :attr:`operations` attribute.
+        :attr:`operation` attribute.
     """
 
     models = _models
@@ -73,12 +78,14 @@ class Operations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, **kwargs: Any) -> _models.OperationListResult:
-        """Lists all of the available Microsoft.Education API operations.
+    def status(self, operation_id: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
+        """Get operation status.
 
+        :param operation_id: Operation Id. Required.
+        :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: OperationListResult or the result of cls(response)
-        :rtype: ~azure.mgmt.education.models.OperationListResult
+        :return: None or the result of cls(response)
+        :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -92,12 +99,13 @@ class Operations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_list_request(
+        request = build_status_request(
+            operation_id=operation_id,
             api_version=api_version,
-            template_url=self.list.metadata["url"],
+            template_url=self.status.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -115,11 +123,11 @@ class Operations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponseBody, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("OperationListResult", pipeline_response)
+        response_headers = {}
+        response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+        response_headers["Retry-After"] = self._deserialize("str", response.headers.get("Retry-After"))
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, None, response_headers)
 
-        return deserialized
-
-    list.metadata = {"url": "/providers/Microsoft.Education/operations"}  # type: ignore
+    status.metadata = {"url": "/providers/Microsoft.Education/operationStatus/{operationId}"}  # type: ignore

@@ -17,68 +17,53 @@ from azure.core.exceptions import (
     map_error,
 )
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import HttpResponse
+from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
-from azure.core.tracing.decorator import distributed_trace
+from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
-from .. import models as _models
-from .._serialization import Serializer
-from .._vendor import MixinABC, _convert_request
+from ... import models as _models
+from ..._vendor import _convert_request
+from ...operations._grant_operations import build_renewal_request
+from .._vendor import MixinABC
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
-
-_SERIALIZER = Serializer()
-_SERIALIZER.client_side_validation = False
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-def build_list_request(**kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop("template_url", "/providers/Microsoft.Education/operations")
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-class Operations:
+class GrantOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.education.EducationManagementClient`'s
-        :attr:`operations` attribute.
+        :class:`~azure.mgmt.education.aio.EducationManagementClient`'s
+        :attr:`grant` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    @distributed_trace
-    def list(self, **kwargs: Any) -> _models.OperationListResult:
-        """Lists all of the available Microsoft.Education API operations.
+    @distributed_trace_async
+    async def renewal(  # pylint: disable=inconsistent-return-statements
+        self, billing_account_name: str, billing_profile_name: str, **kwargs: Any
+    ) -> None:
+        """Request grant renewal.
 
+        :param billing_account_name: Billing account name. Required.
+        :type billing_account_name: str
+        :param billing_profile_name: Billing profile name. Required.
+        :type billing_profile_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: OperationListResult or the result of cls(response)
-        :rtype: ~azure.mgmt.education.models.OperationListResult
+        :return: None or the result of cls(response)
+        :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -92,34 +77,37 @@ class Operations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_list_request(
+        request = build_renewal_request(
+            billing_account_name=billing_account_name,
+            billing_profile_name=billing_profile_name,
             api_version=api_version,
-            template_url=self.list.metadata["url"],
+            template_url=self.renewal.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200]:
+        if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponseBody, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("OperationListResult", pipeline_response)
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("str", response.headers.get("Retry-After"))
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, None, response_headers)
 
-        return deserialized
-
-    list.metadata = {"url": "/providers/Microsoft.Education/operations"}  # type: ignore
+    renewal.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default/renew"}  # type: ignore

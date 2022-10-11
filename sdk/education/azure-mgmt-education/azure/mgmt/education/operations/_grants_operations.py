@@ -8,9 +8,14 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
 
-from msrest import Serializer
-
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
@@ -20,42 +25,37 @@ from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
+from .._serialization import Serializer
 from .._vendor import MixinABC, _convert_request, _format_url_section
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
-def build_list_all_request(
-    *,
-    include_allocated_budget: Optional[bool] = None,
-    **kwargs: Any
-) -> HttpRequest:
+
+def build_list_all_request(*, include_allocated_budget: Optional[bool] = None, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop("template_url", "/providers/Microsoft.Education/grants")
 
     # Construct parameters
     if include_allocated_budget is not None:
-        _params['includeAllocatedBudget'] = _SERIALIZER.query("include_allocated_budget", include_allocated_budget, 'bool')
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+        _params["includeAllocatedBudget"] = _SERIALIZER.query(
+            "include_allocated_budget", include_allocated_budget, "bool"
+        )
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_list_request(
@@ -68,33 +68,32 @@ def build_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants")  # pylint: disable=line-too-long
+    _url = kwargs.pop(
+        "template_url",
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, 'str'),
-        "billingProfileName": _SERIALIZER.url("billing_profile_name", billing_profile_name, 'str'),
+        "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, "str"),
+        "billingProfileName": _SERIALIZER.url("billing_profile_name", billing_profile_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     if include_allocated_budget is not None:
-        _params['includeAllocatedBudget'] = _SERIALIZER.query("include_allocated_budget", include_allocated_budget, 'bool')
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+        _params["includeAllocatedBudget"] = _SERIALIZER.query(
+            "include_allocated_budget", include_allocated_budget, "bool"
+        )
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_get_request(
@@ -107,33 +106,132 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
-    accept = _headers.pop('Accept', "application/json")
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default")  # pylint: disable=line-too-long
+    _url = kwargs.pop(
+        "template_url",
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, 'str'),
-        "billingProfileName": _SERIALIZER.url("billing_profile_name", billing_profile_name, 'str'),
+        "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, "str"),
+        "billingProfileName": _SERIALIZER.url("billing_profile_name", billing_profile_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
     if include_allocated_budget is not None:
-        _params['includeAllocatedBudget'] = _SERIALIZER.query("include_allocated_budget", include_allocated_budget, 'bool')
-    _params['api-version'] = _SERIALIZER.query("api_version", api_version, 'str')
+        _params["includeAllocatedBudget"] = _SERIALIZER.query(
+            "include_allocated_budget", include_allocated_budget, "bool"
+        )
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
-    _headers['Accept'] = _SERIALIZER.header("accept", accept, 'str')
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(
-        method="GET",
-        url=_url,
-        params=_params,
-        headers=_headers,
-        **kwargs
-    )
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_list_all_v2_request(*, include_allocated_budget: Optional[bool] = None, **kwargs: Any) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/providers/Microsoft.Education/grants")
+
+    # Construct parameters
+    if include_allocated_budget is not None:
+        _params["includeAllocatedBudget"] = _SERIALIZER.query(
+            "include_allocated_budget", include_allocated_budget, "bool"
+        )
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_list_v2_request(
+    billing_account_name: str,
+    billing_profile_name: str,
+    *,
+    include_allocated_budget: Optional[bool] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, "str"),
+        "billingProfileName": _SERIALIZER.url("billing_profile_name", billing_profile_name, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    if include_allocated_budget is not None:
+        _params["includeAllocatedBudget"] = _SERIALIZER.query(
+            "include_allocated_budget", include_allocated_budget, "bool"
+        )
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_get_v2_request(
+    billing_account_name: str,
+    billing_profile_name: str,
+    *,
+    include_allocated_budget: Optional[bool] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "billingAccountName": _SERIALIZER.url("billing_account_name", billing_account_name, "str"),
+        "billingProfileName": _SERIALIZER.url("billing_profile_name", billing_profile_name, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    if include_allocated_budget is not None:
+        _params["includeAllocatedBudget"] = _SERIALIZER.query(
+            "include_allocated_budget", include_allocated_budget, "bool"
+        )
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
 
 class GrantsOperations:
     """
@@ -154,40 +252,41 @@ class GrantsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
     def list_all(
-        self,
-        include_allocated_budget: Optional[bool] = None,
-        **kwargs: Any
-    ) -> Iterable[_models.GrantListResponse]:
+        self, include_allocated_budget: Optional[bool] = None, **kwargs: Any
+    ) -> Iterable["_models.GrantDetails"]:
         """Get a list of grants that Microsoft has provided.
 
         :param include_allocated_budget: May be used to include information about budget that has been
          allocated. Default value is None.
         :type include_allocated_budget: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either GrantListResponse or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.education.models.GrantListResponse]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either GrantDetails or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.education.models.GrantDetails]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.GrantListResponse]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GrantListResponse]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_all_request(
-                    api_version=api_version,
                     include_allocated_budget=include_allocated_budget,
-                    template_url=self.list_all.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list_all.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -195,14 +294,7 @@ class GrantsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_all_request(
-                    api_version=api_version,
-                    include_allocated_budget=include_allocated_budget,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -218,10 +310,8 @@ class GrantsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -232,11 +322,9 @@ class GrantsOperations:
 
             return pipeline_response
 
+        return ItemPaged(get_next, extract_data)
 
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list_all.metadata = {'url': "/providers/Microsoft.Education/grants"}  # type: ignore
+    list_all.metadata = {"url": "/providers/Microsoft.Education/grants"}  # type: ignore
 
     @distributed_trace
     def list(
@@ -245,40 +333,44 @@ class GrantsOperations:
         billing_profile_name: str,
         include_allocated_budget: Optional[bool] = None,
         **kwargs: Any
-    ) -> Iterable[_models.GrantListResponse]:
+    ) -> Iterable["_models.GrantDetails"]:
         """Get details for a specific grant linked to the provided billing account and billing profile.
 
-        :param billing_account_name: Billing account name.
+        :param billing_account_name: Billing account name. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name.
+        :param billing_profile_name: Billing profile name. Required.
         :type billing_profile_name: str
         :param include_allocated_budget: May be used to include information about budget that has been
          allocated. Default value is None.
         :type include_allocated_budget: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either GrantListResponse or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.education.models.GrantListResponse]
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :return: An iterator like instance of either GrantDetails or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.education.models.GrantDetails]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.GrantListResponse]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GrantListResponse]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_list_request(
                     billing_account_name=billing_account_name,
                     billing_profile_name=billing_profile_name,
-                    api_version=api_version,
                     include_allocated_budget=include_allocated_budget,
-                    template_url=self.list.metadata['url'],
+                    api_version=api_version,
+                    template_url=self.list.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -286,16 +378,7 @@ class GrantsOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_list_request(
-                    billing_account_name=billing_account_name,
-                    billing_profile_name=billing_profile_name,
-                    api_version=api_version,
-                    include_allocated_budget=include_allocated_budget,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -311,10 +394,8 @@ class GrantsOperations:
         def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -325,11 +406,9 @@ class GrantsOperations:
 
             return pipeline_response
 
+        return ItemPaged(get_next, extract_data)
 
-        return ItemPaged(
-            get_next, extract_data
-        )
-    list.metadata = {'url': "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants"}  # type: ignore
+    list.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants"}  # type: ignore
 
     @distributed_trace
     def get(
@@ -341,36 +420,38 @@ class GrantsOperations:
     ) -> _models.GrantDetails:
         """Get details for a specific grant linked to the provided billing account and billing profile.
 
-        :param billing_account_name: Billing account name.
+        :param billing_account_name: Billing account name. Required.
         :type billing_account_name: str
-        :param billing_profile_name: Billing profile name.
+        :param billing_profile_name: Billing profile name. Required.
         :type billing_profile_name: str
         :param include_allocated_budget: May be used to include information about budget that has been
          allocated. Default value is None.
         :type include_allocated_budget: bool
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: GrantDetails, or the result of cls(response)
+        :return: GrantDetails or the result of cls(response)
         :rtype: ~azure.mgmt.education.models.GrantDetails
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-12-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.GrantDetails]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-12-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GrantDetails]
 
-        
         request = build_get_request(
             billing_account_name=billing_account_name,
             billing_profile_name=billing_profile_name,
-            api_version=api_version,
             include_allocated_budget=include_allocated_budget,
-            template_url=self.get.metadata['url'],
+            api_version=api_version,
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -378,10 +459,9 @@ class GrantsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
+
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -389,12 +469,237 @@ class GrantsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponseBody, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('GrantDetails', pipeline_response)
+        deserialized = self._deserialize("GrantDetails", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {'url': "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default"}  # type: ignore
+    get.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default"}  # type: ignore
 
+    @distributed_trace
+    def list_all_v2(
+        self, include_allocated_budget: Optional[bool] = None, **kwargs: Any
+    ) -> Iterable["_models.GrantDetailsV2"]:
+        """Get a list of grants that Microsoft has provided.
+
+        :param include_allocated_budget: May be used to include information about budget that has been
+         allocated. Default value is None.
+        :type include_allocated_budget: bool
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either GrantDetailsV2 or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.education.models.GrantDetailsV2]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GrantListResponseV2]
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_all_v2_request(
+                    include_allocated_budget=include_allocated_budget,
+                    api_version=api_version,
+                    template_url=self.list_all_v2.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+
+            else:
+                request = HttpRequest("GET", next_link)
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+                request.method = "GET"
+            return request
+
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize("GrantListResponseV2", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseBody, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    list_all_v2.metadata = {"url": "/providers/Microsoft.Education/grants"}  # type: ignore
+
+    @distributed_trace
+    def list_v2(
+        self,
+        billing_account_name: str,
+        billing_profile_name: str,
+        include_allocated_budget: Optional[bool] = None,
+        **kwargs: Any
+    ) -> Iterable["_models.GrantDetailsV2"]:
+        """Get details for a specific grant linked to the provided billing account and billing profile.
+
+        :param billing_account_name: Billing account name. Required.
+        :type billing_account_name: str
+        :param billing_profile_name: Billing profile name. Required.
+        :type billing_profile_name: str
+        :param include_allocated_budget: May be used to include information about budget that has been
+         allocated. Default value is None.
+        :type include_allocated_budget: bool
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either GrantDetailsV2 or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.education.models.GrantDetailsV2]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GrantListResponseV2]
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_v2_request(
+                    billing_account_name=billing_account_name,
+                    billing_profile_name=billing_profile_name,
+                    include_allocated_budget=include_allocated_budget,
+                    api_version=api_version,
+                    template_url=self.list_v2.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+
+            else:
+                request = HttpRequest("GET", next_link)
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+                request.method = "GET"
+            return request
+
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize("GrantListResponseV2", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseBody, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    list_v2.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants"}  # type: ignore
+
+    @distributed_trace
+    def get_v2(
+        self,
+        billing_account_name: str,
+        billing_profile_name: str,
+        include_allocated_budget: Optional[bool] = None,
+        **kwargs: Any
+    ) -> _models.GrantDetailsV2:
+        """Get details for a specific grant linked to the provided billing account and billing profile.
+
+        :param billing_account_name: Billing account name. Required.
+        :type billing_account_name: str
+        :param billing_profile_name: Billing profile name. Required.
+        :type billing_profile_name: str
+        :param include_allocated_budget: May be used to include information about budget that has been
+         allocated. Default value is None.
+        :type include_allocated_budget: bool
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: GrantDetailsV2 or the result of cls(response)
+        :rtype: ~azure.mgmt.education.models.GrantDetailsV2
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-01-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GrantDetailsV2]
+
+        request = build_get_v2_request(
+            billing_account_name=billing_account_name,
+            billing_profile_name=billing_profile_name,
+            include_allocated_budget=include_allocated_budget,
+            api_version=api_version,
+            template_url=self.get_v2.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseBody, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("GrantDetailsV2", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get_v2.metadata = {"url": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/providers/Microsoft.Education/grants/default"}  # type: ignore
