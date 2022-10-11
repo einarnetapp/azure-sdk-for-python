@@ -17,78 +17,46 @@ from azure.core.exceptions import (
     map_error,
 )
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import HttpResponse
+from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
-from azure.core.tracing.decorator import distributed_trace
+from azure.core.tracing.decorator_async import distributed_trace_async
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
-from .. import models as _models
-from .._serialization import Serializer
-from .._vendor import _convert_request, _format_url_section
+from ... import models as _models
+from ..._vendor import _convert_request
+from ...operations._upgradable_versions_operations import build_details_request
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
-
-_SERIALIZER = Serializer()
-_SERIALIZER.client_side_validation = False
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-def build_list_request(resource_group_name: str, monitor_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01-preview"))  # type: str
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "monitorName": _SERIALIZER.url("monitor_name", monitor_name, "str"),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-class DeploymentInfoOperations:
+class UpgradableVersionsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.elastic.MicrosoftElastic`'s
-        :attr:`deployment_info` attribute.
+        :class:`~azure.mgmt.elastic.aio.MicrosoftElastic`'s
+        :attr:`upgradable_versions` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    @distributed_trace
-    def list(self, resource_group_name: str, monitor_name: str, **kwargs: Any) -> _models.DeploymentInfoResponse:
-        """Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor
-        resource.
+    @distributed_trace_async
+    async def details(
+        self, resource_group_name: str, monitor_name: str, **kwargs: Any
+    ) -> _models.UpgradableVersionsList:
+        """List of upgradable versions for a given monitor resource.
 
-        Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor
-        resource.
+        List of upgradable versions for a given monitor resource.
 
         :param resource_group_name: The name of the resource group to which the Elastic resource
          belongs. Required.
@@ -96,8 +64,8 @@ class DeploymentInfoOperations:
         :param monitor_name: Monitor resource name. Required.
         :type monitor_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DeploymentInfoResponse or the result of cls(response)
-        :rtype: ~azure.mgmt.elastic.models.DeploymentInfoResponse
+        :return: UpgradableVersionsList or the result of cls(response)
+        :rtype: ~azure.mgmt.elastic.models.UpgradableVersionsList
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -112,21 +80,21 @@ class DeploymentInfoOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DeploymentInfoResponse]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.UpgradableVersionsList]
 
-        request = build_list_request(
+        request = build_details_request(
             resource_group_name=resource_group_name,
             monitor_name=monitor_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.list.metadata["url"],
+            template_url=self.details.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -139,11 +107,11 @@ class DeploymentInfoOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("DeploymentInfoResponse", pipeline_response)
+        deserialized = self._deserialize("UpgradableVersionsList", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo"}  # type: ignore
+    details.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listUpgradableVersions"}  # type: ignore

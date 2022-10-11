@@ -34,7 +34,14 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_request(resource_group_name: str, monitor_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_delete_request(
+    resource_group_name: str,
+    monitor_name: str,
+    subscription_id: str,
+    *,
+    ruleset_id: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -44,7 +51,7 @@ def build_list_request(resource_group_name: str, monitor_name: str, subscription
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/detachAndDeleteTrafficFilter",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -56,6 +63,8 @@ def build_list_request(resource_group_name: str, monitor_name: str, subscription
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if ruleset_id is not None:
+        _params["rulesetId"] = _SERIALIZER.query("ruleset_id", ruleset_id, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -63,14 +72,14 @@ def build_list_request(resource_group_name: str, monitor_name: str, subscription
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class DeploymentInfoOperations:
+class DetachAndDeleteTrafficFilterOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.elastic.MicrosoftElastic`'s
-        :attr:`deployment_info` attribute.
+        :attr:`detach_and_delete_traffic_filter` attribute.
     """
 
     models = _models
@@ -83,21 +92,23 @@ class DeploymentInfoOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, resource_group_name: str, monitor_name: str, **kwargs: Any) -> _models.DeploymentInfoResponse:
-        """Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor
-        resource.
+    def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, monitor_name: str, ruleset_id: Optional[str] = None, **kwargs: Any
+    ) -> None:
+        """Detach and Delete traffic filter from the given deployment.
 
-        Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor
-        resource.
+        Detach and Delete traffic filter from the given deployment.
 
         :param resource_group_name: The name of the resource group to which the Elastic resource
          belongs. Required.
         :type resource_group_name: str
         :param monitor_name: Monitor resource name. Required.
         :type monitor_name: str
+        :param ruleset_id: Ruleset Id of the filter. Default value is None.
+        :type ruleset_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DeploymentInfoResponse or the result of cls(response)
-        :rtype: ~azure.mgmt.elastic.models.DeploymentInfoResponse
+        :return: None or the result of cls(response)
+        :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -112,14 +123,15 @@ class DeploymentInfoOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DeploymentInfoResponse]
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_list_request(
+        request = build_delete_request(
             resource_group_name=resource_group_name,
             monitor_name=monitor_name,
             subscription_id=self._config.subscription_id,
+            ruleset_id=ruleset_id,
             api_version=api_version,
-            template_url=self.list.metadata["url"],
+            template_url=self.delete.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -139,11 +151,7 @@ class DeploymentInfoOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("DeploymentInfoResponse", pipeline_response)
-
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, None, {})
 
-        return deserialized
-
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/detachAndDeleteTrafficFilter"}  # type: ignore

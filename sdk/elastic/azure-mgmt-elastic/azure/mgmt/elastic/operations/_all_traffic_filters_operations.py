@@ -44,7 +44,7 @@ def build_list_request(resource_group_name: str, monitor_name: str, subscription
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listAllTrafficFilters",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -63,14 +63,14 @@ def build_list_request(resource_group_name: str, monitor_name: str, subscription
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class DeploymentInfoOperations:
+class AllTrafficFiltersOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.elastic.MicrosoftElastic`'s
-        :attr:`deployment_info` attribute.
+        :attr:`all_traffic_filters` attribute.
     """
 
     models = _models
@@ -83,12 +83,10 @@ class DeploymentInfoOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, resource_group_name: str, monitor_name: str, **kwargs: Any) -> _models.DeploymentInfoResponse:
-        """Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor
-        resource.
+    def list(self, resource_group_name: str, monitor_name: str, **kwargs: Any) -> _models.ElasticTrafficFilterResponse:
+        """Get the list of all traffic filters for the account.
 
-        Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor
-        resource.
+        Get the list of all traffic filters for the account.
 
         :param resource_group_name: The name of the resource group to which the Elastic resource
          belongs. Required.
@@ -96,8 +94,8 @@ class DeploymentInfoOperations:
         :param monitor_name: Monitor resource name. Required.
         :type monitor_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: DeploymentInfoResponse or the result of cls(response)
-        :rtype: ~azure.mgmt.elastic.models.DeploymentInfoResponse
+        :return: ElasticTrafficFilterResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.elastic.models.ElasticTrafficFilterResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -112,7 +110,7 @@ class DeploymentInfoOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DeploymentInfoResponse]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ElasticTrafficFilterResponse]
 
         request = build_list_request(
             resource_group_name=resource_group_name,
@@ -139,11 +137,11 @@ class DeploymentInfoOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("DeploymentInfoResponse", pipeline_response)
+        deserialized = self._deserialize("ElasticTrafficFilterResponse", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listAllTrafficFilters"}  # type: ignore

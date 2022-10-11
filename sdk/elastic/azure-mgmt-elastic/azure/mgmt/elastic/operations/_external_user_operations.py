@@ -17,33 +17,70 @@ from azure.core.exceptions import (
     map_error,
 )
 from azure.core.pipeline import PipelineResponse
-from azure.core.pipeline.transport import AsyncHttpResponse
+from azure.core.pipeline.transport import HttpResponse
 from azure.core.rest import HttpRequest
-from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.tracing.decorator import distributed_trace
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
-from ... import models as _models
-from ..._vendor import _convert_request
-from ...operations._vm_collection_operations import build_update_request
+from .. import models as _models
+from .._serialization import Serializer
+from .._vendor import _convert_request, _format_url_section
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+
+_SERIALIZER = Serializer()
+_SERIALIZER.client_side_validation = False
 
 
-class VMCollectionOperations:
+def build_create_or_update_request(
+    resource_group_name: str, monitor_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-07-01-preview"))  # type: str
+    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/createOrUpdateExternalUser",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "monitorName": _SERIALIZER.url("monitor_name", monitor_name, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+class ExternalUserOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.elastic.aio.MicrosoftElastic`'s
-        :attr:`vm_collection` attribute.
+        :class:`~azure.mgmt.elastic.MicrosoftElastic`'s
+        :attr:`external_user` attribute.
     """
 
     models = _models
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         input_args = list(args)
         self._client = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -51,37 +88,39 @@ class VMCollectionOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @overload
-    async def update(  # pylint: disable=inconsistent-return-statements
+    def create_or_update(
         self,
         resource_group_name: str,
         monitor_name: str,
-        body: Optional[_models.VMCollectionUpdate] = None,
+        body: Optional[_models.ExternalUserInfo] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> None:
-        """Update the vm details that will be monitored by the Elastic monitor resource.
+    ) -> _models.ExternalUserCreationResponse:
+        """Create User inside elastic deployment which are used by customers to perform operations on the
+        elastic deployment.
 
-        Update the vm details that will be monitored by the Elastic monitor resource.
+        Create User inside elastic deployment which are used by customers to perform operations on the
+        elastic deployment.
 
         :param resource_group_name: The name of the resource group to which the Elastic resource
          belongs. Required.
         :type resource_group_name: str
         :param monitor_name: Monitor resource name. Required.
         :type monitor_name: str
-        :param body: VM resource Id. Default value is None.
-        :type body: ~azure.mgmt.elastic.models.VMCollectionUpdate
+        :param body: Elastic External User Creation Parameters. Default value is None.
+        :type body: ~azure.mgmt.elastic.models.ExternalUserInfo
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
+        :return: ExternalUserCreationResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.elastic.models.ExternalUserCreationResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    async def update(  # pylint: disable=inconsistent-return-statements
+    def create_or_update(
         self,
         resource_group_name: str,
         monitor_name: str,
@@ -89,52 +128,57 @@ class VMCollectionOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> None:
-        """Update the vm details that will be monitored by the Elastic monitor resource.
+    ) -> _models.ExternalUserCreationResponse:
+        """Create User inside elastic deployment which are used by customers to perform operations on the
+        elastic deployment.
 
-        Update the vm details that will be monitored by the Elastic monitor resource.
+        Create User inside elastic deployment which are used by customers to perform operations on the
+        elastic deployment.
 
         :param resource_group_name: The name of the resource group to which the Elastic resource
          belongs. Required.
         :type resource_group_name: str
         :param monitor_name: Monitor resource name. Required.
         :type monitor_name: str
-        :param body: VM resource Id. Default value is None.
+        :param body: Elastic External User Creation Parameters. Default value is None.
         :type body: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
+        :return: ExternalUserCreationResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.elastic.models.ExternalUserCreationResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
-    @distributed_trace_async
-    async def update(  # pylint: disable=inconsistent-return-statements
+    @distributed_trace
+    def create_or_update(
         self,
         resource_group_name: str,
         monitor_name: str,
-        body: Optional[Union[_models.VMCollectionUpdate, IO]] = None,
+        body: Optional[Union[_models.ExternalUserInfo, IO]] = None,
         **kwargs: Any
-    ) -> None:
-        """Update the vm details that will be monitored by the Elastic monitor resource.
+    ) -> _models.ExternalUserCreationResponse:
+        """Create User inside elastic deployment which are used by customers to perform operations on the
+        elastic deployment.
 
-        Update the vm details that will be monitored by the Elastic monitor resource.
+        Create User inside elastic deployment which are used by customers to perform operations on the
+        elastic deployment.
 
         :param resource_group_name: The name of the resource group to which the Elastic resource
          belongs. Required.
         :type resource_group_name: str
         :param monitor_name: Monitor resource name. Required.
         :type monitor_name: str
-        :param body: VM resource Id. Is either a model type or a IO type. Default value is None.
-        :type body: ~azure.mgmt.elastic.models.VMCollectionUpdate or IO
+        :param body: Elastic External User Creation Parameters. Is either a model type or a IO type.
+         Default value is None.
+        :type body: ~azure.mgmt.elastic.models.ExternalUserInfo or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
+        :return: ExternalUserCreationResponse or the result of cls(response)
+        :rtype: ~azure.mgmt.elastic.models.ExternalUserCreationResponse
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -150,7 +194,7 @@ class VMCollectionOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ExternalUserCreationResponse]
 
         content_type = content_type or "application/json"
         _json = None
@@ -159,11 +203,11 @@ class VMCollectionOperations:
             _content = body
         else:
             if body is not None:
-                _json = self._serialize.body(body, "VMCollectionUpdate")
+                _json = self._serialize.body(body, "ExternalUserInfo")
             else:
                 _json = None
 
-        request = build_update_request(
+        request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             monitor_name=monitor_name,
             subscription_id=self._config.subscription_id,
@@ -171,14 +215,14 @@ class VMCollectionOperations:
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self.update.metadata["url"],
+            template_url=self.create_or_update.metadata["url"],
             headers=_headers,
             params=_params,
         )
         request = _convert_request(request)
         request.url = self._client.format_url(request.url)  # type: ignore
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -191,7 +235,11 @@ class VMCollectionOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if cls:
-            return cls(pipeline_response, None, {})
+        deserialized = self._deserialize("ExternalUserCreationResponse", pipeline_response)
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/vmCollectionUpdate"}  # type: ignore
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/createOrUpdateExternalUser"}  # type: ignore
