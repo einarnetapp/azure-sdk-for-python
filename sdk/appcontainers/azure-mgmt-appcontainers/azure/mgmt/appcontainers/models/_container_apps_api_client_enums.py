@@ -57,6 +57,13 @@ class AppProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     GRPC = "grpc"
 
 
+class AppState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Current state of the app. Controls if the app is enabled or disabled."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
 class BindingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Custom Domain binding type."""
 

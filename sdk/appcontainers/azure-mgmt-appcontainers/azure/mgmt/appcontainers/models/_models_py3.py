@@ -1565,7 +1565,7 @@ class Configuration(_serialization.Model):
         self,
         *,
         secrets: Optional[List["_models.Secret"]] = None,
-        active_revisions_mode: Optional[Union[str, "_models.ActiveRevisionsMode"]] = None,
+        active_revisions_mode: Union[str, "_models.ActiveRevisionsMode"] = "Single",
         ingress: Optional["_models.Ingress"] = None,
         registries: Optional[List["_models.RegistryCredentials"]] = None,
         dapr: Optional["_models.Dapr"] = None,
@@ -1947,8 +1947,13 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
     :vartype environment_id: str
     :ivar workload_profile_type: Workload profile type to pin for container app execution.
     :vartype workload_profile_type: str
+    :ivar app_state: Current state of the app. Controls if the app is enabled or disabled. Known
+     values are: "Enabled" and "Disabled".
+    :vartype app_state: str or ~azure.mgmt.appcontainers.models.AppState
     :ivar latest_revision_name: Name of the latest revision of the Container App.
     :vartype latest_revision_name: str
+    :ivar latest_ready_revision_name: Name of the latest ready revision of the Container App.
+    :vartype latest_ready_revision_name: str
     :ivar latest_revision_fqdn: Fully Qualified Domain Name of the latest revision of the Container
      App.
     :vartype latest_revision_fqdn: str
@@ -1972,6 +1977,7 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
         "location": {"required": True},
         "provisioning_state": {"readonly": True},
         "latest_revision_name": {"readonly": True},
+        "latest_ready_revision_name": {"readonly": True},
         "latest_revision_fqdn": {"readonly": True},
         "custom_domain_verification_id": {"readonly": True},
         "outbound_ip_addresses": {"readonly": True},
@@ -1991,7 +1997,9 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
         "managed_environment_id": {"key": "properties.managedEnvironmentId", "type": "str"},
         "environment_id": {"key": "properties.environmentId", "type": "str"},
         "workload_profile_type": {"key": "properties.workloadProfileType", "type": "str"},
+        "app_state": {"key": "properties.appState", "type": "str"},
         "latest_revision_name": {"key": "properties.latestRevisionName", "type": "str"},
+        "latest_ready_revision_name": {"key": "properties.latestReadyRevisionName", "type": "str"},
         "latest_revision_fqdn": {"key": "properties.latestRevisionFqdn", "type": "str"},
         "custom_domain_verification_id": {"key": "properties.customDomainVerificationId", "type": "str"},
         "configuration": {"key": "properties.configuration", "type": "Configuration"},
@@ -2010,6 +2018,7 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
         managed_environment_id: Optional[str] = None,
         environment_id: Optional[str] = None,
         workload_profile_type: Optional[str] = None,
+        app_state: Optional[Union[str, "_models.AppState"]] = None,
         configuration: Optional["_models.Configuration"] = None,
         template: Optional["_models.Template"] = None,
         **kwargs
@@ -2030,6 +2039,9 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
         :paramtype environment_id: str
         :keyword workload_profile_type: Workload profile type to pin for container app execution.
         :paramtype workload_profile_type: str
+        :keyword app_state: Current state of the app. Controls if the app is enabled or disabled. Known
+         values are: "Enabled" and "Disabled".
+        :paramtype app_state: str or ~azure.mgmt.appcontainers.models.AppState
         :keyword configuration: Non versioned Container App configuration properties.
         :paramtype configuration: ~azure.mgmt.appcontainers.models.Configuration
         :keyword template: Container App versioned application definition.
@@ -2042,7 +2054,9 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
         self.managed_environment_id = managed_environment_id
         self.environment_id = environment_id
         self.workload_profile_type = workload_profile_type
+        self.app_state = app_state
         self.latest_revision_name = None
+        self.latest_ready_revision_name = None
         self.latest_revision_fqdn = None
         self.custom_domain_verification_id = None
         self.configuration = configuration
@@ -2918,9 +2932,9 @@ class Dapr(_serialization.Model):
     def __init__(
         self,
         *,
-        enabled: Optional[bool] = None,
+        enabled: bool = False,
         app_id: Optional[str] = None,
-        app_protocol: Optional[Union[str, "_models.AppProtocol"]] = None,
+        app_protocol: Union[str, "_models.AppProtocol"] = "http",
         app_port: Optional[int] = None,
         http_read_buffer_size: Optional[int] = None,
         http_max_request_size: Optional[int] = None,
@@ -4575,10 +4589,10 @@ class Ingress(_serialization.Model):
         external: bool = False,
         target_port: Optional[int] = None,
         exposed_port: Optional[int] = None,
-        transport: Optional[Union[str, "_models.IngressTransportMethod"]] = None,
+        transport: Union[str, "_models.IngressTransportMethod"] = "auto",
         traffic: Optional[List["_models.TrafficWeight"]] = None,
         custom_domains: Optional[List["_models.CustomDomain"]] = None,
-        allow_insecure: Optional[bool] = None,
+        allow_insecure: bool = False,
         ip_security_restrictions: Optional[List["_models.IpSecurityRestrictionRule"]] = None,
         **kwargs
     ):

@@ -160,6 +160,7 @@ from ._container_apps_api_client_enums import AccessMode
 from ._container_apps_api_client_enums import Action
 from ._container_apps_api_client_enums import ActiveRevisionsMode
 from ._container_apps_api_client_enums import AppProtocol
+from ._container_apps_api_client_enums import AppState
 from ._container_apps_api_client_enums import Applicability
 from ._container_apps_api_client_enums import BindingType
 from ._container_apps_api_client_enums import Category
@@ -343,6 +344,7 @@ __all__ = [
     "Action",
     "ActiveRevisionsMode",
     "AppProtocol",
+    "AppState",
     "Applicability",
     "BindingType",
     "Category",
