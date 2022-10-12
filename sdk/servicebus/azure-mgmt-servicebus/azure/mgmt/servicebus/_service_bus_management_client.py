@@ -9,7 +9,7 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from typing import TYPE_CHECKING
+from typing import Any, Optional, TYPE_CHECKING
 
 from msrest import Deserializer, Serializer
 
@@ -21,8 +21,6 @@ from ._configuration import ServiceBusManagementClientConfiguration
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from typing import Any, Optional
-
     from azure.core.credentials import TokenCredential
 
 class _SDKClient(object):
@@ -149,6 +147,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import DisasterRecoveryConfigsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'disaster_recovery_configs'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -165,6 +164,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2018_01_01_preview.operations import EventHubsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'event_hubs'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -193,6 +193,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import MigrationConfigsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'migration_configs'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -224,6 +225,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import NamespacesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'namespaces'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -255,6 +257,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -271,6 +274,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2018_01_01_preview.operations import PremiumMessagingRegionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'premium_messaging_regions'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -296,6 +300,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import PrivateEndpointConnectionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_endpoint_connections'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -321,6 +326,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import PrivateLinkResourcesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_link_resources'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -352,6 +358,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import QueuesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'queues'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -368,6 +375,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2018_01_01_preview.operations import RegionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'regions'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -396,6 +404,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import RulesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'rules'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -427,6 +436,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import SubscriptionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'subscriptions'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -458,6 +468,7 @@ class ServiceBusManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_01_01_preview.operations import TopicsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'topics'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     def close(self):
