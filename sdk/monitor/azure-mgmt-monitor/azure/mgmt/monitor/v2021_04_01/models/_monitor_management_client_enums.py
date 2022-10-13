@@ -71,6 +71,7 @@ class KnownDataFlowStreams(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MICROSOFT_PERF = "Microsoft-Perf"
     MICROSOFT_SYSLOG = "Microsoft-Syslog"
     MICROSOFT_WINDOWS_EVENT = "Microsoft-WindowsEvent"
+    MICROSOFT_SECURITY_EVENT = "Microsoft-SecurityEvent"
 
 
 class KnownExtensionDataSourceStreams(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -81,6 +82,7 @@ class KnownExtensionDataSourceStreams(str, Enum, metaclass=CaseInsensitiveEnumMe
     MICROSOFT_PERF = "Microsoft-Perf"
     MICROSOFT_SYSLOG = "Microsoft-Syslog"
     MICROSOFT_WINDOWS_EVENT = "Microsoft-WindowsEvent"
+    MICROSOFT_SECURITY_EVENT = "Microsoft-SecurityEvent"
 
 
 class KnownPerfCounterDataSourceStreams(str, Enum, metaclass=CaseInsensitiveEnumMeta):
