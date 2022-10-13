@@ -32,6 +32,7 @@ from ._models_py3 import ActivityEntityQueryTemplate
 from ._models_py3 import ActivityEntityQueryTemplatePropertiesQueryDefinitions
 from ._models_py3 import ActivityTimelineItem
 from ._models_py3 import AlertDetailsOverride
+from ._models_py3 import AlertPropertyMapping
 from ._models_py3 import AlertRule
 from ._models_py3 import AlertRuleTemplate
 from ._models_py3 import AlertRuleTemplateDataSource
@@ -339,6 +340,7 @@ from ._models_py3 import SecurityGroupEntityProperties
 from ._models_py3 import SecurityMLAnalyticsSetting
 from ._models_py3 import SecurityMLAnalyticsSettingsDataSource
 from ._models_py3 import SecurityMLAnalyticsSettingsList
+from ._models_py3 import SentinelEntityMapping
 from ._models_py3 import SentinelOnboardingState
 from ._models_py3 import SentinelOnboardingStatesList
 from ._models_py3 import SettingList
@@ -347,6 +349,8 @@ from ._models_py3 import SourceControl
 from ._models_py3 import SourceControlList
 from ._models_py3 import SubmissionMailEntity
 from ._models_py3 import SubmissionMailEntityProperties
+from ._models_py3 import Summary
+from ._models_py3 import SummaryList
 from ._models_py3 import SystemData
 from ._models_py3 import TICheckRequirements
 from ._models_py3 import TICheckRequirementsProperties
@@ -398,6 +402,7 @@ from ._models_py3 import Webhook
 
 from ._security_insights_enums import ActionType
 from ._security_insights_enums import AlertDetail
+from ._security_insights_enums import AlertProperty
 from ._security_insights_enums import AlertRuleKind
 from ._security_insights_enums import AlertSeverity
 from ._security_insights_enums import AlertStatus
@@ -465,6 +470,7 @@ from ._security_insights_enums import OwnerType
 from ._security_insights_enums import PermissionProviderScope
 from ._security_insights_enums import PollingFrequency
 from ._security_insights_enums import ProviderName
+from ._security_insights_enums import ProvisioningState
 from ._security_insights_enums import RegistryHive
 from ._security_insights_enums import RegistryValueKind
 from ._security_insights_enums import RepoType
@@ -474,6 +480,7 @@ from ._security_insights_enums import SettingType
 from ._security_insights_enums import SettingsStatus
 from ._security_insights_enums import SourceKind
 from ._security_insights_enums import SourceType
+from ._security_insights_enums import SummaryStatus
 from ._security_insights_enums import SupportTier
 from ._security_insights_enums import TemplateStatus
 from ._security_insights_enums import ThreatIntelligenceResourceKindEnum
@@ -481,6 +488,7 @@ from ._security_insights_enums import ThreatIntelligenceSortingCriteriaEnum
 from ._security_insights_enums import TriggerOperator
 from ._security_insights_enums import TriggersOn
 from ._security_insights_enums import TriggersWhen
+from ._security_insights_enums import Type
 from ._security_insights_enums import UebaDataSources
 from ._security_insights_enums import Version
 from ._patch import __all__ as _patch_all
@@ -514,6 +522,7 @@ __all__ = [
     "ActivityEntityQueryTemplatePropertiesQueryDefinitions",
     "ActivityTimelineItem",
     "AlertDetailsOverride",
+    "AlertPropertyMapping",
     "AlertRule",
     "AlertRuleTemplate",
     "AlertRuleTemplateDataSource",
@@ -821,6 +830,7 @@ __all__ = [
     "SecurityMLAnalyticsSetting",
     "SecurityMLAnalyticsSettingsDataSource",
     "SecurityMLAnalyticsSettingsList",
+    "SentinelEntityMapping",
     "SentinelOnboardingState",
     "SentinelOnboardingStatesList",
     "SettingList",
@@ -829,6 +839,8 @@ __all__ = [
     "SourceControlList",
     "SubmissionMailEntity",
     "SubmissionMailEntityProperties",
+    "Summary",
+    "SummaryList",
     "SystemData",
     "TICheckRequirements",
     "TICheckRequirementsProperties",
@@ -879,6 +891,7 @@ __all__ = [
     "Webhook",
     "ActionType",
     "AlertDetail",
+    "AlertProperty",
     "AlertRuleKind",
     "AlertSeverity",
     "AlertStatus",
@@ -946,6 +959,7 @@ __all__ = [
     "PermissionProviderScope",
     "PollingFrequency",
     "ProviderName",
+    "ProvisioningState",
     "RegistryHive",
     "RegistryValueKind",
     "RepoType",
@@ -955,6 +969,7 @@ __all__ = [
     "SettingsStatus",
     "SourceKind",
     "SourceType",
+    "SummaryStatus",
     "SupportTier",
     "TemplateStatus",
     "ThreatIntelligenceResourceKindEnum",
@@ -962,6 +977,7 @@ __all__ = [
     "TriggerOperator",
     "TriggersOn",
     "TriggersWhen",
+    "Type",
     "UebaDataSources",
     "Version",
 ]

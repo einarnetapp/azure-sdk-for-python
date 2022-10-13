@@ -28,7 +28,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._alert_rules_operations import (
+from ...operations._summaries_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
@@ -39,14 +39,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class AlertRulesOperations:
+class SummariesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.aio.SecurityInsights`'s
-        :attr:`alert_rules` attribute.
+        :attr:`summaries` attribute.
     """
 
     models = _models
@@ -59,8 +59,8 @@ class AlertRulesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> AsyncIterable["_models.AlertRule"]:
-        """Gets all alert rules.
+    def list(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> AsyncIterable["_models.Summary"]:
+        """Gets all summaries.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -68,15 +68,15 @@ class AlertRulesOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either AlertRule or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.AlertRule]
+        :return: An iterator like instance of either Summary or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.Summary]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertRulesList]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SummaryList]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -120,7 +120,7 @@ class AlertRulesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("AlertRulesList", pipeline_response)
+            deserialized = self._deserialize("SummaryList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -142,24 +142,24 @@ class AlertRulesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries"}  # type: ignore
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, workspace_name: str, rule_id: str, **kwargs: Any
-    ) -> _models.AlertRule:
-        """Gets the alert rule.
+        self, resource_group_name: str, workspace_name: str, summary_id: str, **kwargs: Any
+    ) -> _models.Summary:
+        """Gets a summary.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -174,12 +174,12 @@ class AlertRulesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertRule]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Summary]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            rule_id=rule_id,
+            summary_id=summary_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -199,180 +199,28 @@ class AlertRulesOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AlertRule", pipeline_response)
+        deserialized = self._deserialize("Summary", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"}  # type: ignore
-
-    @overload
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        rule_id: str,
-        alert_rule: _models.AlertRule,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.AlertRule:
-        """Creates or updates the alert rule.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
-        :param alert_rule: The alert rule. Required.
-        :type alert_rule: ~azure.mgmt.securityinsight.models.AlertRule
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        rule_id: str,
-        alert_rule: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.AlertRule:
-        """Creates or updates the alert rule.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
-        :param alert_rule: The alert rule. Required.
-        :type alert_rule: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        rule_id: str,
-        alert_rule: Union[_models.AlertRule, IO],
-        **kwargs: Any
-    ) -> _models.AlertRule:
-        """Creates or updates the alert rule.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
-        :param alert_rule: The alert rule. Is either a model type or a IO type. Required.
-        :type alert_rule: ~azure.mgmt.securityinsight.models.AlertRule or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertRule]
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(alert_rule, (IO, bytes)):
-            _content = alert_rule
-        else:
-            _json = self._serialize.body(alert_rule, "AlertRule")
-
-        request = build_create_or_update_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            rule_id=rule_id,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.create_or_update.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if response.status_code == 200:
-            deserialized = self._deserialize("AlertRule", pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize("AlertRule", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}"}  # type: ignore
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, workspace_name: str, rule_id: str, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, summary_id: str, **kwargs: Any
     ) -> None:
-        """Delete the alert rule.
+        """Delete a summary.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -395,7 +243,7 @@ class AlertRulesOperations:
         request = build_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            rule_id=rule_id,
+            summary_id=summary_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -418,4 +266,170 @@ class AlertRulesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}"}  # type: ignore
+
+    @overload
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        summary_id: str,
+        summary: _models.Summary,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.Summary:
+        """Create or update a Summary and its Summary Items (bulk creation). To create a Summary and its
+        Items, we should call this endpoint with rawContent property. The rawContent is mainly used for
+        small summary (content size below 3.8 MB). The status of processing such large file can be
+        polled through the URL returned in Azure-AsyncOperation header.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
+        :param summary: The summary. Required.
+        :type summary: ~azure.mgmt.securityinsight.models.Summary
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        summary_id: str,
+        summary: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.Summary:
+        """Create or update a Summary and its Summary Items (bulk creation). To create a Summary and its
+        Items, we should call this endpoint with rawContent property. The rawContent is mainly used for
+        small summary (content size below 3.8 MB). The status of processing such large file can be
+        polled through the URL returned in Azure-AsyncOperation header.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
+        :param summary: The summary. Required.
+        :type summary: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        summary_id: str,
+        summary: Union[_models.Summary, IO],
+        **kwargs: Any
+    ) -> _models.Summary:
+        """Create or update a Summary and its Summary Items (bulk creation). To create a Summary and its
+        Items, we should call this endpoint with rawContent property. The rawContent is mainly used for
+        small summary (content size below 3.8 MB). The status of processing such large file can be
+        polled through the URL returned in Azure-AsyncOperation header.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
+        :param summary: The summary. Is either a model type or a IO type. Required.
+        :type summary: ~azure.mgmt.securityinsight.models.Summary or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Summary]
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(summary, (IO, bytes)):
+            _content = summary
+        else:
+            _json = self._serialize.body(summary, "Summary")
+
+        request = build_create_or_update_request(
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            summary_id=summary_id,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.create_or_update.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 200:
+            deserialized = self._deserialize("Summary", pipeline_response)
+
+        if response.status_code == 201:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+
+            deserialized = self._deserialize("Summary", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)
+
+        return deserialized
+
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}"}  # type: ignore

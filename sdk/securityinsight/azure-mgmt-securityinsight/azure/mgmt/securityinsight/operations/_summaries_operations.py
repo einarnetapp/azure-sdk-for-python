@@ -37,12 +37,7 @@ _SERIALIZER.client_side_validation = False
 
 
 def build_list_request(
-    resource_group_name: str,
-    workspace_name: str,
-    subscription_id: str,
-    *,
-    skip_token: Optional[str] = None,
-    **kwargs: Any
+    resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -53,7 +48,7 @@ def build_list_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -67,8 +62,6 @@ def build_list_request(
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if skip_token is not None:
-        _params["$skipToken"] = _SERIALIZER.query("skip_token", skip_token, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -77,7 +70,7 @@ def build_list_request(
 
 
 def build_get_request(
-    resource_group_name: str, workspace_name: str, watchlist_alias: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, workspace_name: str, summary_id: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -88,7 +81,7 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -96,7 +89,7 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=90, min_length=1),
-        "watchlistAlias": _SERIALIZER.url("watchlist_alias", watchlist_alias, "str"),
+        "summaryId": _SERIALIZER.url("summary_id", summary_id, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -111,7 +104,7 @@ def build_get_request(
 
 
 def build_delete_request(
-    resource_group_name: str, workspace_name: str, watchlist_alias: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, workspace_name: str, summary_id: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -122,7 +115,7 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -130,7 +123,7 @@ def build_delete_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=90, min_length=1),
-        "watchlistAlias": _SERIALIZER.url("watchlist_alias", watchlist_alias, "str"),
+        "summaryId": _SERIALIZER.url("summary_id", summary_id, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -145,7 +138,7 @@ def build_delete_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, workspace_name: str, watchlist_alias: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, workspace_name: str, summary_id: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -157,7 +150,7 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -165,7 +158,7 @@ def build_create_or_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=90, min_length=1),
-        "watchlistAlias": _SERIALIZER.url("watchlist_alias", watchlist_alias, "str"),
+        "summaryId": _SERIALIZER.url("summary_id", summary_id, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -181,14 +174,14 @@ def build_create_or_update_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class WatchlistsOperations:
+class SummariesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.SecurityInsights`'s
-        :attr:`watchlists` attribute.
+        :attr:`summaries` attribute.
     """
 
     models = _models
@@ -201,31 +194,24 @@ class WatchlistsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(
-        self, resource_group_name: str, workspace_name: str, skip_token: Optional[str] = None, **kwargs: Any
-    ) -> Iterable["_models.Watchlist"]:
-        """Gets all watchlists, without watchlist items.
+    def list(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> Iterable["_models.Summary"]:
+        """Gets all summaries.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
-         a previous response contains a nextLink element, the value of the nextLink element will include
-         a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
-         Default value is None.
-        :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Watchlist or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.Watchlist]
+        :return: An iterator like instance of either Summary or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.securityinsight.models.Summary]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WatchlistList]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SummaryList]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -242,7 +228,6 @@ class WatchlistsOperations:
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
-                    skip_token=skip_token,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -270,7 +255,7 @@ class WatchlistsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("WatchlistList", pipeline_response)
+            deserialized = self._deserialize("SummaryList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -292,24 +277,22 @@ class WatchlistsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries"}  # type: ignore
 
     @distributed_trace
-    def get(
-        self, resource_group_name: str, workspace_name: str, watchlist_alias: str, **kwargs: Any
-    ) -> _models.Watchlist:
-        """Gets a watchlist, without its watchlist items.
+    def get(self, resource_group_name: str, workspace_name: str, summary_id: str, **kwargs: Any) -> _models.Summary:
+        """Gets a summary.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
-        :type watchlist_alias: str
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Watchlist or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.Watchlist
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -324,12 +307,12 @@ class WatchlistsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Watchlist]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Summary]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            watchlist_alias=watchlist_alias,
+            summary_id=summary_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -349,28 +332,28 @@ class WatchlistsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Watchlist", pipeline_response)
+        deserialized = self._deserialize("Summary", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}"}  # type: ignore
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, workspace_name: str, watchlist_alias: str, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, summary_id: str, **kwargs: Any
     ) -> None:
-        """Delete a watchlist.
+        """Delete a summary.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
-        :type watchlist_alias: str
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -393,7 +376,7 @@ class WatchlistsOperations:
         request = build_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            watchlist_alias=watchlist_alias,
+            summary_id=summary_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -413,50 +396,42 @@ class WatchlistsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        response_headers = {}
-        if response.status_code == 200:
-            response_headers["Azure-AsyncOperation"] = self._deserialize(
-                "str", response.headers.get("Azure-AsyncOperation")
-            )
-
         if cls:
-            return cls(pipeline_response, None, response_headers)
+            return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}"}  # type: ignore
 
     @overload
     def create_or_update(
         self,
         resource_group_name: str,
         workspace_name: str,
-        watchlist_alias: str,
-        watchlist: _models.Watchlist,
+        summary_id: str,
+        summary: _models.Summary,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Watchlist:
-        """Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv
-        content type). To create a Watchlist and its Items, we should call this endpoint with either
-        rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for
-        small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large
-        watchlist, where the content size can go up to 500 MB. The status of processing such large file
-        can be polled through the URL returned in Azure-AsyncOperation header.
+    ) -> _models.Summary:
+        """Create or update a Summary and its Summary Items (bulk creation). To create a Summary and its
+        Items, we should call this endpoint with rawContent property. The rawContent is mainly used for
+        small summary (content size below 3.8 MB). The status of processing such large file can be
+        polled through the URL returned in Azure-AsyncOperation header.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
-        :type watchlist_alias: str
-        :param watchlist: The watchlist. Required.
-        :type watchlist: ~azure.mgmt.securityinsight.models.Watchlist
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
+        :param summary: The summary. Required.
+        :type summary: ~azure.mgmt.securityinsight.models.Summary
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Watchlist or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.Watchlist
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -465,34 +440,32 @@ class WatchlistsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        watchlist_alias: str,
-        watchlist: IO,
+        summary_id: str,
+        summary: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Watchlist:
-        """Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv
-        content type). To create a Watchlist and its Items, we should call this endpoint with either
-        rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for
-        small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large
-        watchlist, where the content size can go up to 500 MB. The status of processing such large file
-        can be polled through the URL returned in Azure-AsyncOperation header.
+    ) -> _models.Summary:
+        """Create or update a Summary and its Summary Items (bulk creation). To create a Summary and its
+        Items, we should call this endpoint with rawContent property. The rawContent is mainly used for
+        small summary (content size below 3.8 MB). The status of processing such large file can be
+        polled through the URL returned in Azure-AsyncOperation header.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
-        :type watchlist_alias: str
-        :param watchlist: The watchlist. Required.
-        :type watchlist: IO
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
+        :param summary: The summary. Required.
+        :type summary: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Watchlist or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.Watchlist
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -501,32 +474,30 @@ class WatchlistsOperations:
         self,
         resource_group_name: str,
         workspace_name: str,
-        watchlist_alias: str,
-        watchlist: Union[_models.Watchlist, IO],
+        summary_id: str,
+        summary: Union[_models.Summary, IO],
         **kwargs: Any
-    ) -> _models.Watchlist:
-        """Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv
-        content type). To create a Watchlist and its Items, we should call this endpoint with either
-        rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for
-        small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large
-        watchlist, where the content size can go up to 500 MB. The status of processing such large file
-        can be polled through the URL returned in Azure-AsyncOperation header.
+    ) -> _models.Summary:
+        """Create or update a Summary and its Summary Items (bulk creation). To create a Summary and its
+        Items, we should call this endpoint with rawContent property. The rawContent is mainly used for
+        small summary (content size below 3.8 MB). The status of processing such large file can be
+        polled through the URL returned in Azure-AsyncOperation header.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param watchlist_alias: Watchlist Alias. Required.
-        :type watchlist_alias: str
-        :param watchlist: The watchlist. Is either a model type or a IO type. Required.
-        :type watchlist: ~azure.mgmt.securityinsight.models.Watchlist or IO
+        :param summary_id: Summary ID. Required.
+        :type summary_id: str
+        :param summary: The summary. Is either a model type or a IO type. Required.
+        :type summary: ~azure.mgmt.securityinsight.models.Summary or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Watchlist or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.Watchlist
+        :return: Summary or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.Summary
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -542,20 +513,20 @@ class WatchlistsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Watchlist]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Summary]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(watchlist, (IO, bytes)):
-            _content = watchlist
+        if isinstance(summary, (IO, bytes)):
+            _content = summary
         else:
-            _json = self._serialize.body(watchlist, "Watchlist")
+            _json = self._serialize.body(summary, "Summary")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            watchlist_alias=watchlist_alias,
+            summary_id=summary_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -580,18 +551,18 @@ class WatchlistsOperations:
 
         response_headers = {}
         if response.status_code == 200:
-            deserialized = self._deserialize("Watchlist", pipeline_response)
+            deserialized = self._deserialize("Summary", pipeline_response)
 
         if response.status_code == 201:
             response_headers["Azure-AsyncOperation"] = self._deserialize(
                 "str", response.headers.get("Azure-AsyncOperation")
             )
 
-            deserialized = self._deserialize("Watchlist", pipeline_response)
+            deserialized = self._deserialize("Summary", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dynamicSummaries/{summaryId}"}  # type: ignore

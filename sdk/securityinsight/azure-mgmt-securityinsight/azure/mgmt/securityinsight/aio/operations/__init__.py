@@ -40,6 +40,7 @@ from ._watchlist_items_operations import WatchlistItemsOperations
 from ._data_connectors_operations import DataConnectorsOperations
 from ._data_connectors_check_requirements_operations import DataConnectorsCheckRequirementsOperations
 from ._operations import Operations
+from ._summaries_operations import SummariesOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
@@ -80,6 +81,7 @@ __all__ = [
     "DataConnectorsOperations",
     "DataConnectorsCheckRequirementsOperations",
     "Operations",
+    "SummariesOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
