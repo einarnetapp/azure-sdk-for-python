@@ -32,6 +32,7 @@ from ._models_py3 import ActivityEntityQueryTemplate
 from ._models_py3 import ActivityEntityQueryTemplatePropertiesQueryDefinitions
 from ._models_py3 import ActivityTimelineItem
 from ._models_py3 import AlertDetailsOverride
+from ._models_py3 import AlertPropertyMapping
 from ._models_py3 import AlertRule
 from ._models_py3 import AlertRuleTemplate
 from ._models_py3 import AlertRuleTemplateDataSource
@@ -95,6 +96,7 @@ from ._models_py3 import CodelessUiDataConnector
 from ._models_py3 import ConnectedEntity
 from ._models_py3 import ConnectivityCriteria
 from ._models_py3 import ConnectorInstructionModelBase
+from ._models_py3 import Content
 from ._models_py3 import ContentPathMap
 from ._models_py3 import CustomEntityQuery
 from ._models_py3 import Customs
@@ -209,6 +211,7 @@ from ._models_py3 import InsightsTableResult
 from ._models_py3 import InsightsTableResultColumnsItem
 from ._models_py3 import InstructionSteps
 from ._models_py3 import InstructionStepsInstructionsItem
+from ._models_py3 import Instructions
 from ._models_py3 import IoTCheckRequirements
 from ._models_py3 import IoTDataConnector
 from ._models_py3 import IoTDataConnectorProperties
@@ -311,6 +314,10 @@ from ._models_py3 import PropertyArrayConditionProperties
 from ._models_py3 import PropertyChangedConditionProperties
 from ._models_py3 import PropertyConditionProperties
 from ._models_py3 import QueryBasedAlertRuleTemplateProperties
+from ._models_py3 import Recommendation
+from ._models_py3 import RecommendationList
+from ._models_py3 import RecommendationPatch
+from ._models_py3 import RecommendedAction
 from ._models_py3 import RegistryKeyEntity
 from ._models_py3 import RegistryKeyEntityProperties
 from ._models_py3 import RegistryValueEntity
@@ -339,6 +346,7 @@ from ._models_py3 import SecurityGroupEntityProperties
 from ._models_py3 import SecurityMLAnalyticsSetting
 from ._models_py3 import SecurityMLAnalyticsSettingsDataSource
 from ._models_py3 import SecurityMLAnalyticsSettingsList
+from ._models_py3 import SentinelEntityMapping
 from ._models_py3 import SentinelOnboardingState
 from ._models_py3 import SentinelOnboardingStatesList
 from ._models_py3 import SettingList
@@ -398,6 +406,7 @@ from ._models_py3 import Webhook
 
 from ._security_insights_enums import ActionType
 from ._security_insights_enums import AlertDetail
+from ._security_insights_enums import AlertProperty
 from ._security_insights_enums import AlertRuleKind
 from ._security_insights_enums import AlertSeverity
 from ._security_insights_enums import AlertStatus
@@ -412,12 +421,14 @@ from ._security_insights_enums import AutomationRulePropertyChangedConditionSupp
 from ._security_insights_enums import AutomationRulePropertyChangedConditionSupportedPropertyType
 from ._security_insights_enums import AutomationRulePropertyConditionSupportedOperator
 from ._security_insights_enums import AutomationRulePropertyConditionSupportedProperty
+from ._security_insights_enums import Category
 from ._security_insights_enums import ConditionType
 from ._security_insights_enums import ConfidenceLevel
 from ._security_insights_enums import ConfidenceScoreStatus
 from ._security_insights_enums import ConnectAuthKind
 from ._security_insights_enums import ConnectivityType
 from ._security_insights_enums import ContentType
+from ._security_insights_enums import Context
 from ._security_insights_enums import CreatedByType
 from ._security_insights_enums import CustomEntityQueryKind
 from ._security_insights_enums import DataConnectorAuthorizationState
@@ -464,6 +475,7 @@ from ._security_insights_enums import OutputType
 from ._security_insights_enums import OwnerType
 from ._security_insights_enums import PermissionProviderScope
 from ._security_insights_enums import PollingFrequency
+from ._security_insights_enums import Priority
 from ._security_insights_enums import ProviderName
 from ._security_insights_enums import RegistryHive
 from ._security_insights_enums import RegistryValueKind
@@ -474,6 +486,7 @@ from ._security_insights_enums import SettingType
 from ._security_insights_enums import SettingsStatus
 from ._security_insights_enums import SourceKind
 from ._security_insights_enums import SourceType
+from ._security_insights_enums import State
 from ._security_insights_enums import SupportTier
 from ._security_insights_enums import TemplateStatus
 from ._security_insights_enums import ThreatIntelligenceResourceKindEnum
@@ -514,6 +527,7 @@ __all__ = [
     "ActivityEntityQueryTemplatePropertiesQueryDefinitions",
     "ActivityTimelineItem",
     "AlertDetailsOverride",
+    "AlertPropertyMapping",
     "AlertRule",
     "AlertRuleTemplate",
     "AlertRuleTemplateDataSource",
@@ -577,6 +591,7 @@ __all__ = [
     "ConnectedEntity",
     "ConnectivityCriteria",
     "ConnectorInstructionModelBase",
+    "Content",
     "ContentPathMap",
     "CustomEntityQuery",
     "Customs",
@@ -691,6 +706,7 @@ __all__ = [
     "InsightsTableResultColumnsItem",
     "InstructionSteps",
     "InstructionStepsInstructionsItem",
+    "Instructions",
     "IoTCheckRequirements",
     "IoTDataConnector",
     "IoTDataConnectorProperties",
@@ -793,6 +809,10 @@ __all__ = [
     "PropertyChangedConditionProperties",
     "PropertyConditionProperties",
     "QueryBasedAlertRuleTemplateProperties",
+    "Recommendation",
+    "RecommendationList",
+    "RecommendationPatch",
+    "RecommendedAction",
     "RegistryKeyEntity",
     "RegistryKeyEntityProperties",
     "RegistryValueEntity",
@@ -821,6 +841,7 @@ __all__ = [
     "SecurityMLAnalyticsSetting",
     "SecurityMLAnalyticsSettingsDataSource",
     "SecurityMLAnalyticsSettingsList",
+    "SentinelEntityMapping",
     "SentinelOnboardingState",
     "SentinelOnboardingStatesList",
     "SettingList",
@@ -879,6 +900,7 @@ __all__ = [
     "Webhook",
     "ActionType",
     "AlertDetail",
+    "AlertProperty",
     "AlertRuleKind",
     "AlertSeverity",
     "AlertStatus",
@@ -893,12 +915,14 @@ __all__ = [
     "AutomationRulePropertyChangedConditionSupportedPropertyType",
     "AutomationRulePropertyConditionSupportedOperator",
     "AutomationRulePropertyConditionSupportedProperty",
+    "Category",
     "ConditionType",
     "ConfidenceLevel",
     "ConfidenceScoreStatus",
     "ConnectAuthKind",
     "ConnectivityType",
     "ContentType",
+    "Context",
     "CreatedByType",
     "CustomEntityQueryKind",
     "DataConnectorAuthorizationState",
@@ -945,6 +969,7 @@ __all__ = [
     "OwnerType",
     "PermissionProviderScope",
     "PollingFrequency",
+    "Priority",
     "ProviderName",
     "RegistryHive",
     "RegistryValueKind",
@@ -955,6 +980,7 @@ __all__ = [
     "SettingsStatus",
     "SourceKind",
     "SourceType",
+    "State",
     "SupportTier",
     "TemplateStatus",
     "ThreatIntelligenceResourceKindEnum",
