@@ -57,6 +57,13 @@ class AppProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     GRPC = "grpc"
 
 
+class AppState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Current state of the app. Controls if the app is enabled or disabled."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
 class BindingType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Custom Domain binding type."""
 
@@ -163,6 +170,17 @@ class ForwardProxyConvention(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     NO_PROXY = "NoProxy"
     STANDARD = "Standard"
     CUSTOM = "Custom"
+
+
+class IngressClientCertificateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Client certificate mode for mTLS authentication. Ignore indicates server drops client
+    certificate on forwarding. Accept indicates server forwards client certificate but does not
+    require a client certificate. Require indicates server requires a client certificate.
+    """
+
+    IGNORE = "ignore"
+    ACCEPT = "accept"
+    REQUIRE = "require"
 
 
 class IngressTransportMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
