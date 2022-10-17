@@ -9,20 +9,17 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from typing import TYPE_CHECKING
-
-from msrest import Deserializer, Serializer
+from typing import Any, Optional, TYPE_CHECKING
 
 from azure.mgmt.core import ARMPipelineClient
 from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
 
 from ._configuration import StorageManagementClientConfiguration
+from ._serialization import Deserializer, Serializer
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from typing import Any, Optional
-
     from azure.core.credentials import TokenCredential
 
 class _SDKClient(object):
@@ -43,9 +40,9 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
     The api-version parameter sets the default API version if the operation
     group is not described in the profile.
 
-    :param credential: Credential needed for the client to connect to Azure.
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The ID of the target subscription.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param api_version: API version to use if no profile is provided, or if missing in profile.
     :type api_version: str
@@ -68,10 +65,10 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
 
     def __init__(
         self,
-        credential,  # type: "TokenCredential"
-        subscription_id,  # type: str
+        credential: "TokenCredential",
+        subscription_id: str,
         api_version=None, # type: Optional[str]
-        base_url="https://management.azure.com",  # type: str
+        base_url: str = "https://management.azure.com",
         profile=KnownProfiles.default, # type: KnownProfiles
         **kwargs  # type: Any
     ):
@@ -219,6 +216,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import BlobContainersOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'blob_containers'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -256,6 +254,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import BlobInventoryPoliciesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'blob_inventory_policies'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -302,6 +301,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import BlobServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'blob_services'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -336,6 +336,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import DeletedAccountsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'deleted_accounts'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -373,6 +374,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import EncryptionScopesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'encryption_scopes'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -413,6 +415,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import FileServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'file_services'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -453,6 +456,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import FileSharesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'file_shares'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -472,6 +476,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import LocalUsersOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'local_users'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -518,6 +523,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import ManagementPoliciesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'management_policies'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -555,6 +561,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import ObjectReplicationPoliciesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'object_replication_policies'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -613,6 +620,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -650,6 +658,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import PrivateEndpointConnectionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_endpoint_connections'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -687,6 +696,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import PrivateLinkResourcesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_link_resources'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -724,6 +734,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import QueueOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'queue'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -761,6 +772,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import QueueServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'queue_services'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -819,6 +831,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import SkusOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'skus'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -886,6 +899,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import StorageAccountsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'storage_accounts'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -923,6 +937,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import TableOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'table'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -960,6 +975,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import TableServicesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'table_services'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -988,6 +1004,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2018_02_01.operations import UsageOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'usage'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -1037,6 +1054,7 @@ class StorageManagementClient(MultiApiClientMixin, _SDKClient):
             from .v2022_05_01.operations import UsagesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'usages'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     def close(self):
