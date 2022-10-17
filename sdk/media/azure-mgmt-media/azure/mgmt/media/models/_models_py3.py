@@ -2225,7 +2225,8 @@ class ContentKeyPolicyFairPlayConfiguration(ContentKeyPolicyConfiguration):
 
     :ivar odata_type: The discriminator for derived types. Required.
     :vartype odata_type: str
-    :ivar ask: The key that must be used as FairPlay Application Secret key. Required.
+    :ivar ask: The key that must be used as FairPlay Application Secret key. This needs to be
+     base64 encoded. Required.
     :vartype ask: bytes
     :ivar fair_play_pfx_password: The password encrypting FairPlay certificate in PKCS 12 (pfx)
      format. Required.
@@ -2278,7 +2279,8 @@ class ContentKeyPolicyFairPlayConfiguration(ContentKeyPolicyConfiguration):
         **kwargs
     ):
         """
-        :keyword ask: The key that must be used as FairPlay Application Secret key. Required.
+        :keyword ask: The key that must be used as FairPlay Application Secret key. This needs to be
+         base64 encoded. Required.
         :paramtype ask: bytes
         :keyword fair_play_pfx_password: The password encrypting FairPlay certificate in PKCS 12 (pfx)
          format. Required.
