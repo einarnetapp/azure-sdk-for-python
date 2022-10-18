@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -52,7 +52,7 @@ class NetworkConnectionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.aio.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.aio.DevCenter`'s
         :attr:`network_connections` attribute.
     """
 
@@ -109,10 +109,17 @@ class NetworkConnectionsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -149,7 +156,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncIterable["_models.NetworkConnection"]:
         """Lists network connections in a resource group.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param top: The maximum number of resources to return from the operation. Example: '$top=10'.
          Default value is None.
@@ -190,10 +198,17 @@ class NetworkConnectionsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -230,7 +245,8 @@ class NetworkConnectionsOperations:
     ) -> _models.NetworkConnection:
         """Gets a network connection resource.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -365,7 +381,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncLROPoller[_models.NetworkConnection]:
         """Creates or updates a Network Connections resource.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -401,7 +418,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncLROPoller[_models.NetworkConnection]:
         """Creates or updates a Network Connections resource.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -435,7 +453,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncLROPoller[_models.NetworkConnection]:
         """Creates or updates a Network Connections resource.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -585,7 +604,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncLROPoller[_models.NetworkConnection]:
         """Partially updates a Network Connection.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -621,7 +641,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncLROPoller[_models.NetworkConnection]:
         """Partially updates a Network Connection.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -655,7 +676,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncLROPoller[_models.NetworkConnection]:
         """Partially updates a Network Connection.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -777,7 +799,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncLROPoller[None]:
         """Deletes a Network Connections resource.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -844,7 +867,8 @@ class NetworkConnectionsOperations:
     ) -> AsyncIterable["_models.HealthCheckStatusDetails"]:
         """Lists health check status details.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -891,10 +915,17 @@ class NetworkConnectionsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -931,7 +962,8 @@ class NetworkConnectionsOperations:
     ) -> _models.HealthCheckStatusDetails:
         """Gets health check status details.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.
@@ -993,7 +1025,8 @@ class NetworkConnectionsOperations:
         """Triggers a new health check run. The execution and health check result can be tracked via the
         network Connection health check details.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param network_connection_name: Name of the Network Connection that can be applied to a Pool.
          Required.

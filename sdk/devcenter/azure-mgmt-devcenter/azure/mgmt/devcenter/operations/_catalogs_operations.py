@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, IO, Iterable, Optional, TypeVar, Union, cast, overload
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -44,7 +44,7 @@ def build_list_by_dev_center_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-12-preview"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -53,8 +53,10 @@ def build_list_by_dev_center_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "devCenterName": _SERIALIZER.url("dev_center_name", dev_center_name, "str"),
     }
 
@@ -77,7 +79,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-12-preview"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -86,8 +88,10 @@ def build_get_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "devCenterName": _SERIALIZER.url("dev_center_name", dev_center_name, "str"),
         "catalogName": _SERIALIZER.url("catalog_name", catalog_name, "str"),
     }
@@ -109,7 +113,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-12-preview"))  # type: str
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -119,8 +123,10 @@ def build_create_or_update_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "devCenterName": _SERIALIZER.url("dev_center_name", dev_center_name, "str"),
         "catalogName": _SERIALIZER.url("catalog_name", catalog_name, "str"),
     }
@@ -144,7 +150,7 @@ def build_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-12-preview"))  # type: str
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -154,8 +160,10 @@ def build_update_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "devCenterName": _SERIALIZER.url("dev_center_name", dev_center_name, "str"),
         "catalogName": _SERIALIZER.url("catalog_name", catalog_name, "str"),
     }
@@ -179,7 +187,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-12-preview"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -188,8 +196,10 @@ def build_delete_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "devCenterName": _SERIALIZER.url("dev_center_name", dev_center_name, "str"),
         "catalogName": _SERIALIZER.url("catalog_name", catalog_name, "str"),
     }
@@ -211,7 +221,7 @@ def build_sync_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-10-12-preview"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -220,8 +230,10 @@ def build_sync_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/sync",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "devCenterName": _SERIALIZER.url("dev_center_name", dev_center_name, "str"),
         "catalogName": _SERIALIZER.url("catalog_name", catalog_name, "str"),
     }
@@ -243,7 +255,7 @@ class CatalogsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.DevCenter`'s
         :attr:`catalogs` attribute.
     """
 
@@ -262,7 +274,8 @@ class CatalogsOperations:
     ) -> Iterable["_models.Catalog"]:
         """Lists catalogs for a devcenter.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -306,10 +319,17 @@ class CatalogsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -344,7 +364,8 @@ class CatalogsOperations:
     def get(self, resource_group_name: str, dev_center_name: str, catalog_name: str, **kwargs: Any) -> _models.Catalog:
         """Gets a catalog.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -480,7 +501,8 @@ class CatalogsOperations:
     ) -> LROPoller[_models.Catalog]:
         """Creates or updates a catalog.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -517,7 +539,8 @@ class CatalogsOperations:
     ) -> LROPoller[_models.Catalog]:
         """Creates or updates a catalog.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -552,7 +575,8 @@ class CatalogsOperations:
     ) -> LROPoller[_models.Catalog]:
         """Creates or updates a catalog.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -705,7 +729,8 @@ class CatalogsOperations:
     ) -> LROPoller[_models.Catalog]:
         """Partially updates a catalog.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -742,7 +767,8 @@ class CatalogsOperations:
     ) -> LROPoller[_models.Catalog]:
         """Partially updates a catalog.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -777,7 +803,8 @@ class CatalogsOperations:
     ) -> LROPoller[_models.Catalog]:
         """Partially updates a catalog.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -900,7 +927,8 @@ class CatalogsOperations:
     ) -> LROPoller[None]:
         """Deletes a catalog resource.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -1013,7 +1041,8 @@ class CatalogsOperations:
     ) -> LROPoller[None]:
         """Syncs templates for a template source.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -1058,7 +1087,7 @@ class CatalogsOperations:
 
         if polling is True:
             polling_method = cast(
-                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
             )  # type: PollingMethod
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())

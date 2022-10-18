@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -50,7 +50,7 @@ class DevBoxDefinitionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.aio.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.aio.DevCenter`'s
         :attr:`dev_box_definitions` attribute.
     """
 
@@ -69,7 +69,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncIterable["_models.DevBoxDefinition"]:
         """List Dev Box definitions for a devcenter.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -113,10 +114,17 @@ class DevBoxDefinitionsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -153,7 +161,8 @@ class DevBoxDefinitionsOperations:
     ) -> _models.DevBoxDefinition:
         """Gets a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -293,7 +302,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncLROPoller[_models.DevBoxDefinition]:
         """Creates or updates a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -331,7 +341,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncLROPoller[_models.DevBoxDefinition]:
         """Creates or updates a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -367,7 +378,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncLROPoller[_models.DevBoxDefinition]:
         """Creates or updates a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -522,7 +534,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncLROPoller[_models.DevBoxDefinition]:
         """Partially updates a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -560,7 +573,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncLROPoller[_models.DevBoxDefinition]:
         """Partially updates a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -596,7 +610,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncLROPoller[_models.DevBoxDefinition]:
         """Partially updates a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -721,7 +736,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncLROPoller[None]:
         """Deletes a Dev Box definition.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -790,7 +806,8 @@ class DevBoxDefinitionsOperations:
     ) -> AsyncIterable["_models.DevBoxDefinition"]:
         """List Dev Box definitions configured for a project.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -834,10 +851,17 @@ class DevBoxDefinitionsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -874,7 +898,8 @@ class DevBoxDefinitionsOperations:
     ) -> _models.DevBoxDefinition:
         """Gets a Dev Box definition configured for a project.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
