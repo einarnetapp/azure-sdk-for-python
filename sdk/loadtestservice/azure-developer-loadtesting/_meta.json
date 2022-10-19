@@ -1,0 +1,11 @@
+{
+  "commit": "9b4365f3dac7e48df969752be43cad87ae35a26b",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
+  "autorest": "3.9.2",
+  "use": [
+    "@autorest/python@6.1.11",
+    "@autorest/modelerfour@4.24.3"
+  ],
+  "autorest_command": "autorest README.md --use=@autorest/python@6.1.11 --use=@autorest/modelerfour@4.24.3 --version=3.9.2",
+  "readme": "specification/loadtestservice/data-plane/readme.md"
+}

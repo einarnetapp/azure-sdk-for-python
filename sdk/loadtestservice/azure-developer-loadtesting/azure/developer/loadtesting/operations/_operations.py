@@ -8,15 +8,18 @@
 # --------------------------------------------------------------------------
 import datetime
 import sys
-from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
+from typing import Any, Callable, Dict, IO, Iterable, Optional, TypeVar, Union, cast, overload
+import urllib.parse
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
     HttpResponseError,
     ResourceExistsError,
     ResourceNotFoundError,
+    ResourceNotModifiedError,
     map_error,
 )
+from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpResponse
 from azure.core.rest import HttpRequest
@@ -38,16 +41,16 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_app_component_create_or_update_app_components_request(name: str, **kwargs: Any) -> HttpRequest:
+def build_app_component_create_or_update_request(name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/appcomponents/{name}"
+    _url = "/app-components/{name}"
     path_format_arguments = {
         "name": _SERIALIZER.url("name", name, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"),
     }
@@ -65,15 +68,15 @@ def build_app_component_create_or_update_app_components_request(name: str, **kwa
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_app_component_delete_app_components_request(name: str, **kwargs: Any) -> HttpRequest:
+def build_app_component_delete_request(name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/appcomponents/{name}"
+    _url = "/app-components/{name}"
     path_format_arguments = {
         "name": _SERIALIZER.url("name", name, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"),
     }
@@ -89,15 +92,15 @@ def build_app_component_delete_app_components_request(name: str, **kwargs: Any) 
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_app_component_get_app_component_by_name_request(name: str, **kwargs: Any) -> HttpRequest:
+def build_app_component_get_request(name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/appcomponents/{name}"
+    _url = "/app-components/{name}"
     path_format_arguments = {
         "name": _SERIALIZER.url("name", name, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"),
     }
@@ -113,28 +116,26 @@ def build_app_component_get_app_component_by_name_request(name: str, **kwargs: A
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_app_component_get_app_component_request(
+def build_app_component_get_by_test_or_test_run_request(
     *, test_run_id: Optional[str] = None, test_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/appcomponents"
+    _url = "/app-components"
 
     # Construct parameters
+    if test_id is not None:
+        _params["testId"] = _SERIALIZER.query("test_id", test_id, "str")
     if test_run_id is not None:
         _params["testRunId"] = _SERIALIZER.query(
             "test_run_id", test_run_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
         )
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if test_id is not None:
-        _params["testId"] = _SERIALIZER.query(
-            "test_id", test_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
-        )
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -142,12 +143,12 @@ def build_app_component_get_app_component_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_server_metrics_create_or_update_server_metrics_config_request(name: str, **kwargs: Any) -> HttpRequest:
+def build_server_metrics_create_or_update_request(name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -169,11 +170,11 @@ def build_server_metrics_create_or_update_server_metrics_config_request(name: st
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_server_metrics_get_server_metrics_config_by_name_request(name: str, **kwargs: Any) -> HttpRequest:
+def build_server_metrics_get_request(name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -193,11 +194,11 @@ def build_server_metrics_get_server_metrics_config_by_name_request(name: str, **
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_server_metrics_delete_server_metrics_config_request(name: str, **kwargs: Any) -> HttpRequest:
+def build_server_metrics_delete_request(name: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -217,28 +218,26 @@ def build_server_metrics_delete_server_metrics_config_request(name: str, **kwarg
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_server_metrics_get_server_metrics_config_request(
+def build_server_metrics_get_by_test_or_test_run_request(
     *, test_run_id: Optional[str] = None, test_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = "/serverMetricsConfig"
 
     # Construct parameters
+    if test_id is not None:
+        _params["testId"] = _SERIALIZER.query("test_id", test_id, "str")
     if test_run_id is not None:
         _params["testRunId"] = _SERIALIZER.query(
             "test_run_id", test_run_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
         )
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if test_id is not None:
-        _params["testId"] = _SERIALIZER.query(
-            "test_id", test_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
-        )
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -246,11 +245,11 @@ def build_server_metrics_get_server_metrics_config_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_server_metrics_get_server_default_metrics_config_request(**kwargs: Any) -> HttpRequest:
+def build_server_metrics_get_default_metrics_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -265,11 +264,11 @@ def build_server_metrics_get_server_default_metrics_config_request(**kwargs: Any
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_server_metrics_list_supported_resource_types_request(**kwargs: Any) -> HttpRequest:
+def build_server_metrics_list_supported_resource_type_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -284,12 +283,12 @@ def build_server_metrics_list_supported_resource_types_request(**kwargs: Any) ->
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_create_or_update_test_request(test_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_create_or_update_request(test_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -311,11 +310,11 @@ def build_test_create_or_update_test_request(test_id: str, **kwargs: Any) -> Htt
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_delete_load_test_request(test_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_delete_request(test_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -335,11 +334,11 @@ def build_test_delete_load_test_request(test_id: str, **kwargs: Any) -> HttpRequ
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_get_load_test_request(test_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_get_request(test_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -359,20 +358,19 @@ def build_test_get_load_test_request(test_id: str, **kwargs: Any) -> HttpRequest
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_list_load_test_search_request(
+def build_test_list_request(
     *,
     order_by: Optional[str] = None,
     search: Optional[str] = None,
     last_updated_start_time: Optional[datetime.datetime] = None,
     last_updated_end_time: Optional[datetime.datetime] = None,
     continuation_token_parameter: Optional[str] = None,
-    max_page_size: int = 50,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -393,8 +391,6 @@ def build_test_list_load_test_search_request(
         _params["continuationToken"] = _SERIALIZER.query(
             "continuation_token_parameter", continuation_token_parameter, "str"
         )
-    if max_page_size is not None:
-        _params["maxPageSize"] = _SERIALIZER.query("max_page_size", max_page_size, "int")
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
@@ -403,11 +399,11 @@ def build_test_list_load_test_search_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_get_test_file_request(test_id: str, file_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_get_file_request(test_id: str, file_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -428,11 +424,11 @@ def build_test_get_test_file_request(test_id: str, file_id: str, **kwargs: Any) 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_delete_test_file_request(test_id: str, file_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_delete_file_request(test_id: str, file_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -453,13 +449,13 @@ def build_test_delete_test_file_request(test_id: str, file_id: str, **kwargs: An
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_list_test_files_request(
+def build_test_get_all_files_request(
     test_id: str, *, continuation_token_parameter: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -471,11 +467,11 @@ def build_test_list_test_files_request(
     _url = _format_url_section(_url, **path_format_arguments)
 
     # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if continuation_token_parameter is not None:
         _params["continuationToken"] = _SERIALIZER.query(
             "continuation_token_parameter", continuation_token_parameter, "str"
         )
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -483,11 +479,11 @@ def build_test_list_test_files_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_run_delete_test_run_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_run_delete_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -509,13 +505,14 @@ def build_test_run_delete_test_run_request(test_run_id: str, **kwargs: Any) -> H
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_run_create_or_update_test_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_run_create_or_update_request(
+    test_run_id: str, *, old_test_run_id: Optional[str] = None, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    old_test_run_id = kwargs.pop("old_test_run_id", _params.pop("oldTestRunId", None))  # type: Optional[str]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -541,11 +538,11 @@ def build_test_run_create_or_update_test_request(test_run_id: str, **kwargs: Any
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_run_get_test_run_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_run_get_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -567,11 +564,11 @@ def build_test_run_get_test_run_request(test_run_id: str, **kwargs: Any) -> Http
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_run_get_test_run_file_request(test_run_id: str, file_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_run_get_file_request(test_run_id: str, file_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -594,7 +591,7 @@ def build_test_run_get_test_run_file_request(test_run_id: str, file_id: str, **k
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_run_list_test_runs_request(
+def build_test_run_list_request(
     *,
     order_by: Optional[str] = None,
     continuation_token_parameter: Optional[str] = None,
@@ -602,14 +599,13 @@ def build_test_run_list_test_runs_request(
     execution_from: Optional[datetime.datetime] = None,
     execution_to: Optional[datetime.datetime] = None,
     status: Optional[str] = None,
-    max_page_size: int = 50,
     test_id: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -624,19 +620,15 @@ def build_test_run_list_test_runs_request(
         )
     if search is not None:
         _params["search"] = _SERIALIZER.query("search", search, "str")
+    if test_id is not None:
+        _params["testId"] = _SERIALIZER.query("test_id", test_id, "str")
     if execution_from is not None:
         _params["executionFrom"] = _SERIALIZER.query("execution_from", execution_from, "iso-8601")
     if execution_to is not None:
         _params["executionTo"] = _SERIALIZER.query("execution_to", execution_to, "iso-8601")
     if status is not None:
         _params["status"] = _SERIALIZER.query("status", status, "str")
-    if max_page_size is not None:
-        _params["maxPageSize"] = _SERIALIZER.query("max_page_size", max_page_size, "int")
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if test_id is not None:
-        _params["testId"] = _SERIALIZER.query(
-            "test_id", test_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
-        )
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -644,11 +636,11 @@ def build_test_run_list_test_runs_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_run_stop_test_run_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_run_stop_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -670,44 +662,15 @@ def build_test_run_stop_test_run_request(test_run_id: str, **kwargs: Any) -> Htt
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_test_run_get_test_run_client_metrics_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
+def build_test_run_metric_namespaces_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/testruns/{testRunId}/clientMetrics"
-    path_format_arguments = {
-        "testRunId": _SERIALIZER.url(
-            "test_run_id", test_run_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
-        ),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_test_run_get_test_run_client_metrics_filters_request(test_run_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/testruns/{testRunId}/clientMetricsFilters"
+    _url = "/testRuns/{testRunId}/metricNamespaces"
     path_format_arguments = {
         "testRunId": _SERIALIZER.url(
             "test_run_id", test_run_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
@@ -723,6 +686,80 @@ def build_test_run_get_test_run_client_metrics_filters_request(test_run_id: str,
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_test_run_metric_definitions_request(test_run_id: str, *, metricnamespace: str, **kwargs: Any) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/testRuns/{testRunId}/metricDefinitions"
+    path_format_arguments = {
+        "testRunId": _SERIALIZER.url(
+            "test_run_id", test_run_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
+        ),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params["metricnamespace"] = _SERIALIZER.query("metricnamespace", metricnamespace, "str")
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_test_run_metrics_request(
+    test_run_id: str,
+    *,
+    metricname: str,
+    metricnamespace: str,
+    result_type: str,
+    timespan: str,
+    aggregation: Optional[str] = None,
+    interval: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-11-01"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/testRuns/{testRunId}/metrics"
+    path_format_arguments = {
+        "testRunId": _SERIALIZER.url(
+            "test_run_id", test_run_id, "str", max_length=50, min_length=2, pattern=r"^[a-z0-9_-]*$"
+        ),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    if aggregation is not None:
+        _params["aggregation"] = _SERIALIZER.query("aggregation", aggregation, "str")
+    if interval is not None:
+        _params["interval"] = _SERIALIZER.query("interval", interval, "str")
+    _params["metricname"] = _SERIALIZER.query("metricname", metricname, "str")
+    _params["metricnamespace"] = _SERIALIZER.query("metricnamespace", metricnamespace, "str")
+    _params["resultType"] = _SERIALIZER.query("result_type", result_type, "str")
+    _params["timespan"] = _SERIALIZER.query("timespan", timespan, "str")
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 class AppComponentOperations:
@@ -743,15 +780,15 @@ class AppComponentOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @overload
-    def create_or_update_app_components(
+    def create_or_update(
         self, name: str, body: JSON, *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> JSON:
-        """Associate an App Component (Azure resource) to a test or test run.
+        """Associate an app component (Azure resource) to a test or test run.
 
-        Associate an App Component (Azure resource) to a test or test run.
+        Associate an app component (Azure resource) to a test or test run.
 
-        :param name: Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name of the app component, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type name: str
         :param body: App Component model. Required.
         :type body: JSON
@@ -769,16 +806,18 @@ class AppComponentOperations:
                 body = {
                     "value": {
                         "str": {
-                            "resourceId": "str",  # Fully qualified resource Id e.g
+                            "resourceId": "str",  # fully qualified resource Id e.g
                               subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                               Required.
-                            "resourceName": "str",  # Azure resource name. Required.
-                            "resourceType": "str",  # Azure resource type. Required.
+                            "resourceName": "str",  # Azure resource name, required while
+                              creating the app component. Required.
                             "displayName": "str",  # Optional. Azure resource display
                               name.
                             "kind": "str",  # Optional. Kind of Azure resource type.
                             "resourceGroup": "str",  # Optional. Resource group name of
                               the Azure resource.
+                            "resourceType": "str",  # Optional. Azure resource type,
+                              required while creating the app component.
                             "subscriptionId": "str"  # Optional. Subscription Id of the
                               Azure resource.
                         }
@@ -786,25 +825,27 @@ class AppComponentOperations:
                     "name": "str",  # Optional. AppComponent name.
                     "resourceId": "str",  # Optional. Azure Load Testing resource Id.
                     "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
+                      unique name.
                     "testRunId": "str"  # Optional. [Required if testId is not given] Load test
-                      run unique identifier.
+                      run unique name.
                 }
 
                 # response body for status code(s): 200, 201
                 response == {
                     "value": {
                         "str": {
-                            "resourceId": "str",  # Fully qualified resource Id e.g
+                            "resourceId": "str",  # fully qualified resource Id e.g
                               subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                               Required.
-                            "resourceName": "str",  # Azure resource name. Required.
-                            "resourceType": "str",  # Azure resource type. Required.
+                            "resourceName": "str",  # Azure resource name, required while
+                              creating the app component. Required.
                             "displayName": "str",  # Optional. Azure resource display
                               name.
                             "kind": "str",  # Optional. Kind of Azure resource type.
                             "resourceGroup": "str",  # Optional. Resource group name of
                               the Azure resource.
+                            "resourceType": "str",  # Optional. Azure resource type,
+                              required while creating the app component.
                             "subscriptionId": "str"  # Optional. Subscription Id of the
                               Azure resource.
                         }
@@ -812,22 +853,22 @@ class AppComponentOperations:
                     "name": "str",  # Optional. AppComponent name.
                     "resourceId": "str",  # Optional. Azure Load Testing resource Id.
                     "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
+                      unique name.
                     "testRunId": "str"  # Optional. [Required if testId is not given] Load test
-                      run unique identifier.
+                      run unique name.
                 }
         """
 
     @overload
-    def create_or_update_app_components(
+    def create_or_update(
         self, name: str, body: IO, *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> JSON:
-        """Associate an App Component (Azure resource) to a test or test run.
+        """Associate an app component (Azure resource) to a test or test run.
 
-        Associate an App Component (Azure resource) to a test or test run.
+        Associate an app component (Azure resource) to a test or test run.
 
-        :param name: Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name of the app component, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type name: str
         :param body: App Component model. Required.
         :type body: IO
@@ -845,16 +886,18 @@ class AppComponentOperations:
                 response == {
                     "value": {
                         "str": {
-                            "resourceId": "str",  # Fully qualified resource Id e.g
+                            "resourceId": "str",  # fully qualified resource Id e.g
                               subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                               Required.
-                            "resourceName": "str",  # Azure resource name. Required.
-                            "resourceType": "str",  # Azure resource type. Required.
+                            "resourceName": "str",  # Azure resource name, required while
+                              creating the app component. Required.
                             "displayName": "str",  # Optional. Azure resource display
                               name.
                             "kind": "str",  # Optional. Kind of Azure resource type.
                             "resourceGroup": "str",  # Optional. Resource group name of
                               the Azure resource.
+                            "resourceType": "str",  # Optional. Azure resource type,
+                              required while creating the app component.
                             "subscriptionId": "str"  # Optional. Subscription Id of the
                               Azure resource.
                         }
@@ -862,20 +905,20 @@ class AppComponentOperations:
                     "name": "str",  # Optional. AppComponent name.
                     "resourceId": "str",  # Optional. Azure Load Testing resource Id.
                     "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
+                      unique name.
                     "testRunId": "str"  # Optional. [Required if testId is not given] Load test
-                      run unique identifier.
+                      run unique name.
                 }
         """
 
     @distributed_trace
-    def create_or_update_app_components(self, name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
-        """Associate an App Component (Azure resource) to a test or test run.
+    def create_or_update(self, name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
+        """Associate an app component (Azure resource) to a test or test run.
 
-        Associate an App Component (Azure resource) to a test or test run.
+        Associate an app component (Azure resource) to a test or test run.
 
-        :param name: Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name of the app component, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type name: str
         :param body: App Component model. Is either a model type or a IO type. Required.
         :type body: JSON or IO
@@ -893,16 +936,18 @@ class AppComponentOperations:
                 response == {
                     "value": {
                         "str": {
-                            "resourceId": "str",  # Fully qualified resource Id e.g
+                            "resourceId": "str",  # fully qualified resource Id e.g
                               subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                               Required.
-                            "resourceName": "str",  # Azure resource name. Required.
-                            "resourceType": "str",  # Azure resource type. Required.
+                            "resourceName": "str",  # Azure resource name, required while
+                              creating the app component. Required.
                             "displayName": "str",  # Optional. Azure resource display
                               name.
                             "kind": "str",  # Optional. Kind of Azure resource type.
                             "resourceGroup": "str",  # Optional. Resource group name of
                               the Azure resource.
+                            "resourceType": "str",  # Optional. Azure resource type,
+                              required while creating the app component.
                             "subscriptionId": "str"  # Optional. Subscription Id of the
                               Azure resource.
                         }
@@ -910,12 +955,17 @@ class AppComponentOperations:
                     "name": "str",  # Optional. AppComponent name.
                     "resourceId": "str",  # Optional. Azure Load Testing resource Id.
                     "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
+                      unique name.
                     "testRunId": "str"  # Optional. [Required if testId is not given] Load test
-                      run unique identifier.
+                      run unique name.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -932,7 +982,7 @@ class AppComponentOperations:
         else:
             _json = body
 
-        request = build_app_component_create_or_update_app_components_request(
+        request = build_app_component_create_or_update_request(
             name=name,
             content_type=content_type,
             api_version=self._config.api_version,
@@ -974,19 +1024,24 @@ class AppComponentOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def delete_app_components(self, name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
-        """Delete an App Component.
+    def delete(self, name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
+        """Delete an app component.
 
-        Delete an App Component.
+        Delete an app component.
 
-        :param name: Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name of the app component, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type name: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -994,7 +1049,7 @@ class AppComponentOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_app_component_delete_app_components_request(
+        request = build_app_component_delete_request(
             name=name,
             api_version=self._config.api_version,
             headers=_headers,
@@ -1019,13 +1074,13 @@ class AppComponentOperations:
             return cls(pipeline_response, None, {})
 
     @distributed_trace
-    def get_app_component_by_name(self, name: str, **kwargs: Any) -> JSON:
-        """Get App Component details by App Component name.
+    def get(self, name: str, **kwargs: Any) -> JSON:
+        """Get app Component details by unique name.
 
-        Get App Component details by App Component name.
+        Get app Component details by unique name.
 
-        :param name: Unique name of the App Component, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name of the app component, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type name: str
         :return: JSON object
         :rtype: JSON
@@ -1038,16 +1093,18 @@ class AppComponentOperations:
                 response == {
                     "value": {
                         "str": {
-                            "resourceId": "str",  # Fully qualified resource Id e.g
+                            "resourceId": "str",  # fully qualified resource Id e.g
                               subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                               Required.
-                            "resourceName": "str",  # Azure resource name. Required.
-                            "resourceType": "str",  # Azure resource type. Required.
+                            "resourceName": "str",  # Azure resource name, required while
+                              creating the app component. Required.
                             "displayName": "str",  # Optional. Azure resource display
                               name.
                             "kind": "str",  # Optional. Kind of Azure resource type.
                             "resourceGroup": "str",  # Optional. Resource group name of
                               the Azure resource.
+                            "resourceType": "str",  # Optional. Azure resource type,
+                              required while creating the app component.
                             "subscriptionId": "str"  # Optional. Subscription Id of the
                               Azure resource.
                         }
@@ -1055,12 +1112,17 @@ class AppComponentOperations:
                     "name": "str",  # Optional. AppComponent name.
                     "resourceId": "str",  # Optional. Azure Load Testing resource Id.
                     "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
+                      unique name.
                     "testRunId": "str"  # Optional. [Required if testId is not given] Load test
-                      run unique identifier.
+                      run unique name.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -1068,7 +1130,7 @@ class AppComponentOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_app_component_get_app_component_by_name_request(
+        request = build_app_component_get_request(
             name=name,
             api_version=self._config.api_version,
             headers=_headers,
@@ -1100,18 +1162,14 @@ class AppComponentOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def get_app_component(
-        self, *, test_run_id: Optional[str] = None, test_id: Optional[str] = None, **kwargs: Any
-    ) -> JSON:
-        """Get App Components for a test or a test run by its name.
+    def get_by_test_or_test_run(self, *, test_run_id: Optional[str] = None, **kwargs: Any) -> JSON:
+        """Get an app component for a test or a test run by its name.
 
-        Get App Components for a test or a test run by its name.
+        Get an app component for a test or a test run by its name.
 
-        :keyword test_run_id: [Required, if testId is not provided] Test run Id. Default value is None.
+        :keyword test_run_id: Required testRunId, if testId field is not provided. Default value is
+         None.
         :paramtype test_run_id: str
-        :keyword test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Default value is None.
-        :paramtype test_id: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -1123,16 +1181,18 @@ class AppComponentOperations:
                 response == {
                     "value": {
                         "str": {
-                            "resourceId": "str",  # Fully qualified resource Id e.g
+                            "resourceId": "str",  # fully qualified resource Id e.g
                               subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                               Required.
-                            "resourceName": "str",  # Azure resource name. Required.
-                            "resourceType": "str",  # Azure resource type. Required.
+                            "resourceName": "str",  # Azure resource name, required while
+                              creating the app component. Required.
                             "displayName": "str",  # Optional. Azure resource display
                               name.
                             "kind": "str",  # Optional. Kind of Azure resource type.
                             "resourceGroup": "str",  # Optional. Resource group name of
                               the Azure resource.
+                            "resourceType": "str",  # Optional. Azure resource type,
+                              required while creating the app component.
                             "subscriptionId": "str"  # Optional. Subscription Id of the
                               Azure resource.
                         }
@@ -1140,12 +1200,17 @@ class AppComponentOperations:
                     "name": "str",  # Optional. AppComponent name.
                     "resourceId": "str",  # Optional. Azure Load Testing resource Id.
                     "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
+                      unique name.
                     "testRunId": "str"  # Optional. [Required if testId is not given] Load test
-                      run unique identifier.
+                      run unique name.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -1153,9 +1218,9 @@ class AppComponentOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_app_component_get_app_component_request(
+        request = build_app_component_get_by_test_or_test_run_request(
             test_run_id=test_run_id,
-            test_id=test_id,
+            test_id=self._config.test_id,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -1204,15 +1269,15 @@ class ServerMetricsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @overload
-    def create_or_update_server_metrics_config(
+    def create_or_update(
         self, name: str, body: JSON, *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> JSON:
         """Configure server metrics for a test or test run.
 
         Configure server metrics for a test or test run.
 
-        :param name: Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name for server metrics, must contain only lower-case alphabetic, numeric,
+         underscore or hyphen characters. Required.
         :type name: str
         :param body: Server metrics configuration model. Required.
         :type body: JSON
@@ -1233,22 +1298,22 @@ class ServerMetricsOperations:
                             "aggregation": "str",  # Metric aggregation. Required.
                             "metricnamespace": "str",  # Metric name space. Required.
                             "name": {
-                                "localizedValue": "str",  # Metric localized name.
-                                  Required.
-                                "value": "str"  # Metric name value. Required.
+                                "localizedValue": "str",  # Optional. The locale
+                                  specific value.
+                                "value": "str"  # Optional. The invariant value.
                             },
-                            "resourceId": "str",  # Azure resource Id. Required.
+                            "resourceId": "str",  # Azure resource id. Required.
                             "resourceType": "str",  # Azure resource type. Required.
                             "displayDescription": "str",  # Optional. Metric description.
-                            "id": "str",  # Optional. Unique identifier for metric.
+                            "id": "str",  # Optional. Unique name for metric.
                             "unit": "str"  # Optional. Metric unit.
                         }
                     },
-                    "name": "str",  # Optional. Server metrics config name.
-                    "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
-                    "testRunId": "str"  # Optional. [Required, if testId is not given] Load test
-                      run unique identifier.
+                    "name": "str",  # Optional. Server metrics configuration model.
+                    "testId": "str",  # Optional. [Required, if test run Id is not given] Load
+                      test unique name.
+                    "testRunId": "str"  # Optional. [Required, if test Id is not given] Load test
+                      run unique name.
                 }
 
                 # response body for status code(s): 200, 201
@@ -1258,35 +1323,35 @@ class ServerMetricsOperations:
                             "aggregation": "str",  # Metric aggregation. Required.
                             "metricnamespace": "str",  # Metric name space. Required.
                             "name": {
-                                "localizedValue": "str",  # Metric localized name.
-                                  Required.
-                                "value": "str"  # Metric name value. Required.
+                                "localizedValue": "str",  # Optional. The locale
+                                  specific value.
+                                "value": "str"  # Optional. The invariant value.
                             },
-                            "resourceId": "str",  # Azure resource Id. Required.
+                            "resourceId": "str",  # Azure resource id. Required.
                             "resourceType": "str",  # Azure resource type. Required.
                             "displayDescription": "str",  # Optional. Metric description.
-                            "id": "str",  # Optional. Unique identifier for metric.
+                            "id": "str",  # Optional. Unique name for metric.
                             "unit": "str"  # Optional. Metric unit.
                         }
                     },
-                    "name": "str",  # Optional. Server metrics config name.
-                    "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
-                    "testRunId": "str"  # Optional. [Required, if testId is not given] Load test
-                      run unique identifier.
+                    "name": "str",  # Optional. Server metrics configuration model.
+                    "testId": "str",  # Optional. [Required, if test run Id is not given] Load
+                      test unique name.
+                    "testRunId": "str"  # Optional. [Required, if test Id is not given] Load test
+                      run unique name.
                 }
         """
 
     @overload
-    def create_or_update_server_metrics_config(
+    def create_or_update(
         self, name: str, body: IO, *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> JSON:
         """Configure server metrics for a test or test run.
 
         Configure server metrics for a test or test run.
 
-        :param name: Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name for server metrics, must contain only lower-case alphabetic, numeric,
+         underscore or hyphen characters. Required.
         :type name: str
         :param body: Server metrics configuration model. Required.
         :type body: IO
@@ -1307,33 +1372,33 @@ class ServerMetricsOperations:
                             "aggregation": "str",  # Metric aggregation. Required.
                             "metricnamespace": "str",  # Metric name space. Required.
                             "name": {
-                                "localizedValue": "str",  # Metric localized name.
-                                  Required.
-                                "value": "str"  # Metric name value. Required.
+                                "localizedValue": "str",  # Optional. The locale
+                                  specific value.
+                                "value": "str"  # Optional. The invariant value.
                             },
-                            "resourceId": "str",  # Azure resource Id. Required.
+                            "resourceId": "str",  # Azure resource id. Required.
                             "resourceType": "str",  # Azure resource type. Required.
                             "displayDescription": "str",  # Optional. Metric description.
-                            "id": "str",  # Optional. Unique identifier for metric.
+                            "id": "str",  # Optional. Unique name for metric.
                             "unit": "str"  # Optional. Metric unit.
                         }
                     },
-                    "name": "str",  # Optional. Server metrics config name.
-                    "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
-                    "testRunId": "str"  # Optional. [Required, if testId is not given] Load test
-                      run unique identifier.
+                    "name": "str",  # Optional. Server metrics configuration model.
+                    "testId": "str",  # Optional. [Required, if test run Id is not given] Load
+                      test unique name.
+                    "testRunId": "str"  # Optional. [Required, if test Id is not given] Load test
+                      run unique name.
                 }
         """
 
     @distributed_trace
-    def create_or_update_server_metrics_config(self, name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
+    def create_or_update(self, name: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
         """Configure server metrics for a test or test run.
 
         Configure server metrics for a test or test run.
 
-        :param name: Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name for server metrics, must contain only lower-case alphabetic, numeric,
+         underscore or hyphen characters. Required.
         :type name: str
         :param body: Server metrics configuration model. Is either a model type or a IO type. Required.
         :type body: JSON or IO
@@ -1354,25 +1419,30 @@ class ServerMetricsOperations:
                             "aggregation": "str",  # Metric aggregation. Required.
                             "metricnamespace": "str",  # Metric name space. Required.
                             "name": {
-                                "localizedValue": "str",  # Metric localized name.
-                                  Required.
-                                "value": "str"  # Metric name value. Required.
+                                "localizedValue": "str",  # Optional. The locale
+                                  specific value.
+                                "value": "str"  # Optional. The invariant value.
                             },
-                            "resourceId": "str",  # Azure resource Id. Required.
+                            "resourceId": "str",  # Azure resource id. Required.
                             "resourceType": "str",  # Azure resource type. Required.
                             "displayDescription": "str",  # Optional. Metric description.
-                            "id": "str",  # Optional. Unique identifier for metric.
+                            "id": "str",  # Optional. Unique name for metric.
                             "unit": "str"  # Optional. Metric unit.
                         }
                     },
-                    "name": "str",  # Optional. Server metrics config name.
-                    "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
-                    "testRunId": "str"  # Optional. [Required, if testId is not given] Load test
-                      run unique identifier.
+                    "name": "str",  # Optional. Server metrics configuration model.
+                    "testId": "str",  # Optional. [Required, if test run Id is not given] Load
+                      test unique name.
+                    "testRunId": "str"  # Optional. [Required, if test Id is not given] Load test
+                      run unique name.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1389,7 +1459,7 @@ class ServerMetricsOperations:
         else:
             _json = body
 
-        request = build_server_metrics_create_or_update_server_metrics_config_request(
+        request = build_server_metrics_create_or_update_request(
             name=name,
             content_type=content_type,
             api_version=self._config.api_version,
@@ -1431,13 +1501,13 @@ class ServerMetricsOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def get_server_metrics_config_by_name(self, name: str, **kwargs: Any) -> JSON:
+    def get(self, name: str, **kwargs: Any) -> JSON:
         """Get server metrics configuration by its name.
 
         Get server metrics configuration by its name.
 
-        :param name: Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name for server metrics, must contain only lower-case alphabetic, numeric,
+         underscore or hyphen characters. Required.
         :type name: str
         :return: JSON object
         :rtype: JSON
@@ -1453,25 +1523,30 @@ class ServerMetricsOperations:
                             "aggregation": "str",  # Metric aggregation. Required.
                             "metricnamespace": "str",  # Metric name space. Required.
                             "name": {
-                                "localizedValue": "str",  # Metric localized name.
-                                  Required.
-                                "value": "str"  # Metric name value. Required.
+                                "localizedValue": "str",  # Optional. The locale
+                                  specific value.
+                                "value": "str"  # Optional. The invariant value.
                             },
-                            "resourceId": "str",  # Azure resource Id. Required.
+                            "resourceId": "str",  # Azure resource id. Required.
                             "resourceType": "str",  # Azure resource type. Required.
                             "displayDescription": "str",  # Optional. Metric description.
-                            "id": "str",  # Optional. Unique identifier for metric.
+                            "id": "str",  # Optional. Unique name for metric.
                             "unit": "str"  # Optional. Metric unit.
                         }
                     },
-                    "name": "str",  # Optional. Server metrics config name.
-                    "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
-                    "testRunId": "str"  # Optional. [Required, if testId is not given] Load test
-                      run unique identifier.
+                    "name": "str",  # Optional. Server metrics configuration model.
+                    "testId": "str",  # Optional. [Required, if test run Id is not given] Load
+                      test unique name.
+                    "testRunId": "str"  # Optional. [Required, if test Id is not given] Load test
+                      run unique name.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -1479,7 +1554,7 @@ class ServerMetricsOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_server_metrics_get_server_metrics_config_by_name_request(
+        request = build_server_metrics_get_request(
             name=name,
             api_version=self._config.api_version,
             headers=_headers,
@@ -1511,21 +1586,24 @@ class ServerMetricsOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def delete_server_metrics_config(  # pylint: disable=inconsistent-return-statements
-        self, name: str, **kwargs: Any
-    ) -> None:
+    def delete(self, name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
         """Delete server metrics configuration by its name.
 
         Delete server metrics configuration by its name.
 
-        :param name: Unique name for server metrics, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param name: Unique name for server metrics, must contain only lower-case alphabetic, numeric,
+         underscore or hyphen characters. Required.
         :type name: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -1533,7 +1611,7 @@ class ServerMetricsOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_server_metrics_delete_server_metrics_config_request(
+        request = build_server_metrics_delete_request(
             name=name,
             api_version=self._config.api_version,
             headers=_headers,
@@ -1558,18 +1636,14 @@ class ServerMetricsOperations:
             return cls(pipeline_response, None, {})
 
     @distributed_trace
-    def get_server_metrics_config(
-        self, *, test_run_id: Optional[str] = None, test_id: Optional[str] = None, **kwargs: Any
-    ) -> JSON:
+    def get_by_test_or_test_run(self, *, test_run_id: Optional[str] = None, **kwargs: Any) -> JSON:
         """Get server metrics configuration for a test or test run by its name.
 
         Get server metrics configuration for a test or test run by its name.
 
-        :keyword test_run_id: [Required, if testId is not provided] Test run Id. Default value is None.
+        :keyword test_run_id: Required testRunId, if testId field is not provided. Default value is
+         None.
         :paramtype test_run_id: str
-        :keyword test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Default value is None.
-        :paramtype test_id: str
         :return: JSON object
         :rtype: JSON
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -1584,25 +1658,30 @@ class ServerMetricsOperations:
                             "aggregation": "str",  # Metric aggregation. Required.
                             "metricnamespace": "str",  # Metric name space. Required.
                             "name": {
-                                "localizedValue": "str",  # Metric localized name.
-                                  Required.
-                                "value": "str"  # Metric name value. Required.
+                                "localizedValue": "str",  # Optional. The locale
+                                  specific value.
+                                "value": "str"  # Optional. The invariant value.
                             },
-                            "resourceId": "str",  # Azure resource Id. Required.
+                            "resourceId": "str",  # Azure resource id. Required.
                             "resourceType": "str",  # Azure resource type. Required.
                             "displayDescription": "str",  # Optional. Metric description.
-                            "id": "str",  # Optional. Unique identifier for metric.
+                            "id": "str",  # Optional. Unique name for metric.
                             "unit": "str"  # Optional. Metric unit.
                         }
                     },
-                    "name": "str",  # Optional. Server metrics config name.
-                    "testId": "str",  # Optional. [Required, if testRunId is not given] Load test
-                      unique identifier.
-                    "testRunId": "str"  # Optional. [Required, if testId is not given] Load test
-                      run unique identifier.
+                    "name": "str",  # Optional. Server metrics configuration model.
+                    "testId": "str",  # Optional. [Required, if test run Id is not given] Load
+                      test unique name.
+                    "testRunId": "str"  # Optional. [Required, if test Id is not given] Load test
+                      run unique name.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -1610,9 +1689,9 @@ class ServerMetricsOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_server_metrics_get_server_metrics_config_request(
+        request = build_server_metrics_get_by_test_or_test_run_request(
             test_run_id=test_run_id,
-            test_id=test_id,
+            test_id=self._config.test_id,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -1643,7 +1722,7 @@ class ServerMetricsOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def get_server_default_metrics_config(self, **kwargs: Any) -> JSON:
+    def get_default_metrics(self, **kwargs: Any) -> JSON:
         """Get all default server metrics configuration for supported resource types.
 
         Get all default server metrics configuration for supported resource types.
@@ -1660,37 +1739,30 @@ class ServerMetricsOperations:
                     "defaultMetrics": {
                         "str": [
                             {
-                                "aggregation": "str",  # Optional. Default metrics
-                                  map {resourceType : list of metrics config} (Refer for metrics
-                                  structure:
-                                  https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
-                                "displayDescription": "str",  # Optional. Default
-                                  metrics map {resourceType : list of metrics config} (Refer for
-                                  metrics structure:
-                                  https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
-                                "metricnamespace": "str",  # Optional. Default
-                                  metrics map {resourceType : list of metrics config} (Refer for
-                                  metrics structure:
-                                  https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+                                "aggregation": "str",  # Optional. Metric
+                                  aggregation.
+                                "displayDescription": "str",  # Optional. Metric
+                                  display description.
+                                "metricnamespace": "str",  # Optional. Metric
+                                  namespace.
                                 "name": {
-                                    "localizedValue": "str",  # Optional. Default
-                                      metrics map {resourceType : list of metrics config} (Refer for
-                                      metrics structure:
-                                      https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
-                                    "value": "str"  # Optional. Default metrics
-                                      map {resourceType : list of metrics config} (Refer for metrics
-                                      structure:
-                                      https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+                                    "localizedValue": "str",  # Optional. The
+                                      locale specific value.
+                                    "value": "str"  # Optional. The invariant
+                                      value.
                                 },
-                                "unit": "str"  # Optional. Default metrics map
-                                  {resourceType : list of metrics config} (Refer for metrics structure:
-                                  https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+                                "unit": "str"  # Optional. Metric unit.
                             }
                         ]
                     }
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -1698,7 +1770,7 @@ class ServerMetricsOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_server_metrics_get_server_default_metrics_config_request(
+        request = build_server_metrics_get_default_metrics_request(
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -1729,10 +1801,10 @@ class ServerMetricsOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def list_supported_resource_types(self, **kwargs: Any) -> JSON:
-        """Get all supported resource types for App Components(Azure resource types).
+    def list_supported_resource_type(self, **kwargs: Any) -> JSON:
+        """Get all supported resource types for adding an app component(Azure resource types).
 
-        Get all supported resource types for App Components(Azure resource types).
+        Get all supported resource types for adding an app component(Azure resource types).
 
         :return: JSON object
         :rtype: JSON
@@ -1748,7 +1820,12 @@ class ServerMetricsOperations:
                     ]
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -1756,7 +1833,7 @@ class ServerMetricsOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_server_metrics_list_supported_resource_types_request(
+        request = build_server_metrics_list_supported_resource_type_request(
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -1806,20 +1883,20 @@ class TestOperations:
         raise_if_not_implemented(
             self.__class__,
             [
-                "upload_test_file",
+                "upload_file",
             ],
         )
 
     @overload
-    def create_or_update_test(
+    def create_or_update(
         self, test_id: str, body: JSON, *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> JSON:
-        """Create a new test or Update an existing test.
+        """Create a new test or update an existing test.
 
-        Create a new test or Update an existing test.
+        Create a new test or update an existing test.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
         :param body: Load test model. Required.
         :type body: JSON
@@ -1835,6 +1912,12 @@ class TestOperations:
 
                 # JSON input template you can fill out and use as your body input.
                 body = {
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
                     "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
                       DateTime(ISO 8601 literal format) of the test model.
@@ -1850,62 +1933,64 @@ class TestOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         ],
                         "configUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "inputArtifactsZipFileurl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "testScriptUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "userPropUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         }
                     },
                     "keyvaultReferenceIdentityId": "str",  # Optional. Resource Id of the managed
@@ -1920,36 +2005,43 @@ class TestOperations:
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -1960,10 +2052,10 @@ class TestOperations:
                       /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
@@ -1973,6 +2065,12 @@ class TestOperations:
 
                 # response body for status code(s): 200, 201
                 response == {
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
                     "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
                       DateTime(ISO 8601 literal format) of the test model.
@@ -1988,62 +2086,64 @@ class TestOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         ],
                         "configUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "inputArtifactsZipFileurl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "testScriptUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "userPropUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         }
                     },
                     "keyvaultReferenceIdentityId": "str",  # Optional. Resource Id of the managed
@@ -2058,36 +2158,43 @@ class TestOperations:
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -2098,10 +2205,10 @@ class TestOperations:
                       /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
@@ -2111,15 +2218,15 @@ class TestOperations:
         """
 
     @overload
-    def create_or_update_test(
+    def create_or_update(
         self, test_id: str, body: IO, *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> JSON:
-        """Create a new test or Update an existing test.
+        """Create a new test or update an existing test.
 
-        Create a new test or Update an existing test.
+        Create a new test or update an existing test.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
         :param body: Load test model. Required.
         :type body: IO
@@ -2135,6 +2242,12 @@ class TestOperations:
 
                 # response body for status code(s): 200, 201
                 response == {
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
                     "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
                       DateTime(ISO 8601 literal format) of the test model.
@@ -2150,62 +2263,64 @@ class TestOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         ],
                         "configUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "inputArtifactsZipFileurl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "testScriptUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "userPropUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         }
                     },
                     "keyvaultReferenceIdentityId": "str",  # Optional. Resource Id of the managed
@@ -2220,36 +2335,43 @@ class TestOperations:
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -2260,10 +2382,10 @@ class TestOperations:
                       /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
@@ -2273,13 +2395,13 @@ class TestOperations:
         """
 
     @distributed_trace
-    def create_or_update_test(self, test_id: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
-        """Create a new test or Update an existing test.
+    def create_or_update(self, test_id: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
+        """Create a new test or update an existing test.
 
-        Create a new test or Update an existing test.
+        Create a new test or update an existing test.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
         :param body: Load test model. Is either a model type or a IO type. Required.
         :type body: JSON or IO
@@ -2295,6 +2417,12 @@ class TestOperations:
 
                 # response body for status code(s): 200, 201
                 response == {
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
                     "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
                       DateTime(ISO 8601 literal format) of the test model.
@@ -2310,62 +2438,64 @@ class TestOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         ],
                         "configUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "inputArtifactsZipFileurl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "testScriptUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "userPropUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         }
                     },
                     "keyvaultReferenceIdentityId": "str",  # Optional. Resource Id of the managed
@@ -2380,36 +2510,43 @@ class TestOperations:
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -2420,10 +2557,10 @@ class TestOperations:
                       /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
@@ -2431,7 +2568,12 @@ class TestOperations:
                     "testId": "str"  # Optional. Unique test name as identifier.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -2448,7 +2590,7 @@ class TestOperations:
         else:
             _json = body
 
-        request = build_test_create_or_update_test_request(
+        request = build_test_create_or_update_request(
             test_id=test_id,
             content_type=content_type,
             api_version=self._config.api_version,
@@ -2490,19 +2632,24 @@ class TestOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def delete_load_test(self, test_id: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
+    def delete(self, test_id: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
         """Delete a test by its name.
 
         Delete a test by its name.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -2510,7 +2657,7 @@ class TestOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_test_delete_load_test_request(
+        request = build_test_delete_request(
             test_id=test_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -2535,13 +2682,13 @@ class TestOperations:
             return cls(pipeline_response, None, {})
 
     @distributed_trace
-    def get_load_test(self, test_id: str, **kwargs: Any) -> JSON:
+    def get(self, test_id: str, **kwargs: Any) -> JSON:
         """Get load test details by test name.
 
         Get load test details by test name.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
         :return: JSON object
         :rtype: JSON
@@ -2552,6 +2699,12 @@ class TestOperations:
 
                 # response body for status code(s): 200
                 response == {
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
                     "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
                       DateTime(ISO 8601 literal format) of the test model.
@@ -2567,62 +2720,64 @@ class TestOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         ],
                         "configUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "inputArtifactsZipFileurl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "testScriptUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         },
                         "userPropUrl": {
                             "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
                               of the file.
                             "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                             "filename": "str",  # Optional. Name of the file.
                             "url": "str",  # Optional. File URL.
                             "validationStatus": "str"  # Optional. Validation status of
-                              the file.
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         }
                     },
                     "keyvaultReferenceIdentityId": "str",  # Optional. Resource Id of the managed
@@ -2637,36 +2792,43 @@ class TestOperations:
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -2677,10 +2839,10 @@ class TestOperations:
                       /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
@@ -2688,7 +2850,12 @@ class TestOperations:
                     "testId": "str"  # Optional. Unique test name as identifier.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -2696,7 +2863,7 @@ class TestOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_test_get_load_test_request(
+        request = build_test_get_request(
             test_id=test_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -2728,7 +2895,7 @@ class TestOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def list_load_test_search(
+    def list(
         self,
         *,
         order_by: Optional[str] = None,
@@ -2736,9 +2903,8 @@ class TestOperations:
         last_updated_start_time: Optional[datetime.datetime] = None,
         last_updated_end_time: Optional[datetime.datetime] = None,
         continuation_token_parameter: Optional[str] = None,
-        max_page_size: int = 50,
         **kwargs: Any
-    ) -> JSON:
+    ) -> Iterable[JSON]:
         """Get all load tests by the fully qualified resource Id e.g
         subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
 
@@ -2760,10 +2926,8 @@ class TestOperations:
         :keyword continuation_token_parameter: Continuation token to get the next page of response.
          Default value is None.
         :paramtype continuation_token_parameter: str
-        :keyword max_page_size: Number of results in response. Default value is 50.
-        :paramtype max_page_size: int
-        :return: JSON object
-        :rtype: JSON
+        :return: An iterator like instance of JSON object
+        :rtype: ~azure.core.paging.ItemPaged[JSON]
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -2771,223 +2935,246 @@ class TestOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "value": [
-                        {
-                            "createdBy": "str",  # Optional. The user that created the
-                              test model.
-                            "createdDateTime": "2020-02-20 00:00:00",  # Optional. The
-                              created DateTime(ISO 8601 literal format) of the test model.
-                            "description": "str",  # Optional. The test description.
-                            "displayName": "str",  # Optional. Display name of a test.
-                            "environmentVariables": {
-                                "str": "str"  # Optional. Environment variables which
-                                  are defined as a set of <name,value> pairs.
-                            },
-                            "inputArtifacts": {
-                                "additionalUrls": [
-                                    {
-                                        "expireTime": "2020-02-20 00:00:00",
-                                          # Optional. Expiry time of the file.
-                                        "fileId": "str",  # Optional. File
-                                          unique identifier.
-                                        "fileType": 0,  # Optional. Integer
-                                          representation of the file type (0 = JMX_FILE, 1 =
-                                          USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are:
-                                          0, 1, and 2.
-                                        "filename": "str",  # Optional. Name
-                                          of the file.
-                                        "url": "str",  # Optional. File URL.
-                                        "validationStatus": "str"  #
-                                          Optional. Validation status of the file.
-                                    }
-                                ],
-                                "configUrl": {
-                                    "expireTime": "2020-02-20 00:00:00",  #
-                                      Optional. Expiry time of the file.
-                                    "fileId": "str",  # Optional. File unique
-                                      identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
-                                    "filename": "str",  # Optional. Name of the
-                                      file.
-                                    "url": "str",  # Optional. File URL.
-                                    "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
-                                },
-                                "inputArtifactsZipFileurl": {
-                                    "expireTime": "2020-02-20 00:00:00",  #
-                                      Optional. Expiry time of the file.
-                                    "fileId": "str",  # Optional. File unique
-                                      identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
-                                    "filename": "str",  # Optional. Name of the
-                                      file.
-                                    "url": "str",  # Optional. File URL.
-                                    "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
-                                },
-                                "testScriptUrl": {
-                                    "expireTime": "2020-02-20 00:00:00",  #
-                                      Optional. Expiry time of the file.
-                                    "fileId": "str",  # Optional. File unique
-                                      identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
-                                    "filename": "str",  # Optional. Name of the
-                                      file.
-                                    "url": "str",  # Optional. File URL.
-                                    "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
-                                },
-                                "userPropUrl": {
-                                    "expireTime": "2020-02-20 00:00:00",  #
-                                      Optional. Expiry time of the file.
-                                    "fileId": "str",  # Optional. File unique
-                                      identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
-                                    "filename": "str",  # Optional. Name of the
-                                      file.
-                                    "url": "str",  # Optional. File URL.
-                                    "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
-                                }
-                            },
-                            "keyvaultReferenceIdentityId": "str",  # Optional. Resource
-                              Id of the managed identity referencing the Key vault.
-                            "keyvaultReferenceIdentityType": "str",  # Optional. Type of
-                              the managed identity referencing the Key vault.
-                            "lastModifiedBy": "str",  # Optional. The user that last
-                              modified the test model.
-                            "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional.
-                              The last Modified DateTime(ISO 8601 literal format) of the test model.
-                            "loadTestConfig": {
-                                "engineInstances": 0,  # Optional. The number of
-                                  engine instances to execute load test. Supported values are in range
-                                  of 1-45. Required for creating a new test.
-                                "splitAllCSVs": bool  # Optional. Whether all the
-                                  input CSV files should be split evenly across all engines.
-                            },
-                            "passFailCriteria": {
-                                "passFailMetrics": {
-                                    "str": {
-                                        "action": "str",  # Optional. Either
-                                          "u2018stop"u2019 or "u2018continue"u2019 after the threshold
-                                          is met. Default is "u2018continue"u2019.
-                                        "actualValue": 0.0,  # Optional. The
-                                          actual value of the client metric for the test run.
-                                        "aggregate": "str",  # Optional. The
-                                          aggregation function to be applied on the client metric.
-                                          Allowed functions - "u2018percentage"u2019 - for error metric
-                                          ,"u2018avg"u2019, "u2018p50"u2019, "u2018p90"u2019,
-                                          "u2018p95"u2019, "u2018p99"u2019, "u2018min"u2019,
-                                          "u2018max"u2019 - for response_time_ms and latency metric,
-                                          "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                          for requests.
-                                        "clientmetric": "str",  # Optional.
-                                          The client metric on which the criteria should be applied.
-                                          Allowed values - "u2018response_time_ms"u2019 ,
-                                          "u2018latency"u2019, "u2018error"u2019, "u2018requests"u2019,
-                                          "u2018requests_per_sec"u2019.
-                                        "condition": "str",  # Optional. The
-                                          comparison operator. Supported types "u2018>"u2019.
-                                        "requestName": "str",  # Optional.
-                                          Request name for which the Pass fail criteria has to be
-                                          applied.
-                                        "result": "str",  # Optional. Outcome
-                                          of the test run. possible outcome - "u2018passed"u2019 ,
-                                          "u2018failed"u2019 , "u2018undetermined"u2019.
-                                        "value": 0.0  # Optional. The value
-                                          to compare with the client metric. Allowed values -
-                                          "u2018error : [0.0 , 100.0] unit- % "u2019, response_time_ms
-                                          and latency : any integer value unit- ms.
-                                    }
-                                }
-                            },
-                            "resourceId": "str",  # Optional. Fully qualified resource Id
-                              e.g
-                              /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
-                            "secrets": {
-                                "str": {
-                                    "type": "str",  # Optional. Type of secret.
-                                      eg. AKV_SECRET_URI/SECRET_VALUE.
-                                    "value": "str"  # Optional. The value of the
-                                      secret, of type AKV_SECRET_URI or SECRET_VALUE.
-                                }
-                            },
-                            "subnetId": "str",  # Optional. Subnet ID on which the load
-                              test instances should run.
-                            "testId": "str"  # Optional. Unique test name as identifier.
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
+                    "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
+                      DateTime(ISO 8601 literal format) of the test model.
+                    "description": "str",  # Optional. The test description.
+                    "displayName": "str",  # Optional. Display name of a test.
+                    "environmentVariables": {
+                        "str": "str"  # Optional. Environment variables which are defined as
+                          a set of <name,value> pairs.
+                    },
+                    "inputArtifacts": {
+                        "additionalUrls": [
+                            {
+                                "expireTime": "2020-02-20 00:00:00",  # Optional.
+                                  Expiry time of the file.
+                                "fileId": "str",  # Optional. File unique identifier.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
+                                "filename": "str",  # Optional. Name of the file.
+                                "url": "str",  # Optional. File URL.
+                                "validationStatus": "str"  # Optional. Validation
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
+                            }
+                        ],
+                        "configUrl": {
+                            "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
+                              of the file.
+                            "fileId": "str",  # Optional. File unique identifier.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
+                            "filename": "str",  # Optional. Name of the file.
+                            "url": "str",  # Optional. File URL.
+                            "validationStatus": "str"  # Optional. Validation status of
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
+                        },
+                        "inputArtifactsZipFileurl": {
+                            "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
+                              of the file.
+                            "fileId": "str",  # Optional. File unique identifier.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
+                            "filename": "str",  # Optional. Name of the file.
+                            "url": "str",  # Optional. File URL.
+                            "validationStatus": "str"  # Optional. Validation status of
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
+                        },
+                        "testScriptUrl": {
+                            "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
+                              of the file.
+                            "fileId": "str",  # Optional. File unique identifier.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
+                            "filename": "str",  # Optional. Name of the file.
+                            "url": "str",  # Optional. File URL.
+                            "validationStatus": "str"  # Optional. Validation status of
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
+                        },
+                        "userPropUrl": {
+                            "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
+                              of the file.
+                            "fileId": "str",  # Optional. File unique identifier.
+                            "fileType": "str",  # Optional. File type. Known values are:
+                              "JMX_FILE", "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
+                            "filename": "str",  # Optional. Name of the file.
+                            "url": "str",  # Optional. File URL.
+                            "validationStatus": "str"  # Optional. Validation status of
+                              the file. Known values are: "NOT_VALIDATED", "VALIDATION_SUCCESS",
+                              "VALIDATION_FAILURE", and "VALIDATION_INITIATED".
                         }
-                    ],
-                    "nextLink": "str"  # Optional. Link for the next list of resources in case of
-                      paginated results, if applicable.
+                    },
+                    "keyvaultReferenceIdentityId": "str",  # Optional. Resource Id of the managed
+                      identity referencing the Key vault.
+                    "keyvaultReferenceIdentityType": "str",  # Optional. Type of the managed
+                      identity referencing the Key vault.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
+                    "loadTestConfig": {
+                        "engineInstances": 0,  # Optional. The number of engine instances to
+                          execute load test. Supported values are in range of 1-45. Required for
+                          creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
+                        "splitAllCSVs": bool  # Optional. Whether all the input CSV files
+                          should be split evenly across all engines.
+                    },
+                    "passFailCriteria": {
+                        "passFailMetrics": {
+                            "str": {
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
+                                "actualValue": 0.0,  # Optional. The actual value of
+                                  the client metric for the test run.
+                                "aggregate": "str",  # Optional. The aggregation
+                                  function to be applied on the client metric. Allowed functions -
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
+                                  "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
+                                  "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
+                                  metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
+                                "clientmetric": "str",  # Optional. The client metric
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
+                                "condition": "str",  # Optional. The comparison
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
+                                "requestName": "str",  # Optional. Request name for
+                                  which the Pass fail criteria has to be applied.
+                                "result": "str",  # Optional. Outcome of the test
+                                  run. Known values are: "passed", "undetermined", and "failed".
+                                "value": 0.0  # Optional. The value to compare with
+                                  the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
+                                  % "u2019, response_time_ms and latency : any integer value unit- ms.
+                            }
+                        }
+                    },
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+                    "secrets": {
+                        "str": {
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
+                        }
+                    },
+                    "subnetId": "str",  # Optional. Subnet ID on which the load test instances
+                      should run.
+                    "testId": "str"  # Optional. Unique test name as identifier.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_test_list_load_test_search_request(
-            order_by=order_by,
-            search=search,
-            last_updated_start_time=last_updated_start_time,
-            last_updated_end_time=last_updated_end_time,
-            continuation_token_parameter=continuation_token_parameter,
-            max_page_size=max_page_size,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "Endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
+        def prepare_request(next_link=None):
+            if not next_link:
 
-        response = pipeline_response.http_response
+                request = build_test_list_request(
+                    order_by=order_by,
+                    search=search,
+                    last_updated_start_time=last_updated_start_time,
+                    last_updated_end_time=last_updated_end_time,
+                    continuation_token_parameter=continuation_token_parameter,
+                    api_version=self._config.api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "Endpoint": self._serialize.url(
+                        "self._config.endpoint", self._config.endpoint, "str", skip_quote=True
+                    ),
+                }
+                request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
 
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                path_format_arguments = {
+                    "Endpoint": self._serialize.url(
+                        "self._config.endpoint", self._config.endpoint, "str", skip_quote=True
+                    ),
+                }
+                request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
 
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
+            return request
 
-        if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {})
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = deserialized["value"]
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.get("nextLink", None), iter(list_of_elem)
 
-        return cast(JSON, deserialized)
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
 
     @distributed_trace
-    def get_test_file(self, test_id: str, file_id: str, **kwargs: Any) -> JSON:
+    def get_file(self, test_id: str, file_id: str, **kwargs: Any) -> JSON:
         """Get test file by the file name.
 
         Get test file by the file name.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
-        :param file_id: Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param file_id: Unique name for test file, must contain only lower-case alphabetic, numeric,
+         underscore or hyphen characters. Required.
         :type file_id: str
         :return: JSON object
         :rtype: JSON
@@ -3000,15 +3187,21 @@ class TestOperations:
                 response == {
                     "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time of the file.
                     "fileId": "str",  # Optional. File unique identifier.
-                    "fileType": 0,  # Optional. Integer representation of the file type (0 =
-                      JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0, 1,
-                      and 2.
+                    "fileType": "str",  # Optional. File type. Known values are: "JMX_FILE",
+                      "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                     "filename": "str",  # Optional. Name of the file.
                     "url": "str",  # Optional. File URL.
-                    "validationStatus": "str"  # Optional. Validation status of the file.
+                    "validationStatus": "str"  # Optional. Validation status of the file. Known
+                      values are: "NOT_VALIDATED", "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                      "VALIDATION_INITIATED".
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -3016,7 +3209,7 @@ class TestOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_test_get_test_file_request(
+        request = build_test_get_file_request(
             test_id=test_id,
             file_id=file_id,
             api_version=self._config.api_version,
@@ -3049,24 +3242,29 @@ class TestOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def delete_test_file(  # pylint: disable=inconsistent-return-statements
+    def delete_file(  # pylint: disable=inconsistent-return-statements
         self, test_id: str, file_id: str, **kwargs: Any
     ) -> None:
         """Delete file by the file name for a test.
 
         Delete file by the file name for a test.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
-        :param file_id: Unique identifier for test file, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param file_id: Unique name for test file, must contain only lower-case alphabetic, numeric,
+         underscore or hyphen characters. Required.
         :type file_id: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -3074,7 +3272,7 @@ class TestOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_test_delete_test_file_request(
+        request = build_test_delete_file_request(
             test_id=test_id,
             file_id=file_id,
             api_version=self._config.api_version,
@@ -3100,21 +3298,21 @@ class TestOperations:
             return cls(pipeline_response, None, {})
 
     @distributed_trace
-    def list_test_files(
+    def get_all_files(
         self, test_id: str, *, continuation_token_parameter: Optional[str] = None, **kwargs: Any
-    ) -> JSON:
+    ) -> Iterable[JSON]:
         """Get all test files.
 
         Get all test files.
 
-        :param test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_id: Unique name for the load test, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_id: str
         :keyword continuation_token_parameter: Continuation token to get the next page of response.
          Default value is None.
         :paramtype continuation_token_parameter: str
-        :return: JSON object
-        :rtype: JSON
+        :return: An iterator like instance of JSON object
+        :rtype: ~azure.core.paging.ItemPaged[JSON]
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -3122,63 +3320,91 @@ class TestOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "value": [
-                        {
-                            "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time
-                              of the file.
-                            "fileId": "str",  # Optional. File unique identifier.
-                            "fileType": 0,  # Optional. Integer representation of the
-                              file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS).
-                              Known values are: 0, 1, and 2.
-                            "filename": "str",  # Optional. Name of the file.
-                            "url": "str",  # Optional. File URL.
-                            "validationStatus": "str"  # Optional. Validation status of
-                              the file.
-                        }
-                    ],
-                    "nextLink": "str"  # Optional. Link for the next list of file URLs, if
-                      applicable.
+                    "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time of the file.
+                    "fileId": "str",  # Optional. File unique identifier.
+                    "fileType": "str",  # Optional. File type. Known values are: "JMX_FILE",
+                      "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
+                    "filename": "str",  # Optional. Name of the file.
+                    "url": "str",  # Optional. File URL.
+                    "validationStatus": "str"  # Optional. Validation status of the file. Known
+                      values are: "NOT_VALIDATED", "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                      "VALIDATION_INITIATED".
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_test_list_test_files_request(
-            test_id=test_id,
-            continuation_token_parameter=continuation_token_parameter,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "Endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
+        def prepare_request(next_link=None):
+            if not next_link:
 
-        response = pipeline_response.http_response
+                request = build_test_get_all_files_request(
+                    test_id=test_id,
+                    continuation_token_parameter=continuation_token_parameter,
+                    api_version=self._config.api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "Endpoint": self._serialize.url(
+                        "self._config.endpoint", self._config.endpoint, "str", skip_quote=True
+                    ),
+                }
+                request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
 
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                path_format_arguments = {
+                    "Endpoint": self._serialize.url(
+                        "self._config.endpoint", self._config.endpoint, "str", skip_quote=True
+                    ),
+                }
+                request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
 
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
+            return request
 
-        if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {})
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = deserialized["value"]
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.get("nextLink", None), iter(list_of_elem)
 
-        return cast(JSON, deserialized)
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
 
 
 class TestRunOperations:
@@ -3199,21 +3425,24 @@ class TestRunOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def delete_test_run(  # pylint: disable=inconsistent-return-statements
-        self, test_run_id: str, **kwargs: Any
-    ) -> None:
+    def delete(self, test_run_id: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
         """Delete a test run by its name.
 
         Delete a test run by its name.
 
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
         :return: None
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -3221,7 +3450,7 @@ class TestRunOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
-        request = build_test_run_delete_test_run_request(
+        request = build_test_run_delete_request(
             test_run_id=test_run_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -3246,7 +3475,7 @@ class TestRunOperations:
             return cls(pipeline_response, None, {})
 
     @overload
-    def create_or_update_test(
+    def create_or_update(
         self,
         test_run_id: str,
         body: JSON,
@@ -3259,8 +3488,8 @@ class TestRunOperations:
 
         Create and start a new test run with the given name.
 
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
         :param body: Load test run model. Required.
         :type body: JSON
@@ -3278,11 +3507,17 @@ class TestRunOperations:
 
                 # JSON input template you can fill out and use as your body input.
                 body = {
-                    "createdBy": "str",  # Optional. The user that created the test run.
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
-                      DateTime(ISO 8601 literal format) of the test run.
+                      DateTime(ISO 8601 literal format) of the test model.
                     "description": "str",  # Optional. The test run description.
-                    "displayName": "str",  # Optional. Display name of a test run.
+                    "displayName": "str",  # Optional. Display name of a testRun.
                     "duration": 0,  # Optional. Test run duration in milliseconds.
                     "endDateTime": "2020-02-20 00:00:00",  # Optional. The test run end
                       DateTime(ISO 8601 literal format).
@@ -3290,45 +3525,59 @@ class TestRunOperations:
                         "str": "str"  # Optional. Environment variables which are defined as
                           a set of <name,value> pairs.
                     },
+                    "errorDetails": [
+                        {
+                            "message": "str"  # Optional. Error details in case test run
+                              was not successfully run.
+                        }
+                    ],
                     "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test run initiated
                       time.
-                    "lastModifiedBy": "str",  # Optional. The user that updated the test run.
-                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last updated
-                      DateTime(ISO 8601 literal format) of the test run.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
                     "loadTestConfig": {
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -3336,18 +3585,23 @@ class TestRunOperations:
                         }
                     },
                     "portalUrl": "str",  # Optional. Portal url.
-                    "resourceId": "str",  # Optional. Load test resource Id.
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "startDateTime": "2020-02-20 00:00:00",  # Optional. The test run start
                       DateTime(ISO 8601 literal format).
-                    "status": "str",  # Optional. The test run status.
+                    "status": "str",  # Optional. The test run status. Known values are:
+                      "ACCEPTED", "NOTSTARTED", "PROVISIONING", "PROVISIONED", "CONFIGURING",
+                      "CONFIGURED", "EXECUTING", "EXECUTED", "DEPROVISIONING", "DEPROVISIONED", "DONE",
+                      "CANCELLING", "CANCELLED", "FAILED", "VALIDATION_SUCCESS", and
+                      "VALIDATION_FAILURE".
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
                       should run.
                     "testArtifacts": {
@@ -3358,64 +3612,73 @@ class TestRunOperations:
                                       Optional. Expiry time of the file.
                                     "fileId": "str",  # Optional. File unique
                                       identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
+                                    "fileType": "str",  # Optional. File type.
+                                      Known values are: "JMX_FILE", "USER_PROPERTIES", and
+                                      "ADDITIONAL_ARTIFACTS".
                                     "filename": "str",  # Optional. Name of the
                                       file.
                                     "url": "str",  # Optional. File URL.
                                     "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
+                                      Validation status of the file. Known values are: "NOT_VALIDATED",
+                                      "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                      "VALIDATION_INITIATED".
                                 }
                             ],
                             "configUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "inputArtifactsZipFileurl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "testScriptUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "userPropUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         },
                         "outputArtifacts": {
@@ -3423,32 +3686,35 @@ class TestRunOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "resultUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         }
                     },
                     "testId": "str",  # Optional. Associated test Id.
                     "testResult": "str",  # Optional. Test result for pass/Fail criteria used
-                      during the test run. possible outcome - "u2018Passed"u2019 , "u2018Failed"u2019 ,
-                      "u2018Not Applicable"u2019.
+                      during the test run. Known values are: "PASSED", "NOT_APPLICABLE", and "FAILED".
                     "testRunId": "str",  # Optional. Unique test run name as identifier.
                     "testRunStatistics": {
                         "str": {
@@ -3464,7 +3730,7 @@ class TestRunOperations:
                             "receivedKBytesPerSec": 0.0,  # Optional. Received network
                               bytes.
                             "sampleCount": 0.0,  # Optional. Sampler count.
-                            "sentKBytesPerSec": 0.0,  # Optional. Sent network bytes.
+                            "sentKBytesPerSec": 0.0,  # Optional. Send network bytes.
                             "throughput": 0.0,  # Optional. Throughput.
                             "transaction": "str"  # Optional. Transaction name.
                         }
@@ -3475,11 +3741,17 @@ class TestRunOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "createdBy": "str",  # Optional. The user that created the test run.
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
-                      DateTime(ISO 8601 literal format) of the test run.
+                      DateTime(ISO 8601 literal format) of the test model.
                     "description": "str",  # Optional. The test run description.
-                    "displayName": "str",  # Optional. Display name of a test run.
+                    "displayName": "str",  # Optional. Display name of a testRun.
                     "duration": 0,  # Optional. Test run duration in milliseconds.
                     "endDateTime": "2020-02-20 00:00:00",  # Optional. The test run end
                       DateTime(ISO 8601 literal format).
@@ -3487,45 +3759,59 @@ class TestRunOperations:
                         "str": "str"  # Optional. Environment variables which are defined as
                           a set of <name,value> pairs.
                     },
+                    "errorDetails": [
+                        {
+                            "message": "str"  # Optional. Error details in case test run
+                              was not successfully run.
+                        }
+                    ],
                     "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test run initiated
                       time.
-                    "lastModifiedBy": "str",  # Optional. The user that updated the test run.
-                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last updated
-                      DateTime(ISO 8601 literal format) of the test run.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
                     "loadTestConfig": {
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -3533,18 +3819,23 @@ class TestRunOperations:
                         }
                     },
                     "portalUrl": "str",  # Optional. Portal url.
-                    "resourceId": "str",  # Optional. Load test resource Id.
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "startDateTime": "2020-02-20 00:00:00",  # Optional. The test run start
                       DateTime(ISO 8601 literal format).
-                    "status": "str",  # Optional. The test run status.
+                    "status": "str",  # Optional. The test run status. Known values are:
+                      "ACCEPTED", "NOTSTARTED", "PROVISIONING", "PROVISIONED", "CONFIGURING",
+                      "CONFIGURED", "EXECUTING", "EXECUTED", "DEPROVISIONING", "DEPROVISIONED", "DONE",
+                      "CANCELLING", "CANCELLED", "FAILED", "VALIDATION_SUCCESS", and
+                      "VALIDATION_FAILURE".
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
                       should run.
                     "testArtifacts": {
@@ -3555,64 +3846,73 @@ class TestRunOperations:
                                       Optional. Expiry time of the file.
                                     "fileId": "str",  # Optional. File unique
                                       identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
+                                    "fileType": "str",  # Optional. File type.
+                                      Known values are: "JMX_FILE", "USER_PROPERTIES", and
+                                      "ADDITIONAL_ARTIFACTS".
                                     "filename": "str",  # Optional. Name of the
                                       file.
                                     "url": "str",  # Optional. File URL.
                                     "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
+                                      Validation status of the file. Known values are: "NOT_VALIDATED",
+                                      "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                      "VALIDATION_INITIATED".
                                 }
                             ],
                             "configUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "inputArtifactsZipFileurl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "testScriptUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "userPropUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         },
                         "outputArtifacts": {
@@ -3620,32 +3920,35 @@ class TestRunOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "resultUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         }
                     },
                     "testId": "str",  # Optional. Associated test Id.
                     "testResult": "str",  # Optional. Test result for pass/Fail criteria used
-                      during the test run. possible outcome - "u2018Passed"u2019 , "u2018Failed"u2019 ,
-                      "u2018Not Applicable"u2019.
+                      during the test run. Known values are: "PASSED", "NOT_APPLICABLE", and "FAILED".
                     "testRunId": "str",  # Optional. Unique test run name as identifier.
                     "testRunStatistics": {
                         "str": {
@@ -3661,7 +3964,7 @@ class TestRunOperations:
                             "receivedKBytesPerSec": 0.0,  # Optional. Received network
                               bytes.
                             "sampleCount": 0.0,  # Optional. Sampler count.
-                            "sentKBytesPerSec": 0.0,  # Optional. Sent network bytes.
+                            "sentKBytesPerSec": 0.0,  # Optional. Send network bytes.
                             "throughput": 0.0,  # Optional. Throughput.
                             "transaction": "str"  # Optional. Transaction name.
                         }
@@ -3672,7 +3975,7 @@ class TestRunOperations:
         """
 
     @overload
-    def create_or_update_test(
+    def create_or_update(
         self,
         test_run_id: str,
         body: IO,
@@ -3685,8 +3988,8 @@ class TestRunOperations:
 
         Create and start a new test run with the given name.
 
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
         :param body: Load test run model. Required.
         :type body: IO
@@ -3704,11 +4007,17 @@ class TestRunOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "createdBy": "str",  # Optional. The user that created the test run.
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
-                      DateTime(ISO 8601 literal format) of the test run.
+                      DateTime(ISO 8601 literal format) of the test model.
                     "description": "str",  # Optional. The test run description.
-                    "displayName": "str",  # Optional. Display name of a test run.
+                    "displayName": "str",  # Optional. Display name of a testRun.
                     "duration": 0,  # Optional. Test run duration in milliseconds.
                     "endDateTime": "2020-02-20 00:00:00",  # Optional. The test run end
                       DateTime(ISO 8601 literal format).
@@ -3716,45 +4025,59 @@ class TestRunOperations:
                         "str": "str"  # Optional. Environment variables which are defined as
                           a set of <name,value> pairs.
                     },
+                    "errorDetails": [
+                        {
+                            "message": "str"  # Optional. Error details in case test run
+                              was not successfully run.
+                        }
+                    ],
                     "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test run initiated
                       time.
-                    "lastModifiedBy": "str",  # Optional. The user that updated the test run.
-                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last updated
-                      DateTime(ISO 8601 literal format) of the test run.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
                     "loadTestConfig": {
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -3762,18 +4085,23 @@ class TestRunOperations:
                         }
                     },
                     "portalUrl": "str",  # Optional. Portal url.
-                    "resourceId": "str",  # Optional. Load test resource Id.
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "startDateTime": "2020-02-20 00:00:00",  # Optional. The test run start
                       DateTime(ISO 8601 literal format).
-                    "status": "str",  # Optional. The test run status.
+                    "status": "str",  # Optional. The test run status. Known values are:
+                      "ACCEPTED", "NOTSTARTED", "PROVISIONING", "PROVISIONED", "CONFIGURING",
+                      "CONFIGURED", "EXECUTING", "EXECUTED", "DEPROVISIONING", "DEPROVISIONED", "DONE",
+                      "CANCELLING", "CANCELLED", "FAILED", "VALIDATION_SUCCESS", and
+                      "VALIDATION_FAILURE".
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
                       should run.
                     "testArtifacts": {
@@ -3784,64 +4112,73 @@ class TestRunOperations:
                                       Optional. Expiry time of the file.
                                     "fileId": "str",  # Optional. File unique
                                       identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
+                                    "fileType": "str",  # Optional. File type.
+                                      Known values are: "JMX_FILE", "USER_PROPERTIES", and
+                                      "ADDITIONAL_ARTIFACTS".
                                     "filename": "str",  # Optional. Name of the
                                       file.
                                     "url": "str",  # Optional. File URL.
                                     "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
+                                      Validation status of the file. Known values are: "NOT_VALIDATED",
+                                      "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                      "VALIDATION_INITIATED".
                                 }
                             ],
                             "configUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "inputArtifactsZipFileurl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "testScriptUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "userPropUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         },
                         "outputArtifacts": {
@@ -3849,32 +4186,35 @@ class TestRunOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "resultUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         }
                     },
                     "testId": "str",  # Optional. Associated test Id.
                     "testResult": "str",  # Optional. Test result for pass/Fail criteria used
-                      during the test run. possible outcome - "u2018Passed"u2019 , "u2018Failed"u2019 ,
-                      "u2018Not Applicable"u2019.
+                      during the test run. Known values are: "PASSED", "NOT_APPLICABLE", and "FAILED".
                     "testRunId": "str",  # Optional. Unique test run name as identifier.
                     "testRunStatistics": {
                         "str": {
@@ -3890,7 +4230,7 @@ class TestRunOperations:
                             "receivedKBytesPerSec": 0.0,  # Optional. Received network
                               bytes.
                             "sampleCount": 0.0,  # Optional. Sampler count.
-                            "sentKBytesPerSec": 0.0,  # Optional. Sent network bytes.
+                            "sentKBytesPerSec": 0.0,  # Optional. Send network bytes.
                             "throughput": 0.0,  # Optional. Throughput.
                             "transaction": "str"  # Optional. Transaction name.
                         }
@@ -3901,15 +4241,15 @@ class TestRunOperations:
         """
 
     @distributed_trace
-    def create_or_update_test(
+    def create_or_update(
         self, test_run_id: str, body: Union[JSON, IO], *, old_test_run_id: Optional[str] = None, **kwargs: Any
     ) -> JSON:
         """Create and start a new test run with the given name.
 
         Create and start a new test run with the given name.
 
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
         :param body: Load test run model. Is either a model type or a IO type. Required.
         :type body: JSON or IO
@@ -3927,11 +4267,17 @@ class TestRunOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "createdBy": "str",  # Optional. The user that created the test run.
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
-                      DateTime(ISO 8601 literal format) of the test run.
+                      DateTime(ISO 8601 literal format) of the test model.
                     "description": "str",  # Optional. The test run description.
-                    "displayName": "str",  # Optional. Display name of a test run.
+                    "displayName": "str",  # Optional. Display name of a testRun.
                     "duration": 0,  # Optional. Test run duration in milliseconds.
                     "endDateTime": "2020-02-20 00:00:00",  # Optional. The test run end
                       DateTime(ISO 8601 literal format).
@@ -3939,45 +4285,59 @@ class TestRunOperations:
                         "str": "str"  # Optional. Environment variables which are defined as
                           a set of <name,value> pairs.
                     },
+                    "errorDetails": [
+                        {
+                            "message": "str"  # Optional. Error details in case test run
+                              was not successfully run.
+                        }
+                    ],
                     "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test run initiated
                       time.
-                    "lastModifiedBy": "str",  # Optional. The user that updated the test run.
-                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last updated
-                      DateTime(ISO 8601 literal format) of the test run.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
                     "loadTestConfig": {
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -3985,18 +4345,23 @@ class TestRunOperations:
                         }
                     },
                     "portalUrl": "str",  # Optional. Portal url.
-                    "resourceId": "str",  # Optional. Load test resource Id.
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "startDateTime": "2020-02-20 00:00:00",  # Optional. The test run start
                       DateTime(ISO 8601 literal format).
-                    "status": "str",  # Optional. The test run status.
+                    "status": "str",  # Optional. The test run status. Known values are:
+                      "ACCEPTED", "NOTSTARTED", "PROVISIONING", "PROVISIONED", "CONFIGURING",
+                      "CONFIGURED", "EXECUTING", "EXECUTED", "DEPROVISIONING", "DEPROVISIONED", "DONE",
+                      "CANCELLING", "CANCELLED", "FAILED", "VALIDATION_SUCCESS", and
+                      "VALIDATION_FAILURE".
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
                       should run.
                     "testArtifacts": {
@@ -4007,64 +4372,73 @@ class TestRunOperations:
                                       Optional. Expiry time of the file.
                                     "fileId": "str",  # Optional. File unique
                                       identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
+                                    "fileType": "str",  # Optional. File type.
+                                      Known values are: "JMX_FILE", "USER_PROPERTIES", and
+                                      "ADDITIONAL_ARTIFACTS".
                                     "filename": "str",  # Optional. Name of the
                                       file.
                                     "url": "str",  # Optional. File URL.
                                     "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
+                                      Validation status of the file. Known values are: "NOT_VALIDATED",
+                                      "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                      "VALIDATION_INITIATED".
                                 }
                             ],
                             "configUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "inputArtifactsZipFileurl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "testScriptUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "userPropUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         },
                         "outputArtifacts": {
@@ -4072,32 +4446,35 @@ class TestRunOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "resultUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         }
                     },
                     "testId": "str",  # Optional. Associated test Id.
                     "testResult": "str",  # Optional. Test result for pass/Fail criteria used
-                      during the test run. possible outcome - "u2018Passed"u2019 , "u2018Failed"u2019 ,
-                      "u2018Not Applicable"u2019.
+                      during the test run. Known values are: "PASSED", "NOT_APPLICABLE", and "FAILED".
                     "testRunId": "str",  # Optional. Unique test run name as identifier.
                     "testRunStatistics": {
                         "str": {
@@ -4113,7 +4490,7 @@ class TestRunOperations:
                             "receivedKBytesPerSec": 0.0,  # Optional. Received network
                               bytes.
                             "sampleCount": 0.0,  # Optional. Sampler count.
-                            "sentKBytesPerSec": 0.0,  # Optional. Sent network bytes.
+                            "sentKBytesPerSec": 0.0,  # Optional. Send network bytes.
                             "throughput": 0.0,  # Optional. Throughput.
                             "transaction": "str"  # Optional. Transaction name.
                         }
@@ -4122,7 +4499,12 @@ class TestRunOperations:
                       run.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -4139,7 +4521,7 @@ class TestRunOperations:
         else:
             _json = body
 
-        request = build_test_run_create_or_update_test_request(
+        request = build_test_run_create_or_update_request(
             test_run_id=test_run_id,
             old_test_run_id=old_test_run_id,
             content_type=content_type,
@@ -4175,13 +4557,13 @@ class TestRunOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def get_test_run(self, test_run_id: str, **kwargs: Any) -> JSON:
+    def get(self, test_run_id: str, **kwargs: Any) -> JSON:
         """Get test run details by name.
 
         Get test run details by name.
 
-        :param test_run_id: Unique name of load test run, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
         :return: JSON object
         :rtype: JSON
@@ -4192,11 +4574,17 @@ class TestRunOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "createdBy": "str",  # Optional. The user that created the test run.
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
-                      DateTime(ISO 8601 literal format) of the test run.
+                      DateTime(ISO 8601 literal format) of the test model.
                     "description": "str",  # Optional. The test run description.
-                    "displayName": "str",  # Optional. Display name of a test run.
+                    "displayName": "str",  # Optional. Display name of a testRun.
                     "duration": 0,  # Optional. Test run duration in milliseconds.
                     "endDateTime": "2020-02-20 00:00:00",  # Optional. The test run end
                       DateTime(ISO 8601 literal format).
@@ -4204,45 +4592,59 @@ class TestRunOperations:
                         "str": "str"  # Optional. Environment variables which are defined as
                           a set of <name,value> pairs.
                     },
+                    "errorDetails": [
+                        {
+                            "message": "str"  # Optional. Error details in case test run
+                              was not successfully run.
+                        }
+                    ],
                     "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test run initiated
                       time.
-                    "lastModifiedBy": "str",  # Optional. The user that updated the test run.
-                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last updated
-                      DateTime(ISO 8601 literal format) of the test run.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
                     "loadTestConfig": {
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -4250,18 +4652,23 @@ class TestRunOperations:
                         }
                     },
                     "portalUrl": "str",  # Optional. Portal url.
-                    "resourceId": "str",  # Optional. Load test resource Id.
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "startDateTime": "2020-02-20 00:00:00",  # Optional. The test run start
                       DateTime(ISO 8601 literal format).
-                    "status": "str",  # Optional. The test run status.
+                    "status": "str",  # Optional. The test run status. Known values are:
+                      "ACCEPTED", "NOTSTARTED", "PROVISIONING", "PROVISIONED", "CONFIGURING",
+                      "CONFIGURED", "EXECUTING", "EXECUTED", "DEPROVISIONING", "DEPROVISIONED", "DONE",
+                      "CANCELLING", "CANCELLED", "FAILED", "VALIDATION_SUCCESS", and
+                      "VALIDATION_FAILURE".
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
                       should run.
                     "testArtifacts": {
@@ -4272,64 +4679,73 @@ class TestRunOperations:
                                       Optional. Expiry time of the file.
                                     "fileId": "str",  # Optional. File unique
                                       identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
+                                    "fileType": "str",  # Optional. File type.
+                                      Known values are: "JMX_FILE", "USER_PROPERTIES", and
+                                      "ADDITIONAL_ARTIFACTS".
                                     "filename": "str",  # Optional. Name of the
                                       file.
                                     "url": "str",  # Optional. File URL.
                                     "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
+                                      Validation status of the file. Known values are: "NOT_VALIDATED",
+                                      "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                      "VALIDATION_INITIATED".
                                 }
                             ],
                             "configUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "inputArtifactsZipFileurl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "testScriptUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "userPropUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         },
                         "outputArtifacts": {
@@ -4337,32 +4753,35 @@ class TestRunOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "resultUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         }
                     },
                     "testId": "str",  # Optional. Associated test Id.
                     "testResult": "str",  # Optional. Test result for pass/Fail criteria used
-                      during the test run. possible outcome - "u2018Passed"u2019 , "u2018Failed"u2019 ,
-                      "u2018Not Applicable"u2019.
+                      during the test run. Known values are: "PASSED", "NOT_APPLICABLE", and "FAILED".
                     "testRunId": "str",  # Optional. Unique test run name as identifier.
                     "testRunStatistics": {
                         "str": {
@@ -4378,7 +4797,7 @@ class TestRunOperations:
                             "receivedKBytesPerSec": 0.0,  # Optional. Received network
                               bytes.
                             "sampleCount": 0.0,  # Optional. Sampler count.
-                            "sentKBytesPerSec": 0.0,  # Optional. Sent network bytes.
+                            "sentKBytesPerSec": 0.0,  # Optional. Send network bytes.
                             "throughput": 0.0,  # Optional. Throughput.
                             "transaction": "str"  # Optional. Transaction name.
                         }
@@ -4387,7 +4806,12 @@ class TestRunOperations:
                       run.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -4395,7 +4819,7 @@ class TestRunOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_test_run_get_test_run_request(
+        request = build_test_run_get_request(
             test_run_id=test_run_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -4427,16 +4851,16 @@ class TestRunOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def get_test_run_file(self, test_run_id: str, file_id: str, **kwargs: Any) -> JSON:
+    def get_file(self, test_run_id: str, file_id: str, **kwargs: Any) -> JSON:
         """Get test run file by file name.
 
         Get test run file by file name.
 
-        :param test_run_id: Unique name of load test run, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
-        :param file_id: Unique identifier for test run file, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param file_id: Unique name for test run file, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type file_id: str
         :return: JSON object
         :rtype: JSON
@@ -4449,15 +4873,21 @@ class TestRunOperations:
                 response == {
                     "expireTime": "2020-02-20 00:00:00",  # Optional. Expiry time of the file.
                     "fileId": "str",  # Optional. File unique identifier.
-                    "fileType": 0,  # Optional. Integer representation of the file type (0 =
-                      JMX_FILE, 1 = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0, 1,
-                      and 2.
+                    "fileType": "str",  # Optional. File type. Known values are: "JMX_FILE",
+                      "USER_PROPERTIES", and "ADDITIONAL_ARTIFACTS".
                     "filename": "str",  # Optional. Name of the file.
                     "url": "str",  # Optional. File URL.
-                    "validationStatus": "str"  # Optional. Validation status of the file.
+                    "validationStatus": "str"  # Optional. Validation status of the file. Known
+                      values are: "NOT_VALIDATED", "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                      "VALIDATION_INITIATED".
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -4465,7 +4895,7 @@ class TestRunOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_test_run_get_test_run_file_request(
+        request = build_test_run_get_file_request(
             test_run_id=test_run_id,
             file_id=file_id,
             api_version=self._config.api_version,
@@ -4498,7 +4928,7 @@ class TestRunOperations:
         return cast(JSON, deserialized)
 
     @distributed_trace
-    def list_test_runs(
+    def list(
         self,
         *,
         order_by: Optional[str] = None,
@@ -4507,10 +4937,8 @@ class TestRunOperations:
         execution_from: Optional[datetime.datetime] = None,
         execution_to: Optional[datetime.datetime] = None,
         status: Optional[str] = None,
-        max_page_size: int = 50,
-        test_id: Optional[str] = None,
         **kwargs: Any
-    ) -> JSON:
+    ) -> Iterable[JSON]:
         """Get all test runs with given filters.
 
         Get all test runs with given filters.
@@ -4524,24 +4952,16 @@ class TestRunOperations:
         :keyword search: Filter search based on searchable fields - description, executedUser. Default
          value is None.
         :paramtype search: str
-        :keyword execution_from: The end DateTime(ISO 8601 literal format) of test-run execution time
+        :keyword execution_from: End DateTime(ISO 8601 literal format) of test-run execution time
          filter range. Default value is None.
         :paramtype execution_from: ~datetime.datetime
-        :keyword execution_to: The start DateTime(ISO 8601 literal format) of test-run execution time
+        :keyword execution_to: Start DateTime(ISO 8601 literal format) of test-run execution time
          filter range. Default value is None.
         :paramtype execution_to: ~datetime.datetime
-        :keyword status: Comma separated list of test run status, value can be -  "ACCEPTED",
-         "NOTSTARTED","PROVISIONING","PROVISIONED","CONFIGURING",
-        "CONFIGURED","EXECUTING","EXECUTED","DEPROVISIONING","DEPROVISIONED","DONE","CANCELLED","FAILED".
-         Default value is None.
+        :keyword status: Comma separated list of test run status. Default value is None.
         :paramtype status: str
-        :keyword max_page_size: Number of results in response. Default value is 50.
-        :paramtype max_page_size: int
-        :keyword test_id: Unique name for load test, must be a valid URL character ^[a-z0-9_-]*$.
-         Default value is None.
-        :paramtype test_id: str
-        :return: JSON object
-        :rtype: JSON
+        :return: An iterator like instance of JSON object
+        :rtype: ~azure.core.paging.ItemPaged[JSON]
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -4549,314 +4969,17 @@ class TestRunOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "value": [
-                        {
-                            "createdBy": "str",  # Optional. The user that created the
-                              test run.
-                            "createdDateTime": "2020-02-20 00:00:00",  # Optional. The
-                              created DateTime(ISO 8601 literal format) of the test run.
-                            "description": "str",  # Optional. The test run description.
-                            "displayName": "str",  # Optional. Display name of a test
-                              run.
-                            "duration": 0,  # Optional. Test run duration in
-                              milliseconds.
-                            "endDateTime": "2020-02-20 00:00:00",  # Optional. The test
-                              run end DateTime(ISO 8601 literal format).
-                            "environmentVariables": {
-                                "str": "str"  # Optional. Environment variables which
-                                  are defined as a set of <name,value> pairs.
-                            },
-                            "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test
-                              run initiated time.
-                            "lastModifiedBy": "str",  # Optional. The user that updated
-                              the test run.
-                            "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional.
-                              The last updated  DateTime(ISO 8601 literal format) of the test run.
-                            "loadTestConfig": {
-                                "engineInstances": 0,  # Optional. The number of
-                                  engine instances to execute load test. Supported values are in range
-                                  of 1-45. Required for creating a new test.
-                                "splitAllCSVs": bool  # Optional. Whether all the
-                                  input CSV files should be split evenly across all engines.
-                            },
-                            "passFailCriteria": {
-                                "passFailMetrics": {
-                                    "str": {
-                                        "action": "str",  # Optional. Either
-                                          "u2018stop"u2019 or "u2018continue"u2019 after the threshold
-                                          is met. Default is "u2018continue"u2019.
-                                        "actualValue": 0.0,  # Optional. The
-                                          actual value of the client metric for the test run.
-                                        "aggregate": "str",  # Optional. The
-                                          aggregation function to be applied on the client metric.
-                                          Allowed functions - "u2018percentage"u2019 - for error metric
-                                          ,"u2018avg"u2019, "u2018p50"u2019, "u2018p90"u2019,
-                                          "u2018p95"u2019, "u2018p99"u2019, "u2018min"u2019,
-                                          "u2018max"u2019 - for response_time_ms and latency metric,
-                                          "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                          for requests.
-                                        "clientmetric": "str",  # Optional.
-                                          The client metric on which the criteria should be applied.
-                                          Allowed values - "u2018response_time_ms"u2019 ,
-                                          "u2018latency"u2019, "u2018error"u2019, "u2018requests"u2019,
-                                          "u2018requests_per_sec"u2019.
-                                        "condition": "str",  # Optional. The
-                                          comparison operator. Supported types "u2018>"u2019.
-                                        "requestName": "str",  # Optional.
-                                          Request name for which the Pass fail criteria has to be
-                                          applied.
-                                        "result": "str",  # Optional. Outcome
-                                          of the test run. possible outcome - "u2018passed"u2019 ,
-                                          "u2018failed"u2019 , "u2018undetermined"u2019.
-                                        "value": 0.0  # Optional. The value
-                                          to compare with the client metric. Allowed values -
-                                          "u2018error : [0.0 , 100.0] unit- % "u2019, response_time_ms
-                                          and latency : any integer value unit- ms.
-                                    }
-                                }
-                            },
-                            "portalUrl": "str",  # Optional. Portal url.
-                            "resourceId": "str",  # Optional. Load test resource Id.
-                            "secrets": {
-                                "str": {
-                                    "type": "str",  # Optional. Type of secret.
-                                      eg. AKV_SECRET_URI/SECRET_VALUE.
-                                    "value": "str"  # Optional. The value of the
-                                      secret, of type AKV_SECRET_URI or SECRET_VALUE.
-                                }
-                            },
-                            "startDateTime": "2020-02-20 00:00:00",  # Optional. The test
-                              run start DateTime(ISO 8601 literal format).
-                            "status": "str",  # Optional. The test run status.
-                            "subnetId": "str",  # Optional. Subnet ID on which the load
-                              test instances should run.
-                            "testArtifacts": {
-                                "inputArtifacts": {
-                                    "additionalUrls": [
-                                        {
-                                            "expireTime": "2020-02-20
-                                              00:00:00",  # Optional. Expiry time of the file.
-                                            "fileId": "str",  # Optional.
-                                              File unique identifier.
-                                            "fileType": 0,  # Optional.
-                                              Integer representation of the file type (0 = JMX_FILE, 1
-                                              = USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known
-                                              values are: 0, 1, and 2.
-                                            "filename": "str",  #
-                                              Optional. Name of the file.
-                                            "url": "str",  # Optional.
-                                              File URL.
-                                            "validationStatus": "str"  #
-                                              Optional. Validation status of the file.
-                                        }
-                                    ],
-                                    "configUrl": {
-                                        "expireTime": "2020-02-20 00:00:00",
-                                          # Optional. Expiry time of the file.
-                                        "fileId": "str",  # Optional. File
-                                          unique identifier.
-                                        "fileType": 0,  # Optional. Integer
-                                          representation of the file type (0 = JMX_FILE, 1 =
-                                          USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are:
-                                          0, 1, and 2.
-                                        "filename": "str",  # Optional. Name
-                                          of the file.
-                                        "url": "str",  # Optional. File URL.
-                                        "validationStatus": "str"  #
-                                          Optional. Validation status of the file.
-                                    },
-                                    "inputArtifactsZipFileurl": {
-                                        "expireTime": "2020-02-20 00:00:00",
-                                          # Optional. Expiry time of the file.
-                                        "fileId": "str",  # Optional. File
-                                          unique identifier.
-                                        "fileType": 0,  # Optional. Integer
-                                          representation of the file type (0 = JMX_FILE, 1 =
-                                          USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are:
-                                          0, 1, and 2.
-                                        "filename": "str",  # Optional. Name
-                                          of the file.
-                                        "url": "str",  # Optional. File URL.
-                                        "validationStatus": "str"  #
-                                          Optional. Validation status of the file.
-                                    },
-                                    "testScriptUrl": {
-                                        "expireTime": "2020-02-20 00:00:00",
-                                          # Optional. Expiry time of the file.
-                                        "fileId": "str",  # Optional. File
-                                          unique identifier.
-                                        "fileType": 0,  # Optional. Integer
-                                          representation of the file type (0 = JMX_FILE, 1 =
-                                          USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are:
-                                          0, 1, and 2.
-                                        "filename": "str",  # Optional. Name
-                                          of the file.
-                                        "url": "str",  # Optional. File URL.
-                                        "validationStatus": "str"  #
-                                          Optional. Validation status of the file.
-                                    },
-                                    "userPropUrl": {
-                                        "expireTime": "2020-02-20 00:00:00",
-                                          # Optional. Expiry time of the file.
-                                        "fileId": "str",  # Optional. File
-                                          unique identifier.
-                                        "fileType": 0,  # Optional. Integer
-                                          representation of the file type (0 = JMX_FILE, 1 =
-                                          USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are:
-                                          0, 1, and 2.
-                                        "filename": "str",  # Optional. Name
-                                          of the file.
-                                        "url": "str",  # Optional. File URL.
-                                        "validationStatus": "str"  #
-                                          Optional. Validation status of the file.
-                                    }
-                                },
-                                "outputArtifacts": {
-                                    "logsUrl": {
-                                        "expireTime": "2020-02-20 00:00:00",
-                                          # Optional. Expiry time of the file.
-                                        "fileId": "str",  # Optional. File
-                                          unique identifier.
-                                        "fileType": 0,  # Optional. Integer
-                                          representation of the file type (0 = JMX_FILE, 1 =
-                                          USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are:
-                                          0, 1, and 2.
-                                        "filename": "str",  # Optional. Name
-                                          of the file.
-                                        "url": "str",  # Optional. File URL.
-                                        "validationStatus": "str"  #
-                                          Optional. Validation status of the file.
-                                    },
-                                    "resultUrl": {
-                                        "expireTime": "2020-02-20 00:00:00",
-                                          # Optional. Expiry time of the file.
-                                        "fileId": "str",  # Optional. File
-                                          unique identifier.
-                                        "fileType": 0,  # Optional. Integer
-                                          representation of the file type (0 = JMX_FILE, 1 =
-                                          USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are:
-                                          0, 1, and 2.
-                                        "filename": "str",  # Optional. Name
-                                          of the file.
-                                        "url": "str",  # Optional. File URL.
-                                        "validationStatus": "str"  #
-                                          Optional. Validation status of the file.
-                                    }
-                                }
-                            },
-                            "testId": "str",  # Optional. Associated test Id.
-                            "testResult": "str",  # Optional. Test result for pass/Fail
-                              criteria used during the test run. possible outcome - "u2018Passed"u2019
-                              , "u2018Failed"u2019 , "u2018Not Applicable"u2019.
-                            "testRunId": "str",  # Optional. Unique test run name as
-                              identifier.
-                            "testRunStatistics": {
-                                "str": {
-                                    "errorCount": 0.0,  # Optional. Error count.
-                                    "errorPct": 0.0,  # Optional. Error
-                                      percentage.
-                                    "maxResTime": 0.0,  # Optional. Max response
-                                      time.
-                                    "meanResTime": 0.0,  # Optional. Mean
-                                      response time.
-                                    "medianResTime": 0.0,  # Optional. Median
-                                      response time.
-                                    "minResTime": 0.0,  # Optional. Minimum
-                                      response time.
-                                    "pct1ResTime": 0.0,  # Optional. 90
-                                      percentile response time.
-                                    "pct2ResTime": 0.0,  # Optional. 95
-                                      percentile response time.
-                                    "pct3ResTime": 0.0,  # Optional. 99
-                                      percentile response time.
-                                    "receivedKBytesPerSec": 0.0,  # Optional.
-                                      Received network bytes.
-                                    "sampleCount": 0.0,  # Optional. Sampler
-                                      count.
-                                    "sentKBytesPerSec": 0.0,  # Optional. Sent
-                                      network bytes.
-                                    "throughput": 0.0,  # Optional. Throughput.
-                                    "transaction": "str"  # Optional. Transaction
-                                      name.
-                                }
-                            },
-                            "vusers": 0  # Optional. Number of virtual users, for which
-                              test has been run.
-                        }
-                    ],
-                    "nextLink": "str"  # Optional. Link for the next list of resources in case of
-                      paginated results, if applicable.
-                }
-        """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
-
-        request = build_test_run_list_test_runs_request(
-            order_by=order_by,
-            continuation_token_parameter=continuation_token_parameter,
-            search=search,
-            execution_from=execution_from,
-            execution_to=execution_to,
-            status=status,
-            max_page_size=max_page_size,
-            test_id=test_id,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "Endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
-        }
-        request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
-
-        if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {})
-
-        return cast(JSON, deserialized)
-
-    @distributed_trace
-    def stop_test_run(self, test_run_id: str, **kwargs: Any) -> JSON:
-        """Stop test run by name.
-
-        Stop test run by name.
-
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
-        :type test_run_id: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "createdBy": "str",  # Optional. The user that created the test run.
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
                     "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
-                      DateTime(ISO 8601 literal format) of the test run.
+                      DateTime(ISO 8601 literal format) of the test model.
                     "description": "str",  # Optional. The test run description.
-                    "displayName": "str",  # Optional. Display name of a test run.
+                    "displayName": "str",  # Optional. Display name of a testRun.
                     "duration": 0,  # Optional. Test run duration in milliseconds.
                     "endDateTime": "2020-02-20 00:00:00",  # Optional. The test run end
                       DateTime(ISO 8601 literal format).
@@ -4864,45 +4987,59 @@ class TestRunOperations:
                         "str": "str"  # Optional. Environment variables which are defined as
                           a set of <name,value> pairs.
                     },
+                    "errorDetails": [
+                        {
+                            "message": "str"  # Optional. Error details in case test run
+                              was not successfully run.
+                        }
+                    ],
                     "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test run initiated
                       time.
-                    "lastModifiedBy": "str",  # Optional. The user that updated the test run.
-                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last updated
-                      DateTime(ISO 8601 literal format) of the test run.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
                     "loadTestConfig": {
                         "engineInstances": 0,  # Optional. The number of engine instances to
                           execute load test. Supported values are in range of 1-45. Required for
                           creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
                         "splitAllCSVs": bool  # Optional. Whether all the input CSV files
                           should be split evenly across all engines.
                     },
                     "passFailCriteria": {
                         "passFailMetrics": {
                             "str": {
-                                "action": "str",  # Optional. Either "u2018stop"u2019
-                                  or "u2018continue"u2019 after the threshold is met. Default is
-                                  "u2018continue"u2019.
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
                                 "actualValue": 0.0,  # Optional. The actual value of
                                   the client metric for the test run.
                                 "aggregate": "str",  # Optional. The aggregation
                                   function to be applied on the client metric. Allowed functions -
-                                  "u2018percentage"u2019 - for error metric ,"u2018avg"u2019,
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
                                   "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
                                   "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
                                   metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
-                                  for requests.
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
                                 "clientmetric": "str",  # Optional. The client metric
-                                  on which the criteria should be applied. Allowed values -
-                                  "u2018response_time_ms"u2019 , "u2018latency"u2019,
-                                  "u2018error"u2019, "u2018requests"u2019,
-                                  "u2018requests_per_sec"u2019.
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
                                 "condition": "str",  # Optional. The comparison
-                                  operator. Supported types "u2018>"u2019.
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
                                 "requestName": "str",  # Optional. Request name for
                                   which the Pass fail criteria has to be applied.
                                 "result": "str",  # Optional. Outcome of the test
-                                  run. possible outcome - "u2018passed"u2019 , "u2018failed"u2019 ,
-                                  "u2018undetermined"u2019.
+                                  run. Known values are: "passed", "undetermined", and "failed".
                                 "value": 0.0  # Optional. The value to compare with
                                   the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
                                   % "u2019, response_time_ms and latency : any integer value unit- ms.
@@ -4910,18 +5047,23 @@ class TestRunOperations:
                         }
                     },
                     "portalUrl": "str",  # Optional. Portal url.
-                    "resourceId": "str",  # Optional. Load test resource Id.
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
                     "secrets": {
                         "str": {
-                            "type": "str",  # Optional. Type of secret. eg.
-                              AKV_SECRET_URI/SECRET_VALUE.
-                            "value": "str"  # Optional. The value of the secret, of type
-                              AKV_SECRET_URI or SECRET_VALUE.
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
                         }
                     },
                     "startDateTime": "2020-02-20 00:00:00",  # Optional. The test run start
                       DateTime(ISO 8601 literal format).
-                    "status": "str",  # Optional. The test run status.
+                    "status": "str",  # Optional. The test run status. Known values are:
+                      "ACCEPTED", "NOTSTARTED", "PROVISIONING", "PROVISIONED", "CONFIGURING",
+                      "CONFIGURED", "EXECUTING", "EXECUTED", "DEPROVISIONING", "DEPROVISIONED", "DONE",
+                      "CANCELLING", "CANCELLED", "FAILED", "VALIDATION_SUCCESS", and
+                      "VALIDATION_FAILURE".
                     "subnetId": "str",  # Optional. Subnet ID on which the load test instances
                       should run.
                     "testArtifacts": {
@@ -4932,64 +5074,73 @@ class TestRunOperations:
                                       Optional. Expiry time of the file.
                                     "fileId": "str",  # Optional. File unique
                                       identifier.
-                                    "fileType": 0,  # Optional. Integer
-                                      representation of the file type (0 = JMX_FILE, 1 =
-                                      USER_PROPERTIES, 2 = ADDITIONAL_ARTIFACTS). Known values are: 0,
-                                      1, and 2.
+                                    "fileType": "str",  # Optional. File type.
+                                      Known values are: "JMX_FILE", "USER_PROPERTIES", and
+                                      "ADDITIONAL_ARTIFACTS".
                                     "filename": "str",  # Optional. Name of the
                                       file.
                                     "url": "str",  # Optional. File URL.
                                     "validationStatus": "str"  # Optional.
-                                      Validation status of the file.
+                                      Validation status of the file. Known values are: "NOT_VALIDATED",
+                                      "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                      "VALIDATION_INITIATED".
                                 }
                             ],
                             "configUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "inputArtifactsZipFileurl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "testScriptUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "userPropUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         },
                         "outputArtifacts": {
@@ -4997,32 +5148,35 @@ class TestRunOperations:
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             },
                             "resultUrl": {
                                 "expireTime": "2020-02-20 00:00:00",  # Optional.
                                   Expiry time of the file.
                                 "fileId": "str",  # Optional. File unique identifier.
-                                "fileType": 0,  # Optional. Integer representation of
-                                  the file type (0 = JMX_FILE, 1 = USER_PROPERTIES, 2 =
-                                  ADDITIONAL_ARTIFACTS). Known values are: 0, 1, and 2.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
                                 "filename": "str",  # Optional. Name of the file.
                                 "url": "str",  # Optional. File URL.
                                 "validationStatus": "str"  # Optional. Validation
-                                  status of the file.
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
                             }
                         }
                     },
                     "testId": "str",  # Optional. Associated test Id.
                     "testResult": "str",  # Optional. Test result for pass/Fail criteria used
-                      during the test run. possible outcome - "u2018Passed"u2019 , "u2018Failed"u2019 ,
-                      "u2018Not Applicable"u2019.
+                      during the test run. Known values are: "PASSED", "NOT_APPLICABLE", and "FAILED".
                     "testRunId": "str",  # Optional. Unique test run name as identifier.
                     "testRunStatistics": {
                         "str": {
@@ -5038,7 +5192,7 @@ class TestRunOperations:
                             "receivedKBytesPerSec": 0.0,  # Optional. Received network
                               bytes.
                             "sampleCount": 0.0,  # Optional. Sampler count.
-                            "sentKBytesPerSec": 0.0,  # Optional. Sent network bytes.
+                            "sentKBytesPerSec": 0.0,  # Optional. Send network bytes.
                             "throughput": 0.0,  # Optional. Throughput.
                             "transaction": "str"  # Optional. Transaction name.
                         }
@@ -5047,7 +5201,342 @@ class TestRunOperations:
                       run.
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_test_run_list_request(
+                    order_by=order_by,
+                    continuation_token_parameter=continuation_token_parameter,
+                    search=search,
+                    execution_from=execution_from,
+                    execution_to=execution_to,
+                    status=status,
+                    test_id=self._config.test_id,
+                    api_version=self._config.api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "Endpoint": self._serialize.url(
+                        "self._config.endpoint", self._config.endpoint, "str", skip_quote=True
+                    ),
+                }
+                request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                path_format_arguments = {
+                    "Endpoint": self._serialize.url(
+                        "self._config.endpoint", self._config.endpoint, "str", skip_quote=True
+                    ),
+                }
+                request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
+
+            return request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = deserialized["value"]
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.get("nextLink", None), iter(list_of_elem)
+
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @distributed_trace
+    def stop(self, test_run_id: str, **kwargs: Any) -> JSON:
+        """Stop test run by name.
+
+        Stop test run by name.
+
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
+        :type test_run_id: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "certificate": {
+                        "name": "str",  # Optional. Name of the certificate.
+                        "type": "str",  # Optional. Type of certificate. "AKV_CERT_URI"
+                        "value": "str"  # Optional. The value of the certificate for
+                          respective type.
+                    },
+                    "createdBy": "str",  # Optional. The user that created the test model.
+                    "createdDateTime": "2020-02-20 00:00:00",  # Optional. The created
+                      DateTime(ISO 8601 literal format) of the test model.
+                    "description": "str",  # Optional. The test run description.
+                    "displayName": "str",  # Optional. Display name of a testRun.
+                    "duration": 0,  # Optional. Test run duration in milliseconds.
+                    "endDateTime": "2020-02-20 00:00:00",  # Optional. The test run end
+                      DateTime(ISO 8601 literal format).
+                    "environmentVariables": {
+                        "str": "str"  # Optional. Environment variables which are defined as
+                          a set of <name,value> pairs.
+                    },
+                    "errorDetails": [
+                        {
+                            "message": "str"  # Optional. Error details in case test run
+                              was not successfully run.
+                        }
+                    ],
+                    "executedDateTime": "2020-02-20 00:00:00",  # Optional. Test run initiated
+                      time.
+                    "lastModifiedBy": "str",  # Optional. The user that last modified the test
+                      model.
+                    "lastModifiedDateTime": "2020-02-20 00:00:00",  # Optional. The last Modified
+                      DateTime(ISO 8601 literal format) of the test model.
+                    "loadTestConfig": {
+                        "engineInstances": 0,  # Optional. The number of engine instances to
+                          execute load test. Supported values are in range of 1-45. Required for
+                          creating a new test.
+                        "optionalLoadTestConfig": {
+                            "duration": 0,  # Optional. duration.
+                            "endpointUrl": "str",  # Optional. Endpoint url.
+                            "rampUpTime": 0,  # Optional. ramp up time.
+                            "vusers": 0  # Optional. No of virtual users.
+                        },
+                        "quickStartTest": bool,  # Optional. If true, optionalLoadTestConfig
+                          is required and JMX script for the load test is not required to upload.
+                        "splitAllCSVs": bool  # Optional. Whether all the input CSV files
+                          should be split evenly across all engines.
+                    },
+                    "passFailCriteria": {
+                        "passFailMetrics": {
+                            "str": {
+                                "action": "str",  # Optional. Action taken after the
+                                  threshold is met. Default is "u2018continue"u2019. Known values are:
+                                  "stop" and "continue".
+                                "actualValue": 0.0,  # Optional. The actual value of
+                                  the client metric for the test run.
+                                "aggregate": "str",  # Optional. The aggregation
+                                  function to be applied on the client metric. Allowed functions -
+                                  "u2018percentage"u2019 - for error metric , "u2018avg"u2019,
+                                  "u2018p50"u2019, "u2018p90"u2019, "u2018p95"u2019, "u2018p99"u2019,
+                                  "u2018min"u2019, "u2018max"u2019 - for response_time_ms and latency
+                                  metric, "u2018avg"u2019 - for requests_per_sec, "u2018count"u2019 -
+                                  for requests. Known values are: "count", "percentage", "avg", "p50",
+                                  "p90", "p95", "p99", "min", and "max".
+                                "clientmetric": "str",  # Optional. The client metric
+                                  on which the criteria should be applied. Known values are:
+                                  "response_time_ms", "latency", "error", "requests", and
+                                  "requests_per_sec".
+                                "condition": "str",  # Optional. The comparison
+                                  operator. Supported types "u2018>"u2019, "u2018<"u2019.
+                                "requestName": "str",  # Optional. Request name for
+                                  which the Pass fail criteria has to be applied.
+                                "result": "str",  # Optional. Outcome of the test
+                                  run. Known values are: "passed", "undetermined", and "failed".
+                                "value": 0.0  # Optional. The value to compare with
+                                  the client metric. Allowed values - "u2018error : [0.0 , 100.0] unit-
+                                  % "u2019, response_time_ms and latency : any integer value unit- ms.
+                            }
+                        }
+                    },
+                    "portalUrl": "str",  # Optional. Portal url.
+                    "resourceId": "str",  # Optional. Fully qualified resource Id e.g
+                      /subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+                    "secrets": {
+                        "str": {
+                            "type": "str",  # Optional. Type of secret. Known values are:
+                              "AKV_SECRET_URI" and "SECRET_VALUE".
+                            "value": "str"  # Optional. The value of the secret for the
+                              respective type.
+                        }
+                    },
+                    "startDateTime": "2020-02-20 00:00:00",  # Optional. The test run start
+                      DateTime(ISO 8601 literal format).
+                    "status": "str",  # Optional. The test run status. Known values are:
+                      "ACCEPTED", "NOTSTARTED", "PROVISIONING", "PROVISIONED", "CONFIGURING",
+                      "CONFIGURED", "EXECUTING", "EXECUTED", "DEPROVISIONING", "DEPROVISIONED", "DONE",
+                      "CANCELLING", "CANCELLED", "FAILED", "VALIDATION_SUCCESS", and
+                      "VALIDATION_FAILURE".
+                    "subnetId": "str",  # Optional. Subnet ID on which the load test instances
+                      should run.
+                    "testArtifacts": {
+                        "inputArtifacts": {
+                            "additionalUrls": [
+                                {
+                                    "expireTime": "2020-02-20 00:00:00",  #
+                                      Optional. Expiry time of the file.
+                                    "fileId": "str",  # Optional. File unique
+                                      identifier.
+                                    "fileType": "str",  # Optional. File type.
+                                      Known values are: "JMX_FILE", "USER_PROPERTIES", and
+                                      "ADDITIONAL_ARTIFACTS".
+                                    "filename": "str",  # Optional. Name of the
+                                      file.
+                                    "url": "str",  # Optional. File URL.
+                                    "validationStatus": "str"  # Optional.
+                                      Validation status of the file. Known values are: "NOT_VALIDATED",
+                                      "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                      "VALIDATION_INITIATED".
+                                }
+                            ],
+                            "configUrl": {
+                                "expireTime": "2020-02-20 00:00:00",  # Optional.
+                                  Expiry time of the file.
+                                "fileId": "str",  # Optional. File unique identifier.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
+                                "filename": "str",  # Optional. Name of the file.
+                                "url": "str",  # Optional. File URL.
+                                "validationStatus": "str"  # Optional. Validation
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
+                            },
+                            "inputArtifactsZipFileurl": {
+                                "expireTime": "2020-02-20 00:00:00",  # Optional.
+                                  Expiry time of the file.
+                                "fileId": "str",  # Optional. File unique identifier.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
+                                "filename": "str",  # Optional. Name of the file.
+                                "url": "str",  # Optional. File URL.
+                                "validationStatus": "str"  # Optional. Validation
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
+                            },
+                            "testScriptUrl": {
+                                "expireTime": "2020-02-20 00:00:00",  # Optional.
+                                  Expiry time of the file.
+                                "fileId": "str",  # Optional. File unique identifier.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
+                                "filename": "str",  # Optional. Name of the file.
+                                "url": "str",  # Optional. File URL.
+                                "validationStatus": "str"  # Optional. Validation
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
+                            },
+                            "userPropUrl": {
+                                "expireTime": "2020-02-20 00:00:00",  # Optional.
+                                  Expiry time of the file.
+                                "fileId": "str",  # Optional. File unique identifier.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
+                                "filename": "str",  # Optional. Name of the file.
+                                "url": "str",  # Optional. File URL.
+                                "validationStatus": "str"  # Optional. Validation
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
+                            }
+                        },
+                        "outputArtifacts": {
+                            "logsUrl": {
+                                "expireTime": "2020-02-20 00:00:00",  # Optional.
+                                  Expiry time of the file.
+                                "fileId": "str",  # Optional. File unique identifier.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
+                                "filename": "str",  # Optional. Name of the file.
+                                "url": "str",  # Optional. File URL.
+                                "validationStatus": "str"  # Optional. Validation
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
+                            },
+                            "resultUrl": {
+                                "expireTime": "2020-02-20 00:00:00",  # Optional.
+                                  Expiry time of the file.
+                                "fileId": "str",  # Optional. File unique identifier.
+                                "fileType": "str",  # Optional. File type. Known
+                                  values are: "JMX_FILE", "USER_PROPERTIES", and
+                                  "ADDITIONAL_ARTIFACTS".
+                                "filename": "str",  # Optional. Name of the file.
+                                "url": "str",  # Optional. File URL.
+                                "validationStatus": "str"  # Optional. Validation
+                                  status of the file. Known values are: "NOT_VALIDATED",
+                                  "VALIDATION_SUCCESS", "VALIDATION_FAILURE", and
+                                  "VALIDATION_INITIATED".
+                            }
+                        }
+                    },
+                    "testId": "str",  # Optional. Associated test Id.
+                    "testResult": "str",  # Optional. Test result for pass/Fail criteria used
+                      during the test run. Known values are: "PASSED", "NOT_APPLICABLE", and "FAILED".
+                    "testRunId": "str",  # Optional. Unique test run name as identifier.
+                    "testRunStatistics": {
+                        "str": {
+                            "errorCount": 0.0,  # Optional. Error count.
+                            "errorPct": 0.0,  # Optional. Error percentage.
+                            "maxResTime": 0.0,  # Optional. Max response time.
+                            "meanResTime": 0.0,  # Optional. Mean response time.
+                            "medianResTime": 0.0,  # Optional. Median response time.
+                            "minResTime": 0.0,  # Optional. Minimum response time.
+                            "pct1ResTime": 0.0,  # Optional. 90 percentile response time.
+                            "pct2ResTime": 0.0,  # Optional. 95 percentile response time.
+                            "pct3ResTime": 0.0,  # Optional. 99 percentile response time.
+                            "receivedKBytesPerSec": 0.0,  # Optional. Received network
+                              bytes.
+                            "sampleCount": 0.0,  # Optional. Sampler count.
+                            "sentKBytesPerSec": 0.0,  # Optional. Send network bytes.
+                            "throughput": 0.0,  # Optional. Throughput.
+                            "transaction": "str"  # Optional. Transaction name.
+                        }
+                    },
+                    "vusers": 0  # Optional. Number of virtual users, for which test has been
+                      run.
+                }
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
@@ -5055,7 +5544,7 @@ class TestRunOperations:
 
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
-        request = build_test_run_stop_test_run_request(
+        request = build_test_run_stop_request(
             test_run_id=test_run_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -5086,19 +5575,225 @@ class TestRunOperations:
 
         return cast(JSON, deserialized)
 
-    @overload
-    def get_test_run_client_metrics(
-        self, test_run_id: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
-    ) -> JSON:
-        """Get all client metrics for a load test run.
+    @distributed_trace
+    def metric_namespaces(self, test_run_id: str, **kwargs: Any) -> JSON:
+        """Lists the metric namespaces for a load test run.
 
-        Get all client metrics for a load test run.
+        Lists the metric namespaces for a load test run.
 
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
-        :param body: Client metrics request model. Required.
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "value": [
+                        {
+                            "metricNamespaceName": "str",  # Optional. The fully
+                              qualified metric namespace name.
+                            "name": "str"  # Optional. The escaped name of the namespace.
+                        }
+                    ]
+                }
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
+
+        request = build_test_run_metric_namespaces_request(
+            test_run_id=test_run_id,
+            api_version=self._config.api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "Endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
+        }
+        request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})
+
+        return cast(JSON, deserialized)
+
+    @distributed_trace
+    def metric_definitions(self, test_run_id: str, *, metricnamespace: str, **kwargs: Any) -> JSON:
+        """Lists the metric definitions for a load test run.
+
+        Lists the metric definitions for a load test run.
+
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
+        :type test_run_id: str
+        :keyword metricnamespace: Metric namespace to query metric definitions for. Required.
+        :paramtype metricnamespace: str
+        :return: JSON object
+        :rtype: JSON
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "value": [
+                        {
+                            "dimensions": [
+                                {
+                                    "localizedValue": "str",  # Optional. The
+                                      locale specific value.
+                                    "value": "str"  # Optional. The invariant
+                                      value.
+                                }
+                            ],
+                            "displayDescription": "str",  # Optional. Detailed
+                              description of this metric.
+                            "metricAvailabilities": [
+                                {
+                                    "timeGrain": "str"  # Optional. The time
+                                      grain specifies the aggregation interval for the metric.
+                                      Expressed as a duration 'PT1M', 'PT1H', etc. Known values are:
+                                      "PT5S", "PT10S", "PT1M", "PT5M", and "PT1H".
+                                }
+                            ],
+                            "name": {
+                                "localizedValue": "str",  # Optional. The locale
+                                  specific value.
+                                "value": "str"  # Optional. The invariant value.
+                            },
+                            "namespace": "str",  # Optional. The namespace the metric
+                              belongs to.
+                            "primaryAggregationType": "str",  # Optional. the primary
+                              aggregation type value defining how to use the values for display. Known
+                              values are: "Average", "Count", "Minimum", "Maximum", "None", "Total",
+                              "Percentile90", "Percentile95", and "Percentile99".
+                            "supportedAggregationTypes": [
+                                "str"  # Optional. the collection of what aggregation
+                                  types are supported.
+                            ],
+                            "unit": "str"  # Optional. The unit of the metric. Known
+                              values are: "NotSpecified", "Percent", "Count", "Seconds",
+                              "Milliseconds", "Bytes", "BytesPerSecond", and "CountPerSecond".
+                        }
+                    ]
+                }
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
+
+        request = build_test_run_metric_definitions_request(
+            test_run_id=test_run_id,
+            metricnamespace=metricnamespace,
+            api_version=self._config.api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "Endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
+        }
+        request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        if response.content:
+            deserialized = response.json()
+        else:
+            deserialized = None
+
+        if cls:
+            return cls(pipeline_response, cast(JSON, deserialized), {})
+
+        return cast(JSON, deserialized)
+
+    @overload
+    def metrics(
+        self,
+        test_run_id: str,
+        body: Optional[JSON] = None,
+        *,
+        metricname: str,
+        metricnamespace: str,
+        result_type: str,
+        timespan: str,
+        aggregation: Optional[str] = None,
+        interval: Optional[str] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> JSON:
+        """Lists the metric values for a load test run.
+
+        Lists the metric values for a load test run.
+
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
+        :type test_run_id: str
+        :param body: Default value is None.
         :type body: JSON
+        :keyword metricname: Metric name. Required.
+        :paramtype metricname: str
+        :keyword metricnamespace: Metric namespace to query metric definitions for. Required.
+        :paramtype metricnamespace: str
+        :keyword result_type: Reduces the set of data collected. The syntax allowed depends on the
+         operation. See the operation's description for details. Known values are: "Data" and
+         "Metadata". Required.
+        :paramtype result_type: str
+        :keyword timespan: The timespan of the query. It is a string with the following format
+         'startDateTime_ISO/endDateTime_ISO'. Required.
+        :paramtype timespan: str
+        :keyword aggregation: The list of aggregation types (comma separated) to retrieve. Default
+         value is None.
+        :paramtype aggregation: str
+        :keyword interval: The interval (i.e. timegrain) of the query. Known values are: "PT5S",
+         "PT10S", "PT1M", "PT5M", and "PT1H". Default value is None.
+        :paramtype interval: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -5111,86 +5806,124 @@ class TestRunOperations:
 
                 # JSON input template you can fill out and use as your body input.
                 body = {
-                    "endTime": "2020-02-20 00:00:00",  # End time. Required.
-                    "startTime": "2020-02-20 00:00:00",  # Start time. Required.
-                    "errors": [
-                        "str"  # Optional. List of errors, maximum supported errors for
-                          queries are 20. In case of empty, by default will return metrics for maximum
-                          20 errors.
-                    ],
-                    "groupByInterval": "str",  # Optional. For test duration less than 10 minutes
-                      group by time interval can be any one of 5s,10s,1m,5m.""n""nFor test duration
-                      greater than 10 minutes, group by time interval can be any one of 1m,5m,1h.
-                      Default value is 1m.
-                    "percentiles": [
-                        "str"  # Optional. List of percentiles values for response time,
-                          supported values 50,90,99,95. Default value is 50th percentile.
-                    ],
-                    "requestSamplers": [
-                        "str"  # Optional. List of request samplers, maximum supported
-                          samplers for queries are 20. In case of empty, it will return metrics for
-                          maximum 20 samplers.
+                    "filters": [
+                        {
+                            "name": "str",  # Optional. The invariant metadata name.
+                            "values": [
+                                "str"  # Optional. The metadata values. Maximum
+                                  values can be 20.
+                            ]
+                        }
                     ]
                 }
 
                 # response body for status code(s): 200
                 response == {
-                    "testRunId": "str",  # Optional. Test run name for which client metrics
-                      results is required.
-                    "timeSeries": {
-                        "activeUsers": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
+                    "interval": "str",  # Optional. The interval (window size) for which the
+                      metric data was returned in. This may be adjusted in the future and returned back
+                      from what was originally requested. This is not present if a metadata request was
+                      made.
+                    "namespace": "str",  # Optional. The namespace of the metrics being queried.
+                    "timespan": "str",  # Optional. The timespan for which the data was
+                      retrieved. Its value consists of two datetimes concatenated, separated by '/'.
+                      This may be adjusted in the future and returned back from what was originally
+                      requested.
+                    "value": {
+                        "displayDescription": "str",  # Optional. Detailed description of
+                          this metric.
+                        "id": "str",  # Optional. The Metric Id.
+                        "name": {
+                            "localizedValue": "str",  # Optional. The locale specific
+                              value.
+                            "value": "str"  # Optional. The invariant value.
                         },
-                        "errors": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        },
-                        "responseTime": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        },
-                        "throughput": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        }
+                        "timeseries": [
+                            {
+                                "data": [
+                                    {
+                                        "average": 0.0,  # Optional. The
+                                          average value in the time range.
+                                        "count": 0.0,  # Optional. The number
+                                          of samples in the time range. Can be used to determine the
+                                          number of values that contributed to the average value.
+                                        "maximum": 0.0,  # Optional. The
+                                          greatest value in the time range.
+                                        "minimum": 0.0,  # Optional. The
+                                          least value in the time range.
+                                        "percentile90": 0.0,  # Optional.
+                                          90th percentile value in the time range.
+                                        "percentile95": 0.0,  # Optional.
+                                          95th percentile value in the time range.
+                                        "percentile99": 0.0,  # Optional.
+                                          99th percentile value in the time range.
+                                        "timeStamp": "str",  # Optional. The
+                                          timestamp for the metric value in ISO 8601 format.
+                                        "total": 0.0  # Optional. The sum of
+                                          all of the values in the time range.
+                                    }
+                                ],
+                                "metadatavalues": [
+                                    {
+                                        "name": {
+                                            "localizedValue": "str",  #
+                                              Optional. The locale specific value.
+                                            "value": "str"  # Optional.
+                                              The invariant value.
+                                        },
+                                        "value": "str"  # Optional. The value
+                                          of the metadata.
+                                    }
+                                ]
+                            }
+                        ],
+                        "unit": "str"  # Optional. The unit of the metric. Known values are:
+                          "NotSpecified", "Percent", "Count", "Seconds", "Milliseconds", "Bytes",
+                          "BytesPerSecond", and "CountPerSecond".
                     }
                 }
         """
 
     @overload
-    def get_test_run_client_metrics(
-        self, test_run_id: str, body: IO, *, content_type: str = "application/json", **kwargs: Any
+    def metrics(
+        self,
+        test_run_id: str,
+        body: Optional[IO] = None,
+        *,
+        metricname: str,
+        metricnamespace: str,
+        result_type: str,
+        timespan: str,
+        aggregation: Optional[str] = None,
+        interval: Optional[str] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> JSON:
-        """Get all client metrics for a load test run.
+        """Lists the metric values for a load test run.
 
-        Get all client metrics for a load test run.
+        Lists the metric values for a load test run.
 
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
-        :param body: Client metrics request model. Required.
+        :param body: Default value is None.
         :type body: IO
+        :keyword metricname: Metric name. Required.
+        :paramtype metricname: str
+        :keyword metricnamespace: Metric namespace to query metric definitions for. Required.
+        :paramtype metricnamespace: str
+        :keyword result_type: Reduces the set of data collected. The syntax allowed depends on the
+         operation. See the operation's description for details. Known values are: "Data" and
+         "Metadata". Required.
+        :paramtype result_type: str
+        :keyword timespan: The timespan of the query. It is a string with the following format
+         'startDateTime_ISO/endDateTime_ISO'. Required.
+        :paramtype timespan: str
+        :keyword aggregation: The list of aggregation types (comma separated) to retrieve. Default
+         value is None.
+        :paramtype aggregation: str
+        :keyword interval: The interval (i.e. timegrain) of the query. Known values are: "PT5S",
+         "PT10S", "PT1M", "PT5M", and "PT1H". Default value is None.
+        :paramtype interval: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -5203,60 +5936,110 @@ class TestRunOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "testRunId": "str",  # Optional. Test run name for which client metrics
-                      results is required.
-                    "timeSeries": {
-                        "activeUsers": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
+                    "interval": "str",  # Optional. The interval (window size) for which the
+                      metric data was returned in. This may be adjusted in the future and returned back
+                      from what was originally requested. This is not present if a metadata request was
+                      made.
+                    "namespace": "str",  # Optional. The namespace of the metrics being queried.
+                    "timespan": "str",  # Optional. The timespan for which the data was
+                      retrieved. Its value consists of two datetimes concatenated, separated by '/'.
+                      This may be adjusted in the future and returned back from what was originally
+                      requested.
+                    "value": {
+                        "displayDescription": "str",  # Optional. Detailed description of
+                          this metric.
+                        "id": "str",  # Optional. The Metric Id.
+                        "name": {
+                            "localizedValue": "str",  # Optional. The locale specific
+                              value.
+                            "value": "str"  # Optional. The invariant value.
                         },
-                        "errors": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        },
-                        "responseTime": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        },
-                        "throughput": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        }
+                        "timeseries": [
+                            {
+                                "data": [
+                                    {
+                                        "average": 0.0,  # Optional. The
+                                          average value in the time range.
+                                        "count": 0.0,  # Optional. The number
+                                          of samples in the time range. Can be used to determine the
+                                          number of values that contributed to the average value.
+                                        "maximum": 0.0,  # Optional. The
+                                          greatest value in the time range.
+                                        "minimum": 0.0,  # Optional. The
+                                          least value in the time range.
+                                        "percentile90": 0.0,  # Optional.
+                                          90th percentile value in the time range.
+                                        "percentile95": 0.0,  # Optional.
+                                          95th percentile value in the time range.
+                                        "percentile99": 0.0,  # Optional.
+                                          99th percentile value in the time range.
+                                        "timeStamp": "str",  # Optional. The
+                                          timestamp for the metric value in ISO 8601 format.
+                                        "total": 0.0  # Optional. The sum of
+                                          all of the values in the time range.
+                                    }
+                                ],
+                                "metadatavalues": [
+                                    {
+                                        "name": {
+                                            "localizedValue": "str",  #
+                                              Optional. The locale specific value.
+                                            "value": "str"  # Optional.
+                                              The invariant value.
+                                        },
+                                        "value": "str"  # Optional. The value
+                                          of the metadata.
+                                    }
+                                ]
+                            }
+                        ],
+                        "unit": "str"  # Optional. The unit of the metric. Known values are:
+                          "NotSpecified", "Percent", "Count", "Seconds", "Milliseconds", "Bytes",
+                          "BytesPerSecond", and "CountPerSecond".
                     }
                 }
         """
 
     @distributed_trace
-    def get_test_run_client_metrics(self, test_run_id: str, body: Union[JSON, IO], **kwargs: Any) -> JSON:
-        """Get all client metrics for a load test run.
+    def metrics(
+        self,
+        test_run_id: str,
+        body: Optional[Union[JSON, IO]] = None,
+        *,
+        metricname: str,
+        metricnamespace: str,
+        result_type: str,
+        timespan: str,
+        aggregation: Optional[str] = None,
+        interval: Optional[str] = None,
+        **kwargs: Any
+    ) -> JSON:
+        """Lists the metric values for a load test run.
 
-        Get all client metrics for a load test run.
+        Lists the metric values for a load test run.
 
-        :param test_run_id: Unique name of the load test run, must be a valid URL character
-         ^[a-z0-9_-]*$. Required.
+        :param test_run_id: Unique name for the load test run, must contain only lower-case alphabetic,
+         numeric, underscore or hyphen characters. Required.
         :type test_run_id: str
-        :param body: Client metrics request model. Is either a model type or a IO type. Required.
+        :param body: Is either a model type or a IO type. Default value is None.
         :type body: JSON or IO
+        :keyword metricname: Metric name. Required.
+        :paramtype metricname: str
+        :keyword metricnamespace: Metric namespace to query metric definitions for. Required.
+        :paramtype metricnamespace: str
+        :keyword result_type: Reduces the set of data collected. The syntax allowed depends on the
+         operation. See the operation's description for details. Known values are: "Data" and
+         "Metadata". Required.
+        :paramtype result_type: str
+        :keyword timespan: The timespan of the query. It is a string with the following format
+         'startDateTime_ISO/endDateTime_ISO'. Required.
+        :paramtype timespan: str
+        :keyword aggregation: The list of aggregation types (comma separated) to retrieve. Default
+         value is None.
+        :paramtype aggregation: str
+        :keyword interval: The interval (i.e. timegrain) of the query. Known values are: "PT5S",
+         "PT10S", "PT1M", "PT5M", and "PT1H". Default value is None.
+        :paramtype interval: str
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -5269,49 +6052,75 @@ class TestRunOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "testRunId": "str",  # Optional. Test run name for which client metrics
-                      results is required.
-                    "timeSeries": {
-                        "activeUsers": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
+                    "interval": "str",  # Optional. The interval (window size) for which the
+                      metric data was returned in. This may be adjusted in the future and returned back
+                      from what was originally requested. This is not present if a metadata request was
+                      made.
+                    "namespace": "str",  # Optional. The namespace of the metrics being queried.
+                    "timespan": "str",  # Optional. The timespan for which the data was
+                      retrieved. Its value consists of two datetimes concatenated, separated by '/'.
+                      This may be adjusted in the future and returned back from what was originally
+                      requested.
+                    "value": {
+                        "displayDescription": "str",  # Optional. Detailed description of
+                          this metric.
+                        "id": "str",  # Optional. The Metric Id.
+                        "name": {
+                            "localizedValue": "str",  # Optional. The locale specific
+                              value.
+                            "value": "str"  # Optional. The invariant value.
                         },
-                        "errors": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        },
-                        "responseTime": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        },
-                        "throughput": {
-                            "str": [
-                                {
-                                    "timestamp": "2020-02-20 00:00:00",  #
-                                      Optional. Timestamp(ISO 8601 literal format).
-                                    "value": 0.0  # Optional. Value at timestamp.
-                                }
-                            ]
-                        }
+                        "timeseries": [
+                            {
+                                "data": [
+                                    {
+                                        "average": 0.0,  # Optional. The
+                                          average value in the time range.
+                                        "count": 0.0,  # Optional. The number
+                                          of samples in the time range. Can be used to determine the
+                                          number of values that contributed to the average value.
+                                        "maximum": 0.0,  # Optional. The
+                                          greatest value in the time range.
+                                        "minimum": 0.0,  # Optional. The
+                                          least value in the time range.
+                                        "percentile90": 0.0,  # Optional.
+                                          90th percentile value in the time range.
+                                        "percentile95": 0.0,  # Optional.
+                                          95th percentile value in the time range.
+                                        "percentile99": 0.0,  # Optional.
+                                          99th percentile value in the time range.
+                                        "timeStamp": "str",  # Optional. The
+                                          timestamp for the metric value in ISO 8601 format.
+                                        "total": 0.0  # Optional. The sum of
+                                          all of the values in the time range.
+                                    }
+                                ],
+                                "metadatavalues": [
+                                    {
+                                        "name": {
+                                            "localizedValue": "str",  #
+                                              Optional. The locale specific value.
+                                            "value": "str"  # Optional.
+                                              The invariant value.
+                                        },
+                                        "value": "str"  # Optional. The value
+                                          of the metadata.
+                                    }
+                                ]
+                            }
+                        ],
+                        "unit": "str"  # Optional. The unit of the metric. Known values are:
+                          "NotSpecified", "Percent", "Count", "Seconds", "Milliseconds", "Bytes",
+                          "BytesPerSecond", and "CountPerSecond".
                     }
                 }
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -5326,91 +6135,23 @@ class TestRunOperations:
         if isinstance(body, (IO, bytes)):
             _content = body
         else:
-            _json = body
+            if body is not None:
+                _json = body
+            else:
+                _json = None
 
-        request = build_test_run_get_test_run_client_metrics_request(
+        request = build_test_run_metrics_request(
             test_run_id=test_run_id,
+            metricname=metricname,
+            metricnamespace=metricnamespace,
+            result_type=result_type,
+            timespan=timespan,
+            aggregation=aggregation,
+            interval=interval,
             content_type=content_type,
             api_version=self._config.api_version,
             json=_json,
             content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "Endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
-        }
-        request.url = self._client.format_url(request.url, **path_format_arguments)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        if response.content:
-            deserialized = response.json()
-        else:
-            deserialized = None
-
-        if cls:
-            return cls(pipeline_response, cast(JSON, deserialized), {})
-
-        return cast(JSON, deserialized)
-
-    @distributed_trace
-    def get_test_run_client_metrics_filters(self, test_run_id: str, **kwargs: Any) -> JSON:
-        """Get all filters that are supported for client metrics for a given load test run.
-
-        Get all filters that are supported for client metrics for a given load test run.
-
-        :param test_run_id: Unique name for load test run, must be a valid URL character ^[a-z0-9_-]*$.
-         Required.
-        :type test_run_id: str
-        :return: JSON object
-        :rtype: JSON
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "filters": {
-                        "errorFiltersValues": [
-                            "str"  # Optional. List of errors occurred for the test run,
-                              for which client metrics can be filtered.
-                        ],
-                        "requestSamplerValues": [
-                            "str"  # Optional. List of request sampler for the test run,
-                              for which client metrics can be filtered.
-                        ]
-                    },
-                    "testRunId": "str",  # Optional. Test run name for which client metrics
-                      filters is required.
-                    "timeRange": {
-                        "endTime": "2020-02-20 00:00:00",  # Optional. end DateTime(ISO 8601
-                          literal format) for the requested client metrics filter.
-                        "startTime": "2020-02-20 00:00:00"  # Optional. start DateTime(ISO
-                          8601 literal format) for the requested client metrics filter.
-                    }
-                }
-        """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
-
-        request = build_test_run_get_test_run_client_metrics_filters_request(
-            test_run_id=test_run_id,
-            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )

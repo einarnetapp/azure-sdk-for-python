@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 
 PACKAGE_NAME = "azure-developer-loadtesting"
-PACKAGE_PPRINT_NAME = "Azure Developer LoadTesting"
+PACKAGE_PPRINT_NAME = "None"
 
 # a-b-c => a/b/c
 package_folder_path = PACKAGE_NAME.replace("-", "/")
@@ -29,7 +29,7 @@ if not version:
 setup(
     name=PACKAGE_NAME,
     version=version,
-    description="Microsoft Azure Developer LoadTesting Client Library for Python",
+    description="Microsoft None Client Library for Python",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
     license="MIT License",

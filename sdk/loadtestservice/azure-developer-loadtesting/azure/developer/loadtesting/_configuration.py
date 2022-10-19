@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, TYPE_CHECKING
+from typing import Any, Optional, TYPE_CHECKING
 
 from azure.core.configuration import Configuration
 from azure.core.pipeline import policies
@@ -28,14 +28,18 @@ class LoadTestingClientConfiguration(Configuration):  # pylint: disable=too-many
     :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :keyword api_version: Api Version. Default value is "2022-06-01-preview". Note that overriding
-     this default value may result in unsupported behavior.
+    :param test_id: Unique name of an existing load test. Default value is None.
+    :type test_id: str
+    :keyword api_version: Api Version. Default value is "2022-11-01". Note that overriding this
+     default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
-    def __init__(self, endpoint: str, credential: "TokenCredential", **kwargs: Any) -> None:
+    def __init__(
+        self, endpoint: str, credential: "TokenCredential", test_id: Optional[str] = None, **kwargs: Any
+    ) -> None:
         super(LoadTestingClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-06-01-preview")  # type: str
+        api_version = kwargs.pop("api_version", "2022-11-01")  # type: str
 
         if endpoint is None:
             raise ValueError("Parameter 'endpoint' must not be None.")
@@ -44,6 +48,7 @@ class LoadTestingClientConfiguration(Configuration):  # pylint: disable=too-many
 
         self.endpoint = endpoint
         self.credential = credential
+        self.test_id = test_id
         self.api_version = api_version
         self.credential_scopes = kwargs.pop("credential_scopes", ["https://loadtest.azure-dev.com/.default"])
         kwargs.setdefault("sdk_moniker", "developer-loadtesting/{}".format(VERSION))

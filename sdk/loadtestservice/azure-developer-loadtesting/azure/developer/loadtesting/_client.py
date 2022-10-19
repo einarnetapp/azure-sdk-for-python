@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, TYPE_CHECKING
+from typing import Any, Optional, TYPE_CHECKING
 
 from azure.core import PipelineClient
 from azure.core.rest import HttpRequest, HttpResponse
@@ -18,8 +18,6 @@ from .operations import AppComponentOperations, ServerMetricsOperations, TestOpe
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from typing import Dict
-
     from azure.core.credentials import TokenCredential
 
 
@@ -38,14 +36,20 @@ class LoadTestingClient:  # pylint: disable=client-accepts-api-version-keyword
     :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :keyword api_version: Api Version. Default value is "2022-06-01-preview". Note that overriding
-     this default value may result in unsupported behavior.
+    :param test_id: Unique name of an existing load test. Default value is None.
+    :type test_id: str
+    :keyword api_version: Api Version. Default value is "2022-11-01". Note that overriding this
+     default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
-    def __init__(self, endpoint: str, credential: "TokenCredential", **kwargs: Any) -> None:
+    def __init__(
+        self, endpoint: str, credential: "TokenCredential", test_id: Optional[str] = None, **kwargs: Any
+    ) -> None:
         _endpoint = "https://{Endpoint}"
-        self._config = LoadTestingClientConfiguration(endpoint=endpoint, credential=credential, **kwargs)
+        self._config = LoadTestingClientConfiguration(
+            endpoint=endpoint, credential=credential, test_id=test_id, **kwargs
+        )
         self._client = PipelineClient(base_url=_endpoint, config=self._config, **kwargs)
 
         self._serialize = Serializer()
