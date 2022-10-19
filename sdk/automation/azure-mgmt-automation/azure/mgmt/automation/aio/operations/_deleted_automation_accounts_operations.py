@@ -25,21 +25,21 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._linked_workspace_operations import build_get_request
+from ...operations._deleted_automation_accounts_operations import build_list_by_subscription_request
 from .._vendor import MixinABC
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class LinkedWorkspaceOperations:
+class DeletedAutomationAccountsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.automation.aio.AutomationClient`'s
-        :attr:`linked_workspace` attribute.
+        :attr:`deleted_automation_accounts` attribute.
     """
 
     models = _models
@@ -52,18 +52,12 @@ class LinkedWorkspaceOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def get(
-        self, resource_group_name: str, automation_account_name: str, **kwargs: Any
-    ) -> _models.LinkedWorkspace:
-        """Retrieve the linked workspace for the account id.
+    async def list_by_subscription(self, **kwargs: Any) -> _models.DeletedAutomationAccountListResult:
+        """Retrieve deleted automation account.
 
-        :param resource_group_name: Name of an Azure Resource group. Required.
-        :type resource_group_name: str
-        :param automation_account_name: The name of the automation account. Required.
-        :type automation_account_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: LinkedWorkspace or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.LinkedWorkspace
+        :return: DeletedAutomationAccountListResult or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.DeletedAutomationAccountListResult
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -77,15 +71,13 @@ class LinkedWorkspaceOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.LinkedWorkspace]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-01-31"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DeletedAutomationAccountListResult]
 
-        request = build_get_request(
-            resource_group_name=resource_group_name,
-            automation_account_name=automation_account_name,
+        request = build_list_by_subscription_request(
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get.metadata["url"],
+            template_url=self.list_by_subscription.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -103,11 +95,11 @@ class LinkedWorkspaceOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("LinkedWorkspace", pipeline_response)
+        deserialized = self._deserialize("DeletedAutomationAccountListResult", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/linkedWorkspace"}  # type: ignore
+    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Automation/deletedAutomationAccounts"}  # type: ignore

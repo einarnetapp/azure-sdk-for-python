@@ -8,7 +8,14 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Optional, TypeVar
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -20,8 +27,10 @@ from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._software_update_configuration_runs_operations import build_get_by_id_request, build_list_request
 from .._vendor import MixinABC
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class SoftwareUpdateConfigurationRunsOperations:
     """
@@ -42,7 +51,6 @@ class SoftwareUpdateConfigurationRunsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace_async
     async def get_by_id(
         self,
@@ -54,42 +62,42 @@ class SoftwareUpdateConfigurationRunsOperations:
     ) -> _models.SoftwareUpdateConfigurationRun:
         """Get a single software update configuration Run by Id.
 
-        :param resource_group_name: Name of an Azure Resource group.
+        :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
-        :param automation_account_name: The name of the automation account.
+        :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
         :param software_update_configuration_run_id: The Id of the software update configuration run.
+         Required.
         :type software_update_configuration_run_id: str
         :param client_request_id: Identifies this specific client request. Default value is None.
         :type client_request_id: str
-        :keyword api_version: Api Version. Default value is "2019-06-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SoftwareUpdateConfigurationRun, or the result of cls(response)
+        :return: SoftwareUpdateConfigurationRun or the result of cls(response)
         :rtype: ~azure.mgmt.automation.models.SoftwareUpdateConfigurationRun
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2019-06-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SoftwareUpdateConfigurationRun]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SoftwareUpdateConfigurationRun]
 
-        
         request = build_get_by_id_request(
-            subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
             software_update_configuration_run_id=software_update_configuration_run_id,
-            api_version=api_version,
+            subscription_id=self._config.subscription_id,
             client_request_id=client_request_id,
-            template_url=self.get_by_id.metadata['url'],
+            api_version=api_version,
+            template_url=self.get_by_id.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -97,10 +105,9 @@ class SoftwareUpdateConfigurationRunsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
+
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -108,15 +115,14 @@ class SoftwareUpdateConfigurationRunsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SoftwareUpdateConfigurationRun', pipeline_response)
+        deserialized = self._deserialize("SoftwareUpdateConfigurationRun", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_by_id.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns/{softwareUpdateConfigurationRunId}"}  # type: ignore
-
+    get_by_id.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns/{softwareUpdateConfigurationRunId}"}  # type: ignore
 
     @distributed_trace_async
     async def list(
@@ -131,9 +137,9 @@ class SoftwareUpdateConfigurationRunsOperations:
     ) -> _models.SoftwareUpdateConfigurationRunListResult:
         """Return list of software update configuration runs.
 
-        :param resource_group_name: Name of an Azure Resource group.
+        :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
-        :param automation_account_name: The name of the automation account.
+        :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
         :param client_request_id: Identifies this specific client request. Default value is None.
         :type client_request_id: str
@@ -146,36 +152,35 @@ class SoftwareUpdateConfigurationRunsOperations:
         :param top: Maximum number of entries returned in the results collection. Default value is
          None.
         :type top: str
-        :keyword api_version: Api Version. Default value is "2019-06-01". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SoftwareUpdateConfigurationRunListResult, or the result of cls(response)
+        :return: SoftwareUpdateConfigurationRunListResult or the result of cls(response)
         :rtype: ~azure.mgmt.automation.models.SoftwareUpdateConfigurationRunListResult
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2019-06-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SoftwareUpdateConfigurationRunListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SoftwareUpdateConfigurationRunListResult]
 
-        
         request = build_list_request(
-            subscription_id=self._config.subscription_id,
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
-            api_version=api_version,
+            subscription_id=self._config.subscription_id,
             client_request_id=client_request_id,
             filter=filter,
             skip=skip,
             top=top,
-            template_url=self.list.metadata['url'],
+            api_version=api_version,
+            template_url=self.list.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -183,10 +188,9 @@ class SoftwareUpdateConfigurationRunsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
+
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -194,12 +198,11 @@ class SoftwareUpdateConfigurationRunsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SoftwareUpdateConfigurationRunListResult', pipeline_response)
+        deserialized = self._deserialize("SoftwareUpdateConfigurationRunListResult", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns"}  # type: ignore
-
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns"}  # type: ignore
