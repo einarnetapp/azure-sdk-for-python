@@ -45,7 +45,7 @@ def build_execute_request(location_name: str, subscription_id: str, **kwargs: An
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkVirtualNetworkSubnetUsage",
+        "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkNameAvailability",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
@@ -65,14 +65,14 @@ def build_execute_request(location_name: str, subscription_id: str, **kwargs: An
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class VirtualNetworkSubnetUsageOperations:
+class CheckNameAvailabilityWithLocationOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.rdbms.postgresql_flexibleservers.PostgreSQLManagementClient`'s
-        :attr:`virtual_network_subnet_usage` attribute.
+        :attr:`check_name_availability_with_location` attribute.
     """
 
     models = _models
@@ -88,64 +88,74 @@ class VirtualNetworkSubnetUsageOperations:
     def execute(
         self,
         location_name: str,
-        parameters: _models.VirtualNetworkSubnetUsageParameter,
+        name_availability_request: _models.CheckNameAvailabilityRequest,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.VirtualNetworkSubnetUsageResult:
-        """Get virtual network subnet usage for a given vNet resource id.
+    ) -> _models.NameAvailability:
+        """Check the availability of name for resource.
 
         :param location_name: The name of the location. Required.
         :type location_name: str
-        :param parameters: The required parameters for creating or updating a server. Required.
-        :type parameters:
-         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.VirtualNetworkSubnetUsageParameter
+        :param name_availability_request: The required parameters for checking if resource name is
+         available. Required.
+        :type name_availability_request:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.CheckNameAvailabilityRequest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: VirtualNetworkSubnetUsageResult or the result of cls(response)
-        :rtype: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.VirtualNetworkSubnetUsageResult
+        :return: NameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.NameAvailability
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
     def execute(
-        self, location_name: str, parameters: IO, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.VirtualNetworkSubnetUsageResult:
-        """Get virtual network subnet usage for a given vNet resource id.
+        self,
+        location_name: str,
+        name_availability_request: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.NameAvailability:
+        """Check the availability of name for resource.
 
         :param location_name: The name of the location. Required.
         :type location_name: str
-        :param parameters: The required parameters for creating or updating a server. Required.
-        :type parameters: IO
+        :param name_availability_request: The required parameters for checking if resource name is
+         available. Required.
+        :type name_availability_request: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: VirtualNetworkSubnetUsageResult or the result of cls(response)
-        :rtype: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.VirtualNetworkSubnetUsageResult
+        :return: NameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.NameAvailability
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace
     def execute(
-        self, location_name: str, parameters: Union[_models.VirtualNetworkSubnetUsageParameter, IO], **kwargs: Any
-    ) -> _models.VirtualNetworkSubnetUsageResult:
-        """Get virtual network subnet usage for a given vNet resource id.
+        self,
+        location_name: str,
+        name_availability_request: Union[_models.CheckNameAvailabilityRequest, IO],
+        **kwargs: Any
+    ) -> _models.NameAvailability:
+        """Check the availability of name for resource.
 
         :param location_name: The name of the location. Required.
         :type location_name: str
-        :param parameters: The required parameters for creating or updating a server. Is either a model
-         type or a IO type. Required.
-        :type parameters:
-         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.VirtualNetworkSubnetUsageParameter or IO
+        :param name_availability_request: The required parameters for checking if resource name is
+         available. Is either a model type or a IO type. Required.
+        :type name_availability_request:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.CheckNameAvailabilityRequest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: VirtualNetworkSubnetUsageResult or the result of cls(response)
-        :rtype: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.VirtualNetworkSubnetUsageResult
+        :return: NameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.NameAvailability
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -161,15 +171,15 @@ class VirtualNetworkSubnetUsageOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.VirtualNetworkSubnetUsageResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.NameAvailability]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(parameters, (IO, bytes)):
-            _content = parameters
+        if isinstance(name_availability_request, (IO, bytes)):
+            _content = name_availability_request
         else:
-            _json = self._serialize.body(parameters, "VirtualNetworkSubnetUsageParameter")
+            _json = self._serialize.body(name_availability_request, "CheckNameAvailabilityRequest")
 
         request = build_execute_request(
             location_name=location_name,
@@ -196,11 +206,11 @@ class VirtualNetworkSubnetUsageOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("VirtualNetworkSubnetUsageResult", pipeline_response)
+        deserialized = self._deserialize("NameAvailability", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    execute.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkVirtualNetworkSubnetUsage"}  # type: ignore
+    execute.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkNameAvailability"}  # type: ignore

@@ -7,6 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -29,8 +30,8 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._virtual_network_rules_operations import (
-    build_create_or_update_request,
+from ...operations._administrators_operations import (
+    build_create_request,
     build_delete_request,
     build_get_request,
     build_list_by_server_request,
@@ -40,14 +41,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class VirtualNetworkRulesOperations:
+class AdministratorsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.rdbms.postgresql.aio.PostgreSQLManagementClient`'s
-        :attr:`virtual_network_rules` attribute.
+        :class:`~azure.mgmt.rdbms.postgresql_flexibleservers.aio.PostgreSQLManagementClient`'s
+        :attr:`administrators` attribute.
     """
 
     models = _models
@@ -59,78 +60,14 @@ class VirtualNetworkRulesOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    @distributed_trace_async
-    async def get(
-        self, resource_group_name: str, server_name: str, virtual_network_rule_name: str, **kwargs: Any
-    ) -> _models.VirtualNetworkRule:
-        """Gets a virtual network rule.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param server_name: The name of the server. Required.
-        :type server_name: str
-        :param virtual_network_rule_name: The name of the virtual network rule. Required.
-        :type virtual_network_rule_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: VirtualNetworkRule or the result of cls(response)
-        :rtype: ~azure.mgmt.rdbms.postgresql.models.VirtualNetworkRule
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2017-12-01"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.VirtualNetworkRule]
-
-        request = build_get_request(
-            resource_group_name=resource_group_name,
-            server_name=server_name,
-            virtual_network_rule_name=virtual_network_rule_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.get.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("VirtualNetworkRule", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"}  # type: ignore
-
-    async def _create_or_update_initial(
+    async def _create_initial(
         self,
         resource_group_name: str,
         server_name: str,
-        virtual_network_rule_name: str,
-        parameters: Union[_models.VirtualNetworkRule, IO],
+        object_id: str,
+        parameters: Union[_models.ActiveDirectoryAdministratorAdd, IO],
         **kwargs: Any
-    ) -> Optional[_models.VirtualNetworkRule]:
+    ) -> _models.ActiveDirectoryAdministrator:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -142,9 +79,9 @@ class VirtualNetworkRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2017-12-01"))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.VirtualNetworkRule]]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveDirectoryAdministrator]
 
         content_type = content_type or "application/json"
         _json = None
@@ -152,18 +89,18 @@ class VirtualNetworkRulesOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "VirtualNetworkRule")
+            _json = self._serialize.body(parameters, "ActiveDirectoryAdministratorAdd")
 
-        request = build_create_or_update_request(
+        request = build_create_request(
             resource_group_name=resource_group_name,
             server_name=server_name,
-            virtual_network_rule_name=virtual_network_rule_name,
+            object_id=object_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
             content=_content,
-            template_url=self._create_or_update_initial.metadata["url"],
+            template_url=self._create_initial.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -176,46 +113,48 @@ class VirtualNetworkRulesOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 201, 202]:
+        if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = None
         if response.status_code == 200:
-            deserialized = self._deserialize("VirtualNetworkRule", pipeline_response)
+            deserialized = self._deserialize("ActiveDirectoryAdministrator", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("VirtualNetworkRule", pipeline_response)
+            deserialized = self._deserialize("ActiveDirectoryAdministrator", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"}  # type: ignore
+    _create_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}"}  # type: ignore
 
     @overload
-    async def begin_create_or_update(
+    async def begin_create(
         self,
         resource_group_name: str,
         server_name: str,
-        virtual_network_rule_name: str,
-        parameters: _models.VirtualNetworkRule,
+        object_id: str,
+        parameters: _models.ActiveDirectoryAdministratorAdd,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.VirtualNetworkRule]:
-        """Creates or updates an existing virtual network rule.
+    ) -> AsyncLROPoller[_models.ActiveDirectoryAdministrator]:
+        """Creates a new server.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param virtual_network_rule_name: The name of the virtual network rule. Required.
-        :type virtual_network_rule_name: str
-        :param parameters: The requested virtual Network Rule Resource state. Required.
-        :type parameters: ~azure.mgmt.rdbms.postgresql.models.VirtualNetworkRule
+        :param object_id: Guid of the objectId for the administrator. Required.
+        :type object_id: str
+        :param parameters: The required parameters for adding an active directory administrator for a
+         server. Required.
+        :type parameters:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministratorAdd
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -227,34 +166,35 @@ class VirtualNetworkRulesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either VirtualNetworkRule or the result of
-         cls(response)
+        :return: An instance of AsyncLROPoller that returns either ActiveDirectoryAdministrator or the
+         result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.rdbms.postgresql.models.VirtualNetworkRule]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministrator]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    async def begin_create_or_update(
+    async def begin_create(
         self,
         resource_group_name: str,
         server_name: str,
-        virtual_network_rule_name: str,
+        object_id: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.VirtualNetworkRule]:
-        """Creates or updates an existing virtual network rule.
+    ) -> AsyncLROPoller[_models.ActiveDirectoryAdministrator]:
+        """Creates a new server.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param virtual_network_rule_name: The name of the virtual network rule. Required.
-        :type virtual_network_rule_name: str
-        :param parameters: The requested virtual Network Rule Resource state. Required.
+        :param object_id: Guid of the objectId for the administrator. Required.
+        :type object_id: str
+        :param parameters: The required parameters for adding an active directory administrator for a
+         server. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -267,34 +207,35 @@ class VirtualNetworkRulesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either VirtualNetworkRule or the result of
-         cls(response)
+        :return: An instance of AsyncLROPoller that returns either ActiveDirectoryAdministrator or the
+         result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.rdbms.postgresql.models.VirtualNetworkRule]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministrator]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace_async
-    async def begin_create_or_update(
+    async def begin_create(
         self,
         resource_group_name: str,
         server_name: str,
-        virtual_network_rule_name: str,
-        parameters: Union[_models.VirtualNetworkRule, IO],
+        object_id: str,
+        parameters: Union[_models.ActiveDirectoryAdministratorAdd, IO],
         **kwargs: Any
-    ) -> AsyncLROPoller[_models.VirtualNetworkRule]:
-        """Creates or updates an existing virtual network rule.
+    ) -> AsyncLROPoller[_models.ActiveDirectoryAdministrator]:
+        """Creates a new server.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param virtual_network_rule_name: The name of the virtual network rule. Required.
-        :type virtual_network_rule_name: str
-        :param parameters: The requested virtual Network Rule Resource state. Is either a model type or
-         a IO type. Required.
-        :type parameters: ~azure.mgmt.rdbms.postgresql.models.VirtualNetworkRule or IO
+        :param object_id: Guid of the objectId for the administrator. Required.
+        :type object_id: str
+        :param parameters: The required parameters for adding an active directory administrator for a
+         server. Is either a model type or a IO type. Required.
+        :type parameters:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministratorAdd or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -306,26 +247,26 @@ class VirtualNetworkRulesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either VirtualNetworkRule or the result of
-         cls(response)
+        :return: An instance of AsyncLROPoller that returns either ActiveDirectoryAdministrator or the
+         result of cls(response)
         :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.rdbms.postgresql.models.VirtualNetworkRule]
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministrator]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2017-12-01"))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.VirtualNetworkRule]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveDirectoryAdministrator]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
-            raw_result = await self._create_or_update_initial(  # type: ignore
+            raw_result = await self._create_initial(  # type: ignore
                 resource_group_name=resource_group_name,
                 server_name=server_name,
-                virtual_network_rule_name=virtual_network_rule_name,
+                object_id=object_id,
                 parameters=parameters,
                 api_version=api_version,
                 content_type=content_type,
@@ -337,13 +278,16 @@ class VirtualNetworkRulesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("VirtualNetworkRule", pipeline_response)
+            deserialized = self._deserialize("ActiveDirectoryAdministrator", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
 
         if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
+            polling_method = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )  # type: AsyncPollingMethod
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -357,10 +301,10 @@ class VirtualNetworkRulesOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"}  # type: ignore
+    begin_create.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}"}  # type: ignore
 
     async def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, server_name: str, virtual_network_rule_name: str, **kwargs: Any
+        self, resource_group_name: str, server_name: str, object_id: str, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -373,13 +317,13 @@ class VirtualNetworkRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2017-12-01"))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
             server_name=server_name,
-            virtual_network_rule_name=virtual_network_rule_name,
+            object_id=object_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -397,26 +341,31 @@ class VirtualNetworkRulesOperations:
 
         if response.status_code not in [200, 202, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
 
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, None, response_headers)
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"}  # type: ignore
+    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}"}  # type: ignore
 
     @distributed_trace_async
     async def begin_delete(
-        self, resource_group_name: str, server_name: str, virtual_network_rule_name: str, **kwargs: Any
+        self, resource_group_name: str, server_name: str, object_id: str, **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Deletes the virtual network rule with the given name.
+        """Deletes an Active Directory Administrator associated with the server.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param server_name: The name of the server. Required.
         :type server_name: str
-        :param virtual_network_rule_name: The name of the virtual network rule. Required.
-        :type virtual_network_rule_name: str
+        :param object_id: Guid of the objectId for the administrator. Required.
+        :type object_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
@@ -432,7 +381,7 @@ class VirtualNetworkRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2017-12-01"))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -441,7 +390,7 @@ class VirtualNetworkRulesOperations:
             raw_result = await self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
                 server_name=server_name,
-                virtual_network_rule_name=virtual_network_rule_name,
+                object_id=object_id,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -455,7 +404,9 @@ class VirtualNetworkRulesOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
+            polling_method = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )  # type: AsyncPollingMethod
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -469,13 +420,78 @@ class VirtualNetworkRulesOperations:
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}"}  # type: ignore
+    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}"}  # type: ignore
+
+    @distributed_trace_async
+    async def get(
+        self, resource_group_name: str, server_name: str, object_id: str, **kwargs: Any
+    ) -> _models.ActiveDirectoryAdministrator:
+        """Gets information about a server.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param server_name: The name of the server. Required.
+        :type server_name: str
+        :param object_id: Guid of the objectId for the administrator. Required.
+        :type object_id: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ActiveDirectoryAdministrator or the result of cls(response)
+        :rtype: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministrator
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveDirectoryAdministrator]
+
+        request = build_get_request(
+            resource_group_name=resource_group_name,
+            server_name=server_name,
+            object_id=object_id,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.get.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ActiveDirectoryAdministrator", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}"}  # type: ignore
 
     @distributed_trace
     def list_by_server(
         self, resource_group_name: str, server_name: str, **kwargs: Any
-    ) -> AsyncIterable["_models.VirtualNetworkRule"]:
-        """Gets a list of virtual network rules in a server.
+    ) -> AsyncIterable["_models.ActiveDirectoryAdministrator"]:
+        """List all the AAD administrators for a given server.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
@@ -483,16 +499,17 @@ class VirtualNetworkRulesOperations:
         :param server_name: The name of the server. Required.
         :type server_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either VirtualNetworkRule or the result of cls(response)
+        :return: An iterator like instance of either ActiveDirectoryAdministrator or the result of
+         cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.rdbms.postgresql.models.VirtualNetworkRule]
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.rdbms.postgresql_flexibleservers.models.ActiveDirectoryAdministrator]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2017-12-01"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.VirtualNetworkRuleListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AdministratorListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -518,14 +535,25 @@ class VirtualNetworkRulesOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("VirtualNetworkRuleListResult", pipeline_response)
+            deserialized = self._deserialize("AdministratorListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -541,10 +569,11 @@ class VirtualNetworkRulesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_server.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/virtualNetworkRules"}  # type: ignore
+    list_by_server.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators"}  # type: ignore
