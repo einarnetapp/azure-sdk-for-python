@@ -28,6 +28,29 @@ class AlertDetail(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SEVERITY = "Severity"
 
 
+class AlertProperty(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The V3 alert property."""
+
+    #: Alert's link
+    ALERT_LINK = "AlertLink"
+    #: Confidence level property
+    CONFIDENCE_LEVEL = "ConfidenceLevel"
+    #: Confidence score
+    CONFIDENCE_SCORE = "ConfidenceScore"
+    #: Extended links to the alert
+    EXTENDED_LINKS = "ExtendedLinks"
+    #: Product name alert property
+    PRODUCT_NAME = "ProductName"
+    #: Provider name alert property
+    PROVIDER_NAME = "ProviderName"
+    #: Product component name alert property
+    PRODUCT_COMPONENT_NAME = "ProductComponentName"
+    #: Remediation steps alert property
+    REMEDIATION_STEPS = "RemediationSteps"
+    #: Techniques alert property
+    TECHNIQUES = "Techniques"
+
+
 class AlertRuleKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of the alert rule."""
 
@@ -866,7 +889,7 @@ class IngestionMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class KillChainIntent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Holds the alert intent stage(s) mapping for this alert."""
+    """The intent of the alert."""
 
     #: The default value.
     UNKNOWN = "Unknown"
@@ -1058,6 +1081,15 @@ class ProviderName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MICROSOFT_AUTHORIZATION_POLICY_ASSIGNMENTS = "Microsoft.Authorization/policyAssignments"
 
 
+class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The current provisioning state."""
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
+    IN_PROGRESS = "InProgress"
+
+
 class RegistryHive(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """the hive that holds the registry key."""
 
@@ -1161,6 +1193,13 @@ class SourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOTE_STORAGE = "Remote storage"
 
 
+class SummaryStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The status of the Summary : Active, Deleted."""
+
+    ACTIVE = "Active"
+    DELETED = "Deleted"
+
+
 class SupportTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of support for content item."""
 
@@ -1220,6 +1259,13 @@ class TriggersWhen(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CREATED = "Created"
     #: Trigger on updated objects
     UPDATED = "Updated"
+
+
+class Type(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of the summary."""
+
+    DYNAMIC_SUMMARY = "dynamic-summary"
+    DYNAMIC_SUMMARY_ITEM = "dynamic-summary-item"
 
 
 class UebaDataSources(str, Enum, metaclass=CaseInsensitiveEnumMeta):
