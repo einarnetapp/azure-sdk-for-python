@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -48,7 +48,7 @@ class SchedulesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.aio.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.aio.DevCenter`'s
         :attr:`schedules` attribute.
     """
 
@@ -67,7 +67,8 @@ class SchedulesOperations:
     ) -> AsyncIterable["_models.Schedule"]:
         """Lists schedules for a pool.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -114,10 +115,17 @@ class SchedulesOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -160,7 +168,8 @@ class SchedulesOperations:
     ) -> _models.Schedule:
         """Gets a schedule resource.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -281,11 +290,15 @@ class SchedulesOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [201]:
+        if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Schedule", pipeline_response)
+        if response.status_code == 200:
+            deserialized = self._deserialize("Schedule", pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize("Schedule", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -309,7 +322,8 @@ class SchedulesOperations:
     ) -> AsyncLROPoller[_models.Schedule]:
         """Creates or updates a Schedule.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -354,7 +368,8 @@ class SchedulesOperations:
     ) -> AsyncLROPoller[_models.Schedule]:
         """Creates or updates a Schedule.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -397,7 +412,8 @@ class SchedulesOperations:
     ) -> AsyncLROPoller[_models.Schedule]:
         """Creates or updates a Schedule.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -478,7 +494,7 @@ class SchedulesOperations:
 
     begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}"}  # type: ignore
 
-    async def _update_initial(  # pylint: disable=inconsistent-return-statements
+    async def _update_initial(
         self,
         resource_group_name: str,
         project_name: str,
@@ -487,7 +503,7 @@ class SchedulesOperations:
         body: Union[_models.ScheduleUpdate, IO],
         top: Optional[int] = None,
         **kwargs: Any
-    ) -> None:
+    ) -> Optional[_models.Schedule]:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -501,7 +517,7 @@ class SchedulesOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.Schedule]]
 
         content_type = content_type or "application/json"
         _json = None
@@ -535,12 +551,18 @@ class SchedulesOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [202]:
+        if response.status_code not in [200, 202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
+        deserialized = None
+        if response.status_code == 200:
+            deserialized = self._deserialize("Schedule", pipeline_response)
+
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
 
     _update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}"}  # type: ignore
 
@@ -556,10 +578,11 @@ class SchedulesOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[None]:
+    ) -> AsyncLROPoller[_models.Schedule]:
         """Partially updates a Scheduled.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -583,8 +606,9 @@ class SchedulesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :return: An instance of AsyncLROPoller that returns either Schedule or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.devcenter.models.Schedule]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -600,10 +624,11 @@ class SchedulesOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncLROPoller[None]:
+    ) -> AsyncLROPoller[_models.Schedule]:
         """Partially updates a Scheduled.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -627,8 +652,9 @@ class SchedulesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :return: An instance of AsyncLROPoller that returns either Schedule or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.devcenter.models.Schedule]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -642,10 +668,11 @@ class SchedulesOperations:
         body: Union[_models.ScheduleUpdate, IO],
         top: Optional[int] = None,
         **kwargs: Any
-    ) -> AsyncLROPoller[None]:
+    ) -> AsyncLROPoller[_models.Schedule]:
         """Partially updates a Scheduled.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str
@@ -669,8 +696,9 @@ class SchedulesOperations:
         :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :return: An instance of AsyncLROPoller that returns either Schedule or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.devcenter.models.Schedule]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -678,7 +706,7 @@ class SchedulesOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Schedule]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
@@ -699,9 +727,11 @@ class SchedulesOperations:
             )
         kwargs.pop("error_map", None)
 
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("Schedule", pipeline_response)
             if cls:
-                return cls(pipeline_response, None, {})
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
 
         if polling is True:
             polling_method = cast(
@@ -788,7 +818,8 @@ class SchedulesOperations:
     ) -> AsyncLROPoller[None]:
         """Deletes a Scheduled.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param project_name: The name of the project. Required.
         :type project_name: str

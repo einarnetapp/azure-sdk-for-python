@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, overload
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -46,7 +46,7 @@ class EnvironmentTypesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.devcenter.aio.DevCenterClient`'s
+        :class:`~azure.mgmt.devcenter.aio.DevCenter`'s
         :attr:`environment_types` attribute.
     """
 
@@ -65,7 +65,8 @@ class EnvironmentTypesOperations:
     ) -> AsyncIterable["_models.EnvironmentType"]:
         """Lists environment types for the devcenter.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -109,10 +110,17 @@ class EnvironmentTypesOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -149,7 +157,8 @@ class EnvironmentTypesOperations:
     ) -> _models.EnvironmentType:
         """Gets an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -219,7 +228,8 @@ class EnvironmentTypesOperations:
     ) -> _models.EnvironmentType:
         """Creates or updates an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -249,7 +259,8 @@ class EnvironmentTypesOperations:
     ) -> _models.EnvironmentType:
         """Creates or updates an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -277,7 +288,8 @@ class EnvironmentTypesOperations:
     ) -> _models.EnvironmentType:
         """Creates or updates an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -364,7 +376,8 @@ class EnvironmentTypesOperations:
     ) -> _models.EnvironmentType:
         """Partially updates an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -394,7 +407,8 @@ class EnvironmentTypesOperations:
     ) -> _models.EnvironmentType:
         """Partially updates an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -422,7 +436,8 @@ class EnvironmentTypesOperations:
     ) -> _models.EnvironmentType:
         """Partially updates an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
@@ -503,7 +518,8 @@ class EnvironmentTypesOperations:
     ) -> None:
         """Deletes an environment type.
 
-        :param resource_group_name: Name of the resource group within the Azure subscription. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param dev_center_name: The name of the devcenter. Required.
         :type dev_center_name: str
