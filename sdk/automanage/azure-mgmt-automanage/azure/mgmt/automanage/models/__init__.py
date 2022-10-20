@@ -32,44 +32,42 @@ from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
 from ._models_py3 import UpdateResource
 
-
-from ._automanage_client_enums import (
-    ActionType,
-    CreatedByType,
-    Origin,
-)
+from ._automanage_client_enums import ActionType
+from ._automanage_client_enums import CreatedByType
+from ._automanage_client_enums import Origin
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
+
 __all__ = [
-    'BestPractice',
-    'BestPracticeList',
-    'ConfigurationProfile',
-    'ConfigurationProfileAssignment',
-    'ConfigurationProfileAssignmentList',
-    'ConfigurationProfileAssignmentProperties',
-    'ConfigurationProfileList',
-    'ConfigurationProfileProperties',
-    'ConfigurationProfileUpdate',
-    'ErrorAdditionalInfo',
-    'ErrorDetail',
-    'ErrorResponse',
-    'Operation',
-    'OperationDisplay',
-    'OperationListResult',
-    'ProxyResource',
-    'Report',
-    'ReportList',
-    'ReportResource',
-    'Resource',
-    'ServicePrincipal',
-    'ServicePrincipalListResult',
-    'SystemData',
-    'TrackedResource',
-    'UpdateResource',
-    'ActionType',
-    'CreatedByType',
-    'Origin',
+    "BestPractice",
+    "BestPracticeList",
+    "ConfigurationProfile",
+    "ConfigurationProfileAssignment",
+    "ConfigurationProfileAssignmentList",
+    "ConfigurationProfileAssignmentProperties",
+    "ConfigurationProfileList",
+    "ConfigurationProfileProperties",
+    "ConfigurationProfileUpdate",
+    "ErrorAdditionalInfo",
+    "ErrorDetail",
+    "ErrorResponse",
+    "Operation",
+    "OperationDisplay",
+    "OperationListResult",
+    "ProxyResource",
+    "Report",
+    "ReportList",
+    "ReportResource",
+    "Resource",
+    "ServicePrincipal",
+    "ServicePrincipalListResult",
+    "SystemData",
+    "TrackedResource",
+    "UpdateResource",
+    "ActionType",
+    "CreatedByType",
+    "Origin",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
