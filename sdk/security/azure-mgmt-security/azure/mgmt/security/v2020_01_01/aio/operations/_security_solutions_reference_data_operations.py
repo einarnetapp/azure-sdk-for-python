@@ -8,7 +8,14 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Optional, TypeVar
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, ResourceNotModifiedError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -18,9 +25,14 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._security_solutions_reference_data_operations import build_list_by_home_region_request, build_list_request
-T = TypeVar('T')
+from ...operations._security_solutions_reference_data_operations import (
+    build_list_by_home_region_request,
+    build_list_request,
+)
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class SecuritySolutionsReferenceDataOperations:
     """
@@ -41,12 +53,8 @@ class SecuritySolutionsReferenceDataOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace_async
-    async def list(
-        self,
-        **kwargs: Any
-    ) -> _models.SecuritySolutionsReferenceDataList:
+    async def list(self, **kwargs: Any) -> _models.SecuritySolutionsReferenceDataList:
         """Gets a list of all supported Security Solutions for the subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -55,21 +63,23 @@ class SecuritySolutionsReferenceDataOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecuritySolutionsReferenceDataList]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecuritySolutionsReferenceDataList]
 
-        
         request = build_list_request(
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.list.metadata['url'],
+            template_url=self.list.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -77,9 +87,7 @@ class SecuritySolutionsReferenceDataOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -88,22 +96,17 @@ class SecuritySolutionsReferenceDataOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SecuritySolutionsReferenceDataList', pipeline_response)
+        deserialized = self._deserialize("SecuritySolutionsReferenceDataList", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securitySolutionsReferenceData"}  # type: ignore
-
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securitySolutionsReferenceData"}  # type: ignore
 
     @distributed_trace_async
-    async def list_by_home_region(
-        self,
-        asc_location: str,
-        **kwargs: Any
-    ) -> _models.SecuritySolutionsReferenceDataList:
+    async def list_by_home_region(self, asc_location: str, **kwargs: Any) -> _models.SecuritySolutionsReferenceDataList:
         """Gets list of all supported Security Solutions for subscription and location.
 
         :param asc_location: The location where ASC stores the data of the subscription. can be
@@ -115,22 +118,24 @@ class SecuritySolutionsReferenceDataOperations:
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError, 304: ResourceNotModifiedError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-01"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.SecuritySolutionsReferenceDataList]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-01"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecuritySolutionsReferenceDataList]
 
-        
         request = build_list_by_home_region_request(
             asc_location=asc_location,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.list_by_home_region.metadata['url'],
+            template_url=self.list_by_home_region.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -138,9 +143,7 @@ class SecuritySolutionsReferenceDataOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
 
         response = pipeline_response.http_response
@@ -149,12 +152,11 @@ class SecuritySolutionsReferenceDataOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('SecuritySolutionsReferenceDataList', pipeline_response)
+        deserialized = self._deserialize("SecuritySolutionsReferenceDataList", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list_by_home_region.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData"}  # type: ignore
-
+    list_by_home_region.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutionsReferenceData"}  # type: ignore
