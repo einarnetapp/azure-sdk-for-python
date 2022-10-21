@@ -36,13 +36,8 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_revisions_request(
-    resource_group_name: str,
-    container_app_name: str,
-    subscription_id: str,
-    *,
-    filter: Optional[str] = None,
-    **kwargs: Any
+def build_get_root_request(
+    resource_group_name: str, environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -53,50 +48,14 @@ def build_list_revisions_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/rootApi/",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if filter is not None:
-        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_get_revision_request(
-    resource_group_name: str, container_app_name: str, revision_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-        "revisionName": _SERIALIZER.url("revision_name", revision_name, "str"),
+        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -110,8 +69,8 @@ def build_get_revision_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_activate_revision_request(
-    resource_group_name: str, container_app_name: str, revision_name: str, subscription_id: str, **kwargs: Any
+def build_list_dapr_components_request(
+    resource_group_name: str, environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -122,15 +81,14 @@ def build_activate_revision_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/activate",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/daprApi/",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-        "revisionName": _SERIALIZER.url("revision_name", revision_name, "str"),
+        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -141,11 +99,11 @@ def build_activate_revision_request(
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_deactivate_revision_request(
-    resource_group_name: str, container_app_name: str, revision_name: str, subscription_id: str, **kwargs: Any
+def build_get_dapr_components_request(
+    resource_group_name: str, environment_name: str, component_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -156,15 +114,15 @@ def build_deactivate_revision_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/deactivate",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/daprApi/{componentName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-        "revisionName": _SERIALIZER.url("revision_name", revision_name, "str"),
+        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
+        "componentName": _SERIALIZER.url("component_name", component_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -175,11 +133,11 @@ def build_deactivate_revision_request(
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_restart_revision_request(
-    resource_group_name: str, container_app_name: str, revision_name: str, subscription_id: str, **kwargs: Any
+def build_list_certificates_request(
+    resource_group_name: str, environment_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -190,15 +148,14 @@ def build_restart_revision_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/restart",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/certificatesApi/",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "containerAppName": _SERIALIZER.url("container_app_name", container_app_name, "str"),
-        "revisionName": _SERIALIZER.url("revision_name", revision_name, "str"),
+        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -209,17 +166,51 @@ def build_restart_revision_request(
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class ContainerAppsRevisionsOperations:
+def build_get_certificates_request(
+    resource_group_name: str, environment_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01-preview"))  # type: str
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/certificatesApi/{certificateName}",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "environmentName": _SERIALIZER.url("environment_name", environment_name, "str"),
+        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+class ManagedEnvironmentsDiagnosticsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.app.ContainerAppsAPIClient`'s
-        :attr:`container_apps_revisions` attribute.
+        :attr:`managed_environments_diagnostics` attribute.
     """
 
     models = _models
@@ -232,30 +223,90 @@ class ContainerAppsRevisionsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_revisions(
-        self, resource_group_name: str, container_app_name: str, filter: Optional[str] = None, **kwargs: Any
-    ) -> Iterable["_models.Revision"]:
-        """Get the Revisions for a given Container App.
+    def get_root(self, resource_group_name: str, environment_name: str, **kwargs: Any) -> _models.ManagedEnvironment:
+        """Get the properties of a Managed Environment.
 
-        Get the Revisions for a given Container App.
+        Get the properties of a Managed Environment used to host container apps.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App for which Revisions are needed. Required.
-        :type container_app_name: str
-        :param filter: The filter to apply on the operation. Default value is None.
-        :type filter: str
+        :param environment_name: Name of the Environment. Required.
+        :type environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Revision or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.Revision]
+        :return: ManagedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.ManagedEnvironment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ManagedEnvironment]
+
+        request = build_get_root_request(
+            resource_group_name=resource_group_name,
+            environment_name=environment_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.get_root.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ManagedEnvironment", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get_root.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/rootApi/"}  # type: ignore
+
+    @distributed_trace
+    def list_dapr_components(
+        self, resource_group_name: str, environment_name: str, **kwargs: Any
+    ) -> Iterable["_models.DaprComponent"]:
+        """Get the Dapr components of a Managed Environment.
+
+        Get the Dapr components of a Managed Environment used to host container apps.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param environment_name: Name of the Environment. Required.
+        :type environment_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: An iterator like instance of either DaprComponent or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.DaprComponent]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.RevisionCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponentsCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -268,13 +319,12 @@ class ContainerAppsRevisionsOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_list_revisions_request(
+                request = build_list_dapr_components_request(
                     resource_group_name=resource_group_name,
-                    container_app_name=container_app_name,
+                    environment_name=environment_name,
                     subscription_id=self._config.subscription_id,
-                    filter=filter,
                     api_version=api_version,
-                    template_url=self.list_revisions.metadata["url"],
+                    template_url=self.list_dapr_components.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -300,7 +350,7 @@ class ContainerAppsRevisionsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("RevisionCollection", pipeline_response)
+            deserialized = self._deserialize("DaprComponentsCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -323,26 +373,26 @@ class ContainerAppsRevisionsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_revisions.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions"}  # type: ignore
+    list_dapr_components.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/daprApi/"}  # type: ignore
 
     @distributed_trace
-    def get_revision(
-        self, resource_group_name: str, container_app_name: str, revision_name: str, **kwargs: Any
-    ) -> _models.Revision:
-        """Get a revision of a Container App.
+    def get_dapr_components(
+        self, resource_group_name: str, environment_name: str, component_name: str, **kwargs: Any
+    ) -> _models.DaprComponent:
+        """Get the Dapr component of a Managed Environment.
 
-        Get a revision of a Container App.
+        Get the Dapr component of a Managed Environment used to host container apps.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param revision_name: Name of the Container App Revision. Required.
-        :type revision_name: str
+        :param environment_name: Name of the Environment. Required.
+        :type environment_name: str
+        :param component_name: Name of the Dapr Component. Required.
+        :type component_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Revision or the result of cls(response)
-        :rtype: ~azure.mgmt.app.models.Revision
+        :return: DaprComponent or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.DaprComponent
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -357,15 +407,15 @@ class ContainerAppsRevisionsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Revision]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.DaprComponent]
 
-        request = build_get_revision_request(
+        request = build_get_dapr_components_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            revision_name=revision_name,
+            environment_name=environment_name,
+            component_name=component_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get_revision.metadata["url"],
+            template_url=self.get_dapr_components.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -383,33 +433,124 @@ class ContainerAppsRevisionsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Revision", pipeline_response)
+        deserialized = self._deserialize("DaprComponent", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_revision.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}"}  # type: ignore
+    get_dapr_components.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/daprApi/{componentName}"}  # type: ignore
 
     @distributed_trace
-    def activate_revision(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, container_app_name: str, revision_name: str, **kwargs: Any
-    ) -> None:
-        """Activates a revision for a Container App.
+    def list_certificates(
+        self, resource_group_name: str, environment_name: str, **kwargs: Any
+    ) -> Iterable["_models.Certificate"]:
+        """Get the Certificates in a Managed Environment.
 
-        Activates a revision for a Container App.
+        Get the Certificates of a Managed Environment used to host container apps.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param revision_name: Name of the Container App Revision. Required.
-        :type revision_name: str
+        :param environment_name: Name of the Environment. Required.
+        :type environment_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
+        :return: An iterator like instance of either Certificate or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.app.models.Certificate]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CertificateCollection]
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_certificates_request(
+                    resource_group_name=resource_group_name,
+                    environment_name=environment_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    template_url=self.list_certificates.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+                request.method = "GET"
+            return request
+
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize("CertificateCollection", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    list_certificates.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/certificatesApi/"}  # type: ignore
+
+    @distributed_trace
+    def get_certificates(
+        self, resource_group_name: str, environment_name: str, certificate_name: str, **kwargs: Any
+    ) -> _models.Certificate:
+        """Get the specified Certificate in a Managed Environment.
+
+        Get the specified Certificate of a Managed Environment used to host container apps.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param environment_name: Name of the Environment. Required.
+        :type environment_name: str
+        :param certificate_name: Name of the Certificate. Required.
+        :type certificate_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Certificate or the result of cls(response)
+        :rtype: ~azure.mgmt.app.models.Certificate
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -424,15 +565,15 @@ class ContainerAppsRevisionsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Certificate]
 
-        request = build_activate_revision_request(
+        request = build_get_certificates_request(
             resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            revision_name=revision_name,
+            environment_name=environment_name,
+            certificate_name=certificate_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.activate_revision.metadata["url"],
+            template_url=self.get_certificates.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -450,133 +591,11 @@ class ContainerAppsRevisionsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    activate_revision.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/activate"}  # type: ignore
-
-    @distributed_trace
-    def deactivate_revision(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, container_app_name: str, revision_name: str, **kwargs: Any
-    ) -> None:
-        """Deactivates a revision for a Container App.
-
-        Deactivates a revision for a Container App.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param revision_name: Name of the Container App Revision. Required.
-        :type revision_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-
-        request = build_deactivate_revision_request(
-            resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            revision_name=revision_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.deactivate_revision.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+        deserialized = self._deserialize("Certificate", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, None, {})
+            return cls(pipeline_response, deserialized, {})
 
-    deactivate_revision.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/deactivate"}  # type: ignore
+        return deserialized
 
-    @distributed_trace
-    def restart_revision(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, container_app_name: str, revision_name: str, **kwargs: Any
-    ) -> None:
-        """Restarts a revision for a Container App.
-
-        Restarts a revision for a Container App.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param revision_name: Name of the Container App Revision. Required.
-        :type revision_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-
-        request = build_restart_revision_request(
-            resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            revision_name=revision_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.restart_revision.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    restart_revision.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/revisions/{revisionName}/restart"}  # type: ignore
+    get_certificates.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/detectorProperties/certificatesApi/{certificateName}"}  # type: ignore
