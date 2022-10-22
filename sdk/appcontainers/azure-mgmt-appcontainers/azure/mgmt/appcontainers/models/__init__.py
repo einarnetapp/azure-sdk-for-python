@@ -109,6 +109,10 @@ from ._models_py3 import LogAnalyticsConfiguration
 from ._models_py3 import Login
 from ._models_py3 import LoginRoutes
 from ._models_py3 import LoginScopes
+from ._models_py3 import ManagedCertificate
+from ._models_py3 import ManagedCertificateCollection
+from ._models_py3 import ManagedCertificatePatch
+from ._models_py3 import ManagedCertificateProperties
 from ._models_py3 import ManagedEnvironment
 from ._models_py3 import ManagedEnvironmentOutboundSettings
 from ._models_py3 import ManagedEnvironmentStorage
@@ -175,6 +179,7 @@ from ._container_apps_api_client_enums import ExtendedLocationTypes
 from ._container_apps_api_client_enums import ForwardProxyConvention
 from ._container_apps_api_client_enums import IngressTransportMethod
 from ._container_apps_api_client_enums import LogLevel
+from ._container_apps_api_client_enums import ManagedCertificateDomainControlValidation
 from ._container_apps_api_client_enums import ManagedEnvironmentOutBoundType
 from ._container_apps_api_client_enums import ManagedServiceIdentityType
 from ._container_apps_api_client_enums import RevisionHealthState
@@ -293,6 +298,10 @@ __all__ = [
     "Login",
     "LoginRoutes",
     "LoginScopes",
+    "ManagedCertificate",
+    "ManagedCertificateCollection",
+    "ManagedCertificatePatch",
+    "ManagedCertificateProperties",
     "ManagedEnvironment",
     "ManagedEnvironmentOutboundSettings",
     "ManagedEnvironmentStorage",
@@ -358,6 +367,7 @@ __all__ = [
     "ForwardProxyConvention",
     "IngressTransportMethod",
     "LogLevel",
+    "ManagedCertificateDomainControlValidation",
     "ManagedEnvironmentOutBoundType",
     "ManagedServiceIdentityType",
     "RevisionHealthState",

@@ -185,6 +185,14 @@ class LogLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ERROR = "error"
 
 
+class ManagedCertificateDomainControlValidation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Selected type of domain control validation for managed certificates."""
+
+    CNAME = "CNAME"
+    HTTP = "HTTP"
+    TXT = "TXT"
+
+
 class ManagedEnvironmentOutBoundType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Outbound type for the cluster."""
 
