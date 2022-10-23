@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -58,9 +58,9 @@ class ThreatIntelligenceIndicatorsOperations:
         resource_group_name: str,
         workspace_name: str,
         filter: Optional[str] = None,
-        orderby: Optional[str] = None,
         top: Optional[int] = None,
         skip_token: Optional[str] = None,
+        orderby: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterable["_models.ThreatIntelligenceInformation"]:
         """Get all threat intelligence indicators.
@@ -73,8 +73,6 @@ class ThreatIntelligenceIndicatorsOperations:
         :param filter: Filters the results, based on a Boolean condition. Optional. Default value is
          None.
         :type filter: str
-        :param orderby: Sorts the results. Optional. Default value is None.
-        :type orderby: str
         :param top: Returns only the first n results. Optional. Default value is None.
         :type top: int
         :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
@@ -82,6 +80,8 @@ class ThreatIntelligenceIndicatorsOperations:
          a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
          Default value is None.
         :type skip_token: str
+        :param orderby: Sorts the results. Optional. Default value is None.
+        :type orderby: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: An iterator like instance of either ThreatIntelligenceInformation or the result of
          cls(response)
@@ -111,9 +111,9 @@ class ThreatIntelligenceIndicatorsOperations:
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
                     filter=filter,
-                    orderby=orderby,
                     top=top,
                     skip_token=skip_token,
+                    orderby=orderby,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -124,10 +124,17 @@ class ThreatIntelligenceIndicatorsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
