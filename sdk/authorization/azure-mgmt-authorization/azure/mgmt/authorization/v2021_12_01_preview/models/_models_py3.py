@@ -2806,6 +2806,8 @@ class AlertConfiguration(_serialization.Model):
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
@@ -2814,6 +2816,7 @@ class AlertConfiguration(_serialization.Model):
         "type": {"readonly": True},
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -2824,6 +2827,7 @@ class AlertConfiguration(_serialization.Model):
         "scope": {"key": "properties.scope", "type": "str"},
         "is_enabled": {"key": "properties.isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "properties.alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "properties.alertDefinition", "type": "AlertDefinition"},
     }
 
     def __init__(self, *, is_enabled: Optional[bool] = None, **kwargs):
@@ -2840,6 +2844,7 @@ class AlertConfiguration(_serialization.Model):
         self.scope = None
         self.is_enabled = is_enabled
         self.alert_configuration_type = None  # type: Optional[str]
+        self.alert_definition = None
 
 
 class AlertConfigurationListResult(_serialization.Model):
@@ -2892,12 +2897,15 @@ class AlertConfigurationProperties(_serialization.Model):
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -2905,6 +2913,7 @@ class AlertConfigurationProperties(_serialization.Model):
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
     }
 
     _subtype_map = {
@@ -2927,6 +2936,7 @@ class AlertConfigurationProperties(_serialization.Model):
         self.scope = None
         self.is_enabled = is_enabled
         self.alert_configuration_type = None  # type: Optional[str]
+        self.alert_definition = None
 
 
 class AlertDefinition(_serialization.Model):  # pylint: disable=too-many-instance-attributes
@@ -3239,12 +3249,15 @@ class AzureRolesAssignedOutsidePimAlertConfigurationProperties(AlertConfiguratio
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3252,6 +3265,7 @@ class AzureRolesAssignedOutsidePimAlertConfigurationProperties(AlertConfiguratio
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
     }
 
     def __init__(self, *, is_enabled: Optional[bool] = None, **kwargs):
@@ -3387,12 +3401,15 @@ class DuplicateRoleCreatedAlertConfigurationProperties(AlertConfigurationPropert
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     """
 
     _validation = {
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3400,6 +3417,7 @@ class DuplicateRoleCreatedAlertConfigurationProperties(AlertConfigurationPropert
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
     }
 
     def __init__(self, *, is_enabled: Optional[bool] = None, **kwargs):
@@ -3680,6 +3698,8 @@ class TooManyOwnersAssignedToResourceAlertConfigurationProperties(AlertConfigura
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     :ivar threshold_number_of_owners: The threshold number of owners.
     :vartype threshold_number_of_owners: int
     :ivar threshold_percentage_of_owners_out_of_all_role_members: The threshold percentage of
@@ -3691,6 +3711,7 @@ class TooManyOwnersAssignedToResourceAlertConfigurationProperties(AlertConfigura
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3698,6 +3719,7 @@ class TooManyOwnersAssignedToResourceAlertConfigurationProperties(AlertConfigura
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
         "threshold_number_of_owners": {"key": "thresholdNumberOfOwners", "type": "int"},
         "threshold_percentage_of_owners_out_of_all_role_members": {
             "key": "thresholdPercentageOfOwnersOutOfAllRoleMembers",
@@ -3782,6 +3804,8 @@ class TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties(Alert
     :vartype is_enabled: bool
     :ivar alert_configuration_type: The alert configuration type. Required.
     :vartype alert_configuration_type: str
+    :ivar alert_definition: The alert definition.
+    :vartype alert_definition: ~azure.mgmt.authorization.v2021_12_01_preview.models.AlertDefinition
     :ivar threshold_number_of_permanent_owners: The threshold number of permanent owners.
     :vartype threshold_number_of_permanent_owners: int
     :ivar threshold_percentage_of_permanent_owners_out_of_all_owners: The threshold percentage of
@@ -3793,6 +3817,7 @@ class TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties(Alert
         "alert_definition_id": {"readonly": True},
         "scope": {"readonly": True},
         "alert_configuration_type": {"required": True},
+        "alert_definition": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3800,6 +3825,7 @@ class TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties(Alert
         "scope": {"key": "scope", "type": "str"},
         "is_enabled": {"key": "isEnabled", "type": "bool"},
         "alert_configuration_type": {"key": "alertConfigurationType", "type": "str"},
+        "alert_definition": {"key": "alertDefinition", "type": "AlertDefinition"},
         "threshold_number_of_permanent_owners": {"key": "thresholdNumberOfPermanentOwners", "type": "int"},
         "threshold_percentage_of_permanent_owners_out_of_all_owners": {
             "key": "thresholdPercentageOfPermanentOwnersOutOfAllOwners",
