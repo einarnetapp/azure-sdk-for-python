@@ -177,12 +177,31 @@ class DenyAssignment(_serialization.Model):  # pylint: disable=too-many-instance
     :ivar is_system_protected: Specifies whether this deny assignment was created by Azure and
      cannot be edited or deleted.
     :vartype is_system_protected: bool
+    :ivar condition: The conditions on the deny assignment. This limits the resources it can be
+     assigned to. e.g.:
+     @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName]
+     StringEqualsIgnoreCase 'foo_storage_container'.
+    :vartype condition: str
+    :ivar condition_version: Version of the condition.
+    :vartype condition_version: str
+    :ivar created_on: Time it was created.
+    :vartype created_on: ~datetime.datetime
+    :ivar updated_on: Time it was updated.
+    :vartype updated_on: ~datetime.datetime
+    :ivar created_by: Id of the user who created the assignment.
+    :vartype created_by: str
+    :ivar updated_by: Id of the user who updated the assignment.
+    :vartype updated_by: str
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "created_on": {"readonly": True},
+        "updated_on": {"readonly": True},
+        "created_by": {"readonly": True},
+        "updated_by": {"readonly": True},
     }
 
     _attribute_map = {
@@ -197,6 +216,12 @@ class DenyAssignment(_serialization.Model):  # pylint: disable=too-many-instance
         "principals": {"key": "properties.principals", "type": "[Principal]"},
         "exclude_principals": {"key": "properties.excludePrincipals", "type": "[Principal]"},
         "is_system_protected": {"key": "properties.isSystemProtected", "type": "bool"},
+        "condition": {"key": "properties.condition", "type": "str"},
+        "condition_version": {"key": "properties.conditionVersion", "type": "str"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "updated_on": {"key": "properties.updatedOn", "type": "iso-8601"},
+        "created_by": {"key": "properties.createdBy", "type": "str"},
+        "updated_by": {"key": "properties.updatedBy", "type": "str"},
     }
 
     def __init__(
@@ -210,6 +235,8 @@ class DenyAssignment(_serialization.Model):  # pylint: disable=too-many-instance
         principals: Optional[List["_models.Principal"]] = None,
         exclude_principals: Optional[List["_models.Principal"]] = None,
         is_system_protected: Optional[bool] = None,
+        condition: Optional[str] = None,
+        condition_version: Optional[str] = None,
         **kwargs
     ):
         """
@@ -232,6 +259,13 @@ class DenyAssignment(_serialization.Model):  # pylint: disable=too-many-instance
         :keyword is_system_protected: Specifies whether this deny assignment was created by Azure and
          cannot be edited or deleted.
         :paramtype is_system_protected: bool
+        :keyword condition: The conditions on the deny assignment. This limits the resources it can be
+         assigned to. e.g.:
+         @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName]
+         StringEqualsIgnoreCase 'foo_storage_container'.
+        :paramtype condition: str
+        :keyword condition_version: Version of the condition.
+        :paramtype condition_version: str
         """
         super().__init__(**kwargs)
         self.id = None
@@ -245,6 +279,12 @@ class DenyAssignment(_serialization.Model):  # pylint: disable=too-many-instance
         self.principals = principals
         self.exclude_principals = exclude_principals
         self.is_system_protected = is_system_protected
+        self.condition = condition
+        self.condition_version = condition_version
+        self.created_on = None
+        self.updated_on = None
+        self.created_by = None
+        self.updated_by = None
 
 
 class DenyAssignmentFilter(_serialization.Model):
@@ -1072,7 +1112,7 @@ class RoleAssignmentListResult(_serialization.Model):
         self.next_link = None
 
 
-class RoleDefinition(_serialization.Model):
+class RoleDefinition(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """Role definition.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -1093,12 +1133,24 @@ class RoleDefinition(_serialization.Model):
     :vartype permissions: list[~azure.mgmt.authorization.v2022_04_01.models.Permission]
     :ivar assignable_scopes: Role definition assignable scopes.
     :vartype assignable_scopes: list[str]
+    :ivar created_on: Time it was created.
+    :vartype created_on: ~datetime.datetime
+    :ivar updated_on: Time it was updated.
+    :vartype updated_on: ~datetime.datetime
+    :ivar created_by: Id of the user who created the assignment.
+    :vartype created_by: str
+    :ivar updated_by: Id of the user who updated the assignment.
+    :vartype updated_by: str
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "created_on": {"readonly": True},
+        "updated_on": {"readonly": True},
+        "created_by": {"readonly": True},
+        "updated_by": {"readonly": True},
     }
 
     _attribute_map = {
@@ -1110,6 +1162,10 @@ class RoleDefinition(_serialization.Model):
         "role_type": {"key": "properties.type", "type": "str"},
         "permissions": {"key": "properties.permissions", "type": "[Permission]"},
         "assignable_scopes": {"key": "properties.assignableScopes", "type": "[str]"},
+        "created_on": {"key": "properties.createdOn", "type": "iso-8601"},
+        "updated_on": {"key": "properties.updatedOn", "type": "iso-8601"},
+        "created_by": {"key": "properties.createdBy", "type": "str"},
+        "updated_by": {"key": "properties.updatedBy", "type": "str"},
     }
 
     def __init__(
@@ -1143,6 +1199,10 @@ class RoleDefinition(_serialization.Model):
         self.role_type = role_type
         self.permissions = permissions
         self.assignable_scopes = assignable_scopes
+        self.created_on = None
+        self.updated_on = None
+        self.created_by = None
+        self.updated_by = None
 
 
 class RoleDefinitionFilter(_serialization.Model):
