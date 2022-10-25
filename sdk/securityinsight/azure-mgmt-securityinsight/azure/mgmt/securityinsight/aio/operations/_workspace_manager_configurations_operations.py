@@ -28,7 +28,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._alert_rules_operations import (
+from ...operations._workspace_manager_configurations_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
@@ -39,14 +39,14 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class AlertRulesOperations:
+class WorkspaceManagerConfigurationsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.aio.SecurityInsights`'s
-        :attr:`alert_rules` attribute.
+        :attr:`workspace_manager_configurations` attribute.
     """
 
     models = _models
@@ -59,24 +59,43 @@ class AlertRulesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> AsyncIterable["_models.AlertRule"]:
-        """Gets all alert rules.
+    def list(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        orderby: Optional[str] = None,
+        top: Optional[int] = None,
+        skip_token: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncIterable["_models.WorkspaceManagerConfiguration"]:
+        """Gets all workspace manager configurations for a Sentinel workspace.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
+        :param orderby: Sorts the results. Optional. Default value is None.
+        :type orderby: str
+        :param top: Returns only the first n results. Optional. Default value is None.
+        :type top: int
+        :param skip_token: Skiptoken is only used if a previous operation returned a partial result. If
+         a previous response contains a nextLink element, the value of the nextLink element will include
+         a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.
+         Default value is None.
+        :type skip_token: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either AlertRule or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.AlertRule]
+        :return: An iterator like instance of either WorkspaceManagerConfiguration or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.securityinsight.models.WorkspaceManagerConfiguration]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertRulesList]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WorkspaceManagerConfigurationList]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -93,6 +112,9 @@ class AlertRulesOperations:
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
+                    orderby=orderby,
+                    top=top,
+                    skip_token=skip_token,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -120,7 +142,7 @@ class AlertRulesOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("AlertRulesList", pipeline_response)
+            deserialized = self._deserialize("WorkspaceManagerConfigurationList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -136,30 +158,32 @@ class AlertRulesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerConfigurations"}  # type: ignore
 
     @distributed_trace_async
     async def get(
-        self, resource_group_name: str, workspace_name: str, rule_id: str, **kwargs: Any
-    ) -> _models.AlertRule:
-        """Gets the alert rule.
+        self, resource_group_name: str, workspace_name: str, workspace_manager_configuration_name: str, **kwargs: Any
+    ) -> _models.WorkspaceManagerConfiguration:
+        """Gets a workspace manager configuration.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
+        :param workspace_manager_configuration_name: The name of the workspace manager configuration.
+         Required.
+        :type workspace_manager_configuration_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
+        :return: WorkspaceManagerConfiguration or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerConfiguration
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -174,12 +198,12 @@ class AlertRulesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertRule]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WorkspaceManagerConfiguration]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            rule_id=rule_id,
+            workspace_manager_configuration_name=workspace_manager_configuration_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -197,182 +221,32 @@ class AlertRulesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AlertRule", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"}  # type: ignore
-
-    @overload
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        rule_id: str,
-        alert_rule: _models.AlertRule,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.AlertRule:
-        """Creates or updates the alert rule.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
-        :param alert_rule: The alert rule. Required.
-        :type alert_rule: ~azure.mgmt.securityinsight.models.AlertRule
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        rule_id: str,
-        alert_rule: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.AlertRule:
-        """Creates or updates the alert rule.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
-        :param alert_rule: The alert rule. Required.
-        :type alert_rule: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def create_or_update(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        rule_id: str,
-        alert_rule: Union[_models.AlertRule, IO],
-        **kwargs: Any
-    ) -> _models.AlertRule:
-        """Creates or updates the alert rule.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
-        :param alert_rule: The alert rule. Is either a model type or a IO type. Required.
-        :type alert_rule: ~azure.mgmt.securityinsight.models.AlertRule or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertRule or the result of cls(response)
-        :rtype: ~azure.mgmt.securityinsight.models.AlertRule
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertRule]
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(alert_rule, (IO, bytes)):
-            _content = alert_rule
-        else:
-            _json = self._serialize.body(alert_rule, "AlertRule")
-
-        request = build_create_or_update_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            rule_id=rule_id,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.create_or_update.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        if response.status_code == 200:
-            deserialized = self._deserialize("AlertRule", pipeline_response)
-
-        if response.status_code == 201:
-            deserialized = self._deserialize("AlertRule", pipeline_response)
+        deserialized = self._deserialize("WorkspaceManagerConfiguration", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerConfigurations/{workspaceManagerConfigurationName}"}  # type: ignore
 
     @distributed_trace_async
     async def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, workspace_name: str, rule_id: str, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, workspace_manager_configuration_name: str, **kwargs: Any
     ) -> None:
-        """Delete the alert rule.
+        """Deletes a workspace manager configuration.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
-        :param rule_id: Alert rule ID. Required.
-        :type rule_id: str
+        :param workspace_manager_configuration_name: The name of the workspace manager configuration.
+         Required.
+        :type workspace_manager_configuration_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -395,7 +269,7 @@ class AlertRulesOperations:
         request = build_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
-            rule_id=rule_id,
+            workspace_manager_configuration_name=workspace_manager_configuration_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -413,9 +287,169 @@ class AlertRulesOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerConfigurations/{workspaceManagerConfigurationName}"}  # type: ignore
+
+    @overload
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_configuration_name: str,
+        workspace_manager_configuration: _models.WorkspaceManagerConfiguration,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.WorkspaceManagerConfiguration:
+        """Creates or updates a workspace manager configuration.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param workspace_manager_configuration_name: The name of the workspace manager configuration.
+         Required.
+        :type workspace_manager_configuration_name: str
+        :param workspace_manager_configuration: The workspace manager configuration. Required.
+        :type workspace_manager_configuration:
+         ~azure.mgmt.securityinsight.models.WorkspaceManagerConfiguration
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: WorkspaceManagerConfiguration or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerConfiguration
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_configuration_name: str,
+        workspace_manager_configuration: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.WorkspaceManagerConfiguration:
+        """Creates or updates a workspace manager configuration.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param workspace_manager_configuration_name: The name of the workspace manager configuration.
+         Required.
+        :type workspace_manager_configuration_name: str
+        :param workspace_manager_configuration: The workspace manager configuration. Required.
+        :type workspace_manager_configuration: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: WorkspaceManagerConfiguration or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerConfiguration
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def create_or_update(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        workspace_manager_configuration_name: str,
+        workspace_manager_configuration: Union[_models.WorkspaceManagerConfiguration, IO],
+        **kwargs: Any
+    ) -> _models.WorkspaceManagerConfiguration:
+        """Creates or updates a workspace manager configuration.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param workspace_manager_configuration_name: The name of the workspace manager configuration.
+         Required.
+        :type workspace_manager_configuration_name: str
+        :param workspace_manager_configuration: The workspace manager configuration. Is either a model
+         type or a IO type. Required.
+        :type workspace_manager_configuration:
+         ~azure.mgmt.securityinsight.models.WorkspaceManagerConfiguration or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: WorkspaceManagerConfiguration or the result of cls(response)
+        :rtype: ~azure.mgmt.securityinsight.models.WorkspaceManagerConfiguration
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WorkspaceManagerConfiguration]
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(workspace_manager_configuration, (IO, bytes)):
+            _content = workspace_manager_configuration
+        else:
+            _json = self._serialize.body(workspace_manager_configuration, "WorkspaceManagerConfiguration")
+
+        request = build_create_or_update_request(
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            workspace_manager_configuration_name=workspace_manager_configuration_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.create_or_update.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if response.status_code == 200:
+            deserialized = self._deserialize("WorkspaceManagerConfiguration", pipeline_response)
+
+        if response.status_code == 201:
+            deserialized = self._deserialize("WorkspaceManagerConfiguration", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerConfigurations/{workspaceManagerConfigurationName}"}  # type: ignore

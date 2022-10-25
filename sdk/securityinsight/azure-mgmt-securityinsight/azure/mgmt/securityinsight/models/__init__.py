@@ -32,6 +32,7 @@ from ._models_py3 import ActivityEntityQueryTemplate
 from ._models_py3 import ActivityEntityQueryTemplatePropertiesQueryDefinitions
 from ._models_py3 import ActivityTimelineItem
 from ._models_py3 import AlertDetailsOverride
+from ._models_py3 import AlertPropertyMapping
 from ._models_py3 import AlertRule
 from ._models_py3 import AlertRuleTemplate
 from ._models_py3 import AlertRuleTemplateDataSource
@@ -65,6 +66,7 @@ from ._models_py3 import AwsS3DataConnector
 from ._models_py3 import AwsS3DataConnectorDataTypes
 from ._models_py3 import AwsS3DataConnectorDataTypesLogs
 from ._models_py3 import AzureDevOpsResourceInfo
+from ._models_py3 import AzureEntityResource
 from ._models_py3 import AzureResourceEntity
 from ._models_py3 import AzureResourceEntityProperties
 from ._models_py3 import Bookmark
@@ -148,6 +150,9 @@ from ._models_py3 import EntityQueryTemplateList
 from ._models_py3 import EntityTimelineItem
 from ._models_py3 import EntityTimelineParameters
 from ._models_py3 import EntityTimelineResponse
+from ._models_py3 import ErrorAdditionalInfo
+from ._models_py3 import ErrorDetail
+from ._models_py3 import ErrorResponse
 from ._models_py3 import EventGroupingSettings
 from ._models_py3 import ExpansionEntityQuery
 from ._models_py3 import ExpansionResultAggregation
@@ -339,6 +344,7 @@ from ._models_py3 import SecurityGroupEntityProperties
 from ._models_py3 import SecurityMLAnalyticsSetting
 from ._models_py3 import SecurityMLAnalyticsSettingsDataSource
 from ._models_py3 import SecurityMLAnalyticsSettingsList
+from ._models_py3 import SentinelEntityMapping
 from ._models_py3 import SentinelOnboardingState
 from ._models_py3 import SentinelOnboardingStatesList
 from ._models_py3 import SettingList
@@ -395,9 +401,12 @@ from ._models_py3 import WatchlistItem
 from ._models_py3 import WatchlistItemList
 from ._models_py3 import WatchlistList
 from ._models_py3 import Webhook
+from ._models_py3 import WorkspaceManagerConfiguration
+from ._models_py3 import WorkspaceManagerConfigurationList
 
 from ._security_insights_enums import ActionType
 from ._security_insights_enums import AlertDetail
+from ._security_insights_enums import AlertProperty
 from ._security_insights_enums import AlertRuleKind
 from ._security_insights_enums import AlertSeverity
 from ._security_insights_enums import AlertStatus
@@ -458,6 +467,7 @@ from ._security_insights_enums import KillChainIntent
 from ._security_insights_enums import Kind
 from ._security_insights_enums import MatchingMethod
 from ._security_insights_enums import MicrosoftSecurityProductName
+from ._security_insights_enums import Mode
 from ._security_insights_enums import OSFamily
 from ._security_insights_enums import Operator
 from ._security_insights_enums import OutputType
@@ -514,6 +524,7 @@ __all__ = [
     "ActivityEntityQueryTemplatePropertiesQueryDefinitions",
     "ActivityTimelineItem",
     "AlertDetailsOverride",
+    "AlertPropertyMapping",
     "AlertRule",
     "AlertRuleTemplate",
     "AlertRuleTemplateDataSource",
@@ -547,6 +558,7 @@ __all__ = [
     "AwsS3DataConnectorDataTypes",
     "AwsS3DataConnectorDataTypesLogs",
     "AzureDevOpsResourceInfo",
+    "AzureEntityResource",
     "AzureResourceEntity",
     "AzureResourceEntityProperties",
     "Bookmark",
@@ -630,6 +642,9 @@ __all__ = [
     "EntityTimelineItem",
     "EntityTimelineParameters",
     "EntityTimelineResponse",
+    "ErrorAdditionalInfo",
+    "ErrorDetail",
+    "ErrorResponse",
     "EventGroupingSettings",
     "ExpansionEntityQuery",
     "ExpansionResultAggregation",
@@ -821,6 +836,7 @@ __all__ = [
     "SecurityMLAnalyticsSetting",
     "SecurityMLAnalyticsSettingsDataSource",
     "SecurityMLAnalyticsSettingsList",
+    "SentinelEntityMapping",
     "SentinelOnboardingState",
     "SentinelOnboardingStatesList",
     "SettingList",
@@ -877,8 +893,11 @@ __all__ = [
     "WatchlistItemList",
     "WatchlistList",
     "Webhook",
+    "WorkspaceManagerConfiguration",
+    "WorkspaceManagerConfigurationList",
     "ActionType",
     "AlertDetail",
+    "AlertProperty",
     "AlertRuleKind",
     "AlertSeverity",
     "AlertStatus",
@@ -939,6 +958,7 @@ __all__ = [
     "Kind",
     "MatchingMethod",
     "MicrosoftSecurityProductName",
+    "Mode",
     "OSFamily",
     "Operator",
     "OutputType",

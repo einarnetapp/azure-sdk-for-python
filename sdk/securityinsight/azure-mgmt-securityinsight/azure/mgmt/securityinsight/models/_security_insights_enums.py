@@ -28,6 +28,29 @@ class AlertDetail(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SEVERITY = "Severity"
 
 
+class AlertProperty(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The V3 alert property."""
+
+    #: Alert's link
+    ALERT_LINK = "AlertLink"
+    #: Confidence level property
+    CONFIDENCE_LEVEL = "ConfidenceLevel"
+    #: Confidence score
+    CONFIDENCE_SCORE = "ConfidenceScore"
+    #: Extended links to the alert
+    EXTENDED_LINKS = "ExtendedLinks"
+    #: Product name alert property
+    PRODUCT_NAME = "ProductName"
+    #: Provider name alert property
+    PROVIDER_NAME = "ProviderName"
+    #: Product component name alert property
+    PRODUCT_COMPONENT_NAME = "ProductComponentName"
+    #: Remediation steps alert property
+    REMEDIATION_STEPS = "RemediationSteps"
+    #: Techniques alert property
+    TECHNIQUES = "Techniques"
+
+
 class AlertRuleKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of the alert rule."""
 
@@ -866,7 +889,7 @@ class IngestionMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class KillChainIntent(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Holds the alert intent stage(s) mapping for this alert."""
+    """The intent of the alert."""
 
     #: The default value.
     UNKNOWN = "Unknown"
@@ -984,6 +1007,15 @@ class MicrosoftSecurityProductName(str, Enum, metaclass=CaseInsensitiveEnumMeta)
     AZURE_SECURITY_CENTER_FOR_IO_T = "Azure Security Center for IoT"
     OFFICE365_ADVANCED_THREAT_PROTECTION = "Office 365 Advanced Threat Protection"
     MICROSOFT_DEFENDER_ADVANCED_THREAT_PROTECTION = "Microsoft Defender Advanced Threat Protection"
+
+
+class Mode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The current mode of the workspace manager configuration."""
+
+    #: The workspace manager configuration is enabled
+    ENABLED = "Enabled"
+    #: The workspace manager configuration is disabled
+    DISABLED = "Disabled"
 
 
 class Operator(str, Enum, metaclass=CaseInsensitiveEnumMeta):
