@@ -64,9 +64,9 @@ class CertificatesOperations:
     async def get(
         self, resource_group_name: str, deployment_name: str, certificate_name: str, **kwargs: Any
     ) -> _models.NginxCertificate:
-        """Get a certificate of given Nginx deployment.
+        """Get a certificate of s given Nginx deployment.
 
-        Get a certificate of given Nginx deployment.
+        Get a certificate of s given Nginx deployment.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
