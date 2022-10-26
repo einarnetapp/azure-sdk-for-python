@@ -36,7 +36,9 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_list_request(resource_group_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_list_request(
+    resource_name: str, resource_group_name: str, subscription_id: str, *, filter: Optional[str] = None, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -46,9 +48,10 @@ def build_list_request(resource_group_name: str, subscription_id: str, **kwargs:
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
+        "resourceName": _SERIALIZER.url("resource_name", resource_name, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -57,6 +60,8 @@ def build_list_request(resource_group_name: str, subscription_id: str, **kwargs:
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if filter is not None:
+        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -64,14 +69,14 @@ def build_list_request(resource_group_name: str, subscription_id: str, **kwargs:
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class Operations:
+class ReplicationAppliancesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.recoveryservicessiterecovery.SiteRecoveryManagementClient`'s
-        :attr:`operations` attribute.
+        :attr:`replication_appliances` attribute.
     """
 
     models = _models
@@ -84,22 +89,25 @@ class Operations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, **kwargs: Any) -> Iterable["_models.OperationsDiscovery"]:
-        """Returns the list of available operations.
+    def list(self, filter: Optional[str] = None, **kwargs: Any) -> Iterable["_models.ReplicationAppliance"]:
+        """Gets the list of appliances.
 
-        Operation to return the list of available operations.
+        Gets the list of Azure Site Recovery appliances for the vault.
 
+        :param filter: OData filter options. Default value is None.
+        :type filter: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either OperationsDiscovery or the result of cls(response)
+        :return: An iterator like instance of either ReplicationAppliance or the result of
+         cls(response)
         :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.OperationsDiscovery]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.recoveryservicessiterecovery.models.ReplicationAppliance]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationsDiscoveryCollection]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ApplianceCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -113,8 +121,10 @@ class Operations:
             if not next_link:
 
                 request = build_list_request(
+                    resource_name=self._config.resource_name,
                     resource_group_name=self._config.resource_group_name,
                     subscription_id=self._config.subscription_id,
+                    filter=filter,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -142,7 +152,7 @@ class Operations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("OperationsDiscoveryCollection", pipeline_response)
+            deserialized = self._deserialize("ApplianceCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -164,4 +174,4 @@ class Operations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationAppliances"}  # type: ignore
