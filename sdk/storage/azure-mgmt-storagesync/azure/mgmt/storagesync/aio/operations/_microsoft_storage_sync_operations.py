@@ -25,43 +25,27 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._asc_operations_operations import build_get_request
+from ...operations._microsoft_storage_sync_operations import build_location_operation_status_request
+from .._vendor import MixinABC
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class AscOperationsOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.storagecache.aio.StorageCacheManagementClient`'s
-        :attr:`asc_operations` attribute.
-    """
-
-    models = _models
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
+class MicrosoftStorageSyncOperationsMixin(MixinABC):
     @distributed_trace_async
-    async def get(self, location: str, operation_id: str, **kwargs: Any) -> _models.AscOperation:
-        """Gets the status of an asynchronous operation for the Azure HPC Cache.
+    async def location_operation_status(
+        self, location_name: str, operation_id: str, **kwargs: Any
+    ) -> _models.LocationOperationStatus:
+        """Get Operation status.
 
-        :param location: The name of the region used to look up the operation. Required.
-        :type location: str
-        :param operation_id: The operation id which uniquely identifies the asynchronous operation.
-         Required.
+        :param location_name: The desired region to obtain information from. Required.
+        :type location_name: str
+        :param operation_id: operation Id. Required.
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AscOperation or the result of cls(response)
-        :rtype: ~azure.mgmt.storagecache.models.AscOperation
+        :return: LocationOperationStatus or the result of cls(response)
+        :rtype: ~azure.mgmt.storagesync.models.LocationOperationStatus
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -76,14 +60,14 @@ class AscOperationsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AscOperation]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.LocationOperationStatus]
 
-        request = build_get_request(
-            location=location,
+        request = build_location_operation_status_request(
+            location_name=location_name,
             operation_id=operation_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get.metadata["url"],
+            template_url=self.location_operation_status.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -98,13 +82,20 @@ class AscOperationsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.StorageSyncError, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AscOperation", pipeline_response)
+        response_headers = {}
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
+        response_headers["x-ms-correlation-request-id"] = self._deserialize(
+            "str", response.headers.get("x-ms-correlation-request-id")
+        )
+
+        deserialized = self._deserialize("LocationOperationStatus", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}"}  # type: ignore
+    location_operation_status.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}"}  # type: ignore
