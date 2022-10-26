@@ -13,6 +13,7 @@ from azure.core.exceptions import (
     HttpResponseError,
     ResourceExistsError,
     ResourceNotFoundError,
+    ResourceNotModifiedError,
     map_error,
 )
 from azure.core.paging import ItemPaged
@@ -40,14 +41,14 @@ def build_get_all_request(
     target_resource: Optional[str] = None,
     target_resource_group: Optional[str] = None,
     target_resource_type: Optional[str] = None,
-    monitor_service: Optional[Union[str, "_models.MonitorService"]] = None,
-    monitor_condition: Optional[Union[str, "_models.MonitorCondition"]] = None,
-    severity: Optional[Union[str, "_models.Severity"]] = None,
-    smart_group_state: Optional[Union[str, "_models.AlertState"]] = None,
-    time_range: Optional[Union[str, "_models.TimeRange"]] = None,
+    monitor_service: Optional[Union[str, _models.MonitorService]] = None,
+    monitor_condition: Optional[Union[str, _models.MonitorCondition]] = None,
+    severity: Optional[Union[str, _models.Severity]] = None,
+    smart_group_state: Optional[Union[str, _models.AlertState]] = None,
+    time_range: Optional[Union[str, _models.TimeRange]] = None,
     page_count: Optional[int] = None,
-    sort_by: Optional[Union[str, "_models.SmartGroupsSortByFields"]] = None,
-    sort_order: Optional[Union[str, "_models.SortOrder"]] = None,
+    sort_by: Optional[Union[str, _models.SmartGroupsSortByFields]] = None,
+    sort_order: Optional[Union[str, _models.SortOrder]] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -126,7 +127,7 @@ def build_get_by_id_request(smart_group_id: str, subscription_id: str, **kwargs:
 
 
 def build_change_state_request(
-    smart_group_id: str, subscription_id: str, *, new_state: Union[str, "_models.AlertState"], **kwargs: Any
+    smart_group_id: str, subscription_id: str, *, new_state: Union[str, _models.AlertState], **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -209,14 +210,14 @@ class SmartGroupsOperations:
         target_resource: Optional[str] = None,
         target_resource_group: Optional[str] = None,
         target_resource_type: Optional[str] = None,
-        monitor_service: Optional[Union[str, "_models.MonitorService"]] = None,
-        monitor_condition: Optional[Union[str, "_models.MonitorCondition"]] = None,
-        severity: Optional[Union[str, "_models.Severity"]] = None,
-        smart_group_state: Optional[Union[str, "_models.AlertState"]] = None,
-        time_range: Optional[Union[str, "_models.TimeRange"]] = None,
+        monitor_service: Optional[Union[str, _models.MonitorService]] = None,
+        monitor_condition: Optional[Union[str, _models.MonitorCondition]] = None,
+        severity: Optional[Union[str, _models.Severity]] = None,
+        smart_group_state: Optional[Union[str, _models.AlertState]] = None,
+        time_range: Optional[Union[str, _models.TimeRange]] = None,
         page_count: Optional[int] = None,
-        sort_by: Optional[Union[str, "_models.SmartGroupsSortByFields"]] = None,
-        sort_order: Optional[Union[str, "_models.SortOrder"]] = None,
+        sort_by: Optional[Union[str, _models.SmartGroupsSortByFields]] = None,
+        sort_order: Optional[Union[str, _models.SortOrder]] = None,
         **kwargs: Any
     ) -> Iterable["_models.SmartGroup"]:
         """Get all Smart Groups within a specified subscription.
@@ -271,10 +272,15 @@ class SmartGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2019-05-05-preview"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SmartGroupsList]
 
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         def prepare_request(next_link=None):
@@ -347,13 +353,18 @@ class SmartGroupsOperations:
         :rtype: ~azure.mgmt.alertsmanagement.models.SmartGroup
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2019-05-05-preview"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SmartGroup]
 
         request = build_get_by_id_request(
@@ -392,7 +403,7 @@ class SmartGroupsOperations:
 
     @distributed_trace
     def change_state(
-        self, smart_group_id: str, new_state: Union[str, "_models.AlertState"], **kwargs: Any
+        self, smart_group_id: str, new_state: Union[str, _models.AlertState], **kwargs: Any
     ) -> _models.SmartGroup:
         """Change the state of a Smart Group.
 
@@ -406,13 +417,18 @@ class SmartGroupsOperations:
         :rtype: ~azure.mgmt.alertsmanagement.models.SmartGroup
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2019-05-05-preview"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SmartGroup]
 
         request = build_change_state_request(
@@ -462,13 +478,18 @@ class SmartGroupsOperations:
         :rtype: ~azure.mgmt.alertsmanagement.models.SmartGroupModification
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map = {401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError}
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2019-05-05-preview"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SmartGroupModification]
 
         request = build_get_history_request(

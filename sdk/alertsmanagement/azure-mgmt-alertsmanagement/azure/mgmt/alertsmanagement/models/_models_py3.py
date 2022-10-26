@@ -752,6 +752,26 @@ class AlertsSummaryGroupItem(_serialization.Model):
         self.values = values
 
 
+class Comments(_serialization.Model):
+    """Change alert state reason.
+
+    :ivar comments:
+    :vartype comments: str
+    """
+
+    _attribute_map = {
+        "comments": {"key": "comments", "type": "str"},
+    }
+
+    def __init__(self, *, comments: Optional[str] = None, **kwargs):
+        """
+        :keyword comments:
+        :paramtype comments: str
+        """
+        super().__init__(**kwargs)
+        self.comments = comments
+
+
 class Condition(_serialization.Model):
     """Condition to trigger an alert processing rule.
 
