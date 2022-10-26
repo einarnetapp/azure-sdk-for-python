@@ -32,6 +32,7 @@ from ._models_py3 import ActivityEntityQueryTemplate
 from ._models_py3 import ActivityEntityQueryTemplatePropertiesQueryDefinitions
 from ._models_py3 import ActivityTimelineItem
 from ._models_py3 import AlertDetailsOverride
+from ._models_py3 import AlertPropertyMapping
 from ._models_py3 import AlertRule
 from ._models_py3 import AlertRuleTemplate
 from ._models_py3 import AlertRuleTemplateDataSource
@@ -339,6 +340,7 @@ from ._models_py3 import SecurityGroupEntityProperties
 from ._models_py3 import SecurityMLAnalyticsSetting
 from ._models_py3 import SecurityMLAnalyticsSettingsDataSource
 from ._models_py3 import SecurityMLAnalyticsSettingsList
+from ._models_py3 import SentinelEntityMapping
 from ._models_py3 import SentinelOnboardingState
 from ._models_py3 import SentinelOnboardingStatesList
 from ._models_py3 import SettingList
@@ -398,6 +400,7 @@ from ._models_py3 import Webhook
 
 from ._security_insights_enums import ActionType
 from ._security_insights_enums import AlertDetail
+from ._security_insights_enums import AlertProperty
 from ._security_insights_enums import AlertRuleKind
 from ._security_insights_enums import AlertSeverity
 from ._security_insights_enums import AlertStatus
@@ -514,6 +517,7 @@ __all__ = [
     "ActivityEntityQueryTemplatePropertiesQueryDefinitions",
     "ActivityTimelineItem",
     "AlertDetailsOverride",
+    "AlertPropertyMapping",
     "AlertRule",
     "AlertRuleTemplate",
     "AlertRuleTemplateDataSource",
@@ -821,6 +825,7 @@ __all__ = [
     "SecurityMLAnalyticsSetting",
     "SecurityMLAnalyticsSettingsDataSource",
     "SecurityMLAnalyticsSettingsList",
+    "SentinelEntityMapping",
     "SentinelOnboardingState",
     "SentinelOnboardingStatesList",
     "SettingList",
@@ -879,6 +884,7 @@ __all__ = [
     "Webhook",
     "ActionType",
     "AlertDetail",
+    "AlertProperty",
     "AlertRuleKind",
     "AlertSeverity",
     "AlertStatus",

@@ -1982,6 +1982,9 @@ class AlertDetailsOverride(_serialization.Model):
     :vartype alert_tactics_column_name: str
     :ivar alert_severity_column_name: the column name to take the alert severity from.
     :vartype alert_severity_column_name: str
+    :ivar alert_dynamic_properties: List of additional dynamic properties to override.
+    :vartype alert_dynamic_properties:
+     list[~azure.mgmt.securityinsight.models.AlertPropertyMapping]
     """
 
     _attribute_map = {
@@ -1989,6 +1992,7 @@ class AlertDetailsOverride(_serialization.Model):
         "alert_description_format": {"key": "alertDescriptionFormat", "type": "str"},
         "alert_tactics_column_name": {"key": "alertTacticsColumnName", "type": "str"},
         "alert_severity_column_name": {"key": "alertSeverityColumnName", "type": "str"},
+        "alert_dynamic_properties": {"key": "alertDynamicProperties", "type": "[AlertPropertyMapping]"},
     }
 
     def __init__(
@@ -1998,6 +2002,7 @@ class AlertDetailsOverride(_serialization.Model):
         alert_description_format: Optional[str] = None,
         alert_tactics_column_name: Optional[str] = None,
         alert_severity_column_name: Optional[str] = None,
+        alert_dynamic_properties: Optional[List["_models.AlertPropertyMapping"]] = None,
         **kwargs
     ):
         """
@@ -2011,12 +2016,52 @@ class AlertDetailsOverride(_serialization.Model):
         :paramtype alert_tactics_column_name: str
         :keyword alert_severity_column_name: the column name to take the alert severity from.
         :paramtype alert_severity_column_name: str
+        :keyword alert_dynamic_properties: List of additional dynamic properties to override.
+        :paramtype alert_dynamic_properties:
+         list[~azure.mgmt.securityinsight.models.AlertPropertyMapping]
         """
         super().__init__(**kwargs)
         self.alert_display_name_format = alert_display_name_format
         self.alert_description_format = alert_description_format
         self.alert_tactics_column_name = alert_tactics_column_name
         self.alert_severity_column_name = alert_severity_column_name
+        self.alert_dynamic_properties = alert_dynamic_properties
+
+
+class AlertPropertyMapping(_serialization.Model):
+    """A single alert property mapping to override.
+
+    :ivar alert_property: The V3 alert property. Known values are: "AlertLink", "ConfidenceLevel",
+     "ConfidenceScore", "ExtendedLinks", "ProductName", "ProviderName", "ProductComponentName",
+     "RemediationSteps", and "Techniques".
+    :vartype alert_property: str or ~azure.mgmt.securityinsight.models.AlertProperty
+    :ivar value: the column name to use to override this property.
+    :vartype value: str
+    """
+
+    _attribute_map = {
+        "alert_property": {"key": "alertProperty", "type": "str"},
+        "value": {"key": "value", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        alert_property: Optional[Union[str, "_models.AlertProperty"]] = None,
+        value: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword alert_property: The V3 alert property. Known values are: "AlertLink",
+         "ConfidenceLevel", "ConfidenceScore", "ExtendedLinks", "ProductName", "ProviderName",
+         "ProductComponentName", "RemediationSteps", and "Techniques".
+        :paramtype alert_property: str or ~azure.mgmt.securityinsight.models.AlertProperty
+        :keyword value: the column name to use to override this property.
+        :paramtype value: str
+        """
+        super().__init__(**kwargs)
+        self.alert_property = alert_property
+        self.value = value
 
 
 class AlertRule(ResourceWithEtag):
@@ -15367,6 +15412,9 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _validation = {
@@ -15402,9 +15450,10 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "properties.eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
-    def __init__(
+    def __init__(  # pylint: disable=too-many-locals
         self,
         *,
         etag: Optional[str] = None,
@@ -15424,6 +15473,7 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -15468,6 +15518,9 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(etag=etag, **kwargs)
         self.kind = "NRT"  # type: str
@@ -15488,6 +15541,7 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-instance-attributes
@@ -15550,6 +15604,9 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _validation = {
@@ -15587,6 +15644,7 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "properties.eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(
@@ -15606,6 +15664,7 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -15643,6 +15702,9 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.kind = "NRT"  # type: str
@@ -15662,6 +15724,7 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
@@ -15684,6 +15747,9 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _attribute_map = {
@@ -15694,6 +15760,7 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(
@@ -15706,6 +15773,7 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -15726,6 +15794,9 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.query = query
@@ -15735,6 +15806,7 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class NrtAlertRuleTemplateProperties(
@@ -15761,6 +15833,9 @@ class NrtAlertRuleTemplateProperties(
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     :ivar alert_rules_created_by_template_count: the number of alert rules that were created by
      this template.
     :vartype alert_rules_created_by_template_count: int
@@ -15797,6 +15872,7 @@ class NrtAlertRuleTemplateProperties(
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
         "alert_rules_created_by_template_count": {"key": "alertRulesCreatedByTemplateCount", "type": "int"},
         "last_updated_date_utc": {"key": "lastUpdatedDateUTC", "type": "iso-8601"},
         "created_date_utc": {"key": "createdDateUTC", "type": "iso-8601"},
@@ -15818,6 +15894,7 @@ class NrtAlertRuleTemplateProperties(
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         alert_rules_created_by_template_count: Optional[int] = None,
         description: Optional[str] = None,
         display_name: Optional[str] = None,
@@ -15845,6 +15922,9 @@ class NrtAlertRuleTemplateProperties(
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         :keyword alert_rules_created_by_template_count: the number of alert rules that were created by
          this template.
         :paramtype alert_rules_created_by_template_count: int
@@ -15878,6 +15958,7 @@ class NrtAlertRuleTemplateProperties(
             entity_mappings=entity_mappings,
             alert_details_override=alert_details_override,
             event_grouping_settings=event_grouping_settings,
+            sentinel_entities_mappings=sentinel_entities_mappings,
             **kwargs
         )
         self.query = query
@@ -15887,6 +15968,7 @@ class NrtAlertRuleTemplateProperties(
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
         self.alert_rules_created_by_template_count = alert_rules_created_by_template_count
         self.last_updated_date_utc = None
         self.created_date_utc = None
@@ -18268,6 +18350,9 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     :ivar alert_rule_template_name: The Name of the alert rule template used to create this rule.
     :vartype alert_rule_template_name: str
     :ivar template_version: The version of the alert rule template used to create this rule - in
@@ -18322,6 +18407,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         "custom_details": {"key": "properties.customDetails", "type": "{str}"},
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
         "alert_rule_template_name": {"key": "properties.alertRuleTemplateName", "type": "str"},
         "template_version": {"key": "properties.templateVersion", "type": "str"},
         "description": {"key": "properties.description", "type": "str"},
@@ -18349,6 +18435,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         alert_rule_template_name: Optional[str] = None,
         template_version: Optional[str] = None,
         description: Optional[str] = None,
@@ -18388,6 +18475,9 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         :keyword alert_rule_template_name: The Name of the alert rule template used to create this
          rule.
         :paramtype alert_rule_template_name: str
@@ -18426,6 +18516,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
+        self.sentinel_entities_mappings = sentinel_entities_mappings
         self.alert_rule_template_name = alert_rule_template_name
         self.template_version = template_version
         self.description = description
@@ -18439,7 +18530,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         self.incident_configuration = incident_configuration
 
 
-class ScheduledAlertRuleCommonProperties(_serialization.Model):
+class ScheduledAlertRuleCommonProperties(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """Scheduled alert rule template property bag.
 
     :ivar query: The query that creates alerts for this rule.
@@ -18465,6 +18556,9 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _attribute_map = {
@@ -18478,6 +18572,7 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         "custom_details": {"key": "customDetails", "type": "{str}"},
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(
@@ -18493,6 +18588,7 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -18520,6 +18616,9 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.query = query
@@ -18532,6 +18631,7 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylint: disable=too-many-instance-attributes
@@ -18564,6 +18664,9 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     :ivar alert_rule_template_name: The Name of the alert rule template used to create this rule.
     :vartype alert_rule_template_name: str
     :ivar template_version: The version of the alert rule template used to create this rule - in
@@ -18611,6 +18714,7 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
         "custom_details": {"key": "customDetails", "type": "{str}"},
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
         "alert_rule_template_name": {"key": "alertRuleTemplateName", "type": "str"},
         "template_version": {"key": "templateVersion", "type": "str"},
         "description": {"key": "description", "type": "str"},
@@ -18641,6 +18745,7 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         alert_rule_template_name: Optional[str] = None,
         template_version: Optional[str] = None,
         description: Optional[str] = None,
@@ -18674,6 +18779,9 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         :keyword alert_rule_template_name: The Name of the alert rule template used to create this
          rule.
         :paramtype alert_rule_template_name: str
@@ -18711,6 +18819,7 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
             custom_details=custom_details,
             entity_mappings=entity_mappings,
             alert_details_override=alert_details_override,
+            sentinel_entities_mappings=sentinel_entities_mappings,
             **kwargs
         )
         self.alert_rule_template_name = alert_rule_template_name
@@ -18795,6 +18904,9 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _validation = {
@@ -18836,6 +18948,7 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         "custom_details": {"key": "properties.customDetails", "type": "{str}"},
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -18859,6 +18972,7 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -18906,6 +19020,9 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.kind = "Scheduled"  # type: str
@@ -18929,6 +19046,7 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class SecurityAlert(Entity):  # pylint: disable=too-many-instance-attributes
@@ -19337,8 +19455,10 @@ class SecurityAlertPropertiesConfidenceReasonsItem(_serialization.Model):
         self.reason_type = None
 
 
-class SecurityAlertTimelineItem(EntityTimelineItem):
+class SecurityAlertTimelineItem(EntityTimelineItem):  # pylint: disable=too-many-instance-attributes
     """Represents security alert timeline item.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -19364,6 +19484,13 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
     :vartype time_generated: ~datetime.datetime
     :ivar alert_type: The name of the alert type. Required.
     :vartype alert_type: str
+    :ivar intent: The intent of the alert. Known values are: "Unknown", "Probing", "Exploitation",
+     "Persistence", "PrivilegeEscalation", "DefenseEvasion", "CredentialAccess", "Discovery",
+     "LateralMovement", "Execution", "Collection", "Exfiltration", "CommandAndControl", and
+     "Impact".
+    :vartype intent: str or ~azure.mgmt.securityinsight.models.KillChainIntent
+    :ivar techniques: The techniques of the alert.
+    :vartype techniques: list[str]
     """
 
     _validation = {
@@ -19375,6 +19502,7 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         "start_time_utc": {"required": True},
         "time_generated": {"required": True},
         "alert_type": {"required": True},
+        "intent": {"readonly": True},
     }
 
     _attribute_map = {
@@ -19388,6 +19516,8 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         "start_time_utc": {"key": "startTimeUtc", "type": "iso-8601"},
         "time_generated": {"key": "timeGenerated", "type": "iso-8601"},
         "alert_type": {"key": "alertType", "type": "str"},
+        "intent": {"key": "intent", "type": "str"},
+        "techniques": {"key": "techniques", "type": "[str]"},
     }
 
     def __init__(
@@ -19402,6 +19532,7 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         alert_type: str,
         product_name: Optional[str] = None,
         description: Optional[str] = None,
+        techniques: Optional[List[str]] = None,
         **kwargs
     ):
         """
@@ -19424,6 +19555,8 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         :paramtype time_generated: ~datetime.datetime
         :keyword alert_type: The name of the alert type. Required.
         :paramtype alert_type: str
+        :keyword techniques: The techniques of the alert.
+        :paramtype techniques: list[str]
         """
         super().__init__(**kwargs)
         self.kind = "SecurityAlert"  # type: str
@@ -19436,6 +19569,8 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         self.start_time_utc = start_time_utc
         self.time_generated = time_generated
         self.alert_type = alert_type
+        self.intent = None
+        self.techniques = techniques
 
 
 class SecurityGroupEntity(Entity):
@@ -19616,6 +19751,26 @@ class SecurityMLAnalyticsSettingsList(_serialization.Model):
         super().__init__(**kwargs)
         self.next_link = None
         self.value = value
+
+
+class SentinelEntityMapping(_serialization.Model):
+    """A single sentinel entity mapping.
+
+    :ivar column_name: the column name to be mapped to the SentinelEntities.
+    :vartype column_name: str
+    """
+
+    _attribute_map = {
+        "column_name": {"key": "columnName", "type": "str"},
+    }
+
+    def __init__(self, *, column_name: Optional[str] = None, **kwargs):
+        """
+        :keyword column_name: the column name to be mapped to the SentinelEntities.
+        :paramtype column_name: str
+        """
+        super().__init__(**kwargs)
+        self.column_name = column_name
 
 
 class SentinelOnboardingState(ResourceWithEtag):

@@ -29,14 +29,14 @@ class SecurityInsightsConfiguration(Configuration):  # pylint: disable=too-many-
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-10-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(SecurityInsightsConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-09-01-preview")  # type: str
+        api_version = kwargs.pop("api_version", "2022-10-01-preview")  # type: str
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
