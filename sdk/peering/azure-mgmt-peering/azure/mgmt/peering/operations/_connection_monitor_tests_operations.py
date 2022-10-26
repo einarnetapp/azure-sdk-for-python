@@ -36,7 +36,13 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_get_request(peer_asn_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_get_request(
+    resource_group_name: str,
+    peering_service_name: str,
+    connection_monitor_test_name: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -45,10 +51,15 @@ def build_get_request(peer_asn_name: str, subscription_id: str, **kwargs: Any) -
 
     # Construct URL
     _url = kwargs.pop(
-        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}"
-    )
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "peerAsnName": _SERIALIZER.url("peer_asn_name", peer_asn_name, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
+        "connectionMonitorTestName": _SERIALIZER.url(
+            "connection_monitor_test_name", connection_monitor_test_name, "str"
+        ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -63,7 +74,13 @@ def build_get_request(peer_asn_name: str, subscription_id: str, **kwargs: Any) -
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_create_or_update_request(peer_asn_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_create_or_update_request(
+    resource_group_name: str,
+    peering_service_name: str,
+    connection_monitor_test_name: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -73,10 +90,15 @@ def build_create_or_update_request(peer_asn_name: str, subscription_id: str, **k
 
     # Construct URL
     _url = kwargs.pop(
-        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}"
-    )
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "peerAsnName": _SERIALIZER.url("peer_asn_name", peer_asn_name, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
+        "connectionMonitorTestName": _SERIALIZER.url(
+            "connection_monitor_test_name", connection_monitor_test_name, "str"
+        ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -93,7 +115,13 @@ def build_create_or_update_request(peer_asn_name: str, subscription_id: str, **k
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_delete_request(peer_asn_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_delete_request(
+    resource_group_name: str,
+    peering_service_name: str,
+    connection_monitor_test_name: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -102,10 +130,15 @@ def build_delete_request(peer_asn_name: str, subscription_id: str, **kwargs: Any
 
     # Construct URL
     _url = kwargs.pop(
-        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}"
-    )
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "peerAsnName": _SERIALIZER.url("peer_asn_name", peer_asn_name, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
+        "connectionMonitorTestName": _SERIALIZER.url(
+            "connection_monitor_test_name", connection_monitor_test_name, "str"
+        ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -120,7 +153,9 @@ def build_delete_request(peer_asn_name: str, subscription_id: str, **kwargs: Any
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_list_by_peering_service_request(
+    resource_group_name: str, peering_service_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -128,8 +163,13 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns")
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests",
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -144,14 +184,14 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class PeerAsnsOperations:
+class ConnectionMonitorTestsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.peering.PeeringManagementClient`'s
-        :attr:`peer_asns` attribute.
+        :attr:`connection_monitor_tests` attribute.
     """
 
     models = _models
@@ -164,14 +204,21 @@ class PeerAsnsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def get(self, peer_asn_name: str, **kwargs: Any) -> _models.PeerAsn:
-        """Gets the peer ASN with the specified name under the given subscription.
+    def get(
+        self, resource_group_name: str, peering_service_name: str, connection_monitor_test_name: str, **kwargs: Any
+    ) -> _models.ConnectionMonitorTest:
+        """Gets an existing connection monitor test with the specified name under the given subscription,
+        resource group and peering service.
 
-        :param peer_asn_name: The peer ASN name. Required.
-        :type peer_asn_name: str
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param peering_service_name: The name of the peering service. Required.
+        :type peering_service_name: str
+        :param connection_monitor_test_name: The name of the connection monitor test. Required.
+        :type connection_monitor_test_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeerAsn or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeerAsn
+        :return: ConnectionMonitorTest or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.ConnectionMonitorTest
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -186,10 +233,12 @@ class PeerAsnsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeerAsn]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectionMonitorTest]
 
         request = build_get_request(
-            peer_asn_name=peer_asn_name,
+            resource_group_name=resource_group_name,
+            peering_service_name=peering_service_name,
+            connection_monitor_test_name=connection_monitor_test_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -210,72 +259,106 @@ class PeerAsnsOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("PeerAsn", pipeline_response)
+        deserialized = self._deserialize("ConnectionMonitorTest", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}"}  # type: ignore
 
     @overload
     def create_or_update(
-        self, peer_asn_name: str, peer_asn: _models.PeerAsn, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.PeerAsn:
-        """Creates a new peer ASN or updates an existing peer ASN with the specified name under the given
-        subscription.
+        self,
+        resource_group_name: str,
+        peering_service_name: str,
+        connection_monitor_test_name: str,
+        connection_monitor_test: _models.ConnectionMonitorTest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.ConnectionMonitorTest:
+        """Creates or updates a connection monitor test with the specified name under the given
+        subscription, resource group and peering service.
 
-        :param peer_asn_name: The peer ASN name. Required.
-        :type peer_asn_name: str
-        :param peer_asn: The peer ASN. Required.
-        :type peer_asn: ~azure.mgmt.peering.models.PeerAsn
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param peering_service_name: The name of the peering service. Required.
+        :type peering_service_name: str
+        :param connection_monitor_test_name: The name of the connection monitor test. Required.
+        :type connection_monitor_test_name: str
+        :param connection_monitor_test: The properties needed to create a connection monitor test.
+         Required.
+        :type connection_monitor_test: ~azure.mgmt.peering.models.ConnectionMonitorTest
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeerAsn or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeerAsn
+        :return: ConnectionMonitorTest or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.ConnectionMonitorTest
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
     def create_or_update(
-        self, peer_asn_name: str, peer_asn: IO, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.PeerAsn:
-        """Creates a new peer ASN or updates an existing peer ASN with the specified name under the given
-        subscription.
+        self,
+        resource_group_name: str,
+        peering_service_name: str,
+        connection_monitor_test_name: str,
+        connection_monitor_test: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.ConnectionMonitorTest:
+        """Creates or updates a connection monitor test with the specified name under the given
+        subscription, resource group and peering service.
 
-        :param peer_asn_name: The peer ASN name. Required.
-        :type peer_asn_name: str
-        :param peer_asn: The peer ASN. Required.
-        :type peer_asn: IO
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param peering_service_name: The name of the peering service. Required.
+        :type peering_service_name: str
+        :param connection_monitor_test_name: The name of the connection monitor test. Required.
+        :type connection_monitor_test_name: str
+        :param connection_monitor_test: The properties needed to create a connection monitor test.
+         Required.
+        :type connection_monitor_test: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeerAsn or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeerAsn
+        :return: ConnectionMonitorTest or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.ConnectionMonitorTest
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace
     def create_or_update(
-        self, peer_asn_name: str, peer_asn: Union[_models.PeerAsn, IO], **kwargs: Any
-    ) -> _models.PeerAsn:
-        """Creates a new peer ASN or updates an existing peer ASN with the specified name under the given
-        subscription.
+        self,
+        resource_group_name: str,
+        peering_service_name: str,
+        connection_monitor_test_name: str,
+        connection_monitor_test: Union[_models.ConnectionMonitorTest, IO],
+        **kwargs: Any
+    ) -> _models.ConnectionMonitorTest:
+        """Creates or updates a connection monitor test with the specified name under the given
+        subscription, resource group and peering service.
 
-        :param peer_asn_name: The peer ASN name. Required.
-        :type peer_asn_name: str
-        :param peer_asn: The peer ASN. Is either a model type or a IO type. Required.
-        :type peer_asn: ~azure.mgmt.peering.models.PeerAsn or IO
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param peering_service_name: The name of the peering service. Required.
+        :type peering_service_name: str
+        :param connection_monitor_test_name: The name of the connection monitor test. Required.
+        :type connection_monitor_test_name: str
+        :param connection_monitor_test: The properties needed to create a connection monitor test. Is
+         either a model type or a IO type. Required.
+        :type connection_monitor_test: ~azure.mgmt.peering.models.ConnectionMonitorTest or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeerAsn or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeerAsn
+        :return: ConnectionMonitorTest or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.ConnectionMonitorTest
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -291,18 +374,20 @@ class PeerAsnsOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeerAsn]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectionMonitorTest]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(peer_asn, (IO, bytes)):
-            _content = peer_asn
+        if isinstance(connection_monitor_test, (IO, bytes)):
+            _content = connection_monitor_test
         else:
-            _json = self._serialize.body(peer_asn, "PeerAsn")
+            _json = self._serialize.body(connection_monitor_test, "ConnectionMonitorTest")
 
         request = build_create_or_update_request(
-            peer_asn_name=peer_asn_name,
+            resource_group_name=resource_group_name,
+            peering_service_name=peering_service_name,
+            connection_monitor_test_name=connection_monitor_test_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -327,24 +412,31 @@ class PeerAsnsOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("PeerAsn", pipeline_response)
+            deserialized = self._deserialize("ConnectionMonitorTest", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("PeerAsn", pipeline_response)
+            deserialized = self._deserialize("ConnectionMonitorTest", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}"}  # type: ignore
 
     @distributed_trace
-    def delete(self, peer_asn_name: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
-        """Deletes an existing peer ASN with the specified name under the given subscription.
+    def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, peering_service_name: str, connection_monitor_test_name: str, **kwargs: Any
+    ) -> None:
+        """Deletes an existing connection monitor test with the specified name under the given
+        subscription, resource group and peering service.
 
-        :param peer_asn_name: The peer ASN name. Required.
-        :type peer_asn_name: str
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param peering_service_name: The name of the peering service. Required.
+        :type peering_service_name: str
+        :param connection_monitor_test_name: The name of the connection monitor test. Required.
+        :type connection_monitor_test_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -365,7 +457,9 @@ class PeerAsnsOperations:
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_delete_request(
-            peer_asn_name=peer_asn_name,
+            resource_group_name=resource_group_name,
+            peering_service_name=peering_service_name,
+            connection_monitor_test_name=connection_monitor_test_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -389,22 +483,30 @@ class PeerAsnsOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns/{peerAsnName}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests/{connectionMonitorTestName}"}  # type: ignore
 
     @distributed_trace
-    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.PeerAsn"]:
-        """Lists all of the peer ASNs under the given subscription.
+    def list_by_peering_service(
+        self, resource_group_name: str, peering_service_name: str, **kwargs: Any
+    ) -> Iterable["_models.ConnectionMonitorTest"]:
+        """Lists all connection monitor tests under the given subscription, resource group and peering
+        service.
 
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param peering_service_name: The name of the peering service. Required.
+        :type peering_service_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PeerAsn or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.peering.models.PeerAsn]
+        :return: An iterator like instance of either ConnectionMonitorTest or the result of
+         cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.peering.models.ConnectionMonitorTest]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeerAsnListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectionMonitorTestListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -417,10 +519,12 @@ class PeerAsnsOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_list_by_subscription_request(
+                request = build_list_by_peering_service_request(
+                    resource_group_name=resource_group_name,
+                    peering_service_name=peering_service_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.list_by_subscription.metadata["url"],
+                    template_url=self.list_by_peering_service.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -446,7 +550,7 @@ class PeerAsnsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("PeerAsnListResult", pipeline_response)
+            deserialized = self._deserialize("ConnectionMonitorTestListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -469,4 +573,4 @@ class PeerAsnsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peerAsns"}  # type: ignore
+    list_by_peering_service.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}/connectionMonitorTests"}  # type: ignore

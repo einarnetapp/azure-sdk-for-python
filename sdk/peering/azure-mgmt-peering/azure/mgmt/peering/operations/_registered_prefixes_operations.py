@@ -37,7 +37,7 @@ _SERIALIZER.client_side_validation = False
 
 
 def build_get_request(
-    resource_group_name: str, peering_service_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, peering_name: str, registered_prefix_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -48,11 +48,12 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
+        "peeringName": _SERIALIZER.url("peering_name", peering_name, "str"),
+        "registeredPrefixName": _SERIALIZER.url("registered_prefix_name", registered_prefix_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -68,7 +69,7 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, peering_service_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, peering_name: str, registered_prefix_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -80,11 +81,12 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
+        "peeringName": _SERIALIZER.url("peering_name", peering_name, "str"),
+        "registeredPrefixName": _SERIALIZER.url("registered_prefix_name", registered_prefix_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -102,7 +104,7 @@ def build_create_or_update_request(
 
 
 def build_delete_request(
-    resource_group_name: str, peering_service_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, peering_name: str, registered_prefix_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -113,11 +115,12 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
+        "peeringName": _SERIALIZER.url("peering_name", peering_name, "str"),
+        "registeredPrefixName": _SERIALIZER.url("registered_prefix_name", registered_prefix_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -132,54 +135,23 @@ def build_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_update_request(
-    resource_group_name: str, peering_service_name: str, subscription_id: str, **kwargs: Any
+def build_list_by_peering_request(
+    resource_group_name: str, peering_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))  # type: str
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "peeringServiceName": _SERIALIZER.url("peering_service_name", peering_service_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_list_by_resource_group_request(resource_group_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))  # type: str
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "peeringName": _SERIALIZER.url("peering_name", peering_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -194,31 +166,9 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))  # type: str
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServices")
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_initialize_connection_monitor_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_validate_request(
+    resource_group_name: str, peering_name: str, registered_prefix_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -227,9 +177,13 @@ def build_initialize_connection_monitor_request(subscription_id: str, **kwargs: 
 
     # Construct URL
     _url = kwargs.pop(
-        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/initializeConnectionMonitor"
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}/validate",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "peeringName": _SERIALIZER.url("peering_name", peering_name, "str"),
+        "registeredPrefixName": _SERIALIZER.url("registered_prefix_name", registered_prefix_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -244,14 +198,14 @@ def build_initialize_connection_monitor_request(subscription_id: str, **kwargs: 
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class PeeringServicesOperations:
+class RegisteredPrefixesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.peering.PeeringManagementClient`'s
-        :attr:`peering_services` attribute.
+        :attr:`registered_prefixes` attribute.
     """
 
     models = _models
@@ -264,17 +218,21 @@ class PeeringServicesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def get(self, resource_group_name: str, peering_service_name: str, **kwargs: Any) -> _models.PeeringService:
-        """Gets an existing peering service with the specified name under the given subscription and
-        resource group.
+    def get(
+        self, resource_group_name: str, peering_name: str, registered_prefix_name: str, **kwargs: Any
+    ) -> _models.PeeringRegisteredPrefix:
+        """Gets an existing registered prefix with the specified name under the given subscription,
+        resource group and peering.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
-        :param peering_service_name: The name of the peering. Required.
-        :type peering_service_name: str
+        :param peering_name: The name of the peering. Required.
+        :type peering_name: str
+        :param registered_prefix_name: The name of the registered prefix. Required.
+        :type registered_prefix_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeeringService or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeeringService
+        :return: PeeringRegisteredPrefix or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.PeeringRegisteredPrefix
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -289,11 +247,12 @@ class PeeringServicesOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringService]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringRegisteredPrefix]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            peering_service_name=peering_service_name,
+            peering_name=peering_name,
+            registered_prefix_name=registered_prefix_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -314,40 +273,43 @@ class PeeringServicesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("PeeringService", pipeline_response)
+        deserialized = self._deserialize("PeeringRegisteredPrefix", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}"}  # type: ignore
 
     @overload
     def create_or_update(
         self,
         resource_group_name: str,
-        peering_service_name: str,
-        peering_service: _models.PeeringService,
+        peering_name: str,
+        registered_prefix_name: str,
+        registered_prefix: _models.PeeringRegisteredPrefix,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.PeeringService:
-        """Creates a new peering service or updates an existing peering with the specified name under the
-        given subscription and resource group.
+    ) -> _models.PeeringRegisteredPrefix:
+        """Creates a new registered prefix with the specified name under the given subscription, resource
+        group and peering.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
-        :param peering_service_name: The name of the peering service. Required.
-        :type peering_service_name: str
-        :param peering_service: The properties needed to create or update a peering service. Required.
-        :type peering_service: ~azure.mgmt.peering.models.PeeringService
+        :param peering_name: The name of the peering. Required.
+        :type peering_name: str
+        :param registered_prefix_name: The name of the registered prefix. Required.
+        :type registered_prefix_name: str
+        :param registered_prefix: The properties needed to create a registered prefix. Required.
+        :type registered_prefix: ~azure.mgmt.peering.models.PeeringRegisteredPrefix
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeeringService or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeeringService
+        :return: PeeringRegisteredPrefix or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.PeeringRegisteredPrefix
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -355,27 +317,30 @@ class PeeringServicesOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        peering_service_name: str,
-        peering_service: IO,
+        peering_name: str,
+        registered_prefix_name: str,
+        registered_prefix: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.PeeringService:
-        """Creates a new peering service or updates an existing peering with the specified name under the
-        given subscription and resource group.
+    ) -> _models.PeeringRegisteredPrefix:
+        """Creates a new registered prefix with the specified name under the given subscription, resource
+        group and peering.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
-        :param peering_service_name: The name of the peering service. Required.
-        :type peering_service_name: str
-        :param peering_service: The properties needed to create or update a peering service. Required.
-        :type peering_service: IO
+        :param peering_name: The name of the peering. Required.
+        :type peering_name: str
+        :param registered_prefix_name: The name of the registered prefix. Required.
+        :type registered_prefix_name: str
+        :param registered_prefix: The properties needed to create a registered prefix. Required.
+        :type registered_prefix: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeeringService or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeeringService
+        :return: PeeringRegisteredPrefix or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.PeeringRegisteredPrefix
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -383,26 +348,29 @@ class PeeringServicesOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        peering_service_name: str,
-        peering_service: Union[_models.PeeringService, IO],
+        peering_name: str,
+        registered_prefix_name: str,
+        registered_prefix: Union[_models.PeeringRegisteredPrefix, IO],
         **kwargs: Any
-    ) -> _models.PeeringService:
-        """Creates a new peering service or updates an existing peering with the specified name under the
-        given subscription and resource group.
+    ) -> _models.PeeringRegisteredPrefix:
+        """Creates a new registered prefix with the specified name under the given subscription, resource
+        group and peering.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
-        :param peering_service_name: The name of the peering service. Required.
-        :type peering_service_name: str
-        :param peering_service: The properties needed to create or update a peering service. Is either
-         a model type or a IO type. Required.
-        :type peering_service: ~azure.mgmt.peering.models.PeeringService or IO
+        :param peering_name: The name of the peering. Required.
+        :type peering_name: str
+        :param registered_prefix_name: The name of the registered prefix. Required.
+        :type registered_prefix_name: str
+        :param registered_prefix: The properties needed to create a registered prefix. Is either a
+         model type or a IO type. Required.
+        :type registered_prefix: ~azure.mgmt.peering.models.PeeringRegisteredPrefix or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeeringService or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeeringService
+        :return: PeeringRegisteredPrefix or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.PeeringRegisteredPrefix
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -418,19 +386,20 @@ class PeeringServicesOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringService]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringRegisteredPrefix]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(peering_service, (IO, bytes)):
-            _content = peering_service
+        if isinstance(registered_prefix, (IO, bytes)):
+            _content = registered_prefix
         else:
-            _json = self._serialize.body(peering_service, "PeeringService")
+            _json = self._serialize.body(registered_prefix, "PeeringRegisteredPrefix")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            peering_service_name=peering_service_name,
+            peering_name=peering_name,
+            registered_prefix_name=registered_prefix_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -455,29 +424,31 @@ class PeeringServicesOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("PeeringService", pipeline_response)
+            deserialized = self._deserialize("PeeringRegisteredPrefix", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("PeeringService", pipeline_response)
+            deserialized = self._deserialize("PeeringRegisteredPrefix", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}"}  # type: ignore
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, peering_service_name: str, **kwargs: Any
+        self, resource_group_name: str, peering_name: str, registered_prefix_name: str, **kwargs: Any
     ) -> None:
-        """Deletes an existing peering service with the specified name under the given subscription and
-        resource group.
+        """Deletes an existing registered prefix with the specified name under the given subscription,
+        resource group and peering.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
-        :param peering_service_name: The name of the peering service. Required.
-        :type peering_service_name: str
+        :param peering_name: The name of the peering. Required.
+        :type peering_name: str
+        :param registered_prefix_name: The name of the registered prefix. Required.
+        :type registered_prefix_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -499,7 +470,8 @@ class PeeringServicesOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            peering_service_name=peering_service_name,
+            peering_name=peering_name,
+            registered_prefix_name=registered_prefix_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -523,83 +495,113 @@ class PeeringServicesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}"}  # type: ignore
-
-    @overload
-    def update(
-        self,
-        resource_group_name: str,
-        peering_service_name: str,
-        tags: _models.ResourceTags,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.PeeringService:
-        """Updates tags for a peering service with the specified name under the given subscription and
-        resource group.
-
-        :param resource_group_name: The name of the resource group. Required.
-        :type resource_group_name: str
-        :param peering_service_name: The name of the peering service. Required.
-        :type peering_service_name: str
-        :param tags: The resource tags. Required.
-        :type tags: ~azure.mgmt.peering.models.ResourceTags
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeeringService or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeeringService
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def update(
-        self,
-        resource_group_name: str,
-        peering_service_name: str,
-        tags: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.PeeringService:
-        """Updates tags for a peering service with the specified name under the given subscription and
-        resource group.
-
-        :param resource_group_name: The name of the resource group. Required.
-        :type resource_group_name: str
-        :param peering_service_name: The name of the peering service. Required.
-        :type peering_service_name: str
-        :param tags: The resource tags. Required.
-        :type tags: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeeringService or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeeringService
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}"}  # type: ignore
 
     @distributed_trace
-    def update(
-        self, resource_group_name: str, peering_service_name: str, tags: Union[_models.ResourceTags, IO], **kwargs: Any
-    ) -> _models.PeeringService:
-        """Updates tags for a peering service with the specified name under the given subscription and
-        resource group.
+    def list_by_peering(
+        self, resource_group_name: str, peering_name: str, **kwargs: Any
+    ) -> Iterable["_models.PeeringRegisteredPrefix"]:
+        """Lists all registered prefixes under the given subscription, resource group and peering.
 
         :param resource_group_name: The name of the resource group. Required.
         :type resource_group_name: str
-        :param peering_service_name: The name of the peering service. Required.
-        :type peering_service_name: str
-        :param tags: The resource tags. Is either a model type or a IO type. Required.
-        :type tags: ~azure.mgmt.peering.models.ResourceTags or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
+        :param peering_name: The name of the peering. Required.
+        :type peering_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: PeeringService or the result of cls(response)
-        :rtype: ~azure.mgmt.peering.models.PeeringService
+        :return: An iterator like instance of either PeeringRegisteredPrefix or the result of
+         cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.peering.models.PeeringRegisteredPrefix]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringRegisteredPrefixListResult]
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_list_by_peering_request(
+                    resource_group_name=resource_group_name,
+                    peering_name=peering_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    template_url=self.list_by_peering.metadata["url"],
+                    headers=_headers,
+                    params=_params,
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                request = _convert_request(request)
+                request.url = self._client.format_url(request.url)  # type: ignore
+                request.method = "GET"
+            return request
+
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize("PeeringRegisteredPrefixListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    list_by_peering.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes"}  # type: ignore
+
+    @distributed_trace
+    def validate(
+        self, resource_group_name: str, peering_name: str, registered_prefix_name: str, **kwargs: Any
+    ) -> _models.PeeringRegisteredPrefix:
+        """Validates an existing registered prefix with the specified name under the given subscription,
+        resource group and peering.
+
+        :param resource_group_name: The name of the resource group. Required.
+        :type resource_group_name: str
+        :param peering_name: The name of the peering. Required.
+        :type peering_name: str
+        :param registered_prefix_name: The name of the registered prefix. Required.
+        :type registered_prefix_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: PeeringRegisteredPrefix or the result of cls(response)
+        :rtype: ~azure.mgmt.peering.models.PeeringRegisteredPrefix
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -610,30 +612,19 @@ class PeeringServicesOperations:
         }
         error_map.update(kwargs.pop("error_map", {}) or {})
 
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringService]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringRegisteredPrefix]
 
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(tags, (IO, bytes)):
-            _content = tags
-        else:
-            _json = self._serialize.body(tags, "ResourceTags")
-
-        request = build_update_request(
+        request = build_validate_request(
             resource_group_name=resource_group_name,
-            peering_service_name=peering_service_name,
+            peering_name=peering_name,
+            registered_prefix_name=registered_prefix_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self.update.metadata["url"],
+            template_url=self.validate.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -651,223 +642,11 @@ class PeeringServicesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("PeeringService", pipeline_response)
+        deserialized = self._deserialize("PeeringRegisteredPrefix", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices/{peeringServiceName}"}  # type: ignore
-
-    @distributed_trace
-    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> Iterable["_models.PeeringService"]:
-        """Lists all of the peering services under the given subscription and resource group.
-
-        :param resource_group_name: The name of the resource group. Required.
-        :type resource_group_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PeeringService or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.peering.models.PeeringService]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringServiceListResult]
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_resource_group_request(
-                    resource_group_name=resource_group_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    template_url=self.list_by_resource_group.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
-                request.method = "GET"
-            return request
-
-        def extract_data(pipeline_response):
-            deserialized = self._deserialize("PeeringServiceListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peeringServices"}  # type: ignore
-
-    @distributed_trace
-    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.PeeringService"]:
-        """Lists all of the peerings under the given subscription.
-
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PeeringService or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.peering.models.PeeringService]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PeeringServiceListResult]
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_list_by_subscription_request(
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    template_url=self.list_by_subscription.metadata["url"],
-                    headers=_headers,
-                    params=_params,
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
-                request.method = "GET"
-            return request
-
-        def extract_data(pipeline_response):
-            deserialized = self._deserialize("PeeringServiceListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServices"}  # type: ignore
-
-    @distributed_trace
-    def initialize_connection_monitor(self, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
-        """Initialize Peering Service for Connection Monitor functionality.
-
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-
-        request = build_initialize_connection_monitor_request(
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.initialize_connection_monitor.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})
-
-    initialize_connection_monitor.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/initializeConnectionMonitor"}  # type: ignore
+    validate.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Peering/peerings/{peeringName}/registeredPrefixes/{registeredPrefixName}/validate"}  # type: ignore
