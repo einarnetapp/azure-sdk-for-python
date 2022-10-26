@@ -4901,6 +4901,182 @@ class LoginScopes(_serialization.Model):
         self.scopes = scopes
 
 
+class ManagedCertificate(TrackedResource):
+    """Managed certificates used for Custom Domain bindings of Container Apps in a Managed Environment.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.appcontainers.models.SystemData
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives. Required.
+    :vartype location: str
+    :ivar properties: Certificate resource specific properties.
+    :vartype properties: ~azure.mgmt.appcontainers.models.ManagedCertificateProperties
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ManagedCertificateProperties"},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: str,
+        tags: Optional[Dict[str, str]] = None,
+        properties: Optional["_models.ManagedCertificateProperties"] = None,
+        **kwargs
+    ):
+        """
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: The geo-location where the resource lives. Required.
+        :paramtype location: str
+        :keyword properties: Certificate resource specific properties.
+        :paramtype properties: ~azure.mgmt.appcontainers.models.ManagedCertificateProperties
+        """
+        super().__init__(tags=tags, location=location, **kwargs)
+        self.properties = properties
+
+
+class ManagedCertificateCollection(_serialization.Model):
+    """Collection of Managed Certificates.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: Collection of resources. Required.
+    :vartype value: list[~azure.mgmt.appcontainers.models.ManagedCertificate]
+    :ivar next_link: Link to next page of resources.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"required": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ManagedCertificate]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, *, value: List["_models.ManagedCertificate"], **kwargs):
+        """
+        :keyword value: Collection of resources. Required.
+        :paramtype value: list[~azure.mgmt.appcontainers.models.ManagedCertificate]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
+class ManagedCertificatePatch(_serialization.Model):
+    """A managed certificate to update.
+
+    :ivar tags: Application-specific metadata in the form of key-value pairs.
+    :vartype tags: dict[str, str]
+    """
+
+    _attribute_map = {
+        "tags": {"key": "tags", "type": "{str}"},
+    }
+
+    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+        """
+        :keyword tags: Application-specific metadata in the form of key-value pairs.
+        :paramtype tags: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.tags = tags
+
+
+class ManagedCertificateProperties(_serialization.Model):
+    """Certificate resource specific properties.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar provisioning_state: Provisioning state of the certificate. Known values are: "Succeeded",
+     "Failed", "Canceled", "DeleteFailed", and "Pending".
+    :vartype provisioning_state: str or
+     ~azure.mgmt.appcontainers.models.CertificateProvisioningState
+    :ivar subject_name: Subject name of the certificate.
+    :vartype subject_name: str
+    :ivar error: Any error occurred during the certificate provision.
+    :vartype error: str
+    :ivar domain_control_validation: Selected type of domain control validation for managed
+     certificates. Known values are: "CNAME", "HTTP", and "TXT".
+    :vartype domain_control_validation: str or
+     ~azure.mgmt.appcontainers.models.ManagedCertificateDomainControlValidation
+    :ivar validation_token: A TXT token used for DNS TXT domain control validation when issuing
+     this type of managed certificates.
+    :vartype validation_token: str
+    """
+
+    _validation = {
+        "provisioning_state": {"readonly": True},
+        "error": {"readonly": True},
+        "validation_token": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "subject_name": {"key": "subjectName", "type": "str"},
+        "error": {"key": "error", "type": "str"},
+        "domain_control_validation": {"key": "domainControlValidation", "type": "str"},
+        "validation_token": {"key": "validationToken", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        subject_name: Optional[str] = None,
+        domain_control_validation: Optional[Union[str, "_models.ManagedCertificateDomainControlValidation"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword subject_name: Subject name of the certificate.
+        :paramtype subject_name: str
+        :keyword domain_control_validation: Selected type of domain control validation for managed
+         certificates. Known values are: "CNAME", "HTTP", and "TXT".
+        :paramtype domain_control_validation: str or
+         ~azure.mgmt.appcontainers.models.ManagedCertificateDomainControlValidation
+        """
+        super().__init__(**kwargs)
+        self.provisioning_state = None
+        self.subject_name = subject_name
+        self.error = None
+        self.domain_control_validation = domain_control_validation
+        self.validation_token = None
+
+
 class ManagedEnvironment(TrackedResource):  # pylint: disable=too-many-instance-attributes
     """An environment for hosting container apps.
 
