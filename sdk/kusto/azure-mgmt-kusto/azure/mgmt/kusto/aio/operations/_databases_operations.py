@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, AsyncIterable, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
 from azure.core.exceptions import (
@@ -250,10 +250,17 @@ class DatabasesOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -354,7 +361,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: Union[_models.Database, IO],
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         **kwargs: Any
     ) -> _models.Database:
         error_map = {
@@ -430,7 +437,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: _models.Database,
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -474,7 +481,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: IO,
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -518,7 +525,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: Union[_models.Database, IO],
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         **kwargs: Any
     ) -> AsyncLROPoller[_models.Database]:
         """Creates or updates a database.
@@ -607,7 +614,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: Union[_models.Database, IO],
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         **kwargs: Any
     ) -> _models.Database:
         error_map = {
@@ -692,7 +699,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: _models.Database,
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -736,7 +743,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: IO,
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -780,7 +787,7 @@ class DatabasesOperations:
         cluster_name: str,
         database_name: str,
         parameters: Union[_models.Database, IO],
-        caller_role: Union[str, "_models.CallerRole"] = "Admin",
+        caller_role: Union[str, _models.CallerRole] = "Admin",
         **kwargs: Any
     ) -> AsyncLROPoller[_models.Database]:
         """Updates a database.
@@ -1025,10 +1032,17 @@ class DatabasesOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
