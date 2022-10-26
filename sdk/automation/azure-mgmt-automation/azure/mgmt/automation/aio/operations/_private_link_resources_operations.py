@@ -9,7 +9,14 @@
 from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar
 
 from azure.core.async_paging import AsyncItemPaged, AsyncList
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -21,8 +28,10 @@ from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._private_link_resources_operations import build_automation_request
 from .._vendor import MixinABC
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class PrivateLinkResourcesOperations:
     """
@@ -43,49 +52,45 @@ class PrivateLinkResourcesOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace
     def automation(
-        self,
-        resource_group_name: str,
-        automation_account_name: str,
-        **kwargs: Any
-    ) -> AsyncIterable[_models.PrivateLinkResourceListResult]:
+        self, resource_group_name: str, automation_account_name: str, **kwargs: Any
+    ) -> AsyncIterable["_models.PrivateLinkResource"]:
         """Gets the private link resources that need to be created for Automation account.
 
-        :param resource_group_name: Name of an Azure Resource group.
+        :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
-        :param automation_account_name: The name of the automation account.
+        :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :keyword api_version: Api Version. Default value is "2020-01-13-preview". Note that overriding
-         this default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either PrivateLinkResourceListResult or the result of
-         cls(response)
+        :return: An iterator like instance of either PrivateLinkResource or the result of cls(response)
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.automation.models.PrivateLinkResourceListResult]
-        :raises: ~azure.core.exceptions.HttpResponseError
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.automation.models.PrivateLinkResource]
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2020-01-13-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.PrivateLinkResourceListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2020-01-13-preview"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrivateLinkResourceListResult]
 
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
         def prepare_request(next_link=None):
             if not next_link:
-                
+
                 request = build_automation_request(
-                    subscription_id=self._config.subscription_id,
                     resource_group_name=resource_group_name,
                     automation_account_name=automation_account_name,
+                    subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.automation.metadata['url'],
+                    template_url=self.automation.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -93,16 +98,7 @@ class PrivateLinkResourcesOperations:
                 request.url = self._client.format_url(request.url)  # type: ignore
 
             else:
-                
-                request = build_automation_request(
-                    subscription_id=self._config.subscription_id,
-                    resource_group_name=resource_group_name,
-                    automation_account_name=automation_account_name,
-                    api_version=api_version,
-                    template_url=next_link,
-                    headers=_headers,
-                    params=_params,
-                )
+                request = HttpRequest("GET", next_link)
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -118,10 +114,8 @@ class PrivateLinkResourcesOperations:
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # pylint: disable=protected-access
-                request,
-                stream=False,
-                **kwargs
+            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
 
@@ -131,8 +125,6 @@ class PrivateLinkResourcesOperations:
 
             return pipeline_response
 
+        return AsyncItemPaged(get_next, extract_data)
 
-        return AsyncItemPaged(
-            get_next, extract_data
-        )
-    automation.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/privateLinkResources"}  # type: ignore
+    automation.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/privateLinkResources"}  # type: ignore

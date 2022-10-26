@@ -8,7 +8,14 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Optional, TypeVar
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -20,8 +27,10 @@ from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._keys_operations import build_list_by_automation_account_request
 from .._vendor import MixinABC
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class KeysOperations:
     """
@@ -42,46 +51,41 @@ class KeysOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace_async
     async def list_by_automation_account(
-        self,
-        resource_group_name: str,
-        automation_account_name: str,
-        **kwargs: Any
+        self, resource_group_name: str, automation_account_name: str, **kwargs: Any
     ) -> _models.KeyListResult:
         """Retrieve the automation keys for an account.
 
-        :param resource_group_name: Name of an Azure Resource group.
+        :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
-        :param automation_account_name: The name of the automation account.
+        :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :keyword api_version: Api Version. Default value is "2021-06-22". Note that overriding this
-         default value may result in unsupported behavior.
-        :paramtype api_version: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: KeyListResult, or the result of cls(response)
+        :return: KeyListResult or the result of cls(response)
         :rtype: ~azure.mgmt.automation.models.KeyListResult
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2021-06-22"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[_models.KeyListResult]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.KeyListResult]
 
-        
         request = build_list_by_automation_account_request(
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.list_by_automation_account.metadata['url'],
+            template_url=self.list_by_automation_account.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -89,10 +93,9 @@ class KeysOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
+
         response = pipeline_response.http_response
 
         if response.status_code not in [200]:
@@ -100,12 +103,11 @@ class KeysOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize('KeyListResult', pipeline_response)
+        deserialized = self._deserialize("KeyListResult", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    list_by_automation_account.metadata = {'url': "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/listKeys"}  # type: ignore
-
+    list_by_automation_account.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/listKeys"}  # type: ignore

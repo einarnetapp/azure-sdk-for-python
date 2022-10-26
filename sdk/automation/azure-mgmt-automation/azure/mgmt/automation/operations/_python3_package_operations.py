@@ -36,7 +36,7 @@ _SERIALIZER.client_side_validation = False
 
 
 def build_delete_request(
-    resource_group_name: str, automation_account_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, automation_account_name: str, package_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -47,14 +47,14 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
+        "packageName": _SERIALIZER.url("package_name", package_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -70,7 +70,7 @@ def build_delete_request(
 
 
 def build_get_request(
-    resource_group_name: str, automation_account_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, automation_account_name: str, package_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -81,14 +81,14 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
+        "packageName": _SERIALIZER.url("package_name", package_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -104,7 +104,7 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, automation_account_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, automation_account_name: str, package_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -116,14 +116,14 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
+        "packageName": _SERIALIZER.url("package_name", package_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -141,7 +141,7 @@ def build_create_or_update_request(
 
 
 def build_update_request(
-    resource_group_name: str, automation_account_name: str, certificate_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, automation_account_name: str, package_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -153,14 +153,14 @@ def build_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._]+$"
         ),
         "automationAccountName": _SERIALIZER.url("automation_account_name", automation_account_name, "str"),
-        "certificateName": _SERIALIZER.url("certificate_name", certificate_name, "str"),
+        "packageName": _SERIALIZER.url("package_name", package_name, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -189,7 +189,7 @@ def build_list_by_automation_account_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
@@ -210,14 +210,14 @@ def build_list_by_automation_account_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class CertificateOperations:
+class Python3PackageOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.automation.AutomationClient`'s
-        :attr:`certificate` attribute.
+        :attr:`python3_package` attribute.
     """
 
     models = _models
@@ -231,16 +231,16 @@ class CertificateOperations:
 
     @distributed_trace
     def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, automation_account_name: str, certificate_name: str, **kwargs: Any
+        self, resource_group_name: str, automation_account_name: str, package_name: str, **kwargs: Any
     ) -> None:
-        """Delete the certificate.
+        """Delete the python 3 package by name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The name of certificate. Required.
-        :type certificate_name: str
+        :param package_name: The python package name. Required.
+        :type package_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None or the result of cls(response)
         :rtype: None
@@ -263,7 +263,7 @@ class CertificateOperations:
         request = build_delete_request(
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
-            certificate_name=certificate_name,
+            package_name=package_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.delete.metadata["url"],
@@ -279,7 +279,7 @@ class CertificateOperations:
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200]:
+        if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
@@ -287,23 +287,23 @@ class CertificateOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
 
     @distributed_trace
     def get(
-        self, resource_group_name: str, automation_account_name: str, certificate_name: str, **kwargs: Any
-    ) -> _models.Certificate:
-        """Retrieve the certificate identified by certificate name.
+        self, resource_group_name: str, automation_account_name: str, package_name: str, **kwargs: Any
+    ) -> _models.Module:
+        """Retrieve the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The name of certificate. Required.
-        :type certificate_name: str
+        :param package_name: The python package name. Required.
+        :type package_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.Certificate
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -318,12 +318,12 @@ class CertificateOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Certificate]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Module]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
-            certificate_name=certificate_name,
+            package_name=package_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -344,44 +344,42 @@ class CertificateOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Certificate", pipeline_response)
+        deserialized = self._deserialize("Module", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
 
     @overload
     def create_or_update(
         self,
         resource_group_name: str,
         automation_account_name: str,
-        certificate_name: str,
-        parameters: _models.CertificateCreateOrUpdateParameters,
+        package_name: str,
+        parameters: _models.PythonPackageCreateParameters,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Create a certificate.
+    ) -> _models.Module:
+        """Create or Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The parameters supplied to the create or update certificate operation.
-         Required.
-        :type certificate_name: str
-        :param parameters: The parameters supplied to the create or update certificate operation.
-         Required.
-        :type parameters: ~azure.mgmt.automation.models.CertificateCreateOrUpdateParameters
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The create or update parameters for python package. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageCreateParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.Certificate
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -390,30 +388,28 @@ class CertificateOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        certificate_name: str,
+        package_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Create a certificate.
+    ) -> _models.Module:
+        """Create or Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The parameters supplied to the create or update certificate operation.
-         Required.
-        :type certificate_name: str
-        :param parameters: The parameters supplied to the create or update certificate operation.
-         Required.
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The create or update parameters for python package. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.Certificate
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -422,28 +418,27 @@ class CertificateOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        certificate_name: str,
-        parameters: Union[_models.CertificateCreateOrUpdateParameters, IO],
+        package_name: str,
+        parameters: Union[_models.PythonPackageCreateParameters, IO],
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Create a certificate.
+    ) -> _models.Module:
+        """Create or Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The parameters supplied to the create or update certificate operation.
-         Required.
-        :type certificate_name: str
-        :param parameters: The parameters supplied to the create or update certificate operation. Is
-         either a model type or a IO type. Required.
-        :type parameters: ~azure.mgmt.automation.models.CertificateCreateOrUpdateParameters or IO
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The create or update parameters for python package. Is either a model type
+         or a IO type. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageCreateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.Certificate
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -459,7 +454,7 @@ class CertificateOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Certificate]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Module]
 
         content_type = content_type or "application/json"
         _json = None
@@ -467,12 +462,12 @@ class CertificateOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "CertificateCreateOrUpdateParameters")
+            _json = self._serialize.body(parameters, "PythonPackageCreateParameters")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
-            certificate_name=certificate_name,
+            package_name=package_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -497,45 +492,45 @@ class CertificateOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("Certificate", pipeline_response)
+            deserialized = self._deserialize("Module", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("Certificate", pipeline_response)
+            deserialized = self._deserialize("Module", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
 
     @overload
     def update(
         self,
         resource_group_name: str,
         automation_account_name: str,
-        certificate_name: str,
-        parameters: _models.CertificateUpdateParameters,
+        package_name: str,
+        parameters: _models.PythonPackageUpdateParameters,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Update a certificate.
+    ) -> _models.Module:
+        """Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The parameters supplied to the update certificate operation. Required.
-        :type certificate_name: str
-        :param parameters: The parameters supplied to the update certificate operation. Required.
-        :type parameters: ~azure.mgmt.automation.models.CertificateUpdateParameters
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The update parameters for python package. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageUpdateParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.Certificate
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -544,28 +539,28 @@ class CertificateOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        certificate_name: str,
+        package_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Update a certificate.
+    ) -> _models.Module:
+        """Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The parameters supplied to the update certificate operation. Required.
-        :type certificate_name: str
-        :param parameters: The parameters supplied to the update certificate operation. Required.
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The update parameters for python package. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.Certificate
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -574,27 +569,27 @@ class CertificateOperations:
         self,
         resource_group_name: str,
         automation_account_name: str,
-        certificate_name: str,
-        parameters: Union[_models.CertificateUpdateParameters, IO],
+        package_name: str,
+        parameters: Union[_models.PythonPackageUpdateParameters, IO],
         **kwargs: Any
-    ) -> _models.Certificate:
-        """Update a certificate.
+    ) -> _models.Module:
+        """Update the python 3 package identified by package name.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
-        :param certificate_name: The parameters supplied to the update certificate operation. Required.
-        :type certificate_name: str
-        :param parameters: The parameters supplied to the update certificate operation. Is either a
-         model type or a IO type. Required.
-        :type parameters: ~azure.mgmt.automation.models.CertificateUpdateParameters or IO
+        :param package_name: The name of python package. Required.
+        :type package_name: str
+        :param parameters: The update parameters for python package. Is either a model type or a IO
+         type. Required.
+        :type parameters: ~azure.mgmt.automation.models.PythonPackageUpdateParameters or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Certificate or the result of cls(response)
-        :rtype: ~azure.mgmt.automation.models.Certificate
+        :return: Module or the result of cls(response)
+        :rtype: ~azure.mgmt.automation.models.Module
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -610,7 +605,7 @@ class CertificateOperations:
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Certificate]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Module]
 
         content_type = content_type or "application/json"
         _json = None
@@ -618,12 +613,12 @@ class CertificateOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "CertificateUpdateParameters")
+            _json = self._serialize.body(parameters, "PythonPackageUpdateParameters")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
             automation_account_name=automation_account_name,
-            certificate_name=certificate_name,
+            package_name=package_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -647,35 +642,35 @@ class CertificateOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Certificate", pipeline_response)
+        deserialized = self._deserialize("Module", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates/{certificateName}"}  # type: ignore
+    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages/{packageName}"}  # type: ignore
 
     @distributed_trace
     def list_by_automation_account(
         self, resource_group_name: str, automation_account_name: str, **kwargs: Any
-    ) -> Iterable["_models.Certificate"]:
-        """Retrieve a list of certificates.
+    ) -> Iterable["_models.Module"]:
+        """Retrieve a list of python 3 packages.
 
         :param resource_group_name: Name of an Azure Resource group. Required.
         :type resource_group_name: str
         :param automation_account_name: The name of the automation account. Required.
         :type automation_account_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Certificate or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.automation.models.Certificate]
+        :return: An iterator like instance of either Module or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.automation.models.Module]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-08-08"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CertificateListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ModuleListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -708,7 +703,7 @@ class CertificateOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("CertificateListResult", pipeline_response)
+            deserialized = self._deserialize("ModuleListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -731,4 +726,4 @@ class CertificateOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_automation_account.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/certificates"}  # type: ignore
+    list_by_automation_account.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/python3Packages"}  # type: ignore
