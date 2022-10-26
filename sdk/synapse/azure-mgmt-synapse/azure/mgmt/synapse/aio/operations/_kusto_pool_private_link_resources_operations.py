@@ -26,20 +26,20 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from ... import models as _models
 from ..._vendor import _convert_request
-from ...operations._kusto_operations_operations import build_list_request
+from ...operations._kusto_pool_private_link_resources_operations import build_list_request
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class KustoOperationsOperations:
+class KustoPoolPrivateLinkResourcesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.synapse.aio.SynapseManagementClient`'s
-        :attr:`kusto_operations` attribute.
+        :attr:`kusto_pool_private_link_resources` attribute.
     """
 
     models = _models
@@ -52,19 +52,30 @@ class KustoOperationsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, **kwargs: Any) -> AsyncIterable["_models.Operation"]:
-        """Lists available operations for the Kusto sub-resources inside Microsoft.Synapse provider.
+    def list(
+        self, resource_group_name: str, workspace_name: str, kusto_pool_name: str, **kwargs: Any
+    ) -> AsyncIterable["_models.KustoPoolPrivateLinkResources"]:
+        """Lists all Kusto pool PrivateLinkResources.
 
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param kusto_pool_name: The name of the Kusto pool. Required.
+        :type kusto_pool_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Operation or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.synapse.models.Operation]
+        :return: An iterator like instance of either KustoPoolPrivateLinkResources or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.synapse.models.KustoPoolPrivateLinkResources]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01-preview"))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrivateLinkResources]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -78,6 +89,10 @@ class KustoOperationsOperations:
             if not next_link:
 
                 request = build_list_request(
+                    resource_group_name=resource_group_name,
+                    workspace_name=workspace_name,
+                    kusto_pool_name=kusto_pool_name,
+                    subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     template_url=self.list.metadata["url"],
                     headers=_headers,
@@ -94,11 +109,11 @@ class KustoOperationsOperations:
             return request
 
         async def extract_data(pipeline_response):
-            deserialized = self._deserialize("OperationListResult", pipeline_response)
+            deserialized = self._deserialize("PrivateLinkResources", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, AsyncList(list_of_elem)
+            return None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
@@ -117,4 +132,4 @@ class KustoOperationsOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/providers/Microsoft.Synapse/kustooperations"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/privateLinkResources"}  # type: ignore
