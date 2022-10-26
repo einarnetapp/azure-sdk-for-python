@@ -25,7 +25,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
 from .._serialization import Serializer
-from .._vendor import _convert_request, _format_url_section
+from .._vendor import MixinABC, _convert_request, _format_url_section
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
@@ -34,21 +34,23 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_get_request(location: str, operation_id: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
+def build_location_operation_status_request(
+    location_name: str, operation_id: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-05-01"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}",
+        "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "location": _SERIALIZER.url("location", location, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "locationName": _SERIALIZER.url("location_name", location_name, "str"),
         "operationId": _SERIALIZER.url("operation_id", operation_id, "str"),
     }
 
@@ -63,37 +65,20 @@ def build_get_request(location: str, operation_id: str, subscription_id: str, **
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class AscOperationsOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.storagecache.StorageCacheManagementClient`'s
-        :attr:`asc_operations` attribute.
-    """
-
-    models = _models
-
-    def __init__(self, *args, **kwargs):
-        input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
+class MicrosoftStorageSyncOperationsMixin(MixinABC):
     @distributed_trace
-    def get(self, location: str, operation_id: str, **kwargs: Any) -> _models.AscOperation:
-        """Gets the status of an asynchronous operation for the Azure HPC Cache.
+    def location_operation_status(
+        self, location_name: str, operation_id: str, **kwargs: Any
+    ) -> _models.LocationOperationStatus:
+        """Get Operation status.
 
-        :param location: The name of the region used to look up the operation. Required.
-        :type location: str
-        :param operation_id: The operation id which uniquely identifies the asynchronous operation.
-         Required.
+        :param location_name: The desired region to obtain information from. Required.
+        :type location_name: str
+        :param operation_id: operation Id. Required.
         :type operation_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AscOperation or the result of cls(response)
-        :rtype: ~azure.mgmt.storagecache.models.AscOperation
+        :return: LocationOperationStatus or the result of cls(response)
+        :rtype: ~azure.mgmt.storagesync.models.LocationOperationStatus
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -108,14 +93,14 @@ class AscOperationsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AscOperation]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.LocationOperationStatus]
 
-        request = build_get_request(
-            location=location,
+        request = build_location_operation_status_request(
+            location_name=location_name,
             operation_id=operation_id,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get.metadata["url"],
+            template_url=self.location_operation_status.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -130,13 +115,20 @@ class AscOperationsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(_models.StorageSyncError, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("AscOperation", pipeline_response)
+        response_headers = {}
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
+        response_headers["x-ms-correlation-request-id"] = self._deserialize(
+            "str", response.headers.get("x-ms-correlation-request-id")
+        )
+
+        deserialized = self._deserialize("LocationOperationStatus", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, response_headers)
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}"}  # type: ignore
+    location_operation_status.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}"}  # type: ignore
