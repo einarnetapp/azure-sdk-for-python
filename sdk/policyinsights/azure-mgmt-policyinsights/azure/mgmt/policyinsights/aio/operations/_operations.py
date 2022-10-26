@@ -70,7 +70,7 @@ class Operations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2019-10-01"))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-04-01"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationsListResults]
 
         request = build_list_request(

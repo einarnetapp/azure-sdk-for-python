@@ -17,6 +17,7 @@ from ._configuration import PolicyInsightsClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
     AttestationsOperations,
+    ComponentPolicyStatesOperations,
     Operations,
     PolicyEventsOperations,
     PolicyMetadataOperations,
@@ -32,7 +33,7 @@ if TYPE_CHECKING:
 
 
 class PolicyInsightsClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
-    """PolicyInsightsClient.
+    """Query component policy states at varying resource scopes for Resource Provider mode policies.
 
     :ivar policy_tracked_resources: PolicyTrackedResourcesOperations operations
     :vartype policy_tracked_resources:
@@ -43,12 +44,15 @@ class PolicyInsightsClient:  # pylint: disable=client-accepts-api-version-keywor
     :vartype policy_events: azure.mgmt.policyinsights.operations.PolicyEventsOperations
     :ivar policy_states: PolicyStatesOperations operations
     :vartype policy_states: azure.mgmt.policyinsights.operations.PolicyStatesOperations
-    :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.policyinsights.operations.Operations
     :ivar policy_metadata: PolicyMetadataOperations operations
     :vartype policy_metadata: azure.mgmt.policyinsights.operations.PolicyMetadataOperations
     :ivar policy_restrictions: PolicyRestrictionsOperations operations
     :vartype policy_restrictions: azure.mgmt.policyinsights.operations.PolicyRestrictionsOperations
+    :ivar component_policy_states: ComponentPolicyStatesOperations operations
+    :vartype component_policy_states:
+     azure.mgmt.policyinsights.operations.ComponentPolicyStatesOperations
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.policyinsights.operations.Operations
     :ivar attestations: AttestationsOperations operations
     :vartype attestations: azure.mgmt.policyinsights.operations.AttestationsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
@@ -83,11 +87,14 @@ class PolicyInsightsClient:  # pylint: disable=client-accepts-api-version-keywor
         self.remediations = RemediationsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.policy_events = PolicyEventsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.policy_states = PolicyStatesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.policy_metadata = PolicyMetadataOperations(self._client, self._config, self._serialize, self._deserialize)
         self.policy_restrictions = PolicyRestrictionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.component_policy_states = ComponentPolicyStatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.attestations = AttestationsOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:

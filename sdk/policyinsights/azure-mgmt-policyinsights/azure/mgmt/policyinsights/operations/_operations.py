@@ -38,7 +38,7 @@ def build_list_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2019-10-01"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-04-01"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -92,7 +92,7 @@ class Operations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2019-10-01"))  # type: str
+        api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-04-01"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.OperationsListResults]
 
         request = build_list_request(
