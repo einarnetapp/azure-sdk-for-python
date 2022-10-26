@@ -65,7 +65,7 @@ def build_get_request(location: str, cluster_version: str, subscription_id: str,
 
 def build_get_by_environment_request(
     location: str,
-    environment: Union[str, "_models.ManagedClusterVersionEnvironment"],
+    environment: Union[str, _models.ManagedClusterVersionEnvironment],
     cluster_version: str,
     subscription_id: str,
     **kwargs: Any
@@ -129,7 +129,7 @@ def build_list_request(location: str, subscription_id: str, **kwargs: Any) -> Ht
 
 def build_list_by_environment_request(
     location: str,
-    environment: Union[str, "_models.ManagedClusterVersionEnvironment"],
+    environment: Union[str, _models.ManagedClusterVersionEnvironment],
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -247,7 +247,7 @@ class ManagedClusterVersionOperations:
     def get_by_environment(
         self,
         location: str,
-        environment: Union[str, "_models.ManagedClusterVersionEnvironment"],
+        environment: Union[str, _models.ManagedClusterVersionEnvironment],
         cluster_version: str,
         **kwargs: Any
     ) -> _models.ManagedClusterCodeVersionResult:
@@ -378,7 +378,7 @@ class ManagedClusterVersionOperations:
 
     @distributed_trace
     def list_by_environment(
-        self, location: str, environment: Union[str, "_models.ManagedClusterVersionEnvironment"], **kwargs: Any
+        self, location: str, environment: Union[str, _models.ManagedClusterVersionEnvironment], **kwargs: Any
     ) -> List[_models.ManagedClusterCodeVersionResult]:
         """Gets the list of Service Fabric cluster code versions available for the specified environment.
 

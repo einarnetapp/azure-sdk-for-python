@@ -122,7 +122,7 @@ class ManagedClusterVersionOperations:
     async def get_by_environment(
         self,
         location: str,
-        environment: Union[str, "_models.ManagedClusterVersionEnvironment"],
+        environment: Union[str, _models.ManagedClusterVersionEnvironment],
         cluster_version: str,
         **kwargs: Any
     ) -> _models.ManagedClusterCodeVersionResult:
@@ -253,7 +253,7 @@ class ManagedClusterVersionOperations:
 
     @distributed_trace_async
     async def list_by_environment(
-        self, location: str, environment: Union[str, "_models.ManagedClusterVersionEnvironment"], **kwargs: Any
+        self, location: str, environment: Union[str, _models.ManagedClusterVersionEnvironment], **kwargs: Any
     ) -> List[_models.ManagedClusterCodeVersionResult]:
         """Gets the list of Service Fabric cluster code versions available for the specified environment.
 
