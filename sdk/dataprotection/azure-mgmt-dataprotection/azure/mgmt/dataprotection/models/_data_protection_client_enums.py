@@ -73,6 +73,15 @@ class DayOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     WEDNESDAY = "Wednesday"
 
 
+class ExistingResourcePolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Gets or sets the Conflict Policy property. This property sets policy during conflict of
+    resources during restore.
+    """
+
+    SKIP = "Skip"
+    PATCH = "Patch"
+
+
 class FeatureSupportStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """feature support status."""
 
@@ -91,14 +100,6 @@ class FeatureType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DATA_SOURCE_TYPE = "DataSourceType"
 
 
-class ImmutabilityState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Immutability state."""
-
-    DISABLED = "Disabled"
-    UNLOCKED = "Unlocked"
-    LOCKED = "Locked"
-
-
 class Month(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Month."""
 
@@ -114,6 +115,15 @@ class Month(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     NOVEMBER = "November"
     OCTOBER = "October"
     SEPTEMBER = "September"
+
+
+class PersistentVolumeRestoreMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Gets or sets the PV Restore Mode property. This property sets whether volumes needs to be
+    restored.
+    """
+
+    RESTORE_WITH_VOLUME_DATA = "RestoreWithVolumeData"
+    RESTORE_WITHOUT_VOLUME_DATA = "RestoreWithoutVolumeData"
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -148,16 +158,6 @@ class RehydrationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DELETE_IN_PROGRESS = "DELETE_IN_PROGRESS"
     DELETED = "DELETED"
     FAILED = "FAILED"
-
-
-class ResourceGuardProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Provisioning state of the BackupVault resource."""
-
-    FAILED = "Failed"
-    PROVISIONING = "Provisioning"
-    SUCCEEDED = "Succeeded"
-    UNKNOWN = "Unknown"
-    UPDATING = "Updating"
 
 
 class ResourceMoveState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -199,17 +199,6 @@ class SecretStoreType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     INVALID = "Invalid"
     AZURE_KEY_VAULT = "AzureKeyVault"
-
-
-class SoftDeleteState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """State of soft delete."""
-
-    #: Soft Delete is turned off for the BackupVault
-    OFF = "Off"
-    #: Soft Delete is enabled for the BackupVault but can be turned off
-    ON = "On"
-    #: Soft Delete is permanently enabled for the BackupVault and the setting cannot be changed
-    ALWAYS_ON = "AlwaysOn"
 
 
 class SourceDataStoreType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

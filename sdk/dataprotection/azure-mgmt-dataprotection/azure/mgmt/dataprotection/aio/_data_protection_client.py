@@ -16,15 +16,12 @@ from .. import models
 from .._serialization import Deserializer, Serializer
 from ._configuration import DataProtectionClientConfiguration
 from .operations import (
-    BackupInstancesExtensionRoutingOperations,
     BackupInstancesOperations,
     BackupPoliciesOperations,
     BackupVaultOperationResultsOperations,
     BackupVaultsOperations,
     DataProtectionOperations,
     DataProtectionOperationsOperations,
-    DeletedBackupInstancesOperations,
-    DppResourceGuardProxyOperations,
     ExportJobsOperationResultOperations,
     ExportJobsOperations,
     JobsOperations,
@@ -71,9 +68,6 @@ class DataProtectionClient:  # pylint: disable=client-accepts-api-version-keywor
     :vartype backup_policies: azure.mgmt.dataprotection.aio.operations.BackupPoliciesOperations
     :ivar backup_instances: BackupInstancesOperations operations
     :vartype backup_instances: azure.mgmt.dataprotection.aio.operations.BackupInstancesOperations
-    :ivar backup_instances_extension_routing: BackupInstancesExtensionRoutingOperations operations
-    :vartype backup_instances_extension_routing:
-     azure.mgmt.dataprotection.aio.operations.BackupInstancesExtensionRoutingOperations
     :ivar recovery_points: RecoveryPointsOperations operations
     :vartype recovery_points: azure.mgmt.dataprotection.aio.operations.RecoveryPointsOperations
     :ivar jobs: JobsOperations operations
@@ -86,21 +80,15 @@ class DataProtectionClient:  # pylint: disable=client-accepts-api-version-keywor
     :ivar export_jobs_operation_result: ExportJobsOperationResultOperations operations
     :vartype export_jobs_operation_result:
      azure.mgmt.dataprotection.aio.operations.ExportJobsOperationResultOperations
-    :ivar deleted_backup_instances: DeletedBackupInstancesOperations operations
-    :vartype deleted_backup_instances:
-     azure.mgmt.dataprotection.aio.operations.DeletedBackupInstancesOperations
     :ivar resource_guards: ResourceGuardsOperations operations
     :vartype resource_guards: azure.mgmt.dataprotection.aio.operations.ResourceGuardsOperations
-    :ivar dpp_resource_guard_proxy: DppResourceGuardProxyOperations operations
-    :vartype dpp_resource_guard_proxy:
-     azure.mgmt.dataprotection.aio.operations.DppResourceGuardProxyOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The subscription Id. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-10-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -147,9 +135,6 @@ class DataProtectionClient:  # pylint: disable=client-accepts-api-version-keywor
         self.backup_instances = BackupInstancesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.backup_instances_extension_routing = BackupInstancesExtensionRoutingOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.recovery_points = RecoveryPointsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.jobs = JobsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.restorable_time_ranges = RestorableTimeRangesOperations(
@@ -159,13 +144,7 @@ class DataProtectionClient:  # pylint: disable=client-accepts-api-version-keywor
         self.export_jobs_operation_result = ExportJobsOperationResultOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.deleted_backup_instances = DeletedBackupInstancesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.resource_guards = ResourceGuardsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.dpp_resource_guard_proxy = DppResourceGuardProxyOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> Awaitable[AsyncHttpResponse]:
         """Runs the network request through the client's chained policies.
