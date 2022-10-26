@@ -106,6 +106,13 @@ class CacheType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ALL = "All"
 
 
+class CanMigrateDefaultSku(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Recommended sku for the migration."""
+
+    STANDARD_AZURE_FRONT_DOOR = "Standard_AzureFrontDoor"
+    PREMIUM_AZURE_FRONT_DOOR = "Premium_AzureFrontDoor"
+
+
 class CdnCertificateSourceParametersTypeName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """CdnCertificateSourceParametersTypeName."""
 
@@ -708,6 +715,11 @@ class ProfileResourceState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ACTIVE = "Active"
     DELETING = "Deleting"
     DISABLED = "Disabled"
+    MIGRATING = "Migrating"
+    MIGRATED = "Migrated"
+    PENDING_MIGRATION_COMMIT = "PendingMigrationCommit"
+    COMMITTING_MIGRATION = "CommittingMigration"
+    ABORTING_MIGRATION = "AbortingMigration"
 
 
 class ProtocolType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

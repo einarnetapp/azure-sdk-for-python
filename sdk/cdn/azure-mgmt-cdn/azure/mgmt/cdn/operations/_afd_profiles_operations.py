@@ -42,7 +42,7 @@ def build_list_resource_usage_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-05-01-preview"))  # type: str
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -75,7 +75,7 @@ def build_check_host_name_availability_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-05-01-preview"))  # type: str
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -128,7 +128,7 @@ class AFDProfilesOperations:
     def list_resource_usage(
         self, resource_group_name: str, profile_name: str, **kwargs: Any
     ) -> Iterable["_models.Usage"]:
-        """Checks the quota and actual usage of AzureFrontDoor endpoints under the given CDN profile.
+        """Checks the quota and actual usage of endpoints under the given CDN profile.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str
@@ -223,7 +223,7 @@ class AFDProfilesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.CheckNameAvailabilityOutput:
-        """Check the name availability of a host name.
+        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str
@@ -251,7 +251,7 @@ class AFDProfilesOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.CheckNameAvailabilityOutput:
-        """Check the name availability of a host name.
+        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str
@@ -277,7 +277,7 @@ class AFDProfilesOperations:
         check_host_name_availability_input: Union[_models.CheckHostNameAvailabilityInput, IO],
         **kwargs: Any
     ) -> _models.CheckNameAvailabilityOutput:
-        """Check the name availability of a host name.
+        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str

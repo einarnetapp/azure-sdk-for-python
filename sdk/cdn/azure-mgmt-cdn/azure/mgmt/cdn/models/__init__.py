@@ -37,6 +37,8 @@ from ._models_py3 import AzureFirstPartyManagedCertificateParameters
 from ._models_py3 import CacheConfiguration
 from ._models_py3 import CacheExpirationActionParameters
 from ._models_py3 import CacheKeyQueryStringActionParameters
+from ._models_py3 import CanMigrateParameters
+from ._models_py3 import CanMigrateResult
 from ._models_py3 import CdnCertificateSourceParameters
 from ._models_py3 import CdnEndpoint
 from ._models_py3 import CdnManagedHttpsParameters
@@ -140,6 +142,10 @@ from ._models_py3 import MetricSpecification
 from ._models_py3 import MetricsResponse
 from ._models_py3 import MetricsResponseSeriesItem
 from ._models_py3 import MetricsResponseSeriesPropertiesItemsItem
+from ._models_py3 import MigrateResult
+from ._models_py3 import MigrationErrorType
+from ._models_py3 import MigrationParameters
+from ._models_py3 import MigrationWebApplicationFirewallMapping
 from ._models_py3 import Operation
 from ._models_py3 import OperationDisplay
 from ._models_py3 import OperationsListResult
@@ -261,6 +267,7 @@ from ._cdn_management_client_enums import CacheBehavior
 from ._cdn_management_client_enums import CacheExpirationActionParametersTypeName
 from ._cdn_management_client_enums import CacheKeyQueryStringActionParametersTypeName
 from ._cdn_management_client_enums import CacheType
+from ._cdn_management_client_enums import CanMigrateDefaultSku
 from ._cdn_management_client_enums import CdnCertificateSourceParametersTypeName
 from ._cdn_management_client_enums import CertificateSource
 from ._cdn_management_client_enums import CertificateType
@@ -424,6 +431,8 @@ __all__ = [
     "CacheConfiguration",
     "CacheExpirationActionParameters",
     "CacheKeyQueryStringActionParameters",
+    "CanMigrateParameters",
+    "CanMigrateResult",
     "CdnCertificateSourceParameters",
     "CdnEndpoint",
     "CdnManagedHttpsParameters",
@@ -527,6 +536,10 @@ __all__ = [
     "MetricsResponse",
     "MetricsResponseSeriesItem",
     "MetricsResponseSeriesPropertiesItemsItem",
+    "MigrateResult",
+    "MigrationErrorType",
+    "MigrationParameters",
+    "MigrationWebApplicationFirewallMapping",
     "Operation",
     "OperationDisplay",
     "OperationsListResult",
@@ -647,6 +660,7 @@ __all__ = [
     "CacheExpirationActionParametersTypeName",
     "CacheKeyQueryStringActionParametersTypeName",
     "CacheType",
+    "CanMigrateDefaultSku",
     "CdnCertificateSourceParametersTypeName",
     "CertificateSource",
     "CertificateType",

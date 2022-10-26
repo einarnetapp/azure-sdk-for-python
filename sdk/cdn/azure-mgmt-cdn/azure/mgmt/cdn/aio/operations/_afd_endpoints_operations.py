@@ -1069,8 +1069,7 @@ class AFDEndpointsOperations:
     def list_resource_usage(
         self, resource_group_name: str, profile_name: str, endpoint_name: str, **kwargs: Any
     ) -> AsyncIterable["_models.Usage"]:
-        """Checks the quota and actual usage of the given AzureFrontDoor endpoint under the given CDN
-        profile.
+        """Checks the quota and actual usage of endpoints under the given CDN profile.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str
@@ -1170,8 +1169,7 @@ class AFDEndpointsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.ValidateCustomDomainOutput:
-        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.This
-        api isn't work for apex domain.
+        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str
@@ -1203,8 +1201,7 @@ class AFDEndpointsOperations:
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.ValidateCustomDomainOutput:
-        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.This
-        api isn't work for apex domain.
+        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str
@@ -1234,8 +1231,7 @@ class AFDEndpointsOperations:
         custom_domain_properties: Union[_models.ValidateCustomDomainInput, IO],
         **kwargs: Any
     ) -> _models.ValidateCustomDomainOutput:
-        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.This
-        api isn't work for apex domain.
+        """Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
 
         :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
         :type resource_group_name: str

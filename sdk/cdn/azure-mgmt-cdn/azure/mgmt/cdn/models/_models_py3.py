@@ -156,6 +156,8 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :vartype domain_validation_state: str or ~azure.mgmt.cdn.models.DomainValidationState
     :ivar host_name: The host name of the domain. Must be a domain name.
     :vartype host_name: str
+    :ivar extended_properties: Key-Value pair representing migration properties for domains.
+    :vartype extended_properties: dict[str, str]
     :ivar validation_properties: Values the customer needs to validate domain ownership.
     :vartype validation_properties: ~azure.mgmt.cdn.models.DomainValidationProperties
     """
@@ -188,6 +190,7 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "deployment_status": {"key": "properties.deploymentStatus", "type": "str"},
         "domain_validation_state": {"key": "properties.domainValidationState", "type": "str"},
         "host_name": {"key": "properties.hostName", "type": "str"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
         "validation_properties": {"key": "properties.validationProperties", "type": "DomainValidationProperties"},
     }
 
@@ -198,6 +201,7 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         azure_dns_zone: Optional["_models.ResourceReference"] = None,
         pre_validated_custom_domain_resource_id: Optional["_models.ResourceReference"] = None,
         host_name: Optional[str] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -212,6 +216,8 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         :paramtype pre_validated_custom_domain_resource_id: ~azure.mgmt.cdn.models.ResourceReference
         :keyword host_name: The host name of the domain. Must be a domain name.
         :paramtype host_name: str
+        :keyword extended_properties: Key-Value pair representing migration properties for domains.
+        :paramtype extended_properties: dict[str, str]
         """
         super().__init__(**kwargs)
         self.profile_name = None
@@ -222,6 +228,7 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         self.deployment_status = None
         self.domain_validation_state = None
         self.host_name = host_name
+        self.extended_properties = extended_properties
         self.validation_properties = None
 
 
@@ -423,6 +430,8 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
     :vartype domain_validation_state: str or ~azure.mgmt.cdn.models.DomainValidationState
     :ivar host_name: The host name of the domain. Must be a domain name. Required.
     :vartype host_name: str
+    :ivar extended_properties: Key-Value pair representing migration properties for domains.
+    :vartype extended_properties: dict[str, str]
     :ivar validation_properties: Values the customer needs to validate domain ownership.
     :vartype validation_properties: ~azure.mgmt.cdn.models.DomainValidationProperties
     """
@@ -448,6 +457,7 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         },
         "domain_validation_state": {"key": "domainValidationState", "type": "str"},
         "host_name": {"key": "hostName", "type": "str"},
+        "extended_properties": {"key": "extendedProperties", "type": "{str}"},
         "validation_properties": {"key": "validationProperties", "type": "DomainValidationProperties"},
     }
 
@@ -458,6 +468,7 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         tls_settings: Optional["_models.AFDDomainHttpsParameters"] = None,
         azure_dns_zone: Optional["_models.ResourceReference"] = None,
         pre_validated_custom_domain_resource_id: Optional["_models.ResourceReference"] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -472,6 +483,8 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         :paramtype pre_validated_custom_domain_resource_id: ~azure.mgmt.cdn.models.ResourceReference
         :keyword host_name: The host name of the domain. Must be a domain name. Required.
         :paramtype host_name: str
+        :keyword extended_properties: Key-Value pair representing migration properties for domains.
+        :paramtype extended_properties: dict[str, str]
         """
         super().__init__(
             tls_settings=tls_settings,
@@ -483,6 +496,7 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         self.deployment_status = None
         self.domain_validation_state = None
         self.host_name = host_name
+        self.extended_properties = extended_properties
         self.validation_properties = None
         self.profile_name = None
         self.tls_settings = tls_settings
@@ -2250,6 +2264,70 @@ class CacheKeyQueryStringActionParameters(_serialization.Model):
         self.query_parameters = query_parameters
 
 
+class CanMigrateParameters(_serialization.Model):
+    """Request body for CanMigrate operation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar classic_resource_reference: Resource reference of the classic cdn profile or classic
+     frontdoor that need to be migrated. Required.
+    :vartype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+    """
+
+    _validation = {
+        "classic_resource_reference": {"required": True},
+    }
+
+    _attribute_map = {
+        "classic_resource_reference": {"key": "classicResourceReference", "type": "ResourceReference"},
+    }
+
+    def __init__(self, *, classic_resource_reference: "_models.ResourceReference", **kwargs):
+        """
+        :keyword classic_resource_reference: Resource reference of the classic cdn profile or classic
+         frontdoor that need to be migrated. Required.
+        :paramtype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+        """
+        super().__init__(**kwargs)
+        self.classic_resource_reference = classic_resource_reference
+
+
+class CanMigrateResult(_serialization.Model):
+    """Result for canMigrate operation.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar can_migrate: Flag that says if the profile can be migrated.
+    :vartype can_migrate: bool
+    :ivar default_sku: Recommended sku for the migration. Known values are:
+     "Standard_AzureFrontDoor" and "Premium_AzureFrontDoor".
+    :vartype default_sku: str or ~azure.mgmt.cdn.models.CanMigrateDefaultSku
+    :ivar errors:
+    :vartype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+    """
+
+    _validation = {
+        "can_migrate": {"readonly": True},
+        "default_sku": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "can_migrate": {"key": "canMigrate", "type": "bool"},
+        "default_sku": {"key": "defaultSku", "type": "str"},
+        "errors": {"key": "errors", "type": "[MigrationErrorType]"},
+    }
+
+    def __init__(self, *, errors: Optional[List["_models.MigrationErrorType"]] = None, **kwargs):
+        """
+        :keyword errors:
+        :paramtype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+        """
+        super().__init__(**kwargs)
+        self.can_migrate = None
+        self.default_sku = None
+        self.errors = errors
+
+
 class CdnCertificateSourceParameters(_serialization.Model):
     """Defines the parameters for using CDN managed certificate for securing custom domain.
 
@@ -2460,6 +2538,9 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
     :ivar endpoint_links: Describes Azure CDN endpoints associated with this Web Application
      Firewall policy.
     :vartype endpoint_links: list[~azure.mgmt.cdn.models.CdnEndpoint]
+    :ivar extended_properties: Key-Value pair representing additional properties for Web
+     Application Firewall policy.
+    :vartype extended_properties: dict[str, str]
     :ivar provisioning_state: Provisioning state of the WebApplicationFirewallPolicy. Known values
      are: "Creating", "Succeeded", and "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.cdn.models.ProvisioningState
@@ -2494,6 +2575,7 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         "custom_rules": {"key": "properties.customRules", "type": "CustomRuleList"},
         "managed_rules": {"key": "properties.managedRules", "type": "ManagedRuleSetList"},
         "endpoint_links": {"key": "properties.endpointLinks", "type": "[CdnEndpoint]"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "resource_state": {"key": "properties.resourceState", "type": "str"},
     }
@@ -2509,6 +2591,7 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         rate_limit_rules: Optional["_models.RateLimitRuleList"] = None,
         custom_rules: Optional["_models.CustomRuleList"] = None,
         managed_rules: Optional["_models.ManagedRuleSetList"] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -2529,6 +2612,9 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         :paramtype custom_rules: ~azure.mgmt.cdn.models.CustomRuleList
         :keyword managed_rules: Describes managed rules inside the policy.
         :paramtype managed_rules: ~azure.mgmt.cdn.models.ManagedRuleSetList
+        :keyword extended_properties: Key-Value pair representing additional properties for Web
+         Application Firewall policy.
+        :paramtype extended_properties: dict[str, str]
         """
         super().__init__(location=location, tags=tags, **kwargs)
         self.etag = etag
@@ -2538,6 +2624,7 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         self.custom_rules = custom_rules
         self.managed_rules = managed_rules
         self.endpoint_links = None
+        self.extended_properties = extended_properties
         self.provisioning_state = None
         self.resource_state = None
 
@@ -7359,6 +7446,169 @@ class MetricsResponseSeriesPropertiesItemsItem(_serialization.Model):
         self.value = value
 
 
+class MigrateResult(_serialization.Model):
+    """Result for migrate operation.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar migrated_profile_resource_id: Arm resource id of the migrated profile.
+    :vartype migrated_profile_resource_id: ~azure.mgmt.cdn.models.ResourceReference
+    :ivar errors:
+    :vartype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+    """
+
+    _validation = {
+        "migrated_profile_resource_id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "migrated_profile_resource_id": {"key": "migratedProfileResourceId", "type": "ResourceReference"},
+        "errors": {"key": "errors", "type": "[MigrationErrorType]"},
+    }
+
+    def __init__(self, *, errors: Optional[List["_models.MigrationErrorType"]] = None, **kwargs):
+        """
+        :keyword errors:
+        :paramtype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+        """
+        super().__init__(**kwargs)
+        self.migrated_profile_resource_id = None
+        self.errors = errors
+
+
+class MigrationErrorType(_serialization.Model):
+    """Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar code: Error code.
+    :vartype code: str
+    :ivar resource_name: Resource which has the problem.
+    :vartype resource_name: str
+    :ivar error_message: Error message indicating why the operation failed.
+    :vartype error_message: str
+    :ivar next_steps: Describes what needs to be done to fix the problem.
+    :vartype next_steps: str
+    """
+
+    _validation = {
+        "code": {"readonly": True},
+        "resource_name": {"readonly": True},
+        "error_message": {"readonly": True},
+        "next_steps": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "code": {"key": "code", "type": "str"},
+        "resource_name": {"key": "resourceName", "type": "str"},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "next_steps": {"key": "nextSteps", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.code = None
+        self.resource_name = None
+        self.error_message = None
+        self.next_steps = None
+
+
+class MigrationParameters(_serialization.Model):
+    """Request body for Migrate operation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar sku: Sku for the migration. Required.
+    :vartype sku: ~azure.mgmt.cdn.models.Sku
+    :ivar classic_resource_reference: Resource reference of the classic cdn profile or classic
+     frontdoor that need to be migrated. Required.
+    :vartype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+    :ivar profile_name: Name of the new profile that need to be created. Required.
+    :vartype profile_name: str
+    :ivar migration_web_application_firewall_mappings: Waf mapping for the migrated profile.
+    :vartype migration_web_application_firewall_mappings:
+     list[~azure.mgmt.cdn.models.MigrationWebApplicationFirewallMapping]
+    """
+
+    _validation = {
+        "sku": {"required": True},
+        "classic_resource_reference": {"required": True},
+        "profile_name": {"required": True},
+    }
+
+    _attribute_map = {
+        "sku": {"key": "sku", "type": "Sku"},
+        "classic_resource_reference": {"key": "classicResourceReference", "type": "ResourceReference"},
+        "profile_name": {"key": "profileName", "type": "str"},
+        "migration_web_application_firewall_mappings": {
+            "key": "migrationWebApplicationFirewallMappings",
+            "type": "[MigrationWebApplicationFirewallMapping]",
+        },
+    }
+
+    def __init__(
+        self,
+        *,
+        sku: "_models.Sku",
+        classic_resource_reference: "_models.ResourceReference",
+        profile_name: str,
+        migration_web_application_firewall_mappings: Optional[
+            List["_models.MigrationWebApplicationFirewallMapping"]
+        ] = None,
+        **kwargs
+    ):
+        """
+        :keyword sku: Sku for the migration. Required.
+        :paramtype sku: ~azure.mgmt.cdn.models.Sku
+        :keyword classic_resource_reference: Resource reference of the classic cdn profile or classic
+         frontdoor that need to be migrated. Required.
+        :paramtype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+        :keyword profile_name: Name of the new profile that need to be created. Required.
+        :paramtype profile_name: str
+        :keyword migration_web_application_firewall_mappings: Waf mapping for the migrated profile.
+        :paramtype migration_web_application_firewall_mappings:
+         list[~azure.mgmt.cdn.models.MigrationWebApplicationFirewallMapping]
+        """
+        super().__init__(**kwargs)
+        self.sku = sku
+        self.classic_resource_reference = classic_resource_reference
+        self.profile_name = profile_name
+        self.migration_web_application_firewall_mappings = migration_web_application_firewall_mappings
+
+
+class MigrationWebApplicationFirewallMapping(_serialization.Model):
+    """Web Application Firewall Mapping.
+
+    :ivar migrated_from: Migration From Waf policy.
+    :vartype migrated_from: ~azure.mgmt.cdn.models.ResourceReference
+    :ivar migrated_to: Migration to Waf policy.
+    :vartype migrated_to: ~azure.mgmt.cdn.models.ResourceReference
+    """
+
+    _attribute_map = {
+        "migrated_from": {"key": "migratedFrom", "type": "ResourceReference"},
+        "migrated_to": {"key": "migratedTo", "type": "ResourceReference"},
+    }
+
+    def __init__(
+        self,
+        *,
+        migrated_from: Optional["_models.ResourceReference"] = None,
+        migrated_to: Optional["_models.ResourceReference"] = None,
+        **kwargs
+    ):
+        """
+        :keyword migrated_from: Migration From Waf policy.
+        :paramtype migrated_from: ~azure.mgmt.cdn.models.ResourceReference
+        :keyword migrated_to: Migration to Waf policy.
+        :paramtype migrated_to: ~azure.mgmt.cdn.models.ResourceReference
+        """
+        super().__init__(**kwargs)
+        self.migrated_from = migrated_from
+        self.migrated_to = migrated_to
+
+
 class Operation(_serialization.Model):
     """CDN REST API operation.
 
@@ -8706,11 +8956,14 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
      new AFD profile.
     :vartype kind: str
     :ivar resource_state: Resource status of the profile. Known values are: "Creating", "Active",
-     "Deleting", and "Disabled".
+     "Deleting", "Disabled", "Migrating", "Migrated", "PendingMigrationCommit",
+     "CommittingMigration", and "AbortingMigration".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.ProfileResourceState
     :ivar provisioning_state: Provisioning status of the profile. Known values are: "Succeeded",
      "Failed", "Updating", "Deleting", and "Creating".
     :vartype provisioning_state: str or ~azure.mgmt.cdn.models.ProfileProvisioningState
+    :ivar extended_properties: Key-Value pair representing additional properties for profiles.
+    :vartype extended_properties: dict[str, str]
     :ivar front_door_id: The Id of the frontdoor.
     :vartype front_door_id: str
     :ivar origin_response_timeout_seconds: Send and receive timeout on forwarding request to the
@@ -8743,6 +8996,7 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         "kind": {"key": "kind", "type": "str"},
         "resource_state": {"key": "properties.resourceState", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
         "front_door_id": {"key": "properties.frontDoorId", "type": "str"},
         "origin_response_timeout_seconds": {"key": "properties.originResponseTimeoutSeconds", "type": "int"},
     }
@@ -8753,6 +9007,7 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         location: str,
         sku: "_models.Sku",
         tags: Optional[Dict[str, str]] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         origin_response_timeout_seconds: Optional[int] = None,
         **kwargs
     ):
@@ -8764,6 +9019,8 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         :keyword sku: The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider,
          feature list and rate) of the profile. Required.
         :paramtype sku: ~azure.mgmt.cdn.models.Sku
+        :keyword extended_properties: Key-Value pair representing additional properties for profiles.
+        :paramtype extended_properties: dict[str, str]
         :keyword origin_response_timeout_seconds: Send and receive timeout on forwarding request to the
          origin. When timeout is reached, the request fails and returns.
         :paramtype origin_response_timeout_seconds: int
@@ -8773,6 +9030,7 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         self.kind = None
         self.resource_state = None
         self.provisioning_state = None
+        self.extended_properties = extended_properties
         self.front_door_id = None
         self.origin_response_timeout_seconds = origin_response_timeout_seconds
 

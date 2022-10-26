@@ -31,6 +31,7 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._profiles_operations import (
+    build_can_migrate_request,
     build_create_request,
     build_delete_request,
     build_generate_sso_uri_request,
@@ -39,6 +40,8 @@ from ...operations._profiles_operations import (
     build_list_request,
     build_list_resource_usage_request,
     build_list_supported_optimization_types_request,
+    build_migrate_request,
+    build_migration_commit_request,
     build_update_request,
 )
 from .._vendor import MixinABC
@@ -845,6 +848,457 @@ class ProfilesOperations:
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
     begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}"}  # type: ignore
+
+    @overload
+    async def can_migrate(
+        self,
+        resource_group_name: str,
+        can_migrate_parameters: _models.CanMigrateParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.CanMigrateResult:
+        """Checks if CDN profile can be migrated to Azure Frontdoor(Standard/Premium) profile.
+
+        :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
+        :type resource_group_name: str
+        :param can_migrate_parameters: Properties needed to check if cdn profile or classic frontdoor
+         can be migrated. Required.
+        :type can_migrate_parameters: ~azure.mgmt.cdn.models.CanMigrateParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: CanMigrateResult or the result of cls(response)
+        :rtype: ~azure.mgmt.cdn.models.CanMigrateResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def can_migrate(
+        self,
+        resource_group_name: str,
+        can_migrate_parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.CanMigrateResult:
+        """Checks if CDN profile can be migrated to Azure Frontdoor(Standard/Premium) profile.
+
+        :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
+        :type resource_group_name: str
+        :param can_migrate_parameters: Properties needed to check if cdn profile or classic frontdoor
+         can be migrated. Required.
+        :type can_migrate_parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: CanMigrateResult or the result of cls(response)
+        :rtype: ~azure.mgmt.cdn.models.CanMigrateResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def can_migrate(
+        self, resource_group_name: str, can_migrate_parameters: Union[_models.CanMigrateParameters, IO], **kwargs: Any
+    ) -> _models.CanMigrateResult:
+        """Checks if CDN profile can be migrated to Azure Frontdoor(Standard/Premium) profile.
+
+        :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
+        :type resource_group_name: str
+        :param can_migrate_parameters: Properties needed to check if cdn profile or classic frontdoor
+         can be migrated. Is either a model type or a IO type. Required.
+        :type can_migrate_parameters: ~azure.mgmt.cdn.models.CanMigrateParameters or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: CanMigrateResult or the result of cls(response)
+        :rtype: ~azure.mgmt.cdn.models.CanMigrateResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.CanMigrateResult]
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(can_migrate_parameters, (IO, bytes)):
+            _content = can_migrate_parameters
+        else:
+            _json = self._serialize.body(can_migrate_parameters, "CanMigrateParameters")
+
+        request = build_can_migrate_request(
+            resource_group_name=resource_group_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.can_migrate.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("CanMigrateResult", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    can_migrate.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/canMigrate"}  # type: ignore
+
+    async def _migrate_initial(
+        self, resource_group_name: str, migration_parameters: Union[_models.MigrationParameters, IO], **kwargs: Any
+    ) -> _models.MigrateResult:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.MigrateResult]
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(migration_parameters, (IO, bytes)):
+            _content = migration_parameters
+        else:
+            _json = self._serialize.body(migration_parameters, "MigrationParameters")
+
+        request = build_migrate_request(
+            resource_group_name=resource_group_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self._migrate_initial.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 200:
+            deserialized = self._deserialize("MigrateResult", pipeline_response)
+
+        if response.status_code == 202:
+            response_headers["location"] = self._deserialize("str", response.headers.get("location"))
+
+            deserialized = self._deserialize("MigrateResult", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)
+
+        return deserialized
+
+    _migrate_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/migrate"}  # type: ignore
+
+    @overload
+    async def begin_migrate(
+        self,
+        resource_group_name: str,
+        migration_parameters: _models.MigrationParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.MigrateResult]:
+        """Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be
+        committed after this.
+
+        :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
+        :type resource_group_name: str
+        :param migration_parameters: Properties needed to migrate the profile. Required.
+        :type migration_parameters: ~azure.mgmt.cdn.models.MigrationParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either MigrateResult or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.cdn.models.MigrateResult]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def begin_migrate(
+        self,
+        resource_group_name: str,
+        migration_parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.MigrateResult]:
+        """Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be
+        committed after this.
+
+        :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
+        :type resource_group_name: str
+        :param migration_parameters: Properties needed to migrate the profile. Required.
+        :type migration_parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either MigrateResult or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.cdn.models.MigrateResult]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def begin_migrate(
+        self, resource_group_name: str, migration_parameters: Union[_models.MigrationParameters, IO], **kwargs: Any
+    ) -> AsyncLROPoller[_models.MigrateResult]:
+        """Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be
+        committed after this.
+
+        :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
+        :type resource_group_name: str
+        :param migration_parameters: Properties needed to migrate the profile. Is either a model type
+         or a IO type. Required.
+        :type migration_parameters: ~azure.mgmt.cdn.models.MigrationParameters or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either MigrateResult or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.cdn.models.MigrateResult]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.MigrateResult]
+        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        if cont_token is None:
+            raw_result = await self._migrate_initial(  # type: ignore
+                resource_group_name=resource_group_name,
+                migration_parameters=migration_parameters,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("MigrateResult", pipeline_response)
+            if cls:
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
+
+        if polling is True:
+            polling_method = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )  # type: AsyncPollingMethod
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+
+    begin_migrate.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/migrate"}  # type: ignore
+
+    async def _migration_commit_initial(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, profile_name: str, **kwargs: Any
+    ) -> None:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+
+        request = build_migration_commit_request(
+            resource_group_name=resource_group_name,
+            profile_name=profile_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self._migration_commit_initial.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["location"] = self._deserialize("str", response.headers.get("location"))
+
+        if cls:
+            return cls(pipeline_response, None, response_headers)
+
+    _migration_commit_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationCommit"}  # type: ignore
+
+    @distributed_trace_async
+    async def begin_migration_commit(
+        self, resource_group_name: str, profile_name: str, **kwargs: Any
+    ) -> AsyncLROPoller[None]:
+        """Commit the migrated Azure Frontdoor(Standard/Premium) profile.
+
+        :param resource_group_name: Name of the Resource group within the Azure subscription. Required.
+        :type resource_group_name: str
+        :param profile_name: Name of the CDN profile which is unique within the resource group.
+         Required.
+        :type profile_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncARMPolling. Pass in False for
+         this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        if cont_token is None:
+            raw_result = await self._migration_commit_initial(  # type: ignore
+                resource_group_name=resource_group_name,
+                profile_name=profile_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})
+
+        if polling is True:
+            polling_method = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )  # type: AsyncPollingMethod
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+
+    begin_migration_commit.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationCommit"}  # type: ignore
 
     @distributed_trace_async
     async def generate_sso_uri(self, resource_group_name: str, profile_name: str, **kwargs: Any) -> _models.SsoUri:
