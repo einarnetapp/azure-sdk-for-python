@@ -8,7 +8,14 @@
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Optional, TypeVar
 
-from azure.core.exceptions import ClientAuthenticationError, HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.exceptions import (
+    ClientAuthenticationError,
+    HttpResponseError,
+    ResourceExistsError,
+    ResourceNotFoundError,
+    ResourceNotModifiedError,
+    map_error,
+)
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import AsyncHttpResponse
 from azure.core.rest import HttpRequest
@@ -19,8 +26,10 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from ... import models as _models
 from ..._vendor import _convert_request
 from ...operations._locations_operations import build_get_capability_request
-T = TypeVar('T')
+
+T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+
 
 class LocationsOperations:
     """
@@ -41,40 +50,37 @@ class LocationsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-
     @distributed_trace_async
-    async def get_capability(
-        self,
-        location: str,
-        **kwargs: Any
-    ) -> Optional[_models.CapabilityInformation]:
+    async def get_capability(self, location: str, **kwargs: Any) -> Optional[_models.CapabilityInformation]:
         """Gets subscription-level properties and limits for Data Lake Analytics specified by resource
         location.
 
-        :param location: The resource location without whitespace.
+        :param location: The resource location without whitespace. Required.
         :type location: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: CapabilityInformation, or the result of cls(response)
+        :return: CapabilityInformation or None or the result of cls(response)
         :rtype: ~azure.mgmt.datalake.analytics.account.models.CapabilityInformation or None
-        :raises: ~azure.core.exceptions.HttpResponseError
+        :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
-            401: ClientAuthenticationError, 404: ResourceNotFoundError, 409: ResourceExistsError
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
         }
-        error_map.update(kwargs.pop('error_map', {}) or {})
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop('api_version', _params.pop('api-version', "2019-11-01-preview"))  # type: str
-        cls = kwargs.pop('cls', None)  # type: ClsType[Optional[_models.CapabilityInformation]]
+        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.CapabilityInformation]]
 
-        
         request = build_get_capability_request(
-            subscription_id=self._config.subscription_id,
             location=location,
+            subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get_capability.metadata['url'],
+            template_url=self.get_capability.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -82,10 +88,9 @@ class LocationsOperations:
         request.url = self._client.format_url(request.url)  # type: ignore
 
         pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request,
-            stream=False,
-            **kwargs
+            request, stream=False, **kwargs
         )
+
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 404]:
@@ -95,12 +100,11 @@ class LocationsOperations:
 
         deserialized = None
         if response.status_code == 200:
-            deserialized = self._deserialize('CapabilityInformation', pipeline_response)
+            deserialized = self._deserialize("CapabilityInformation", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_capability.metadata = {'url': "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/capability"}  # type: ignore
-
+    get_capability.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeAnalytics/locations/{location}/capability"}  # type: ignore
