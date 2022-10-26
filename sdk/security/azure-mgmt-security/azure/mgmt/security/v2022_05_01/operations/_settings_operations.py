@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, IO, Iterable, Optional, TypeVar, Union, overload
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -63,7 +63,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
 
 
 def build_get_request(
-    setting_name: Union[str, "_models.SettingName"], subscription_id: str, **kwargs: Any
+    setting_name: Union[str, _models.SettingName], subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -94,7 +94,7 @@ def build_get_request(
 
 
 def build_update_request(
-    setting_name: Union[str, "_models.SettingName"], subscription_id: str, **kwargs: Any
+    setting_name: Union[str, _models.SettingName], subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -184,10 +184,17 @@ class SettingsOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -219,7 +226,7 @@ class SettingsOperations:
     list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/settings"}  # type: ignore
 
     @distributed_trace
-    def get(self, setting_name: Union[str, "_models.SettingName"], **kwargs: Any) -> _models.Setting:
+    def get(self, setting_name: Union[str, _models.SettingName], **kwargs: Any) -> _models.Setting:
         """Settings of different configurations in Microsoft Defender for Cloud.
 
         :param setting_name: The name of the setting. Known values are: "MCAS", "WDATP",
@@ -277,7 +284,7 @@ class SettingsOperations:
     @overload
     def update(
         self,
-        setting_name: Union[str, "_models.SettingName"],
+        setting_name: Union[str, _models.SettingName],
         setting: _models.Setting,
         *,
         content_type: str = "application/json",
@@ -302,7 +309,7 @@ class SettingsOperations:
     @overload
     def update(
         self,
-        setting_name: Union[str, "_models.SettingName"],
+        setting_name: Union[str, _models.SettingName],
         setting: IO,
         *,
         content_type: str = "application/json",
@@ -326,7 +333,7 @@ class SettingsOperations:
 
     @distributed_trace
     def update(
-        self, setting_name: Union[str, "_models.SettingName"], setting: Union[_models.Setting, IO], **kwargs: Any
+        self, setting_name: Union[str, _models.SettingName], setting: Union[_models.Setting, IO], **kwargs: Any
     ) -> _models.Setting:
         """updating settings about different configurations in Microsoft Defender for Cloud.
 

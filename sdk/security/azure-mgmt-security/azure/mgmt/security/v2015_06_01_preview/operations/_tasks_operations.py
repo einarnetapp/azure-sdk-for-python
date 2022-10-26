@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from typing import Any, Callable, Dict, Iterable, Optional, TypeVar, Union
-from urllib.parse import parse_qs, urljoin, urlparse
+import urllib.parse
 
 from azure.core.exceptions import (
     ClientAuthenticationError,
@@ -133,7 +133,7 @@ def build_get_subscription_level_task_request(
 def build_update_subscription_level_task_state_request(
     asc_location: str,
     task_name: str,
-    task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+    task_update_action_type: Union[str, _models.TaskUpdateActionType],
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -245,7 +245,7 @@ def build_update_resource_group_level_task_state_request(
     resource_group_name: str,
     asc_location: str,
     task_name: str,
-    task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+    task_update_action_type: Union[str, _models.TaskUpdateActionType],
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -344,10 +344,17 @@ class TasksOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -426,10 +433,17 @@ class TasksOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -524,7 +538,7 @@ class TasksOperations:
         self,
         asc_location: str,
         task_name: str,
-        task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+        task_update_action_type: Union[str, _models.TaskUpdateActionType],
         **kwargs: Any
     ) -> None:
         """Recommended tasks that will help improve the security of the subscription proactively.
@@ -637,10 +651,17 @@ class TasksOperations:
 
             else:
                 # make call to next link with the client's api-version
-                _parsed_next_link = urlparse(next_link)
-                _next_request_params = case_insensitive_dict(parse_qs(_parsed_next_link.query))
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
                 _next_request_params["api-version"] = self._config.api_version
-                request = HttpRequest("GET", urljoin(next_link, _parsed_next_link.path), params=_next_request_params)
+                request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 request = _convert_request(request)
                 request.url = self._client.format_url(request.url)  # type: ignore
                 request.method = "GET"
@@ -742,7 +763,7 @@ class TasksOperations:
         resource_group_name: str,
         asc_location: str,
         task_name: str,
-        task_update_action_type: Union[str, "_models.TaskUpdateActionType"],
+        task_update_action_type: Union[str, _models.TaskUpdateActionType],
         **kwargs: Any
     ) -> None:
         """Recommended tasks that will help improve the security of the subscription proactively.
