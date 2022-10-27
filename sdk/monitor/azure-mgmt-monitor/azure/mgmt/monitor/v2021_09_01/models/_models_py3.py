@@ -145,6 +145,10 @@ class AzureResource(_serialization.Model):
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
+    :ivar kind: Azure resource kind.
+    :vartype kind: str
+    :ivar identity: Azure resource identity.
+    :vartype identity: str
     :ivar location: Resource location. Required.
     :vartype location: str
     :ivar tags: Resource tags.
@@ -155,6 +159,8 @@ class AzureResource(_serialization.Model):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "kind": {"readonly": True},
+        "identity": {"readonly": True},
         "location": {"required": True},
     }
 
@@ -162,6 +168,8 @@ class AzureResource(_serialization.Model):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "identity": {"key": "identity", "type": "str"},
         "location": {"key": "location", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
     }
@@ -177,6 +185,8 @@ class AzureResource(_serialization.Model):
         self.id = None
         self.name = None
         self.type = None
+        self.kind = None
+        self.identity = None
         self.location = location
         self.tags = tags
 
@@ -194,6 +204,10 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
+    :ivar kind: Azure resource kind.
+    :vartype kind: str
+    :ivar identity: Azure resource identity.
+    :vartype identity: str
     :ivar location: Resource location. Required.
     :vartype location: str
     :ivar tags: Resource tags.
@@ -240,6 +254,8 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "kind": {"readonly": True},
+        "identity": {"readonly": True},
         "location": {"required": True},
         "group_short_name": {"max_length": 12},
     }
@@ -248,6 +264,8 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "identity": {"key": "identity", "type": "str"},
         "location": {"key": "location", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
         "group_short_name": {"key": "properties.groupShortName", "type": "str"},
@@ -579,8 +597,8 @@ class Context(_serialization.Model):
     """
 
     _attribute_map = {
-        "notification_source": {"key": "notificationSource", "type": "str"},
-        "context_type": {"key": "contextType", "type": "str"},
+        "notification_source": {"key": "NotificationSource", "type": "str"},
+        "context_type": {"key": "ContextType", "type": "str"},
     }
 
     def __init__(self, *, notification_source: Optional[str] = None, context_type: Optional[str] = None, **kwargs):
@@ -1085,11 +1103,11 @@ class TestNotificationDetailsResponse(_serialization.Model):
     }
 
     _attribute_map = {
-        "context": {"key": "context", "type": "Context"},
-        "state": {"key": "state", "type": "str"},
-        "completed_time": {"key": "completedTime", "type": "str"},
-        "created_time": {"key": "createdTime", "type": "str"},
-        "action_details": {"key": "actionDetails", "type": "[ActionDetail]"},
+        "context": {"key": "Context", "type": "Context"},
+        "state": {"key": "State", "type": "str"},
+        "completed_time": {"key": "CompletedTime", "type": "str"},
+        "created_time": {"key": "CreatedTime", "type": "str"},
+        "action_details": {"key": "ActionDetails", "type": "[ActionDetail]"},
     }
 
     def __init__(
@@ -1120,6 +1138,46 @@ class TestNotificationDetailsResponse(_serialization.Model):
         self.completed_time = completed_time
         self.created_time = created_time
         self.action_details = action_details
+
+
+class TestNotificationResponse(_serialization.Model):
+    """The response when test notification succeeded.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar notification_id: The notification id. Required.
+    :vartype notification_id: str
+    :ivar correlation_id: The correlation id. Required.
+    :vartype correlation_id: str
+    :ivar created_time: The created time. Required.
+    :vartype created_time: str
+    """
+
+    _validation = {
+        "notification_id": {"required": True},
+        "correlation_id": {"required": True},
+        "created_time": {"required": True},
+    }
+
+    _attribute_map = {
+        "notification_id": {"key": "notificationId", "type": "str"},
+        "correlation_id": {"key": "correlationId", "type": "str"},
+        "created_time": {"key": "createdTime", "type": "str"},
+    }
+
+    def __init__(self, *, notification_id: str, correlation_id: str, created_time: str, **kwargs):
+        """
+        :keyword notification_id: The notification id. Required.
+        :paramtype notification_id: str
+        :keyword correlation_id: The correlation id. Required.
+        :paramtype correlation_id: str
+        :keyword created_time: The created time. Required.
+        :paramtype created_time: str
+        """
+        super().__init__(**kwargs)
+        self.notification_id = notification_id
+        self.correlation_id = correlation_id
+        self.created_time = created_time
 
 
 class VoiceReceiver(_serialization.Model):

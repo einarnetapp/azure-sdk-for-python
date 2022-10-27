@@ -86,6 +86,10 @@ class AzureResource(_serialization.Model):
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
+    :ivar kind: Azure resource kind.
+    :vartype kind: str
+    :ivar identity: Azure resource identity.
+    :vartype identity: str
     :ivar location: Resource location. Required.
     :vartype location: str
     :ivar tags: Resource tags.
@@ -96,6 +100,8 @@ class AzureResource(_serialization.Model):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "kind": {"readonly": True},
+        "identity": {"readonly": True},
         "location": {"required": True},
     }
 
@@ -103,6 +109,8 @@ class AzureResource(_serialization.Model):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "identity": {"key": "identity", "type": "str"},
         "location": {"key": "location", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
     }
@@ -118,6 +126,8 @@ class AzureResource(_serialization.Model):
         self.id = None
         self.name = None
         self.type = None
+        self.kind = None
+        self.identity = None
         self.location = location
         self.tags = tags
 
@@ -135,6 +145,10 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
+    :ivar kind: Azure resource kind.
+    :vartype kind: str
+    :ivar identity: Azure resource identity.
+    :vartype identity: str
     :ivar location: Resource location. Required.
     :vartype location: str
     :ivar tags: Resource tags.
@@ -178,6 +192,8 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "kind": {"readonly": True},
+        "identity": {"readonly": True},
         "location": {"required": True},
         "group_short_name": {"max_length": 12},
     }
@@ -186,6 +202,8 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "identity": {"key": "identity", "type": "str"},
         "location": {"key": "location", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
         "group_short_name": {"key": "properties.groupShortName", "type": "str"},

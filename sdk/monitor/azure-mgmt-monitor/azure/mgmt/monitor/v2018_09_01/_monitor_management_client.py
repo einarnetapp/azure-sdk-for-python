@@ -15,7 +15,7 @@ from azure.mgmt.core import ARMPipelineClient
 from . import models
 from .._serialization import Deserializer, Serializer
 from ._configuration import MonitorManagementClientConfiguration
-from .operations import ActionGroupsOperations, BaselinesOperations
+from .operations import ActionGroupsOperations
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -27,8 +27,6 @@ class MonitorManagementClient:  # pylint: disable=client-accepts-api-version-key
 
     :ivar action_groups: ActionGroupsOperations operations
     :vartype action_groups: $(python-base-namespace).v2018_09_01.operations.ActionGroupsOperations
-    :ivar baselines: BaselinesOperations operations
-    :vartype baselines: $(python-base-namespace).v2018_09_01.operations.BaselinesOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. Required.
@@ -57,7 +55,6 @@ class MonitorManagementClient:  # pylint: disable=client-accepts-api-version-key
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
         self.action_groups = ActionGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.baselines = BaselinesOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.

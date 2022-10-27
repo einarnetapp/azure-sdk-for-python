@@ -25,6 +25,7 @@ from ._models_py3 import LogicAppReceiver
 from ._models_py3 import NotificationRequestBody
 from ._models_py3 import SmsReceiver
 from ._models_py3 import TestNotificationDetailsResponse
+from ._models_py3 import TestNotificationResponse
 from ._models_py3 import VoiceReceiver
 from ._models_py3 import WebhookReceiver
 
@@ -53,6 +54,7 @@ __all__ = [
     "NotificationRequestBody",
     "SmsReceiver",
     "TestNotificationDetailsResponse",
+    "TestNotificationResponse",
     "VoiceReceiver",
     "WebhookReceiver",
     "ReceiverStatus",

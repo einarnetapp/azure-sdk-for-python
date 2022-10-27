@@ -145,6 +145,10 @@ class AzureResource(_serialization.Model):
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
+    :ivar kind: Azure resource kind.
+    :vartype kind: str
+    :ivar identity: Azure resource identity.
+    :vartype identity: str
     :ivar location: Resource location. Required.
     :vartype location: str
     :ivar tags: Resource tags.
@@ -155,6 +159,8 @@ class AzureResource(_serialization.Model):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "kind": {"readonly": True},
+        "identity": {"readonly": True},
         "location": {"required": True},
     }
 
@@ -162,6 +168,8 @@ class AzureResource(_serialization.Model):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "identity": {"key": "identity", "type": "str"},
         "location": {"key": "location", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
     }
@@ -177,6 +185,8 @@ class AzureResource(_serialization.Model):
         self.id = None
         self.name = None
         self.type = None
+        self.kind = None
+        self.identity = None
         self.location = location
         self.tags = tags
 
@@ -194,6 +204,10 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
     :vartype name: str
     :ivar type: Azure resource type.
     :vartype type: str
+    :ivar kind: Azure resource kind.
+    :vartype kind: str
+    :ivar identity: Azure resource identity.
+    :vartype identity: str
     :ivar location: Resource location. Required.
     :vartype location: str
     :ivar tags: Resource tags.
@@ -240,6 +254,8 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "kind": {"readonly": True},
+        "identity": {"readonly": True},
         "location": {"required": True},
         "group_short_name": {"max_length": 12},
     }
@@ -248,6 +264,8 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "kind": {"key": "kind", "type": "str"},
+        "identity": {"key": "identity", "type": "str"},
         "location": {"key": "location", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
         "group_short_name": {"key": "properties.groupShortName", "type": "str"},
@@ -888,10 +906,7 @@ class NotificationRequestBody(_serialization.Model):  # pylint: disable=too-many
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar alert_type: The value of the supported alert type. Supported alert type values are:
-     servicehealth, metricstaticthreshold, metricsdynamicthreshold, logalertv2, smartalert,
-     webtestalert, logalertv1numresult, logalertv1metricmeasurement, resourcehealth, activitylog,
-     budget. Required.
+    :ivar alert_type: The name of the supported alert type. Required.
     :vartype alert_type: str
     :ivar email_receivers: The list of email receivers that are part of this action group.
     :vartype email_receivers: list[~$(python-base-namespace).v2022_06_01.models.EmailReceiver]
@@ -963,10 +978,7 @@ class NotificationRequestBody(_serialization.Model):  # pylint: disable=too-many
         **kwargs
     ):
         """
-        :keyword alert_type: The value of the supported alert type. Supported alert type values are:
-         servicehealth, metricstaticthreshold, metricsdynamicthreshold, logalertv2, smartalert,
-         webtestalert, logalertv1numresult, logalertv1metricmeasurement, resourcehealth, activitylog,
-         budget. Required.
+        :keyword alert_type: The name of the supported alert type. Required.
         :paramtype alert_type: str
         :keyword email_receivers: The list of email receivers that are part of this action group.
         :paramtype email_receivers: list[~$(python-base-namespace).v2022_06_01.models.EmailReceiver]
