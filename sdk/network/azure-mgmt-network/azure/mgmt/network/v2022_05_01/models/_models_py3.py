@@ -13067,17 +13067,17 @@ class ErrorResponse(_serialization.Model):
     """The error object.
 
     :ivar error: The error details object.
-    :vartype error: ~azure.mgmt.network.v2022_05_01.models.ErrorDetails
+    :vartype error: ~azure.mgmt.network.v2022_05_01.models.Error
     """
 
     _attribute_map = {
-        "error": {"key": "error", "type": "ErrorDetails"},
+        "error": {"key": "error", "type": "Error"},
     }
 
-    def __init__(self, *, error: Optional["_models.ErrorDetails"] = None, **kwargs):
+    def __init__(self, *, error: Optional["_models.Error"] = None, **kwargs):
         """
         :keyword error: The error details object.
-        :paramtype error: ~azure.mgmt.network.v2022_05_01.models.ErrorDetails
+        :paramtype error: ~azure.mgmt.network.v2022_05_01.models.Error
         """
         super().__init__(**kwargs)
         self.error = error
@@ -24175,6 +24175,8 @@ class NetworkWatcher(Resource):
     :ivar provisioning_state: The provisioning state of the network watcher resource. Known values
      are: "Succeeded", "Updating", "Deleting", and "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.network.v2022_05_01.models.ProvisioningState
+    :ivar running_operation_ids: List of running operation IDs.
+    :vartype running_operation_ids: list[int]
     """
 
     _validation = {
@@ -24192,6 +24194,7 @@ class NetworkWatcher(Resource):
         "tags": {"key": "tags", "type": "{str}"},
         "etag": {"key": "etag", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "running_operation_ids": {"key": "properties.runningOperationIds", "type": "[int]"},
     }
 
     def __init__(
@@ -24200,6 +24203,7 @@ class NetworkWatcher(Resource):
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         location: Optional[str] = None,
         tags: Optional[Dict[str, str]] = None,
+        running_operation_ids: Optional[List[int]] = None,
         **kwargs
     ):
         """
@@ -24209,10 +24213,13 @@ class NetworkWatcher(Resource):
         :paramtype location: str
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
+        :keyword running_operation_ids: List of running operation IDs.
+        :paramtype running_operation_ids: list[int]
         """
         super().__init__(id=id, location=location, tags=tags, **kwargs)
         self.etag = None
         self.provisioning_state = None
+        self.running_operation_ids = running_operation_ids
 
 
 class NetworkWatcherListResult(_serialization.Model):
