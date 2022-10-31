@@ -33,6 +33,8 @@ from .operations import (
     EntityQueryTemplatesOperations,
     EntityRelationsOperations,
     FileImportsOperations,
+    GetOperations,
+    GetRecommendationsOperations,
     IPGeodataOperations,
     IncidentCommentsOperations,
     IncidentRelationsOperations,
@@ -48,6 +50,7 @@ from .operations import (
     ThreatIntelligenceIndicatorMetricsOperations,
     ThreatIntelligenceIndicatorOperations,
     ThreatIntelligenceIndicatorsOperations,
+    UpdateOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
 )
@@ -121,6 +124,13 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :vartype source_control: azure.mgmt.securityinsight.aio.operations.SourceControlOperations
     :ivar source_controls: SourceControlsOperations operations
     :vartype source_controls: azure.mgmt.securityinsight.aio.operations.SourceControlsOperations
+    :ivar get_recommendations: GetRecommendationsOperations operations
+    :vartype get_recommendations:
+     azure.mgmt.securityinsight.aio.operations.GetRecommendationsOperations
+    :ivar get: GetOperations operations
+    :vartype get: azure.mgmt.securityinsight.aio.operations.GetOperations
+    :ivar update: UpdateOperations operations
+    :vartype update: azure.mgmt.securityinsight.aio.operations.UpdateOperations
     :ivar threat_intelligence_indicator: ThreatIntelligenceIndicatorOperations operations
     :vartype threat_intelligence_indicator:
      azure.mgmt.securityinsight.aio.operations.ThreatIntelligenceIndicatorOperations
@@ -148,7 +158,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -219,6 +229,11 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         )
         self.source_control = SourceControlOperations(self._client, self._config, self._serialize, self._deserialize)
         self.source_controls = SourceControlsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.get_recommendations = GetRecommendationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.get = GetOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.update = UpdateOperations(self._client, self._config, self._serialize, self._deserialize)
         self.threat_intelligence_indicator = ThreatIntelligenceIndicatorOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
