@@ -44,7 +44,7 @@ _SERIALIZER.client_side_validation = False
 
 
 def build_get_request(
-    resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -57,13 +57,13 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=64, min_length=3),
+        "connectorName": _SERIALIZER.url("connector_name", connector_name, "str", max_length=64, min_length=3),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -79,7 +79,7 @@ def build_get_request(
 
 
 def build_delete_request(
-    resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -92,13 +92,13 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=64, min_length=3),
+        "connectorName": _SERIALIZER.url("connector_name", connector_name, "str", max_length=64, min_length=3),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -114,7 +114,7 @@ def build_delete_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -128,13 +128,13 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=64, min_length=3),
+        "connectorName": _SERIALIZER.url("connector_name", connector_name, "str", max_length=64, min_length=3),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -152,7 +152,7 @@ def build_create_or_update_request(
 
 
 def build_update_request(
-    resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, connector_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -166,13 +166,13 @@ def build_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1, pattern=r"^[-\w\._\(\)]+$"
         ),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str", max_length=64, min_length=3),
+        "connectorName": _SERIALIZER.url("connector_name", connector_name, "str", max_length=64, min_length=3),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
@@ -201,7 +201,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url(
@@ -231,7 +231,7 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Databricks/workspaces")
+    _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Databricks/accessConnectors")
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -247,14 +247,14 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class WorkspacesOperations:
+class AccessConnectorsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.databricks.AzureDatabricksManagementClient`'s
-        :attr:`workspaces` attribute.
+        :attr:`access_connectors` attribute.
     """
 
     models = _models
@@ -267,17 +267,17 @@ class WorkspacesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def get(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> _models.Workspace:
-        """Gets the workspace.
+    def get(self, resource_group_name: str, connector_name: str, **kwargs: Any) -> _models.AccessConnector:
+        """Gets an azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Workspace or the result of cls(response)
-        :rtype: ~azure.mgmt.databricks.models.Workspace
+        :return: AccessConnector or the result of cls(response)
+        :rtype: ~azure.mgmt.databricks.models.AccessConnector
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -294,11 +294,11 @@ class WorkspacesOperations:
         api_version = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-04-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Workspace]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AccessConnector]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
+            connector_name=connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -319,17 +319,17 @@ class WorkspacesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Workspace", pipeline_response)
+        deserialized = self._deserialize("AccessConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}"}  # type: ignore
 
     def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, workspace_name: str, **kwargs: Any
+        self, resource_group_name: str, connector_name: str, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -349,7 +349,7 @@ class WorkspacesOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
+            connector_name=connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -373,17 +373,17 @@ class WorkspacesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}"}  # type: ignore
+    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}"}  # type: ignore
 
     @distributed_trace
-    def begin_delete(self, resource_group_name: str, workspace_name: str, **kwargs: Any) -> LROPoller[None]:
-        """Deletes the workspace.
+    def begin_delete(self, resource_group_name: str, connector_name: str, **kwargs: Any) -> LROPoller[None]:
+        """Deletes the azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -409,7 +409,7 @@ class WorkspacesOperations:
         if cont_token is None:
             raw_result = self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                workspace_name=workspace_name,
+                connector_name=connector_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -437,11 +437,15 @@ class WorkspacesOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}"}  # type: ignore
+    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}"}  # type: ignore
 
     def _create_or_update_initial(
-        self, resource_group_name: str, workspace_name: str, parameters: Union[_models.Workspace, IO], **kwargs: Any
-    ) -> _models.Workspace:
+        self,
+        resource_group_name: str,
+        connector_name: str,
+        parameters: Union[_models.AccessConnector, IO],
+        **kwargs: Any
+    ) -> _models.AccessConnector:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -457,7 +461,7 @@ class WorkspacesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-04-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Workspace]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AccessConnector]
 
         content_type = content_type or "application/json"
         _json = None
@@ -465,11 +469,11 @@ class WorkspacesOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "Workspace")
+            _json = self._serialize.body(parameters, "AccessConnector")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
+            connector_name=connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -494,37 +498,38 @@ class WorkspacesOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("Workspace", pipeline_response)
+            deserialized = self._deserialize("AccessConnector", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("Workspace", pipeline_response)
+            deserialized = self._deserialize("AccessConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}"}  # type: ignore
+    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}"}  # type: ignore
 
     @overload
     def begin_create_or_update(
         self,
         resource_group_name: str,
-        workspace_name: str,
-        parameters: _models.Workspace,
+        connector_name: str,
+        parameters: _models.AccessConnector,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.Workspace]:
-        """Creates a new workspace.
+    ) -> LROPoller[_models.AccessConnector]:
+        """Creates or updates azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param parameters: Parameters supplied to the create or update a workspace. Required.
-        :type parameters: ~azure.mgmt.databricks.models.Workspace
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
+        :param parameters: Parameters supplied to the create or update an azure databricks
+         accessConnector. Required.
+        :type parameters: ~azure.mgmt.databricks.models.AccessConnector
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -536,8 +541,9 @@ class WorkspacesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either Workspace or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.Workspace]
+        :return: An instance of LROPoller that returns either AccessConnector or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -545,20 +551,21 @@ class WorkspacesOperations:
     def begin_create_or_update(
         self,
         resource_group_name: str,
-        workspace_name: str,
+        connector_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.Workspace]:
-        """Creates a new workspace.
+    ) -> LROPoller[_models.AccessConnector]:
+        """Creates or updates azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param parameters: Parameters supplied to the create or update a workspace. Required.
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
+        :param parameters: Parameters supplied to the create or update an azure databricks
+         accessConnector. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -571,25 +578,30 @@ class WorkspacesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either Workspace or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.Workspace]
+        :return: An instance of LROPoller that returns either AccessConnector or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace
     def begin_create_or_update(
-        self, resource_group_name: str, workspace_name: str, parameters: Union[_models.Workspace, IO], **kwargs: Any
-    ) -> LROPoller[_models.Workspace]:
-        """Creates a new workspace.
+        self,
+        resource_group_name: str,
+        connector_name: str,
+        parameters: Union[_models.AccessConnector, IO],
+        **kwargs: Any
+    ) -> LROPoller[_models.AccessConnector]:
+        """Creates or updates azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param parameters: Parameters supplied to the create or update a workspace. Is either a model
-         type or a IO type. Required.
-        :type parameters: ~azure.mgmt.databricks.models.Workspace or IO
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
+        :param parameters: Parameters supplied to the create or update an azure databricks
+         accessConnector. Is either a model type or a IO type. Required.
+        :type parameters: ~azure.mgmt.databricks.models.AccessConnector or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -601,8 +613,9 @@ class WorkspacesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either Workspace or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.Workspace]
+        :return: An instance of LROPoller that returns either AccessConnector or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -612,14 +625,14 @@ class WorkspacesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-04-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Workspace]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AccessConnector]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
             raw_result = self._create_or_update_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                workspace_name=workspace_name,
+                connector_name=connector_name,
                 parameters=parameters,
                 api_version=api_version,
                 content_type=content_type,
@@ -631,7 +644,7 @@ class WorkspacesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("Workspace", pipeline_response)
+            deserialized = self._deserialize("AccessConnector", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -651,15 +664,15 @@ class WorkspacesOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}"}  # type: ignore
+    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}"}  # type: ignore
 
     def _update_initial(
         self,
         resource_group_name: str,
-        workspace_name: str,
-        parameters: Union[_models.WorkspaceUpdate, IO],
+        connector_name: str,
+        parameters: Union[_models.AccessConnectorUpdate, IO],
         **kwargs: Any
-    ) -> Optional[_models.Workspace]:
+    ) -> Optional[_models.AccessConnector]:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -675,7 +688,7 @@ class WorkspacesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-04-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.Workspace]]
+        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.AccessConnector]]
 
         content_type = content_type or "application/json"
         _json = None
@@ -683,11 +696,11 @@ class WorkspacesOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "WorkspaceUpdate")
+            _json = self._serialize.body(parameters, "AccessConnectorUpdate")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
+            connector_name=connector_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -713,34 +726,34 @@ class WorkspacesOperations:
 
         deserialized = None
         if response.status_code == 200:
-            deserialized = self._deserialize("Workspace", pipeline_response)
+            deserialized = self._deserialize("AccessConnector", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}"}  # type: ignore
+    _update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}"}  # type: ignore
 
     @overload
     def begin_update(
         self,
         resource_group_name: str,
-        workspace_name: str,
-        parameters: _models.WorkspaceUpdate,
+        connector_name: str,
+        parameters: _models.AccessConnectorUpdate,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.Workspace]:
-        """Updates a workspace.
+    ) -> LROPoller[_models.AccessConnector]:
+        """Updates an azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param parameters: The update to the workspace. Required.
-        :type parameters: ~azure.mgmt.databricks.models.WorkspaceUpdate
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
+        :param parameters: The update to the azure databricks accessConnector. Required.
+        :type parameters: ~azure.mgmt.databricks.models.AccessConnectorUpdate
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -752,8 +765,9 @@ class WorkspacesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either Workspace or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.Workspace]
+        :return: An instance of LROPoller that returns either AccessConnector or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -761,20 +775,20 @@ class WorkspacesOperations:
     def begin_update(
         self,
         resource_group_name: str,
-        workspace_name: str,
+        connector_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.Workspace]:
-        """Updates a workspace.
+    ) -> LROPoller[_models.AccessConnector]:
+        """Updates an azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param parameters: The update to the workspace. Required.
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
+        :param parameters: The update to the azure databricks accessConnector. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -787,8 +801,9 @@ class WorkspacesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either Workspace or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.Workspace]
+        :return: An instance of LROPoller that returns either AccessConnector or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -796,19 +811,20 @@ class WorkspacesOperations:
     def begin_update(
         self,
         resource_group_name: str,
-        workspace_name: str,
-        parameters: Union[_models.WorkspaceUpdate, IO],
+        connector_name: str,
+        parameters: Union[_models.AccessConnectorUpdate, IO],
         **kwargs: Any
-    ) -> LROPoller[_models.Workspace]:
-        """Updates a workspace.
+    ) -> LROPoller[_models.AccessConnector]:
+        """Updates an azure databricks accessConnector.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param parameters: The update to the workspace. Is either a model type or a IO type. Required.
-        :type parameters: ~azure.mgmt.databricks.models.WorkspaceUpdate or IO
+        :param connector_name: The name of the azure databricks accessConnector. Required.
+        :type connector_name: str
+        :param parameters: The update to the azure databricks accessConnector. Is either a model type
+         or a IO type. Required.
+        :type parameters: ~azure.mgmt.databricks.models.AccessConnectorUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -820,8 +836,9 @@ class WorkspacesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either Workspace or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.Workspace]
+        :return: An instance of LROPoller that returns either AccessConnector or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -831,14 +848,14 @@ class WorkspacesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-04-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.Workspace]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AccessConnector]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
             raw_result = self._update_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                workspace_name=workspace_name,
+                connector_name=connector_name,
                 parameters=parameters,
                 api_version=api_version,
                 content_type=content_type,
@@ -850,7 +867,7 @@ class WorkspacesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("Workspace", pipeline_response)
+            deserialized = self._deserialize("AccessConnector", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -870,18 +887,18 @@ class WorkspacesOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}"}  # type: ignore
+    begin_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors/{connectorName}"}  # type: ignore
 
     @distributed_trace
-    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> Iterable["_models.Workspace"]:
-        """Gets all the workspaces within a resource group.
+    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> Iterable["_models.AccessConnector"]:
+        """Gets all the azure databricks accessConnectors within a resource group.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Workspace or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.databricks.models.Workspace]
+        :return: An iterator like instance of either AccessConnector or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -890,7 +907,7 @@ class WorkspacesOperations:
         api_version = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-04-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WorkspaceListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AccessConnectorListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -933,7 +950,7 @@ class WorkspacesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("WorkspaceListResult", pipeline_response)
+            deserialized = self._deserialize("AccessConnectorListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -956,15 +973,15 @@ class WorkspacesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces"}  # type: ignore
+    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/accessConnectors"}  # type: ignore
 
     @distributed_trace
-    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.Workspace"]:
-        """Gets all the workspaces within a subscription.
+    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.AccessConnector"]:
+        """Gets all the azure databricks accessConnectors within a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either Workspace or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.databricks.models.Workspace]
+        :return: An iterator like instance of either AccessConnector or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.databricks.models.AccessConnector]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -973,7 +990,7 @@ class WorkspacesOperations:
         api_version = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-04-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.WorkspaceListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AccessConnectorListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -1015,7 +1032,7 @@ class WorkspacesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("WorkspaceListResult", pipeline_response)
+            deserialized = self._deserialize("AccessConnectorListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -1038,4 +1055,4 @@ class WorkspacesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Databricks/workspaces"}  # type: ignore
+    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Databricks/accessConnectors"}  # type: ignore
