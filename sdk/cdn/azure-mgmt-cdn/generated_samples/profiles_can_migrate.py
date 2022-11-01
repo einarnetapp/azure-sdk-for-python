@@ -14,7 +14,7 @@ from azure.mgmt.cdn import CdnManagementClient
     pip install azure-identity
     pip install azure-mgmt-cdn
 # USAGE
-    python endpoints_get.py
+    python profiles_can_migrate.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,17 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.endpoints.get(
+    response = client.profiles.can_migrate(
         resource_group_name="RG",
-        profile_name="profile1",
-        endpoint_name="endpoint1",
+        can_migrate_parameters={
+            "classicResourceReference": {
+                "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoors/frontdoorname"
+            }
+        },
     )
     print(response)
 
 
-# x-ms-original-file: specification/cdn/resource-manager/Microsoft.Cdn/preview/2022-11-01-preview/examples/Endpoints_Get.json
+# x-ms-original-file: specification/cdn/resource-manager/Microsoft.Cdn/preview/2022-11-01-preview/examples/Profiles_CanMigrate.json
 if __name__ == "__main__":
     main()

@@ -17,7 +17,6 @@ from ._rule_sets_operations import RuleSetsOperations
 from ._rules_operations import RulesOperations
 from ._security_policies_operations import SecurityPoliciesOperations
 from ._secrets_operations import SecretsOperations
-from ._validate_operations import ValidateOperations
 from ._log_analytics_operations import LogAnalyticsOperations
 from ._profiles_operations import ProfilesOperations
 from ._endpoints_operations import EndpointsOperations
@@ -46,7 +45,6 @@ __all__ = [
     "RulesOperations",
     "SecurityPoliciesOperations",
     "SecretsOperations",
-    "ValidateOperations",
     "LogAnalyticsOperations",
     "ProfilesOperations",
     "EndpointsOperations",

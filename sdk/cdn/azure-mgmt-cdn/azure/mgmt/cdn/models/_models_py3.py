@@ -156,6 +156,8 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :vartype domain_validation_state: str or ~azure.mgmt.cdn.models.DomainValidationState
     :ivar host_name: The host name of the domain. Must be a domain name.
     :vartype host_name: str
+    :ivar extended_properties: Key-Value pair representing migration properties for domains.
+    :vartype extended_properties: dict[str, str]
     :ivar validation_properties: Values the customer needs to validate domain ownership.
     :vartype validation_properties: ~azure.mgmt.cdn.models.DomainValidationProperties
     """
@@ -188,6 +190,7 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "deployment_status": {"key": "properties.deploymentStatus", "type": "str"},
         "domain_validation_state": {"key": "properties.domainValidationState", "type": "str"},
         "host_name": {"key": "properties.hostName", "type": "str"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
         "validation_properties": {"key": "properties.validationProperties", "type": "DomainValidationProperties"},
     }
 
@@ -198,6 +201,7 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         azure_dns_zone: Optional["_models.ResourceReference"] = None,
         pre_validated_custom_domain_resource_id: Optional["_models.ResourceReference"] = None,
         host_name: Optional[str] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -212,6 +216,8 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         :paramtype pre_validated_custom_domain_resource_id: ~azure.mgmt.cdn.models.ResourceReference
         :keyword host_name: The host name of the domain. Must be a domain name.
         :paramtype host_name: str
+        :keyword extended_properties: Key-Value pair representing migration properties for domains.
+        :paramtype extended_properties: dict[str, str]
         """
         super().__init__(**kwargs)
         self.profile_name = None
@@ -222,6 +228,7 @@ class AFDDomain(ProxyResource):  # pylint: disable=too-many-instance-attributes
         self.deployment_status = None
         self.domain_validation_state = None
         self.host_name = host_name
+        self.extended_properties = extended_properties
         self.validation_properties = None
 
 
@@ -423,6 +430,8 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
     :vartype domain_validation_state: str or ~azure.mgmt.cdn.models.DomainValidationState
     :ivar host_name: The host name of the domain. Must be a domain name. Required.
     :vartype host_name: str
+    :ivar extended_properties: Key-Value pair representing migration properties for domains.
+    :vartype extended_properties: dict[str, str]
     :ivar validation_properties: Values the customer needs to validate domain ownership.
     :vartype validation_properties: ~azure.mgmt.cdn.models.DomainValidationProperties
     """
@@ -448,6 +457,7 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         },
         "domain_validation_state": {"key": "domainValidationState", "type": "str"},
         "host_name": {"key": "hostName", "type": "str"},
+        "extended_properties": {"key": "extendedProperties", "type": "{str}"},
         "validation_properties": {"key": "validationProperties", "type": "DomainValidationProperties"},
     }
 
@@ -458,6 +468,7 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         tls_settings: Optional["_models.AFDDomainHttpsParameters"] = None,
         azure_dns_zone: Optional["_models.ResourceReference"] = None,
         pre_validated_custom_domain_resource_id: Optional["_models.ResourceReference"] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -472,6 +483,8 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         :paramtype pre_validated_custom_domain_resource_id: ~azure.mgmt.cdn.models.ResourceReference
         :keyword host_name: The host name of the domain. Must be a domain name. Required.
         :paramtype host_name: str
+        :keyword extended_properties: Key-Value pair representing migration properties for domains.
+        :paramtype extended_properties: dict[str, str]
         """
         super().__init__(
             tls_settings=tls_settings,
@@ -483,6 +496,7 @@ class AFDDomainProperties(AFDDomainUpdatePropertiesParameters, AFDStatePropertie
         self.deployment_status = None
         self.domain_validation_state = None
         self.host_name = host_name
+        self.extended_properties = extended_properties
         self.validation_properties = None
         self.profile_name = None
         self.tls_settings = tls_settings
@@ -599,7 +613,7 @@ class TrackedResource(Resource):
 
 
 class AFDEndpoint(TrackedResource):  # pylint: disable=too-many-instance-attributes
-    """CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format :code:`<endpointname>`.azureedge.net.
+    """Azure Front Door endpoint is the entity within a Azure Front Door profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format :code:`<endpointname>`.azureedge.net.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -899,7 +913,7 @@ class AfdErrorResponse(_serialization.Model):
 
 
 class AFDOrigin(ProxyResource):  # pylint: disable=too-many-instance-attributes
-    """CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.
+    """Azure Front Door origin is the source of the content being delivered via Azure Front Door. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -923,8 +937,8 @@ class AFDOrigin(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :ivar https_port: The value of the HTTPS port. Must be between 1 and 65535.
     :vartype https_port: int
     :ivar origin_host_header: The host header value sent to the origin with each request. If you
-     leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-     Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+     leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+     Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
      hostname by default. This overrides the host header defined at Endpoint.
     :vartype origin_host_header: str
     :ivar priority: Priority of origin in given origin group for load balancing. Higher priorities
@@ -1015,8 +1029,8 @@ class AFDOrigin(ProxyResource):  # pylint: disable=too-many-instance-attributes
         :keyword https_port: The value of the HTTPS port. Must be between 1 and 65535.
         :paramtype https_port: int
         :keyword origin_host_header: The host header value sent to the origin with each request. If you
-         leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-         Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+         leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+         Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
          hostname by default. This overrides the host header defined at Endpoint.
         :paramtype origin_host_header: str
         :keyword priority: Priority of origin in given origin group for load balancing. Higher
@@ -1055,7 +1069,7 @@ class AFDOrigin(ProxyResource):  # pylint: disable=too-many-instance-attributes
 
 
 class AFDOriginGroup(ProxyResource):  # pylint: disable=too-many-instance-attributes
-    """AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.
+    """AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from Azure Front Door.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -1160,7 +1174,7 @@ class AFDOriginGroupListResult(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar value: List of CDN origin groups within an endpoint.
+    :ivar value: List of Azure Front Door origin groups within an Azure Front Door endpoint.
     :vartype value: list[~azure.mgmt.cdn.models.AFDOriginGroup]
     :ivar next_link: URL to get the next set of origin objects if there are any.
     :vartype next_link: str
@@ -1421,7 +1435,7 @@ class AFDOriginListResult(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar value: List of CDN origins within an endpoint.
+    :ivar value: List of Azure Front Door origins within an Azure Front Door endpoint.
     :vartype value: list[~azure.mgmt.cdn.models.AFDOrigin]
     :ivar next_link: URL to get the next set of origin objects if there are any.
     :vartype next_link: str
@@ -1463,8 +1477,8 @@ class AFDOriginUpdatePropertiesParameters(_serialization.Model):  # pylint: disa
     :ivar https_port: The value of the HTTPS port. Must be between 1 and 65535.
     :vartype https_port: int
     :ivar origin_host_header: The host header value sent to the origin with each request. If you
-     leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-     Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+     leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+     Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
      hostname by default. This overrides the host header defined at Endpoint.
     :vartype origin_host_header: str
     :ivar priority: Priority of origin in given origin group for load balancing. Higher priorities
@@ -1537,8 +1551,8 @@ class AFDOriginUpdatePropertiesParameters(_serialization.Model):  # pylint: disa
         :keyword https_port: The value of the HTTPS port. Must be between 1 and 65535.
         :paramtype https_port: int
         :keyword origin_host_header: The host header value sent to the origin with each request. If you
-         leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-         Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+         leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+         Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
          hostname by default. This overrides the host header defined at Endpoint.
         :paramtype origin_host_header: str
         :keyword priority: Priority of origin in given origin group for load balancing. Higher
@@ -1599,8 +1613,8 @@ class AFDOriginProperties(
     :ivar https_port: The value of the HTTPS port. Must be between 1 and 65535.
     :vartype https_port: int
     :ivar origin_host_header: The host header value sent to the origin with each request. If you
-     leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-     Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+     leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+     Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
      hostname by default. This overrides the host header defined at Endpoint.
     :vartype origin_host_header: str
     :ivar priority: Priority of origin in given origin group for load balancing. Higher priorities
@@ -1677,8 +1691,8 @@ class AFDOriginProperties(
         :keyword https_port: The value of the HTTPS port. Must be between 1 and 65535.
         :paramtype https_port: int
         :keyword origin_host_header: The host header value sent to the origin with each request. If you
-         leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-         Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+         leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+         Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
          hostname by default. This overrides the host header defined at Endpoint.
         :paramtype origin_host_header: str
         :keyword priority: Priority of origin in given origin group for load balancing. Higher
@@ -1745,8 +1759,8 @@ class AFDOriginUpdateParameters(_serialization.Model):  # pylint: disable=too-ma
     :ivar https_port: The value of the HTTPS port. Must be between 1 and 65535.
     :vartype https_port: int
     :ivar origin_host_header: The host header value sent to the origin with each request. If you
-     leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-     Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+     leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+     Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
      hostname by default. This overrides the host header defined at Endpoint.
     :vartype origin_host_header: str
     :ivar priority: Priority of origin in given origin group for load balancing. Higher priorities
@@ -1819,8 +1833,8 @@ class AFDOriginUpdateParameters(_serialization.Model):  # pylint: disable=too-ma
         :keyword https_port: The value of the HTTPS port. Must be between 1 and 65535.
         :paramtype https_port: int
         :keyword origin_host_header: The host header value sent to the origin with each request. If you
-         leave this blank, the request hostname determines this value. Azure CDN origins, such as Web
-         Apps, Blob Storage, and Cloud Services require this host header value to match the origin
+         leave this blank, the request hostname determines this value. Azure Front Door origins, such as
+         Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin
          hostname by default. This overrides the host header defined at Endpoint.
         :paramtype origin_host_header: str
         :keyword priority: Priority of origin in given origin group for load balancing. Higher
@@ -2088,6 +2102,10 @@ class CacheConfiguration(_serialization.Model):
      Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or
      larger than 1 MB. Known values are: "Enabled" and "Disabled".
     :vartype is_compression_enabled: str or ~azure.mgmt.cdn.models.RuleIsCompressionEnabled
+    :ivar is_negative_caching_enabled: Indicates whether negative caching is enabled. Known values
+     are: "Enabled" and "Disabled".
+    :vartype is_negative_caching_enabled: str or
+     ~azure.mgmt.cdn.models.RuleIsNegativeCachingEnabled
     :ivar cache_behavior: Caching behavior for the requests. Known values are: "HonorOrigin",
      "OverrideAlways", and "OverrideIfOriginMissing".
     :vartype cache_behavior: str or ~azure.mgmt.cdn.models.RuleCacheBehavior
@@ -2100,6 +2118,7 @@ class CacheConfiguration(_serialization.Model):
         "query_string_caching_behavior": {"key": "queryStringCachingBehavior", "type": "str"},
         "query_parameters": {"key": "queryParameters", "type": "str"},
         "is_compression_enabled": {"key": "isCompressionEnabled", "type": "str"},
+        "is_negative_caching_enabled": {"key": "isNegativeCachingEnabled", "type": "str"},
         "cache_behavior": {"key": "cacheBehavior", "type": "str"},
         "cache_duration": {"key": "cacheDuration", "type": "str"},
     }
@@ -2110,6 +2129,7 @@ class CacheConfiguration(_serialization.Model):
         query_string_caching_behavior: Optional[Union[str, "_models.RuleQueryStringCachingBehavior"]] = None,
         query_parameters: Optional[str] = None,
         is_compression_enabled: Optional[Union[str, "_models.RuleIsCompressionEnabled"]] = None,
+        is_negative_caching_enabled: Optional[Union[str, "_models.RuleIsNegativeCachingEnabled"]] = None,
         cache_behavior: Optional[Union[str, "_models.RuleCacheBehavior"]] = None,
         cache_duration: Optional[str] = None,
         **kwargs
@@ -2129,6 +2149,10 @@ class CacheConfiguration(_serialization.Model):
          version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1
          byte or larger than 1 MB. Known values are: "Enabled" and "Disabled".
         :paramtype is_compression_enabled: str or ~azure.mgmt.cdn.models.RuleIsCompressionEnabled
+        :keyword is_negative_caching_enabled: Indicates whether negative caching is enabled. Known
+         values are: "Enabled" and "Disabled".
+        :paramtype is_negative_caching_enabled: str or
+         ~azure.mgmt.cdn.models.RuleIsNegativeCachingEnabled
         :keyword cache_behavior: Caching behavior for the requests. Known values are: "HonorOrigin",
          "OverrideAlways", and "OverrideIfOriginMissing".
         :paramtype cache_behavior: str or ~azure.mgmt.cdn.models.RuleCacheBehavior
@@ -2140,6 +2164,7 @@ class CacheConfiguration(_serialization.Model):
         self.query_string_caching_behavior = query_string_caching_behavior
         self.query_parameters = query_parameters
         self.is_compression_enabled = is_compression_enabled
+        self.is_negative_caching_enabled = is_negative_caching_enabled
         self.cache_behavior = cache_behavior
         self.cache_duration = cache_duration
 
@@ -2248,6 +2273,70 @@ class CacheKeyQueryStringActionParameters(_serialization.Model):
         self.type_name = type_name
         self.query_string_behavior = query_string_behavior
         self.query_parameters = query_parameters
+
+
+class CanMigrateParameters(_serialization.Model):
+    """Request body for CanMigrate operation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar classic_resource_reference: Resource reference of the classic cdn profile or classic
+     frontdoor that need to be migrated. Required.
+    :vartype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+    """
+
+    _validation = {
+        "classic_resource_reference": {"required": True},
+    }
+
+    _attribute_map = {
+        "classic_resource_reference": {"key": "classicResourceReference", "type": "ResourceReference"},
+    }
+
+    def __init__(self, *, classic_resource_reference: "_models.ResourceReference", **kwargs):
+        """
+        :keyword classic_resource_reference: Resource reference of the classic cdn profile or classic
+         frontdoor that need to be migrated. Required.
+        :paramtype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+        """
+        super().__init__(**kwargs)
+        self.classic_resource_reference = classic_resource_reference
+
+
+class CanMigrateResult(_serialization.Model):
+    """Result for canMigrate operation.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar can_migrate: Flag that says if the profile can be migrated.
+    :vartype can_migrate: bool
+    :ivar default_sku: Recommended sku for the migration. Known values are:
+     "Standard_AzureFrontDoor" and "Premium_AzureFrontDoor".
+    :vartype default_sku: str or ~azure.mgmt.cdn.models.CanMigrateDefaultSku
+    :ivar errors:
+    :vartype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+    """
+
+    _validation = {
+        "can_migrate": {"readonly": True},
+        "default_sku": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "can_migrate": {"key": "canMigrate", "type": "bool"},
+        "default_sku": {"key": "defaultSku", "type": "str"},
+        "errors": {"key": "errors", "type": "[MigrationErrorType]"},
+    }
+
+    def __init__(self, *, errors: Optional[List["_models.MigrationErrorType"]] = None, **kwargs):
+        """
+        :keyword errors:
+        :paramtype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+        """
+        super().__init__(**kwargs)
+        self.can_migrate = None
+        self.default_sku = None
+        self.errors = errors
 
 
 class CdnCertificateSourceParameters(_serialization.Model):
@@ -2460,6 +2549,9 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
     :ivar endpoint_links: Describes Azure CDN endpoints associated with this Web Application
      Firewall policy.
     :vartype endpoint_links: list[~azure.mgmt.cdn.models.CdnEndpoint]
+    :ivar extended_properties: Key-Value pair representing additional properties for Web
+     Application Firewall policy.
+    :vartype extended_properties: dict[str, str]
     :ivar provisioning_state: Provisioning state of the WebApplicationFirewallPolicy. Known values
      are: "Creating", "Succeeded", and "Failed".
     :vartype provisioning_state: str or ~azure.mgmt.cdn.models.ProvisioningState
@@ -2494,6 +2586,7 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         "custom_rules": {"key": "properties.customRules", "type": "CustomRuleList"},
         "managed_rules": {"key": "properties.managedRules", "type": "ManagedRuleSetList"},
         "endpoint_links": {"key": "properties.endpointLinks", "type": "[CdnEndpoint]"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "resource_state": {"key": "properties.resourceState", "type": "str"},
     }
@@ -2509,6 +2602,7 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         rate_limit_rules: Optional["_models.RateLimitRuleList"] = None,
         custom_rules: Optional["_models.CustomRuleList"] = None,
         managed_rules: Optional["_models.ManagedRuleSetList"] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -2529,6 +2623,9 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         :paramtype custom_rules: ~azure.mgmt.cdn.models.CustomRuleList
         :keyword managed_rules: Describes managed rules inside the policy.
         :paramtype managed_rules: ~azure.mgmt.cdn.models.ManagedRuleSetList
+        :keyword extended_properties: Key-Value pair representing additional properties for Web
+         Application Firewall policy.
+        :paramtype extended_properties: dict[str, str]
         """
         super().__init__(location=location, tags=tags, **kwargs)
         self.etag = etag
@@ -2538,6 +2635,7 @@ class CdnWebApplicationFirewallPolicy(TrackedResource):  # pylint: disable=too-m
         self.custom_rules = custom_rules
         self.managed_rules = managed_rules
         self.endpoint_links = None
+        self.extended_properties = extended_properties
         self.provisioning_state = None
         self.resource_state = None
 
@@ -7033,6 +7131,68 @@ class ManagedRuleSetList(_serialization.Model):
         self.managed_rule_sets = managed_rule_sets
 
 
+class ManagedServiceIdentity(_serialization.Model):
+    """Managed service identity (system assigned and/or user assigned identities).
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar principal_id: The service principal ID of the system assigned identity. This property
+     will only be provided for a system assigned identity.
+    :vartype principal_id: str
+    :ivar tenant_id: The tenant ID of the system assigned identity. This property will only be
+     provided for a system assigned identity.
+    :vartype tenant_id: str
+    :ivar type: Type of managed service identity (where both SystemAssigned and UserAssigned types
+     are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
+     "SystemAssigned, UserAssigned".
+    :vartype type: str or ~azure.mgmt.cdn.models.ManagedServiceIdentityType
+    :ivar user_assigned_identities: The set of user assigned identities associated with the
+     resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
+     '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
+     The dictionary values can be empty objects ({}) in requests.
+    :vartype user_assigned_identities: dict[str, ~azure.mgmt.cdn.models.UserAssignedIdentity]
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "user_assigned_identities": {"key": "userAssignedIdentities", "type": "{UserAssignedIdentity}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Union[str, "_models.ManagedServiceIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword type: Type of managed service identity (where both SystemAssigned and UserAssigned
+         types are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
+         "SystemAssigned, UserAssigned".
+        :paramtype type: str or ~azure.mgmt.cdn.models.ManagedServiceIdentityType
+        :keyword user_assigned_identities: The set of user assigned identities associated with the
+         resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
+         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
+         The dictionary values can be empty objects ({}) in requests.
+        :paramtype user_assigned_identities: dict[str, ~azure.mgmt.cdn.models.UserAssignedIdentity]
+        """
+        super().__init__(**kwargs)
+        self.principal_id = None
+        self.tenant_id = None
+        self.type = type
+        self.user_assigned_identities = user_assigned_identities
+
+
 class MatchCondition(_serialization.Model):
     """Define match conditions.
 
@@ -7242,7 +7402,7 @@ class MetricsResponse(_serialization.Model):
     :ivar date_time_end:
     :vartype date_time_end: ~datetime.datetime
     :ivar granularity: Known values are: "PT5M", "PT1H", and "P1D".
-    :vartype granularity: str or ~azure.mgmt.cdn.models.MetricsResponseGranularity
+    :vartype granularity: str or ~azure.mgmt.cdn.models.MetricsGranularity
     :ivar series:
     :vartype series: list[~azure.mgmt.cdn.models.MetricsResponseSeriesItem]
     """
@@ -7259,7 +7419,7 @@ class MetricsResponse(_serialization.Model):
         *,
         date_time_begin: Optional[datetime.datetime] = None,
         date_time_end: Optional[datetime.datetime] = None,
-        granularity: Optional[Union[str, "_models.MetricsResponseGranularity"]] = None,
+        granularity: Optional[Union[str, "_models.MetricsGranularity"]] = None,
         series: Optional[List["_models.MetricsResponseSeriesItem"]] = None,
         **kwargs
     ):
@@ -7269,7 +7429,7 @@ class MetricsResponse(_serialization.Model):
         :keyword date_time_end:
         :paramtype date_time_end: ~datetime.datetime
         :keyword granularity: Known values are: "PT5M", "PT1H", and "P1D".
-        :paramtype granularity: str or ~azure.mgmt.cdn.models.MetricsResponseGranularity
+        :paramtype granularity: str or ~azure.mgmt.cdn.models.MetricsGranularity
         :keyword series:
         :paramtype series: list[~azure.mgmt.cdn.models.MetricsResponseSeriesItem]
         """
@@ -7286,7 +7446,7 @@ class MetricsResponseSeriesItem(_serialization.Model):
     :ivar metric:
     :vartype metric: str
     :ivar unit: Known values are: "count", "bytes", "bitsPerSecond", and "milliSeconds".
-    :vartype unit: str or ~azure.mgmt.cdn.models.MetricsResponseSeriesItemUnit
+    :vartype unit: str or ~azure.mgmt.cdn.models.MetricsSeriesUnit
     :ivar groups:
     :vartype groups: list[~azure.mgmt.cdn.models.MetricsResponseSeriesPropertiesItemsItem]
     :ivar data:
@@ -7308,7 +7468,7 @@ class MetricsResponseSeriesItem(_serialization.Model):
         self,
         *,
         metric: Optional[str] = None,
-        unit: Optional[Union[str, "_models.MetricsResponseSeriesItemUnit"]] = None,
+        unit: Optional[Union[str, "_models.MetricsSeriesUnit"]] = None,
         groups: Optional[List["_models.MetricsResponseSeriesPropertiesItemsItem"]] = None,
         data: Optional[
             List["_models.Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesDataItems"]
@@ -7319,7 +7479,7 @@ class MetricsResponseSeriesItem(_serialization.Model):
         :keyword metric:
         :paramtype metric: str
         :keyword unit: Known values are: "count", "bytes", "bitsPerSecond", and "milliSeconds".
-        :paramtype unit: str or ~azure.mgmt.cdn.models.MetricsResponseSeriesItemUnit
+        :paramtype unit: str or ~azure.mgmt.cdn.models.MetricsSeriesUnit
         :keyword groups:
         :paramtype groups: list[~azure.mgmt.cdn.models.MetricsResponseSeriesPropertiesItemsItem]
         :keyword data:
@@ -7357,6 +7517,169 @@ class MetricsResponseSeriesPropertiesItemsItem(_serialization.Model):
         super().__init__(**kwargs)
         self.name = name
         self.value = value
+
+
+class MigrateResult(_serialization.Model):
+    """Result for migrate operation.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar migrated_profile_resource_id: Arm resource id of the migrated profile.
+    :vartype migrated_profile_resource_id: ~azure.mgmt.cdn.models.ResourceReference
+    :ivar errors:
+    :vartype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+    """
+
+    _validation = {
+        "migrated_profile_resource_id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "migrated_profile_resource_id": {"key": "migratedProfileResourceId", "type": "ResourceReference"},
+        "errors": {"key": "errors", "type": "[MigrationErrorType]"},
+    }
+
+    def __init__(self, *, errors: Optional[List["_models.MigrationErrorType"]] = None, **kwargs):
+        """
+        :keyword errors:
+        :paramtype errors: list[~azure.mgmt.cdn.models.MigrationErrorType]
+        """
+        super().__init__(**kwargs)
+        self.migrated_profile_resource_id = None
+        self.errors = errors
+
+
+class MigrationErrorType(_serialization.Model):
+    """Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar code: Error code.
+    :vartype code: str
+    :ivar resource_name: Resource which has the problem.
+    :vartype resource_name: str
+    :ivar error_message: Error message indicating why the operation failed.
+    :vartype error_message: str
+    :ivar next_steps: Describes what needs to be done to fix the problem.
+    :vartype next_steps: str
+    """
+
+    _validation = {
+        "code": {"readonly": True},
+        "resource_name": {"readonly": True},
+        "error_message": {"readonly": True},
+        "next_steps": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "code": {"key": "code", "type": "str"},
+        "resource_name": {"key": "resourceName", "type": "str"},
+        "error_message": {"key": "errorMessage", "type": "str"},
+        "next_steps": {"key": "nextSteps", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.code = None
+        self.resource_name = None
+        self.error_message = None
+        self.next_steps = None
+
+
+class MigrationParameters(_serialization.Model):
+    """Request body for Migrate operation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar sku: Sku for the migration. Required.
+    :vartype sku: ~azure.mgmt.cdn.models.Sku
+    :ivar classic_resource_reference: Resource reference of the classic cdn profile or classic
+     frontdoor that need to be migrated. Required.
+    :vartype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+    :ivar profile_name: Name of the new profile that need to be created. Required.
+    :vartype profile_name: str
+    :ivar migration_web_application_firewall_mappings: Waf mapping for the migrated profile.
+    :vartype migration_web_application_firewall_mappings:
+     list[~azure.mgmt.cdn.models.MigrationWebApplicationFirewallMapping]
+    """
+
+    _validation = {
+        "sku": {"required": True},
+        "classic_resource_reference": {"required": True},
+        "profile_name": {"required": True},
+    }
+
+    _attribute_map = {
+        "sku": {"key": "sku", "type": "Sku"},
+        "classic_resource_reference": {"key": "classicResourceReference", "type": "ResourceReference"},
+        "profile_name": {"key": "profileName", "type": "str"},
+        "migration_web_application_firewall_mappings": {
+            "key": "migrationWebApplicationFirewallMappings",
+            "type": "[MigrationWebApplicationFirewallMapping]",
+        },
+    }
+
+    def __init__(
+        self,
+        *,
+        sku: "_models.Sku",
+        classic_resource_reference: "_models.ResourceReference",
+        profile_name: str,
+        migration_web_application_firewall_mappings: Optional[
+            List["_models.MigrationWebApplicationFirewallMapping"]
+        ] = None,
+        **kwargs
+    ):
+        """
+        :keyword sku: Sku for the migration. Required.
+        :paramtype sku: ~azure.mgmt.cdn.models.Sku
+        :keyword classic_resource_reference: Resource reference of the classic cdn profile or classic
+         frontdoor that need to be migrated. Required.
+        :paramtype classic_resource_reference: ~azure.mgmt.cdn.models.ResourceReference
+        :keyword profile_name: Name of the new profile that need to be created. Required.
+        :paramtype profile_name: str
+        :keyword migration_web_application_firewall_mappings: Waf mapping for the migrated profile.
+        :paramtype migration_web_application_firewall_mappings:
+         list[~azure.mgmt.cdn.models.MigrationWebApplicationFirewallMapping]
+        """
+        super().__init__(**kwargs)
+        self.sku = sku
+        self.classic_resource_reference = classic_resource_reference
+        self.profile_name = profile_name
+        self.migration_web_application_firewall_mappings = migration_web_application_firewall_mappings
+
+
+class MigrationWebApplicationFirewallMapping(_serialization.Model):
+    """Web Application Firewall Mapping.
+
+    :ivar migrated_from: Migration From Waf policy.
+    :vartype migrated_from: ~azure.mgmt.cdn.models.ResourceReference
+    :ivar migrated_to: Migration to Waf policy.
+    :vartype migrated_to: ~azure.mgmt.cdn.models.ResourceReference
+    """
+
+    _attribute_map = {
+        "migrated_from": {"key": "migratedFrom", "type": "ResourceReference"},
+        "migrated_to": {"key": "migratedTo", "type": "ResourceReference"},
+    }
+
+    def __init__(
+        self,
+        *,
+        migrated_from: Optional["_models.ResourceReference"] = None,
+        migrated_to: Optional["_models.ResourceReference"] = None,
+        **kwargs
+    ):
+        """
+        :keyword migrated_from: Migration From Waf policy.
+        :paramtype migrated_from: ~azure.mgmt.cdn.models.ResourceReference
+        :keyword migrated_to: Migration to Waf policy.
+        :paramtype migrated_to: ~azure.mgmt.cdn.models.ResourceReference
+        """
+        super().__init__(**kwargs)
+        self.migrated_from = migrated_from
+        self.migrated_to = migrated_to
 
 
 class Operation(_serialization.Model):
@@ -8705,12 +9028,17 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
     :ivar kind: Kind of the profile. Used by portal to differentiate traditional CDN profile and
      new AFD profile.
     :vartype kind: str
+    :ivar identity: Managed service identity (system assigned and/or user assigned identities).
+    :vartype identity: ~azure.mgmt.cdn.models.ManagedServiceIdentity
     :ivar resource_state: Resource status of the profile. Known values are: "Creating", "Active",
-     "Deleting", and "Disabled".
+     "Deleting", "Disabled", "Migrating", "Migrated", "PendingMigrationCommit",
+     "CommittingMigration", and "AbortingMigration".
     :vartype resource_state: str or ~azure.mgmt.cdn.models.ProfileResourceState
     :ivar provisioning_state: Provisioning status of the profile. Known values are: "Succeeded",
      "Failed", "Updating", "Deleting", and "Creating".
     :vartype provisioning_state: str or ~azure.mgmt.cdn.models.ProfileProvisioningState
+    :ivar extended_properties: Key-Value pair representing additional properties for profiles.
+    :vartype extended_properties: dict[str, str]
     :ivar front_door_id: The Id of the frontdoor.
     :vartype front_door_id: str
     :ivar origin_response_timeout_seconds: Send and receive timeout on forwarding request to the
@@ -8741,8 +9069,10 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         "tags": {"key": "tags", "type": "{str}"},
         "sku": {"key": "sku", "type": "Sku"},
         "kind": {"key": "kind", "type": "str"},
+        "identity": {"key": "identity", "type": "ManagedServiceIdentity"},
         "resource_state": {"key": "properties.resourceState", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+        "extended_properties": {"key": "properties.extendedProperties", "type": "{str}"},
         "front_door_id": {"key": "properties.frontDoorId", "type": "str"},
         "origin_response_timeout_seconds": {"key": "properties.originResponseTimeoutSeconds", "type": "int"},
     }
@@ -8753,6 +9083,8 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         location: str,
         sku: "_models.Sku",
         tags: Optional[Dict[str, str]] = None,
+        identity: Optional["_models.ManagedServiceIdentity"] = None,
+        extended_properties: Optional[Dict[str, str]] = None,
         origin_response_timeout_seconds: Optional[int] = None,
         **kwargs
     ):
@@ -8764,6 +9096,10 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         :keyword sku: The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider,
          feature list and rate) of the profile. Required.
         :paramtype sku: ~azure.mgmt.cdn.models.Sku
+        :keyword identity: Managed service identity (system assigned and/or user assigned identities).
+        :paramtype identity: ~azure.mgmt.cdn.models.ManagedServiceIdentity
+        :keyword extended_properties: Key-Value pair representing additional properties for profiles.
+        :paramtype extended_properties: dict[str, str]
         :keyword origin_response_timeout_seconds: Send and receive timeout on forwarding request to the
          origin. When timeout is reached, the request fails and returns.
         :paramtype origin_response_timeout_seconds: int
@@ -8771,10 +9107,45 @@ class Profile(TrackedResource):  # pylint: disable=too-many-instance-attributes
         super().__init__(location=location, tags=tags, **kwargs)
         self.sku = sku
         self.kind = None
+        self.identity = identity
         self.resource_state = None
         self.provisioning_state = None
+        self.extended_properties = extended_properties
         self.front_door_id = None
         self.origin_response_timeout_seconds = origin_response_timeout_seconds
+
+
+class ProfileChangeSkuWafMapping(_serialization.Model):
+    """Parameters required for profile upgrade.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar security_policy_name: The security policy name. Required.
+    :vartype security_policy_name: str
+    :ivar change_to_waf_policy: The new waf resource for the security policy to use. Required.
+    :vartype change_to_waf_policy: ~azure.mgmt.cdn.models.ResourceReference
+    """
+
+    _validation = {
+        "security_policy_name": {"required": True},
+        "change_to_waf_policy": {"required": True},
+    }
+
+    _attribute_map = {
+        "security_policy_name": {"key": "securityPolicyName", "type": "str"},
+        "change_to_waf_policy": {"key": "changeToWafPolicy", "type": "ResourceReference"},
+    }
+
+    def __init__(self, *, security_policy_name: str, change_to_waf_policy: "_models.ResourceReference", **kwargs):
+        """
+        :keyword security_policy_name: The security policy name. Required.
+        :paramtype security_policy_name: str
+        :keyword change_to_waf_policy: The new waf resource for the security policy to use. Required.
+        :paramtype change_to_waf_policy: ~azure.mgmt.cdn.models.ResourceReference
+        """
+        super().__init__(**kwargs)
+        self.security_policy_name = security_policy_name
+        self.change_to_waf_policy = change_to_waf_policy
 
 
 class ProfileListResult(_serialization.Model):
@@ -8812,6 +9183,8 @@ class ProfileUpdateParameters(_serialization.Model):
 
     :ivar tags: Profile tags.
     :vartype tags: dict[str, str]
+    :ivar identity: Managed service identity (system assigned and/or user assigned identities).
+    :vartype identity: ~azure.mgmt.cdn.models.ManagedServiceIdentity
     :ivar origin_response_timeout_seconds: Send and receive timeout on forwarding request to the
      origin. When timeout is reached, the request fails and returns.
     :vartype origin_response_timeout_seconds: int
@@ -8823,22 +9196,59 @@ class ProfileUpdateParameters(_serialization.Model):
 
     _attribute_map = {
         "tags": {"key": "tags", "type": "{str}"},
+        "identity": {"key": "identity", "type": "ManagedServiceIdentity"},
         "origin_response_timeout_seconds": {"key": "properties.originResponseTimeoutSeconds", "type": "int"},
     }
 
     def __init__(
-        self, *, tags: Optional[Dict[str, str]] = None, origin_response_timeout_seconds: Optional[int] = None, **kwargs
+        self,
+        *,
+        tags: Optional[Dict[str, str]] = None,
+        identity: Optional["_models.ManagedServiceIdentity"] = None,
+        origin_response_timeout_seconds: Optional[int] = None,
+        **kwargs
     ):
         """
         :keyword tags: Profile tags.
         :paramtype tags: dict[str, str]
+        :keyword identity: Managed service identity (system assigned and/or user assigned identities).
+        :paramtype identity: ~azure.mgmt.cdn.models.ManagedServiceIdentity
         :keyword origin_response_timeout_seconds: Send and receive timeout on forwarding request to the
          origin. When timeout is reached, the request fails and returns.
         :paramtype origin_response_timeout_seconds: int
         """
         super().__init__(**kwargs)
         self.tags = tags
+        self.identity = identity
         self.origin_response_timeout_seconds = origin_response_timeout_seconds
+
+
+class ProfileUpgradeParameters(_serialization.Model):
+    """Parameters required for profile upgrade.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar waf_mapping_list: Web Application Firewall (WAF) and security policy mapping for the
+     profile upgrade. Required.
+    :vartype waf_mapping_list: list[~azure.mgmt.cdn.models.ProfileChangeSkuWafMapping]
+    """
+
+    _validation = {
+        "waf_mapping_list": {"required": True},
+    }
+
+    _attribute_map = {
+        "waf_mapping_list": {"key": "wafMappingList", "type": "[ProfileChangeSkuWafMapping]"},
+    }
+
+    def __init__(self, *, waf_mapping_list: List["_models.ProfileChangeSkuWafMapping"], **kwargs):
+        """
+        :keyword waf_mapping_list: Web Application Firewall (WAF) and security policy mapping for the
+         profile upgrade. Required.
+        :paramtype waf_mapping_list: list[~azure.mgmt.cdn.models.ProfileChangeSkuWafMapping]
+        """
+        super().__init__(**kwargs)
+        self.waf_mapping_list = waf_mapping_list
 
 
 class PurgeParameters(_serialization.Model):
@@ -12504,6 +12914,34 @@ class UsagesListResult(_serialization.Model):
         self.next_link = next_link
 
 
+class UserAssignedIdentity(_serialization.Model):
+    """User assigned identity properties.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar principal_id: The principal ID of the assigned identity.
+    :vartype principal_id: str
+    :ivar client_id: The client ID of the assigned identity.
+    :vartype client_id: str
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "client_id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "client_id": {"key": "clientId", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.principal_id = None
+        self.client_id = None
+
+
 class UserManagedHttpsParameters(CustomDomainHttpsParameters):
     """Defines the certificate source parameters using user's keyvault certificate for enabling SSL.
 
@@ -12798,7 +13236,7 @@ class WafMetricsResponse(_serialization.Model):
     :ivar date_time_end:
     :vartype date_time_end: ~datetime.datetime
     :ivar granularity: Known values are: "PT5M", "PT1H", and "P1D".
-    :vartype granularity: str or ~azure.mgmt.cdn.models.WafMetricsResponseGranularity
+    :vartype granularity: str or ~azure.mgmt.cdn.models.WafMetricsGranularity
     :ivar series:
     :vartype series: list[~azure.mgmt.cdn.models.WafMetricsResponseSeriesItem]
     """
@@ -12815,7 +13253,7 @@ class WafMetricsResponse(_serialization.Model):
         *,
         date_time_begin: Optional[datetime.datetime] = None,
         date_time_end: Optional[datetime.datetime] = None,
-        granularity: Optional[Union[str, "_models.WafMetricsResponseGranularity"]] = None,
+        granularity: Optional[Union[str, "_models.WafMetricsGranularity"]] = None,
         series: Optional[List["_models.WafMetricsResponseSeriesItem"]] = None,
         **kwargs
     ):
@@ -12825,7 +13263,7 @@ class WafMetricsResponse(_serialization.Model):
         :keyword date_time_end:
         :paramtype date_time_end: ~datetime.datetime
         :keyword granularity: Known values are: "PT5M", "PT1H", and "P1D".
-        :paramtype granularity: str or ~azure.mgmt.cdn.models.WafMetricsResponseGranularity
+        :paramtype granularity: str or ~azure.mgmt.cdn.models.WafMetricsGranularity
         :keyword series:
         :paramtype series: list[~azure.mgmt.cdn.models.WafMetricsResponseSeriesItem]
         """
@@ -12842,7 +13280,7 @@ class WafMetricsResponseSeriesItem(_serialization.Model):
     :ivar metric:
     :vartype metric: str
     :ivar unit: "count"
-    :vartype unit: str or ~azure.mgmt.cdn.models.WafMetricsResponseSeriesItemUnit
+    :vartype unit: str or ~azure.mgmt.cdn.models.WafMetricsSeriesUnit
     :ivar groups:
     :vartype groups: list[~azure.mgmt.cdn.models.WafMetricsResponseSeriesPropertiesItemsItem]
     :ivar data:
@@ -12864,7 +13302,7 @@ class WafMetricsResponseSeriesItem(_serialization.Model):
         self,
         *,
         metric: Optional[str] = None,
-        unit: Optional[Union[str, "_models.WafMetricsResponseSeriesItemUnit"]] = None,
+        unit: Optional[Union[str, "_models.WafMetricsSeriesUnit"]] = None,
         groups: Optional[List["_models.WafMetricsResponseSeriesPropertiesItemsItem"]] = None,
         data: Optional[
             List["_models.Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems"]
@@ -12875,7 +13313,7 @@ class WafMetricsResponseSeriesItem(_serialization.Model):
         :keyword metric:
         :paramtype metric: str
         :keyword unit: "count"
-        :paramtype unit: str or ~azure.mgmt.cdn.models.WafMetricsResponseSeriesItemUnit
+        :paramtype unit: str or ~azure.mgmt.cdn.models.WafMetricsSeriesUnit
         :keyword groups:
         :paramtype groups: list[~azure.mgmt.cdn.models.WafMetricsResponseSeriesPropertiesItemsItem]
         :keyword data:

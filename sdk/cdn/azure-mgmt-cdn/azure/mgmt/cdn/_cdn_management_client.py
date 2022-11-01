@@ -38,7 +38,6 @@ from .operations import (
     RulesOperations,
     SecretsOperations,
     SecurityPoliciesOperations,
-    ValidateOperations,
 )
 
 if TYPE_CHECKING:
@@ -71,8 +70,6 @@ class CdnManagementClient(
     :vartype security_policies: azure.mgmt.cdn.operations.SecurityPoliciesOperations
     :ivar secrets: SecretsOperations operations
     :vartype secrets: azure.mgmt.cdn.operations.SecretsOperations
-    :ivar validate: ValidateOperations operations
-    :vartype validate: azure.mgmt.cdn.operations.ValidateOperations
     :ivar log_analytics: LogAnalyticsOperations operations
     :vartype log_analytics: azure.mgmt.cdn.operations.LogAnalyticsOperations
     :ivar profiles: ProfilesOperations operations
@@ -101,8 +98,8 @@ class CdnManagementClient(
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2021-06-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2022-11-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -140,7 +137,6 @@ class CdnManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.secrets = SecretsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.validate = ValidateOperations(self._client, self._config, self._serialize, self._deserialize)
         self.log_analytics = LogAnalyticsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.profiles = ProfilesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.endpoints = EndpointsOperations(self._client, self._config, self._serialize, self._deserialize)
