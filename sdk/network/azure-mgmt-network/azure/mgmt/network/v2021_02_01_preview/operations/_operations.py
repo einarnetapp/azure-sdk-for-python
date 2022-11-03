@@ -32,12 +32,16 @@ from .. import models as _models
 from ..._serialization import Serializer
 from .._vendor import _convert_request, _format_url_section
 
-T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
+T = TypeVar("T")
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 _SERIALIZER = Serializer()
@@ -50,7 +54,9 @@ def build_network_managers_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -81,7 +87,9 @@ def build_network_managers_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -115,7 +123,9 @@ def build_network_managers_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -146,7 +156,9 @@ def build_network_managers_patch_tags_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -180,7 +192,9 @@ def build_network_managers_list_by_subscription_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -215,7 +229,9 @@ def build_network_managers_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -249,7 +265,9 @@ def build_network_manager_commits_post_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -283,7 +301,9 @@ def build_network_manager_deployment_status_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -323,7 +343,9 @@ def build_effective_virtual_networks_list_by_network_manager_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -361,7 +383,9 @@ def build_effective_virtual_networks_list_by_network_group_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -396,7 +420,9 @@ def build_active_connectivity_configurations_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -430,7 +456,9 @@ def build_active_security_admin_rules_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -464,7 +492,9 @@ def build_active_security_user_rules_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -498,7 +528,9 @@ def build_connectivity_configurations_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -530,7 +562,9 @@ def build_connectivity_configurations_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -565,7 +599,9 @@ def build_connectivity_configurations_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -603,7 +639,9 @@ def build_connectivity_configurations_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -638,7 +676,9 @@ def build_effective_connectivity_configurations_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -672,7 +712,9 @@ def build_network_manager_effective_security_admin_rules_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -706,7 +748,9 @@ def build_network_groups_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -744,7 +788,9 @@ def build_network_groups_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -781,7 +827,9 @@ def build_network_groups_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -819,7 +867,9 @@ def build_network_groups_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -860,7 +910,9 @@ def build_security_user_configurations_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -895,7 +947,9 @@ def build_security_user_configurations_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -927,7 +981,9 @@ def build_security_user_configurations_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -962,7 +1018,9 @@ def build_security_user_configurations_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1001,7 +1059,9 @@ def build_user_rule_collections_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1042,7 +1102,9 @@ def build_user_rule_collections_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1080,7 +1142,9 @@ def build_user_rule_collections_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -1121,7 +1185,9 @@ def build_user_rule_collections_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1162,7 +1228,9 @@ def build_user_rules_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1205,7 +1273,9 @@ def build_user_rules_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1245,7 +1315,9 @@ def build_user_rules_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -1288,7 +1360,9 @@ def build_user_rules_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1328,7 +1402,9 @@ def build_security_admin_configurations_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1363,7 +1439,9 @@ def build_security_admin_configurations_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1395,7 +1473,9 @@ def build_security_admin_configurations_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -1430,7 +1510,9 @@ def build_security_admin_configurations_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1469,7 +1551,9 @@ def build_admin_rule_collections_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1510,7 +1594,9 @@ def build_admin_rule_collections_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1548,7 +1634,9 @@ def build_admin_rule_collections_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -1589,7 +1677,9 @@ def build_admin_rule_collections_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1630,7 +1720,9 @@ def build_admin_rules_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1673,7 +1765,9 @@ def build_admin_rules_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1713,7 +1807,9 @@ def build_admin_rules_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -1756,7 +1852,9 @@ def build_admin_rules_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1790,7 +1888,9 @@ def build_network_security_perimeters_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1823,7 +1923,9 @@ def build_network_security_perimeters_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -1859,7 +1961,9 @@ def build_network_security_perimeters_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1892,7 +1996,9 @@ def build_network_security_perimeters_list_by_subscription_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1929,7 +2035,9 @@ def build_network_security_perimeters_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -1967,7 +2075,9 @@ def build_nsp_profiles_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2005,7 +2115,9 @@ def build_nsp_profiles_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -2046,7 +2158,9 @@ def build_nsp_profiles_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2086,7 +2200,9 @@ def build_nsp_profiles_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2128,7 +2244,9 @@ def build_nsp_access_rules_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2168,7 +2286,9 @@ def build_nsp_access_rules_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -2211,7 +2331,9 @@ def build_nsp_access_rules_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2253,7 +2375,9 @@ def build_nsp_access_rules_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2295,7 +2419,9 @@ def build_nsp_associations_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2333,7 +2459,9 @@ def build_nsp_associations_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -2374,7 +2502,9 @@ def build_nsp_associations_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2414,7 +2544,9 @@ def build_nsp_associations_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2457,7 +2589,9 @@ def build_nsp_association_reconcile_post_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -2494,7 +2628,9 @@ def build_perimeter_associable_resource_types_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2531,7 +2667,9 @@ def build_nsp_access_rules_reconcile_post_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -2569,7 +2707,9 @@ def build_nsp_links_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2603,7 +2743,9 @@ def build_nsp_links_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
@@ -2640,7 +2782,9 @@ def build_nsp_links_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2680,7 +2824,9 @@ def build_nsp_links_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2717,7 +2863,9 @@ def build_nsp_link_reconcile_post_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2755,7 +2903,9 @@ def build_nsp_link_references_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2793,7 +2943,9 @@ def build_nsp_link_references_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2833,7 +2985,9 @@ def build_nsp_link_references_list_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2874,7 +3028,9 @@ def build_nsp_link_reference_reconcile_post_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-02-01-preview")
+    )  # type: Literal["2021-02-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -2945,7 +3101,9 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManager]
 
         request = build_network_managers_get_request(
@@ -3069,7 +3227,9 @@ class NetworkManagersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManager]
 
@@ -3145,7 +3305,9 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_network_managers_delete_request(
@@ -3265,7 +3427,9 @@ class NetworkManagersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManager]
 
@@ -3334,7 +3498,9 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerListResult]
 
         error_map = {
@@ -3428,7 +3594,9 @@ class NetworkManagersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerListResult]
 
         error_map = {
@@ -3608,7 +3776,9 @@ class NetworkManagerCommitsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerCommit]
 
@@ -3768,7 +3938,9 @@ class NetworkManagerDeploymentStatusOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerDeploymentStatusListResult]
 
@@ -3956,7 +4128,9 @@ class EffectiveVirtualNetworksOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.EffectiveVirtualNetworksListResult]
 
@@ -4103,7 +4277,9 @@ class EffectiveVirtualNetworksOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.EffectiveVirtualNetworksListResult]
 
@@ -4264,7 +4440,9 @@ class ActiveConnectivityConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveConnectivityConfigurationsListResult]
 
@@ -4421,7 +4599,9 @@ class ActiveSecurityAdminRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveSecurityAdminRulesListResult]
 
@@ -4578,7 +4758,9 @@ class ActiveSecurityUserRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ActiveSecurityUserRulesListResult]
 
@@ -4674,7 +4856,9 @@ class ConnectivityConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectivityConfiguration]
 
         request = build_connectivity_configurations_get_request(
@@ -4815,7 +4999,9 @@ class ConnectivityConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectivityConfiguration]
 
@@ -4896,7 +5082,9 @@ class ConnectivityConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_connectivity_configurations_delete_request(
@@ -4960,7 +5148,9 @@ class ConnectivityConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ConnectivityConfigurationListResult]
 
         error_map = {
@@ -5147,7 +5337,9 @@ class EffectiveConnectivityConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop(
             "cls", None
@@ -5310,7 +5502,9 @@ class NetworkManagerEffectiveSecurityAdminRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkManagerEffectiveSecurityAdminRulesListResult]
 
@@ -5404,7 +5598,9 @@ class NetworkGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkGroup]
 
         request = build_network_groups_get_request(
@@ -5555,7 +5751,9 @@ class NetworkGroupsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkGroup]
 
@@ -5640,7 +5838,9 @@ class NetworkGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_network_groups_delete_request(
@@ -5703,7 +5903,9 @@ class NetworkGroupsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkGroupListResult]
 
         error_map = {
@@ -5828,7 +6030,9 @@ class SecurityUserConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfigurationListResult]
 
         error_map = {
@@ -5927,7 +6131,9 @@ class SecurityUserConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
 
         request = build_security_user_configurations_get_request(
@@ -6065,7 +6271,9 @@ class SecurityUserConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
 
@@ -6144,7 +6352,9 @@ class SecurityUserConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_security_user_configurations_delete_request(
@@ -6230,7 +6440,9 @@ class UserRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollectionListResult]
 
         error_map = {
@@ -6338,7 +6550,9 @@ class UserRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
 
         request = build_user_rule_collections_get_request(
@@ -6485,7 +6699,9 @@ class UserRuleCollectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
 
@@ -6573,7 +6789,9 @@ class UserRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_user_rule_collections_delete_request(
@@ -6664,7 +6882,9 @@ class UserRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.UserRuleListResult]
 
         error_map = {
@@ -6776,7 +6996,9 @@ class UserRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseUserRule]
 
         request = build_user_rules_get_request(
@@ -6933,7 +7155,9 @@ class UserRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseUserRule]
 
@@ -7025,7 +7249,9 @@ class UserRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_user_rules_delete_request(
@@ -7112,7 +7338,9 @@ class SecurityAdminConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfigurationListResult]
 
         error_map = {
@@ -7211,7 +7439,9 @@ class SecurityAdminConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
 
         request = build_security_admin_configurations_get_request(
@@ -7349,7 +7579,9 @@ class SecurityAdminConfigurationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SecurityConfiguration]
 
@@ -7428,7 +7660,9 @@ class SecurityAdminConfigurationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_security_admin_configurations_delete_request(
@@ -7514,7 +7748,9 @@ class AdminRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollectionListResult]
 
         error_map = {
@@ -7622,7 +7858,9 @@ class AdminRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
 
         request = build_admin_rule_collections_get_request(
@@ -7769,7 +8007,9 @@ class AdminRuleCollectionsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.RuleCollection]
 
@@ -7857,7 +8097,9 @@ class AdminRuleCollectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_admin_rule_collections_delete_request(
@@ -7948,7 +8190,9 @@ class AdminRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.AdminRuleListResult]
 
         error_map = {
@@ -8060,7 +8304,9 @@ class AdminRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseAdminRule]
 
         request = build_admin_rules_get_request(
@@ -8217,7 +8463,9 @@ class AdminRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.BaseAdminRule]
 
@@ -8309,7 +8557,9 @@ class AdminRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_admin_rules_delete_request(
@@ -8388,7 +8638,9 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeter]
 
         request = build_network_security_perimeters_get_request(
@@ -8514,7 +8766,9 @@ class NetworkSecurityPerimetersOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeter]
 
@@ -8590,7 +8844,9 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_network_security_perimeters_delete_request(
@@ -8644,7 +8900,9 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeterListResult]
 
         error_map = {
@@ -8739,7 +8997,9 @@ class NetworkSecurityPerimetersOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NetworkSecurityPerimeterListResult]
 
         error_map = {
@@ -8857,7 +9117,9 @@ class NspProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspProfile]
 
         request = build_nsp_profiles_get_request(
@@ -8993,7 +9255,9 @@ class NspProfilesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspProfile]
 
@@ -9072,7 +9336,9 @@ class NspProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_nsp_profiles_delete_request(
@@ -9134,7 +9400,9 @@ class NspProfilesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspProfileListResult]
 
         error_map = {
@@ -9260,7 +9528,9 @@ class NspAccessRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAccessRule]
 
         request = build_nsp_access_rules_get_request(
@@ -9406,7 +9676,9 @@ class NspAccessRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAccessRule]
 
@@ -9493,7 +9765,9 @@ class NspAccessRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_nsp_access_rules_delete_request(
@@ -9560,7 +9834,9 @@ class NspAccessRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAccessRuleListResult]
 
         error_map = {
@@ -9680,7 +9956,9 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAssociation]
 
         request = build_nsp_associations_get_request(
@@ -9816,7 +10094,9 @@ class NspAssociationsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAssociation]
 
@@ -9881,7 +10161,9 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_nsp_associations_delete_request(
@@ -9943,7 +10225,9 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -10014,7 +10298,9 @@ class NspAssociationsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspAssociationsListResult]
 
         error_map = {
@@ -10140,7 +10426,9 @@ class NspAssociationReconcileOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
@@ -10217,7 +10505,9 @@ class PerimeterAssociableResourceTypesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.PerimeterAssociableResourcesListResult]
 
         error_map = {
@@ -10343,7 +10633,9 @@ class NspAccessRulesReconcileOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[JSON]
 
@@ -10432,7 +10724,9 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLink]
 
         request = build_nsp_links_get_request(
@@ -10566,7 +10860,9 @@ class NspLinksOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLink]
 
@@ -10631,7 +10927,9 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_nsp_links_delete_request(
@@ -10693,7 +10991,9 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -10765,7 +11065,9 @@ class NspLinksOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLinkListResult]
 
         error_map = {
@@ -10884,7 +11186,9 @@ class NspLinkReconcileOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_nsp_link_reconcile_post_request(
@@ -10963,7 +11267,9 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLinkReference]
 
         request = build_nsp_link_references_get_request(
@@ -11012,7 +11318,9 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_nsp_link_references_delete_request(
@@ -11074,7 +11382,9 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -11147,7 +11457,9 @@ class NspLinkReferencesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.NspLinkReferenceListResult]
 
         error_map = {
@@ -11266,7 +11578,9 @@ class NspLinkReferenceReconcileOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-02-01-preview"))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-02-01-preview")
+        )  # type: Literal["2021-02-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_nsp_link_reference_reconcile_post_request(
