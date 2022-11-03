@@ -31,6 +31,7 @@ from ._models_py3 import ContainerPort
 from ._models_py3 import ContainerProbe
 from ._models_py3 import ContainerPropertiesInstanceView
 from ._models_py3 import ContainerState
+from ._models_py3 import DeploymentExtensionSpec
 from ._models_py3 import DnsConfiguration
 from ._models_py3 import EncryptionProperties
 from ._models_py3 import EnvironmentVariable
@@ -101,6 +102,7 @@ __all__ = [
     "ContainerProbe",
     "ContainerPropertiesInstanceView",
     "ContainerState",
+    "DeploymentExtensionSpec",
     "DnsConfiguration",
     "EncryptionProperties",
     "EnvironmentVariable",
