@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
-from azure.mgmt.rdbms import PostgreSQLManagementClient
+from azure.mgmt.rdbms import MariaDBManagementClient
 
 """
 # PREREQUISITES
@@ -24,17 +24,17 @@ from azure.mgmt.rdbms import PostgreSQLManagementClient
 
 
 def main():
-    client = PostgreSQLManagementClient(
+    client = MariaDBManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="ffffffff-ffff-ffff-ffff-ffffffffffff",
     )
 
     response = client.check_name_availability.execute(
-        name_availability_request={"name": "name1", "type": "Microsoft.DBforPostgreSQL"},
+        name_availability_request={"name": "name1", "type": "Microsoft.DBforMariaDB"},
     )
     print(response)
 
 
-# x-ms-original-file: specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2017-12-01/examples/CheckNameAvailability.json
+# x-ms-original-file: specification/mariadb/resource-manager/Microsoft.DBforMariaDB/stable/2018-06-01/examples/CheckNameAvailability.json
 if __name__ == "__main__":
     main()
