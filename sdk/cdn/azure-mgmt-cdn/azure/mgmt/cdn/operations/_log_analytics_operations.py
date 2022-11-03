@@ -7,6 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import datetime
+import sys
 from typing import Any, Callable, Dict, List, Optional, TypeVar, Union
 
 from azure.core.exceptions import (
@@ -26,8 +27,12 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
 from .._serialization import Serializer
-from .._vendor import MixinABC, _convert_request, _format_url_section
+from .._vendor import CdnManagementClientMixinABC, _convert_request, _format_url_section
 
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
 
@@ -54,7 +59,9 @@ def build_get_log_analytics_metrics_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
+    )  # type: Literal["2022-11-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -113,7 +120,9 @@ def build_get_log_analytics_rankings_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
+    )  # type: Literal["2022-11-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -155,7 +164,9 @@ def build_get_log_analytics_locations_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
+    )  # type: Literal["2022-11-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -188,7 +199,9 @@ def build_get_log_analytics_resources_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
+    )  # type: Literal["2022-11-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -232,7 +245,9 @@ def build_get_waf_log_analytics_metrics_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
+    )  # type: Literal["2022-11-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -286,7 +301,9 @@ def build_get_waf_log_analytics_rankings_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01"))  # type: str
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-11-01-preview")
+    )  # type: Literal["2022-11-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -398,7 +415,9 @@ class LogAnalyticsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-11-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.MetricsResponse]
 
         request = build_get_log_analytics_metrics_request(
@@ -490,7 +509,9 @@ class LogAnalyticsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-11-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.RankingsResponse]
 
         request = build_get_log_analytics_rankings_request(
@@ -558,7 +579,9 @@ class LogAnalyticsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-11-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ContinentsResponse]
 
         request = build_get_log_analytics_locations_request(
@@ -620,7 +643,9 @@ class LogAnalyticsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-11-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.ResourcesResponse]
 
         request = build_get_log_analytics_resources_request(
@@ -706,7 +731,9 @@ class LogAnalyticsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-11-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.WafMetricsResponse]
 
         request = build_get_waf_log_analytics_metrics_request(
@@ -799,7 +826,9 @@ class LogAnalyticsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-11-01-preview"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.WafRankingsResponse]
 
         request = build_get_waf_log_analytics_rankings_request(
