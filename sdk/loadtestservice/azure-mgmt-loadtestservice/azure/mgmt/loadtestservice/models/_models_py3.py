@@ -8,19 +8,13 @@
 # --------------------------------------------------------------------------
 
 import datetime
-import sys
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from .. import models as _models
-if sys.version_info >= (3, 9):
-    from collections.abc import MutableMapping
-else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
-JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
 class Resource(_serialization.Model):
@@ -514,7 +508,7 @@ class LoadTestResourcePatchRequestBody(_serialization.Model):
     """LoadTest resource patch request body.
 
     :ivar tags: Resource tags.
-    :vartype tags: JSON
+    :vartype tags: dict[str, str]
     :ivar identity: The type of identity used for the resource.
     :vartype identity: ~azure.mgmt.loadtestservice.models.ManagedServiceIdentity
     :ivar description: Description of the resource.
@@ -528,7 +522,7 @@ class LoadTestResourcePatchRequestBody(_serialization.Model):
     }
 
     _attribute_map = {
-        "tags": {"key": "tags", "type": "object"},
+        "tags": {"key": "tags", "type": "{str}"},
         "identity": {"key": "identity", "type": "ManagedServiceIdentity"},
         "description": {"key": "properties.description", "type": "str"},
         "encryption": {"key": "properties.encryption", "type": "EncryptionProperties"},
@@ -537,7 +531,7 @@ class LoadTestResourcePatchRequestBody(_serialization.Model):
     def __init__(
         self,
         *,
-        tags: Optional[JSON] = None,
+        tags: Optional[Dict[str, str]] = None,
         identity: Optional["_models.ManagedServiceIdentity"] = None,
         description: Optional[str] = None,
         encryption: Optional["_models.EncryptionProperties"] = None,
@@ -545,7 +539,7 @@ class LoadTestResourcePatchRequestBody(_serialization.Model):
     ):
         """
         :keyword tags: Resource tags.
-        :paramtype tags: JSON
+        :paramtype tags: dict[str, str]
         :keyword identity: The type of identity used for the resource.
         :paramtype identity: ~azure.mgmt.loadtestservice.models.ManagedServiceIdentity
         :keyword description: Description of the resource.
