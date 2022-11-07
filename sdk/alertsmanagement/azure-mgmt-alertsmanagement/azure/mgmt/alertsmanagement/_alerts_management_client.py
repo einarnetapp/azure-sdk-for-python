@@ -15,7 +15,13 @@ from azure.mgmt.core import ARMPipelineClient
 from . import models
 from ._configuration import AlertsManagementClientConfiguration
 from ._serialization import Deserializer, Serializer
-from .operations import AlertProcessingRulesOperations, AlertsOperations, Operations, SmartGroupsOperations
+from .operations import (
+    AlertProcessingRulesOperations,
+    AlertsOperations,
+    Operations,
+    PrometheusRuleGroupsOperations,
+    SmartGroupsOperations,
+)
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -28,6 +34,9 @@ class AlertsManagementClient:  # pylint: disable=client-accepts-api-version-keyw
     :ivar alert_processing_rules: AlertProcessingRulesOperations operations
     :vartype alert_processing_rules:
      azure.mgmt.alertsmanagement.operations.AlertProcessingRulesOperations
+    :ivar prometheus_rule_groups: PrometheusRuleGroupsOperations operations
+    :vartype prometheus_rule_groups:
+     azure.mgmt.alertsmanagement.operations.PrometheusRuleGroupsOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.alertsmanagement.operations.Operations
     :ivar alerts: AlertsOperations operations
@@ -59,6 +68,9 @@ class AlertsManagementClient:  # pylint: disable=client-accepts-api-version-keyw
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
         self.alert_processing_rules = AlertProcessingRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.prometheus_rule_groups = PrometheusRuleGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)

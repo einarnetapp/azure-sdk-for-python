@@ -44,13 +44,15 @@ def build_list_by_subscription_request(subscription_id: str, **kwargs: Any) -> H
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-07-22-preview")
+    )  # type: Literal["2021-07-22-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
-        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules"
-    )
+        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/prometheusRuleGroups"
+    )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
@@ -70,17 +72,21 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-07-22-preview")
+    )  # type: Literal["2021-07-22-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -94,24 +100,28 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_get_by_name_request(
-    resource_group_name: str, alert_processing_rule_name: str, subscription_id: str, **kwargs: Any
+def build_get_request(
+    resource_group_name: str, rule_group_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-07-22-preview")
+    )  # type: Literal["2021-07-22-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "alertProcessingRuleName": _SERIALIZER.url("alert_processing_rule_name", alert_processing_rule_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -126,24 +136,28 @@ def build_get_by_name_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, alert_processing_rule_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, rule_group_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-07-22-preview")
+    )  # type: Literal["2021-07-22-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "alertProcessingRuleName": _SERIALIZER.url("alert_processing_rule_name", alert_processing_rule_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -159,56 +173,29 @@ def build_create_or_update_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_delete_request(
-    resource_group_name: str, alert_processing_rule_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "alertProcessingRuleName": _SERIALIZER.url("alert_processing_rule_name", alert_processing_rule_name, "str"),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_update_request(
-    resource_group_name: str, alert_processing_rule_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, rule_group_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-07-22-preview")
+    )  # type: Literal["2021-07-22-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "alertProcessingRuleName": _SERIALIZER.url("alert_processing_rule_name", alert_processing_rule_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -224,14 +211,49 @@ def build_update_request(
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class AlertProcessingRulesOperations:
+def build_delete_request(
+    resource_group_name: str, rule_group_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2021-07-22-preview")
+    )  # type: Literal["2021-07-22-preview"]
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "ruleGroupName": _SERIALIZER.url("rule_group_name", rule_group_name, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+class PrometheusRuleGroupsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.alertsmanagement.AlertsManagementClient`'s
-        :attr:`alert_processing_rules` attribute.
+        :attr:`prometheus_rule_groups` attribute.
     """
 
     models = _models
@@ -244,19 +266,23 @@ class AlertProcessingRulesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.AlertProcessingRule"]:
-        """List all alert processing rules in a subscription.
+    def list_by_subscription(self, **kwargs: Any) -> Iterable["_models.PrometheusRuleGroupResource"]:
+        """Retrieve Prometheus rule group definitions in a subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.alertsmanagement.models.AlertProcessingRule]
+        :return: An iterator like instance of either PrometheusRuleGroupResource or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertProcessingRulesList]
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-07-22-preview")
+        )  # type: Literal["2021-07-22-preview"]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrometheusRuleGroupResourceCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -287,11 +313,11 @@ class AlertProcessingRulesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("AlertProcessingRulesList", pipeline_response)
+            deserialized = self._deserialize("PrometheusRuleGroupResourceCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, iter(list_of_elem)
+            return None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
@@ -303,33 +329,38 @@ class AlertProcessingRulesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules"}  # type: ignore
+    list_by_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/prometheusRuleGroups"}  # type: ignore
 
     @distributed_trace
     def list_by_resource_group(
         self, resource_group_name: str, **kwargs: Any
-    ) -> Iterable["_models.AlertProcessingRule"]:
-        """List all alert processing rules in a resource group.
+    ) -> Iterable["_models.PrometheusRuleGroupResource"]:
+        """Retrieve Prometheus rule group definitions in a resource group.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.alertsmanagement.models.AlertProcessingRule]
+        :return: An iterator like instance of either PrometheusRuleGroupResource or the result of
+         cls(response)
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertProcessingRulesList]
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-07-22-preview")
+        )  # type: Literal["2021-07-22-preview"]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrometheusRuleGroupResourceCollection]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -361,11 +392,11 @@ class AlertProcessingRulesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("AlertProcessingRulesList", pipeline_response)
+            deserialized = self._deserialize("PrometheusRuleGroupResourceCollection", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
-            return deserialized.next_link or None, iter(list_of_elem)
+            return None, iter(list_of_elem)
 
         def get_next(next_link=None):
             request = prepare_request(next_link)
@@ -377,29 +408,27 @@ class AlertProcessingRulesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules"}  # type: ignore
+    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups"}  # type: ignore
 
     @distributed_trace
-    def get_by_name(
-        self, resource_group_name: str, alert_processing_rule_name: str, **kwargs: Any
-    ) -> _models.AlertProcessingRule:
-        """Get an alert processing rule by name.
+    def get(self, resource_group_name: str, rule_group_name: str, **kwargs: Any) -> _models.PrometheusRuleGroupResource:
+        """Retrieve a Prometheus rule group definition.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param alert_processing_rule_name: The name of the alert processing rule that needs to be
-         fetched. Required.
-        :type alert_processing_rule_name: str
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :return: PrometheusRuleGroupResource or the result of cls(response)
+        :rtype: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -413,15 +442,17 @@ class AlertProcessingRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertProcessingRule]
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-07-22-preview")
+        )  # type: Literal["2021-07-22-preview"]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrometheusRuleGroupResource]
 
-        request = build_get_by_name_request(
+        request = build_get_request(
             resource_group_name=resource_group_name,
-            alert_processing_rule_name=alert_processing_rule_name,
+            rule_group_name=rule_group_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
-            template_url=self.get_by_name.metadata["url"],
+            template_url=self.get.metadata["url"],
             headers=_headers,
             params=_params,
         )
@@ -436,46 +467,43 @@ class AlertProcessingRulesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        response_headers = {}
-        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
-
-        deserialized = self._deserialize("AlertProcessingRule", pipeline_response)
+        deserialized = self._deserialize("PrometheusRuleGroupResource", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get_by_name.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}"}  # type: ignore
 
     @overload
     def create_or_update(
         self,
         resource_group_name: str,
-        alert_processing_rule_name: str,
-        alert_processing_rule: _models.AlertProcessingRule,
+        rule_group_name: str,
+        parameters: _models.PrometheusRuleGroupResource,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.AlertProcessingRule:
-        """Create or update an alert processing rule.
+    ) -> _models.PrometheusRuleGroupResource:
+        """Create or update a Prometheus rule group definition.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param alert_processing_rule_name: The name of the alert processing rule that needs to be
-         created/updated. Required.
-        :type alert_processing_rule_name: str
-        :param alert_processing_rule: Alert processing rule to be created/updated. Required.
-        :type alert_processing_rule: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
+        :param parameters: The parameters of the rule group to create or update. Required.
+        :type parameters: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :return: PrometheusRuleGroupResource or the result of cls(response)
+        :rtype: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -483,27 +511,27 @@ class AlertProcessingRulesOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        alert_processing_rule_name: str,
-        alert_processing_rule: IO,
+        rule_group_name: str,
+        parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.AlertProcessingRule:
-        """Create or update an alert processing rule.
+    ) -> _models.PrometheusRuleGroupResource:
+        """Create or update a Prometheus rule group definition.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param alert_processing_rule_name: The name of the alert processing rule that needs to be
-         created/updated. Required.
-        :type alert_processing_rule_name: str
-        :param alert_processing_rule: Alert processing rule to be created/updated. Required.
-        :type alert_processing_rule: IO
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
+        :param parameters: The parameters of the rule group to create or update. Required.
+        :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :return: PrometheusRuleGroupResource or the result of cls(response)
+        :rtype: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -511,26 +539,26 @@ class AlertProcessingRulesOperations:
     def create_or_update(
         self,
         resource_group_name: str,
-        alert_processing_rule_name: str,
-        alert_processing_rule: Union[_models.AlertProcessingRule, IO],
+        rule_group_name: str,
+        parameters: Union[_models.PrometheusRuleGroupResource, IO],
         **kwargs: Any
-    ) -> _models.AlertProcessingRule:
-        """Create or update an alert processing rule.
+    ) -> _models.PrometheusRuleGroupResource:
+        """Create or update a Prometheus rule group definition.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param alert_processing_rule_name: The name of the alert processing rule that needs to be
-         created/updated. Required.
-        :type alert_processing_rule_name: str
-        :param alert_processing_rule: Alert processing rule to be created/updated. Is either a model
-         type or a IO type. Required.
-        :type alert_processing_rule: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule or IO
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
+        :param parameters: The parameters of the rule group to create or update. Is either a model type
+         or a IO type. Required.
+        :type parameters: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :return: PrometheusRuleGroupResource or the result of cls(response)
+        :rtype: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -544,21 +572,23 @@ class AlertProcessingRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-07-22-preview")
+        )  # type: Literal["2021-07-22-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertProcessingRule]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrometheusRuleGroupResource]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(alert_processing_rule, (IO, bytes)):
-            _content = alert_processing_rule
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
         else:
-            _json = self._serialize.body(alert_processing_rule, "AlertProcessingRule")
+            _json = self._serialize.body(parameters, "PrometheusRuleGroupResource")
 
         request = build_create_or_update_request(
             resource_group_name=resource_group_name,
-            alert_processing_rule_name=alert_processing_rule_name,
+            rule_group_name=rule_group_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -579,116 +609,47 @@ class AlertProcessingRulesOperations:
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        response_headers = {}
         if response.status_code == 200:
-            response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
-
-            deserialized = self._deserialize("AlertProcessingRule", pipeline_response)
+            deserialized = self._deserialize("PrometheusRuleGroupResource", pipeline_response)
 
         if response.status_code == 201:
-            response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
-
-            deserialized = self._deserialize("AlertProcessingRule", pipeline_response)
+            deserialized = self._deserialize("PrometheusRuleGroupResource", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}"}  # type: ignore
-
-    @distributed_trace
-    def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, alert_processing_rule_name: str, **kwargs: Any
-    ) -> None:
-        """Delete an alert processing rule.
-
-        :param resource_group_name: Resource group name where the resource is created. Required.
-        :type resource_group_name: str
-        :param alert_processing_rule_name: The name of the alert processing rule that needs to be
-         deleted. Required.
-        :type alert_processing_rule_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-
-        request = build_delete_request(
-            resource_group_name=resource_group_name,
-            alert_processing_rule_name=alert_processing_rule_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.delete.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 200:
-            response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
-
-        if response.status_code == 204:
-            response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
-
-        if cls:
-            return cls(pipeline_response, None, response_headers)
-
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}"}  # type: ignore
+    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}"}  # type: ignore
 
     @overload
     def update(
         self,
         resource_group_name: str,
-        alert_processing_rule_name: str,
-        alert_processing_rule_patch: _models.PatchObject,
+        rule_group_name: str,
+        parameters: _models.PrometheusRuleGroupResourcePatch,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.AlertProcessingRule:
-        """Enable, disable, or update tags for an alert processing rule.
+    ) -> _models.PrometheusRuleGroupResource:
+        """Update an Prometheus rule group definition.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param alert_processing_rule_name: The name that needs to be updated. Required.
-        :type alert_processing_rule_name: str
-        :param alert_processing_rule_patch: Parameters supplied to the operation. Required.
-        :type alert_processing_rule_patch: ~azure.mgmt.alertsmanagement.models.PatchObject
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
+        :param parameters: The parameters of the rule group to update. Required.
+        :type parameters: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResourcePatch
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :return: PrometheusRuleGroupResource or the result of cls(response)
+        :rtype: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -696,26 +657,27 @@ class AlertProcessingRulesOperations:
     def update(
         self,
         resource_group_name: str,
-        alert_processing_rule_name: str,
-        alert_processing_rule_patch: IO,
+        rule_group_name: str,
+        parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.AlertProcessingRule:
-        """Enable, disable, or update tags for an alert processing rule.
+    ) -> _models.PrometheusRuleGroupResource:
+        """Update an Prometheus rule group definition.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param alert_processing_rule_name: The name that needs to be updated. Required.
-        :type alert_processing_rule_name: str
-        :param alert_processing_rule_patch: Parameters supplied to the operation. Required.
-        :type alert_processing_rule_patch: IO
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
+        :param parameters: The parameters of the rule group to update. Required.
+        :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :return: PrometheusRuleGroupResource or the result of cls(response)
+        :rtype: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -723,25 +685,26 @@ class AlertProcessingRulesOperations:
     def update(
         self,
         resource_group_name: str,
-        alert_processing_rule_name: str,
-        alert_processing_rule_patch: Union[_models.PatchObject, IO],
+        rule_group_name: str,
+        parameters: Union[_models.PrometheusRuleGroupResourcePatch, IO],
         **kwargs: Any
-    ) -> _models.AlertProcessingRule:
-        """Enable, disable, or update tags for an alert processing rule.
+    ) -> _models.PrometheusRuleGroupResource:
+        """Update an Prometheus rule group definition.
 
-        :param resource_group_name: Resource group name where the resource is created. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param alert_processing_rule_name: The name that needs to be updated. Required.
-        :type alert_processing_rule_name: str
-        :param alert_processing_rule_patch: Parameters supplied to the operation. Is either a model
-         type or a IO type. Required.
-        :type alert_processing_rule_patch: ~azure.mgmt.alertsmanagement.models.PatchObject or IO
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
+        :param parameters: The parameters of the rule group to update. Is either a model type or a IO
+         type. Required.
+        :type parameters: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResourcePatch or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: AlertProcessingRule or the result of cls(response)
-        :rtype: ~azure.mgmt.alertsmanagement.models.AlertProcessingRule
+        :return: PrometheusRuleGroupResource or the result of cls(response)
+        :rtype: ~azure.mgmt.alertsmanagement.models.PrometheusRuleGroupResource
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -755,21 +718,23 @@ class AlertProcessingRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", "2021-08-08"))  # type: Literal["2021-08-08"]
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-07-22-preview")
+        )  # type: Literal["2021-07-22-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.AlertProcessingRule]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrometheusRuleGroupResource]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(alert_processing_rule_patch, (IO, bytes)):
-            _content = alert_processing_rule_patch
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
         else:
-            _json = self._serialize.body(alert_processing_rule_patch, "PatchObject")
+            _json = self._serialize.body(parameters, "PrometheusRuleGroupResourcePatch")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
-            alert_processing_rule_name=alert_processing_rule_name,
+            rule_group_name=rule_group_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -790,17 +755,74 @@ class AlertProcessingRulesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        response_headers = {}
-        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
-
-        deserialized = self._deserialize("AlertProcessingRule", pipeline_response)
+        deserialized = self._deserialize("PrometheusRuleGroupResource", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)
+            return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{alertProcessingRuleName}"}  # type: ignore
+    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}"}  # type: ignore
+
+    @distributed_trace
+    def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, rule_group_name: str, **kwargs: Any
+    ) -> None:
+        """Delete a Prometheus rule group definition.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param rule_group_name: The name of the rule group. Required.
+        :type rule_group_name: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2021-07-22-preview")
+        )  # type: Literal["2021-07-22-preview"]
+        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+
+        request = build_delete_request(
+            resource_group_name=resource_group_name,
+            rule_group_name=rule_group_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.delete.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseAutoGenerated, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})
+
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/prometheusRuleGroups/{ruleGroupName}"}  # type: ignore
