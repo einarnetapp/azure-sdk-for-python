@@ -32,6 +32,9 @@ from ._security_ml_analytics_settings_operations import SecurityMLAnalyticsSetti
 from ._product_settings_operations import ProductSettingsOperations
 from ._source_control_operations import SourceControlOperations
 from ._source_controls_operations import SourceControlsOperations
+from ._get_recommendations_operations import GetRecommendationsOperations
+from ._get_operations import GetOperations
+from ._update_operations import UpdateOperations
 from ._threat_intelligence_indicator_operations import ThreatIntelligenceIndicatorOperations
 from ._threat_intelligence_indicators_operations import ThreatIntelligenceIndicatorsOperations
 from ._threat_intelligence_indicator_metrics_operations import ThreatIntelligenceIndicatorMetricsOperations
@@ -72,6 +75,9 @@ __all__ = [
     "ProductSettingsOperations",
     "SourceControlOperations",
     "SourceControlsOperations",
+    "GetRecommendationsOperations",
+    "GetOperations",
+    "UpdateOperations",
     "ThreatIntelligenceIndicatorOperations",
     "ThreatIntelligenceIndicatorsOperations",
     "ThreatIntelligenceIndicatorMetricsOperations",
