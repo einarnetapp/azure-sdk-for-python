@@ -17,6 +17,7 @@ from ._configuration import DataFactoryManagementClientConfiguration
 from ._serialization import Deserializer, Serializer
 from .operations import (
     ActivityRunsOperations,
+    CredentialOperationsOperations,
     DataFlowDebugSessionOperations,
     DataFlowsOperations,
     DatasetsOperations,
@@ -88,6 +89,9 @@ class DataFactoryManagementClient:  # pylint: disable=client-accepts-api-version
     :ivar managed_private_endpoints: ManagedPrivateEndpointsOperations operations
     :vartype managed_private_endpoints:
      azure.mgmt.datafactory.operations.ManagedPrivateEndpointsOperations
+    :ivar credential_operations: CredentialOperationsOperations operations
+    :vartype credential_operations:
+     azure.mgmt.datafactory.operations.CredentialOperationsOperations
     :ivar private_end_point_connections: PrivateEndPointConnectionsOperations operations
     :vartype private_end_point_connections:
      azure.mgmt.datafactory.operations.PrivateEndPointConnectionsOperations
@@ -157,6 +161,9 @@ class DataFactoryManagementClient:  # pylint: disable=client-accepts-api-version
             self._client, self._config, self._serialize, self._deserialize
         )
         self.managed_private_endpoints = ManagedPrivateEndpointsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.credential_operations = CredentialOperationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.private_end_point_connections = PrivateEndPointConnectionsOperations(
