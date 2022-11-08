@@ -13,13 +13,18 @@ from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
-if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
-    from .. import models as _models
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    from .. import models as _models
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
@@ -1565,7 +1570,7 @@ class Configuration(_serialization.Model):
         self,
         *,
         secrets: Optional[List["_models.Secret"]] = None,
-        active_revisions_mode: Optional[Union[str, "_models.ActiveRevisionsMode"]] = None,
+        active_revisions_mode: Union[str, "_models.ActiveRevisionsMode"] = "Single",
         ingress: Optional["_models.Ingress"] = None,
         registries: Optional[List["_models.RegistryCredentials"]] = None,
         dapr: Optional["_models.Dapr"] = None,
@@ -1996,7 +2001,7 @@ class ContainerApp(TrackedResource):  # pylint: disable=too-many-instance-attrib
         "custom_domain_verification_id": {"key": "properties.customDomainVerificationId", "type": "str"},
         "configuration": {"key": "properties.configuration", "type": "Configuration"},
         "template": {"key": "properties.template", "type": "Template"},
-        "outbound_ip_addresses": {"key": "properties.outboundIPAddresses", "type": "[str]"},
+        "outbound_ip_addresses": {"key": "properties.outboundIpAddresses", "type": "[str]"},
         "event_stream_endpoint": {"key": "properties.eventStreamEndpoint", "type": "str"},
     }
 
@@ -2551,7 +2556,7 @@ class CustomDomainConfiguration(_serialization.Model):
     :ivar certificate_value: PFX or PEM blob.
     :vartype certificate_value: bytes
     :ivar certificate_password: Certificate password.
-    :vartype certificate_password: bytes
+    :vartype certificate_password: str
     :ivar expiration_date: Certificate expiration date.
     :vartype expiration_date: ~datetime.datetime
     :ivar thumbprint: Certificate thumbprint.
@@ -2571,7 +2576,7 @@ class CustomDomainConfiguration(_serialization.Model):
         "custom_domain_verification_id": {"key": "customDomainVerificationId", "type": "str"},
         "dns_suffix": {"key": "dnsSuffix", "type": "str"},
         "certificate_value": {"key": "certificateValue", "type": "bytearray"},
-        "certificate_password": {"key": "certificatePassword", "type": "bytearray"},
+        "certificate_password": {"key": "certificatePassword", "type": "str"},
         "expiration_date": {"key": "expirationDate", "type": "iso-8601"},
         "thumbprint": {"key": "thumbprint", "type": "str"},
         "subject_name": {"key": "subjectName", "type": "str"},
@@ -2582,7 +2587,7 @@ class CustomDomainConfiguration(_serialization.Model):
         *,
         dns_suffix: Optional[str] = None,
         certificate_value: Optional[bytes] = None,
-        certificate_password: Optional[bytes] = None,
+        certificate_password: Optional[str] = None,
         **kwargs
     ):
         """
@@ -2591,7 +2596,7 @@ class CustomDomainConfiguration(_serialization.Model):
         :keyword certificate_value: PFX or PEM blob.
         :paramtype certificate_value: bytes
         :keyword certificate_password: Certificate password.
-        :paramtype certificate_password: bytes
+        :paramtype certificate_password: str
         """
         super().__init__(**kwargs)
         self.custom_domain_verification_id = None
@@ -2918,9 +2923,9 @@ class Dapr(_serialization.Model):
     def __init__(
         self,
         *,
-        enabled: Optional[bool] = None,
+        enabled: bool = False,
         app_id: Optional[str] = None,
-        app_protocol: Optional[Union[str, "_models.AppProtocol"]] = None,
+        app_protocol: Union[str, "_models.AppProtocol"] = "http",
         app_port: Optional[int] = None,
         http_read_buffer_size: Optional[int] = None,
         http_max_request_size: Optional[int] = None,
@@ -3022,7 +3027,7 @@ class DaprComponent(ProxyResource):  # pylint: disable=too-many-instance-attribu
         *,
         component_type: Optional[str] = None,
         version: Optional[str] = None,
-        ignore_errors: Optional[bool] = None,
+        ignore_errors: bool = False,
         init_timeout: Optional[str] = None,
         secrets: Optional[List["_models.Secret"]] = None,
         secret_store_component: Optional[str] = None,
@@ -3162,7 +3167,7 @@ class DaprSecretsCollection(_serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar value: Collection of secrets used by a Dapr component. Required.
-    :vartype value: list[~azure.mgmt.appcontainers.models.Secret]
+    :vartype value: list[~azure.mgmt.appcontainers.models.DaprSecret]
     """
 
     _validation = {
@@ -3170,13 +3175,13 @@ class DaprSecretsCollection(_serialization.Model):
     }
 
     _attribute_map = {
-        "value": {"key": "value", "type": "[Secret]"},
+        "value": {"key": "value", "type": "[DaprSecret]"},
     }
 
-    def __init__(self, *, value: List["_models.Secret"], **kwargs):
+    def __init__(self, *, value: List["_models.DaprSecret"], **kwargs):
         """
         :keyword value: Collection of secrets used by a Dapr component. Required.
-        :paramtype value: list[~azure.mgmt.appcontainers.models.Secret]
+        :paramtype value: list[~azure.mgmt.appcontainers.models.DaprSecret]
         """
         super().__init__(**kwargs)
         self.value = value
@@ -4575,10 +4580,10 @@ class Ingress(_serialization.Model):
         external: bool = False,
         target_port: Optional[int] = None,
         exposed_port: Optional[int] = None,
-        transport: Optional[Union[str, "_models.IngressTransportMethod"]] = None,
+        transport: Union[str, "_models.IngressTransportMethod"] = "auto",
         traffic: Optional[List["_models.TrafficWeight"]] = None,
         custom_domains: Optional[List["_models.CustomDomain"]] = None,
-        allow_insecure: Optional[bool] = None,
+        allow_insecure: bool = False,
         ip_security_restrictions: Optional[List["_models.IpSecurityRestrictionRule"]] = None,
         **kwargs
     ):
@@ -5327,7 +5332,13 @@ class OpenIdConnectClientCredential(_serialization.Model):
         "client_secret_setting_name": {"key": "clientSecretSettingName", "type": "str"},
     }
 
-    def __init__(self, *, method: Optional[str] = None, client_secret_setting_name: Optional[str] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        method: Optional[Literal["ClientSecretPost"]] = None,
+        client_secret_setting_name: Optional[str] = None,
+        **kwargs
+    ):
         """
         :keyword method: The method that should be used to authenticate the user. Default value is
          "ClientSecretPost".
@@ -5975,7 +5986,7 @@ class Scale(_serialization.Model):
         self,
         *,
         min_replicas: Optional[int] = None,
-        max_replicas: Optional[int] = None,
+        max_replicas: int = 10,
         rules: Optional[List["_models.ScaleRule"]] = None,
         **kwargs
     ):
