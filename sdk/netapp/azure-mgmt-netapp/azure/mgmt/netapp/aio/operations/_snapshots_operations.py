@@ -44,6 +44,10 @@ if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
@@ -92,7 +96,9 @@ class SnapshotsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.SnapshotsList]
 
         error_map = {
@@ -203,7 +209,9 @@ class SnapshotsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.Snapshot]
 
         request = build_get_request(
@@ -261,7 +269,9 @@ class SnapshotsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.Snapshot]]
 
@@ -451,7 +461,9 @@ class SnapshotsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.Snapshot]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
@@ -520,7 +532,9 @@ class SnapshotsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.Snapshot]]
 
@@ -607,7 +621,9 @@ class SnapshotsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))  # type: str
         cls = kwargs.pop("cls", None)  # type: ClsType[_models.Snapshot]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
@@ -675,7 +691,9 @@ class SnapshotsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
         request = build_delete_request(
@@ -747,7 +765,9 @@ class SnapshotsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
@@ -811,7 +831,9 @@ class SnapshotsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
 
@@ -992,7 +1014,9 @@ class SnapshotsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))  # type: str
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )  # type: Literal["2022-05-01"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
         cls = kwargs.pop("cls", None)  # type: ClsType[None]
         polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
