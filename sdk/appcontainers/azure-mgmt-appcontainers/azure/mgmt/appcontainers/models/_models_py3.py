@@ -13,13 +13,18 @@ from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
-if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
-    from .. import models as _models
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    from .. import models as _models
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
@@ -2551,7 +2556,7 @@ class CustomDomainConfiguration(_serialization.Model):
     :ivar certificate_value: PFX or PEM blob.
     :vartype certificate_value: bytes
     :ivar certificate_password: Certificate password.
-    :vartype certificate_password: bytes
+    :vartype certificate_password: str
     :ivar expiration_date: Certificate expiration date.
     :vartype expiration_date: ~datetime.datetime
     :ivar thumbprint: Certificate thumbprint.
@@ -2571,7 +2576,7 @@ class CustomDomainConfiguration(_serialization.Model):
         "custom_domain_verification_id": {"key": "customDomainVerificationId", "type": "str"},
         "dns_suffix": {"key": "dnsSuffix", "type": "str"},
         "certificate_value": {"key": "certificateValue", "type": "bytearray"},
-        "certificate_password": {"key": "certificatePassword", "type": "bytearray"},
+        "certificate_password": {"key": "certificatePassword", "type": "str"},
         "expiration_date": {"key": "expirationDate", "type": "iso-8601"},
         "thumbprint": {"key": "thumbprint", "type": "str"},
         "subject_name": {"key": "subjectName", "type": "str"},
@@ -2582,7 +2587,7 @@ class CustomDomainConfiguration(_serialization.Model):
         *,
         dns_suffix: Optional[str] = None,
         certificate_value: Optional[bytes] = None,
-        certificate_password: Optional[bytes] = None,
+        certificate_password: Optional[str] = None,
         **kwargs
     ):
         """
@@ -2591,7 +2596,7 @@ class CustomDomainConfiguration(_serialization.Model):
         :keyword certificate_value: PFX or PEM blob.
         :paramtype certificate_value: bytes
         :keyword certificate_password: Certificate password.
-        :paramtype certificate_password: bytes
+        :paramtype certificate_password: str
         """
         super().__init__(**kwargs)
         self.custom_domain_verification_id = None
@@ -5327,7 +5332,13 @@ class OpenIdConnectClientCredential(_serialization.Model):
         "client_secret_setting_name": {"key": "clientSecretSettingName", "type": "str"},
     }
 
-    def __init__(self, *, method: Optional[str] = None, client_secret_setting_name: Optional[str] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        method: Optional[Literal["ClientSecretPost"]] = None,
+        client_secret_setting_name: Optional[str] = None,
+        **kwargs
+    ):
         """
         :keyword method: The method that should be used to authenticate the user. Default value is
          "ClientSecretPost".
