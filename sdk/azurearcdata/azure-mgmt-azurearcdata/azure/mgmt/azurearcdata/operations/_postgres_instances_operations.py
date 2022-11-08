@@ -54,7 +54,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
 
     # Construct URL
     _url = kwargs.pop(
-        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerInstances"
+        "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/postgresInstances"
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -83,7 +83,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -102,7 +102,7 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
 
 
 def build_get_request(
-    resource_group_name: str, sql_server_instance_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, postgres_instance_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -115,12 +115,12 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, "str"),
+        "postgresInstanceName": _SERIALIZER.url("postgres_instance_name", postgres_instance_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -135,7 +135,7 @@ def build_get_request(
 
 
 def build_create_request(
-    resource_group_name: str, sql_server_instance_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, postgres_instance_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -149,12 +149,12 @@ def build_create_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, "str"),
+        "postgresInstanceName": _SERIALIZER.url("postgres_instance_name", postgres_instance_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -171,7 +171,7 @@ def build_create_request(
 
 
 def build_delete_request(
-    resource_group_name: str, sql_server_instance_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, postgres_instance_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -184,12 +184,12 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, "str"),
+        "postgresInstanceName": _SERIALIZER.url("postgres_instance_name", postgres_instance_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -204,7 +204,7 @@ def build_delete_request(
 
 
 def build_update_request(
-    resource_group_name: str, sql_server_instance_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, postgres_instance_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -218,12 +218,12 @@ def build_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "sqlServerInstanceName": _SERIALIZER.url("sql_server_instance_name", sql_server_instance_name, "str"),
+        "postgresInstanceName": _SERIALIZER.url("postgres_instance_name", postgres_instance_name, "str"),
     }
 
     _url = _format_url_section(_url, **path_format_arguments)
@@ -239,14 +239,14 @@ def build_update_request(
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class SqlServerInstancesOperations:
+class PostgresInstancesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.azurearcdata.AzureArcDataManagementClient`'s
-        :attr:`sql_server_instances` attribute.
+        :attr:`postgres_instances` attribute.
     """
 
     models = _models
@@ -259,14 +259,14 @@ class SqlServerInstancesOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list(self, **kwargs: Any) -> Iterable["_models.SqlServerInstance"]:
-        """List sqlServerInstance resources in the subscription.
+    def list(self, **kwargs: Any) -> Iterable["_models.PostgresInstance"]:
+        """List postgres Instance resources in the subscription.
 
-        List sqlServerInstance resources in the subscription.
+        List postgres Instance resources in the subscription.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SqlServerInstance or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.azurearcdata.models.SqlServerInstance]
+        :return: An iterator like instance of either PostgresInstance or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.azurearcdata.models.PostgresInstance]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -275,7 +275,7 @@ class SqlServerInstancesOperations:
         api_version = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-06-15-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SqlServerInstanceListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PostgresInstanceListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -317,7 +317,7 @@ class SqlServerInstancesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("SqlServerInstanceListResult", pipeline_response)
+            deserialized = self._deserialize("PostgresInstanceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -340,19 +340,19 @@ class SqlServerInstancesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlServerInstances"}  # type: ignore
+    list.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/postgresInstances"}  # type: ignore
 
     @distributed_trace
-    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> Iterable["_models.SqlServerInstance"]:
-        """List sqlServerInstance resources in the resource group.
+    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> Iterable["_models.PostgresInstance"]:
+        """List postgres Instance resources in the resource group.
 
-        Gets all sqlServerInstances in a resource group.
+        Get a postgres Instances list by Resource group name.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either SqlServerInstance or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.azurearcdata.models.SqlServerInstance]
+        :return: An iterator like instance of either PostgresInstance or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.azurearcdata.models.PostgresInstance]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
@@ -361,7 +361,7 @@ class SqlServerInstancesOperations:
         api_version = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-06-15-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SqlServerInstanceListResult]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PostgresInstanceListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -404,7 +404,7 @@ class SqlServerInstancesOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("SqlServerInstanceListResult", pipeline_response)
+            deserialized = self._deserialize("PostgresInstanceListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -427,19 +427,19 @@ class SqlServerInstancesOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances"}  # type: ignore
+    list_by_resource_group.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances"}  # type: ignore
 
     @distributed_trace
-    def get(self, resource_group_name: str, sql_server_instance_name: str, **kwargs: Any) -> _models.SqlServerInstance:
-        """Retrieves a SQL Server Instance resource.
+    def get(self, resource_group_name: str, postgres_instance_name: str, **kwargs: Any) -> _models.PostgresInstance:
+        """Retrieves a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlServerInstance or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlServerInstance
+        :return: PostgresInstance or the result of cls(response)
+        :rtype: ~azure.mgmt.azurearcdata.models.PostgresInstance
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -456,11 +456,11 @@ class SqlServerInstancesOperations:
         api_version = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-06-15-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SqlServerInstance]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PostgresInstance]
 
         request = build_get_request(
             resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
+            postgres_instance_name=postgres_instance_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self.get.metadata["url"],
@@ -481,22 +481,22 @@ class SqlServerInstancesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("SqlServerInstance", pipeline_response)
+        deserialized = self._deserialize("PostgresInstance", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}"}  # type: ignore
 
     def _create_initial(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        sql_server_instance: Union[_models.SqlServerInstance, IO],
+        postgres_instance_name: str,
+        resource: Union[_models.PostgresInstance, IO],
         **kwargs: Any
-    ) -> _models.SqlServerInstance:
+    ) -> _models.PostgresInstance:
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -512,19 +512,19 @@ class SqlServerInstancesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-06-15-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SqlServerInstance]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PostgresInstance]
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(sql_server_instance, (IO, bytes)):
-            _content = sql_server_instance
+        if isinstance(resource, (IO, bytes)):
+            _content = resource
         else:
-            _json = self._serialize.body(sql_server_instance, "SqlServerInstance")
+            _json = self._serialize.body(resource, "PostgresInstance")
 
         request = build_create_request(
             resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
+            postgres_instance_name=postgres_instance_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -549,36 +549,36 @@ class SqlServerInstancesOperations:
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if response.status_code == 200:
-            deserialized = self._deserialize("SqlServerInstance", pipeline_response)
+            deserialized = self._deserialize("PostgresInstance", pipeline_response)
 
         if response.status_code == 201:
-            deserialized = self._deserialize("SqlServerInstance", pipeline_response)
+            deserialized = self._deserialize("PostgresInstance", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    _create_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    _create_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}"}  # type: ignore
 
     @overload
     def begin_create(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        sql_server_instance: _models.SqlServerInstance,
+        postgres_instance_name: str,
+        resource: _models.PostgresInstance,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.SqlServerInstance]:
-        """Creates or replaces a SQL Server Instance resource.
+    ) -> LROPoller[_models.PostgresInstance]:
+        """Creates or replaces a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
-        :param sql_server_instance: The SQL Server Instance to be created or updated. Required.
-        :type sql_server_instance: ~azure.mgmt.azurearcdata.models.SqlServerInstance
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
+        :param resource: The postgres instance. Required.
+        :type resource: ~azure.mgmt.azurearcdata.models.PostgresInstance
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -590,9 +590,9 @@ class SqlServerInstancesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either SqlServerInstance or the result of
+        :return: An instance of LROPoller that returns either PostgresInstance or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.SqlServerInstance]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.PostgresInstance]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -600,20 +600,20 @@ class SqlServerInstancesOperations:
     def begin_create(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        sql_server_instance: IO,
+        postgres_instance_name: str,
+        resource: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.SqlServerInstance]:
-        """Creates or replaces a SQL Server Instance resource.
+    ) -> LROPoller[_models.PostgresInstance]:
+        """Creates or replaces a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
-        :param sql_server_instance: The SQL Server Instance to be created or updated. Required.
-        :type sql_server_instance: IO
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
+        :param resource: The postgres instance. Required.
+        :type resource: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -625,9 +625,9 @@ class SqlServerInstancesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either SqlServerInstance or the result of
+        :return: An instance of LROPoller that returns either PostgresInstance or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.SqlServerInstance]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.PostgresInstance]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -635,19 +635,18 @@ class SqlServerInstancesOperations:
     def begin_create(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        sql_server_instance: Union[_models.SqlServerInstance, IO],
+        postgres_instance_name: str,
+        resource: Union[_models.PostgresInstance, IO],
         **kwargs: Any
-    ) -> LROPoller[_models.SqlServerInstance]:
-        """Creates or replaces a SQL Server Instance resource.
+    ) -> LROPoller[_models.PostgresInstance]:
+        """Creates or replaces a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
-        :param sql_server_instance: The SQL Server Instance to be created or updated. Is either a model
-         type or a IO type. Required.
-        :type sql_server_instance: ~azure.mgmt.azurearcdata.models.SqlServerInstance or IO
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
+        :param resource: The postgres instance. Is either a model type or a IO type. Required.
+        :type resource: ~azure.mgmt.azurearcdata.models.PostgresInstance or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
@@ -659,9 +658,9 @@ class SqlServerInstancesOperations:
         :paramtype polling: bool or ~azure.core.polling.PollingMethod
         :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
          Retry-After header is present.
-        :return: An instance of LROPoller that returns either SqlServerInstance or the result of
+        :return: An instance of LROPoller that returns either PostgresInstance or the result of
          cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.SqlServerInstance]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.azurearcdata.models.PostgresInstance]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -671,15 +670,15 @@ class SqlServerInstancesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-06-15-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SqlServerInstance]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PostgresInstance]
         polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
         if cont_token is None:
             raw_result = self._create_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                sql_server_instance_name=sql_server_instance_name,
-                sql_server_instance=sql_server_instance,
+                postgres_instance_name=postgres_instance_name,
+                resource=resource,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -690,7 +689,7 @@ class SqlServerInstancesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("SqlServerInstance", pipeline_response)
+            deserialized = self._deserialize("PostgresInstance", pipeline_response)
             if cls:
                 return cls(pipeline_response, deserialized, {})
             return deserialized
@@ -712,10 +711,10 @@ class SqlServerInstancesOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_create.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    begin_create.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}"}  # type: ignore
 
     def _delete_initial(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, sql_server_instance_name: str, **kwargs: Any
+        self, resource_group_name: str, postgres_instance_name: str, **kwargs: Any
     ) -> None:
         error_map = {
             401: ClientAuthenticationError,
@@ -735,7 +734,7 @@ class SqlServerInstancesOperations:
 
         request = build_delete_request(
             resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
+            postgres_instance_name=postgres_instance_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             template_url=self._delete_initial.metadata["url"],
@@ -759,16 +758,16 @@ class SqlServerInstancesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    _delete_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}"}  # type: ignore
 
     @distributed_trace
-    def begin_delete(self, resource_group_name: str, sql_server_instance_name: str, **kwargs: Any) -> LROPoller[None]:
-        """Deletes a SQL Server Instance resource.
+    def begin_delete(self, resource_group_name: str, postgres_instance_name: str, **kwargs: Any) -> LROPoller[None]:
+        """Deletes a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :keyword str continuation_token: A continuation token to restart a poller from a saved state.
         :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
@@ -794,7 +793,7 @@ class SqlServerInstancesOperations:
         if cont_token is None:
             raw_result = self._delete_initial(  # type: ignore
                 resource_group_name=resource_group_name,
-                sql_server_instance_name=sql_server_instance_name,
+                postgres_instance_name=postgres_instance_name,
                 api_version=api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -822,32 +821,32 @@ class SqlServerInstancesOperations:
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
 
-    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    begin_delete.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}"}  # type: ignore
 
     @overload
     def update(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        parameters: _models.SqlServerInstanceUpdate,
+        postgres_instance_name: str,
+        parameters: _models.PostgresInstanceUpdate,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.SqlServerInstance:
-        """Updates a SQL Server Instance resource.
+    ) -> _models.PostgresInstance:
+        """Updates a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
-        :param parameters: The SQL Server Instance. Required.
-        :type parameters: ~azure.mgmt.azurearcdata.models.SqlServerInstanceUpdate
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
+        :param parameters: The Postgres Instance. Required.
+        :type parameters: ~azure.mgmt.azurearcdata.models.PostgresInstanceUpdate
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlServerInstance or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlServerInstance
+        :return: PostgresInstance or the result of cls(response)
+        :rtype: ~azure.mgmt.azurearcdata.models.PostgresInstance
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -855,26 +854,26 @@ class SqlServerInstancesOperations:
     def update(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
+        postgres_instance_name: str,
         parameters: IO,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.SqlServerInstance:
-        """Updates a SQL Server Instance resource.
+    ) -> _models.PostgresInstance:
+        """Updates a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
-        :param parameters: The SQL Server Instance. Required.
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
+        :param parameters: The Postgres Instance. Required.
         :type parameters: IO
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlServerInstance or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlServerInstance
+        :return: PostgresInstance or the result of cls(response)
+        :rtype: ~azure.mgmt.azurearcdata.models.PostgresInstance
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -882,24 +881,24 @@ class SqlServerInstancesOperations:
     def update(
         self,
         resource_group_name: str,
-        sql_server_instance_name: str,
-        parameters: Union[_models.SqlServerInstanceUpdate, IO],
+        postgres_instance_name: str,
+        parameters: Union[_models.PostgresInstanceUpdate, IO],
         **kwargs: Any
-    ) -> _models.SqlServerInstance:
-        """Updates a SQL Server Instance resource.
+    ) -> _models.PostgresInstance:
+        """Updates a postgres Instance resource.
 
         :param resource_group_name: The name of the Azure resource group. Required.
         :type resource_group_name: str
-        :param sql_server_instance_name: Name of SQL Server Instance. Required.
-        :type sql_server_instance_name: str
-        :param parameters: The SQL Server Instance. Is either a model type or a IO type. Required.
-        :type parameters: ~azure.mgmt.azurearcdata.models.SqlServerInstanceUpdate or IO
+        :param postgres_instance_name: Name of Postgres Instance. Required.
+        :type postgres_instance_name: str
+        :param parameters: The Postgres Instance. Is either a model type or a IO type. Required.
+        :type parameters: ~azure.mgmt.azurearcdata.models.PostgresInstanceUpdate or IO
         :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
          Default value is None.
         :paramtype content_type: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SqlServerInstance or the result of cls(response)
-        :rtype: ~azure.mgmt.azurearcdata.models.SqlServerInstance
+        :return: PostgresInstance or the result of cls(response)
+        :rtype: ~azure.mgmt.azurearcdata.models.PostgresInstance
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -917,7 +916,7 @@ class SqlServerInstancesOperations:
             "api_version", _params.pop("api-version", self._config.api_version)
         )  # type: Literal["2022-06-15-preview"]
         content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.SqlServerInstance]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PostgresInstance]
 
         content_type = content_type or "application/json"
         _json = None
@@ -925,11 +924,11 @@ class SqlServerInstancesOperations:
         if isinstance(parameters, (IO, bytes)):
             _content = parameters
         else:
-            _json = self._serialize.body(parameters, "SqlServerInstanceUpdate")
+            _json = self._serialize.body(parameters, "PostgresInstanceUpdate")
 
         request = build_update_request(
             resource_group_name=resource_group_name,
-            sql_server_instance_name=sql_server_instance_name,
+            postgres_instance_name=postgres_instance_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -953,11 +952,11 @@ class SqlServerInstancesOperations:
             error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("SqlServerInstance", pipeline_response)
+        deserialized = self._deserialize("PostgresInstance", pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
 
-    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}"}  # type: ignore
+    update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}"}  # type: ignore
