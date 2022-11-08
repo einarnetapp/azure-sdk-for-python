@@ -168,6 +168,7 @@ from ._models_py3 import CreateDataFlowDebugSessionResponse
 from ._models_py3 import CreateLinkedIntegrationRuntimeRequest
 from ._models_py3 import CreateRunResponse
 from ._models_py3 import Credential
+from ._models_py3 import CredentialListResponse
 from ._models_py3 import CredentialReference
 from ._models_py3 import CredentialResource
 from ._models_py3 import CustomActivity
@@ -395,6 +396,7 @@ from ._models_py3 import MagentoLinkedService
 from ._models_py3 import MagentoObjectDataset
 from ._models_py3 import MagentoSource
 from ._models_py3 import ManagedIdentityCredential
+from ._models_py3 import ManagedIdentityCredentialResource
 from ._models_py3 import ManagedIntegrationRuntime
 from ._models_py3 import ManagedIntegrationRuntimeError
 from ._models_py3 import ManagedIntegrationRuntimeNode
@@ -1006,6 +1008,7 @@ __all__ = [
     "CreateLinkedIntegrationRuntimeRequest",
     "CreateRunResponse",
     "Credential",
+    "CredentialListResponse",
     "CredentialReference",
     "CredentialResource",
     "CustomActivity",
@@ -1233,6 +1236,7 @@ __all__ = [
     "MagentoObjectDataset",
     "MagentoSource",
     "ManagedIdentityCredential",
+    "ManagedIdentityCredentialResource",
     "ManagedIntegrationRuntime",
     "ManagedIntegrationRuntimeError",
     "ManagedIntegrationRuntimeNode",
