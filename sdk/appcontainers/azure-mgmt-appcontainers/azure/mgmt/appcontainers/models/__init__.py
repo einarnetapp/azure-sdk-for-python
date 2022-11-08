@@ -169,6 +169,7 @@ from ._container_apps_api_client_enums import ConnectedEnvironmentProvisioningSt
 from ._container_apps_api_client_enums import ContainerAppProvisioningState
 from ._container_apps_api_client_enums import CookieExpirationConvention
 from ._container_apps_api_client_enums import CreatedByType
+from ._container_apps_api_client_enums import DaprComponentProvisioningState
 from ._container_apps_api_client_enums import DnsVerificationTestResult
 from ._container_apps_api_client_enums import EnvironmentProvisioningState
 from ._container_apps_api_client_enums import ExtendedLocationTypes
@@ -182,6 +183,7 @@ from ._container_apps_api_client_enums import RevisionProvisioningState
 from ._container_apps_api_client_enums import Scheme
 from ._container_apps_api_client_enums import SkuName
 from ._container_apps_api_client_enums import SourceControlOperationState
+from ._container_apps_api_client_enums import StorageProvisioningState
 from ._container_apps_api_client_enums import StorageType
 from ._container_apps_api_client_enums import Type
 from ._container_apps_api_client_enums import UnauthenticatedClientActionV2
@@ -352,6 +354,7 @@ __all__ = [
     "ContainerAppProvisioningState",
     "CookieExpirationConvention",
     "CreatedByType",
+    "DaprComponentProvisioningState",
     "DnsVerificationTestResult",
     "EnvironmentProvisioningState",
     "ExtendedLocationTypes",
@@ -365,6 +368,7 @@ __all__ = [
     "Scheme",
     "SkuName",
     "SourceControlOperationState",
+    "StorageProvisioningState",
     "StorageType",
     "Type",
     "UnauthenticatedClientActionV2",
