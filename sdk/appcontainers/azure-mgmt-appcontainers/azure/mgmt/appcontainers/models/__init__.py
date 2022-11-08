@@ -55,6 +55,7 @@ from ._models_py3 import ContainerAppProbeTcpSocket
 from ._models_py3 import ContainerAppSecret
 from ._models_py3 import ContainerResources
 from ._models_py3 import CookieExpiration
+from ._models_py3 import CorsPolicy
 from ._models_py3 import CustomDomain
 from ._models_py3 import CustomDomainConfiguration
 from ._models_py3 import CustomHostnameAnalysisResult
@@ -160,6 +161,7 @@ from ._container_apps_api_client_enums import AccessMode
 from ._container_apps_api_client_enums import Action
 from ._container_apps_api_client_enums import ActiveRevisionsMode
 from ._container_apps_api_client_enums import AppProtocol
+from ._container_apps_api_client_enums import AppState
 from ._container_apps_api_client_enums import Applicability
 from ._container_apps_api_client_enums import BindingType
 from ._container_apps_api_client_enums import Category
@@ -173,6 +175,7 @@ from ._container_apps_api_client_enums import DnsVerificationTestResult
 from ._container_apps_api_client_enums import EnvironmentProvisioningState
 from ._container_apps_api_client_enums import ExtendedLocationTypes
 from ._container_apps_api_client_enums import ForwardProxyConvention
+from ._container_apps_api_client_enums import IngressClientCertificateMode
 from ._container_apps_api_client_enums import IngressTransportMethod
 from ._container_apps_api_client_enums import LogLevel
 from ._container_apps_api_client_enums import ManagedEnvironmentOutBoundType
@@ -239,6 +242,7 @@ __all__ = [
     "ContainerAppSecret",
     "ContainerResources",
     "CookieExpiration",
+    "CorsPolicy",
     "CustomDomain",
     "CustomDomainConfiguration",
     "CustomHostnameAnalysisResult",
@@ -343,6 +347,7 @@ __all__ = [
     "Action",
     "ActiveRevisionsMode",
     "AppProtocol",
+    "AppState",
     "Applicability",
     "BindingType",
     "Category",
@@ -356,6 +361,7 @@ __all__ = [
     "EnvironmentProvisioningState",
     "ExtendedLocationTypes",
     "ForwardProxyConvention",
+    "IngressClientCertificateMode",
     "IngressTransportMethod",
     "LogLevel",
     "ManagedEnvironmentOutBoundType",
