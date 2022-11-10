@@ -37,6 +37,7 @@ from ...operations._configurations_operations import (
     build_put_request,
     build_update_request,
 )
+from .._vendor import PostgreSQLManagementClientMixinABC
 
 if sys.version_info >= (3, 8):
     from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports

@@ -94,6 +94,53 @@ class IdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     USER_ASSIGNED = "UserAssigned"
 
 
+class MigrationDetailsLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Migration details level."""
+
+    DEFAULT = "Default"
+    SUMMARY = "Summary"
+    FULL = "Full"
+
+
+class MigrationListFilter(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """MigrationListFilter."""
+
+    ACTIVE = "Active"
+    ALL = "All"
+
+
+class MigrationNameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Migration name availability reason."""
+
+    INVALID = "Invalid"
+    ALREADY_EXISTS = "AlreadyExists"
+
+
+class MigrationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Migration state."""
+
+    IN_PROGRESS = "InProgress"
+    WAITING_FOR_USER_ACTION = "WaitingForUserAction"
+    CANCELED = "Canceled"
+    FAILED = "Failed"
+    SUCCEEDED = "Succeeded"
+
+
+class MigrationSubState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Migration sub state."""
+
+    PERFORMING_PRE_REQUISITE_STEPS = "PerformingPreRequisiteSteps"
+    WAITING_FOR_LOGICAL_REPLICATION_SETUP_REQUEST_ON_SOURCE_DB = "WaitingForLogicalReplicationSetupRequestOnSourceDB"
+    WAITING_FOR_DBS_TO_MIGRATE_SPECIFICATION = "WaitingForDBsToMigrateSpecification"
+    WAITING_FOR_TARGET_DB_OVERWRITE_CONFIRMATION = "WaitingForTargetDBOverwriteConfirmation"
+    WAITING_FOR_DATA_MIGRATION_SCHEDULING = "WaitingForDataMigrationScheduling"
+    WAITING_FOR_DATA_MIGRATION_WINDOW = "WaitingForDataMigrationWindow"
+    MIGRATING_DATA = "MigratingData"
+    WAITING_FOR_CUTOVER_TRIGGER = "WaitingForCutoverTrigger"
+    COMPLETING_MIGRATION = "CompletingMigration"
+    COMPLETED = "Completed"
+
+
 class OperationOrigin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The intended executor of the operation."""
 

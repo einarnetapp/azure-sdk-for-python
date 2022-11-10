@@ -25,7 +25,9 @@ from .operations import (
     FirewallRulesOperations,
     GetPrivateDnsZoneSuffixOperations,
     LocationBasedCapabilitiesOperations,
+    MigrationsOperations,
     Operations,
+    PostgreSQLManagementClientOperationsMixin,
     ServersOperations,
     VirtualNetworkSubnetUsageOperations,
 )
@@ -35,7 +37,9 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class PostgreSQLManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class PostgreSQLManagementClient(
+    PostgreSQLManagementClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """The Microsoft Azure management API provides create, read, update, and delete functionality for
     Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security
     alert policies, log files and configurations with new business model.
@@ -66,6 +70,9 @@ class PostgreSQLManagementClient:  # pylint: disable=client-accepts-api-version-
      azure.mgmt.rdbms.postgresql_flexibleservers.aio.operations.FirewallRulesOperations
     :ivar servers: ServersOperations operations
     :vartype servers: azure.mgmt.rdbms.postgresql_flexibleservers.aio.operations.ServersOperations
+    :ivar migrations: MigrationsOperations operations
+    :vartype migrations:
+     azure.mgmt.rdbms.postgresql_flexibleservers.aio.operations.MigrationsOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.rdbms.postgresql_flexibleservers.aio.operations.Operations
     :ivar get_private_dns_zone_suffix: GetPrivateDnsZoneSuffixOperations operations
@@ -118,6 +125,7 @@ class PostgreSQLManagementClient:  # pylint: disable=client-accepts-api-version-
         self.databases = DatabasesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.firewall_rules = FirewallRulesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.servers = ServersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.migrations = MigrationsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.get_private_dns_zone_suffix = GetPrivateDnsZoneSuffixOperations(
             self._client, self._config, self._serialize, self._deserialize
