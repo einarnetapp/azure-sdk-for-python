@@ -33,6 +33,8 @@ from .operations import (
     EntityQueryTemplatesOperations,
     EntityRelationsOperations,
     FileImportsOperations,
+    GetOperations,
+    GetRecommendationsOperations,
     IPGeodataOperations,
     IncidentCommentsOperations,
     IncidentRelationsOperations,
@@ -48,6 +50,7 @@ from .operations import (
     ThreatIntelligenceIndicatorMetricsOperations,
     ThreatIntelligenceIndicatorOperations,
     ThreatIntelligenceIndicatorsOperations,
+    UpdateOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
 )
@@ -108,6 +111,13 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :ivar sentinel_onboarding_states: SentinelOnboardingStatesOperations operations
     :vartype sentinel_onboarding_states:
      azure.mgmt.securityinsight.operations.SentinelOnboardingStatesOperations
+    :ivar get_recommendations: GetRecommendationsOperations operations
+    :vartype get_recommendations:
+     azure.mgmt.securityinsight.operations.GetRecommendationsOperations
+    :ivar get: GetOperations operations
+    :vartype get: azure.mgmt.securityinsight.operations.GetOperations
+    :ivar update: UpdateOperations operations
+    :vartype update: azure.mgmt.securityinsight.operations.UpdateOperations
     :ivar security_ml_analytics_settings: SecurityMLAnalyticsSettingsOperations operations
     :vartype security_ml_analytics_settings:
      azure.mgmt.securityinsight.operations.SecurityMLAnalyticsSettingsOperations
@@ -144,7 +154,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-12-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -207,6 +217,11 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self.sentinel_onboarding_states = SentinelOnboardingStatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.get_recommendations = GetRecommendationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.get = GetOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.update = UpdateOperations(self._client, self._config, self._serialize, self._deserialize)
         self.security_ml_analytics_settings = SecurityMLAnalyticsSettingsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
