@@ -13,13 +13,18 @@ from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
-if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
-    from .. import models as _models
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+if sys.version_info >= (3, 8):
+    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
+else:
+    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    from .. import models as _models
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
@@ -1982,6 +1987,9 @@ class AlertDetailsOverride(_serialization.Model):
     :vartype alert_tactics_column_name: str
     :ivar alert_severity_column_name: the column name to take the alert severity from.
     :vartype alert_severity_column_name: str
+    :ivar alert_dynamic_properties: List of additional dynamic properties to override.
+    :vartype alert_dynamic_properties:
+     list[~azure.mgmt.securityinsight.models.AlertPropertyMapping]
     """
 
     _attribute_map = {
@@ -1989,6 +1997,7 @@ class AlertDetailsOverride(_serialization.Model):
         "alert_description_format": {"key": "alertDescriptionFormat", "type": "str"},
         "alert_tactics_column_name": {"key": "alertTacticsColumnName", "type": "str"},
         "alert_severity_column_name": {"key": "alertSeverityColumnName", "type": "str"},
+        "alert_dynamic_properties": {"key": "alertDynamicProperties", "type": "[AlertPropertyMapping]"},
     }
 
     def __init__(
@@ -1998,6 +2007,7 @@ class AlertDetailsOverride(_serialization.Model):
         alert_description_format: Optional[str] = None,
         alert_tactics_column_name: Optional[str] = None,
         alert_severity_column_name: Optional[str] = None,
+        alert_dynamic_properties: Optional[List["_models.AlertPropertyMapping"]] = None,
         **kwargs
     ):
         """
@@ -2011,12 +2021,52 @@ class AlertDetailsOverride(_serialization.Model):
         :paramtype alert_tactics_column_name: str
         :keyword alert_severity_column_name: the column name to take the alert severity from.
         :paramtype alert_severity_column_name: str
+        :keyword alert_dynamic_properties: List of additional dynamic properties to override.
+        :paramtype alert_dynamic_properties:
+         list[~azure.mgmt.securityinsight.models.AlertPropertyMapping]
         """
         super().__init__(**kwargs)
         self.alert_display_name_format = alert_display_name_format
         self.alert_description_format = alert_description_format
         self.alert_tactics_column_name = alert_tactics_column_name
         self.alert_severity_column_name = alert_severity_column_name
+        self.alert_dynamic_properties = alert_dynamic_properties
+
+
+class AlertPropertyMapping(_serialization.Model):
+    """A single alert property mapping to override.
+
+    :ivar alert_property: The V3 alert property. Known values are: "AlertLink", "ConfidenceLevel",
+     "ConfidenceScore", "ExtendedLinks", "ProductName", "ProviderName", "ProductComponentName",
+     "RemediationSteps", and "Techniques".
+    :vartype alert_property: str or ~azure.mgmt.securityinsight.models.AlertProperty
+    :ivar value: the column name to use to override this property.
+    :vartype value: str
+    """
+
+    _attribute_map = {
+        "alert_property": {"key": "alertProperty", "type": "str"},
+        "value": {"key": "value", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        alert_property: Optional[Union[str, "_models.AlertProperty"]] = None,
+        value: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword alert_property: The V3 alert property. Known values are: "AlertLink",
+         "ConfidenceLevel", "ConfidenceScore", "ExtendedLinks", "ProductName", "ProviderName",
+         "ProductComponentName", "RemediationSteps", and "Techniques".
+        :paramtype alert_property: str or ~azure.mgmt.securityinsight.models.AlertProperty
+        :keyword value: the column name to use to override this property.
+        :paramtype value: str
+        """
+        super().__init__(**kwargs)
+        self.alert_property = alert_property
+        self.value = value
 
 
 class AlertRule(ResourceWithEtag):
@@ -3644,7 +3694,7 @@ class Availability(_serialization.Model):
         "is_preview": {"key": "isPreview", "type": "bool"},
     }
 
-    def __init__(self, *, status: Optional[int] = None, is_preview: Optional[bool] = None, **kwargs):
+    def __init__(self, *, status: Optional[Literal[1]] = None, is_preview: Optional[bool] = None, **kwargs):
         """
         :keyword status: The connector Availability Status. Default value is 1.
         :paramtype status: int
@@ -5920,6 +5970,39 @@ class ConnectorInstructionModelBase(_serialization.Model):
         super().__init__(**kwargs)
         self.parameters = parameters
         self.type = type
+
+
+class Content(_serialization.Model):
+    """Content section of the recommendation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar title: Title of the content. Required.
+    :vartype title: str
+    :ivar description: Description of the content. Required.
+    :vartype description: str
+    """
+
+    _validation = {
+        "title": {"required": True},
+        "description": {"required": True},
+    }
+
+    _attribute_map = {
+        "title": {"key": "title", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+    }
+
+    def __init__(self, *, title: str, description: str, **kwargs):
+        """
+        :keyword title: Title of the content. Required.
+        :paramtype title: str
+        :keyword description: Description of the content. Required.
+        :paramtype description: str
+        """
+        super().__init__(**kwargs)
+        self.title = title
+        self.description = description
 
 
 class ContentPathMap(_serialization.Model):
@@ -9906,7 +9989,7 @@ class HuntingBookmarkProperties(EntityCommonProperties):  # pylint: disable=too-
 
 
 class Incident(ResourceWithEtag):  # pylint: disable=too-many-instance-attributes
-    """Represents an incident in Azure Security Insights.
+    """Incident.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -9923,52 +10006,52 @@ class Incident(ResourceWithEtag):  # pylint: disable=too-many-instance-attribute
     :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
     :ivar etag: Etag of the azure resource.
     :vartype etag: str
-    :ivar additional_data: Additional data on the incident.
-    :vartype additional_data: ~azure.mgmt.securityinsight.models.IncidentAdditionalData
-    :ivar classification: The reason the incident was closed. Known values are: "Undetermined",
-     "TruePositive", "BenignPositive", and "FalsePositive".
-    :vartype classification: str or ~azure.mgmt.securityinsight.models.IncidentClassification
-    :ivar classification_comment: Describes the reason the incident was closed.
-    :vartype classification_comment: str
-    :ivar classification_reason: The classification reason the incident was closed with. Known
-     values are: "SuspiciousActivity", "SuspiciousButExpected", "IncorrectAlertLogic", and
-     "InaccurateData".
-    :vartype classification_reason: str or
-     ~azure.mgmt.securityinsight.models.IncidentClassificationReason
-    :ivar created_time_utc: The time the incident was created.
-    :vartype created_time_utc: ~datetime.datetime
+    :ivar title: The title of the incident.
+    :vartype title: str
     :ivar description: The description of the incident.
     :vartype description: str
-    :ivar first_activity_time_utc: The time of the first activity in the incident.
-    :vartype first_activity_time_utc: ~datetime.datetime
-    :ivar incident_url: The deep-link url to the incident in Azure portal.
-    :vartype incident_url: str
-    :ivar incident_number: A sequential number.
-    :vartype incident_number: int
-    :ivar labels: List of labels relevant to this incident.
-    :vartype labels: list[~azure.mgmt.securityinsight.models.IncidentLabel]
-    :ivar provider_name: The name of the source provider that generated the incident.
-    :vartype provider_name: str
-    :ivar provider_incident_id: The incident ID assigned by the incident provider.
-    :vartype provider_incident_id: str
-    :ivar last_activity_time_utc: The time of the last activity in the incident.
-    :vartype last_activity_time_utc: ~datetime.datetime
-    :ivar last_modified_time_utc: The last time the incident was updated.
-    :vartype last_modified_time_utc: ~datetime.datetime
-    :ivar owner: Describes a user that the incident is assigned to.
-    :vartype owner: ~azure.mgmt.securityinsight.models.IncidentOwnerInfo
-    :ivar related_analytic_rule_ids: List of resource ids of Analytic rules related to the
-     incident.
-    :vartype related_analytic_rule_ids: list[str]
     :ivar severity: The severity of the incident. Known values are: "High", "Medium", "Low", and
      "Informational".
     :vartype severity: str or ~azure.mgmt.securityinsight.models.IncidentSeverity
     :ivar status: The status of the incident. Known values are: "New", "Active", and "Closed".
     :vartype status: str or ~azure.mgmt.securityinsight.models.IncidentStatus
+    :ivar classification: The reason the incident was closed. Known values are: "Undetermined",
+     "TruePositive", "BenignPositive", and "FalsePositive".
+    :vartype classification: str or ~azure.mgmt.securityinsight.models.IncidentClassification
+    :ivar classification_reason: The classification reason the incident was closed with. Known
+     values are: "SuspiciousActivity", "SuspiciousButExpected", "IncorrectAlertLogic", and
+     "InaccurateData".
+    :vartype classification_reason: str or
+     ~azure.mgmt.securityinsight.models.IncidentClassificationReason
+    :ivar classification_comment: Describes the reason the incident was closed.
+    :vartype classification_comment: str
+    :ivar owner: Describes a user that the incident is assigned to.
+    :vartype owner: ~azure.mgmt.securityinsight.models.IncidentOwnerInfo
+    :ivar labels: List of labels relevant to this incident.
+    :vartype labels: list[~azure.mgmt.securityinsight.models.IncidentLabel]
+    :ivar first_activity_time_utc: The time of the first activity in the incident.
+    :vartype first_activity_time_utc: ~datetime.datetime
+    :ivar last_activity_time_utc: The time of the last activity in the incident.
+    :vartype last_activity_time_utc: ~datetime.datetime
+    :ivar last_modified_time_utc: The last time the incident was updated.
+    :vartype last_modified_time_utc: ~datetime.datetime
+    :ivar created_time_utc: The time the incident was created.
+    :vartype created_time_utc: ~datetime.datetime
+    :ivar incident_number: A sequential number.
+    :vartype incident_number: int
+    :ivar additional_data: Additional data on the incident.
+    :vartype additional_data: ~azure.mgmt.securityinsight.models.IncidentAdditionalData
+    :ivar related_analytic_rule_ids: List of resource ids of Analytic rules related to the
+     incident.
+    :vartype related_analytic_rule_ids: list[str]
+    :ivar incident_url: The deep-link url to the incident in Azure portal.
+    :vartype incident_url: str
+    :ivar provider_name: The name of the source provider that generated the incident.
+    :vartype provider_name: str
+    :ivar provider_incident_id: The incident ID assigned by the incident provider.
+    :vartype provider_incident_id: str
     :ivar team_information: Describes a team for the incident.
     :vartype team_information: ~azure.mgmt.securityinsight.models.TeamInformation
-    :ivar title: The title of the incident.
-    :vartype title: str
     """
 
     _validation = {
@@ -9976,12 +10059,12 @@ class Incident(ResourceWithEtag):  # pylint: disable=too-many-instance-attribute
         "name": {"readonly": True},
         "type": {"readonly": True},
         "system_data": {"readonly": True},
-        "additional_data": {"readonly": True},
-        "created_time_utc": {"readonly": True},
-        "incident_url": {"readonly": True},
-        "incident_number": {"readonly": True},
         "last_modified_time_utc": {"readonly": True},
+        "created_time_utc": {"readonly": True},
+        "incident_number": {"readonly": True},
+        "additional_data": {"readonly": True},
         "related_analytic_rule_ids": {"readonly": True},
+        "incident_url": {"readonly": True},
     }
 
     _attribute_map = {
@@ -9990,106 +10073,106 @@ class Incident(ResourceWithEtag):  # pylint: disable=too-many-instance-attribute
         "type": {"key": "type", "type": "str"},
         "system_data": {"key": "systemData", "type": "SystemData"},
         "etag": {"key": "etag", "type": "str"},
-        "additional_data": {"key": "properties.additionalData", "type": "IncidentAdditionalData"},
-        "classification": {"key": "properties.classification", "type": "str"},
-        "classification_comment": {"key": "properties.classificationComment", "type": "str"},
-        "classification_reason": {"key": "properties.classificationReason", "type": "str"},
-        "created_time_utc": {"key": "properties.createdTimeUtc", "type": "iso-8601"},
+        "title": {"key": "properties.title", "type": "str"},
         "description": {"key": "properties.description", "type": "str"},
-        "first_activity_time_utc": {"key": "properties.firstActivityTimeUtc", "type": "iso-8601"},
-        "incident_url": {"key": "properties.incidentUrl", "type": "str"},
-        "incident_number": {"key": "properties.incidentNumber", "type": "int"},
-        "labels": {"key": "properties.labels", "type": "[IncidentLabel]"},
-        "provider_name": {"key": "properties.providerName", "type": "str"},
-        "provider_incident_id": {"key": "properties.providerIncidentId", "type": "str"},
-        "last_activity_time_utc": {"key": "properties.lastActivityTimeUtc", "type": "iso-8601"},
-        "last_modified_time_utc": {"key": "properties.lastModifiedTimeUtc", "type": "iso-8601"},
-        "owner": {"key": "properties.owner", "type": "IncidentOwnerInfo"},
-        "related_analytic_rule_ids": {"key": "properties.relatedAnalyticRuleIds", "type": "[str]"},
         "severity": {"key": "properties.severity", "type": "str"},
         "status": {"key": "properties.status", "type": "str"},
+        "classification": {"key": "properties.classification", "type": "str"},
+        "classification_reason": {"key": "properties.classificationReason", "type": "str"},
+        "classification_comment": {"key": "properties.classificationComment", "type": "str"},
+        "owner": {"key": "properties.owner", "type": "IncidentOwnerInfo"},
+        "labels": {"key": "properties.labels", "type": "[IncidentLabel]"},
+        "first_activity_time_utc": {"key": "properties.firstActivityTimeUtc", "type": "iso-8601"},
+        "last_activity_time_utc": {"key": "properties.lastActivityTimeUtc", "type": "iso-8601"},
+        "last_modified_time_utc": {"key": "properties.lastModifiedTimeUtc", "type": "iso-8601"},
+        "created_time_utc": {"key": "properties.createdTimeUtc", "type": "iso-8601"},
+        "incident_number": {"key": "properties.incidentNumber", "type": "int"},
+        "additional_data": {"key": "properties.additionalData", "type": "IncidentAdditionalData"},
+        "related_analytic_rule_ids": {"key": "properties.relatedAnalyticRuleIds", "type": "[str]"},
+        "incident_url": {"key": "properties.incidentUrl", "type": "str"},
+        "provider_name": {"key": "properties.providerName", "type": "str"},
+        "provider_incident_id": {"key": "properties.providerIncidentId", "type": "str"},
         "team_information": {"key": "properties.teamInformation", "type": "TeamInformation"},
-        "title": {"key": "properties.title", "type": "str"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
         self,
         *,
         etag: Optional[str] = None,
-        classification: Optional[Union[str, "_models.IncidentClassification"]] = None,
-        classification_comment: Optional[str] = None,
-        classification_reason: Optional[Union[str, "_models.IncidentClassificationReason"]] = None,
+        title: Optional[str] = None,
         description: Optional[str] = None,
-        first_activity_time_utc: Optional[datetime.datetime] = None,
-        labels: Optional[List["_models.IncidentLabel"]] = None,
-        provider_name: Optional[str] = None,
-        provider_incident_id: Optional[str] = None,
-        last_activity_time_utc: Optional[datetime.datetime] = None,
-        owner: Optional["_models.IncidentOwnerInfo"] = None,
         severity: Optional[Union[str, "_models.IncidentSeverity"]] = None,
         status: Optional[Union[str, "_models.IncidentStatus"]] = None,
+        classification: Optional[Union[str, "_models.IncidentClassification"]] = None,
+        classification_reason: Optional[Union[str, "_models.IncidentClassificationReason"]] = None,
+        classification_comment: Optional[str] = None,
+        owner: Optional["_models.IncidentOwnerInfo"] = None,
+        labels: Optional[List["_models.IncidentLabel"]] = None,
+        first_activity_time_utc: Optional[datetime.datetime] = None,
+        last_activity_time_utc: Optional[datetime.datetime] = None,
+        provider_name: Optional[str] = None,
+        provider_incident_id: Optional[str] = None,
         team_information: Optional["_models.TeamInformation"] = None,
-        title: Optional[str] = None,
         **kwargs
     ):
         """
         :keyword etag: Etag of the azure resource.
         :paramtype etag: str
-        :keyword classification: The reason the incident was closed. Known values are: "Undetermined",
-         "TruePositive", "BenignPositive", and "FalsePositive".
-        :paramtype classification: str or ~azure.mgmt.securityinsight.models.IncidentClassification
-        :keyword classification_comment: Describes the reason the incident was closed.
-        :paramtype classification_comment: str
-        :keyword classification_reason: The classification reason the incident was closed with. Known
-         values are: "SuspiciousActivity", "SuspiciousButExpected", "IncorrectAlertLogic", and
-         "InaccurateData".
-        :paramtype classification_reason: str or
-         ~azure.mgmt.securityinsight.models.IncidentClassificationReason
+        :keyword title: The title of the incident.
+        :paramtype title: str
         :keyword description: The description of the incident.
         :paramtype description: str
-        :keyword first_activity_time_utc: The time of the first activity in the incident.
-        :paramtype first_activity_time_utc: ~datetime.datetime
-        :keyword labels: List of labels relevant to this incident.
-        :paramtype labels: list[~azure.mgmt.securityinsight.models.IncidentLabel]
-        :keyword provider_name: The name of the source provider that generated the incident.
-        :paramtype provider_name: str
-        :keyword provider_incident_id: The incident ID assigned by the incident provider.
-        :paramtype provider_incident_id: str
-        :keyword last_activity_time_utc: The time of the last activity in the incident.
-        :paramtype last_activity_time_utc: ~datetime.datetime
-        :keyword owner: Describes a user that the incident is assigned to.
-        :paramtype owner: ~azure.mgmt.securityinsight.models.IncidentOwnerInfo
         :keyword severity: The severity of the incident. Known values are: "High", "Medium", "Low", and
          "Informational".
         :paramtype severity: str or ~azure.mgmt.securityinsight.models.IncidentSeverity
         :keyword status: The status of the incident. Known values are: "New", "Active", and "Closed".
         :paramtype status: str or ~azure.mgmt.securityinsight.models.IncidentStatus
+        :keyword classification: The reason the incident was closed. Known values are: "Undetermined",
+         "TruePositive", "BenignPositive", and "FalsePositive".
+        :paramtype classification: str or ~azure.mgmt.securityinsight.models.IncidentClassification
+        :keyword classification_reason: The classification reason the incident was closed with. Known
+         values are: "SuspiciousActivity", "SuspiciousButExpected", "IncorrectAlertLogic", and
+         "InaccurateData".
+        :paramtype classification_reason: str or
+         ~azure.mgmt.securityinsight.models.IncidentClassificationReason
+        :keyword classification_comment: Describes the reason the incident was closed.
+        :paramtype classification_comment: str
+        :keyword owner: Describes a user that the incident is assigned to.
+        :paramtype owner: ~azure.mgmt.securityinsight.models.IncidentOwnerInfo
+        :keyword labels: List of labels relevant to this incident.
+        :paramtype labels: list[~azure.mgmt.securityinsight.models.IncidentLabel]
+        :keyword first_activity_time_utc: The time of the first activity in the incident.
+        :paramtype first_activity_time_utc: ~datetime.datetime
+        :keyword last_activity_time_utc: The time of the last activity in the incident.
+        :paramtype last_activity_time_utc: ~datetime.datetime
+        :keyword provider_name: The name of the source provider that generated the incident.
+        :paramtype provider_name: str
+        :keyword provider_incident_id: The incident ID assigned by the incident provider.
+        :paramtype provider_incident_id: str
         :keyword team_information: Describes a team for the incident.
         :paramtype team_information: ~azure.mgmt.securityinsight.models.TeamInformation
-        :keyword title: The title of the incident.
-        :paramtype title: str
         """
         super().__init__(etag=etag, **kwargs)
-        self.additional_data = None
-        self.classification = classification
-        self.classification_comment = classification_comment
-        self.classification_reason = classification_reason
-        self.created_time_utc = None
+        self.title = title
         self.description = description
-        self.first_activity_time_utc = first_activity_time_utc
-        self.incident_url = None
-        self.incident_number = None
-        self.labels = labels
-        self.provider_name = provider_name
-        self.provider_incident_id = provider_incident_id
-        self.last_activity_time_utc = last_activity_time_utc
-        self.last_modified_time_utc = None
-        self.owner = owner
-        self.related_analytic_rule_ids = None
         self.severity = severity
         self.status = status
+        self.classification = classification
+        self.classification_reason = classification_reason
+        self.classification_comment = classification_comment
+        self.owner = owner
+        self.labels = labels
+        self.first_activity_time_utc = first_activity_time_utc
+        self.last_activity_time_utc = last_activity_time_utc
+        self.last_modified_time_utc = None
+        self.created_time_utc = None
+        self.incident_number = None
+        self.additional_data = None
+        self.related_analytic_rule_ids = None
+        self.incident_url = None
+        self.provider_name = provider_name
+        self.provider_incident_id = provider_incident_id
         self.team_information = team_information
-        self.title = title
 
 
 class IncidentAdditionalData(_serialization.Model):
@@ -10105,13 +10188,13 @@ class IncidentAdditionalData(_serialization.Model):
     :vartype comments_count: int
     :ivar alert_product_names: List of product names of alerts in the incident.
     :vartype alert_product_names: list[str]
+    :ivar tactics: The tactics associated with incident.
+    :vartype tactics: list[str or ~azure.mgmt.securityinsight.models.AttackTactic]
+    :ivar techniques: The techniques associated with incident's tactics.
+    :vartype techniques: list[str]
     :ivar provider_incident_url: The provider incident url to the incident in Microsoft 365
      Defender portal.
     :vartype provider_incident_url: str
-    :ivar tactics: The tactics associated with incident.
-    :vartype tactics: list[str or ~azure.mgmt.securityinsight.models.AttackTactic]
-    :ivar techniques: The techniques associated with incident's tactics'.
-    :vartype techniques: list[str]
     """
 
     _validation = {
@@ -10119,9 +10202,9 @@ class IncidentAdditionalData(_serialization.Model):
         "bookmarks_count": {"readonly": True},
         "comments_count": {"readonly": True},
         "alert_product_names": {"readonly": True},
-        "provider_incident_url": {"readonly": True},
         "tactics": {"readonly": True},
         "techniques": {"readonly": True},
+        "provider_incident_url": {"readonly": True},
     }
 
     _attribute_map = {
@@ -10129,9 +10212,9 @@ class IncidentAdditionalData(_serialization.Model):
         "bookmarks_count": {"key": "bookmarksCount", "type": "int"},
         "comments_count": {"key": "commentsCount", "type": "int"},
         "alert_product_names": {"key": "alertProductNames", "type": "[str]"},
-        "provider_incident_url": {"key": "providerIncidentUrl", "type": "str"},
         "tactics": {"key": "tactics", "type": "[str]"},
         "techniques": {"key": "techniques", "type": "[str]"},
+        "provider_incident_url": {"key": "providerIncidentUrl", "type": "str"},
     }
 
     def __init__(self, **kwargs):
@@ -10141,9 +10224,9 @@ class IncidentAdditionalData(_serialization.Model):
         self.bookmarks_count = None
         self.comments_count = None
         self.alert_product_names = None
-        self.provider_incident_url = None
         self.tactics = None
         self.techniques = None
+        self.provider_incident_url = None
 
 
 class IncidentAlertList(_serialization.Model):
@@ -10216,12 +10299,12 @@ class IncidentComment(ResourceWithEtag):
     :vartype system_data: ~azure.mgmt.securityinsight.models.SystemData
     :ivar etag: Etag of the azure resource.
     :vartype etag: str
+    :ivar message: The comment message.
+    :vartype message: str
     :ivar created_time_utc: The time the comment was created.
     :vartype created_time_utc: ~datetime.datetime
     :ivar last_modified_time_utc: The time the comment was updated.
     :vartype last_modified_time_utc: ~datetime.datetime
-    :ivar message: The comment message.
-    :vartype message: str
     :ivar author: Describes the client that created the comment.
     :vartype author: ~azure.mgmt.securityinsight.models.ClientInfo
     """
@@ -10242,9 +10325,9 @@ class IncidentComment(ResourceWithEtag):
         "type": {"key": "type", "type": "str"},
         "system_data": {"key": "systemData", "type": "SystemData"},
         "etag": {"key": "etag", "type": "str"},
+        "message": {"key": "properties.message", "type": "str"},
         "created_time_utc": {"key": "properties.createdTimeUtc", "type": "iso-8601"},
         "last_modified_time_utc": {"key": "properties.lastModifiedTimeUtc", "type": "iso-8601"},
-        "message": {"key": "properties.message", "type": "str"},
         "author": {"key": "properties.author", "type": "ClientInfo"},
     }
 
@@ -10256,43 +10339,43 @@ class IncidentComment(ResourceWithEtag):
         :paramtype message: str
         """
         super().__init__(etag=etag, **kwargs)
+        self.message = message
         self.created_time_utc = None
         self.last_modified_time_utc = None
-        self.message = message
         self.author = None
 
 
 class IncidentCommentList(_serialization.Model):
-    """List of incident comments.
+    """IncidentCommentList.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar next_link: URL to fetch the next set of comments.
-    :vartype next_link: str
-    :ivar value: Array of comments. Required.
+    :ivar value: Required.
     :vartype value: list[~azure.mgmt.securityinsight.models.IncidentComment]
+    :ivar next_link:
+    :vartype next_link: str
     """
 
     _validation = {
-        "next_link": {"readonly": True},
         "value": {"required": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        "next_link": {"key": "nextLink", "type": "str"},
         "value": {"key": "value", "type": "[IncidentComment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
     def __init__(self, *, value: List["_models.IncidentComment"], **kwargs):
         """
-        :keyword value: Array of comments. Required.
+        :keyword value: Required.
         :paramtype value: list[~azure.mgmt.securityinsight.models.IncidentComment]
         """
         super().__init__(**kwargs)
-        self.next_link = None
         self.value = value
+        self.next_link = None
 
 
 class IncidentConfiguration(_serialization.Model):
@@ -10373,42 +10456,42 @@ class IncidentEntitiesResultsMetadata(_serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :ivar count: Total number of aggregations of the given kind in the incident related entities
-     result. Required.
-    :vartype count: int
     :ivar entity_kind: The kind of the aggregated entity. Required. Known values are: "Account",
      "Host", "File", "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip",
      "Malware", "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice",
      "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and
      "Nic".
     :vartype entity_kind: str or ~azure.mgmt.securityinsight.models.EntityKind
+    :ivar count: Total number of aggregations of the given kind in the incident related entities
+     result. Required.
+    :vartype count: int
     """
 
     _validation = {
-        "count": {"required": True},
         "entity_kind": {"required": True},
+        "count": {"required": True},
     }
 
     _attribute_map = {
-        "count": {"key": "count", "type": "int"},
         "entity_kind": {"key": "entityKind", "type": "str"},
+        "count": {"key": "count", "type": "int"},
     }
 
-    def __init__(self, *, count: int, entity_kind: Union[str, "_models.EntityKind"], **kwargs):
+    def __init__(self, *, entity_kind: Union[str, "_models.EntityKind"], count: int, **kwargs):
         """
-        :keyword count: Total number of aggregations of the given kind in the incident related entities
-         result. Required.
-        :paramtype count: int
         :keyword entity_kind: The kind of the aggregated entity. Required. Known values are: "Account",
          "Host", "File", "AzureResource", "CloudApplication", "DnsResolution", "FileHash", "Ip",
          "Malware", "Process", "RegistryKey", "RegistryValue", "SecurityGroup", "Url", "IoTDevice",
          "SecurityAlert", "Bookmark", "MailCluster", "MailMessage", "Mailbox", "SubmissionMail", and
          "Nic".
         :paramtype entity_kind: str or ~azure.mgmt.securityinsight.models.EntityKind
+        :keyword count: Total number of aggregations of the given kind in the incident related entities
+         result. Required.
+        :paramtype count: int
         """
         super().__init__(**kwargs)
-        self.count = count
         self.entity_kind = entity_kind
+        self.count = count
 
 
 class IncidentInfo(_serialization.Model):
@@ -10499,30 +10582,30 @@ class IncidentList(_serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
+    :ivar value: Required.
+    :vartype value: list[~azure.mgmt.securityinsight.models.Incident]
     :ivar next_link: URL to fetch the next set of incidents.
     :vartype next_link: str
-    :ivar value: Array of incidents. Required.
-    :vartype value: list[~azure.mgmt.securityinsight.models.Incident]
     """
 
     _validation = {
-        "next_link": {"readonly": True},
         "value": {"required": True},
+        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
-        "next_link": {"key": "nextLink", "type": "str"},
         "value": {"key": "value", "type": "[Incident]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
     def __init__(self, *, value: List["_models.Incident"], **kwargs):
         """
-        :keyword value: Array of incidents. Required.
+        :keyword value: Required.
         :paramtype value: list[~azure.mgmt.securityinsight.models.Incident]
         """
         super().__init__(**kwargs)
-        self.next_link = None
         self.value = value
+        self.next_link = None
 
 
 class IncidentOwnerInfo(_serialization.Model):
@@ -11123,6 +11206,54 @@ class InsightsTableResultColumnsItem(_serialization.Model):
         super().__init__(**kwargs)
         self.type = type
         self.name = name
+
+
+class Instructions(_serialization.Model):
+    """Instructions section of a recommendation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar actions_to_be_performed: What actions should be taken to complete the recommendation.
+     Required.
+    :vartype actions_to_be_performed: str
+    :ivar recommendation_importance: Explains why the recommendation is important. Required.
+    :vartype recommendation_importance: str
+    :ivar how_to_perform_action_details: How should the user complete the recommendation.
+    :vartype how_to_perform_action_details: str
+    """
+
+    _validation = {
+        "actions_to_be_performed": {"required": True},
+        "recommendation_importance": {"required": True},
+    }
+
+    _attribute_map = {
+        "actions_to_be_performed": {"key": "actionsToBePerformed", "type": "str"},
+        "recommendation_importance": {"key": "recommendationImportance", "type": "str"},
+        "how_to_perform_action_details": {"key": "howToPerformActionDetails", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        actions_to_be_performed: str,
+        recommendation_importance: str,
+        how_to_perform_action_details: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword actions_to_be_performed: What actions should be taken to complete the recommendation.
+         Required.
+        :paramtype actions_to_be_performed: str
+        :keyword recommendation_importance: Explains why the recommendation is important. Required.
+        :paramtype recommendation_importance: str
+        :keyword how_to_perform_action_details: How should the user complete the recommendation.
+        :paramtype how_to_perform_action_details: str
+        """
+        super().__init__(**kwargs)
+        self.actions_to_be_performed = actions_to_be_performed
+        self.recommendation_importance = recommendation_importance
+        self.how_to_perform_action_details = how_to_perform_action_details
 
 
 class InstructionStepsInstructionsItem(ConnectorInstructionModelBase):
@@ -15367,6 +15498,9 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _validation = {
@@ -15402,9 +15536,10 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "properties.eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
-    def __init__(
+    def __init__(  # pylint: disable=too-many-locals
         self,
         *,
         etag: Optional[str] = None,
@@ -15424,6 +15559,7 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -15468,6 +15604,9 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(etag=etag, **kwargs)
         self.kind = "NRT"  # type: str
@@ -15488,6 +15627,7 @@ class NrtAlertRule(AlertRule):  # pylint: disable=too-many-instance-attributes
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-instance-attributes
@@ -15550,6 +15690,9 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _validation = {
@@ -15587,6 +15730,7 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "properties.eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(
@@ -15606,6 +15750,7 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -15643,6 +15788,9 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.kind = "NRT"  # type: str
@@ -15662,6 +15810,7 @@ class NrtAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many-insta
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
@@ -15684,6 +15833,9 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _attribute_map = {
@@ -15694,6 +15846,7 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(
@@ -15706,6 +15859,7 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -15726,6 +15880,9 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.query = query
@@ -15735,6 +15892,7 @@ class QueryBasedAlertRuleTemplateProperties(_serialization.Model):
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class NrtAlertRuleTemplateProperties(
@@ -15761,6 +15919,9 @@ class NrtAlertRuleTemplateProperties(
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
     :ivar event_grouping_settings: The event grouping settings.
     :vartype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     :ivar alert_rules_created_by_template_count: the number of alert rules that were created by
      this template.
     :vartype alert_rules_created_by_template_count: int
@@ -15797,6 +15958,7 @@ class NrtAlertRuleTemplateProperties(
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
         "event_grouping_settings": {"key": "eventGroupingSettings", "type": "EventGroupingSettings"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
         "alert_rules_created_by_template_count": {"key": "alertRulesCreatedByTemplateCount", "type": "int"},
         "last_updated_date_utc": {"key": "lastUpdatedDateUTC", "type": "iso-8601"},
         "created_date_utc": {"key": "createdDateUTC", "type": "iso-8601"},
@@ -15818,6 +15980,7 @@ class NrtAlertRuleTemplateProperties(
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
         event_grouping_settings: Optional["_models.EventGroupingSettings"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         alert_rules_created_by_template_count: Optional[int] = None,
         description: Optional[str] = None,
         display_name: Optional[str] = None,
@@ -15845,6 +16008,9 @@ class NrtAlertRuleTemplateProperties(
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
         :keyword event_grouping_settings: The event grouping settings.
         :paramtype event_grouping_settings: ~azure.mgmt.securityinsight.models.EventGroupingSettings
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         :keyword alert_rules_created_by_template_count: the number of alert rules that were created by
          this template.
         :paramtype alert_rules_created_by_template_count: int
@@ -15878,6 +16044,7 @@ class NrtAlertRuleTemplateProperties(
             entity_mappings=entity_mappings,
             alert_details_override=alert_details_override,
             event_grouping_settings=event_grouping_settings,
+            sentinel_entities_mappings=sentinel_entities_mappings,
             **kwargs
         )
         self.query = query
@@ -15887,6 +16054,7 @@ class NrtAlertRuleTemplateProperties(
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
         self.event_grouping_settings = event_grouping_settings
+        self.sentinel_entities_mappings = sentinel_entities_mappings
         self.alert_rules_created_by_template_count = alert_rules_created_by_template_count
         self.last_updated_date_utc = None
         self.created_date_utc = None
@@ -17667,6 +17835,286 @@ class PropertyConditionProperties(AutomationRuleCondition):
         self.condition_properties = condition_properties
 
 
+class Recommendation(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+    """Recommendation object.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: id of recommendation. Required.
+    :vartype id: str
+    :ivar instructions: Instructions of the recommendation. Required.
+    :vartype instructions: ~azure.mgmt.securityinsight.models.Instructions
+    :ivar content: Content of the recommendation.
+    :vartype content: ~azure.mgmt.securityinsight.models.Content
+    :ivar resource_id: Id of the resource this recommendation refers to.
+    :vartype resource_id: str
+    :ivar additional_properties: Collection of additional properties for the recommendation.
+    :vartype additional_properties: dict[str, str]
+    :ivar title: Title of the recommendation. Required.
+    :vartype title: str
+    :ivar description: Description of the recommendation. Required.
+    :vartype description: str
+    :ivar recommendation_type_title: Title of the recommendation type. Required.
+    :vartype recommendation_type_title: str
+    :ivar recommendation_type_id: Id of the recommendation type. Required.
+    :vartype recommendation_type_id: str
+    :ivar category: Category of the recommendation. Required. Known values are: "Onboarding",
+     "NewFeature", "SocEfficiency", "CostOptimization", and "Demo".
+    :vartype category: str or ~azure.mgmt.securityinsight.models.Category
+    :ivar context: Context of the recommendation. Required. Known values are: "Analytics",
+     "Incidents", "Overview", and "None".
+    :vartype context: str or ~azure.mgmt.securityinsight.models.Context
+    :ivar workspace_id: Id of the workspace this recommendation refers to. Required.
+    :vartype workspace_id: str
+    :ivar actions: List of actions to take for this recommendation. Required.
+    :vartype actions: list[~azure.mgmt.securityinsight.models.RecommendedAction]
+    :ivar state: State of the recommendation. Required. Known values are: "Active", "Disabled",
+     "CompletedByUser", "CompletedByAction", and "Hidden".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.State
+    :ivar priority: Priority of the recommendation. Required. Known values are: "Low", "Medium",
+     and "High".
+    :vartype priority: str or ~azure.mgmt.securityinsight.models.Priority
+    :ivar last_evaluated_time_utc: The time stamp (UTC) when the recommendation was last evaluated.
+     Required.
+    :vartype last_evaluated_time_utc: ~datetime.datetime
+    :ivar hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+     again.
+    :vartype hide_until_time_utc: ~datetime.datetime
+    :ivar display_until_time_utc: The timestamp (UTC) after which the recommendation should not be
+     displayed anymore.
+    :vartype display_until_time_utc: ~datetime.datetime
+    :ivar visible: Value indicating if the recommendation should be displayed or not.
+    :vartype visible: bool
+    """
+
+    _validation = {
+        "id": {"required": True},
+        "instructions": {"required": True},
+        "title": {"required": True},
+        "description": {"required": True},
+        "recommendation_type_title": {"required": True},
+        "recommendation_type_id": {"required": True},
+        "category": {"required": True},
+        "context": {"required": True},
+        "workspace_id": {"required": True},
+        "actions": {"required": True},
+        "state": {"required": True},
+        "priority": {"required": True},
+        "last_evaluated_time_utc": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "instructions": {"key": "instructions", "type": "Instructions"},
+        "content": {"key": "content", "type": "Content"},
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "additional_properties": {"key": "additionalProperties", "type": "{str}"},
+        "title": {"key": "title", "type": "str"},
+        "description": {"key": "description", "type": "str"},
+        "recommendation_type_title": {"key": "recommendationTypeTitle", "type": "str"},
+        "recommendation_type_id": {"key": "recommendationTypeId", "type": "str"},
+        "category": {"key": "category", "type": "str"},
+        "context": {"key": "context", "type": "str"},
+        "workspace_id": {"key": "workspaceId", "type": "str"},
+        "actions": {"key": "actions", "type": "[RecommendedAction]"},
+        "state": {"key": "state", "type": "str"},
+        "priority": {"key": "priority", "type": "str"},
+        "last_evaluated_time_utc": {"key": "lastEvaluatedTimeUtc", "type": "iso-8601"},
+        "hide_until_time_utc": {"key": "hideUntilTimeUtc", "type": "iso-8601"},
+        "display_until_time_utc": {"key": "displayUntilTimeUtc", "type": "iso-8601"},
+        "visible": {"key": "visible", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        id: str,  # pylint: disable=redefined-builtin
+        instructions: "_models.Instructions",
+        title: str,
+        description: str,
+        recommendation_type_title: str,
+        recommendation_type_id: str,
+        category: Union[str, "_models.Category"],
+        context: Union[str, "_models.Context"],
+        workspace_id: str,
+        actions: List["_models.RecommendedAction"],
+        state: Union[str, "_models.State"],
+        priority: Union[str, "_models.Priority"],
+        last_evaluated_time_utc: datetime.datetime,
+        content: Optional["_models.Content"] = None,
+        resource_id: Optional[str] = None,
+        additional_properties: Optional[Dict[str, str]] = None,
+        hide_until_time_utc: Optional[datetime.datetime] = None,
+        display_until_time_utc: Optional[datetime.datetime] = None,
+        visible: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword id: id of recommendation. Required.
+        :paramtype id: str
+        :keyword instructions: Instructions of the recommendation. Required.
+        :paramtype instructions: ~azure.mgmt.securityinsight.models.Instructions
+        :keyword content: Content of the recommendation.
+        :paramtype content: ~azure.mgmt.securityinsight.models.Content
+        :keyword resource_id: Id of the resource this recommendation refers to.
+        :paramtype resource_id: str
+        :keyword additional_properties: Collection of additional properties for the recommendation.
+        :paramtype additional_properties: dict[str, str]
+        :keyword title: Title of the recommendation. Required.
+        :paramtype title: str
+        :keyword description: Description of the recommendation. Required.
+        :paramtype description: str
+        :keyword recommendation_type_title: Title of the recommendation type. Required.
+        :paramtype recommendation_type_title: str
+        :keyword recommendation_type_id: Id of the recommendation type. Required.
+        :paramtype recommendation_type_id: str
+        :keyword category: Category of the recommendation. Required. Known values are: "Onboarding",
+         "NewFeature", "SocEfficiency", "CostOptimization", and "Demo".
+        :paramtype category: str or ~azure.mgmt.securityinsight.models.Category
+        :keyword context: Context of the recommendation. Required. Known values are: "Analytics",
+         "Incidents", "Overview", and "None".
+        :paramtype context: str or ~azure.mgmt.securityinsight.models.Context
+        :keyword workspace_id: Id of the workspace this recommendation refers to. Required.
+        :paramtype workspace_id: str
+        :keyword actions: List of actions to take for this recommendation. Required.
+        :paramtype actions: list[~azure.mgmt.securityinsight.models.RecommendedAction]
+        :keyword state: State of the recommendation. Required. Known values are: "Active", "Disabled",
+         "CompletedByUser", "CompletedByAction", and "Hidden".
+        :paramtype state: str or ~azure.mgmt.securityinsight.models.State
+        :keyword priority: Priority of the recommendation. Required. Known values are: "Low", "Medium",
+         and "High".
+        :paramtype priority: str or ~azure.mgmt.securityinsight.models.Priority
+        :keyword last_evaluated_time_utc: The time stamp (UTC) when the recommendation was last
+         evaluated. Required.
+        :paramtype last_evaluated_time_utc: ~datetime.datetime
+        :keyword hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+         again.
+        :paramtype hide_until_time_utc: ~datetime.datetime
+        :keyword display_until_time_utc: The timestamp (UTC) after which the recommendation should not
+         be displayed anymore.
+        :paramtype display_until_time_utc: ~datetime.datetime
+        :keyword visible: Value indicating if the recommendation should be displayed or not.
+        :paramtype visible: bool
+        """
+        super().__init__(**kwargs)
+        self.id = id
+        self.instructions = instructions
+        self.content = content
+        self.resource_id = resource_id
+        self.additional_properties = additional_properties
+        self.title = title
+        self.description = description
+        self.recommendation_type_title = recommendation_type_title
+        self.recommendation_type_id = recommendation_type_id
+        self.category = category
+        self.context = context
+        self.workspace_id = workspace_id
+        self.actions = actions
+        self.state = state
+        self.priority = priority
+        self.last_evaluated_time_utc = last_evaluated_time_utc
+        self.hide_until_time_utc = hide_until_time_utc
+        self.display_until_time_utc = display_until_time_utc
+        self.visible = visible
+
+
+class RecommendationList(_serialization.Model):
+    """A list of recommendations.
+
+    :ivar value: An list of recommendations.
+    :vartype value: list[~azure.mgmt.securityinsight.models.Recommendation]
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[Recommendation]"},
+    }
+
+    def __init__(self, *, value: Optional[List["_models.Recommendation"]] = None, **kwargs):
+        """
+        :keyword value: An list of recommendations.
+        :paramtype value: list[~azure.mgmt.securityinsight.models.Recommendation]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+
+
+class RecommendationPatch(_serialization.Model):
+    """Recommendation Fields to update.
+
+    :ivar state: State of the recommendation. Known values are: "Active", "Disabled",
+     "CompletedByUser", "CompletedByAction", and "Hidden".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.State
+    :ivar hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+     again.
+    :vartype hide_until_time_utc: ~datetime.datetime
+    """
+
+    _attribute_map = {
+        "state": {"key": "state", "type": "str"},
+        "hide_until_time_utc": {"key": "hideUntilTimeUtc", "type": "iso-8601"},
+    }
+
+    def __init__(
+        self,
+        *,
+        state: Optional[Union[str, "_models.State"]] = None,
+        hide_until_time_utc: Optional[datetime.datetime] = None,
+        **kwargs
+    ):
+        """
+        :keyword state: State of the recommendation. Known values are: "Active", "Disabled",
+         "CompletedByUser", "CompletedByAction", and "Hidden".
+        :paramtype state: str or ~azure.mgmt.securityinsight.models.State
+        :keyword hide_until_time_utc: The time stamp (UTC) when the recommendation should be displayed
+         again.
+        :paramtype hide_until_time_utc: ~datetime.datetime
+        """
+        super().__init__(**kwargs)
+        self.state = state
+        self.hide_until_time_utc = hide_until_time_utc
+
+
+class RecommendedAction(_serialization.Model):
+    """What actions should be taken to complete the recommendation.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar link_text: Text of the link to complete the action. Required.
+    :vartype link_text: str
+    :ivar link_url: The Link to complete the action. Required.
+    :vartype link_url: str
+    :ivar state: The state of the action. Known values are: "Low", "Medium", and "High".
+    :vartype state: str or ~azure.mgmt.securityinsight.models.Priority
+    """
+
+    _validation = {
+        "link_text": {"required": True},
+        "link_url": {"required": True},
+    }
+
+    _attribute_map = {
+        "link_text": {"key": "linkText", "type": "str"},
+        "link_url": {"key": "linkUrl", "type": "str"},
+        "state": {"key": "state", "type": "str"},
+    }
+
+    def __init__(
+        self, *, link_text: str, link_url: str, state: Optional[Union[str, "_models.Priority"]] = None, **kwargs
+    ):
+        """
+        :keyword link_text: Text of the link to complete the action. Required.
+        :paramtype link_text: str
+        :keyword link_url: The Link to complete the action. Required.
+        :paramtype link_url: str
+        :keyword state: The state of the action. Known values are: "Low", "Medium", and "High".
+        :paramtype state: str or ~azure.mgmt.securityinsight.models.Priority
+        """
+        super().__init__(**kwargs)
+        self.link_text = link_text
+        self.link_url = link_url
+        self.state = state
+
+
 class RegistryKeyEntity(Entity):
     """Represents a registry key entity.
 
@@ -18268,6 +18716,9 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     :ivar alert_rule_template_name: The Name of the alert rule template used to create this rule.
     :vartype alert_rule_template_name: str
     :ivar template_version: The version of the alert rule template used to create this rule - in
@@ -18322,6 +18773,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         "custom_details": {"key": "properties.customDetails", "type": "{str}"},
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
         "alert_rule_template_name": {"key": "properties.alertRuleTemplateName", "type": "str"},
         "template_version": {"key": "properties.templateVersion", "type": "str"},
         "description": {"key": "properties.description", "type": "str"},
@@ -18349,6 +18801,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         alert_rule_template_name: Optional[str] = None,
         template_version: Optional[str] = None,
         description: Optional[str] = None,
@@ -18388,6 +18841,9 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         :keyword alert_rule_template_name: The Name of the alert rule template used to create this
          rule.
         :paramtype alert_rule_template_name: str
@@ -18426,6 +18882,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
+        self.sentinel_entities_mappings = sentinel_entities_mappings
         self.alert_rule_template_name = alert_rule_template_name
         self.template_version = template_version
         self.description = description
@@ -18439,7 +18896,7 @@ class ScheduledAlertRule(AlertRule):  # pylint: disable=too-many-instance-attrib
         self.incident_configuration = incident_configuration
 
 
-class ScheduledAlertRuleCommonProperties(_serialization.Model):
+class ScheduledAlertRuleCommonProperties(_serialization.Model):  # pylint: disable=too-many-instance-attributes
     """Scheduled alert rule template property bag.
 
     :ivar query: The query that creates alerts for this rule.
@@ -18465,6 +18922,9 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _attribute_map = {
@@ -18478,6 +18938,7 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         "custom_details": {"key": "customDetails", "type": "{str}"},
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(
@@ -18493,6 +18954,7 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -18520,6 +18982,9 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.query = query
@@ -18532,6 +18997,7 @@ class ScheduledAlertRuleCommonProperties(_serialization.Model):
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylint: disable=too-many-instance-attributes
@@ -18564,6 +19030,9 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     :ivar alert_rule_template_name: The Name of the alert rule template used to create this rule.
     :vartype alert_rule_template_name: str
     :ivar template_version: The version of the alert rule template used to create this rule - in
@@ -18611,6 +19080,7 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
         "custom_details": {"key": "customDetails", "type": "{str}"},
         "entity_mappings": {"key": "entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
         "alert_rule_template_name": {"key": "alertRuleTemplateName", "type": "str"},
         "template_version": {"key": "templateVersion", "type": "str"},
         "description": {"key": "description", "type": "str"},
@@ -18641,6 +19111,7 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         alert_rule_template_name: Optional[str] = None,
         template_version: Optional[str] = None,
         description: Optional[str] = None,
@@ -18674,6 +19145,9 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         :keyword alert_rule_template_name: The Name of the alert rule template used to create this
          rule.
         :paramtype alert_rule_template_name: str
@@ -18711,6 +19185,7 @@ class ScheduledAlertRuleProperties(ScheduledAlertRuleCommonProperties):  # pylin
             custom_details=custom_details,
             entity_mappings=entity_mappings,
             alert_details_override=alert_details_override,
+            sentinel_entities_mappings=sentinel_entities_mappings,
             **kwargs
         )
         self.alert_rule_template_name = alert_rule_template_name
@@ -18795,6 +19270,9 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
     :vartype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
     :ivar alert_details_override: The alert details override settings.
     :vartype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+    :ivar sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+    :vartype sentinel_entities_mappings:
+     list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
     """
 
     _validation = {
@@ -18836,6 +19314,7 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         "custom_details": {"key": "properties.customDetails", "type": "{str}"},
         "entity_mappings": {"key": "properties.entityMappings", "type": "[EntityMapping]"},
         "alert_details_override": {"key": "properties.alertDetailsOverride", "type": "AlertDetailsOverride"},
+        "sentinel_entities_mappings": {"key": "properties.sentinelEntitiesMappings", "type": "[SentinelEntityMapping]"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -18859,6 +19338,7 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         custom_details: Optional[Dict[str, str]] = None,
         entity_mappings: Optional[List["_models.EntityMapping"]] = None,
         alert_details_override: Optional["_models.AlertDetailsOverride"] = None,
+        sentinel_entities_mappings: Optional[List["_models.SentinelEntityMapping"]] = None,
         **kwargs
     ):
         """
@@ -18906,6 +19386,9 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         :paramtype entity_mappings: list[~azure.mgmt.securityinsight.models.EntityMapping]
         :keyword alert_details_override: The alert details override settings.
         :paramtype alert_details_override: ~azure.mgmt.securityinsight.models.AlertDetailsOverride
+        :keyword sentinel_entities_mappings: Array of the sentinel entity mappings of the alert rule.
+        :paramtype sentinel_entities_mappings:
+         list[~azure.mgmt.securityinsight.models.SentinelEntityMapping]
         """
         super().__init__(**kwargs)
         self.kind = "Scheduled"  # type: str
@@ -18929,6 +19412,7 @@ class ScheduledAlertRuleTemplate(AlertRuleTemplate):  # pylint: disable=too-many
         self.custom_details = custom_details
         self.entity_mappings = entity_mappings
         self.alert_details_override = alert_details_override
+        self.sentinel_entities_mappings = sentinel_entities_mappings
 
 
 class SecurityAlert(Entity):  # pylint: disable=too-many-instance-attributes
@@ -19337,8 +19821,10 @@ class SecurityAlertPropertiesConfidenceReasonsItem(_serialization.Model):
         self.reason_type = None
 
 
-class SecurityAlertTimelineItem(EntityTimelineItem):
+class SecurityAlertTimelineItem(EntityTimelineItem):  # pylint: disable=too-many-instance-attributes
     """Represents security alert timeline item.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -19364,6 +19850,13 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
     :vartype time_generated: ~datetime.datetime
     :ivar alert_type: The name of the alert type. Required.
     :vartype alert_type: str
+    :ivar intent: The intent of the alert. Known values are: "Unknown", "Probing", "Exploitation",
+     "Persistence", "PrivilegeEscalation", "DefenseEvasion", "CredentialAccess", "Discovery",
+     "LateralMovement", "Execution", "Collection", "Exfiltration", "CommandAndControl", and
+     "Impact".
+    :vartype intent: str or ~azure.mgmt.securityinsight.models.KillChainIntent
+    :ivar techniques: The techniques of the alert.
+    :vartype techniques: list[str]
     """
 
     _validation = {
@@ -19375,6 +19868,7 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         "start_time_utc": {"required": True},
         "time_generated": {"required": True},
         "alert_type": {"required": True},
+        "intent": {"readonly": True},
     }
 
     _attribute_map = {
@@ -19388,6 +19882,8 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         "start_time_utc": {"key": "startTimeUtc", "type": "iso-8601"},
         "time_generated": {"key": "timeGenerated", "type": "iso-8601"},
         "alert_type": {"key": "alertType", "type": "str"},
+        "intent": {"key": "intent", "type": "str"},
+        "techniques": {"key": "techniques", "type": "[str]"},
     }
 
     def __init__(
@@ -19402,6 +19898,7 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         alert_type: str,
         product_name: Optional[str] = None,
         description: Optional[str] = None,
+        techniques: Optional[List[str]] = None,
         **kwargs
     ):
         """
@@ -19424,6 +19921,8 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         :paramtype time_generated: ~datetime.datetime
         :keyword alert_type: The name of the alert type. Required.
         :paramtype alert_type: str
+        :keyword techniques: The techniques of the alert.
+        :paramtype techniques: list[str]
         """
         super().__init__(**kwargs)
         self.kind = "SecurityAlert"  # type: str
@@ -19436,6 +19935,8 @@ class SecurityAlertTimelineItem(EntityTimelineItem):
         self.start_time_utc = start_time_utc
         self.time_generated = time_generated
         self.alert_type = alert_type
+        self.intent = None
+        self.techniques = techniques
 
 
 class SecurityGroupEntity(Entity):
@@ -19616,6 +20117,26 @@ class SecurityMLAnalyticsSettingsList(_serialization.Model):
         super().__init__(**kwargs)
         self.next_link = None
         self.value = value
+
+
+class SentinelEntityMapping(_serialization.Model):
+    """A single sentinel entity mapping.
+
+    :ivar column_name: the column name to be mapped to the SentinelEntities.
+    :vartype column_name: str
+    """
+
+    _attribute_map = {
+        "column_name": {"key": "columnName", "type": "str"},
+    }
+
+    def __init__(self, *, column_name: Optional[str] = None, **kwargs):
+        """
+        :keyword column_name: the column name to be mapped to the SentinelEntities.
+        :paramtype column_name: str
+        """
+        super().__init__(**kwargs)
+        self.column_name = column_name
 
 
 class SentinelOnboardingState(ResourceWithEtag):
@@ -20175,10 +20696,10 @@ class TeamProperties(_serialization.Model):
     :vartype team_name: str
     :ivar team_description: The description of the team.
     :vartype team_description: str
-    :ivar member_ids: List of member IDs to add to the team.
-    :vartype member_ids: list[str]
     :ivar group_ids: List of group IDs to add their members to the team.
     :vartype group_ids: list[str]
+    :ivar member_ids: List of member IDs to add to the team.
+    :vartype member_ids: list[str]
     """
 
     _validation = {
@@ -20188,8 +20709,8 @@ class TeamProperties(_serialization.Model):
     _attribute_map = {
         "team_name": {"key": "teamName", "type": "str"},
         "team_description": {"key": "teamDescription", "type": "str"},
-        "member_ids": {"key": "memberIds", "type": "[str]"},
         "group_ids": {"key": "groupIds", "type": "[str]"},
+        "member_ids": {"key": "memberIds", "type": "[str]"},
     }
 
     def __init__(
@@ -20197,8 +20718,8 @@ class TeamProperties(_serialization.Model):
         *,
         team_name: str,
         team_description: Optional[str] = None,
-        member_ids: Optional[List[str]] = None,
         group_ids: Optional[List[str]] = None,
+        member_ids: Optional[List[str]] = None,
         **kwargs
     ):
         """
@@ -20206,16 +20727,16 @@ class TeamProperties(_serialization.Model):
         :paramtype team_name: str
         :keyword team_description: The description of the team.
         :paramtype team_description: str
-        :keyword member_ids: List of member IDs to add to the team.
-        :paramtype member_ids: list[str]
         :keyword group_ids: List of group IDs to add their members to the team.
         :paramtype group_ids: list[str]
+        :keyword member_ids: List of member IDs to add to the team.
+        :paramtype member_ids: list[str]
         """
         super().__init__(**kwargs)
         self.team_name = team_name
         self.team_description = team_description
-        self.member_ids = member_ids
         self.group_ids = group_ids
+        self.member_ids = member_ids
 
 
 class ThreatIntelligence(_serialization.Model):
