@@ -241,7 +241,7 @@ class ActionGroupResource(AzureResource):  # pylint: disable=too-many-instance-a
         "name": {"readonly": True},
         "type": {"readonly": True},
         "location": {"required": True},
-        "group_short_name": {"max_length": 12},
+        "group_short_name": {"max_length": 12, "min_length": 2},
     }
 
     _attribute_map = {
@@ -616,7 +616,10 @@ class EmailReceiver(_serialization.Model):
 
     _validation = {
         "name": {"required": True},
-        "email_address": {"required": True},
+        "email_address": {
+            "required": True,
+            "pattern": r"^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
+        },
         "status": {"readonly": True},
     }
 
