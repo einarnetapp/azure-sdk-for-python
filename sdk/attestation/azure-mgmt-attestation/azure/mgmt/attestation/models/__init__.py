@@ -14,7 +14,9 @@ from ._models_py3 import AttestationServicePatchParams
 from ._models_py3 import CloudErrorBody
 from ._models_py3 import JSONWebKey
 from ._models_py3 import JSONWebKeySet
+from ._models_py3 import LogSpecification
 from ._models_py3 import OperationList
+from ._models_py3 import OperationProperties
 from ._models_py3 import OperationsDefinition
 from ._models_py3 import OperationsDisplayDefinition
 from ._models_py3 import PrivateEndpoint
@@ -22,6 +24,7 @@ from ._models_py3 import PrivateEndpointConnection
 from ._models_py3 import PrivateEndpointConnectionListResult
 from ._models_py3 import PrivateLinkServiceConnectionState
 from ._models_py3 import Resource
+from ._models_py3 import ServiceSpecification
 from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
 
@@ -42,7 +45,9 @@ __all__ = [
     "CloudErrorBody",
     "JSONWebKey",
     "JSONWebKeySet",
+    "LogSpecification",
     "OperationList",
+    "OperationProperties",
     "OperationsDefinition",
     "OperationsDisplayDefinition",
     "PrivateEndpoint",
@@ -50,6 +55,7 @@ __all__ = [
     "PrivateEndpointConnectionListResult",
     "PrivateLinkServiceConnectionState",
     "Resource",
+    "ServiceSpecification",
     "SystemData",
     "TrackedResource",
     "AttestationServiceStatus",
