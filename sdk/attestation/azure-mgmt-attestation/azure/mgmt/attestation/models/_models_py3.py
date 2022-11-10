@@ -562,6 +562,32 @@ class JSONWebKeySet(_serialization.Model):
         self.keys = keys
 
 
+class LogSpecification(_serialization.Model):
+    """Specifications of the Log for Microsoft Azure Attestation.
+
+    :ivar name: Name of the log.
+    :vartype name: str
+    :ivar display_name: Localized friendly display name of the log.
+    :vartype display_name: str
+    """
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+    }
+
+    def __init__(self, *, name: Optional[str] = None, display_name: Optional[str] = None, **kwargs):
+        """
+        :keyword name: Name of the log.
+        :paramtype name: str
+        :keyword display_name: Localized friendly display name of the log.
+        :paramtype display_name: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.display_name = display_name
+
+
 class OperationList(_serialization.Model):
     """List of supported operations.
 
@@ -592,6 +618,26 @@ class OperationList(_serialization.Model):
         self.value = value
 
 
+class OperationProperties(_serialization.Model):
+    """Extra Operation properties.
+
+    :ivar service_specification: Service specifications of the operation.
+    :vartype service_specification: ~azure.mgmt.attestation.models.ServiceSpecification
+    """
+
+    _attribute_map = {
+        "service_specification": {"key": "serviceSpecification", "type": "ServiceSpecification"},
+    }
+
+    def __init__(self, *, service_specification: Optional["_models.ServiceSpecification"] = None, **kwargs):
+        """
+        :keyword service_specification: Service specifications of the operation.
+        :paramtype service_specification: ~azure.mgmt.attestation.models.ServiceSpecification
+        """
+        super().__init__(**kwargs)
+        self.service_specification = service_specification
+
+
 class OperationsDefinition(_serialization.Model):
     """Definition object with the name and properties of an operation.
 
@@ -599,25 +645,36 @@ class OperationsDefinition(_serialization.Model):
     :vartype name: str
     :ivar display: Display object with properties of the operation.
     :vartype display: ~azure.mgmt.attestation.models.OperationsDisplayDefinition
+    :ivar properties: Properties of the operation.
+    :vartype properties: ~azure.mgmt.attestation.models.OperationProperties
     """
 
     _attribute_map = {
         "name": {"key": "name", "type": "str"},
         "display": {"key": "display", "type": "OperationsDisplayDefinition"},
+        "properties": {"key": "properties", "type": "OperationProperties"},
     }
 
     def __init__(
-        self, *, name: Optional[str] = None, display: Optional["_models.OperationsDisplayDefinition"] = None, **kwargs
+        self,
+        *,
+        name: Optional[str] = None,
+        display: Optional["_models.OperationsDisplayDefinition"] = None,
+        properties: Optional["_models.OperationProperties"] = None,
+        **kwargs
     ):
         """
         :keyword name: Name of the operation.
         :paramtype name: str
         :keyword display: Display object with properties of the operation.
         :paramtype display: ~azure.mgmt.attestation.models.OperationsDisplayDefinition
+        :keyword properties: Properties of the operation.
+        :paramtype properties: ~azure.mgmt.attestation.models.OperationProperties
         """
         super().__init__(**kwargs)
         self.name = name
         self.display = display
+        self.properties = properties
 
 
 class OperationsDisplayDefinition(_serialization.Model):
@@ -815,6 +872,26 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         self.status = status
         self.description = description
         self.actions_required = actions_required
+
+
+class ServiceSpecification(_serialization.Model):
+    """Service specification payload.
+
+    :ivar log_specifications: Specifications of the Log for Microsoft Azure Attestation.
+    :vartype log_specifications: list[~azure.mgmt.attestation.models.LogSpecification]
+    """
+
+    _attribute_map = {
+        "log_specifications": {"key": "logSpecifications", "type": "[LogSpecification]"},
+    }
+
+    def __init__(self, *, log_specifications: Optional[List["_models.LogSpecification"]] = None, **kwargs):
+        """
+        :keyword log_specifications: Specifications of the Log for Microsoft Azure Attestation.
+        :paramtype log_specifications: list[~azure.mgmt.attestation.models.LogSpecification]
+        """
+        super().__init__(**kwargs)
+        self.log_specifications = log_specifications
 
 
 class SystemData(_serialization.Model):
