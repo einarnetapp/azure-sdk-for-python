@@ -6,8 +6,10 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import AADApp
 from ._models_py3 import ActiveDirectoryAdministrator
 from ._models_py3 import ActiveDirectoryAdministratorAdd
+from ._models_py3 import AdminCredentials
 from ._models_py3 import AdministratorListResult
 from ._models_py3 import AuthConfig
 from ._models_py3 import Backup
@@ -18,6 +20,7 @@ from ._models_py3 import CheckNameAvailabilityResponse
 from ._models_py3 import Configuration
 from ._models_py3 import ConfigurationForUpdate
 from ._models_py3 import ConfigurationListResult
+from ._models_py3 import DBServerMetadata
 from ._models_py3 import DataEncryption
 from ._models_py3 import Database
 from ._models_py3 import DatabaseListResult
@@ -32,6 +35,14 @@ from ._models_py3 import FlexibleServerEditionCapability
 from ._models_py3 import HighAvailability
 from ._models_py3 import HyperscaleNodeEditionCapability
 from ._models_py3 import MaintenanceWindow
+from ._models_py3 import MigrationNameAvailabilityResource
+from ._models_py3 import MigrationResource
+from ._models_py3 import MigrationResourceForPatch
+from ._models_py3 import MigrationResourceGroup
+from ._models_py3 import MigrationResourceListResult
+from ._models_py3 import MigrationSecretParameters
+from ._models_py3 import MigrationStatus
+from ._models_py3 import MigrationSubStateDetails
 from ._models_py3 import NameAvailability
 from ._models_py3 import Network
 from ._models_py3 import NodeTypeCapability
@@ -70,6 +81,11 @@ from ._postgre_sql_management_client_enums import FailoverMode
 from ._postgre_sql_management_client_enums import GeoRedundantBackupEnum
 from ._postgre_sql_management_client_enums import HighAvailabilityMode
 from ._postgre_sql_management_client_enums import IdentityType
+from ._postgre_sql_management_client_enums import MigrationDetailsLevel
+from ._postgre_sql_management_client_enums import MigrationListFilter
+from ._postgre_sql_management_client_enums import MigrationNameAvailabilityReason
+from ._postgre_sql_management_client_enums import MigrationState
+from ._postgre_sql_management_client_enums import MigrationSubState
 from ._postgre_sql_management_client_enums import OperationOrigin
 from ._postgre_sql_management_client_enums import Origin
 from ._postgre_sql_management_client_enums import PrincipalType
@@ -84,8 +100,10 @@ from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "AADApp",
     "ActiveDirectoryAdministrator",
     "ActiveDirectoryAdministratorAdd",
+    "AdminCredentials",
     "AdministratorListResult",
     "AuthConfig",
     "Backup",
@@ -96,6 +114,7 @@ __all__ = [
     "Configuration",
     "ConfigurationForUpdate",
     "ConfigurationListResult",
+    "DBServerMetadata",
     "DataEncryption",
     "Database",
     "DatabaseListResult",
@@ -110,6 +129,14 @@ __all__ = [
     "HighAvailability",
     "HyperscaleNodeEditionCapability",
     "MaintenanceWindow",
+    "MigrationNameAvailabilityResource",
+    "MigrationResource",
+    "MigrationResourceForPatch",
+    "MigrationResourceGroup",
+    "MigrationResourceListResult",
+    "MigrationSecretParameters",
+    "MigrationStatus",
+    "MigrationSubStateDetails",
     "NameAvailability",
     "Network",
     "NodeTypeCapability",
@@ -147,6 +174,11 @@ __all__ = [
     "GeoRedundantBackupEnum",
     "HighAvailabilityMode",
     "IdentityType",
+    "MigrationDetailsLevel",
+    "MigrationListFilter",
+    "MigrationNameAvailabilityReason",
+    "MigrationState",
+    "MigrationSubState",
     "OperationOrigin",
     "Origin",
     "PrincipalType",

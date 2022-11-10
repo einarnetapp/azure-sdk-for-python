@@ -17,6 +17,46 @@ if TYPE_CHECKING:
     from .. import models as _models
 
 
+class AADApp(_serialization.Model):
+    """Azure active directory application.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar aad_secret: Required.
+    :vartype aad_secret: str
+    :ivar client_id: Required.
+    :vartype client_id: str
+    :ivar tenant_id: Required.
+    :vartype tenant_id: str
+    """
+
+    _validation = {
+        "aad_secret": {"required": True},
+        "client_id": {"required": True},
+        "tenant_id": {"required": True},
+    }
+
+    _attribute_map = {
+        "aad_secret": {"key": "aadSecret", "type": "str"},
+        "client_id": {"key": "clientId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+    }
+
+    def __init__(self, *, aad_secret: str, client_id: str, tenant_id: str, **kwargs):
+        """
+        :keyword aad_secret: Required.
+        :paramtype aad_secret: str
+        :keyword client_id: Required.
+        :paramtype client_id: str
+        :keyword tenant_id: Required.
+        :paramtype tenant_id: str
+        """
+        super().__init__(**kwargs)
+        self.aad_secret = aad_secret
+        self.client_id = client_id
+        self.tenant_id = tenant_id
+
+
 class Resource(_serialization.Model):
     """Common fields that are returned in the response for all Azure Resource Manager resources.
 
@@ -210,6 +250,39 @@ class ActiveDirectoryAdministratorAdd(_serialization.Model):
         self.principal_type = principal_type
         self.principal_name = principal_name
         self.tenant_id = tenant_id
+
+
+class AdminCredentials(_serialization.Model):
+    """Server admin credentials.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar source_server_password: Required.
+    :vartype source_server_password: str
+    :ivar target_server_password: Required.
+    :vartype target_server_password: str
+    """
+
+    _validation = {
+        "source_server_password": {"required": True},
+        "target_server_password": {"required": True},
+    }
+
+    _attribute_map = {
+        "source_server_password": {"key": "sourceServerPassword", "type": "str"},
+        "target_server_password": {"key": "targetServerPassword", "type": "str"},
+    }
+
+    def __init__(self, *, source_server_password: str, target_server_password: str, **kwargs):
+        """
+        :keyword source_server_password: Required.
+        :paramtype source_server_password: str
+        :keyword target_server_password: Required.
+        :paramtype target_server_password: str
+        """
+        super().__init__(**kwargs)
+        self.source_server_password = source_server_password
+        self.target_server_password = target_server_password
 
 
 class AdministratorListResult(_serialization.Model):
@@ -837,6 +910,52 @@ class DataEncryption(_serialization.Model):
         self.type = type
 
 
+class DBServerMetadata(_serialization.Model):
+    """Database server metadata.
+
+    :ivar location:
+    :vartype location: str
+    :ivar version:
+    :vartype version: str
+    :ivar storage_mb:
+    :vartype storage_mb: int
+    :ivar sku: The SKU (pricing tier) of the server.
+    :vartype sku: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.Sku
+    """
+
+    _attribute_map = {
+        "location": {"key": "location", "type": "str"},
+        "version": {"key": "version", "type": "str"},
+        "storage_mb": {"key": "storageMB", "type": "int"},
+        "sku": {"key": "sku", "type": "Sku"},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: Optional[str] = None,
+        version: Optional[str] = None,
+        storage_mb: Optional[int] = None,
+        sku: Optional["_models.Sku"] = None,
+        **kwargs
+    ):
+        """
+        :keyword location:
+        :paramtype location: str
+        :keyword version:
+        :paramtype version: str
+        :keyword storage_mb:
+        :paramtype storage_mb: int
+        :keyword sku: The SKU (pricing tier) of the server.
+        :paramtype sku: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.Sku
+        """
+        super().__init__(**kwargs)
+        self.location = location
+        self.version = version
+        self.storage_mb = storage_mb
+        self.sku = sku
+
+
 class DelegatedSubnetUsage(_serialization.Model):
     """Delegated subnet usage data.
 
@@ -1260,6 +1379,543 @@ class MaintenanceWindow(_serialization.Model):
         self.day_of_week = day_of_week
 
 
+class MigrationNameAvailabilityResource(_serialization.Model):
+    """Represents a migration name's availability.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar name: The resource name to verify. Required.
+    :vartype name: str
+    :ivar type: The type of the resource. Required.
+    :vartype type: str
+    :ivar name_available: Indicates whether the resource name is available.
+    :vartype name_available: bool
+    :ivar reason: Migration name availability reason. Known values are: "Invalid" and
+     "AlreadyExists".
+    :vartype reason: str or
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationNameAvailabilityReason
+    :ivar message: Migration name availability message.
+    :vartype message: str
+    """
+
+    _validation = {
+        "name": {"required": True},
+        "type": {"required": True},
+        "name_available": {"readonly": True},
+        "reason": {"readonly": True},
+        "message": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "name_available": {"key": "nameAvailable", "type": "bool"},
+        "reason": {"key": "reason", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+    }
+
+    def __init__(self, *, name: str, type: str, **kwargs):
+        """
+        :keyword name: The resource name to verify. Required.
+        :paramtype name: str
+        :keyword type: The type of the resource. Required.
+        :paramtype type: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.type = type
+        self.name_available = None
+        self.reason = None
+        self.message = None
+
+
+class TrackedResource(Resource):
+    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.SystemData
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives. Required.
+    :vartype location: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+    }
+
+    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
+        """
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: The geo-location where the resource lives. Required.
+        :paramtype location: str
+        """
+        super().__init__(**kwargs)
+        self.tags = tags
+        self.location = location
+
+
+class MigrationResource(TrackedResource):  # pylint: disable=too-many-instance-attributes
+    """Represents a migration resource.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.SystemData
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives. Required.
+    :vartype location: str
+    :ivar migration_id:
+    :vartype migration_id: str
+    :ivar migration_name:
+    :vartype migration_name: str
+    :ivar migration_details_level: Migration details level. Known values are: "Default", "Summary",
+     and "Full".
+    :vartype migration_details_level: str or
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationDetailsLevel
+    :ivar current_status: Migration status.
+    :vartype current_status: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationStatus
+    :ivar source_db_server_metadata: Database server metadata.
+    :vartype source_db_server_metadata:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.DBServerMetadata
+    :ivar target_db_server_metadata: Database server metadata.
+    :vartype target_db_server_metadata:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.DBServerMetadata
+    :ivar source_db_server_resource_id:
+    :vartype source_db_server_resource_id: str
+    :ivar secret_parameters: Migration secret parameters.
+    :vartype secret_parameters:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationSecretParameters
+    :ivar user_assigned_identity_resource_id:
+    :vartype user_assigned_identity_resource_id: str
+    :ivar target_db_server_resource_id:
+    :vartype target_db_server_resource_id: str
+    :ivar d_bs_to_migrate:
+    :vartype d_bs_to_migrate: list[str]
+    :ivar migration_resource_group: Migration resource group.
+    :vartype migration_resource_group:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationResourceGroup
+    :ivar setup_logical_replication_on_source_db_if_needed:
+    :vartype setup_logical_replication_on_source_db_if_needed: bool
+    :ivar overwrite_dbs_in_target:
+    :vartype overwrite_dbs_in_target: bool
+    :ivar migration_window_start_time_in_utc:
+    :vartype migration_window_start_time_in_utc: ~datetime.datetime
+    :ivar start_data_migration:
+    :vartype start_data_migration: bool
+    :ivar trigger_cutover:
+    :vartype trigger_cutover: bool
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+        "location": {"required": True},
+        "migration_id": {"readonly": True},
+        "migration_name": {"readonly": True},
+        "migration_details_level": {"readonly": True},
+        "current_status": {"readonly": True},
+        "source_db_server_metadata": {"readonly": True},
+        "target_db_server_metadata": {"readonly": True},
+        "target_db_server_resource_id": {"readonly": True},
+        "d_bs_to_migrate": {"max_items": 8, "min_items": 0},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "tags": {"key": "tags", "type": "{str}"},
+        "location": {"key": "location", "type": "str"},
+        "migration_id": {"key": "properties.migrationId", "type": "str"},
+        "migration_name": {"key": "properties.migrationName", "type": "str"},
+        "migration_details_level": {"key": "properties.migrationDetailsLevel", "type": "str"},
+        "current_status": {"key": "properties.currentStatus", "type": "MigrationStatus"},
+        "source_db_server_metadata": {"key": "properties.sourceDBServerMetadata", "type": "DBServerMetadata"},
+        "target_db_server_metadata": {"key": "properties.targetDBServerMetadata", "type": "DBServerMetadata"},
+        "source_db_server_resource_id": {"key": "properties.sourceDBServerResourceId", "type": "str"},
+        "secret_parameters": {"key": "properties.secretParameters", "type": "MigrationSecretParameters"},
+        "user_assigned_identity_resource_id": {"key": "properties.userAssignedIdentityResourceId", "type": "str"},
+        "target_db_server_resource_id": {"key": "properties.targetDBServerResourceId", "type": "str"},
+        "d_bs_to_migrate": {"key": "properties.dBsToMigrate", "type": "[str]"},
+        "migration_resource_group": {"key": "properties.migrationResourceGroup", "type": "MigrationResourceGroup"},
+        "setup_logical_replication_on_source_db_if_needed": {
+            "key": "properties.setupLogicalReplicationOnSourceDBIfNeeded",
+            "type": "bool",
+        },
+        "overwrite_dbs_in_target": {"key": "properties.overwriteDBsInTarget", "type": "bool"},
+        "migration_window_start_time_in_utc": {"key": "properties.migrationWindowStartTimeInUtc", "type": "iso-8601"},
+        "start_data_migration": {"key": "properties.startDataMigration", "type": "bool"},
+        "trigger_cutover": {"key": "properties.triggerCutover", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        location: str,
+        tags: Optional[Dict[str, str]] = None,
+        source_db_server_resource_id: Optional[str] = None,
+        secret_parameters: Optional["_models.MigrationSecretParameters"] = None,
+        user_assigned_identity_resource_id: Optional[str] = None,
+        d_bs_to_migrate: Optional[List[str]] = None,
+        migration_resource_group: Optional["_models.MigrationResourceGroup"] = None,
+        setup_logical_replication_on_source_db_if_needed: Optional[bool] = None,
+        overwrite_dbs_in_target: Optional[bool] = None,
+        migration_window_start_time_in_utc: Optional[datetime.datetime] = None,
+        start_data_migration: Optional[bool] = None,
+        trigger_cutover: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword tags: Resource tags.
+        :paramtype tags: dict[str, str]
+        :keyword location: The geo-location where the resource lives. Required.
+        :paramtype location: str
+        :keyword source_db_server_resource_id:
+        :paramtype source_db_server_resource_id: str
+        :keyword secret_parameters: Migration secret parameters.
+        :paramtype secret_parameters:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationSecretParameters
+        :keyword user_assigned_identity_resource_id:
+        :paramtype user_assigned_identity_resource_id: str
+        :keyword d_bs_to_migrate:
+        :paramtype d_bs_to_migrate: list[str]
+        :keyword migration_resource_group: Migration resource group.
+        :paramtype migration_resource_group:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationResourceGroup
+        :keyword setup_logical_replication_on_source_db_if_needed:
+        :paramtype setup_logical_replication_on_source_db_if_needed: bool
+        :keyword overwrite_dbs_in_target:
+        :paramtype overwrite_dbs_in_target: bool
+        :keyword migration_window_start_time_in_utc:
+        :paramtype migration_window_start_time_in_utc: ~datetime.datetime
+        :keyword start_data_migration:
+        :paramtype start_data_migration: bool
+        :keyword trigger_cutover:
+        :paramtype trigger_cutover: bool
+        """
+        super().__init__(tags=tags, location=location, **kwargs)
+        self.migration_id = None
+        self.migration_name = None
+        self.migration_details_level = None
+        self.current_status = None
+        self.source_db_server_metadata = None
+        self.target_db_server_metadata = None
+        self.source_db_server_resource_id = source_db_server_resource_id
+        self.secret_parameters = secret_parameters
+        self.user_assigned_identity_resource_id = user_assigned_identity_resource_id
+        self.target_db_server_resource_id = None
+        self.d_bs_to_migrate = d_bs_to_migrate
+        self.migration_resource_group = migration_resource_group
+        self.setup_logical_replication_on_source_db_if_needed = setup_logical_replication_on_source_db_if_needed
+        self.overwrite_dbs_in_target = overwrite_dbs_in_target
+        self.migration_window_start_time_in_utc = migration_window_start_time_in_utc
+        self.start_data_migration = start_data_migration
+        self.trigger_cutover = trigger_cutover
+
+
+class MigrationResourceForPatch(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+    """Represents a migration resource for patch.
+
+    :ivar tags: Application-specific metadata in the form of key-value pairs.
+    :vartype tags: dict[str, str]
+    :ivar source_db_server_resource_id:
+    :vartype source_db_server_resource_id: str
+    :ivar secret_parameters: Migration secret parameters.
+    :vartype secret_parameters:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationSecretParameters
+    :ivar user_assigned_identity_resource_id:
+    :vartype user_assigned_identity_resource_id: str
+    :ivar d_bs_to_migrate:
+    :vartype d_bs_to_migrate: list[str]
+    :ivar migration_resource_group: Migration resource group.
+    :vartype migration_resource_group:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationResourceGroup
+    :ivar setup_logical_replication_on_source_db_if_needed:
+    :vartype setup_logical_replication_on_source_db_if_needed: bool
+    :ivar overwrite_dbs_in_target:
+    :vartype overwrite_dbs_in_target: bool
+    :ivar migration_window_start_time_in_utc:
+    :vartype migration_window_start_time_in_utc: ~datetime.datetime
+    :ivar start_data_migration:
+    :vartype start_data_migration: bool
+    :ivar trigger_cutover:
+    :vartype trigger_cutover: bool
+    """
+
+    _validation = {
+        "d_bs_to_migrate": {"max_items": 8, "min_items": 0},
+    }
+
+    _attribute_map = {
+        "tags": {"key": "tags", "type": "{str}"},
+        "source_db_server_resource_id": {"key": "properties.sourceDBServerResourceId", "type": "str"},
+        "secret_parameters": {"key": "properties.secretParameters", "type": "MigrationSecretParameters"},
+        "user_assigned_identity_resource_id": {"key": "properties.userAssignedIdentityResourceId", "type": "str"},
+        "d_bs_to_migrate": {"key": "properties.dBsToMigrate", "type": "[str]"},
+        "migration_resource_group": {"key": "properties.migrationResourceGroup", "type": "MigrationResourceGroup"},
+        "setup_logical_replication_on_source_db_if_needed": {
+            "key": "properties.setupLogicalReplicationOnSourceDBIfNeeded",
+            "type": "bool",
+        },
+        "overwrite_dbs_in_target": {"key": "properties.overwriteDBsInTarget", "type": "bool"},
+        "migration_window_start_time_in_utc": {"key": "properties.migrationWindowStartTimeInUtc", "type": "iso-8601"},
+        "start_data_migration": {"key": "properties.startDataMigration", "type": "bool"},
+        "trigger_cutover": {"key": "properties.triggerCutover", "type": "bool"},
+    }
+
+    def __init__(
+        self,
+        *,
+        tags: Optional[Dict[str, str]] = None,
+        source_db_server_resource_id: Optional[str] = None,
+        secret_parameters: Optional["_models.MigrationSecretParameters"] = None,
+        user_assigned_identity_resource_id: Optional[str] = None,
+        d_bs_to_migrate: Optional[List[str]] = None,
+        migration_resource_group: Optional["_models.MigrationResourceGroup"] = None,
+        setup_logical_replication_on_source_db_if_needed: Optional[bool] = None,
+        overwrite_dbs_in_target: Optional[bool] = None,
+        migration_window_start_time_in_utc: Optional[datetime.datetime] = None,
+        start_data_migration: Optional[bool] = None,
+        trigger_cutover: Optional[bool] = None,
+        **kwargs
+    ):
+        """
+        :keyword tags: Application-specific metadata in the form of key-value pairs.
+        :paramtype tags: dict[str, str]
+        :keyword source_db_server_resource_id:
+        :paramtype source_db_server_resource_id: str
+        :keyword secret_parameters: Migration secret parameters.
+        :paramtype secret_parameters:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationSecretParameters
+        :keyword user_assigned_identity_resource_id:
+        :paramtype user_assigned_identity_resource_id: str
+        :keyword d_bs_to_migrate:
+        :paramtype d_bs_to_migrate: list[str]
+        :keyword migration_resource_group: Migration resource group.
+        :paramtype migration_resource_group:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationResourceGroup
+        :keyword setup_logical_replication_on_source_db_if_needed:
+        :paramtype setup_logical_replication_on_source_db_if_needed: bool
+        :keyword overwrite_dbs_in_target:
+        :paramtype overwrite_dbs_in_target: bool
+        :keyword migration_window_start_time_in_utc:
+        :paramtype migration_window_start_time_in_utc: ~datetime.datetime
+        :keyword start_data_migration:
+        :paramtype start_data_migration: bool
+        :keyword trigger_cutover:
+        :paramtype trigger_cutover: bool
+        """
+        super().__init__(**kwargs)
+        self.tags = tags
+        self.source_db_server_resource_id = source_db_server_resource_id
+        self.secret_parameters = secret_parameters
+        self.user_assigned_identity_resource_id = user_assigned_identity_resource_id
+        self.d_bs_to_migrate = d_bs_to_migrate
+        self.migration_resource_group = migration_resource_group
+        self.setup_logical_replication_on_source_db_if_needed = setup_logical_replication_on_source_db_if_needed
+        self.overwrite_dbs_in_target = overwrite_dbs_in_target
+        self.migration_window_start_time_in_utc = migration_window_start_time_in_utc
+        self.start_data_migration = start_data_migration
+        self.trigger_cutover = trigger_cutover
+
+
+class MigrationResourceGroup(_serialization.Model):
+    """Migration resource group.
+
+    :ivar resource_id:
+    :vartype resource_id: str
+    :ivar subnet_resource_id:
+    :vartype subnet_resource_id: str
+    """
+
+    _attribute_map = {
+        "resource_id": {"key": "resourceId", "type": "str"},
+        "subnet_resource_id": {"key": "subnetResourceId", "type": "str"},
+    }
+
+    def __init__(self, *, resource_id: Optional[str] = None, subnet_resource_id: Optional[str] = None, **kwargs):
+        """
+        :keyword resource_id:
+        :paramtype resource_id: str
+        :keyword subnet_resource_id:
+        :paramtype subnet_resource_id: str
+        """
+        super().__init__(**kwargs)
+        self.resource_id = resource_id
+        self.subnet_resource_id = subnet_resource_id
+
+
+class MigrationResourceListResult(_serialization.Model):
+    """A list of migration resources.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value:
+    :vartype value: list[~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationResource]
+    :ivar next_link: The link used to get the next page of migrations.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[MigrationResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
+class MigrationSecretParameters(_serialization.Model):
+    """Migration secret parameters.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar admin_credentials: Server admin credentials. Required.
+    :vartype admin_credentials:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.AdminCredentials
+    :ivar aad_app: Azure active directory application. Required.
+    :vartype aad_app: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.AADApp
+    """
+
+    _validation = {
+        "admin_credentials": {"required": True},
+        "aad_app": {"required": True},
+    }
+
+    _attribute_map = {
+        "admin_credentials": {"key": "adminCredentials", "type": "AdminCredentials"},
+        "aad_app": {"key": "aadApp", "type": "AADApp"},
+    }
+
+    def __init__(self, *, admin_credentials: "_models.AdminCredentials", aad_app: "_models.AADApp", **kwargs):
+        """
+        :keyword admin_credentials: Server admin credentials. Required.
+        :paramtype admin_credentials:
+         ~azure.mgmt.rdbms.postgresql_flexibleservers.models.AdminCredentials
+        :keyword aad_app: Azure active directory application. Required.
+        :paramtype aad_app: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.AADApp
+        """
+        super().__init__(**kwargs)
+        self.admin_credentials = admin_credentials
+        self.aad_app = aad_app
+
+
+class MigrationStatus(_serialization.Model):
+    """Migration status.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar state: Migration state. Known values are: "InProgress", "WaitingForUserAction",
+     "Canceled", "Failed", and "Succeeded".
+    :vartype state: str or ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationState
+    :ivar error:
+    :vartype error: str
+    :ivar current_sub_state_details: Migration sub state details.
+    :vartype current_sub_state_details:
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationSubStateDetails
+    """
+
+    _validation = {
+        "state": {"readonly": True},
+        "error": {"readonly": True},
+        "current_sub_state_details": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "state": {"key": "state", "type": "str"},
+        "error": {"key": "error", "type": "str"},
+        "current_sub_state_details": {"key": "currentSubStateDetails", "type": "MigrationSubStateDetails"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.state = None
+        self.error = None
+        self.current_sub_state_details = None
+
+
+class MigrationSubStateDetails(_serialization.Model):
+    """Migration sub state details.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar current_sub_state: Migration sub state. Known values are: "PerformingPreRequisiteSteps",
+     "WaitingForLogicalReplicationSetupRequestOnSourceDB", "WaitingForDBsToMigrateSpecification",
+     "WaitingForTargetDBOverwriteConfirmation", "WaitingForDataMigrationScheduling",
+     "WaitingForDataMigrationWindow", "MigratingData", "WaitingForCutoverTrigger",
+     "CompletingMigration", and "Completed".
+    :vartype current_sub_state: str or
+     ~azure.mgmt.rdbms.postgresql_flexibleservers.models.MigrationSubState
+    """
+
+    _validation = {
+        "current_sub_state": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "current_sub_state": {"key": "currentSubState", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.current_sub_state = None
+
+
 class NameAvailability(CheckNameAvailabilityResponse):
     """Represents a resource name availability.
 
@@ -1531,59 +2187,6 @@ class RestartParameter(_serialization.Model):
         super().__init__(**kwargs)
         self.restart_with_failover = restart_with_failover
         self.failover_mode = failover_mode
-
-
-class TrackedResource(Resource):
-    """The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
-     information.
-    :vartype system_data: ~azure.mgmt.rdbms.postgresql_flexibleservers.models.SystemData
-    :ivar tags: Resource tags.
-    :vartype tags: dict[str, str]
-    :ivar location: The geo-location where the resource lives. Required.
-    :vartype location: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "system_data": {"readonly": True},
-        "location": {"required": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "system_data": {"key": "systemData", "type": "SystemData"},
-        "tags": {"key": "tags", "type": "{str}"},
-        "location": {"key": "location", "type": "str"},
-    }
-
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs):
-        """
-        :keyword tags: Resource tags.
-        :paramtype tags: dict[str, str]
-        :keyword location: The geo-location where the resource lives. Required.
-        :paramtype location: str
-        """
-        super().__init__(**kwargs)
-        self.tags = tags
-        self.location = location
 
 
 class Server(TrackedResource):  # pylint: disable=too-many-instance-attributes

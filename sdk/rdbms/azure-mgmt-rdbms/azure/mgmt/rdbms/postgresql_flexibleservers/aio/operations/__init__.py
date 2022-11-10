@@ -15,6 +15,8 @@ from ._configurations_operations import ConfigurationsOperations
 from ._databases_operations import DatabasesOperations
 from ._firewall_rules_operations import FirewallRulesOperations
 from ._servers_operations import ServersOperations
+from ._migrations_operations import MigrationsOperations
+from ._postgre_sql_management_client_operations import PostgreSQLManagementClientOperationsMixin
 from ._operations import Operations
 from ._get_private_dns_zone_suffix_operations import GetPrivateDnsZoneSuffixOperations
 from ._virtual_network_subnet_usage_operations import VirtualNetworkSubnetUsageOperations
@@ -33,6 +35,8 @@ __all__ = [
     "DatabasesOperations",
     "FirewallRulesOperations",
     "ServersOperations",
+    "MigrationsOperations",
+    "PostgreSQLManagementClientOperationsMixin",
     "Operations",
     "GetPrivateDnsZoneSuffixOperations",
     "VirtualNetworkSubnetUsageOperations",
