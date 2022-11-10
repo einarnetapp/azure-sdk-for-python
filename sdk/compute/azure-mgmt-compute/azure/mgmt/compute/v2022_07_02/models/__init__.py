@@ -56,6 +56,7 @@ from ._models_py3 import SourceVault
 from ._models_py3 import SubResource
 from ._models_py3 import SubResourceReadOnly
 from ._models_py3 import SupportedCapabilities
+from ._models_py3 import SystemData
 from ._models_py3 import UserAssignedIdentitiesValue
 
 from ._compute_management_client_enums import AccessLevel
@@ -132,6 +133,7 @@ __all__ = [
     "SubResource",
     "SubResourceReadOnly",
     "SupportedCapabilities",
+    "SystemData",
     "UserAssignedIdentitiesValue",
     "AccessLevel",
     "Architecture",
