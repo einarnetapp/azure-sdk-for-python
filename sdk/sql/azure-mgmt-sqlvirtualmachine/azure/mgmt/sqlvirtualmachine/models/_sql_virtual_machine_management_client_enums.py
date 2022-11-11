@@ -213,3 +213,9 @@ class StorageWorkloadType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     GENERAL = "GENERAL"
     OLTP = "OLTP"
     DW = "DW"
+
+
+class TroubleShootingScenario(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """SQL VM troubleshooting scenario."""
+
+    UN_HEALTHY_REPLICA = "UnHealthyReplica"

@@ -6,6 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import AADAuthenticationSettings
 from ._models_py3 import AdditionalFeaturesServerConfigurations
 from ._models_py3 import AgConfiguration
 from ._models_py3 import AgReplica
@@ -37,10 +38,14 @@ from ._models_py3 import SqlVirtualMachineGroupListResult
 from ._models_py3 import SqlVirtualMachineGroupUpdate
 from ._models_py3 import SqlVirtualMachineListResult
 from ._models_py3 import SqlVirtualMachineUpdate
+from ._models_py3 import SqlVmTroubleshoot
 from ._models_py3 import SqlWorkloadTypeUpdateSettings
 from ._models_py3 import StorageConfigurationSettings
 from ._models_py3 import SystemData
 from ._models_py3 import TrackedResource
+from ._models_py3 import TroubleshootAdditionalProperties
+from ._models_py3 import TroubleshootStatus
+from ._models_py3 import UnHealthyReplicaProperties
 from ._models_py3 import WsfcDomainCredentials
 from ._models_py3 import WsfcDomainProfile
 
@@ -69,11 +74,13 @@ from ._sql_virtual_machine_management_client_enums import SqlServerLicenseType
 from ._sql_virtual_machine_management_client_enums import SqlVmGroupImageSku
 from ._sql_virtual_machine_management_client_enums import SqlWorkloadType
 from ._sql_virtual_machine_management_client_enums import StorageWorkloadType
+from ._sql_virtual_machine_management_client_enums import TroubleShootingScenario
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "AADAuthenticationSettings",
     "AdditionalFeaturesServerConfigurations",
     "AgConfiguration",
     "AgReplica",
@@ -105,10 +112,14 @@ __all__ = [
     "SqlVirtualMachineGroupUpdate",
     "SqlVirtualMachineListResult",
     "SqlVirtualMachineUpdate",
+    "SqlVmTroubleshoot",
     "SqlWorkloadTypeUpdateSettings",
     "StorageConfigurationSettings",
     "SystemData",
     "TrackedResource",
+    "TroubleshootAdditionalProperties",
+    "TroubleshootStatus",
+    "UnHealthyReplicaProperties",
     "WsfcDomainCredentials",
     "WsfcDomainProfile",
     "AssessmentDayOfWeek",
@@ -136,6 +147,7 @@ __all__ = [
     "SqlVmGroupImageSku",
     "SqlWorkloadType",
     "StorageWorkloadType",
+    "TroubleShootingScenario",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()
