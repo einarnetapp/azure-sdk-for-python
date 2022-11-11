@@ -196,16 +196,6 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     MERGED = "Merged"
 
 
-class QuotaRequestState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The quota request status."""
-
-    ACCEPTED = "Accepted"
-    INVALID = "Invalid"
-    SUCCEEDED = "Succeeded"
-    FAILED = "Failed"
-    IN_PROGRESS = "InProgress"
-
-
 class ReservationBillingPlan(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represent the billing plans."""
 
@@ -265,16 +255,6 @@ class ReservedResourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     AZURE_FILES = "AzureFiles"
     SQL_EDGE = "SqlEdge"
     VIRTUAL_MACHINE_SOFTWARE = "VirtualMachineSoftware"
-
-
-class ResourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The resource types."""
-
-    STANDARD = "standard"
-    DEDICATED = "dedicated"
-    LOW_PRIORITY = "lowPriority"
-    SHARED = "shared"
-    SERVICE_SPECIFIC = "serviceSpecific"
 
 
 class UserFriendlyAppliedScopeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

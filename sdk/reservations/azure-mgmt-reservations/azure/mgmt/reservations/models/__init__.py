@@ -8,6 +8,7 @@
 
 from ._models_py3 import AppliedReservationList
 from ._models_py3 import AppliedReservations
+from ._models_py3 import AppliedScopeProperties
 from ._models_py3 import AvailableScopeProperties
 from ._models_py3 import AvailableScopeRequest
 from ._models_py3 import AvailableScopeRequestProperties
@@ -28,13 +29,9 @@ from ._models_py3 import CatalogMsrp
 from ._models_py3 import ChangeDirectoryRequest
 from ._models_py3 import ChangeDirectoryResponse
 from ._models_py3 import ChangeDirectoryResult
-from ._models_py3 import CreateGenericQuotaRequestParameters
-from ._models_py3 import CurrentQuotaLimit
-from ._models_py3 import CurrentQuotaLimitBase
 from ._models_py3 import Error
 from ._models_py3 import ErrorDetails
 from ._models_py3 import ErrorResponse
-from ._models_py3 import ExceptionResponse
 from ._models_py3 import ExchangeOperationResultResponse
 from ._models_py3 import ExchangePolicyError
 from ._models_py3 import ExchangePolicyErrors
@@ -54,15 +51,6 @@ from ._models_py3 import PaymentDetail
 from ._models_py3 import Price
 from ._models_py3 import PurchaseRequest
 from ._models_py3 import PurchaseRequestPropertiesReservedResourceProperties
-from ._models_py3 import QuotaLimits
-from ._models_py3 import QuotaLimitsResponse
-from ._models_py3 import QuotaProperties
-from ._models_py3 import QuotaRequestDetails
-from ._models_py3 import QuotaRequestDetailsList
-from ._models_py3 import QuotaRequestOneResourceSubmitResponse
-from ._models_py3 import QuotaRequestProperties
-from ._models_py3 import QuotaRequestSubmitResponse
-from ._models_py3 import QuotaRequestSubmitResponse201
 from ._models_py3 import RefundBillingInformation
 from ._models_py3 import RefundPolicyError
 from ._models_py3 import RefundPolicyResult
@@ -82,6 +70,7 @@ from ._models_py3 import ReservationOrderResponse
 from ._models_py3 import ReservationResponse
 from ._models_py3 import ReservationSplitProperties
 from ._models_py3 import ReservationSummary
+from ._models_py3 import ReservationSwapProperties
 from ._models_py3 import ReservationToExchange
 from ._models_py3 import ReservationToPurchaseCalculateExchange
 from ._models_py3 import ReservationToPurchaseExchange
@@ -91,16 +80,12 @@ from ._models_py3 import ReservationUtilizationAggregates
 from ._models_py3 import ReservationsListResult
 from ._models_py3 import ReservationsProperties
 from ._models_py3 import ReservationsPropertiesUtilization
-from ._models_py3 import ResourceName
 from ._models_py3 import ScopeProperties
-from ._models_py3 import ServiceError
-from ._models_py3 import ServiceErrorDetail
 from ._models_py3 import SkuCapability
 from ._models_py3 import SkuName
 from ._models_py3 import SkuProperty
 from ._models_py3 import SkuRestriction
 from ._models_py3 import SplitRequest
-from ._models_py3 import SubRequest
 from ._models_py3 import SubscriptionScopeProperties
 from ._models_py3 import SystemData
 
@@ -115,12 +100,10 @@ from ._azure_reservation_api_enums import Location
 from ._azure_reservation_api_enums import OperationStatus
 from ._azure_reservation_api_enums import PaymentStatus
 from ._azure_reservation_api_enums import ProvisioningState
-from ._azure_reservation_api_enums import QuotaRequestState
 from ._azure_reservation_api_enums import ReservationBillingPlan
 from ._azure_reservation_api_enums import ReservationStatusCode
 from ._azure_reservation_api_enums import ReservationTerm
 from ._azure_reservation_api_enums import ReservedResourceType
-from ._azure_reservation_api_enums import ResourceType
 from ._azure_reservation_api_enums import UserFriendlyAppliedScopeType
 from ._azure_reservation_api_enums import UserFriendlyRenewState
 from ._patch import __all__ as _patch_all
@@ -130,6 +113,7 @@ from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     "AppliedReservationList",
     "AppliedReservations",
+    "AppliedScopeProperties",
     "AvailableScopeProperties",
     "AvailableScopeRequest",
     "AvailableScopeRequestProperties",
@@ -150,13 +134,9 @@ __all__ = [
     "ChangeDirectoryRequest",
     "ChangeDirectoryResponse",
     "ChangeDirectoryResult",
-    "CreateGenericQuotaRequestParameters",
-    "CurrentQuotaLimit",
-    "CurrentQuotaLimitBase",
     "Error",
     "ErrorDetails",
     "ErrorResponse",
-    "ExceptionResponse",
     "ExchangeOperationResultResponse",
     "ExchangePolicyError",
     "ExchangePolicyErrors",
@@ -176,15 +156,6 @@ __all__ = [
     "Price",
     "PurchaseRequest",
     "PurchaseRequestPropertiesReservedResourceProperties",
-    "QuotaLimits",
-    "QuotaLimitsResponse",
-    "QuotaProperties",
-    "QuotaRequestDetails",
-    "QuotaRequestDetailsList",
-    "QuotaRequestOneResourceSubmitResponse",
-    "QuotaRequestProperties",
-    "QuotaRequestSubmitResponse",
-    "QuotaRequestSubmitResponse201",
     "RefundBillingInformation",
     "RefundPolicyError",
     "RefundPolicyResult",
@@ -204,6 +175,7 @@ __all__ = [
     "ReservationResponse",
     "ReservationSplitProperties",
     "ReservationSummary",
+    "ReservationSwapProperties",
     "ReservationToExchange",
     "ReservationToPurchaseCalculateExchange",
     "ReservationToPurchaseExchange",
@@ -213,16 +185,12 @@ __all__ = [
     "ReservationsListResult",
     "ReservationsProperties",
     "ReservationsPropertiesUtilization",
-    "ResourceName",
     "ScopeProperties",
-    "ServiceError",
-    "ServiceErrorDetail",
     "SkuCapability",
     "SkuName",
     "SkuProperty",
     "SkuRestriction",
     "SplitRequest",
-    "SubRequest",
     "SubscriptionScopeProperties",
     "SystemData",
     "AppliedScopeType",
@@ -236,12 +204,10 @@ __all__ = [
     "OperationStatus",
     "PaymentStatus",
     "ProvisioningState",
-    "QuotaRequestState",
     "ReservationBillingPlan",
     "ReservationStatusCode",
     "ReservationTerm",
     "ReservedResourceType",
-    "ResourceType",
     "UserFriendlyAppliedScopeType",
     "UserFriendlyRenewState",
 ]

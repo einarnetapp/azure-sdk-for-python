@@ -21,8 +21,6 @@ from .operations import (
     CalculateRefundOperations,
     ExchangeOperations,
     OperationOperations,
-    QuotaOperations,
-    QuotaRequestStatusOperations,
     ReservationOperations,
     ReservationOrderOperations,
     ReturnOperations,
@@ -52,15 +50,13 @@ class AzureReservationAPI(
     :vartype calculate_exchange: azure.mgmt.reservations.aio.operations.CalculateExchangeOperations
     :ivar exchange: ExchangeOperations operations
     :vartype exchange: azure.mgmt.reservations.aio.operations.ExchangeOperations
-    :ivar quota: QuotaOperations operations
-    :vartype quota: azure.mgmt.reservations.aio.operations.QuotaOperations
-    :ivar quota_request_status: QuotaRequestStatusOperations operations
-    :vartype quota_request_status:
-     azure.mgmt.reservations.aio.operations.QuotaRequestStatusOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
+    :keyword api_version: Api Version. Default value is "2022-11-01". Note that overriding this
+     default value may result in unsupported behavior.
+    :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
     """
@@ -88,10 +84,6 @@ class AzureReservationAPI(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.exchange = ExchangeOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.quota = QuotaOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.quota_request_status = QuotaRequestStatusOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
 
     def _send_request(self, request: HttpRequest, **kwargs: Any) -> Awaitable[AsyncHttpResponse]:
         """Runs the network request through the client's chained policies.
