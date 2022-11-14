@@ -32,11 +32,11 @@ def main():
     response = client.server_dev_ops_audit_settings.get(
         resource_group_name="devAuditTestRG",
         server_name="devOpsAuditTestSvr",
-        dev_ops_auditing_settings_name="Default",
+        dev_ops_auditing_settings_name="default",
     )
     print(response)
 
 
-# x-ms-original-file: specification/sql/resource-manager/Microsoft.Sql/preview/2022-02-01-preview/examples/ServerDevOpsAuditGet.json
+# x-ms-original-file: specification/sql/resource-manager/Microsoft.Sql/preview/2020-11-01-preview/examples/ServerDevOpsAuditGet.json
 if __name__ == "__main__":
     main()

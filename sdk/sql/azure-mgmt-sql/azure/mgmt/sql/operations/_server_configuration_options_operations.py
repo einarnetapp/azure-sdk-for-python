@@ -42,27 +42,64 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_get_request(
-    resource_group_name: str, server_name: str, dev_ops_auditing_settings_name: str, subscription_id: str, **kwargs: Any
+def build_list_by_managed_instance_request(
+    resource_group_name: str, managed_instance_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version = kwargs.pop(
-        "api_version", _params.pop("api-version", "2020-11-01-preview")
-    )  # type: Literal["2020-11-01-preview"]
+        "api_version", _params.pop("api-version", "2022-08-01-preview")
+    )  # type: Literal["2022-08-01-preview"]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serverName": _SERIALIZER.url("server_name", server_name, "str"),
-        "devOpsAuditingSettingsName": _SERIALIZER.url(
-            "dev_ops_auditing_settings_name", dev_ops_auditing_settings_name, "str"
+        "managedInstanceName": _SERIALIZER.url("managed_instance_name", managed_instance_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+    }
+
+    _url = _format_url_section(_url, **path_format_arguments)
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_get_request(
+    resource_group_name: str,
+    managed_instance_name: str,
+    server_configuration_option_name: Union[str, _models.ServerConfigurationOptionName],
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version = kwargs.pop(
+        "api_version", _params.pop("api-version", "2022-08-01-preview")
+    )  # type: Literal["2022-08-01-preview"]
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions/{serverConfigurationOptionName}",
+    )  # pylint: disable=line-too-long
+    path_format_arguments = {
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "managedInstanceName": _SERIALIZER.url("managed_instance_name", managed_instance_name, "str"),
+        "serverConfigurationOptionName": _SERIALIZER.url(
+            "server_configuration_option_name", server_configuration_option_name, "str"
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -79,27 +116,31 @@ def build_get_request(
 
 
 def build_create_or_update_request(
-    resource_group_name: str, server_name: str, dev_ops_auditing_settings_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    managed_instance_name: str,
+    server_configuration_option_name: Union[str, _models.ServerConfigurationOptionName],
+    subscription_id: str,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version = kwargs.pop(
-        "api_version", _params.pop("api-version", "2020-11-01-preview")
-    )  # type: Literal["2020-11-01-preview"]
+        "api_version", _params.pop("api-version", "2022-08-01-preview")
+    )  # type: Literal["2022-08-01-preview"]
     content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions/{serverConfigurationOptionName}",
     )  # pylint: disable=line-too-long
     path_format_arguments = {
         "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serverName": _SERIALIZER.url("server_name", server_name, "str"),
-        "devOpsAuditingSettingsName": _SERIALIZER.url(
-            "dev_ops_auditing_settings_name", dev_ops_auditing_settings_name, "str"
+        "managedInstanceName": _SERIALIZER.url("managed_instance_name", managed_instance_name, "str"),
+        "serverConfigurationOptionName": _SERIALIZER.url(
+            "server_configuration_option_name", server_configuration_option_name, "str"
         ),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -117,47 +158,14 @@ def build_create_or_update_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_list_by_server_request(
-    resource_group_name: str, server_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version = kwargs.pop(
-        "api_version", _params.pop("api-version", "2020-11-01-preview")
-    )  # type: Literal["2020-11-01-preview"]
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings",
-    )  # pylint: disable=line-too-long
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "serverName": _SERIALIZER.url("server_name", server_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url = _format_url_section(_url, **path_format_arguments)
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-class ServerDevOpsAuditSettingsOperations:
+class ServerConfigurationOptionsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.sql.SqlManagementClient`'s
-        :attr:`server_dev_ops_audit_settings` attribute.
+        :attr:`server_configuration_options` attribute.
     """
 
     models = _models
@@ -170,335 +178,29 @@ class ServerDevOpsAuditSettingsOperations:
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def get(
-        self, resource_group_name: str, server_name: str, dev_ops_auditing_settings_name: str, **kwargs: Any
-    ) -> _models.ServerDevOpsAuditingSettings:
-        """Gets a server's DevOps audit settings.
+    def list_by_managed_instance(
+        self, resource_group_name: str, managed_instance_name: str, **kwargs: Any
+    ) -> Iterable["_models.ServerConfigurationOption"]:
+        """Gets a list of managed instance server configuration options.
 
         :param resource_group_name: The name of the resource group that contains the resource. You can
          obtain this value from the Azure Resource Manager API or the portal. Required.
         :type resource_group_name: str
-        :param server_name: The name of the server. Required.
-        :type server_name: str
-        :param dev_ops_auditing_settings_name: The name of the devops audit settings. This should
-         always be 'default'. Required.
-        :type dev_ops_auditing_settings_name: str
+        :param managed_instance_name: The name of the managed instance. Required.
+        :type managed_instance_name: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ServerDevOpsAuditingSettings or the result of cls(response)
-        :rtype: ~azure.mgmt.sql.models.ServerDevOpsAuditingSettings
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
-        )  # type: Literal["2020-11-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ServerDevOpsAuditingSettings]
-
-        request = build_get_request(
-            resource_group_name=resource_group_name,
-            server_name=server_name,
-            dev_ops_auditing_settings_name=dev_ops_auditing_settings_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            template_url=self.get.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("ServerDevOpsAuditingSettings", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}"}  # type: ignore
-
-    def _create_or_update_initial(
-        self,
-        resource_group_name: str,
-        server_name: str,
-        dev_ops_auditing_settings_name: str,
-        parameters: Union[_models.ServerDevOpsAuditingSettings, IO],
-        **kwargs: Any
-    ) -> Optional[_models.ServerDevOpsAuditingSettings]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
-        )  # type: Literal["2020-11-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.ServerDevOpsAuditingSettings]]
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(parameters, (IO, bytes)):
-            _content = parameters
-        else:
-            _json = self._serialize.body(parameters, "ServerDevOpsAuditingSettings")
-
-        request = build_create_or_update_request(
-            resource_group_name=resource_group_name,
-            server_name=server_name,
-            dev_ops_auditing_settings_name=dev_ops_auditing_settings_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            template_url=self._create_or_update_initial.metadata["url"],
-            headers=_headers,
-            params=_params,
-        )
-        request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
-
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = None
-        if response.status_code == 200:
-            deserialized = self._deserialize("ServerDevOpsAuditingSettings", pipeline_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})
-
-        return deserialized
-
-    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}"}  # type: ignore
-
-    @overload
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        server_name: str,
-        dev_ops_auditing_settings_name: str,
-        parameters: _models.ServerDevOpsAuditingSettings,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.ServerDevOpsAuditingSettings]:
-        """Creates or updates a server's DevOps audit settings.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param server_name: The name of the server. Required.
-        :type server_name: str
-        :param dev_ops_auditing_settings_name: The name of the devops audit settings. This should
-         always be 'default'. Required.
-        :type dev_ops_auditing_settings_name: str
-        :param parameters: Properties of DevOps audit settings. Required.
-        :type parameters: ~azure.mgmt.sql.models.ServerDevOpsAuditingSettings
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either ServerDevOpsAuditingSettings or the
-         result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sql.models.ServerDevOpsAuditingSettings]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        server_name: str,
-        dev_ops_auditing_settings_name: str,
-        parameters: IO,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.ServerDevOpsAuditingSettings]:
-        """Creates or updates a server's DevOps audit settings.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param server_name: The name of the server. Required.
-        :type server_name: str
-        :param dev_ops_auditing_settings_name: The name of the devops audit settings. This should
-         always be 'default'. Required.
-        :type dev_ops_auditing_settings_name: str
-        :param parameters: Properties of DevOps audit settings. Required.
-        :type parameters: IO
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either ServerDevOpsAuditingSettings or the
-         result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sql.models.ServerDevOpsAuditingSettings]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        server_name: str,
-        dev_ops_auditing_settings_name: str,
-        parameters: Union[_models.ServerDevOpsAuditingSettings, IO],
-        **kwargs: Any
-    ) -> LROPoller[_models.ServerDevOpsAuditingSettings]:
-        """Creates or updates a server's DevOps audit settings.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param server_name: The name of the server. Required.
-        :type server_name: str
-        :param dev_ops_auditing_settings_name: The name of the devops audit settings. This should
-         always be 'default'. Required.
-        :type dev_ops_auditing_settings_name: str
-        :param parameters: Properties of DevOps audit settings. Is either a model type or a IO type.
-         Required.
-        :type parameters: ~azure.mgmt.sql.models.ServerDevOpsAuditingSettings or IO
-        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
-         Default value is None.
-        :paramtype content_type: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
-         operation to not poll, or pass in your own initialized polling object for a personal polling
-         strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns either ServerDevOpsAuditingSettings or the
-         result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sql.models.ServerDevOpsAuditingSettings]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
-        )  # type: Literal["2020-11-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ServerDevOpsAuditingSettings]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
-        if cont_token is None:
-            raw_result = self._create_or_update_initial(  # type: ignore
-                resource_group_name=resource_group_name,
-                server_name=server_name,
-                dev_ops_auditing_settings_name=dev_ops_auditing_settings_name,
-                parameters=parameters,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("ServerDevOpsAuditingSettings", pipeline_response)
-            if cls:
-                return cls(pipeline_response, deserialized, {})
-            return deserialized
-
-        if polling is True:
-            polling_method = cast(
-                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
-            )  # type: PollingMethod
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
-
-    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}"}  # type: ignore
-
-    @distributed_trace
-    def list_by_server(
-        self, resource_group_name: str, server_name: str, **kwargs: Any
-    ) -> Iterable["_models.ServerDevOpsAuditingSettings"]:
-        """Lists DevOps audit settings of a server.
-
-        :param resource_group_name: The name of the resource group that contains the resource. You can
-         obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param server_name: The name of the server. Required.
-        :type server_name: str
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: An iterator like instance of either ServerDevOpsAuditingSettings or the result of
+        :return: An iterator like instance of either ServerConfigurationOption or the result of
          cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.sql.models.ServerDevOpsAuditingSettings]
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.sql.models.ServerConfigurationOption]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version = kwargs.pop(
-            "api_version", _params.pop("api-version", "2020-11-01-preview")
-        )  # type: Literal["2020-11-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ServerDevOpsAuditSettingsListResult]
+            "api_version", _params.pop("api-version", "2022-08-01-preview")
+        )  # type: Literal["2022-08-01-preview"]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ServerConfigurationOptionListResult]
 
         error_map = {
             401: ClientAuthenticationError,
@@ -511,12 +213,12 @@ class ServerDevOpsAuditSettingsOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_list_by_server_request(
+                request = build_list_by_managed_instance_request(
                     resource_group_name=resource_group_name,
-                    server_name=server_name,
+                    managed_instance_name=managed_instance_name,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
-                    template_url=self.list_by_server.metadata["url"],
+                    template_url=self.list_by_managed_instance.metadata["url"],
                     headers=_headers,
                     params=_params,
                 )
@@ -531,7 +233,7 @@ class ServerDevOpsAuditSettingsOperations:
             return request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("ServerDevOpsAuditSettingsListResult", pipeline_response)
+            deserialized = self._deserialize("ServerConfigurationOptionListResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)
@@ -553,4 +255,314 @@ class ServerDevOpsAuditSettingsOperations:
 
         return ItemPaged(get_next, extract_data)
 
-    list_by_server.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings"}  # type: ignore
+    list_by_managed_instance.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions"}  # type: ignore
+
+    @distributed_trace
+    def get(
+        self,
+        resource_group_name: str,
+        managed_instance_name: str,
+        server_configuration_option_name: Union[str, _models.ServerConfigurationOptionName],
+        **kwargs: Any
+    ) -> _models.ServerConfigurationOption:
+        """Gets managed instance server configuration option.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param managed_instance_name: The name of the managed instance. Required.
+        :type managed_instance_name: str
+        :param server_configuration_option_name: The name of the server configuration option.
+         "allowPolybaseExport" Required.
+        :type server_configuration_option_name: str or
+         ~azure.mgmt.sql.models.ServerConfigurationOptionName
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: ServerConfigurationOption or the result of cls(response)
+        :rtype: ~azure.mgmt.sql.models.ServerConfigurationOption
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-08-01-preview")
+        )  # type: Literal["2022-08-01-preview"]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ServerConfigurationOption]
+
+        request = build_get_request(
+            resource_group_name=resource_group_name,
+            managed_instance_name=managed_instance_name,
+            server_configuration_option_name=server_configuration_option_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            template_url=self.get.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ServerConfigurationOption", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions/{serverConfigurationOptionName}"}  # type: ignore
+
+    def _create_or_update_initial(
+        self,
+        resource_group_name: str,
+        managed_instance_name: str,
+        server_configuration_option_name: Union[str, _models.ServerConfigurationOptionName],
+        parameters: Union[_models.ServerConfigurationOption, IO],
+        **kwargs: Any
+    ) -> _models.ServerConfigurationOption:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-08-01-preview")
+        )  # type: Literal["2022-08-01-preview"]
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ServerConfigurationOption]
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IO, bytes)):
+            _content = parameters
+        else:
+            _json = self._serialize.body(parameters, "ServerConfigurationOption")
+
+        request = build_create_or_update_request(
+            resource_group_name=resource_group_name,
+            managed_instance_name=managed_instance_name,
+            server_configuration_option_name=server_configuration_option_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self._create_or_update_initial.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)  # type: ignore
+
+        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ServerConfigurationOption", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    _create_or_update_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions/{serverConfigurationOptionName}"}  # type: ignore
+
+    @overload
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        managed_instance_name: str,
+        server_configuration_option_name: Union[str, _models.ServerConfigurationOptionName],
+        parameters: _models.ServerConfigurationOption,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.ServerConfigurationOption]:
+        """Updates managed instance server configuration option.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param managed_instance_name: The name of the managed instance. Required.
+        :type managed_instance_name: str
+        :param server_configuration_option_name: The name of the server configuration option.
+         "allowPolybaseExport" Required.
+        :type server_configuration_option_name: str or
+         ~azure.mgmt.sql.models.ServerConfigurationOptionName
+        :param parameters: Server configuration option parameters. Required.
+        :type parameters: ~azure.mgmt.sql.models.ServerConfigurationOption
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
+         operation to not poll, or pass in your own initialized polling object for a personal polling
+         strategy.
+        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of LROPoller that returns either ServerConfigurationOption or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sql.models.ServerConfigurationOption]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        managed_instance_name: str,
+        server_configuration_option_name: Union[str, _models.ServerConfigurationOptionName],
+        parameters: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.ServerConfigurationOption]:
+        """Updates managed instance server configuration option.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param managed_instance_name: The name of the managed instance. Required.
+        :type managed_instance_name: str
+        :param server_configuration_option_name: The name of the server configuration option.
+         "allowPolybaseExport" Required.
+        :type server_configuration_option_name: str or
+         ~azure.mgmt.sql.models.ServerConfigurationOptionName
+        :param parameters: Server configuration option parameters. Required.
+        :type parameters: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
+         operation to not poll, or pass in your own initialized polling object for a personal polling
+         strategy.
+        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of LROPoller that returns either ServerConfigurationOption or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sql.models.ServerConfigurationOption]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        managed_instance_name: str,
+        server_configuration_option_name: Union[str, _models.ServerConfigurationOptionName],
+        parameters: Union[_models.ServerConfigurationOption, IO],
+        **kwargs: Any
+    ) -> LROPoller[_models.ServerConfigurationOption]:
+        """Updates managed instance server configuration option.
+
+        :param resource_group_name: The name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param managed_instance_name: The name of the managed instance. Required.
+        :type managed_instance_name: str
+        :param server_configuration_option_name: The name of the server configuration option.
+         "allowPolybaseExport" Required.
+        :type server_configuration_option_name: str or
+         ~azure.mgmt.sql.models.ServerConfigurationOptionName
+        :param parameters: Server configuration option parameters. Is either a model type or a IO type.
+         Required.
+        :type parameters: ~azure.mgmt.sql.models.ServerConfigurationOption or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be ARMPolling. Pass in False for this
+         operation to not poll, or pass in your own initialized polling object for a personal polling
+         strategy.
+        :paramtype polling: bool or ~azure.core.polling.PollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of LROPoller that returns either ServerConfigurationOption or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.sql.models.ServerConfigurationOption]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version = kwargs.pop(
+            "api_version", _params.pop("api-version", "2022-08-01-preview")
+        )  # type: Literal["2022-08-01-preview"]
+        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ServerConfigurationOption]
+        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        if cont_token is None:
+            raw_result = self._create_or_update_initial(  # type: ignore
+                resource_group_name=resource_group_name,
+                managed_instance_name=managed_instance_name,
+                server_configuration_option_name=server_configuration_option_name,
+                parameters=parameters,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("ServerConfigurationOption", pipeline_response)
+            if cls:
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
+
+        if polling is True:
+            polling_method = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))  # type: PollingMethod
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+
+    begin_create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverConfigurationOptions/{serverConfigurationOptionName}"}  # type: ignore
