@@ -13,13 +13,14 @@ from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
 
 from .. import _serialization
 
-if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
-    from .. import models as _models
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
 else:
     from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    from .. import models as _models
 JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
 
 
@@ -18023,6 +18024,40 @@ class Credential(_serialization.Model):
         self.type = None  # type: Optional[str]
         self.description = description
         self.annotations = annotations
+
+
+class CredentialListResponse(_serialization.Model):
+    """A list of credential resources.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: List of credentials. Required.
+    :vartype value: list[~azure.mgmt.datafactory.models.ManagedIdentityCredentialResource]
+    :ivar next_link: The link to the next page of results, if any remaining results exist.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"required": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ManagedIdentityCredentialResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(
+        self, *, value: List["_models.ManagedIdentityCredentialResource"], next_link: Optional[str] = None, **kwargs
+    ):
+        """
+        :keyword value: List of credentials. Required.
+        :paramtype value: list[~azure.mgmt.datafactory.models.ManagedIdentityCredentialResource]
+        :keyword next_link: The link to the next page of results, if any remaining results exist.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = next_link
 
 
 class CredentialReference(_serialization.Model):
@@ -36470,6 +36505,50 @@ class ManagedIdentityCredential(Credential):
         self.resource_id = resource_id
 
 
+class ManagedIdentityCredentialResource(SubResource):
+    """Credential resource type.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar id: The resource identifier.
+    :vartype id: str
+    :ivar name: The resource name.
+    :vartype name: str
+    :ivar type: The resource type.
+    :vartype type: str
+    :ivar etag: Etag identifies change in the resource.
+    :vartype etag: str
+    :ivar properties: Managed Identity Credential properties. Required.
+    :vartype properties: ~azure.mgmt.datafactory.models.ManagedIdentityCredential
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "etag": {"readonly": True},
+        "properties": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "etag": {"key": "etag", "type": "str"},
+        "properties": {"key": "properties", "type": "ManagedIdentityCredential"},
+    }
+
+    def __init__(self, *, properties: "_models.ManagedIdentityCredential", **kwargs):
+        """
+        :keyword properties: Managed Identity Credential properties. Required.
+        :paramtype properties: ~azure.mgmt.datafactory.models.ManagedIdentityCredential
+        """
+        super().__init__(**kwargs)
+        self.properties = properties
+
+
 class ManagedIntegrationRuntime(IntegrationRuntime):
     """Managed integration runtime, including managed elastic and managed dedicated integration runtimes.
 
@@ -52917,7 +52996,7 @@ class ScriptAction(_serialization.Model):
         self.parameters = parameters
 
 
-class ScriptActivity(ExecutionActivity):
+class ScriptActivity(ExecutionActivity):  # pylint: disable=too-many-instance-attributes
     """Script activity type.
 
     All required parameters must be populated in order to send to Azure.
@@ -52939,6 +53018,10 @@ class ScriptActivity(ExecutionActivity):
     :vartype linked_service_name: ~azure.mgmt.datafactory.models.LinkedServiceReference
     :ivar policy: Activity policy.
     :vartype policy: ~azure.mgmt.datafactory.models.ActivityPolicy
+    :ivar script_block_execution_timeout: ScriptBlock execution timeout. Type: string (or
+     Expression with resultType string), pattern:
+     ((\d+).)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+    :vartype script_block_execution_timeout: JSON
     :ivar scripts: Array of script blocks. Type: array.
     :vartype scripts: list[~azure.mgmt.datafactory.models.ScriptActivityScriptBlock]
     :ivar log_settings: Log settings of script activity.
@@ -52959,6 +53042,7 @@ class ScriptActivity(ExecutionActivity):
         "user_properties": {"key": "userProperties", "type": "[UserProperty]"},
         "linked_service_name": {"key": "linkedServiceName", "type": "LinkedServiceReference"},
         "policy": {"key": "policy", "type": "ActivityPolicy"},
+        "script_block_execution_timeout": {"key": "typeProperties.scriptBlockExecutionTimeout", "type": "object"},
         "scripts": {"key": "typeProperties.scripts", "type": "[ScriptActivityScriptBlock]"},
         "log_settings": {"key": "typeProperties.logSettings", "type": "ScriptActivityTypePropertiesLogSettings"},
     }
@@ -52973,6 +53057,7 @@ class ScriptActivity(ExecutionActivity):
         user_properties: Optional[List["_models.UserProperty"]] = None,
         linked_service_name: Optional["_models.LinkedServiceReference"] = None,
         policy: Optional["_models.ActivityPolicy"] = None,
+        script_block_execution_timeout: Optional[JSON] = None,
         scripts: Optional[List["_models.ScriptActivityScriptBlock"]] = None,
         log_settings: Optional["_models.ScriptActivityTypePropertiesLogSettings"] = None,
         **kwargs
@@ -52993,6 +53078,10 @@ class ScriptActivity(ExecutionActivity):
         :paramtype linked_service_name: ~azure.mgmt.datafactory.models.LinkedServiceReference
         :keyword policy: Activity policy.
         :paramtype policy: ~azure.mgmt.datafactory.models.ActivityPolicy
+        :keyword script_block_execution_timeout: ScriptBlock execution timeout. Type: string (or
+         Expression with resultType string), pattern:
+         ((\d+).)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+        :paramtype script_block_execution_timeout: JSON
         :keyword scripts: Array of script blocks. Type: array.
         :paramtype scripts: list[~azure.mgmt.datafactory.models.ScriptActivityScriptBlock]
         :keyword log_settings: Log settings of script activity.
@@ -53009,6 +53098,7 @@ class ScriptActivity(ExecutionActivity):
             **kwargs
         )
         self.type = "Script"  # type: str
+        self.script_block_execution_timeout = script_block_execution_timeout
         self.scripts = scripts
         self.log_settings = log_settings
 
@@ -55764,12 +55854,13 @@ class SnowflakeSource(CopySource):
     :vartype disable_metrics_collection: JSON
     :ivar query: Snowflake Sql query. Type: string (or Expression with resultType string).
     :vartype query: JSON
-    :ivar export_settings: Snowflake export settings.
+    :ivar export_settings: Snowflake export settings. Required.
     :vartype export_settings: ~azure.mgmt.datafactory.models.SnowflakeExportCopyCommand
     """
 
     _validation = {
         "type": {"required": True},
+        "export_settings": {"required": True},
     }
 
     _attribute_map = {
@@ -55786,13 +55877,13 @@ class SnowflakeSource(CopySource):
     def __init__(
         self,
         *,
+        export_settings: "_models.SnowflakeExportCopyCommand",
         additional_properties: Optional[Dict[str, JSON]] = None,
         source_retry_count: Optional[JSON] = None,
         source_retry_wait: Optional[JSON] = None,
         max_concurrent_connections: Optional[JSON] = None,
         disable_metrics_collection: Optional[JSON] = None,
         query: Optional[JSON] = None,
-        export_settings: Optional["_models.SnowflakeExportCopyCommand"] = None,
         **kwargs
     ):
         """
@@ -55813,7 +55904,7 @@ class SnowflakeSource(CopySource):
         :paramtype disable_metrics_collection: JSON
         :keyword query: Snowflake Sql query. Type: string (or Expression with resultType string).
         :paramtype query: JSON
-        :keyword export_settings: Snowflake export settings.
+        :keyword export_settings: Snowflake export settings. Required.
         :paramtype export_settings: ~azure.mgmt.datafactory.models.SnowflakeExportCopyCommand
         """
         super().__init__(
