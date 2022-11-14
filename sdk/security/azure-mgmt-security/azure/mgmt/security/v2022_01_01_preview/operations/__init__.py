@@ -10,9 +10,14 @@ from ._governance_rule_operations import GovernanceRuleOperations
 from ._governance_rules_operations import GovernanceRulesOperations
 from ._security_connector_governance_rule_operations import SecurityConnectorGovernanceRuleOperations
 from ._security_connector_governance_rules_operations import SecurityConnectorGovernanceRulesOperations
+from ._management_group_governance_rule_operations import ManagementGroupGovernanceRuleOperations
+from ._management_group_governance_rules_operations import ManagementGroupGovernanceRulesOperations
 from ._subscription_governance_rules_execute_status_operations import SubscriptionGovernanceRulesExecuteStatusOperations
 from ._security_connector_governance_rules_execute_status_operations import (
     SecurityConnectorGovernanceRulesExecuteStatusOperations,
+)
+from ._management_group_governance_rules_execute_status_operations import (
+    ManagementGroupGovernanceRulesExecuteStatusOperations,
 )
 from ._governance_assignments_operations import GovernanceAssignmentsOperations
 
@@ -25,8 +30,11 @@ __all__ = [
     "GovernanceRulesOperations",
     "SecurityConnectorGovernanceRuleOperations",
     "SecurityConnectorGovernanceRulesOperations",
+    "ManagementGroupGovernanceRuleOperations",
+    "ManagementGroupGovernanceRulesOperations",
     "SubscriptionGovernanceRulesExecuteStatusOperations",
     "SecurityConnectorGovernanceRulesExecuteStatusOperations",
+    "ManagementGroupGovernanceRulesExecuteStatusOperations",
     "GovernanceAssignmentsOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])

@@ -18,6 +18,7 @@ from ._models_py3 import GovernanceEmailNotification
 from ._models_py3 import GovernanceRule
 from ._models_py3 import GovernanceRuleEmailNotification
 from ._models_py3 import GovernanceRuleList
+from ._models_py3 import GovernanceRuleMetadata
 from ._models_py3 import GovernanceRuleOwnerSource
 from ._models_py3 import RemediationEta
 from ._models_py3 import Resource
@@ -43,6 +44,7 @@ __all__ = [
     "GovernanceRule",
     "GovernanceRuleEmailNotification",
     "GovernanceRuleList",
+    "GovernanceRuleMetadata",
     "GovernanceRuleOwnerSource",
     "RemediationEta",
     "Resource",

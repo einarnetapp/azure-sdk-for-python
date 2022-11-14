@@ -26,6 +26,12 @@
                 "description": "Azure subscription ID. Required.",
                 "docstring_type": "str",
                 "required": true
+            },
+            "management_group_id": {
+                "signature": "management_group_id: str,",
+                "description": "Azure Management Group ID. Required.",
+                "docstring_type": "str",
+                "required": true
             }
         },
         "async": {
@@ -40,11 +46,17 @@
                 "description": "Azure subscription ID. Required.",
                 "docstring_type": "str",
                 "required": true
+            },
+            "management_group_id": {
+                "signature": "management_group_id: str,",
+                "description": "Azure Management Group ID. Required.",
+                "docstring_type": "str",
+                "required": true
             }
         },
         "constant": {
         },
-        "call": "credential, subscription_id",
+        "call": "credential, subscription_id, management_group_id",
         "service_client_specific": {
             "sync": {
                 "api_version": {
@@ -101,8 +113,11 @@
         "governance_rules": "GovernanceRulesOperations",
         "security_connector_governance_rule": "SecurityConnectorGovernanceRuleOperations",
         "security_connector_governance_rules": "SecurityConnectorGovernanceRulesOperations",
+        "management_group_governance_rule": "ManagementGroupGovernanceRuleOperations",
+        "management_group_governance_rules": "ManagementGroupGovernanceRulesOperations",
         "subscription_governance_rules_execute_status": "SubscriptionGovernanceRulesExecuteStatusOperations",
         "security_connector_governance_rules_execute_status": "SecurityConnectorGovernanceRulesExecuteStatusOperations",
+        "management_group_governance_rules_execute_status": "ManagementGroupGovernanceRulesExecuteStatusOperations",
         "governance_assignments": "GovernanceAssignmentsOperations"
     }
 }
