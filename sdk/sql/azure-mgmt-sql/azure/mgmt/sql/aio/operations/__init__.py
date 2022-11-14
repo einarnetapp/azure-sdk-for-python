@@ -181,6 +181,7 @@ from ._managed_database_move_operations_operations import ManagedDatabaseMoveOpe
 from ._managed_instance_dtcs_operations import ManagedInstanceDtcsOperations
 from ._synapse_link_workspaces_operations import SynapseLinkWorkspacesOperations
 from ._virtual_clusters_operations import VirtualClustersOperations
+from ._server_configuration_options_operations import ServerConfigurationOptionsOperations
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
@@ -332,6 +333,7 @@ __all__ = [
     "ManagedInstanceDtcsOperations",
     "SynapseLinkWorkspacesOperations",
     "VirtualClustersOperations",
+    "ServerConfigurationOptionsOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

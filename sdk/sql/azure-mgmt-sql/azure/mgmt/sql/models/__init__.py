@@ -305,6 +305,8 @@ from ._models_py3 import ServerBlobAuditingPolicy
 from ._models_py3 import ServerBlobAuditingPolicyListResult
 from ._models_py3 import ServerCommunicationLink
 from ._models_py3 import ServerCommunicationLinkListResult
+from ._models_py3 import ServerConfigurationOption
+from ._models_py3 import ServerConfigurationOptionListResult
 from ._models_py3 import ServerConnectionPolicy
 from ._models_py3 import ServerConnectionPolicyListResult
 from ._models_py3 import ServerDevOpsAuditSettingsListResult
@@ -512,6 +514,7 @@ from ._sql_management_client_enums import SecurityEventType
 from ._sql_management_client_enums import SensitivityLabelRank
 from ._sql_management_client_enums import SensitivityLabelSource
 from ._sql_management_client_enums import SensitivityLabelUpdateKind
+from ._sql_management_client_enums import ServerConfigurationOptionName
 from ._sql_management_client_enums import ServerConnectionType
 from ._sql_management_client_enums import ServerKeyType
 from ._sql_management_client_enums import ServerNetworkAccessFlag
@@ -848,6 +851,8 @@ __all__ = [
     "ServerBlobAuditingPolicyListResult",
     "ServerCommunicationLink",
     "ServerCommunicationLinkListResult",
+    "ServerConfigurationOption",
+    "ServerConfigurationOptionListResult",
     "ServerConnectionPolicy",
     "ServerConnectionPolicyListResult",
     "ServerDevOpsAuditSettingsListResult",
@@ -1054,6 +1059,7 @@ __all__ = [
     "SensitivityLabelRank",
     "SensitivityLabelSource",
     "SensitivityLabelUpdateKind",
+    "ServerConfigurationOptionName",
     "ServerConnectionType",
     "ServerKeyType",
     "ServerNetworkAccessFlag",

@@ -16766,6 +16766,77 @@ class ServerCommunicationLinkListResult(_serialization.Model):
         self.value = value
 
 
+class ServerConfigurationOption(ProxyResource):
+    """A server configuration option.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Resource ID.
+    :vartype id: str
+    :ivar name: Resource name.
+    :vartype name: str
+    :ivar type: Resource type.
+    :vartype type: str
+    :ivar server_configuration_option_value: Value of the server configuration option.
+    :vartype server_configuration_option_value: int
+    :ivar provisioning_state: Provisioning state of server configuration option. Known values are:
+     "Created", "InProgress", "Succeeded", "Failed", and "Canceled".
+    :vartype provisioning_state: str or ~azure.mgmt.sql.models.ProvisioningState
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "provisioning_state": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "server_configuration_option_value": {"key": "properties.serverConfigurationOptionValue", "type": "int"},
+        "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
+    }
+
+    def __init__(self, *, server_configuration_option_value: Optional[int] = None, **kwargs):
+        """
+        :keyword server_configuration_option_value: Value of the server configuration option.
+        :paramtype server_configuration_option_value: int
+        """
+        super().__init__(**kwargs)
+        self.server_configuration_option_value = server_configuration_option_value
+        self.provisioning_state = None
+
+
+class ServerConfigurationOptionListResult(_serialization.Model):
+    """A list of server configuration options.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Array of results.
+    :vartype value: list[~azure.mgmt.sql.models.ServerConfigurationOption]
+    :ivar next_link: Link to retrieve next page of results.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"readonly": True},
+        "next_link": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[ServerConfigurationOption]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.value = None
+        self.next_link = None
+
+
 class ServerConnectionPolicy(ProxyResource):
     """A server connection policy.
 

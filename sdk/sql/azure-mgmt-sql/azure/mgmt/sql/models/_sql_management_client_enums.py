@@ -1068,6 +1068,12 @@ class SensitivityLabelUpdateKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REMOVE = "remove"
 
 
+class ServerConfigurationOptionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ServerConfigurationOptionName."""
+
+    ALLOW_POLYBASE_EXPORT = "allowPolybaseExport"
+
+
 class ServerConnectionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The server connection type."""
 
