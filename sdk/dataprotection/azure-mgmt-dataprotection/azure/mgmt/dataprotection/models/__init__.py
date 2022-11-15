@@ -34,6 +34,7 @@ from ._models_py3 import AzureMonitorAlertSettings
 from ._models_py3 import AzureOperationalStoreParameters
 from ._models_py3 import AzureRetentionRule
 from ._models_py3 import BackupCriteria
+from ._models_py3 import BackupDatasourceParameters
 from ._models_py3 import BackupInstance
 from ._models_py3 import BackupInstanceResource
 from ._models_py3 import BackupInstanceResourceList
@@ -91,6 +92,8 @@ from ._models_py3 import ItemLevelRestoreCriteria
 from ._models_py3 import ItemLevelRestoreTargetInfo
 from ._models_py3 import JobExtendedInfo
 from ._models_py3 import JobSubTask
+from ._models_py3 import KubernetesClusterBackupDatasourceParameters
+from ._models_py3 import KubernetesClusterRestoreCriteria
 from ._models_py3 import KubernetesPVRestoreCriteria
 from ._models_py3 import KubernetesStorageClassRestoreCriteria
 from ._models_py3 import MonitoringSettings
@@ -148,10 +151,12 @@ from ._data_protection_client_enums import CreatedByType
 from ._data_protection_client_enums import CurrentProtectionState
 from ._data_protection_client_enums import DataStoreTypes
 from ._data_protection_client_enums import DayOfWeek
+from ._data_protection_client_enums import ExistingResourcePolicy
 from ._data_protection_client_enums import FeatureSupportStatus
 from ._data_protection_client_enums import FeatureType
 from ._data_protection_client_enums import ImmutabilityState
 from ._data_protection_client_enums import Month
+from ._data_protection_client_enums import PersistentVolumeRestoreMode
 from ._data_protection_client_enums import ProvisioningState
 from ._data_protection_client_enums import RecoveryOption
 from ._data_protection_client_enums import RehydrationPriority
@@ -202,6 +207,7 @@ __all__ = [
     "AzureOperationalStoreParameters",
     "AzureRetentionRule",
     "BackupCriteria",
+    "BackupDatasourceParameters",
     "BackupInstance",
     "BackupInstanceResource",
     "BackupInstanceResourceList",
@@ -259,6 +265,8 @@ __all__ = [
     "ItemLevelRestoreTargetInfo",
     "JobExtendedInfo",
     "JobSubTask",
+    "KubernetesClusterBackupDatasourceParameters",
+    "KubernetesClusterRestoreCriteria",
     "KubernetesPVRestoreCriteria",
     "KubernetesStorageClassRestoreCriteria",
     "MonitoringSettings",
@@ -315,10 +323,12 @@ __all__ = [
     "CurrentProtectionState",
     "DataStoreTypes",
     "DayOfWeek",
+    "ExistingResourcePolicy",
     "FeatureSupportStatus",
     "FeatureType",
     "ImmutabilityState",
     "Month",
+    "PersistentVolumeRestoreMode",
     "ProvisioningState",
     "RecoveryOption",
     "RehydrationPriority",
