@@ -14,7 +14,7 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
     pip install azure-identity
     pip install azure-mgmt-devcenter
 # USAGE
-    python environment_types_update.py
+    python schedules_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,18 +26,18 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
 def main():
     client = DevCenterMgmtClient(
         credential=DefaultAzureCredential(),
-        subscription_id="{subscriptionId}",
+        subscription_id="0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     )
 
-    response = client.environment_types.update(
+    response = client.schedules.get(
         resource_group_name="rg1",
-        dev_center_name="Contoso",
-        environment_type_name="{environmentTypeName}",
-        body={"tags": {"Owner": "superuser"}},
+        project_name="TestProject",
+        pool_name="DevPool",
+        schedule_name="autoShutdown",
     )
     print(response)
 
 
-# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-10-12-preview/examples/EnvironmentTypes_Patch.json
+# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-11-11-preview/examples/Schedules_Get.json
 if __name__ == "__main__":
     main()

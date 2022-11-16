@@ -14,7 +14,7 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
     pip install azure-identity
     pip install azure-mgmt-devcenter
 # USAGE
-    python pools_create_or_update.py
+    python schedules_patch.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,26 +26,19 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
 def main():
     client = DevCenterMgmtClient(
         credential=DefaultAzureCredential(),
-        subscription_id="{subscriptionId}",
+        subscription_id="0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     )
 
-    response = client.pools.begin_create_or_update(
+    response = client.schedules.begin_update(
         resource_group_name="rg1",
-        project_name="{projectName}",
-        pool_name="{poolName}",
-        body={
-            "location": "centralus",
-            "properties": {
-                "devBoxDefinitionName": "WebDevBox",
-                "licenseType": "Windows_Client",
-                "localAdministrator": "Enabled",
-                "networkConnectionName": "Network1-westus2",
-            },
-        },
+        project_name="TestProject",
+        pool_name="DevPool",
+        schedule_name="autoShutdown",
+        body={"properties": {"time": "18:00"}},
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-10-12-preview/examples/Pools_Put.json
+# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-11-11-preview/examples/Schedules_Patch.json
 if __name__ == "__main__":
     main()

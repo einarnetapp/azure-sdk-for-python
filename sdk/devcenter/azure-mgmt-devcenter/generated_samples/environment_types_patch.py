@@ -14,7 +14,7 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
     pip install azure-identity
     pip install azure-mgmt-devcenter
 # USAGE
-    python catalogs_create_or_update_ado.py
+    python environment_types_patch.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,27 +26,18 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
 def main():
     client = DevCenterMgmtClient(
         credential=DefaultAzureCredential(),
-        subscription_id="{subscriptionId}",
+        subscription_id="0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     )
 
-    response = client.catalogs.begin_create_or_update(
+    response = client.environment_types.update(
         resource_group_name="rg1",
         dev_center_name="Contoso",
-        catalog_name="{catalogName}",
-        body={
-            "properties": {
-                "adoGit": {
-                    "branch": "main",
-                    "path": "/templates",
-                    "secretIdentifier": "https://contosokv.vault.azure.net/secrets/CentralRepoPat",
-                    "uri": "https://contoso@dev.azure.com/contoso/contosoOrg/_git/centralrepo-fakecontoso",
-                }
-            }
-        },
-    ).result()
+        environment_type_name="DevTest",
+        body={"tags": {"Owner": "superuser"}},
+    )
     print(response)
 
 
-# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-10-12-preview/examples/Catalogs_CreateAdo.json
+# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-11-11-preview/examples/EnvironmentTypes_Patch.json
 if __name__ == "__main__":
     main()

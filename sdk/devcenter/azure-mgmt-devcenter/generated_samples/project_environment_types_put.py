@@ -14,7 +14,7 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
     pip install azure-identity
     pip install azure-mgmt-devcenter
 # USAGE
-    python project_environment_types_update.py
+    python project_environment_types_put.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,13 +26,13 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
 def main():
     client = DevCenterMgmtClient(
         credential=DefaultAzureCredential(),
-        subscription_id="{subscriptionId}",
+        subscription_id="0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     )
 
-    response = client.project_environment_types.update(
+    response = client.project_environment_types.create_or_update(
         resource_group_name="rg1",
         project_name="ContosoProj",
-        environment_type_name="{environmentTypeName}",
+        environment_type_name="DevTest",
         body={
             "identity": {
                 "type": "UserAssigned",
@@ -41,6 +41,7 @@ def main():
                 },
             },
             "properties": {
+                "creatorRoleAssignment": {"roles": {"4cbf0b6c-e750-441c-98a7-10da8387e4d6": {}}},
                 "deploymentTargetId": "/subscriptions/00000000-0000-0000-0000-000000000000",
                 "status": "Enabled",
                 "userRoleAssignments": {
@@ -53,6 +54,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-10-12-preview/examples/ProjectEnvironmentTypes_Patch.json
+# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-11-11-preview/examples/ProjectEnvironmentTypes_Put.json
 if __name__ == "__main__":
     main()

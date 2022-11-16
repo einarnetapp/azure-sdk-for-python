@@ -71,10 +71,10 @@ class UsagesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-11-11-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-10-12-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ListUsagesResult]
+        )
+        cls: ClsType[_models.ListUsagesResult] = kwargs.pop("cls", None)
 
         error_map = {
             401: ClientAuthenticationError,
@@ -96,7 +96,7 @@ class UsagesOperations:
                     params=_params,
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
 
             else:
                 # make call to next link with the client's api-version
@@ -112,7 +112,7 @@ class UsagesOperations:
                     "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
                 )
                 request = _convert_request(request)
-                request.url = self._client.format_url(request.url)  # type: ignore
+                request.url = self._client.format_url(request.url)
                 request.method = "GET"
             return request
 
@@ -120,13 +120,13 @@ class UsagesOperations:
             deserialized = self._deserialize("ListUsagesResult", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
-                list_of_elem = cls(list_of_elem)
+                list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.next_link or None, AsyncList(list_of_elem)
 
         async def get_next(next_link=None):
             request = prepare_request(next_link)
 
-            pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
                 request, stream=False, **kwargs
             )
             response = pipeline_response.http_response
@@ -139,4 +139,6 @@ class UsagesOperations:
 
         return AsyncItemPaged(get_next, extract_data)
 
-    list_by_location.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/locations/{location}/usages"}  # type: ignore
+    list_by_location.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/locations/{location}/usages"
+    }
