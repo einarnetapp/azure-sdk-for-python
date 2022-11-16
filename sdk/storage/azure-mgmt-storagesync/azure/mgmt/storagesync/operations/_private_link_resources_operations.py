@@ -45,7 +45,7 @@ def build_list_by_storage_sync_service_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop("api_version", _params.pop("api-version", "2022-06-01"))  # type: Literal["2022-06-01"]
+    api_version: Literal["2022-09-01"] = kwargs.pop("api_version", _params.pop("api-version", "2022-09-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -61,7 +61,7 @@ def build_list_by_storage_sync_service_request(
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -119,10 +119,10 @@ class PrivateLinkResourcesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-09-01"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
-        )  # type: Literal["2022-06-01"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.PrivateLinkResourceListResult]
+        )
+        cls: ClsType[_models.PrivateLinkResourceListResult] = kwargs.pop("cls", None)
 
         request = build_list_by_storage_sync_service_request(
             resource_group_name=resource_group_name,
@@ -134,9 +134,9 @@ class PrivateLinkResourcesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -153,4 +153,6 @@ class PrivateLinkResourcesOperations:
 
         return deserialized
 
-    list_by_storage_sync_service.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateLinkResources"}  # type: ignore
+    list_by_storage_sync_service.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateLinkResources"
+    }

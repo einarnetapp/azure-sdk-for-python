@@ -889,6 +889,70 @@ class LocationOperationStatus(_serialization.Model):
         self.percent_complete = None
 
 
+class ManagedServiceIdentity(_serialization.Model):
+    """Managed service identity (system assigned and/or user assigned identities).
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar principal_id: The service principal ID of the system assigned identity. This property
+     will only be provided for a system assigned identity.
+    :vartype principal_id: str
+    :ivar tenant_id: The tenant ID of the system assigned identity. This property will only be
+     provided for a system assigned identity.
+    :vartype tenant_id: str
+    :ivar type: Type of managed service identity (where both SystemAssigned and UserAssigned types
+     are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
+     "SystemAssigned, UserAssigned".
+    :vartype type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+    :ivar user_assigned_identities: The set of user assigned identities associated with the
+     resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
+     '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
+     The dictionary values can be empty objects ({}) in requests.
+    :vartype user_assigned_identities: dict[str,
+     ~azure.mgmt.storagesync.models.UserAssignedIdentity]
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
+        "type": {"required": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "user_assigned_identities": {"key": "userAssignedIdentities", "type": "{UserAssignedIdentity}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        type: Union[str, "_models.ManagedServiceIdentityType"],
+        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword type: Type of managed service identity (where both SystemAssigned and UserAssigned
+         types are allowed). Required. Known values are: "None", "SystemAssigned", "UserAssigned", and
+         "SystemAssigned, UserAssigned".
+        :paramtype type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+        :keyword user_assigned_identities: The set of user assigned identities associated with the
+         resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form:
+         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
+         The dictionary values can be empty objects ({}) in requests.
+        :paramtype user_assigned_identities: dict[str,
+         ~azure.mgmt.storagesync.models.UserAssignedIdentity]
+        """
+        super().__init__(**kwargs)
+        self.principal_id = None
+        self.tenant_id = None
+        self.type = type
+        self.user_assigned_identities = user_assigned_identities
+
+
 class OperationDisplayInfo(_serialization.Model):
     """The operation supported by storage sync.
 
@@ -1764,6 +1828,11 @@ class RegisteredServer(ProxyResource):  # pylint: disable=too-many-instance-attr
     :vartype monitoring_configuration: str
     :ivar server_name: Server name.
     :vartype server_name: str
+    :ivar identity_type: Identity Type. Known values are: "None", "SystemAssigned", "UserAssigned",
+     and "SystemAssigned, UserAssigned".
+    :vartype identity_type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+    :ivar identity_id: Comma separated list of user assigned identities.
+    :vartype identity_id: str
     """
 
     _validation = {
@@ -1774,6 +1843,8 @@ class RegisteredServer(ProxyResource):  # pylint: disable=too-many-instance-attr
         "agent_version_status": {"readonly": True},
         "agent_version_expiration_date": {"readonly": True},
         "server_name": {"readonly": True},
+        "identity_type": {"readonly": True},
+        "identity_id": {"readonly": True},
     }
 
     _attribute_map = {
@@ -1804,6 +1875,8 @@ class RegisteredServer(ProxyResource):  # pylint: disable=too-many-instance-attr
         "monitoring_endpoint_uri": {"key": "properties.monitoringEndpointUri", "type": "str"},
         "monitoring_configuration": {"key": "properties.monitoringConfiguration", "type": "str"},
         "server_name": {"key": "properties.serverName", "type": "str"},
+        "identity_type": {"key": "properties.identityType", "type": "str"},
+        "identity_id": {"key": "properties.identityId", "type": "str"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
@@ -1897,6 +1970,8 @@ class RegisteredServer(ProxyResource):  # pylint: disable=too-many-instance-attr
         self.monitoring_endpoint_uri = monitoring_endpoint_uri
         self.monitoring_configuration = monitoring_configuration
         self.server_name = None
+        self.identity_type = None
+        self.identity_id = None
 
 
 class RegisteredServerArray(_serialization.Model):
@@ -1953,6 +2028,8 @@ class RegisteredServerCreateParameters(ProxyResource):  # pylint: disable=too-ma
     :vartype server_id: str
     :ivar friendly_name: Friendly Name.
     :vartype friendly_name: str
+    :ivar application_id: Server ServicePrincipal Id.
+    :vartype application_id: str
     """
 
     _validation = {
@@ -1976,6 +2053,7 @@ class RegisteredServerCreateParameters(ProxyResource):  # pylint: disable=too-ma
         "cluster_name": {"key": "properties.clusterName", "type": "str"},
         "server_id": {"key": "properties.serverId", "type": "str"},
         "friendly_name": {"key": "properties.friendlyName", "type": "str"},
+        "application_id": {"key": "properties.ApplicationId", "type": "str"},
     }
 
     def __init__(
@@ -1990,6 +2068,7 @@ class RegisteredServerCreateParameters(ProxyResource):  # pylint: disable=too-ma
         cluster_name: Optional[str] = None,
         server_id: Optional[str] = None,
         friendly_name: Optional[str] = None,
+        application_id: Optional[str] = None,
         **kwargs
     ):
         """
@@ -2011,6 +2090,8 @@ class RegisteredServerCreateParameters(ProxyResource):  # pylint: disable=too-ma
         :paramtype server_id: str
         :keyword friendly_name: Friendly Name.
         :paramtype friendly_name: str
+        :keyword application_id: Server ServicePrincipal Id.
+        :paramtype application_id: str
         """
         super().__init__(**kwargs)
         self.server_certificate = server_certificate
@@ -2022,6 +2103,51 @@ class RegisteredServerCreateParameters(ProxyResource):  # pylint: disable=too-ma
         self.cluster_name = cluster_name
         self.server_id = server_id
         self.friendly_name = friendly_name
+        self.application_id = application_id
+
+
+class RegisteredServerUpdateParameters(ProxyResource):
+    """The parameters used when updating a registered server.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.storagesync.models.SystemData
+    :ivar application_id: Server ServicePrincipal Id.
+    :vartype application_id: str
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "system_data": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "application_id": {"key": "properties.ApplicationId", "type": "str"},
+    }
+
+    def __init__(self, *, application_id: Optional[str] = None, **kwargs):
+        """
+        :keyword application_id: Server ServicePrincipal Id.
+        :paramtype application_id: str
+        """
+        super().__init__(**kwargs)
+        self.application_id = application_id
 
 
 class ResourcesMoveInfo(_serialization.Model):
@@ -3196,6 +3322,13 @@ class StorageSyncService(TrackedResource):  # pylint: disable=too-many-instance-
     :vartype last_workflow_id: str
     :ivar last_operation_name: Resource Last Operation Name.
     :vartype last_operation_name: str
+    :ivar identity_type: Identity Type. Known values are: "None", "SystemAssigned", "UserAssigned",
+     and "SystemAssigned, UserAssigned".
+    :vartype identity_type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+    :ivar identity_id: Comma separated list of user assigned identities.
+    :vartype identity_id: str
+    :ivar identity: Managed service identity (system assigned and/or user assigned identities).
+    :vartype identity: ~azure.mgmt.storagesync.models.ManagedServiceIdentity
     :ivar private_endpoint_connections: List of private endpoint connection associated with the
      specified storage sync service.
     :vartype private_endpoint_connections:
@@ -3213,6 +3346,8 @@ class StorageSyncService(TrackedResource):  # pylint: disable=too-many-instance-
         "provisioning_state": {"readonly": True},
         "last_workflow_id": {"readonly": True},
         "last_operation_name": {"readonly": True},
+        "identity_type": {"readonly": True},
+        "identity_id": {"readonly": True},
         "private_endpoint_connections": {"readonly": True},
     }
 
@@ -3229,6 +3364,9 @@ class StorageSyncService(TrackedResource):  # pylint: disable=too-many-instance-
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "last_workflow_id": {"key": "properties.lastWorkflowId", "type": "str"},
         "last_operation_name": {"key": "properties.lastOperationName", "type": "str"},
+        "identity_type": {"key": "properties.identityType", "type": "str"},
+        "identity_id": {"key": "properties.identityId", "type": "str"},
+        "identity": {"key": "properties.identity", "type": "ManagedServiceIdentity"},
         "private_endpoint_connections": {
             "key": "properties.privateEndpointConnections",
             "type": "[PrivateEndpointConnection]",
@@ -3241,6 +3379,7 @@ class StorageSyncService(TrackedResource):  # pylint: disable=too-many-instance-
         location: str,
         tags: Optional[Dict[str, str]] = None,
         incoming_traffic_policy: Optional[Union[str, "_models.IncomingTrafficPolicy"]] = None,
+        identity: Optional["_models.ManagedServiceIdentity"] = None,
         **kwargs
     ):
         """
@@ -3251,6 +3390,8 @@ class StorageSyncService(TrackedResource):  # pylint: disable=too-many-instance-
         :keyword incoming_traffic_policy: Incoming Traffic Policy. Known values are: "AllowAllTraffic"
          and "AllowVirtualNetworksOnly".
         :paramtype incoming_traffic_policy: str or ~azure.mgmt.storagesync.models.IncomingTrafficPolicy
+        :keyword identity: Managed service identity (system assigned and/or user assigned identities).
+        :paramtype identity: ~azure.mgmt.storagesync.models.ManagedServiceIdentity
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.incoming_traffic_policy = incoming_traffic_policy
@@ -3259,6 +3400,9 @@ class StorageSyncService(TrackedResource):  # pylint: disable=too-many-instance-
         self.provisioning_state = None
         self.last_workflow_id = None
         self.last_operation_name = None
+        self.identity_type = None
+        self.identity_id = None
+        self.identity = identity
         self.private_endpoint_connections = None
 
 
@@ -3300,6 +3444,11 @@ class StorageSyncServiceCreateParameters(_serialization.Model):
     :ivar incoming_traffic_policy: Incoming Traffic Policy. Known values are: "AllowAllTraffic" and
      "AllowVirtualNetworksOnly".
     :vartype incoming_traffic_policy: str or ~azure.mgmt.storagesync.models.IncomingTrafficPolicy
+    :ivar identity_type: Identity Type. Known values are: "None", "SystemAssigned", "UserAssigned",
+     and "SystemAssigned, UserAssigned".
+    :vartype identity_type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+    :ivar identity_id: Comma separated list of user assigned identities.
+    :vartype identity_id: str
     """
 
     _validation = {
@@ -3310,6 +3459,8 @@ class StorageSyncServiceCreateParameters(_serialization.Model):
         "location": {"key": "location", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
         "incoming_traffic_policy": {"key": "properties.incomingTrafficPolicy", "type": "str"},
+        "identity_type": {"key": "properties.identityType", "type": "str"},
+        "identity_id": {"key": "properties.identityId", "type": "str"},
     }
 
     def __init__(
@@ -3318,6 +3469,8 @@ class StorageSyncServiceCreateParameters(_serialization.Model):
         location: str,
         tags: Optional[Dict[str, str]] = None,
         incoming_traffic_policy: Optional[Union[str, "_models.IncomingTrafficPolicy"]] = None,
+        identity_type: Optional[Union[str, "_models.ManagedServiceIdentityType"]] = None,
+        identity_id: Optional[str] = None,
         **kwargs
     ):
         """
@@ -3334,11 +3487,18 @@ class StorageSyncServiceCreateParameters(_serialization.Model):
         :keyword incoming_traffic_policy: Incoming Traffic Policy. Known values are: "AllowAllTraffic"
          and "AllowVirtualNetworksOnly".
         :paramtype incoming_traffic_policy: str or ~azure.mgmt.storagesync.models.IncomingTrafficPolicy
+        :keyword identity_type: Identity Type. Known values are: "None", "SystemAssigned",
+         "UserAssigned", and "SystemAssigned, UserAssigned".
+        :paramtype identity_type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+        :keyword identity_id: Comma separated list of user assigned identities.
+        :paramtype identity_id: str
         """
         super().__init__(**kwargs)
         self.location = location
         self.tags = tags
         self.incoming_traffic_policy = incoming_traffic_policy
+        self.identity_type = identity_type
+        self.identity_id = identity_id
 
 
 class StorageSyncServiceUpdateParameters(_serialization.Model):
@@ -3349,11 +3509,18 @@ class StorageSyncServiceUpdateParameters(_serialization.Model):
     :ivar incoming_traffic_policy: Incoming Traffic Policy. Known values are: "AllowAllTraffic" and
      "AllowVirtualNetworksOnly".
     :vartype incoming_traffic_policy: str or ~azure.mgmt.storagesync.models.IncomingTrafficPolicy
+    :ivar identity_type: Identity Type. Known values are: "None", "SystemAssigned", "UserAssigned",
+     and "SystemAssigned, UserAssigned".
+    :vartype identity_type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+    :ivar identity_id: Comma separated list of user assigned identities.
+    :vartype identity_id: str
     """
 
     _attribute_map = {
         "tags": {"key": "tags", "type": "{str}"},
         "incoming_traffic_policy": {"key": "properties.incomingTrafficPolicy", "type": "str"},
+        "identity_type": {"key": "properties.identityType", "type": "str"},
+        "identity_id": {"key": "properties.identityId", "type": "str"},
     }
 
     def __init__(
@@ -3361,6 +3528,8 @@ class StorageSyncServiceUpdateParameters(_serialization.Model):
         *,
         tags: Optional[Dict[str, str]] = None,
         incoming_traffic_policy: Optional[Union[str, "_models.IncomingTrafficPolicy"]] = None,
+        identity_type: Optional[Union[str, "_models.ManagedServiceIdentityType"]] = None,
+        identity_id: Optional[str] = None,
         **kwargs
     ):
         """
@@ -3369,10 +3538,17 @@ class StorageSyncServiceUpdateParameters(_serialization.Model):
         :keyword incoming_traffic_policy: Incoming Traffic Policy. Known values are: "AllowAllTraffic"
          and "AllowVirtualNetworksOnly".
         :paramtype incoming_traffic_policy: str or ~azure.mgmt.storagesync.models.IncomingTrafficPolicy
+        :keyword identity_type: Identity Type. Known values are: "None", "SystemAssigned",
+         "UserAssigned", and "SystemAssigned, UserAssigned".
+        :paramtype identity_type: str or ~azure.mgmt.storagesync.models.ManagedServiceIdentityType
+        :keyword identity_id: Comma separated list of user assigned identities.
+        :paramtype identity_id: str
         """
         super().__init__(**kwargs)
         self.tags = tags
         self.incoming_traffic_policy = incoming_traffic_policy
+        self.identity_type = identity_type
+        self.identity_id = identity_id
 
 
 class SubscriptionState(_serialization.Model):
@@ -3653,6 +3829,34 @@ class TriggerRolloverRequest(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.server_certificate = server_certificate
+
+
+class UserAssignedIdentity(_serialization.Model):
+    """User assigned identity properties.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar principal_id: The principal ID of the assigned identity.
+    :vartype principal_id: str
+    :ivar client_id: The client ID of the assigned identity.
+    :vartype client_id: str
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "client_id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "client_id": {"key": "clientId", "type": "str"},
+    }
+
+    def __init__(self, **kwargs):
+        """ """
+        super().__init__(**kwargs)
+        self.principal_id = None
+        self.client_id = None
 
 
 class Workflow(ProxyResource):  # pylint: disable=too-many-instance-attributes
