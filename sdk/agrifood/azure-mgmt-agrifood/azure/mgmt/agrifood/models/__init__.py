@@ -6,6 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from ._models_py3 import ApiProperties
 from ._models_py3 import ArmAsyncOperation
 from ._models_py3 import CheckNameAvailabilityRequest
 from ._models_py3 import CheckNameAvailabilityResponse
@@ -14,6 +15,7 @@ from ._models_py3 import ErrorAdditionalInfo
 from ._models_py3 import ErrorDetail
 from ._models_py3 import ErrorResponse
 from ._models_py3 import Extension
+from ._models_py3 import ExtensionInstallationRequest
 from ._models_py3 import ExtensionListResponse
 from ._models_py3 import FarmBeats
 from ._models_py3 import FarmBeatsExtension
@@ -47,10 +49,11 @@ from ._agri_food_mgmt_client_enums import PrivateEndpointServiceConnectionStatus
 from ._agri_food_mgmt_client_enums import ProvisioningState
 from ._agri_food_mgmt_client_enums import PublicNetworkAccess
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "ApiProperties",
     "ArmAsyncOperation",
     "CheckNameAvailabilityRequest",
     "CheckNameAvailabilityResponse",
@@ -59,6 +62,7 @@ __all__ = [
     "ErrorDetail",
     "ErrorResponse",
     "Extension",
+    "ExtensionInstallationRequest",
     "ExtensionListResponse",
     "FarmBeats",
     "FarmBeatsExtension",
