@@ -7,19 +7,17 @@
 # --------------------------------------------------------------------------
 
 from enum import Enum
-from six import with_metaclass
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ActionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
-    """
+class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs."""
 
     INTERNAL = "Internal"
 
-class AuthType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The authentication type.
-    """
+
+class AuthType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The authentication type."""
 
     SYSTEM_ASSIGNED_IDENTITY = "systemAssignedIdentity"
     USER_ASSIGNED_IDENTITY = "userAssignedIdentity"
@@ -27,15 +25,15 @@ class AuthType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     SERVICE_PRINCIPAL_CERTIFICATE = "servicePrincipalCertificate"
     SECRET = "secret"
 
-class AzureResourceType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The azure resource type.
-    """
+
+class AzureResourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The azure resource type."""
 
     KEY_VAULT = "KeyVault"
 
-class ClientType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The application client type
-    """
+
+class ClientType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The application client type."""
 
     NONE = "none"
     DOTNET = "dotnet"
@@ -47,52 +45,54 @@ class ClientType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
     DJANGO = "django"
     NODEJS = "nodejs"
     SPRING_BOOT = "springBoot"
+    KAFKA_SPRING_BOOT = "kafka-springBoot"
 
-class CreatedByType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The type of identity that created the resource.
-    """
+
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of identity that created the resource."""
 
     USER = "User"
     APPLICATION = "Application"
     MANAGED_IDENTITY = "ManagedIdentity"
     KEY = "Key"
 
-class Origin(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
+
+class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit
-    logs UX. Default value is "user,system"
+    logs UX. Default value is "user,system".
     """
 
     USER = "user"
     SYSTEM = "system"
     USER_SYSTEM = "user,system"
 
-class SecretType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The secret type.
-    """
+
+class SecretType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The secret type."""
 
     RAW_VALUE = "rawValue"
     KEY_VAULT_SECRET_URI = "keyVaultSecretUri"
     KEY_VAULT_SECRET_REFERENCE = "keyVaultSecretReference"
 
-class TargetServiceType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The target service type.
-    """
+
+class TargetServiceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The target service type."""
 
     AZURE_RESOURCE = "AzureResource"
     CONFLUENT_BOOTSTRAP_SERVER = "ConfluentBootstrapServer"
     CONFLUENT_SCHEMA_REGISTRY = "ConfluentSchemaRegistry"
 
-class ValidationResultStatus(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """The result of validation
-    """
+
+class ValidationResultStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The result of validation."""
 
     SUCCESS = "success"
     FAILURE = "failure"
     WARNING = "warning"
 
-class VNetSolutionType(with_metaclass(CaseInsensitiveEnumMeta, str, Enum)):
-    """Type of VNet solution.
-    """
+
+class VNetSolutionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of VNet solution."""
 
     SERVICE_ENDPOINT = "serviceEndpoint"
     PRIVATE_LINK = "privateLink"
