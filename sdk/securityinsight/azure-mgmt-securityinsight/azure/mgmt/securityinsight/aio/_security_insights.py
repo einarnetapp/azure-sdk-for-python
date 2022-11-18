@@ -12,7 +12,7 @@ from typing import Any, Awaitable, TYPE_CHECKING
 from azure.core.rest import AsyncHttpResponse, HttpRequest
 from azure.mgmt.core import AsyncARMPipelineClient
 
-from .. import models
+from .. import models as _models
 from .._serialization import Deserializer, Serializer
 from ._configuration import SecurityInsightsConfiguration
 from .operations import (
@@ -50,6 +50,7 @@ from .operations import (
     ThreatIntelligenceIndicatorsOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
+    WorkspaceManagerMembersOperations,
 )
 
 if TYPE_CHECKING:
@@ -135,6 +136,9 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :vartype watchlists: azure.mgmt.securityinsight.aio.operations.WatchlistsOperations
     :ivar watchlist_items: WatchlistItemsOperations operations
     :vartype watchlist_items: azure.mgmt.securityinsight.aio.operations.WatchlistItemsOperations
+    :ivar workspace_manager_members: WorkspaceManagerMembersOperations operations
+    :vartype workspace_manager_members:
+     azure.mgmt.securityinsight.aio.operations.WorkspaceManagerMembersOperations
     :ivar data_connectors: DataConnectorsOperations operations
     :vartype data_connectors: azure.mgmt.securityinsight.aio.operations.DataConnectorsOperations
     :ivar data_connectors_check_requirements: DataConnectorsCheckRequirementsOperations operations
@@ -148,7 +152,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2022-09-01-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2023-03-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -165,7 +169,7 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         self._config = SecurityInsightsConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
@@ -230,6 +234,9 @@ class SecurityInsights:  # pylint: disable=client-accepts-api-version-keyword,to
         )
         self.watchlists = WatchlistsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watchlist_items = WatchlistItemsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.workspace_manager_members = WorkspaceManagerMembersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.data_connectors = DataConnectorsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.data_connectors_check_requirements = DataConnectorsCheckRequirementsOperations(
             self._client, self._config, self._serialize, self._deserialize
