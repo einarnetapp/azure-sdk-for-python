@@ -318,7 +318,7 @@ class AlertSimulatorRequestProperties(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.additional_properties = additional_properties
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class AlertSimulatorBundlesRequestProperties(AlertSimulatorRequestProperties):
@@ -360,7 +360,7 @@ class AlertSimulatorBundlesRequestProperties(AlertSimulatorRequestProperties):
         :paramtype bundles: list[str or ~azure.mgmt.security.v2021_01_01.models.BundleType]
         """
         super().__init__(additional_properties=additional_properties, **kwargs)
-        self.kind = "Bundles"  # type: str
+        self.kind: str = "Bundles"
         self.bundles = bundles
 
 
@@ -410,7 +410,7 @@ class ResourceIdentifier(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = None  # type: Optional[str]
+        self.type: Optional[str] = None
 
 
 class AzureResourceIdentifier(ResourceIdentifier):
@@ -440,7 +440,7 @@ class AzureResourceIdentifier(ResourceIdentifier):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "AzureResource"  # type: str
+        self.type: str = "AzureResource"
         self.azure_resource_id = None
 
 
@@ -560,7 +560,7 @@ class LogAnalyticsIdentifier(ResourceIdentifier):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.type = "LogAnalytics"  # type: str
+        self.type: str = "LogAnalytics"
         self.workspace_id = None
         self.workspace_subscription_id = None
         self.workspace_resource_group = None

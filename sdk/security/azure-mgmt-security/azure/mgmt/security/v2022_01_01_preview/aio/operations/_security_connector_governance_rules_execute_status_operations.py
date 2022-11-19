@@ -71,10 +71,10 @@ class SecurityConnectorGovernanceRulesExecuteStatusOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.ExecuteRuleStatus]]
+        )
+        cls: ClsType[Optional[_models.ExecuteRuleStatus]] = kwargs.pop("cls", None)
 
         request = build_get_request(
             resource_group_name=resource_group_name,
@@ -88,9 +88,9 @@ class SecurityConnectorGovernanceRulesExecuteStatusOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -113,7 +113,9 @@ class SecurityConnectorGovernanceRulesExecuteStatusOperations:
 
         return deserialized
 
-    _get_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"}  # type: ignore
+    _get_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"
+    }
 
     @distributed_trace_async
     async def begin_get(
@@ -150,15 +152,15 @@ class SecurityConnectorGovernanceRulesExecuteStatusOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ExecuteRuleStatus]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, AsyncPollingMethod]
+        )
+        cls: ClsType[_models.ExecuteRuleStatus] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._get_initial(  # type: ignore
+            raw_result = await self._get_initial(
                 resource_group_name=resource_group_name,
                 security_connector_name=security_connector_name,
                 rule_id=rule_id,
@@ -178,7 +180,7 @@ class SecurityConnectorGovernanceRulesExecuteStatusOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))  # type: AsyncPollingMethod
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -190,6 +192,8 @@ class SecurityConnectorGovernanceRulesExecuteStatusOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_get.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"}  # type: ignore
+    begin_get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"
+    }

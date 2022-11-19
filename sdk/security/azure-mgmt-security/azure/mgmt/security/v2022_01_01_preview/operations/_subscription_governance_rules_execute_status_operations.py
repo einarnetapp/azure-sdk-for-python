@@ -45,9 +45,9 @@ def build_get_request(rule_id: str, operation_id: str, subscription_id: str, **k
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2022-01-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2022-01-01-preview")
-    )  # type: Literal["2022-01-01-preview"]
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -63,7 +63,7 @@ def build_get_request(rule_id: str, operation_id: str, subscription_id: str, **k
         "operationId": _SERIALIZER.url("operation_id", operation_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -105,10 +105,10 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[Optional[_models.ExecuteRuleStatus]]
+        )
+        cls: ClsType[Optional[_models.ExecuteRuleStatus]] = kwargs.pop("cls", None)
 
         request = build_get_request(
             rule_id=rule_id,
@@ -120,9 +120,9 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -145,7 +145,9 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
 
         return deserialized
 
-    _get_initial.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"}  # type: ignore
+    _get_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"
+    }
 
     @distributed_trace
     def begin_get(self, rule_id: str, operation_id: str, **kwargs: Any) -> LROPoller[_models.ExecuteRuleStatus]:
@@ -175,15 +177,15 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.ExecuteRuleStatus]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        )
+        cls: ClsType[_models.ExecuteRuleStatus] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = self._get_initial(  # type: ignore
+            raw_result = self._get_initial(
                 rule_id=rule_id,
                 operation_id=operation_id,
                 api_version=api_version,
@@ -201,7 +203,7 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
             return deserialized
 
         if polling is True:
-            polling_method = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))  # type: PollingMethod
+            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -213,6 +215,8 @@ class SubscriptionGovernanceRulesExecuteStatusOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"}  # type: ignore
+    begin_get.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}"
+    }

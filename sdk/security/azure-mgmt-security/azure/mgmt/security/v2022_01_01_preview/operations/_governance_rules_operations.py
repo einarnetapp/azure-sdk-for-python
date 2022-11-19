@@ -45,9 +45,9 @@ def build_get_request(rule_id: str, subscription_id: str, **kwargs: Any) -> Http
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2022-01-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2022-01-01-preview")
-    )  # type: Literal["2022-01-01-preview"]
+    )
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -61,7 +61,7 @@ def build_get_request(rule_id: str, subscription_id: str, **kwargs: Any) -> Http
         "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -76,10 +76,10 @@ def build_create_or_update_request(rule_id: str, subscription_id: str, **kwargs:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2022-01-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2022-01-01-preview")
-    )  # type: Literal["2022-01-01-preview"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -93,7 +93,7 @@ def build_create_or_update_request(rule_id: str, subscription_id: str, **kwargs:
         "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -109,9 +109,9 @@ def build_create_or_update_request(rule_id: str, subscription_id: str, **kwargs:
 def build_delete_request(rule_id: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2022-01-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2022-01-01-preview")
-    )  # type: Literal["2022-01-01-preview"]
+    )
     # Construct URL
     _url = kwargs.pop(
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}"
@@ -123,7 +123,7 @@ def build_delete_request(rule_id: str, subscription_id: str, **kwargs: Any) -> H
         "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -135,10 +135,10 @@ def build_rule_id_execute_single_subscription_request(rule_id: str, subscription
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2022-01-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2022-01-01-preview")
-    )  # type: Literal["2022-01-01-preview"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -152,7 +152,7 @@ def build_rule_id_execute_single_subscription_request(rule_id: str, subscription
         "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -171,10 +171,10 @@ def build_rule_id_execute_single_security_connector_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version = kwargs.pop(
+    api_version: Literal["2022-01-01-preview"] = kwargs.pop(
         "api_version", _params.pop("api-version", "2022-01-01-preview")
-    )  # type: Literal["2022-01-01-preview"]
-    content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
+    )
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -193,7 +193,7 @@ def build_rule_id_execute_single_security_connector_request(
         "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
     }
 
-    _url = _format_url_section(_url, **path_format_arguments)
+    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -248,10 +248,10 @@ class GovernanceRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GovernanceRule]
+        )
+        cls: ClsType[_models.GovernanceRule] = kwargs.pop("cls", None)
 
         request = build_get_request(
             rule_id=rule_id,
@@ -262,9 +262,9 @@ class GovernanceRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -281,7 +281,7 @@ class GovernanceRulesOperations:
 
         return deserialized
 
-    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}"}  # type: ignore
+    get.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}"}
 
     @overload
     def create_or_update(
@@ -359,11 +359,11 @@ class GovernanceRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[_models.GovernanceRule]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.GovernanceRule] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -385,9 +385,9 @@ class GovernanceRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -404,11 +404,13 @@ class GovernanceRulesOperations:
             deserialized = self._deserialize("GovernanceRule", pipeline_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
-        return deserialized
+        return deserialized  # type: ignore
 
-    create_or_update.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}"}  # type: ignore
+    create_or_update.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}"
+    }
 
     @distributed_trace
     def delete(self, rule_id: str, **kwargs: Any) -> None:  # pylint: disable=inconsistent-return-statements
@@ -433,10 +435,10 @@ class GovernanceRulesOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         request = build_delete_request(
             rule_id=rule_id,
@@ -447,9 +449,9 @@ class GovernanceRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -462,7 +464,7 @@ class GovernanceRulesOperations:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}"}  # type: ignore
+    delete.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}"}
 
     def _rule_id_execute_single_subscription_initial(  # pylint: disable=inconsistent-return-statements
         self,
@@ -481,11 +483,11 @@ class GovernanceRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -510,9 +512,9 @@ class GovernanceRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -528,7 +530,9 @@ class GovernanceRulesOperations:
         if cls:
             return cls(pipeline_response, None, response_headers)
 
-    _rule_id_execute_single_subscription_initial.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"}  # type: ignore
+    _rule_id_execute_single_subscription_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"
+    }
 
     @overload
     def begin_rule_id_execute_single_subscription(
@@ -631,14 +635,14 @@ class GovernanceRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = self._rule_id_execute_single_subscription_initial(  # type: ignore
                 rule_id=rule_id,
@@ -657,7 +661,7 @@ class GovernanceRulesOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))  # type: PollingMethod
+            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -669,9 +673,11 @@ class GovernanceRulesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_rule_id_execute_single_subscription.metadata = {"url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"}  # type: ignore
+    begin_rule_id_execute_single_subscription.metadata = {
+        "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"
+    }
 
     def _rule_id_execute_single_security_connector_initial(  # pylint: disable=inconsistent-return-statements
         self,
@@ -692,11 +698,11 @@ class GovernanceRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
@@ -723,9 +729,9 @@ class GovernanceRulesOperations:
             params=_params,
         )
         request = _convert_request(request)
-        request.url = self._client.format_url(request.url)  # type: ignore
+        request.url = self._client.format_url(request.url)
 
-        pipeline_response = self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             request, stream=False, **kwargs
         )
 
@@ -741,7 +747,9 @@ class GovernanceRulesOperations:
         if cls:
             return cls(pipeline_response, None, response_headers)
 
-    _rule_id_execute_single_security_connector_initial.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"}  # type: ignore
+    _rule_id_execute_single_security_connector_initial.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"
+    }
 
     @overload
     def begin_rule_id_execute_single_security_connector(
@@ -865,14 +873,14 @@ class GovernanceRulesOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version = kwargs.pop(
+        api_version: Literal["2022-01-01-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", "2022-01-01-preview")
-        )  # type: Literal["2022-01-01-preview"]
-        content_type = kwargs.pop("content_type", _headers.pop("Content-Type", None))  # type: Optional[str]
-        cls = kwargs.pop("cls", None)  # type: ClsType[None]
-        polling = kwargs.pop("polling", True)  # type: Union[bool, PollingMethod]
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token = kwargs.pop("continuation_token", None)  # type: Optional[str]
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = self._rule_id_execute_single_security_connector_initial(  # type: ignore
                 resource_group_name=resource_group_name,
@@ -893,7 +901,7 @@ class GovernanceRulesOperations:
                 return cls(pipeline_response, None, {})
 
         if polling is True:
-            polling_method = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))  # type: PollingMethod
+            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -905,6 +913,8 @@ class GovernanceRulesOperations:
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)
+        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    begin_rule_id_execute_single_security_connector.metadata = {"url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"}  # type: ignore
+    begin_rule_id_execute_single_security_connector.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/execute"
+    }

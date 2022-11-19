@@ -122,7 +122,7 @@ class CloudOffering(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.offering_type = None  # type: Optional[str]
+        self.offering_type: Optional[str] = None
         self.description = None
 
 
@@ -170,7 +170,7 @@ class CspmMonitorAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2021_07_01_preview.models.CspmMonitorAwsOfferingNativeCloudConnection
         """
         super().__init__(**kwargs)
-        self.offering_type = "CspmMonitorAws"  # type: str
+        self.offering_type: str = "CspmMonitorAws"
         self.native_cloud_connection = native_cloud_connection
 
 
@@ -630,7 +630,7 @@ class DefenderForContainersAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2021_07_01_preview.models.DefenderForContainersAwsOfferingKinesisToS3
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForContainersAws"  # type: str
+        self.offering_type: str = "DefenderForContainersAws"
         self.kubernetes_service = kubernetes_service
         self.kubernetes_scuba_reader = kubernetes_scuba_reader
         self.cloud_watch_to_kinesis = cloud_watch_to_kinesis
@@ -772,7 +772,7 @@ class DefenderForServersAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2021_07_01_preview.models.DefenderForServersAwsOfferingArcAutoProvisioning
         """
         super().__init__(**kwargs)
-        self.offering_type = "DefenderForServersAws"  # type: str
+        self.offering_type: str = "DefenderForServersAws"
         self.defender_for_servers = defender_for_servers
         self.arc_auto_provisioning = arc_auto_provisioning
 
@@ -971,7 +971,7 @@ class InformationProtectionAwsOffering(CloudOffering):
          ~azure.mgmt.security.v2021_07_01_preview.models.InformationProtectionAwsOfferingInformationProtection
         """
         super().__init__(**kwargs)
-        self.offering_type = "InformationProtectionAws"  # type: str
+        self.offering_type: str = "InformationProtectionAws"
         self.information_protection = information_protection
 
 

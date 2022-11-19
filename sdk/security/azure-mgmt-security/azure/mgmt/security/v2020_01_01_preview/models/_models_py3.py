@@ -66,7 +66,7 @@ class AuthenticationDetailsProperties(_serialization.Model):
         super().__init__(**kwargs)
         self.authentication_provisioning_state = None
         self.granted_permissions = None
-        self.authentication_type = None  # type: Optional[str]
+        self.authentication_type: Optional[str] = None
 
 
 class AwAssumeRoleAuthenticationDetailsProperties(AuthenticationDetailsProperties):
@@ -126,7 +126,7 @@ class AwAssumeRoleAuthenticationDetailsProperties(AuthenticationDetailsPropertie
         :paramtype aws_external_id: str
         """
         super().__init__(**kwargs)
-        self.authentication_type = "awsAssumeRole"  # type: str
+        self.authentication_type: str = "awsAssumeRole"
         self.account_id = None
         self.aws_assume_role_arn = aws_assume_role_arn
         self.aws_external_id = aws_external_id
@@ -189,7 +189,7 @@ class AwsCredsAuthenticationDetailsProperties(AuthenticationDetailsProperties):
         :paramtype aws_secret_access_key: str
         """
         super().__init__(**kwargs)
-        self.authentication_type = "awsCreds"  # type: str
+        self.authentication_type: str = "awsCreds"
         self.account_id = None
         self.aws_access_key_id = aws_access_key_id
         self.aws_secret_access_key = aws_secret_access_key
@@ -515,7 +515,7 @@ class GcpCredentialsDetailsProperties(AuthenticationDetailsProperties):  # pylin
         :paramtype client_x509_cert_url: str
         """
         super().__init__(**kwargs)
-        self.authentication_type = "gcpCredentials"  # type: str
+        self.authentication_type: str = "gcpCredentials"
         self.organization_id = organization_id
         self.type = type
         self.project_id = project_id
