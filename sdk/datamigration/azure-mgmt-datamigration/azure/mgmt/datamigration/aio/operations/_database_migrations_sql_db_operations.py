@@ -33,6 +33,7 @@ from ...operations._database_migrations_sql_db_operations import (
     build_create_or_update_request,
     build_delete_request,
     build_get_request,
+    build_retry_request,
 )
 
 if sys.version_info >= (3, 8):
@@ -103,7 +104,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[_models.DatabaseMigrationSqlDb] = kwargs.pop("cls", None)
@@ -163,7 +164,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -339,7 +340,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -406,7 +407,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -478,7 +479,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         cls: ClsType[None] = kwargs.pop("cls", None)
@@ -541,7 +542,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -705,7 +706,7 @@ class DatabaseMigrationsSqlDbOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop(
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
             "api_version", _params.pop("api-version", self._config.api_version)
         )
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
@@ -749,4 +750,159 @@ class DatabaseMigrationsSqlDbOperations:
 
     begin_cancel.metadata = {
         "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{sqlDbInstanceName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/cancel"
+    }
+
+    @overload
+    async def retry(
+        self,
+        resource_group_name: str,
+        sql_db_instance_name: str,
+        target_db_name: str,
+        migration_operation_input: _models.MigrationOperationInput,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.DatabaseMigrationSqlDb:
+        """Retry on going migration for the database.
+
+        :param resource_group_name: Name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param sql_db_instance_name: Required.
+        :type sql_db_instance_name: str
+        :param target_db_name: The name of the target database. Required.
+        :type target_db_name: str
+        :param migration_operation_input: Required migration operation ID for which retry will be
+         initiated. Required.
+        :type migration_operation_input: ~azure.mgmt.datamigration.models.MigrationOperationInput
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: DatabaseMigrationSqlDb or the result of cls(response)
+        :rtype: ~azure.mgmt.datamigration.models.DatabaseMigrationSqlDb
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def retry(
+        self,
+        resource_group_name: str,
+        sql_db_instance_name: str,
+        target_db_name: str,
+        migration_operation_input: IO,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.DatabaseMigrationSqlDb:
+        """Retry on going migration for the database.
+
+        :param resource_group_name: Name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param sql_db_instance_name: Required.
+        :type sql_db_instance_name: str
+        :param target_db_name: The name of the target database. Required.
+        :type target_db_name: str
+        :param migration_operation_input: Required migration operation ID for which retry will be
+         initiated. Required.
+        :type migration_operation_input: IO
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: DatabaseMigrationSqlDb or the result of cls(response)
+        :rtype: ~azure.mgmt.datamigration.models.DatabaseMigrationSqlDb
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def retry(
+        self,
+        resource_group_name: str,
+        sql_db_instance_name: str,
+        target_db_name: str,
+        migration_operation_input: Union[_models.MigrationOperationInput, IO],
+        **kwargs: Any
+    ) -> _models.DatabaseMigrationSqlDb:
+        """Retry on going migration for the database.
+
+        :param resource_group_name: Name of the resource group that contains the resource. You can
+         obtain this value from the Azure Resource Manager API or the portal. Required.
+        :type resource_group_name: str
+        :param sql_db_instance_name: Required.
+        :type sql_db_instance_name: str
+        :param target_db_name: The name of the target database. Required.
+        :type target_db_name: str
+        :param migration_operation_input: Required migration operation ID for which retry will be
+         initiated. Is either a model type or a IO type. Required.
+        :type migration_operation_input: ~azure.mgmt.datamigration.models.MigrationOperationInput or IO
+        :keyword content_type: Body Parameter content-type. Known values are: 'application/json'.
+         Default value is None.
+        :paramtype content_type: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: DatabaseMigrationSqlDb or the result of cls(response)
+        :rtype: ~azure.mgmt.datamigration.models.DatabaseMigrationSqlDb
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop(
+            "api_version", _params.pop("api-version", self._config.api_version)
+        )
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.DatabaseMigrationSqlDb] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(migration_operation_input, (IO, bytes)):
+            _content = migration_operation_input
+        else:
+            _json = self._serialize.body(migration_operation_input, "MigrationOperationInput")
+
+        request = build_retry_request(
+            resource_group_name=resource_group_name,
+            sql_db_instance_name=sql_db_instance_name,
+            target_db_name=target_db_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            template_url=self.retry.metadata["url"],
+            headers=_headers,
+            params=_params,
+        )
+        request = _convert_request(request)
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("DatabaseMigrationSqlDb", pipeline_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})
+
+        return deserialized
+
+    retry.metadata = {
+        "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{sqlDbInstanceName}/providers/Microsoft.DataMigration/databaseMigrations/{targetDbName}/retry"
     }

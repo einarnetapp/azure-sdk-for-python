@@ -35,14 +35,14 @@ class DataMigrationManagementClientConfiguration(Configuration):  # pylint: disa
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: Subscription ID that identifies an Azure subscription. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2022-03-30-preview". Note that overriding
+    :keyword api_version: Api Version. Default value is "2022-10-31-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(DataMigrationManagementClientConfiguration, self).__init__(**kwargs)
-        api_version: Literal["2022-03-30-preview"] = kwargs.pop("api_version", "2022-03-30-preview")
+        api_version: Literal["2022-10-31-preview"] = kwargs.pop("api_version", "2022-10-31-preview")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")

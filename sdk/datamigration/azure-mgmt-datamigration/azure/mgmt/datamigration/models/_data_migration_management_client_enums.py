@@ -593,6 +593,14 @@ class UpdateActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ADDED_ON_TARGET = "AddedOnTarget"
 
 
+class ValidateIRKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Resource Type."""
+
+    SQL_MI = "SqlMi"
+    SQL_VM = "SqlVm"
+    SQL_DB = "SqlDb"
+
+
 class ValidationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Current status of the validation."""
 

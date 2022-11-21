@@ -3103,6 +3103,8 @@ class CopyProgressDetails(_serialization.Model):  # pylint: disable=too-many-ins
     :vartype copy_throughput: float
     :ivar copy_duration: Copy Duration in seconds.
     :vartype copy_duration: int
+    :ivar errors: Table Level Errors.
+    :vartype errors: list[str]
     """
 
     _validation = {
@@ -3117,6 +3119,7 @@ class CopyProgressDetails(_serialization.Model):  # pylint: disable=too-many-ins
         "copy_start": {"readonly": True},
         "copy_throughput": {"readonly": True},
         "copy_duration": {"readonly": True},
+        "errors": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3131,6 +3134,7 @@ class CopyProgressDetails(_serialization.Model):  # pylint: disable=too-many-ins
         "copy_start": {"key": "copyStart", "type": "iso-8601"},
         "copy_throughput": {"key": "copyThroughput", "type": "float"},
         "copy_duration": {"key": "copyDuration", "type": "int"},
+        "errors": {"key": "errors", "type": "[str]"},
     }
 
     def __init__(self, **kwargs):
@@ -3147,6 +3151,7 @@ class CopyProgressDetails(_serialization.Model):  # pylint: disable=too-many-ins
         self.copy_start = None
         self.copy_throughput = None
         self.copy_duration = None
+        self.errors = None
 
 
 class Database(_serialization.Model):  # pylint: disable=too-many-instance-attributes
@@ -3775,6 +3780,8 @@ class DatabaseMigrationPropertiesSqlDb(DatabaseMigrationProperties):  # pylint: 
     :vartype offline_configuration: ~azure.mgmt.datamigration.models.SqlDbOfflineConfiguration
     :ivar table_list: List of tables to copy.
     :vartype table_list: list[str]
+    :ivar key_vault: Key Vault Properties.
+    :vartype key_vault: ~azure.mgmt.datamigration.models.KeyVaultProperties
     """
 
     _validation = {
@@ -3808,6 +3815,7 @@ class DatabaseMigrationPropertiesSqlDb(DatabaseMigrationProperties):  # pylint: 
         "target_sql_connection": {"key": "targetSqlConnection", "type": "SqlConnectionInformation"},
         "offline_configuration": {"key": "offlineConfiguration", "type": "SqlDbOfflineConfiguration"},
         "table_list": {"key": "tableList", "type": "[str]"},
+        "key_vault": {"key": "keyVault", "type": "KeyVaultProperties"},
     }
 
     def __init__(
@@ -3822,6 +3830,7 @@ class DatabaseMigrationPropertiesSqlDb(DatabaseMigrationProperties):  # pylint: 
         provisioning_error: Optional[str] = None,
         target_sql_connection: Optional["_models.SqlConnectionInformation"] = None,
         table_list: Optional[List[str]] = None,
+        key_vault: Optional["_models.KeyVaultProperties"] = None,
         **kwargs
     ):
         """
@@ -3843,6 +3852,8 @@ class DatabaseMigrationPropertiesSqlDb(DatabaseMigrationProperties):  # pylint: 
         :paramtype target_sql_connection: ~azure.mgmt.datamigration.models.SqlConnectionInformation
         :keyword table_list: List of tables to copy.
         :paramtype table_list: list[str]
+        :keyword key_vault: Key Vault Properties.
+        :paramtype key_vault: ~azure.mgmt.datamigration.models.KeyVaultProperties
         """
         super().__init__(
             scope=scope,
@@ -3859,6 +3870,7 @@ class DatabaseMigrationPropertiesSqlDb(DatabaseMigrationProperties):  # pylint: 
         self.target_sql_connection = target_sql_connection
         self.offline_configuration = None
         self.table_list = table_list
+        self.key_vault = key_vault
 
 
 class DatabaseMigrationPropertiesSqlMi(DatabaseMigrationProperties):  # pylint: disable=too-many-instance-attributes
@@ -6130,6 +6142,63 @@ class IntegrationRuntimeMonitoringData(_serialization.Model):
         super().__init__(**kwargs)
         self.name = None
         self.nodes = None
+
+
+class KeyVaultProperties(_serialization.Model):
+    """Key Vault properties for user credentials.
+
+    :ivar name: Key Vault Name.
+    :vartype name: str
+    :ivar source_username_secret_name: Key Vault Secret Name corresponding to source username.
+    :vartype source_username_secret_name: str
+    :ivar source_password_secret_name: Key Vault Secret Name corresponding to source password.
+    :vartype source_password_secret_name: str
+    :ivar file_share_username_secret_name: Key Vault Secret Name corresponding to file share
+     username.
+    :vartype file_share_username_secret_name: str
+    :ivar file_share_password_secret_name: Key Vault Secret Name corresponding to file share
+     password.
+    :vartype file_share_password_secret_name: str
+    """
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "source_username_secret_name": {"key": "sourceUsernameSecretName", "type": "str"},
+        "source_password_secret_name": {"key": "sourcePasswordSecretName", "type": "str"},
+        "file_share_username_secret_name": {"key": "fileShareUsernameSecretName", "type": "str"},
+        "file_share_password_secret_name": {"key": "fileSharePasswordSecretName", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        name: Optional[str] = None,
+        source_username_secret_name: Optional[str] = None,
+        source_password_secret_name: Optional[str] = None,
+        file_share_username_secret_name: Optional[str] = None,
+        file_share_password_secret_name: Optional[str] = None,
+        **kwargs
+    ):
+        """
+        :keyword name: Key Vault Name.
+        :paramtype name: str
+        :keyword source_username_secret_name: Key Vault Secret Name corresponding to source username.
+        :paramtype source_username_secret_name: str
+        :keyword source_password_secret_name: Key Vault Secret Name corresponding to source password.
+        :paramtype source_password_secret_name: str
+        :keyword file_share_username_secret_name: Key Vault Secret Name corresponding to file share
+         username.
+        :paramtype file_share_username_secret_name: str
+        :keyword file_share_password_secret_name: Key Vault Secret Name corresponding to file share
+         password.
+        :paramtype file_share_password_secret_name: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.source_username_secret_name = source_username_secret_name
+        self.source_password_secret_name = source_password_secret_name
+        self.file_share_username_secret_name = file_share_username_secret_name
+        self.file_share_password_secret_name = file_share_password_secret_name
 
 
 class MigrateMISyncCompleteCommandInput(_serialization.Model):
@@ -17443,6 +17512,32 @@ class TaskList(_serialization.Model):
         self.next_link = next_link
 
 
+class TestConnectivityData(_serialization.Model):
+    """TestConnectivityData.
+
+    :ivar code:
+    :vartype code: str
+    :ivar message:
+    :vartype message: str
+    """
+
+    _attribute_map = {
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+    }
+
+    def __init__(self, *, code: Optional[str] = None, message: Optional[str] = None, **kwargs):
+        """
+        :keyword code:
+        :paramtype code: str
+        :keyword message:
+        :paramtype message: str
+        """
+        super().__init__(**kwargs)
+        self.code = code
+        self.message = message
+
+
 class UploadOCIDriverTaskInput(_serialization.Model):
     """Input for the service task to upload an OCI driver.
 
@@ -17567,6 +17662,80 @@ class UploadOCIDriverTaskProperties(ProjectTaskProperties):
         self.task_type: str = "Service.Upload.OCI"
         self.input = input
         self.output = None
+
+
+class ValidateIR(_serialization.Model):
+    """IR validations for MI / VM.
+
+    :ivar kind: Resource Type. Known values are: "SqlMi", "SqlVm", and "SqlDb".
+    :vartype kind: str or ~azure.mgmt.datamigration.models.ValidateIRKind
+    :ivar source_database_name: Name of the source database.
+    :vartype source_database_name: str
+    :ivar source_sql_connection: Source SQL Server connection details.
+    :vartype source_sql_connection: ~azure.mgmt.datamigration.models.SqlConnectionInformation
+    :ivar target_database_name: Name of the target database.
+    :vartype target_database_name: str
+    :ivar target_sql_connection: Target SQL Server connection details.
+    :vartype target_sql_connection: ~azure.mgmt.datamigration.models.SqlConnectionInformation
+    :ivar backup_configuration: Backup configuration info.
+    :vartype backup_configuration: ~azure.mgmt.datamigration.models.BackupConfiguration
+    :ivar succeeded: Validation result.
+    :vartype succeeded: bool
+    :ivar errors: Validation errors.
+    :vartype errors: list[~azure.mgmt.datamigration.models.TestConnectivityData]
+    """
+
+    _attribute_map = {
+        "kind": {"key": "kind", "type": "str"},
+        "source_database_name": {"key": "sourceDatabaseName", "type": "str"},
+        "source_sql_connection": {"key": "sourceSqlConnection", "type": "SqlConnectionInformation"},
+        "target_database_name": {"key": "targetDatabaseName", "type": "str"},
+        "target_sql_connection": {"key": "targetSqlConnection", "type": "SqlConnectionInformation"},
+        "backup_configuration": {"key": "backupConfiguration", "type": "BackupConfiguration"},
+        "succeeded": {"key": "succeeded", "type": "bool"},
+        "errors": {"key": "errors", "type": "[TestConnectivityData]"},
+    }
+
+    def __init__(
+        self,
+        *,
+        kind: Optional[Union[str, "_models.ValidateIRKind"]] = None,
+        source_database_name: Optional[str] = None,
+        source_sql_connection: Optional["_models.SqlConnectionInformation"] = None,
+        target_database_name: Optional[str] = None,
+        target_sql_connection: Optional["_models.SqlConnectionInformation"] = None,
+        backup_configuration: Optional["_models.BackupConfiguration"] = None,
+        succeeded: Optional[bool] = None,
+        errors: Optional[List["_models.TestConnectivityData"]] = None,
+        **kwargs
+    ):
+        """
+        :keyword kind: Resource Type. Known values are: "SqlMi", "SqlVm", and "SqlDb".
+        :paramtype kind: str or ~azure.mgmt.datamigration.models.ValidateIRKind
+        :keyword source_database_name: Name of the source database.
+        :paramtype source_database_name: str
+        :keyword source_sql_connection: Source SQL Server connection details.
+        :paramtype source_sql_connection: ~azure.mgmt.datamigration.models.SqlConnectionInformation
+        :keyword target_database_name: Name of the target database.
+        :paramtype target_database_name: str
+        :keyword target_sql_connection: Target SQL Server connection details.
+        :paramtype target_sql_connection: ~azure.mgmt.datamigration.models.SqlConnectionInformation
+        :keyword backup_configuration: Backup configuration info.
+        :paramtype backup_configuration: ~azure.mgmt.datamigration.models.BackupConfiguration
+        :keyword succeeded: Validation result.
+        :paramtype succeeded: bool
+        :keyword errors: Validation errors.
+        :paramtype errors: list[~azure.mgmt.datamigration.models.TestConnectivityData]
+        """
+        super().__init__(**kwargs)
+        self.kind = kind
+        self.source_database_name = source_database_name
+        self.source_sql_connection = source_sql_connection
+        self.target_database_name = target_database_name
+        self.target_sql_connection = target_sql_connection
+        self.backup_configuration = backup_configuration
+        self.succeeded = succeeded
+        self.errors = errors
 
 
 class ValidateMigrationInputSqlServerSqlDbSyncTaskProperties(ProjectTaskProperties):

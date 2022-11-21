@@ -14,7 +14,7 @@ from azure.mgmt.datamigration import DataMigrationManagementClient
     pip install azure-identity
     pip install azure-mgmt-datamigration
 # USAGE
-    python list_auth_keys_migration_service.py
+    python validate_ir.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,13 +29,35 @@ def main():
         subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
-    response = client.sql_migration_services.list_auth_keys(
+    response = client.sql_migration_services.validate_ir(
         resource_group_name="testrg",
         sql_migration_service_name="service1",
+        parameters={
+            "properties": {
+                "backupConfiguration": {
+                    "sourceLocation": {
+                        "fileShare": {"password": "placeholder", "path": "C:\\aaa\\bbb\\ccc", "username": "name"}
+                    },
+                    "targetLocation": {
+                        "accountKey": "abcd",
+                        "storageAccountResourceId": "account.database.windows.net",
+                    },
+                },
+                "sourceDatabaseName": "afdfaa",
+                "sourceSqlConnection": {
+                    "authentication": "WindowsAuthentication",
+                    "dataSource": "aaa",
+                    "encryptConnection": True,
+                    "password": "placeholder",
+                    "trustServerCertificate": True,
+                    "userName": "bbb",
+                },
+            }
+        },
     )
     print(response)
 
 
-# x-ms-original-file: specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2022-10-31-preview/examples/ListAuthKeysMigrationService.json
+# x-ms-original-file: specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2022-10-31-preview/examples/ValidateIR.json
 if __name__ == "__main__":
     main()

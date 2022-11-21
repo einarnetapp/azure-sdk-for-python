@@ -115,6 +115,7 @@ from ._models_py3 import InstallOCIDriverTaskInput
 from ._models_py3 import InstallOCIDriverTaskOutput
 from ._models_py3 import InstallOCIDriverTaskProperties
 from ._models_py3 import IntegrationRuntimeMonitoringData
+from ._models_py3 import KeyVaultProperties
 from ._models_py3 import MiSqlConnectionInfo
 from ._models_py3 import MigrateMISyncCompleteCommandInput
 from ._models_py3 import MigrateMISyncCompleteCommandOutput
@@ -305,10 +306,12 @@ from ._models_py3 import SyncMigrationDatabaseErrorEvent
 from ._models_py3 import SystemData
 from ._models_py3 import TargetLocation
 from ._models_py3 import TaskList
+from ._models_py3 import TestConnectivityData
 from ._models_py3 import TrackedResource
 from ._models_py3 import UploadOCIDriverTaskInput
 from ._models_py3 import UploadOCIDriverTaskOutput
 from ._models_py3 import UploadOCIDriverTaskProperties
+from ._models_py3 import ValidateIR
 from ._models_py3 import ValidateMigrationInputSqlServerSqlDbSyncTaskProperties
 from ._models_py3 import ValidateMigrationInputSqlServerSqlMISyncTaskInput
 from ._models_py3 import ValidateMigrationInputSqlServerSqlMISyncTaskOutput
@@ -377,6 +380,7 @@ from ._data_migration_management_client_enums import SyncTableMigrationState
 from ._data_migration_management_client_enums import TaskState
 from ._data_migration_management_client_enums import TaskType
 from ._data_migration_management_client_enums import UpdateActionType
+from ._data_migration_management_client_enums import ValidateIRKind
 from ._data_migration_management_client_enums import ValidationStatus
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
@@ -492,6 +496,7 @@ __all__ = [
     "InstallOCIDriverTaskOutput",
     "InstallOCIDriverTaskProperties",
     "IntegrationRuntimeMonitoringData",
+    "KeyVaultProperties",
     "MiSqlConnectionInfo",
     "MigrateMISyncCompleteCommandInput",
     "MigrateMISyncCompleteCommandOutput",
@@ -682,10 +687,12 @@ __all__ = [
     "SystemData",
     "TargetLocation",
     "TaskList",
+    "TestConnectivityData",
     "TrackedResource",
     "UploadOCIDriverTaskInput",
     "UploadOCIDriverTaskOutput",
     "UploadOCIDriverTaskProperties",
+    "ValidateIR",
     "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties",
     "ValidateMigrationInputSqlServerSqlMISyncTaskInput",
     "ValidateMigrationInputSqlServerSqlMISyncTaskOutput",
@@ -753,6 +760,7 @@ __all__ = [
     "TaskState",
     "TaskType",
     "UpdateActionType",
+    "ValidateIRKind",
     "ValidationStatus",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
