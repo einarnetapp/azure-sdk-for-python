@@ -11,17 +11,15 @@
 
 from typing import Any, Optional, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
-
 from azure.mgmt.core import AsyncARMPipelineClient
 from azure.profiles import KnownProfiles, ProfileDefinition
 from azure.profiles.multiapiclient import MultiApiClientMixin
 
+from .._serialization import Deserializer, Serializer
 from ._configuration import AzureDigitalTwinsManagementClientConfiguration
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from azure.core.credentials import TokenCredential
     from azure.core.credentials_async import AsyncTokenCredential
 
 class _SDKClient(object):
@@ -42,9 +40,9 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
     The api-version parameter sets the default API version if the operation
     group is not described in the profile.
 
-    :param credential: Credential needed for the client to connect to Azure.
+    :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The subscription identifier.
+    :param subscription_id: The subscription identifier. Required.
     :type subscription_id: str
     :param api_version: API version to use if no profile is provided, or if missing in profile.
     :type api_version: str
@@ -71,7 +69,7 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
         api_version: Optional[str] = None,
         base_url: str = "https://management.azure.com",
         profile: KnownProfiles = KnownProfiles.default,
-        **kwargs  # type: Any
+        **kwargs: Any
     ) -> None:
         self._config = AzureDigitalTwinsManagementClientConfiguration(credential, subscription_id, **kwargs)
         self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
@@ -134,6 +132,7 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_31.aio.operations import DigitalTwinsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'digital_twins'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -159,6 +158,7 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_31.aio.operations import DigitalTwinsEndpointOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'digital_twins_endpoint'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -184,6 +184,7 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_31.aio.operations import Operations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'operations'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -203,6 +204,7 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_31.aio.operations import PrivateEndpointConnectionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_endpoint_connections'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -222,6 +224,7 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_31.aio.operations import PrivateLinkResourcesOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'private_link_resources'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     @property
@@ -238,6 +241,7 @@ class AzureDigitalTwinsManagementClient(MultiApiClientMixin, _SDKClient):
             from ..v2022_05_31.aio.operations import TimeSeriesDatabaseConnectionsOperations as OperationClass
         else:
             raise ValueError("API version {} does not have operation group 'time_series_database_connections'".format(api_version))
+        self._config.api_version = api_version
         return OperationClass(self._client, self._config, Serializer(self._models_dict(api_version)), Deserializer(self._models_dict(api_version)))
 
     async def close(self):
