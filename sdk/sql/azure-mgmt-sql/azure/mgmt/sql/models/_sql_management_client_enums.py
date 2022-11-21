@@ -408,12 +408,6 @@ class DayOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SATURDAY = "Saturday"
 
 
-class DevOpsAuditingSettingsName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """DevOpsAuditingSettingsName."""
-
-    DEFAULT = "Default"
-
-
 class DiffBackupIntervalInHours(int, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The differential backup interval in hours. This is how many interval hours between each
     differential backup will be supported. This is only applicable to live databases but not

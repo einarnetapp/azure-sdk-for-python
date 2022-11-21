@@ -436,7 +436,6 @@ from ._sql_management_client_enums import DatabaseReadScale
 from ._sql_management_client_enums import DatabaseState
 from ._sql_management_client_enums import DatabaseStatus
 from ._sql_management_client_enums import DayOfWeek
-from ._sql_management_client_enums import DevOpsAuditingSettingsName
 from ._sql_management_client_enums import DiffBackupIntervalInHours
 from ._sql_management_client_enums import DtcName
 from ._sql_management_client_enums import ElasticPoolLicenseType
@@ -545,7 +544,7 @@ from ._sql_management_client_enums import VulnerabilityAssessmentPolicyBaselineN
 from ._sql_management_client_enums import VulnerabilityAssessmentScanState
 from ._sql_management_client_enums import VulnerabilityAssessmentScanTriggerType
 from ._patch import __all__ as _patch_all
-from ._patch import *  # type: ignore # pylint: disable=unused-wildcard-import
+from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
@@ -978,7 +977,6 @@ __all__ = [
     "DatabaseState",
     "DatabaseStatus",
     "DayOfWeek",
-    "DevOpsAuditingSettingsName",
     "DiffBackupIntervalInHours",
     "DtcName",
     "ElasticPoolLicenseType",
