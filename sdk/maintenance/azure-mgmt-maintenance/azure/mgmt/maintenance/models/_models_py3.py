@@ -216,7 +216,7 @@ class ErrorDetails(_serialization.Model):
 
 
 class InputLinuxParameters(_serialization.Model):
-    """Input properties for patching a Linux machine.
+    """Input properties for patching a Linux machine. This property only applies to Guest (InGuestPatch) scope.
 
     :ivar package_name_masks_to_exclude: Package names to be excluded for patching.
     :vartype package_name_masks_to_exclude: list[str]
@@ -258,20 +258,21 @@ class InputPatchConfiguration(_serialization.Model):
     """Input configuration for a patch run.
 
     :ivar reboot_setting: Possible reboot preference as defined by the user based on which it would
-     be decided to reboot the machine or not after the patch operation is completed. Known values
-     are: "IfRequired", "Never", and "Always".
+     be decided to reboot the machine or not after the patch operation is completed. This property
+     only applies to Guest (InGuestPatch) scope. Known values are: "IfRequired", "Never", and
+     "Always".
     :vartype reboot_setting: str or ~azure.mgmt.maintenance.models.RebootOptions
     :ivar windows_parameters: Input parameters specific to patching a Windows machine. For Linux
-     machines, do not pass this property.
+     machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope.
     :vartype windows_parameters: ~azure.mgmt.maintenance.models.InputWindowsParameters
     :ivar linux_parameters: Input parameters specific to patching Linux machine. For Windows
-     machines, do not pass this property.
+     machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope.
     :vartype linux_parameters: ~azure.mgmt.maintenance.models.InputLinuxParameters
-    :ivar pre_tasks: List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global',
-     'parameters': { 'arg1': 'value1'}}].
+    :ivar pre_tasks: [Not supported] List of pre tasks. e.g. [{'source' :'runbook', 'taskScope':
+     'Global', 'parameters': { 'arg1': 'value1'}}].
     :vartype pre_tasks: list[~azure.mgmt.maintenance.models.TaskProperties]
-    :ivar post_tasks: List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource',
-     'parameters': { 'arg1': 'value1'}}].
+    :ivar post_tasks: [Not supported] List of post tasks. e.g. [{'source' :'runbook', 'taskScope':
+     'Resource', 'parameters': { 'arg1': 'value1'}}].
     :vartype post_tasks: list[~azure.mgmt.maintenance.models.TaskProperties]
     """
 
@@ -295,20 +296,21 @@ class InputPatchConfiguration(_serialization.Model):
     ):
         """
         :keyword reboot_setting: Possible reboot preference as defined by the user based on which it
-         would be decided to reboot the machine or not after the patch operation is completed. Known
-         values are: "IfRequired", "Never", and "Always".
+         would be decided to reboot the machine or not after the patch operation is completed. This
+         property only applies to Guest (InGuestPatch) scope. Known values are: "IfRequired", "Never",
+         and "Always".
         :paramtype reboot_setting: str or ~azure.mgmt.maintenance.models.RebootOptions
         :keyword windows_parameters: Input parameters specific to patching a Windows machine. For Linux
-         machines, do not pass this property.
+         machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope.
         :paramtype windows_parameters: ~azure.mgmt.maintenance.models.InputWindowsParameters
         :keyword linux_parameters: Input parameters specific to patching Linux machine. For Windows
-         machines, do not pass this property.
+         machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope.
         :paramtype linux_parameters: ~azure.mgmt.maintenance.models.InputLinuxParameters
-        :keyword pre_tasks: List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global',
-         'parameters': { 'arg1': 'value1'}}].
+        :keyword pre_tasks: [Not supported] List of pre tasks. e.g. [{'source' :'runbook', 'taskScope':
+         'Global', 'parameters': { 'arg1': 'value1'}}].
         :paramtype pre_tasks: list[~azure.mgmt.maintenance.models.TaskProperties]
-        :keyword post_tasks: List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource',
-         'parameters': { 'arg1': 'value1'}}].
+        :keyword post_tasks: [Not supported] List of post tasks. e.g. [{'source' :'runbook',
+         'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}].
         :paramtype post_tasks: list[~azure.mgmt.maintenance.models.TaskProperties]
         """
         super().__init__(**kwargs)
@@ -320,7 +322,7 @@ class InputPatchConfiguration(_serialization.Model):
 
 
 class InputWindowsParameters(_serialization.Model):
-    """Input properties for patching a Windows machine.
+    """Input properties for patching a Windows machine. This property only applies to Guest (InGuestPatch) scope.
 
     :ivar kb_numbers_to_exclude: Windows KBID to be excluded for patching.
     :vartype kb_numbers_to_exclude: list[str]
@@ -473,7 +475,8 @@ class MaintenanceConfiguration(Resource):  # pylint: disable=too-many-instance-a
     :ivar visibility: Gets or sets the visibility of the configuration. The default value is
      'Custom'. Known values are: "Custom" and "Public".
     :vartype visibility: str or ~azure.mgmt.maintenance.models.Visibility
-    :ivar install_patches: The input parameters to be passed to the patch run operation.
+    :ivar install_patches: The input parameters to be passed to the patch run operation. This
+     property only applies to Guest (InGuestPatch) scope.
     :vartype install_patches: ~azure.mgmt.maintenance.models.InputPatchConfiguration
     :ivar start_date_time: Effective start date of the maintenance window in YYYY-MM-DD hh:mm
      format. The start date can be set to either the current date or future date. The window will be
@@ -567,7 +570,8 @@ class MaintenanceConfiguration(Resource):  # pylint: disable=too-many-instance-a
         :keyword visibility: Gets or sets the visibility of the configuration. The default value is
          'Custom'. Known values are: "Custom" and "Public".
         :paramtype visibility: str or ~azure.mgmt.maintenance.models.Visibility
-        :keyword install_patches: The input parameters to be passed to the patch run operation.
+        :keyword install_patches: The input parameters to be passed to the patch run operation. This
+         property only applies to Guest (InGuestPatch) scope.
         :paramtype install_patches: ~azure.mgmt.maintenance.models.InputPatchConfiguration
         :keyword start_date_time: Effective start date of the maintenance window in YYYY-MM-DD hh:mm
          format. The start date can be set to either the current date or future date. The window will be
@@ -819,14 +823,14 @@ class SystemData(_serialization.Model):
 
 
 class TaskProperties(_serialization.Model):
-    """Task properties of the software update configuration.
+    """[Not supported] Task properties of the software update configuration.
 
-    :ivar parameters: Gets or sets the parameters of the task.
+    :ivar parameters: [Not supported] Gets or sets the parameters of the task.
     :vartype parameters: dict[str, str]
-    :ivar source: Gets or sets the name of the runbook.
+    :ivar source: [Not supported] Gets or sets the name of the runbook.
     :vartype source: str
-    :ivar task_scope: Global Task execute once when schedule trigger. Resource task execute for
-     each VM. Known values are: "Global" and "Resource".
+    :ivar task_scope: [Not supported] Global Task execute once when schedule trigger. Resource task
+     execute for each VM. Known values are: "Global" and "Resource".
     :vartype task_scope: str or ~azure.mgmt.maintenance.models.TaskScope
     """
 
@@ -845,12 +849,12 @@ class TaskProperties(_serialization.Model):
         **kwargs
     ):
         """
-        :keyword parameters: Gets or sets the parameters of the task.
+        :keyword parameters: [Not supported] Gets or sets the parameters of the task.
         :paramtype parameters: dict[str, str]
-        :keyword source: Gets or sets the name of the runbook.
+        :keyword source: [Not supported] Gets or sets the name of the runbook.
         :paramtype source: str
-        :keyword task_scope: Global Task execute once when schedule trigger. Resource task execute for
-         each VM. Known values are: "Global" and "Resource".
+        :keyword task_scope: [Not supported] Global Task execute once when schedule trigger. Resource
+         task execute for each VM. Known values are: "Global" and "Resource".
         :paramtype task_scope: str or ~azure.mgmt.maintenance.models.TaskScope
         """
         super().__init__(**kwargs)
