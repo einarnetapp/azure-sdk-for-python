@@ -100,7 +100,7 @@ class TrackedResource(Resource):
         self.location = location
 
 
-class AttestationProvider(TrackedResource):
+class AttestationProvider(TrackedResource):  # pylint: disable=too-many-instance-attributes
     """Attestation service response message.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -128,6 +128,9 @@ class AttestationProvider(TrackedResource):
     :vartype status: str or ~azure.mgmt.attestation.models.AttestationServiceStatus
     :ivar attest_uri: Gets the uri of attestation service.
     :vartype attest_uri: str
+    :ivar public_network_access: Controls whether traffic from the public network is allowed to
+     access the Attestation Provider APIs. Known values are: "Enabled" and "Disabled".
+    :vartype public_network_access: str or ~azure.mgmt.attestation.models.PublicNetworkAccessType
     :ivar private_endpoint_connections: List of private endpoint connections associated with the
      attestation provider.
     :vartype private_endpoint_connections:
@@ -153,6 +156,7 @@ class AttestationProvider(TrackedResource):
         "trust_model": {"key": "properties.trustModel", "type": "str"},
         "status": {"key": "properties.status", "type": "str"},
         "attest_uri": {"key": "properties.attestUri", "type": "str"},
+        "public_network_access": {"key": "properties.publicNetworkAccess", "type": "str"},
         "private_endpoint_connections": {
             "key": "properties.privateEndpointConnections",
             "type": "[PrivateEndpointConnection]",
@@ -167,6 +171,7 @@ class AttestationProvider(TrackedResource):
         trust_model: Optional[str] = None,
         status: Optional[Union[str, "_models.AttestationServiceStatus"]] = None,
         attest_uri: Optional[str] = None,
+        public_network_access: Union[str, "_models.PublicNetworkAccessType"] = "Enabled",
         **kwargs
     ):
         """
@@ -181,12 +186,16 @@ class AttestationProvider(TrackedResource):
         :paramtype status: str or ~azure.mgmt.attestation.models.AttestationServiceStatus
         :keyword attest_uri: Gets the uri of attestation service.
         :paramtype attest_uri: str
+        :keyword public_network_access: Controls whether traffic from the public network is allowed to
+         access the Attestation Provider APIs. Known values are: "Enabled" and "Disabled".
+        :paramtype public_network_access: str or ~azure.mgmt.attestation.models.PublicNetworkAccessType
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.system_data = None
         self.trust_model = trust_model
         self.status = status
         self.attest_uri = attest_uri
+        self.public_network_access = public_network_access
         self.private_endpoint_connections = None
 
 
@@ -271,23 +280,37 @@ class AttestationServiceCreationParams(_serialization.Model):
 class AttestationServiceCreationSpecificParams(_serialization.Model):
     """Client supplied parameters used to create a new attestation provider.
 
+    :ivar public_network_access: Controls whether traffic from the public network is allowed to
+     access the Attestation Provider APIs. Known values are: "Enabled" and "Disabled".
+    :vartype public_network_access: str or ~azure.mgmt.attestation.models.PublicNetworkAccessType
     :ivar policy_signing_certificates: JSON Web Key Set defining a set of X.509 Certificates that
      will represent the parent certificate for the signing certificate used for policy operations.
     :vartype policy_signing_certificates: ~azure.mgmt.attestation.models.JSONWebKeySet
     """
 
     _attribute_map = {
+        "public_network_access": {"key": "publicNetworkAccess", "type": "str"},
         "policy_signing_certificates": {"key": "policySigningCertificates", "type": "JSONWebKeySet"},
     }
 
-    def __init__(self, *, policy_signing_certificates: Optional["_models.JSONWebKeySet"] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        public_network_access: Union[str, "_models.PublicNetworkAccessType"] = "Enabled",
+        policy_signing_certificates: Optional["_models.JSONWebKeySet"] = None,
+        **kwargs
+    ):
         """
+        :keyword public_network_access: Controls whether traffic from the public network is allowed to
+         access the Attestation Provider APIs. Known values are: "Enabled" and "Disabled".
+        :paramtype public_network_access: str or ~azure.mgmt.attestation.models.PublicNetworkAccessType
         :keyword policy_signing_certificates: JSON Web Key Set defining a set of X.509 Certificates
          that will represent the parent certificate for the signing certificate used for policy
          operations.
         :paramtype policy_signing_certificates: ~azure.mgmt.attestation.models.JSONWebKeySet
         """
         super().__init__(**kwargs)
+        self.public_network_access = public_network_access
         self.policy_signing_certificates = policy_signing_certificates
 
 
@@ -296,19 +319,53 @@ class AttestationServicePatchParams(_serialization.Model):
 
     :ivar tags: The tags that will be assigned to the attestation provider.
     :vartype tags: dict[str, str]
+    :ivar properties: Properties of the attestation provider.
+    :vartype properties: ~azure.mgmt.attestation.models.AttestationServicePatchSpecificParams
     """
 
     _attribute_map = {
         "tags": {"key": "tags", "type": "{str}"},
+        "properties": {"key": "properties", "type": "AttestationServicePatchSpecificParams"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs):
+    def __init__(
+        self,
+        *,
+        tags: Optional[Dict[str, str]] = None,
+        properties: Optional["_models.AttestationServicePatchSpecificParams"] = None,
+        **kwargs
+    ):
         """
         :keyword tags: The tags that will be assigned to the attestation provider.
         :paramtype tags: dict[str, str]
+        :keyword properties: Properties of the attestation provider.
+        :paramtype properties: ~azure.mgmt.attestation.models.AttestationServicePatchSpecificParams
         """
         super().__init__(**kwargs)
         self.tags = tags
+        self.properties = properties
+
+
+class AttestationServicePatchSpecificParams(_serialization.Model):
+    """Client supplied parameters used to patch an existing attestation provider.
+
+    :ivar public_network_access: Controls whether traffic from the public network is allowed to
+     access the Attestation Provider APIs. Known values are: "Enabled" and "Disabled".
+    :vartype public_network_access: str or ~azure.mgmt.attestation.models.PublicNetworkAccessType
+    """
+
+    _attribute_map = {
+        "public_network_access": {"key": "publicNetworkAccess", "type": "str"},
+    }
+
+    def __init__(self, *, public_network_access: Union[str, "_models.PublicNetworkAccessType"] = "Enabled", **kwargs):
+        """
+        :keyword public_network_access: Controls whether traffic from the public network is allowed to
+         access the Attestation Provider APIs. Known values are: "Enabled" and "Disabled".
+        :paramtype public_network_access: str or ~azure.mgmt.attestation.models.PublicNetworkAccessType
+        """
+        super().__init__(**kwargs)
+        self.public_network_access = public_network_access
 
 
 class CloudErrorBody(_serialization.Model):
@@ -562,6 +619,32 @@ class JSONWebKeySet(_serialization.Model):
         self.keys = keys
 
 
+class LogSpecification(_serialization.Model):
+    """Specifications of the Log for Microsoft Azure Attestation.
+
+    :ivar name: Name of the log.
+    :vartype name: str
+    :ivar display_name: Localized friendly display name of the log.
+    :vartype display_name: str
+    """
+
+    _attribute_map = {
+        "name": {"key": "name", "type": "str"},
+        "display_name": {"key": "displayName", "type": "str"},
+    }
+
+    def __init__(self, *, name: Optional[str] = None, display_name: Optional[str] = None, **kwargs):
+        """
+        :keyword name: Name of the log.
+        :paramtype name: str
+        :keyword display_name: Localized friendly display name of the log.
+        :paramtype display_name: str
+        """
+        super().__init__(**kwargs)
+        self.name = name
+        self.display_name = display_name
+
+
 class OperationList(_serialization.Model):
     """List of supported operations.
 
@@ -592,6 +675,26 @@ class OperationList(_serialization.Model):
         self.value = value
 
 
+class OperationProperties(_serialization.Model):
+    """Extra Operation properties.
+
+    :ivar service_specification: Service specifications of the operation.
+    :vartype service_specification: ~azure.mgmt.attestation.models.ServiceSpecification
+    """
+
+    _attribute_map = {
+        "service_specification": {"key": "serviceSpecification", "type": "ServiceSpecification"},
+    }
+
+    def __init__(self, *, service_specification: Optional["_models.ServiceSpecification"] = None, **kwargs):
+        """
+        :keyword service_specification: Service specifications of the operation.
+        :paramtype service_specification: ~azure.mgmt.attestation.models.ServiceSpecification
+        """
+        super().__init__(**kwargs)
+        self.service_specification = service_specification
+
+
 class OperationsDefinition(_serialization.Model):
     """Definition object with the name and properties of an operation.
 
@@ -599,25 +702,36 @@ class OperationsDefinition(_serialization.Model):
     :vartype name: str
     :ivar display: Display object with properties of the operation.
     :vartype display: ~azure.mgmt.attestation.models.OperationsDisplayDefinition
+    :ivar properties: Properties of the operation.
+    :vartype properties: ~azure.mgmt.attestation.models.OperationProperties
     """
 
     _attribute_map = {
         "name": {"key": "name", "type": "str"},
         "display": {"key": "display", "type": "OperationsDisplayDefinition"},
+        "properties": {"key": "properties", "type": "OperationProperties"},
     }
 
     def __init__(
-        self, *, name: Optional[str] = None, display: Optional["_models.OperationsDisplayDefinition"] = None, **kwargs
+        self,
+        *,
+        name: Optional[str] = None,
+        display: Optional["_models.OperationsDisplayDefinition"] = None,
+        properties: Optional["_models.OperationProperties"] = None,
+        **kwargs
     ):
         """
         :keyword name: Name of the operation.
         :paramtype name: str
         :keyword display: Display object with properties of the operation.
         :paramtype display: ~azure.mgmt.attestation.models.OperationsDisplayDefinition
+        :keyword properties: Properties of the operation.
+        :paramtype properties: ~azure.mgmt.attestation.models.OperationProperties
         """
         super().__init__(**kwargs)
         self.name = name
         self.display = display
+        self.properties = properties
 
 
 class OperationsDisplayDefinition(_serialization.Model):
@@ -774,6 +888,75 @@ class PrivateEndpointConnectionListResult(_serialization.Model):
         self.value = value
 
 
+class PrivateLinkResource(Resource):
+    """A private link resource.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar group_id: The private link resource group id.
+    :vartype group_id: str
+    :ivar required_members: The private link resource required member names.
+    :vartype required_members: list[str]
+    :ivar required_zone_names: The private link resource Private link DNS zone name.
+    :vartype required_zone_names: list[str]
+    """
+
+    _validation = {
+        "id": {"readonly": True},
+        "name": {"readonly": True},
+        "type": {"readonly": True},
+        "group_id": {"readonly": True},
+        "required_members": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "name": {"key": "name", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+        "group_id": {"key": "properties.groupId", "type": "str"},
+        "required_members": {"key": "properties.requiredMembers", "type": "[str]"},
+        "required_zone_names": {"key": "properties.requiredZoneNames", "type": "[str]"},
+    }
+
+    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs):
+        """
+        :keyword required_zone_names: The private link resource Private link DNS zone name.
+        :paramtype required_zone_names: list[str]
+        """
+        super().__init__(**kwargs)
+        self.group_id = None
+        self.required_members = None
+        self.required_zone_names = required_zone_names
+
+
+class PrivateLinkResourceListResult(_serialization.Model):
+    """A list of private link resources.
+
+    :ivar value: Array of private link resources.
+    :vartype value: list[~azure.mgmt.attestation.models.PrivateLinkResource]
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[PrivateLinkResource]"},
+    }
+
+    def __init__(self, *, value: Optional[List["_models.PrivateLinkResource"]] = None, **kwargs):
+        """
+        :keyword value: Array of private link resources.
+        :paramtype value: list[~azure.mgmt.attestation.models.PrivateLinkResource]
+        """
+        super().__init__(**kwargs)
+        self.value = value
+
+
 class PrivateLinkServiceConnectionState(_serialization.Model):
     """A collection of information about the state of the connection between service consumer and provider.
 
@@ -815,6 +998,26 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
         self.status = status
         self.description = description
         self.actions_required = actions_required
+
+
+class ServiceSpecification(_serialization.Model):
+    """Service specification payload.
+
+    :ivar log_specifications: Specifications of the Log for Microsoft Azure Attestation.
+    :vartype log_specifications: list[~azure.mgmt.attestation.models.LogSpecification]
+    """
+
+    _attribute_map = {
+        "log_specifications": {"key": "logSpecifications", "type": "[LogSpecification]"},
+    }
+
+    def __init__(self, *, log_specifications: Optional[List["_models.LogSpecification"]] = None, **kwargs):
+        """
+        :keyword log_specifications: Specifications of the Log for Microsoft Azure Attestation.
+        :paramtype log_specifications: list[~azure.mgmt.attestation.models.LogSpecification]
+        """
+        super().__init__(**kwargs)
+        self.log_specifications = log_specifications
 
 
 class SystemData(_serialization.Model):

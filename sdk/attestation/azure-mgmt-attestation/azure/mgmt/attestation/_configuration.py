@@ -35,14 +35,14 @@ class AttestationManagementClientConfiguration(Configuration):  # pylint: disabl
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
-    :keyword api_version: Api Version. Default value is "2020-10-01". Note that overriding this
+    :keyword api_version: Api Version. Default value is "2021-06-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
     """
 
     def __init__(self, credential: "TokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(AttestationManagementClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2020-10-01")  # type: Literal["2020-10-01"]
+        api_version: Literal["2021-06-01"] = kwargs.pop("api_version", "2021-06-01")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
@@ -56,10 +56,7 @@ class AttestationManagementClientConfiguration(Configuration):  # pylint: disabl
         kwargs.setdefault("sdk_moniker", "mgmt-attestation/{}".format(VERSION))
         self._configure(**kwargs)
 
-    def _configure(
-        self, **kwargs  # type: Any
-    ):
-        # type: (...) -> None
+    def _configure(self, **kwargs: Any) -> None:
         self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
         self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
         self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)

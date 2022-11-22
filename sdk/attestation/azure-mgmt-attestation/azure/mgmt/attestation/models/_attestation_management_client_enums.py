@@ -42,3 +42,12 @@ class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiv
     PENDING = "Pending"
     APPROVED = "Approved"
     REJECTED = "Rejected"
+
+
+class PublicNetworkAccessType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The public network access type for API calls to the Attestation Provider."""
+
+    #: Enables public network connectivity to the Attestation Provider REST APIs.
+    ENABLED = "Enabled"
+    #: Disables public network connectivity to the Attestation Provider REST APIs.
+    DISABLED = "Disabled"
