@@ -14,7 +14,7 @@ from azure.mgmt.search import SearchManagementClient
     pip install azure-identity
     pip install azure-mgmt-search
 # USAGE
-    python search_list_services_by_subscription.py
+    python delete_shared_private_link_resource.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,11 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.services.list_by_subscription()
-    for item in response:
-        print(item)
+    response = client.shared_private_link_resources.begin_delete(
+        resource_group_name="rg1",
+        search_service_name="mysearchservice",
+        shared_private_link_resource_name="testResource",
+    ).result()
+    print(response)
 
 
-# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/stable/2020-08-01/examples/SearchListServicesBySubscription.json
+# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/stable/2020-08-01/examples/DeleteSharedPrivateLinkResource.json
 if __name__ == "__main__":
     main()

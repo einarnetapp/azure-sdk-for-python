@@ -47,13 +47,13 @@ class PrivateLinkServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnu
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The state of the last provisioning operation performed on the Search service. Provisioning is
+    """The state of the last provisioning operation performed on the search service. Provisioning is
     an intermediate state that occurs while service capacity is being established. After capacity
     is set up, provisioningState changes to either 'succeeded' or 'failed'. Client applications can
     poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by
     using the Get Search Service operation to see when an operation is completed. If you are using
     the free service, this value tends to come back as 'succeeded' directly in the call to Create
-    Search service. This is because the free service uses capacity that is already set up.
+    search service. This is because the free service uses capacity that is already set up.
     """
 
     SUCCEEDED = "succeeded"
@@ -72,13 +72,13 @@ class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class SearchServiceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The status of the Search service. Possible values include: 'running': The Search service is
-    running and no provisioning operations are underway. 'provisioning': The Search service is
-    being provisioned or scaled up or down. 'deleting': The Search service is being deleted.
-    'degraded': The Search service is degraded. This can occur when the underlying search units are
-    not healthy. The Search service is most likely operational, but performance might be slow and
-    some requests might be dropped. 'disabled': The Search service is disabled. In this state, the
-    service will reject all API requests. 'error': The Search service is in an error state. If your
+    """The status of the search service. Possible values include: 'running': The search service is
+    running and no provisioning operations are underway. 'provisioning': The search service is
+    being provisioned or scaled up or down. 'deleting': The search service is being deleted.
+    'degraded': The search service is degraded. This can occur when the underlying search units are
+    not healthy. The search service is most likely operational, but performance might be slow and
+    some requests might be dropped. 'disabled': The search service is disabled. In this state, the
+    service will reject all API requests. 'error': The search service is in an error state. If your
     service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team
     is actively investigating the underlying issue. Dedicated services in these states are still
     chargeable based on the number of search units provisioned.
@@ -92,8 +92,37 @@ class SearchServiceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ERROR = "error"
 
 
+class SharedPrivateLinkResourceAsyncOperationResult(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The current status of the long running asynchronous shared private link resource operation."""
+
+    RUNNING = "Running"
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+
+
+class SharedPrivateLinkResourceProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The provisioning state of the shared private link resource. Can be Updating, Deleting, Failed,
+    Succeeded or Incomplete.
+    """
+
+    UPDATING = "Updating"
+    DELETING = "Deleting"
+    FAILED = "Failed"
+    SUCCEEDED = "Succeeded"
+    INCOMPLETE = "Incomplete"
+
+
+class SharedPrivateLinkResourceStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected."""
+
+    PENDING = "Pending"
+    APPROVED = "Approved"
+    REJECTED = "Rejected"
+    DISCONNECTED = "Disconnected"
+
+
 class SkuName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The SKU of the Search service. Valid values include: 'free': Shared service. 'basic': Dedicated
+    """The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated
     service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12
     replicas. 'standard2': Similar to standard, but with more capacity per search unit.
     'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3
