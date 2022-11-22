@@ -116,7 +116,7 @@ class ActiveBaseSecurityAdminRule(_serialization.Model):
         self.rule_collection_description = rule_collection_description
         self.rule_collection_applies_to_groups = rule_collection_applies_to_groups
         self.rule_groups = rule_groups
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ActiveBaseSecurityUserRule(_serialization.Model):
@@ -218,7 +218,7 @@ class ActiveBaseSecurityUserRule(_serialization.Model):
         self.rule_collection_description = rule_collection_description
         self.rule_collection_applies_to_groups = rule_collection_applies_to_groups
         self.rule_groups = rule_groups
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class ActiveConfigurationParameter(_serialization.Model):
@@ -670,7 +670,7 @@ class ActiveDefaultSecurityAdminRule(ActiveBaseSecurityAdminRule):  # pylint: di
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -831,7 +831,7 @@ class ActiveDefaultSecurityUserRule(ActiveBaseSecurityUserRule):  # pylint: disa
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -1025,7 +1025,7 @@ class ActiveSecurityAdminRule(ActiveBaseSecurityAdminRule):  # pylint: disable=t
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -1235,7 +1235,7 @@ class ActiveSecurityUserRule(ActiveBaseSecurityUserRule):  # pylint: disable=too
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -1403,7 +1403,7 @@ class BaseAdminRule(ProxyResource):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
         self.system_data = None
 
 
@@ -1538,7 +1538,7 @@ class AdminRule(BaseAdminRule):  # pylint: disable=too-many-instance-attributes
          ~azure.mgmt.network.v2021_02_01_preview.models.SecurityConfigurationRuleDirection
         """
         super().__init__(**kwargs)
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -1628,7 +1628,7 @@ class BaseUserRule(ProxyResource):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
         self.system_data = None
 
 
@@ -2053,7 +2053,7 @@ class DefaultAdminRule(BaseAdminRule):  # pylint: disable=too-many-instance-attr
         :paramtype flag: str
         """
         super().__init__(**kwargs)
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -2159,7 +2159,7 @@ class DefaultUserRule(BaseUserRule):  # pylint: disable=too-many-instance-attrib
         :paramtype flag: str
         """
         super().__init__(**kwargs)
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -2257,7 +2257,7 @@ class EffectiveBaseSecurityAdminRule(_serialization.Model):
         self.rule_collection_description = rule_collection_description
         self.rule_collection_applies_to_groups = rule_collection_applies_to_groups
         self.rule_groups = rule_groups
-        self.kind = None  # type: Optional[str]
+        self.kind: Optional[str] = None
 
 
 class EffectiveDefaultSecurityAdminRule(EffectiveBaseSecurityAdminRule):  # pylint: disable=too-many-instance-attributes
@@ -2404,7 +2404,7 @@ class EffectiveDefaultSecurityAdminRule(EffectiveBaseSecurityAdminRule):  # pyli
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Default"  # type: str
+        self.kind: str = "Default"
         self.display_name = None
         self.description = None
         self.flag = flag
@@ -2586,7 +2586,7 @@ class EffectiveSecurityAdminRule(EffectiveBaseSecurityAdminRule):  # pylint: dis
             rule_groups=rule_groups,
             **kwargs
         )
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
@@ -3710,9 +3710,10 @@ class NspLink(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :ivar etag: A unique read-only string that changes whenever the resource is updated.
     :vartype etag: str
     :ivar provisioning_state: The provisioning state of the NSP Link resource. Known values are:
-     "Succeeded", "Creating", "Updating", "Deleting", "Accepted", and "Failed".
+     "Succeeded", "Creating", "Updating", "Deleting", "Accepted", "Failed", and
+     "WaitForRemoteCompletion".
     :vartype provisioning_state: str or
-     ~azure.mgmt.network.v2021_02_01_preview.models.NspProvisioningState
+     ~azure.mgmt.network.v2021_02_01_preview.models.NspLinkProvisioningState
     :ivar auto_approved_remote_perimeter_resource_id: Perimeter ARM Id for the remote NSP with
      which the link gets created in Auto-approval mode. It should be used when the NSP admin have
      Microsoft.Network/networkSecurityPerimeters/linkPerimeter/action permission on the remote NSP
@@ -3720,6 +3721,8 @@ class NspLink(ProxyResource):  # pylint: disable=too-many-instance-attributes
     :vartype auto_approved_remote_perimeter_resource_id: str
     :ivar remote_perimeter_guid: Remote NSP Guid with which the link gets created.
     :vartype remote_perimeter_guid: str
+    :ivar remote_perimeter_location: Remote NSP location with which the link gets created.
+    :vartype remote_perimeter_location: str
     :ivar local_inbound_profiles: Local Inbound profile names to which Inbound is allowed. Use ['\
      *'] to allow inbound to all profiles. It's default value is ['*\ '].
     :vartype local_inbound_profiles: list[str]
@@ -3751,6 +3754,7 @@ class NspLink(ProxyResource):  # pylint: disable=too-many-instance-attributes
         "etag": {"readonly": True},
         "provisioning_state": {"readonly": True},
         "remote_perimeter_guid": {"readonly": True},
+        "remote_perimeter_location": {"readonly": True},
         "local_inbound_profiles": {"unique": True},
         "local_outbound_profiles": {"readonly": True, "unique": True},
         "remote_inbound_profiles": {"unique": True},
@@ -3769,6 +3773,7 @@ class NspLink(ProxyResource):  # pylint: disable=too-many-instance-attributes
             "type": "str",
         },
         "remote_perimeter_guid": {"key": "properties.remotePerimeterGuid", "type": "str"},
+        "remote_perimeter_location": {"key": "properties.remotePerimeterLocation", "type": "str"},
         "local_inbound_profiles": {"key": "properties.localInboundProfiles", "type": "[str]"},
         "local_outbound_profiles": {"key": "properties.localOutboundProfiles", "type": "[str]"},
         "remote_inbound_profiles": {"key": "properties.remoteInboundProfiles", "type": "[str]"},
@@ -3808,6 +3813,7 @@ class NspLink(ProxyResource):  # pylint: disable=too-many-instance-attributes
         self.provisioning_state = None
         self.auto_approved_remote_perimeter_resource_id = auto_approved_remote_perimeter_resource_id
         self.remote_perimeter_guid = None
+        self.remote_perimeter_location = None
         self.local_inbound_profiles = local_inbound_profiles
         self.local_outbound_profiles = None
         self.remote_inbound_profiles = remote_inbound_profiles
@@ -3856,14 +3862,17 @@ class NspLinkReference(ProxyResource):  # pylint: disable=too-many-instance-attr
     :ivar etag: A unique read-only string that changes whenever the resource is updated.
     :vartype etag: str
     :ivar provisioning_state: The provisioning state of the NSP LinkReference resource. Known
-     values are: "Succeeded", "Creating", "Updating", "Deleting", "Accepted", and "Failed".
+     values are: "Succeeded", "Creating", "Updating", "Deleting", "Accepted", "Failed", and
+     "WaitForRemoteCompletion".
     :vartype provisioning_state: str or
-     ~azure.mgmt.network.v2021_02_01_preview.models.NspProvisioningState
+     ~azure.mgmt.network.v2021_02_01_preview.models.NspLinkProvisioningState
     :ivar remote_perimeter_resource_id: Perimeter ARM Id for the remote NSP with which the link is
      created.
     :vartype remote_perimeter_resource_id: str
     :ivar remote_perimeter_guid: Remote NSP Guid with which the link is created.
     :vartype remote_perimeter_guid: str
+    :ivar remote_perimeter_location: Remote NSP location with which the link gets created.
+    :vartype remote_perimeter_location: str
     :ivar local_inbound_profiles: Local Inbound profile names to which Inbound is allowed. Use ['\
      *'] to allow inbound to all profiles. It's default value is ['*\ '].
     :vartype local_inbound_profiles: list[str]
@@ -3894,6 +3903,7 @@ class NspLinkReference(ProxyResource):  # pylint: disable=too-many-instance-attr
         "provisioning_state": {"readonly": True},
         "remote_perimeter_resource_id": {"readonly": True},
         "remote_perimeter_guid": {"readonly": True},
+        "remote_perimeter_location": {"readonly": True},
         "local_inbound_profiles": {"unique": True},
         "local_outbound_profiles": {"readonly": True, "unique": True},
         "remote_inbound_profiles": {"readonly": True},
@@ -3909,6 +3919,7 @@ class NspLinkReference(ProxyResource):  # pylint: disable=too-many-instance-attr
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "remote_perimeter_resource_id": {"key": "properties.remotePerimeterResourceId", "type": "str"},
         "remote_perimeter_guid": {"key": "properties.remotePerimeterGuid", "type": "str"},
+        "remote_perimeter_location": {"key": "properties.remotePerimeterLocation", "type": "str"},
         "local_inbound_profiles": {"key": "properties.localInboundProfiles", "type": "[str]"},
         "local_outbound_profiles": {"key": "properties.localOutboundProfiles", "type": "[str]"},
         "remote_inbound_profiles": {"key": "properties.remoteInboundProfiles", "type": "[str]"},
@@ -3936,6 +3947,7 @@ class NspLinkReference(ProxyResource):  # pylint: disable=too-many-instance-attr
         self.provisioning_state = None
         self.remote_perimeter_resource_id = None
         self.remote_perimeter_guid = None
+        self.remote_perimeter_location = None
         self.local_inbound_profiles = local_inbound_profiles
         self.local_outbound_profiles = None
         self.remote_inbound_profiles = None
@@ -4669,7 +4681,7 @@ class UserRule(BaseUserRule):  # pylint: disable=too-many-instance-attributes
          ~azure.mgmt.network.v2021_02_01_preview.models.SecurityConfigurationRuleDirection
         """
         super().__init__(**kwargs)
-        self.kind = "Custom"  # type: str
+        self.kind: str = "Custom"
         self.display_name = display_name
         self.description = description
         self.protocol = protocol
