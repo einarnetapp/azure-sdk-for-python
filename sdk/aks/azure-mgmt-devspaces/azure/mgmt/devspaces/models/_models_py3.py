@@ -425,7 +425,7 @@ class OrchestratorSpecificConnectionDetails(_serialization.Model):
     def __init__(self, **kwargs):
         """ """
         super().__init__(**kwargs)
-        self.instance_type = None  # type: Optional[str]
+        self.instance_type: Optional[str] = None
 
 
 class KubernetesConnectionDetails(OrchestratorSpecificConnectionDetails):
@@ -456,7 +456,7 @@ class KubernetesConnectionDetails(OrchestratorSpecificConnectionDetails):
         :paramtype kube_config: str
         """
         super().__init__(**kwargs)
-        self.instance_type = "Kubernetes"  # type: str
+        self.instance_type: str = "Kubernetes"
         self.kube_config = kube_config
 
 
