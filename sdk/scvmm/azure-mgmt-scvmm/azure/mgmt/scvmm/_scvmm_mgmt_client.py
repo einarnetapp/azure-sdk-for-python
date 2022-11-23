@@ -7,45 +7,54 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
 
-from msrest import Deserializer, Serializer
+from azure.core.rest import HttpRequest, HttpResponse
+from azure.mgmt.core import ARMPipelineClient
 
-from azure.core.rest import AsyncHttpResponse, HttpRequest
-from azure.mgmt.core import AsyncARMPipelineClient
-
-from .. import models
-from ._configuration import SCVMMConfiguration
-from .operations import AvailabilitySetsOperations, CloudsOperations, InventoryItemsOperations, Operations, VirtualMachineTemplatesOperations, VirtualMachinesOperations, VirtualNetworksOperations, VmmServersOperations
+from . import models as _models
+from ._configuration import ScvmmMgmtClientConfiguration
+from ._serialization import Deserializer, Serializer
+from .operations import (
+    AvailabilitySetsOperations,
+    CloudsOperations,
+    InventoryItemsOperations,
+    Operations,
+    VirtualMachineTemplatesOperations,
+    VirtualMachinesOperations,
+    VirtualNetworksOperations,
+    VmmServersOperations,
+)
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from azure.core.credentials_async import AsyncTokenCredential
+    from azure.core.credentials import TokenCredential
 
-class SCVMM:    # pylint: disable=too-many-instance-attributes
+
+class ScvmmMgmtClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """The Microsoft.ScVmm Rest API spec.
 
     :ivar vmm_servers: VmmServersOperations operations
-    :vartype vmm_servers: azure.mgmt.scvmm.aio.operations.VmmServersOperations
+    :vartype vmm_servers: azure.mgmt.scvmm.operations.VmmServersOperations
     :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.scvmm.aio.operations.Operations
+    :vartype operations: azure.mgmt.scvmm.operations.Operations
     :ivar clouds: CloudsOperations operations
-    :vartype clouds: azure.mgmt.scvmm.aio.operations.CloudsOperations
+    :vartype clouds: azure.mgmt.scvmm.operations.CloudsOperations
     :ivar virtual_networks: VirtualNetworksOperations operations
-    :vartype virtual_networks: azure.mgmt.scvmm.aio.operations.VirtualNetworksOperations
+    :vartype virtual_networks: azure.mgmt.scvmm.operations.VirtualNetworksOperations
     :ivar virtual_machines: VirtualMachinesOperations operations
-    :vartype virtual_machines: azure.mgmt.scvmm.aio.operations.VirtualMachinesOperations
+    :vartype virtual_machines: azure.mgmt.scvmm.operations.VirtualMachinesOperations
     :ivar virtual_machine_templates: VirtualMachineTemplatesOperations operations
     :vartype virtual_machine_templates:
-     azure.mgmt.scvmm.aio.operations.VirtualMachineTemplatesOperations
+     azure.mgmt.scvmm.operations.VirtualMachineTemplatesOperations
     :ivar availability_sets: AvailabilitySetsOperations operations
-    :vartype availability_sets: azure.mgmt.scvmm.aio.operations.AvailabilitySetsOperations
+    :vartype availability_sets: azure.mgmt.scvmm.operations.AvailabilitySetsOperations
     :ivar inventory_items: InventoryItemsOperations operations
-    :vartype inventory_items: azure.mgmt.scvmm.aio.operations.InventoryItemsOperations
-    :param credential: Credential needed for the client to connect to Azure.
-    :type credential: ~azure.core.credentials_async.AsyncTokenCredential
+    :vartype inventory_items: azure.mgmt.scvmm.operations.InventoryItemsOperations
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The Azure subscription ID. This is a GUID-formatted string (e.g.
-     00000000-0000-0000-0000-000000000000).
+     00000000-0000-0000-0000-000000000000). Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is "https://management.azure.com".
     :type base_url: str
@@ -58,60 +67,63 @@ class SCVMM:    # pylint: disable=too-many-instance-attributes
 
     def __init__(
         self,
-        credential: "AsyncTokenCredential",
+        credential: "TokenCredential",
         subscription_id: str,
         base_url: str = "https://management.azure.com",
         **kwargs: Any
     ) -> None:
-        self._config = SCVMMConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
-        self._client = AsyncARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
+        self._config = ScvmmMgmtClientConfiguration(credential=credential, subscription_id=subscription_id, **kwargs)
+        self._client = ARMPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
         self.vmm_servers = VmmServersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.clouds = CloudsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.virtual_networks = VirtualNetworksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.virtual_machines = VirtualMachinesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.virtual_machine_templates = VirtualMachineTemplatesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.availability_sets = AvailabilitySetsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.virtual_networks = VirtualNetworksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_machines = VirtualMachinesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_machine_templates = VirtualMachineTemplatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.availability_sets = AvailabilitySetsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.inventory_items = InventoryItemsOperations(self._client, self._config, self._serialize, self._deserialize)
 
-
-    def _send_request(
-        self,
-        request: HttpRequest,
-        **kwargs: Any
-    ) -> Awaitable[AsyncHttpResponse]:
+    def _send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.
 
         >>> from azure.core.rest import HttpRequest
         >>> request = HttpRequest("GET", "https://www.example.org/")
         <HttpRequest [GET], url: 'https://www.example.org/'>
-        >>> response = await client._send_request(request)
-        <AsyncHttpResponse: 200 OK>
+        >>> response = client._send_request(request)
+        <HttpResponse: 200 OK>
 
-        For more information on this code flow, see https://aka.ms/azsdk/python/protocol/quickstart
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
 
         :param request: The network request you want to make. Required.
         :type request: ~azure.core.rest.HttpRequest
         :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
         :return: The response of your network call. Does not do error handling on your response.
-        :rtype: ~azure.core.rest.AsyncHttpResponse
+        :rtype: ~azure.core.rest.HttpResponse
         """
 
         request_copy = deepcopy(request)
         request_copy.url = self._client.format_url(request_copy.url)
         return self._client.send_request(request_copy, **kwargs)
 
-    async def close(self) -> None:
-        await self._client.close()
+    def close(self) -> None:
+        self._client.close()
 
-    async def __aenter__(self) -> "SCVMM":
-        await self._client.__aenter__()
+    def __enter__(self) -> "ScvmmMgmtClient":
+        self._client.__enter__()
         return self
 
-    async def __aexit__(self, *exc_details) -> None:
-        await self._client.__aexit__(*exc_details)
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
