@@ -14,7 +14,7 @@ from azure.mgmt.apimanagement import ApiManagementClient
     pip install azure-identity
     pip install azure-mgmt-apimanagement
 # USAGE
-    python api_management_get_schema1.py
+    python api_management_perform_connectivity_check.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,14 +29,18 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.global_schema.get(
+    response = client.begin_perform_connectivity_check_async(
         resource_group_name="rg1",
         service_name="apimService1",
-        schema_id="schema1",
-    )
+        connectivity_check_request_params={
+            "destination": {"address": "8.8.8.8", "port": 53},
+            "preferredIPVersion": "IPv4",
+            "source": {"region": "northeurope"},
+        },
+    ).result()
     print(response)
 
 
-# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementGetGlobalSchema1.json
+# x-ms-original-file: specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2021-08-01/examples/ApiManagementPerformConnectivityCheck.json
 if __name__ == "__main__":
     main()
