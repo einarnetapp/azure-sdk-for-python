@@ -197,9 +197,6 @@ class ExportRDBParameters(_serialization.Model):
     :vartype prefix: str
     :ivar container: Container name to export to. Required.
     :vartype container: str
-    :ivar preferred_data_archive_auth_method: Preferred auth method to communicate to storage
-     account used for data archive, specify SAS or ManagedIdentity, default value is SAS.
-    :vartype preferred_data_archive_auth_method: str
     """
 
     _validation = {
@@ -211,18 +208,9 @@ class ExportRDBParameters(_serialization.Model):
         "format": {"key": "format", "type": "str"},
         "prefix": {"key": "prefix", "type": "str"},
         "container": {"key": "container", "type": "str"},
-        "preferred_data_archive_auth_method": {"key": "preferred-data-archive-auth-method", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        prefix: str,
-        container: str,
-        format: Optional[str] = None,
-        preferred_data_archive_auth_method: Optional[str] = None,
-        **kwargs
-    ):
+    def __init__(self, *, prefix: str, container: str, format: Optional[str] = None, **kwargs):
         """
         :keyword format: File format.
         :paramtype format: str
@@ -230,15 +218,11 @@ class ExportRDBParameters(_serialization.Model):
         :paramtype prefix: str
         :keyword container: Container name to export to. Required.
         :paramtype container: str
-        :keyword preferred_data_archive_auth_method: Preferred auth method to communicate to storage
-         account used for data archive, specify SAS or ManagedIdentity, default value is SAS.
-        :paramtype preferred_data_archive_auth_method: str
         """
         super().__init__(**kwargs)
         self.format = format
         self.prefix = prefix
         self.container = container
-        self.preferred_data_archive_auth_method = preferred_data_archive_auth_method
 
 
 class ImportRDBParameters(_serialization.Model):
@@ -250,9 +234,6 @@ class ImportRDBParameters(_serialization.Model):
     :vartype format: str
     :ivar files: files to import. Required.
     :vartype files: list[str]
-    :ivar preferred_data_archive_auth_method: Preferred auth method to communicate to storage
-     account used for data archive, specify SAS or ManagedIdentity, default value is SAS.
-    :vartype preferred_data_archive_auth_method: str
     """
 
     _validation = {
@@ -262,30 +243,18 @@ class ImportRDBParameters(_serialization.Model):
     _attribute_map = {
         "format": {"key": "format", "type": "str"},
         "files": {"key": "files", "type": "[str]"},
-        "preferred_data_archive_auth_method": {"key": "preferred-data-archive-auth-method", "type": "str"},
     }
 
-    def __init__(
-        self,
-        *,
-        files: List[str],
-        format: Optional[str] = None,
-        preferred_data_archive_auth_method: Optional[str] = None,
-        **kwargs
-    ):
+    def __init__(self, *, files: List[str], format: Optional[str] = None, **kwargs):
         """
         :keyword format: File format.
         :paramtype format: str
         :keyword files: files to import. Required.
         :paramtype files: list[str]
-        :keyword preferred_data_archive_auth_method: Preferred auth method to communicate to storage
-         account used for data archive, specify SAS or ManagedIdentity, default value is SAS.
-        :paramtype preferred_data_archive_auth_method: str
         """
         super().__init__(**kwargs)
         self.format = format
         self.files = files
-        self.preferred_data_archive_auth_method = preferred_data_archive_auth_method
 
 
 class ManagedServiceIdentity(_serialization.Model):
@@ -977,9 +946,8 @@ class RedisCommonProperties(_serialization.Model):
      rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value
      etc.
     :vartype redis_configuration: ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-    :ivar redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major' is
-     required) or the value 'latest' which refers to the latest stable Redis version that is
-     available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+    :ivar redis_version: Redis version. Only major version will be used in PUT/PATCH request with
+     current valid values: (4, 6).
     :vartype redis_version: str
     :ivar enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is enabled.
     :vartype enable_non_ssl_port: bool
@@ -1033,9 +1001,8 @@ class RedisCommonProperties(_serialization.Model):
          etc.
         :paramtype redis_configuration:
          ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-        :keyword redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major'
-         is required) or the value 'latest' which refers to the latest stable Redis version that is
-         available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+        :keyword redis_version: Redis version. Only major version will be used in PUT/PATCH request
+         with current valid values: (4, 6).
         :paramtype redis_version: str
         :keyword enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is
          enabled.
@@ -1079,8 +1046,7 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
     :vartype additional_properties: dict[str, any]
     :ivar rdb_backup_enabled: Specifies whether the rdb backup is enabled.
     :vartype rdb_backup_enabled: str
-    :ivar rdb_backup_frequency: Specifies the frequency for creating rdb backup in minutes. Valid
-     values: (15, 30, 60, 360, 720, 1440).
+    :ivar rdb_backup_frequency: Specifies the frequency for creating rdb backup.
     :vartype rdb_backup_frequency: str
     :ivar rdb_backup_max_snapshot_count: Specifies the maximum number of snapshots for rdb backup.
     :vartype rdb_backup_max_snapshot_count: str
@@ -1121,6 +1087,7 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
     _validation = {
         "maxclients": {"readonly": True},
         "preferred_data_archive_auth_method": {"readonly": True},
+        "preferred_data_persistence_auth_method": {"readonly": True},
         "zonal_configuration": {"readonly": True},
     }
 
@@ -1159,7 +1126,6 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
         maxmemory_policy: Optional[str] = None,
         maxmemory_reserved: Optional[str] = None,
         maxmemory_delta: Optional[str] = None,
-        preferred_data_persistence_auth_method: Optional[str] = None,
         authnotrequired: Optional[str] = None,
         **kwargs
     ):
@@ -1169,8 +1135,7 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
         :paramtype additional_properties: dict[str, any]
         :keyword rdb_backup_enabled: Specifies whether the rdb backup is enabled.
         :paramtype rdb_backup_enabled: str
-        :keyword rdb_backup_frequency: Specifies the frequency for creating rdb backup in minutes.
-         Valid values: (15, 30, 60, 360, 720, 1440).
+        :keyword rdb_backup_frequency: Specifies the frequency for creating rdb backup.
         :paramtype rdb_backup_frequency: str
         :keyword rdb_backup_max_snapshot_count: Specifies the maximum number of snapshots for rdb
          backup.
@@ -1196,10 +1161,6 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
         :keyword maxmemory_delta: Value in megabytes reserved for non-cache usage per shard e.g.
          failover.
         :paramtype maxmemory_delta: str
-        :keyword preferred_data_persistence_auth_method: Preferred auth method to communicate to
-         storage account used for data persistence, specify SAS or ManagedIdentity, default value is
-         SAS.
-        :paramtype preferred_data_persistence_auth_method: str
         :keyword authnotrequired: Specifies whether the authentication is disabled. Setting this
          property is highly discouraged from security point of view.
         :paramtype authnotrequired: str
@@ -1219,7 +1180,7 @@ class RedisCommonPropertiesRedisConfiguration(_serialization.Model):  # pylint: 
         self.maxmemory_delta = maxmemory_delta
         self.maxclients = None
         self.preferred_data_archive_auth_method = None
-        self.preferred_data_persistence_auth_method = preferred_data_persistence_auth_method
+        self.preferred_data_persistence_auth_method = None
         self.zonal_configuration = None
         self.authnotrequired = authnotrequired
 
@@ -1241,9 +1202,8 @@ class RedisCreateParameters(_serialization.Model):  # pylint: disable=too-many-i
      rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value
      etc.
     :vartype redis_configuration: ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-    :ivar redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major' is
-     required) or the value 'latest' which refers to the latest stable Redis version that is
-     available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+    :ivar redis_version: Redis version. Only major version will be used in PUT/PATCH request with
+     current valid values: (4, 6).
     :vartype redis_version: str
     :ivar enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is enabled.
     :vartype enable_non_ssl_port: bool
@@ -1340,9 +1300,8 @@ class RedisCreateParameters(_serialization.Model):  # pylint: disable=too-many-i
          etc.
         :paramtype redis_configuration:
          ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-        :keyword redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major'
-         is required) or the value 'latest' which refers to the latest stable Redis version that is
-         available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+        :keyword redis_version: Redis version. Only major version will be used in PUT/PATCH request
+         with current valid values: (4, 6).
         :paramtype redis_version: str
         :keyword enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is
          enabled.
@@ -1401,9 +1360,8 @@ class RedisCreateProperties(RedisCommonProperties):  # pylint: disable=too-many-
      rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value
      etc.
     :vartype redis_configuration: ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-    :ivar redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major' is
-     required) or the value 'latest' which refers to the latest stable Redis version that is
-     available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+    :ivar redis_version: Redis version. Only major version will be used in PUT/PATCH request with
+     current valid values: (4, 6).
     :vartype redis_version: str
     :ivar enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is enabled.
     :vartype enable_non_ssl_port: bool
@@ -1480,9 +1438,8 @@ class RedisCreateProperties(RedisCommonProperties):  # pylint: disable=too-many-
          etc.
         :paramtype redis_configuration:
          ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-        :keyword redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major'
-         is required) or the value 'latest' which refers to the latest stable Redis version that is
-         available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+        :keyword redis_version: Redis version. Only major version will be used in PUT/PATCH request
+         with current valid values: (4, 6).
         :paramtype redis_version: str
         :keyword enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is
          enabled.
@@ -1754,8 +1711,6 @@ class RedisLinkedServer(_serialization.Model):
 class RedisLinkedServerCreateParameters(_serialization.Model):
     """Parameter required for creating a linked server to redis cache.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     All required parameters must be populated in order to send to Azure.
 
     :ivar linked_redis_cache_id: Fully qualified resourceId of the linked redis cache. Required.
@@ -1765,28 +1720,18 @@ class RedisLinkedServerCreateParameters(_serialization.Model):
     :ivar server_role: Role of the linked server. Required. Known values are: "Primary" and
      "Secondary".
     :vartype server_role: str or ~azure.mgmt.redis.models.ReplicationRole
-    :ivar geo_replicated_primary_host_name: The unchanging DNS name which will always point to
-     current geo-primary cache among the linked redis caches for seamless Geo Failover experience.
-    :vartype geo_replicated_primary_host_name: str
-    :ivar primary_host_name: The changing DNS name that resolves to the current geo-primary cache
-     among the linked redis caches before or after the Geo Failover.
-    :vartype primary_host_name: str
     """
 
     _validation = {
         "linked_redis_cache_id": {"required": True},
         "linked_redis_cache_location": {"required": True},
         "server_role": {"required": True},
-        "geo_replicated_primary_host_name": {"readonly": True},
-        "primary_host_name": {"readonly": True},
     }
 
     _attribute_map = {
         "linked_redis_cache_id": {"key": "properties.linkedRedisCacheId", "type": "str"},
         "linked_redis_cache_location": {"key": "properties.linkedRedisCacheLocation", "type": "str"},
         "server_role": {"key": "properties.serverRole", "type": "str"},
-        "geo_replicated_primary_host_name": {"key": "properties.geoReplicatedPrimaryHostName", "type": "str"},
-        "primary_host_name": {"key": "properties.primaryHostName", "type": "str"},
     }
 
     def __init__(
@@ -1810,14 +1755,10 @@ class RedisLinkedServerCreateParameters(_serialization.Model):
         self.linked_redis_cache_id = linked_redis_cache_id
         self.linked_redis_cache_location = linked_redis_cache_location
         self.server_role = server_role
-        self.geo_replicated_primary_host_name = None
-        self.primary_host_name = None
 
 
 class RedisLinkedServerCreateProperties(_serialization.Model):
     """Create properties for a linked server.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
 
     All required parameters must be populated in order to send to Azure.
 
@@ -1828,28 +1769,18 @@ class RedisLinkedServerCreateProperties(_serialization.Model):
     :ivar server_role: Role of the linked server. Required. Known values are: "Primary" and
      "Secondary".
     :vartype server_role: str or ~azure.mgmt.redis.models.ReplicationRole
-    :ivar geo_replicated_primary_host_name: The unchanging DNS name which will always point to
-     current geo-primary cache among the linked redis caches for seamless Geo Failover experience.
-    :vartype geo_replicated_primary_host_name: str
-    :ivar primary_host_name: The changing DNS name that resolves to the current geo-primary cache
-     among the linked redis caches before or after the Geo Failover.
-    :vartype primary_host_name: str
     """
 
     _validation = {
         "linked_redis_cache_id": {"required": True},
         "linked_redis_cache_location": {"required": True},
         "server_role": {"required": True},
-        "geo_replicated_primary_host_name": {"readonly": True},
-        "primary_host_name": {"readonly": True},
     }
 
     _attribute_map = {
         "linked_redis_cache_id": {"key": "linkedRedisCacheId", "type": "str"},
         "linked_redis_cache_location": {"key": "linkedRedisCacheLocation", "type": "str"},
         "server_role": {"key": "serverRole", "type": "str"},
-        "geo_replicated_primary_host_name": {"key": "geoReplicatedPrimaryHostName", "type": "str"},
-        "primary_host_name": {"key": "primaryHostName", "type": "str"},
     }
 
     def __init__(
@@ -1873,8 +1804,6 @@ class RedisLinkedServerCreateProperties(_serialization.Model):
         self.linked_redis_cache_id = linked_redis_cache_id
         self.linked_redis_cache_location = linked_redis_cache_location
         self.server_role = server_role
-        self.geo_replicated_primary_host_name = None
-        self.primary_host_name = None
 
 
 class RedisLinkedServerProperties(RedisLinkedServerCreateProperties):
@@ -1891,12 +1820,6 @@ class RedisLinkedServerProperties(RedisLinkedServerCreateProperties):
     :ivar server_role: Role of the linked server. Required. Known values are: "Primary" and
      "Secondary".
     :vartype server_role: str or ~azure.mgmt.redis.models.ReplicationRole
-    :ivar geo_replicated_primary_host_name: The unchanging DNS name which will always point to
-     current geo-primary cache among the linked redis caches for seamless Geo Failover experience.
-    :vartype geo_replicated_primary_host_name: str
-    :ivar primary_host_name: The changing DNS name that resolves to the current geo-primary cache
-     among the linked redis caches before or after the Geo Failover.
-    :vartype primary_host_name: str
     :ivar provisioning_state: Terminal state of the link between primary and secondary redis cache.
     :vartype provisioning_state: str
     """
@@ -1905,8 +1828,6 @@ class RedisLinkedServerProperties(RedisLinkedServerCreateProperties):
         "linked_redis_cache_id": {"required": True},
         "linked_redis_cache_location": {"required": True},
         "server_role": {"required": True},
-        "geo_replicated_primary_host_name": {"readonly": True},
-        "primary_host_name": {"readonly": True},
         "provisioning_state": {"readonly": True},
     }
 
@@ -1914,8 +1835,6 @@ class RedisLinkedServerProperties(RedisLinkedServerCreateProperties):
         "linked_redis_cache_id": {"key": "linkedRedisCacheId", "type": "str"},
         "linked_redis_cache_location": {"key": "linkedRedisCacheLocation", "type": "str"},
         "server_role": {"key": "serverRole", "type": "str"},
-        "geo_replicated_primary_host_name": {"key": "geoReplicatedPrimaryHostName", "type": "str"},
-        "primary_host_name": {"key": "primaryHostName", "type": "str"},
         "provisioning_state": {"key": "provisioningState", "type": "str"},
     }
 
@@ -1964,12 +1883,6 @@ class RedisLinkedServerWithProperties(ProxyResource):
     :vartype linked_redis_cache_location: str
     :ivar server_role: Role of the linked server. Known values are: "Primary" and "Secondary".
     :vartype server_role: str or ~azure.mgmt.redis.models.ReplicationRole
-    :ivar geo_replicated_primary_host_name: The unchanging DNS name which will always point to
-     current geo-primary cache among the linked redis caches for seamless Geo Failover experience.
-    :vartype geo_replicated_primary_host_name: str
-    :ivar primary_host_name: The changing DNS name that resolves to the current geo-primary cache
-     among the linked redis caches before or after the Geo Failover.
-    :vartype primary_host_name: str
     :ivar provisioning_state: Terminal state of the link between primary and secondary redis cache.
     :vartype provisioning_state: str
     """
@@ -1978,8 +1891,6 @@ class RedisLinkedServerWithProperties(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
-        "geo_replicated_primary_host_name": {"readonly": True},
-        "primary_host_name": {"readonly": True},
         "provisioning_state": {"readonly": True},
     }
 
@@ -1990,8 +1901,6 @@ class RedisLinkedServerWithProperties(ProxyResource):
         "linked_redis_cache_id": {"key": "properties.linkedRedisCacheId", "type": "str"},
         "linked_redis_cache_location": {"key": "properties.linkedRedisCacheLocation", "type": "str"},
         "server_role": {"key": "properties.serverRole", "type": "str"},
-        "geo_replicated_primary_host_name": {"key": "properties.geoReplicatedPrimaryHostName", "type": "str"},
-        "primary_host_name": {"key": "properties.primaryHostName", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
     }
 
@@ -2015,8 +1924,6 @@ class RedisLinkedServerWithProperties(ProxyResource):
         self.linked_redis_cache_id = linked_redis_cache_id
         self.linked_redis_cache_location = linked_redis_cache_location
         self.server_role = server_role
-        self.geo_replicated_primary_host_name = None
-        self.primary_host_name = None
         self.provisioning_state = None
 
 
@@ -2168,9 +2075,8 @@ class RedisProperties(RedisCreateProperties):  # pylint: disable=too-many-instan
      rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value
      etc.
     :vartype redis_configuration: ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-    :ivar redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major' is
-     required) or the value 'latest' which refers to the latest stable Redis version that is
-     available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+    :ivar redis_version: Redis version. Only major version will be used in PUT/PATCH request with
+     current valid values: (4, 6).
     :vartype redis_version: str
     :ivar enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is enabled.
     :vartype enable_non_ssl_port: bool
@@ -2283,9 +2189,8 @@ class RedisProperties(RedisCreateProperties):  # pylint: disable=too-many-instan
          etc.
         :paramtype redis_configuration:
          ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-        :keyword redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major'
-         is required) or the value 'latest' which refers to the latest stable Redis version that is
-         available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+        :keyword redis_version: Redis version. Only major version will be used in PUT/PATCH request
+         with current valid values: (4, 6).
         :paramtype redis_version: str
         :keyword enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is
          enabled.
@@ -2487,9 +2392,8 @@ class RedisResource(TrackedResource):  # pylint: disable=too-many-instance-attri
      rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value
      etc.
     :vartype redis_configuration: ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-    :ivar redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major' is
-     required) or the value 'latest' which refers to the latest stable Redis version that is
-     available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+    :ivar redis_version: Redis version. Only major version will be used in PUT/PATCH request with
+     current valid values: (4, 6).
     :vartype redis_version: str
     :ivar enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is enabled.
     :vartype enable_non_ssl_port: bool
@@ -2631,9 +2535,8 @@ class RedisResource(TrackedResource):  # pylint: disable=too-many-instance-attri
          etc.
         :paramtype redis_configuration:
          ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-        :keyword redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major'
-         is required) or the value 'latest' which refers to the latest stable Redis version that is
-         available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+        :keyword redis_version: Redis version. Only major version will be used in PUT/PATCH request
+         with current valid values: (4, 6).
         :paramtype redis_version: str
         :keyword enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is
          enabled.
@@ -2700,9 +2603,8 @@ class RedisUpdateParameters(_serialization.Model):  # pylint: disable=too-many-i
      rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value
      etc.
     :vartype redis_configuration: ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-    :ivar redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major' is
-     required) or the value 'latest' which refers to the latest stable Redis version that is
-     available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+    :ivar redis_version: Redis version. Only major version will be used in PUT/PATCH request with
+     current valid values: (4, 6).
     :vartype redis_version: str
     :ivar enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is enabled.
     :vartype enable_non_ssl_port: bool
@@ -2771,9 +2673,8 @@ class RedisUpdateParameters(_serialization.Model):  # pylint: disable=too-many-i
          etc.
         :paramtype redis_configuration:
          ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-        :keyword redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major'
-         is required) or the value 'latest' which refers to the latest stable Redis version that is
-         available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+        :keyword redis_version: Redis version. Only major version will be used in PUT/PATCH request
+         with current valid values: (4, 6).
         :paramtype redis_version: str
         :keyword enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is
          enabled.
@@ -2819,9 +2720,8 @@ class RedisUpdateProperties(RedisCommonProperties):
      rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value
      etc.
     :vartype redis_configuration: ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-    :ivar redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major' is
-     required) or the value 'latest' which refers to the latest stable Redis version that is
-     available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+    :ivar redis_version: Redis version. Only major version will be used in PUT/PATCH request with
+     current valid values: (4, 6).
     :vartype redis_version: str
     :ivar enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is enabled.
     :vartype enable_non_ssl_port: bool
@@ -2879,9 +2779,8 @@ class RedisUpdateProperties(RedisCommonProperties):
          etc.
         :paramtype redis_configuration:
          ~azure.mgmt.redis.models.RedisCommonPropertiesRedisConfiguration
-        :keyword redis_version: Redis version. This should be in the form 'major[.minor]' (only 'major'
-         is required) or the value 'latest' which refers to the latest stable Redis version that is
-         available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'.
+        :keyword redis_version: Redis version. Only major version will be used in PUT/PATCH request
+         with current valid values: (4, 6).
         :paramtype redis_version: str
         :keyword enable_non_ssl_port: Specifies whether the non-ssl Redis server port (6379) is
          enabled.

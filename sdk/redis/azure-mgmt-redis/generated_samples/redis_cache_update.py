@@ -29,14 +29,14 @@ def main():
         subscription_id="subid",
     )
 
-    response = client.redis.begin_update(
+    response = client.redis.update(
         resource_group_name="rg1",
         name="cache1",
         parameters={"properties": {"enableNonSslPort": True, "replicasPerPrimary": 2}},
-    ).result()
+    )
     print(response)
 
 
-# x-ms-original-file: specification/redis/resource-manager/Microsoft.Cache/stable/2022-06-01/examples/RedisCacheUpdate.json
+# x-ms-original-file: specification/redis/resource-manager/Microsoft.Cache/stable/2021-06-01/examples/RedisCacheUpdate.json
 if __name__ == "__main__":
     main()

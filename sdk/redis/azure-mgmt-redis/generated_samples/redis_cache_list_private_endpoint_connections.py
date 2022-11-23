@@ -14,7 +14,7 @@ from azure.mgmt.redis import RedisManagementClient
     pip install azure-identity
     pip install azure-mgmt-redis
 # USAGE
-    python redis_cache_operations.py
+    python redis_cache_list_private_endpoint_connections.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,14 +26,17 @@ from azure.mgmt.redis import RedisManagementClient
 def main():
     client = RedisManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
+        subscription_id="{subscriptionId}",
     )
 
-    response = client.operations.list()
+    response = client.private_endpoint_connections.list(
+        resource_group_name="rgtest01",
+        cache_name="cachetest01",
+    )
     for item in response:
         print(item)
 
 
-# x-ms-original-file: specification/redis/resource-manager/Microsoft.Cache/stable/2022-06-01/examples/RedisCacheOperations.json
+# x-ms-original-file: specification/redis/resource-manager/Microsoft.Cache/stable/2021-06-01/examples/RedisCacheListPrivateEndpointConnections.json
 if __name__ == "__main__":
     main()
