@@ -42,7 +42,7 @@ class DevCenterMgmtClientConfiguration(Configuration):  # pylint: disable=too-ma
 
     def __init__(self, credential: "AsyncTokenCredential", subscription_id: str, **kwargs: Any) -> None:
         super(DevCenterMgmtClientConfiguration, self).__init__(**kwargs)
-        api_version = kwargs.pop("api_version", "2022-11-11-preview")  # type: Literal["2022-11-11-preview"]
+        api_version: Literal["2022-11-11-preview"] = kwargs.pop("api_version", "2022-11-11-preview")
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")

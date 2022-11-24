@@ -14,7 +14,7 @@ from azure.mgmt.devcenter import DevCenterMgmtClient
     pip install azure-identity
     pip install azure-mgmt-devcenter
 # USAGE
-    python catalogs_create_or_update_git_hub.py
+    python pools_patch.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -29,24 +29,15 @@ def main():
         subscription_id="0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     )
 
-    response = client.catalogs.begin_create_or_update(
+    response = client.pools.begin_update(
         resource_group_name="rg1",
-        dev_center_name="Contoso",
-        catalog_name="CentralCatalog",
-        body={
-            "properties": {
-                "gitHub": {
-                    "branch": "main",
-                    "path": "/templates",
-                    "secretIdentifier": "https://contosokv.vault.azure.net/secrets/CentralRepoPat",
-                    "uri": "https://github.com/Contoso/centralrepo-fake.git",
-                }
-            }
-        },
+        project_name="DevProject",
+        pool_name="DevPool",
+        body={"properties": {"devBoxDefinitionName": "WebDevBox2"}},
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-11-11-preview/examples/Catalogs_CreateGitHub.json
+# x-ms-original-file: specification/devcenter/resource-manager/Microsoft.DevCenter/preview/2022-11-11-preview/examples/Pools_Patch.json
 if __name__ == "__main__":
     main()
