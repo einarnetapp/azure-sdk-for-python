@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
-from azure.mgmt.machinelearningservices import MachineLearningServicesMgmtClient
+from azure.mgmt.machinelearningservices import AzureMachineLearningServices
 
 """
 # PREREQUISITES
@@ -24,7 +24,7 @@ from azure.mgmt.machinelearningservices import MachineLearningServicesMgmtClient
 
 
 def main():
-    client = MachineLearningServicesMgmtClient(
+    client = AzureMachineLearningServices(
         credential=DefaultAzureCredential(),
         subscription_id="34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     )
@@ -37,6 +37,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/stable/2022-10-01/examples/Compute/get/KubernetesCompute.json
+# x-ms-original-file: specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/preview/2022-12-01-preview/examples/Compute/get/KubernetesCompute.json
 if __name__ == "__main__":
     main()

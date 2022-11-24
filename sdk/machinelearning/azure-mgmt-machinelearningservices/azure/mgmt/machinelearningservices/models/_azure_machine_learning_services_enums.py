@@ -32,11 +32,15 @@ class ApplicationSharingPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SHARED = "Shared"
 
 
-class AutoRebuildSetting(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """AutoRebuild setting for the derived image."""
+class AssetProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Provisioning state of registry asset."""
 
-    DISABLED = "Disabled"
-    ON_BASE_IMAGE_UPDATE = "OnBaseImageUpdate"
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
+    CREATING = "Creating"
+    UPDATING = "Updating"
+    DELETING = "Deleting"
 
 
 class Autosave(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -249,10 +253,24 @@ class ComputeInstanceState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ComputePowerAction(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The compute power action."""
+    """[Required] The compute power action."""
 
     START = "Start"
     STOP = "Stop"
+
+
+class ComputeProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The provision state of the cluster. Valid values are Unknown, Updating, Provisioning,
+    Succeeded, and Failed.
+    """
+
+    UNKNOWN = "Unknown"
+    UPDATING = "Updating"
+    CREATING = "Creating"
+    DELETING = "Deleting"
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
 
 
 class ComputeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -278,14 +296,8 @@ class ConnectionAuthType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     USERNAME_PASSWORD = "UsernamePassword"
     NONE = "None"
     SAS = "SAS"
-
-
-class ConnectionCategory(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Category of the connection."""
-
-    PYTHON_FEED = "PythonFeed"
-    CONTAINER_REGISTRY = "ContainerRegistry"
-    GIT = "Git"
+    SERVICE_PRINCIPAL = "ServicePrincipal"
+    ACCESS_KEY = "AccessKey"
 
 
 class ContainerType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -312,6 +324,8 @@ class CredentialsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     NONE = "None"
     SAS = "Sas"
     SERVICE_PRINCIPAL = "ServicePrincipal"
+    KERBEROS_KEYTAB = "KerberosKeytab"
+    KERBEROS_PASSWORD = "KerberosPassword"
 
 
 class DatastoreType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -321,6 +335,7 @@ class DatastoreType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     AZURE_DATA_LAKE_GEN1 = "AzureDataLakeGen1"
     AZURE_DATA_LAKE_GEN2 = "AzureDataLakeGen2"
     AZURE_FILE = "AzureFile"
+    HDFS = "Hdfs"
 
 
 class DataType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -415,6 +430,20 @@ class EnvironmentType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     CURATED = "Curated"
     USER_CREATED = "UserCreated"
+
+
+class EnvironmentVariableType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of the Environment Variable. Possible values are: local - For local variable."""
+
+    LOCAL = "local"
+
+
+class ExportFormatType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The format of exported labels."""
+
+    DATASET = "Dataset"
+    COCO = "Coco"
+    CSV = "CSV"
 
 
 class FeatureLags(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -556,6 +585,23 @@ class IdentityConfigurationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     USER_IDENTITY = "UserIdentity"
 
 
+class ImageAnnotationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Annotation type of image data."""
+
+    CLASSIFICATION = "Classification"
+    BOUNDING_BOX = "BoundingBox"
+    INSTANCE_SEGMENTATION = "InstanceSegmentation"
+
+
+class ImageType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of the image. Possible values are: docker - For docker images. azureml - For AzureML
+    images.
+    """
+
+    DOCKER = "docker"
+    AZUREML = "azureml"
+
+
 class InputDeliveryMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum to determine the input data delivery mode."""
 
@@ -605,6 +651,15 @@ class JobOutputType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     TRITON_MODEL = "triton_model"
 
 
+class JobProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Enum to determine the job provisioning state."""
+
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
+    IN_PROGRESS = "InProgress"
+
+
 class JobStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of a job."""
 
@@ -641,6 +696,8 @@ class JobStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PAUSED = "Paused"
     #: Default job status if not mapped to all other statuses
     UNKNOWN = "Unknown"
+    #: The job is in a scheduled state. Job is not in any active state.
+    SCHEDULED = "Scheduled"
 
 
 class JobType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -648,8 +705,10 @@ class JobType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     AUTO_ML = "AutoML"
     COMMAND = "Command"
+    LABELING = "Labeling"
     SWEEP = "Sweep"
     PIPELINE = "Pipeline"
+    SPARK = "Spark"
 
 
 class KeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -713,6 +772,34 @@ class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
 
+class MediaType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Media type of data asset."""
+
+    IMAGE = "Image"
+    TEXT = "Text"
+
+
+class MLAssistConfigurationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """MLAssistConfigurationType."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class MlflowAutologger(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates whether mlflow autologger is enabled for notebooks."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class MLFlowAutologgerState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Enum to determine the state of mlflow autologger."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
 class ModelSize(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Image model size."""
 
@@ -763,6 +850,25 @@ class Network(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     HOST = "Host"
 
 
+class NlpLearningRateScheduler(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Enum of learning rate schedulers that aligns with those supported by HF."""
+
+    #: No learning rate schedule.
+    NONE = "None"
+    #: Linear warmup and decay.
+    LINEAR = "Linear"
+    #: Linear warmup then cosine decay.
+    COSINE = "Cosine"
+    #: Linear warmup, cosine decay, then restart to initial LR.
+    COSINE_WITH_RESTARTS = "CosineWithRestarts"
+    #: Increase linearly then polynomially decay.
+    POLYNOMIAL = "Polynomial"
+    #: Constant learning rate.
+    CONSTANT = "Constant"
+    #: Linear warmup followed by constant value.
+    CONSTANT_WITH_WARMUP = "ConstantWithWarmup"
+
+
 class NodeState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of the compute node. Values are idle, running, preparing, unusable, leaving and
     preempted.
@@ -774,6 +880,13 @@ class NodeState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     UNUSABLE = "unusable"
     LEAVING = "leaving"
     PREEMPTED = "preempted"
+
+
+class NodesValueType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The enumerated types for the nodes value."""
+
+    ALL = "All"
+    CUSTOM = "Custom"
 
 
 class ObjectDetectionPrimaryMetrics(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -844,6 +957,7 @@ class OutputDeliveryMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     READ_WRITE_MOUNT = "ReadWriteMount"
     UPLOAD = "Upload"
+    DIRECT = "Direct"
 
 
 class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -865,18 +979,12 @@ class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiv
     TIMEOUT = "Timeout"
 
 
-class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The current deployment state of workspace resource. The provisioningState is to indicate states
-    for resource provisioning.
-    """
+class Protocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Protocol over which communication will happen over this endpoint."""
 
-    UNKNOWN = "Unknown"
-    UPDATING = "Updating"
-    CREATING = "Creating"
-    DELETING = "Deleting"
-    SUCCEEDED = "Succeeded"
-    FAILED = "Failed"
-    CANCELED = "Canceled"
+    TCP = "tcp"
+    UDP = "udp"
+    HTTP = "http"
 
 
 class ProvisioningStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1083,6 +1191,8 @@ class SecretsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CERTIFICATE = "Certificate"
     SAS = "Sas"
     SERVICE_PRINCIPAL = "ServicePrincipal"
+    KERBEROS_PASSWORD = "KerberosPassword"
+    KERBEROS_KEYTAB = "KerberosKeytab"
 
 
 class ServiceDataAccessAuthIdentity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1140,6 +1250,13 @@ class SourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     URI = "URI"
 
 
+class SparkJobEntryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """SparkJobEntryType."""
+
+    SPARK_JOB_PYTHON_ENTRY = "SparkJobPythonEntry"
+    SPARK_JOB_SCALA_ENTRY = "SparkJobScalaEntry"
+
+
 class SshPublicAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh
     port is closed on this instance. Enabled - Indicates that the public ssh port is open and
@@ -1192,6 +1309,14 @@ class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     INVALID_VM_FAMILY_NAME = "InvalidVMFamilyName"
     OPERATION_NOT_SUPPORTED_FOR_SKU = "OperationNotSupportedForSku"
     OPERATION_NOT_ENABLED_FOR_REGION = "OperationNotEnabledForRegion"
+
+
+class StatusMessageLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """StatusMessageLevel."""
+
+    ERROR = "Error"
+    INFORMATION = "Information"
+    WARNING = "Warning"
 
 
 class StochasticOptimizer(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -1287,6 +1412,13 @@ class TaskType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     TEXT_NER = "TextNER"
 
 
+class TextAnnotationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Annotation type of text data."""
+
+    CLASSIFICATION = "Classification"
+    NAMED_ENTITY_RECOGNITION = "NamedEntityRecognition"
+
+
 class TriggerType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """TriggerType."""
 
@@ -1363,6 +1495,15 @@ class VMTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SPOT = "Spot"
 
 
+class VolumeDefinitionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe."""
+
+    BIND = "bind"
+    VOLUME = "volume"
+    TMPFS = "tmpfs"
+    NPIPE = "npipe"
+
+
 class WeekDay(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum of weekday."""
 
@@ -1380,3 +1521,18 @@ class WeekDay(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SATURDAY = "Saturday"
     #: Sunday weekday
     SUNDAY = "Sunday"
+
+
+class WorkspaceProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The current deployment state of workspace resource. The provisioningState is to indicate states
+    for resource provisioning.
+    """
+
+    UNKNOWN = "Unknown"
+    UPDATING = "Updating"
+    CREATING = "Creating"
+    DELETING = "Deleting"
+    SUCCEEDED = "Succeeded"
+    FAILED = "Failed"
+    CANCELED = "Canceled"
+    SOFT_DELETED = "SoftDeleted"
